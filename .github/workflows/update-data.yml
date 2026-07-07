@@ -4,7 +4,16 @@ on:
   schedule:
     # cada 6 horas -- ajustar la frecuencia durante el Mundial si hace falta
     - cron: "0 */6 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      pmsr_limit:
+        description: "Maximo de PDFs PMSR a descargar/parsear en esta corrida (vacio = sin limite)"
+        required: false
+        default: ""
+      pmsr_max_seconds:
+        description: "Corte por tiempo total de descarga de PDFs en segundos (vacio = sin limite)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -16,6 +25,7 @@ concurrency:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -31,6 +41,8 @@ jobs:
         working-directory: .
         env:
           PYTHONUNBUFFERED: "1"
+          PMSR_LIMIT: ${{ github.event.inputs.pmsr_limit }}
+          PMSR_MAX_SECONDS: ${{ github.event.inputs.pmsr_max_seconds }}
 
       - name: Commitear datos actualizados
         run: |

@@ -33,8 +33,10 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import re
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -49,6 +51,13 @@ HEADERS = {
     "User-Agent": "MetricasMundial2026Bot/1.0 (+https://github.com/ramirosilvera/metricasmundial2026; "
     "proyecto de analisis publico y sin fines de lucro; contacto via GitHub issues)"
 }
+REQUEST_TIMEOUT_S = 15
+# 94 PDFs secuenciales pueden tardar mucho si el sitio tira lento -- se
+# puede acotar la corrida con la env var PMSR_LIMIT (ej. para probar el
+# parser rápido antes de bajar los 94) o PMSR_MAX_SECONDS para cortar por
+# tiempo total en vez de por cantidad.
+PMSR_LIMIT = int(os.environ.get("PMSR_LIMIT") or 0) or None
+PMSR_MAX_SECONDS = int(os.environ.get("PMSR_MAX_SECONDS") or 0) or None
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "data" / "raw" / "fifa_training_centre"
@@ -82,7 +91,7 @@ TEAM_CODE_MAP = {
 
 
 def _get(url: str) -> requests.Response:
-    resp = requests.get(url, headers=HEADERS, timeout=30)
+    resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT_S)
     resp.raise_for_status()
     return resp
 
@@ -218,7 +227,18 @@ def scrape() -> list[dict]:
     pdf_debug_samples: list[dict] = []
     retrieved_at = datetime.now(timezone.utc).isoformat()
 
-    for report in reports:
+    # Argentina primero: si esta corrida esta acotada por PMSR_LIMIT/
+    # PMSR_MAX_SECONDS, que lo que sí se llegue a descargar sea lo más
+    # relevante para el proyecto.
+    reports_ordered = sorted(
+        reports,
+        key=lambda r: 0 if "Argentina" in (r["team_a"], r["team_b"]) else 1,
+    )
+
+    start_time = time.monotonic()
+    downloaded = 0
+
+    for report in reports_ordered:
         matches_rows.append({
             "match_id": report["match_id"],
             "competition": "FIFA World Cup",
@@ -234,8 +254,16 @@ def scrape() -> list[dict]:
             "referee": "",
         })
 
+        if PMSR_LIMIT is not None and downloaded >= PMSR_LIMIT:
+            failed.append({"match_number": report["match_number"], "url": report["url"], "error": "no procesado en esta corrida (PMSR_LIMIT)"})
+            continue
+        if PMSR_MAX_SECONDS is not None and (time.monotonic() - start_time) >= PMSR_MAX_SECONDS:
+            failed.append({"match_number": report["match_number"], "url": report["url"], "error": "no procesado en esta corrida (PMSR_MAX_SECONDS)"})
+            continue
+
         try:
             pdf_bytes = _get(report["url"]).content
+            downloaded += 1
         except requests.RequestException as exc:
             failed.append({"match_number": report["match_number"], "url": report["url"], "error": str(exc)})
             continue
@@ -245,6 +273,8 @@ def scrape() -> list[dict]:
         except Exception as exc:  # PDF corrupto/formato inesperado -- no debe tumbar todo el pipeline
             failed.append({"match_number": report["match_number"], "url": report["url"], "error": f"error extrayendo PDF: {exc}"})
             continue
+
+        print(f"  M{report['match_number']} {report['team_a']} v {report['team_b']}: {len(tables)} tablas extraidas", flush=True)
 
         if len(pdf_debug_samples) < PDF_DEBUG_SAMPLE_LIMIT:
             pdf_debug_samples.append({
