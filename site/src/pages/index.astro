@@ -1,0 +1,105 @@
+---
+import Base from "../layouts/Base.astro";
+import DataStatusBanner from "../layouts/DataStatusBanner.astro";
+import { loadJson, type TeamSeasonSummary, type MatchRow } from "../lib/data";
+
+const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
+const matches = loadJson<MatchRow[]>("matches.json");
+
+const arg2022 = summary.find((r) => r.team === "Argentina" && r.season === "2022");
+const arg2018 = summary.find((r) => r.team === "Argentina" && r.season === "2018");
+const nTeams = new Set(summary.map((r) => r.team)).size;
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title="Inicio" description="¿Argentina corre menos que el resto en el Mundial? Un análisis abierto, con los sesgos a la vista.">
+  <DataStatusBanner />
+
+  <h1>¿Argentina tiene una desventaja física real, o es un sesgo instalado?</h1>
+  <p class="lede">
+    Este proyecto pone a prueba esa hipótesis con datos abiertos y metodología explícita — no arranca mostrando un
+    ranking. Antes de mirar cualquier gráfico, dos advertencias que condicionan todo lo que sigue.
+  </p>
+
+  <div class="grid-2 section">
+    <div class="callout">
+      <h3>1. La distancia corrida, sola, no mide "estado físico"</h3>
+      <p>
+        Los equipos que dominan el balón corren <em>menos</em>, no más — no persiguen. Sin normalizar por posesión,
+        estado del marcador y fase del partido, un ranking de distancia es ruido táctico disfrazado de dato físico.
+        Por eso este sitio separa siempre <strong>contexto táctico</strong> de <strong>resultado físico</strong>.
+      </p>
+    </div>
+    <div class="callout warning">
+      <h3>2. Con 4–7 partidos por torneo, no hay significancia estadística</h3>
+      <p>
+        Este proyecto es <strong>descriptivo</strong>, no un estudio causal. Todos los gráficos muestran dispersión
+        (no solo promedios) y tamaño de muestra explícito. Ver <a href={`${base}metodologia/`}>metodología completa</a>.
+      </p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Lo que ya sabemos con datos reales</h2>
+      <p>Fuente: StatsBomb Open Data (contexto táctico), Mundiales 2018 y 2022</p>
+    </div>
+    <div class="stat-tiles">
+      <div class="stat-tile">
+        <div class="value">{nTeams}</div>
+        <div class="label">selecciones con datos cargados</div>
+      </div>
+      <div class="stat-tile">
+        <div class="value">{matches.length}</div>
+        <div class="label">partidos procesados (2018 + 2022)</div>
+      </div>
+      <div class="stat-tile">
+        <div class="value">{arg2022 ? Math.round(arg2022.posesion_promedio_proxy * 100) : "—"}%</div>
+        <div class="label">posesión promedio (proxy) Argentina 2022, campeón</div>
+      </div>
+      <div class="stat-tile">
+        <div class="value">{arg2018 ? Math.round(arg2018.posesion_promedio_proxy * 100) : "—"}%</div>
+        <div class="label">posesión promedio (proxy) Argentina 2018, eliminada en octavos</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Lo que todavía falta (y por qué)</h2>
+    </div>
+    <div class="card">
+      <p>
+        La métrica que responde directamente la hipótesis —distancia recorrida, alta intensidad, sprints— la publica <strong>FIFA Training Centre</strong> como
+        reportes públicos por partido, no como API. El scraper ya está escrito y corre automáticamente por GitHub
+        Actions; se completa a medida que FIFA publica cada reporte del Mundial 2026 en curso. Igual con la edad de
+        plantel (Transfermarkt). Este sitio nunca muestra un dato inventado: mientras no haya datos reales, la
+        sección correspondiente queda marcada como pendiente, explícitamente.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Explorá</h2>
+    </div>
+    <div class="grid-2">
+      <a class="card" href={`${base}selecciones/`} style="text-decoration:none; color:inherit;">
+        <h3>Selecciones →</h3>
+        <p>Rankings, boxplots de dispersión y heatmap de percentiles entre selecciones.</p>
+      </a>
+      <a class="card" href={`${base}comparar/`} style="text-decoration:none; color:inherit;">
+        <h3>Comparar dos selecciones →</h3>
+        <p>Radar cabeza a cabeza normalizado por percentil.</p>
+      </a>
+      <a class="card" href={`${base}jugadores/`} style="text-decoration:none; color:inherit;">
+        <h3>Jugadores →</h3>
+        <p>Minutos jugados por plantel — la unidad de análisis correcta, no el promedio de equipo.</p>
+      </a>
+      <a class="card" href={`${base}explorador/`} style="text-decoration:none; color:inherit;">
+        <h3>Explorador SQL →</h3>
+        <p>Consultas libres sobre los datos crudos (Parquet), corriendo en tu navegador con DuckDB-WASM.</p>
+      </a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,134 @@
+[
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "match_id": 7531,
+    "possession_share_proxy": 0.7505
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "match_id": 7531,
+    "possession_share_proxy": 0.2495
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "match_id": 7545,
+    "possession_share_proxy": 0.586
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "match_id": 7545,
+    "possession_share_proxy": 0.414
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "match_id": 7564,
+    "possession_share_proxy": 0.3445
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "match_id": 7564,
+    "possession_share_proxy": 0.6555
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "match_id": 7580,
+    "possession_share_proxy": 0.4064
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "match_id": 7580,
+    "possession_share_proxy": 0.5936
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "match_id": 3857264,
+    "possession_share_proxy": 0.2847
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_id": 3857264,
+    "possession_share_proxy": 0.7153
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_id": 3857289,
+    "possession_share_proxy": 0.5654
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "match_id": 3857289,
+    "possession_share_proxy": 0.4346
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_id": 3857300,
+    "possession_share_proxy": 0.673
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "match_id": 3857300,
+    "possession_share_proxy": 0.327
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_id": 3869151,
+    "possession_share_proxy": 0.5935
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "match_id": 3869151,
+    "possession_share_proxy": 0.4065
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "match_id": 3869321,
+    "possession_share_proxy": 0.5148
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_id": 3869321,
+    "possession_share_proxy": 0.4852
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_id": 3869519,
+    "possession_share_proxy": 0.4254
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "match_id": 3869519,
+    "possession_share_proxy": 0.5746
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_id": 3869685,
+    "possession_share_proxy": 0.53
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "match_id": 3869685,
+    "possession_share_proxy": 0.47
+  }
+]

@@ -1,0 +1,30 @@
+---
+import Base from "../layouts/Base.astro";
+import DataStatusBanner from "../layouts/DataStatusBanner.astro";
+import RadarCompare from "../islands/RadarCompare";
+import TimelineChart from "../islands/TimelineChart";
+import { loadJson, type RadarRow, type TimelineRow } from "../lib/data";
+
+const radar = loadJson<RadarRow[]>("radar_team_season.json");
+const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
+---
+
+<Base title="Comparar" description="Comparación cabeza a cabeza y evolución dentro del torneo.">
+  <DataStatusBanner />
+  <h1>Comparar selecciones</h1>
+  <p class="lede">Radar cabeza a cabeza (percentiles) y evolución partido a partido dentro de un mismo torneo.</p>
+
+  <section class="section">
+    <div class="section-head"><h2>Cabeza a cabeza</h2></div>
+    <div class="card">
+      <RadarCompare client:only="react" rows={radar} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Evolución durante el torneo</h2></div>
+    <div class="card">
+      <TimelineChart client:only="react" rows={timeline} />
+    </div>
+  </section>
+</Base>

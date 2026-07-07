@@ -1,0 +1,200 @@
+[
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "match_date": "2018-06-16",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.7505,
+    "pass_accuracy_pct": 87.2,
+    "shots_total": 28
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "match_date": "2018-06-21",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.586,
+    "pass_accuracy_pct": 77.2,
+    "shots_total": 10
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "match_date": "2018-06-26",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.6555,
+    "pass_accuracy_pct": 80.5,
+    "shots_total": 8
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "match_date": "2018-06-30",
+    "stage": "Round of 16",
+    "possession_share_proxy": 0.5936,
+    "pass_accuracy_pct": 83.7,
+    "shots_total": 12
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_date": "2022-11-22",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.673,
+    "pass_accuracy_pct": 83.9,
+    "shots_total": 15
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_date": "2022-11-26",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.5654,
+    "pass_accuracy_pct": 84.0,
+    "shots_total": 5
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_date": "2022-11-30",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.7153,
+    "pass_accuracy_pct": 90.9,
+    "shots_total": 24
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_date": "2022-12-03",
+    "stage": "Round of 16",
+    "possession_share_proxy": 0.5935,
+    "pass_accuracy_pct": 88.7,
+    "shots_total": 14
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_date": "2022-12-09",
+    "stage": "Quarter-finals",
+    "possession_share_proxy": 0.4852,
+    "pass_accuracy_pct": 83.0,
+    "shots_total": 19
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_date": "2022-12-13",
+    "stage": "Semi-finals",
+    "possession_share_proxy": 0.4254,
+    "pass_accuracy_pct": 82.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "match_date": "2022-12-18",
+    "stage": "Final",
+    "possession_share_proxy": 0.53,
+    "pass_accuracy_pct": 80.8,
+    "shots_total": 24
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "match_date": "2022-12-03",
+    "stage": "Round of 16",
+    "possession_share_proxy": 0.4065,
+    "pass_accuracy_pct": 80.3,
+    "shots_total": 5
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "match_date": "2018-06-21",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.414,
+    "pass_accuracy_pct": 71.7,
+    "shots_total": 14
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "match_date": "2022-12-13",
+    "stage": "Semi-finals",
+    "possession_share_proxy": 0.5746,
+    "pass_accuracy_pct": 86.3,
+    "shots_total": 12
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "match_date": "2018-06-30",
+    "stage": "Round of 16",
+    "possession_share_proxy": 0.4064,
+    "pass_accuracy_pct": 80.9,
+    "shots_total": 9
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "match_date": "2022-12-18",
+    "stage": "Final",
+    "possession_share_proxy": 0.47,
+    "pass_accuracy_pct": 76.1,
+    "shots_total": 14
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "match_date": "2018-06-16",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.2495,
+    "pass_accuracy_pct": 61.2,
+    "shots_total": 9
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "match_date": "2022-11-26",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.4346,
+    "pass_accuracy_pct": 75.4,
+    "shots_total": 4
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "match_date": "2022-12-09",
+    "stage": "Quarter-finals",
+    "possession_share_proxy": 0.5148,
+    "pass_accuracy_pct": 82.8,
+    "shots_total": 12
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "match_date": "2018-06-26",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.3445,
+    "pass_accuracy_pct": 65.2,
+    "shots_total": 9
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "match_date": "2022-11-30",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.2847,
+    "pass_accuracy_pct": 79.2,
+    "shots_total": 4
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "match_date": "2022-11-22",
+    "stage": "Group Stage",
+    "possession_share_proxy": 0.327,
+    "pass_accuracy_pct": 68.9,
+    "shots_total": 3
+  }
+]

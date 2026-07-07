@@ -1,0 +1,45 @@
+---
+import Base from "../../layouts/Base.astro";
+import DataStatusBanner from "../../layouts/DataStatusBanner.astro";
+import RankingBar from "../../islands/RankingBar";
+import PossessionBoxplot from "../../islands/PossessionBoxplot";
+import MetricHeatmap from "../../islands/MetricHeatmap";
+import { loadJson, type TeamSeasonSummary, type BoxplotRow } from "../../lib/data";
+
+const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
+const boxplot = loadJson<BoxplotRow[]>("boxplot_possession_proxy.json");
+---
+
+<Base title="Selecciones" description="Rankings y distribución de métricas tácticas por selección.">
+  <DataStatusBanner />
+  <h1>Selecciones</h1>
+  <p class="lede">
+    Contexto táctico real (StatsBomb open data), no métricas físicas todavía. Sirve para ver estilo de juego —
+    posesión, precisión de pase, volumen de remate— como variable de <em>control</em>, no como respuesta a la
+    hipótesis física.
+  </p>
+
+  <section class="section">
+    <div class="section-head"><h2>Ranking por métrica</h2></div>
+    <div class="card">
+      <RankingBar client:only="react" rows={summary} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Distribución de posesión por selección</h2>
+      <p>Cada punto es un partido — la dispersión importa más que el promedio con n tan chico.</p>
+    </div>
+    <div class="card">
+      <PossessionBoxplot client:only="react" rows={boxplot} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Heatmap de percentiles</h2></div>
+    <div class="card">
+      <MetricHeatmap client:only="react" rows={summary} />
+    </div>
+  </section>
+</Base>

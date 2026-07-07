@@ -1,0 +1,54 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Análisis abierto del rendimiento físico y táctico en el Mundial 2026." } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · Métricas Mundial 2026</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href={`${base}`}>
+          <strong>Métricas Mundial 2026</strong>
+          <span>análisis físico y táctico, 100% datos abiertos</span>
+        </a>
+        <nav class="nav">
+          <a href={`${base}`}>Inicio</a>
+          <a href={`${base}selecciones/`}>Selecciones</a>
+          <a href={`${base}comparar/`}>Comparar</a>
+          <a href={`${base}jugadores/`}>Jugadores</a>
+          <a href={`${base}explorador/`}>Explorador SQL</a>
+          <a href={`${base}metodologia/`}>Metodología</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="wrap">
+        <p>
+          Proyecto abierto, sin fines de lucro. Código y datos versionados en <a href="https://github.com/ramirosilvera/metricasmundial2026" target="_blank" rel="noreferrer">GitHub</a>.
+          Fuentes: StatsBomb Open Data, FIFA Training Centre, Transfermarkt. Ver <a href={`${base}metodologia/`}>metodología</a> para
+          limitaciones y sesgos conocidos.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

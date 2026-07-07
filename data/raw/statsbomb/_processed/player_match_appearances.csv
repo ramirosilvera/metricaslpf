@@ -1,0 +1,339 @@
+match_id,team,player_id,player_name,position,is_starter,minutes_played
+7531,Argentina,3659,Wilfredo Daniel Caballero,Goalkeeper,True,95
+7531,Argentina,5513,Eduardo Antonio Salvio,Right Back,True,95
+7531,Argentina,3090,Nicolás Hernán Otamendi,Right Center Back,True,95
+7531,Argentina,3602,Faustino Marcos Alberto Rojo,Left Center Back,True,95
+7531,Argentina,5507,Nicolás Alejandro Tagliafico,Left Back,True,95
+7531,Argentina,5499,Maximiliano Eduardo Meza,Right Midfield,True,83
+7531,Argentina,5510,Lucas Rodrigo Biglia,Right Center Midfield,True,53
+7531,Argentina,5506,Javier Alejandro Mascherano,Left Center Midfield,True,95
+7531,Argentina,2995,Ángel Fabián Di María Hernández,Left Midfield,True,74
+7531,Argentina,5503,Lionel Andrés Messi Cuccittini,Center Attacking Midfield,True,95
+7531,Argentina,3237,Sergio Leonel Agüero del Castillo,Center Forward,True,95
+7531,Iceland,5498,Hannes Þór Halldórsson,Goalkeeper,True,95
+7531,Iceland,5508,Birkir Már Sævarsson,Right Back,True,95
+7531,Iceland,5505,Kári Árnason,Right Center Back,True,95
+7531,Iceland,5511,Ragnar Sigurðsson,Left Center Back,True,95
+7531,Iceland,5501,Hörður Björgvin Magnússon,Left Back,True,95
+7531,Iceland,5515,Aron Einar Gunnarsson,Right Defensive Midfield,True,75
+7531,Iceland,5512,Emil Hallfreðsson,Left Defensive Midfield,True,95
+7531,Iceland,3720,Johann Berg Guðmunds­son,Right Midfield,True,62
+7531,Iceland,5509,Birkir Bjarnason,Left Midfield,True,95
+7531,Iceland,5514,Alfreð Finnbogason,Center Forward,True,88
+7531,Iceland,3944,Gylfi Þór Sigurðsson,Secondary Striker,True,95
+7531,Argentina,5504,Éver Maximiliano David Banega,,False,42
+7531,Iceland,5495,Rúrik Gíslason,,False,33
+7531,Argentina,5496,Cristian David Pavón,,False,21
+7531,Iceland,5502,Ari Freyr Skúlason,,False,20
+7531,Argentina,5497,Gonzalo Gerardo Higuaín,,False,12
+7531,Iceland,5500,Björn Bergmann Sigurðarson,,False,7
+7545,Argentina,3659,Wilfredo Daniel Caballero,Goalkeeper,True,94
+7545,Argentina,5742,Gabriel Iván Mercado,Right Center Back,True,94
+7545,Argentina,3090,Nicolás Hernán Otamendi,Center Back,True,94
+7545,Argentina,5507,Nicolás Alejandro Tagliafico,Left Center Back,True,94
+7545,Argentina,5513,Eduardo Antonio Salvio,Right Midfield,True,55
+7545,Argentina,5741,Enzo Nicolás Pérez,Right Center Midfield,True,67
+7545,Argentina,5506,Javier Alejandro Mascherano,Left Center Midfield,True,94
+7545,Argentina,19597,Marcos Javier Acuña,Left Midfield,True,94
+7545,Argentina,5503,Lionel Andrés Messi Cuccittini,Right Attacking Midfield,True,94
+7545,Argentina,5499,Maximiliano Eduardo Meza,Left Attacking Midfield,True,94
+7545,Argentina,3237,Sergio Leonel Agüero del Castillo,Center Forward,True,53
+7545,Croatia,3444,Danijel Subašić,Goalkeeper,True,94
+7545,Croatia,5461,Šime Vrsaljko,Right Back,True,94
+7545,Croatia,3471,Dejan Lovren,Right Center Back,True,94
+7545,Croatia,5468,Domagoj Vida,Left Center Back,True,94
+7545,Croatia,5457,Ivan Strinić,Left Back,True,94
+7545,Croatia,5469,Marcelo Brozović,Center Defensive Midfield,True,94
+7545,Croatia,5465,Ante Rebić,Right Midfield,True,56
+7545,Croatia,5463,Luka Modrić,Right Center Midfield,True,94
+7545,Croatia,5470,Ivan Rakitić,Left Center Midfield,True,94
+7545,Croatia,5474,Ivan Perišić,Left Midfield,True,81
+7545,Croatia,5472,Mario Mandžukić,Center Forward,True,92
+7545,Argentina,5497,Gonzalo Gerardo Higuaín,,False,41
+7545,Argentina,5496,Cristian David Pavón,,False,39
+7545,Croatia,5460,Andrej Kramarić,,False,38
+7545,Argentina,5743,Paulo Bruno Exequiel Dybala,,False,27
+7545,Croatia,5456,Mateo Kovačić,,False,13
+7545,Croatia,5739,Vedran Ćorluka,,False,2
+7564,Nigeria,5454,Francis Odinaka Uzoho,Goalkeeper,True,94
+7564,Nigeria,5467,Leon Aderemi Balogun,Right Center Back,True,94
+7564,Nigeria,5455,William Troost-Ekong,Center Back,True,94
+7564,Nigeria,5830,Kenneth Josiah Omeruo,Left Center Back,True,89
+7564,Nigeria,3963,Victor Moses,Right Wing Back,True,94
+7564,Nigeria,5462,Brian Oladapo Idowu,Left Wing Back,True,94
+7564,Nigeria,5475,John Michael Nchekwube Obinna,Center Defensive Midfield,True,94
+7564,Nigeria,3338,Onyinye Wilfred Ndidi,Right Center Midfield,True,94
+7564,Nigeria,5466,Oghenekaro Etebo,Left Center Midfield,True,94
+7564,Nigeria,3708,Kelechi Promise Iheanacho,Right Center Forward,True,45
+7564,Nigeria,5473,Ahmed Musa,Left Center Forward,True,91
+7564,Argentina,6312,Franco Armani,Goalkeeper,True,94
+7564,Argentina,5742,Gabriel Iván Mercado,Right Back,True,94
+7564,Argentina,3090,Nicolás Hernán Otamendi,Right Center Back,True,94
+7564,Argentina,3602,Faustino Marcos Alberto Rojo,Left Center Back,True,94
+7564,Argentina,5507,Nicolás Alejandro Tagliafico,Left Back,True,79
+7564,Argentina,5506,Javier Alejandro Mascherano,Right Center Midfield,True,94
+7564,Argentina,5504,Éver Maximiliano David Banega,Left Center Midfield,True,94
+7564,Argentina,5741,Enzo Nicolás Pérez,Right Wing,True,60
+7564,Argentina,2995,Ángel Fabián Di María Hernández,Left Wing,True,71
+7564,Argentina,5503,Lionel Andrés Messi Cuccittini,Right Center Forward,True,94
+7564,Argentina,5497,Gonzalo Gerardo Higuaín,Left Center Forward,True,94
+7564,Nigeria,5458,Odion Jude Ighalo,,False,49
+7564,Argentina,5496,Cristian David Pavón,,False,34
+7564,Argentina,5499,Maximiliano Eduardo Meza,,False,23
+7564,Argentina,3237,Sergio Leonel Agüero del Castillo,,False,15
+7564,Nigeria,3647,Alex Iwobi,,False,5
+7564,Nigeria,5464,Simeon Tochukwu Nwankwo,,False,3
+7580,France,3099,Hugo Lloris,Goalkeeper,True,95
+7580,France,5476,Benjamin Pavard,Right Back,True,95
+7580,France,5485,Raphaël Varane,Right Center Back,True,95
+7580,France,5492,Samuel Yves Umtiti,Left Center Back,True,95
+7580,France,5484,Lucas Hernández Pi,Left Back,True,95
+7580,France,5487,Antoine Griezmann,Right Wing Back,True,82
+7580,France,20004,Paul Pogba,Right Defensive Midfield,True,95
+7580,France,3961,N'Golo Kanté,Left Defensive Midfield,True,95
+7580,France,3009,Kylian Mbappé Lottin,Right Wing,True,88
+7580,France,4375,Blaise Matuidi,Left Wing,True,74
+7580,France,3604,Olivier Giroud,Center Forward,True,95
+7580,Argentina,6312,Franco Armani,Goalkeeper,True,95
+7580,Argentina,5742,Gabriel Iván Mercado,Right Back,True,95
+7580,Argentina,3090,Nicolás Hernán Otamendi,Right Center Back,True,95
+7580,Argentina,3602,Faustino Marcos Alberto Rojo,Left Center Back,True,45
+7580,Argentina,5507,Nicolás Alejandro Tagliafico,Left Back,True,95
+7580,Argentina,5506,Javier Alejandro Mascherano,Center Defensive Midfield,True,95
+7580,Argentina,5741,Enzo Nicolás Pérez,Right Center Midfield,True,65
+7580,Argentina,5504,Éver Maximiliano David Banega,Left Center Midfield,True,95
+7580,Argentina,2995,Ángel Fabián Di María Hernández,Right Wing,True,95
+7580,Argentina,5496,Cristian David Pavón,Left Wing,True,74
+7580,Argentina,5503,Lionel Andrés Messi Cuccittini,Center Forward,True,95
+7580,Argentina,6349,Federico Julián Fazio,,False,50
+7580,Argentina,3237,Sergio Leonel Agüero del Castillo,,False,30
+7580,Argentina,5499,Maximiliano Eduardo Meza,,False,21
+7580,France,5480,Corentin Tolisso,,False,21
+7580,France,2948,Nabil Fekir,,False,13
+7580,France,3254,Florian Thauvin,,False,7
+3857264,Poland,5669,Wojciech Szczęsny,Goalkeeper,True,96
+3857264,Poland,4734,Matty Cash,Right Back,True,96
+3857264,Poland,3034,Kamil Glik,Right Center Back,True,96
+3857264,Poland,44166,Jakub Piotr Kiwior,Left Center Back,True,96
+3857264,Poland,5673,Bartosz Bereszyński,Left Back,True,72
+3857264,Poland,11737,Krystian Bielik,Right Defensive Midfield,True,61
+3857264,Poland,3637,Grzegorz Krychowiak,Left Defensive Midfield,True,82
+3857264,Poland,5660,Piotr Zieliński,Right Midfield,True,96
+3857264,Poland,7979,Przemysław Frankowski,Left Midfield,True,45
+3857264,Poland,5668,Robert Lewandowski,Right Center Forward,True,96
+3857264,Poland,8836,Karol Świderski,Left Center Forward,True,45
+3857264,Argentina,6909,Damián Emiliano Martínez,Goalkeeper,True,96
+3857264,Argentina,29201,Nahuel Molina Lucero,Right Back,True,96
+3857264,Argentina,20572,Cristian Gabriel Romero,Right Center Back,True,96
+3857264,Argentina,3090,Nicolás Hernán Otamendi,Left Center Back,True,96
+3857264,Argentina,19597,Marcos Javier Acuña,Left Back,True,58
+3857264,Argentina,38718,Enzo Fernandez,Center Defensive Midfield,True,78
+3857264,Argentina,7797,Rodrigo Javier De Paul,Right Center Midfield,True,96
+3857264,Argentina,27886,Alexis Mac Allister,Left Center Midfield,True,82
+3857264,Argentina,2995,Ángel Fabián Di María Hernández,Right Wing,True,58
+3857264,Argentina,29560,Julián Álvarez,Left Wing,True,78
+3857264,Argentina,5503,Lionel Andrés Messi Cuccittini,Center Forward,True,96
+3857264,Poland,28453,Michał Skóraś,,False,51
+3857264,Poland,31955,Jakub Kamiński,,False,51
+3857264,Argentina,16308,Leandro Daniel Paredes,,False,38
+3857264,Argentina,5507,Nicolás Alejandro Tagliafico,,False,38
+3857264,Poland,8714,Damian Szymański,,False,35
+3857264,Poland,4685,Artur Jędrzejczyk,,False,24
+3857264,Argentina,11456,Lautaro Javier Martínez,,False,18
+3857264,Argentina,7161,Germán Alejandro Pezzella,,False,18
+3857264,Argentina,28637,Thiago Ezequiel Almada,,False,14
+3857264,Poland,12493,Krzysztof Piątek,,False,14
+3857289,Argentina,6909,Damián Emiliano Martínez,Goalkeeper,True,96
+3857289,Argentina,28263,Gonzalo Ariel Montiel,Right Back,True,62
+3857289,Argentina,3090,Nicolás Hernán Otamendi,Right Center Back,True,96
+3857289,Argentina,27768,Lisandro Martínez,Left Center Back,True,96
+3857289,Argentina,19597,Marcos Javier Acuña,Left Back,True,96
+3857289,Argentina,7797,Rodrigo Javier De Paul,Right Defensive Midfield,True,96
+3857289,Argentina,26404,Guido Rodríguez,Left Defensive Midfield,True,56
+3857289,Argentina,2995,Ángel Fabián Di María Hernández,Right Midfield,True,68
+3857289,Argentina,27886,Alexis Mac Allister,Left Midfield,True,68
+3857289,Argentina,5503,Lionel Andrés Messi Cuccittini,Right Center Forward,True,96
+3857289,Argentina,11456,Lautaro Javier Martínez,Left Center Forward,True,62
+3857289,Mexico,5577,Francisco Guillermo Ochoa Magaña,Goalkeeper,True,96
+3857289,Mexico,11388,Néstor Alejandro Araújo Razo,Right Center Back,True,96
+3857289,Mexico,26368,César Jasib Montes Castro,Center Back,True,96
+3857289,Mexico,5573,Héctor Alfredo Moreno Herrera,Left Center Back,True,96
+3857289,Mexico,30500,Kevin Nahin Álvarez Campos,Right Wing Back,True,65
+3857289,Mexico,5576,Jesús Daniel Gallardo Vasconcelos,Left Wing Back,True,96
+3857289,Mexico,5575,Héctor Miguel Herrera López,Center Defensive Midfield,True,96
+3857289,Mexico,28825,Luis Gerardo Chávez Magallón,Right Center Midfield,True,96
+3857289,Mexico,5563,José Andrés Guardado Hernández,Left Center Midfield,True,40
+3857289,Mexico,5571,Hirving Rodrigo Lozano Bahena,Right Center Forward,True,72
+3857289,Mexico,26301,Ernesto Alexis Vega Rojas,Left Center Forward,True,65
+3857289,Mexico,15872,Érick Gabriel Gutiérrez Galaviz,,False,56
+3857289,Argentina,38718,Enzo Fernandez,,False,40
+3857289,Argentina,29560,Julián Álvarez,,False,34
+3857289,Argentina,29201,Nahuel Molina Lucero,,False,34
+3857289,Mexico,5568,Raúl Alonso Jiménez Rodríguez,,False,31
+3857289,Mexico,15452,Carlos Uriel Antuna Romero,,False,31
+3857289,Argentina,28268,Exequiel Alejandro Palacios,,False,28
+3857289,Argentina,20572,Cristian Gabriel Romero,,False,28
+3857289,Mexico,26375,Roberto Carlos Alvarado Hernández,,False,24
+3857300,Argentina,6909,Damián Emiliano Martínez,Goalkeeper,True,103
+3857300,Argentina,29201,Nahuel Molina Lucero,Right Back,True,103
+3857300,Argentina,20572,Cristian Gabriel Romero,Right Center Back,True,58
+3857300,Argentina,3090,Nicolás Hernán Otamendi,Left Center Back,True,103
+3857300,Argentina,5507,Nicolás Alejandro Tagliafico,Left Back,True,70
+3857300,Argentina,7797,Rodrigo Javier De Paul,Right Defensive Midfield,True,103
+3857300,Argentina,16308,Leandro Daniel Paredes,Left Defensive Midfield,True,58
+3857300,Argentina,2995,Ángel Fabián Di María Hernández,Right Midfield,True,103
+3857300,Argentina,7006,Alejandro Darío Gómez,Left Midfield,True,58
+3857300,Argentina,5503,Lionel Andrés Messi Cuccittini,Right Center Forward,True,103
+3857300,Argentina,11456,Lautaro Javier Martínez,Left Center Forward,True,103
+3857300,Saudi Arabia,5714,Mohammed Khalil Al Owais,Goalkeeper,True,103
+3857300,Saudi Arabia,51710,Saud Abdullah Abdul Hamid,Right Back,True,103
+3857300,Saudi Arabia,51546,Hassan Mohammed Al-Tambakti,Right Center Back,True,103
+3857300,Saudi Arabia,5715,Ali Albulayhi,Left Center Back,True,103
+3857300,Saudi Arabia,5183,Yasir Gharsan Al Shahrani,Left Back,True,98
+3857300,Saudi Arabia,56755,Abdulelah Saad Hameed Al-Malki,Center Defensive Midfield,True,103
+3857300,Saudi Arabia,51099,Firas Tariq Nasser Al Albirakan,Right Midfield,True,88
+3857300,Saudi Arabia,5178,Salman Mohammed Al Faraj,Right Center Midfield,True,47
+3857300,Saudi Arabia,5713,Mohammed Kanoo,Left Center Midfield,True,103
+3857300,Saudi Arabia,5187,Salem Mohammed Al Dawsari,Left Midfield,True,103
+3857300,Saudi Arabia,51469,Saleh Khalid Al Shehri,Center Forward,True,77
+3857300,Saudi Arabia,54144,Nawaf Shaker Al Abid,,False,40
+3857300,Argentina,27768,Lisandro Martínez,,False,45
+3857300,Argentina,29560,Julián Álvarez,,False,45
+3857300,Argentina,38718,Enzo Fernandez,,False,45
+3857300,Argentina,19597,Marcos Javier Acuña,,False,33
+3857300,Saudi Arabia,57620,Sultan Abdullah Salim Al Ghannam,,False,26
+3857300,Saudi Arabia,51094,Abdulelah Al Amri,,False,16
+3857300,Saudi Arabia,121539,Haitham Mohammed Asiri,,False,15
+3857300,Saudi Arabia,5191,Mohammed Al Burayk,,False,5
+3869151,Argentina,6909,Damián Emiliano Martínez,Goalkeeper,True,97
+3869151,Argentina,29201,Nahuel Molina Lucero,Right Back,True,79
+3869151,Argentina,20572,Cristian Gabriel Romero,Right Center Back,True,97
+3869151,Argentina,3090,Nicolás Hernán Otamendi,Left Center Back,True,97
+3869151,Argentina,19597,Marcos Javier Acuña,Left Back,True,71
+3869151,Argentina,38718,Enzo Fernandez,Center Defensive Midfield,True,97
+3869151,Argentina,7797,Rodrigo Javier De Paul,Right Center Midfield,True,97
+3869151,Argentina,27886,Alexis Mac Allister,Left Center Midfield,True,79
+3869151,Argentina,29560,Julián Álvarez,Right Wing,True,71
+3869151,Argentina,7006,Alejandro Darío Gómez,Left Wing,True,49
+3869151,Argentina,5503,Lionel Andrés Messi Cuccittini,Center Forward,True,97
+3869151,Australia,3240,Mathew Ryan,Goalkeeper,True,97
+3869151,Australia,15957,Miloš Degenek,Right Back,True,71
+3869151,Australia,22293,Harry Souttar,Right Center Back,True,97
+3869151,Australia,33495,Kye Rowles,Left Center Back,True,97
+3869151,Australia,5479,Aziz Eraltay Behich,Left Back,True,97
+3869151,Australia,33488,Keanu Baccus,Right Defensive Midfield,True,57
+3869151,Australia,3281,Aaron Mooy,Left Defensive Midfield,True,97
+3869151,Australia,5481,Mathew Leckie,Right Midfield,True,71
+3869151,Australia,33477,Riley McGree,Left Midfield,True,57
+3869151,Australia,33492,Mitchell Thomas Duke,Right Center Forward,True,71
+3869151,Australia,5490,Jackson Irvine,Left Center Forward,True,97
+3869151,Argentina,27768,Lisandro Martínez,,False,48
+3869151,Australia,8346,Craig Goodwin,,False,40
+3869151,Australia,8859,Ajdin Hrustic,,False,40
+3869151,Argentina,11456,Lautaro Javier Martínez,,False,26
+3869151,Argentina,5507,Nicolás Alejandro Tagliafico,,False,26
+3869151,Australia,9980,Jamie MacLaren,,False,26
+3869151,Australia,227697,Garang Kuol,,False,26
+3869151,Australia,28370,Fran Karačić,,False,26
+3869151,Argentina,28268,Exequiel Alejandro Palacios,,False,18
+3869151,Argentina,28263,Gonzalo Ariel Montiel,,False,18
+3869321,Netherlands,8326,Andries Noppert,Goalkeeper,True,127
+3869321,Netherlands,21809,Jurriën David Norman Timber,Right Center Back,True,127
+3869321,Netherlands,3669,Virgil van Dijk,Center Back,True,127
+3869321,Netherlands,3306,Nathan Aké,Left Center Back,True,127
+3869321,Netherlands,8125,Denzel Dumfries,Right Wing Back,True,127
+3869321,Netherlands,3311,Daley Blind,Left Wing Back,True,64
+3869321,Netherlands,6994,Marten de Roon,Right Defensive Midfield,True,45
+3869321,Netherlands,8118,Frenkie de Jong,Left Defensive Midfield,True,127
+3869321,Netherlands,20750,Cody Mathès Gakpo,Center Attacking Midfield,True,112
+3869321,Netherlands,8259,Steven Bergwijn,Right Center Forward,True,45
+3869321,Netherlands,2988,Memphis Depay,Left Center Forward,True,77
+3869321,Argentina,6909,Damián Emiliano Martínez,Goalkeeper,True,127
+3869321,Argentina,20572,Cristian Gabriel Romero,Right Center Back,True,77
+3869321,Argentina,3090,Nicolás Hernán Otamendi,Center Back,True,127
+3869321,Argentina,27768,Lisandro Martínez,Left Center Back,True,111
+3869321,Argentina,29201,Nahuel Molina Lucero,Right Wing Back,True,105
+3869321,Argentina,19597,Marcos Javier Acuña,Left Wing Back,True,77
+3869321,Argentina,38718,Enzo Fernandez,Center Defensive Midfield,True,127
+3869321,Argentina,7797,Rodrigo Javier De Paul,Right Center Midfield,True,65
+3869321,Argentina,27886,Alexis Mac Allister,Left Center Midfield,True,127
+3869321,Argentina,5503,Lionel Andrés Messi Cuccittini,Right Center Forward,True,127
+3869321,Argentina,29560,Julián Álvarez,Left Center Forward,True,80
+3869321,Netherlands,7745,Steven Berghuis,,False,82
+3869321,Netherlands,7891,Teun Koopmeiners,,False,82
+3869321,Netherlands,20033,Luuk de Jong,,False,63
+3869321,Argentina,16308,Leandro Daniel Paredes,,False,62
+3869321,Argentina,5507,Nicolás Alejandro Tagliafico,,False,50
+3869321,Argentina,7161,Germán Alejandro Pezzella,,False,50
+3869321,Netherlands,7829,Wout Weghorst,,False,50
+3869321,Argentina,11456,Lautaro Javier Martínez,,False,47
+3869321,Argentina,28263,Gonzalo Ariel Montiel,,False,22
+3869321,Argentina,2995,Ángel Fabián Di María Hernández,,False,16
+3869321,Netherlands,21547,Noa Lang,,False,15
+3869519,Argentina,6909,Damián Emiliano Martínez,Goalkeeper,True,95
+3869519,Argentina,29201,Nahuel Molina Lucero,Right Back,True,85
+3869519,Argentina,20572,Cristian Gabriel Romero,Right Center Back,True,95
+3869519,Argentina,3090,Nicolás Hernán Otamendi,Left Center Back,True,95
+3869519,Argentina,5507,Nicolás Alejandro Tagliafico,Left Back,True,95
+3869519,Argentina,16308,Leandro Daniel Paredes,Right Defensive Midfield,True,61
+3869519,Argentina,38718,Enzo Fernandez,Left Defensive Midfield,True,95
+3869519,Argentina,7797,Rodrigo Javier De Paul,Right Midfield,True,73
+3869519,Argentina,27886,Alexis Mac Allister,Left Midfield,True,85
+3869519,Argentina,5503,Lionel Andrés Messi Cuccittini,Right Center Forward,True,95
+3869519,Argentina,29560,Julián Álvarez,Left Center Forward,True,73
+3869519,Croatia,16531,Dominik Livaković,Goalkeeper,True,95
+3869519,Croatia,29163,Josip Juranović,Right Back,True,95
+3869519,Croatia,3471,Dejan Lovren,Right Center Back,True,95
+3869519,Croatia,33018,Joško Gvardiol,Left Center Back,True,95
+3869519,Croatia,12625,Borna Sosa,Left Back,True,45
+3869519,Croatia,5469,Marcelo Brozović,Center Defensive Midfield,True,49
+3869519,Croatia,5463,Luka Modrić,Right Center Midfield,True,80
+3869519,Croatia,5456,Mateo Kovačić,Left Center Midfield,True,95
+3869519,Croatia,11603,Mario Pašalić,Right Wing,True,45
+3869519,Croatia,5474,Ivan Perišić,Left Wing,True,95
+3869519,Croatia,5460,Andrej Kramarić,Center Forward,True,71
+3869519,Croatia,16527,Mislav Oršić,,False,50
+3869519,Croatia,3441,Nikola Vlašić,,False,50
+3869519,Croatia,7693,Bruno Petković,,False,46
+3869519,Argentina,27768,Lisandro Martínez,,False,34
+3869519,Croatia,22041,Marko Livaja,,False,24
+3869519,Argentina,28268,Exequiel Alejandro Palacios,,False,22
+3869519,Argentina,5743,Paulo Bruno Exequiel Dybala,,False,22
+3869519,Croatia,28914,Lovro Majer,,False,15
+3869519,Argentina,6377,Ángel Martín Correa,,False,10
+3869519,Argentina,21081,Juan Marcos Foyth,,False,10
+3869685,Argentina,6909,Damián Emiliano Martínez,Goalkeeper,True,125
+3869685,Argentina,29201,Nahuel Molina Lucero,Right Back,True,90
+3869685,Argentina,20572,Cristian Gabriel Romero,Right Center Back,True,125
+3869685,Argentina,3090,Nicolás Hernán Otamendi,Left Center Back,True,125
+3869685,Argentina,5507,Nicolás Alejandro Tagliafico,Left Back,True,120
+3869685,Argentina,38718,Enzo Fernandez,Center Defensive Midfield,True,125
+3869685,Argentina,7797,Rodrigo Javier De Paul,Right Center Midfield,True,101
+3869685,Argentina,27886,Alexis Mac Allister,Left Center Midfield,True,115
+3869685,Argentina,5503,Lionel Andrés Messi Cuccittini,Right Wing,True,125
+3869685,Argentina,2995,Ángel Fabián Di María Hernández,Left Wing,True,63
+3869685,Argentina,29560,Julián Álvarez,Center Forward,True,101
+3869685,France,3099,Hugo Lloris,Goalkeeper,True,125
+3869685,France,4445,Jules Koundé,Right Back,True,120
+3869685,France,5485,Raphaël Varane,Right Center Back,True,112
+3869685,France,8519,Dayotchanculle Upamecano,Left Center Back,True,125
+3869685,France,6704,Theo Bernard François Hernández,Left Back,True,70
+3869685,France,10481,Aurélien Djani Tchouaméni,Right Defensive Midfield,True,125
+3869685,France,3026,Adrien Rabiot,Left Defensive Midfield,True,95
+3869685,France,5477,Ousmane Dembélé,Right Wing,True,40
+3869685,France,5487,Antoine Griezmann,Center Attacking Midfield,True,70
+3869685,France,3009,Kylian Mbappé Lottin,Left Wing,True,125
+3869685,France,3604,Olivier Giroud,Center Forward,True,41
+3869685,France,22097,Randal Kolo Muani,,False,85
+3869685,France,2972,Marcus Thuram,,False,84
+3869685,Argentina,19597,Marcos Javier Acuña,,False,62
+3869685,France,24778,Eduardo Camavinga,,False,55
+3869685,France,8217,Kingsley Coman,,False,55
+3869685,Argentina,28263,Gonzalo Ariel Montiel,,False,35
+3869685,France,11990,Youssouf Fofana,,False,30
+3869685,Argentina,16308,Leandro Daniel Paredes,,False,24
+3869685,Argentina,11456,Lautaro Javier Martínez,,False,24
+3869685,France,11135,Ibrahima Konaté,,False,13
+3869685,Argentina,7161,Germán Alejandro Pezzella,,False,10
+3869685,France,7439,Axel Disasi,,False,5
+3869685,Argentina,5743,Paulo Bruno Exequiel Dybala,,False,5

@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import SqlExplorer from "../islands/SqlExplorer";
+---
+
+<Base title="Explorador SQL" description="Consultas SQL libres sobre los datos crudos, corriendo en el navegador con DuckDB-WASM.">
+  <h1>Explorador SQL</h1>
+  <p class="lede">
+    Esta es la alternativa a tener una base de datos propia: los archivos Parquet versionados en el repositorio se
+    sirven como estáticos y <a href="https://duckdb.org/docs/api/wasm/overview" target="_blank" rel="noreferrer">DuckDB-WASM</a>
+    corre el motor SQL completo dentro de tu navegador. Sin backend, sin servidor de base de datos, sin costo.
+  </p>
+  <div class="card">
+    <SqlExplorer client:only="react" />
+  </div>
+</Base>

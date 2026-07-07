@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import DataStatusBanner from "../layouts/DataStatusBanner.astro";
+import PlayerMinutesBar from "../islands/PlayerMinutesBar";
+import { loadJson, type PlayerMinutesRow } from "../lib/data";
+
+const players = loadJson<PlayerMinutesRow[]>("player_minutes_ranking.json");
+---
+
+<Base title="Jugadores" description="Ranking de minutos jugados por plantel — la unidad de análisis correcta.">
+  <DataStatusBanner />
+  <h1>Jugadores</h1>
+  <p class="lede">
+    Un promedio de equipo esconde que algunos jugadores corren mucho y otros poco. Cuando lleguen las métricas
+    físicas por jugador (FIFA Training Centre), esta es la vista donde se van a cruzar con minutos jugados y edad —
+    hoy muestra minutos jugados reales por plantel como base.
+  </p>
+
+  <section class="section">
+    <div class="card">
+      <PlayerMinutesBar client:only="react" rows={players} />
+    </div>
+  </section>
+</Base>

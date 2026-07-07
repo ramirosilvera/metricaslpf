@@ -1,0 +1,19 @@
+# Node / Astro
+site/node_modules/
+site/dist/
+site/.astro/
+site/check_site.mjs
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# HTML crudo guardado por los scrapers para debug (puede ser pesado, no versionar)
+data/raw/fifa_training_centre/raw_*.html
+data/raw/transfermarkt/raw_*.html
+
+# editores / SO
+.DS_Store
+.vscode/
+*.log

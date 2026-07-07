@@ -1,0 +1,106 @@
+[
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "posesion_promedio_proxy_percentil": 100.0,
+    "precision_pases_promedio_percentil": 76.9,
+    "remates_promedio_percentil": 92.3,
+    "remates_al_arco_promedio_percentil": 69.2
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "posesion_promedio_proxy_percentil": 84.6,
+    "precision_pases_promedio_percentil": 92.3,
+    "remates_promedio_percentil": 100.0,
+    "remates_al_arco_promedio_percentil": 96.2
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "posesion_promedio_proxy_percentil": 42.3,
+    "precision_pases_promedio_percentil": 61.5,
+    "remates_promedio_percentil": 30.8,
+    "remates_al_arco_promedio_percentil": 19.2
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "posesion_promedio_proxy_percentil": 53.8,
+    "precision_pases_promedio_percentil": 30.8,
+    "remates_promedio_percentil": 80.8,
+    "remates_al_arco_promedio_percentil": 76.9
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "posesion_promedio_proxy_percentil": 92.3,
+    "precision_pases_promedio_percentil": 100.0,
+    "remates_promedio_percentil": 65.4,
+    "remates_al_arco_promedio_percentil": 38.5
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "posesion_promedio_proxy_percentil": 42.3,
+    "precision_pases_promedio_percentil": 69.2,
+    "remates_promedio_percentil": 46.2,
+    "remates_al_arco_promedio_percentil": 61.5
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "posesion_promedio_proxy_percentil": 69.2,
+    "precision_pases_promedio_percentil": 46.2,
+    "remates_promedio_percentil": 80.8,
+    "remates_al_arco_promedio_percentil": 96.2
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "posesion_promedio_proxy_percentil": 7.7,
+    "precision_pases_promedio_percentil": 7.7,
+    "remates_promedio_percentil": 46.2,
+    "remates_al_arco_promedio_percentil": 38.5
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "posesion_promedio_proxy_percentil": 61.5,
+    "precision_pases_promedio_percentil": 38.5,
+    "remates_promedio_percentil": 19.2,
+    "remates_al_arco_promedio_percentil": 19.2
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "posesion_promedio_proxy_percentil": 76.9,
+    "precision_pases_promedio_percentil": 84.6,
+    "remates_promedio_percentil": 65.4,
+    "remates_al_arco_promedio_percentil": 84.6
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "posesion_promedio_proxy_percentil": 30.8,
+    "precision_pases_promedio_percentil": 15.4,
+    "remates_promedio_percentil": 46.2,
+    "remates_al_arco_promedio_percentil": 53.8
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "posesion_promedio_proxy_percentil": 15.4,
+    "precision_pases_promedio_percentil": 53.8,
+    "remates_promedio_percentil": 19.2,
+    "remates_al_arco_promedio_percentil": 7.7
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "posesion_promedio_proxy_percentil": 23.1,
+    "precision_pases_promedio_percentil": 23.1,
+    "remates_promedio_percentil": 7.7,
+    "remates_al_arco_promedio_percentil": 38.5
+  }
+]

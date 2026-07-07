@@ -1,0 +1,5 @@
+{
+  "status": "pending_first_scrape",
+  "note": "Todavia no hay datos fisicos cargados. Se completan corriendo etl/scrape_fifa_training_centre.py en GitHub Actions (requiere red sin restricciones; no corre en el entorno de desarrollo sandboxed).",
+  "rows": []
+}

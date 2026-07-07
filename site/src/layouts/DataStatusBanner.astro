@@ -1,0 +1,25 @@
+---
+import { loadJson, type Meta } from "../lib/data";
+
+const meta = loadJson<Meta>("meta.json");
+const items = [
+  { label: "Contexto táctico (StatsBomb)", s: meta.sources.tactical_context },
+  { label: "Físico (FIFA Training Centre)", s: meta.sources.physical_performance },
+  { label: "Edad de plantel (Transfermarkt)", s: meta.sources.squad_ages },
+];
+---
+
+<div class="callout warning" style="margin-bottom: 1.75rem;">
+  <h3>Estado de los datos</h3>
+  <p style="margin-bottom: 0.9rem;">
+    Este proyecto se actualiza automáticamente vía GitHub Actions. Generado por última vez: <strong>{new Date(meta.generated_at).toLocaleString("es-AR", { dateStyle: "medium", timeStyle: "short" })}</strong>.
+  </p>
+  <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+    {items.map((it) => (
+      <span class={`badge ${it.s.status === "ok" ? "status-ok" : "status-pending"}`}>
+        <span class="dot"></span>
+        {it.label}: {it.s.status === "ok" ? "cargado" : "pendiente de primera corrida"}
+      </span>
+    ))}
+  </div>
+</div>

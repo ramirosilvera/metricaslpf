@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-07-07T23:11:05.608956+00:00",
+  "sources": {
+    "tactical_context": {
+      "provider": "StatsBomb Open Data",
+      "license": "https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf (uso no comercial)",
+      "coverage": "Mundial 2018 y 2022 -- partidos de Argentina cargados como semilla inicial",
+      "status": "ok"
+    },
+    "physical_performance": {
+      "provider": "FIFA Training Centre",
+      "coverage": "Mundial 2026 (en curso)",
+      "status": "pending_first_scrape"
+    },
+    "squad_ages": {
+      "provider": "Transfermarkt",
+      "status": "pending_first_scrape"
+    }
+  }
+}

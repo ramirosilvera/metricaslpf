@@ -1,0 +1,91 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Metodología" description="Sesgos, variables de confusión y cómo leer los datos de este proyecto.">
+  <h1>Metodología</h1>
+  <p class="lede">
+    Este proyecto pone a prueba una hipótesis específica: que la Selección Argentina corre menos, hace menos
+    esfuerzos de alta intensidad, o tiene menor capacidad física que otras selecciones — posiblemente asociado a la
+    edad promedio del plantel. Antes de mostrar un solo gráfico, hay que ser honestos sobre qué puede y qué no puede
+    responder este dataset.
+  </p>
+
+  <section class="section">
+    <h2>Por qué esto es descriptivo, no un estudio causal</h2>
+    <p>
+      Con 4 a 7 partidos por selección en un solo torneo, ninguna diferencia entre selecciones tiene el tamaño de
+      muestra necesario para inferencia causal sobre "capacidad física". Todos los gráficos de este sitio muestran
+      dispersión (boxplots, percentiles) en vez de solo promedios, y el tamaño de muestra siempre está a la vista.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Sesgos y variables de confusión</h2>
+    <ol>
+      <li><strong>Estilo de posesión invierte la métrica.</strong> Los equipos que dominan el balón corren menos, no más — no tienen que perseguir. FIFA Training Centre lo señala explícitamente en su análisis "Why do teams run" del Mundial 2022.</li>
+      <li><strong>Estado del marcador.</strong> Equipos que ganan bajan intensidad a propósito en los últimos minutos; los que pierden la suben. Es estrategia, no fitness.</li>
+      <li><strong>Calidad y estilo del rival.</strong> Correr mucho contra un rival que también presiona alto no es comparable a correr poco contra un bloque bajo.</li>
+      <li><strong>Fase del torneo y descanso entre partidos.</strong> Grupos vs. octavos vs. final tienen distinto descanso, clima y motivación.</li>
+      <li><strong>Clima y sede.</strong> El Mundial 2026 se juega en EE.UU./México/Canadá, con climas y altitudes muy distintas entre sedes — afecta de forma mecánica, independiente de la selección.</li>
+      <li><strong>Rotación y gestión de carga.</strong> Un plantel con banco largo puede mostrar métricas de equipo "peores" sin que eso hable de su techo físico.</li>
+      <li><strong>Tamaño de muestra desigual.</strong> Un eliminado en octavos tiene 4 partidos; un finalista, 7. Promediar "el torneo" sin ponderar esto sesga la comparación.</li>
+      <li><strong>Sesgo de percepción previo.</strong> La narrativa "Argentina es lenta/vieja" está instalada en medios desde hace años — exactamente lo que este proyecto pone a prueba, y exactamente por qué el diseño evita arrancar con un ranking crudo como titular.</li>
+      <li><strong>Edad promedio como proxy físico es débil.</strong> La relación edad–rendimiento físico es no lineal y depende de posición, historial de lesiones y carga de la temporada de clubes — no solo de la edad cronológica del plantel. Hay que ponderar por minutos jugados, no promediar el plantel completo.</li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <h2>Métricas engañosas vs. métricas robustas</h2>
+    <table>
+      <thead>
+        <tr><th>Métrica</th><th>Qué mide realmente</th><th>Confiabilidad física</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Distancia total (km/partido)</td><td>Mezcla física + decisión táctica</td><td>Baja si se usa sola</td></tr>
+        <tr><td>Distancia a alta intensidad (&gt;20 km/h)</td><td>Esfuerzo real, menos influido por estilo</td><td>Media-alta</td></tr>
+        <tr><td>Sprints y velocidad punta</td><td>Capacidad neuromuscular</td><td>Alta</td></tr>
+        <tr><td>Distancia sin balón</td><td>Aísla el componente físico del táctico</td><td>Alta (poco reportada)</td></tr>
+        <tr><td>Distancia último tramo vs. primer tramo</td><td>Fatiga intra-partido</td><td>Alta si hay splits</td></tr>
+        <tr><td>Edad promedio simple del plantel</td><td>Proxy demográfico</td><td>Baja — usar como control, no resultado</td></tr>
+        <tr><td>Edad ponderada por minutos jugados</td><td>Proxy más honesto</td><td>Media</td></tr>
+        <tr><td>Posesión, PPDA</td><td>Estilo de juego</td><td>Es contexto táctico, no físico</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Cómo se valida acá (dado el n chico)</h2>
+    <ul>
+      <li>Comparar Argentina contra selecciones de perfil similar y contra sí misma en el tiempo (2018 vs. 2022 vs. 2026), no contra "el resto" en abstracto.</li>
+      <li>Normalizar siempre por 90 minutos, por fase de posesión y por fase del torneo.</li>
+      <li>Mostrar rango/dispersión, no solo el promedio.</li>
+      <li>Separar variable de control (edad, contexto táctico) de variable de resultado (métricas físicas) en toda la interfaz.</li>
+      <li>Bajar a nivel jugador, no solo selección — un promedio de equipo esconde variación individual real.</li>
+      <li>Dejar el resultado abierto: mostrar si la hipótesis se sostiene, no se sostiene, o es inconclusa con los datos disponibles — nunca una conclusión editorializada de antemano.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Fuentes de datos</h2>
+    <table>
+      <thead>
+        <tr><th>Fuente</th><th>Qué aporta</th><th>Cobertura</th><th>Limitación principal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FIFA Training Centre</td><td>Métricas físicas oficiales (GPS/tracking)</td><td>Mundiales 2018, 2022, 2026 en curso</td><td>No es API — páginas HTML editoriales, requiere scraping</td></tr>
+        <tr><td>StatsBomb Open Data</td><td>Contexto táctico (eventos, posesión-proxy, formaciones)</td><td>Mundial 2018 y 2022 completos</td><td>Sin datos de distancia/sprints — es dataset de eventos, no tracking</td></tr>
+        <tr><td>Transfermarkt</td><td>Edad, fecha de nacimiento, club, posición</td><td>Todos los planteles</td><td>Scraping no oficial, sin API pública</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Arquitectura (por qué no hay base de datos)</h2>
+    <p>
+      Todo el proyecto es JAMstack: GitHub Pages + Astro (sitio estático) + Parquet versionado en git como fuente de
+      verdad + JSON pre-agregados para el frontend + GitHub Actions como motor ETL. Para consultas libres, el <a href={`${import.meta.env.BASE_URL}explorador/`}>explorador SQL</a> corre
+      DuckDB-WASM en el navegador directamente sobre los Parquet publicados — sin backend ni servidor de base de datos.
+    </p>
+  </section>
+</Base>

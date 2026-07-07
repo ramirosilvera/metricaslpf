@@ -1,0 +1,145 @@
+[
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "partidos": 4,
+    "posesion_promedio_proxy": 0.646,
+    "precision_pases_promedio": 82.15,
+    "remates_promedio": 14.5,
+    "remates_al_arco_promedio": 4.25,
+    "goles_totales": 6,
+    "faltas_promedio": 15.5
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "partidos": 7,
+    "posesion_promedio_proxy": 0.57,
+    "precision_pases_promedio": 84.886,
+    "remates_promedio": 15.714,
+    "remates_al_arco_promedio": 8.0,
+    "goles_totales": 23,
+    "faltas_promedio": 16.286
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.406,
+    "precision_pases_promedio": 80.3,
+    "remates_promedio": 5.0,
+    "remates_al_arco_promedio": 1.0,
+    "goles_totales": 0,
+    "faltas_promedio": 18.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.414,
+    "precision_pases_promedio": 71.7,
+    "remates_promedio": 14.0,
+    "remates_al_arco_promedio": 5.0,
+    "goles_totales": 3,
+    "faltas_promedio": 23.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.575,
+    "precision_pases_promedio": 86.3,
+    "remates_promedio": 12.0,
+    "remates_al_arco_promedio": 2.0,
+    "goles_totales": 0,
+    "faltas_promedio": 10.0
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.406,
+    "precision_pases_promedio": 80.9,
+    "remates_promedio": 9.0,
+    "remates_al_arco_promedio": 4.0,
+    "goles_totales": 4,
+    "faltas_promedio": 23.0
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.47,
+    "precision_pases_promedio": 76.1,
+    "remates_promedio": 14.0,
+    "remates_al_arco_promedio": 8.0,
+    "goles_totales": 5,
+    "faltas_promedio": 19.0
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.25,
+    "precision_pases_promedio": 61.2,
+    "remates_promedio": 9.0,
+    "remates_al_arco_promedio": 2.0,
+    "goles_totales": 1,
+    "faltas_promedio": 17.0
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.435,
+    "precision_pases_promedio": 75.4,
+    "remates_promedio": 4.0,
+    "remates_al_arco_promedio": 1.0,
+    "goles_totales": 0,
+    "faltas_promedio": 21.0
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.515,
+    "precision_pases_promedio": 82.8,
+    "remates_promedio": 12.0,
+    "remates_al_arco_promedio": 7.0,
+    "goles_totales": 5,
+    "faltas_promedio": 37.0
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.344,
+    "precision_pases_promedio": 65.2,
+    "remates_promedio": 9.0,
+    "remates_al_arco_promedio": 3.0,
+    "goles_totales": 1,
+    "faltas_promedio": 21.0
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.285,
+    "precision_pases_promedio": 79.2,
+    "remates_promedio": 4.0,
+    "remates_al_arco_promedio": 0.0,
+    "goles_totales": 0,
+    "faltas_promedio": 9.0
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "partidos": 1,
+    "posesion_promedio_proxy": 0.327,
+    "precision_pases_promedio": 68.9,
+    "remates_promedio": 3.0,
+    "remates_al_arco_promedio": 2.0,
+    "goles_totales": 2,
+    "faltas_promedio": 22.0
+  }
+]
