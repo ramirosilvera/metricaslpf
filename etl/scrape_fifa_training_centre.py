@@ -105,6 +105,17 @@ def scrape() -> list[dict]:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     report_urls = discover_match_report_urls()
+    # Diagnostico incondicional: se escribe siempre (haya o no filas), para
+    # poder ver en cualquier corrida cuantas URLs se encontraron sin tener
+    # que revisar logs de GitHub Actions.
+    (RAW_DIR / "_discovery_status.json").write_text(json.dumps({
+        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "hub_url": HUB_URL,
+        "report_urls_found": report_urls,
+        "count": len(report_urls),
+    }, ensure_ascii=False, indent=2))
+    print(f"discover_match_report_urls: {len(report_urls)} URLs encontradas", flush=True)
+
     rows: list[dict] = []
     failed: list[dict] = []
 
@@ -156,7 +167,7 @@ def scrape() -> list[dict]:
 if __name__ == "__main__":
     rows = scrape()
     n_failed = len(json.loads(FAILED_LOG.read_text())) if FAILED_LOG.exists() else 0
-    print(f"filas extraidas: {len(rows)} -- items pendientes de revision manual: {n_failed}")
+    print(f"filas extraidas: {len(rows)} -- items pendientes de revision manual: {n_failed}", flush=True)
     if not rows:
         print(
             "ADVERTENCIA: no se pudo extraer ninguna fila automáticamente. "

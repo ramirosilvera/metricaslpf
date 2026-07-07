@@ -29,6 +29,8 @@ jobs:
       - name: Correr pipeline completo (scraping + warehouse + validacion + agregados)
         run: python etl/pipeline.py --allow-scrape-failures
         working-directory: .
+        env:
+          PYTHONUNBUFFERED: "1"
 
       - name: Commitear datos actualizados
         run: |
@@ -49,6 +51,7 @@ jobs:
           name: scrape-failures
           path: |
             data/raw/*/_failed.*
+            data/raw/*/_discovery_status.json
           if-no-files-found: ignore
 
 # trigger workflow indexing
