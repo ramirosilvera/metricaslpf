@@ -41,10 +41,17 @@ def build():
     WAREHOUSE.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect()
 
-    # --- matches ---
-    matches = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "matches.csv")
-    if matches is not None:
-        matches = matches.astype({"match_id": "int64", "home_score": "int64", "away_score": "int64"})
+    # --- matches (StatsBomb 2018/2022 + registro propio FIFA 2026 desde los PDF PMSR) ---
+    matches_sources = [
+        _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "matches.csv"),
+        _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "matches_fifa2026.csv"),
+    ]
+    matches_sources = [m for m in matches_sources if m is not None]
+    if matches_sources:
+        matches = pd.concat(matches_sources, ignore_index=True)
+        matches["match_id"] = matches["match_id"].astype("int64")
+        matches["home_score"] = pd.to_numeric(matches["home_score"], errors="coerce").astype("Int64")
+        matches["away_score"] = pd.to_numeric(matches["away_score"], errors="coerce").astype("Int64")
         matches = MatchesSchema.validate(matches)
         con.register("matches_df", matches)
         con.execute(f"COPY matches_df TO '{WAREHOUSE / 'matches.parquet'}' (FORMAT PARQUET)")

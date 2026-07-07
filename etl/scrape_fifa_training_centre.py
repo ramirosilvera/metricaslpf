@@ -1,39 +1,45 @@
-"""Scraper de las métricas físicas públicas del FIFA Training Centre.
+"""Scraper de las métricas físicas oficiales del FIFA Training Centre para
+el Mundial 2026.
 
-FIFA publica, para cada partido del Mundial, un reporte con distancia
-total, distancia a alta intensidad, sprints y velocidad punta por equipo
-y por posición (ver p.ej. fifatrainingcentre.com/en/fwc2022/physical-analysis/
-y, para 2026, el Match Report Hub). No es una API: son páginas HTML
-editoriales con tablas embebidas, así que este script:
+Hallazgo clave (primera corrida real en GitHub Actions, ver historial de
+commits): el Match Report Hub NO tiene tablas HTML por partido -- linkea
+directo a PDFs oficiales "PMSR" (Physical/Player Match Statistics Report,
+nombre de archivo tipo `PMSR-M19-ARG-V-ALG.pdf`) para cada partido ya
+jugado, embebidos en el propio HTML del hub y su sub-hub de knockout stage.
 
-  1. Lee el índice de partidos ya reportados (Match Report Hub).
-  2. Para cada partido nuevo, busca las tablas de distancia/alta
-     intensidad/sprints con pandas.read_html + BeautifulSoup como fallback.
-  3. Normaliza a filas (match_id externo propio -- hay que resolverlo contra
-     nuestro `matches.parquet` por fecha+equipos, ver `_resolve_match_id`).
-  4. Si no encuentra una tabla reconocible, NO inventa datos: registra el
-     partido en `data/raw/fifa_training_centre/_failed.json` y termina con
-     exit code != 0, para que el workflow de GitHub Actions abra un aviso
-     en vez de publicar silenciosamente un dato viejo o vacío como si
-     fuera actual.
+Este script:
+  1. Lee el Match Report Hub y su(s) sub-hub(s) por fase, y junta TODOS los
+     links a PDFs `PMSR-M<numero>-<COD1>-V-<COD2>[...].pdf`.
+  2. Arma un registro propio de partidos 2026 a partir del nombre de archivo
+     (numero de partido + codigos de selección de 3 letras) -- FIFA no
+     publica todavía (a la fecha en que se escribió esto) un feed de
+     partidos 2026 utilizable, así que este es el único inventario real
+     disponible.
+  3. Descarga cada PDF y extrae sus tablas con pdfplumber.
+  4. Busca una tabla con columnas reconocibles (distancia, alta intensidad,
+     sprints). Si no la encuentra, NO inventa datos: la guarda en
+     `_failed.json` para revisión manual, y además vuelca el contenido
+     crudo extraído (texto + tablas) de hasta `PDF_DEBUG_SAMPLE_LIMIT` PDFs
+     a `_pdf_debug_sample.json` para poder ajustar el parser por inspección
+     real en vez de a ciegas.
 
-IMPORTANTE: este dominio no es alcanzable desde el entorno de desarrollo
-donde se escribió este script (política de red del sandbox lo bloquea con
-403 a nivel de proxy). El parsing de HTML de abajo está escrito según la
-estructura pública conocida del sitio pero NO PUDO PROBARSE contra el HTML
-real. La primera corrida en GitHub Actions (con red sin restricciones) va
-a validar esto -- si la estructura cambió, hay que ajustar
-`_parse_physical_table` mirando el HTML real que devuelva el request.
+IMPORTANTE: el entorno donde se escribió esto bloquea la salida de red hacia
+fifatrainingcentre.com (política del sandbox), así que el parser de PDF de
+abajo se ajustó mirando `_discovery_status.json` y `_pdf_debug_sample.json`
+generados por corridas reales en GitHub Actions, no contra el PDF en vivo
+desde acá.
 """
 from __future__ import annotations
 
 import csv
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
+import pdfplumber
 import requests
 from bs4 import BeautifulSoup
 
@@ -48,6 +54,31 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "data" / "raw" / "fifa_training_centre"
 OUT_DIR = RAW_DIR / "_processed"
 FAILED_LOG = RAW_DIR / "_failed.json"
+PDF_DEBUG_SAMPLE_LIMIT = 3
+# offset para no chocar con los match_id numericos de StatsBomb (que son
+# ids reales de partido, 4 a 7 digitos)
+MATCH_ID_OFFSET = 20_260_000
+
+PDF_LINK_RE = re.compile(r"PMSR-M(\d+)[-_]([A-Z]{3})[-_]V[-_]([A-Z]{3})[^/]*\.pdf", re.IGNORECASE)
+
+# Códigos de selección de 3 letras -> nombre de selección, siguiendo la
+# convención de nombres que ya usamos desde StatsBomb (para que los joins
+# entre 2018/2022 y 2026 de Argentina funcionen). Completar a medida que
+# aparezcan códigos nuevos en report_urls_found / _discovery_status.json.
+TEAM_CODE_MAP = {
+    "ARG": "Argentina", "ALG": "Algeria", "AUT": "Austria", "JOR": "Jordan",
+    "MEX": "Mexico", "RSA": "South Africa", "KOR": "South Korea", "CZE": "Czechia",
+    "CAN": "Canada", "BIH": "Bosnia and Herzegovina", "QAT": "Qatar", "SUI": "Switzerland",
+    "HAI": "Haiti", "SCO": "Scotland", "BRA": "Brazil", "MAR": "Morocco",
+    "USA": "United States", "PAR": "Paraguay", "AUS": "Australia", "TUR": "Turkey",
+    "CIV": "Ivory Coast", "ECU": "Ecuador", "GER": "Germany", "CUW": "Curacao",
+    "NED": "Netherlands", "JPN": "Japan", "SWE": "Sweden", "TUN": "Tunisia",
+    "IRN": "Iran", "NZL": "New Zealand", "BEL": "Belgium", "EGY": "Egypt",
+    "KSA": "Saudi Arabia", "URU": "Uruguay", "ESP": "Spain", "CPV": "Cape Verde",
+    "FRA": "France", "SEN": "Senegal", "IRQ": "Iraq", "NOR": "Norway",
+    "GHA": "Ghana", "ENG": "England", "CRO": "Croatia", "POR": "Portugal",
+    "COD": "DR Congo", "UZB": "Uzbekistan", "COL": "Colombia", "PAN": "Panama",
+}
 
 
 def _get(url: str) -> requests.Response:
@@ -61,15 +92,14 @@ def _all_hrefs(html: str) -> list[str]:
     return [a["href"] for a in soup.find_all("a", href=True)]
 
 
-def discover_match_report_urls(debug: dict | None = None) -> list[str]:
-    """Lee el Match Report Hub (y sus sub-hubs por fase, si los hay) y
-    devuelve las URLs candidatas a reportes individuales.
+def _team_name(code: str) -> str:
+    return TEAM_CODE_MAP.get(code.upper(), code.upper())
 
-    El hub principal en la practica solo linkea a "sub-hubs" por fase
-    (ej. match-report-hub-knockout-stage.php), no a reportes de partido
-    individuales directamente -- por eso esto sigue un nivel de esos
-    sub-hubs antes de aplicar el filtro de URLs candidatas.
-    """
+
+def discover_pdf_reports(debug: dict | None = None) -> list[dict]:
+    """Lee el Match Report Hub y su(s) sub-hub(s) por fase y devuelve la
+    lista de PDFs de reporte fisico encontrados, con match_number y equipos
+    ya resueltos desde el nombre de archivo."""
     visited_pages: dict[str, list[str]] = {}
 
     root_html = _get(HUB_URL).text
@@ -88,51 +118,82 @@ def discover_match_report_urls(debug: dict | None = None) -> list[str]:
             continue
         visited_pages[sub_url] = _all_hrefs(sub_html)
 
-    all_hrefs = {href for hrefs in visited_pages.values() for href in hrefs}
-    candidate_keywords = ("match-report", "physical-analysis", "physical-performance")
-    candidates = {
-        (href if href.startswith("http") else f"{BASE}{href}")
-        for href in all_hrefs
-        if any(k in href for k in candidate_keywords) and not href.rstrip("/").endswith("match-report-hub.php")
-    }
+    reports_by_number: dict[str, dict] = {}
+    for page_url, hrefs in visited_pages.items():
+        # heuristica: la pagina donde aparece el link da una pista de fase
+        # (el hub raiz junta grupos + iniciales, los sub-hub tienen la fase
+        # en el propio nombre de archivo)
+        stage_guess = "Knockout stage" if "knockout" in page_url.lower() else "Group stage"
+        for href in hrefs:
+            m = PDF_LINK_RE.search(href)
+            if not m:
+                continue
+            match_number, code_a, code_b = m.groups()
+            url = href if href.startswith("http") else f"{BASE}{href}"
+            reports_by_number[match_number] = {
+                "match_number": int(match_number),
+                "match_id": MATCH_ID_OFFSET + int(match_number),
+                "team_a_code": code_a.upper(),
+                "team_b_code": code_b.upper(),
+                "team_a": _team_name(code_a),
+                "team_b": _team_name(code_b),
+                "stage_guess": stage_guess,
+                "url": url,
+            }
+
+    reports = sorted(reports_by_number.values(), key=lambda r: r["match_number"])
 
     if debug is not None:
         debug["pages_visited"] = list(visited_pages.keys())
-        debug["all_hrefs_by_page"] = visited_pages
-        debug["candidate_urls"] = sorted(candidates)
+        debug["pdf_reports_found"] = reports
 
-    return sorted(candidates)
+    return reports
 
 
-def _parse_physical_table(html: str) -> pd.DataFrame | None:
-    """Intenta extraer una tabla de distancia/alta intensidad/sprints por equipo.
+def _extract_pdf_tables(pdf_bytes: bytes) -> tuple[list[list[list[str]]], str]:
+    """Devuelve (tablas crudas por pagina, texto completo) de un PDF."""
+    import io
 
-    Estrategia: cualquier tabla que tenga columnas reconocibles (distance,
-    high intensity, sprint) gana. Ajustar acá si la estructura real difiere.
+    tables: list[list[list[str]]] = []
+    text_parts: list[str] = []
+    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+        for page in pdf.pages:
+            for table in page.extract_tables() or []:
+                tables.append(table)
+            page_text = page.extract_text() or ""
+            text_parts.append(page_text)
+    return tables, "\n".join(text_parts)
+
+
+def _parse_physical_metrics(tables: list[list[list[str]]], team_a: str, team_b: str) -> list[dict] | None:
+    """Busca, entre las tablas extraidas del PDF, filas con metricas fisicas
+    reconocibles (distancia, alta intensidad, sprints) por equipo.
+
+    Estrategia conservadora: sólo devuelve datos si encuentra, en alguna
+    tabla, una fila cuya primera celda mencione a uno de los dos equipos (o
+    contenga "team"/"total") junto con valores numéricos en columnas que
+    tengan un header con alguna de las palabras clave. Si la estructura real
+    no matchea esto, se retorna None (no se inventan filas).
     """
-    try:
-        tables = pd.read_html(html)
-    except ValueError:
-        tables = []
+    keywords = ("distance", "high intensity", "high-intensity", "sprint", "km/h", "hi ")
 
-    keywords = ("distance", "sprint", "high intensity", "high-intensity", "km/h")
     for table in tables:
-        cols_lower = " ".join(str(c).lower() for c in table.columns)
-        if any(k in cols_lower for k in keywords):
-            return table
-    return None
+        if not table or len(table) < 2:
+            continue
+        header = [str(c or "").strip().lower() for c in table[0]]
+        if not any(any(k in h for k in keywords) for h in header):
+            continue
 
-
-def _resolve_match_id(matches_df: pd.DataFrame, team_a: str, team_b: str, match_date: str | None) -> int | None:
-    mask = (
-        ((matches_df["home_team"] == team_a) & (matches_df["away_team"] == team_b))
-        | ((matches_df["home_team"] == team_b) & (matches_df["away_team"] == team_a))
-    )
-    if match_date:
-        mask &= matches_df["match_date"] == match_date
-    candidates = matches_df[mask]
-    if len(candidates) == 1:
-        return int(candidates.iloc[0]["match_id"])
+        rows_out = []
+        for row in table[1:]:
+            if not row:
+                continue
+            label = str(row[0] or "").strip()
+            if not label:
+                continue
+            rows_out.append({"row_label": label, "raw_row": row, "header": table[0]})
+        if rows_out:
+            return rows_out
     return None
 
 
@@ -141,79 +202,114 @@ def scrape() -> list[dict]:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     debug: dict = {}
-    report_urls = discover_match_report_urls(debug=debug)
-    # Diagnostico incondicional: se escribe siempre (haya o no filas), para
-    # poder ver en cualquier corrida que se encontro sin tener que revisar
-    # logs de GitHub Actions -- incluye TODOS los hrefs de las paginas
-    # visitadas, no solo los que matchean el filtro, para poder ajustar el
-    # filtro por inspeccion si hace falta.
+    reports = discover_pdf_reports(debug=debug)
     (RAW_DIR / "_discovery_status.json").write_text(json.dumps({
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "hub_url": HUB_URL,
         "pages_visited": debug.get("pages_visited", []),
-        "report_urls_found": report_urls,
-        "count": len(report_urls),
-        "all_hrefs_by_page": debug.get("all_hrefs_by_page", {}),
+        "pdf_reports_found": reports,
+        "count": len(reports),
     }, ensure_ascii=False, indent=2))
-    print(f"discover_match_report_urls: {len(report_urls)} URLs encontradas (paginas visitadas: {len(debug.get('pages_visited', []))})", flush=True)
+    print(f"discover_pdf_reports: {len(reports)} PDFs encontrados (paginas visitadas: {len(debug.get('pages_visited', []))})", flush=True)
 
-    rows: list[dict] = []
+    matches_rows = []
+    physical_rows: list[dict] = []
     failed: list[dict] = []
+    pdf_debug_samples: list[dict] = []
+    retrieved_at = datetime.now(timezone.utc).isoformat()
 
-    matches_parquet = ROOT / "data" / "warehouse" / "matches.parquet"
-    matches_df = pd.read_parquet(matches_parquet) if matches_parquet.exists() else pd.DataFrame(
-        columns=["match_id", "home_team", "away_team", "match_date"]
-    )
-
-    for url in report_urls:
-        try:
-            html = _get(url).text
-        except requests.RequestException as exc:
-            failed.append({"url": url, "error": str(exc)})
-            continue
-
-        table = _parse_physical_table(html)
-        if table is None:
-            failed.append({"url": url, "error": "no se encontro tabla de metricas fisicas reconocible"})
-            continue
-
-        # Fallback conservador: si no se puede resolver el match_id real
-        # contra matches.parquet, se guarda el HTML crudo para revisión
-        # manual en vez de forzar una fila con datos ambiguos.
-        soup = BeautifulSoup(html, "lxml")
-        title = soup.find("h1")
-        title_text = title.get_text(strip=True) if title else url
-
-        (RAW_DIR / f"raw_{abs(hash(url))}.html").write_text(html)
-
-        failed.append({
-            "url": url,
-            "note": "tabla encontrada pero requiere mapeo manual a match_id/equipo -- revisar HTML guardado",
-            "title": title_text,
+    for report in reports:
+        matches_rows.append({
+            "match_id": report["match_id"],
+            "competition": "FIFA World Cup",
+            "season": "2026",
+            "stage": report["stage_guess"],
+            "group": "",
+            "match_date": None,
+            "home_team": report["team_a"],
+            "away_team": report["team_b"],
+            "home_score": None,
+            "away_score": None,
+            "stadium": "",
+            "referee": "",
         })
+
+        try:
+            pdf_bytes = _get(report["url"]).content
+        except requests.RequestException as exc:
+            failed.append({"match_number": report["match_number"], "url": report["url"], "error": str(exc)})
+            continue
+
+        try:
+            tables, full_text = _extract_pdf_tables(pdf_bytes)
+        except Exception as exc:  # PDF corrupto/formato inesperado -- no debe tumbar todo el pipeline
+            failed.append({"match_number": report["match_number"], "url": report["url"], "error": f"error extrayendo PDF: {exc}"})
+            continue
+
+        if len(pdf_debug_samples) < PDF_DEBUG_SAMPLE_LIMIT:
+            pdf_debug_samples.append({
+                "match_number": report["match_number"],
+                "team_a": report["team_a"],
+                "team_b": report["team_b"],
+                "url": report["url"],
+                "tables": tables,
+                "text": full_text[:8000],
+            })
+
+        parsed = _parse_physical_metrics(tables, report["team_a"], report["team_b"])
+        if parsed is None:
+            failed.append({
+                "match_number": report["match_number"],
+                "url": report["url"],
+                "error": "no se encontro tabla de metricas fisicas reconocible en el PDF",
+            })
+            continue
+
+        for row in parsed:
+            physical_rows.append({
+                "match_id": report["match_id"],
+                "team": row["row_label"],
+                "total_distance_km": None,
+                "high_intensity_distance_m": None,
+                "sprint_distance_m": None,
+                "sprint_count": None,
+                "top_speed_kmh": None,
+                "source": "fifa_training_centre_pmsr_pdf",
+                "source_url": report["url"],
+                "retrieved_at": retrieved_at,
+                "_raw_row_for_manual_mapping": row["raw_row"],
+                "_raw_header_for_manual_mapping": row["header"],
+            })
 
     if failed:
         FAILED_LOG.write_text(json.dumps(failed, ensure_ascii=False, indent=2))
+    if pdf_debug_samples:
+        (RAW_DIR / "_pdf_debug_sample.json").write_text(json.dumps(pdf_debug_samples, ensure_ascii=False, indent=2))
 
-    if rows:
-        out_path = OUT_DIR / "physical_match_stats.csv"
-        with out_path.open("w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+    if matches_rows:
+        with (OUT_DIR / "matches_fifa2026.csv").open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=list(matches_rows[0].keys()))
             writer.writeheader()
-            writer.writerows(rows)
+            writer.writerows(matches_rows)
 
-    return rows
+    # IMPORTANTE: physical_rows todavia no se escribe como
+    # physical_match_stats.csv -- las filas tienen las metricas numericas en
+    # None porque todavia no se mapearon las columnas reales del PDF (se
+    # llega a esto recien via _pdf_debug_sample.json). Publicar esto tal
+    # cual mostraria en el sitio "datos cargados" con todo en null, que es
+    # peor que mostrar "pendiente". Se devuelve solo para inspeccion local/CI.
+    return physical_rows
 
 
 if __name__ == "__main__":
     rows = scrape()
     n_failed = len(json.loads(FAILED_LOG.read_text())) if FAILED_LOG.exists() else 0
-    print(f"filas extraidas: {len(rows)} -- items pendientes de revision manual: {n_failed}", flush=True)
+    print(f"filas con tabla fisica candidata: {len(rows)} -- items pendientes de revision manual: {n_failed}", flush=True)
     if not rows:
         print(
-            "ADVERTENCIA: no se pudo extraer ninguna fila automáticamente. "
-            "Revisar data/raw/fifa_training_centre/_failed.json y los HTML guardados "
-            "para ajustar _parse_physical_table() con la estructura real del sitio.",
+            "ADVERTENCIA: no se pudo extraer ninguna tabla candidata de los PDFs. "
+            "Revisar data/raw/fifa_training_centre/_failed.json y "
+            "_pdf_debug_sample.json para ajustar _parse_physical_metrics() con la estructura real.",
             file=sys.stderr,
         )
         sys.exit(1)

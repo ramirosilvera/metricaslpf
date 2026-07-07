@@ -32,13 +32,20 @@ registrado en `data/raw/*/_failed.*` para revisión.
   partidos de Argentina en los Mundiales 2018 y 2022 (11 partidos). Se
   puede ampliar a otras selecciones/torneos corriendo
   `fetch_statsbomb_open_data.py --season 2022 --team "<selección>"`.
-- **FIFA Training Centre (métricas físicas)**: el scraper está escrito
-  pero **no pudo probarse contra el HTML real** porque el entorno donde
-  se desarrolló este proyecto bloquea la salida de red hacia ese dominio.
-  Va a correr por primera vez de verdad en GitHub Actions. Si la
-  estructura de la página no matchea lo esperado, el script falla de
-  forma visible (no inventa datos) y hay que ajustar
-  `_parse_physical_table()` mirando el HTML real.
+- **FIFA Training Centre (métricas físicas)**: confirmado en corridas
+  reales en GitHub Actions que el Match Report Hub no tiene tablas HTML —
+  linkea a PDFs oficiales "PMSR" (`PMSR-M19-ARG-V-ALG.pdf`, uno por
+  partido ya jugado, para las 3 fases publicadas hasta ahora: hub
+  principal + sub-hub de knockout stage). El scraper ya descubre esos PDFs
+  automáticamente y arma con ellos un registro propio de partidos 2026
+  (`matches_fifa2026.csv`, se mergea con los partidos de StatsBomb en
+  `matches.parquet`). Lo que falta: mapear las columnas reales de la
+  tabla de métricas físicas dentro del PDF a
+  `total_distance_km`/`high_intensity_distance_m`/etc. — el scraper ya
+  descarga cada PDF y vuelca una muestra de sus tablas crudas a
+  `data/raw/fifa_training_centre/_pdf_debug_sample.json` en cada corrida
+  para poder ajustar `_parse_physical_metrics()` con la estructura real
+  sin adivinar.
 - **Transfermarkt (edad de plantel)**: mismo caso — scraper escrito, sin
   probar contra HTML real, y además falta completar `TEAM_SQUAD_URLS`
   con las URLs de las 48 selecciones de 2026 antes de la primera corrida.
