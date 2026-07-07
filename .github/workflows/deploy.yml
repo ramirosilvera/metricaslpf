@@ -2,7 +2,9 @@ name: Deploy a GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # el repo no tiene "main" todavia -- deployar desde la rama que hoy es
+    # default branch, y desde main tambien por si se crea/renombra despues
+    branches: [main, claude/metricas-mundial-architecture-gqk5x6]
   workflow_dispatch: {}
 
 permissions:
