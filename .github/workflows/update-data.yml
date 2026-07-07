@@ -50,3 +50,5 @@ jobs:
           path: |
             data/raw/*/_failed.*
           if-no-files-found: ignore
+
+# trigger workflow indexing
