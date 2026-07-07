@@ -56,16 +56,52 @@ def _get(url: str) -> requests.Response:
     return resp
 
 
-def discover_match_report_urls() -> list[str]:
-    """Lee el Match Report Hub y devuelve las URLs de reportes individuales."""
-    resp = _get(HUB_URL)
-    soup = BeautifulSoup(resp.text, "lxml")
-    urls = set()
-    for a in soup.find_all("a", href=True):
-        href = a["href"]
-        if "match-report" in href or "physical-analysis" in href:
-            urls.add(href if href.startswith("http") else f"{BASE}{href}")
-    return sorted(urls)
+def _all_hrefs(html: str) -> list[str]:
+    soup = BeautifulSoup(html, "lxml")
+    return [a["href"] for a in soup.find_all("a", href=True)]
+
+
+def discover_match_report_urls(debug: dict | None = None) -> list[str]:
+    """Lee el Match Report Hub (y sus sub-hubs por fase, si los hay) y
+    devuelve las URLs candidatas a reportes individuales.
+
+    El hub principal en la practica solo linkea a "sub-hubs" por fase
+    (ej. match-report-hub-knockout-stage.php), no a reportes de partido
+    individuales directamente -- por eso esto sigue un nivel de esos
+    sub-hubs antes de aplicar el filtro de URLs candidatas.
+    """
+    visited_pages: dict[str, list[str]] = {}
+
+    root_html = _get(HUB_URL).text
+    root_hrefs = _all_hrefs(root_html)
+    visited_pages[HUB_URL] = root_hrefs
+
+    sub_hub_urls = {
+        (href if href.startswith("http") else f"{BASE}{href}")
+        for href in root_hrefs
+        if "match-report-hub" in href and href.rstrip("/").split("/")[-1] != "match-report-hub.php"
+    }
+    for sub_url in sorted(sub_hub_urls)[:10]:
+        try:
+            sub_html = _get(sub_url).text
+        except requests.RequestException:
+            continue
+        visited_pages[sub_url] = _all_hrefs(sub_html)
+
+    all_hrefs = {href for hrefs in visited_pages.values() for href in hrefs}
+    candidate_keywords = ("match-report", "physical-analysis", "physical-performance")
+    candidates = {
+        (href if href.startswith("http") else f"{BASE}{href}")
+        for href in all_hrefs
+        if any(k in href for k in candidate_keywords) and not href.rstrip("/").endswith("match-report-hub.php")
+    }
+
+    if debug is not None:
+        debug["pages_visited"] = list(visited_pages.keys())
+        debug["all_hrefs_by_page"] = visited_pages
+        debug["candidate_urls"] = sorted(candidates)
+
+    return sorted(candidates)
 
 
 def _parse_physical_table(html: str) -> pd.DataFrame | None:
@@ -104,17 +140,22 @@ def scrape() -> list[dict]:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    report_urls = discover_match_report_urls()
+    debug: dict = {}
+    report_urls = discover_match_report_urls(debug=debug)
     # Diagnostico incondicional: se escribe siempre (haya o no filas), para
-    # poder ver en cualquier corrida cuantas URLs se encontraron sin tener
-    # que revisar logs de GitHub Actions.
+    # poder ver en cualquier corrida que se encontro sin tener que revisar
+    # logs de GitHub Actions -- incluye TODOS los hrefs de las paginas
+    # visitadas, no solo los que matchean el filtro, para poder ajustar el
+    # filtro por inspeccion si hace falta.
     (RAW_DIR / "_discovery_status.json").write_text(json.dumps({
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "hub_url": HUB_URL,
+        "pages_visited": debug.get("pages_visited", []),
         "report_urls_found": report_urls,
         "count": len(report_urls),
+        "all_hrefs_by_page": debug.get("all_hrefs_by_page", {}),
     }, ensure_ascii=False, indent=2))
-    print(f"discover_match_report_urls: {len(report_urls)} URLs encontradas", flush=True)
+    print(f"discover_match_report_urls: {len(report_urls)} URLs encontradas (paginas visitadas: {len(debug.get('pages_visited', []))})", flush=True)
 
     rows: list[dict] = []
     failed: list[dict] = []
