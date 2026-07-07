@@ -59,7 +59,7 @@ PDF_DEBUG_SAMPLE_LIMIT = 3
 # ids reales de partido, 4 a 7 digitos)
 MATCH_ID_OFFSET = 20_260_000
 
-PDF_LINK_RE = re.compile(r"PMSR-M(\d+)[-_]([A-Z]{3})[-_]V[-_]([A-Z]{3})[^/]*\.pdf", re.IGNORECASE)
+PDF_LINK_RE = re.compile(r"PMSR-M(\d+)[-_ ]([A-Z]{3})[-_ ]V[-_ ]([A-Z]{3})[^/]*\.pdf", re.IGNORECASE)
 
 # Códigos de selección de 3 letras -> nombre de selección, siguiendo la
 # convención de nombres que ya usamos desde StatsBomb (para que los joins
