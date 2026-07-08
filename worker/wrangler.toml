@@ -1,0 +1,25 @@
+name = "metricasmundial2026-chat"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# Origen permitido por CORS -- debe ser exactamente el origen (protocolo+host)
+# donde se sirve el sitio de GitHub Pages, SIN el path del repo.
+[vars]
+ALLOWED_ORIGIN = "https://ramirosilvera.github.io"
+GEMINI_MODEL = "gemini-2.0-flash"
+RATE_LIMIT_PER_HOUR = "15"
+
+# Rate limiting por IP es opcional: si no se crea/bindea este namespace KV,
+# el Worker sigue funcionando (ver checkRateLimit en src/index.js), solo
+# que sin el límite adicional por hora.
+#
+# Para activarlo:
+#   npx wrangler kv namespace create RATE_LIMIT
+# y descomentar las siguientes 3 líneas con el id que devuelva ese comando:
+#
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "REEMPLAZAR_CON_EL_ID_REAL"
+
+# GEMINI_API_KEY NO va acá -- se carga como secreto de Cloudflare
+# (`wrangler secret put GEMINI_API_KEY`), nunca en texto plano en este archivo.

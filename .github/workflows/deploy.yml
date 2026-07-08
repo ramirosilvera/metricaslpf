@@ -34,6 +34,13 @@ jobs:
 
       - name: Build
         working-directory: site
+        env:
+          # URL del Worker del asistente de IA. Es una variable de repo (no un
+          # secret): es pública igual, porque termina en el JS que se sirve al
+          # navegador. Se setea en Settings -> Secrets and variables -> Actions
+          # -> Variables, una vez que el Worker esté deployado (ver worker/README.md).
+          # Si no está seteada, el sitio compila igual y el chat simplemente no aparece.
+          PUBLIC_CHAT_API_URL: ${{ vars.PUBLIC_CHAT_API_URL }}
         run: npm run build
 
       - uses: actions/configure-pages@v5

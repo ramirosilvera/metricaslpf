@@ -19,7 +19,8 @@ data/
   schemas/    (reservado para esquemas adicionales)
 etl/          scripts Python: scraping, transformación, agregación, validación
 site/         sitio Astro (React para los charts interactivos)
-.github/workflows/  actualización de datos (cron) y deploy a GitHub Pages
+worker/       proxy serverless (Cloudflare Worker) para el asistente de IA -- ver worker/README.md
+.github/workflows/  actualización de datos (cron), deploy a GitHub Pages y deploy del Worker
 tests/        tests de humo del pipeline (pytest)
 ```
 
@@ -60,6 +61,16 @@ Antes de leer cualquier gráfico, ver **`/metodologia/`** en el sitio (o
 `site/src/pages/metodologia.astro`): sesgos conocidos, variables de confusión,
 métricas engañosas vs. robustas, y cómo se valida la hipótesis dado el tamaño de
 muestra chico de un solo torneo.
+
+## Asistente de IA
+
+El sitio incluye un chat opcional (botón 💬 abajo a la derecha) que responde
+preguntas sobre las métricas y cómo interpretarlas, usando Gemini. Como el
+sitio es estático, la clave de la API nunca viaja al navegador: hay un proxy
+serverless gratuito (Cloudflare Workers) que la guarda del lado del servidor.
+Ver **`worker/README.md`** para el setup manual (secrets de GitHub necesarios)
+-- son unos pocos pasos de una sola vez, sin tocar código. Si no se configura,
+el sitio funciona igual y el botón de chat simplemente no aparece.
 
 ## Licencia de los datos
 

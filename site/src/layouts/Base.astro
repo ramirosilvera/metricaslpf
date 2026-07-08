@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import ChatAssistant from "../islands/ChatAssistant";
 
 interface Props {
   title: string;
@@ -75,5 +76,6 @@ function isActive(href: string) {
         </p>
       </div>
     </footer>
+    <ChatAssistant client:only="react" />
   </body>
 </html>
