@@ -42,6 +42,12 @@ registrado en `data/raw/*/_failed.*` para revisión.
   `matches.parquet`). Ya viene corriendo en producción vía `update-data.yml`
   con cobertura incremental (procesa unos pocos PDFs por corrida, prioriza
   los partidos de Argentina, y cachea lo ya procesado entre corridas).
+  Cada PDF trae, además de la página física, ~130 tablas de estadística
+  táctica por jugador (pases, presión, duelos, ofertas de recepción) que el
+  scraper extrae en la misma pasada -- sin descargas extra -- y publica en
+  `tactical_player_match_stats.csv` (único dato táctico real que existe hoy
+  para el Mundial 2026, ya que StatsBomb todavía no publicó eventos de este
+  torneo).
 - **Transfermarkt (edad/valor de mercado de plantel)**: el scraper
   *descubre* las 48 selecciones del Mundial 2026 recorriendo la página de
   participantes del torneo (no depende de un mapeo hardcodeado de URLs por

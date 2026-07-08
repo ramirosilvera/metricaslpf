@@ -14,6 +14,7 @@ const PARQUET_TABLES: { table: string; file: string }[] = [
   { table: "player_match_appearances", file: "player_match_appearances.parquet" },
   { table: "physical_match_stats", file: "physical_match_stats.parquet" },
   { table: "physical_player_match_stats", file: "physical_player_match_stats.parquet" },
+  { table: "tactical_player_match_stats", file: "tactical_player_match_stats.parquet" },
   { table: "squads", file: "squads.parquet" },
   { table: "derived_team_metrics", file: "derived_team_metrics.parquet" },
   { table: "derived_team_style", file: "derived_team_style.parquet" },

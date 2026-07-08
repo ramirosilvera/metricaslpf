@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T19:08:53.401690+00:00",
+  "generated_at": "2026-07-08T22:08:17.742390+00:00",
   "sources": {
     "tactical_context": {
       "provider": "StatsBomb Open Data",
@@ -12,6 +12,13 @@
       "coverage": "Mundial 2026 (en curso)",
       "status": "ok",
       "matches_loaded": 96,
+      "matches_total": 96
+    },
+    "tactical_2026": {
+      "provider": "FIFA Training Centre",
+      "coverage": "pases, presión, duelos y ofertas de recepción por jugador -- Mundial 2026 (en curso)",
+      "status": "ok",
+      "matches_loaded": 1,
       "matches_total": 96
     },
     "squad_ages": {

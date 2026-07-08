@@ -24,6 +24,7 @@ from schemas import (
     PlayerAppearancesSchema,
     PhysicalMatchStatsSchema,
     PhysicalPlayerMatchStatsSchema,
+    TacticalPlayerMatchStatsSchema,
     SquadsSchema,
 )
 
@@ -103,6 +104,29 @@ def build():
         con.register("phys_players_df", physical_players)
         con.execute(f"COPY phys_players_df TO '{WAREHOUSE / 'physical_player_match_stats.parquet'}' (FORMAT PARQUET)")
         print(f"physical_player_match_stats.parquet: {len(physical_players)} filas")
+
+    # --- tactical_player_match_stats (FIFA Training Centre, por jugador -- Mundial 2026) ---
+    tactical_players = _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "tactical_player_match_stats.csv")
+    if tactical_players is not None:
+        tactical_players = tactical_players.astype({"match_id": "int64"})
+        tactical_players["jersey_number"] = pd.to_numeric(tactical_players["jersey_number"], errors="coerce").astype("Int64")
+        int_cols = [
+            "passes_attempted", "passes_completed", "switches_of_play", "crosses_attempted", "crosses_completed",
+            "line_breaks_attempted", "line_breaks_completed", "ball_progressions", "take_ons", "step_ins",
+            "attempts_at_goal", "goals", "total_offers", "offers_in_front", "offers_in_between", "offers_out_to_in",
+            "offers_in_to_out", "offers_in_behind", "offers_no_movement", "offers_received", "tackles_made",
+            "tackles_won", "blocks", "interceptions", "pressing_direct", "pressing_indirect", "duels_won_aerial",
+            "duels_won_physical", "possession_contests_won", "clearances", "loose_ball_receptions", "pushing_on",
+            "pushing_on_into_pressing", "possession_regains", "possession_interrupted",
+        ]
+        for c in int_cols:
+            tactical_players[c] = pd.to_numeric(tactical_players[c], errors="coerce").astype("Int64")
+        for c in ["pass_completion_pct", "line_break_completion_pct"]:
+            tactical_players[c] = pd.to_numeric(tactical_players[c], errors="coerce")
+        tactical_players = TacticalPlayerMatchStatsSchema.validate(tactical_players)
+        con.register("tactical_players_df", tactical_players)
+        con.execute(f"COPY tactical_players_df TO '{WAREHOUSE / 'tactical_player_match_stats.parquet'}' (FORMAT PARQUET)")
+        print(f"tactical_player_match_stats.parquet: {len(tactical_players)} filas")
 
     # --- squads (Transfermarkt: edad de plantel) ---
     squads = _read_csv_if_exists(RAW / "transfermarkt" / "_processed" / "squads.csv")

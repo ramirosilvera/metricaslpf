@@ -174,6 +174,34 @@ def build():
     else:
         _write_json("physical_player_ranking.json", {"status": "pending_first_scrape", "rows": []})
 
+    has_tactical_players = (WAREHOUSE / "tactical_player_match_stats.parquet").exists()
+    if has_tactical_players:
+        tactical_players = con.execute(
+            f"SELECT * FROM read_parquet('{WAREHOUSE / 'tactical_player_match_stats.parquet'}')"
+        ).df()
+        _write_json("tactical_player_match_stats.json", _records(tactical_players))
+
+        tactical_player_ranking = (
+            tactical_players.groupby(["team", "player_name"])
+            .agg(
+                partidos=("match_id", "nunique"),
+                pases_completados_totales=("passes_completed", "sum"),
+                precision_pases_promedio=("pass_completion_pct", "mean"),
+                progresiones_totales=("ball_progressions", "sum"),
+                tackles_ganados_totales=("tackles_won", "sum"),
+                intercepciones_totales=("interceptions", "sum"),
+                presiones_totales=("pressing_direct", "sum"),
+                recuperaciones_totales=("possession_regains", "sum"),
+                goles_totales=("goals", "sum"),
+            )
+            .reset_index()
+            .sort_values("pases_completados_totales", ascending=False)
+        )
+        _write_json("tactical_player_ranking.json", _records(tactical_player_ranking))
+    else:
+        _write_json("tactical_player_match_stats.json", {"status": "pending_first_scrape", "rows": []})
+        _write_json("tactical_player_ranking.json", {"status": "pending_first_scrape", "rows": []})
+
     if has_squads:
         squads = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'squads.parquet'}')").df()
         _write_json("squads.json", _records(squads))
@@ -229,6 +257,13 @@ def build():
                 "coverage": "Mundial 2026 (en curso)",
                 "status": "ok" if has_physical else "pending_first_scrape",
                 "matches_loaded": matches_with_physical,
+                "matches_total": total_matches_2026,
+            },
+            "tactical_2026": {
+                "provider": "FIFA Training Centre",
+                "coverage": "pases, presión, duelos y ofertas de recepción por jugador -- Mundial 2026 (en curso)",
+                "status": "ok" if has_tactical_players else "pending_first_scrape",
+                "matches_loaded": int(tactical_players["match_id"].nunique()) if has_tactical_players else 0,
                 "matches_total": total_matches_2026,
             },
             "squad_ages": {

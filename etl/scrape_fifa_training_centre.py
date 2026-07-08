@@ -288,8 +288,177 @@ def _parse_physical_metrics(tables: list[list[list[str]]]) -> list[dict] | None:
     return player_rows or None
 
 
+# El PDF trae, además de la página física, ~130 tablas de estadística táctica
+# por jugador (pases, ofertas de recepción, acciones defensivas) -- el mismo
+# tipo de dato que usan los analistas de video (Wyscout/InStat/Hudl). Vienen
+# en el mismo patrón que "Physical Data <Selección>": una celda de texto con
+# todas las filas de jugador pegadas, con un número fijo de columnas
+# numéricas al final de cada línea (confirmado contando contra el header de
+# la tabla vecina, que sí llega bien separado por columna).
+_TOKEN_RE = re.compile(r"\d+\s*/\s*\d+|\d+%|\d+")
+
+
+def _split_prefix_and_tail(line: str, expected_fields: int) -> tuple[str, list[str]] | None:
+    matches = list(_TOKEN_RE.finditer(line))
+    if len(matches) < expected_fields:
+        return None
+    tail_matches = matches[-expected_fields:]
+    prefix = line[: tail_matches[0].start()].strip()
+    return prefix, [m.group() for m in tail_matches]
+
+
+def _parse_jersey_name(prefix: str) -> tuple[int, str] | None:
+    m = re.match(r"^(\d+)\s+(.*)$", prefix.strip())
+    if not m:
+        return None
+    jersey, name = m.groups()
+    return int(jersey), name.strip()
+
+
+def _find_section_cells(tables: list[list[list[str]]], *markers: str) -> list[tuple[str, str]]:
+    """Devuelve [(equipo, texto_de_la_celda)] para las celdas cuyo texto
+    contenga alguno de los `markers` (probando variantes porque el PDF a
+    veces rompe el ligature "ff" -> "\\x00", ej. "Offers" -> "O\\x00ers")."""
+    found = []
+    for table in tables:
+        for cell_row in table:
+            for cell in cell_row or []:
+                if not cell:
+                    continue
+                for marker in markers:
+                    idx = cell.find(marker)
+                    if idx == -1:
+                        continue
+                    team = cell[idx + len(marker):].split("\n", 1)[0].strip()
+                    found.append((team, cell))
+                    break
+    return found
+
+
+def _parse_distributions(tables: list[list[list[str]]]) -> dict[tuple[str, int], dict]:
+    out: dict[tuple[str, int], dict] = {}
+    for team, cell in _find_section_cells(tables, "In Possession - Distributions "):
+        for line in _decode_pmsr_font(cell).split("\n"):
+            split = _split_prefix_and_tail(line, 14)
+            if not split:
+                continue
+            prefix, tail = split
+            parsed_name = _parse_jersey_name(prefix)
+            if not parsed_name:
+                continue
+            jersey, name = parsed_name
+            out[(team, jersey)] = {
+                "team": team,
+                "jersey_number": jersey,
+                "player_name": name,
+                "passes_attempted": int(tail[0]),
+                "passes_completed": int(tail[1]),
+                "pass_completion_pct": float(tail[2].rstrip("%")),
+                "switches_of_play": int(tail[3]),
+                "crosses_attempted": int(tail[4]),
+                "crosses_completed": int(tail[5]),
+                "line_breaks_attempted": int(tail[6]),
+                "line_breaks_completed": int(tail[7]),
+                "line_break_completion_pct": float(tail[8].rstrip("%")),
+                "ball_progressions": int(tail[9]),
+                "take_ons": int(tail[10]),
+                "step_ins": int(tail[11]),
+                "attempts_at_goal": int(tail[12]),
+                "goals": int(tail[13]),
+            }
+    return out
+
+
+def _parse_offers_receptions(tables: list[list[list[str]]]) -> dict[tuple[str, int], dict]:
+    out: dict[tuple[str, int], dict] = {}
+    for team, cell in _find_section_cells(tables, "ers & Receptions "):
+        for line in _decode_pmsr_font(cell).split("\n"):
+            split = _split_prefix_and_tail(line, 8)
+            if not split:
+                continue
+            prefix, tail = split
+            parsed_name = _parse_jersey_name(prefix)
+            if not parsed_name:
+                continue
+            jersey, name = parsed_name
+            out[(team, jersey)] = {
+                "team": team,
+                "jersey_number": jersey,
+                "player_name": name,
+                "total_offers": int(tail[0]),
+                "offers_in_front": int(tail[1]),
+                "offers_in_between": int(tail[2]),
+                "offers_out_to_in": int(tail[3]),
+                "offers_in_to_out": int(tail[4]),
+                "offers_in_behind": int(tail[5]),
+                "offers_no_movement": int(tail[6]),
+                "offers_received": int(tail[7]),
+            }
+    return out
+
+
+def _parse_out_of_possession(tables: list[list[list[str]]]) -> dict[tuple[str, int], dict]:
+    out: dict[tuple[str, int], dict] = {}
+    for team, cell in _find_section_cells(tables, "Out of Possession "):
+        for line in _decode_pmsr_font(cell).split("\n"):
+            split = _split_prefix_and_tail(line, 14)
+            if not split:
+                continue
+            prefix, tail = split
+            parsed_name = _parse_jersey_name(prefix)
+            if not parsed_name:
+                continue
+            jersey, name = parsed_name
+            tackles_made, tackles_won = (int(x.strip()) for x in tail[0].split("/"))
+            out[(team, jersey)] = {
+                "team": team,
+                "jersey_number": jersey,
+                "player_name": name,
+                "tackles_made": tackles_made,
+                "tackles_won": tackles_won,
+                "blocks": int(tail[1]),
+                "interceptions": int(tail[2]),
+                "pressing_direct": int(tail[3]),
+                "pressing_indirect": int(tail[4]),
+                "duels_won_aerial": int(tail[5]),
+                "duels_won_physical": int(tail[6]),
+                "possession_contests_won": int(tail[7]),
+                "clearances": int(tail[8]),
+                "loose_ball_receptions": int(tail[9]),
+                "pushing_on": int(tail[10]),
+                "pushing_on_into_pressing": int(tail[11]),
+                "possession_regains": int(tail[12]),
+                "possession_interrupted": int(tail[13]),
+            }
+    return out
+
+
+def _parse_tactical_metrics(tables: list[list[list[str]]]) -> list[dict]:
+    """Combina las 3 secciones (distribución de pases, ofertas de recepción,
+    fuera de posesión) en una fila por jugador. Tolerante: si una sección no
+    aparece (PDF con estructura distinta), simplemente deja esos campos
+    ausentes en vez de descartar la fila entera."""
+    distributions = _parse_distributions(tables)
+    offers = _parse_offers_receptions(tables)
+    out_of_poss = _parse_out_of_possession(tables)
+
+    keys = set(distributions) | set(offers) | set(out_of_poss)
+    rows = []
+    for key in keys:
+        row = dict(distributions.get(key, {}))
+        row.update(offers.get(key, {}))
+        row.update(out_of_poss.get(key, {}))
+        if "team" not in row:
+            # la fila solo aparece en offers/out_of_poss (raro, pero no se
+            # descarta) -- reconstruir team/jersey desde la key
+            row["team"], row["jersey_number"] = key
+        rows.append(row)
+    return rows
+
+
 PLAYER_STATS_PATH = OUT_DIR / "physical_player_match_stats.csv"
 TEAM_STATS_PATH = OUT_DIR / "physical_match_stats.csv"
+TACTICAL_STATS_PATH = OUT_DIR / "tactical_player_match_stats.csv"
 MATCHES_PATH = OUT_DIR / "matches_fifa2026.csv"
 
 
@@ -303,6 +472,29 @@ def _load_cached_player_rows() -> tuple[list[dict], set[int]]:
         rows = list(csv.DictReader(f))
     match_ids = {int(r["match_id"]) for r in rows}
     return rows, match_ids
+
+
+TACTICAL_FIELDS = [
+    "match_id", "team", "jersey_number", "player_name",
+    "passes_attempted", "passes_completed", "pass_completion_pct",
+    "switches_of_play", "crosses_attempted", "crosses_completed",
+    "line_breaks_attempted", "line_breaks_completed", "line_break_completion_pct",
+    "ball_progressions", "take_ons", "step_ins", "attempts_at_goal", "goals",
+    "total_offers", "offers_in_front", "offers_in_between", "offers_out_to_in",
+    "offers_in_to_out", "offers_in_behind", "offers_no_movement", "offers_received",
+    "tackles_made", "tackles_won", "blocks", "interceptions",
+    "pressing_direct", "pressing_indirect", "duels_won_aerial", "duels_won_physical",
+    "possession_contests_won", "clearances", "loose_ball_receptions",
+    "pushing_on", "pushing_on_into_pressing", "possession_regains", "possession_interrupted",
+    "source", "source_url", "retrieved_at",
+]
+
+
+def _load_cached_tactical_rows() -> list[dict]:
+    if not TACTICAL_STATS_PATH.exists():
+        return []
+    with TACTICAL_STATS_PATH.open(newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
 
 
 def _load_cached_matches() -> dict[int, dict]:
@@ -365,8 +557,10 @@ def scrape() -> list[dict]:
     cached_player_rows, cached_match_ids = _load_cached_player_rows()
     print(f"partidos ya cubiertos en corridas anteriores: {len(cached_match_ids)}", flush=True)
     matches_by_id = _load_cached_matches()
+    cached_tactical_rows = _load_cached_tactical_rows()
 
     new_player_rows: list[dict] = []
+    new_tactical_rows: list[dict] = []
     failed: list[dict] = []
     pdf_debug_samples: list[dict] = []
     retrieved_at = datetime.now(timezone.utc).isoformat()
@@ -466,6 +660,16 @@ def scrape() -> list[dict]:
                 "retrieved_at": retrieved_at,
             })
 
+        tactical_parsed = _parse_tactical_metrics(tables)
+        for row in tactical_parsed:
+            full_row = {field: row.get(field) for field in TACTICAL_FIELDS}
+            full_row["match_id"] = report["match_id"]
+            full_row["source"] = "fifa_training_centre_pmsr_pdf"
+            full_row["source_url"] = report["url"]
+            full_row["retrieved_at"] = retrieved_at
+            new_tactical_rows.append(full_row)
+        print(f"    + {len(tactical_parsed)} filas de estadistica tactica", flush=True)
+
     if failed:
         FAILED_LOG.write_text(json.dumps(failed, ensure_ascii=False, indent=2))
     if pdf_debug_samples:
@@ -490,6 +694,14 @@ def scrape() -> list[dict]:
             writer = csv.DictWriter(f, fieldnames=list(team_rows[0].keys()))
             writer.writeheader()
             writer.writerows(team_rows)
+
+    all_tactical_rows = cached_tactical_rows + new_tactical_rows
+    if all_tactical_rows:
+        with TACTICAL_STATS_PATH.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=TACTICAL_FIELDS)
+            writer.writeheader()
+            writer.writerows(all_tactical_rows)
+        print(f"tactical_player_match_stats.csv: {len(all_tactical_rows)} filas totales", flush=True)
 
     return new_player_rows
 

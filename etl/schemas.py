@@ -104,6 +104,62 @@ PhysicalPlayerMatchStatsSchema = DataFrameSchema(
     coerce=True,
 )
 
+# Estadística táctica por jugador y partido del Mundial 2026 (FIFA Training
+# Centre, mismos PDF PMSR que la página física -- 3 secciones del reporte:
+# distribución de pases, ofertas de recepción, y acciones fuera de posesión.
+# Todas las columnas numéricas son nullable porque una sección puede faltar
+# en algún PDF sin que se descarte la fila entera.
+TacticalPlayerMatchStatsSchema = DataFrameSchema(
+    {
+        "match_id": Column(int),
+        "team": Column(str),
+        "jersey_number": Column("Int64", nullable=True),
+        "player_name": Column(str),
+        "passes_attempted": Column("Int64", nullable=True),
+        "passes_completed": Column("Int64", nullable=True),
+        "pass_completion_pct": Column(float, Check.in_range(0, 100), nullable=True),
+        "switches_of_play": Column("Int64", nullable=True),
+        "crosses_attempted": Column("Int64", nullable=True),
+        "crosses_completed": Column("Int64", nullable=True),
+        "line_breaks_attempted": Column("Int64", nullable=True),
+        "line_breaks_completed": Column("Int64", nullable=True),
+        "line_break_completion_pct": Column(float, Check.in_range(0, 100), nullable=True),
+        "ball_progressions": Column("Int64", nullable=True),
+        "take_ons": Column("Int64", nullable=True),
+        "step_ins": Column("Int64", nullable=True),
+        "attempts_at_goal": Column("Int64", nullable=True),
+        "goals": Column("Int64", Check.ge(0), nullable=True),
+        "total_offers": Column("Int64", nullable=True),
+        "offers_in_front": Column("Int64", nullable=True),
+        "offers_in_between": Column("Int64", nullable=True),
+        "offers_out_to_in": Column("Int64", nullable=True),
+        "offers_in_to_out": Column("Int64", nullable=True),
+        "offers_in_behind": Column("Int64", nullable=True),
+        "offers_no_movement": Column("Int64", nullable=True),
+        "offers_received": Column("Int64", nullable=True),
+        "tackles_made": Column("Int64", nullable=True),
+        "tackles_won": Column("Int64", nullable=True),
+        "blocks": Column("Int64", nullable=True),
+        "interceptions": Column("Int64", nullable=True),
+        "pressing_direct": Column("Int64", nullable=True),
+        "pressing_indirect": Column("Int64", nullable=True),
+        "duels_won_aerial": Column("Int64", nullable=True),
+        "duels_won_physical": Column("Int64", nullable=True),
+        "possession_contests_won": Column("Int64", nullable=True),
+        "clearances": Column("Int64", nullable=True),
+        "loose_ball_receptions": Column("Int64", nullable=True),
+        "pushing_on": Column("Int64", nullable=True),
+        "pushing_on_into_pressing": Column("Int64", nullable=True),
+        "possession_regains": Column("Int64", nullable=True),
+        "possession_interrupted": Column("Int64", nullable=True),
+        "source": Column(str),
+        "source_url": Column(str, nullable=True),
+        "retrieved_at": Column(str),
+    },
+    strict=False,
+    coerce=True,
+)
+
 DerivedTeamMetricsSchema = DataFrameSchema(
     {
         "team": Column(str),
