@@ -283,7 +283,7 @@ def scrape() -> list[dict]:
                 "team_b": report["team_b"],
                 "url": report["url"],
                 "tables": tables,
-                "text": full_text[:8000],
+                "text": full_text[:40000],
             })
 
         parsed = _parse_physical_metrics(tables, report["team_a"], report["team_b"])
