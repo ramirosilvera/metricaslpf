@@ -126,7 +126,7 @@ export default {
       return json({ error: "not_configured", message: "El asistente todavía no está configurado (falta GEMINI_API_KEY)." }, 503, headers);
     }
 
-    const model = env.GEMINI_MODEL || "gemini-2.0-flash";
+    const model = env.GEMINI_MODEL || "gemini-flash-latest";
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
 
     const contents = [
@@ -145,7 +145,15 @@ export default {
         body: JSON.stringify({
           system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
           contents,
-          generationConfig: { temperature: 0.4, maxOutputTokens: 400 },
+          generationConfig: {
+            temperature: 0.4,
+            maxOutputTokens: 512,
+            // Los modelos "2.5" razonan puertas adentro antes de responder y
+            // ese razonamiento cuenta contra maxOutputTokens -- sin esto, la
+            // respuesta visible se cortaba a mitad de frase porque el
+            // presupuesto se gastaba en el pensamiento interno, no en el texto.
+            thinkingConfig: { thinkingBudget: 0 },
+          },
         }),
       });
     } catch (err) {
