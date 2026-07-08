@@ -148,11 +148,28 @@ def _player_physical_metrics(physical_players: pd.DataFrame) -> pd.DataFrame:
     return agg
 
 
+def _player_tactical_metrics(tactical_players: pd.DataFrame) -> pd.DataFrame:
+    return (
+        tactical_players.groupby(["player_name", "team"])
+        .agg(
+            pases_completados_promedio=("passes_completed", "mean"),
+            precision_pases_promedio=("pass_completion_pct", "mean"),
+            progresiones_promedio=("ball_progressions", "mean"),
+            tackles_ganados_promedio=("tackles_won", "mean"),
+            intercepciones_promedio=("interceptions", "mean"),
+            presion_directa_promedio=("pressing_direct", "mean"),
+            recuperaciones_promedio=("possession_regains", "mean"),
+        )
+        .reset_index()
+    )
+
+
 def build():
     matches = _read_parquet_if_exists("matches.parquet")
     tactical = _read_parquet_if_exists("team_match_stats_tactical.parquet")
     physical = _read_parquet_if_exists("physical_match_stats.parquet")
     physical_players = _read_parquet_if_exists("physical_player_match_stats.parquet")
+    tactical_players = _read_parquet_if_exists("tactical_player_match_stats.parquet")
     squads = _read_parquet_if_exists("squads.parquet")
 
     team_metric_frames = []
@@ -191,20 +208,36 @@ def build():
         style.to_parquet(WAREHOUSE / "derived_team_style.parquet", index=False)
         print(f"derived_team_style.parquet: {len(style)} filas")
 
+    player_metric_frames = []
     if physical_players is not None and not physical_players.empty:
         player_metrics = _player_physical_metrics(physical_players)
-        player_long = player_metrics.melt(
+        player_metric_frames.append(player_metrics.melt(
             id_vars=["player_name", "team"],
             value_vars=["distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh"],
             var_name="metric",
             value_name="value",
-        ).dropna(subset=["value"])
+        ))
+    if tactical_players is not None and not tactical_players.empty:
+        tactical_metrics = _player_tactical_metrics(tactical_players)
+        player_metric_frames.append(tactical_metrics.melt(
+            id_vars=["player_name", "team"],
+            value_vars=[
+                "pases_completados_promedio", "precision_pases_promedio", "progresiones_promedio",
+                "tackles_ganados_promedio", "intercepciones_promedio", "presion_directa_promedio",
+                "recuperaciones_promedio",
+            ],
+            var_name="metric",
+            value_name="value",
+        ))
+
+    if player_metric_frames:
+        player_long = pd.concat(player_metric_frames, ignore_index=True).dropna(subset=["value"])
         player_long = _zscore_percentile(player_long, "value", ["metric"])
         player_long = DerivedPlayerMetricsSchema.validate(player_long)
         player_long.to_parquet(WAREHOUSE / "derived_player_metrics.parquet", index=False)
         print(f"derived_player_metrics.parquet: {len(player_long)} filas")
     else:
-        print("derived_player_metrics: sin datos fisicos por jugador todavia")
+        print("derived_player_metrics: sin datos por jugador todavia")
 
 
 if __name__ == "__main__":

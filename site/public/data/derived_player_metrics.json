@@ -32862,5 +32862,1797 @@
     "value": 25.7,
     "z_score": -1.95,
     "percentile": 5.0
+  },
+  {
+    "player_name": "Adil BOULBINA",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 12.0,
+    "z_score": -0.92,
+    "percentile": 17.2
+  },
+  {
+    "player_name": "Aissa MANDI",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 99.0,
+    "z_score": 2.69,
+    "percentile": 100.0
+  },
+  {
+    "player_name": "Alexis MAC ALLISTER",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 62.0,
+    "z_score": 1.15,
+    "percentile": 84.4
+  },
+  {
+    "player_name": "Amine GOUIRI",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 16.0,
+    "z_score": -0.76,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Anis HADJ MOUSSA",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 18.0,
+    "z_score": -0.67,
+    "percentile": 34.4
+  },
+  {
+    "player_name": "Cristian ROMERO",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 65.0,
+    "z_score": 1.28,
+    "percentile": 92.2
+  },
+  {
+    "player_name": "Emiliano MARTINEZ",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 31.0,
+    "z_score": -0.13,
+    "percentile": 56.2
+  },
+  {
+    "player_name": "Enzo FERNANDEZ",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 65.0,
+    "z_score": 1.28,
+    "percentile": 92.2
+  },
+  {
+    "player_name": "Facundo MEDINA",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 35.0,
+    "z_score": 0.03,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Fares CHAIBI",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 44.0,
+    "z_score": 0.41,
+    "percentile": 71.9
+  },
+  {
+    "player_name": "Gonzalo MONTIEL",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 20.0,
+    "z_score": -0.59,
+    "percentile": 40.6
+  },
+  {
+    "player_name": "Hicham BOUDAOUI",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 22.0,
+    "z_score": -0.51,
+    "percentile": 46.9
+  },
+  {
+    "player_name": "Houssem AOUAR",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 21.0,
+    "z_score": -0.55,
+    "percentile": 43.8
+  },
+  {
+    "player_name": "Ibrahim MAZA",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 39.0,
+    "z_score": 0.2,
+    "percentile": 67.2
+  },
+  {
+    "player_name": "Julian ALVAREZ",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 8.0,
+    "z_score": -1.09,
+    "percentile": 9.4
+  },
+  {
+    "player_name": "Lautaro MARTINEZ",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 12.0,
+    "z_score": -0.92,
+    "percentile": 17.2
+  },
+  {
+    "player_name": "Lionel MESSI",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 30.0,
+    "z_score": -0.17,
+    "percentile": 51.6
+  },
+  {
+    "player_name": "Lisandro MARTINEZ",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 64.0,
+    "z_score": 1.23,
+    "percentile": 87.5
+  },
+  {
+    "player_name": "Luca ZIDANE",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 39.0,
+    "z_score": 0.2,
+    "percentile": 67.2
+  },
+  {
+    "player_name": "Mohamed AMOURA",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 7.0,
+    "z_score": -1.13,
+    "percentile": 6.2
+  },
+  {
+    "player_name": "Nabil BENTALEB",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 51.0,
+    "z_score": 0.7,
+    "percentile": 78.1
+  },
+  {
+    "player_name": "Nahuel MOLINA",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 19.0,
+    "z_score": -0.63,
+    "percentile": 37.5
+  },
+  {
+    "player_name": "Nico GONZALEZ",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 10.0,
+    "z_score": -1.0,
+    "percentile": 12.5
+  },
+  {
+    "player_name": "Nico PAZ",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 4.0,
+    "z_score": -1.25,
+    "percentile": 3.1
+  },
+  {
+    "player_name": "Nicolas OTAMENDI",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 13.0,
+    "z_score": -0.88,
+    "percentile": 21.9
+  },
+  {
+    "player_name": "Rafik BELGHALI",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 34.0,
+    "z_score": -0.01,
+    "percentile": 59.4
+  },
+  {
+    "player_name": "Ramiz ZERROUKI",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 17.0,
+    "z_score": -0.71,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Ramy BENSEBAINI",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 88.0,
+    "z_score": 2.23,
+    "percentile": 96.9
+  },
+  {
+    "player_name": "Rayan AIT-NOURI",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 54.0,
+    "z_score": 0.82,
+    "percentile": 81.2
+  },
+  {
+    "player_name": "Riyad MAHREZ",
+    "team": "Algeria",
+    "metric": "pases_completados_promedio",
+    "value": 17.0,
+    "z_score": -0.71,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Rodrigo DE PAUL",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 49.0,
+    "z_score": 0.61,
+    "percentile": 75.0
+  },
+  {
+    "player_name": "Thiago ALMADA",
+    "team": "Argentina",
+    "metric": "pases_completados_promedio",
+    "value": 30.0,
+    "z_score": -0.17,
+    "percentile": 51.6
+  },
+  {
+    "player_name": "Adil BOULBINA",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 100.0,
+    "z_score": 1.31,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Aissa MANDI",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 95.0,
+    "z_score": 0.71,
+    "percentile": 73.4
+  },
+  {
+    "player_name": "Alexis MAC ALLISTER",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 95.0,
+    "z_score": 0.71,
+    "percentile": 73.4
+  },
+  {
+    "player_name": "Amine GOUIRI",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 84.0,
+    "z_score": -0.62,
+    "percentile": 28.1
+  },
+  {
+    "player_name": "Anis HADJ MOUSSA",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 82.0,
+    "z_score": -0.86,
+    "percentile": 21.9
+  },
+  {
+    "player_name": "Cristian ROMERO",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 98.0,
+    "z_score": 1.07,
+    "percentile": 87.5
+  },
+  {
+    "player_name": "Emiliano MARTINEZ",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 76.0,
+    "z_score": -1.58,
+    "percentile": 9.4
+  },
+  {
+    "player_name": "Enzo FERNANDEZ",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 94.0,
+    "z_score": 0.59,
+    "percentile": 68.8
+  },
+  {
+    "player_name": "Facundo MEDINA",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 97.0,
+    "z_score": 0.95,
+    "percentile": 84.4
+  },
+  {
+    "player_name": "Fares CHAIBI",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 92.0,
+    "z_score": 0.35,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Gonzalo MONTIEL",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 91.0,
+    "z_score": 0.23,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Hicham BOUDAOUI",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 96.0,
+    "z_score": 0.83,
+    "percentile": 79.7
+  },
+  {
+    "player_name": "Houssem AOUAR",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 100.0,
+    "z_score": 1.31,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Ibrahim MAZA",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 83.0,
+    "z_score": -0.74,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Julian ALVAREZ",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 80.0,
+    "z_score": -1.1,
+    "percentile": 14.1
+  },
+  {
+    "player_name": "Lautaro MARTINEZ",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 80.0,
+    "z_score": -1.1,
+    "percentile": 14.1
+  },
+  {
+    "player_name": "Lionel MESSI",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 75.0,
+    "z_score": -1.7,
+    "percentile": 6.2
+  },
+  {
+    "player_name": "Lisandro MARTINEZ",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 96.0,
+    "z_score": 0.83,
+    "percentile": 79.7
+  },
+  {
+    "player_name": "Luca ZIDANE",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 100.0,
+    "z_score": 1.31,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Mohamed AMOURA",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 88.0,
+    "z_score": -0.14,
+    "percentile": 40.6
+  },
+  {
+    "player_name": "Nabil BENTALEB",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 91.0,
+    "z_score": 0.23,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Nahuel MOLINA",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 66.0,
+    "z_score": -2.79,
+    "percentile": 3.1
+  },
+  {
+    "player_name": "Nico GONZALEZ",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 91.0,
+    "z_score": 0.23,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Nico PAZ",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 100.0,
+    "z_score": 1.31,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Nicolas OTAMENDI",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 81.0,
+    "z_score": -0.98,
+    "percentile": 18.8
+  },
+  {
+    "player_name": "Rafik BELGHALI",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 89.0,
+    "z_score": -0.02,
+    "percentile": 43.8
+  },
+  {
+    "player_name": "Ramiz ZERROUKI",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 85.0,
+    "z_score": -0.5,
+    "percentile": 32.8
+  },
+  {
+    "player_name": "Ramy BENSEBAINI",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 93.0,
+    "z_score": 0.47,
+    "percentile": 65.6
+  },
+  {
+    "player_name": "Rayan AIT-NOURI",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 87.0,
+    "z_score": -0.26,
+    "percentile": 37.5
+  },
+  {
+    "player_name": "Riyad MAHREZ",
+    "team": "Algeria",
+    "metric": "precision_pases_promedio",
+    "value": 85.0,
+    "z_score": -0.5,
+    "percentile": 32.8
+  },
+  {
+    "player_name": "Rodrigo DE PAUL",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 91.0,
+    "z_score": 0.23,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Thiago ALMADA",
+    "team": "Argentina",
+    "metric": "precision_pases_promedio",
+    "value": 91.0,
+    "z_score": 0.23,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Adil BOULBINA",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 2.0,
+    "z_score": 0.06,
+    "percentile": 75.0
+  },
+  {
+    "player_name": "Aissa MANDI",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 1.0,
+    "z_score": -0.26,
+    "percentile": 57.8
+  },
+  {
+    "player_name": "Alexis MAC ALLISTER",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Amine GOUIRI",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 2.0,
+    "z_score": 0.06,
+    "percentile": 75.0
+  },
+  {
+    "player_name": "Anis HADJ MOUSSA",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 3.0,
+    "z_score": 0.38,
+    "percentile": 82.8
+  },
+  {
+    "player_name": "Cristian ROMERO",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 1.0,
+    "z_score": -0.26,
+    "percentile": 57.8
+  },
+  {
+    "player_name": "Emiliano MARTINEZ",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Enzo FERNANDEZ",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 5.0,
+    "z_score": 1.03,
+    "percentile": 90.6
+  },
+  {
+    "player_name": "Facundo MEDINA",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Fares CHAIBI",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 7.0,
+    "z_score": 1.68,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Gonzalo MONTIEL",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Hicham BOUDAOUI",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 1.0,
+    "z_score": -0.26,
+    "percentile": 57.8
+  },
+  {
+    "player_name": "Houssem AOUAR",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Ibrahim MAZA",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 7.0,
+    "z_score": 1.68,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Julian ALVAREZ",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Lautaro MARTINEZ",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 1.0,
+    "z_score": -0.26,
+    "percentile": 57.8
+  },
+  {
+    "player_name": "Lionel MESSI",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 4.0,
+    "z_score": 0.71,
+    "percentile": 87.5
+  },
+  {
+    "player_name": "Lisandro MARTINEZ",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Luca ZIDANE",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Mohamed AMOURA",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Nabil BENTALEB",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Nahuel MOLINA",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 1.0,
+    "z_score": -0.26,
+    "percentile": 57.8
+  },
+  {
+    "player_name": "Nico GONZALEZ",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 2.0,
+    "z_score": 0.06,
+    "percentile": 75.0
+  },
+  {
+    "player_name": "Nico PAZ",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Nicolas OTAMENDI",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Rafik BELGHALI",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Ramiz ZERROUKI",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 0.0,
+    "z_score": -0.59,
+    "percentile": 23.4
+  },
+  {
+    "player_name": "Ramy BENSEBAINI",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 1.0,
+    "z_score": -0.26,
+    "percentile": 57.8
+  },
+  {
+    "player_name": "Rayan AIT-NOURI",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 15.0,
+    "z_score": 4.26,
+    "percentile": 100.0
+  },
+  {
+    "player_name": "Riyad MAHREZ",
+    "team": "Algeria",
+    "metric": "progresiones_promedio",
+    "value": 1.0,
+    "z_score": -0.26,
+    "percentile": 57.8
+  },
+  {
+    "player_name": "Rodrigo DE PAUL",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 3.0,
+    "z_score": 0.38,
+    "percentile": 82.8
+  },
+  {
+    "player_name": "Thiago ALMADA",
+    "team": "Argentina",
+    "metric": "progresiones_promedio",
+    "value": 1.0,
+    "z_score": -0.26,
+    "percentile": 57.8
+  },
+  {
+    "player_name": "Adil BOULBINA",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Aissa MANDI",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Alexis MAC ALLISTER",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Amine GOUIRI",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Anis HADJ MOUSSA",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Cristian ROMERO",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 3.0,
+    "z_score": 2.26,
+    "percentile": 98.4
+  },
+  {
+    "player_name": "Emiliano MARTINEZ",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Enzo FERNANDEZ",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Facundo MEDINA",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 2.0,
+    "z_score": 1.21,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Fares CHAIBI",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Gonzalo MONTIEL",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 2.0,
+    "z_score": 1.21,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Hicham BOUDAOUI",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Houssem AOUAR",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Ibrahim MAZA",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Julian ALVAREZ",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Lautaro MARTINEZ",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Lionel MESSI",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Lisandro MARTINEZ",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Luca ZIDANE",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Mohamed AMOURA",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Nabil BENTALEB",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 2.0,
+    "z_score": 1.21,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Nahuel MOLINA",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Nico GONZALEZ",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Nico PAZ",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Nicolas OTAMENDI",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Rafik BELGHALI",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 2.0,
+    "z_score": 1.21,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Ramiz ZERROUKI",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Ramy BENSEBAINI",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 2.0,
+    "z_score": 1.21,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Rayan AIT-NOURI",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 2.0,
+    "z_score": 1.21,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Riyad MAHREZ",
+    "team": "Algeria",
+    "metric": "tackles_ganados_promedio",
+    "value": 0.0,
+    "z_score": -0.88,
+    "percentile": 25.0
+  },
+  {
+    "player_name": "Rodrigo DE PAUL",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 3.0,
+    "z_score": 2.26,
+    "percentile": 98.4
+  },
+  {
+    "player_name": "Thiago ALMADA",
+    "team": "Argentina",
+    "metric": "tackles_ganados_promedio",
+    "value": 1.0,
+    "z_score": 0.16,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Adil BOULBINA",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Aissa MANDI",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Alexis MAC ALLISTER",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 2.0,
+    "z_score": 1.32,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Amine GOUIRI",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Anis HADJ MOUSSA",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Cristian ROMERO",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Emiliano MARTINEZ",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Enzo FERNANDEZ",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 3.0,
+    "z_score": 2.37,
+    "percentile": 100.0
+  },
+  {
+    "player_name": "Facundo MEDINA",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 2.0,
+    "z_score": 1.32,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Fares CHAIBI",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Gonzalo MONTIEL",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 2.0,
+    "z_score": 1.32,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Hicham BOUDAOUI",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 2.0,
+    "z_score": 1.32,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Houssem AOUAR",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Ibrahim MAZA",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Julian ALVAREZ",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Lautaro MARTINEZ",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 1.0,
+    "z_score": 0.26,
+    "percentile": 65.6
+  },
+  {
+    "player_name": "Lionel MESSI",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Lisandro MARTINEZ",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Luca ZIDANE",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 1.0,
+    "z_score": 0.26,
+    "percentile": 65.6
+  },
+  {
+    "player_name": "Mohamed AMOURA",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 1.0,
+    "z_score": 0.26,
+    "percentile": 65.6
+  },
+  {
+    "player_name": "Nabil BENTALEB",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 2.0,
+    "z_score": 1.32,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Nahuel MOLINA",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 2.0,
+    "z_score": 1.32,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Nico GONZALEZ",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Nico PAZ",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Nicolas OTAMENDI",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 2.0,
+    "z_score": 1.32,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Rafik BELGHALI",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Ramiz ZERROUKI",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Ramy BENSEBAINI",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 2.0,
+    "z_score": 1.32,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Rayan AIT-NOURI",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 1.0,
+    "z_score": 0.26,
+    "percentile": 65.6
+  },
+  {
+    "player_name": "Riyad MAHREZ",
+    "team": "Algeria",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Rodrigo DE PAUL",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 0.0,
+    "z_score": -0.79,
+    "percentile": 29.7
+  },
+  {
+    "player_name": "Thiago ALMADA",
+    "team": "Argentina",
+    "metric": "intercepciones_promedio",
+    "value": 1.0,
+    "z_score": 0.26,
+    "percentile": 65.6
+  },
+  {
+    "player_name": "Adil BOULBINA",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 0.0,
+    "z_score": -1.0,
+    "percentile": 12.5
+  },
+  {
+    "player_name": "Aissa MANDI",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 1.0,
+    "z_score": -0.66,
+    "percentile": 34.4
+  },
+  {
+    "player_name": "Alexis MAC ALLISTER",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 8.0,
+    "z_score": 1.73,
+    "percentile": 93.8
+  },
+  {
+    "player_name": "Amine GOUIRI",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 7.0,
+    "z_score": 1.39,
+    "percentile": 90.6
+  },
+  {
+    "player_name": "Anis HADJ MOUSSA",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 0.0,
+    "z_score": -1.0,
+    "percentile": 12.5
+  },
+  {
+    "player_name": "Cristian ROMERO",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 10.0,
+    "z_score": 2.41,
+    "percentile": 98.4
+  },
+  {
+    "player_name": "Emiliano MARTINEZ",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 0.0,
+    "z_score": -1.0,
+    "percentile": 12.5
+  },
+  {
+    "player_name": "Enzo FERNANDEZ",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 5.0,
+    "z_score": 0.7,
+    "percentile": 78.1
+  },
+  {
+    "player_name": "Facundo MEDINA",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 6.0,
+    "z_score": 1.05,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Fares CHAIBI",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 3.0,
+    "z_score": 0.02,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Gonzalo MONTIEL",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 3.0,
+    "z_score": 0.02,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Hicham BOUDAOUI",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 1.0,
+    "z_score": -0.66,
+    "percentile": 34.4
+  },
+  {
+    "player_name": "Houssem AOUAR",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 0.0,
+    "z_score": -1.0,
+    "percentile": 12.5
+  },
+  {
+    "player_name": "Ibrahim MAZA",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 2.0,
+    "z_score": -0.32,
+    "percentile": 51.6
+  },
+  {
+    "player_name": "Julian ALVAREZ",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 4.0,
+    "z_score": 0.36,
+    "percentile": 70.3
+  },
+  {
+    "player_name": "Lautaro MARTINEZ",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 1.0,
+    "z_score": -0.66,
+    "percentile": 34.4
+  },
+  {
+    "player_name": "Lionel MESSI",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 4.0,
+    "z_score": 0.36,
+    "percentile": 70.3
+  },
+  {
+    "player_name": "Lisandro MARTINEZ",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 0.0,
+    "z_score": -1.0,
+    "percentile": 12.5
+  },
+  {
+    "player_name": "Luca ZIDANE",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 0.0,
+    "z_score": -1.0,
+    "percentile": 12.5
+  },
+  {
+    "player_name": "Mohamed AMOURA",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 1.0,
+    "z_score": -0.66,
+    "percentile": 34.4
+  },
+  {
+    "player_name": "Nabil BENTALEB",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 3.0,
+    "z_score": 0.02,
+    "percentile": 62.5
+  },
+  {
+    "player_name": "Nahuel MOLINA",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 5.0,
+    "z_score": 0.7,
+    "percentile": 78.1
+  },
+  {
+    "player_name": "Nico GONZALEZ",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 0.0,
+    "z_score": -1.0,
+    "percentile": 12.5
+  },
+  {
+    "player_name": "Nico PAZ",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 1.0,
+    "z_score": -0.66,
+    "percentile": 34.4
+  },
+  {
+    "player_name": "Nicolas OTAMENDI",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 2.0,
+    "z_score": -0.32,
+    "percentile": 51.6
+  },
+  {
+    "player_name": "Rafik BELGHALI",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 5.0,
+    "z_score": 0.7,
+    "percentile": 78.1
+  },
+  {
+    "player_name": "Ramiz ZERROUKI",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 1.0,
+    "z_score": -0.66,
+    "percentile": 34.4
+  },
+  {
+    "player_name": "Ramy BENSEBAINI",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 1.0,
+    "z_score": -0.66,
+    "percentile": 34.4
+  },
+  {
+    "player_name": "Rayan AIT-NOURI",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 10.0,
+    "z_score": 2.41,
+    "percentile": 98.4
+  },
+  {
+    "player_name": "Riyad MAHREZ",
+    "team": "Algeria",
+    "metric": "presion_directa_promedio",
+    "value": 2.0,
+    "z_score": -0.32,
+    "percentile": 51.6
+  },
+  {
+    "player_name": "Rodrigo DE PAUL",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 6.0,
+    "z_score": 1.05,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Thiago ALMADA",
+    "team": "Argentina",
+    "metric": "presion_directa_promedio",
+    "value": 2.0,
+    "z_score": -0.32,
+    "percentile": 51.6
+  },
+  {
+    "player_name": "Adil BOULBINA",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 0.0,
+    "z_score": -1.24,
+    "percentile": 9.4
+  },
+  {
+    "player_name": "Aissa MANDI",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 2.0,
+    "z_score": -0.18,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Alexis MAC ALLISTER",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 4.0,
+    "z_score": 0.87,
+    "percentile": 79.7
+  },
+  {
+    "player_name": "Amine GOUIRI",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 0.0,
+    "z_score": -1.24,
+    "percentile": 9.4
+  },
+  {
+    "player_name": "Anis HADJ MOUSSA",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Cristian ROMERO",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 7.0,
+    "z_score": 2.46,
+    "percentile": 100.0
+  },
+  {
+    "player_name": "Emiliano MARTINEZ",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Enzo FERNANDEZ",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 4.0,
+    "z_score": 0.87,
+    "percentile": 79.7
+  },
+  {
+    "player_name": "Facundo MEDINA",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 4.0,
+    "z_score": 0.87,
+    "percentile": 79.7
+  },
+  {
+    "player_name": "Fares CHAIBI",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 2.0,
+    "z_score": -0.18,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Gonzalo MONTIEL",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 4.0,
+    "z_score": 0.87,
+    "percentile": 79.7
+  },
+  {
+    "player_name": "Hicham BOUDAOUI",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 2.0,
+    "z_score": -0.18,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Houssem AOUAR",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 0.0,
+    "z_score": -1.24,
+    "percentile": 9.4
+  },
+  {
+    "player_name": "Ibrahim MAZA",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Julian ALVAREZ",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Lautaro MARTINEZ",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 2.0,
+    "z_score": -0.18,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Lionel MESSI",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Lisandro MARTINEZ",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Luca ZIDANE",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 3.0,
+    "z_score": 0.35,
+    "percentile": 65.6
+  },
+  {
+    "player_name": "Mohamed AMOURA",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Nabil BENTALEB",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 6.0,
+    "z_score": 1.93,
+    "percentile": 96.9
+  },
+  {
+    "player_name": "Nahuel MOLINA",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 5.0,
+    "z_score": 1.4,
+    "percentile": 92.2
+  },
+  {
+    "player_name": "Nico GONZALEZ",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 0.0,
+    "z_score": -1.24,
+    "percentile": 9.4
+  },
+  {
+    "player_name": "Nico PAZ",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Nicolas OTAMENDI",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 2.0,
+    "z_score": -0.18,
+    "percentile": 53.1
+  },
+  {
+    "player_name": "Rafik BELGHALI",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 4.0,
+    "z_score": 0.87,
+    "percentile": 79.7
+  },
+  {
+    "player_name": "Ramiz ZERROUKI",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 0.0,
+    "z_score": -1.24,
+    "percentile": 9.4
+  },
+  {
+    "player_name": "Ramy BENSEBAINI",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 5.0,
+    "z_score": 1.4,
+    "percentile": 92.2
+  },
+  {
+    "player_name": "Rayan AIT-NOURI",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 3.0,
+    "z_score": 0.35,
+    "percentile": 65.6
+  },
+  {
+    "player_name": "Riyad MAHREZ",
+    "team": "Algeria",
+    "metric": "recuperaciones_promedio",
+    "value": 1.0,
+    "z_score": -0.71,
+    "percentile": 31.2
+  },
+  {
+    "player_name": "Rodrigo DE PAUL",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 4.0,
+    "z_score": 0.87,
+    "percentile": 79.7
+  },
+  {
+    "player_name": "Thiago ALMADA",
+    "team": "Argentina",
+    "metric": "recuperaciones_promedio",
+    "value": 3.0,
+    "z_score": 0.35,
+    "percentile": 65.6
   }
 ]
