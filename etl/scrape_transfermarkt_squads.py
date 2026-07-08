@@ -31,7 +31,19 @@ import requests
 from bs4 import BeautifulSoup
 
 BASE = "https://www.transfermarkt.com"
-HUB_URL = f"{BASE}/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26"
+# El código de competencia de Transfermarkt no sigue un patrón fijo año a
+# año (confirmado: "WM26" devolvió 404 en la primera corrida real) -- se
+# prueban varios candidatos en orden y, si todos fallan, se cae a la
+# búsqueda general del sitio para resolver la URL real en vez de adivinar
+# a ciegas de nuevo.
+HUB_URL_CANDIDATES = [
+    f"{BASE}/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26",
+    f"{BASE}/weltmeisterschaft-2026/teilnehmer/pokalwettbewerb/WM26",
+    f"{BASE}/fifa-world-cup-2026-usa-mexico-canada/teilnehmer/pokalwettbewerb/WM26",
+    f"{BASE}/wm-2026/teilnehmer/pokalwettbewerb/WM26",
+]
+SEARCH_URL = f"{BASE}/schnellsuche/ergebnis/schnellsuche?query=FIFA+World+Cup+2026"
+COMPETITION_LINK_RE = re.compile(r"/([a-z0-9-]+)/(?:startseite|teilnehmer)/pokalwettbewerb/([A-Za-z0-9]+)")
 HEADERS = {
     "User-Agent": "MetricasMundial2026Bot/1.0 (+https://github.com/ramirosilvera/metricasmundial2026; "
     "proyecto de analisis publico y sin fines de lucro; contacto via GitHub issues)"
@@ -164,21 +176,59 @@ def _parse_squad_table(html: str, team: str) -> list[dict]:
     return rows_out
 
 
+def _resolve_hub_url(attempts: list[dict]) -> tuple[str, str] | None:
+    """Prueba cada candidato de HUB_URL_CANDIDATES en orden. Si todos
+    devuelven error, busca la competencia por nombre en el buscador general
+    del sitio y prueba la URL que encuentre ahí. Devuelve (url, html) del
+    primer candidato que responda 200, o None si ninguno funcionó -- en
+    ese caso `attempts` queda con el detalle de cada intento para diagnóstico."""
+    for url in HUB_URL_CANDIDATES:
+        try:
+            html = _get(url).text
+            attempts.append({"url": url, "status": "ok"})
+            return url, html
+        except requests.RequestException as exc:
+            attempts.append({"url": url, "status": "error", "detail": str(exc)})
+
+    try:
+        search_html = _get(SEARCH_URL).text
+    except requests.RequestException as exc:
+        attempts.append({"url": SEARCH_URL, "status": "error", "detail": str(exc)})
+        return None
+
+    match = COMPETITION_LINK_RE.search(search_html)
+    if not match:
+        attempts.append({"url": SEARCH_URL, "status": "ok_pero_sin_link_de_competencia"})
+        (RAW_DIR / "raw_search.html").write_text(search_html)
+        return None
+
+    slug, comp_id = match.groups()
+    resolved_url = f"{BASE}/{slug}/teilnehmer/pokalwettbewerb/{comp_id}"
+    try:
+        html = _get(resolved_url).text
+        attempts.append({"url": resolved_url, "status": "ok", "resuelto_via": "busqueda"})
+        return resolved_url, html
+    except requests.RequestException as exc:
+        attempts.append({"url": resolved_url, "status": "error", "detail": str(exc), "resuelto_via": "busqueda"})
+        return None
+
+
 def scrape() -> list[dict]:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    try:
-        hub_html = _get(HUB_URL).text
-    except requests.RequestException as exc:
-        (RAW_DIR / "_discovery_status.json").write_text(json.dumps({"error": str(exc), "hub_url": HUB_URL}, indent=2))
-        print(f"no se pudo bajar la pagina de participantes: {exc}", file=sys.stderr)
+    attempts: list[dict] = []
+    resolved = _resolve_hub_url(attempts)
+    if resolved is None:
+        (RAW_DIR / "_discovery_status.json").write_text(json.dumps({"attempts": attempts}, indent=2, ensure_ascii=False))
+        print("no se pudo resolver la pagina de participantes del Mundial 2026 -- revisar _discovery_status.json", file=sys.stderr)
         return []
+    hub_url, hub_html = resolved
 
     (RAW_DIR / "raw_hub.html").write_text(hub_html)
     team_urls = discover_team_urls(hub_html)
     (RAW_DIR / "_discovery_status.json").write_text(
-        json.dumps({"hub_url": HUB_URL, "teams_found": len(team_urls), "teams": team_urls}, indent=2, ensure_ascii=False)
+        json.dumps({"attempts": attempts, "hub_url": hub_url, "teams_found": len(team_urls), "teams": team_urls}, indent=2, ensure_ascii=False)
     )
     print(f"selecciones descubiertas: {len(team_urls)}")
     if not team_urls:
