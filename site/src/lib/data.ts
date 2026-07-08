@@ -88,6 +88,33 @@ export interface Meta {
   sources: {
     tactical_context: SourceStatus;
     physical_performance: SourceStatus;
+    tactical_2026?: SourceStatus;
     squad_ages: SourceStatus;
+    derived_metrics?: SourceStatus;
   };
+}
+
+export interface DerivedTeamMetricRow {
+  team: string;
+  season: string;
+  metric: string;
+  value: number;
+  z_score: number | null;
+  percentile: number | null;
+}
+
+export interface DerivedTeamStyleRow {
+  team: string;
+  season: string;
+  cluster_id: number;
+  cluster_label: string;
+}
+
+export interface DerivedPlayerMetricRow {
+  player_name: string;
+  team: string;
+  metric: string;
+  value: number;
+  z_score: number | null;
+  percentile: number | null;
 }
