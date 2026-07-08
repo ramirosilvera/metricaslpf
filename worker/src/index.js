@@ -94,6 +94,29 @@ export default {
       return new Response(null, { status: 204, headers });
     }
 
+    // Endpoint de diagnóstico temporal: permite ver, abriendo la URL
+    // directo en el navegador, qué modelos de Gemini soportan generateContent
+    // con la clave configurada -- sin exponer la clave en la respuesta.
+    if (request.method === "GET" && new URL(request.url).pathname === "/debug-models") {
+      if (!env.GEMINI_API_KEY) return json({ error: "not_configured" }, 503, headers);
+      let listResponse;
+      try {
+        listResponse = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models?key=${env.GEMINI_API_KEY}`,
+        );
+      } catch {
+        return json({ error: "upstream_unreachable" }, 502, headers);
+      }
+      const data = await listResponse.json();
+      if (!listResponse.ok) {
+        return json({ error: "upstream_error", status: listResponse.status, detail: data?.error?.message }, 502, headers);
+      }
+      const models = (data.models || [])
+        .filter((m) => (m.supportedGenerationMethods || []).includes("generateContent"))
+        .map((m) => m.name);
+      return json({ models }, 200, headers);
+    }
+
     if (request.method !== "POST") {
       return json({ error: "method_not_allowed" }, 405, headers);
     }
