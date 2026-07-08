@@ -6,7 +6,11 @@ compatibility_date = "2024-11-01"
 # donde se sirve el sitio de GitHub Pages, SIN el path del repo.
 [vars]
 ALLOWED_ORIGIN = "https://ramirosilvera.github.io"
-GEMINI_MODEL = "gemini-2.0-flash"
+# "gemini-2.0-flash" devolvía 404 NOT_FOUND en generateContent pese a
+# figurar en /v1beta/models -- se usa el alias "-latest" que Google
+# mantiene apuntando al modelo flash vigente, para no repetir este
+# problema cada vez que rotan los modelos disponibles.
+GEMINI_MODEL = "gemini-flash-latest"
 RATE_LIMIT_PER_HOUR = "15"
 
 # Rate limiting por IP es opcional: si no se crea/bindea este namespace KV,
