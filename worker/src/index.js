@@ -154,7 +154,17 @@ export default {
 
     if (!geminiResponse.ok) {
       const status = geminiResponse.status === 429 ? 429 : 502;
-      return json({ error: "upstream_error", status: geminiResponse.status }, status, headers);
+      // Se loguea el detalle completo (visible en Cloudflare -> Workers -> Logs
+      // en vivo) para poder diagnosticar sin exponer la clave en la respuesta al cliente.
+      const errorBody = await geminiResponse.text();
+      console.error("Gemini upstream error", geminiResponse.status, errorBody);
+      let reason;
+      try {
+        reason = JSON.parse(errorBody)?.error?.status;
+      } catch {
+        /* cuerpo no era JSON */
+      }
+      return json({ error: "upstream_error", status: geminiResponse.status, reason }, status, headers);
     }
 
     const data = await geminiResponse.json();

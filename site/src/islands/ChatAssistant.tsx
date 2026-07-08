@@ -55,7 +55,10 @@ export default function ChatAssistant() {
         } else if (res.status === 503) {
           setError("El asistente todavía no está configurado.");
         } else {
-          setError("No se pudo obtener respuesta. Probá de nuevo.");
+          // Se muestra el código de diagnóstico para poder reportar el problema
+          // sin necesidad de abrir las herramientas de desarrollador del navegador.
+          const detail = [data?.error, data?.status, data?.reason].filter(Boolean).join(" ");
+          setError(`No se pudo obtener respuesta. Probá de nuevo.${detail ? ` (${detail})` : ""}`);
         }
         return;
       }
