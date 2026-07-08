@@ -69,6 +69,33 @@ PhysicalMatchStatsSchema = DataFrameSchema(
     coerce=True,
 )
 
+# Métricas físicas por JUGADOR y partido -- la unidad de análisis real que
+# reportan los PDF "PMSR" de FIFA Training Centre (zonas de velocidad 1-5,
+# sprints, velocidad punta). PhysicalMatchStatsSchema (arriba) se sigue
+# llenando como agregado por equipo derivado de esta tabla.
+PhysicalPlayerMatchStatsSchema = DataFrameSchema(
+    {
+        "match_id": Column(int),
+        "team": Column(str),
+        "jersey_number": Column("Int64", nullable=True),
+        "player_name": Column(str),
+        "total_distance_m": Column(float, Check.in_range(0, 14000), nullable=True),
+        "zone1_m": Column(float, Check.ge(0), nullable=True),
+        "zone2_m": Column(float, Check.ge(0), nullable=True),
+        "zone3_m": Column(float, Check.ge(0), nullable=True),
+        "zone4_m": Column(float, Check.ge(0), nullable=True),
+        "zone5_m": Column(float, Check.ge(0), nullable=True),
+        "high_speed_runs_count": Column(float, Check.ge(0), nullable=True),
+        "sprint_count": Column(float, Check.ge(0), nullable=True),
+        "top_speed_kmh": Column(float, Check.in_range(0, 40), nullable=True),
+        "source": Column(str),
+        "source_url": Column(str, nullable=True),
+        "retrieved_at": Column(str),
+    },
+    strict=False,
+    coerce=True,
+)
+
 SquadsSchema = DataFrameSchema(
     {
         "team": Column(str),

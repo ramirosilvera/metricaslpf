@@ -17,6 +17,7 @@ from schemas import (
     TeamMatchStatsSchema,
     PlayerAppearancesSchema,
     PhysicalMatchStatsSchema,
+    PhysicalPlayerMatchStatsSchema,
     SquadsSchema,
 )
 
@@ -27,6 +28,7 @@ CHECKS = [
     ("team_match_stats_tactical.parquet", TeamMatchStatsSchema),
     ("player_match_appearances.parquet", PlayerAppearancesSchema),
     ("physical_match_stats.parquet", PhysicalMatchStatsSchema),
+    ("physical_player_match_stats.parquet", PhysicalPlayerMatchStatsSchema),
     ("squads.parquet", SquadsSchema),
 ]
 

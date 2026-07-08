@@ -1,0 +1,7 @@
+match_id,team,total_distance_km,high_intensity_distance_m,sprint_distance_m,sprint_count,top_speed_kmh,source,source_url,retrieved_at
+20260019,Argentina,108.39,6139.4,1760.1,369.0,33.7,fifa_training_centre_pmsr_pdf,https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M19-ARG-V-ALG.pdf,2026-07-08T13:05:54.441218+00:00
+20260019,Algeria,107.58,6471.7,1423.0,401.0,33.0,fifa_training_centre_pmsr_pdf,https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M19-ARG-V-ALG.pdf,2026-07-08T13:05:54.441218+00:00
+20260043,Argentina,104.37,6292.9,1764.0,363.0,33.6,fifa_training_centre_pmsr_pdf,https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M43-ARG-V-AUT.pdf,2026-07-08T13:12:07.567790+00:00
+20260043,Austria,107.77,6682.6,1743.1,403.0,34.0,fifa_training_centre_pmsr_pdf,https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M43-ARG-V-AUT.pdf,2026-07-08T13:12:07.567790+00:00
+20260070,Jordan,110.61,6380.0,1455.0,397.0,33.4,fifa_training_centre_pmsr_pdf,https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M70-JOR-V-ARG.pdf,2026-07-08T13:12:07.567790+00:00
+20260070,Argentina,105.9,6153.6,1473.0,367.0,35.2,fifa_training_centre_pmsr_pdf,https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M70-JOR-V-ARG.pdf,2026-07-08T13:12:07.567790+00:00

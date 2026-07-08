@@ -48,6 +48,34 @@ def test_player_minutes_aggregate_has_no_duplicate_players():
     assert len(keys) == len(set(keys)), "un mismo jugador aparece mas de una vez (bug de agrupacion)"
 
 
+def test_physical_team_totals_match_sum_of_players():
+    team_path = WAREHOUSE / "physical_match_stats.parquet"
+    player_path = WAREHOUSE / "physical_player_match_stats.parquet"
+    if not team_path.exists() or not player_path.exists():
+        pytest.skip("todavia no hay datos fisicos cargados")
+
+    team_df = pd.read_parquet(team_path)
+    player_df = pd.read_parquet(player_path)
+    player_sums = (
+        player_df.groupby(["match_id", "team"])["total_distance_m"].sum() / 1000
+    ).round(1)
+    for _, row in team_df.iterrows():
+        key = (row["match_id"], row["team"])
+        assert key in player_sums.index, f"falta el detalle por jugador de {key}"
+        assert abs(player_sums[key] - row["total_distance_km"]) < 0.5, (
+            f"{key}: suma de jugadores ({player_sums[key]}km) no coincide con el total de equipo ({row['total_distance_km']}km)"
+        )
+
+
+def test_physical_player_stats_within_human_ranges():
+    path = WAREHOUSE / "physical_player_match_stats.parquet"
+    if not path.exists():
+        pytest.skip("todavia no hay datos fisicos por jugador")
+    df = pd.read_parquet(path)
+    assert (df["total_distance_m"].dropna() <= 14000).all()
+    assert (df["top_speed_kmh"].dropna() <= 40).all()
+
+
 def test_schemas_validate():
     from schemas import MatchesSchema, TeamMatchStatsSchema, PlayerAppearancesSchema
 

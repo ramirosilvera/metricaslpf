@@ -23,6 +23,7 @@ from schemas import (
     TeamMatchStatsSchema,
     PlayerAppearancesSchema,
     PhysicalMatchStatsSchema,
+    PhysicalPlayerMatchStatsSchema,
     SquadsSchema,
 )
 
@@ -90,6 +91,18 @@ def build():
         print(f"physical_match_stats.parquet: {len(physical)} filas")
     else:
         print("physical_match_stats: sin datos todavia (pendiente de la primera corrida del scraper en GitHub Actions)")
+
+    # --- physical_player_match_stats (FIFA Training Centre, por jugador) ---
+    physical_players = _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "physical_player_match_stats.csv")
+    if physical_players is not None:
+        physical_players = physical_players.astype({"match_id": "int64"})
+        physical_players["jersey_number"] = pd.to_numeric(physical_players["jersey_number"], errors="coerce").astype("Int64")
+        for c in ["total_distance_m", "zone1_m", "zone2_m", "zone3_m", "zone4_m", "zone5_m", "high_speed_runs_count", "sprint_count", "top_speed_kmh"]:
+            physical_players[c] = pd.to_numeric(physical_players[c], errors="coerce")
+        physical_players = PhysicalPlayerMatchStatsSchema.validate(physical_players)
+        con.register("phys_players_df", physical_players)
+        con.execute(f"COPY phys_players_df TO '{WAREHOUSE / 'physical_player_match_stats.parquet'}' (FORMAT PARQUET)")
+        print(f"physical_player_match_stats.parquet: {len(physical_players)} filas")
 
     # --- squads (Transfermarkt: edad de plantel) ---
     squads = _read_csv_if_exists(RAW / "transfermarkt" / "_processed" / "squads.csv")

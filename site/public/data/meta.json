@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T12:53:22.071555+00:00",
+  "generated_at": "2026-07-08T13:14:16.870929+00:00",
   "sources": {
     "tactical_context": {
       "provider": "StatsBomb Open Data",
@@ -10,7 +10,7 @@
     "physical_performance": {
       "provider": "FIFA Training Centre",
       "coverage": "Mundial 2026 (en curso)",
-      "status": "pending_first_scrape"
+      "status": "ok"
     },
     "squad_ages": {
       "provider": "Transfermarkt",

@@ -13,6 +13,7 @@ const PARQUET_TABLES: { table: string; file: string }[] = [
   { table: "team_match_stats_tactical", file: "team_match_stats_tactical.parquet" },
   { table: "player_match_appearances", file: "player_match_appearances.parquet" },
   { table: "physical_match_stats", file: "physical_match_stats.parquet" },
+  { table: "physical_player_match_stats", file: "physical_player_match_stats.parquet" },
   { table: "squads", file: "squads.parquet" },
 ];
 

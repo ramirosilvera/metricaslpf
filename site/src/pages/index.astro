@@ -5,11 +5,21 @@ import { loadJson, type TeamSeasonSummary, type MatchRow } from "../lib/data";
 
 const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
 const matches = loadJson<MatchRow[]>("matches.json");
+const physicalRaw = loadJson<any>("physical_match_stats.json");
+const physicalRows: any[] = Array.isArray(physicalRaw) ? physicalRaw : [];
 
 const arg2022 = summary.find((r) => r.team === "Argentina" && r.season === "2022");
 const arg2018 = summary.find((r) => r.team === "Argentina" && r.season === "2018");
 const nTeams = new Set(summary.map((r) => r.team)).size;
 const base = import.meta.env.BASE_URL;
+
+const matches2026Argentina = matches
+  .filter((m) => m.season === "2026" && (m.home_team === "Argentina" || m.away_team === "Argentina"))
+  .sort((a, b) => (a.match_date ?? "").localeCompare(b.match_date ?? ""));
+
+function physicalFor(matchId: number, team: string) {
+  return physicalRows.find((r) => r.match_id === matchId && r.team === team);
+}
 ---
 
 <Base title="Inicio" description="¿Argentina corre menos que el resto en el Mundial? Un análisis abierto, con los sesgos a la vista.">
@@ -64,17 +74,61 @@ const base = import.meta.env.BASE_URL;
     </div>
   </section>
 
+  {matches2026Argentina.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Mundial 2026 — Argentina hasta el momento</h2>
+        <p>Fuente: FIFA Training Centre (reporte oficial por partido)</p>
+      </div>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Fase</th>
+              <th>Partido</th>
+              <th>Estadio</th>
+              <th>Distancia (equipo)</th>
+              <th>Sprints (equipo)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {matches2026Argentina.map((m) => {
+              const argTeam = m.home_team === "Argentina" ? m.home_team : m.away_team;
+              const phys = physicalFor(m.match_id, argTeam);
+              return (
+                <tr>
+                  <td>{m.match_date ?? "—"}</td>
+                  <td>{m.stage ?? "—"}</td>
+                  <td>
+                    {m.home_team} {m.home_score ?? "-"} – {m.away_score ?? "-"} {m.away_team}
+                  </td>
+                  <td>{m.stadium || "—"}</td>
+                  <td>{phys ? `${phys.total_distance_km} km` : "pendiente"}</td>
+                  <td>{phys ? phys.sprint_count : "pendiente"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <p style="font-size:0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
+          Detalle físico por jugador (distancia, zonas de velocidad, sprints, velocidad punta) en <a href={`${base}jugadores/`}>Jugadores</a>.
+        </p>
+      </div>
+    </section>
+  )}
+
   <section class="section">
     <div class="section-head">
-      <h2>Lo que todavía falta (y por qué)</h2>
+      <h2>Cómo se completan los datos que faltan</h2>
     </div>
     <div class="card">
       <p>
         La métrica que responde directamente la hipótesis —distancia recorrida, alta intensidad, sprints— la publica <strong>FIFA Training Centre</strong> como
-        reportes públicos por partido, no como API. El scraper ya está escrito y corre automáticamente por GitHub
-        Actions; se completa a medida que FIFA publica cada reporte del Mundial 2026 en curso. Igual con la edad de
-        plantel (Transfermarkt). Este sitio nunca muestra un dato inventado: mientras no haya datos reales, la
-        sección correspondiente queda marcada como pendiente, explícitamente.
+        reportes oficiales en PDF por partido, no como API. El scraper ya los descarga y decodifica automáticamente
+        por GitHub Actions, corrida tras corrida va sumando más partidos del Mundial 2026 en curso. Igual con la edad
+        de plantel (Transfermarkt), todavía pendiente. Este sitio nunca muestra un dato inventado: mientras un
+        partido o una selección no tenga datos reales cargados, queda marcado como pendiente, explícitamente.
       </p>
     </div>
   </section>

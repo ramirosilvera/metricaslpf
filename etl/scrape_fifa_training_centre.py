@@ -159,6 +159,46 @@ def discover_pdf_reports(debug: dict | None = None) -> list[dict]:
     return reports
 
 
+_MATCH_SUMMARY_RE = re.compile(
+    r"^(?P<home>.+?) (?P<home_score>\d+) - (?P<away_score>\d+) (?P<away>.+?)\n"
+    r"(?P<group_label>.+?) - Match (?P<match_num>\d+)\n"
+    r"(?P<date>\d{1,2} \w+ \d{4})\n"
+    r".*?\n"
+    r"(?P<stadium>.+?)\n",
+    re.DOTALL,
+)
+
+
+def _parse_match_summary(tables: list[list[list[str]]]) -> dict | None:
+    """La portada del PDF ("POST MATCH SUMMARY REPORT") trae resultado,
+    fecha, estadio y fase en texto plano (sin el problema de la fuente
+    remapeada) -- se usa para completar matches_fifa2026.csv con datos
+    reales en vez de dejarlos vacíos."""
+    for table in tables:
+        for cell_row in table:
+            for cell in cell_row or []:
+                if not cell or "POST MATCH SUMMARY REPORT" not in cell:
+                    continue
+                m = _MATCH_SUMMARY_RE.match(cell)
+                if not m:
+                    continue
+                d = m.groupdict()
+                try:
+                    match_date = datetime.strptime(d["date"], "%d %B %Y").strftime("%Y-%m-%d")
+                except ValueError:
+                    match_date = None
+                return {
+                    "home_team": d["home"].strip(),
+                    "away_team": d["away"].strip(),
+                    "home_score": int(d["home_score"]),
+                    "away_score": int(d["away_score"]),
+                    "stage": d["group_label"].strip(),
+                    "match_date": match_date,
+                    "stadium": d["stadium"].strip(),
+                }
+    return None
+
+
 def _extract_pdf_tables(pdf_bytes: bytes) -> tuple[list[list[list[str]]], str]:
     """Devuelve (tablas crudas por pagina, texto completo) de un PDF."""
     import io
@@ -174,36 +214,137 @@ def _extract_pdf_tables(pdf_bytes: bytes) -> tuple[list[list[list[str]]], str]:
     return tables, "\n".join(text_parts)
 
 
-def _parse_physical_metrics(tables: list[list[list[str]]], team_a: str, team_b: str) -> list[dict] | None:
-    """Busca, entre las tablas extraidas del PDF, filas con metricas fisicas
-    reconocibles (distancia, alta intensidad, sprints) por equipo.
+# El PDF "PMSR" usa una fuente con los dígitos remapeados a Unicode Private
+# Use Area en vez de ASCII '0'-'9' (probablemente para dificultar el copy-paste
+# directo). Confirmado cruzando la suma de distancia de los 16 jugadores
+# listados contra el total de equipo que SI viene en texto plano en la
+# página de "Key Statistics" (108.4km / 109.3km calzan exacto con este mapeo).
+_PUA_MAP = {chr(0xE071 + i): str(i) for i in range(10)}
+_PUA_MAP.update({
+    chr(0xE094): ".",
+    chr(0xE088): "-",
+    chr(0xE081): "(",
+    chr(0xE082): ")",
+    chr(0xE092): ":",
+    chr(0xE09D): "+",
+})
 
-    Estrategia conservadora: sólo devuelve datos si encuentra, en alguna
-    tabla, una fila cuya primera celda mencione a uno de los dos equipos (o
-    contenga "team"/"total") junto con valores numéricos en columnas que
-    tengan un header con alguna de las palabras clave. Si la estructura real
-    no matchea esto, se retorna None (no se inventan filas).
+
+def _decode_pmsr_font(s: str) -> str:
+    return "".join(_PUA_MAP.get(ch, ch) for ch in s)
+
+
+def _parse_physical_metrics(tables: list[list[list[str]]]) -> list[dict] | None:
+    """Busca celdas "Physical Data <Selección>" entre las tablas extraidas
+    (una por equipo) y decodifica las filas de jugadores.
+
+    Cada fila de jugador tiene 9 números al final (después de decodificar):
+    distancia total, zona 1-5, corridas de alta velocidad (zona 3), sprints
+    (zona 4 y 5), velocidad punta. Si no encuentra ninguna celda con ese
+    patrón, devuelve None -- no se inventan datos.
     """
-    keywords = ("distance", "high intensity", "high-intensity", "sprint", "km/h", "hi ")
+    player_rows: list[dict] = []
 
     for table in tables:
-        if not table or len(table) < 2:
-            continue
-        header = [str(c or "").strip().lower() for c in table[0]]
-        if not any(any(k in h for k in keywords) for h in header):
-            continue
+        for cell_row in table:
+            for cell in cell_row or []:
+                if not cell or "Physical Data" not in cell:
+                    continue
+                team_name = cell.split("Physical Data", 1)[1].split("\n", 1)[0].strip()
+                for line in cell.split("\n"):
+                    decoded = _decode_pmsr_font(line)
+                    nums = re.findall(r"-?\d+\.?\d*", decoded)
+                    if len(nums) < 9:
+                        continue
+                    tail = nums[-9:]
+                    try:
+                        vals = [float(n) for n in tail]
+                    except ValueError:
+                        continue
+                    # la parte de texto antes del primer numero de la cola es "<jersey> <nombre>"
+                    prefix = decoded
+                    for n in tail:
+                        prefix = prefix.rsplit(n, 1)[0]
+                    prefix = prefix.strip()
+                    jersey_match = re.match(r"^(\d+)\s+(.*)$", prefix)
+                    if not jersey_match:
+                        continue
+                    jersey, name = jersey_match.groups()
+                    player_rows.append({
+                        "team": team_name,
+                        "jersey_number": int(jersey),
+                        "player_name": name.strip(),
+                        "total_distance_m": vals[0],
+                        "zone1_m": vals[1],
+                        "zone2_m": vals[2],
+                        "zone3_m": vals[3],
+                        "zone4_m": vals[4],
+                        "zone5_m": vals[5],
+                        "high_speed_runs_count": vals[6],
+                        "sprint_count": vals[7],
+                        "top_speed_kmh": vals[8],
+                    })
 
-        rows_out = []
-        for row in table[1:]:
-            if not row:
-                continue
-            label = str(row[0] or "").strip()
-            if not label:
-                continue
-            rows_out.append({"row_label": label, "raw_row": row, "header": table[0]})
-        if rows_out:
-            return rows_out
-    return None
+    return player_rows or None
+
+
+PLAYER_STATS_PATH = OUT_DIR / "physical_player_match_stats.csv"
+TEAM_STATS_PATH = OUT_DIR / "physical_match_stats.csv"
+MATCHES_PATH = OUT_DIR / "matches_fifa2026.csv"
+
+
+def _load_cached_player_rows() -> tuple[list[dict], set[int]]:
+    """Lee lo que ya se publicó en corridas anteriores (viene del checkout de
+    git en CI) para no re-descargar PDFs de partidos ya procesados -- así
+    cada corrida programada suma cobertura en vez de arrancar de cero."""
+    if not PLAYER_STATS_PATH.exists():
+        return [], set()
+    with PLAYER_STATS_PATH.open(newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    match_ids = {int(r["match_id"]) for r in rows}
+    return rows, match_ids
+
+
+def _load_cached_matches() -> dict[int, dict]:
+    """Idem para matches_fifa2026.csv -- así el resultado/fecha/estadio ya
+    resuelto en una corrida anterior no se pierde en las que solo alcanzan a
+    cubrir otros partidos."""
+    if not MATCHES_PATH.exists():
+        return {}
+    with MATCHES_PATH.open(newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    for r in rows:
+        r["match_id"] = int(r["match_id"])
+    return {r["match_id"]: r for r in rows}
+
+
+def _team_aggregates_from_players(player_rows: list[dict]) -> list[dict]:
+    by_match_team: dict[tuple, list[dict]] = {}
+    for r in player_rows:
+        key = (int(r["match_id"]), r["team"])
+        by_match_team.setdefault(key, []).append(r)
+
+    team_rows = []
+    for (match_id, team), rows in by_match_team.items():
+        total_distance_m = sum(float(r["total_distance_m"]) for r in rows)
+        zone4_5_m = sum(float(r["zone4_m"]) + float(r["zone5_m"]) for r in rows)
+        zone5_m = sum(float(r["zone5_m"]) for r in rows)
+        sprint_count = sum(float(r["sprint_count"]) for r in rows)
+        top_speed = max(float(r["top_speed_kmh"]) for r in rows)
+        any_row = rows[0]
+        team_rows.append({
+            "match_id": match_id,
+            "team": team,
+            "total_distance_km": round(total_distance_m / 1000, 2),
+            "high_intensity_distance_m": round(zone4_5_m, 1),
+            "sprint_distance_m": round(zone5_m, 1),
+            "sprint_count": sprint_count,
+            "top_speed_kmh": top_speed,
+            "source": any_row["source"],
+            "source_url": any_row["source_url"],
+            "retrieved_at": any_row["retrieved_at"],
+        })
+    return team_rows
 
 
 def scrape() -> list[dict]:
@@ -221,8 +362,11 @@ def scrape() -> list[dict]:
     }, ensure_ascii=False, indent=2))
     print(f"discover_pdf_reports: {len(reports)} PDFs encontrados (paginas visitadas: {len(debug.get('pages_visited', []))})", flush=True)
 
-    matches_rows = []
-    physical_rows: list[dict] = []
+    cached_player_rows, cached_match_ids = _load_cached_player_rows()
+    print(f"partidos ya cubiertos en corridas anteriores: {len(cached_match_ids)}", flush=True)
+    matches_by_id = _load_cached_matches()
+
+    new_player_rows: list[dict] = []
     failed: list[dict] = []
     pdf_debug_samples: list[dict] = []
     retrieved_at = datetime.now(timezone.utc).isoformat()
@@ -239,21 +383,24 @@ def scrape() -> list[dict]:
     downloaded = 0
 
     for report in reports_ordered:
-        matches_rows.append({
-            "match_id": report["match_id"],
-            "competition": "FIFA World Cup",
-            "season": "2026",
-            "stage": report["stage_guess"],
-            "group": "",
-            "match_date": None,
-            "home_team": report["team_a"],
-            "away_team": report["team_b"],
-            "home_score": None,
-            "away_score": None,
-            "stadium": "",
-            "referee": "",
-        })
+        if report["match_id"] not in matches_by_id:
+            matches_by_id[report["match_id"]] = {
+                "match_id": report["match_id"],
+                "competition": "FIFA World Cup",
+                "season": "2026",
+                "stage": report["stage_guess"],
+                "group": "",
+                "match_date": None,
+                "home_team": report["team_a"],
+                "away_team": report["team_b"],
+                "home_score": None,
+                "away_score": None,
+                "stadium": "",
+                "referee": "",
+            }
 
+        if report["match_id"] in cached_match_ids:
+            continue  # ya lo tenemos de una corrida anterior
         if PMSR_LIMIT is not None and downloaded >= PMSR_LIMIT:
             failed.append({"match_number": report["match_number"], "url": report["url"], "error": "no procesado en esta corrida (PMSR_LIMIT)"})
             continue
@@ -274,9 +421,14 @@ def scrape() -> list[dict]:
             failed.append({"match_number": report["match_number"], "url": report["url"], "error": f"error extrayendo PDF: {exc}"})
             continue
 
-        print(f"  M{report['match_number']} {report['team_a']} v {report['team_b']}: {len(tables)} tablas extraidas", flush=True)
+        summary = _parse_match_summary(tables)
+        if summary:
+            matches_by_id[report["match_id"]].update(summary)
 
-        if len(pdf_debug_samples) < PDF_DEBUG_SAMPLE_LIMIT:
+        parsed = _parse_physical_metrics(tables)
+        print(f"  M{report['match_number']} {report['team_a']} v {report['team_b']}: {len(parsed or [])} filas de jugador", flush=True)
+
+        if len(pdf_debug_samples) < PDF_DEBUG_SAMPLE_LIMIT and parsed is None:
             pdf_debug_samples.append({
                 "match_number": report["match_number"],
                 "team_a": report["team_a"],
@@ -286,29 +438,32 @@ def scrape() -> list[dict]:
                 "text": full_text[:40000],
             })
 
-        parsed = _parse_physical_metrics(tables, report["team_a"], report["team_b"])
         if parsed is None:
             failed.append({
                 "match_number": report["match_number"],
                 "url": report["url"],
-                "error": "no se encontro tabla de metricas fisicas reconocible en el PDF",
+                "error": "no se encontro 'Physical Data' reconocible en el PDF",
             })
             continue
 
         for row in parsed:
-            physical_rows.append({
+            new_player_rows.append({
                 "match_id": report["match_id"],
-                "team": row["row_label"],
-                "total_distance_km": None,
-                "high_intensity_distance_m": None,
-                "sprint_distance_m": None,
-                "sprint_count": None,
-                "top_speed_kmh": None,
+                "team": row["team"],
+                "jersey_number": row["jersey_number"],
+                "player_name": row["player_name"],
+                "total_distance_m": row["total_distance_m"],
+                "zone1_m": row["zone1_m"],
+                "zone2_m": row["zone2_m"],
+                "zone3_m": row["zone3_m"],
+                "zone4_m": row["zone4_m"],
+                "zone5_m": row["zone5_m"],
+                "high_speed_runs_count": row["high_speed_runs_count"],
+                "sprint_count": row["sprint_count"],
+                "top_speed_kmh": row["top_speed_kmh"],
                 "source": "fifa_training_centre_pmsr_pdf",
                 "source_url": report["url"],
                 "retrieved_at": retrieved_at,
-                "_raw_row_for_manual_mapping": row["raw_row"],
-                "_raw_header_for_manual_mapping": row["header"],
             })
 
     if failed:
@@ -316,28 +471,37 @@ def scrape() -> list[dict]:
     if pdf_debug_samples:
         (RAW_DIR / "_pdf_debug_sample.json").write_text(json.dumps(pdf_debug_samples, ensure_ascii=False, indent=2))
 
+    matches_rows = sorted(matches_by_id.values(), key=lambda r: r["match_id"])
     if matches_rows:
-        with (OUT_DIR / "matches_fifa2026.csv").open("w", newline="", encoding="utf-8") as f:
+        with MATCHES_PATH.open("w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=list(matches_rows[0].keys()))
             writer.writeheader()
             writer.writerows(matches_rows)
 
-    # IMPORTANTE: physical_rows todavia no se escribe como
-    # physical_match_stats.csv -- las filas tienen las metricas numericas en
-    # None porque todavia no se mapearon las columnas reales del PDF (se
-    # llega a esto recien via _pdf_debug_sample.json). Publicar esto tal
-    # cual mostraria en el sitio "datos cargados" con todo en null, que es
-    # peor que mostrar "pendiente". Se devuelve solo para inspeccion local/CI.
-    return physical_rows
+    all_player_rows = cached_player_rows + new_player_rows
+    if all_player_rows:
+        with PLAYER_STATS_PATH.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=list(all_player_rows[0].keys()))
+            writer.writeheader()
+            writer.writerows(all_player_rows)
+
+        team_rows = _team_aggregates_from_players(all_player_rows)
+        with TEAM_STATS_PATH.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=list(team_rows[0].keys()))
+            writer.writeheader()
+            writer.writerows(team_rows)
+
+    return new_player_rows
 
 
 if __name__ == "__main__":
     rows = scrape()
     n_failed = len(json.loads(FAILED_LOG.read_text())) if FAILED_LOG.exists() else 0
-    print(f"filas con tabla fisica candidata: {len(rows)} -- items pendientes de revision manual: {n_failed}", flush=True)
-    if not rows:
+    n_cached = len(_load_cached_player_rows()[1])
+    print(f"filas de jugador nuevas: {len(rows)} -- partidos con datos fisicos en total: {n_cached} -- pendientes de revision manual: {n_failed}", flush=True)
+    if not rows and n_cached == 0:
         print(
-            "ADVERTENCIA: no se pudo extraer ninguna tabla candidata de los PDFs. "
+            "ADVERTENCIA: no se pudo extraer ninguna fila fisica automáticamente. "
             "Revisar data/raw/fifa_training_centre/_failed.json y "
             "_pdf_debug_sample.json para ajustar _parse_physical_metrics() con la estructura real.",
             file=sys.stderr,

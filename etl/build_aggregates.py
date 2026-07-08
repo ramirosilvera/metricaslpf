@@ -50,6 +50,7 @@ def build():
     has_tactical = (WAREHOUSE / "team_match_stats_tactical.parquet").exists()
     has_appearances = (WAREHOUSE / "player_match_appearances.parquet").exists()
     has_physical = (WAREHOUSE / "physical_match_stats.parquet").exists()
+    has_physical_players = (WAREHOUSE / "physical_player_match_stats.parquet").exists()
     has_squads = (WAREHOUSE / "squads.parquet").exists()
 
     print("Generando agregados en site/public/data/ ...")
@@ -124,6 +125,9 @@ def build():
 
     if has_physical:
         physical = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')").df()
+        if has_matches:
+            matches_for_physical = con.execute(f"SELECT match_id, season, stage, home_team, away_team, match_date FROM read_parquet('{WAREHOUSE / 'matches.parquet'}')").df()
+            physical = physical.merge(matches_for_physical, on="match_id", how="left")
         _write_json("physical_match_stats.json", _records(physical))
     else:
         _write_json(
@@ -138,6 +142,34 @@ def build():
                 "rows": [],
             },
         )
+
+    if has_physical_players:
+        physical_players = con.execute(
+            f"SELECT * FROM read_parquet('{WAREHOUSE / 'physical_player_match_stats.parquet'}')"
+        ).df()
+        physical_players["high_intensity_m"] = physical_players["zone4_m"] + physical_players["zone5_m"]
+
+        # ranking acumulado por jugador (puede sumar varios partidos si ya
+        # hay mas de uno cargado para ese jugador)
+        player_physical_ranking = (
+            physical_players.groupby(["team", "player_name"])
+            .agg(
+                partidos=("match_id", "nunique"),
+                distancia_total_km=("total_distance_m", lambda s: round(s.sum() / 1000, 1)),
+                distancia_promedio_km=("total_distance_m", lambda s: round(s.mean() / 1000, 2)),
+                alta_intensidad_promedio_m=("high_intensity_m", lambda s: round(s.mean(), 1)),
+                sprints_promedio=("sprint_count", "mean"),
+                velocidad_punta_kmh=("top_speed_kmh", "max"),
+            )
+            .reset_index()
+            .sort_values("distancia_total_km", ascending=False)
+        )
+        _write_json("physical_player_ranking.json", _records(player_physical_ranking))
+
+        physical_players_out = physical_players.drop(columns=["high_intensity_m"])
+        _write_json("physical_player_match_stats.json", _records(physical_players_out))
+    else:
+        _write_json("physical_player_ranking.json", {"status": "pending_first_scrape", "rows": []})
 
     if has_squads:
         squads = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'squads.parquet'}')").df()
