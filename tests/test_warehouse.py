@@ -72,7 +72,7 @@ def test_physical_player_stats_within_human_ranges():
     if not path.exists():
         pytest.skip("todavia no hay datos fisicos por jugador")
     df = pd.read_parquet(path)
-    assert (df["total_distance_m"].dropna() <= 14000).all()
+    assert (df["total_distance_m"].dropna() <= 16000).all()
     assert (df["top_speed_kmh"].dropna() <= 40).all()
 
 
