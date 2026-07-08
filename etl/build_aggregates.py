@@ -188,6 +188,12 @@ def build():
             },
         )
 
+    discovery_path = ROOT / "data" / "raw" / "fifa_training_centre" / "_discovery_status.json"
+    total_matches_2026 = None
+    if discovery_path.exists():
+        total_matches_2026 = json.loads(discovery_path.read_text()).get("count")
+    matches_with_physical = int(physical["match_id"].nunique()) if has_physical else 0
+
     meta = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "sources": {
@@ -201,6 +207,8 @@ def build():
                 "provider": "FIFA Training Centre",
                 "coverage": "Mundial 2026 (en curso)",
                 "status": "ok" if has_physical else "pending_first_scrape",
+                "matches_loaded": matches_with_physical,
+                "matches_total": total_matches_2026,
             },
             "squad_ages": {
                 "provider": "Transfermarkt",

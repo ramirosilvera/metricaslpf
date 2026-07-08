@@ -25,17 +25,25 @@ function physicalFor(matchId: number, team: string) {
 <Base title="Inicio" description="¿Argentina corre menos que el resto en el Mundial? Un análisis abierto, con los sesgos a la vista.">
   <DataStatusBanner />
 
-  <h1>¿Argentina tiene una desventaja física real, o es un sesgo instalado?</h1>
-  <p class="lede">
-    Este proyecto pone a prueba esa hipótesis con datos abiertos y metodología explícita — no arranca mostrando un
-    ranking. Antes de mirar cualquier gráfico, dos advertencias que condicionan todo lo que sigue.
-  </p>
+  <div class="hero">
+    <p class="eyebrow">Mundial 2026 · análisis abierto</p>
+    <h1>¿Argentina tiene una desventaja física real, o es un sesgo instalado?</h1>
+    <p class="lede">
+      Este proyecto pone a prueba esa hipótesis con datos abiertos y metodología explícita — no arranca mostrando un
+      ranking. Antes de mirar cualquier gráfico, dos advertencias que condicionan todo lo que sigue.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href={`${base}selecciones/`}>Ver rankings →</a>
+      <a class="btn btn-ghost" href={`${base}metodologia/`}>Leer la metodología</a>
+    </div>
+  </div>
 
   <div class="grid-2 section">
     <div class="callout">
       <h3>1. La distancia corrida, sola, no mide "estado físico"</h3>
       <p>
-        Los equipos que dominan el balón corren <em>menos</em>, no más — no persiguen. Sin normalizar por posesión,
+        Los equipos que dominan el balón corren <em>menos</em>, no más — no persiguen. Sin normalizar por{" "}
+        <span class="term" tabindex="0" data-tip="Porcentaje del tiempo de juego que un equipo pasa con el balón. No es la posesión oficial de FIFA/Opta (basada en tracking) — es un proxy calculado a partir de la duración de eventos de StatsBomb.">posesión</span>,
         estado del marcador y fase del partido, un ranking de distancia es ruido táctico disfrazado de dato físico.
         Por eso este sitio separa siempre <strong>contexto táctico</strong> de <strong>resultado físico</strong>.
       </p>
@@ -61,7 +69,7 @@ function physicalFor(matchId: number, team: string) {
       </div>
       <div class="stat-tile">
         <div class="value">{matches.length}</div>
-        <div class="label">partidos procesados (2018 + 2022)</div>
+        <div class="label">partidos procesados (2018 + 2022 + 2026)</div>
       </div>
       <div class="stat-tile">
         <div class="value">{arg2022 ? Math.round(arg2022.posesion_promedio_proxy * 100) : "—"}%</div>
@@ -81,36 +89,38 @@ function physicalFor(matchId: number, team: string) {
         <p>Fuente: FIFA Training Centre (reporte oficial por partido)</p>
       </div>
       <div class="card">
-        <table>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Fase</th>
-              <th>Partido</th>
-              <th>Estadio</th>
-              <th>Distancia (equipo)</th>
-              <th>Sprints (equipo)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {matches2026Argentina.map((m) => {
-              const argTeam = m.home_team === "Argentina" ? m.home_team : m.away_team;
-              const phys = physicalFor(m.match_id, argTeam);
-              return (
-                <tr>
-                  <td>{m.match_date ?? "—"}</td>
-                  <td>{m.stage ?? "—"}</td>
-                  <td>
-                    {m.home_team} {m.home_score ?? "-"} – {m.away_score ?? "-"} {m.away_team}
-                  </td>
-                  <td>{m.stadium || "—"}</td>
-                  <td>{phys ? `${phys.total_distance_km} km` : "pendiente"}</td>
-                  <td>{phys ? phys.sprint_count : "pendiente"}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Fase</th>
+                <th>Partido</th>
+                <th>Estadio</th>
+                <th>Distancia (equipo)</th>
+                <th>Sprints (equipo)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {matches2026Argentina.map((m) => {
+                const argTeam = m.home_team === "Argentina" ? m.home_team : m.away_team;
+                const phys = physicalFor(m.match_id, argTeam);
+                return (
+                  <tr>
+                    <td>{m.match_date ?? "—"}</td>
+                    <td>{m.stage ?? "—"}</td>
+                    <td>
+                      {m.home_team} {m.home_score ?? "-"} – {m.away_score ?? "-"} {m.away_team}
+                    </td>
+                    <td>{m.stadium || "—"}</td>
+                    <td>{phys ? `${phys.total_distance_km} km` : "pendiente"}</td>
+                    <td>{phys ? phys.sprint_count : "pendiente"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
         <p style="font-size:0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
           Detalle físico por jugador (distancia, zonas de velocidad, sprints, velocidad punta) en <a href={`${base}jugadores/`}>Jugadores</a>.
         </p>
@@ -124,11 +134,13 @@ function physicalFor(matchId: number, team: string) {
     </div>
     <div class="card">
       <p>
-        La métrica que responde directamente la hipótesis —distancia recorrida, alta intensidad, sprints— la publica <strong>FIFA Training Centre</strong> como
-        reportes oficiales en PDF por partido, no como API. El scraper ya los descarga y decodifica automáticamente
-        por GitHub Actions, corrida tras corrida va sumando más partidos del Mundial 2026 en curso. Igual con la edad
-        de plantel (Transfermarkt), todavía pendiente. Este sitio nunca muestra un dato inventado: mientras un
-        partido o una selección no tenga datos reales cargados, queda marcado como pendiente, explícitamente.
+        La métrica que responde directamente la hipótesis —distancia recorrida,{" "}
+        <span class="term" tabindex="0" data-tip="Distancia recorrida por encima de 20 km/h (zonas 4 y 5). Es la métrica que más se acerca a un esfuerzo físico 'puro', menos influida por el estilo de juego que la distancia total.">alta intensidad</span>,
+        sprints— la publica <strong>FIFA Training Centre</strong> como reportes oficiales en PDF por partido, no como API. El scraper ya
+        los descarga y decodifica automáticamente por GitHub Actions, corrida tras corrida va sumando más partidos
+        del Mundial 2026 en curso. Igual con la edad de plantel (Transfermarkt), todavía pendiente. Este sitio nunca
+        muestra un dato inventado: mientras un partido o una selección no tenga datos reales cargados, queda marcado
+        como pendiente, explícitamente.
       </p>
     </div>
   </section>
@@ -138,20 +150,20 @@ function physicalFor(matchId: number, team: string) {
       <h2>Explorá</h2>
     </div>
     <div class="grid-2">
-      <a class="card" href={`${base}selecciones/`} style="text-decoration:none; color:inherit;">
-        <h3>Selecciones →</h3>
+      <a class="card card-link" href={`${base}selecciones/`}>
+        <h3>Selecciones <span class="card-arrow">→</span></h3>
         <p>Rankings, boxplots de dispersión y heatmap de percentiles entre selecciones.</p>
       </a>
-      <a class="card" href={`${base}comparar/`} style="text-decoration:none; color:inherit;">
-        <h3>Comparar dos selecciones →</h3>
+      <a class="card card-link" href={`${base}comparar/`}>
+        <h3>Comparar dos selecciones <span class="card-arrow">→</span></h3>
         <p>Radar cabeza a cabeza normalizado por percentil.</p>
       </a>
-      <a class="card" href={`${base}jugadores/`} style="text-decoration:none; color:inherit;">
-        <h3>Jugadores →</h3>
-        <p>Minutos jugados por plantel — la unidad de análisis correcta, no el promedio de equipo.</p>
+      <a class="card card-link" href={`${base}jugadores/`}>
+        <h3>Jugadores <span class="card-arrow">→</span></h3>
+        <p>Métricas físicas reales del Mundial 2026 y minutos jugados — la unidad de análisis correcta.</p>
       </a>
-      <a class="card" href={`${base}explorador/`} style="text-decoration:none; color:inherit;">
-        <h3>Explorador SQL →</h3>
+      <a class="card card-link" href={`${base}explorador/`}>
+        <h3>Explorador SQL <span class="card-arrow">→</span></h3>
         <p>Consultas libres sobre los datos crudos (Parquet), corriendo en tu navegador con DuckDB-WASM.</p>
       </a>
     </div>

@@ -4,9 +4,14 @@ import { loadJson, type Meta } from "../lib/data";
 const meta = loadJson<Meta>("meta.json");
 const items = [
   { label: "Contexto táctico (StatsBomb)", s: meta.sources.tactical_context },
-  { label: "Físico (FIFA Training Centre)", s: meta.sources.physical_performance },
   { label: "Edad de plantel (Transfermarkt)", s: meta.sources.squad_ages },
 ];
+
+const phys = meta.sources.physical_performance;
+const pct =
+  phys.matches_total && phys.matches_total > 0
+    ? Math.min(100, Math.round(((phys.matches_loaded ?? 0) / phys.matches_total) * 100))
+    : null;
 ---
 
 <div class="callout warning" style="margin-bottom: 1.75rem;">
@@ -14,6 +19,17 @@ const items = [
   <p style="margin-bottom: 0.9rem;">
     Este proyecto se actualiza automáticamente vía GitHub Actions. Generado por última vez: <strong>{new Date(meta.generated_at).toLocaleString("es-AR", { dateStyle: "medium", timeStyle: "short" })}</strong>.
   </p>
+
+  {pct !== null && (
+    <div style="margin-bottom: 0.9rem;">
+      <div class="progress-row">
+        <span class="badge status-ok"><span class="dot"></span>Físico (FIFA Training Centre)</span>
+        <div class="progress-track"><div class="progress-fill" style={`width:${pct}%`}></div></div>
+        <span class="progress-label">{phys.matches_loaded} / {phys.matches_total} partidos</span>
+      </div>
+    </div>
+  )}
+
   <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
     {items.map((it) => (
       <span class={`badge ${it.s.status === "ok" ? "status-ok" : "status-pending"}`}>

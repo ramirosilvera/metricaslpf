@@ -8,6 +8,21 @@ interface Props {
 
 const { title, description = "Análisis abierto del rendimiento físico y táctico en el Mundial 2026." } = Astro.props;
 const base = import.meta.env.BASE_URL;
+
+const navItems = [
+  { href: `${base}`, label: "Inicio" },
+  { href: `${base}selecciones/`, label: "Selecciones" },
+  { href: `${base}comparar/`, label: "Comparar" },
+  { href: `${base}jugadores/`, label: "Jugadores" },
+  { href: `${base}explorador/`, label: "Explorador SQL" },
+  { href: `${base}metodologia/`, label: "Metodología" },
+];
+
+const currentPath = Astro.url.pathname;
+function isActive(href: string) {
+  if (href === base) return currentPath === base || currentPath === `${base}index.html`;
+  return currentPath.startsWith(href);
+}
 ---
 
 <!doctype html>
@@ -23,16 +38,26 @@ const base = import.meta.env.BASE_URL;
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href={`${base}`}>
-          <strong>Métricas Mundial 2026</strong>
-          <span>análisis físico y táctico, 100% datos abiertos</span>
+          <span class="brand-mark">⚽</span>
+          <span class="brand-text">
+            <strong>Métricas Mundial 2026</strong>
+            <span>análisis físico y táctico · 100% datos abiertos</span>
+          </span>
         </a>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-label="Abrir menú">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 5H17M3 10H17M3 15H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </label>
+
         <nav class="nav">
-          <a href={`${base}`}>Inicio</a>
-          <a href={`${base}selecciones/`}>Selecciones</a>
-          <a href={`${base}comparar/`}>Comparar</a>
-          <a href={`${base}jugadores/`}>Jugadores</a>
-          <a href={`${base}explorador/`}>Explorador SQL</a>
-          <a href={`${base}metodologia/`}>Metodología</a>
+          {navItems.map((item) => (
+            <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+              {item.label}
+            </a>
+          ))}
         </nav>
       </div>
     </header>

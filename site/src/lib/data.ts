@@ -79,6 +79,8 @@ export interface SourceStatus {
   license?: string;
   coverage?: string;
   status: "ok" | "missing" | "pending_first_scrape";
+  matches_loaded?: number;
+  matches_total?: number;
 }
 
 export interface Meta {
