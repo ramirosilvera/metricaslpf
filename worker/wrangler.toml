@@ -13,6 +13,15 @@ ALLOWED_ORIGIN = "https://ramirosilvera.github.io"
 GEMINI_MODEL = "gemini-flash-latest"
 RATE_LIMIT_PER_HOUR = "15"
 
+# Supabase: para que el asistente pueda hacer function-calling (consultar
+# datos reales en vez de solo texto grounded). SUPABASE_ANON_KEY es segura
+# para estar acá en texto plano -- está diseñada por Supabase para uso
+# público del lado del cliente, protegida por las políticas RLS de solo
+# lectura del schema metricas_mundial (nunca la service_role key, esa solo
+# la usa el pipeline de ETL para escribir datos, ver etl/sync_supabase.py).
+SUPABASE_URL = "https://wyedmgxngqdgnxmbencl.supabase.co"
+SUPABASE_ANON_KEY = "sb_publishable_hgjykngEI8vtiQ4Wvmy4yg_WbzykPXu"
+
 # Rate limiting por IP es opcional: si no se crea/bindea este namespace KV,
 # el Worker sigue funcionando (ver checkRateLimit en src/index.js), solo
 # que sin el límite adicional por hora.

@@ -1,5 +1,19 @@
 # Asistente de IA — Worker (proxy Gemini)
 
+## Function-calling (consultas reales a Supabase)
+
+El asistente no solo responde con texto "grounded" por el system prompt:
+puede invocar 5 funciones RPC de Supabase (`get_team_summary`,
+`get_team_matches`, `get_player_ranking`, `get_physical_leaders`,
+`get_tactical_leaders`) para responder con números reales -- resumen de
+una selección, ranking de jugadores por distancia/sprints/pases/tackles,
+etc. Gemini decide cuándo necesita un dato concreto; el Worker ejecuta esa
+función específica contra Supabase (con la clave `anon`, protegida por RLS
+de solo lectura -- nunca SQL libre) y le devuelve el resultado antes de que
+Gemini arme la respuesta final. Si `SUPABASE_URL`/`SUPABASE_ANON_KEY` no
+están configuradas, el asistente sigue funcionando en modo texto-solamente
+(sin esas herramientas).
+
 ## Por qué existe esto
 
 El sitio es 100% estático (GitHub Pages). Una clave de API paga/prepaga
@@ -97,5 +111,7 @@ secretos locales con `npx wrangler secret put GEMINI_API_KEY`.
 
 ## Cambiar el modelo de Gemini
 
-Editar `GEMINI_MODEL` en `wrangler.toml` (por defecto `gemini-2.0-flash`,
-el más barato/rápido — recomendado para mantener el uso del prepago bajo).
+Editar `GEMINI_MODEL` en `wrangler.toml` (por defecto `gemini-flash-latest`,
+el alias que Google mantiene apuntando al modelo flash vigente -- el más
+barato/rápido, recomendado para mantener el uso del prepago bajo, y evita
+tener que actualizar el nombre a mano cada vez que Google rota modelos).
