@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T14:04:38.230352+00:00",
+  "generated_at": "2026-07-08T15:13:35.079255+00:00",
   "sources": {
     "tactical_context": {
       "provider": "StatsBomb Open Data",
@@ -16,7 +16,13 @@
     },
     "squad_ages": {
       "provider": "Transfermarkt",
+      "coverage": "edad y valor de mercado del plantel actual (Mundial 2026)",
       "status": "pending_first_scrape"
+    },
+    "derived_metrics": {
+      "provider": "calculado internamente sobre las fuentes de arriba",
+      "coverage": "percentiles y z-scores por temporada, clustering de estilo de juego",
+      "status": "ok"
     }
   }
 }

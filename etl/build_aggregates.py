@@ -52,6 +52,9 @@ def build():
     has_physical = (WAREHOUSE / "physical_match_stats.parquet").exists()
     has_physical_players = (WAREHOUSE / "physical_player_match_stats.parquet").exists()
     has_squads = (WAREHOUSE / "squads.parquet").exists()
+    has_derived_team_metrics = (WAREHOUSE / "derived_team_metrics.parquet").exists()
+    has_derived_team_style = (WAREHOUSE / "derived_team_style.parquet").exists()
+    has_derived_player_metrics = (WAREHOUSE / "derived_player_metrics.parquet").exists()
 
     print("Generando agregados en site/public/data/ ...")
 
@@ -180,13 +183,31 @@ def build():
             {
                 "status": "pending_first_scrape",
                 "note": (
-                    "Todavia no hay edades de plantel cargadas. Se completan corriendo "
-                    "etl/scrape_transfermarkt_squads.py (requiere completar TEAM_SQUAD_URLS "
-                    "y correrlo en GitHub Actions)."
+                    "Todavia no hay edades/valor de plantel cargados. Se completan corriendo "
+                    "etl/scrape_transfermarkt_squads.py en GitHub Actions (requiere red sin "
+                    "restricciones; no corre en el entorno de desarrollo sandboxed)."
                 ),
                 "rows": [],
             },
         )
+
+    if has_derived_team_metrics:
+        derived_team = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_team_metrics.parquet'}')").df()
+        _write_json("derived_team_metrics.json", _records(derived_team))
+    else:
+        _write_json("derived_team_metrics.json", {"status": "pending_first_scrape", "rows": []})
+
+    if has_derived_team_style:
+        derived_style = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_team_style.parquet'}')").df()
+        _write_json("derived_team_style.json", _records(derived_style))
+    else:
+        _write_json("derived_team_style.json", {"status": "pending_first_scrape", "rows": []})
+
+    if has_derived_player_metrics:
+        derived_player = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_player_metrics.parquet'}')").df()
+        _write_json("derived_player_metrics.json", _records(derived_player))
+    else:
+        _write_json("derived_player_metrics.json", {"status": "pending_first_scrape", "rows": []})
 
     discovery_path = ROOT / "data" / "raw" / "fifa_training_centre" / "_discovery_status.json"
     total_matches_2026 = None
@@ -212,7 +233,13 @@ def build():
             },
             "squad_ages": {
                 "provider": "Transfermarkt",
+                "coverage": "edad y valor de mercado del plantel actual (Mundial 2026)",
                 "status": "ok" if has_squads else "pending_first_scrape",
+            },
+            "derived_metrics": {
+                "provider": "calculado internamente sobre las fuentes de arriba",
+                "coverage": "percentiles y z-scores por temporada, clustering de estilo de juego",
+                "status": "ok" if has_derived_team_metrics else "pending_first_scrape",
             },
         },
     }

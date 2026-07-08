@@ -1,5 +1,5 @@
 {
   "status": "pending_first_scrape",
-  "note": "Todavia no hay edades de plantel cargadas. Se completan corriendo etl/scrape_transfermarkt_squads.py (requiere completar TEAM_SQUAD_URLS y correrlo en GitHub Actions).",
+  "note": "Todavia no hay edades/valor de plantel cargados. Se completan corriendo etl/scrape_transfermarkt_squads.py en GitHub Actions (requiere red sin restricciones; no corre en el entorno de desarrollo sandboxed).",
   "rows": []
 }

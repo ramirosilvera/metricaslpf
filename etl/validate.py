@@ -19,6 +19,9 @@ from schemas import (
     PhysicalMatchStatsSchema,
     PhysicalPlayerMatchStatsSchema,
     SquadsSchema,
+    DerivedTeamMetricsSchema,
+    DerivedTeamStyleSchema,
+    DerivedPlayerMetricsSchema,
 )
 
 WAREHOUSE = Path(__file__).resolve().parent.parent / "data" / "warehouse"
@@ -30,6 +33,9 @@ CHECKS = [
     ("physical_match_stats.parquet", PhysicalMatchStatsSchema),
     ("physical_player_match_stats.parquet", PhysicalPlayerMatchStatsSchema),
     ("squads.parquet", SquadsSchema),
+    ("derived_team_metrics.parquet", DerivedTeamMetricsSchema),
+    ("derived_team_style.parquet", DerivedTeamStyleSchema),
+    ("derived_player_metrics.parquet", DerivedPlayerMetricsSchema),
 ]
 
 

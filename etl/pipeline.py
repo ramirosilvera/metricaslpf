@@ -54,6 +54,7 @@ def main():
 
     run("build_statsbomb_features.py")
     run("build_warehouse.py")
+    run("build_derived_metrics.py")
     run("validate.py")
     run("build_aggregates.py")
     run("sync_supabase.py")

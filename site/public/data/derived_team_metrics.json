@@ -1,0 +1,2058 @@
+[
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.6464,
+    "z_score": 1.6,
+    "percentile": 100.0
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.5696857142857142,
+    "z_score": 1.15,
+    "percentile": 87.5
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.4065,
+    "z_score": -0.39,
+    "percentile": 37.5
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.414,
+    "z_score": 0.01,
+    "percentile": 80.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.5746,
+    "z_score": 1.19,
+    "percentile": 100.0
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.4064,
+    "z_score": -0.04,
+    "percentile": 60.0
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.47,
+    "z_score": 0.21,
+    "percentile": 62.5
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.2495,
+    "z_score": -1.11,
+    "percentile": 20.0
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.4346,
+    "z_score": -0.12,
+    "percentile": 50.0
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.5148,
+    "z_score": 0.63,
+    "percentile": 75.0
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.3445,
+    "z_score": -0.46,
+    "percentile": 40.0
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.2847,
+    "z_score": -1.53,
+    "percentile": 12.5
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "metric": "posesion_promedio_proxy",
+    "value": 0.327,
+    "z_score": -1.14,
+    "percentile": 25.0
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "metric": "precision_pases_promedio",
+    "value": 82.15,
+    "z_score": 1.07,
+    "percentile": 100.0
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "metric": "precision_pases_promedio",
+    "value": 84.88571428571429,
+    "z_score": 0.99,
+    "percentile": 87.5
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "metric": "precision_pases_promedio",
+    "value": 80.3,
+    "z_score": 0.19,
+    "percentile": 62.5
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "metric": "precision_pases_promedio",
+    "value": 71.7,
+    "z_score": -0.06,
+    "percentile": 60.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "metric": "precision_pases_promedio",
+    "value": 86.3,
+    "z_score": 1.24,
+    "percentile": 100.0
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "metric": "precision_pases_promedio",
+    "value": 80.9,
+    "z_score": 0.93,
+    "percentile": 80.0
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "metric": "precision_pases_promedio",
+    "value": 76.1,
+    "z_score": -0.55,
+    "percentile": 37.5
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "metric": "precision_pases_promedio",
+    "value": 61.2,
+    "z_score": -1.19,
+    "percentile": 20.0
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "metric": "precision_pases_promedio",
+    "value": 75.4,
+    "z_score": -0.67,
+    "percentile": 25.0
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "metric": "precision_pases_promedio",
+    "value": 82.8,
+    "z_score": 0.63,
+    "percentile": 75.0
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "metric": "precision_pases_promedio",
+    "value": 65.2,
+    "z_score": -0.76,
+    "percentile": 40.0
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "metric": "precision_pases_promedio",
+    "value": 79.2,
+    "z_score": -0.01,
+    "percentile": 50.0
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "metric": "precision_pases_promedio",
+    "value": 68.9,
+    "z_score": -1.81,
+    "percentile": 12.5
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "metric": "remates_promedio",
+    "value": 14.5,
+    "z_score": 1.18,
+    "percentile": 100.0
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "metric": "remates_promedio",
+    "value": 15.714285714285714,
+    "z_score": 1.35,
+    "percentile": 100.0
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "metric": "remates_promedio",
+    "value": 5.0,
+    "z_score": -0.71,
+    "percentile": 50.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "metric": "remates_promedio",
+    "value": 14.0,
+    "z_score": 1.01,
+    "percentile": 80.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "metric": "remates_promedio",
+    "value": 12.0,
+    "z_score": 0.63,
+    "percentile": 68.8
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "metric": "remates_promedio",
+    "value": 9.0,
+    "z_score": -0.73,
+    "percentile": 40.0
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "metric": "remates_promedio",
+    "value": 14.0,
+    "z_score": 1.02,
+    "percentile": 87.5
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "metric": "remates_promedio",
+    "value": 9.0,
+    "z_score": -0.73,
+    "percentile": 40.0
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "metric": "remates_promedio",
+    "value": 4.0,
+    "z_score": -0.91,
+    "percentile": 31.2
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "metric": "remates_promedio",
+    "value": 12.0,
+    "z_score": 0.63,
+    "percentile": 68.8
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "metric": "remates_promedio",
+    "value": 9.0,
+    "z_score": -0.73,
+    "percentile": 40.0
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "metric": "remates_promedio",
+    "value": 4.0,
+    "z_score": -0.91,
+    "percentile": 31.2
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": -1.1,
+    "percentile": 12.5
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "metric": "remates_al_arco_promedio",
+    "value": 4.25,
+    "z_score": 0.51,
+    "percentile": 80.0
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "metric": "remates_al_arco_promedio",
+    "value": 8.0,
+    "z_score": 1.28,
+    "percentile": 93.8
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "metric": "remates_al_arco_promedio",
+    "value": 1.0,
+    "z_score": -0.77,
+    "percentile": 31.2
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "metric": "remates_al_arco_promedio",
+    "value": 5.0,
+    "z_score": 1.16,
+    "percentile": 100.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "metric": "remates_al_arco_promedio",
+    "value": 2.0,
+    "z_score": -0.48,
+    "percentile": 56.2
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "metric": "remates_al_arco_promedio",
+    "value": 4.0,
+    "z_score": 0.3,
+    "percentile": 60.0
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "metric": "remates_al_arco_promedio",
+    "value": 8.0,
+    "z_score": 1.28,
+    "percentile": 93.8
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "metric": "remates_al_arco_promedio",
+    "value": 2.0,
+    "z_score": -1.41,
+    "percentile": 20.0
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "metric": "remates_al_arco_promedio",
+    "value": 1.0,
+    "z_score": -0.77,
+    "percentile": 31.2
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "metric": "remates_al_arco_promedio",
+    "value": 7.0,
+    "z_score": 0.99,
+    "percentile": 75.0
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "metric": "remates_al_arco_promedio",
+    "value": 3.0,
+    "z_score": -0.56,
+    "percentile": 40.0
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "metric": "remates_al_arco_promedio",
+    "value": 0.0,
+    "z_score": -1.06,
+    "percentile": 12.5
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "metric": "remates_al_arco_promedio",
+    "value": 2.0,
+    "z_score": -0.48,
+    "percentile": 56.2
+  },
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "metric": "faltas_promedio",
+    "value": 15.5,
+    "z_score": -1.27,
+    "percentile": 20.0
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "metric": "faltas_promedio",
+    "value": 16.285714285714285,
+    "z_score": -0.32,
+    "percentile": 37.5
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "metric": "faltas_promedio",
+    "value": 18.0,
+    "z_score": -0.12,
+    "percentile": 50.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "metric": "faltas_promedio",
+    "value": 23.0,
+    "z_score": 0.89,
+    "percentile": 90.0
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "metric": "faltas_promedio",
+    "value": 10.0,
+    "z_score": -1.04,
+    "percentile": 25.0
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "metric": "faltas_promedio",
+    "value": 23.0,
+    "z_score": 0.89,
+    "percentile": 90.0
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "metric": "faltas_promedio",
+    "value": 19.0,
+    "z_score": -0.0,
+    "percentile": 62.5
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "metric": "faltas_promedio",
+    "value": 17.0,
+    "z_score": -0.84,
+    "percentile": 40.0
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "metric": "faltas_promedio",
+    "value": 21.0,
+    "z_score": 0.23,
+    "percentile": 75.0
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "metric": "faltas_promedio",
+    "value": 37.0,
+    "z_score": 2.07,
+    "percentile": 100.0
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "metric": "faltas_promedio",
+    "value": 21.0,
+    "z_score": 0.32,
+    "percentile": 60.0
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "metric": "faltas_promedio",
+    "value": 9.0,
+    "z_score": -1.16,
+    "percentile": 12.5
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "metric": "faltas_promedio",
+    "value": 22.0,
+    "z_score": 0.34,
+    "percentile": 87.5
+  },
+  {
+    "team": "Algeria",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 110.5575,
+    "z_score": -0.66,
+    "percentile": 22.9
+  },
+  {
+    "team": "Argentina",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 113.94200000000001,
+    "z_score": 0.02,
+    "percentile": 60.4
+  },
+  {
+    "team": "Australia",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 123.505,
+    "z_score": 1.94,
+    "percentile": 95.8
+  },
+  {
+    "team": "Austria",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 112.98,
+    "z_score": -0.17,
+    "percentile": 52.1
+  },
+  {
+    "team": "Belgium",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 124.676,
+    "z_score": 2.18,
+    "percentile": 97.9
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 113.3975,
+    "z_score": -0.09,
+    "percentile": 56.2
+  },
+  {
+    "team": "Brazil",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 112.26199999999999,
+    "z_score": -0.32,
+    "percentile": 39.6
+  },
+  {
+    "team": "Cabo Verde",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 119.1075,
+    "z_score": 1.06,
+    "percentile": 89.6
+  },
+  {
+    "team": "Canada",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 114.09200000000001,
+    "z_score": 0.05,
+    "percentile": 64.6
+  },
+  {
+    "team": "Colombia",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 108.356,
+    "z_score": -1.11,
+    "percentile": 10.4
+  },
+  {
+    "team": "Congo DR",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 111.865,
+    "z_score": -0.4,
+    "percentile": 35.4
+  },
+  {
+    "team": "Croatia",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 113.08,
+    "z_score": -0.15,
+    "percentile": 54.2
+  },
+  {
+    "team": "Curaçao",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 105.25666666666666,
+    "z_score": -1.73,
+    "percentile": 4.2
+  },
+  {
+    "team": "Czechia",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 116.27333333333333,
+    "z_score": 0.49,
+    "percentile": 72.9
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 108.735,
+    "z_score": -1.03,
+    "percentile": 14.6
+  },
+  {
+    "team": "Ecuador",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 106.745,
+    "z_score": -1.43,
+    "percentile": 6.2
+  },
+  {
+    "team": "Egypt",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 121.04400000000001,
+    "z_score": 1.45,
+    "percentile": 91.7
+  },
+  {
+    "team": "England",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 112.542,
+    "z_score": -0.26,
+    "percentile": 45.8
+  },
+  {
+    "team": "France",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 109.904,
+    "z_score": -0.79,
+    "percentile": 18.8
+  },
+  {
+    "team": "Germany",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 127.2325,
+    "z_score": 2.7,
+    "percentile": 100.0
+  },
+  {
+    "team": "Ghana",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 109.2025,
+    "z_score": -0.94,
+    "percentile": 16.7
+  },
+  {
+    "team": "Haiti",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 111.36333333333333,
+    "z_score": -0.5,
+    "percentile": 29.2
+  },
+  {
+    "team": "IR Iran",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 114.79,
+    "z_score": 0.19,
+    "percentile": 66.7
+  },
+  {
+    "team": "Iraq",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 108.46,
+    "z_score": -1.09,
+    "percentile": 12.5
+  },
+  {
+    "team": "Japan",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 111.6875,
+    "z_score": -0.44,
+    "percentile": 33.3
+  },
+  {
+    "team": "Jordan",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 115.77333333333333,
+    "z_score": 0.39,
+    "percentile": 68.8
+  },
+  {
+    "team": "Korea Republic",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 111.65333333333335,
+    "z_score": -0.44,
+    "percentile": 31.2
+  },
+  {
+    "team": "Mexico",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 112.77000000000001,
+    "z_score": -0.22,
+    "percentile": 47.9
+  },
+  {
+    "team": "Morocco",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 117.94000000000001,
+    "z_score": 0.82,
+    "percentile": 81.2
+  },
+  {
+    "team": "Netherlands",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 113.94,
+    "z_score": 0.02,
+    "percentile": 58.3
+  },
+  {
+    "team": "New Zealand",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 116.34666666666668,
+    "z_score": 0.5,
+    "percentile": 75.0
+  },
+  {
+    "team": "Norway",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 117.002,
+    "z_score": 0.64,
+    "percentile": 79.2
+  },
+  {
+    "team": "Panama",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 112.24000000000001,
+    "z_score": -0.32,
+    "percentile": 37.5
+  },
+  {
+    "team": "Paraguay",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 118.51199999999999,
+    "z_score": 0.94,
+    "percentile": 85.4
+  },
+  {
+    "team": "Portugal",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 110.694,
+    "z_score": -0.64,
+    "percentile": 25.0
+  },
+  {
+    "team": "Qatar",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 103.34333333333332,
+    "z_score": -2.12,
+    "percentile": 2.1
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 112.82666666666667,
+    "z_score": -0.21,
+    "percentile": 50.0
+  },
+  {
+    "team": "Scotland",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 116.19,
+    "z_score": 0.47,
+    "percentile": 70.8
+  },
+  {
+    "team": "Senegal",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 123.1975,
+    "z_score": 1.88,
+    "percentile": 93.8
+  },
+  {
+    "team": "South Africa",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 107.2675,
+    "z_score": -1.33,
+    "percentile": 8.3
+  },
+  {
+    "team": "Spain",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 113.99000000000001,
+    "z_score": 0.03,
+    "percentile": 62.5
+  },
+  {
+    "team": "Sweden",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 109.945,
+    "z_score": -0.79,
+    "percentile": 20.8
+  },
+  {
+    "team": "Switzerland",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 118.046,
+    "z_score": 0.85,
+    "percentile": 83.3
+  },
+  {
+    "team": "Tunisia",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 111.08666666666666,
+    "z_score": -0.56,
+    "percentile": 27.1
+  },
+  {
+    "team": "Türkiye",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 116.94,
+    "z_score": 0.62,
+    "percentile": 77.1
+  },
+  {
+    "team": "USA",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 118.982,
+    "z_score": 1.03,
+    "percentile": 87.5
+  },
+  {
+    "team": "Uruguay",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 112.48666666666668,
+    "z_score": -0.27,
+    "percentile": 43.8
+  },
+  {
+    "team": "Uzbekistan",
+    "season": "2026",
+    "metric": "distancia_promedio_km",
+    "value": 112.48,
+    "z_score": -0.28,
+    "percentile": 41.7
+  },
+  {
+    "team": "Algeria",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 423.5,
+    "z_score": -0.62,
+    "percentile": 33.3
+  },
+  {
+    "team": "Argentina",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 401.0,
+    "z_score": -1.26,
+    "percentile": 9.4
+  },
+  {
+    "team": "Australia",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 475.0,
+    "z_score": 0.86,
+    "percentile": 79.2
+  },
+  {
+    "team": "Austria",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 444.0,
+    "z_score": -0.03,
+    "percentile": 50.0
+  },
+  {
+    "team": "Belgium",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 511.8,
+    "z_score": 1.91,
+    "percentile": 97.9
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 439.0,
+    "z_score": -0.17,
+    "percentile": 45.8
+  },
+  {
+    "team": "Brazil",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 422.0,
+    "z_score": -0.66,
+    "percentile": 29.2
+  },
+  {
+    "team": "Cabo Verde",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 420.25,
+    "z_score": -0.71,
+    "percentile": 27.1
+  },
+  {
+    "team": "Canada",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 512.0,
+    "z_score": 1.92,
+    "percentile": 100.0
+  },
+  {
+    "team": "Colombia",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 410.0,
+    "z_score": -1.01,
+    "percentile": 17.7
+  },
+  {
+    "team": "Congo DR",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 445.0,
+    "z_score": -0.0,
+    "percentile": 52.1
+  },
+  {
+    "team": "Croatia",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 456.75,
+    "z_score": 0.33,
+    "percentile": 66.7
+  },
+  {
+    "team": "Curaçao",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 410.0,
+    "z_score": -1.01,
+    "percentile": 17.7
+  },
+  {
+    "team": "Czechia",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 460.3333333333333,
+    "z_score": 0.44,
+    "percentile": 72.9
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 423.0,
+    "z_score": -0.63,
+    "percentile": 31.2
+  },
+  {
+    "team": "Ecuador",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 448.25,
+    "z_score": 0.09,
+    "percentile": 54.2
+  },
+  {
+    "team": "Egypt",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 487.4,
+    "z_score": 1.21,
+    "percentile": 85.4
+  },
+  {
+    "team": "England",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 453.8,
+    "z_score": 0.25,
+    "percentile": 60.4
+  },
+  {
+    "team": "France",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 402.8,
+    "z_score": -1.21,
+    "percentile": 12.5
+  },
+  {
+    "team": "Germany",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 497.5,
+    "z_score": 1.5,
+    "percentile": 91.7
+  },
+  {
+    "team": "Ghana",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 418.0,
+    "z_score": -0.78,
+    "percentile": 25.0
+  },
+  {
+    "team": "Haiti",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 458.6666666666667,
+    "z_score": 0.39,
+    "percentile": 70.8
+  },
+  {
+    "team": "IR Iran",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 449.0,
+    "z_score": 0.11,
+    "percentile": 56.2
+  },
+  {
+    "team": "Iraq",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 401.0,
+    "z_score": -1.26,
+    "percentile": 9.4
+  },
+  {
+    "team": "Japan",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 417.25,
+    "z_score": -0.8,
+    "percentile": 22.9
+  },
+  {
+    "team": "Jordan",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 454.3333333333333,
+    "z_score": 0.27,
+    "percentile": 62.5
+  },
+  {
+    "team": "Korea Republic",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 432.6666666666667,
+    "z_score": -0.36,
+    "percentile": 41.7
+  },
+  {
+    "team": "Mexico",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 438.0,
+    "z_score": -0.2,
+    "percentile": 43.8
+  },
+  {
+    "team": "Morocco",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 497.6,
+    "z_score": 1.51,
+    "percentile": 93.8
+  },
+  {
+    "team": "Netherlands",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 397.5,
+    "z_score": -1.37,
+    "percentile": 6.2
+  },
+  {
+    "team": "New Zealand",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 497.3333333333333,
+    "z_score": 1.5,
+    "percentile": 89.6
+  },
+  {
+    "team": "Norway",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 455.4,
+    "z_score": 0.3,
+    "percentile": 64.6
+  },
+  {
+    "team": "Panama",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 457.3333333333333,
+    "z_score": 0.35,
+    "percentile": 68.8
+  },
+  {
+    "team": "Paraguay",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 428.2,
+    "z_score": -0.48,
+    "percentile": 37.5
+  },
+  {
+    "team": "Portugal",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 426.8,
+    "z_score": -0.52,
+    "percentile": 35.4
+  },
+  {
+    "team": "Qatar",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 360.0,
+    "z_score": -2.44,
+    "percentile": 2.1
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 483.3333333333333,
+    "z_score": 1.1,
+    "percentile": 83.3
+  },
+  {
+    "team": "Scotland",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 417.0,
+    "z_score": -0.81,
+    "percentile": 20.8
+  },
+  {
+    "team": "Senegal",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 502.5,
+    "z_score": 1.65,
+    "percentile": 95.8
+  },
+  {
+    "team": "South Africa",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 471.0,
+    "z_score": 0.74,
+    "percentile": 77.1
+  },
+  {
+    "team": "Spain",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 443.0,
+    "z_score": -0.06,
+    "percentile": 47.9
+  },
+  {
+    "team": "Sweden",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 396.5,
+    "z_score": -1.39,
+    "percentile": 4.2
+  },
+  {
+    "team": "Switzerland",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 461.4,
+    "z_score": 0.47,
+    "percentile": 75.0
+  },
+  {
+    "team": "Tunisia",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 404.3333333333333,
+    "z_score": -1.17,
+    "percentile": 14.6
+  },
+  {
+    "team": "Türkiye",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 429.6666666666667,
+    "z_score": -0.44,
+    "percentile": 39.6
+  },
+  {
+    "team": "USA",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 489.2,
+    "z_score": 1.27,
+    "percentile": 87.5
+  },
+  {
+    "team": "Uruguay",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 482.6666666666667,
+    "z_score": 1.08,
+    "percentile": 81.2
+  },
+  {
+    "team": "Uzbekistan",
+    "season": "2026",
+    "metric": "sprints_promedio",
+    "value": 451.3333333333333,
+    "z_score": 0.18,
+    "percentile": 58.3
+  },
+  {
+    "team": "Algeria",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 33.5,
+    "z_score": -1.55,
+    "percentile": 4.2
+  },
+  {
+    "team": "Argentina",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.2,
+    "z_score": 0.25,
+    "percentile": 72.9
+  },
+  {
+    "team": "Australia",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 36.7,
+    "z_score": 1.85,
+    "percentile": 93.8
+  },
+  {
+    "team": "Austria",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.1,
+    "z_score": -0.91,
+    "percentile": 18.8
+  },
+  {
+    "team": "Belgium",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.8,
+    "z_score": -0.17,
+    "percentile": 50.0
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.8,
+    "z_score": -0.17,
+    "percentile": 50.0
+  },
+  {
+    "team": "Brazil",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.2,
+    "z_score": -0.81,
+    "percentile": 22.9
+  },
+  {
+    "team": "Cabo Verde",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.0,
+    "z_score": 0.04,
+    "percentile": 60.4
+  },
+  {
+    "team": "Canada",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.2,
+    "z_score": 0.25,
+    "percentile": 72.9
+  },
+  {
+    "team": "Colombia",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.1,
+    "z_score": 0.15,
+    "percentile": 65.6
+  },
+  {
+    "team": "Congo DR",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.4,
+    "z_score": -0.6,
+    "percentile": 28.1
+  },
+  {
+    "team": "Croatia",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.1,
+    "z_score": -0.91,
+    "percentile": 18.8
+  },
+  {
+    "team": "Curaçao",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.7,
+    "z_score": -0.28,
+    "percentile": 39.6
+  },
+  {
+    "team": "Czechia",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.0,
+    "z_score": -1.02,
+    "percentile": 13.5
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.7,
+    "z_score": -0.28,
+    "percentile": 39.6
+  },
+  {
+    "team": "Ecuador",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.5,
+    "z_score": 0.57,
+    "percentile": 80.2
+  },
+  {
+    "team": "Egypt",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.2,
+    "z_score": 0.25,
+    "percentile": 72.9
+  },
+  {
+    "team": "England",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.8,
+    "z_score": 0.89,
+    "percentile": 85.4
+  },
+  {
+    "team": "France",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 37.6,
+    "z_score": 2.81,
+    "percentile": 100.0
+  },
+  {
+    "team": "Germany",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.0,
+    "z_score": 0.04,
+    "percentile": 60.4
+  },
+  {
+    "team": "Ghana",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.1,
+    "z_score": 0.15,
+    "percentile": 65.6
+  },
+  {
+    "team": "Haiti",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.4,
+    "z_score": -0.6,
+    "percentile": 28.1
+  },
+  {
+    "team": "IR Iran",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.0,
+    "z_score": -1.02,
+    "percentile": 13.5
+  },
+  {
+    "team": "Iraq",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 33.7,
+    "z_score": -1.34,
+    "percentile": 7.3
+  },
+  {
+    "team": "Japan",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.0,
+    "z_score": 0.04,
+    "percentile": 60.4
+  },
+  {
+    "team": "Jordan",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.6,
+    "z_score": -0.38,
+    "percentile": 32.3
+  },
+  {
+    "team": "Korea Republic",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.2,
+    "z_score": 0.25,
+    "percentile": 72.9
+  },
+  {
+    "team": "Mexico",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.8,
+    "z_score": -0.17,
+    "percentile": 50.0
+  },
+  {
+    "team": "Morocco",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.5,
+    "z_score": 0.57,
+    "percentile": 80.2
+  },
+  {
+    "team": "Netherlands",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 36.8,
+    "z_score": 1.96,
+    "percentile": 95.8
+  },
+  {
+    "team": "New Zealand",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.6,
+    "z_score": -0.38,
+    "percentile": 32.3
+  },
+  {
+    "team": "Norway",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 36.5,
+    "z_score": 1.64,
+    "percentile": 90.6
+  },
+  {
+    "team": "Panama",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.1,
+    "z_score": -0.91,
+    "percentile": 18.8
+  },
+  {
+    "team": "Paraguay",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.7,
+    "z_score": -0.28,
+    "percentile": 39.6
+  },
+  {
+    "team": "Portugal",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.9,
+    "z_score": 1.0,
+    "percentile": 87.5
+  },
+  {
+    "team": "Qatar",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 33.4,
+    "z_score": -1.66,
+    "percentile": 2.1
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 33.8,
+    "z_score": -1.23,
+    "percentile": 10.4
+  },
+  {
+    "team": "Scotland",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.3,
+    "z_score": -0.7,
+    "percentile": 25.0
+  },
+  {
+    "team": "Senegal",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.7,
+    "z_score": -0.28,
+    "percentile": 39.6
+  },
+  {
+    "team": "South Africa",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.2,
+    "z_score": 0.25,
+    "percentile": 72.9
+  },
+  {
+    "team": "Spain",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 33.7,
+    "z_score": -1.34,
+    "percentile": 7.3
+  },
+  {
+    "team": "Sweden",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 37.2,
+    "z_score": 2.38,
+    "percentile": 97.9
+  },
+  {
+    "team": "Switzerland",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.7,
+    "z_score": -0.28,
+    "percentile": 39.6
+  },
+  {
+    "team": "Tunisia",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.8,
+    "z_score": -0.17,
+    "percentile": 50.0
+  },
+  {
+    "team": "Türkiye",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.8,
+    "z_score": -0.17,
+    "percentile": 50.0
+  },
+  {
+    "team": "USA",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 35.6,
+    "z_score": 0.68,
+    "percentile": 83.3
+  },
+  {
+    "team": "Uruguay",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 34.9,
+    "z_score": -0.06,
+    "percentile": 56.2
+  },
+  {
+    "team": "Uzbekistan",
+    "season": "2026",
+    "metric": "velocidad_punta_kmh",
+    "value": 36.5,
+    "z_score": 1.64,
+    "percentile": 90.6
+  },
+  {
+    "team": "Algeria",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 457.7096774193548,
+    "z_score": -0.86,
+    "percentile": 22.9
+  },
+  {
+    "team": "Argentina",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 424.01750000000004,
+    "z_score": -1.6,
+    "percentile": 4.2
+  },
+  {
+    "team": "Australia",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 518.3698412698412,
+    "z_score": 0.47,
+    "percentile": 66.7
+  },
+  {
+    "team": "Austria",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 480.0671875,
+    "z_score": -0.37,
+    "percentile": 39.6
+  },
+  {
+    "team": "Belgium",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 548.837037037037,
+    "z_score": 1.14,
+    "percentile": 85.4
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 479.5828125,
+    "z_score": -0.38,
+    "percentile": 35.4
+  },
+  {
+    "team": "Brazil",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 488.1333333333333,
+    "z_score": -0.19,
+    "percentile": 50.0
+  },
+  {
+    "team": "Cabo Verde",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 446.42615384615385,
+    "z_score": -1.11,
+    "percentile": 14.6
+  },
+  {
+    "team": "Canada",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 578.8375,
+    "z_score": 1.8,
+    "percentile": 100.0
+  },
+  {
+    "team": "Colombia",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 479.6540540540541,
+    "z_score": -0.38,
+    "percentile": 37.5
+  },
+  {
+    "team": "Congo DR",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 468.86875,
+    "z_score": -0.61,
+    "percentile": 29.2
+  },
+  {
+    "team": "Croatia",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 541.3483870967742,
+    "z_score": 0.98,
+    "percentile": 79.2
+  },
+  {
+    "team": "Curaçao",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 487.5673913043478,
+    "z_score": -0.2,
+    "percentile": 47.9
+  },
+  {
+    "team": "Czechia",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 489.6276595744681,
+    "z_score": -0.16,
+    "percentile": 56.2
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 488.615625,
+    "z_score": -0.18,
+    "percentile": 54.2
+  },
+  {
+    "team": "Ecuador",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 515.2935483870967,
+    "z_score": 0.4,
+    "percentile": 64.6
+  },
+  {
+    "team": "Egypt",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 523.86875,
+    "z_score": 0.59,
+    "percentile": 72.9
+  },
+  {
+    "team": "England",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 518.7227848101265,
+    "z_score": 0.48,
+    "percentile": 68.8
+  },
+  {
+    "team": "France",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 498.677027027027,
+    "z_score": 0.04,
+    "percentile": 60.4
+  },
+  {
+    "team": "Germany",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 578.8138461538462,
+    "z_score": 1.8,
+    "percentile": 97.9
+  },
+  {
+    "team": "Ghana",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 446.8222222222222,
+    "z_score": -1.1,
+    "percentile": 16.7
+  },
+  {
+    "team": "Haiti",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 532.5739130434783,
+    "z_score": 0.78,
+    "percentile": 75.0
+  },
+  {
+    "team": "IR Iran",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 513.7511111111111,
+    "z_score": 0.37,
+    "percentile": 62.5
+  },
+  {
+    "team": "Iraq",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 441.9382978723404,
+    "z_score": -1.2,
+    "percentile": 8.3
+  },
+  {
+    "team": "Japan",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 444.759375,
+    "z_score": -1.14,
+    "percentile": 10.4
+  },
+  {
+    "team": "Jordan",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 483.6583333333333,
+    "z_score": -0.29,
+    "percentile": 45.8
+  },
+  {
+    "team": "Korea Republic",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 457.6270833333333,
+    "z_score": -0.86,
+    "percentile": 20.8
+  },
+  {
+    "team": "Mexico",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 453.5975,
+    "z_score": -0.95,
+    "percentile": 18.8
+  },
+  {
+    "team": "Morocco",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 572.8341772151899,
+    "z_score": 1.67,
+    "percentile": 93.8
+  },
+  {
+    "team": "Netherlands",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 436.42615384615385,
+    "z_score": -1.32,
+    "percentile": 6.2
+  },
+  {
+    "team": "New Zealand",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 577.125,
+    "z_score": 1.76,
+    "percentile": 95.8
+  },
+  {
+    "team": "Norway",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 542.4324675324676,
+    "z_score": 1.0,
+    "percentile": 81.2
+  },
+  {
+    "team": "Panama",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 533.8282608695652,
+    "z_score": 0.81,
+    "percentile": 77.1
+  },
+  {
+    "team": "Paraguay",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 483.41999999999996,
+    "z_score": -0.29,
+    "percentile": 41.7
+  },
+  {
+    "team": "Portugal",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 488.1417721518987,
+    "z_score": -0.19,
+    "percentile": 52.1
+  },
+  {
+    "team": "Qatar",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 380.5083333333334,
+    "z_score": -2.55,
+    "percentile": 2.1
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 523.125,
+    "z_score": 0.58,
+    "percentile": 70.8
+  },
+  {
+    "team": "Scotland",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 468.17291666666665,
+    "z_score": -0.63,
+    "percentile": 27.1
+  },
+  {
+    "team": "Senegal",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 549.9261538461539,
+    "z_score": 1.16,
+    "percentile": 87.5
+  },
+  {
+    "team": "South Africa",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 548.1473684210526,
+    "z_score": 1.13,
+    "percentile": 83.3
+  },
+  {
+    "team": "Spain",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 496.21538461538466,
+    "z_score": -0.01,
+    "percentile": 58.3
+  },
+  {
+    "team": "Sweden",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 446.3203125,
+    "z_score": -1.11,
+    "percentile": 12.5
+  },
+  {
+    "team": "Switzerland",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 473.941975308642,
+    "z_score": -0.5,
+    "percentile": 33.3
+  },
+  {
+    "team": "Tunisia",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 471.91249999999997,
+    "z_score": -0.55,
+    "percentile": 31.2
+  },
+  {
+    "team": "Türkiye",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 483.4791666666667,
+    "z_score": -0.29,
+    "percentile": 43.8
+  },
+  {
+    "team": "USA",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 550.4532467532467,
+    "z_score": 1.18,
+    "percentile": 89.6
+  },
+  {
+    "team": "Uruguay",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 568.0777777777778,
+    "z_score": 1.56,
+    "percentile": 91.7
+  },
+  {
+    "team": "Uzbekistan",
+    "season": "2026",
+    "metric": "alta_intensidad_promedio_m",
+    "value": 465.54375,
+    "z_score": -0.69,
+    "percentile": 25.0
+  }
+]

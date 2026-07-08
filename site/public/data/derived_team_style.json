@@ -1,0 +1,80 @@
+[
+  {
+    "team": "Argentina",
+    "season": "2018",
+    "cluster_id": 0,
+    "cluster_label": "Posesión dominante"
+  },
+  {
+    "team": "Argentina",
+    "season": "2022",
+    "cluster_id": 0,
+    "cluster_label": "Posesión dominante"
+  },
+  {
+    "team": "Australia",
+    "season": "2022",
+    "cluster_id": 3,
+    "cluster_label": "Equilibrado"
+  },
+  {
+    "team": "Croatia",
+    "season": "2018",
+    "cluster_id": 2,
+    "cluster_label": "Posesión alta, directo al arco"
+  },
+  {
+    "team": "Croatia",
+    "season": "2022",
+    "cluster_id": 0,
+    "cluster_label": "Posesión dominante"
+  },
+  {
+    "team": "France",
+    "season": "2018",
+    "cluster_id": 2,
+    "cluster_label": "Posesión alta, directo al arco"
+  },
+  {
+    "team": "France",
+    "season": "2022",
+    "cluster_id": 2,
+    "cluster_label": "Posesión alta, directo al arco"
+  },
+  {
+    "team": "Iceland",
+    "season": "2018",
+    "cluster_id": 1,
+    "cluster_label": "Bloque bajo / transición"
+  },
+  {
+    "team": "Mexico",
+    "season": "2022",
+    "cluster_id": 3,
+    "cluster_label": "Equilibrado"
+  },
+  {
+    "team": "Netherlands",
+    "season": "2022",
+    "cluster_id": 2,
+    "cluster_label": "Posesión alta, directo al arco"
+  },
+  {
+    "team": "Nigeria",
+    "season": "2018",
+    "cluster_id": 1,
+    "cluster_label": "Bloque bajo / transición"
+  },
+  {
+    "team": "Poland",
+    "season": "2022",
+    "cluster_id": 3,
+    "cluster_label": "Equilibrado"
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2022",
+    "cluster_id": 1,
+    "cluster_label": "Bloque bajo / transición"
+  }
+]

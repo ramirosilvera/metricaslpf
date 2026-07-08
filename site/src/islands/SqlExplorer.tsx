@@ -15,6 +15,9 @@ const PARQUET_TABLES: { table: string; file: string }[] = [
   { table: "physical_match_stats", file: "physical_match_stats.parquet" },
   { table: "physical_player_match_stats", file: "physical_player_match_stats.parquet" },
   { table: "squads", file: "squads.parquet" },
+  { table: "derived_team_metrics", file: "derived_team_metrics.parquet" },
+  { table: "derived_team_style", file: "derived_team_style.parquet" },
+  { table: "derived_player_metrics", file: "derived_player_metrics.parquet" },
 ];
 
 const DEFAULT_QUERY = `select team, season, count(*) as partidos,

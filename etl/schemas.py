@@ -104,6 +104,43 @@ PhysicalPlayerMatchStatsSchema = DataFrameSchema(
     coerce=True,
 )
 
+DerivedTeamMetricsSchema = DataFrameSchema(
+    {
+        "team": Column(str),
+        "season": Column(str),
+        "metric": Column(str),
+        "value": Column(float, nullable=True),
+        "z_score": Column(float, nullable=True),
+        "percentile": Column(float, Check.in_range(0, 100), nullable=True),
+    },
+    strict=False,
+    coerce=True,
+)
+
+DerivedTeamStyleSchema = DataFrameSchema(
+    {
+        "team": Column(str),
+        "season": Column(str),
+        "cluster_id": Column(int, nullable=True),
+        "cluster_label": Column(str, nullable=True),
+    },
+    strict=False,
+    coerce=True,
+)
+
+DerivedPlayerMetricsSchema = DataFrameSchema(
+    {
+        "player_name": Column(str),
+        "team": Column(str),
+        "metric": Column(str),
+        "value": Column(float, nullable=True),
+        "z_score": Column(float, nullable=True),
+        "percentile": Column(float, Check.in_range(0, 100), nullable=True),
+    },
+    strict=False,
+    coerce=True,
+)
+
 SquadsSchema = DataFrameSchema(
     {
         "team": Column(str),
