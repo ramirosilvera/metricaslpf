@@ -1,53 +1,123 @@
-"""Scraper de planteles del Mundial 2026 (edad, fecha de nacimiento,
-posición, club) desde Transfermarkt.
+"""Scraper de planteles del Mundial 2026 (edad, valor de mercado, posición,
+club) desde Transfermarkt.
 
 Igual que el scraper de FIFA Training Centre, este dominio no fue
 alcanzable desde el sandbox de desarrollo (bloqueado por la política de
-red del entorno). El parsing está escrito según la estructura pública y
-estable que Transfermarkt usa hace años para sus tablas de plantel
-(`table.items` con columnas de jugador/posición/fecha de nacimiento/club),
-pero se valida realmente recién en la primera corrida de GitHub Actions.
+red del entorno): el parsing se escribió según la estructura pública y
+estable que Transfermarkt usa hace años, pero se valida realmente recién
+en la primera corrida de GitHub Actions -- por eso vuelca un diagnóstico
+(_discovery_status.json) igual que el scraper de FIFA, para poder
+iterar con datos reales si la estructura no coincide.
+
+En vez de mantener un mapeo selección -> URL a mano (48 selecciones en el
+Mundial 2026, y hubiera que acertar el slug/id de Transfermarkt de cada
+una de memoria), el scraper DESCUBRE las 48 selecciones y sus planteles
+recorriendo la página de participantes del torneo.
 
 Uso:
-    python etl/scrape_transfermarkt_squads.py --team-slug lionel-scaloni ... (ver TEAMS)
+    python etl/scrape_transfermarkt_squads.py
 """
 from __future__ import annotations
 
 import csv
+import json
 import re
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
 
 BASE = "https://www.transfermarkt.com"
+HUB_URL = f"{BASE}/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26"
 HEADERS = {
     "User-Agent": "MetricasMundial2026Bot/1.0 (+https://github.com/ramirosilvera/metricasmundial2026; "
     "proyecto de analisis publico y sin fines de lucro; contacto via GitHub issues)"
 }
+REQUEST_TIMEOUT_S = 20
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "data" / "raw" / "transfermarkt"
 OUT_DIR = RAW_DIR / "_processed"
 
-# Mapeo selección -> slug/id de Transfermarkt para el Mundial 2026.
-# Completar/corregir en la primera corrida real (el listado de participantes
-# confirmados y sus IDs de Transfermarkt se puede sacar de la página del
-# torneo: transfermarkt.com/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26)
-TEAM_SQUAD_URLS: dict[str, str] = {
-    # "Argentina": "https://www.transfermarkt.com/argentina/startseite/verein/3437",
-}
+# Fecha de referencia para calcular edad -- el inicio real del Mundial 2026,
+# no "hoy" (así el dato no cambia según cuándo corra el scraper).
+TOURNAMENT_START = date(2026, 6, 11)
 
-BIRTH_DATE_RE = re.compile(r"(\d{1,2})/(\d{1,2})/(\d{4})")
+BIRTH_DATE_RE = re.compile(r"(\w{3} \d{1,2}, \d{4})|(\d{1,2})/(\d{1,2})/(\d{4})")
+MARKET_VALUE_RE = re.compile(r"€\s*([\d.,]+)\s*(m|k|Th\.|Mio\.)?", re.IGNORECASE)
+TEAM_LINK_RE = re.compile(r"/([a-z0-9-]+)/startseite/verein/(\d+)")
 
 
 def _get(url: str) -> requests.Response:
-    resp = requests.get(url, headers=HEADERS, timeout=30)
+    resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT_S)
     resp.raise_for_status()
     return resp
+
+
+def _parse_birth_date(text: str) -> str | None:
+    match = BIRTH_DATE_RE.search(text)
+    if not match:
+        return None
+    if match.group(1):
+        try:
+            return datetime.strptime(match.group(1), "%b %d, %Y").date().isoformat()
+        except ValueError:
+            return None
+    m, d, y = match.group(2), match.group(3), match.group(4)
+    try:
+        return date(int(y), int(m), int(d)).isoformat()
+    except ValueError:
+        return None
+
+
+def _age_years(birth_date: str | None) -> float | None:
+    if not birth_date:
+        return None
+    try:
+        b = date.fromisoformat(birth_date)
+    except ValueError:
+        return None
+    years = (TOURNAMENT_START - b).days / 365.25
+    return round(years, 1) if 14 <= years <= 50 else None
+
+
+def _parse_market_value(text: str) -> float | None:
+    match = MARKET_VALUE_RE.search(text)
+    if not match:
+        return None
+    raw, suffix = match.groups()
+    try:
+        value = float(raw.replace(",", ""))
+    except ValueError:
+        return None
+    suffix = (suffix or "").lower()
+    if suffix in ("m", "mio."):
+        return value * 1_000_000
+    if suffix in ("k", "th."):
+        return value * 1_000
+    return value
+
+
+def discover_team_urls(html: str) -> dict[str, str]:
+    """Recorre la página de participantes del Mundial 2026 y devuelve
+    {selección: url_del_plantel}. Convierte el link a la ficha del equipo
+    (".../startseite/verein/ID") en el link a su plantel (".../kader/verein/ID"),
+    patrón estable de Transfermarkt para cualquier equipo."""
+    soup = BeautifulSoup(html, "lxml")
+    teams: dict[str, str] = {}
+    for a in soup.find_all("a", href=TEAM_LINK_RE):
+        match = TEAM_LINK_RE.search(a["href"])
+        if not match:
+            continue
+        slug, team_id = match.groups()
+        name = a.get_text(strip=True)
+        if not name or name in teams:
+            continue
+        teams[name] = f"{BASE}/{slug}/kader/verein/{team_id}"
+    return teams
 
 
 def _parse_squad_table(html: str, team: str) -> list[dict]:
@@ -65,11 +135,7 @@ def _parse_squad_table(html: str, team: str) -> list[dict]:
         player_name = name_cell.get_text(strip=True)
 
         row_text = tr.get_text(" ", strip=True)
-        birth_match = BIRTH_DATE_RE.search(row_text)
-        birth_date = None
-        if birth_match:
-            m, d, y = birth_match.groups()
-            birth_date = f"{y}-{int(m):02d}-{int(d):02d}"
+        birth_date = _parse_birth_date(row_text)
 
         position_cell = tr.find("td", class_="posrela")
         position = None
@@ -81,10 +147,15 @@ def _parse_squad_table(html: str, team: str) -> list[dict]:
         club_img = tr.find("img", class_="tiny_wappen")
         club = club_img["title"] if club_img and club_img.has_attr("title") else None
 
+        value_cell = tr.find("td", class_="rechts hauptlink") or tr.find_all("td")[-1]
+        market_value_eur = _parse_market_value(value_cell.get_text(strip=True)) if value_cell else None
+
         rows_out.append({
             "team": team,
             "player_name": player_name,
             "birth_date": birth_date,
+            "age_years": _age_years(birth_date),
+            "market_value_eur": market_value_eur,
             "position": position,
             "club": club,
             "source": "transfermarkt",
@@ -93,10 +164,26 @@ def _parse_squad_table(html: str, team: str) -> list[dict]:
     return rows_out
 
 
-def scrape(team_urls: dict[str, str] | None = None) -> list[dict]:
-    team_urls = team_urls or TEAM_SQUAD_URLS
+def scrape() -> list[dict]:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    try:
+        hub_html = _get(HUB_URL).text
+    except requests.RequestException as exc:
+        (RAW_DIR / "_discovery_status.json").write_text(json.dumps({"error": str(exc), "hub_url": HUB_URL}, indent=2))
+        print(f"no se pudo bajar la pagina de participantes: {exc}", file=sys.stderr)
+        return []
+
+    (RAW_DIR / "raw_hub.html").write_text(hub_html)
+    team_urls = discover_team_urls(hub_html)
+    (RAW_DIR / "_discovery_status.json").write_text(
+        json.dumps({"hub_url": HUB_URL, "teams_found": len(team_urls), "teams": team_urls}, indent=2, ensure_ascii=False)
+    )
+    print(f"selecciones descubiertas: {len(team_urls)}")
+    if not team_urls:
+        print("no se encontraron links de selecciones -- revisar _discovery_status.json / raw_hub.html", file=sys.stderr)
+        return []
 
     all_rows: list[dict] = []
     failures: list[str] = []
@@ -108,13 +195,13 @@ def scrape(team_urls: dict[str, str] | None = None) -> list[dict]:
             failures.append(f"{team}: {exc}")
             continue
 
-        (RAW_DIR / f"raw_{team.replace(' ', '_')}.html").write_text(html)
         rows = _parse_squad_table(html, team)
         if not rows:
             failures.append(f"{team}: tabla de plantel no encontrada/estructura cambio")
             continue
         all_rows.extend(rows)
-        time.sleep(2)  # scraping respetuoso: no golpear el sitio en ráfaga
+        print(f"  {team}: {len(rows)} jugadores")
+        time.sleep(2)  # scraping respetuoso: no golpear el sitio en rafaga
 
     if all_rows:
         out_path = OUT_DIR / "squads.csv"
@@ -130,13 +217,6 @@ def scrape(team_urls: dict[str, str] | None = None) -> list[dict]:
 
 
 if __name__ == "__main__":
-    if not TEAM_SQUAD_URLS:
-        print(
-            "TEAM_SQUAD_URLS esta vacio -- falta completar el mapeo selección -> URL de Transfermarkt "
-            "para el Mundial 2026 (dejarlo listo es la primera tarea manual del pipeline, ver README de etl/).",
-            file=sys.stderr,
-        )
-        sys.exit(1)
     rows = scrape()
     print(f"jugadores extraidos: {len(rows)}")
     if not rows:

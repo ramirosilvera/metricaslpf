@@ -39,16 +39,17 @@ registrado en `data/raw/*/_failed.*` para revisión.
   principal + sub-hub de knockout stage). El scraper ya descubre esos PDFs
   automáticamente y arma con ellos un registro propio de partidos 2026
   (`matches_fifa2026.csv`, se mergea con los partidos de StatsBomb en
-  `matches.parquet`). Lo que falta: mapear las columnas reales de la
-  tabla de métricas físicas dentro del PDF a
-  `total_distance_km`/`high_intensity_distance_m`/etc. — el scraper ya
-  descarga cada PDF y vuelca una muestra de sus tablas crudas a
-  `data/raw/fifa_training_centre/_pdf_debug_sample.json` en cada corrida
-  para poder ajustar `_parse_physical_metrics()` con la estructura real
-  sin adivinar.
-- **Transfermarkt (edad de plantel)**: mismo caso — scraper escrito, sin
-  probar contra HTML real, y además falta completar `TEAM_SQUAD_URLS`
-  con las URLs de las 48 selecciones de 2026 antes de la primera corrida.
+  `matches.parquet`). Ya viene corriendo en producción vía `update-data.yml`
+  con cobertura incremental (procesa unos pocos PDFs por corrida, prioriza
+  los partidos de Argentina, y cachea lo ya procesado entre corridas).
+- **Transfermarkt (edad/valor de mercado de plantel)**: el scraper
+  *descubre* las 48 selecciones del Mundial 2026 recorriendo la página de
+  participantes del torneo (no depende de un mapeo hardcodeado de URLs por
+  selección), y de cada plantel extrae edad (calculada al inicio del
+  torneo, no "hoy") y valor de mercado. Como con FIFA, no se pudo probar
+  contra HTML real desde el sandbox de desarrollo — vuelca
+  `_discovery_status.json` y `raw_hub.html` en la primera corrida real
+  para poder ajustar el parsing si la estructura no coincide.
 
 ## Por qué Parquet + JSON y no una base de datos
 

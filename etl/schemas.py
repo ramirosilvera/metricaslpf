@@ -109,6 +109,10 @@ SquadsSchema = DataFrameSchema(
         "team": Column(str),
         "player_name": Column(str),
         "birth_date": Column(str, nullable=True),
+        # edad calculada al inicio del torneo (no "hoy"), para que el dato no
+        # cambie según cuándo corra el scraper
+        "age_years": Column(float, Check.in_range(14, 50), nullable=True),
+        "market_value_eur": Column(float, Check.ge(0), nullable=True),
         "position": Column(str, nullable=True),
         "club": Column(str, nullable=True),
         "source": Column(str),

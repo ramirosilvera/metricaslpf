@@ -41,6 +41,7 @@ TABLES = [
     ("player_match_appearances.parquet", "player_match_appearances"),
     ("physical_match_stats.parquet", "physical_match_stats"),
     ("physical_player_match_stats.parquet", "physical_player_match_stats"),
+    ("squads.parquet", "squad_market_value"),
 ]
 
 
