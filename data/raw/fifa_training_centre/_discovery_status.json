@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-07-07T23:50:44.878461+00:00",
+  "checked_at": "2026-07-08T12:53:10.953591+00:00",
   "hub_url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
   "pages_visited": [
     "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
@@ -945,7 +945,27 @@
       "team_b": "Belgium",
       "stage_guess": "Knockout stage",
       "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M94-USA-V-BEL.pdf"
+    },
+    {
+      "match_number": 95,
+      "match_id": 20260095,
+      "team_a_code": "ARG",
+      "team_b_code": "EGY",
+      "team_a": "Argentina",
+      "team_b": "Egypt",
+      "stage_guess": "Knockout stage",
+      "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M95-ARG-V-EGY.pdf"
+    },
+    {
+      "match_number": 96,
+      "match_id": 20260096,
+      "team_a_code": "SUI",
+      "team_b_code": "COL",
+      "team_a": "Switzerland",
+      "team_b": "Colombia",
+      "stage_guess": "Knockout stage",
+      "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M96-SUI-V-COL.pdf"
     }
   ],
-  "count": 94
+  "count": 96
 }

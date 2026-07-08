@@ -7,37 +7,42 @@
   {
     "match_number": 43,
     "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M43-ARG-V-AUT.pdf",
-    "error": "no se encontro tabla de metricas fisicas reconocible en el PDF"
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
   },
   {
     "match_number": 70,
     "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M70-JOR-V-ARG.pdf",
-    "error": "no se encontro tabla de metricas fisicas reconocible en el PDF"
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
   },
   {
     "match_number": 86,
     "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M86-ARG-V-CPV.pdf",
-    "error": "no se encontro tabla de metricas fisicas reconocible en el PDF"
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
+  },
+  {
+    "match_number": 95,
+    "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M95-ARG-V-EGY.pdf",
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
   },
   {
     "match_number": 1,
     "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M01 MEX V RSA.pdf",
-    "error": "no se encontro tabla de metricas fisicas reconocible en el PDF"
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
   },
   {
     "match_number": 2,
     "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M02 KOR V CZE .pdf",
-    "error": "no se encontro tabla de metricas fisicas reconocible en el PDF"
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
   },
   {
     "match_number": 3,
     "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M03-CAN-V-BIH-V2.pdf",
-    "error": "no se encontro tabla de metricas fisicas reconocible en el PDF"
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
   },
   {
     "match_number": 4,
     "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M04-USA-V-PAR.pdf",
-    "error": "no se encontro tabla de metricas fisicas reconocible en el PDF"
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
   },
   {
     "match_number": 5,
@@ -467,6 +472,11 @@
   {
     "match_number": 94,
     "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M94-USA-V-BEL.pdf",
+    "error": "no procesado en esta corrida (PMSR_LIMIT)"
+  },
+  {
+    "match_number": 96,
+    "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M96-SUI-V-COL.pdf",
     "error": "no procesado en esta corrida (PMSR_LIMIT)"
   }
 ]

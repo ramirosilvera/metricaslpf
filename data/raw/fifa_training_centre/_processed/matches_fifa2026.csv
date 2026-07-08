@@ -3,6 +3,7 @@ match_id,competition,season,stage,group,match_date,home_team,away_team,home_scor
 20260043,FIFA World Cup,2026,Group stage,,,Argentina,Austria,,,,
 20260070,FIFA World Cup,2026,Group stage,,,Jordan,Argentina,,,,
 20260086,FIFA World Cup,2026,Knockout stage,,,Argentina,Cape Verde,,,,
+20260095,FIFA World Cup,2026,Knockout stage,,,Argentina,Egypt,,,,
 20260001,FIFA World Cup,2026,Group stage,,,Mexico,South Africa,,,,
 20260002,FIFA World Cup,2026,Group stage,,,South Korea,Czechia,,,,
 20260003,FIFA World Cup,2026,Group stage,,,Canada,Bosnia and Herzegovina,,,,
@@ -93,3 +94,4 @@ match_id,competition,season,stage,group,match_date,home_team,away_team,home_scor
 20260092,FIFA World Cup,2026,Knockout stage,,,Mexico,England,,,,
 20260093,FIFA World Cup,2026,Knockout stage,,,Portugal,Spain,,,,
 20260094,FIFA World Cup,2026,Knockout stage,,,United States,Belgium,,,,
+20260096,FIFA World Cup,2026,Knockout stage,,,Switzerland,Colombia,,,,

@@ -210,6 +210,20 @@
     "referee": null
   },
   {
+    "match_id": 20260095,
+    "competition": "FIFA World Cup",
+    "season": "2026",
+    "stage": "Knockout stage",
+    "group": null,
+    "match_date": null,
+    "home_team": "Argentina",
+    "away_team": "Egypt",
+    "home_score": null,
+    "away_score": null,
+    "stadium": null,
+    "referee": null
+  },
+  {
     "match_id": 20260001,
     "competition": "FIFA World Cup",
     "season": "2026",
@@ -1464,6 +1478,20 @@
     "match_date": null,
     "home_team": "United States",
     "away_team": "Belgium",
+    "home_score": null,
+    "away_score": null,
+    "stadium": null,
+    "referee": null
+  },
+  {
+    "match_id": 20260096,
+    "competition": "FIFA World Cup",
+    "season": "2026",
+    "stage": "Knockout stage",
+    "group": null,
+    "match_date": null,
+    "home_team": "Switzerland",
+    "away_team": "Colombia",
     "home_score": null,
     "away_score": null,
     "stadium": null,
