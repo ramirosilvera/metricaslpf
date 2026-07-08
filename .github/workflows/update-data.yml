@@ -43,6 +43,11 @@ jobs:
           PYTHONUNBUFFERED: "1"
           PMSR_LIMIT: ${{ github.event.inputs.pmsr_limit }}
           PMSR_MAX_SECONDS: ${{ github.event.inputs.pmsr_max_seconds }}
+          # Sincroniza el warehouse a Supabase (schema metricas_mundial).
+          # Si estos secrets no están cargados, sync_supabase.py se
+          # saltea solo -- no rompe el resto del pipeline.
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
 
       - name: Commitear datos actualizados
         run: |

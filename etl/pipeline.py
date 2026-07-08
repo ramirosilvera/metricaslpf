@@ -7,6 +7,7 @@ Pasos:
   3. construir el warehouse Parquet (data/warehouse/)
   4. validar contra los esquemas de Pandera
   5. construir los agregados JSON que consume el sitio (site/public/data/)
+  6. (opcional) sincronizar el warehouse a Supabase (metricas_mundial)
 
 Uso:
     python etl/pipeline.py                 # corrida completa (incluye scraping)
@@ -55,6 +56,7 @@ def main():
     run("build_warehouse.py")
     run("validate.py")
     run("build_aggregates.py")
+    run("sync_supabase.py")
     print("\npipeline OK")
 
 
