@@ -19,8 +19,8 @@ RATE_LIMIT_PER_HOUR = "15"
 # público del lado del cliente, protegida por las políticas RLS de solo
 # lectura del schema metricas_mundial (nunca la service_role key, esa solo
 # la usa el pipeline de ETL para escribir datos, ver etl/sync_supabase.py).
-SUPABASE_URL = "https://wyedmgxngqdgnxmbencl.supabase.co"
-SUPABASE_ANON_KEY = "sb_publishable_hgjykngEI8vtiQ4Wvmy4yg_WbzykPXu"
+SUPABASE_URL = "https://arzzwzuuoysqhgnaprha.supabase.co"
+SUPABASE_ANON_KEY = "sb_publishable_GqaTEmCMmWWkd970obRKBg_mSAH3wJX"
 
 # Rate limiting por IP es opcional: si no se crea/bindea este namespace KV,
 # el Worker sigue funcionando (ver checkRateLimit en src/index.js), solo

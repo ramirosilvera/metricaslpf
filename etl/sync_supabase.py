@@ -64,7 +64,7 @@ def _upsert(table: str, rows: list[dict]) -> None:
         "Authorization": f"Bearer {SUPABASE_SERVICE_ROLE_KEY}",
         "Content-Type": "application/json",
         # Content-Profile le dice a PostgREST en qué schema está la tabla --
-        # sin esto busca en "public" (donde vive la otra app, oloraculo).
+        # sin esto busca en "public" en vez de metricas_mundial.
         "Content-Profile": SCHEMA,
         "Prefer": "resolution=merge-duplicates,return=minimal",
     }
