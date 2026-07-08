@@ -58,8 +58,11 @@ PhysicalMatchStatsSchema = DataFrameSchema(
         "team": Column(str),
         # rango ancho a propósito: partidos con tiempo suplementario (120 min,
         # +33% sobre 90) empujan la distancia de equipo bastante por encima
-        # de lo típico en tiempo reglamentario (~100-120km)
-        "total_distance_km": Column(float, Check.in_range(80, 160), nullable=True),
+        # de lo típico en tiempo reglamentario (~100-120km). Ya se vio un
+        # partido de octavos con prorroga en 160.49km, asi que el margen
+        # queda holgado para el resto de la fase eliminatoria (puede haber
+        # mas partidos a 120 min todavia).
+        "total_distance_km": Column(float, Check.in_range(80, 185), nullable=True),
         "high_intensity_distance_m": Column(float, Check.in_range(0, 25000), nullable=True),
         "sprint_distance_m": Column(float, Check.in_range(0, 10000), nullable=True),
         "sprint_count": Column(float, Check.ge(0), nullable=True),
@@ -82,9 +85,9 @@ PhysicalPlayerMatchStatsSchema = DataFrameSchema(
         "team": Column(str),
         "jersey_number": Column("Int64", nullable=True),
         "player_name": Column(str),
-        # idem: hasta ~16km es plausible para un jugador de campo en un
-        # partido con prorroga (120 min)
-        "total_distance_m": Column(float, Check.in_range(0, 16000), nullable=True),
+        # idem: hasta ~18km es plausible para un jugador de campo en un
+        # partido con prorroga (120 min) de alta intensidad
+        "total_distance_m": Column(float, Check.in_range(0, 18000), nullable=True),
         "zone1_m": Column(float, Check.ge(0), nullable=True),
         "zone2_m": Column(float, Check.ge(0), nullable=True),
         "zone3_m": Column(float, Check.ge(0), nullable=True),
