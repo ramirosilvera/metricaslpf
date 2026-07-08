@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T13:22:38.725514+00:00",
+  "generated_at": "2026-07-08T13:40:29.702524+00:00",
   "sources": {
     "tactical_context": {
       "provider": "StatsBomb Open Data",
@@ -11,7 +11,7 @@
       "provider": "FIFA Training Centre",
       "coverage": "Mundial 2026 (en curso)",
       "status": "ok",
-      "matches_loaded": 3,
+      "matches_loaded": 35,
       "matches_total": 96
     },
     "squad_ages": {
