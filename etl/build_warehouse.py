@@ -6,7 +6,13 @@ instancia, de estos Parquet.
 Fuentes que combina (cada una opcional -- si no existe el CSV, se saltea):
   - data/raw/statsbomb/_processed/*.csv        (contexto táctico, real)
   - data/raw/fifa_training_centre/_processed/*.csv (métricas físicas)
-  - data/raw/transfermarkt/_processed/*.csv    (edad de planteles)
+  - data/raw/26worldcup/_processed/squads.csv  (edad/plantel -- fuente
+    primaria desde que Transfermarkt bloquea el scraping con 403; ver
+    fetch_26worldcup_squads.py)
+  - data/raw/transfermarkt/_processed/squads.csv (edad de planteles --
+    fallback si algún día Transfermarkt deja de bloquear el scraping;
+    el paso "squads" más abajo prueba 26worldcup primero)
+  - data/raw/26worldcup/_processed/team_profile.csv (ranking FIFA, campo base)
 
 Uso:
     python etl/build_warehouse.py
@@ -26,6 +32,7 @@ from schemas import (
     PhysicalPlayerMatchStatsSchema,
     TacticalPlayerMatchStatsSchema,
     SquadsSchema,
+    TeamProfileSchema,
 )
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -128,15 +135,46 @@ def build():
         con.execute(f"COPY tactical_players_df TO '{WAREHOUSE / 'tactical_player_match_stats.parquet'}' (FORMAT PARQUET)")
         print(f"tactical_player_match_stats.parquet: {len(tactical_players)} filas")
 
-    # --- squads (Transfermarkt: edad de plantel) ---
-    squads = _read_csv_if_exists(RAW / "transfermarkt" / "_processed" / "squads.csv")
+    # --- squads (fuente-agnóstico: 26worldcup/Wikipedia primero -- ver
+    # fetch_26worldcup_squads.py --, Transfermarkt como fallback si algún día
+    # deja de devolver 403 en todos los candidatos de URL) ---
+    squads_source_path = RAW / "26worldcup" / "_processed" / "squads.csv"
+    if not (squads_source_path.exists() and squads_source_path.stat().st_size > 0):
+        squads_source_path = RAW / "transfermarkt" / "_processed" / "squads.csv"
+    squads = _read_csv_if_exists(squads_source_path)
     if squads is not None:
+        squads["age_years"] = pd.to_numeric(squads["age_years"], errors="coerce")
+        squads["market_value_eur"] = pd.to_numeric(squads.get("market_value_eur"), errors="coerce")
+        int_cols = ["jersey_number", "caps", "career_goals", "wc2026_apps", "wc2026_goals", "wc2026_yellow", "wc2026_red"]
+        for c in int_cols:
+            if c not in squads.columns:
+                squads[c] = pd.NA
+            squads[c] = pd.to_numeric(squads[c], errors="coerce").astype("Int64")
+        if "captain" not in squads.columns:
+            squads["captain"] = pd.NA
+        squads["captain"] = (
+            squads["captain"].astype(str).str.lower().map({"true": True, "false": False}).astype("boolean")
+        )
         squads = SquadsSchema.validate(squads)
         con.register("squads_df", squads)
         con.execute(f"COPY squads_df TO '{WAREHOUSE / 'squads.parquet'}' (FORMAT PARQUET)")
-        print(f"squads.parquet: {len(squads)} filas")
+        print(f"squads.parquet: {len(squads)} filas (fuente: {squads_source_path.parent.parent.name})")
     else:
-        print("squads: sin datos todavia (pendiente de la primera corrida del scraper en GitHub Actions)")
+        print("squads: sin datos todavia (correr etl/fetch_26worldcup_squads.py)")
+
+    # --- team_profile (26worldcup/teams.json: ranking FIFA + campo base) ---
+    team_profile = _read_csv_if_exists(RAW / "26worldcup" / "_processed" / "team_profile.csv")
+    if team_profile is not None:
+        for c in ["fifa_ranking", "fifa_ranking_prev"]:
+            team_profile[c] = pd.to_numeric(team_profile[c], errors="coerce").astype("Int64")
+        for c in ["base_camp_lat", "base_camp_lon"]:
+            team_profile[c] = pd.to_numeric(team_profile[c], errors="coerce")
+        team_profile = TeamProfileSchema.validate(team_profile)
+        con.register("team_profile_df", team_profile)
+        con.execute(f"COPY team_profile_df TO '{WAREHOUSE / 'team_profile.parquet'}' (FORMAT PARQUET)")
+        print(f"team_profile.parquet: {len(team_profile)} filas")
+    else:
+        print("team_profile: sin datos todavia (correr etl/fetch_26worldcup_squads.py)")
 
     con.close()
 

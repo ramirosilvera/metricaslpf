@@ -205,9 +205,48 @@ SquadsSchema = DataFrameSchema(
         # edad calculada al inicio del torneo (no "hoy"), para que el dato no
         # cambie según cuándo corra el scraper
         "age_years": Column(float, Check.in_range(14, 50), nullable=True),
+        # market_value_eur queda nullable/None desde que la fuente primaria
+        # pasó a ser 26worldcup (Wikipedia, ver fetch_26worldcup_squads.py):
+        # no tiene valor de mercado. Sigue siendo un dato real y sourced --
+        # no se rellena con un número inventado.
         "market_value_eur": Column(float, Check.ge(0), nullable=True),
         "position": Column(str, nullable=True),
         "club": Column(str, nullable=True),
+        # columnas nuevas que aporta 26worldcup/Wikipedia y que Transfermarkt
+        # no tenía -- todas nullable para no romper si algún jugador viene
+        # incompleto en la fuente.
+        "jersey_number": Column("Int64", Check.in_range(1, 99), nullable=True),
+        "caps": Column("Int64", Check.ge(0), nullable=True),
+        "career_goals": Column("Int64", Check.ge(0), nullable=True),
+        "captain": Column(bool, nullable=True),
+        "wc2026_apps": Column("Int64", Check.in_range(0, 7), nullable=True),
+        "wc2026_goals": Column("Int64", Check.ge(0), nullable=True),
+        "wc2026_yellow": Column("Int64", Check.ge(0), nullable=True),
+        "wc2026_red": Column("Int64", Check.ge(0), nullable=True),
+        "source": Column(str),
+        "retrieved_at": Column(str),
+    },
+    strict=False,
+    coerce=True,
+)
+
+# Perfil de selección: ranking FIFA (+ anterior, útil como covariable para
+# análisis posteriores) y ubicación del campo base -- de 26worldcup/teams.json
+# (a su vez sourced de la API pública de FIFA, no de Wikipedia; ver docstring
+# de fetch_26worldcup_squads.py). No existía una tabla de rankings/perfil de
+# selección antes de esto en el warehouse.
+TeamProfileSchema = DataFrameSchema(
+    {
+        "team": Column(str, unique=True),
+        "fifa_code": Column(str, nullable=True),
+        "group": Column(str, nullable=True),
+        "fifa_ranking": Column("Int64", Check.in_range(1, 250), nullable=True),
+        "fifa_ranking_prev": Column("Int64", Check.in_range(1, 250), nullable=True),
+        "base_camp_city": Column(str, nullable=True),
+        "base_camp_facility": Column(str, nullable=True),
+        "base_camp_country": Column(str, nullable=True),
+        "base_camp_lat": Column(float, Check.in_range(-90, 90), nullable=True),
+        "base_camp_lon": Column(float, Check.in_range(-180, 180), nullable=True),
         "source": Column(str),
         "retrieved_at": Column(str),
     },

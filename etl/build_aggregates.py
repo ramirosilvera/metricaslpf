@@ -52,6 +52,7 @@ def build():
     has_physical = (WAREHOUSE / "physical_match_stats.parquet").exists()
     has_physical_players = (WAREHOUSE / "physical_player_match_stats.parquet").exists()
     has_squads = (WAREHOUSE / "squads.parquet").exists()
+    has_team_profile = (WAREHOUSE / "team_profile.parquet").exists()
     has_derived_team_metrics = (WAREHOUSE / "derived_team_metrics.parquet").exists()
     has_derived_team_style = (WAREHOUSE / "derived_team_style.parquet").exists()
     has_derived_player_metrics = (WAREHOUSE / "derived_player_metrics.parquet").exists()
@@ -211,10 +212,24 @@ def build():
             {
                 "status": "pending_first_scrape",
                 "note": (
-                    "Todavia no hay edades/valor de plantel cargados. Se completan corriendo "
-                    "etl/scrape_transfermarkt_squads.py en GitHub Actions (requiere red sin "
-                    "restricciones; no corre en el entorno de desarrollo sandboxed)."
+                    "Todavia no hay datos de plantel cargados. Se completan corriendo "
+                    "etl/fetch_26worldcup_squads.py (fuente primaria: 26worldcup/Wikipedia; "
+                    "Transfermarkt via etl/scrape_transfermarkt_squads.py queda como fallback "
+                    "pero bloquea el scraping con HTTP 403)."
                 ),
+                "rows": [],
+            },
+        )
+
+    if has_team_profile:
+        team_profile = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'team_profile.parquet'}')").df()
+        _write_json("team_profile.json", _records(team_profile))
+    else:
+        _write_json(
+            "team_profile.json",
+            {
+                "status": "pending_first_scrape",
+                "note": "Se completa corriendo etl/fetch_26worldcup_squads.py (ranking FIFA + campo base, de teams.json).",
                 "rows": [],
             },
         )
@@ -267,9 +282,21 @@ def build():
                 "matches_total": total_matches_2026,
             },
             "squad_ages": {
-                "provider": "Transfermarkt",
-                "coverage": "edad y valor de mercado del plantel actual (Mundial 2026)",
+                "provider": "26worldcup (Wikipedia)",
+                "provider_note": (
+                    "Mirror JSON MIT (github.com/26worldcup/26worldcup.github.io) de hechos "
+                    "extraidos del articulo de Wikipedia '2026 FIFA World Cup squads' "
+                    "(texto CC BY-SA 4.0). No incluye valor de mercado -- Transfermarkt "
+                    "(etl/scrape_transfermarkt_squads.py) queda como fallback si algun dia "
+                    "deja de bloquear el scraping con HTTP 403."
+                ),
+                "coverage": "edad, dorsal, caps, goles de carrera, capitania y stats del Mundial 2026 del plantel actual",
                 "status": "ok" if has_squads else "pending_first_scrape",
+            },
+            "team_profile": {
+                "provider": "26worldcup (FIFA public API)",
+                "coverage": "ranking FIFA (actual y anterior) y ubicacion del campo base por seleccion",
+                "status": "ok" if has_team_profile else "pending_first_scrape",
             },
             "derived_metrics": {
                 "provider": "calculado internamente sobre las fuentes de arriba",

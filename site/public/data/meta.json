@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T23:18:43.732175+00:00",
+  "generated_at": "2026-07-09T11:08:59.304783+00:00",
   "sources": {
     "tactical_context": {
       "provider": "StatsBomb Open Data",
@@ -22,9 +22,15 @@
       "matches_total": 96
     },
     "squad_ages": {
-      "provider": "Transfermarkt",
-      "coverage": "edad y valor de mercado del plantel actual (Mundial 2026)",
-      "status": "pending_first_scrape"
+      "provider": "26worldcup (Wikipedia)",
+      "provider_note": "Mirror JSON MIT (github.com/26worldcup/26worldcup.github.io) de hechos extraidos del articulo de Wikipedia '2026 FIFA World Cup squads' (texto CC BY-SA 4.0). No incluye valor de mercado -- Transfermarkt (etl/scrape_transfermarkt_squads.py) queda como fallback si algun dia deja de bloquear el scraping con HTTP 403.",
+      "coverage": "edad, dorsal, caps, goles de carrera, capitania y stats del Mundial 2026 del plantel actual",
+      "status": "ok"
+    },
+    "team_profile": {
+      "provider": "26worldcup (FIFA public API)",
+      "coverage": "ranking FIFA (actual y anterior) y ubicacion del campo base por seleccion",
+      "status": "ok"
     },
     "derived_metrics": {
       "provider": "calculado internamente sobre las fuentes de arriba",
