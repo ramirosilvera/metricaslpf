@@ -62,7 +62,13 @@ PMSR_MAX_SECONDS = int(os.environ.get("PMSR_MAX_SECONDS") or 0) or None
 ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "data" / "raw" / "fifa_training_centre"
 OUT_DIR = RAW_DIR / "_processed"
+# Cache local de los PDFs crudos ya descargados (gitignoreado por peso).
+# Permite re-parsear un PDF con un parser nuevo (ej. el de metricas
+# tacticas, agregado despues de la corrida fisica original) sin volver a
+# pegarle a los servidores de FIFA.
+PDF_CACHE_DIR = RAW_DIR / "pdfs"
 FAILED_LOG = RAW_DIR / "_failed.json"
+DISCOVERY_STATUS_PATH = RAW_DIR / "_discovery_status.json"
 PDF_DEBUG_SAMPLE_LIMIT = 3
 # offset para no chocar con los match_id numericos de StatsBomb (que son
 # ids reales de partido, 4 a 7 digitos)
@@ -490,11 +496,17 @@ TACTICAL_FIELDS = [
 ]
 
 
-def _load_cached_tactical_rows() -> list[dict]:
+def _load_cached_tactical_rows() -> tuple[list[dict], set[int]]:
+    """Idem `_load_cached_player_rows` pero para la estadistica tactica.
+    La cobertura tactica se trackea INDEPENDIENTE de la fisica: el parser
+    tactico se agrego despues de que la cobertura fisica ya estaba completa,
+    asi que hay partidos con datos fisicos cacheados pero sin tacticos."""
     if not TACTICAL_STATS_PATH.exists():
-        return []
+        return [], set()
     with TACTICAL_STATS_PATH.open(newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+        rows = list(csv.DictReader(f))
+    match_ids = {int(r["match_id"]) for r in rows}
+    return rows, match_ids
 
 
 def _load_cached_matches() -> dict[int, dict]:
@@ -508,6 +520,24 @@ def _load_cached_matches() -> dict[int, dict]:
     for r in rows:
         r["match_id"] = int(r["match_id"])
     return {r["match_id"]: r for r in rows}
+
+
+def _pdf_cache_path(url: str) -> Path:
+    return PDF_CACHE_DIR / Path(url.split("?", 1)[0]).name
+
+
+def _load_cached_discovery() -> list[dict]:
+    """Fallback offline: si el hub no responde (red caida / bloqueada), se
+    reusa el inventario de PDFs de la ultima corrida exitosa, guardado en
+    `_discovery_status.json`. Asi el backfill desde PDFs ya cacheados en
+    disco funciona incluso sin red."""
+    if not DISCOVERY_STATUS_PATH.exists():
+        return []
+    try:
+        status = json.loads(DISCOVERY_STATUS_PATH.read_text())
+    except (json.JSONDecodeError, OSError):
+        return []
+    return status.get("pdf_reports_found") or []
 
 
 def _team_aggregates_from_players(player_rows: list[dict]) -> list[dict]:
@@ -544,20 +574,35 @@ def scrape() -> list[dict]:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     debug: dict = {}
-    reports = discover_pdf_reports(debug=debug)
-    (RAW_DIR / "_discovery_status.json").write_text(json.dumps({
-        "checked_at": datetime.now(timezone.utc).isoformat(),
-        "hub_url": HUB_URL,
-        "pages_visited": debug.get("pages_visited", []),
-        "pdf_reports_found": reports,
-        "count": len(reports),
-    }, ensure_ascii=False, indent=2))
-    print(f"discover_pdf_reports: {len(reports)} PDFs encontrados (paginas visitadas: {len(debug.get('pages_visited', []))})", flush=True)
+    try:
+        reports = discover_pdf_reports(debug=debug)
+    except requests.RequestException as exc:
+        reports = _load_cached_discovery()
+        print(
+            f"discover_pdf_reports: hub inaccesible ({exc}) -- usando el inventario "
+            f"cacheado de _discovery_status.json ({len(reports)} PDFs)",
+            flush=True,
+        )
+        if not reports:
+            raise
+    else:
+        DISCOVERY_STATUS_PATH.write_text(json.dumps({
+            "checked_at": datetime.now(timezone.utc).isoformat(),
+            "hub_url": HUB_URL,
+            "pages_visited": debug.get("pages_visited", []),
+            "pdf_reports_found": reports,
+            "count": len(reports),
+        }, ensure_ascii=False, indent=2))
+        print(f"discover_pdf_reports: {len(reports)} PDFs encontrados (paginas visitadas: {len(debug.get('pages_visited', []))})", flush=True)
 
     cached_player_rows, cached_match_ids = _load_cached_player_rows()
-    print(f"partidos ya cubiertos en corridas anteriores: {len(cached_match_ids)}", flush=True)
+    cached_tactical_rows, cached_tactical_match_ids = _load_cached_tactical_rows()
+    print(
+        f"partidos ya cubiertos en corridas anteriores: {len(cached_match_ids)} fisicos, "
+        f"{len(cached_tactical_match_ids)} tacticos",
+        flush=True,
+    )
     matches_by_id = _load_cached_matches()
-    cached_tactical_rows = _load_cached_tactical_rows()
 
     new_player_rows: list[dict] = []
     new_tactical_rows: list[dict] = []
@@ -593,21 +638,34 @@ def scrape() -> list[dict]:
                 "referee": "",
             }
 
-        if report["match_id"] in cached_match_ids:
-            continue  # ya lo tenemos de una corrida anterior
-        if PMSR_LIMIT is not None and downloaded >= PMSR_LIMIT:
-            failed.append({"match_number": report["match_number"], "url": report["url"], "error": "no procesado en esta corrida (PMSR_LIMIT)"})
-            continue
-        if PMSR_MAX_SECONDS is not None and (time.monotonic() - start_time) >= PMSR_MAX_SECONDS:
-            failed.append({"match_number": report["match_number"], "url": report["url"], "error": "no procesado en esta corrida (PMSR_MAX_SECONDS)"})
-            continue
+        # La cobertura fisica y la tactica se trackean por separado: el
+        # parser tactico se agrego cuando la fisica ya estaba completa, asi
+        # que "ya tenemos datos fisicos" NO implica "ya tenemos tacticos".
+        # Solo se saltea el PDF si ambas coberturas estan completas.
+        need_physical = report["match_id"] not in cached_match_ids
+        need_tactical = report["match_id"] not in cached_tactical_match_ids
+        if not need_physical and not need_tactical:
+            continue  # ya lo tenemos completo de corridas anteriores
 
-        try:
-            pdf_bytes = _get(report["url"]).content
-            downloaded += 1
-        except requests.RequestException as exc:
-            failed.append({"match_number": report["match_number"], "url": report["url"], "error": str(exc)})
-            continue
+        pdf_cache_path = _pdf_cache_path(report["url"])
+        if pdf_cache_path.exists():
+            # re-parseo local: no gasta red, no cuenta para PMSR_LIMIT
+            pdf_bytes = pdf_cache_path.read_bytes()
+        else:
+            if PMSR_LIMIT is not None and downloaded >= PMSR_LIMIT:
+                failed.append({"match_number": report["match_number"], "url": report["url"], "error": "no procesado en esta corrida (PMSR_LIMIT)"})
+                continue
+            if PMSR_MAX_SECONDS is not None and (time.monotonic() - start_time) >= PMSR_MAX_SECONDS:
+                failed.append({"match_number": report["match_number"], "url": report["url"], "error": "no procesado en esta corrida (PMSR_MAX_SECONDS)"})
+                continue
+            try:
+                pdf_bytes = _get(report["url"]).content
+                downloaded += 1
+            except requests.RequestException as exc:
+                failed.append({"match_number": report["match_number"], "url": report["url"], "error": str(exc)})
+                continue
+            PDF_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+            pdf_cache_path.write_bytes(pdf_bytes)
 
         try:
             tables, full_text = _extract_pdf_tables(pdf_bytes)
@@ -619,56 +677,63 @@ def scrape() -> list[dict]:
         if summary:
             matches_by_id[report["match_id"]].update(summary)
 
-        parsed = _parse_physical_metrics(tables)
-        print(f"  M{report['match_number']} {report['team_a']} v {report['team_b']}: {len(parsed or [])} filas de jugador", flush=True)
+        if need_physical:
+            parsed = _parse_physical_metrics(tables)
+            print(f"  M{report['match_number']} {report['team_a']} v {report['team_b']}: {len(parsed or [])} filas de jugador", flush=True)
 
-        if len(pdf_debug_samples) < PDF_DEBUG_SAMPLE_LIMIT and parsed is None:
-            pdf_debug_samples.append({
-                "match_number": report["match_number"],
-                "team_a": report["team_a"],
-                "team_b": report["team_b"],
-                "url": report["url"],
-                "tables": tables,
-                "text": full_text[:40000],
-            })
+            if len(pdf_debug_samples) < PDF_DEBUG_SAMPLE_LIMIT and parsed is None:
+                pdf_debug_samples.append({
+                    "match_number": report["match_number"],
+                    "team_a": report["team_a"],
+                    "team_b": report["team_b"],
+                    "url": report["url"],
+                    "tables": tables,
+                    "text": full_text[:40000],
+                })
 
-        if parsed is None:
-            failed.append({
-                "match_number": report["match_number"],
-                "url": report["url"],
-                "error": "no se encontro 'Physical Data' reconocible en el PDF",
-            })
-            continue
+            if parsed is None:
+                failed.append({
+                    "match_number": report["match_number"],
+                    "url": report["url"],
+                    "error": "no se encontro 'Physical Data' reconocible en el PDF",
+                })
+            else:
+                for row in parsed:
+                    new_player_rows.append({
+                        "match_id": report["match_id"],
+                        "team": row["team"],
+                        "jersey_number": row["jersey_number"],
+                        "player_name": row["player_name"],
+                        "total_distance_m": row["total_distance_m"],
+                        "zone1_m": row["zone1_m"],
+                        "zone2_m": row["zone2_m"],
+                        "zone3_m": row["zone3_m"],
+                        "zone4_m": row["zone4_m"],
+                        "zone5_m": row["zone5_m"],
+                        "high_speed_runs_count": row["high_speed_runs_count"],
+                        "sprint_count": row["sprint_count"],
+                        "top_speed_kmh": row["top_speed_kmh"],
+                        "source": "fifa_training_centre_pmsr_pdf",
+                        "source_url": report["url"],
+                        "retrieved_at": retrieved_at,
+                    })
 
-        for row in parsed:
-            new_player_rows.append({
-                "match_id": report["match_id"],
-                "team": row["team"],
-                "jersey_number": row["jersey_number"],
-                "player_name": row["player_name"],
-                "total_distance_m": row["total_distance_m"],
-                "zone1_m": row["zone1_m"],
-                "zone2_m": row["zone2_m"],
-                "zone3_m": row["zone3_m"],
-                "zone4_m": row["zone4_m"],
-                "zone5_m": row["zone5_m"],
-                "high_speed_runs_count": row["high_speed_runs_count"],
-                "sprint_count": row["sprint_count"],
-                "top_speed_kmh": row["top_speed_kmh"],
-                "source": "fifa_training_centre_pmsr_pdf",
-                "source_url": report["url"],
-                "retrieved_at": retrieved_at,
-            })
-
-        tactical_parsed = _parse_tactical_metrics(tables)
-        for row in tactical_parsed:
-            full_row = {field: row.get(field) for field in TACTICAL_FIELDS}
-            full_row["match_id"] = report["match_id"]
-            full_row["source"] = "fifa_training_centre_pmsr_pdf"
-            full_row["source_url"] = report["url"]
-            full_row["retrieved_at"] = retrieved_at
-            new_tactical_rows.append(full_row)
-        print(f"    + {len(tactical_parsed)} filas de estadistica tactica", flush=True)
+        if need_tactical:
+            tactical_parsed = _parse_tactical_metrics(tables)
+            if not tactical_parsed:
+                failed.append({
+                    "match_number": report["match_number"],
+                    "url": report["url"],
+                    "error": "no se encontraron secciones tacticas reconocibles en el PDF",
+                })
+            for row in tactical_parsed:
+                full_row = {field: row.get(field) for field in TACTICAL_FIELDS}
+                full_row["match_id"] = report["match_id"]
+                full_row["source"] = "fifa_training_centre_pmsr_pdf"
+                full_row["source_url"] = report["url"]
+                full_row["retrieved_at"] = retrieved_at
+                new_tactical_rows.append(full_row)
+            print(f"  M{report['match_number']} {report['team_a']} v {report['team_b']}: + {len(tactical_parsed)} filas de estadistica tactica", flush=True)
 
     if failed:
         FAILED_LOG.write_text(json.dumps(failed, ensure_ascii=False, indent=2))
