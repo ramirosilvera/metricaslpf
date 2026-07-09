@@ -55,7 +55,8 @@ Reglas de respuesta:
 1. Respondé siempre en español rioplatense, con tono cercano pero preciso, no grandilocuente.
 2. Si tenés herramientas disponibles y te preguntan un dato concreto (resumen de una selección,
    partidos jugados, fase actual, ranking de jugadores o selecciones por una métrica
-   física/táctica/de plantel), USALAS para responder con el número real -- no lo evites ni lo
+   física/táctica/de plantel, goleadores del torneo, ranking FIFA de una selección o dónde está
+   su campo base), USALAS para responder con el número real -- no lo evites ni lo
    inventes, y no confíes en tu conocimiento previo del Mundial 2026 (puede estar desactualizado
    respecto al torneo real en curso). Si la herramienta no trae el dato pedido o falla, decilo
    explícitamente ("todavía no tengo ese dato cargado") y remití a la página correspondiente del
@@ -107,7 +108,7 @@ const TOOLS = [
           properties: {
             metric: {
               type: "string",
-              enum: ["minutos_jugados", "distancia_total_km", "distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh", "edad", "valor_mercado_eur"],
+              enum: ["minutos_jugados", "distancia_total_km", "distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh", "edad", "valor_mercado_eur", "caps", "goles_seleccion"],
             },
             limit: { type: "integer", description: "Cantidad de jugadores a devolver, por defecto 10." },
           },
@@ -138,6 +139,28 @@ const TOOLS = [
           required: ["metric"],
         },
       },
+      {
+        name: "get_goal_scorers",
+        description:
+          "Tabla de goleadores del Mundial 2026: goles convertidos (sin contar goles en contra), cuántos fueron de penal y en cuántos partidos distintos marcó cada jugador. Sin 'team' devuelve el ranking general del torneo; con 'team' filtra a los goleadores de esa selección.",
+        parameters: {
+          type: "object",
+          properties: {
+            team: { type: "string", description: "Opcional. Nombre de la selección en inglés, ej. 'Argentina', 'France'. Omitir para el ranking general del torneo." },
+            limit: { type: "integer", description: "Cantidad de goleadores a devolver, por defecto 10." },
+          },
+        },
+      },
+      {
+        name: "get_team_profile",
+        description:
+          "Perfil de una selección: ranking FIFA actual y previo, grupo del Mundial 2026, ciudad/instalación/país de su campo base, edad promedio del plantel, capitán y promedio de partidos internacionales (caps) del plantel.",
+        parameters: {
+          type: "object",
+          properties: { team: { type: "string", description: "Nombre de la selección en inglés, ej. 'Argentina', 'France', 'Brazil'." } },
+          required: ["team"],
+        },
+      },
     ],
   },
 ];
@@ -148,6 +171,8 @@ const TOOL_RPC_MAP = {
   get_player_ranking: (args) => ({ rpc: "get_player_ranking", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
   get_physical_leaders: (args) => ({ rpc: "get_physical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
   get_tactical_leaders: (args) => ({ rpc: "get_tactical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
+  get_goal_scorers: (args) => ({ rpc: "get_goal_scorers", body: { p_team: args?.team ? String(args.team) : null, p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
+  get_team_profile: (args) => ({ rpc: "get_team_profile", body: { p_team: String(args?.team ?? "") } }),
 };
 
 function corsHeaders(origin, allowedOrigin) {
