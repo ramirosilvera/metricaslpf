@@ -20,22 +20,31 @@ export default function PossessionBoxplot({ rows }: Props) {
     for (const r of rows) grouped.set(labelOf(r), (grouped.get(labelOf(r)) ?? 0) + 1);
     const order = [...grouped.keys()].sort((a, b) => grouped.get(b)! - grouped.get(a)!);
 
+    // en viewports angostos se achica el margen izquierdo y se truncan las
+    // etiquetas largas para que el gráfico no quede aplastado ni desborde
+    const width = Math.min(920, ref.current.clientWidth || 920);
+    const isNarrow = width < 520;
+
     const plot = Plot.plot({
-      width: Math.min(920, ref.current.clientWidth || 920),
-      height: 420,
-      marginLeft: 130,
+      width,
+      height: isNarrow ? 380 : 420,
+      marginLeft: isNarrow ? 96 : 130,
       style: {
         background: "transparent",
         color: tokens["--text-secondary"],
         fontFamily: "system-ui, sans-serif",
-        fontSize: "12px",
+        fontSize: isNarrow ? "10px" : "12px",
       },
       x: {
-        label: "posesión (proxy, % del tiempo de evento del partido)",
+        label: isNarrow ? "posesión (proxy, %)" : "posesión (proxy, % del tiempo de evento del partido)",
         percent: true,
         grid: true,
       },
-      y: { label: null, domain: order },
+      y: {
+        label: null,
+        domain: order,
+        tickFormat: isNarrow ? (d: string) => (d.length > 14 ? `${d.slice(0, 13)}…` : d) : undefined,
+      },
       marks: [
         Plot.gridX({ stroke: tokens["--gridline"] }),
         Plot.boxX(rows, {

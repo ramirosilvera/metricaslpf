@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { TeamSeasonSummary } from "../lib/data";
-import { useChartTokens } from "../lib/theme";
+import { useChartTokens, useIsNarrow } from "../lib/theme";
 
 const METRICS: { key: keyof TeamSeasonSummary; label: string; pct?: boolean }[] = [
   { key: "posesion_promedio_proxy", label: "Posesión (proxy StatsBomb)", pct: true },
@@ -17,6 +17,7 @@ interface Props {
 
 export default function RankingBar({ rows }: Props) {
   const tokens = useChartTokens();
+  const narrow = useIsNarrow();
   const [metricKey, setMetricKey] = useState<string>(METRICS[0].key as string);
   const metric = METRICS.find((m) => m.key === metricKey)!;
 
@@ -32,7 +33,7 @@ export default function RankingBar({ rows }: Props) {
   const isArgentina = sorted.map((r) => r.team === "Argentina");
 
   const option = {
-    grid: { left: 150, right: 40, top: 10, bottom: 30 },
+    grid: { left: narrow ? 104 : 150, right: narrow ? 16 : 40, top: 10, bottom: 30 },
     tooltip: {
       trigger: "axis",
       axisPointer: { type: "none" },
@@ -55,7 +56,12 @@ export default function RankingBar({ rows }: Props) {
       data: labels,
       inverse: true,
       axisLine: { lineStyle: { color: tokens["--baseline"] } },
-      axisLabel: { color: tokens["--text-secondary"], fontSize: 12 },
+      axisLabel: {
+        color: tokens["--text-secondary"],
+        fontSize: narrow ? 10 : 12,
+        width: narrow ? 94 : undefined,
+        overflow: "truncate",
+      },
       axisTick: { show: false },
     },
     series: [

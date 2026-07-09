@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { DerivedTeamMetricRow } from "../lib/data";
-import { useChartTokens } from "../lib/theme";
+import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
 
 const METRIC_LABELS: Record<string, string> = {
   posesion_promedio_proxy: "Posesión",
@@ -25,6 +25,7 @@ interface Props {
 
 export default function TeamMetricsRadar({ rows }: Props) {
   const tokens = useChartTokens();
+  const narrow = useIsNarrow();
   const teamSeasons = useMemo(() => [...new Set(rows.map((r) => `${r.team} ${r.season}`))].sort(), [rows]);
 
   const [aLabel, setALabel] = useState(teamSeasons.find((o) => o.startsWith("Argentina")) ?? teamSeasons[0] ?? "");
@@ -50,8 +51,16 @@ export default function TeamMetricsRadar({ rows }: Props) {
       },
       legend: { bottom: 0, textStyle: { color: tokens["--text-secondary"] } },
       radar: {
-        indicator: sharedMetrics.map((m) => ({ name: METRIC_LABELS[m], min: 0, max: 100 })),
-        axisName: { color: tokens["--text-secondary"], fontSize: 10 },
+        indicator: sharedMetrics.map((m) => ({
+          name: narrow ? wrapAxisName(METRIC_LABELS[m], 13) : METRIC_LABELS[m],
+          min: 0,
+          max: 100,
+        })),
+        radius: narrow ? "52%" : "70%",
+        axisName: {
+          color: tokens["--text-secondary"],
+          fontSize: narrow ? 9 : 10,
+        },
         splitLine: { lineStyle: { color: tokens["--gridline"] } },
         splitArea: { areaStyle: { color: ["transparent", "transparent"] } },
         axisLine: { lineStyle: { color: tokens["--baseline"] } },
@@ -66,7 +75,7 @@ export default function TeamMetricsRadar({ rows }: Props) {
         },
       ],
     };
-  }, [sharedMetrics, a, b, aLabel, bLabel, tokens]);
+  }, [sharedMetrics, a, b, aLabel, bLabel, tokens, narrow]);
 
   if (teamSeasons.length === 0) {
     return <p style={{ color: "var(--text-muted)" }}>Todavía no hay métricas derivadas cargadas.</p>;
@@ -92,7 +101,7 @@ export default function TeamMetricsRadar({ rows }: Props) {
         </select>
       </div>
       {option ? (
-        <ReactECharts option={option} style={{ height: 440 }} notMerge={true} />
+        <ReactECharts option={option} style={{ height: narrow ? 360 : 440 }} notMerge={true} />
       ) : (
         <p style={{ color: "var(--text-muted)" }}>
           Estas dos selecciones/torneos no comparten suficientes métricas cargadas todavía (ej. una es de 2018 y la

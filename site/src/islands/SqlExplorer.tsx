@@ -147,21 +147,7 @@ export default function SqlExplorer() {
         Tablas disponibles: {loadedTables.length ? loadedTables.join(", ") : "ninguna todavía"}. Corre 100% en tu
         navegador, sin backend — DuckDB-WASM lee los Parquet publicados en este sitio.
       </p>
-      <textarea
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        rows={8}
-        style={{
-          width: "100%",
-          fontFamily: "ui-monospace, monospace",
-          fontSize: "0.85rem",
-          padding: "0.75rem",
-          borderRadius: "8px",
-          border: "1px solid var(--border)",
-          background: "var(--surface-1)",
-          color: "var(--text-primary)",
-        }}
-      />
+      <textarea className="sql-editor" value={query} onChange={(e) => setQuery(e.target.value)} rows={8} />
       <div style={{ margin: "0.75rem 0" }}>
         <button
           onClick={runQuery}
@@ -173,6 +159,7 @@ export default function SqlExplorer() {
             borderRadius: "6px",
             padding: "0.5rem 1rem",
             fontSize: "0.9rem",
+            minHeight: 44,
             cursor: "pointer",
           }}
         >
@@ -185,7 +172,7 @@ export default function SqlExplorer() {
         </div>
       )}
       {result.length > 0 && (
-        <div style={{ overflowX: "auto" }}>
+        <div className="table-scroll">
           <table>
             <thead>
               <tr>

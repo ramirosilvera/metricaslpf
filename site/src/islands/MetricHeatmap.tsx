@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import type { TeamSeasonSummary } from "../lib/data";
-import { useChartTokens } from "../lib/theme";
+import { useChartTokens, useIsNarrow } from "../lib/theme";
 
 const METRICS: { key: keyof TeamSeasonSummary; label: string; invert?: boolean }[] = [
   { key: "posesion_promedio_proxy", label: "Posesión" },
@@ -22,6 +22,7 @@ interface Props {
 
 export default function MetricHeatmap({ rows }: Props) {
   const tokens = useChartTokens();
+  const narrow = useIsNarrow();
 
   const { labels, data } = useMemo(() => {
     const labels = rows.map((r) => `${r.team} ${r.season}`);
@@ -36,7 +37,7 @@ export default function MetricHeatmap({ rows }: Props) {
   }, [rows]);
 
   const option = {
-    grid: { left: 150, right: 20, top: 30, bottom: 60 },
+    grid: { left: narrow ? 96 : 150, right: narrow ? 8 : 20, top: 30, bottom: narrow ? 84 : 60 },
     tooltip: {
       backgroundColor: tokens["--surface-1"],
       borderColor: tokens["--gridline"],
@@ -47,14 +48,24 @@ export default function MetricHeatmap({ rows }: Props) {
       type: "category",
       data: METRICS.map((m) => m.label),
       splitArea: { show: true },
-      axisLabel: { color: tokens["--text-secondary"], fontSize: 11 },
+      axisLabel: {
+        color: tokens["--text-secondary"],
+        fontSize: narrow ? 9 : 11,
+        interval: 0,
+        rotate: narrow ? 28 : 0,
+      },
       axisLine: { lineStyle: { color: tokens["--baseline"] } },
     },
     yAxis: {
       type: "category",
       data: labels,
       splitArea: { show: true },
-      axisLabel: { color: tokens["--text-secondary"], fontSize: 11 },
+      axisLabel: {
+        color: tokens["--text-secondary"],
+        fontSize: narrow ? 9 : 11,
+        width: narrow ? 88 : undefined,
+        overflow: "truncate",
+      },
       axisLine: { lineStyle: { color: tokens["--baseline"] } },
     },
     visualMap: {
@@ -80,7 +91,11 @@ export default function MetricHeatmap({ rows }: Props) {
 
   return (
     <div>
-      <ReactECharts option={option} style={{ height: Math.max(360, labels.length * 26 + 100) }} notMerge={true} />
+      <ReactECharts
+        option={option}
+        style={{ height: Math.max(360, labels.length * (narrow ? 22 : 26) + (narrow ? 130 : 100)) }}
+        notMerge={true}
+      />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Percentil (0–100) dentro de este conjunto de partidos, no valor absoluto. Celdas claras = percentil bajo,
         oscuras = percentil alto.

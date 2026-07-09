@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { PlayerMinutesRow } from "../lib/data";
-import { useChartTokens } from "../lib/theme";
+import { useChartTokens, useIsNarrow } from "../lib/theme";
 
 interface Props {
   rows: PlayerMinutesRow[];
@@ -9,6 +9,7 @@ interface Props {
 
 export default function PlayerMinutesBar({ rows }: Props) {
   const tokens = useChartTokens();
+  const narrow = useIsNarrow();
   const teams = useMemo(() => [...new Set(rows.map((r) => r.team))].sort(), [rows]);
   const [team, setTeam] = useState(teams.includes("Argentina") ? "Argentina" : teams[0]);
 
@@ -22,7 +23,7 @@ export default function PlayerMinutesBar({ rows }: Props) {
   );
 
   const option = {
-    grid: { left: 170, right: 40, top: 10, bottom: 30 },
+    grid: { left: narrow ? 112 : 170, right: narrow ? 16 : 40, top: 10, bottom: 30 },
     tooltip: {
       trigger: "axis",
       axisPointer: { type: "none" },
@@ -37,9 +38,11 @@ export default function PlayerMinutesBar({ rows }: Props) {
     },
     xAxis: {
       type: "value",
-      name: "minutos jugados",
+      // en móvil el nombre del eje se superpone con los ticks de 4 cifras
+      name: narrow ? "" : "minutos jugados",
+      splitNumber: narrow ? 3 : 5,
       axisLine: { lineStyle: { color: tokens["--baseline"] } },
-      axisLabel: { color: tokens["--text-muted"] },
+      axisLabel: { color: tokens["--text-muted"], fontSize: narrow ? 10 : 12, hideOverlap: true },
       splitLine: { lineStyle: { color: tokens["--gridline"] } },
     },
     yAxis: {
@@ -47,7 +50,12 @@ export default function PlayerMinutesBar({ rows }: Props) {
       data: filtered.map((r) => r.player_name),
       inverse: true,
       axisLine: { lineStyle: { color: tokens["--baseline"] } },
-      axisLabel: { color: tokens["--text-secondary"], fontSize: 12 },
+      axisLabel: {
+        color: tokens["--text-secondary"],
+        fontSize: narrow ? 10 : 12,
+        width: narrow ? 102 : undefined,
+        overflow: "truncate",
+      },
       axisTick: { show: false },
     },
     series: [

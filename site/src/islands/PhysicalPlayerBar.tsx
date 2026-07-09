@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
-import { useChartTokens } from "../lib/theme";
+import { useChartTokens, useIsNarrow } from "../lib/theme";
 
 export interface PhysicalPlayerRankingRow {
   team: string;
@@ -26,6 +26,7 @@ interface Props {
 
 export default function PhysicalPlayerBar({ rows }: Props) {
   const tokens = useChartTokens();
+  const narrow = useIsNarrow();
   const [metricKey, setMetricKey] = useState<string>(METRICS[0].key as string);
   const metric = METRICS.find((m) => m.key === metricKey)!;
 
@@ -42,7 +43,7 @@ export default function PhysicalPlayerBar({ rows }: Props) {
   );
 
   const option = {
-    grid: { left: 170, right: 40, top: 10, bottom: 30 },
+    grid: { left: narrow ? 112 : 170, right: narrow ? 16 : 40, top: 10, bottom: 30 },
     tooltip: {
       trigger: "axis",
       axisPointer: { type: "none" },
@@ -66,7 +67,12 @@ export default function PhysicalPlayerBar({ rows }: Props) {
       data: filtered.map((r) => r.player_name),
       inverse: true,
       axisLine: { lineStyle: { color: tokens["--baseline"] } },
-      axisLabel: { color: tokens["--text-secondary"], fontSize: 12 },
+      axisLabel: {
+        color: tokens["--text-secondary"],
+        fontSize: narrow ? 10 : 12,
+        width: narrow ? 102 : undefined,
+        overflow: "truncate",
+      },
       axisTick: { show: false },
     },
     series: [

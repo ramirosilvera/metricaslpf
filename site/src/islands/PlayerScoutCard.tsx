@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { DerivedPlayerMetricRow } from "../lib/data";
-import { useChartTokens } from "../lib/theme";
+import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
 
 const METRIC_LABELS: Record<string, { label: string; suffix: string; group: "físico" | "táctico" }> = {
   distancia_promedio_km: { label: "Distancia / partido", suffix: " km", group: "físico" },
@@ -25,6 +25,7 @@ interface Props {
 
 export default function PlayerScoutCard({ rows }: Props) {
   const tokens = useChartTokens();
+  const narrow = useIsNarrow();
 
   const teams = useMemo(() => [...new Set(rows.map((r) => r.team))].sort(), [rows]);
   const [team, setTeam] = useState(teams.includes("Argentina") ? "Argentina" : teams[0] ?? "");
@@ -88,8 +89,16 @@ export default function PlayerScoutCard({ rows }: Props) {
         },
       },
       radar: {
-        indicator: radarMetrics.map((m) => ({ name: METRIC_LABELS[m].label, min: 0, max: 100 })),
-        axisName: { color: tokens["--text-secondary"], fontSize: 10 },
+        indicator: radarMetrics.map((m) => ({
+          name: narrow ? wrapAxisName(METRIC_LABELS[m].label, 13) : METRIC_LABELS[m].label,
+          min: 0,
+          max: 100,
+        })),
+        radius: narrow ? "52%" : "70%",
+        axisName: {
+          color: tokens["--text-secondary"],
+          fontSize: narrow ? 9 : 10,
+        },
         splitLine: { lineStyle: { color: tokens["--gridline"] } },
         splitArea: { areaStyle: { color: ["transparent", "transparent"] } },
         axisLine: { lineStyle: { color: tokens["--baseline"] } },
@@ -109,7 +118,7 @@ export default function PlayerScoutCard({ rows }: Props) {
         },
       ],
     };
-  }, [radarMetrics, playerRows, currentPlayer, tokens]);
+  }, [radarMetrics, playerRows, currentPlayer, tokens, narrow]);
 
   if (rows.length === 0) {
     return <p style={{ color: "var(--text-muted)" }}>Todavía no hay métricas por jugador cargadas.</p>;
@@ -146,7 +155,7 @@ export default function PlayerScoutCard({ rows }: Props) {
       </div>
 
       {option ? (
-        <ReactECharts option={option} style={{ height: 380 }} notMerge={true} />
+        <ReactECharts option={option} style={{ height: narrow ? 330 : 380 }} notMerge={true} />
       ) : (
         <p style={{ color: "var(--text-muted)" }}>
           {currentPlayer ? `${currentPlayer} todavía no tiene suficientes métricas cargadas para el radar.` : "Elegí un jugador."}

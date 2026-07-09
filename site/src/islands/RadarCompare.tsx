@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { RadarRow } from "../lib/data";
-import { useChartTokens } from "../lib/theme";
+import { useChartTokens, useIsNarrow } from "../lib/theme";
 
 const INDICATORS = [
-  { key: "posesion_promedio_proxy_percentil", name: "Posesión (percentil)" },
-  { key: "precision_pases_promedio_percentil", name: "Precisión de pase (percentil)" },
-  { key: "remates_promedio_percentil", name: "Remates (percentil)" },
-  { key: "remates_al_arco_promedio_percentil", name: "Remates al arco (percentil)" },
+  { key: "posesion_promedio_proxy_percentil", name: "Posesión (percentil)", short: "Posesión" },
+  { key: "precision_pases_promedio_percentil", name: "Precisión de pase (percentil)", short: "Precisión\nde pase" },
+  { key: "remates_promedio_percentil", name: "Remates (percentil)", short: "Remates" },
+  { key: "remates_al_arco_promedio_percentil", name: "Remates al arco (percentil)", short: "Remates\nal arco" },
 ] as const;
 
 interface Props {
@@ -16,6 +16,7 @@ interface Props {
 
 export default function RadarCompare({ rows }: Props) {
   const tokens = useChartTokens();
+  const narrow = useIsNarrow();
   const options = rows.map((r) => `${r.team} ${r.season}`);
   const [aLabel, setALabel] = useState(options.find((o) => o.startsWith("Argentina")) ?? options[0]);
   const [bLabel, setBLabel] = useState(options.find((o) => o.startsWith("France")) ?? options[1] ?? options[0]);
@@ -38,8 +39,14 @@ export default function RadarCompare({ rows }: Props) {
         textStyle: { color: tokens["--text-secondary"] },
       },
       radar: {
-        indicator: INDICATORS.map((i) => ({ name: i.name, min: 0, max: 100 })),
-        axisName: { color: tokens["--text-secondary"], fontSize: 11 },
+        // en móvil se usan nombres cortos (la nota al pie ya aclara que todo
+        // es percentil) para que las puntas izquierda/derecha no se recorten
+        indicator: INDICATORS.map((i) => ({ name: narrow ? i.short : i.name, min: 0, max: 100 })),
+        radius: narrow ? "56%" : "70%",
+        axisName: {
+          color: tokens["--text-secondary"],
+          fontSize: narrow ? 10 : 11,
+        },
         splitLine: { lineStyle: { color: tokens["--gridline"] } },
         splitArea: { areaStyle: { color: ["transparent", "transparent"] } },
         axisLine: { lineStyle: { color: tokens["--baseline"] } },
@@ -64,7 +71,7 @@ export default function RadarCompare({ rows }: Props) {
         },
       ],
     };
-  }, [a, b, tokens, aLabel, bLabel]);
+  }, [a, b, tokens, aLabel, bLabel, narrow]);
 
   return (
     <div>
@@ -86,7 +93,7 @@ export default function RadarCompare({ rows }: Props) {
         </select>
       </div>
       {a && b ? (
-        <ReactECharts option={option} style={{ height: 420 }} notMerge={true} />
+        <ReactECharts option={option} style={{ height: narrow ? 340 : 420 }} notMerge={true} />
       ) : (
         <p>Elegí dos selecciones/torneos para comparar.</p>
       )}

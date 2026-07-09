@@ -60,6 +60,42 @@ function readTokens(): ThemeTokens {
   return out;
 }
 
+// parte una etiqueta de eje en varias líneas (por palabra) -- el
+// width/overflow de axisName de ECharts no aplica en radares, así que el
+// quiebre se hace a mano para que las puntas no se recorten en móvil
+export function wrapAxisName(name: string, maxChars = 14): string {
+  const lines: string[] = [];
+  let current = "";
+  for (const word of name.split(" ")) {
+    if (current && `${current} ${word}`.length > maxChars) {
+      lines.push(current);
+      current = word;
+    } else {
+      current = current ? `${current} ${word}` : word;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.join("\n");
+}
+
+// true en viewports angostos (móvil) -- para achicar márgenes de grid,
+// rotar labels o reducir alturas en los charts sin duplicar componentes.
+export function useIsNarrow(query = "(max-width: 640px)"): boolean {
+  const [narrow, setNarrow] = useState<boolean>(() =>
+    typeof window === "undefined" ? false : window.matchMedia(query).matches,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const update = () => setNarrow(mq.matches);
+    mq.addEventListener("change", update);
+    update();
+    return () => mq.removeEventListener("change", update);
+  }, [query]);
+
+  return narrow;
+}
+
 export function useChartTokens(): ThemeTokens {
   const [tokens, setTokens] = useState<ThemeTokens>(readTokens);
 

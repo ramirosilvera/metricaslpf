@@ -104,6 +104,11 @@ html,
 body {
   margin: 0;
   padding: 0;
+  /* evita el bug clásico móvil de scroll horizontal por contenido ancho
+     (charts, tablas) que se escapa del layout; clip no crea un scroll
+     container (a diferencia de hidden), con hidden como fallback */
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -208,7 +213,12 @@ a:hover {
 .nav-toggle-label {
   display: none;
   cursor: pointer;
-  padding: 0.4rem;
+  /* área táctil cómoda (44x44) para el botón hamburguesa */
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
 }
@@ -252,6 +262,11 @@ a:hover {
     display: inline-flex;
   }
 
+  .site-header .wrap {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+
   .nav {
     display: none;
     position: absolute;
@@ -262,16 +277,34 @@ a:hover {
     align-items: stretch;
     background: var(--surface-1);
     border-bottom: 1px solid var(--border);
-    padding: 0.5rem 1.5rem 1rem;
+    padding: 0.5rem 1rem 1rem;
     gap: 0.15rem;
+    box-shadow: var(--shadow-md);
+    max-height: calc(100vh - 70px);
+    max-height: calc(100dvh - 70px);
+    overflow-y: auto;
   }
 
   .nav a {
-    padding: 0.6rem 0.7rem;
+    /* ítems del menú móvil con altura táctil de ~44px */
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
   }
 
   .nav-toggle:checked ~ .nav {
     display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  /* en pantallas muy angostas el subtítulo de marca rompe a dos líneas y
+     engorda el header sticky -- se oculta y queda solo el nombre */
+  .brand-text span {
+    display: none;
   }
 }
 
@@ -465,6 +498,8 @@ p {
   border-radius: var(--radius-md);
   background: var(--surface-1);
   padding: 1.15rem 1.35rem;
+  /* URLs o mensajes de error largos sin espacios no deben desbordar en móvil */
+  overflow-wrap: anywhere;
 }
 
 .callout.warning {
@@ -523,6 +558,7 @@ p {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  flex-wrap: wrap;
 }
 
 .progress-track {
@@ -615,6 +651,44 @@ tbody tr:hover td {
   background: var(--brand-soft);
 }
 
+/* contenedor de scroll horizontal para tablas anchas, con sombras en los
+   bordes como pista visual de que hay más contenido (truco de
+   background-attachment local/scroll: las sombras solo aparecen cuando
+   hay contenido oculto hacia ese lado) */
+.table-scroll {
+  /* color de fondo detrás de la tabla: page-plane suelto, surface-1 en cards */
+  --table-scroll-bg: var(--page-plane);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background:
+    linear-gradient(90deg, var(--table-scroll-bg) 40%, transparent) left / 32px 100% no-repeat local,
+    linear-gradient(270deg, var(--table-scroll-bg) 40%, transparent) right / 32px 100% no-repeat local,
+    linear-gradient(90deg, color-mix(in srgb, var(--text-primary) 22%, transparent), transparent) left / 14px 100% no-repeat scroll,
+    linear-gradient(270deg, color-mix(in srgb, var(--text-primary) 22%, transparent), transparent) right / 14px 100% no-repeat scroll;
+}
+
+.card .table-scroll {
+  --table-scroll-bg: var(--surface-1);
+}
+
+.table-scroll table {
+  /* que el hover de fila no tape las sombras de scroll */
+  background: transparent;
+}
+
+@media (max-width: 640px) {
+  .table-scroll table {
+    /* evita que las columnas se aplasten hasta ser ilegibles: la tabla
+       conserva un ancho mínimo y se desplaza horizontalmente */
+    min-width: 560px;
+  }
+
+  tbody td,
+  thead th {
+    padding: 0.7rem 0.6rem;
+  }
+}
+
 .section {
   margin-top: 3rem;
 }
@@ -662,6 +736,28 @@ input[type="text"] {
   border-radius: var(--radius-sm);
   padding: 0.5rem 0.75rem;
   font-size: 0.88rem;
+  min-height: 40px;
+  /* un <select> se dimensiona según su opción más ancha -- sin esto puede
+     desbordar el viewport en móvil con etiquetas largas */
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  select,
+  input[type="text"] {
+    min-height: 44px;
+    /* 16px mínimo: evita el auto-zoom de iOS Safari al enfocar el campo */
+    font-size: 1rem;
+  }
+
+  .controls-row {
+    gap: 0.6rem;
+  }
+
+  .controls-row select {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
 }
 
 select:focus-visible,
@@ -790,8 +886,8 @@ pre {
 /* Asistente de IA (widget flotante) */
 .chat-widget {
   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  right: calc(1.25rem + env(safe-area-inset-right, 0px));
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
   z-index: 50;
   display: flex;
   flex-direction: column;
@@ -819,8 +915,11 @@ pre {
 }
 
 .chat-panel {
-  width: min(360px, calc(100vw - 2.5rem));
-  height: min(480px, calc(100vh - 8rem));
+  width: min(360px, calc(100vw - 2.5rem - env(safe-area-inset-right, 0px)));
+  /* dvh (con fallback vh) evita que la barra de URL de iOS/Android tape el
+     panel; se descuenta además el safe-area inferior */
+  height: min(480px, calc(100vh - 8rem - env(safe-area-inset-bottom, 0px)));
+  height: min(480px, calc(100dvh - 8rem - env(safe-area-inset-bottom, 0px)));
   background: var(--surface-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -847,7 +946,13 @@ pre {
   cursor: pointer;
   font-size: 0.9rem;
   line-height: 1;
-  padding: 0.25rem;
+  /* área táctil de 40x40 sin agrandar el ícono */
+  width: 40px;
+  height: 40px;
+  margin: -0.5rem -0.5rem -0.5rem 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
 }
 
 .chat-messages {
@@ -878,6 +983,7 @@ pre {
   color: var(--text-primary);
   border-radius: var(--radius-sm);
   padding: 0.5rem 0.7rem;
+  min-height: 40px;
   font-size: 0.82rem;
   cursor: pointer;
 }
@@ -893,6 +999,7 @@ pre {
   font-size: 0.87rem;
   line-height: 1.4;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .chat-message-user {
@@ -930,12 +1037,14 @@ pre {
 
 .chat-input-row input {
   flex: 1;
+  min-width: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface-1);
   color: var(--text-primary);
   padding: 0.5rem 0.7rem;
   font-size: 0.87rem;
+  min-height: 44px;
 }
 
 .chat-input-row button {
@@ -944,6 +1053,7 @@ pre {
   font-size: 0.85rem;
   border: none;
   cursor: pointer;
+  min-height: 44px;
 }
 
 .chat-input-row button:disabled {
@@ -951,9 +1061,101 @@ pre {
   cursor: not-allowed;
 }
 
+@media (max-width: 640px) {
+  .chat-input-row input {
+    /* 16px mínimo: evita el auto-zoom de iOS Safari al enfocar */
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 480px) {
   .chat-widget {
-    right: 0.75rem;
-    bottom: 0.75rem;
+    right: calc(0.75rem + env(safe-area-inset-right, 0px));
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .chat-panel {
+    width: calc(100vw - 1.5rem - env(safe-area-inset-right, 0px) - env(safe-area-inset-left, 0px));
+  }
+}
+
+/* ---------- editor SQL (isla SqlExplorer) ---------- */
+
+.sql-editor {
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  resize: vertical;
+}
+
+@media (max-width: 640px) {
+  .sql-editor {
+    /* 16px mínimo: evita el auto-zoom de iOS Safari al enfocar */
+    font-size: 1rem;
+  }
+}
+
+/* ---------- ritmo de espaciado en móvil ---------- */
+
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 1rem;
+  }
+
+  main {
+    padding: 1.75rem 0 3rem;
+  }
+
+  .section {
+    margin-top: 2.25rem;
+  }
+
+  .card {
+    padding: 1.1rem 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .callout {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .lede {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    margin-top: 1.25rem;
+  }
+
+  .btn {
+    min-height: 44px;
+  }
+
+  .stat-tiles {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .stat-tile {
+    padding: 0.9rem 1rem;
+  }
+
+  .stat-tile .value {
+    font-size: 1.55rem;
+  }
+
+  .footer {
+    margin-top: 2.5rem;
+    padding: 1.5rem 0;
   }
 }

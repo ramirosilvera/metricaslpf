@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { TimelineRow } from "../lib/data";
-import { useChartTokens } from "../lib/theme";
+import { useChartTokens, useIsNarrow } from "../lib/theme";
 
 interface Props {
   rows: TimelineRow[];
@@ -9,6 +9,7 @@ interface Props {
 
 export default function TimelineChart({ rows }: Props) {
   const tokens = useChartTokens();
+  const narrow = useIsNarrow();
   const teamSeasons = useMemo(() => {
     const s = new Set(rows.map((r) => `${r.team} ${r.season}`));
     return [...s].sort();
@@ -25,7 +26,7 @@ export default function TimelineChart({ rows }: Props) {
 
   const option = {
     color: [tokens["--series-1"], tokens["--series-3"]],
-    grid: { left: 55, right: 55, top: 30, bottom: 60 },
+    grid: { left: narrow ? 38 : 55, right: narrow ? 12 : 55, top: narrow ? 48 : 30, bottom: narrow ? 70 : 60 },
     tooltip: {
       trigger: "axis",
       backgroundColor: tokens["--surface-1"],
@@ -37,12 +38,12 @@ export default function TimelineChart({ rows }: Props) {
       type: "category",
       data: filtered.map((r) => `${r.stage}\n${r.match_date}`),
       axisLine: { lineStyle: { color: tokens["--baseline"] } },
-      axisLabel: { color: tokens["--text-muted"], fontSize: 10, interval: 0, rotate: 20 },
+      axisLabel: { color: tokens["--text-muted"], fontSize: narrow ? 9 : 10, interval: 0, rotate: narrow ? 35 : 20 },
     },
     yAxis: [
       {
         type: "value",
-        name: "posesión proxy (%)",
+        name: narrow ? "" : "posesión proxy (%)",
         min: 0,
         max: 100,
         axisLabel: { color: tokens["--text-muted"] },
@@ -80,7 +81,7 @@ export default function TimelineChart({ rows }: Props) {
           ))}
         </select>
       </div>
-      <ReactECharts option={option} style={{ height: 380 }} notMerge={true} />
+      <ReactECharts option={option} style={{ height: narrow ? 320 : 380 }} notMerge={true} />
     </div>
   );
 }
