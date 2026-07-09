@@ -13,6 +13,8 @@ Fuentes que combina (cada una opcional -- si no existe el CSV, se saltea):
     fallback si algún día Transfermarkt deja de bloquear el scraping;
     el paso "squads" más abajo prueba 26worldcup primero)
   - data/raw/26worldcup/_processed/team_profile.csv (ranking FIFA, campo base)
+  - data/raw/openfootball/_processed/goal_events.csv (goleador/minuto/penal
+    de cada gol del Mundial 2026, CC0; ver fetch_openfootball_2026.py)
 
 Uso:
     python etl/build_warehouse.py
@@ -33,6 +35,7 @@ from schemas import (
     TacticalPlayerMatchStatsSchema,
     SquadsSchema,
     TeamProfileSchema,
+    GoalEventsSchema,
 )
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -175,6 +178,25 @@ def build():
         print(f"team_profile.parquet: {len(team_profile)} filas")
     else:
         print("team_profile: sin datos todavia (correr etl/fetch_26worldcup_squads.py)")
+
+    # --- goal_events (openfootball/worldcup.json, CC0 -- primer dato a nivel
+    # de evento de gol del proyecto: goleador, minuto, penal/en contra). El
+    # resultado final de cada partido ya se cruzó contra matches (arriba,
+    # fuente FIFA Training Centre) dentro de fetch_openfootball_2026.py --
+    # ver data/raw/openfootball/_score_discrepancies.json si hubo diferencias. ---
+    goal_events = _read_csv_if_exists(RAW / "openfootball" / "_processed" / "goal_events.csv")
+    if goal_events is not None:
+        goal_events["match_id"] = goal_events["match_id"].astype("int64")
+        goal_events["minute"] = pd.to_numeric(goal_events["minute"], errors="coerce").astype("Int64")
+        goal_events["minute_stoppage"] = pd.to_numeric(goal_events["minute_stoppage"], errors="coerce").astype("Int64")
+        goal_events["own_goal"] = goal_events["own_goal"].astype(str).str.lower().map({"true": True, "false": False}).astype(bool)
+        goal_events["penalty"] = goal_events["penalty"].astype(str).str.lower().map({"true": True, "false": False}).astype(bool)
+        goal_events = GoalEventsSchema.validate(goal_events)
+        con.register("goal_events_df", goal_events)
+        con.execute(f"COPY goal_events_df TO '{WAREHOUSE / 'goal_events.parquet'}' (FORMAT PARQUET)")
+        print(f"goal_events.parquet: {len(goal_events)} filas")
+    else:
+        print("goal_events: sin datos todavia (correr etl/fetch_openfootball_2026.py)")
 
     con.close()
 

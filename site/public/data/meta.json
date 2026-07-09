@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T11:08:59.304783+00:00",
+  "generated_at": "2026-07-09T11:17:18.615772+00:00",
   "sources": {
     "tactical_context": {
       "provider": "StatsBomb Open Data",
@@ -36,6 +36,15 @@
       "provider": "calculado internamente sobre las fuentes de arriba",
       "coverage": "percentiles y z-scores por temporada, clustering de estilo de juego",
       "status": "ok"
+    },
+    "goal_events": {
+      "provider": "openfootball/worldcup.json",
+      "license": "CC0-1.0 (dominio publico) -- https://github.com/openfootball/worldcup.json",
+      "coverage": "goleador, minuto y flags de penal/gol en contra de cada gol del Mundial 2026",
+      "cross_checked_against": "resultado final de matches.parquet (FIFA Training Centre)",
+      "status": "ok",
+      "matches_with_goals": 88,
+      "matches_played_total": 96
     }
   }
 }

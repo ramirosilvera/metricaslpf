@@ -253,3 +253,40 @@ TeamProfileSchema = DataFrameSchema(
     strict=False,
     coerce=True,
 )
+
+# Eventos de gol (goleador, minuto, penal/en contra) del Mundial 2026 --
+# openfootball/worldcup.json (CC0, ver etl/fetch_openfootball_2026.py). Es la
+# primera tabla del proyecto a nivel de EVENTO de gol (hasta ahora solo había
+# resultados de partido y estadística agregada por jugador/equipo). El
+# resultado final de cada partido ya se cruzó contra matches.parquet
+# (FIFA Training Centre) antes de llegar acá -- ver _score_discrepancies.json
+# si hubo alguna diferencia entre fuentes.
+GoalEventsSchema = DataFrameSchema(
+    {
+        "match_id": Column(int),
+        # convención de box-score (igual que matches.home_score/away_score):
+        # "team" es la selección a cuyo marcador cuenta el gol. Para un gol
+        # en contra (own_goal=True) el jugador pertenece al EQUIPO RIVAL de
+        # "team" -- así lo separa la propia fuente (goals1/goals2 por lado
+        # que se beneficia, no por lado del jugador). No confundir "team" con
+        # "selección del jugador" en filas con own_goal=True.
+        "team": Column(str),
+        "player_name": Column(str),
+        # minuto "base" (ej. "90+4" -> 90). 130 en vez de 120 para dejar
+        # margen a descuento largo en la segunda mitad de la prórroga.
+        "minute": Column("Int64", Check.in_range(0, 130), nullable=True),
+        # minutos de descuento sumados al minuto base (ej. "90+4" -> 4). Nulo
+        # si el gol fue en tiempo reglamentario/prórroga sin descuento.
+        "minute_stoppage": Column("Int64", Check.ge(0), nullable=True),
+        # texto crudo tal cual lo publica la fuente (ej. "90+4") -- se
+        # conserva para no perder precision al mostrarlo en el sitio.
+        "minute_display": Column(str, nullable=True),
+        "own_goal": Column(bool),
+        "penalty": Column(bool),
+        "source": Column(str),
+        "source_url": Column(str, nullable=True),
+        "retrieved_at": Column(str),
+    },
+    strict=False,
+    coerce=True,
+)

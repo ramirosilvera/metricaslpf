@@ -53,6 +53,7 @@ def build():
     has_physical_players = (WAREHOUSE / "physical_player_match_stats.parquet").exists()
     has_squads = (WAREHOUSE / "squads.parquet").exists()
     has_team_profile = (WAREHOUSE / "team_profile.parquet").exists()
+    has_goal_events = (WAREHOUSE / "goal_events.parquet").exists()
     has_derived_team_metrics = (WAREHOUSE / "derived_team_metrics.parquet").exists()
     has_derived_team_style = (WAREHOUSE / "derived_team_style.parquet").exists()
     has_derived_player_metrics = (WAREHOUSE / "derived_player_metrics.parquet").exists()
@@ -234,6 +235,46 @@ def build():
             },
         )
 
+    if has_goal_events:
+        goal_events = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'goal_events.parquet'}')").df()
+        if has_matches:
+            matches_for_goals = con.execute(
+                f"SELECT match_id, season, stage, home_team, away_team, match_date FROM read_parquet('{WAREHOUSE / 'matches.parquet'}')"
+            ).df()
+            goal_events = goal_events.merge(matches_for_goals, on="match_id", how="left")
+        _write_json("goal_events.json", _records(goal_events.sort_values(["match_id", "minute", "minute_stoppage"])))
+
+        # ranking de goleadores -- los goles en contra NO suman al goleador
+        # (son gol del rival), pero se muestran aparte para no perder el dato.
+        scoring = goal_events[~goal_events["own_goal"]]
+        top_scorers = (
+            scoring.groupby(["team", "player_name"])
+            .agg(
+                goles=("player_name", "count"),
+                penales=("penalty", "sum"),
+                partidos_con_gol=("match_id", "nunique"),
+            )
+            .reset_index()
+            .sort_values(["goles", "player_name"], ascending=[False, True])
+        )
+        # ojo con la semantica de "team" acá: en goal_events es la selección
+        # BENEFICIADA en el marcador (ver GoalEventsSchema.team), no la del
+        # jugador -- se renombra a equipo_beneficiado para no sugerir que el
+        # jugador (rival) juega para ese equipo.
+        own_goals = (
+            goal_events[goal_events["own_goal"]]
+            .rename(columns={"team": "equipo_beneficiado"})
+            .groupby(["equipo_beneficiado", "player_name"])
+            .agg(goles_en_contra=("player_name", "count"))
+            .reset_index()
+        )
+        _write_json("goal_scorer_ranking.json", _records(top_scorers))
+        if len(own_goals):
+            _write_json("own_goals.json", _records(own_goals))
+    else:
+        _write_json("goal_events.json", {"status": "pending_first_scrape", "rows": []})
+        _write_json("goal_scorer_ranking.json", {"status": "pending_first_scrape", "rows": []})
+
     if has_derived_team_metrics:
         derived_team = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_team_metrics.parquet'}')").df()
         _write_json("derived_team_metrics.json", _records(derived_team))
@@ -302,6 +343,21 @@ def build():
                 "provider": "calculado internamente sobre las fuentes de arriba",
                 "coverage": "percentiles y z-scores por temporada, clustering de estilo de juego",
                 "status": "ok" if has_derived_team_metrics else "pending_first_scrape",
+            },
+            "goal_events": {
+                "provider": "openfootball/worldcup.json",
+                "license": "CC0-1.0 (dominio publico) -- https://github.com/openfootball/worldcup.json",
+                "coverage": "goleador, minuto y flags de penal/gol en contra de cada gol del Mundial 2026",
+                "cross_checked_against": "resultado final de matches.parquet (FIFA Training Centre)",
+                "status": "ok" if has_goal_events else "pending_first_scrape",
+                # partidos con al menos un gol propio (un 0-0 matcheado
+                # correctamente no aporta filas acá, no es un partido faltante)
+                "matches_with_goals": int(goal_events["match_id"].nunique()) if has_goal_events else 0,
+                "matches_played_total": (
+                    int(matches[(matches["season"] == "2026") & matches["home_score"].notna()]["match_id"].nunique())
+                    if has_goal_events and has_matches
+                    else None
+                ),
             },
         },
     }

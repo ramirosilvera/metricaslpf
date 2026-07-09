@@ -1,0 +1,1185 @@
+[
+  {
+    "team": "Argentina",
+    "player_name": "Lionel Messi",
+    "goles": 8,
+    "penales": 0,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "Norway",
+    "player_name": "Erling Haaland",
+    "goles": 7,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "France",
+    "player_name": "Kylian Mbappé",
+    "goles": 7,
+    "penales": 1,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "England",
+    "player_name": "Harry Kane",
+    "goles": 6,
+    "penales": 2,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Ismaïla Sarr",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "England",
+    "player_name": "Jude Bellingham",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Mexico",
+    "player_name": "Julián Quiñones",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Spain",
+    "player_name": "Mikel Oyarzabal",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "France",
+    "player_name": "Ousmane Dembélé",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Brazil",
+    "player_name": "Vinícius Júnior",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Netherlands",
+    "player_name": "Brian Brobbey",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Netherlands",
+    "player_name": "Cody Gakpo",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Portugal",
+    "player_name": "Cristiano Ronaldo",
+    "goles": 3,
+    "penales": 1,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Germany",
+    "player_name": "Deniz Undav",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "New Zealand",
+    "player_name": "Elijah Just",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "USA",
+    "player_name": "Folarin Balogun",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Ismael Saibari",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Switzerland",
+    "player_name": "Johan Manzambi",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Canada",
+    "player_name": "Jonathan David",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Germany",
+    "player_name": "Kai Havertz",
+    "goles": 3,
+    "penales": 1,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Brazil",
+    "player_name": "Matheus Cunha",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Mexico",
+    "player_name": "Raúl Jiménez",
+    "goles": 3,
+    "penales": 1,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Romelu Lukaku",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Congo DR",
+    "player_name": "Yoane Wissa",
+    "goles": 3,
+    "penales": 1,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "player_name": "Amad Diallo",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Sweden",
+    "player_name": "Anthony Elanga",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Japan",
+    "player_name": "Ayase Ueda",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Azzedine Ounahi",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "France",
+    "player_name": "Bradley Barcola",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Switzerland",
+    "player_name": "Breel Embolo",
+    "goles": 2,
+    "penales": 1,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Charles De Ketelaere",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Netherlands",
+    "player_name": "Crysencio Summerville",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Canada",
+    "player_name": "Cyle Larin",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Japan",
+    "player_name": "Daichi Kamada",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Colombia",
+    "player_name": "Daniel Muñoz",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Egypt",
+    "player_name": "Emam Ashour",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "player_name": "Ermin Mahmic",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Habib Diarra",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Leandro Trossard",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "USA",
+    "player_name": "Malik Tillman",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Austria",
+    "player_name": "Marko Arnautovic",
+    "goles": 2,
+    "penales": 1,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Uruguay",
+    "player_name": "Maxi Araújo",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Egypt",
+    "player_name": "Mostafa Zico",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "player_name": "Nicolas Pépé",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Pape Gueye",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "IR Iran",
+    "player_name": "Ramin Rezaeian",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Algeria",
+    "player_name": "Riyad Mahrez",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Switzerland",
+    "player_name": "Rubén Vargas",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Soufiane Rahimi",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Sweden",
+    "player_name": "Yasin Ayari",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Youri Tielemans",
+    "goles": 2,
+    "penales": 1,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Uzbekistan",
+    "player_name": "Abbosbek Fayzullaev",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Saudi Arabia",
+    "player_name": "Abdulelah Al-Amri",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Achraf Hakimi",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Uruguay",
+    "player_name": "Agustín Cano",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "USA",
+    "player_name": "Alex Freeman",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Sweden",
+    "player_name": "Alexander Isak",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Alexis Saelemaekers",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Jordan",
+    "player_name": "Ali Olwan",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Algeria",
+    "player_name": "Amine Gouiri",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Ante Budimir",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Norway",
+    "player_name": "Antonio Nusa",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Türkiye",
+    "player_name": "Arda Güler",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "USA",
+    "player_name": "Auston Trusty",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Iraq",
+    "player_name": "Aymen Hussein",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Türkiye",
+    "player_name": "Baris Alper Yilmaz",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Congo DR",
+    "player_name": "Brian Cipenga",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Ghana",
+    "player_name": "Caleb Yirenkyi",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Brazil",
+    "player_name": "Casemiro",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Australia",
+    "player_name": "Connor Metcalfe",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentina",
+    "player_name": "Cristian Romero",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Japan",
+    "player_name": "Daizen Maeda",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Switzerland",
+    "player_name": "Dan Ndoye",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Cabo Verde",
+    "player_name": "Deroy Duarte",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Ghana",
+    "player_name": "Derrick Luckassen",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "France",
+    "player_name": "Désiré Doué",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Uzbekistan",
+    "player_name": "Eldor Shomurodov",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentina",
+    "player_name": "Enzo Fernández",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Germany",
+    "player_name": "Felix Nmecha",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "New Zealand",
+    "player_name": "Finn Surman",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Congo DR",
+    "player_name": "Fiston Mayele",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "player_name": "Franck Kessié",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Brazil",
+    "player_name": "Gabriel Martinelli",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Gessime Yassine",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentina",
+    "player_name": "Giovani Lo Celso",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "USA",
+    "player_name": "Giovanni Reyna",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Ecuador",
+    "player_name": "Gonzalo Plata",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Portugal",
+    "player_name": "Gonçalo Ramos",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Switzerland",
+    "player_name": "Granit Xhaka",
+    "goles": 1,
+    "penales": 1,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Hans Vanaken",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Qatar",
+    "player_name": "Hassan Al-Haydos",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Tunisia",
+    "player_name": "Hazem Mastouri",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Korea Republic",
+    "player_name": "Hwang In-Beom",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Cabo Verde",
+    "player_name": "Hélio Varela",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Ibrahim Mbaye",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Iliman Ndiaye",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Issa Diop",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Ivan Perisic",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Germany",
+    "player_name": "Jamal Musiala",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Netherlands",
+    "player_name": "Jan Paul van Hecke",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Colombia",
+    "player_name": "Jhon Arias",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Scotland",
+    "player_name": "John McGinn",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "player_name": "Jovo Lukić",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Portugal",
+    "player_name": "João Neves",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Paraguay",
+    "player_name": "Julio Enciso",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Japan",
+    "player_name": "Junya Ito",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Colombia",
+    "player_name": "Jáminton Campaz",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Türkiye",
+    "player_name": "Kaan Ayhan",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Japan",
+    "player_name": "Kaishu Sano",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Japan",
+    "player_name": "Keito Nakamura",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "player_name": "Kerim Alajbegovic",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Kevin De Bruyne",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Cabo Verde",
+    "player_name": "Kevin Pina",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Czechia",
+    "player_name": "Ladislav Krejcí",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Spain",
+    "player_name": "Lamine Yamal",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentina",
+    "player_name": "Lautaro Martínez",
+    "goles": 1,
+    "penales": 1,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Norway",
+    "player_name": "Leo Østigard",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Germany",
+    "player_name": "Leroy Sané",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentina",
+    "player_name": "Lisandro Martínez",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Curaçao",
+    "player_name": "Livano Comenencia",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Colombia",
+    "player_name": "Luis Díaz",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Mexico",
+    "player_name": "Luis Romo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Egypt",
+    "player_name": "Mahmoud Saber",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Austria",
+    "player_name": "Marcel Sabitzer",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Norway",
+    "player_name": "Marcus Holmgren Pedersen",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "England",
+    "player_name": "Marcus Rashford",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Martin Baturina",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Mexico",
+    "player_name": "Mateo Chávez",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Sweden",
+    "player_name": "Mattias Svanberg",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Paraguay",
+    "player_name": "Matías Galarza",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Paraguay",
+    "player_name": "Mauricio",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Czechia",
+    "player_name": "Michal Sadílek",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Spain",
+    "player_name": "Mikel Merino",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Egypt",
+    "player_name": "Mohamed Salah",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "IR Iran",
+    "player_name": "Mohammad Mohebbi",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Jordan",
+    "player_name": "Mousa Al-Tamari",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Algeria",
+    "player_name": "Nadhir Benbouali",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Canada",
+    "player_name": "Nathan Saliba",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Germany",
+    "player_name": "Nathaniel Brown",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Australia",
+    "player_name": "Nestory Irankunda",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Brazil",
+    "player_name": "Neymar",
+    "goles": 1,
+    "penales": 1,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Germany",
+    "player_name": "Nico Schlotterbeck",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Nikola Vlasic",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Ecuador",
+    "player_name": "Nilson Angulo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Jordan",
+    "player_name": "Nizar Al-Rashdan",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Portugal",
+    "player_name": "Nuno Mendes",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Korea Republic",
+    "player_name": "Oh Hyeon-Gyu",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Tunisia",
+    "player_name": "Omar Rekik",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Spain",
+    "player_name": "Pedro Porro",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Petar Musa",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Petar Sucic",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Canada",
+    "player_name": "Promise David",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Portugal",
+    "player_name": "Rafael Leão",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Algeria",
+    "player_name": "Rafik Belghali",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Austria",
+    "player_name": "Romano Schmid",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Austria",
+    "player_name": "Sasa Kalajdzic",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "USA",
+    "player_name": "Sebastian Berhalter",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Cabo Verde",
+    "player_name": "Sidny Lopes Cabral",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Canada",
+    "player_name": "Stephan Eustáquio",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "South Africa",
+    "player_name": "Teboho Mokoena",
+    "goles": 1,
+    "penales": 1,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "South Africa",
+    "player_name": "Thapelo Maseko",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Norway",
+    "player_name": "Thelo Aasgaard",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Egypt",
+    "player_name": "Trézéguet",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Sweden",
+    "player_name": "Viktor Gyökeres",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Netherlands",
+    "player_name": "Virgil van Dijk",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Haiti",
+    "player_name": "Wilson Isidor",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Egypt",
+    "player_name": "Yasser Ibrahim",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Spain",
+    "player_name": "Álex Baena",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Mexico",
+    "player_name": "Álvaro Fidalgo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  }
+]

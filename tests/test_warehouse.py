@@ -82,3 +82,41 @@ def test_schemas_validate():
     MatchesSchema.validate(pd.read_parquet(WAREHOUSE / "matches.parquet"))
     TeamMatchStatsSchema.validate(pd.read_parquet(WAREHOUSE / "team_match_stats_tactical.parquet"))
     PlayerAppearancesSchema.validate(pd.read_parquet(WAREHOUSE / "player_match_appearances.parquet"))
+
+
+def test_goal_events_minutes_within_match_bounds():
+    path = WAREHOUSE / "goal_events.parquet"
+    if not path.exists():
+        pytest.skip("todavia no hay eventos de gol cargados")
+    df = pd.read_parquet(path)
+    assert (df["minute"].dropna() >= 0).all()
+    assert (df["minute"].dropna() <= 130).all()
+
+
+def test_goal_events_count_matches_final_score():
+    """Cross-check de regresion: la cuenta de eventos de gol por equipo y
+    partido (openfootball) tiene que seguir coincidiendo con el resultado
+    final ya cargado en matches.parquet (FIFA Training Centre) para todo
+    partido con datos de ambas fuentes -- si esto falla, algo rompio el
+    cruce de fuentes que hace fetch_openfootball_2026.py."""
+    goals_path = WAREHOUSE / "goal_events.parquet"
+    matches_path = WAREHOUSE / "matches.parquet"
+    if not goals_path.exists():
+        pytest.skip("todavia no hay eventos de gol cargados")
+
+    goals = pd.read_parquet(goals_path)
+    matches = pd.read_parquet(matches_path)
+
+    goal_counts = goals.groupby(["match_id", "team"]).size()
+
+    checked = 0
+    for _, row in matches.iterrows():
+        match_id = row["match_id"]
+        if match_id not in goals["match_id"].values:
+            continue  # partido sin datos de openfootball todavia (ok)
+        home_goals = goal_counts.get((match_id, row["home_team"]), 0)
+        away_goals = goal_counts.get((match_id, row["away_team"]), 0)
+        assert home_goals == row["home_score"], f"match_id={match_id} home {row['home_team']}: {home_goals} eventos vs {row['home_score']} en matches.parquet"
+        assert away_goals == row["away_score"], f"match_id={match_id} away {row['away_team']}: {away_goals} eventos vs {row['away_score']} en matches.parquet"
+        checked += 1
+    assert checked > 0, "no se pudo cruzar ningun partido -- revisar el join en fetch_openfootball_2026.py"
