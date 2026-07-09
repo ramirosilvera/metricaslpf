@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
+import { flagFor } from "../lib/flags";
 
 const METRIC_LABELS: Record<string, { label: string; suffix: string; group: "físico" | "táctico" }> = {
   distancia_promedio_km: { label: "Distancia / partido", suffix: " km", group: "físico" },
@@ -19,11 +20,24 @@ const METRIC_LABELS: Record<string, { label: string; suffix: string; group: "fí
 
 const RADAR_ORDER = Object.keys(METRIC_LABELS);
 
-interface Props {
-  rows: DerivedPlayerMetricRow[];
+// Datos de plantel (squads.json) ya cruzados por nombre en build — la clave es
+// `${team}|${player_name}` con el nombre tal como aparece en las métricas.
+export interface SquadInfo {
+  jersey_number: number | null;
+  position: string | null;
+  club: string | null;
+  caps: number | null;
+  captain: boolean;
+  wc2026_apps: number | null;
+  wc2026_goals: number | null;
 }
 
-export default function PlayerScoutCard({ rows }: Props) {
+interface Props {
+  rows: DerivedPlayerMetricRow[];
+  squad?: Record<string, SquadInfo>;
+}
+
+export default function PlayerScoutCard({ rows, squad }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -41,6 +55,8 @@ export default function PlayerScoutCard({ rows }: Props) {
     () => rows.filter((r) => r.team === team && r.player_name === currentPlayer),
     [rows, team, currentPlayer],
   );
+
+  const squadInfo = squad?.[`${team}|${currentPlayer}`] ?? null;
 
   const radarMetrics = RADAR_ORDER.filter((m) => playerRows.some((r) => r.metric === m && r.percentile != null));
 
@@ -154,6 +170,29 @@ export default function PlayerScoutCard({ rows }: Props) {
         )}
       </div>
 
+      {squadInfo && (
+        <div
+          style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", margin: "0 0 0.75rem" }}
+        >
+          <strong style={{ fontSize: "0.95rem" }}>
+            {flagFor(team)} {currentPlayer}
+          </strong>
+          {squadInfo.jersey_number != null && <span className="badge">#{squadInfo.jersey_number}</span>}
+          {squadInfo.position && (
+            <span className="badge">
+              {squadInfo.position}
+              {squadInfo.club ? ` · ${squadInfo.club}` : ""}
+            </span>
+          )}
+          {squadInfo.captain && (
+            <span className="badge status-ok">
+              <span className="dot" />
+              capitán
+            </span>
+          )}
+        </div>
+      )}
+
       {option ? (
         <ReactECharts option={option} style={{ height: narrow ? 330 : 380 }} notMerge={true} />
       ) : (
@@ -163,6 +202,24 @@ export default function PlayerScoutCard({ rows }: Props) {
       )}
 
       <div className="stat-tiles" style={{ marginTop: "1rem" }}>
+        {squadInfo?.caps != null && (
+          <div className="stat-tile">
+            <div className="value">{squadInfo.caps}</div>
+            <div className="label">partidos internacionales (caps)</div>
+          </div>
+        )}
+        {squadInfo?.wc2026_apps != null && (
+          <div className="stat-tile">
+            <div className="value">{squadInfo.wc2026_apps}</div>
+            <div className="label">partidos · Mundial 2026</div>
+          </div>
+        )}
+        {squadInfo?.wc2026_goals != null && (
+          <div className="stat-tile">
+            <div className="value">{squadInfo.wc2026_goals}</div>
+            <div className="label">goles · Mundial 2026</div>
+          </div>
+        )}
         {playerRows
           .filter((r) => METRIC_LABELS[r.metric])
           .map((r) => (
@@ -181,7 +238,8 @@ export default function PlayerScoutCard({ rows }: Props) {
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Percentil calculado dentro del propio dataset cargado (no es un ranking mundial completo). Combina métricas
         físicas (FIFA Training Centre) y tácticas (mismos reportes, Mundial 2026 en curso) cuando ambas están
-        disponibles para el jugador.
+        disponibles para el jugador. Los datos de plantel (dorsal, club, caps, partidos y goles del torneo) vienen de
+        Wikipedia y se cruzan por nombre — puede faltar en algunos jugadores.
       </p>
     </div>
   );

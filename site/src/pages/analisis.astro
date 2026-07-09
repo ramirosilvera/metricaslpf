@@ -2,8 +2,14 @@
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import TeamMetricsRadar from "../islands/TeamMetricsRadar";
-import PlayerScoutCard from "../islands/PlayerScoutCard";
-import { loadJson, type DerivedTeamMetricRow, type DerivedTeamStyleRow, type DerivedPlayerMetricRow } from "../lib/data";
+import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
+import {
+  loadJson,
+  type DerivedTeamMetricRow,
+  type DerivedTeamStyleRow,
+  type DerivedPlayerMetricRow,
+  type SquadPlayerRow,
+} from "../lib/data";
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
@@ -13,6 +19,43 @@ function loadArray<T>(filename: string): T[] {
 const teamMetrics = loadArray<DerivedTeamMetricRow>("derived_team_metrics.json");
 const teamStyle = loadArray<DerivedTeamStyleRow>("derived_team_style.json");
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
+const squadRows = loadArray<SquadPlayerRow>("squads.json");
+
+// Las métricas derivadas usan el nombre estilo FIFA ("Amine GOUIRI") y el
+// plantel el nombre editorial ("Amine Gouiri"), así que el cruce se hace en
+// build normalizando mayúsculas y diacríticos. Es un match best-effort: si un
+// jugador no cruza, la ficha simplemente no muestra datos de plantel.
+function normName(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .replace(/ø/gi, "o")
+    .replace(/đ/gi, "d")
+    .replace(/ł/gi, "l")
+    .toLowerCase()
+    .split(/\s+/)
+    .join(" ")
+    .trim();
+}
+
+const squadByNorm = new Map(squadRows.map((r) => [`${r.team}|${normName(r.player_name)}`, r]));
+const squadInfo: Record<string, SquadInfo> = {};
+for (const row of playerMetrics) {
+  const key = `${row.team}|${row.player_name}`;
+  if (key in squadInfo) continue;
+  const sq = squadByNorm.get(`${row.team}|${normName(row.player_name)}`);
+  if (sq) {
+    squadInfo[key] = {
+      jersey_number: sq.jersey_number,
+      position: sq.position,
+      club: sq.club,
+      caps: sq.caps,
+      captain: sq.captain,
+      wc2026_apps: sq.wc2026_apps,
+      wc2026_goals: sq.wc2026_goals,
+    };
+  }
+}
 
 const styleGroups = teamStyle.reduce<Record<string, DerivedTeamStyleRow[]>>((acc, row) => {
   (acc[row.cluster_label] ??= []).push(row);
@@ -81,7 +124,7 @@ const styleGroups = teamStyle.reduce<Record<string, DerivedTeamStyleRow[]>>((acc
       <p>Percentil en cada métrica disponible (física y táctica) dentro del propio dataset.</p>
     </div>
     <div class="card">
-      <PlayerScoutCard client:only="react" rows={playerMetrics} />
+      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} />
     </div>
   </section>
 </Base>

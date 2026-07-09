@@ -15,6 +15,10 @@ const FLAGS: Record<string, string> = {
   Ghana: "🇬🇭", England: "🏴", Croatia: "🇭🇷", Portugal: "🇵🇹",
   "DR Congo": "🇨🇩", Uzbekistan: "🇺🇿", Colombia: "🇨🇴", Panama: "🇵🇦",
   Nigeria: "🇳🇬", Iceland: "🇮🇸", Poland: "🇵🇱",
+  // alias con la nomenclatura FIFA que usan team_profile.json y los datos de
+  // goles (openfootball / API pública de FIFA)
+  "Congo DR": "🇨🇩", "Curaçao": "🇨🇼", "Côte d'Ivoire": "🇨🇮", "IR Iran": "🇮🇷",
+  "Korea Republic": "🇰🇷", "Türkiye": "🇹🇷", USA: "🇺🇸",
 };
 
 export function flagFor(team: string): string {

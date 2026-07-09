@@ -4,10 +4,19 @@ import DataStatusBanner from "../../layouts/DataStatusBanner.astro";
 import RankingBar from "../../islands/RankingBar";
 import PossessionBoxplot from "../../islands/PossessionBoxplot";
 import MetricHeatmap from "../../islands/MetricHeatmap";
-import { loadJson, type TeamSeasonSummary, type BoxplotRow } from "../../lib/data";
+import { loadJson, type TeamSeasonSummary, type BoxplotRow, type TeamProfileRow } from "../../lib/data";
+import { flagFor } from "../../lib/flags";
 
 const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
 const boxplot = loadJson<BoxplotRow[]>("boxplot_possession_proxy.json");
+
+const profilesRaw = loadJson<TeamProfileRow[] | { status: string; rows: [] }>("team_profile.json");
+const profiles = (Array.isArray(profilesRaw) ? profilesRaw : []).sort(
+  (a, b) => (a.fifa_ranking ?? 999) - (b.fifa_ranking ?? 999),
+);
+
+// país anfitrión del campamento base (la sede es siempre US/MX/CA)
+const HOST_FLAGS: Record<string, string> = { US: "🇺🇸", MX: "🇲🇽", CA: "🇨🇦" };
 ---
 
 <Base title="Selecciones" description="Rankings y distribución de métricas tácticas por selección.">
@@ -43,4 +52,82 @@ const boxplot = loadJson<BoxplotRow[]>("boxplot_possession_proxy.json");
       <MetricHeatmap client:only="react" rows={summary} />
     </div>
   </section>
+
+  {profiles.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Ranking FIFA y campamento base</h2>
+        <p>Fuente: API pública de FIFA — la flecha compara contra el ranking previo al torneo.</p>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Ranking FIFA</th>
+                <th>Selección</th>
+                <th>Grupo</th>
+                <th>Campamento base</th>
+                <th>Sede de entrenamiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              {profiles.map((p) => {
+                const delta =
+                  p.fifa_ranking != null && p.fifa_ranking_prev != null ? p.fifa_ranking_prev - p.fifa_ranking : null;
+                return (
+                  <tr>
+                    <td>
+                      <span class="match-score">{p.fifa_ranking ?? "—"}</span>{" "}
+                      {delta != null && delta > 0 && <span class="rank-delta up">▲{delta}</span>}
+                      {delta != null && delta < 0 && <span class="rank-delta down">▼{-delta}</span>}
+                      {delta === 0 && <span class="rank-delta same">=</span>}
+                    </td>
+                    <td>
+                      <span class="team-flag">{flagFor(p.team)}</span>{p.team}{" "}
+                      <span class="fifa-code">{p.fifa_code}</span>
+                    </td>
+                    <td>{p.group}</td>
+                    <td>
+                      {p.base_camp_city ?? "—"}{" "}
+                      {p.base_camp_country ? HOST_FLAGS[p.base_camp_country] ?? p.base_camp_country : ""}
+                    </td>
+                    <td>{p.base_camp_facility ?? "—"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  )}
 </Base>
+
+<style>
+  .rank-delta {
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+
+  .rank-delta.up {
+    color: var(--win);
+  }
+
+  .rank-delta.down {
+    color: var(--loss);
+  }
+
+  .rank-delta.same {
+    color: var(--text-muted);
+  }
+
+  .fifa-code {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+</style>
