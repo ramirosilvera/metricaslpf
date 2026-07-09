@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import TeamMetricsRadar from "../islands/TeamMetricsRadar";
 import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
+import SquadDepthChart from "../islands/SquadDepthChart";
 import {
   loadJson,
   type DerivedTeamMetricRow,
@@ -117,6 +118,21 @@ const styleGroups = teamStyle.reduce<Record<string, DerivedTeamStyleRow[]>>((acc
       )
     }
   </section>
+
+  {squadRows.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Perfil de plantel: edad y experiencia</h2>
+        <p>
+          ¿Es un plantel joven o veterano? ¿Dónde está concentrada la experiencia? Cada punto es un jugador — edad
+          contra caps/goles, por posición. Datos reales del plantel actual de las 48 selecciones.
+        </p>
+      </div>
+      <div class="card">
+        <SquadDepthChart client:only="react" rows={squadRows} />
+      </div>
+    </section>
+  )}
 
   <section class="section">
     <div class="section-head">

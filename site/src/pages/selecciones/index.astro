@@ -4,33 +4,81 @@ import DataStatusBanner from "../../layouts/DataStatusBanner.astro";
 import RankingBar from "../../islands/RankingBar";
 import PossessionBoxplot from "../../islands/PossessionBoxplot";
 import MetricHeatmap from "../../islands/MetricHeatmap";
-import { loadJson, type TeamSeasonSummary, type BoxplotRow, type TeamProfileRow } from "../../lib/data";
+import TeamPhysicalRanking from "../../islands/TeamPhysicalRanking";
+import TeamPhysicalTrend from "../../islands/TeamPhysicalTrend";
+import {
+  loadJson,
+  type TeamSeasonSummary,
+  type BoxplotRow,
+  type TeamProfileRow,
+  type TeamPhysicalRankingRow,
+  type TeamPhysicalTrendRow,
+} from "../../lib/data";
 import { flagFor } from "../../lib/flags";
+
+function loadArray<T>(filename: string): T[] {
+  const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
+  return Array.isArray(raw) ? raw : [];
+}
 
 const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
 const boxplot = loadJson<BoxplotRow[]>("boxplot_possession_proxy.json");
+const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
+const teamTrend = loadArray<TeamPhysicalTrendRow>("team_physical_trend.json");
 
 const profilesRaw = loadJson<TeamProfileRow[] | { status: string; rows: [] }>("team_profile.json");
 const profiles = (Array.isArray(profilesRaw) ? profilesRaw : []).sort(
   (a, b) => (a.fifa_ranking ?? 999) - (b.fifa_ranking ?? 999),
 );
 
+const nPhysicalTeams = teamPhysical.length;
+
 // país anfitrión del campamento base (la sede es siempre US/MX/CA)
 const HOST_FLAGS: Record<string, string> = { US: "🇺🇸", MX: "🇲🇽", CA: "🇨🇦" };
 ---
 
-<Base title="Selecciones" description="Rankings y distribución de métricas tácticas por selección.">
+<Base title="Selecciones" description="Rendimiento físico real de las 48 selecciones del Mundial 2026, ranking FIFA y contexto táctico.">
   <DataStatusBanner />
-  <p class="eyebrow">Contexto táctico, no físico</p>
+  <p class="eyebrow">Análisis colectivo</p>
   <h1>Selecciones</h1>
   <p class="lede">
-    Contexto táctico real (StatsBomb open data), no métricas físicas todavía. Sirve para ver estilo de juego —
-    posesión, precisión de pase, volumen de remate— como variable de <em>control</em>, no como respuesta a la
-    hipótesis física.
+    Rendimiento físico real del Mundial 2026 para las {nPhysicalTeams || 48} selecciones (FIFA Training Centre), más el
+    contexto táctico que hace falta para leerlo bien. Recordá la clave metodológica: un equipo que domina el balón corre
+    <em>menos</em>, no más — por eso lo físico se lee junto a lo táctico, nunca solo.
   </p>
 
+  {teamPhysical.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Ranking físico del torneo — 48 selecciones</h2>
+        <p>Distancia, alta intensidad, sprints y velocidad punta de cada equipo. Datos reales del Mundial 2026 en curso.</p>
+      </div>
+      <div class="card">
+        <TeamPhysicalRanking client:only="react" rows={teamPhysical} />
+      </div>
+    </section>
+  )}
+
+  {teamTrend.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Forma física dentro del torneo</h2>
+        <p>¿La selección corre más o menos a medida que avanza el Mundial? Un punto por partido, contra la media del torneo.</p>
+      </div>
+      <div class="card">
+        <TeamPhysicalTrend client:only="react" rows={teamTrend} />
+      </div>
+    </section>
+  )}
+
   <section class="section">
-    <div class="section-head"><h2>Ranking por métrica</h2></div>
+    <div class="section-head">
+      <h2>Contexto táctico (StatsBomb, 2018 + 2022)</h2>
+      <p>
+        Estilo de juego —posesión, precisión de pase, volumen de remate— como variable de <em>control</em>. Semilla
+        histórica de StatsBomb, no métricas físicas: sirve para no confundir "corre poco" con "juega mal".
+      </p>
+    </div>
     <div class="card">
       <RankingBar client:only="react" rows={summary} />
     </div>
@@ -47,7 +95,7 @@ const HOST_FLAGS: Record<string, string> = { US: "🇺🇸", MX: "🇲🇽", CA:
   </section>
 
   <section class="section">
-    <div class="section-head"><h2>Heatmap de percentiles</h2></div>
+    <div class="section-head"><h2>Heatmap de percentiles tácticos</h2></div>
     <div class="card">
       <MetricHeatmap client:only="react" rows={summary} />
     </div>

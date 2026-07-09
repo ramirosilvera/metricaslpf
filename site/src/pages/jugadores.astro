@@ -3,12 +3,18 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import PlayerMinutesBar from "../islands/PlayerMinutesBar";
 import PhysicalPlayerBar from "../islands/PhysicalPlayerBar";
-import { loadJson, type PlayerMinutesRow } from "../lib/data";
+import PositionPhysicalRanking from "../islands/PositionPhysicalRanking";
+import { loadJson, type PlayerMinutesRow, type PlayerPhysicalPositionRow } from "../lib/data";
 import type { PhysicalPlayerRankingRow } from "../islands/PhysicalPlayerBar";
 
+function loadArray<T>(filename: string): T[] {
+  const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
+  return Array.isArray(raw) ? raw : [];
+}
+
 const players = loadJson<PlayerMinutesRow[]>("player_minutes_ranking.json");
-const physicalRaw = loadJson<PhysicalPlayerRankingRow[] | { status: string; rows: [] }>("physical_player_ranking.json");
-const physicalPlayers: PhysicalPlayerRankingRow[] = Array.isArray(physicalRaw) ? physicalRaw : [];
+const physicalPlayers = loadArray<PhysicalPlayerRankingRow>("physical_player_ranking.json");
+const byPosition = loadArray<PlayerPhysicalPositionRow>("player_physical_by_position.json");
 ---
 
 <Base title="Jugadores" description="Ranking de minutos jugados y métricas físicas reales por jugador — Mundial 2026.">
@@ -20,9 +26,25 @@ const physicalPlayers: PhysicalPlayerRankingRow[] = Array.isArray(physicalRaw) ?
     correcta para poner a prueba la hipótesis.
   </p>
 
+  {byPosition.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Comparación física normalizada por posición</h2>
+        <p>
+          Un central y un extremo no se miden con la misma vara. Acá el percentil se calcula dentro del grupo posicional
+          (arqueros, defensores, mediocampistas, delanteros), así el ranking es justo — y podés comparar decenas de
+          jugadores a la vez, no de a dos.
+        </p>
+      </div>
+      <div class="card">
+        <PositionPhysicalRanking client:only="react" rows={byPosition} />
+      </div>
+    </section>
+  )}
+
   <section class="section">
     <div class="section-head">
-      <h2>Métricas físicas reales — Mundial 2026</h2>
+      <h2>Métricas físicas por selección — Mundial 2026</h2>
       <p>Fuente: FIFA Training Centre (reportes oficiales por partido, PMSR)</p>
     </div>
     <div class="card">

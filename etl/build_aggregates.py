@@ -148,6 +148,57 @@ def build():
             },
         )
 
+    # --- Rendimiento fisico COLECTIVO del Mundial 2026 (todas las selecciones) ---
+    # El sitio ya tenia el fisico por jugador, pero el fisico a nivel equipo de
+    # las 48 selecciones (96 partidos) no se surface-aba en ningun lado salvo la
+    # fila de Argentina en la home. Estos dos agregados alimentan el ranking
+    # colectivo y la curva de forma partido a partido.
+    if has_physical and has_matches:
+        phys_team = con.execute(
+            f"SELECT * FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')"
+        ).df()
+        m2026 = con.execute(
+            f"SELECT match_id, season, stage, match_date, home_team, away_team FROM read_parquet('{WAREHOUSE / 'matches.parquet'}') WHERE season = '2026'"
+        ).df()
+        pt = phys_team.merge(m2026, on="match_id", how="inner")
+        if len(pt):
+            pt["rival"] = pt.apply(
+                lambda r: r["away_team"] if r["team"] == r["home_team"] else r["home_team"], axis=1
+            )
+            pt["es_local"] = pt["team"] == pt["home_team"]
+            pt = pt.sort_values(["team", "match_date", "match_id"])
+            # indice de jornada relativo por seleccion (1 = su primer partido con dato fisico)
+            pt["jornada"] = pt.groupby("team").cumcount() + 1
+
+            trend_cols = [
+                "team", "match_id", "match_date", "stage", "rival", "es_local", "jornada",
+                "total_distance_km", "high_intensity_distance_m", "sprint_count", "top_speed_kmh",
+            ]
+            _write_json("team_physical_trend.json", _records(pt[trend_cols]))
+
+            # ranking colectivo: promedio por seleccion + percentil dentro de las 48
+            team_phys = (
+                pt.groupby("team")
+                .agg(
+                    partidos=("match_id", "nunique"),
+                    distancia_promedio_km=("total_distance_km", lambda s: round(s.mean(), 2)),
+                    alta_intensidad_promedio_m=("high_intensity_distance_m", lambda s: round(s.mean(), 0)),
+                    sprints_promedio=("sprint_count", lambda s: round(s.mean(), 1)),
+                    velocidad_punta_kmh=("top_speed_kmh", "max"),
+                    distancia_total_km=("total_distance_km", lambda s: round(s.sum(), 1)),
+                )
+                .reset_index()
+            )
+            for metric in [
+                "distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh",
+            ]:
+                team_phys[f"{metric}_percentil"] = (team_phys[metric].rank(pct=True) * 100).round(0)
+            team_phys = team_phys.sort_values("distancia_promedio_km", ascending=False)
+            _write_json("team_physical_ranking.json", _records(team_phys))
+    else:
+        _write_json("team_physical_trend.json", {"status": "pending_first_scrape", "rows": []})
+        _write_json("team_physical_ranking.json", {"status": "pending_first_scrape", "rows": []})
+
     if has_physical_players:
         physical_players = con.execute(
             f"SELECT * FROM read_parquet('{WAREHOUSE / 'physical_player_match_stats.parquet'}')"
@@ -173,8 +224,48 @@ def build():
 
         physical_players_out = physical_players.drop(columns=["high_intensity_m"])
         _write_json("physical_player_match_stats.json", _records(physical_players_out))
+
+        # --- Percentiles NORMALIZADOS POR POSICION (analisis individual justo) ---
+        # Un arquero recorre ~5 km y un defensor ~8.3 km por partido: compararlos
+        # en la misma escala de percentil es enganoso. Se cruza el fisico por
+        # jugador con el plantel (squads) por dorsal+seleccion (match 100%) para
+        # traer la posicion, y el percentil se calcula DENTRO de cada posicion.
+        if has_squads:
+            squads_pos = con.execute(
+                f"SELECT team, jersey_number, position, age_years, market_value_eur, club, caps FROM read_parquet('{WAREHOUSE / 'squads.parquet'}')"
+            ).df()
+            squads_pos = squads_pos.dropna(subset=["jersey_number"]).drop_duplicates(["team", "jersey_number"])
+            pl = physical_players.dropna(subset=["jersey_number"]).copy()
+            pl = pl.merge(squads_pos, on=["team", "jersey_number"], how="inner")
+            if len(pl):
+                agg = (
+                    pl.groupby(["team", "player_name", "position"])
+                    .agg(
+                        jersey_number=("jersey_number", "first"),
+                        club=("club", "first"),
+                        age_years=("age_years", "first"),
+                        partidos=("match_id", "nunique"),
+                        distancia_promedio_km=("total_distance_m", lambda s: round(s.mean() / 1000, 2)),
+                        alta_intensidad_promedio_m=("high_intensity_m", lambda s: round(s.mean(), 0)),
+                        sprints_promedio=("sprint_count", lambda s: round(s.mean(), 1)),
+                        velocidad_punta_kmh=("top_speed_kmh", "max"),
+                    )
+                    .reset_index()
+                )
+                # percentil dentro de la posicion (GK/DF/MF/FW) para cada metrica
+                for metric in [
+                    "distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh",
+                ]:
+                    agg[f"{metric}_pct_pos"] = (
+                        agg.groupby("position")[metric].rank(pct=True) * 100
+                    ).round(0)
+                agg = agg.sort_values(["position", "distancia_promedio_km"], ascending=[True, False])
+                _write_json("player_physical_by_position.json", _records(agg))
+        else:
+            _write_json("player_physical_by_position.json", {"status": "pending_first_scrape", "rows": []})
     else:
         _write_json("physical_player_ranking.json", {"status": "pending_first_scrape", "rows": []})
+        _write_json("player_physical_by_position.json", {"status": "pending_first_scrape", "rows": []})
 
     has_tactical_players = (WAREHOUSE / "tactical_player_match_stats.parquet").exists()
     if has_tactical_players:

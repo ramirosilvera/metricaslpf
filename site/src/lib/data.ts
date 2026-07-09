@@ -215,3 +215,52 @@ export interface DerivedPlayerMetricRow {
   z_score: number | null;
   percentile: number | null;
 }
+
+// Rendimiento físico colectivo del Mundial 2026 (nivel selección, 48 equipos).
+export interface TeamPhysicalRankingRow {
+  team: string;
+  partidos: number;
+  distancia_promedio_km: number;
+  alta_intensidad_promedio_m: number;
+  sprints_promedio: number;
+  velocidad_punta_kmh: number;
+  distancia_total_km: number;
+  distancia_promedio_km_percentil: number;
+  alta_intensidad_promedio_m_percentil: number;
+  sprints_promedio_percentil: number;
+  velocidad_punta_kmh_percentil: number;
+}
+
+// Un punto por partido de cada selección (curva de forma dentro del torneo).
+export interface TeamPhysicalTrendRow {
+  team: string;
+  match_id: number;
+  match_date: string;
+  stage: string;
+  rival: string;
+  es_local: boolean;
+  jornada: number;
+  total_distance_km: number;
+  high_intensity_distance_m: number;
+  sprint_count: number;
+  top_speed_kmh: number;
+}
+
+// Físico por jugador con percentil calculado DENTRO de su posición (GK/DF/MF/FW).
+export interface PlayerPhysicalPositionRow {
+  team: string;
+  player_name: string;
+  position: string;
+  jersey_number: number | null;
+  club: string | null;
+  age_years: number | null;
+  partidos: number;
+  distancia_promedio_km: number;
+  alta_intensidad_promedio_m: number;
+  sprints_promedio: number;
+  velocidad_punta_kmh: number;
+  distancia_promedio_km_pct_pos: number;
+  alta_intensidad_promedio_m_pct_pos: number;
+  sprints_promedio_pct_pos: number;
+  velocidad_punta_kmh_pct_pos: number;
+}

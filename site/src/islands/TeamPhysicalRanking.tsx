@@ -1,0 +1,118 @@
+import { useMemo, useState } from "react";
+import ReactECharts from "echarts-for-react";
+import type { TeamPhysicalRankingRow } from "../lib/data";
+import { useChartTokens, useIsNarrow } from "../lib/theme";
+
+// Ranking físico COLECTIVO real del Mundial 2026 — las 48 selecciones, no un
+// proxy táctico. Es la distancia/intensidad SUMADA del equipo por partido
+// (11 jugadores), promediada entre los partidos ya cargados de cada selección.
+const METRICS: { key: keyof TeamPhysicalRankingRow; pctKey: keyof TeamPhysicalRankingRow; label: string; suffix: string }[] = [
+  { key: "distancia_promedio_km", pctKey: "distancia_promedio_km_percentil", label: "Distancia de equipo (promedio por partido)", suffix: " km" },
+  { key: "alta_intensidad_promedio_m", pctKey: "alta_intensidad_promedio_m_percentil", label: "Distancia a alta intensidad (equipo, promedio)", suffix: " m" },
+  { key: "sprints_promedio", pctKey: "sprints_promedio_percentil", label: "Sprints del equipo (promedio por partido)", suffix: "" },
+  { key: "velocidad_punta_kmh", pctKey: "velocidad_punta_kmh_percentil", label: "Velocidad punta del equipo", suffix: " km/h" },
+];
+
+interface Props {
+  rows: TeamPhysicalRankingRow[];
+}
+
+export default function TeamPhysicalRanking({ rows }: Props) {
+  const tokens = useChartTokens();
+  const narrow = useIsNarrow();
+  const [metricKey, setMetricKey] = useState<string>(METRICS[0].key as string);
+  const metric = METRICS.find((m) => m.key === metricKey)!;
+
+  const sorted = useMemo(
+    () =>
+      [...rows]
+        .filter((r) => r[metric.key] != null)
+        .sort((a, b) => (b[metric.key] as number) - (a[metric.key] as number)),
+    [rows, metricKey],
+  );
+
+  const labels = sorted.map((r) => r.team);
+  const values = sorted.map((r) => r[metric.key] as number);
+  const isArgentina = sorted.map((r) => r.team === "Argentina");
+
+  const option = {
+    grid: { left: narrow ? 92 : 130, right: narrow ? 16 : 44, top: 10, bottom: 30 },
+    tooltip: {
+      trigger: "axis",
+      axisPointer: { type: "none" },
+      backgroundColor: tokens["--surface-1"],
+      borderColor: tokens["--gridline"],
+      textStyle: { color: tokens["--text-primary"] },
+      formatter: (params: any) => {
+        const p = params[0];
+        const row = sorted[p.dataIndex];
+        const pct = row[metric.pctKey] as number;
+        return `<strong>${row.team}</strong><br/>${metric.label}: ${p.value}${metric.suffix}<br/>Percentil entre las 48: ${Math.round(pct)}<br/>${row.partidos} partido(s) con datos`;
+      },
+    },
+    xAxis: {
+      type: "value",
+      axisLine: { lineStyle: { color: tokens["--baseline"] } },
+      axisLabel: { color: tokens["--text-muted"] },
+      splitLine: { lineStyle: { color: tokens["--gridline"] } },
+    },
+    yAxis: {
+      type: "category",
+      data: labels,
+      inverse: true,
+      axisLine: { lineStyle: { color: tokens["--baseline"] } },
+      axisLabel: {
+        color: tokens["--text-secondary"],
+        fontSize: narrow ? 9 : 11,
+        width: narrow ? 84 : undefined,
+        overflow: "truncate",
+      },
+      axisTick: { show: false },
+    },
+    series: [
+      {
+        type: "bar",
+        barWidth: narrow ? 8 : 11,
+        data: values.map((v, i) => ({
+          value: v,
+          itemStyle: {
+            color: isArgentina[i] ? tokens["--series-6"] : tokens["--series-5"],
+            borderRadius: [0, 3, 3, 0],
+          },
+        })),
+      },
+    ],
+  };
+
+  if (rows.length === 0) {
+    return <p style={{ color: "var(--text-muted)" }}>Todavía no hay métricas físicas de equipo cargadas.</p>;
+  }
+
+  return (
+    <div>
+      <div className="controls-row">
+        <label htmlFor="team-phys-metric" style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
+          Métrica física
+        </label>
+        <select id="team-phys-metric" value={metricKey} onChange={(e) => setMetricKey(e.target.value)}>
+          {METRICS.map((m) => (
+            <option key={m.key as string} value={m.key as string}>
+              {m.label}
+            </option>
+          ))}
+        </select>
+        <span className="badge">
+          <span className="dot" style={{ background: tokens["--series-6"] }}></span>
+          Argentina resaltada
+        </span>
+      </div>
+      <ReactECharts option={option} style={{ height: Math.max(360, sorted.length * (narrow ? 18 : 22)) }} notMerge={true} />
+      <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+        Fuente: FIFA Training Centre (reportes oficiales por partido, Mundial 2026). Es la métrica del equipo (suma de
+        los 11) por partido, promediada sobre los partidos ya cargados de cada selección — recordá que un equipo que
+        domina el balón suele correr <em>menos</em>: leé esto junto al contexto táctico, no como un ranking de
+        "esfuerzo". Cobertura parcial y creciente (ver banner de estado).
+      </p>
+    </div>
+  );
+}

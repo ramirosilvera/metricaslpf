@@ -3,12 +3,15 @@
 ## Function-calling (consultas reales a Supabase)
 
 El asistente no solo responde con texto "grounded" por el system prompt:
-puede invocar 7 funciones RPC de Supabase (`get_team_summary`,
+puede invocar 9 funciones RPC de Supabase (`get_team_summary`,
 `get_team_matches`, `get_player_ranking`, `get_physical_leaders`,
-`get_tactical_leaders`, `get_goal_scorers`, `get_team_profile`) para
+`get_tactical_leaders`, `get_goal_scorers`, `get_team_profile`,
+`get_team_physical_trend`, `get_position_leaders`) para
 responder con números reales -- resumen de una selección, ranking de
-jugadores por distancia/sprints/pases/tackles, goleadores del torneo,
-ranking FIFA y campo base de una selección, etc. Gemini decide cuándo necesita un dato concreto; el Worker ejecuta esa
+jugadores por distancia/sprints/pases/tackles (normalizado por posición con
+`get_position_leaders`), curva de forma física partido a partido
+(`get_team_physical_trend`), goleadores del torneo, ranking FIFA y campo
+base de una selección, etc. Gemini decide cuándo necesita un dato concreto; el Worker ejecuta esa
 función específica contra Supabase (con la clave `anon`, protegida por RLS
 de solo lectura -- nunca SQL libre) y le devuelve el resultado antes de que
 Gemini arme la respuesta final. Si `SUPABASE_URL`/`SUPABASE_ANON_KEY` no

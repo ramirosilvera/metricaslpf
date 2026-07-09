@@ -1,19 +1,34 @@
 ---
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
-import { loadJson, type TeamSeasonSummary, type MatchRow } from "../lib/data";
+import { loadJson, type TeamSeasonSummary, type MatchRow, type TeamPhysicalRankingRow, type GoalEventRow } from "../lib/data";
 import { flagFor } from "../lib/flags";
 import ShareCardButton from "../islands/ShareCardButton";
+
+function loadArray<T>(filename: string): T[] {
+  const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
+  return Array.isArray(raw) ? raw : [];
+}
 
 const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
 const matches = loadJson<MatchRow[]>("matches.json");
 const physicalRaw = loadJson<any>("physical_match_stats.json");
 const physicalRows: any[] = Array.isArray(physicalRaw) ? physicalRaw : [];
+const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
+const goalEvents = loadArray<GoalEventRow>("goal_events.json");
 
 const arg2022 = summary.find((r) => r.team === "Argentina" && r.season === "2022");
 const arg2018 = summary.find((r) => r.team === "Argentina" && r.season === "2018");
 const nTeams = new Set(summary.map((r) => r.team)).size;
 const base = import.meta.env.BASE_URL;
+
+// Snapshot en vivo del torneo (todo calculado de datos reales, nunca hardcodeado).
+const physicalByDistance = [...teamPhysical].sort((a, b) => b.distancia_promedio_km - a.distancia_promedio_km);
+const distanceLeader = physicalByDistance[0] ?? null;
+const argPhysIdx = physicalByDistance.findIndex((r) => r.team === "Argentina");
+const argPhysical = argPhysIdx >= 0 ? physicalByDistance[argPhysIdx] : null;
+const nPhysicalMatches = new Set(physicalRows.filter((r) => r.season === "2026").map((r) => r.match_id)).size;
+const totalGoals2026 = goalEvents.length;
 
 const matches2026Argentina = matches
   .filter((m) => m.season === "2026" && (m.home_team === "Argentina" || m.away_team === "Argentina"))
@@ -80,14 +95,15 @@ const heroShareSubtitle = liveStatus ? `Argentina · ${liveStatus}` : "Análisis
         {flagFor("Argentina")} Argentina · {liveStatus}
       </span>
     )}
-    <h1>¿Argentina tiene una desventaja física real, o es un sesgo instalado?</h1>
+    <h1>Rendimiento físico y táctico del Mundial 2026, con datos abiertos</h1>
     <p class="lede">
-      Este proyecto pone a prueba esa hipótesis con datos abiertos y metodología explícita — no arranca mostrando un
-      ranking. Antes de mirar cualquier gráfico, dos advertencias que condicionan todo lo que sigue.
+      Análisis colectivo e individual de las 48 selecciones a partir de datos reales y abiertos — con la mirada puesta
+      en poner a prueba (no confirmar) la vieja hipótesis de que Argentina "corre menos". Empezá por los números; la
+      metodología está a un click.
     </p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href={`${base}selecciones/`}>Ver rankings →</a>
-      <a class="btn btn-ghost" href={`${base}metodologia/`}>Leer la metodología</a>
+      <a class="btn btn-primary" href={`${base}selecciones/`}>Ver análisis de selecciones →</a>
+      <a class="btn btn-ghost" href={`${base}jugadores/`}>Jugadores</a>
       <a class="btn btn-share" href={waLink} target="_blank" rel="noreferrer">📲 WhatsApp</a>
       <ShareCardButton
         client:only="react"
@@ -103,9 +119,54 @@ const heroShareSubtitle = liveStatus ? `Argentina · ${liveStatus}` : "Análisis
     </div>
   </div>
 
+  {teamPhysical.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>El torneo, ahora mismo</h2>
+        <p>Todo calculado en vivo de datos reales — se actualiza solo a medida que el scraper suma partidos.</p>
+      </div>
+      <div class="stat-tiles">
+        <div class="stat-tile">
+          <div class="value">{teamPhysical.length}</div>
+          <div class="label">selecciones con datos físicos cargados</div>
+        </div>
+        <div class="stat-tile">
+          <div class="value">{nPhysicalMatches}</div>
+          <div class="label">partidos del Mundial 2026 con físico</div>
+        </div>
+        <div class="stat-tile">
+          <div class="value">{totalGoals2026}</div>
+          <div class="label">goles convertidos en el torneo</div>
+        </div>
+        {distanceLeader && (
+          <div class="stat-tile">
+            <div class="value" style="font-size:1.4rem;">{flagFor(distanceLeader.team)} {distanceLeader.team}</div>
+            <div class="label">más distancia de equipo por partido ({distanceLeader.distancia_promedio_km} km)</div>
+          </div>
+        )}
+        {argPhysical && (
+          <div class="stat-tile">
+            <div class="value">#{argPhysIdx + 1}<span style="font-size:0.9rem; color:var(--text-muted);"> / {teamPhysical.length}</span></div>
+            <div class="label">Argentina en distancia de equipo · percentil {Math.round(argPhysical.distancia_promedio_km_percentil)}</div>
+          </div>
+        )}
+      </div>
+      <p style="font-size:0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
+        Fuente: FIFA Training Centre (físico) y openfootball (goles), Mundial 2026 en curso. Que Argentina corra más o
+        menos <strong>no</strong> mide por sí solo su estado físico — mirá el <a href={`${base}selecciones/`}>ranking completo</a> junto al contexto táctico.
+      </p>
+    </section>
+  )}
+
+  <section class="section" id="como-leer" style="margin-bottom: 0.5rem;">
+    <div class="section-head">
+      <h2>Cómo leer estos datos</h2>
+      <p>Dos advertencias metodológicas que condicionan todo el análisis — la versión completa está en <a href={`${base}metodologia/`}>Metodología</a>.</p>
+    </div>
+  </section>
   <div class="grid-2 section">
     <div class="callout">
-      <h3>1. La distancia corrida, sola, no mide "estado físico"</h3>
+      <h3>La distancia corrida, sola, no mide "estado físico"</h3>
       <p>
         Los equipos que dominan el balón corren <em>menos</em>, no más — no persiguen. Sin normalizar por{" "}
         <span class="term" tabindex="0" data-tip="Porcentaje del tiempo de juego que un equipo pasa con el balón. No es la posesión oficial de FIFA/Opta (basada en tracking) — es un proxy calculado a partir de la duración de eventos de StatsBomb.">posesión</span>,
@@ -114,7 +175,7 @@ const heroShareSubtitle = liveStatus ? `Argentina · ${liveStatus}` : "Análisis
       </p>
     </div>
     <div class="callout warning">
-      <h3>2. Con 4–7 partidos por torneo, no hay significancia estadística</h3>
+      <h3>Con 4–7 partidos por torneo, no hay significancia estadística</h3>
       <p>
         Este proyecto es <strong>descriptivo</strong>, no un estudio causal. Todos los gráficos muestran dispersión
         (no solo promedios) y tamaño de muestra explícito. Ver <a href={`${base}metodologia/`}>metodología completa</a>.
