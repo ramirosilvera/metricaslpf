@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+const base = import.meta.env.BASE_URL;
 ---
 
 <Base title="Metodología" description="Sesgos, variables de confusión y cómo leer los datos de este proyecto.">
@@ -79,10 +80,14 @@ import Base from "../layouts/Base.astro";
       <tbody>
         <tr><td>FIFA Training Centre</td><td>Métricas físicas oficiales (GPS/tracking)</td><td>Mundiales 2018, 2022, 2026 en curso</td><td>No es API — páginas HTML editoriales, requiere scraping</td></tr>
         <tr><td>StatsBomb Open Data</td><td>Contexto táctico (eventos, posesión-proxy, formaciones)</td><td>Mundial 2018 y 2022 completos</td><td>Sin datos de distancia/sprints — es dataset de eventos, no tracking</td></tr>
-        <tr><td>Transfermarkt</td><td>Edad, fecha de nacimiento, club, posición</td><td>Todos los planteles</td><td>Scraping no oficial, sin API pública</td></tr>
+        <tr><td>26worldcup (Wikipedia)</td><td>Edad, fecha de nacimiento, club, caps, capitanía, ranking FIFA</td><td>Los 48 planteles del Mundial 2026</td><td>Hechos editoriales de Wikipedia, no fuente oficial FIFA</td></tr>
+        <tr><td>openfootball/worldcup.json</td><td>Goleadores y minuto de gol, dominio público (CC0)</td><td>Partidos jugados del Mundial 2026</td><td>Solo resultados y goles, sin datos físicos ni tácticos</td></tr>
       </tbody>
     </table>
     </div>
+    <p style="font-size:0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+      Detalle completo de licencia, cobertura, fecha de actualización y nivel de confianza por fuente en <a href={`${base}fuentes/`}>Fuentes</a>.
+    </p>
   </section>
 
   <section class="section">
