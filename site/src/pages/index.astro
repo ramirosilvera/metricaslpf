@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import { loadJson, type TeamSeasonSummary, type MatchRow } from "../lib/data";
 import { flagFor } from "../lib/flags";
+import ShareCardButton from "../islands/ShareCardButton";
 
 const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
 const matches = loadJson<MatchRow[]>("matches.json");
@@ -51,6 +52,21 @@ const shareStatus = lastMatch2026
   : "todavía sin partidos cargados";
 const shareMessage = `Argentina en el Mundial 2026: ${shareStatus} 🇦🇷⚽ — no arrancamos con un ranking, ponemos a prueba la hipótesis física con datos reales y abiertos. Mirá el análisis completo: ${pageUrl}`;
 const waLink = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+
+// Métricas para la tarjeta-imagen compartible del hero (a partir de datos ya
+// calculados arriba; sin lógica nueva de datos).
+const heroShareStats =
+  decided2026.length > 0
+    ? [
+        { label: "Partidos jugados", value: String(decided2026.length) },
+        { label: "Victorias", value: String(wins2026) },
+        { label: "Instancia", value: lastMatch2026?.stage ?? "—" },
+      ]
+    : [
+        { label: "Selecciones analizadas", value: String(nTeams) },
+        { label: "Fuentes de datos abiertas", value: "3" },
+      ];
+const heroShareSubtitle = liveStatus ? `Argentina · ${liveStatus}` : "Análisis abierto · Mundial 2026";
 ---
 
 <Base title="Inicio" description="¿Argentina corre menos que el resto en el Mundial? Un análisis abierto, con los sesgos a la vista.">
@@ -72,7 +88,18 @@ const waLink = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
     <div class="hero-actions">
       <a class="btn btn-primary" href={`${base}selecciones/`}>Ver rankings →</a>
       <a class="btn btn-ghost" href={`${base}metodologia/`}>Leer la metodología</a>
-      <a class="btn btn-share" href={waLink} target="_blank" rel="noreferrer">📲 Compartir</a>
+      <a class="btn btn-share" href={waLink} target="_blank" rel="noreferrer">📲 WhatsApp</a>
+      <ShareCardButton
+        client:only="react"
+        title="Argentina en el Mundial 2026"
+        subtitle={heroShareSubtitle}
+        flag={flagFor("Argentina")}
+        stats={heroShareStats}
+        tagline="¿Desventaja física real o sesgo instalado?"
+        shareText={shareMessage}
+        filenameBase="argentina-mundial-2026"
+        label="🖼️ Imagen"
+      />
     </div>
   </div>
 

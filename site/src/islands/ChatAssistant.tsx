@@ -87,7 +87,7 @@ export default function ChatAssistant() {
             </button>
           </div>
 
-          <div className="chat-messages" ref={scrollRef}>
+          <div className="chat-messages" ref={scrollRef} role="log" aria-live="polite" aria-label="Mensajes del asistente">
             {turns.length === 0 && (
               <div className="chat-empty">
                 <p>

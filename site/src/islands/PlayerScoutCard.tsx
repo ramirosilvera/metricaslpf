@@ -3,6 +3,8 @@ import ReactECharts from "echarts-for-react";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
 import { flagFor } from "../lib/flags";
+import ShareCardButton from "./ShareCardButton";
+import type { ShareStat } from "../lib/shareCard";
 
 const METRIC_LABELS: Record<string, { label: string; suffix: string; group: "físico" | "táctico" }> = {
   distancia_promedio_km: { label: "Distancia / partido", suffix: " km", group: "físico" },
@@ -90,6 +92,23 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
     return `https://wa.me/?text=${encodeURIComponent(message)}`;
   }, [playerRows, currentPlayer, team]);
 
+  // Datos para la tarjeta-imagen compartible: hasta 3 métricas destacadas
+  // (prioriza percentil alto) tomadas de lo que ya se muestra en la ficha.
+  const shareStats = useMemo<ShareStat[]>(() => {
+    const fmt = (v: number) => `${Math.round(v * 10) / 10}`;
+    const known = playerRows.filter((r) => METRIC_LABELS[r.metric]);
+    const ranked = [...known].sort((a, b) => (b.percentile ?? 0) - (a.percentile ?? 0));
+    return ranked.slice(0, 3).map((r) => ({
+      label: METRIC_LABELS[r.metric].label.replace(" / partido", ""),
+      value: `${fmt(r.value)}${METRIC_LABELS[r.metric].suffix}`,
+    }));
+  }, [playerRows]);
+
+  const shareSubtitle = useMemo(() => {
+    const parts = [squadInfo?.position, squadInfo?.club].filter(Boolean);
+    return parts.length ? `${parts.join(" · ")} · ${team}` : team;
+  }, [squadInfo, team]);
+
   const option = useMemo(() => {
     if (radarMetrics.length < 3) return null;
     return {
@@ -165,8 +184,20 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
         </select>
         {waLink && (
           <a className="btn btn-share" href={waLink} target="_blank" rel="noreferrer">
-            📲 Compartir ficha
+            📲 WhatsApp
           </a>
+        )}
+        {currentPlayer && shareStats.length > 0 && (
+          <ShareCardButton
+            title={currentPlayer}
+            subtitle={shareSubtitle}
+            flag={flagFor(team)}
+            stats={shareStats}
+            tagline="Rendimiento físico y táctico · Mundial 2026"
+            shareText={`${currentPlayer} (${team}) — ficha de rendimiento · Métricas Mundial 2026`}
+            filenameBase={`${team}-${currentPlayer}`}
+            label="🖼️ Imagen"
+          />
         )}
       </div>
 

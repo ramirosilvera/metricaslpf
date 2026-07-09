@@ -147,7 +147,13 @@ export default function SqlExplorer() {
         Tablas disponibles: {loadedTables.length ? loadedTables.join(", ") : "ninguna todavía"}. Corre 100% en tu
         navegador, sin backend — DuckDB-WASM lee los Parquet publicados en este sitio.
       </p>
-      <textarea className="sql-editor" value={query} onChange={(e) => setQuery(e.target.value)} rows={8} />
+      <textarea
+        className="sql-editor"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        rows={8}
+        aria-label="Editor de consultas SQL"
+      />
       <div style={{ margin: "0.75rem 0" }}>
         <button
           onClick={runQuery}

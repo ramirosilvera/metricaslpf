@@ -4,7 +4,9 @@
   --page-plane: #f7f9f7;
   --text-primary: #0a0f0c;
   --text-secondary: #4a544e;
-  --text-muted: #838d86;
+  /* #667069 mantiene el tono "apagado" pero cumple WCAG AA (>=4.5) sobre
+     page-plane y surface-2 -- el valor anterior (#838d86) quedaba en ~3.2 */
+  --text-muted: #667069;
   --gridline: #e0e6e2;
   --baseline: #c1cac4;
   --border: rgba(10, 15, 12, 0.1);
@@ -98,6 +100,35 @@
 
 html {
   scroll-behavior: smooth;
+  /* evita que iOS/Android reescale el texto al rotar y respeta el tamaño
+     definido por el diseño (sensación de app nativa) */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Quita el flash gris del tap en móvil; el feedback táctil se da con el estado
+   :active propio de cada control. Los interactivos igual reciben foco visible. */
+a,
+button,
+label,
+select,
+summary,
+input,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -206,8 +237,33 @@ a:hover {
   letter-spacing: 0.02em;
 }
 
+/* En desktop la nav está siempre visible: el checkbox no cumple ninguna
+   función, se saca del layout y del orden de tabulación. En móvil (media query
+   más abajo) pasa a ser un control accesible por teclado. */
 .nav-toggle {
   display: none;
+}
+
+/* Enlace "saltar al contenido" para navegación por teclado/lector de pantalla:
+   oculto hasta recibir foco, luego aparece anclado arriba a la izquierda. */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -60px;
+  z-index: 100;
+  background: var(--brand);
+  color: var(--brand-contrast);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: calc(0.5rem + env(safe-area-inset-top, 0px));
+  color: var(--brand-contrast);
 }
 
 .nav-toggle-label {
@@ -254,10 +310,33 @@ a:hover {
 
 .nav a[aria-current="page"] {
   color: var(--brand-contrast);
-  background: var(--brand);
+  /* brand-strong (no brand) para que el texto blanco supere WCAG AA en el
+     item activo: blanco/brand daba ~4.16, blanco/brand-strong ~5.97 */
+  background: var(--brand-strong);
 }
 
 @media (max-width: 780px) {
+  /* El checkbox se oculta visualmente pero permanece enfocable por teclado
+     (Space/Enter abre/cierra el menú); el foco se refleja en la hamburguesa. */
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .nav-toggle:focus-visible + .nav-toggle-label {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
   .nav-toggle-label {
     display: inline-flex;
   }
@@ -283,6 +362,7 @@ a:hover {
     max-height: calc(100vh - 70px);
     max-height: calc(100dvh - 70px);
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .nav a {
@@ -958,6 +1038,10 @@ pre {
 .chat-messages {
   flex: 1;
   overflow-y: auto;
+  /* el scroll del panel no arrastra la página detrás (evita pull-to-refresh
+     accidental y da sensación de superficie nativa) */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   padding: 1rem;
   display: flex;
   flex-direction: column;
