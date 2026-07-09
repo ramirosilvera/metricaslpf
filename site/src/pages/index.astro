@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import { loadJson, type TeamSeasonSummary, type MatchRow } from "../lib/data";
+import { flagFor } from "../lib/flags";
 
 const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
 const matches = loadJson<MatchRow[]>("matches.json");
@@ -20,6 +21,26 @@ const matches2026Argentina = matches
 function physicalFor(matchId: number, team: string) {
   return physicalRows.find((r) => r.match_id === matchId && r.team === team);
 }
+
+// Estado actual calculado de los datos, no hardcodeado -- así nunca queda
+// desactualizado a medida que avanza el torneo real.
+function resultFor(m: MatchRow): "win" | "draw" | "loss" | null {
+  if (m.home_score == null || m.away_score == null) return null;
+  const isHome = m.home_team === "Argentina";
+  const own = isHome ? m.home_score : m.away_score;
+  const opp = isHome ? m.away_score : m.home_score;
+  if (own > opp) return "win";
+  if (own < opp) return "loss";
+  return "draw";
+}
+const decided2026 = matches2026Argentina.filter((m) => resultFor(m) !== null);
+const lastMatch2026 = decided2026[decided2026.length - 1];
+const wasEliminated = decided2026.some((m) => resultFor(m) === "loss");
+const liveStatus = lastMatch2026
+  ? wasEliminated
+    ? `Eliminada en ${lastMatch2026.stage}`
+    : `${lastMatch2026.stage} · invicta`
+  : null;
 ---
 
 <Base title="Inicio" description="¿Argentina corre menos que el resto en el Mundial? Un análisis abierto, con los sesgos a la vista.">
@@ -27,6 +48,12 @@ function physicalFor(matchId: number, team: string) {
 
   <div class="hero">
     <p class="eyebrow">Mundial 2026 · análisis abierto</p>
+    {liveStatus && (
+      <span class="stage-pill" style="margin-bottom: 0.9rem;">
+        <span class="pulse"></span>
+        {flagFor("Argentina")} Argentina · {liveStatus}
+      </span>
+    )}
     <h1>¿Argentina tiene una desventaja física real, o es un sesgo instalado?</h1>
     <p class="lede">
       Este proyecto pone a prueba esa hipótesis con datos abiertos y metodología explícita — no arranca mostrando un
@@ -93,6 +120,7 @@ function physicalFor(matchId: number, team: string) {
           <table>
             <thead>
               <tr>
+                <th>Resultado</th>
                 <th>Fecha</th>
                 <th>Fase</th>
                 <th>Partido</th>
@@ -105,12 +133,20 @@ function physicalFor(matchId: number, team: string) {
               {matches2026Argentina.map((m) => {
                 const argTeam = m.home_team === "Argentina" ? m.home_team : m.away_team;
                 const phys = physicalFor(m.match_id, argTeam);
+                const result = resultFor(m);
                 return (
                   <tr>
+                    <td>
+                      {result && (
+                        <span class={`result-badge ${result}`}>{result === "win" ? "V" : result === "loss" ? "D" : "E"}</span>
+                      )}
+                    </td>
                     <td>{m.match_date ?? "—"}</td>
                     <td>{m.stage ?? "—"}</td>
                     <td>
-                      {m.home_team} {m.home_score ?? "-"} – {m.away_score ?? "-"} {m.away_team}
+                      <span class="team-flag">{flagFor(m.home_team)}</span>{m.home_team}{" "}
+                      <span class="match-score">{m.home_score ?? "-"} – {m.away_score ?? "-"}</span>{" "}
+                      {m.away_team} <span class="team-flag">{flagFor(m.away_team)}</span>
                     </td>
                     <td>{m.stadium || "—"}</td>
                     <td>{phys ? `${phys.total_distance_km} km` : "pendiente"}</td>
