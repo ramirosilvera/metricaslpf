@@ -4,12 +4,14 @@ import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import TeamMetricsRadar from "../islands/TeamMetricsRadar";
 import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
 import SquadDepthChart from "../islands/SquadDepthChart";
+import GoalsVsPhysical from "../islands/GoalsVsPhysical";
 import {
   loadJson,
   type DerivedTeamMetricRow,
   type DerivedTeamStyleRow,
   type DerivedPlayerMetricRow,
   type SquadPlayerRow,
+  type GoalsVsPhysicalRow,
 } from "../lib/data";
 
 function loadArray<T>(filename: string): T[] {
@@ -21,6 +23,7 @@ const teamMetrics = loadArray<DerivedTeamMetricRow>("derived_team_metrics.json")
 const teamStyle = loadArray<DerivedTeamStyleRow>("derived_team_style.json");
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
+const goalsVsPhysical = loadArray<GoalsVsPhysicalRow>("goals_vs_physical.json");
 
 // Las métricas derivadas usan el nombre estilo FIFA ("Amine GOUIRI") y el
 // plantel el nombre editorial ("Amine Gouiri"), así que el cruce se hace en
@@ -118,6 +121,21 @@ const styleGroups = teamStyle.reduce<Record<string, DerivedTeamStyleRow[]>>((acc
       )
     }
   </section>
+
+  {goalsVsPhysical.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Goles vs. rendimiento físico, mismo partido</h2>
+        <p>
+          Cruce directo entre goles convertidos y datos físicos del mismo partido — ¿corre más el equipo que más
+          convierte, o no hay relación visible?
+        </p>
+      </div>
+      <div class="card">
+        <GoalsVsPhysical client:only="react" rows={goalsVsPhysical} />
+      </div>
+    </section>
+  )}
 
   {squadRows.length > 0 && (
     <section class="section">

@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { RadarRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
+import ShareCardButton from "./ShareCardButton";
+import { flagFor } from "../lib/flags";
 
 const INDICATORS = [
   { key: "posesion_promedio_proxy_percentil", name: "Posesión (percentil)", short: "Posesión" },
@@ -73,6 +75,18 @@ export default function RadarCompare({ rows }: Props) {
     };
   }, [a, b, tokens, aLabel, bLabel, narrow]);
 
+  const shareStats =
+    a && b
+      ? INDICATORS.map((i) => ({
+          label: i.short.replace("\n", " "),
+          value: `${Math.round(a[i.key])} vs ${Math.round(b[i.key])}`,
+        })).slice(0, 3)
+      : [];
+  const shareText =
+    a && b
+      ? `${a.team} vs ${b.team} (percentiles de contexto táctico, Mundial 2026): posesión ${Math.round(a.posesion_promedio_proxy_percentil)} vs ${Math.round(b.posesion_promedio_proxy_percentil)}.`
+      : undefined;
+
   return (
     <div>
       <div className="controls-row">
@@ -91,6 +105,17 @@ export default function RadarCompare({ rows }: Props) {
             </option>
           ))}
         </select>
+        {a && b && (
+          <ShareCardButton
+            title={`${a.team} vs ${b.team}`}
+            subtitle={`${flagFor(a.team)} vs ${flagFor(b.team)} · Cabeza a cabeza`}
+            stats={shareStats}
+            tagline="Percentiles de contexto táctico (StatsBomb)"
+            shareText={shareText}
+            filenameBase={`${a.team}-vs-${b.team}`}
+            label="🖼️ Compartir"
+          />
+        )}
       </div>
       {a && b ? (
         <ReactECharts option={option} style={{ height: narrow ? 340 : 420 }} notMerge={true} />

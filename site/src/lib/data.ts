@@ -246,6 +246,21 @@ export interface TeamPhysicalTrendRow {
   top_speed_kmh: number;
 }
 
+export interface GoalsVsPhysicalRow {
+  match_id: number;
+  team: string;
+  total_distance_km: number;
+  high_intensity_distance_m: number;
+  sprint_count: number;
+  top_speed_kmh: number;
+  goles_marcados: number;
+  stage?: string;
+  match_date?: string;
+  home_team?: string;
+  away_team?: string;
+  rival?: string;
+}
+
 // Físico por jugador con percentil calculado DENTRO de su posición (GK/DF/MF/FW).
 export interface PlayerPhysicalPositionRow {
   team: string;

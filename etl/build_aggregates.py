@@ -366,6 +366,33 @@ def build():
         _write_json("goal_events.json", {"status": "pending_first_scrape", "rows": []})
         _write_json("goal_scorer_ranking.json", {"status": "pending_first_scrape", "rows": []})
 
+    # --- Goles vs. rendimiento fisico del MISMO partido ---
+    # goal_events y physical_match_stats comparten (match_id, team): cuantos
+    # goles metio cada seleccion en un partido, al lado de cuanto corrio ese
+    # mismo partido. Descriptivo, no causal -- no se afirma que correr mas
+    # genere goles, solo se deja ver la relacion (o ausencia de ella).
+    if has_physical and has_goal_events:
+        phys_for_goals = con.execute(
+            f"SELECT match_id, team, total_distance_km, high_intensity_distance_m, sprint_count, top_speed_kmh "
+            f"FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')"
+        ).df()
+        goals_for_join = con.execute(
+            f"SELECT match_id, team FROM read_parquet('{WAREHOUSE / 'goal_events.parquet'}') WHERE NOT own_goal"
+        ).df()
+        goals_count = goals_for_join.groupby(["match_id", "team"]).size().reset_index(name="goles_marcados")
+        gvp = phys_for_goals.merge(goals_count, on=["match_id", "team"], how="left")
+        gvp["goles_marcados"] = gvp["goles_marcados"].fillna(0).astype(int)
+        if has_matches:
+            matches_for_gvp = con.execute(
+                f"SELECT match_id, stage, match_date, home_team, away_team "
+                f"FROM read_parquet('{WAREHOUSE / 'matches.parquet'}') WHERE season = '2026'"
+            ).df()
+            gvp = gvp.merge(matches_for_gvp, on="match_id", how="inner")
+            gvp["rival"] = gvp.apply(lambda r: r["away_team"] if r["team"] == r["home_team"] else r["home_team"], axis=1)
+        _write_json("goals_vs_physical.json", _records(gvp))
+    else:
+        _write_json("goals_vs_physical.json", {"status": "pending_first_scrape", "rows": []})
+
     if has_derived_team_metrics:
         derived_team = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_team_metrics.parquet'}')").df()
         _write_json("derived_team_metrics.json", _records(derived_team))

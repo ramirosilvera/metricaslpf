@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import { loadJson, type GoalEventRow, type GoalScorerRankingRow, type OwnGoalRow } from "../lib/data";
 import { flagFor } from "../lib/flags";
+import ShareCardButton from "../islands/ShareCardButton";
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
@@ -32,6 +33,18 @@ const totalGoals = goalEvents.length;
 const penaltyGoals = goalEvents.filter((g) => g.penalty).length;
 const ownGoalCount = goalEvents.filter((g) => g.own_goal).length;
 const updatedAt = goalEvents[0]?.retrieved_at?.slice(0, 10) ?? null;
+
+const topScorer = sorted[0] ?? null;
+const topScorerStats = topScorer
+  ? [
+      { label: "Goles", value: String(topScorer.goles) },
+      { label: "Penales", value: String(topScorer.penales) },
+      { label: "Partidos con gol", value: String(topScorer.partidos_con_gol) },
+    ]
+  : [];
+const topScorerShareText = topScorer
+  ? `${topScorer.player_name} (${topScorer.team}) lidera la tabla de goleadores del Mundial 2026 con ${topScorer.goles} goles en ${topScorer.partidos_con_gol} partidos.`
+  : undefined;
 ---
 
 <Base title="Goleadores" description="Tabla de goleadores del Mundial 2026: goles, penales y partidos con gol por jugador, con datos abiertos de openfootball.">
@@ -42,6 +55,21 @@ const updatedAt = goalEvents[0]?.retrieved_at?.slice(0, 10) ?? null;
     Todos los goles del torneo, gol por gol, desde datos abiertos (openfootball). Los penales convertidos están
     incluidos en el total de goles; los goles en contra no suman a ningún goleador y se listan aparte.
   </p>
+
+  {topScorer && (
+    <div class="hero-actions" style="margin-bottom: 1.5rem;">
+      <ShareCardButton
+        client:only="react"
+        title={topScorer.player_name}
+        subtitle={`${flagFor(topScorer.team)} ${topScorer.team} · Goleador del Mundial 2026`}
+        flag={flagFor(topScorer.team)}
+        stats={topScorerStats}
+        tagline="Máximo goleador del torneo"
+        shareText={topScorerShareText}
+        filenameBase={`${topScorer.player_name}-goleador`}
+      />
+    </div>
+  )}
 
   <section class="section">
     <div class="stat-tiles">
