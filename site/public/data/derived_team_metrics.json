@@ -2054,5 +2054,389 @@
     "value": 465.54375,
     "z_score": -0.69,
     "percentile": 25.0
+  },
+  {
+    "team": "Algeria",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.846153846153847,
+    "z_score": -0.97,
+    "percentile": 18.8
+  },
+  {
+    "team": "Argentina",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 29.126923076923074,
+    "z_score": 1.07,
+    "percentile": 85.4
+  },
+  {
+    "team": "Australia",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.353846153846156,
+    "z_score": -0.52,
+    "percentile": 35.4
+  },
+  {
+    "team": "Austria",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.6,
+    "z_score": 0.59,
+    "percentile": 75.0
+  },
+  {
+    "team": "Belgium",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.611538461538462,
+    "z_score": -0.29,
+    "percentile": 43.8
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.465384615384615,
+    "z_score": -1.32,
+    "percentile": 6.2
+  },
+  {
+    "team": "Brazil",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 29.361538461538462,
+    "z_score": 1.28,
+    "percentile": 89.6
+  },
+  {
+    "team": "Cabo Verde",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 29.66923076923077,
+    "z_score": 1.55,
+    "percentile": 93.8
+  },
+  {
+    "team": "Canada",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.97307692307692,
+    "z_score": -0.86,
+    "percentile": 27.1
+  },
+  {
+    "team": "Colombia",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 30.08076923076923,
+    "z_score": 1.92,
+    "percentile": 95.8
+  },
+  {
+    "team": "Congo DR",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 29.069230769230767,
+    "z_score": 1.01,
+    "percentile": 83.3
+  },
+  {
+    "team": "Croatia",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.33076923076923,
+    "z_score": 0.35,
+    "percentile": 68.8
+  },
+  {
+    "team": "Curaçao",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.023076923076925,
+    "z_score": 0.08,
+    "percentile": 54.2
+  },
+  {
+    "team": "Czechia",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.615384615384617,
+    "z_score": -0.29,
+    "percentile": 45.8
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 25.846153846153847,
+    "z_score": -1.87,
+    "percentile": 2.1
+  },
+  {
+    "team": "Ecuador",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.088461538461537,
+    "z_score": -1.65,
+    "percentile": 4.2
+  },
+  {
+    "team": "Egypt",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 29.053846153846152,
+    "z_score": 1.0,
+    "percentile": 81.2
+  },
+  {
+    "team": "England",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.273076923076925,
+    "z_score": -0.59,
+    "percentile": 33.3
+  },
+  {
+    "team": "France",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.003846153846155,
+    "z_score": -0.83,
+    "percentile": 29.2
+  },
+  {
+    "team": "Germany",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.03846153846154,
+    "z_score": 0.09,
+    "percentile": 58.3
+  },
+  {
+    "team": "Ghana",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.96923076923077,
+    "z_score": -0.86,
+    "percentile": 25.0
+  },
+  {
+    "team": "Haiti",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.515384615384615,
+    "z_score": -0.38,
+    "percentile": 39.6
+  },
+  {
+    "team": "IR Iran",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 30.334615384615386,
+    "z_score": 2.15,
+    "percentile": 97.9
+  },
+  {
+    "team": "Iraq",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.915384615384614,
+    "z_score": -0.91,
+    "percentile": 22.9
+  },
+  {
+    "team": "Japan",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.49230769230769,
+    "z_score": -0.4,
+    "percentile": 37.5
+  },
+  {
+    "team": "Jordan",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.46923076923077,
+    "z_score": 0.48,
+    "percentile": 70.8
+  },
+  {
+    "team": "Korea Republic",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.065384615384616,
+    "z_score": 0.12,
+    "percentile": 60.4
+  },
+  {
+    "team": "Mexico",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.892307692307693,
+    "z_score": -0.04,
+    "percentile": 52.1
+  },
+  {
+    "team": "Morocco",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.603846153846156,
+    "z_score": -1.19,
+    "percentile": 8.3
+  },
+  {
+    "team": "Netherlands",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.77692307692308,
+    "z_score": -0.14,
+    "percentile": 50.0
+  },
+  {
+    "team": "New Zealand",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.25769230769231,
+    "z_score": 0.29,
+    "percentile": 64.6
+  },
+  {
+    "team": "Norway",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.799999999999997,
+    "z_score": -1.02,
+    "percentile": 14.6
+  },
+  {
+    "team": "Panama",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 30.430769230769233,
+    "z_score": 2.23,
+    "percentile": 100.0
+  },
+  {
+    "team": "Paraguay",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 29.003846153846155,
+    "z_score": 0.96,
+    "percentile": 79.2
+  },
+  {
+    "team": "Portugal",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.034615384615385,
+    "z_score": 0.09,
+    "percentile": 56.2
+  },
+  {
+    "team": "Qatar",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 29.5,
+    "z_score": 1.4,
+    "percentile": 91.7
+  },
+  {
+    "team": "Saudi Arabia",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.51153846153846,
+    "z_score": 0.52,
+    "percentile": 72.9
+  },
+  {
+    "team": "Scotland",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 29.20384615384615,
+    "z_score": 1.14,
+    "percentile": 87.5
+  },
+  {
+    "team": "Senegal",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.088461538461537,
+    "z_score": -0.76,
+    "percentile": 31.2
+  },
+  {
+    "team": "South Africa",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.81153846153846,
+    "z_score": -1.01,
+    "percentile": 16.7
+  },
+  {
+    "team": "Spain",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.74230769230769,
+    "z_score": -1.07,
+    "percentile": 12.5
+  },
+  {
+    "team": "Sweden",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.557692307692307,
+    "z_score": -0.34,
+    "percentile": 41.7
+  },
+  {
+    "team": "Switzerland",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.303846153846152,
+    "z_score": 0.33,
+    "percentile": 66.7
+  },
+  {
+    "team": "Tunisia",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.65,
+    "z_score": -1.15,
+    "percentile": 10.4
+  },
+  {
+    "team": "Türkiye",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 27.673076923076923,
+    "z_score": -0.23,
+    "percentile": 47.9
+  },
+  {
+    "team": "USA",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 26.892307692307693,
+    "z_score": -0.93,
+    "percentile": 20.8
+  },
+  {
+    "team": "Uruguay",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.746153846153845,
+    "z_score": 0.73,
+    "percentile": 77.1
+  },
+  {
+    "team": "Uzbekistan",
+    "season": "2026",
+    "metric": "edad_promedio",
+    "value": 28.215384615384615,
+    "z_score": 0.25,
+    "percentile": 62.5
   }
 ]
