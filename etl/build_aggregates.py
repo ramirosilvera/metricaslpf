@@ -299,31 +299,148 @@ def build():
         total_matches_2026 = json.loads(discovery_path.read_text()).get("count")
     matches_with_physical = int(physical["match_id"].nunique()) if has_physical else 0
 
+    # --- Cobertura y frescura: números reales computados en vivo sobre el
+    # warehouse (nunca hardcodeados) para que cada dato de la UI sea verificable ---
+    def _max_ts(df, col: str):
+        try:
+            v = df[col].dropna().max()
+            return str(v) if v is not None else None
+        except Exception:
+            return None
+
+    # 48 selecciones participan del Mundial 2026 (fuente de verdad: matches.parquet)
+    teams_2026_total = (
+        int(matches[matches["season"] == "2026"][["home_team", "away_team"]].stack().nunique())
+        if has_matches
+        else None
+    )
+    teams_with_physical = int(physical["team"].nunique()) if has_physical else 0
+    teams_with_tactical_2026 = int(tactical_players["team"].nunique()) if has_tactical_players else 0
+    matches_with_tactical_2026 = int(tactical_players["match_id"].nunique()) if has_tactical_players else 0
+    teams_with_squads = int(squads["team"].nunique()) if has_squads else 0
+    teams_with_profile = int(team_profile["team"].nunique()) if has_team_profile else 0
+
+    def _pct(part, whole):
+        if not whole:
+            return None
+        return round(min(100, (part / whole) * 100), 1)
+
+    # Contexto táctico StatsBomb (histórico 2018/2022): partidos y torneos cargados
+    if has_tactical:
+        _ctx = con.execute(
+            f"""SELECT count(DISTINCT t.match_id) AS m, list(DISTINCT m.season) AS seasons
+                FROM read_parquet('{WAREHOUSE / 'team_match_stats_tactical.parquet'}') t
+                JOIN read_parquet('{WAREHOUSE / 'matches.parquet'}') m USING(match_id)"""
+        ).fetchone()
+        statsbomb_matches, statsbomb_seasons = int(_ctx[0]), sorted(_ctx[1])
+    else:
+        statsbomb_matches, statsbomb_seasons = 0, []
+
+    # --- Cross-verificación openfootball (CC0) vs. resultado oficial FIFA ---
+    # Señal de confianza real: contamos los goles evento-a-evento de openfootball
+    # y los comparamos contra el marcador final oficial de cada partido jugado.
+    cross_verification = None
+    if has_goal_events and has_matches:
+        played = matches[(matches["season"] == "2026") & matches["home_score"].notna()].copy()
+        goals_per_match = goal_events.groupby("match_id").size()
+        checked = int(len(played))
+        matched = 0
+        for _, r in played.iterrows():
+            total_score = int(r["home_score"]) + int(r["away_score"])
+            if int(goals_per_match.get(r["match_id"], 0)) == total_score:
+                matched += 1
+        cross_verification = {
+            "description": (
+                "Cada gol de openfootball (CC0) se contrastó contra el marcador final "
+                "oficial de FIFA Training Centre, partido por partido."
+            ),
+            "source_a": "openfootball/worldcup.json (goles evento a evento)",
+            "source_b": "FIFA Training Centre (marcador final del partido)",
+            "matches_checked": checked,
+            "matches_matched": matched,
+            "discrepancies": checked - matched,
+        }
+
+    # Rubro de confianza (honesto, sin inventar un score: se deriva de
+    # oficialidad de la fuente + cobertura real).
+    #   alta          -> dato oficial (FIFA/StatsBomb) o verificado contra oficial, cobertura alta
+    #   media         -> fuente verificada pero cobertura parcial / en backfill
+    #   complementaria-> fuente secundaria (Wikipedia) sin contraste oficial disponible
+    #   derivada      -> métrica calculada por el proyecto sobre las fuentes de arriba
+    confidence_legend = {
+        "alta": "Dato oficial (FIFA Training Centre / StatsBomb) o verificado contra fuente oficial, con cobertura alta.",
+        "media": "Fuente verificada pero con cobertura parcial o en proceso de carga (backfill).",
+        "complementaria": "Fuente secundaria (Wikipedia/mirror comunitario) sin contraste oficial disponible.",
+        "derivada": "Métrica calculada por el proyecto sobre las fuentes de arriba (percentiles, z-scores, clustering).",
+    }
+
+    generated_at = datetime.now(timezone.utc).isoformat()
+
     meta = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": generated_at,
+        "confidence_legend": confidence_legend,
+        "cross_verification": cross_verification,
         "sources": {
             "tactical_context": {
                 "provider": "StatsBomb Open Data",
+                "provider_url": "https://github.com/statsbomb/open-data",
                 "license": "https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf (uso no comercial)",
+                "license_short": "StatsBomb Open Data (uso no comercial)",
+                "license_url": "https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf",
                 "coverage": "Mundial 2018 y 2022 -- partidos de Argentina cargados como semilla inicial",
+                "coverage_detail": (
+                    f"{statsbomb_matches} partidos cargados de {', '.join(statsbomb_seasons)}"
+                    if statsbomb_seasons
+                    else "sin partidos cargados"
+                ),
+                "method": "Eventos oficiales de StatsBomb; la posesión es un proxy por duración de eventos, no tracking.",
+                "confidence": "media",
+                "as_of": generated_at,
                 "status": "ok" if has_tactical else "missing",
             },
             "physical_performance": {
                 "provider": "FIFA Training Centre",
+                "provider_url": "https://www.fifatrainingcentre.com/",
+                "license": "Datos oficiales FIFA publicados en informes del Mundial 2026",
                 "coverage": "Mundial 2026 (en curso)",
+                "coverage_detail": (
+                    f"{teams_with_physical}/{teams_2026_total} selecciones · {matches_with_physical}/{total_matches_2026} partidos"
+                    if teams_2026_total
+                    else None
+                ),
+                "coverage_pct": _pct(matches_with_physical, total_matches_2026),
+                "method": "Distancia, alta intensidad, sprints y velocidad punta de los informes físicos oficiales FIFA (GPS/tracking).",
+                "confidence": "alta",
+                "as_of": (_max_ts(physical, "retrieved_at") or generated_at) if has_physical else generated_at,
                 "status": "ok" if has_physical else "pending_first_scrape",
                 "matches_loaded": matches_with_physical,
                 "matches_total": total_matches_2026,
+                "teams_loaded": teams_with_physical,
+                "teams_total": teams_2026_total,
             },
             "tactical_2026": {
                 "provider": "FIFA Training Centre",
+                "provider_url": "https://www.fifatrainingcentre.com/",
+                "license": "Datos oficiales FIFA publicados en informes del Mundial 2026",
                 "coverage": "pases, presión, duelos y ofertas de recepción por jugador -- Mundial 2026 (en curso)",
+                "coverage_detail": (
+                    f"{matches_with_tactical_2026}/{total_matches_2026} partidos · {teams_with_tactical_2026}/{teams_2026_total} selecciones (backfill en curso)"
+                    if teams_2026_total
+                    else None
+                ),
+                "coverage_pct": _pct(matches_with_tactical_2026, total_matches_2026),
+                "method": "Métricas tácticas por jugador de los informes oficiales FIFA; la carga histórica se completa progresivamente.",
+                "confidence": "media",
+                "as_of": (_max_ts(tactical_players, "retrieved_at") or generated_at) if has_tactical_players else generated_at,
                 "status": "ok" if has_tactical_players else "pending_first_scrape",
-                "matches_loaded": int(tactical_players["match_id"].nunique()) if has_tactical_players else 0,
+                "matches_loaded": matches_with_tactical_2026,
                 "matches_total": total_matches_2026,
             },
             "squad_ages": {
                 "provider": "26worldcup (Wikipedia)",
+                "provider_url": "https://github.com/26worldcup/26worldcup.github.io",
+                "license": "Código MIT · hechos de Wikipedia (texto CC BY-SA 4.0)",
+                "license_url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
                 "provider_note": (
                     "Mirror JSON MIT (github.com/26worldcup/26worldcup.github.io) de hechos "
                     "extraidos del articulo de Wikipedia '2026 FIFA World Cup squads' "
@@ -332,23 +449,58 @@ def build():
                     "deja de bloquear el scraping con HTTP 403."
                 ),
                 "coverage": "edad, dorsal, caps, goles de carrera, capitania y stats del Mundial 2026 del plantel actual",
+                "coverage_detail": (
+                    f"{teams_with_squads}/{teams_2026_total} selecciones" if teams_2026_total else None
+                ),
+                "coverage_pct": _pct(teams_with_squads, teams_2026_total),
+                "method": "Hechos objetivos (edad, dorsal, caps) tomados del artículo de Wikipedia vía mirror comunitario.",
+                "confidence": "complementaria",
+                "as_of": (_max_ts(squads, "retrieved_at") or generated_at) if has_squads else generated_at,
                 "status": "ok" if has_squads else "pending_first_scrape",
             },
             "team_profile": {
                 "provider": "26worldcup (FIFA public API)",
+                "provider_url": "https://github.com/26worldcup/26worldcup.github.io",
+                "license": "Código MIT · ranking de la API pública FIFA · campo base de Wikipedia",
                 "coverage": "ranking FIFA (actual y anterior) y ubicacion del campo base por seleccion",
+                "coverage_detail": (
+                    f"{teams_with_profile}/{teams_2026_total} selecciones" if teams_2026_total else None
+                ),
+                "coverage_pct": _pct(teams_with_profile, teams_2026_total),
+                "method": "Ranking de la API pública de FIFA; el campo base proviene de Wikipedia vía el mismo mirror.",
+                "confidence": "media",
+                "as_of": (_max_ts(team_profile, "retrieved_at") or generated_at) if has_team_profile else generated_at,
                 "status": "ok" if has_team_profile else "pending_first_scrape",
             },
             "derived_metrics": {
                 "provider": "calculado internamente sobre las fuentes de arriba",
                 "coverage": "percentiles y z-scores por temporada, clustering de estilo de juego",
+                "coverage_detail": "percentil y z-score por métrica dentro de cada temporada; k-means (5 métricas tácticas) para estilo",
+                "method": (
+                    "Percentil y z-score se calculan DENTRO de la misma temporada (2026 vs 2026). "
+                    "El estilo de juego es un k-means sobre 5 métricas tácticas estandarizadas: "
+                    "heurística descriptiva, no una clasificación validada."
+                ),
+                "confidence": "derivada",
+                "as_of": generated_at,
                 "status": "ok" if has_derived_team_metrics else "pending_first_scrape",
             },
             "goal_events": {
                 "provider": "openfootball/worldcup.json",
+                "provider_url": "https://github.com/openfootball/worldcup.json",
                 "license": "CC0-1.0 (dominio publico) -- https://github.com/openfootball/worldcup.json",
+                "license_short": "CC0-1.0 (dominio público)",
+                "license_url": "https://github.com/openfootball/worldcup.json",
                 "coverage": "goleador, minuto y flags de penal/gol en contra de cada gol del Mundial 2026",
+                "coverage_detail": (
+                    f"{int(goal_events['match_id'].nunique())} partidos con goles · verificado {cross_verification['matches_matched']}/{cross_verification['matches_checked']} contra FIFA"
+                    if has_goal_events and cross_verification
+                    else None
+                ),
+                "method": "Goles evento a evento; verificados uno a uno contra el marcador final oficial de FIFA Training Centre.",
+                "confidence": "alta",
                 "cross_checked_against": "resultado final de matches.parquet (FIFA Training Centre)",
+                "as_of": (_max_ts(goal_events, "retrieved_at") or generated_at) if has_goal_events else generated_at,
                 "status": "ok" if has_goal_events else "pending_first_scrape",
                 # partidos con al menos un gol propio (un 0-0 matcheado
                 # correctamente no aporta filas acá, no es un partido faltante)

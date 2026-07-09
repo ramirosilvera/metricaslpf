@@ -24,6 +24,7 @@ const navItems = [
   { href: `${base}analisis/`, label: "Análisis" },
   { href: `${base}explorador/`, label: "Explorador" },
   { href: `${base}metodologia/`, label: "Metodología" },
+  { href: `${base}fuentes/`, label: "Fuentes" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -86,8 +87,8 @@ function isActive(href: string) {
       <div class="wrap">
         <p>
           Proyecto abierto, sin fines de lucro. Código y datos versionados en <a href="https://github.com/ramirosilvera/metricasmundial2026" target="_blank" rel="noreferrer">GitHub</a>.
-          Fuentes: StatsBomb Open Data, FIFA Training Centre, Transfermarkt. Ver <a href={`${base}metodologia/`}>metodología</a> para
-          limitaciones y sesgos conocidos.
+          Fuentes: FIFA Training Centre, StatsBomb Open Data, openfootball (CC0) y 26worldcup/Wikipedia. Ver <a href={`${base}fuentes/`}>fuentes</a> y <a href={`${base}metodologia/`}>metodología</a> para
+          licencias, cobertura, limitaciones y sesgos conocidos.
         </p>
       </div>
     </footer>

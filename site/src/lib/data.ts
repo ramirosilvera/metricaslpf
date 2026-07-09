@@ -74,23 +74,52 @@ export interface PlayerMinutesRow {
   minutos_totales: number;
 }
 
+export type ConfidenceLevel = "alta" | "media" | "complementaria" | "derivada";
+
 export interface SourceStatus {
   provider: string;
+  provider_url?: string;
+  provider_note?: string;
   license?: string;
+  license_short?: string;
+  license_url?: string;
   coverage?: string;
+  coverage_detail?: string | null;
+  coverage_pct?: number | null;
+  method?: string;
+  confidence?: ConfidenceLevel;
+  as_of?: string;
+  cross_checked_against?: string;
   status: "ok" | "missing" | "pending_first_scrape";
   matches_loaded?: number;
-  matches_total?: number;
+  matches_total?: number | null;
+  teams_loaded?: number;
+  teams_total?: number | null;
+  matches_with_goals?: number;
+  matches_played_total?: number | null;
+}
+
+export interface CrossVerification {
+  description: string;
+  source_a: string;
+  source_b: string;
+  matches_checked: number;
+  matches_matched: number;
+  discrepancies: number;
 }
 
 export interface Meta {
   generated_at: string;
+  confidence_legend?: Record<ConfidenceLevel, string>;
+  cross_verification?: CrossVerification | null;
   sources: {
     tactical_context: SourceStatus;
     physical_performance: SourceStatus;
     tactical_2026?: SourceStatus;
     squad_ages: SourceStatus;
+    team_profile?: SourceStatus;
     derived_metrics?: SourceStatus;
+    goal_events?: SourceStatus;
   };
 }
 
