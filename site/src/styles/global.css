@@ -1299,6 +1299,15 @@ pre {
   margin: 0 0 0.75rem;
 }
 
+/* Etiqueta chica que antecede a los chips sugeridos ("Empezá por acá:"). */
+.chat-suggestions-label {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.4rem;
+}
+
 .chat-suggestions {
   display: flex;
   flex-direction: column;
@@ -1319,6 +1328,32 @@ pre {
 
 .chat-suggestions button:hover {
   border-color: color-mix(in srgb, var(--brand) 35%, var(--border));
+}
+
+/* Chip de pregunta sugerida: tarjeta tappable con afordancia de "enviar".
+   El pseudo-elemento agrega una flecha que refuerza que al tocarlo se envía. */
+.chat-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  line-height: 1.3;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.chat-chip::after {
+  content: "→";
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.chat-chip:hover {
+  background: color-mix(in srgb, var(--brand) 8%, var(--surface-2));
+}
+
+.chat-chip:hover::after {
+  color: var(--brand);
 }
 
 .chat-message {

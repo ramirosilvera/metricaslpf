@@ -11,14 +11,128 @@ interface Turn {
   text: string;
 }
 
-const SUGGESTIONS = [
-  "¿Argentina corre menos que otras selecciones?",
-  "¿Qué significa 'alta intensidad'?",
-  "¿De dónde salen estos datos?",
-];
+interface ChatContext {
+  /** Frase de bienvenida en tono copiloto: qué puede hacer acá. */
+  intro: string;
+  /** Placeholder del input, orientado a la página actual. */
+  placeholder: string;
+  /** Chips sugeridos: al tocarlos se envían como si el usuario los tipeara. */
+  chips: string[];
+}
+
+// Preguntas de arranque genéricas (fallback). Interpretativas, no triviales:
+// buscan que el copiloto traiga un dato y lo lea, no un simple sí/no.
+const DEFAULT_CONTEXT: ChatContext = {
+  intro: "Soy tu copiloto de datos del Mundial 2026. Puedo traer los números y ayudarte a interpretarlos.",
+  placeholder: "¿Qué querés saber del torneo?",
+  chips: [
+    "¿Argentina corre menos que el resto?",
+    "¿Quién es el goleador del torneo?",
+    "¿Qué selección tiene el plantel más joven?",
+  ],
+};
+
+// Detecta la página actual por el pathname (el componente es client:only, así que
+// window está disponible) y adapta bienvenida, placeholder y chips. Ninguna de
+// estas variantes dispara una llamada a Gemini: sólo preparan texto local. La
+// API se llama recién cuando el usuario toca un chip o escribe y envía.
+function contextFor(pathname: string): ChatContext {
+  const p = (pathname || "").toLowerCase();
+
+  if (p.includes("/selecciones")) {
+    return {
+      intro: "Estás viendo el físico y el perfil de las selecciones. Puedo leer estos rankings con vos.",
+      placeholder: "¿Qué querés saber de estas selecciones?",
+      chips: [
+        "¿Qué selección corre más y cuál menos?",
+        "¿Argentina corre menos que el promedio del torneo?",
+        "¿Qué selección tiene el plantel más joven?",
+      ],
+    };
+  }
+
+  if (p.includes("/comparar")) {
+    return {
+      intro: "Estás comparando selecciones. Puedo cruzar sus números físicos y tácticos y decirte qué patrón sugieren.",
+      placeholder: "¿Qué querés comparar?",
+      chips: [
+        "¿En qué se diferencian físicamente Argentina y Francia?",
+        "¿Correr menos significa estar peor físicamente?",
+        "¿Qué mide la alta intensidad al comparar dos selecciones?",
+      ],
+    };
+  }
+
+  if (p.includes("/jugadores")) {
+    return {
+      intro: "Estás viendo a los jugadores. Puedo rankearlos por métrica y normalizar por posición para que la comparación sea justa.",
+      placeholder: "¿Qué querés saber de los jugadores?",
+      chips: [
+        "¿Quién es el jugador que más corre del torneo?",
+        "¿Quién lidera en alta intensidad por posición?",
+        "¿Qué significa 'alta intensidad'?",
+      ],
+    };
+  }
+
+  if (p.includes("/goleadores")) {
+    return {
+      intro: "Estás viendo a los goleadores. Puedo traer el ranking real y ponerlo en contexto.",
+      placeholder: "¿Qué querés saber de los goleadores?",
+      chips: [
+        "¿Quién es el goleador del torneo?",
+        "¿Cuántos goles lleva Argentina y quién los hizo?",
+        "¿Quién es el goleador más joven?",
+      ],
+    };
+  }
+
+  if (p.includes("/analisis")) {
+    return {
+      intro: "Estás en el análisis avanzado. Puedo leer los líderes físicos y tácticos y explicar qué patrón muestran.",
+      placeholder: "¿Qué querés que interprete?",
+      chips: [
+        "¿Qué selección tiene la huella física de un equipo que domina el balón?",
+        "¿Correr más siempre es mejor?",
+        "¿Qué selección lidera en alta intensidad?",
+      ],
+    };
+  }
+
+  if (p.includes("/explorador")) {
+    return {
+      intro: "Estás en el explorador de datos. Puedo ayudarte a entender qué hay disponible y cómo leerlo.",
+      placeholder: "¿Qué datos querés explorar?",
+      chips: [
+        "¿Qué métricas físicas hay cargadas por selección?",
+        "¿Qué selección corre más y cuál menos?",
+        "¿De dónde salen estos datos?",
+      ],
+    };
+  }
+
+  if (p.includes("/metodologia") || p.includes("/fuentes")) {
+    return {
+      intro: "Estás viendo cómo se construyó el proyecto. Puedo explicarte las fuentes y los límites de los datos.",
+      placeholder: "¿Qué querés saber de los datos?",
+      chips: [
+        "¿De dónde salen estos datos?",
+        "¿Por qué la distancia recorrida no mide el estado físico?",
+        "¿Se puede sacar una conclusión con tan pocos partidos?",
+      ],
+    };
+  }
+
+  return DEFAULT_CONTEXT;
+}
 
 export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
+  // El contexto se calcula una sola vez al montar (el pathname no cambia sin
+  // recargar en este sitio estático). Es texto local: cero costo de API.
+  const [context] = useState<ChatContext>(() =>
+    contextFor(typeof window !== "undefined" ? window.location.pathname : ""),
+  );
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -90,13 +204,11 @@ export default function ChatAssistant() {
           <div className="chat-messages" ref={scrollRef} role="log" aria-live="polite" aria-label="Mensajes del asistente">
             {turns.length === 0 && (
               <div className="chat-empty">
-                <p>
-                  Preguntame sobre las métricas del sitio: posesión, distancia, alta intensidad, o
-                  cómo interpretar un gráfico. No invento números que no estén en los datos.
-                </p>
+                <p>{context.intro}</p>
+                <p className="chat-suggestions-label">Empezá por acá:</p>
                 <div className="chat-suggestions">
-                  {SUGGESTIONS.map((s) => (
-                    <button key={s} type="button" onClick={() => send(s)}>
+                  {context.chips.map((s) => (
+                    <button key={s} type="button" className="chat-chip" onClick={() => send(s)}>
                       {s}
                     </button>
                   ))}
@@ -126,7 +238,7 @@ export default function ChatAssistant() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Escribí tu pregunta…"
+              placeholder={context.placeholder}
               maxLength={600}
               disabled={loading}
               aria-label="Mensaje para el asistente"
