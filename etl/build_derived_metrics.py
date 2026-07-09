@@ -136,7 +136,6 @@ def _player_physical_metrics(physical_players: pd.DataFrame) -> pd.DataFrame:
     agg = (
         physical_players.groupby(["player_name", "team"])
         .agg(
-            position=("player_name", "size"),  # placeholder, se reemplaza abajo
             distancia_promedio_km=("total_distance_m", lambda s: (s / 1000).mean()),
             alta_intensidad_promedio_m=("alta_intensidad_m", "mean"),
             sprints_promedio=("sprint_count", "mean"),
@@ -144,7 +143,6 @@ def _player_physical_metrics(physical_players: pd.DataFrame) -> pd.DataFrame:
         )
         .reset_index()
     )
-    agg = agg.drop(columns=["position"])
     return agg
 
 

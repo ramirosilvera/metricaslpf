@@ -192,8 +192,21 @@ function json(body, status, extraHeaders) {
   });
 }
 
+let warnedRateLimitDisabled = false;
+
 async function checkRateLimit(env, ip) {
-  if (!env.RATE_LIMIT) return { ok: true }; // KV no configurado -- se saltea, no rompe el feature
+  if (!env.RATE_LIMIT) {
+    // KV no configurado -- se saltea, no rompe el feature. Pero el rate limit
+    // es la ÚNICA barrera de costo real sobre la clave prepaga de Gemini, así
+    // que lo dejamos visible en los logs (wrangler tail / dashboard) una vez
+    // por isolate en lugar de fallar en silencio. Ver wrangler.toml para
+    // activar el namespace KV RATE_LIMIT.
+    if (!warnedRateLimitDisabled) {
+      console.warn("RATE_LIMIT KV no está bindeado -- el límite por IP está INACTIVO (la clave de Gemini queda sin tope de costo). Ver wrangler.toml.");
+      warnedRateLimitDisabled = true;
+    }
+    return { ok: true };
+  }
 
   const limit = Number(env.RATE_LIMIT_PER_HOUR) || DEFAULT_RATE_LIMIT_PER_HOUR;
   const hourBucket = Math.floor(Date.now() / 3_600_000);
