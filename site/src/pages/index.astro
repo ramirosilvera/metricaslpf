@@ -35,12 +35,22 @@ function resultFor(m: MatchRow): "win" | "draw" | "loss" | null {
 }
 const decided2026 = matches2026Argentina.filter((m) => resultFor(m) !== null);
 const lastMatch2026 = decided2026[decided2026.length - 1];
+const wins2026 = decided2026.filter((m) => resultFor(m) === "win").length;
 const wasEliminated = decided2026.some((m) => resultFor(m) === "loss");
 const liveStatus = lastMatch2026
   ? wasEliminated
     ? `Eliminada en ${lastMatch2026.stage}`
     : `${lastMatch2026.stage} · invicta`
   : null;
+
+// Mensaje para compartir por WhatsApp -- mismo estado en vivo de arriba, con
+// el récord de partidos para dar más contexto fuera del sitio.
+const pageUrl = new URL(Astro.url.pathname, "https://ramirosilvera.github.io").href;
+const shareStatus = lastMatch2026
+  ? `${lastMatch2026.stage} · ${wins2026} ${wins2026 === 1 ? "victoria" : "victorias"} en ${decided2026.length} partidos${wasEliminated ? "" : " · invicta"}`
+  : "todavía sin partidos cargados";
+const shareMessage = `Argentina en el Mundial 2026: ${shareStatus} 🇦🇷⚽ — no arrancamos con un ranking, ponemos a prueba la hipótesis física con datos reales y abiertos. Mirá el análisis completo: ${pageUrl}`;
+const waLink = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
 ---
 
 <Base title="Inicio" description="¿Argentina corre menos que el resto en el Mundial? Un análisis abierto, con los sesgos a la vista.">
@@ -62,6 +72,7 @@ const liveStatus = lastMatch2026
     <div class="hero-actions">
       <a class="btn btn-primary" href={`${base}selecciones/`}>Ver rankings →</a>
       <a class="btn btn-ghost" href={`${base}metodologia/`}>Leer la metodología</a>
+      <a class="btn btn-share" href={waLink} target="_blank" rel="noreferrer">📲 Compartir</a>
     </div>
   </div>
 

@@ -397,6 +397,19 @@ p {
   color: var(--text-primary);
 }
 
+/* Compartir por WhatsApp — acento verde con los tokens propios del sitio, sin verde de marca ajeno. */
+.btn-share {
+  background: var(--surface-1);
+  color: var(--brand-strong);
+  border-color: color-mix(in srgb, var(--brand) 45%, var(--border));
+}
+
+.btn-share:hover {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+  border-color: var(--brand);
+}
+
 /* ---------- cards / callouts ---------- */
 
 .card {

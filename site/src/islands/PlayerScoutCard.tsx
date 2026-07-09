@@ -43,6 +43,36 @@ export default function PlayerScoutCard({ rows }: Props) {
 
   const radarMetrics = RADAR_ORDER.filter((m) => playerRows.some((r) => r.metric === m && r.percentile != null));
 
+  // Link "compartir por WhatsApp" con las métricas reales del jugador elegido.
+  // Componente client:only, así que window está disponible; se guarda igual por prudencia.
+  const waLink = useMemo(() => {
+    if (typeof window === "undefined" || !currentPlayer) return null;
+    const shareUrl = window.location.href;
+    const fmt = (v: number) => Math.round(v * 10) / 10;
+
+    const metricName = (m: string) => METRIC_LABELS[m].label.toLowerCase().replace(" / partido", " por partido");
+    const distance = playerRows.find((r) => r.metric === "distancia_promedio_km");
+    const known = playerRows.filter((r) => METRIC_LABELS[r.metric] && r.percentile != null);
+    const best = [...known].sort((a, b) => (b.percentile ?? 0) - (a.percentile ?? 0))[0];
+
+    let insight: string;
+    if (distance) {
+      insight = `corre ${fmt(distance.value)} km promedio por partido en el Mundial 2026${
+        distance.percentile != null ? ` (percentil ${Math.round(distance.percentile)} entre los jugadores medidos)` : ""
+      }`;
+      if (best && best.metric !== "distancia_promedio_km") {
+        insight += ` y está en el percentil ${Math.round(best.percentile ?? 0)} en ${metricName(best.metric)}`;
+      }
+    } else if (best) {
+      insight = `registra ${fmt(best.value)}${METRIC_LABELS[best.metric].suffix} de ${metricName(best.metric)} en el Mundial 2026 (percentil ${Math.round(best.percentile ?? 0)} entre los jugadores medidos)`;
+    } else {
+      return null;
+    }
+
+    const message = `¿Sabías que ${currentPlayer} (${team}) ${insight}? Ficha completa acá: ${shareUrl}`;
+    return `https://wa.me/?text=${encodeURIComponent(message)}`;
+  }, [playerRows, currentPlayer, team]);
+
   const option = useMemo(() => {
     if (radarMetrics.length < 3) return null;
     return {
@@ -108,6 +138,11 @@ export default function PlayerScoutCard({ rows }: Props) {
             </option>
           ))}
         </select>
+        {waLink && (
+          <a className="btn btn-share" href={waLink} target="_blank" rel="noreferrer">
+            📲 Compartir ficha
+          </a>
+        )}
       </div>
 
       {option ? (
