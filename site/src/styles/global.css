@@ -315,6 +315,116 @@ a:hover {
   background: var(--brand-strong);
 }
 
+/* ---------- nav: grupos desplegables (Rankings / Más) e ítem IA ----------
+   Se usa <details>/<summary> nativo: funciona sin JS, es accesible por teclado
+   y colapsa inline en móvil. En desktop el panel flota sobre el contenido. */
+.nav-group {
+  position: relative;
+  display: inline-flex;
+}
+
+.nav-group > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  color: var(--text-secondary);
+  font-size: 0.83rem;
+  font-weight: 550;
+  padding: 0.4rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-group > summary::after {
+  content: "▾";
+  font-size: 0.7em;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
+.nav-group[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+.nav-group > summary:hover,
+.nav-group[open] > summary {
+  color: var(--text-primary);
+  background: var(--surface-2);
+}
+
+.nav-group > summary.is-active {
+  color: var(--brand-contrast);
+  background: var(--brand-strong);
+}
+
+.nav-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+/* Ítem "IA": se ve como un enlace de la nav, pero es un botón que abre el
+   asistente flotante (dispara un CustomEvent, sin navegar). */
+.nav-ia {
+  font-family: inherit;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  font-size: 0.83rem;
+  font-weight: 550;
+  padding: 0.4rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-ia::before {
+  content: "💬";
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+.nav-ia:hover {
+  color: var(--text-primary);
+  background: var(--surface-2);
+}
+
+/* Desktop: los paneles desplegables flotan sobre el contenido. */
+@media (min-width: 781px) {
+  .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    min-width: 190px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 0.35rem;
+    z-index: 40;
+  }
+
+  .nav-group-more .nav-dropdown {
+    left: auto;
+    right: 0;
+  }
+
+  .nav-dropdown a {
+    display: block;
+  }
+}
+
 @media (max-width: 780px) {
   /* El checkbox se oculta visualmente pero permanece enfocable por teclado
      (Space/Enter abre/cierra el menú); el foco se refleja en la hamburguesa. */
@@ -373,6 +483,39 @@ a:hover {
     padding: 0.4rem 0.85rem;
     font-size: 0.95rem;
     border-radius: var(--radius-sm);
+  }
+
+  /* En móvil los grupos y el botón IA se apilan como filas del menú y los
+     desplegables se expanden inline (comportamiento nativo de <details>). */
+  .nav-group {
+    display: block;
+    width: 100%;
+  }
+
+  .nav-group > summary,
+  .nav-ia {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-group > summary::after {
+    margin-left: auto;
+  }
+
+  .nav-dropdown {
+    padding: 0.15rem 0 0.25rem 0.6rem;
+    margin-left: 0.5rem;
+    border-left: 2px solid var(--border);
+  }
+
+  .nav-dropdown a {
+    font-size: 0.9rem;
+    min-height: 40px;
   }
 
   .nav-toggle:checked ~ .nav {
@@ -466,6 +609,108 @@ p {
   gap: 0.75rem;
   flex-wrap: wrap;
   margin-top: 1.5rem;
+}
+
+/* ---------- home: centro de análisis (action center) ----------
+   Portada mínima: una pregunta + 4 acciones grandes. Sin texto explicativo,
+   snapshots ni tablas (todo eso vive en sus páginas). */
+.home-hub {
+  padding: 1.5rem 0 1rem;
+  max-width: 780px;
+}
+
+.home-hub-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  max-width: 16ch;
+  margin: 0 0 2rem;
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.cta-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-height: 132px;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+/* franja de marca superior, coherente con .stat-tile */
+.cta-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-strong));
+}
+
+.cta-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--brand) 40%, var(--border));
+  color: var(--text-primary);
+}
+
+.cta-icon {
+  font-size: 1.85rem;
+  line-height: 1;
+}
+
+.cta-label {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  max-width: 14ch;
+}
+
+.cta-arrow {
+  position: absolute;
+  right: 1.35rem;
+  bottom: 1.3rem;
+  color: var(--brand);
+  font-size: 1.2rem;
+  transition: transform 0.15s ease;
+}
+
+.cta-card:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.home-hub-foot {
+  margin: 2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.home-hub-sep {
+  color: var(--baseline);
+}
+
+@media (max-width: 560px) {
+  .cta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-card {
+    min-height: 0;
+  }
 }
 
 /* ---------- botones ---------- */

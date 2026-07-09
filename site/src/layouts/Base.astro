@@ -20,23 +20,33 @@ const canonicalUrl = new URL(Astro.url.pathname, origin).href;
 // Imagen social por defecto (tarjeta de marca 1200x630 en /public).
 const ogImage = image ?? new URL(`${base}og-image.png`, origin).href;
 
-const navItems = [
-  { href: `${base}`, label: "Inicio" },
-  { href: `${base}selecciones/`, label: "Selecciones" },
-  { href: `${base}comparar/`, label: "Comparar" },
-  { href: `${base}jugadores/`, label: "Jugadores" },
-  { href: `${base}goleadores/`, label: "Goleadores" },
-  { href: `${base}analisis/`, label: "Análisis" },
-  { href: `${base}explorador/`, label: "Explorador" },
-  { href: `${base}metodologia/`, label: "Metodología" },
-  { href: `${base}fuentes/`, label: "Fuentes" },
-];
-
+// Navegación centrada en preguntas, no en categorías: 5 ítems primarios
+// (Inicio · Comparar · Rankings · Analizar · IA). "Rankings" agrupa las tres
+// páginas de ranking existentes; "Más" agrupa lo secundario (Explorador,
+// Metodología, Fuentes) sin quitarlo de la navegación. Ninguna URL cambia.
 const currentPath = Astro.url.pathname;
 function isActive(href: string) {
   if (href === base) return currentPath === base || currentPath === `${base}index.html`;
   return currentPath.startsWith(href);
 }
+
+const homeItem = { href: `${base}`, label: "Inicio" };
+const compararItem = { href: `${base}comparar/`, label: "Comparar" };
+const analizarItem = { href: `${base}analisis/`, label: "Analizar" };
+
+const rankingsItems = [
+  { href: `${base}selecciones/`, label: "Selecciones" },
+  { href: `${base}jugadores/`, label: "Jugadores" },
+  { href: `${base}goleadores/`, label: "Goleadores" },
+];
+const secondaryItems = [
+  { href: `${base}explorador/`, label: "Explorador" },
+  { href: `${base}metodologia/`, label: "Metodología" },
+  { href: `${base}fuentes/`, label: "Fuentes" },
+];
+
+const rankingsActive = rankingsItems.some((i) => isActive(i.href));
+const secondaryActive = secondaryItems.some((i) => isActive(i.href));
 ---
 
 <!doctype html>
@@ -93,11 +103,30 @@ function isActive(href: string) {
         </label>
 
         <nav class="nav" id="nav-principal" aria-label="Navegación principal">
-          {navItems.map((item) => (
-            <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
-              {item.label}
-            </a>
-          ))}
+          <a href={homeItem.href} aria-current={isActive(homeItem.href) ? "page" : undefined}>{homeItem.label}</a>
+          <a href={compararItem.href} aria-current={isActive(compararItem.href) ? "page" : undefined}>{compararItem.label}</a>
+
+          <details class="nav-group">
+            <summary class={rankingsActive ? "is-active" : undefined} aria-current={rankingsActive ? "page" : undefined}>Rankings</summary>
+            <div class="nav-dropdown">
+              {rankingsItems.map((item) => (
+                <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
+              ))}
+            </div>
+          </details>
+
+          <a href={analizarItem.href} aria-current={isActive(analizarItem.href) ? "page" : undefined}>{analizarItem.label}</a>
+
+          <button type="button" class="nav-ia" data-open-chat aria-haspopup="dialog">IA</button>
+
+          <details class="nav-group nav-group-more">
+            <summary class={secondaryActive ? "is-active" : undefined} aria-current={secondaryActive ? "page" : undefined}>Más</summary>
+            <div class="nav-dropdown">
+              {secondaryItems.map((item) => (
+                <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
+              ))}
+            </div>
+          </details>
         </nav>
       </div>
     </header>
@@ -116,6 +145,18 @@ function isActive(href: string) {
       </div>
     </footer>
     <ChatAssistant client:only="react" />
+    <script is:inline>
+      // El ítem "IA" del menú no navega: abre el asistente flotante (ChatAssistant).
+      // Delegamos el click y emitimos un CustomEvent global; el listener vive en
+      // ChatAssistant (lo agrega el agente dueño de esa isla). Si todavía no hay
+      // listener (o el chat no está configurado), el click es inofensivo.
+      document.addEventListener("click", (e) => {
+        const trigger = e.target instanceof Element ? e.target.closest("[data-open-chat]") : null;
+        if (!trigger) return;
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent("mm26:open-chat"));
+      });
+    </script>
     <script is:inline define:vars={{ swUrl: `${base}sw.js`, swScope: base }}>
       // Registro del service worker (PWA + app shell offline). Conservador: si
       // falla, el sitio funciona igual. Ver comentarios en public/sw.js.

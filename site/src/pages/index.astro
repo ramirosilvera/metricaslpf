@@ -1,307 +1,51 @@
 ---
 import Base from "../layouts/Base.astro";
-import DataStatusBanner from "../layouts/DataStatusBanner.astro";
-import { loadJson, type TeamSeasonSummary, type MatchRow, type TeamPhysicalRankingRow, type GoalEventRow } from "../lib/data";
-import { flagFor } from "../lib/flags";
-import ShareCardButton from "../islands/ShareCardButton";
 
-function loadArray<T>(filename: string): T[] {
-  const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
-  return Array.isArray(raw) ? raw : [];
-}
-
-const summary = loadJson<TeamSeasonSummary[]>("team_season_summary.json");
-const matches = loadJson<MatchRow[]>("matches.json");
-const physicalRaw = loadJson<any>("physical_match_stats.json");
-const physicalRows: any[] = Array.isArray(physicalRaw) ? physicalRaw : [];
-const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
-const goalEvents = loadArray<GoalEventRow>("goal_events.json");
-
-const arg2022 = summary.find((r) => r.team === "Argentina" && r.season === "2022");
-const arg2018 = summary.find((r) => r.team === "Argentina" && r.season === "2018");
-const nTeams = new Set(summary.map((r) => r.team)).size;
+// Home = centro de análisis, no portada. El usuario entra con una pregunta
+// ("¿qué querés analizar hoy?") y elige una acción, no una categoría. Todo el
+// contenido explicativo, snapshots y tablas viven ya en sus páginas propias;
+// acá no se duplican. La metodología queda a un click, discreta.
 const base = import.meta.env.BASE_URL;
 
-// Snapshot en vivo del torneo (todo calculado de datos reales, nunca hardcodeado).
-const physicalByDistance = [...teamPhysical].sort((a, b) => b.distancia_promedio_km - a.distancia_promedio_km);
-const distanceLeader = physicalByDistance[0] ?? null;
-const argPhysIdx = physicalByDistance.findIndex((r) => r.team === "Argentina");
-const argPhysical = argPhysIdx >= 0 ? physicalByDistance[argPhysIdx] : null;
-const nPhysicalMatches = new Set(physicalRows.filter((r) => r.season === "2026").map((r) => r.match_id)).size;
-const totalGoals2026 = goalEvents.length;
+// Cada tarjeta enruta a la página existente que mejor responde la pregunta.
+// "Comparar jugadores" -> jugadores/ (comparación física entre muchos a la vez);
+// "Analizar un partido" -> analisis/ (goles vs. físico del mismo partido, radar).
+const actions = [
+  { href: `${base}comparar/`, icon: "🆚", label: "Comparar selecciones" },
+  { href: `${base}jugadores/`, icon: "👟", label: "Comparar jugadores" },
+  { href: `${base}analisis/`, icon: "🔎", label: "Analizar un partido" },
+  { href: `${base}selecciones/`, icon: "📊", label: "Explorar rankings" },
+];
 
-const matches2026Argentina = matches
-  .filter((m) => m.season === "2026" && (m.home_team === "Argentina" || m.away_team === "Argentina"))
-  .sort((a, b) => (a.match_date ?? "").localeCompare(b.match_date ?? ""));
-
-function physicalFor(matchId: number, team: string) {
-  return physicalRows.find((r) => r.match_id === matchId && r.team === team);
-}
-
-// Estado actual calculado de los datos, no hardcodeado -- así nunca queda
-// desactualizado a medida que avanza el torneo real.
-function resultFor(m: MatchRow): "win" | "draw" | "loss" | null {
-  if (m.home_score == null || m.away_score == null) return null;
-  const isHome = m.home_team === "Argentina";
-  const own = isHome ? m.home_score : m.away_score;
-  const opp = isHome ? m.away_score : m.home_score;
-  if (own > opp) return "win";
-  if (own < opp) return "loss";
-  return "draw";
-}
-const decided2026 = matches2026Argentina.filter((m) => resultFor(m) !== null);
-const lastMatch2026 = decided2026[decided2026.length - 1];
-const wins2026 = decided2026.filter((m) => resultFor(m) === "win").length;
-const wasEliminated = decided2026.some((m) => resultFor(m) === "loss");
-const liveStatus = lastMatch2026
-  ? wasEliminated
-    ? `Eliminada en ${lastMatch2026.stage}`
-    : `${lastMatch2026.stage} · invicta`
-  : null;
-
-// Mensaje para compartir por WhatsApp -- mismo estado en vivo de arriba, con
-// el récord de partidos para dar más contexto fuera del sitio.
+// Compartir el sitio por WhatsApp (funcionalidad conservada, ahora liviana y
+// genérica: sin depender de datos en vivo, no queda desactualizado).
 const pageUrl = new URL(Astro.url.pathname, "https://ramirosilvera.github.io").href;
-const shareStatus = lastMatch2026
-  ? `${lastMatch2026.stage} · ${wins2026} ${wins2026 === 1 ? "victoria" : "victorias"} en ${decided2026.length} partidos${wasEliminated ? "" : " · invicta"}`
-  : "todavía sin partidos cargados";
-const shareMessage = `Argentina en el Mundial 2026: ${shareStatus} 🇦🇷⚽ — no arrancamos con un ranking, ponemos a prueba la hipótesis física con datos reales y abiertos. Mirá el análisis completo: ${pageUrl}`;
+const shareMessage = `Métricas Mundial 2026: análisis físico y táctico de las 48 selecciones con datos reales y abiertos. Comparás selecciones, jugadores y partidos vos mismo 🇦🇷⚽ ${pageUrl}`;
 const waLink = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
-
-// Métricas para la tarjeta-imagen compartible del hero (a partir de datos ya
-// calculados arriba; sin lógica nueva de datos).
-const heroShareStats =
-  decided2026.length > 0
-    ? [
-        { label: "Partidos jugados", value: String(decided2026.length) },
-        { label: "Victorias", value: String(wins2026) },
-        { label: "Instancia", value: lastMatch2026?.stage ?? "—" },
-      ]
-    : [
-        { label: "Selecciones analizadas", value: String(nTeams) },
-        { label: "Fuentes de datos abiertas", value: "3" },
-      ];
-const heroShareSubtitle = liveStatus ? `Argentina · ${liveStatus}` : "Análisis abierto · Mundial 2026";
 ---
 
-<Base title="Inicio" description="¿Argentina corre menos que el resto en el Mundial? Un análisis abierto, con los sesgos a la vista.">
-  <DataStatusBanner />
+<Base
+  title="Inicio"
+  description="Centro de análisis del Mundial 2026: compará selecciones, jugadores y partidos con datos reales y abiertos."
+>
+  <section class="home-hub">
+    <p class="eyebrow">Métricas Mundial 2026</p>
+    <h1 class="home-hub-title">¿Qué querés analizar hoy?</h1>
 
-  <div class="hero">
-    <p class="eyebrow">Mundial 2026 · análisis abierto</p>
-    {liveStatus && (
-      <span class="stage-pill" style="margin-bottom: 0.9rem;">
-        <span class="pulse"></span>
-        {flagFor("Argentina")} Argentina · {liveStatus}
-      </span>
-    )}
-    <h1>Rendimiento físico y táctico del Mundial 2026, con datos abiertos</h1>
-    <p class="lede">
-      Análisis colectivo e individual de las 48 selecciones a partir de datos reales y abiertos — con la mirada puesta
-      en poner a prueba (no confirmar) la vieja hipótesis de que Argentina "corre menos". Empezá por los números; la
-      metodología está a un click.
+    <div class="cta-grid">
+      {actions.map((a) => (
+        <a class="cta-card" href={a.href}>
+          <span class="cta-icon" aria-hidden="true">{a.icon}</span>
+          <span class="cta-label">{a.label}</span>
+          <span class="cta-arrow" aria-hidden="true">→</span>
+        </a>
+      ))}
+    </div>
+
+    <p class="home-hub-foot">
+      <a href={`${base}metodologia/`}>¿Cómo calculamos esto?</a>
+      <span class="home-hub-sep" aria-hidden="true">·</span>
+      <a href={waLink} target="_blank" rel="noreferrer">📲 Compartir</a>
     </p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href={`${base}selecciones/`}>Ver análisis de selecciones →</a>
-      <a class="btn btn-ghost" href={`${base}jugadores/`}>Jugadores</a>
-      <a class="btn btn-share" href={waLink} target="_blank" rel="noreferrer">📲 WhatsApp</a>
-      <ShareCardButton
-        client:only="react"
-        title="Argentina en el Mundial 2026"
-        subtitle={heroShareSubtitle}
-        flag={flagFor("Argentina")}
-        stats={heroShareStats}
-        tagline="¿Desventaja física real o sesgo instalado?"
-        shareText={shareMessage}
-        filenameBase="argentina-mundial-2026"
-        label="🖼️ Imagen"
-      />
-    </div>
-  </div>
-
-  {teamPhysical.length > 0 && (
-    <section class="section">
-      <div class="section-head">
-        <h2>El torneo, ahora mismo</h2>
-        <p>Todo calculado en vivo de datos reales — se actualiza solo a medida que el scraper suma partidos.</p>
-      </div>
-      <div class="stat-tiles">
-        <div class="stat-tile">
-          <div class="value">{teamPhysical.length}</div>
-          <div class="label">selecciones con datos físicos cargados</div>
-        </div>
-        <div class="stat-tile">
-          <div class="value">{nPhysicalMatches}</div>
-          <div class="label">partidos del Mundial 2026 con físico</div>
-        </div>
-        <div class="stat-tile">
-          <div class="value">{totalGoals2026}</div>
-          <div class="label">goles convertidos en el torneo</div>
-        </div>
-        {distanceLeader && (
-          <div class="stat-tile">
-            <div class="value" style="font-size:1.4rem;">{flagFor(distanceLeader.team)} {distanceLeader.team}</div>
-            <div class="label">más distancia de equipo por partido ({distanceLeader.distancia_promedio_km} km)</div>
-          </div>
-        )}
-        {argPhysical && (
-          <div class="stat-tile">
-            <div class="value">#{argPhysIdx + 1}<span style="font-size:0.9rem; color:var(--text-muted);"> / {teamPhysical.length}</span></div>
-            <div class="label">Argentina en distancia de equipo · percentil {Math.round(argPhysical.distancia_promedio_km_percentil)}</div>
-          </div>
-        )}
-      </div>
-      <p style="font-size:0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
-        Fuente: FIFA Training Centre (físico) y openfootball (goles), Mundial 2026 en curso. Que Argentina corra más o
-        menos <strong>no</strong> mide por sí solo su estado físico — mirá el <a href={`${base}selecciones/`}>ranking completo</a> junto al contexto táctico.
-      </p>
-    </section>
-  )}
-
-  <section class="section" id="como-leer" style="margin-bottom: 0.5rem;">
-    <div class="section-head">
-      <h2>Cómo leer estos datos</h2>
-      <p>Dos advertencias metodológicas que condicionan todo el análisis — la versión completa está en <a href={`${base}metodologia/`}>Metodología</a>.</p>
-    </div>
-  </section>
-  <div class="grid-2 section">
-    <div class="callout">
-      <h3>La distancia corrida, sola, no mide "estado físico"</h3>
-      <p>
-        Los equipos que dominan el balón corren <em>menos</em>, no más — no persiguen. Sin normalizar por{" "}
-        <span class="term" tabindex="0" data-tip="Porcentaje del tiempo de juego que un equipo pasa con el balón. No es la posesión oficial de FIFA/Opta (basada en tracking) — es un proxy calculado a partir de la duración de eventos de StatsBomb.">posesión</span>,
-        estado del marcador y fase del partido, un ranking de distancia es ruido táctico disfrazado de dato físico.
-        Por eso este sitio separa siempre <strong>contexto táctico</strong> de <strong>resultado físico</strong>.
-      </p>
-    </div>
-    <div class="callout warning">
-      <h3>Con 4–7 partidos por torneo, no hay significancia estadística</h3>
-      <p>
-        Este proyecto es <strong>descriptivo</strong>, no un estudio causal. Todos los gráficos muestran dispersión
-        (no solo promedios) y tamaño de muestra explícito. Ver <a href={`${base}metodologia/`}>metodología completa</a>.
-      </p>
-    </div>
-  </div>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Lo que ya sabemos con datos reales</h2>
-      <p>Fuente: StatsBomb Open Data (contexto táctico), Mundiales 2018 y 2022</p>
-    </div>
-    <div class="stat-tiles">
-      <div class="stat-tile">
-        <div class="value">{nTeams}</div>
-        <div class="label">selecciones con datos cargados</div>
-      </div>
-      <div class="stat-tile">
-        <div class="value">{matches.length}</div>
-        <div class="label">partidos procesados (2018 + 2022 + 2026)</div>
-      </div>
-      <div class="stat-tile">
-        <div class="value">{arg2022 ? Math.round(arg2022.posesion_promedio_proxy * 100) : "—"}%</div>
-        <div class="label">posesión promedio (proxy) Argentina 2022, campeón</div>
-      </div>
-      <div class="stat-tile">
-        <div class="value">{arg2018 ? Math.round(arg2018.posesion_promedio_proxy * 100) : "—"}%</div>
-        <div class="label">posesión promedio (proxy) Argentina 2018, eliminada en octavos</div>
-      </div>
-    </div>
-  </section>
-
-  {matches2026Argentina.length > 0 && (
-    <section class="section">
-      <div class="section-head">
-        <h2>Mundial 2026 — Argentina hasta el momento</h2>
-        <p>Fuente: FIFA Training Centre (reporte oficial por partido)</p>
-      </div>
-      <div class="card">
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>Resultado</th>
-                <th>Fecha</th>
-                <th>Fase</th>
-                <th>Partido</th>
-                <th>Estadio</th>
-                <th>Distancia (equipo)</th>
-                <th>Sprints (equipo)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {matches2026Argentina.map((m) => {
-                const argTeam = m.home_team === "Argentina" ? m.home_team : m.away_team;
-                const phys = physicalFor(m.match_id, argTeam);
-                const result = resultFor(m);
-                return (
-                  <tr>
-                    <td>
-                      {result && (
-                        <span class={`result-badge ${result}`}>{result === "win" ? "V" : result === "loss" ? "D" : "E"}</span>
-                      )}
-                    </td>
-                    <td>{m.match_date ?? "—"}</td>
-                    <td>{m.stage ?? "—"}</td>
-                    <td>
-                      <span class="team-flag">{flagFor(m.home_team)}</span>{m.home_team}{" "}
-                      <span class="match-score">{m.home_score ?? "-"} – {m.away_score ?? "-"}</span>{" "}
-                      {m.away_team} <span class="team-flag">{flagFor(m.away_team)}</span>
-                    </td>
-                    <td>{m.stadium || "—"}</td>
-                    <td>{phys ? `${phys.total_distance_km} km` : "pendiente"}</td>
-                    <td>{phys ? phys.sprint_count : "pendiente"}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <p style="font-size:0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
-          Detalle físico por jugador (distancia, zonas de velocidad, sprints, velocidad punta) en <a href={`${base}jugadores/`}>Jugadores</a>.
-        </p>
-      </div>
-    </section>
-  )}
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Cómo se completan los datos que faltan</h2>
-    </div>
-    <div class="card">
-      <p>
-        La métrica que responde directamente la hipótesis —distancia recorrida,{" "}
-        <span class="term" tabindex="0" data-tip="Distancia recorrida por encima de 20 km/h (zonas 4 y 5). Es la métrica que más se acerca a un esfuerzo físico 'puro', menos influida por el estilo de juego que la distancia total.">alta intensidad</span>,
-        sprints— la publica <strong>FIFA Training Centre</strong> como reportes oficiales en PDF por partido, no como API. El scraper ya
-        los descarga y decodifica automáticamente por GitHub Actions, corrida tras corrida va sumando más partidos
-        del Mundial 2026 en curso. La edad, caps y goleadores de cada plantel ya están cargados para las 48
-        selecciones (fuente: 26worldcup/Wikipedia, ver <a href={`${base}fuentes/`}>Fuentes</a>). Este sitio nunca
-        muestra un dato inventado: mientras un partido o una selección no tenga datos reales cargados, queda marcado
-        como pendiente, explícitamente.
-      </p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Explorá</h2>
-    </div>
-    <div class="grid-2">
-      <a class="card card-link" href={`${base}selecciones/`}>
-        <h3>Selecciones <span class="card-arrow">→</span></h3>
-        <p>Rankings, boxplots de dispersión y heatmap de percentiles entre selecciones.</p>
-      </a>
-      <a class="card card-link" href={`${base}comparar/`}>
-        <h3>Comparar dos selecciones <span class="card-arrow">→</span></h3>
-        <p>Radar cabeza a cabeza normalizado por percentil.</p>
-      </a>
-      <a class="card card-link" href={`${base}jugadores/`}>
-        <h3>Jugadores <span class="card-arrow">→</span></h3>
-        <p>Métricas físicas reales del Mundial 2026 y minutos jugados — la unidad de análisis correcta.</p>
-      </a>
-      <a class="card card-link" href={`${base}explorador/`}>
-        <h3>Explorador SQL <span class="card-arrow">→</span></h3>
-        <p>Consultas libres sobre los datos crudos (Parquet), corriendo en tu navegador con DuckDB-WASM.</p>
-      </a>
-    </div>
   </section>
 </Base>
