@@ -143,6 +143,14 @@ export default function ChatAssistant() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [turns, loading]);
 
+  // El ítem "IA" del menú principal (Base.astro) emite este evento global para
+  // abrir el asistente sin acoplar el markup del header con este island.
+  useEffect(() => {
+    const openChat = () => setOpen(true);
+    window.addEventListener("mm26:open-chat", openChat);
+    return () => window.removeEventListener("mm26:open-chat", openChat);
+  }, []);
+
   if (!CHAT_API_URL) return null;
 
   async function send(text: string) {
