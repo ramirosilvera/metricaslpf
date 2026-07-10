@@ -17,8 +17,28 @@ const base = import.meta.env.BASE_URL;
     <h2>Por qué esto es descriptivo, no un estudio causal</h2>
     <p>
       Con 4 a 7 partidos por selección en un solo torneo, ninguna diferencia entre selecciones tiene el tamaño de
-      muestra necesario para inferencia causal sobre "capacidad física". Todos los gráficos de este sitio muestran
-      dispersión (boxplots, percentiles) en vez de solo promedios, y el tamaño de muestra siempre está a la vista.
+      muestra necesario para inferencia causal sobre "capacidad física". Los gráficos muestran los valores reales y su
+      dispersión cuando corresponde, y el tamaño de muestra siempre está a la vista.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Cómo leer los números: escala "% del mejor"</h2>
+    <p>
+      Los radares y las barras normalizadas <strong>no</strong> usan percentiles (posición en un ranking). Usan
+      <strong>cercanía al mejor rendimiento observado</strong>: un <strong>90</strong> se lee directo como "llega al 90%
+      del mejor valor registrado en esa métrica entre las selecciones del torneo". El mejor del torneo marca el 100.
+    </p>
+    <p style="font-size:0.9rem; color: var(--text-secondary);">
+      Ejemplo — velocidad punta, con un máximo observado de 34 km/h: un equipo a 34 km/h = 100; a 30,6 km/h = 90; a 17
+      km/h = 50. La escala mide <em>qué tan cerca está del techo</em>, no en qué puesto quedó. Por eso se entiende sin
+      saber estadística.
+    </p>
+    <p style="font-size:0.9rem; color: var(--text-secondary);">
+      <strong>Los valores oficiales nunca se alteran</strong>: 110,4 km, 34 km/h, 530 sprints, 57% de posesión se
+      muestran siempre tal cual (en el tooltip y en las barras). La normalización es solo una capa visual para comparar.
+      En las pocas métricas donde <em>menos es mejor</em> (edad del plantel, faltas), el mejor es el valor más bajo y la
+      escala se invierte (el que menos comete marca el 100).
     </p>
   </section>
 

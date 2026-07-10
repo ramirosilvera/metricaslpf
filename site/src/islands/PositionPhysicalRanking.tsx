@@ -42,7 +42,11 @@ export default function PositionPhysicalRanking({ rows }: Props) {
   );
 
   const isArgentina = filtered.map((r) => r.team === "Argentina");
-  const values = filtered.map((r) => (showPercentile ? (r[metric.pctKey] as number) : (r[metric.key] as number)));
+  // "% del mejor de la posición": el mejor de esta posición = filtered[0] (orden desc).
+  const bestInPos = (filtered[0]?.[metric.key] as number) || 1;
+  const values = filtered.map((r) =>
+    showPercentile ? Math.round(((r[metric.key] as number) / bestInPos) * 100) : (r[metric.key] as number),
+  );
 
   const option = {
     grid: { left: narrow ? 116 : 190, right: narrow ? 16 : 44, top: 10, bottom: 30 },
@@ -54,8 +58,8 @@ export default function PositionPhysicalRanking({ rows }: Props) {
       textStyle: { color: tokens["--text-primary"] },
       formatter: (params: any) => {
         const row = filtered[params[0].dataIndex];
-        const pct = row[metric.pctKey] as number;
-        return `<strong>${row.player_name}</strong> · ${row.team}<br/>${row.position}${row.club ? ` · ${row.club}` : ""}<br/>${metric.label}: ${(row[metric.key] as number)}${metric.suffix}<br/>Percentil entre ${row.position}: ${Math.round(pct)}<br/>${row.partidos} partido(s)`;
+        const pctBest = Math.round(((row[metric.key] as number) / bestInPos) * 100);
+        return `<strong>${row.player_name}</strong> · ${row.team}<br/>${row.position}${row.club ? ` · ${row.club}` : ""}<br/>${metric.label}: ${(row[metric.key] as number)}${metric.suffix}<br/><strong>${pctBest}%</strong> del mejor ${row.position}<br/>${row.partidos} partido(s)`;
       },
     },
     xAxis: {
@@ -116,7 +120,7 @@ export default function PositionPhysicalRanking({ rows }: Props) {
         </select>
         <label style={{ fontSize: "0.85rem", color: "var(--text-secondary)", display: "inline-flex", alignItems: "center", gap: "0.35rem" }}>
           <input type="checkbox" checked={showPercentile} onChange={(e) => setShowPercentile(e.target.checked)} />
-          Percentil por posición
+          % del mejor de la posición
         </label>
         <span className="badge">
           <span className="dot" style={{ background: tokens["--series-6"] }}></span>
@@ -128,15 +132,15 @@ export default function PositionPhysicalRanking({ rows }: Props) {
         style={{ height: Math.max(320, filtered.length * 26) }}
         share={{
           title: metric.label,
-          subtitle: `${POSITIONS.find((p) => p.value === position)?.label ?? position} · percentil por posición · Mundial 2026`,
+          subtitle: `${POSITIONS.find((p) => p.value === position)?.label ?? position} · % del mejor de la posición · Mundial 2026`,
           filenameBase: `posicion-${position}-${metricKey}`,
         }}
       />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Fuente: FIFA Training Centre (físico, Mundial 2026) cruzado con el plantel (26worldcup/Wikipedia) por dorsal.
-        El percentil se calcula <strong>dentro de la posición</strong> — un arquero recorre ~5 km y un defensor ~8 km
-        por partido, así que compararlos en la misma escala sería engañoso. Percentil sobre los jugadores medidos, no
-        un ranking mundial completo.
+        El % se calcula <strong>dentro de la posición</strong> — un arquero recorre ~5 km y un defensor ~8 km por
+        partido, así que compararlos en la misma escala sería engañoso. 100 = el máximo de esa posición entre los
+        jugadores medidos, no un ranking mundial completo.
       </p>
     </div>
   );

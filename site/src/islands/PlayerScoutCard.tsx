@@ -6,6 +6,7 @@ import { flagFor } from "../lib/flags";
 import ShareCardButton from "./ShareCardButton";
 import type { ShareStat } from "../lib/shareCard";
 import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights";
+import { makeNormalizer, isLowerBetter } from "../lib/normalize";
 
 const METRIC_LABELS: Record<string, { label: string; suffix: string; group: "físico" | "táctico" }> = {
   distancia_promedio_km: { label: "Distancia / partido", suffix: " km", group: "físico" },
@@ -61,7 +62,19 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
 
   const squadInfo = squad?.[`${team}|${currentPlayer}`] ?? null;
 
-  const radarMetrics = RADAR_ORDER.filter((m) => playerRows.some((r) => r.metric === m && r.percentile != null));
+  // Normalizador por métrica sobre TODOS los jugadores medidos: "% del mejor
+  // registrado" en esa métrica. Reemplaza al percentil como base de la ficha.
+  const normalizers = useMemo(() => {
+    const map: Record<string, (v: number) => number> = {};
+    for (const m of RADAR_ORDER) {
+      const vals = rows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number);
+      map[m] = makeNormalizer(vals, isLowerBetter(m));
+    }
+    return map;
+  }, [rows]);
+  const pctFor = (m: string, v: number | null | undefined) => (v == null ? null : normalizers[m]?.(v) ?? null);
+
+  const radarMetrics = RADAR_ORDER.filter((m) => playerRows.some((r) => r.metric === m && r.value != null));
 
   // Link "compartir por WhatsApp" con las métricas reales del jugador elegido.
   // Componente client:only, así que window está disponible; se guarda igual por prudencia.
@@ -72,19 +85,20 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
 
     const metricName = (m: string) => METRIC_LABELS[m].label.toLowerCase().replace(" / partido", " por partido");
     const distance = playerRows.find((r) => r.metric === "distancia_promedio_km");
-    const known = playerRows.filter((r) => METRIC_LABELS[r.metric] && r.percentile != null);
-    const best = [...known].sort((a, b) => (b.percentile ?? 0) - (a.percentile ?? 0))[0];
+    const known = playerRows.filter((r) => METRIC_LABELS[r.metric] && r.value != null);
+    const best = [...known].sort((a, b) => (pctFor(b.metric, b.value) ?? 0) - (pctFor(a.metric, a.value) ?? 0))[0];
 
     let insight: string;
     if (distance) {
+      const dp = pctFor("distancia_promedio_km", distance.value);
       insight = `corre ${fmt(distance.value)} km promedio por partido en el Mundial 2026${
-        distance.percentile != null ? ` (percentil ${Math.round(distance.percentile)} entre los jugadores medidos)` : ""
+        dp != null ? ` (el ${dp}% de la mayor distancia registrada)` : ""
       }`;
       if (best && best.metric !== "distancia_promedio_km") {
-        insight += ` y está en el percentil ${Math.round(best.percentile ?? 0)} en ${metricName(best.metric)}`;
+        insight += ` y llega al ${pctFor(best.metric, best.value) ?? 0}% del mejor en ${metricName(best.metric)}`;
       }
     } else if (best) {
-      insight = `registra ${fmt(best.value)}${METRIC_LABELS[best.metric].suffix} de ${metricName(best.metric)} en el Mundial 2026 (percentil ${Math.round(best.percentile ?? 0)} entre los jugadores medidos)`;
+      insight = `registra ${fmt(best.value)}${METRIC_LABELS[best.metric].suffix} de ${metricName(best.metric)} en el Mundial 2026 (el ${pctFor(best.metric, best.value) ?? 0}% del mejor registrado)`;
     } else {
       return null;
     }
@@ -120,7 +134,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
           key: r.metric,
           label: METRIC_LABELS[r.metric].label.toLowerCase().replace(" / partido", " por partido"),
           value: r.value,
-          percentile: r.percentile,
+          percentile: pctFor(r.metric, r.value), // ahora es "% del mejor", no percentil
           suffix: METRIC_LABELS[r.metric].suffix,
           group: METRIC_LABELS[r.metric].group,
         })),
@@ -138,10 +152,14 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],
         textStyle: { color: tokens["--text-primary"] },
-        formatter: (p: any) => {
-          const idx = p.dataIndex ?? 0;
+        formatter: () => {
           return radarMetrics
-            .map((m, i) => `${METRIC_LABELS[m].label}: percentil ${Math.round(p.value?.[i] ?? p.data?.value?.[i] ?? 0)}`)
+            .map((m) => {
+              const row = playerRows.find((r) => r.metric === m);
+              const pct = pctFor(m, row?.value ?? null) ?? 0;
+              const raw = row?.value != null ? `${Math.round(row.value * 10) / 10}${METRIC_LABELS[m].suffix}` : "—";
+              return `${METRIC_LABELS[m].label}: <strong>${pct}%</strong> del mejor · ${raw}`;
+            })
             .join("<br/>");
         },
       },
@@ -166,7 +184,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
           data: [
             {
               name: currentPlayer,
-              value: radarMetrics.map((m) => playerRows.find((r) => r.metric === m)?.percentile ?? 0),
+              value: radarMetrics.map((m) => pctFor(m, playerRows.find((r) => r.metric === m)?.value ?? null) ?? 0),
               areaStyle: { opacity: 0.2, color: tokens["--series-3"] },
               lineStyle: { width: 2, color: tokens["--series-3"] },
               itemStyle: { color: tokens["--series-3"] },
@@ -175,7 +193,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
         },
       ],
     };
-  }, [radarMetrics, playerRows, currentPlayer, tokens, narrow]);
+  }, [radarMetrics, playerRows, currentPlayer, tokens, narrow, normalizers]);
 
   if (rows.length === 0) {
     return <p style={{ color: "var(--text-muted)" }}>Todavía no hay métricas por jugador cargadas.</p>;
@@ -235,7 +253,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
           style={{ height: narrow ? 330 : 380 }}
           share={{
             title: currentPlayer,
-            subtitle: `${team} · ficha física y táctica (percentiles) · Mundial 2026`,
+            subtitle: `${team} · ficha física y táctica (% del mejor) · Mundial 2026`,
             insight: insights[0],
             filenameBase: `scout-${team}-${currentPlayer}`,
           }}
@@ -259,7 +277,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
             ))}
           </ul>
           <p className="insight-note">
-            Resumen generado en tu navegador a partir de los percentiles del dataset (no es una respuesta de IA en
+            Resumen generado en tu navegador a partir de los valores oficiales, expresados como % del mejor registrado (no es una respuesta de IA en
             vivo). ¿Querés profundizar? Preguntale al asistente.
           </p>
         </div>
@@ -294,7 +312,10 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
               </div>
               <div className="label">
                 {METRIC_LABELS[r.metric].label}
-                {r.percentile != null ? ` · percentil ${Math.round(r.percentile)}` : ""}
+                {(() => {
+                  const p = pctFor(r.metric, r.value);
+                  return p != null ? ` · ${p}% del mejor` : "";
+                })()}
               </div>
             </div>
           ))}

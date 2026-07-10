@@ -1,168 +1,163 @@
 import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
-import type { RadarRow, TeamPhysicalRankingRow, TeamTacticalRankingRow } from "../lib/data";
+import type { TeamPhysicalRankingRow, TeamTacticalRankingRow, TeamSeasonSummary } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { flagFor } from "../lib/flags";
-import { generateTeamComparisonInsights, type MetricDef } from "../lib/insights";
+import { generateVsBestInsights, type VsBestMetric } from "../lib/insights";
+import { makeNormalizer, isLowerBetter } from "../lib/normalize";
 
-// Dos modos honestos, porque las fuentes NO miden lo mismo en cada época:
-//  - "fisico2026": físico de equipo de las 48 selecciones del Mundial 2026
-//    (FIFA Training Centre). Es el dato más completo y el eje de la hipótesis
-//    del sitio. Todas las selecciones de 2026 son comparables entre sí.
-//  - "tactico": contexto táctico histórico (posesión/pases/remates) de los
-//    Mundiales 2018 y 2022 (StatsBomb Open Data — el free tier no cubre 2026
-//    a nivel de equipo). Ejes distintos a propósito: no se mezclan métricas
-//    de fuentes que miden cosas diferentes.
-//  - "tactico2026": táctico de equipo de las 48 selecciones del Mundial 2026,
-//    derivado de la táctica por jugador de FIFA (progresiones, presión,
-//    recuperaciones, precisión de pase, remates). Vocabulario propio de FIFA,
-//    distinto al de StatsBomb histórico -> también es su propio modo.
-type Mode = "fisico2026" | "tactico2026" | "tactico";
+// Los ejes del radar NO son percentiles (posición en un ranking) sino
+// "% del mejor rendimiento observado": un 90 = "llega al 90% del máximo del
+// torneo en esa métrica". Se entiende sin saber estadística. Los valores
+// oficiales se muestran igual en el tooltip.
+//
+// Tres modos, porque las fuentes miden cosas distintas en cada época:
+//  - fisico2026 / tactico2026: las 48 selecciones del Mundial 2026 (FIFA).
+//  - historico: contexto táctico de 2018/2022 (StatsBomb).
+type Mode = "fisico2026" | "tactico2026" | "historico";
 
-interface Indicator {
+interface Metric {
+  /** Clave del valor OFICIAL en la fila. */
   key: string;
   name: string;
   short: string;
+  /** Sufijo del valor oficial (ej. " km", "%"). */
+  suffix: string;
+  /** Factor para mostrar el valor oficial (ej. posesión 0–1 -> ×100 = %). */
+  factor?: number;
+  /** Etiqueta en minúscula para la lectura automática. */
+  insightLabel: string;
 }
 
-const PHYS_INDICATORS: Indicator[] = [
-  { key: "distancia_promedio_km_percentil", name: "Distancia (percentil)", short: "Distancia" },
-  { key: "alta_intensidad_promedio_m_percentil", name: "Alta intensidad (percentil)", short: "Alta\nintensidad" },
-  { key: "sprints_promedio_percentil", name: "Sprints (percentil)", short: "Sprints" },
-  { key: "velocidad_punta_kmh_percentil", name: "Velocidad punta (percentil)", short: "Velocidad\npunta" },
+const PHYS_METRICS: Metric[] = [
+  { key: "distancia_promedio_km", name: "Distancia", short: "Distancia", suffix: " km", insightLabel: "distancia recorrida" },
+  { key: "alta_intensidad_promedio_m", name: "Alta intensidad", short: "Alta\nintensidad", suffix: " m", insightLabel: "alta intensidad" },
+  { key: "sprints_promedio", name: "Sprints", short: "Sprints", suffix: "", insightLabel: "sprints" },
+  { key: "velocidad_punta_kmh", name: "Velocidad punta", short: "Velocidad\npunta", suffix: " km/h", insightLabel: "velocidad punta" },
 ];
 
-const PHYS_INSIGHT_METRICS: MetricDef[] = [
-  { key: "distancia_promedio_km_percentil", label: "distancia recorrida" },
-  { key: "alta_intensidad_promedio_m_percentil", label: "alta intensidad" },
-  { key: "sprints_promedio_percentil", label: "sprints" },
-  { key: "velocidad_punta_kmh_percentil", label: "velocidad punta" },
+const TAC_METRICS: Metric[] = [
+  { key: "precision_pases_pct", name: "Precisión de pase", short: "Precisión\nde pase", suffix: "%", insightLabel: "precisión de pase" },
+  { key: "progresiones_promedio", name: "Progresiones", short: "Progre-\nsiones", suffix: "", insightLabel: "progresiones de balón" },
+  { key: "remates_promedio", name: "Remates", short: "Remates", suffix: "", insightLabel: "remates" },
+  { key: "presiones_promedio", name: "Presión", short: "Presión", suffix: "", insightLabel: "presión" },
+  { key: "recuperaciones_promedio", name: "Recuperaciones", short: "Recupe-\nraciones", suffix: "", insightLabel: "recuperaciones" },
 ];
 
-const TAC2026_INDICATORS: Indicator[] = [
-  { key: "precision_pases_pct_percentil", name: "Precisión de pase (percentil)", short: "Precisión\nde pase" },
-  { key: "progresiones_promedio_percentil", name: "Progresiones (percentil)", short: "Progre-\nsiones" },
-  { key: "remates_promedio_percentil", name: "Remates (percentil)", short: "Remates" },
-  { key: "presiones_promedio_percentil", name: "Presión (percentil)", short: "Presión" },
-  { key: "recuperaciones_promedio_percentil", name: "Recuperaciones (percentil)", short: "Recupe-\nraciones" },
-];
-
-const TAC2026_INSIGHT_METRICS: MetricDef[] = [
-  { key: "precision_pases_pct_percentil", label: "precisión de pase" },
-  { key: "progresiones_promedio_percentil", label: "progresiones de balón" },
-  { key: "remates_promedio_percentil", label: "remates" },
-  { key: "presiones_promedio_percentil", label: "presión" },
-  { key: "recuperaciones_promedio_percentil", label: "recuperaciones" },
-];
-
-const TAC_INDICATORS: Indicator[] = [
-  { key: "posesion_promedio_proxy_percentil", name: "Posesión (percentil)", short: "Posesión" },
-  { key: "precision_pases_promedio_percentil", name: "Precisión de pase (percentil)", short: "Precisión\nde pase" },
-  { key: "remates_promedio_percentil", name: "Remates (percentil)", short: "Remates" },
-  { key: "remates_al_arco_promedio_percentil", name: "Remates al arco (percentil)", short: "Remates\nal arco" },
-];
-
-const TAC_INSIGHT_METRICS: MetricDef[] = [
-  { key: "posesion_promedio_proxy_percentil", label: "posesión" },
-  { key: "precision_pases_promedio_percentil", label: "precisión de pase" },
-  { key: "remates_promedio_percentil", label: "remates" },
-  { key: "remates_al_arco_promedio_percentil", label: "remates al arco" },
+const HIST_METRICS: Metric[] = [
+  { key: "posesion_promedio_proxy", name: "Posesión", short: "Posesión", suffix: "%", factor: 100, insightLabel: "posesión" },
+  { key: "precision_pases_promedio", name: "Precisión de pase", short: "Precisión\nde pase", suffix: "%", insightLabel: "precisión de pase" },
+  { key: "remates_promedio", name: "Remates", short: "Remates", suffix: "", insightLabel: "remates" },
+  { key: "remates_al_arco_promedio", name: "Remates al arco", short: "Remates\nal arco", suffix: "", insightLabel: "remates al arco" },
 ];
 
 interface Props {
-  /** Táctico histórico 2018/2022 (StatsBomb). */
-  rows: RadarRow[];
-  /** Físico de las 48 selecciones del Mundial 2026 (FIFA Training Centre). */
   physicalRows: TeamPhysicalRankingRow[];
-  /** Táctico de las 48 selecciones del Mundial 2026 (FIFA Training Centre). */
   tacticalRows: TeamTacticalRankingRow[];
+  summaryRows: TeamSeasonSummary[];
 }
 
-export default function RadarCompare({ rows, physicalRows, tacticalRows }: Props) {
+export default function RadarCompare({ physicalRows, tacticalRows, summaryRows }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
-  // Si no hay físico 2026 todavía, arranca en táctico para no mostrar vacío.
-  const [mode, setMode] = useState<Mode>(physicalRows.length ? "fisico2026" : "tactico");
+  const [mode, setMode] = useState<Mode>(physicalRows.length ? "fisico2026" : "historico");
 
-  // Cada modo tiene su propia lista de opciones (etiqueta) y su forma de
-  // encontrar la fila a partir de esa etiqueta.
+  // Configuración del modo activo: métricas, filas y cómo se etiqueta cada opción.
   const cfg = useMemo(() => {
-    if (mode === "fisico2026") {
-      const sorted = [...physicalRows].sort((x, y) => x.team.localeCompare(y.team));
-      const asRadar = (r: TeamPhysicalRankingRow) => ({ ...r, season: "2026" }) as unknown as RadarRow;
+    if (mode === "tactico2026") {
       return {
-        indicators: PHYS_INDICATORS,
-        insightMetrics: PHYS_INSIGHT_METRICS,
-        dimensionLabel: "rendimiento físico",
-        options: sorted.map((r) => r.team),
-        find: (label: string) => {
-          const r = sorted.find((x) => x.team === label);
-          return r ? asRadar(r) : undefined;
-        },
+        metrics: TAC_METRICS,
+        rows: [...tacticalRows].sort((a, b) => a.team.localeCompare(b.team)) as unknown as Record<string, number | string>[],
+        labelOf: (r: Record<string, number | string>) => String(r.team),
         defaultA: "Argentina",
-        defaultB: sorted.find((r) => r.team === "Brazil")?.team ?? sorted.find((r) => r.team !== "Argentina")?.team,
-        note:
-          "Percentil entre las 48 selecciones del Mundial 2026 (0–100), no valor absoluto. Físico de equipo (suma de los 11) por partido: FIFA Training Centre. Recordá que correr más no es automáticamente 'mejor' — leelo junto al contexto táctico.",
-        subtitle: "Cabeza a cabeza · percentiles físicos · Mundial 2026",
+        defaultB: "Brazil",
+        note: "Escala: % del mejor registrado entre las 48 selecciones del Mundial 2026 (100 = el máximo del torneo en esa métrica). Táctico de equipo derivado de FIFA Training Centre. El valor oficial está en el tooltip.",
+        subtitle: "Cabeza a cabeza · % del mejor rendimiento táctico · Mundial 2026",
       };
     }
-    if (mode === "tactico2026") {
-      const sorted = [...tacticalRows].sort((x, y) => x.team.localeCompare(y.team));
-      const asRadar = (r: TeamTacticalRankingRow) => ({ ...r, season: "2026" }) as unknown as RadarRow;
+    if (mode === "historico") {
       return {
-        indicators: TAC2026_INDICATORS,
-        insightMetrics: TAC2026_INSIGHT_METRICS,
-        dimensionLabel: "juego con la pelota",
-        options: sorted.map((r) => r.team),
-        find: (label: string) => {
-          const r = sorted.find((x) => x.team === label);
-          return r ? asRadar(r) : undefined;
-        },
-        defaultA: "Argentina",
-        defaultB: sorted.find((r) => r.team === "Brazil")?.team ?? sorted.find((r) => r.team !== "Argentina")?.team,
-        note:
-          "Percentil entre las 48 selecciones del Mundial 2026 (0–100). Táctico de equipo derivado de la estadística por jugador de FIFA Training Centre (progresiones, presión, recuperaciones, precisión de pase, remates). Vocabulario propio de FIFA — no comparable eje a eje con el táctico histórico de StatsBomb.",
-        subtitle: "Cabeza a cabeza · percentiles tácticos · Mundial 2026",
+        metrics: HIST_METRICS,
+        rows: summaryRows as unknown as Record<string, number | string>[],
+        labelOf: (r: Record<string, number | string>) => `${r.team} ${r.season}`,
+        defaultA: "Argentina 2022",
+        defaultB: "France 2022",
+        note: "Escala: % del mejor registrado en este conjunto (StatsBomb, Mundiales 2018 y 2022; el free tier no cubre 2026 a nivel de equipo). El valor oficial está en el tooltip.",
+        subtitle: "Cabeza a cabeza · % del mejor contexto táctico · 2018/2022",
       };
     }
     return {
-      indicators: TAC_INDICATORS,
-      insightMetrics: TAC_INSIGHT_METRICS,
-      dimensionLabel: "contexto táctico",
-      options: rows.map((r) => `${r.team} ${r.season}`),
-      find: (label: string) => rows.find((r) => `${r.team} ${r.season}` === label),
-      defaultA: rows.find((r) => r.team === "Argentina") ? `Argentina ${rows.find((r) => r.team === "Argentina")!.season}` : `${rows[0]?.team} ${rows[0]?.season}`,
-      defaultB: rows.find((r) => r.team === "France") ? `France ${rows.find((r) => r.team === "France")!.season}` : undefined,
-      note:
-        "Percentil dentro del propio dataset (0–100), no valor absoluto — variables de contexto táctico de StatsBomb (Mundiales 2018 y 2022; el free tier no cubre 2026 a nivel de equipo), no métricas físicas.",
-      subtitle: "Cabeza a cabeza · percentiles de contexto táctico · 2018/2022",
+      metrics: PHYS_METRICS,
+      rows: [...physicalRows].sort((a, b) => a.team.localeCompare(b.team)) as unknown as Record<string, number | string>[],
+      labelOf: (r: Record<string, number | string>) => String(r.team),
+      defaultA: "Argentina",
+      defaultB: "Brazil",
+      note: "Escala: % del mejor registrado entre las 48 selecciones del Mundial 2026 (100 = el máximo del torneo en esa métrica). Físico de equipo (FIFA Training Centre). Correr más no es automáticamente 'mejor': leelo junto al contexto táctico. El valor oficial está en el tooltip.",
+      subtitle: "Cabeza a cabeza · % del mejor rendimiento físico · Mundial 2026",
     };
-  }, [mode, rows, physicalRows, tacticalRows]);
+  }, [mode, physicalRows, tacticalRows, summaryRows]);
 
-  const [aLabel, setALabel] = useState<string>("");
-  const [bLabel, setBLabel] = useState<string>("");
+  const options = useMemo(() => cfg.rows.map(cfg.labelOf), [cfg]);
 
-  // Al cambiar de modo, las etiquetas del modo anterior pueden no existir en el
-  // nuevo -> se caen a los valores por defecto de ese modo.
-  const effectiveA = cfg.options.includes(aLabel) ? aLabel : (cfg.defaultA && cfg.options.includes(cfg.defaultA) ? cfg.defaultA : cfg.options[0]);
-  const effectiveB = cfg.options.includes(bLabel) ? bLabel : (cfg.defaultB && cfg.options.includes(cfg.defaultB) ? cfg.defaultB : cfg.options[1] ?? cfg.options[0]);
+  // Normalizador por métrica: máx/mín del conjunto -> función valor -> % del mejor.
+  const normalizers = useMemo(() => {
+    const map: Record<string, (v: number) => number> = {};
+    for (const m of cfg.metrics) {
+      const vals = cfg.rows.map((r) => Number(r[m.key])).filter((v) => Number.isFinite(v));
+      map[m.key] = makeNormalizer(vals, isLowerBetter(m.key));
+    }
+    return map;
+  }, [cfg]);
 
-  const a = cfg.find(effectiveA);
-  const b = cfg.find(effectiveB);
+  const [aLabel, setALabel] = useState("");
+  const [bLabel, setBLabel] = useState("");
+
+  const effectiveA = options.includes(aLabel) ? aLabel : options.includes(cfg.defaultA) ? cfg.defaultA : options[0];
+  const effectiveB = options.includes(bLabel) ? bLabel : options.includes(cfg.defaultB) ? cfg.defaultB : options[1] ?? options[0];
+
+  const a = cfg.rows.find((r) => cfg.labelOf(r) === effectiveA);
+  const b = cfg.rows.find((r) => cfg.labelOf(r) === effectiveB);
+
+  // Valores normalizados + oficiales de cada equipo, por métrica.
+  const data = useMemo(() => {
+    if (!a || !b) return null;
+    const build = (row: Record<string, number | string>) =>
+      cfg.metrics.map((m) => {
+        const raw = Number(row[m.key]);
+        const rawShown = Number.isFinite(raw) ? raw * (m.factor ?? 1) : NaN;
+        return { norm: normalizers[m.key](raw), raw: rawShown, suffix: m.suffix };
+      });
+    return { a: build(a), b: build(b) };
+  }, [a, b, cfg, normalizers]);
+
+  const nameA = String(a?.team ?? effectiveA);
+  const nameB = String(b?.team ?? effectiveB);
 
   const option = useMemo(() => {
-    if (!a || !b) return {};
+    if (!data) return {};
     return {
       color: [tokens["--series-6"], tokens["--series-1"]],
       tooltip: {
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],
         textStyle: { color: tokens["--text-primary"] },
+        formatter: (p: any) => {
+          const isA = p.name === effectiveA || p.seriesIndex === 0;
+          const arr = isA ? data.a : data.b;
+          const rows = cfg.metrics
+            .map((m, i) => {
+              const d = arr[i];
+              const rawTxt = Number.isFinite(d.raw) ? `${Math.round(d.raw * 10) / 10}${m.suffix}` : "—";
+              return `${m.name.replace("\n", " ")}: <strong>${d.norm}%</strong> del mejor · ${rawTxt}`;
+            })
+            .join("<br/>");
+          return `<strong>${p.name}</strong><br/>${rows}`;
+        },
       },
       legend: { bottom: 0, textStyle: { color: tokens["--text-secondary"] } },
       radar: {
-        indicator: cfg.indicators.map((i) => ({ name: narrow ? i.short : i.name, min: 0, max: 100 })),
+        indicator: cfg.metrics.map((m) => ({ name: narrow ? m.short : m.name, min: 0, max: 100 })),
         radius: narrow ? "56%" : "70%",
         axisName: { color: tokens["--text-secondary"], fontSize: narrow ? 10 : 11 },
         splitLine: { lineStyle: { color: tokens["--gridline"] } },
@@ -173,76 +168,54 @@ export default function RadarCompare({ rows, physicalRows, tacticalRows }: Props
         {
           type: "radar",
           data: [
-            {
-              name: a.team,
-              value: cfg.indicators.map((i) => (a as unknown as Record<string, number>)[i.key]),
-              areaStyle: { opacity: 0.15 },
-              lineStyle: { width: 2 },
-            },
-            {
-              name: b.team,
-              value: cfg.indicators.map((i) => (b as unknown as Record<string, number>)[i.key]),
-              areaStyle: { opacity: 0.15 },
-              lineStyle: { width: 2 },
-            },
+            { name: effectiveA, value: data.a.map((d) => d.norm), areaStyle: { opacity: 0.15 }, lineStyle: { width: 2 } },
+            { name: effectiveB, value: data.b.map((d) => d.norm), areaStyle: { opacity: 0.15 }, lineStyle: { width: 2 } },
           ],
         },
       ],
     };
-  }, [a, b, tokens, narrow, cfg]);
+  }, [data, cfg, tokens, narrow, effectiveA, effectiveB]);
 
-  const insights = useMemo(
-    () => generateTeamComparisonInsights(a, b, cfg.insightMetrics, cfg.dimensionLabel),
-    [a, b, cfg],
-  );
+  const insights = useMemo(() => {
+    if (!data) return [];
+    const metrics: VsBestMetric[] = cfg.metrics.map((m, i) => ({
+      label: m.insightLabel,
+      aPct: data.a[i].norm,
+      bPct: data.b[i].norm,
+      aRaw: data.a[i].raw,
+      bRaw: data.b[i].raw,
+      suffix: m.suffix,
+    }));
+    return generateVsBestInsights(nameA, nameB, metrics);
+  }, [data, cfg, nameA, nameB]);
 
-  const shareText = a && b ? `${a.team} vs ${b.team} · ${cfg.subtitle}` : undefined;
+  const shareText = a && b ? `${nameA} vs ${nameB} · ${cfg.subtitle}` : undefined;
 
   const waLink = useMemo(() => {
     if (!a || !b) return null;
     const url = typeof window !== "undefined" ? window.location.href : undefined;
-    const lead = insights[0] ?? shareText ?? `${a.team} vs ${b.team}`;
-    const message = `${a.team} vs ${b.team} · Mundial 2026 — ${lead}${url ? ` Mirá el análisis completo: ${url}` : ""}`;
+    const lead = insights[0] ?? shareText ?? `${nameA} vs ${nameB}`;
+    const message = `${nameA} vs ${nameB} · Mundial 2026 — ${lead}${url ? ` Mirá el análisis completo: ${url}` : ""}`;
     return `https://wa.me/?text=${encodeURIComponent(message)}`;
-  }, [a, b, insights, shareText]);
+  }, [a, b, insights, shareText, nameA, nameB]);
 
   return (
     <div>
       <div className="mode-toggle" role="tablist" aria-label="Dimensión de comparación">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={mode === "fisico2026"}
-          className={mode === "fisico2026" ? "is-active" : undefined}
-          onClick={() => setMode("fisico2026")}
-          disabled={physicalRows.length === 0}
-        >
+        <button type="button" role="tab" aria-selected={mode === "fisico2026"} className={mode === "fisico2026" ? "is-active" : undefined} onClick={() => setMode("fisico2026")} disabled={physicalRows.length === 0}>
           Físico · Mundial 2026 <span className="mode-count">48</span>
         </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={mode === "tactico2026"}
-          className={mode === "tactico2026" ? "is-active" : undefined}
-          onClick={() => setMode("tactico2026")}
-          disabled={tacticalRows.length === 0}
-        >
+        <button type="button" role="tab" aria-selected={mode === "tactico2026"} className={mode === "tactico2026" ? "is-active" : undefined} onClick={() => setMode("tactico2026")} disabled={tacticalRows.length === 0}>
           Táctico · Mundial 2026 <span className="mode-count">48</span>
         </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={mode === "tactico"}
-          className={mode === "tactico" ? "is-active" : undefined}
-          onClick={() => setMode("tactico")}
-        >
+        <button type="button" role="tab" aria-selected={mode === "historico"} className={mode === "historico" ? "is-active" : undefined} onClick={() => setMode("historico")}>
           Táctico · histórico 2018/2022
         </button>
       </div>
 
       <div className="controls-row">
         <select value={effectiveA} onChange={(e) => setALabel(e.target.value)} aria-label="Primera selección">
-          {cfg.options.map((o) => (
+          {options.map((o) => (
             <option key={o} value={o}>
               {o}
             </option>
@@ -250,7 +223,7 @@ export default function RadarCompare({ rows, physicalRows, tacticalRows }: Props
         </select>
         <span style={{ color: "var(--text-muted)" }}>vs.</span>
         <select value={effectiveB} onChange={(e) => setBLabel(e.target.value)} aria-label="Segunda selección">
-          {cfg.options.map((o) => (
+          {options.map((o) => (
             <option key={o} value={o}>
               {o}
             </option>
@@ -263,11 +236,11 @@ export default function RadarCompare({ rows, physicalRows, tacticalRows }: Props
           option={option}
           style={{ height: narrow ? 340 : 420 }}
           share={{
-            title: `${a.team} vs ${b.team}`,
+            title: `${nameA} vs ${nameB}`,
             subtitle: cfg.subtitle,
             insight: insights[0],
             shareText,
-            filenameBase: `${a.team}-vs-${b.team}-${mode}`,
+            filenameBase: `${nameA}-vs-${nameB}-${mode}`,
           }}
           shareLabel="🖼️ Compartir radar"
         />
@@ -288,8 +261,8 @@ export default function RadarCompare({ rows, physicalRows, tacticalRows }: Props
             ))}
           </ul>
           <p className="insight-note">
-            Resumen generado en tu navegador a partir de los percentiles del dataset (no es una respuesta de IA en
-            vivo). ¿Querés profundizar? Preguntale al asistente.
+            Resumen generado en tu navegador a partir de los valores oficiales del dataset, expresados como % del mejor
+            rendimiento observado (no es una respuesta de IA en vivo). ¿Querés profundizar? Preguntale al asistente.
           </p>
         </div>
       )}
@@ -299,8 +272,7 @@ export default function RadarCompare({ rows, physicalRows, tacticalRows }: Props
           <div className="share-label">
             <strong>Compartir este análisis</strong>
             <span>
-              {flagFor(a.team)} {a.team} vs {b.team} {flagFor(b.team)} — la imagen del radar se comparte con el botón de
-              arriba
+              {flagFor(nameA)} {nameA} vs {nameB} {flagFor(nameB)} — la imagen del radar se comparte con el botón de arriba
             </span>
           </div>
           <div className="share-actions">

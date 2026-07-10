@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import RadarCompare from "../islands/RadarCompare";
 import TimelineChart from "../islands/TimelineChart";
-import { loadJson, type RadarRow, type TimelineRow, type TimelineTactical2026Row, type TeamPhysicalRankingRow, type TeamTacticalRankingRow } from "../lib/data";
+import { loadJson, type TeamSeasonSummary, type TimelineRow, type TimelineTactical2026Row, type TeamPhysicalRankingRow, type TeamTacticalRankingRow } from "../lib/data";
 
 // Normaliza el shape {status, rows} de los agregados que aún no se scrapearon
 // a un array vacío, para que el radar arranque en un modo con datos.
@@ -12,7 +12,9 @@ function loadArray<T>(filename: string): T[] {
   return Array.isArray(raw) ? raw : [];
 }
 
-const radar = loadJson<RadarRow[]>("radar_team_season.json");
+// El radar usa valores OFICIALES (no percentiles) para normalizar a "% del mejor",
+// por eso el histórico se alimenta de team_season_summary (valores absolutos).
+const summary = loadArray<TeamSeasonSummary>("team_season_summary.json");
 const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
 const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");
 const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
@@ -31,7 +33,7 @@ const timeline2026 = loadArray<TimelineTactical2026Row>("timeline_tactical_2026.
 
   <section class="section">
     <div class="card">
-      <RadarCompare client:only="react" rows={radar} physicalRows={teamPhysical} tacticalRows={teamTactical} />
+      <RadarCompare client:only="react" physicalRows={teamPhysical} tacticalRows={teamTactical} summaryRows={summary} />
     </div>
   </section>
 

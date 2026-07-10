@@ -2,6 +2,22 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { DerivedTeamMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
+import { makeNormalizer, isLowerBetter } from "../lib/normalize";
+
+// Sufijos para mostrar el valor OFICIAL en el tooltip (además del % del mejor).
+const METRIC_SUFFIX: Record<string, string> = {
+  posesion_promedio_proxy: "",
+  precision_pases_promedio: "%",
+  remates_promedio: "",
+  remates_al_arco_promedio: "",
+  faltas_promedio: "",
+  distancia_promedio_km: " km",
+  sprints_promedio: "",
+  velocidad_punta_kmh: " km/h",
+  alta_intensidad_promedio_m: " m",
+  edad_promedio: " años",
+  valor_plantel_promedio_eur: " €",
+};
 
 const METRIC_LABELS: Record<string, string> = {
   posesion_promedio_proxy: "Posesión",
@@ -36,18 +52,49 @@ export default function TeamMetricsRadar({ rows }: Props) {
   const b = rowsFor(bLabel);
 
   const sharedMetrics = METRIC_ORDER.filter(
-    (m) => a.some((r) => r.metric === m && r.percentile != null) && b.some((r) => r.metric === m && r.percentile != null),
+    (m) => a.some((r) => r.metric === m && r.value != null) && b.some((r) => r.metric === m && r.value != null),
   );
+
+  // Normalizador por (temporada, métrica): "% del mejor observado" en esa
+  // temporada. Cada equipo se compara contra el techo real de su Mundial.
+  const normalizers = useMemo(() => {
+    const map: Record<string, (v: number) => number> = {};
+    for (const m of METRIC_ORDER) {
+      const bySeason = new Map<string, number[]>();
+      for (const r of rows) {
+        if (r.metric !== m || r.value == null) continue;
+        (bySeason.get(r.season) ?? bySeason.set(r.season, []).get(r.season)!).push(r.value);
+      }
+      for (const [season, vals] of bySeason) map[`${season}|${m}`] = makeNormalizer(vals, isLowerBetter(m));
+    }
+    return map;
+  }, [rows]);
 
   const option = useMemo(() => {
     if (sharedMetrics.length < 3) return null;
-    const valueFor = (list: DerivedTeamMetricRow[], m: string) => list.find((r) => r.metric === m)?.percentile ?? 0;
+    const normFor = (list: DerivedTeamMetricRow[], m: string) => {
+      const row = list.find((r) => r.metric === m);
+      if (!row || row.value == null) return 0;
+      return normalizers[`${row.season}|${m}`]?.(row.value) ?? 0;
+    };
+    const rawFor = (list: DerivedTeamMetricRow[], m: string) => list.find((r) => r.metric === m)?.value ?? null;
     return {
       color: [tokens["--series-6"], tokens["--series-1"]],
       tooltip: {
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],
         textStyle: { color: tokens["--text-primary"] },
+        formatter: (p: any) => {
+          const list = p.name === aLabel ? a : b;
+          const rowsTxt = sharedMetrics
+            .map((m) => {
+              const raw = rawFor(list, m);
+              const rawTxt = raw != null ? `${Math.round(raw * 10) / 10}${METRIC_SUFFIX[m] ?? ""}` : "—";
+              return `${METRIC_LABELS[m]}: <strong>${normFor(list, m)}%</strong> del mejor · ${rawTxt}`;
+            })
+            .join("<br/>");
+          return `<strong>${p.name}</strong><br/>${rowsTxt}`;
+        },
       },
       legend: { bottom: 0, textStyle: { color: tokens["--text-secondary"] } },
       radar: {
@@ -69,13 +116,13 @@ export default function TeamMetricsRadar({ rows }: Props) {
         {
           type: "radar",
           data: [
-            { name: aLabel, value: sharedMetrics.map((m) => valueFor(a, m)), areaStyle: { opacity: 0.15 }, lineStyle: { width: 2 } },
-            { name: bLabel, value: sharedMetrics.map((m) => valueFor(b, m)), areaStyle: { opacity: 0.15 }, lineStyle: { width: 2 } },
+            { name: aLabel, value: sharedMetrics.map((m) => normFor(a, m)), areaStyle: { opacity: 0.15 }, lineStyle: { width: 2 } },
+            { name: bLabel, value: sharedMetrics.map((m) => normFor(b, m)), areaStyle: { opacity: 0.15 }, lineStyle: { width: 2 } },
           ],
         },
       ],
     };
-  }, [sharedMetrics, a, b, aLabel, bLabel, tokens, narrow]);
+  }, [sharedMetrics, a, b, aLabel, bLabel, tokens, narrow, normalizers]);
 
   if (teamSeasons.length === 0) {
     return <p style={{ color: "var(--text-muted)" }}>Todavía no hay métricas derivadas cargadas.</p>;

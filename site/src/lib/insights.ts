@@ -201,28 +201,31 @@ export function generateTeamPhysicalRankingInsights(
       `(${fmt(last.value)}), sobre ${n} selecciones con datos.`,
   );
 
-  // 2) Dónde cae la selección foco.
+  // 2) Dónde cae la selección foco. Se cita el % del MEJOR observado (magnitud),
+  //    no el percentil; el cualificador verbal sigue la posición en la tabla.
+  const best = Math.max(...clean.map((r) => r.value));
   const idx = clean.findIndex((r) => r.team === focusTeam);
   if (idx >= 0) {
     const focus = clean[idx];
     const pos = idx + 1;
-    const pct = focus.percentile != null && Number.isFinite(focus.percentile) ? Math.round(focus.percentile) : null;
-    const pctTxt = pct != null ? `, percentil ${pct}` : "";
+    const pctBest = best > 0 ? Math.round((focus.value / best) * 100) : null;
+    const posPct = (1 - idx / n) * 100; // qué tan arriba en la tabla
+    const pctTxt = pctBest != null ? `, el ${pctBest}% del máximo del torneo` : "";
     insights.push(
       `${focusTeam} aparece ${pos}° de ${n} en ${metricLabel} (${fmt(focus.value)}${pctTxt}): ` +
-        `${rankTier(pct ?? (1 - idx / n) * 100)}.`,
+        `${rankTier(posPct)}.`,
     );
 
     // 3) La lectura clave del proyecto: correr más o menos no ordena, por sí
-    //    solo, por rendimiento. La dirección se alinea con la banda de percentil
-    //    (no con un corte binario) para no chocar con el cualificador de arriba.
-    if (opts.isRunning && pct != null) {
-      if (pct <= 40) {
+    //    solo, por rendimiento. La dirección se alinea con la posición en la
+    //    tabla (no con un corte binario) para no chocar con el cualificador.
+    if (opts.isRunning) {
+      if (posPct <= 40) {
         insights.push(
           `Que corra menos que buena parte del torneo no implica peor estado físico: un equipo que controla la ` +
             `pelota suele recorrer menos distancia porque persigue menos. Leelo junto al contexto táctico, no como un ranking de esfuerzo.`,
         );
-      } else if (pct >= 60) {
+      } else if (posPct >= 60) {
         insights.push(
           `Corre más que buena parte del torneo, pero correr más tampoco es automáticamente "mejor": puede reflejar ` +
             `que juega sin la pelota y persigue más. La cifra sola no ordena por rendimiento.`,
@@ -244,6 +247,7 @@ export interface PlayerMetricPoint {
   /** Etiqueta legible ("distancia por partido", "intercepciones"). */
   label: string;
   value: number;
+  /** % del mejor valor observado (0..100), no percentil. */
   percentile: number | null;
   /** Sufijo de unidad para el valor (" km", "%", ""). */
   suffix?: string;
@@ -251,14 +255,15 @@ export interface PlayerMetricPoint {
   group?: string;
 }
 
-/** Cualificador verbal según dónde cae el percentil dentro del dataset. */
+/** Cualificador verbal según qué tan cerca está del mejor valor observado
+ *  (el campo mide "% del mejor", no percentil). */
 function tier(p: number): string {
-  if (p >= 85) return "uno de los valores más altos entre los jugadores medidos";
-  if (p >= 70) return "claramente por encima de la media del dataset";
-  if (p >= 55) return "por encima de la media del dataset";
-  if (p >= 45) return "en torno a la media del dataset";
-  if (p >= 30) return "por debajo de la media del dataset";
-  return "entre los valores más bajos del dataset";
+  if (p >= 90) return "prácticamente al nivel del mejor registrado";
+  if (p >= 75) return "cerca del mejor del torneo";
+  if (p >= 60) return "en buen nivel respecto del mejor observado";
+  if (p >= 45) return "a media distancia del mejor observado";
+  if (p >= 30) return "bastante lejos del mejor";
+  return "entre los valores más bajos de los jugadores medidos";
 }
 
 function fmtValue(p: PlayerMetricPoint): string {
@@ -289,7 +294,7 @@ export function generatePlayerInsights(
   const top = byPct[0];
   used.add(top.key);
   insights.push(
-    `${playerName} está en el percentil ${round(top.percentile)} en ${top.label} ` +
+    `${playerName} alcanza el ${round(top.percentile)}% del mejor registrado en ${top.label} ` +
       `(${fmtValue(top)}): ${tier(top.percentile)}.`,
   );
 
@@ -302,16 +307,16 @@ export function generatePlayerInsights(
     used.add(second.key);
     const nexo = second.group && top.group && second.group !== top.group ? "También" : "Además";
     insights.push(
-      `${nexo} aparece fuerte en ${second.label}: percentil ${round(second.percentile)} ` +
+      `${nexo} aparece fuerte en ${second.label}: llega al ${round(second.percentile)}% del mejor ` +
         `(${fmtValue(second)}), ${tier(second.percentile)}.`,
     );
   }
 
-  // 3) Punto flojo, sólo si es realmente bajo (< 35) y no repetido.
+  // 3) Punto flojo, sólo si es realmente bajo (< 35% del mejor) y no repetido.
   const weakest = byPct[byPct.length - 1];
   if (weakest && !used.has(weakest.key) && weakest.percentile < 35) {
     insights.push(
-      `Donde más cede es en ${weakest.label}: percentil ${round(weakest.percentile)} ` +
+      `Donde más cede es en ${weakest.label}: ${round(weakest.percentile)}% del mejor ` +
         `(${fmtValue(weakest)}), ${tier(weakest.percentile)}.`,
     );
   }
@@ -321,9 +326,87 @@ export function generatePlayerInsights(
   if (insights.length < 2) {
     const avg = valid.reduce((s, m) => s + m.percentile, 0) / valid.length;
     insights.push(
-      `En el resto de las métricas su rendimiento es parejo (percentil promedio ${round(avg)} ` +
+      `En el resto de las métricas su rendimiento es parejo (en promedio ${round(avg)}% del mejor observado ` +
         `entre las ${valid.length} medidas), sin un pico ni un bache marcado.`,
     );
+  }
+
+  return insights;
+}
+
+// =============================================================================
+// Lecturas "cercanía al mejor rendimiento" (sistema de normalización nuevo)
+// =============================================================================
+// Reemplazan a las lecturas por percentil en los radares: en vez de "está en el
+// percentil 82", dicen "alcanza el 94% de la mayor velocidad registrada". El
+// número es magnitud relativa al mejor observado, no posición en un ranking.
+
+export interface VsBestMetric {
+  /** Etiqueta en minúscula para incrustar en la frase (ej. "distancia recorrida"). */
+  label: string;
+  /** % del mejor observado (0..100) de cada equipo. */
+  aPct: number;
+  bPct: number;
+  /** Valor oficial (para citarlo tal cual). */
+  aRaw: number;
+  bRaw: number;
+  /** Sufijo del valor oficial (ej. " km", "%"). */
+  suffix: string;
+}
+
+function fmtRaw(v: number, suffix: string): string {
+  const n = Math.round(v * 10) / 10;
+  return `${n}${suffix}`;
+}
+
+export function generateVsBestInsights(nameA: string, nameB: string, metrics: VsBestMetric[]): string[] {
+  const usable = metrics.filter((m) => Number.isFinite(m.aPct) && Number.isFinite(m.bPct));
+  if (usable.length === 0) return [];
+
+  const insights: string[] = [];
+
+  // 1) Lectura de conjunto: promedio de "% del mejor" de cada uno.
+  const avgA = Math.round(usable.reduce((s, m) => s + m.aPct, 0) / usable.length);
+  const avgB = Math.round(usable.reduce((s, m) => s + m.bPct, 0) / usable.length);
+  if (Math.abs(avgA - avgB) >= 8) {
+    const leader = avgA > avgB ? nameA : nameB;
+    const other = avgA > avgB ? nameB : nameA;
+    insights.push(
+      `En conjunto, ${leader} está más cerca del techo del torneo: en promedio alcanza el ${Math.max(avgA, avgB)}% ` +
+        `del mejor rendimiento observado, contra el ${Math.min(avgA, avgB)}% de ${other}.`,
+    );
+  } else {
+    insights.push(
+      `${nameA} y ${nameB} llegan parejos al techo del torneo en promedio (${avgA}% y ${avgB}% del mejor observado): ` +
+        `las diferencias aparecen métrica por métrica, no en el conjunto.`,
+    );
+  }
+
+  // 2) Métricas con separación genuina, de mayor a menor brecha.
+  const gaps = [...usable].sort((x, y) => Math.abs(y.aPct - y.bPct) - Math.abs(x.aPct - x.bPct));
+  for (const m of gaps.filter((g) => Math.abs(g.aPct - g.bPct) >= MIN_GAP).slice(0, 3)) {
+    const aHigher = m.aPct >= m.bPct;
+    const higher = aHigher ? nameA : nameB;
+    const lower = aHigher ? nameB : nameA;
+    const hp = Math.max(m.aPct, m.bPct);
+    const lp = Math.min(m.aPct, m.bPct);
+    const hRaw = fmtRaw(aHigher ? m.aRaw : m.bRaw, m.suffix);
+    const lRaw = fmtRaw(aHigher ? m.bRaw : m.aRaw, m.suffix);
+    insights.push(
+      `En ${m.label}, ${higher} alcanza el ${hp}% del mejor del torneo (${hRaw}) y ${lower} el ${lp}% (${lRaw}).`,
+    );
+    if (insights.length >= 4) break;
+  }
+
+  // 3) Si quedó lugar, una métrica donde van casi iguales.
+  if (insights.length < 4) {
+    const even = [...usable].reverse().find((m) => Math.abs(m.aPct - m.bPct) < MIN_GAP);
+    if (even) {
+      insights.push(
+        `En ${even.label} van prácticamente iguales (${Math.round(even.aPct)}% y ${Math.round(even.bPct)}% del mejor): ` +
+          `ahí no hay una ventaja para ninguno.`,
+      );
+    }
   }
 
   return insights;

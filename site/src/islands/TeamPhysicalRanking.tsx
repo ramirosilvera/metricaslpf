@@ -69,8 +69,9 @@ export default function TeamPhysicalRanking({ rows }: Props) {
       formatter: (params: any) => {
         const p = params[0];
         const row = sorted[p.dataIndex];
-        const pct = row[metric.pctKey] as number;
-        return `<strong>${row.team}</strong><br/>${metric.label}: ${p.value}${metric.suffix}<br/>Percentil entre las 48: ${Math.round(pct)}<br/>${row.partidos} partido(s) con datos`;
+        const best = (sorted[0][metric.key] as number) || 1; // sorted desc -> el máximo
+        const pctBest = Math.round(((row[metric.key] as number) / best) * 100);
+        return `<strong>${row.team}</strong><br/>${metric.label}: ${p.value}${metric.suffix}<br/><strong>${pctBest}%</strong> del mejor del torneo<br/>${row.partidos} partido(s) con datos`;
       },
     },
     xAxis: {
