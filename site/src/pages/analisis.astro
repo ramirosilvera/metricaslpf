@@ -8,7 +8,6 @@ import GoalsVsPhysical from "../islands/GoalsVsPhysical";
 import {
   loadJson,
   type DerivedTeamMetricRow,
-  type DerivedTeamStyleRow,
   type DerivedPlayerMetricRow,
   type SquadPlayerRow,
   type GoalsVsPhysicalRow,
@@ -20,7 +19,6 @@ function loadArray<T>(filename: string): T[] {
 }
 
 const teamMetrics = loadArray<DerivedTeamMetricRow>("derived_team_metrics.json");
-const teamStyle = loadArray<DerivedTeamStyleRow>("derived_team_style.json");
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
 const goalsVsPhysical = loadArray<GoalsVsPhysicalRow>("goals_vs_physical.json");
@@ -60,23 +58,18 @@ for (const row of playerMetrics) {
     };
   }
 }
-
-const styleGroups = teamStyle.reduce<Record<string, DerivedTeamStyleRow[]>>((acc, row) => {
-  (acc[row.cluster_label] ??= []).push(row);
-  return acc;
-}, {});
 ---
 
 <Base
   title="Análisis avanzado"
-  description="Percentiles, z-scores y estilo de juego por selección y jugador — el mismo tipo de lectura que usa un analista de video."
+  description="Percentiles y z-scores por selección y jugador — el mismo tipo de lectura que usa un analista de video."
 >
   <DataStatusBanner />
   <p class="eyebrow">La lupa · un caso a la vez</p>
   <h1>Analizar en profundidad</h1>
   <p class="lede">
     Ni tabla ni duelo: acá entrás en <strong>un</strong> caso puntual y cruzás sus datos. Los goles vs. el físico de un
-    partido, el radar multi-fuente de una selección, el estilo de juego y la ficha física-táctica de un jugador —
+    partido, el radar multi-fuente de una selección, el perfil del plantel y la ficha física-táctica de un jugador —
     pensado para leerse como el reporte de un analista de video. <em>Para ordenar a todos usá Rankings; para enfrentar
     dos, Comparar.</em>
   </p>
@@ -89,38 +82,6 @@ const styleGroups = teamStyle.reduce<Record<string, DerivedTeamStyleRow[]>>((acc
     <div class="card">
       <TeamMetricsRadar client:only="react" rows={teamMetrics} />
     </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Estilo de juego</h2>
-      <p>
-        Clustering (k-means) sobre 5 métricas tácticas estandarizadas — agrupa selecciones con perfiles parecidos, no
-        es una etiqueta táctica validada. Ver <a href="../metodologia/">metodología</a>.
-      </p>
-    </div>
-    {
-      Object.keys(styleGroups).length === 0 ? (
-        <p class="card" style="color: var(--text-muted)">
-          Todavía no hay suficientes datos tácticos cargados para agrupar estilos.
-        </p>
-      ) : (
-        <div class="style-grid">
-          {Object.entries(styleGroups).map(([label, teams]) => (
-            <div class="card style-card">
-              <h3>{label}</h3>
-              <ul>
-                {teams.map((t) => (
-                  <li>
-                    {t.team} <span class="badge">{t.season}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )
-    }
   </section>
 
   {goalsVsPhysical.length > 0 && (
@@ -163,30 +124,3 @@ const styleGroups = teamStyle.reduce<Record<string, DerivedTeamStyleRow[]>>((acc
     </div>
   </section>
 </Base>
-
-<style>
-  .style-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-  }
-  .style-card h3 {
-    margin-top: 0;
-    font-size: 1rem;
-  }
-  .style-card ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .style-card li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-  }
-</style>
