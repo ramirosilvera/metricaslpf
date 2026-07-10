@@ -7,14 +7,14 @@ import Base from "../layouts/Base.astro";
 // acá no se duplican. La metodología queda a un click, discreta.
 const base = import.meta.env.BASE_URL;
 
-// Cada tarjeta enruta a la página existente que mejor responde la pregunta.
-// "Comparar jugadores" -> jugadores/ (comparación física entre muchos a la vez);
-// "Analizar un partido" -> analisis/ (goles vs. físico del mismo partido, radar).
+// Cada acción es un MODO distinto, diferenciado por cuántas cosas mirás a la
+// vez: Comparar = dos (duelo), Rankings = las 48 (tabla), Analizar = una (lupa).
+// La descripción corta deja claro qué hace cada una y evita que se pisen entre sí.
 const actions = [
-  { href: `${base}comparar/`, icon: "🆚", label: "Comparar selecciones" },
-  { href: `${base}jugadores/`, icon: "👟", label: "Comparar jugadores" },
-  { href: `${base}analisis/`, icon: "🔎", label: "Analizar un partido" },
-  { href: `${base}selecciones/`, icon: "📊", label: "Explorar rankings" },
+  { href: `${base}comparar/`, icon: "🆚", label: "Comparar dos", desc: "Dos selecciones cara a cara en un radar" },
+  { href: `${base}selecciones/`, icon: "📊", label: "Ver rankings", desc: "Las 48 selecciones ordenadas por cada métrica" },
+  { href: `${base}jugadores/`, icon: "👟", label: "Rankear jugadores", desc: "Físico, posición y minutos, jugador por jugador" },
+  { href: `${base}analisis/`, icon: "🔎", label: "Analizar a fondo", desc: "La lupa en un partido o un jugador puntual" },
 ];
 
 // Compartir el sitio por WhatsApp (funcionalidad conservada, ahora liviana y
@@ -37,6 +37,7 @@ const waLink = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
         <a class="cta-card" href={a.href}>
           <span class="cta-icon" aria-hidden="true">{a.icon}</span>
           <span class="cta-label">{a.label}</span>
+          <span class="cta-desc">{a.desc}</span>
           <span class="cta-arrow" aria-hidden="true">→</span>
         </a>
       ))}

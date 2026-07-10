@@ -721,8 +721,8 @@ p {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  min-height: 132px;
+  gap: 0.55rem;
+  min-height: 158px;
   padding: 1.5rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
@@ -772,6 +772,16 @@ p {
   font-size: 1.15rem;
   letter-spacing: -0.01em;
   max-width: 14ch;
+}
+
+.cta-desc {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.35;
+  max-width: 26ch;
+  /* deja aire para la flecha del ángulo inferior derecho */
+  padding-right: 1.4rem;
 }
 
 .cta-arrow {

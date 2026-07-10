@@ -20,11 +20,12 @@ const byPosition = loadArray<PlayerPhysicalPositionRow>("player_physical_by_posi
 
 <Base title="Jugadores" description="Ranking de minutos jugados y métricas físicas reales por jugador — Mundial 2026.">
   <DataStatusBanner />
-  <p class="eyebrow">Unidad de análisis: el jugador</p>
-  <h1>Jugadores</h1>
+  <p class="eyebrow">Ranking · jugador por jugador</p>
+  <h1>Ranking de jugadores</h1>
   <p class="lede">
-    Un promedio de equipo esconde que algunos jugadores corren mucho y otros poco — esta es la unidad de análisis
-    correcta para poner a prueba la hipótesis.
+    La misma <strong>tabla</strong>, pero a nivel jugador: quién corre más, comparado por posición y por minutos. Un
+    promedio de equipo esconde que algunos corren mucho y otros poco — esta es la unidad correcta para poner a prueba la
+    hipótesis. <em>Para la ficha completa de un jugador, entrá a Analizar.</em>
   </p>
 
   {byPosition.length > 0 && (

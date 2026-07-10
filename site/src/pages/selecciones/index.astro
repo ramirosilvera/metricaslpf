@@ -56,12 +56,13 @@ const leaderShareText = distanceLeader
 
 <Base title="Selecciones" description="Rendimiento físico real de las 48 selecciones del Mundial 2026, ranking FIFA y contexto táctico.">
   <DataStatusBanner />
-  <p class="eyebrow">Análisis colectivo</p>
-  <h1>Selecciones</h1>
+  <p class="eyebrow">Ranking · las 48 selecciones</p>
+  <h1>Ranking de selecciones</h1>
   <p class="lede">
-    Rendimiento físico real del Mundial 2026 para las {nPhysicalTeams || 48} selecciones (FIFA Training Centre), más el
-    contexto táctico que hace falta para leerlo bien. Recordá la clave metodológica: un equipo que domina el balón corre
-    <em>menos</em>, no más — por eso lo físico se lee junto a lo táctico, nunca solo.
+    La <strong>tabla del torneo</strong>: las {nPhysicalTeams || 48} selecciones ordenadas de mayor a menor en la
+    métrica que elijas, física (FIFA Training Centre) o táctica. Clave metodológica: un equipo que domina el balón corre
+    <em>menos</em>, no más — por eso lo físico se lee junto a lo táctico, nunca solo. <em>Para enfrentar dos entre sí,
+    usá Comparar.</em>
   </p>
 
   {distanceLeader && (
