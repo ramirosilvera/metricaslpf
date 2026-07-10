@@ -206,6 +206,12 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 30;
+  /* En iOS (PWA standalone con barra de estado translúcida + viewport-fit=cover)
+     el contenido se mete DEBAJO de la barra de estado del sistema, que además
+     se traga los toques. Sin este padding, la marca y la hamburguesa quedaban
+     bajo la hora/batería y el menú no se podía tocar. El fondo del header cubre
+     este padding, así el notch queda pintado y el bar tappable. */
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 .site-header .wrap {
@@ -214,6 +220,10 @@ a:hover {
   justify-content: space-between;
   padding-top: 0.85rem;
   padding-bottom: 0.85rem;
+  /* en landscape con notch, respetar los insets laterales para que la marca y
+     la hamburguesa no queden bajo el recorte de la pantalla */
+  padding-left: max(1.5rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1.5rem, env(safe-area-inset-right, 0px));
   gap: 1rem;
 }
 
