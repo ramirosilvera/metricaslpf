@@ -21,11 +21,12 @@
  *
  * Seguridad en capas (ninguna es perfecta sola, juntas alcanzan para este caso):
  *   1. CORS restringido al origen real del sitio (ALLOWED_ORIGIN).
- *   2. Rate limit por IP usando Workers KV (si el binding RATE_LIMIT está
- *      configurado -- si no, esta capa se saltea sin romper el feature).
- *   3. Límite de longitud de mensaje/historial para acotar el costo por request.
- *   4. Function-calling restringido a un whitelist fijo de RPCs de solo
+ *   2. Límite de longitud de mensaje/historial para acotar el costo por request.
+ *   3. Function-calling restringido a un whitelist fijo de RPCs de solo
  *      lectura (ver TOOLS/TOOL_RPC_MAP) -- nunca SQL arbitrario.
+ *
+ * (No hay rate limit por IP: el asistente es de uso particular. Si en el futuro
+ *  se abre a tráfico público conviene reponerlo -- ver historial de git.)
  */
 
 const SYSTEM_PROMPT = `Sos el analista táctico de "Métricas Mundial 2026" (metricasmundial2026), un proyecto
@@ -86,7 +87,6 @@ Reglas de respuesta (correctitud, no estilo -- son innegociables):
 
 const MAX_MESSAGE_LENGTH = 600;
 const MAX_HISTORY_TURNS = 6;
-const DEFAULT_RATE_LIMIT_PER_HOUR = 15;
 const MAX_TOOL_ROUNDS = 3;
 const SUPABASE_SCHEMA = "metricas_mundial";
 
@@ -236,33 +236,6 @@ function json(body, status, extraHeaders) {
   });
 }
 
-let warnedRateLimitDisabled = false;
-
-async function checkRateLimit(env, ip) {
-  if (!env.RATE_LIMIT) {
-    // KV no configurado -- se saltea, no rompe el feature. Pero el rate limit
-    // es la ÚNICA barrera de costo real sobre la clave prepaga de Gemini, así
-    // que lo dejamos visible en los logs (wrangler tail / dashboard) una vez
-    // por isolate en lugar de fallar en silencio. Ver wrangler.toml para
-    // activar el namespace KV RATE_LIMIT.
-    if (!warnedRateLimitDisabled) {
-      console.warn("RATE_LIMIT KV no está bindeado -- el límite por IP está INACTIVO (la clave de Gemini queda sin tope de costo). Ver wrangler.toml.");
-      warnedRateLimitDisabled = true;
-    }
-    return { ok: true };
-  }
-
-  const limit = Number(env.RATE_LIMIT_PER_HOUR) || DEFAULT_RATE_LIMIT_PER_HOUR;
-  const hourBucket = Math.floor(Date.now() / 3_600_000);
-  const key = `rl:${ip}:${hourBucket}`;
-
-  const current = Number((await env.RATE_LIMIT.get(key)) || "0");
-  if (current >= limit) return { ok: false, limit };
-
-  await env.RATE_LIMIT.put(key, String(current + 1), { expirationTtl: 3700 });
-  return { ok: true };
-}
-
 async function callSupabaseRpc(env, toolName, args) {
   const mapper = TOOL_RPC_MAP[toolName];
   if (!mapper) return { error: `herramienta desconocida: ${toolName}` };
@@ -362,16 +335,6 @@ export default {
     }
 
     const history = Array.isArray(body?.history) ? body.history.slice(-MAX_HISTORY_TURNS) : [];
-
-    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-    const rl = await checkRateLimit(env, ip);
-    if (!rl.ok) {
-      return json(
-        { error: "rate_limited", message: `Límite de ${rl.limit} mensajes por hora alcanzado. Probá de nuevo más tarde.` },
-        429,
-        headers,
-      );
-    }
 
     if (!env.GEMINI_API_KEY) {
       return json({ error: "not_configured", message: "El asistente todavía no está configurado (falta GEMINI_API_KEY)." }, 503, headers);
