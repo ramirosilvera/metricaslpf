@@ -13,6 +13,10 @@ __pycache__/
 data/raw/fifa_training_centre/raw_*.html
 data/raw/transfermarkt/raw_*.html
 
+# Cache de PDFs del FIFA Training Centre. El skip incremental usa el CSV ya
+# commiteado (_processed), no los PDFs -- persistirlos solo infla el repo.
+data/raw/fifa_training_centre/pdfs/
+
 # editores / SO
 .DS_Store
 .vscode/

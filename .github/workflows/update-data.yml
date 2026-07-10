@@ -25,7 +25,11 @@ concurrency:
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Margen para el backfill de PDFs de FIFA. El scraper igual se auto-corta por
+    # PMSR_MAX_SECONDS (abajo) bastante antes de este techo, para que build +
+    # validación + agregados + sync + commit siempre lleguen a correr. Sin esto,
+    # el job moría por timeout a mitad del scraping y NO commiteaba nada.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -42,7 +46,13 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
           PMSR_LIMIT: ${{ github.event.inputs.pmsr_limit }}
-          PMSR_MAX_SECONDS: ${{ github.event.inputs.pmsr_max_seconds }}
+          # Corte de scraping por tiempo. En dispatch se puede pasar un valor;
+          # si no (o en las corridas programadas) usa 1200s = 20 min, bien por
+          # debajo del timeout-minutes del job, para que el scraper corte solo y
+          # el pipeline llegue a validar/agregar/commitear el progreso. El skip
+          # incremental (por el CSV ya commiteado) hace que cada corrida avance
+          # sobre los partidos que todavía faltan.
+          PMSR_MAX_SECONDS: ${{ github.event.inputs.pmsr_max_seconds || '1200' }}
           # Sincroniza el warehouse a Supabase (schema metricas_mundial).
           # Si estos secrets no están cargados, sync_supabase.py se
           # saltea solo -- no rompe el resto del pipeline.
