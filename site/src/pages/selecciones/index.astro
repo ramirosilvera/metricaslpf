@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import DataStatusBanner from "../../layouts/DataStatusBanner.astro";
+import ConfidenceBadge from "../../layouts/ConfidenceBadge.astro";
 import RankingBar from "../../islands/RankingBar";
 import PossessionBoxplot from "../../islands/PossessionBoxplot";
 import MetricHeatmap from "../../islands/MetricHeatmap";
@@ -133,7 +134,8 @@ const leaderShareText = distanceLeader
     <section class="section">
       <div class="section-head">
         <h2>Ranking FIFA y campamento base</h2>
-        <p>Fuente: API pública de FIFA — la flecha compara contra el ranking previo al torneo.</p>
+        <p>La flecha compara contra el ranking previo al torneo.</p>
+        <ConfidenceBadge source="team_profile" label="Fuente: API pública de FIFA" />
       </div>
       <div class="card">
         <div class="table-scroll">

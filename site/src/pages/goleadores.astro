@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
+import ConfidenceBadge from "../layouts/ConfidenceBadge.astro";
 import { loadJson, type GoalEventRow, type GoalScorerRankingRow, type OwnGoalRow } from "../lib/data";
 import { flagFor } from "../lib/flags";
 import ShareCardButton from "../islands/ShareCardButton";
@@ -32,7 +33,6 @@ const single = sorted.filter((r) => r.goles < 2);
 const totalGoals = goalEvents.length;
 const penaltyGoals = goalEvents.filter((g) => g.penalty).length;
 const ownGoalCount = goalEvents.filter((g) => g.own_goal).length;
-const updatedAt = goalEvents[0]?.retrieved_at?.slice(0, 10) ?? null;
 
 const topScorer = sorted[0] ?? null;
 const topScorerStats = topScorer
@@ -95,7 +95,7 @@ const topScorerShareText = topScorer
   <section class="section">
     <div class="section-head">
       <h2>Tabla de goleadores</h2>
-      <p>Fuente: openfootball (datos abiertos){updatedAt ? ` · actualizado ${updatedAt}` : ""}</p>
+      <ConfidenceBadge source="goal_events" label="Fuente: openfootball (datos abiertos)" />
     </div>
     <div class="card">
       <div class="table-scroll">

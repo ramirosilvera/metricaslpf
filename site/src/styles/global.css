@@ -1028,6 +1028,133 @@ p {
   white-space: nowrap;
 }
 
+/* ---------- insignia de confianza (compacta, expandible) ---------- */
+
+/* Pastilla discreta que resume la verificabilidad de los datos sin ocupar
+   espacio: por defecto es una sola línea; al tocarla despliega el detalle real
+   (fuente, licencia, cobertura, fecha) leído de meta.json. Usa <details> nativo,
+   por lo que es accesible por teclado sin JS. */
+.confidence-badge {
+  display: inline-block;
+  max-width: 100%;
+  font-size: 0.8rem;
+}
+
+.confidence-badge > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  cursor: pointer;
+  list-style: none;
+  padding: 0.32rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--status-good) 25%, var(--border));
+  background: color-mix(in srgb, var(--status-good) 9%, var(--surface-2));
+  color: var(--status-good);
+  font-weight: 600;
+  line-height: 1.2;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+/* Oculta el triángulo por defecto de <summary> en todos los motores. */
+.confidence-badge > summary::-webkit-details-marker {
+  display: none;
+}
+.confidence-badge > summary::marker {
+  content: "";
+}
+
+.confidence-badge > summary:hover {
+  background: color-mix(in srgb, var(--status-good) 15%, var(--surface-2));
+  border-color: color-mix(in srgb, var(--status-good) 42%, var(--border));
+}
+
+.confidence-badge > summary:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Variante neutra para fuentes complementarias/derivadas: sin verde, para no
+   sugerir un sello de "oficial" donde no lo hay. */
+.confidence-badge.is-muted > summary {
+  border-color: var(--border);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+}
+.confidence-badge.is-muted > summary:hover {
+  background: color-mix(in srgb, var(--text-secondary) 8%, var(--surface-2));
+  border-color: color-mix(in srgb, var(--text-secondary) 22%, var(--border));
+}
+
+.confidence-badge .cb-check {
+  font-weight: 800;
+  line-height: 1;
+  font-size: 0.9em;
+}
+
+.confidence-badge .cb-caret {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  transition: transform 0.15s ease;
+}
+
+.confidence-badge[open] > summary .cb-caret {
+  transform: rotate(180deg);
+}
+
+.confidence-panel {
+  margin-top: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-md);
+  padding: 0.95rem 1.05rem;
+  width: max-content;
+  max-width: min(440px, 100%);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  /* URLs/licencias largas sin espacios no deben desbordar en móvil. */
+  overflow-wrap: anywhere;
+}
+
+.confidence-panel p {
+  margin: 0 0 0.6rem;
+}
+
+.confidence-panel .cb-cross {
+  color: var(--status-good);
+  font-weight: 600;
+}
+
+.confidence-panel .cb-sources {
+  list-style: none;
+  margin: 0 0 0.7rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.confidence-panel .cb-source {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.confidence-panel .cb-src-meta {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+}
+
+.confidence-panel .cb-more {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
 /* ---------- glosario / tooltip de término técnico ---------- */
 
 .term {

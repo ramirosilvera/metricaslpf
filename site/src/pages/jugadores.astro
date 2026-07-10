@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
+import ConfidenceBadge from "../layouts/ConfidenceBadge.astro";
 import PlayerMinutesBar from "../islands/PlayerMinutesBar";
 import PhysicalPlayerBar from "../islands/PhysicalPlayerBar";
 import PositionPhysicalRanking from "../islands/PositionPhysicalRanking";
@@ -45,7 +46,7 @@ const byPosition = loadArray<PlayerPhysicalPositionRow>("player_physical_by_posi
   <section class="section">
     <div class="section-head">
       <h2>Métricas físicas por selección — Mundial 2026</h2>
-      <p>Fuente: FIFA Training Centre (reportes oficiales por partido, PMSR)</p>
+      <ConfidenceBadge source="physical_performance" label="Fuente: FIFA Training Centre (PMSR)" />
     </div>
     <div class="card">
       <PhysicalPlayerBar client:only="react" rows={physicalPlayers} />
