@@ -169,6 +169,44 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
         e.preventDefault();
         window.dispatchEvent(new CustomEvent("mm26:open-chat"));
       });
+
+      // Mejora progresiva del menú móvil (el toggle base es CSS puro con
+      // checkbox, funciona sin JS). Acá sólo lo hacemos más robusto en el
+      // celular: cerrar al tocar un enlace, al tocar fuera y con Escape, y
+      // reflejar aria-expanded en la hamburguesa para lectores de pantalla.
+      (function () {
+        const toggle = document.getElementById("nav-toggle");
+        const label = document.querySelector(".nav-toggle-label");
+        const nav = document.getElementById("nav-principal");
+        if (!toggle || !nav || !label) return;
+        const sync = () => label.setAttribute("aria-expanded", toggle.checked ? "true" : "false");
+        const close = () => {
+          if (toggle.checked) {
+            toggle.checked = false;
+            sync();
+          }
+        };
+        toggle.addEventListener("change", sync);
+        sync();
+        // Al tocar un enlace del menú, cerralo (la navegación recarga igual, pero
+        // así se siente inmediato y no queda abierto si es un ancla interna).
+        nav.addEventListener("click", (e) => {
+          if (e.target instanceof Element && e.target.closest("a")) close();
+        });
+        // Tocar fuera del header cierra el menú.
+        document.addEventListener("click", (e) => {
+          if (!toggle.checked) return;
+          const header = e.target instanceof Element ? e.target.closest(".site-header") : null;
+          if (!header) close();
+        });
+        // Escape cierra y devuelve el foco a la hamburguesa.
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && toggle.checked) {
+            close();
+            label.focus();
+          }
+        });
+      })();
     </script>
     <script is:inline define:vars={{ swUrl: `${base}sw.js`, swScope: base }}>
       // Registro del service worker (PWA + app shell offline). Conservador: si

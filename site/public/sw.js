@@ -17,7 +17,10 @@
  * Resultado: nunca se sirve dato/WASM viejo desde caché; si algo falla, el peor
  * caso es que el SW no aporte (comportamiento idéntico a no tenerlo).
  */
-const CACHE = "mm26-shell-v1";
+// v2: se sube la versión para purgar cualquier app-shell/CSS viejo cacheado en
+// dispositivos (el handler de 'activate' borra las caches que no sean esta), así
+// un layout viejo no queda pegado en el navegador del usuario.
+const CACHE = "mm26-shell-v2";
 
 // Rutas que el SW NO debe tocar bajo ninguna circunstancia.
 const BYPASS = /\/(data|data-parquet)\/|\.(parquet|wasm|json|csv)(\?|$)|duckdb|\.worker\./i;

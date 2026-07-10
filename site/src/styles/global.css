@@ -297,6 +297,12 @@ a:hover {
   flex-shrink: 0;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
+  /* En Chrome Android, dentro de un header sticky con backdrop-filter, sin esto
+     el navegador puede tragarse el tap tratándolo como inicio de scroll. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .nav-toggle-label svg {
@@ -310,6 +316,15 @@ a:hover {
   align-items: center;
   flex-shrink: 1;
   min-width: 0;
+}
+
+.nav a,
+.nav-group > summary,
+.nav-ia {
+  /* Taps confiables en móvil: sin delay de 300ms ni gesto de scroll robándose
+     el toque dentro del header sticky con backdrop-filter. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav a {
@@ -484,11 +499,17 @@ a:hover {
     right: 0;
     flex-direction: column;
     align-items: stretch;
+    /* opaco (no translúcido) para que el menú desplegado sobre el contenido sea
+       siempre legible, incluso donde el header usa backdrop-filter */
     background: var(--surface-1);
     border-bottom: 1px solid var(--border);
     padding: 0.5rem 1rem 1rem;
     gap: 0.15rem;
     box-shadow: var(--shadow-md);
+    /* explícito: el panel desplegado queda por encima del contenido en todos los
+       compositores móviles (el header es un contexto de apilado por su
+       backdrop-filter; sin z-index algunos navegadores lo pintaban detrás). */
+    z-index: 40;
     max-height: calc(100vh - 70px);
     max-height: calc(100dvh - 70px);
     overflow-y: auto;
