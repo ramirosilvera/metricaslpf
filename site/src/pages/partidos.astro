@@ -44,6 +44,14 @@ function goalsByTeam(m: MatchSummary, team: string) {
     .join(", ");
 }
 const stageLabel = (s: string) => s || "Fase de grupos";
+
+// Texto normalizado (sin acentos) para el buscador -> selecciones, fase y fecha.
+const norm = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${stageLabel(m.stage)} ${m.match_date}`);
 ---
 
 <Base title="Partidos" description="Resumen de cada partido del Mundial 2026: resultado, goles, físico y una lectura automática, con datos oficiales.">
@@ -59,14 +67,27 @@ const stageLabel = (s: string) => s || "Fase de grupos";
   {matches.length === 0 ? (
     <p class="card" style="color: var(--text-muted)">Todavía no hay partidos con datos cargados.</p>
   ) : (
-    <div class="match-grid">
+    <>
+    <div class="match-search-bar">
+      <input
+        type="search"
+        id="match-search"
+        class="match-search"
+        placeholder="Buscar selección o fase… (ej. Argentina, cuartos)"
+        autocomplete="off"
+        aria-label="Buscar partidos"
+      />
+      <span class="match-count" id="match-count">{matches.length} partidos</span>
+    </div>
+    <p class="match-empty" id="match-empty" hidden>No hay partidos que coincidan con la búsqueda.</p>
+    <div class="match-grid" id="match-grid">
       {matches.map((m) => {
         const homeWin = m.home_score > m.away_score;
         const awayWin = m.away_score > m.home_score;
         const hg = goalsByTeam(m, m.home_team);
         const ag = goalsByTeam(m, m.away_team);
         return (
-          <article class="card match-card">
+          <article class="card match-card" data-search={searchText(m)}>
             <div class="mc-head">
               <span class="mc-stage">{stageLabel(m.stage)}</span>
               <span class="mc-date">{m.match_date}</span>
@@ -124,6 +145,7 @@ const stageLabel = (s: string) => s || "Fase de grupos";
         );
       })}
     </div>
+    </>
   )}
 
   <p style="font-size:0.8rem; color: var(--text-muted); margin-top: 1.5rem;">
@@ -137,6 +159,25 @@ const stageLabel = (s: string) => s || "Fase de grupos";
     import { shareMatch } from "../lib/shareMatch";
     const raw = document.getElementById("matches-json")?.textContent || "[]";
     const byId = new Map(JSON.parse(raw).map((m: any) => [String(m.match_id), m]));
+
+    // Buscador: filtra las tarjetas por selección / fase / fecha, sin recargar.
+    const input = document.getElementById("match-search") as HTMLInputElement | null;
+    const cards = Array.from(document.querySelectorAll<HTMLElement>(".match-card"));
+    const countEl = document.getElementById("match-count");
+    const emptyEl = document.getElementById("match-empty");
+    const total = cards.length;
+    function applyFilter() {
+      const q = (input?.value || "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      let shown = 0;
+      for (const c of cards) {
+        const match = !q || (c.dataset.search || "").includes(q);
+        c.hidden = !match;
+        if (match) shown++;
+      }
+      if (countEl) countEl.textContent = q ? `${shown} de ${total} partidos` : `${total} partidos`;
+      if (emptyEl) emptyEl.hidden = shown !== 0;
+    }
+    input?.addEventListener("input", applyFilter);
     document.querySelectorAll<HTMLButtonElement>(".mc-share").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const m = byId.get(btn.getAttribute("data-mid") || "");
@@ -161,6 +202,38 @@ const stageLabel = (s: string) => s || "Fase de grupos";
 </Base>
 
 <style>
+  .match-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .match-search {
+    flex: 1 1 260px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text-primary);
+  }
+  .match-search:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 1px;
+    border-color: var(--brand);
+  }
+  .match-count {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .match-empty {
+    color: var(--text-muted);
+    padding: 1rem 0;
+  }
   .match-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -170,6 +243,11 @@ const stageLabel = (s: string) => s || "Fase de grupos";
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
+  }
+  /* el atributo [hidden] no alcanza porque .match-card fija display:flex;
+     esta regla, más específica, lo tapa cuando el buscador oculta la tarjeta */
+  .match-card[hidden] {
+    display: none;
   }
   .mc-head {
     display: flex;
