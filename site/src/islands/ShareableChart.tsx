@@ -3,6 +3,8 @@ import ReactECharts from "echarts-for-react";
 import type { EChartsInstance } from "echarts-for-react";
 import { composeChartCard } from "../lib/shareChart";
 import { shareCardBlob } from "../lib/shareCard";
+import RatingsPanel from "./RatingsPanel";
+import type { RatingsData } from "../lib/ratings";
 
 // Wrapper universal: dibuja un gráfico de ECharts y le agrega, debajo, un botón
 // "Compartir imagen" que exporta EL PROPIO gráfico (getDataURL) montado en una
@@ -21,6 +23,9 @@ interface ShareMeta {
   shareText?: string;
   /** Base del nombre de archivo. */
   filenameBase?: string;
+  /** Desglose "estilo EA FC" (GLOBAL + índice por factor): se muestra bajo el
+   *  gráfico en pantalla y se replica en el exportable. */
+  ratings?: RatingsData;
 }
 
 interface Props {
@@ -85,6 +90,7 @@ export default function ShareableChart({
         insight: share.insight,
         url: pageUrl,
         panelBg,
+        ratings: share.ratings,
       });
 
       const result = await shareCardBlob(blob, {
@@ -108,6 +114,7 @@ export default function ShareableChart({
   return (
     <div className="chart-shareable">
       <ReactECharts ref={chartRef} option={option} style={style} notMerge={notMerge} opts={opts} onEvents={onEvents} />
+      {share.ratings && <RatingsPanel data={share.ratings} />}
       <div className="chart-share-bar">
         <button
           type="button"

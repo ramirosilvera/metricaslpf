@@ -192,6 +192,22 @@ export default function RadarCompare({ physicalRows, tacticalRows, summaryRows }
     return generateVsBestInsights(nameA, nameB, metrics);
   }, [data, cfg, nameA, nameB]);
 
+  // Desglose "carta EA FC": GLOBAL (promedio) + índice por factor de cada
+  // selección, con los mismos colores del radar (A=series-6, B=series-1).
+  const ratings = useMemo(() => {
+    if (!data) return undefined;
+    return {
+      entities: [
+        { name: nameA, color: tokens["--series-6"] },
+        { name: nameB, color: tokens["--series-1"] },
+      ],
+      factors: cfg.metrics.map((m, i) => ({
+        label: m.name.replace("\n", " "),
+        values: [data.a[i].norm, data.b[i].norm],
+      })),
+    };
+  }, [data, cfg, nameA, nameB, tokens]);
+
   const shareText = a && b ? `${nameA} vs ${nameB} · ${cfg.subtitle}` : undefined;
 
   const waLink = useMemo(() => {
@@ -244,6 +260,7 @@ export default function RadarCompare({ physicalRows, tacticalRows, summaryRows }
             insight: insights[0],
             shareText,
             filenameBase: `${nameA}-vs-${nameB}-${mode}`,
+            ratings,
           }}
           shareLabel="🖼️ Compartir radar"
         />

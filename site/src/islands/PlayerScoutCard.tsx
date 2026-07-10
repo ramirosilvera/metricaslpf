@@ -146,6 +146,18 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
     [currentPlayer, insightPoints],
   );
 
+  // Desglose "carta EA FC": GLOBAL (promedio) + índice por factor del jugador.
+  const ratings = useMemo(() => {
+    if (radarMetrics.length < 3) return undefined;
+    return {
+      entities: [{ name: currentPlayer, color: tokens["--series-3"] }],
+      factors: radarMetrics.map((m) => ({
+        label: METRIC_LABELS[m].label.replace(" / partido", ""),
+        values: [pctFor(m, playerRows.find((r) => r.metric === m)?.value ?? null) ?? 0],
+      })),
+    };
+  }, [radarMetrics, playerRows, currentPlayer, tokens, normalizers]);
+
   const option = useMemo(() => {
     if (radarMetrics.length < 3) return null;
     return {
@@ -257,6 +269,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
             subtitle: `${team} · ficha física y táctica (índice de rendimiento) · Mundial 2026`,
             insight: insights[0],
             filenameBase: `scout-${team}-${currentPlayer}`,
+            ratings,
           }}
           shareLabel="🖼️ Compartir radar"
         />

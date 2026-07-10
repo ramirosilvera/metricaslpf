@@ -125,6 +125,26 @@ export default function TeamMetricsRadar({ rows }: Props) {
     };
   }, [sharedMetrics, a, b, aLabel, bLabel, tokens, narrow, normalizers]);
 
+  // Desglose "carta EA FC": GLOBAL + índice por factor de cada selección/torneo.
+  const ratings = useMemo(() => {
+    if (sharedMetrics.length < 3) return undefined;
+    const idxOf = (list: DerivedTeamMetricRow[], m: string) => {
+      const row = list.find((r) => r.metric === m);
+      if (!row || row.value == null) return 0;
+      return normalizers[`${row.season}|${m}`]?.(row.value) ?? 0;
+    };
+    return {
+      entities: [
+        { name: aLabel, color: tokens["--series-6"] },
+        { name: bLabel, color: tokens["--series-1"] },
+      ],
+      factors: sharedMetrics.map((m) => ({
+        label: METRIC_LABELS[m],
+        values: [idxOf(a, m), idxOf(b, m)],
+      })),
+    };
+  }, [sharedMetrics, a, b, aLabel, bLabel, normalizers, tokens]);
+
   if (teamSeasons.length === 0) {
     return <p style={{ color: "var(--text-muted)" }}>Todavía no hay métricas derivadas cargadas.</p>;
   }
@@ -156,6 +176,7 @@ export default function TeamMetricsRadar({ rows }: Props) {
             title: `${aLabel} vs ${bLabel}`,
             subtitle: "Métricas derivadas (índice de rendimiento) · radar multi-fuente",
             filenameBase: `${aLabel}-vs-${bLabel}`,
+            ratings,
           }}
           shareLabel="🖼️ Compartir radar"
         />
