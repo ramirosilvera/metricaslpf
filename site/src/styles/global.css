@@ -1403,6 +1403,29 @@ tbody tr:hover td {
   flex-wrap: wrap;
 }
 
+/* Motivo "cancha" en las cabeceras internas: una barra vertical con segmentos
+   de césped (corte del pasto) a la izquierda del h2, como una línea de banda.
+   currentColor no aplica -> se usa el verde de marca directo. */
+.section-head h2 {
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.section-head h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  bottom: 0.12em;
+  width: 5px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--brand) 0 7px,
+    var(--brand-deep) 7px 14px
+  );
+}
+
 .section-head p {
   margin: 0;
   font-size: 0.88rem;

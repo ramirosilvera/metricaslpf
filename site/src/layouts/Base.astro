@@ -75,7 +75,7 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%2315a94f%22/><g stroke=%22white%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><circle cx=%2250%22 cy=%2252%22 r=%2230%22/><path d=%22M50 40 L62.4 48 L57.6 62.5 L42.4 62.5 L37.6 48 Z%22 fill=%22white%22 stroke=%22none%22/><path d=%22M50 40 V22 M62.4 48 L78.5 42.7 M57.6 62.5 L67.6 76.3 M42.4 62.5 L32.4 76.3 M37.6 48 L21.5 42.7%22/></g></svg>" />
     <link rel="icon" type="image/png" sizes="32x32" href={`${base}favicon-32.png`} />
     <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
     <link rel="manifest" href={`${base}manifest.webmanifest`} />
@@ -88,7 +88,18 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href={`${base}`}>
-          <span class="brand-mark" aria-hidden="true">⚽</span>
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
+              <path d="M12 8.8 L15.04 11.01 L13.88 14.59 L10.12 14.59 L8.96 11.01 Z" fill="currentColor" />
+              <path
+                d="M12 8.8 V3 M15.04 11.01 L20.6 9.2 M13.88 14.59 L17.3 19.3 M10.12 14.59 L6.7 19.3 M8.96 11.01 L3.4 9.2"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+            </svg>
+          </span>
           <span class="brand-text">
             <strong>Métricas Mundial 2026</strong>
             <span>análisis físico y táctico · 100% datos abiertos</span>
