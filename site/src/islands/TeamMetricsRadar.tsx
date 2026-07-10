@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { DerivedTeamMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
 
@@ -101,7 +101,16 @@ export default function TeamMetricsRadar({ rows }: Props) {
         </select>
       </div>
       {option ? (
-        <ReactECharts option={option} style={{ height: narrow ? 360 : 440 }} notMerge={true} />
+        <ShareableChart
+          option={option}
+          style={{ height: narrow ? 360 : 440 }}
+          share={{
+            title: `${aLabel} vs ${bLabel}`,
+            subtitle: "Métricas derivadas (percentiles) · radar multi-fuente",
+            filenameBase: `${aLabel}-vs-${bLabel}`,
+          }}
+          shareLabel="🖼️ Compartir radar"
+        />
       ) : (
         <p style={{ color: "var(--text-muted)" }}>
           Estas dos selecciones/torneos no comparten suficientes métricas cargadas todavía (ej. una es de 2018 y la

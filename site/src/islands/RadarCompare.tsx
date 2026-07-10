@@ -1,8 +1,7 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { RadarRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
-import ShareCardButton from "./ShareCardButton";
 import { flagFor } from "../lib/flags";
 import { generateTeamComparisonInsights, type MetricDef } from "../lib/insights";
 
@@ -88,13 +87,6 @@ export default function RadarCompare({ rows }: Props) {
   // calculados. No hay llamada a ninguna API — el chat con IA queda aparte.
   const insights = useMemo(() => generateTeamComparisonInsights(a, b, INSIGHT_METRICS), [a, b]);
 
-  const shareStats =
-    a && b
-      ? INDICATORS.map((i) => ({
-          label: i.short.replace("\n", " "),
-          value: `${Math.round(a[i.key])} vs ${Math.round(b[i.key])}`,
-        })).slice(0, 3)
-      : [];
   const shareText =
     a && b
       ? `${a.team} vs ${b.team} (percentiles de contexto táctico, Mundial 2026): posesión ${Math.round(a.posesion_promedio_proxy_percentil)} vs ${Math.round(b.posesion_promedio_proxy_percentil)}.`
@@ -130,7 +122,18 @@ export default function RadarCompare({ rows }: Props) {
         </select>
       </div>
       {a && b ? (
-        <ReactECharts option={option} style={{ height: narrow ? 340 : 420 }} notMerge={true} />
+        <ShareableChart
+          option={option}
+          style={{ height: narrow ? 340 : 420 }}
+          share={{
+            title: `${a.team} vs ${b.team}`,
+            subtitle: "Cabeza a cabeza · percentiles de contexto táctico · Mundial 2026",
+            insight: insights[0],
+            shareText,
+            filenameBase: `${a.team}-vs-${b.team}`,
+          }}
+          shareLabel="🖼️ Compartir radar"
+        />
       ) : (
         <p>Elegí dos selecciones/torneos para comparar.</p>
       )}
@@ -162,24 +165,16 @@ export default function RadarCompare({ rows }: Props) {
           <div className="share-label">
             <strong>Compartir este análisis</strong>
             <span>
-              {flagFor(a.team)} {a.team} vs {b.team} {flagFor(b.team)}
+              {flagFor(a.team)} {a.team} vs {b.team} {flagFor(b.team)} — la imagen del radar se comparte con el botón de
+              arriba
             </span>
           </div>
           <div className="share-actions">
             {waLink && (
               <a className="btn btn-share" href={waLink} target="_blank" rel="noreferrer">
-                📲 WhatsApp
+                📲 WhatsApp (texto)
               </a>
             )}
-            <ShareCardButton
-              title={`${a.team} vs ${b.team}`}
-              subtitle={`${flagFor(a.team)} vs ${flagFor(b.team)} · Cabeza a cabeza`}
-              stats={shareStats}
-              tagline="Percentiles de contexto táctico (StatsBomb)"
-              shareText={shareText}
-              filenameBase={`${a.team}-vs-${b.team}`}
-              label="🖼️ Imagen"
-            />
           </div>
         </div>
       )}

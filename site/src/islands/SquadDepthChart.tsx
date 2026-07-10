@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { SquadPlayerRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { flagFor } from "../lib/flags";
@@ -147,7 +147,15 @@ export default function SquadDepthChart({ rows }: Props) {
         </div>
       )}
 
-      <ReactECharts option={option} style={{ height: narrow ? 330 : 400 }} notMerge={true} />
+      <ShareableChart
+        option={option}
+        style={{ height: narrow ? 330 : 400 }}
+        share={{
+          title: `${team} · ${yMetric.label}`,
+          subtitle: "Plantel: edad vs. trayectoria · Mundial 2026",
+          filenameBase: `plantel-${team}`,
+        }}
+      />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         {flagFor(team)} {team} — fuente: 26worldcup (mirror de Wikipedia, CC BY-SA). Cada punto es un jugador: edad en
         el eje horizontal, experiencia en el vertical, color por posición y tamaño proporcional al valor elegido. El

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { GoalsVsPhysicalRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 
@@ -101,7 +101,15 @@ export default function GoalsVsPhysical({ rows }: Props) {
           ))}
         </select>
       </div>
-      <ReactECharts option={option} style={{ height: narrow ? 320 : 380 }} notMerge={true} />
+      <ShareableChart
+        option={option}
+        style={{ height: narrow ? 320 : 380 }}
+        share={{
+          title: `Goles vs. ${metric.label}`,
+          subtitle: "Relación físico–goles por partido · Mundial 2026",
+          filenameBase: `goles-vs-${metricKey}`,
+        }}
+      />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Un punto por selección y partido ({rows.length} en total). Descriptivo, no causal: correr más no implica
         convertir más goles, y este cruce no controla por rival, marcador ni posesión. Argentina resaltada en verde.

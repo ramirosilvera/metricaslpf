@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { TimelineRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 
@@ -81,7 +81,15 @@ export default function TimelineChart({ rows }: Props) {
           ))}
         </select>
       </div>
-      <ReactECharts option={option} style={{ height: narrow ? 320 : 380 }} notMerge={true} />
+      <ShareableChart
+        option={option}
+        style={{ height: narrow ? 320 : 380 }}
+        share={{
+          title: selected,
+          subtitle: "Evolución física por partido · Mundial 2026",
+          filenameBase: `timeline-${selected}`,
+        }}
+      />
     </div>
   );
 }

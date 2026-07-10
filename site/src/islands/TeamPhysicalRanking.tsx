@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { TeamPhysicalRankingRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { generateTeamPhysicalRankingInsights } from "../lib/insights";
@@ -129,7 +129,16 @@ export default function TeamPhysicalRanking({ rows }: Props) {
           Argentina resaltada
         </span>
       </div>
-      <ReactECharts option={option} style={{ height: Math.max(360, sorted.length * (narrow ? 18 : 22)) }} notMerge={true} />
+      <ShareableChart
+        option={option}
+        style={{ height: Math.max(360, sorted.length * (narrow ? 18 : 22)) }}
+        share={{
+          title: metric.label,
+          subtitle: "Ranking físico de equipo · 48 selecciones · Mundial 2026",
+          insight: insights[0],
+          filenameBase: `ranking-${metric.key as string}`,
+        }}
+      />
 
       {insights.length > 0 && (
         <div className="insight-card">

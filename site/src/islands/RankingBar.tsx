@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { TeamSeasonSummary } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 
@@ -97,7 +97,15 @@ export default function RankingBar({ rows }: Props) {
           Argentina resaltada
         </span>
       </div>
-      <ReactECharts option={option} style={{ height: Math.max(320, sorted.length * 28) }} notMerge={true} />
+      <ShareableChart
+        option={option}
+        style={{ height: Math.max(320, sorted.length * 28) }}
+        share={{
+          title: metric.label,
+          subtitle: "Ranking por selección/torneo",
+          filenameBase: `ranking-${metricKey}`,
+        }}
+      />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         n = 1 partido por selección salvo Argentina (4 en 2018, 7 en 2022). No promediar entre selecciones con
         tamaños de muestra tan distintos como si fueran comparables — ver <a href="../metodologia/">metodología</a>.

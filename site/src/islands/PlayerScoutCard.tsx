@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
 import { flagFor } from "../lib/flags";
@@ -230,7 +230,17 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
       )}
 
       {option ? (
-        <ReactECharts option={option} style={{ height: narrow ? 330 : 380 }} notMerge={true} />
+        <ShareableChart
+          option={option}
+          style={{ height: narrow ? 330 : 380 }}
+          share={{
+            title: currentPlayer,
+            subtitle: `${team} · ficha física y táctica (percentiles) · Mundial 2026`,
+            insight: insights[0],
+            filenameBase: `scout-${team}-${currentPlayer}`,
+          }}
+          shareLabel="🖼️ Compartir radar"
+        />
       ) : (
         <p style={{ color: "var(--text-muted)" }}>
           {currentPlayer ? `${currentPlayer} todavía no tiene suficientes métricas cargadas para el radar.` : "Elegí un jugador."}

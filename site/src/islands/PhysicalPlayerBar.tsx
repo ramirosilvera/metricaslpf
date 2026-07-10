@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 
 export interface PhysicalPlayerRankingRow {
@@ -107,7 +107,15 @@ export default function PhysicalPlayerBar({ rows }: Props) {
           ))}
         </select>
       </div>
-      <ReactECharts option={option} style={{ height: Math.max(320, filtered.length * 28) }} notMerge={true} />
+      <ShareableChart
+        option={option}
+        style={{ height: Math.max(320, filtered.length * 28) }}
+        share={{
+          title: `${team} · ${metric.label}`,
+          subtitle: "Ranking físico por jugador · Mundial 2026",
+          filenameBase: `jugadores-${team}-${metricKey}`,
+        }}
+      />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Fuente: FIFA Training Centre (reportes oficiales PMSR), Mundial 2026. Cobertura parcial: solo partidos ya
         procesados por el scraper — ver el banner de estado de datos.

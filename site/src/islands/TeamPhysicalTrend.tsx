@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { TeamPhysicalTrendRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 
@@ -121,7 +121,15 @@ export default function TeamPhysicalTrend({ rows }: Props) {
           el scraper sume más partidos.
         </p>
       ) : (
-        <ReactECharts option={option} style={{ height: narrow ? 320 : 380 }} notMerge={true} />
+        <ShareableChart
+          option={option}
+          style={{ height: narrow ? 320 : 380 }}
+          share={{
+            title: `${team} · ${metric.label}`,
+            subtitle: "Evolución por partido vs. media del torneo · Mundial 2026",
+            filenameBase: `tendencia-${team}-${metricKey}`,
+          }}
+        />
       )}
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Fuente: FIFA Training Centre, Mundial 2026. Con pocos partidos por selección esto es descriptivo, no una

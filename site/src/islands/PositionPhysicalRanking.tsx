@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { PlayerPhysicalPositionRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 
@@ -123,7 +123,15 @@ export default function PositionPhysicalRanking({ rows }: Props) {
           Argentina resaltada
         </span>
       </div>
-      <ReactECharts option={option} style={{ height: Math.max(320, filtered.length * 26) }} notMerge={true} />
+      <ShareableChart
+        option={option}
+        style={{ height: Math.max(320, filtered.length * 26) }}
+        share={{
+          title: metric.label,
+          subtitle: `${POSITIONS.find((p) => p.value === position)?.label ?? position} · percentil por posición · Mundial 2026`,
+          filenameBase: `posicion-${position}-${metricKey}`,
+        }}
+      />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Fuente: FIFA Training Centre (físico, Mundial 2026) cruzado con el plantel (26worldcup/Wikipedia) por dorsal.
         El percentil se calcula <strong>dentro de la posición</strong> — un arquero recorre ~5 km y un defensor ~8 km

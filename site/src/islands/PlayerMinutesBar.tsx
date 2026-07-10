@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { PlayerMinutesRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 
@@ -79,7 +79,15 @@ export default function PlayerMinutesBar({ rows }: Props) {
           ))}
         </select>
       </div>
-      <ReactECharts option={option} style={{ height: Math.max(320, filtered.length * 28) }} notMerge={true} />
+      <ShareableChart
+        option={option}
+        style={{ height: Math.max(320, filtered.length * 28) }}
+        share={{
+          title: `${team} · Minutos jugados`,
+          subtitle: "Minutos por jugador · Mundial 2026",
+          filenameBase: `minutos-${team}`,
+        }}
+      />
     </div>
   );
 }

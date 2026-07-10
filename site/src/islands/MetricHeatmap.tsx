@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import ReactECharts from "echarts-for-react";
+import ShareableChart from "./ShareableChart";
 import type { TeamSeasonSummary } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 
@@ -91,10 +91,14 @@ export default function MetricHeatmap({ rows }: Props) {
 
   return (
     <div>
-      <ReactECharts
+      <ShareableChart
         option={option}
         style={{ height: Math.max(360, labels.length * (narrow ? 22 : 26) + (narrow ? 130 : 100)) }}
-        notMerge={true}
+        share={{
+          title: "Mapa de calor táctico",
+          subtitle: "Percentiles por selección/torneo · StatsBomb",
+          filenameBase: "mapa-calor-tactico",
+        }}
       />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Percentil (0–100) dentro de este conjunto de partidos, no valor absoluto. Celdas claras = percentil bajo,

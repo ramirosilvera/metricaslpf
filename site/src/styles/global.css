@@ -876,6 +876,27 @@ p {
   border-color: var(--brand);
 }
 
+/* Barra de compartir bajo cada gráfico (ShareableChart): discreta, alineada a
+   la derecha, para no competir con el gráfico ni con los controles de arriba. */
+.chart-share-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.btn-share-sm {
+  font-size: 0.8rem;
+  padding: 0.42rem 0.85rem;
+}
+
+.chart-share-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 /* ---------- cards / callouts ---------- */
 
 .card {
