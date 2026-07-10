@@ -32,6 +32,7 @@ function isActive(href: string) {
 
 const homeItem = { href: `${base}`, label: "Inicio" };
 const compararItem = { href: `${base}comparar/`, label: "Comparar" };
+const partidosItem = { href: `${base}partidos/`, label: "Partidos" };
 const analizarItem = { href: `${base}analisis/`, label: "Analizar" };
 
 const rankingsItems = [
@@ -126,6 +127,7 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
             </div>
           </details>
 
+          <a href={partidosItem.href} aria-current={isActive(partidosItem.href) ? "page" : undefined}>{partidosItem.label}</a>
           <a href={analizarItem.href} aria-current={isActive(analizarItem.href) ? "page" : undefined}>{analizarItem.label}</a>
 
           <button type="button" class="nav-ia" data-open-chat aria-haspopup="dialog">IA</button>

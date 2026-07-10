@@ -316,3 +316,36 @@ export interface PlayerPhysicalPositionRow {
   sprints_promedio_pct_pos: number;
   velocidad_punta_kmh_pct_pos: number;
 }
+
+// Resumen por partido del Mundial 2026 (vista "Partidos"). Todo dato oficial;
+// `remates` es proxy de peligro (NO xG, que no existe en fuentes libres 2026).
+export interface MatchTeamStats {
+  distancia_km: number | null;
+  alta_intensidad_m: number | null;
+  sprints: number | null;
+  velocidad_punta_kmh: number | null;
+  remates: number | null;
+  pases: number | null;
+  posesion_pct: number | null;
+}
+export interface MatchGoal {
+  player: string;
+  team: string;
+  minute: string;
+  penalty?: boolean;
+}
+export interface MatchSummary {
+  match_id: number;
+  match_date: string;
+  stage: string;
+  home_team: string;
+  away_team: string;
+  home_score: number;
+  away_score: number;
+  home: MatchTeamStats;
+  away: MatchTeamStats;
+  goleadores: MatchGoal[];
+  goles_contra: MatchGoal[];
+  destacado: { player: string; team: string; note: string } | null;
+  insight: string;
+}

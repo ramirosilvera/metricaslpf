@@ -482,6 +482,100 @@ def build():
     else:
         _write_json("goals_vs_physical.json", {"status": "pending_first_scrape", "rows": []})
 
+    # --- Resumen por partido del Mundial 2026 (vista "Partidos") -------------
+    # Una tarjeta por partido jugado, con TODO lo que tenemos de datos oficiales:
+    # resultado, goles con minuto, físico de cada equipo (distancia, sprints,
+    # alta intensidad, velocidad punta), remates (proxy de peligro -- NO es xG,
+    # que no existe en ninguna fuente libre para 2026), posesión-proxy (share de
+    # pases), jugador destacado y una lectura automática. Se reconstruye en cada
+    # corrida -> se va actualizando con cada partido nuevo.
+    if has_matches and has_physical and has_goal_events:
+        played = matches[(matches["season"] == "2026") & matches["home_score"].notna()].copy()
+        ms_phys = con.execute(
+            f"SELECT match_id, team, total_distance_km, high_intensity_distance_m, sprint_count, top_speed_kmh "
+            f"FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')"
+        ).df()
+        ms_goals = con.execute(
+            f"SELECT match_id, team, player_name, minute, minute_display, own_goal, penalty "
+            f"FROM read_parquet('{WAREHOUSE / 'goal_events.parquet'}')"
+        ).df()
+        if (WAREHOUSE / "tactical_player_match_stats.parquet").exists():
+            ms_tac = con.execute(
+                f"SELECT match_id, team, sum(attempts_at_goal) AS remates, sum(passes_completed) AS pases "
+                f"FROM read_parquet('{WAREHOUSE / 'tactical_player_match_stats.parquet'}') GROUP BY match_id, team"
+            ).df()
+        else:
+            ms_tac = pd.DataFrame(columns=["match_id", "team", "remates", "pases"])
+
+        def _num(df, col):
+            return float(df[col].iloc[0]) if len(df) and pd.notna(df[col].iloc[0]) else None
+
+        def _team_block(mid, t):
+            p = ms_phys[(ms_phys["match_id"] == mid) & (ms_phys["team"] == t)]
+            tr = ms_tac[(ms_tac["match_id"] == mid) & (ms_tac["team"] == t)]
+            return {
+                "distancia_km": _num(p, "total_distance_km"),
+                "alta_intensidad_m": _num(p, "high_intensity_distance_m"),
+                "sprints": _num(p, "sprint_count"),
+                "velocidad_punta_kmh": _num(p, "top_speed_kmh"),
+                "remates": int(tr["remates"].iloc[0]) if len(tr) and pd.notna(tr["remates"].iloc[0]) else None,
+                "pases": int(tr["pases"].iloc[0]) if len(tr) and pd.notna(tr["pases"].iloc[0]) else None,
+            }
+
+        summaries = []
+        for _, m in played.sort_values(["match_date", "match_id"], ascending=[False, False]).iterrows():
+            mid, home, away = m["match_id"], m["home_team"], m["away_team"]
+            hs, as_ = int(m["home_score"]), int(m["away_score"])
+            h, a = _team_block(mid, home), _team_block(mid, away)
+            # posesión-proxy = share de pases completados (no es posesión oficial)
+            if h["pases"] and a["pases"] and (h["pases"] + a["pases"]) > 0:
+                h["posesion_pct"] = round(h["pases"] / (h["pases"] + a["pases"]) * 100, 1)
+                a["posesion_pct"] = round(100 - h["posesion_pct"], 1)
+            else:
+                h["posesion_pct"] = a["posesion_pct"] = None
+
+            gm = ms_goals[(ms_goals["match_id"] == mid) & (~ms_goals["own_goal"])].sort_values("minute")
+            goleadores = [
+                {"player": r.player_name, "team": r.team,
+                 "minute": r.minute_display or (str(int(r.minute)) if pd.notna(r.minute) else ""),
+                 "penalty": bool(r.penalty)}
+                for r in gm.itertuples()
+            ]
+            og = ms_goals[(ms_goals["match_id"] == mid) & (ms_goals["own_goal"])]
+            goles_contra = [{"player": r.player_name, "team": r.team, "minute": r.minute_display or ""} for r in og.itertuples()]
+
+            destacado = None
+            if len(gm):
+                top = gm.groupby(["player_name", "team"]).size().sort_values(ascending=False)
+                (pn, tm), n = top.index[0], int(top.iloc[0])
+                destacado = {"player": pn, "team": tm, "note": f"{n} gol{'es' if n > 1 else ''}"}
+
+            # lectura automática: resultado + quién corrió más + quién manejó más la pelota
+            if hs > as_:
+                res = f"{home} venció {hs}-{as_} a {away}"
+            elif as_ > hs:
+                res = f"{away} venció {as_}-{hs} a {home}"
+            else:
+                res = f"{home} y {away} empataron {hs}-{as_}"
+            bits = [res + "."]
+            if h["distancia_km"] and a["distancia_km"] and abs(h["distancia_km"] - a["distancia_km"]) >= 2:
+                mteam, mv, ov = (home, h["distancia_km"], a["distancia_km"]) if h["distancia_km"] > a["distancia_km"] else (away, a["distancia_km"], h["distancia_km"])
+                bits.append(f"{mteam} recorrió más ({mv} vs {ov} km).")
+            if h["posesion_pct"] and a["posesion_pct"] and abs(h["posesion_pct"] - a["posesion_pct"]) >= 6:
+                pteam, pv = (home, h["posesion_pct"]) if h["posesion_pct"] > a["posesion_pct"] else (away, a["posesion_pct"])
+                bits.append(f"{pteam} manejó más la pelota ({pv}% de los pases).")
+            insight = " ".join(bits)
+
+            summaries.append({
+                "match_id": int(mid), "match_date": m["match_date"], "stage": m["stage"],
+                "home_team": home, "away_team": away, "home_score": hs, "away_score": as_,
+                "home": h, "away": a, "goleadores": goleadores, "goles_contra": goles_contra,
+                "destacado": destacado, "insight": insight,
+            })
+        _write_json("match_summaries.json", summaries)
+    else:
+        _write_json("match_summaries.json", {"status": "pending_first_scrape", "rows": []})
+
     if has_derived_team_metrics:
         derived_team = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_team_metrics.parquet'}')").df()
         _write_json("derived_team_metrics.json", _records(derived_team))

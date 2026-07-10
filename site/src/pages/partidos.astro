@@ -1,0 +1,286 @@
+---
+import Base from "../layouts/Base.astro";
+import DataStatusBanner from "../layouts/DataStatusBanner.astro";
+import { loadJson, type MatchSummary } from "../lib/data";
+import { flagFor } from "../lib/flags";
+
+const base = import.meta.env.BASE_URL;
+
+function loadArray<T>(filename: string): T[] {
+  const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
+  return Array.isArray(raw) ? raw : [];
+}
+const matches = loadArray<MatchSummary>("match_summaries.json");
+
+// Filas de comparación cara a cara: valor de cada equipo + su cuota del total
+// (barra), para leer en un vistazo quién dominó cada faceta. Se omite la fila si
+// falta el dato en alguno de los dos equipos.
+type Row = { label: string; hv: string; av: string; hpct: number; unit: string };
+function rows(m: MatchSummary): Row[] {
+  const defs: { label: string; key: keyof MatchSummary["home"]; unit: string; digits: number }[] = [
+    { label: "Posesión", key: "posesion_pct", unit: "%", digits: 0 },
+    { label: "Remates", key: "remates", unit: "", digits: 0 },
+    { label: "Distancia", key: "distancia_km", unit: " km", digits: 1 },
+    { label: "Alta intensidad", key: "alta_intensidad_m", unit: " m", digits: 0 },
+    { label: "Sprints", key: "sprints", unit: "", digits: 0 },
+    { label: "Velocidad punta", key: "velocidad_punta_kmh", unit: " km/h", digits: 1 },
+  ];
+  const out: Row[] = [];
+  for (const d of defs) {
+    const h = m.home[d.key] as number | null;
+    const a = m.away[d.key] as number | null;
+    if (h == null || a == null) continue;
+    const total = h + a;
+    const fmt = (v: number) => `${Number(v.toFixed(d.digits))}${d.unit}`;
+    out.push({ label: d.label, hv: fmt(h), av: fmt(a), hpct: total > 0 ? (h / total) * 100 : 50, unit: d.unit });
+  }
+  return out;
+}
+
+function goalsByTeam(m: MatchSummary, team: string) {
+  return m.goleadores
+    .filter((g) => g.team === team)
+    .map((g) => `${g.player} ${g.minute}'${g.penalty ? " (p)" : ""}`)
+    .join(", ");
+}
+const stageLabel = (s: string) => s || "Fase de grupos";
+---
+
+<Base title="Partidos" description="Resumen de cada partido del Mundial 2026: resultado, goles, físico y una lectura automática, con datos oficiales.">
+  <DataStatusBanner />
+  <p class="eyebrow">Partido por partido · Mundial 2026</p>
+  <h1>Partidos</h1>
+  <p class="lede">
+    Cada partido jugado, resumido para entenderlo en <strong>30 segundos</strong>: resultado, goles, quién corrió y
+    manejó más la pelota, y una lectura automática — todo con datos oficiales. <em>Nota: no mostramos xG (ninguna fuente
+    libre lo publica para 2026); usamos remates como proxy de peligro.</em>
+  </p>
+
+  {matches.length === 0 ? (
+    <p class="card" style="color: var(--text-muted)">Todavía no hay partidos con datos cargados.</p>
+  ) : (
+    <div class="match-grid">
+      {matches.map((m) => {
+        const homeWin = m.home_score > m.away_score;
+        const awayWin = m.away_score > m.home_score;
+        const hg = goalsByTeam(m, m.home_team);
+        const ag = goalsByTeam(m, m.away_team);
+        return (
+          <article class="card match-card">
+            <div class="mc-head">
+              <span class="mc-stage">{stageLabel(m.stage)}</span>
+              <span class="mc-date">{m.match_date}</span>
+            </div>
+
+            <div class="mc-score">
+              <div class={`mc-team ${homeWin ? "win" : ""}`}>
+                <span class="mc-flag">{flagFor(m.home_team)}</span>
+                <span class="mc-name">{m.home_team}</span>
+              </div>
+              <div class="mc-result">
+                <strong>{m.home_score}</strong><span>–</span><strong>{m.away_score}</strong>
+              </div>
+              <div class={`mc-team mc-team-r ${awayWin ? "win" : ""}`}>
+                <span class="mc-name">{m.away_team}</span>
+                <span class="mc-flag">{flagFor(m.away_team)}</span>
+              </div>
+            </div>
+
+            {(hg || ag) && (
+              <div class="mc-goals">
+                <span>{hg || "—"}</span>
+                <span class="mc-ball" aria-hidden="true">⚽</span>
+                <span>{ag || "—"}</span>
+              </div>
+            )}
+
+            <div class="mc-stats">
+              {rows(m).map((r) => (
+                <div class="mc-row">
+                  <span class="mc-hv">{r.hv}</span>
+                  <div class="mc-bar" title={r.label}>
+                    <div class="mc-fill" style={`width:${r.hpct}%`}></div>
+                  </div>
+                  <span class="mc-label">{r.label}</span>
+                  <span class="mc-av">{r.av}</span>
+                </div>
+              ))}
+            </div>
+
+            {m.destacado && (
+              <div class="mc-mvp">
+                <span aria-hidden="true">⭐</span> {m.destacado.player} <span class="mc-mvp-team">({m.destacado.team})</span>
+                <span class="mc-mvp-note">· {m.destacado.note}</span>
+              </div>
+            )}
+
+            {m.insight && <p class="mc-insight">{m.insight}</p>}
+
+            <a class="mc-link" href={`${base}analisis/`}>Ver análisis completo →</a>
+          </article>
+        );
+      })}
+    </div>
+  )}
+
+  <p style="font-size:0.8rem; color: var(--text-muted); margin-top: 1.5rem;">
+    Físico: FIFA Training Centre. Goles: openfootball (CC0). Posesión = cuota de pases completados (proxy, no dato
+    oficial de posesión). Remates = tiros al arco intentados (proxy de peligro, <strong>no</strong> xG). Marcador de
+    FIFA; el detalle de goleadores puede demorar en los partidos más recientes.
+  </p>
+</Base>
+
+<style>
+  .match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+  .match-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .mc-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+  .mc-score {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .mc-team {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 0;
+    color: var(--text-secondary);
+  }
+  .mc-team.win {
+    color: var(--text-primary);
+  }
+  .mc-team.win .mc-name {
+    font-weight: 800;
+  }
+  .mc-team-r {
+    justify-content: flex-end;
+  }
+  .mc-flag {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .mc-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mc-result {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 1.4rem;
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
+  }
+  .mc-result span {
+    color: var(--text-muted);
+  }
+  .mc-goals {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0;
+  }
+  .mc-goals span:last-child {
+    text-align: right;
+  }
+  .mc-ball {
+    opacity: 0.6;
+  }
+  .mc-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .mc-row {
+    display: grid;
+    grid-template-columns: 3.2rem 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .mc-hv {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-align: right;
+    color: var(--text-primary);
+  }
+  .mc-av {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--text-primary);
+    min-width: 3.2rem;
+  }
+  .mc-label {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  .mc-bar {
+    grid-column: 2;
+    grid-row: 1;
+    height: 18px;
+    border-radius: 5px;
+    background: var(--series-1);
+    opacity: 0.28;
+    position: relative;
+    overflow: hidden;
+  }
+  .mc-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--series-6);
+    opacity: 0.62;
+  }
+  .mc-mvp {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  .mc-mvp-team {
+    color: var(--text-muted);
+  }
+  .mc-mvp-note {
+    color: var(--text-muted);
+  }
+  .mc-insight {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.45;
+  }
+  .mc-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: auto;
+  }
+</style>
