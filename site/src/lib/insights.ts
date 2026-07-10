@@ -41,6 +41,15 @@ const TEAM_HIGHER_MEANS: Record<string, string> = {
     "produce más sprints por partido, típico de una propuesta de más quiebres y contraataque",
   velocidad_punta_kmh_percentil:
     "alcanza picos de velocidad más altos, lo que sugiere más recursos de profundidad y desmarque",
+  // Táctico de equipo 2026 (FIFA Training Centre) — vocabulario propio de FIFA.
+  progresiones_promedio_percentil:
+    "hace avanzar la pelota con más progresiones, señal de un juego que llega más al frente por conducción y pase",
+  presiones_promedio_percentil:
+    "presiona más al rival, consistente con un plan de recuperar arriba y no ceder el balón",
+  recuperaciones_promedio_percentil:
+    "recupera más balones, lo que sugiere más trabajo defensivo y de reacción tras pérdida",
+  precision_pases_pct_percentil:
+    "hace circular la pelota con más precisión, señal de una construcción más cuidada y menos pérdidas",
 };
 
 export interface MetricDef {

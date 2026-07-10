@@ -291,9 +291,70 @@ def build():
             .sort_values("pases_completados_totales", ascending=False)
         )
         _write_json("tactical_player_ranking.json", _records(tactical_player_ranking))
+
+        # --- Ranking TÁCTICO COLECTIVO del Mundial 2026 (las 48 selecciones) ---
+        # Agrega la táctica por jugador de FIFA Training Centre a nivel equipo:
+        # primero suma los 11 por partido, luego promedia entre los partidos
+        # cargados de cada selección, y finalmente calcula el percentil dentro
+        # de las 48. Es el equivalente TÁCTICO del ranking físico 2026, con el
+        # vocabulario propio de FIFA (progresiones, presión, recuperaciones...),
+        # distinto al de StatsBomb 2018/2022 -> no se mezclan en un mismo eje.
+        per_match = (
+            tactical_players.groupby(["team", "match_id"])
+            .agg(
+                remates=("attempts_at_goal", "sum"),
+                progresiones=("ball_progressions", "sum"),
+                quiebres=("line_breaks_completed", "sum"),
+                presiones=("pressing_direct", "sum"),
+                recuperaciones=("possession_regains", "sum"),
+                tackles=("tackles_won", "sum"),
+                intercepciones=("interceptions", "sum"),
+            )
+            .reset_index()
+        )
+        team_tac = (
+            per_match.groupby("team")
+            .agg(
+                partidos=("match_id", "nunique"),
+                remates_promedio=("remates", "mean"),
+                progresiones_promedio=("progresiones", "mean"),
+                quiebres_linea_promedio=("quiebres", "mean"),
+                presiones_promedio=("presiones", "mean"),
+                recuperaciones_promedio=("recuperaciones", "mean"),
+                tackles_promedio=("tackles", "mean"),
+                intercepciones_promedio=("intercepciones", "mean"),
+            )
+            .reset_index()
+        )
+        # Precisión de pase del equipo = pases completados / intentados SUMADOS
+        # sobre todos sus partidos (más robusto que promediar porcentajes).
+        prec = (
+            tactical_players.groupby("team")
+            .agg(_compl=("passes_completed", "sum"), _att=("passes_attempted", "sum"))
+            .reset_index()
+        )
+        prec["precision_pases_pct"] = (prec["_compl"] / prec["_att"] * 100).where(prec["_att"] > 0)
+        team_tac = team_tac.merge(prec[["team", "precision_pases_pct"]], on="team", how="left")
+
+        tac_metric_cols = [
+            "precision_pases_pct",
+            "remates_promedio",
+            "progresiones_promedio",
+            "quiebres_linea_promedio",
+            "presiones_promedio",
+            "recuperaciones_promedio",
+            "tackles_promedio",
+            "intercepciones_promedio",
+        ]
+        for c in tac_metric_cols:
+            team_tac[c] = team_tac[c].round(1)
+            team_tac[f"{c}_percentil"] = (team_tac[c].rank(pct=True) * 100).round(0)
+        team_tac = team_tac.sort_values("progresiones_promedio", ascending=False)
+        _write_json("team_tactical_ranking.json", _records(team_tac))
     else:
         _write_json("tactical_player_match_stats.json", {"status": "pending_first_scrape", "rows": []})
         _write_json("tactical_player_ranking.json", {"status": "pending_first_scrape", "rows": []})
+        _write_json("team_tactical_ranking.json", {"status": "pending_first_scrape", "rows": []})
 
     if has_squads:
         squads = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'squads.parquet'}')").df()

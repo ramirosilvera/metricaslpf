@@ -231,6 +231,30 @@ export interface TeamPhysicalRankingRow {
   velocidad_punta_kmh_percentil: number;
 }
 
+// Ranking TÁCTICO colectivo del Mundial 2026 (48 selecciones, FIFA Training
+// Centre). Vocabulario propio de FIFA (progresiones, presión, recuperaciones…),
+// distinto al táctico histórico de StatsBomb (2018/2022).
+export interface TeamTacticalRankingRow {
+  team: string;
+  partidos: number;
+  precision_pases_pct: number;
+  remates_promedio: number;
+  progresiones_promedio: number;
+  quiebres_linea_promedio: number;
+  presiones_promedio: number;
+  recuperaciones_promedio: number;
+  tackles_promedio: number;
+  intercepciones_promedio: number;
+  precision_pases_pct_percentil: number;
+  remates_promedio_percentil: number;
+  progresiones_promedio_percentil: number;
+  quiebres_linea_promedio_percentil: number;
+  presiones_promedio_percentil: number;
+  recuperaciones_promedio_percentil: number;
+  tackles_promedio_percentil: number;
+  intercepciones_promedio_percentil: number;
+}
+
 // Un punto por partido de cada selección (curva de forma dentro del torneo).
 export interface TeamPhysicalTrendRow {
   team: string;

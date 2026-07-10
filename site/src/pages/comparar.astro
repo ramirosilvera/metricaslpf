@@ -3,10 +3,18 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import RadarCompare from "../islands/RadarCompare";
 import TimelineChart from "../islands/TimelineChart";
-import { loadJson, type RadarRow, type TimelineRow, type TeamPhysicalRankingRow } from "../lib/data";
+import { loadJson, type RadarRow, type TimelineRow, type TeamPhysicalRankingRow, type TeamTacticalRankingRow } from "../lib/data";
+
+// Normaliza el shape {status, rows} de los agregados que aún no se scrapearon
+// a un array vacío, para que el radar arranque en un modo con datos.
+function loadArray<T>(filename: string): T[] {
+  const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
+  return Array.isArray(raw) ? raw : [];
+}
 
 const radar = loadJson<RadarRow[]>("radar_team_season.json");
-const teamPhysical = loadJson<TeamPhysicalRankingRow[]>("team_physical_ranking.json");
+const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
+const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");
 const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
 ---
 
@@ -22,7 +30,7 @@ const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
 
   <section class="section">
     <div class="card">
-      <RadarCompare client:only="react" rows={radar} physicalRows={teamPhysical} />
+      <RadarCompare client:only="react" rows={radar} physicalRows={teamPhysical} tacticalRows={teamTactical} />
     </div>
   </section>
 

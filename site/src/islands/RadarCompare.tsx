@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
-import type { RadarRow, TeamPhysicalRankingRow } from "../lib/data";
+import type { RadarRow, TeamPhysicalRankingRow, TeamTacticalRankingRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { flagFor } from "../lib/flags";
 import { generateTeamComparisonInsights, type MetricDef } from "../lib/insights";
@@ -13,7 +13,11 @@ import { generateTeamComparisonInsights, type MetricDef } from "../lib/insights"
 //    Mundiales 2018 y 2022 (StatsBomb Open Data — el free tier no cubre 2026
 //    a nivel de equipo). Ejes distintos a propósito: no se mezclan métricas
 //    de fuentes que miden cosas diferentes.
-type Mode = "fisico2026" | "tactico";
+//  - "tactico2026": táctico de equipo de las 48 selecciones del Mundial 2026,
+//    derivado de la táctica por jugador de FIFA (progresiones, presión,
+//    recuperaciones, precisión de pase, remates). Vocabulario propio de FIFA,
+//    distinto al de StatsBomb histórico -> también es su propio modo.
+type Mode = "fisico2026" | "tactico2026" | "tactico";
 
 interface Indicator {
   key: string;
@@ -35,6 +39,22 @@ const PHYS_INSIGHT_METRICS: MetricDef[] = [
   { key: "velocidad_punta_kmh_percentil", label: "velocidad punta" },
 ];
 
+const TAC2026_INDICATORS: Indicator[] = [
+  { key: "precision_pases_pct_percentil", name: "Precisión de pase (percentil)", short: "Precisión\nde pase" },
+  { key: "progresiones_promedio_percentil", name: "Progresiones (percentil)", short: "Progre-\nsiones" },
+  { key: "remates_promedio_percentil", name: "Remates (percentil)", short: "Remates" },
+  { key: "presiones_promedio_percentil", name: "Presión (percentil)", short: "Presión" },
+  { key: "recuperaciones_promedio_percentil", name: "Recuperaciones (percentil)", short: "Recupe-\nraciones" },
+];
+
+const TAC2026_INSIGHT_METRICS: MetricDef[] = [
+  { key: "precision_pases_pct_percentil", label: "precisión de pase" },
+  { key: "progresiones_promedio_percentil", label: "progresiones de balón" },
+  { key: "remates_promedio_percentil", label: "remates" },
+  { key: "presiones_promedio_percentil", label: "presión" },
+  { key: "recuperaciones_promedio_percentil", label: "recuperaciones" },
+];
+
 const TAC_INDICATORS: Indicator[] = [
   { key: "posesion_promedio_proxy_percentil", name: "Posesión (percentil)", short: "Posesión" },
   { key: "precision_pases_promedio_percentil", name: "Precisión de pase (percentil)", short: "Precisión\nde pase" },
@@ -54,9 +74,11 @@ interface Props {
   rows: RadarRow[];
   /** Físico de las 48 selecciones del Mundial 2026 (FIFA Training Centre). */
   physicalRows: TeamPhysicalRankingRow[];
+  /** Táctico de las 48 selecciones del Mundial 2026 (FIFA Training Centre). */
+  tacticalRows: TeamTacticalRankingRow[];
 }
 
-export default function RadarCompare({ rows, physicalRows }: Props) {
+export default function RadarCompare({ rows, physicalRows, tacticalRows }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -85,6 +107,25 @@ export default function RadarCompare({ rows, physicalRows }: Props) {
         subtitle: "Cabeza a cabeza · percentiles físicos · Mundial 2026",
       };
     }
+    if (mode === "tactico2026") {
+      const sorted = [...tacticalRows].sort((x, y) => x.team.localeCompare(y.team));
+      const asRadar = (r: TeamTacticalRankingRow) => ({ ...r, season: "2026" }) as unknown as RadarRow;
+      return {
+        indicators: TAC2026_INDICATORS,
+        insightMetrics: TAC2026_INSIGHT_METRICS,
+        dimensionLabel: "juego con la pelota",
+        options: sorted.map((r) => r.team),
+        find: (label: string) => {
+          const r = sorted.find((x) => x.team === label);
+          return r ? asRadar(r) : undefined;
+        },
+        defaultA: "Argentina",
+        defaultB: sorted.find((r) => r.team === "Brazil")?.team ?? sorted.find((r) => r.team !== "Argentina")?.team,
+        note:
+          "Percentil entre las 48 selecciones del Mundial 2026 (0–100). Táctico de equipo derivado de la estadística por jugador de FIFA Training Centre (progresiones, presión, recuperaciones, precisión de pase, remates). Vocabulario propio de FIFA — no comparable eje a eje con el táctico histórico de StatsBomb.",
+        subtitle: "Cabeza a cabeza · percentiles tácticos · Mundial 2026",
+      };
+    }
     return {
       indicators: TAC_INDICATORS,
       insightMetrics: TAC_INSIGHT_METRICS,
@@ -97,7 +138,7 @@ export default function RadarCompare({ rows, physicalRows }: Props) {
         "Percentil dentro del propio dataset (0–100), no valor absoluto — variables de contexto táctico de StatsBomb (Mundiales 2018 y 2022; el free tier no cubre 2026 a nivel de equipo), no métricas físicas.",
       subtitle: "Cabeza a cabeza · percentiles de contexto táctico · 2018/2022",
     };
-  }, [mode, rows, physicalRows]);
+  }, [mode, rows, physicalRows, tacticalRows]);
 
   const [aLabel, setALabel] = useState<string>("");
   const [bLabel, setBLabel] = useState<string>("");
@@ -177,6 +218,16 @@ export default function RadarCompare({ rows, physicalRows }: Props) {
           disabled={physicalRows.length === 0}
         >
           Físico · Mundial 2026 <span className="mode-count">48</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mode === "tactico2026"}
+          className={mode === "tactico2026" ? "is-active" : undefined}
+          onClick={() => setMode("tactico2026")}
+          disabled={tacticalRows.length === 0}
+        >
+          Táctico · Mundial 2026 <span className="mode-count">48</span>
         </button>
         <button
           type="button"
