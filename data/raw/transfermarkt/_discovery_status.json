@@ -3,104 +3,27 @@
     {
       "url": "https://www.transfermarkt.com/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26",
       "status": "error",
-      "detail": "404 Client Error: Not Found for url: https://www.transfermarkt.com/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26"
+      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26"
     },
     {
       "url": "https://www.transfermarkt.com/weltmeisterschaft-2026/teilnehmer/pokalwettbewerb/WM26",
       "status": "error",
-      "detail": "404 Client Error: Not Found for url: https://www.transfermarkt.com/weltmeisterschaft-2026/teilnehmer/pokalwettbewerb/WM26"
+      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/weltmeisterschaft-2026/teilnehmer/pokalwettbewerb/WM26"
     },
     {
       "url": "https://www.transfermarkt.com/fifa-world-cup-2026-usa-mexico-canada/teilnehmer/pokalwettbewerb/WM26",
       "status": "error",
-      "detail": "404 Client Error: Not Found for url: https://www.transfermarkt.com/fifa-world-cup-2026-usa-mexico-canada/teilnehmer/pokalwettbewerb/WM26"
+      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/fifa-world-cup-2026-usa-mexico-canada/teilnehmer/pokalwettbewerb/WM26"
     },
     {
       "url": "https://www.transfermarkt.com/wm-2026/teilnehmer/pokalwettbewerb/WM26",
       "status": "error",
-      "detail": "404 Client Error: Not Found for url: https://www.transfermarkt.com/wm-2026/teilnehmer/pokalwettbewerb/WM26"
+      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/wm-2026/teilnehmer/pokalwettbewerb/WM26"
     },
     {
-      "url": "https://www.transfermarkt.com/weltmeisterschaft/teilnehmer/pokalwettbewerb/FIWC",
-      "status": "ok",
-      "resuelto_via": "busqueda"
+      "url": "https://www.transfermarkt.com/schnellsuche/ergebnis/schnellsuche?query=FIFA+World+Cup+2026",
+      "status": "error",
+      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/schnellsuche/ergebnis/schnellsuche?query=FIFA+World+Cup+2026"
     }
-  ],
-  "hub_url": "https://www.transfermarkt.com/weltmeisterschaft/teilnehmer/pokalwettbewerb/FIWC",
-  "teams_found": 73,
-  "teams": {
-    "France": "https://www.transfermarkt.com/frankreich/kader/verein/3377",
-    "England": "https://www.transfermarkt.com/england/kader/verein/3299",
-    "Spain": "https://www.transfermarkt.com/spanien/kader/verein/3375",
-    "Argentina": "https://www.transfermarkt.com/argentinien/kader/verein/3437",
-    "Norway": "https://www.transfermarkt.com/norwegen/kader/verein/3440",
-    "Belgium": "https://www.transfermarkt.com/belgien/kader/verein/3382",
-    "Morocco": "https://www.transfermarkt.com/marokko/kader/verein/3575",
-    "Switzerland": "https://www.transfermarkt.com/schweiz/kader/verein/3384",
-    "Portugal": "https://www.transfermarkt.com/portugal/kader/verein/3300",
-    "Germany": "https://www.transfermarkt.com/deutschland/kader/verein/3262",
-    "Brazil": "https://www.transfermarkt.com/brasilien/kader/verein/3439",
-    "Netherlands": "https://www.transfermarkt.com/niederlande/kader/verein/3379",
-    "Ivory Coast": "https://www.transfermarkt.com/elfenbeinkuste/kader/verein/3591",
-    "Senegal": "https://www.transfermarkt.com/senegal/kader/verein/3499",
-    "Turkiye": "https://www.transfermarkt.com/turkei/kader/verein/3381",
-    "Sweden": "https://www.transfermarkt.com/schweden/kader/verein/3557",
-    "Croatia": "https://www.transfermarkt.com/kroatien/kader/verein/3556",
-    "United States": "https://www.transfermarkt.com/vereinigte-staaten/kader/verein/3505",
-    "Ecuador": "https://www.transfermarkt.com/ecuador/kader/verein/5750",
-    "Uruguay": "https://www.transfermarkt.com/uruguay/kader/verein/3449",
-    "Colombia": "https://www.transfermarkt.com/kolumbien/kader/verein/3816",
-    "Japan": "https://www.transfermarkt.com/japan/kader/verein/3435",
-    "Algeria": "https://www.transfermarkt.com/algerien/kader/verein/3614",
-    "Austria": "https://www.transfermarkt.com/osterreich/kader/verein/3383",
-    "Ghana": "https://www.transfermarkt.com/ghana/kader/verein/3441",
-    "Canada": "https://www.transfermarkt.com/kanada/kader/verein/3510",
-    "Mexico": "https://www.transfermarkt.com/mexiko/kader/verein/6303",
-    "Czechia": "https://www.transfermarkt.com/tschechien/kader/verein/3445",
-    "Scotland": "https://www.transfermarkt.com/schottland/kader/verein/3380",
-    "Paraguay": "https://www.transfermarkt.com/paraguay/kader/verein/3581",
-    "Bosnia-Herzegovina": "https://www.transfermarkt.com/bosnien-herzegowina/kader/verein/3446",
-    "Democratic Republic of the Congo": "https://www.transfermarkt.com/demokratische-republik-kongo/kader/verein/3854",
-    "South Korea": "https://www.transfermarkt.com/sudkorea/kader/verein/3589",
-    "Egypt": "https://www.transfermarkt.com/agypten/kader/verein/3672",
-    "Uzbekistan": "https://www.transfermarkt.com/usbekistan/kader/verein/3563",
-    "Australia": "https://www.transfermarkt.com/australien/kader/verein/3433",
-    "Tunisia": "https://www.transfermarkt.com/tunesien/kader/verein/3670",
-    "Haiti": "https://www.transfermarkt.com/haiti/kader/verein/14161",
-    "Cape Verde": "https://www.transfermarkt.com/kap-verde/kader/verein/4311",
-    "South Africa": "https://www.transfermarkt.com/sudafrika/kader/verein/3806",
-    "Saudi Arabia": "https://www.transfermarkt.com/saudi-arabien/kader/verein/3807",
-    "Panama": "https://www.transfermarkt.com/panama/kader/verein/3577",
-    "New Zealand": "https://www.transfermarkt.com/neuseeland/kader/verein/9171",
-    "Iran": "https://www.transfermarkt.com/iran/kader/verein/3582",
-    "Curaçao": "https://www.transfermarkt.com/curacao/kader/verein/32364",
-    "Iraq": "https://www.transfermarkt.com/irak/kader/verein/3560",
-    "Jordan": "https://www.transfermarkt.com/jordanien/kader/verein/15737",
-    "Qatar": "https://www.transfermarkt.com/katar/kader/verein/14162",
-    "Denmark": "https://www.transfermarkt.com/danemark/kader/verein/3436",
-    "Italy": "https://www.transfermarkt.com/italien/kader/verein/3376",
-    "Greece": "https://www.transfermarkt.com/griechenland/kader/verein/3378",
-    "Georgia": "https://www.transfermarkt.com/georgien/kader/verein/3669",
-    "Ukraine": "https://www.transfermarkt.com/ukraine/kader/verein/3699",
-    "Russia": "https://www.transfermarkt.com/russland/kader/verein/3448",
-    "Poland": "https://www.transfermarkt.com/polen/kader/verein/3442",
-    "Serbia": "https://www.transfermarkt.com/serbien/kader/verein/3438",
-    "Hungary": "https://www.transfermarkt.com/ungarn/kader/verein/3468",
-    "Cameroon": "https://www.transfermarkt.com/kamerun/kader/verein/3434",
-    "Wales": "https://www.transfermarkt.com/wales/kader/verein/3864",
-    "Nigeria": "https://www.transfermarkt.com/nigeria/kader/verein/3444",
-    "Kosovo": "https://www.transfermarkt.com/kosovo/kader/verein/53982",
-    "Republic of Ireland": "https://www.transfermarkt.com/irland/kader/verein/3509",
-    "Mali": "https://www.transfermarkt.com/mali/kader/verein/3674",
-    "Burkina Faso": "https://www.transfermarkt.com/burkina-faso/kader/verein/5872",
-    "Slovenia": "https://www.transfermarkt.com/slowenien/kader/verein/3588",
-    "Albania": "https://www.transfermarkt.com/albanien/kader/verein/3561",
-    "Iceland": "https://www.transfermarkt.com/island/kader/verein/3574",
-    "Northern Ireland": "https://www.transfermarkt.com/nordirland/kader/verein/5674",
-    "The Gambia": "https://www.transfermarkt.com/gambia/kader/verein/6186",
-    "Venezuela": "https://www.transfermarkt.com/venezuela/kader/verein/3504",
-    "Montenegro": "https://www.transfermarkt.com/montenegro/kader/verein/11953",
-    "Israel": "https://www.transfermarkt.com/israel/kader/verein/5547",
-    "Chile": "https://www.transfermarkt.com/chile/kader/verein/3700"
-  }
+  ]
 }

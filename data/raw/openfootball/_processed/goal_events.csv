@@ -1,281 +1,281 @@
 match_id,team,player_name,minute,minute_stoppage,minute_display,own_goal,penalty,source,source_url,retrieved_at
-20260001,Mexico,Julián Quiñones,9,,9,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260001,Mexico,Raúl Jiménez,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260002,Korea Republic,Hwang In-Beom,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260002,Korea Republic,Oh Hyeon-Gyu,80,,80,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260002,Czechia,Ladislav Krejcí,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260025,Czechia,Michal Sadílek,6,,6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260025,South Africa,Teboho Mokoena,83,,83,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260028,Mexico,Luis Romo,50,,50,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260053,Mexico,Mateo Chávez,55,,55,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260053,Mexico,Julián Quiñones,61,,61,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260053,Mexico,Álvaro Fidalgo,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260054,South Africa,Thapelo Maseko,63,,63,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260003,Canada,Cyle Larin,78,,78,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260003,Bosnia and Herzegovina,Jovo Lukić,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260008,Qatar,Miro Muheim,90,4,90+4,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260008,Switzerland,Breel Embolo,17,,17,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260026,Switzerland,Johan Manzambi,74,,74,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260026,Switzerland,Johan Manzambi,90,,90,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260026,Switzerland,Rubén Vargas,84,,84,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260026,Switzerland,Granit Xhaka,90,7,90+7,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260026,Bosnia and Herzegovina,Ermin Mahmic,90,3,90+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260027,Canada,Cyle Larin,16,,16,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260027,Canada,Jonathan David,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260027,Canada,Jonathan David,45,3,45+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260027,Canada,Nathan Saliba,64,,64,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260027,Canada,Mohamed Manai,75,,75,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260027,Canada,Jonathan David,90,2,90+2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260051,Switzerland,Rubén Vargas,46,,46,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260051,Switzerland,Johan Manzambi,57,,57,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260051,Canada,Promise David,76,,76,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260052,Bosnia and Herzegovina,Kerim Alajbegovic,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260052,Bosnia and Herzegovina,Mahmoud Abunada,34,,34,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260052,Bosnia and Herzegovina,Ermin Mahmic,80,,80,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260052,Qatar,Hassan Al-Haydos,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260007,Brazil,Vinícius Júnior,32,,32,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260007,Morocco,Ismael Saibari,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260005,Scotland,John McGinn,28,,28,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260030,Morocco,Ismael Saibari,2,,2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260029,Brazil,Matheus Cunha,23,,23,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260029,Brazil,Matheus Cunha,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260029,Brazil,Vinícius Júnior,45,3,45+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260049,Brazil,Vinícius Júnior,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260049,Brazil,Vinícius Júnior,45,3,45+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260049,Brazil,Matheus Cunha,60,,60,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260050,Morocco,Achraf Hakimi,39,,39,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260050,Morocco,Ismael Saibari,45,1,45+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260050,Morocco,Soufiane Rahimi,78,,78,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260050,Morocco,Gessime Yassine,89,,89,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260050,Haiti,Yassine Bounou,10,,10,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260050,Haiti,Wilson Isidor,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260004,USA,Damian Bobadilla,7,,7,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260004,USA,Folarin Balogun,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260004,USA,Folarin Balogun,45,5,45+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260004,USA,Giovanni Reyna,90,8,90+8,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260004,Paraguay,Mauricio,73,,73,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260006,Australia,Nestory Irankunda,27,,27,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260006,Australia,Connor Metcalfe,75,,75,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260032,USA,Cameron Burgess,11,,11,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260032,USA,Alex Freeman,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260031,Paraguay,Matías Galarza,2,,2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260059,Türkiye,Arda Güler,10,,10,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260059,Türkiye,Baris Alper Yilmaz,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260059,Türkiye,Kaan Ayhan,90,8,90+8,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260059,USA,Auston Trusty,3,,3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260059,USA,Sebastian Berhalter,49,,49,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260010,Germany,Felix Nmecha,6,,6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260010,Germany,Nico Schlotterbeck,38,,38,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260010,Germany,Kai Havertz,45,5,45+5,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260010,Germany,Kai Havertz,88,,88,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260010,Germany,Jamal Musiala,47,,47,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260010,Germany,Nathaniel Brown,68,,68,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260010,Germany,Deniz Undav,78,,78,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260010,Curaçao,Livano Comenencia,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260009,Côte d'Ivoire,Amad Diallo,90,,90,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260033,Germany,Deniz Undav,68,,68,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260033,Germany,Deniz Undav,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260033,Côte d'Ivoire,Franck Kessié,30,,30,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260055,Côte d'Ivoire,Nicolas Pépé,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260055,Côte d'Ivoire,Nicolas Pépé,64,,64,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260056,Ecuador,Nilson Angulo,9,,9,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260056,Ecuador,Gonzalo Plata,77,,77,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260056,Germany,Leroy Sané,2,,2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260011,Netherlands,Virgil van Dijk,51,,51,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260011,Netherlands,Crysencio Summerville,64,,64,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260011,Japan,Keito Nakamura,57,,57,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260011,Japan,Daichi Kamada,88,,88,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260012,Sweden,Yasin Ayari,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260012,Sweden,Yasin Ayari,90,6,90+6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260012,Sweden,Alexander Isak,30,,30,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260012,Sweden,Viktor Gyökeres,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260012,Sweden,Mattias Svanberg,84,,84,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260012,Tunisia,Omar Rekik,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260035,Netherlands,Brian Brobbey,5,,5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260035,Netherlands,Brian Brobbey,17,,17,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260035,Netherlands,Cody Gakpo,47,,47,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260035,Netherlands,Cody Gakpo,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260035,Netherlands,Crysencio Summerville,89,,89,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260035,Sweden,Anthony Elanga,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260036,Japan,Daichi Kamada,4,,4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260036,Japan,Ayase Ueda,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260036,Japan,Ayase Ueda,83,,83,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260036,Japan,Junya Ito,69,,69,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260057,Japan,Daizen Maeda,56,,56,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260057,Sweden,Anthony Elanga,62,,62,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260058,Tunisia,Hazem Mastouri,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260058,Netherlands,Ellyes Skhiri,3,,3,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260058,Netherlands,Brian Brobbey,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260058,Netherlands,Jan Paul van Hecke,62,,62,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260016,Belgium,Mohamed Hany,66,,66,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260016,Egypt,Emam Ashour,19,,19,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260015,IR Iran,Ramin Rezaeian,32,,32,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260015,IR Iran,Mohammad Mohebbi,64,,64,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260015,New Zealand,Elijah Just,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260015,New Zealand,Elijah Just,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260040,New Zealand,Finn Surman,15,,15,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260040,Egypt,Mostafa Zico,58,,58,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260040,Egypt,Mohamed Salah,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260040,Egypt,Trézéguet,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260063,Egypt,Mahmoud Saber,5,,5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260063,IR Iran,Ramin Rezaeian,14,,14,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260064,New Zealand,Elijah Just,84,,84,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260064,Belgium,Leandro Trossard,28,,28,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260064,Belgium,Leandro Trossard,50,,50,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260064,Belgium,Kevin De Bruyne,66,,66,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260064,Belgium,Romelu Lukaku,86,,86,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260064,Belgium,Alexis Saelemaekers,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260013,Saudi Arabia,Abdulelah Al-Amri,41,,41,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260013,Uruguay,Maxi Araújo,80,,80,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260038,Spain,Lamine Yamal,10,,10,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260038,Spain,Mikel Oyarzabal,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260038,Spain,Mikel Oyarzabal,24,,24,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260038,Spain,Hassan Al-Tambakti,49,,49,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260037,Uruguay,Maxi Araújo,44,,44,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260037,Uruguay,Agustín Cano,45,6,45+6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260037,Cabo Verde,Kevin Pina,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260037,Cabo Verde,Hélio Varela,61,,61,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260066,Spain,Álex Baena,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260017,France,Kylian Mbappé,66,,66,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260017,France,Kylian Mbappé,90,6,90+6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260017,France,Bradley Barcola,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260017,Senegal,Ibrahim Mbaye,90,5,90+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260018,Iraq,Aymen Hussein,39,,39,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260018,Norway,Erling Haaland,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260018,Norway,Erling Haaland,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260018,Norway,Leo Østigard,76,,76,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260018,Norway,Aymen Hussein,90,6,90+6,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260042,France,Kylian Mbappé,14,,14,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260042,France,Kylian Mbappé,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260042,France,Ousmane Dembélé,66,,66,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260041,Norway,Marcus Holmgren Pedersen,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260041,Norway,Erling Haaland,48,,48,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260041,Norway,Erling Haaland,58,,58,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260041,Senegal,Ismaïla Sarr,53,,53,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260041,Senegal,Ismaïla Sarr,90,3,90+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260061,Norway,Thelo Aasgaard,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260061,France,Ousmane Dembélé,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260061,France,Ousmane Dembélé,20,,20,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260061,France,Ousmane Dembélé,32,,32,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260061,France,Désiré Doué,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260062,Senegal,Habib Diarra,4,,4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260062,Senegal,Ismaïla Sarr,56,,56,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260062,Senegal,Pape Gueye,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260062,Senegal,Pape Gueye,71,,71,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260062,Senegal,Iliman Ndiaye,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260019,Argentina,Lionel Messi,17,,17,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260019,Argentina,Lionel Messi,60,,60,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260019,Argentina,Lionel Messi,76,,76,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260020,Austria,Romano Schmid,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260020,Austria,Yazan Al-Arab,76,,76,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260020,Austria,Marko Arnautovic,90,12,90+12,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260020,Jordan,Ali Olwan,50,,50,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260043,Argentina,Lionel Messi,38,,38,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260043,Argentina,Lionel Messi,90,5,90+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260044,Jordan,Nizar Al-Rashdan,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260044,Algeria,Nadhir Benbouali,69,,69,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260044,Algeria,Amine Gouiri,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260069,Algeria,Rafik Belghali,45,,45,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260069,Algeria,Riyad Mahrez,60,,60,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260069,Algeria,Riyad Mahrez,90,3,90+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260069,Austria,Marko Arnautovic,28,,28,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260069,Austria,Marcel Sabitzer,55,,55,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260069,Austria,Sasa Kalajdzic,90,6,90+6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260070,Jordan,Mousa Al-Tamari,55,,55,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260070,Argentina,Giovani Lo Celso,19,,19,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260070,Argentina,Lautaro Martínez,31,,31,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260070,Argentina,Lionel Messi,80,,80,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260023,Portugal,João Neves,6,,6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260023,Congo DR,Yoane Wissa,45,5,45+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260024,Uzbekistan,Abbosbek Fayzullaev,60,,60,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260024,Colombia,Daniel Muñoz,40,,40,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260024,Colombia,Luis Díaz,65,,65,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260024,Colombia,Jáminton Campaz,90,9,90+9,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260047,Portugal,Cristiano Ronaldo,6,,6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260047,Portugal,Cristiano Ronaldo,39,,39,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260047,Portugal,Nuno Mendes,17,,17,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260047,Portugal,Abduvohid Nematov,60,,60,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260047,Portugal,Rafael Leão,87,,87,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260048,Colombia,Daniel Muñoz,76,,76,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260072,Congo DR,Yoane Wissa,68,,68,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260072,Congo DR,Fiston Mayele,78,,78,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260072,Congo DR,Yoane Wissa,90,1,90+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260072,Uzbekistan,Eldor Shomurodov,10,,10,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260022,England,Harry Kane,12,,12,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260022,England,Harry Kane,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260022,England,Jude Bellingham,47,,47,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260022,England,Marcus Rashford,85,,85,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260022,Croatia,Martin Baturina,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260022,Croatia,Petar Musa,45,5,45+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260021,Ghana,Caleb Yirenkyi,90,5,90+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260046,Croatia,Ante Budimir,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260067,England,Jude Bellingham,62,,62,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260067,England,Harry Kane,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260068,Croatia,Petar Sucic,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260068,Croatia,Nikola Vlasic,83,,83,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260068,Ghana,Derrick Luckassen,73,,73,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260073,Canada,Stephan Eustáquio,90,2,90+2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260074,Germany,Kai Havertz,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260074,Paraguay,Julio Enciso,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260075,Netherlands,Cody Gakpo,72,,72,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260075,Morocco,Issa Diop,90,1,90+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260076,Brazil,Casemiro,56,,56,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260076,Brazil,Gabriel Martinelli,90,5,90+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260076,Japan,Kaishu Sano,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260077,France,Kylian Mbappé,45,,45,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260077,France,Kylian Mbappé,74,,74,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260077,France,Bradley Barcola,53,,53,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260078,Côte d'Ivoire,Amad Diallo,74,,74,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260078,Norway,Antonio Nusa,39,,39,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260078,Norway,Erling Haaland,86,,86,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260079,Mexico,Julián Quiñones,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260079,Mexico,Raúl Jiménez,45,1,45+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260080,England,Harry Kane,75,,75,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260080,England,Harry Kane,86,,86,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260080,Congo DR,Brian Cipenga,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260081,USA,Folarin Balogun,45,,45,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260081,USA,Malik Tillman,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260082,Belgium,Romelu Lukaku,86,,86,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260082,Belgium,Youri Tielemans,89,,89,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260082,Belgium,Youri Tielemans,120,5,120+5,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260082,Senegal,Habib Diarra,25,,25,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260082,Senegal,Ismaïla Sarr,51,,51,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260083,Portugal,Cristiano Ronaldo,68,,68,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260083,Portugal,Gonçalo Ramos,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260083,Croatia,Ivan Perisic,53,,53,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260084,Spain,Mikel Oyarzabal,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260084,Spain,Mikel Oyarzabal,89,,89,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260084,Spain,Pedro Porro,66,,66,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260085,Switzerland,Breel Embolo,10,,10,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260085,Switzerland,Dan Ndoye,46,,46,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260086,Argentina,Lionel Messi,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260086,Argentina,Lisandro Martínez,92,,92,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260086,Argentina,Diney Borges,111,,111,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260086,Cabo Verde,Deroy Duarte,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260086,Cabo Verde,Sidny Lopes Cabral,103,,103,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260087,Colombia,Jhon Arias,14,,14,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260088,Australia,Mohamed Hany,55,,55,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260088,Egypt,Emam Ashour,13,,13,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260089,France,Kylian Mbappé,70,,70,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260090,Morocco,Azzedine Ounahi,50,,50,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260090,Morocco,Azzedine Ounahi,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260090,Morocco,Soufiane Rahimi,90,8,90+8,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260091,Brazil,Neymar,90,10,90+10,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260091,Norway,Erling Haaland,79,,79,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260091,Norway,Erling Haaland,90,,90,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260092,Mexico,Julián Quiñones,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260092,Mexico,Raúl Jiménez,69,,69,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260092,England,Jude Bellingham,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260092,England,Jude Bellingham,38,,38,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260092,England,Harry Kane,60,,60,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260093,Spain,Mikel Merino,90,1,90+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260094,USA,Malik Tillman,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260094,Belgium,Charles De Ketelaere,9,,9,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260094,Belgium,Charles De Ketelaere,33,,33,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260094,Belgium,Hans Vanaken,57,,57,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260094,Belgium,Romelu Lukaku,90,3,90+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260095,Argentina,Cristian Romero,79,,79,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260095,Argentina,Lionel Messi,83,,83,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260095,Argentina,Enzo Fernández,90,2,90+2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260095,Egypt,Yasser Ibrahim,15,,15,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
-20260095,Egypt,Mostafa Zico,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:24:39.331427+00:00
+20260001,Mexico,Julián Quiñones,9,,9,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260001,Mexico,Raúl Jiménez,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260002,Korea Republic,Hwang In-Beom,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260002,Korea Republic,Oh Hyeon-Gyu,80,,80,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260002,Czechia,Ladislav Krejcí,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260025,Czechia,Michal Sadílek,6,,6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260025,South Africa,Teboho Mokoena,83,,83,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260028,Mexico,Luis Romo,50,,50,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260053,Mexico,Mateo Chávez,55,,55,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260053,Mexico,Julián Quiñones,61,,61,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260053,Mexico,Álvaro Fidalgo,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260054,South Africa,Thapelo Maseko,63,,63,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260003,Canada,Cyle Larin,78,,78,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260003,Bosnia and Herzegovina,Jovo Lukić,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260008,Qatar,Miro Muheim,90,4,90+4,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260008,Switzerland,Breel Embolo,17,,17,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260026,Switzerland,Johan Manzambi,74,,74,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260026,Switzerland,Johan Manzambi,90,,90,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260026,Switzerland,Rubén Vargas,84,,84,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260026,Switzerland,Granit Xhaka,90,7,90+7,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260026,Bosnia and Herzegovina,Ermin Mahmic,90,3,90+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260027,Canada,Cyle Larin,16,,16,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260027,Canada,Jonathan David,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260027,Canada,Jonathan David,45,3,45+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260027,Canada,Nathan Saliba,64,,64,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260027,Canada,Mohamed Manai,75,,75,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260027,Canada,Jonathan David,90,2,90+2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260051,Switzerland,Rubén Vargas,46,,46,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260051,Switzerland,Johan Manzambi,57,,57,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260051,Canada,Promise David,76,,76,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260052,Bosnia and Herzegovina,Kerim Alajbegovic,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260052,Bosnia and Herzegovina,Mahmoud Abunada,34,,34,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260052,Bosnia and Herzegovina,Ermin Mahmic,80,,80,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260052,Qatar,Hassan Al-Haydos,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260007,Brazil,Vinícius Júnior,32,,32,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260007,Morocco,Ismael Saibari,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260005,Scotland,John McGinn,28,,28,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260030,Morocco,Ismael Saibari,2,,2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260029,Brazil,Matheus Cunha,23,,23,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260029,Brazil,Matheus Cunha,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260029,Brazil,Vinícius Júnior,45,3,45+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260049,Brazil,Vinícius Júnior,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260049,Brazil,Vinícius Júnior,45,3,45+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260049,Brazil,Matheus Cunha,60,,60,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260050,Morocco,Achraf Hakimi,39,,39,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260050,Morocco,Ismael Saibari,45,1,45+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260050,Morocco,Soufiane Rahimi,78,,78,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260050,Morocco,Gessime Yassine,89,,89,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260050,Haiti,Yassine Bounou,10,,10,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260050,Haiti,Wilson Isidor,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260004,USA,Damian Bobadilla,7,,7,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260004,USA,Folarin Balogun,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260004,USA,Folarin Balogun,45,5,45+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260004,USA,Giovanni Reyna,90,8,90+8,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260004,Paraguay,Mauricio,73,,73,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260006,Australia,Nestory Irankunda,27,,27,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260006,Australia,Connor Metcalfe,75,,75,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260032,USA,Cameron Burgess,11,,11,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260032,USA,Alex Freeman,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260031,Paraguay,Matías Galarza,2,,2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260059,Türkiye,Arda Güler,10,,10,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260059,Türkiye,Baris Alper Yilmaz,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260059,Türkiye,Kaan Ayhan,90,8,90+8,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260059,USA,Auston Trusty,3,,3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260059,USA,Sebastian Berhalter,49,,49,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260010,Germany,Felix Nmecha,6,,6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260010,Germany,Nico Schlotterbeck,38,,38,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260010,Germany,Kai Havertz,45,5,45+5,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260010,Germany,Kai Havertz,88,,88,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260010,Germany,Jamal Musiala,47,,47,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260010,Germany,Nathaniel Brown,68,,68,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260010,Germany,Deniz Undav,78,,78,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260010,Curaçao,Livano Comenencia,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260009,Côte d'Ivoire,Amad Diallo,90,,90,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260033,Germany,Deniz Undav,68,,68,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260033,Germany,Deniz Undav,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260033,Côte d'Ivoire,Franck Kessié,30,,30,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260055,Côte d'Ivoire,Nicolas Pépé,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260055,Côte d'Ivoire,Nicolas Pépé,64,,64,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260056,Ecuador,Nilson Angulo,9,,9,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260056,Ecuador,Gonzalo Plata,77,,77,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260056,Germany,Leroy Sané,2,,2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260011,Netherlands,Virgil van Dijk,51,,51,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260011,Netherlands,Crysencio Summerville,64,,64,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260011,Japan,Keito Nakamura,57,,57,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260011,Japan,Daichi Kamada,88,,88,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260012,Sweden,Yasin Ayari,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260012,Sweden,Yasin Ayari,90,6,90+6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260012,Sweden,Alexander Isak,30,,30,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260012,Sweden,Viktor Gyökeres,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260012,Sweden,Mattias Svanberg,84,,84,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260012,Tunisia,Omar Rekik,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260035,Netherlands,Brian Brobbey,5,,5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260035,Netherlands,Brian Brobbey,17,,17,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260035,Netherlands,Cody Gakpo,47,,47,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260035,Netherlands,Cody Gakpo,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260035,Netherlands,Crysencio Summerville,89,,89,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260035,Sweden,Anthony Elanga,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260036,Japan,Daichi Kamada,4,,4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260036,Japan,Ayase Ueda,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260036,Japan,Ayase Ueda,83,,83,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260036,Japan,Junya Ito,69,,69,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260057,Japan,Daizen Maeda,56,,56,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260057,Sweden,Anthony Elanga,62,,62,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260058,Tunisia,Hazem Mastouri,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260058,Netherlands,Ellyes Skhiri,3,,3,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260058,Netherlands,Brian Brobbey,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260058,Netherlands,Jan Paul van Hecke,62,,62,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260016,Belgium,Mohamed Hany,66,,66,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260016,Egypt,Emam Ashour,19,,19,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260015,IR Iran,Ramin Rezaeian,32,,32,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260015,IR Iran,Mohammad Mohebbi,64,,64,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260015,New Zealand,Elijah Just,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260015,New Zealand,Elijah Just,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260040,New Zealand,Finn Surman,15,,15,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260040,Egypt,Mostafa Zico,58,,58,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260040,Egypt,Mohamed Salah,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260040,Egypt,Trézéguet,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260063,Egypt,Mahmoud Saber,5,,5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260063,IR Iran,Ramin Rezaeian,14,,14,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260064,New Zealand,Elijah Just,84,,84,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260064,Belgium,Leandro Trossard,28,,28,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260064,Belgium,Leandro Trossard,50,,50,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260064,Belgium,Kevin De Bruyne,66,,66,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260064,Belgium,Romelu Lukaku,86,,86,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260064,Belgium,Alexis Saelemaekers,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260013,Saudi Arabia,Abdulelah Al-Amri,41,,41,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260013,Uruguay,Maxi Araújo,80,,80,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260038,Spain,Lamine Yamal,10,,10,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260038,Spain,Mikel Oyarzabal,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260038,Spain,Mikel Oyarzabal,24,,24,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260038,Spain,Hassan Al-Tambakti,49,,49,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260037,Uruguay,Maxi Araújo,44,,44,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260037,Uruguay,Agustín Cano,45,6,45+6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260037,Cabo Verde,Kevin Pina,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260037,Cabo Verde,Hélio Varela,61,,61,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260066,Spain,Álex Baena,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260017,France,Kylian Mbappé,66,,66,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260017,France,Kylian Mbappé,90,6,90+6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260017,France,Bradley Barcola,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260017,Senegal,Ibrahim Mbaye,90,5,90+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260018,Iraq,Aymen Hussein,39,,39,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260018,Norway,Erling Haaland,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260018,Norway,Erling Haaland,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260018,Norway,Leo Østigard,76,,76,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260018,Norway,Aymen Hussein,90,6,90+6,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260042,France,Kylian Mbappé,14,,14,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260042,France,Kylian Mbappé,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260042,France,Ousmane Dembélé,66,,66,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260041,Norway,Marcus Holmgren Pedersen,43,,43,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260041,Norway,Erling Haaland,48,,48,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260041,Norway,Erling Haaland,58,,58,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260041,Senegal,Ismaïla Sarr,53,,53,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260041,Senegal,Ismaïla Sarr,90,3,90+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260061,Norway,Thelo Aasgaard,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260061,France,Ousmane Dembélé,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260061,France,Ousmane Dembélé,20,,20,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260061,France,Ousmane Dembélé,32,,32,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260061,France,Désiré Doué,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260062,Senegal,Habib Diarra,4,,4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260062,Senegal,Ismaïla Sarr,56,,56,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260062,Senegal,Pape Gueye,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260062,Senegal,Pape Gueye,71,,71,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260062,Senegal,Iliman Ndiaye,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260019,Argentina,Lionel Messi,17,,17,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260019,Argentina,Lionel Messi,60,,60,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260019,Argentina,Lionel Messi,76,,76,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260020,Austria,Romano Schmid,21,,21,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260020,Austria,Yazan Al-Arab,76,,76,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260020,Austria,Marko Arnautovic,90,12,90+12,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260020,Jordan,Ali Olwan,50,,50,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260043,Argentina,Lionel Messi,38,,38,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260043,Argentina,Lionel Messi,90,5,90+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260044,Jordan,Nizar Al-Rashdan,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260044,Algeria,Nadhir Benbouali,69,,69,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260044,Algeria,Amine Gouiri,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260069,Algeria,Rafik Belghali,45,,45,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260069,Algeria,Riyad Mahrez,60,,60,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260069,Algeria,Riyad Mahrez,90,3,90+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260069,Austria,Marko Arnautovic,28,,28,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260069,Austria,Marcel Sabitzer,55,,55,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260069,Austria,Sasa Kalajdzic,90,6,90+6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260070,Jordan,Mousa Al-Tamari,55,,55,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260070,Argentina,Giovani Lo Celso,19,,19,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260070,Argentina,Lautaro Martínez,31,,31,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260070,Argentina,Lionel Messi,80,,80,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260023,Portugal,João Neves,6,,6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260023,Congo DR,Yoane Wissa,45,5,45+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260024,Uzbekistan,Abbosbek Fayzullaev,60,,60,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260024,Colombia,Daniel Muñoz,40,,40,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260024,Colombia,Luis Díaz,65,,65,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260024,Colombia,Jáminton Campaz,90,9,90+9,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260047,Portugal,Cristiano Ronaldo,6,,6,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260047,Portugal,Cristiano Ronaldo,39,,39,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260047,Portugal,Nuno Mendes,17,,17,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260047,Portugal,Abduvohid Nematov,60,,60,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260047,Portugal,Rafael Leão,87,,87,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260048,Colombia,Daniel Muñoz,76,,76,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260072,Congo DR,Yoane Wissa,68,,68,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260072,Congo DR,Fiston Mayele,78,,78,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260072,Congo DR,Yoane Wissa,90,1,90+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260072,Uzbekistan,Eldor Shomurodov,10,,10,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260022,England,Harry Kane,12,,12,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260022,England,Harry Kane,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260022,England,Jude Bellingham,47,,47,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260022,England,Marcus Rashford,85,,85,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260022,Croatia,Martin Baturina,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260022,Croatia,Petar Musa,45,5,45+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260021,Ghana,Caleb Yirenkyi,90,5,90+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260046,Croatia,Ante Budimir,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260067,England,Jude Bellingham,62,,62,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260067,England,Harry Kane,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260068,Croatia,Petar Sucic,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260068,Croatia,Nikola Vlasic,83,,83,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260068,Ghana,Derrick Luckassen,73,,73,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260073,Canada,Stephan Eustáquio,90,2,90+2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260074,Germany,Kai Havertz,54,,54,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260074,Paraguay,Julio Enciso,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260075,Netherlands,Cody Gakpo,72,,72,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260075,Morocco,Issa Diop,90,1,90+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260076,Brazil,Casemiro,56,,56,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260076,Brazil,Gabriel Martinelli,90,5,90+5,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260076,Japan,Kaishu Sano,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260077,France,Kylian Mbappé,45,,45,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260077,France,Kylian Mbappé,74,,74,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260077,France,Bradley Barcola,53,,53,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260078,Côte d'Ivoire,Amad Diallo,74,,74,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260078,Norway,Antonio Nusa,39,,39,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260078,Norway,Erling Haaland,86,,86,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260079,Mexico,Julián Quiñones,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260079,Mexico,Raúl Jiménez,45,1,45+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260080,England,Harry Kane,75,,75,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260080,England,Harry Kane,86,,86,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260080,Congo DR,Brian Cipenga,7,,7,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260081,USA,Folarin Balogun,45,,45,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260081,USA,Malik Tillman,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260082,Belgium,Romelu Lukaku,86,,86,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260082,Belgium,Youri Tielemans,89,,89,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260082,Belgium,Youri Tielemans,120,5,120+5,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260082,Senegal,Habib Diarra,25,,25,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260082,Senegal,Ismaïla Sarr,51,,51,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260083,Portugal,Cristiano Ronaldo,68,,68,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260083,Portugal,Gonçalo Ramos,90,4,90+4,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260083,Croatia,Ivan Perisic,53,,53,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260084,Spain,Mikel Oyarzabal,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260084,Spain,Mikel Oyarzabal,89,,89,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260084,Spain,Pedro Porro,66,,66,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260085,Switzerland,Breel Embolo,10,,10,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260085,Switzerland,Dan Ndoye,46,,46,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260086,Argentina,Lionel Messi,29,,29,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260086,Argentina,Lisandro Martínez,92,,92,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260086,Argentina,Diney Borges,111,,111,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260086,Cabo Verde,Deroy Duarte,59,,59,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260086,Cabo Verde,Sidny Lopes Cabral,103,,103,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260087,Colombia,Jhon Arias,14,,14,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260088,Australia,Mohamed Hany,55,,55,True,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260088,Egypt,Emam Ashour,13,,13,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260089,France,Kylian Mbappé,70,,70,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260090,Morocco,Azzedine Ounahi,50,,50,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260090,Morocco,Azzedine Ounahi,82,,82,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260090,Morocco,Soufiane Rahimi,90,8,90+8,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260091,Brazil,Neymar,90,10,90+10,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260091,Norway,Erling Haaland,79,,79,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260091,Norway,Erling Haaland,90,,90,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260092,Mexico,Julián Quiñones,42,,42,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260092,Mexico,Raúl Jiménez,69,,69,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260092,England,Jude Bellingham,36,,36,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260092,England,Jude Bellingham,38,,38,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260092,England,Harry Kane,60,,60,False,True,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260093,Spain,Mikel Merino,90,1,90+1,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260094,USA,Malik Tillman,31,,31,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260094,Belgium,Charles De Ketelaere,9,,9,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260094,Belgium,Charles De Ketelaere,33,,33,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260094,Belgium,Hans Vanaken,57,,57,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260094,Belgium,Romelu Lukaku,90,3,90+3,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260095,Argentina,Cristian Romero,79,,79,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260095,Argentina,Lionel Messi,83,,83,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260095,Argentina,Enzo Fernández,90,2,90+2,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260095,Egypt,Yasser Ibrahim,15,,15,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
+20260095,Egypt,Mostafa Zico,67,,67,False,False,openfootball,https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json,2026-07-10T01:58:50.784881+00:00
