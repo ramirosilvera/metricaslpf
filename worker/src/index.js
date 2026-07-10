@@ -143,6 +143,31 @@ const TOOLS = [
         },
       },
       {
+        name: "get_team_tactical_leaders",
+        description:
+          "Ranking de SELECCIONES (no jugadores) segun una metrica TACTICA de equipo del Mundial 2026, agregando la estadistica por jugador de FIFA: progresiones de balon, presion sobre el rival, recuperaciones, remates, tackles ganados, intercepciones, quiebres de linea y precision de pase del equipo. Usala para '¿que seleccion progresa/presiona/recupera mas la pelota?' o para comparar el juego con la pelota entre selecciones. Para el ranking FISICO de selecciones usa get_physical_leaders; para jugadores individuales usa get_tactical_leaders.",
+        parameters: {
+          type: "object",
+          properties: {
+            metric: {
+              type: "string",
+              enum: [
+                "progresiones_promedio",
+                "precision_pases_pct",
+                "presiones_promedio",
+                "recuperaciones_promedio",
+                "remates_promedio",
+                "tackles_promedio",
+                "intercepciones_promedio",
+                "quiebres_linea_promedio",
+              ],
+            },
+            limit: { type: "integer" },
+          },
+          required: ["metric"],
+        },
+      },
+      {
         name: "get_tactical_leaders",
         description: "Ranking de jugadores según una métrica táctica del Mundial 2026 (pases, progresiones, tackles, intercepciones, presión, recuperaciones, goles).",
         parameters: {
@@ -215,6 +240,7 @@ const TOOL_RPC_MAP = {
     body: { p_position: String(args?.position ?? ""), p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) },
   }),
   get_tactical_leaders: (args) => ({ rpc: "get_tactical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
+  get_team_tactical_leaders: (args) => ({ rpc: "get_team_tactical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
   get_goal_scorers: (args) => ({ rpc: "get_goal_scorers", body: { p_team: args?.team ? String(args.team) : null, p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
   get_team_profile: (args) => ({ rpc: "get_team_profile", body: { p_team: String(args?.team ?? "") } }),
 };
