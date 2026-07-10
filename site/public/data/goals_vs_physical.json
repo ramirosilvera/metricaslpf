@@ -2686,5 +2686,33 @@
     "home_team": "Switzerland",
     "away_team": "Colombia",
     "rival": "Switzerland"
+  },
+  {
+    "match_id": 20260097,
+    "team": "France",
+    "total_distance_km": 108.57,
+    "high_intensity_distance_m": 7456.9,
+    "sprint_count": 363.0,
+    "top_speed_kmh": 35.5,
+    "goles_marcados": 0,
+    "stage": "Quarter-final",
+    "match_date": "2026-07-09",
+    "home_team": "France",
+    "away_team": "Morocco",
+    "rival": "Morocco"
+  },
+  {
+    "match_id": 20260097,
+    "team": "Morocco",
+    "total_distance_km": 108.25,
+    "high_intensity_distance_m": 7151.5,
+    "sprint_count": 373.0,
+    "top_speed_kmh": 35.3,
+    "goles_marcados": 0,
+    "stage": "Quarter-final",
+    "match_date": "2026-07-09",
+    "home_team": "France",
+    "away_team": "Morocco",
+    "rival": "France"
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-07-10T01:58:52.970648+00:00",
+  "checked_at": "2026-07-10T09:19:25.001594+00:00",
   "hub_url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
   "pages_visited": [
     "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
@@ -965,7 +965,17 @@
       "team_b": "Colombia",
       "stage_guess": "Knockout stage",
       "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M96-SUI-V-COL.pdf"
+    },
+    {
+      "match_number": 97,
+      "match_id": 20260097,
+      "team_a_code": "FRA",
+      "team_b_code": "MAR",
+      "team_a": "France",
+      "team_b": "Morocco",
+      "stage_guess": "Knockout stage",
+      "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M97-FRA-V-MAR.pdf"
     }
   ],
-  "count": 96
+  "count": 97
 }

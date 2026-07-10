@@ -1496,5 +1496,19 @@
     "away_score": 0,
     "stadium": "BC Place Vancouver",
     "referee": null
+  },
+  {
+    "match_id": 20260097,
+    "competition": "FIFA World Cup",
+    "season": "2026",
+    "stage": "Quarter-final",
+    "group": null,
+    "match_date": "2026-07-09",
+    "home_team": "France",
+    "away_team": "Morocco",
+    "home_score": 2,
+    "away_score": 0,
+    "stadium": "Boston Stadium",
+    "referee": null
   }
 ]

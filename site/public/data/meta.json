@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T01:58:59.450469+00:00",
+  "generated_at": "2026-07-10T09:26:12.701645+00:00",
   "confidence_legend": {
     "alta": "Dato oficial (FIFA Training Centre / StatsBomb) o verificado contra fuente oficial, con cobertura alta.",
     "media": "Fuente verificada pero con cobertura parcial o en proceso de carga (backfill).",
@@ -10,9 +10,9 @@
     "description": "Cada gol de openfootball (CC0) se contrastó contra el marcador final oficial de FIFA Training Centre, partido por partido.",
     "source_a": "openfootball/worldcup.json (goles evento a evento)",
     "source_b": "FIFA Training Centre (marcador final del partido)",
-    "matches_checked": 96,
+    "matches_checked": 97,
     "matches_matched": 96,
-    "discrepancies": 0
+    "discrepancies": 1
   },
   "sources": {
     "tactical_context": {
@@ -25,7 +25,7 @@
       "coverage_detail": "11 partidos cargados de 2018, 2022",
       "method": "Eventos oficiales de StatsBomb; la posesión es un proxy por duración de eventos, no tracking.",
       "confidence": "media",
-      "as_of": "2026-07-10T01:58:59.450469+00:00",
+      "as_of": "2026-07-10T09:26:12.701645+00:00",
       "status": "ok"
     },
     "physical_performance": {
@@ -33,14 +33,14 @@
       "provider_url": "https://www.fifatrainingcentre.com/",
       "license": "Datos oficiales FIFA publicados en informes del Mundial 2026",
       "coverage": "Mundial 2026 (en curso)",
-      "coverage_detail": "48/48 selecciones · 96/96 partidos",
+      "coverage_detail": "48/48 selecciones · 97/97 partidos",
       "coverage_pct": 100,
       "method": "Distancia, alta intensidad, sprints y velocidad punta de los informes físicos oficiales FIFA (GPS/tracking).",
       "confidence": "alta",
-      "as_of": "2026-07-08T13:55:29.915951+00:00",
+      "as_of": "2026-07-10T09:19:25.043451+00:00",
       "status": "ok",
-      "matches_loaded": 96,
-      "matches_total": 96,
+      "matches_loaded": 97,
+      "matches_total": 97,
       "teams_loaded": 48,
       "teams_total": 48
     },
@@ -49,14 +49,14 @@
       "provider_url": "https://www.fifatrainingcentre.com/",
       "license": "Datos oficiales FIFA publicados en informes del Mundial 2026",
       "coverage": "pases, presión, duelos y ofertas de recepción por jugador -- Mundial 2026 (en curso)",
-      "coverage_detail": "96/96 partidos · 48/48 selecciones (backfill en curso)",
+      "coverage_detail": "97/97 partidos · 48/48 selecciones (backfill en curso)",
       "coverage_pct": 100,
       "method": "Métricas tácticas por jugador de los informes oficiales FIFA; la carga histórica se completa progresivamente.",
       "confidence": "media",
-      "as_of": "2026-07-10T01:24:43.960496+00:00",
+      "as_of": "2026-07-10T09:19:25.043451+00:00",
       "status": "ok",
-      "matches_loaded": 96,
-      "matches_total": 96
+      "matches_loaded": 97,
+      "matches_total": 97
     },
     "squad_ages": {
       "provider": "26worldcup (Wikipedia)",
@@ -69,7 +69,7 @@
       "coverage_pct": 100,
       "method": "Hechos objetivos (edad, dorsal, caps) tomados del artículo de Wikipedia vía mirror comunitario.",
       "confidence": "complementaria",
-      "as_of": "2026-07-10T01:58:51.466437+00:00",
+      "as_of": "2026-07-10T09:19:23.296767+00:00",
       "status": "ok"
     },
     "team_profile": {
@@ -81,7 +81,7 @@
       "coverage_pct": 100,
       "method": "Ranking de la API pública de FIFA; el campo base proviene de Wikipedia vía el mismo mirror.",
       "confidence": "media",
-      "as_of": "2026-07-10T01:58:51.482569+00:00",
+      "as_of": "2026-07-10T09:19:23.312841+00:00",
       "status": "ok"
     },
     "derived_metrics": {
@@ -90,7 +90,7 @@
       "coverage_detail": "percentil y z-score por métrica dentro de cada temporada; k-means (5 métricas tácticas) para estilo",
       "method": "Percentil y z-score se calculan DENTRO de la misma temporada (2026 vs 2026). El estilo de juego es un k-means sobre 5 métricas tácticas estandarizadas: heurística descriptiva, no una clasificación validada.",
       "confidence": "derivada",
-      "as_of": "2026-07-10T01:58:59.450469+00:00",
+      "as_of": "2026-07-10T09:26:12.701645+00:00",
       "status": "ok"
     },
     "goal_events": {
@@ -100,14 +100,14 @@
       "license_short": "CC0-1.0 (dominio público)",
       "license_url": "https://github.com/openfootball/worldcup.json",
       "coverage": "goleador, minuto y flags de penal/gol en contra de cada gol del Mundial 2026",
-      "coverage_detail": "88 partidos con goles · verificado 96/96 contra FIFA",
+      "coverage_detail": "88 partidos con goles · verificado 96/97 contra FIFA",
       "method": "Goles evento a evento; verificados uno a uno contra el marcador final oficial de FIFA Training Centre.",
       "confidence": "alta",
       "cross_checked_against": "resultado final de matches.parquet (FIFA Training Centre)",
-      "as_of": "2026-07-10T01:58:50.784881+00:00",
+      "as_of": "2026-07-10T09:19:22.030132+00:00",
       "status": "ok",
       "matches_with_goals": 88,
-      "matches_played_total": 96
+      "matches_played_total": 97
     }
   }
 }

@@ -1066,6 +1066,19 @@
     "top_speed_kmh": 36.5
   },
   {
+    "team": "France",
+    "match_id": 20260097,
+    "match_date": "2026-07-09",
+    "stage": "Quarter-final",
+    "rival": "Morocco",
+    "es_local": true,
+    "jornada": 6,
+    "total_distance_km": 108.57,
+    "high_intensity_distance_m": 7456.9,
+    "sprint_count": 363.0,
+    "top_speed_kmh": 35.5
+  },
+  {
     "team": "Germany",
     "match_id": 20260010,
     "match_date": "2026-06-14",
@@ -1544,6 +1557,19 @@
     "total_distance_km": 108.8,
     "high_intensity_distance_m": 8501.4,
     "sprint_count": 452.0,
+    "top_speed_kmh": 35.3
+  },
+  {
+    "team": "Morocco",
+    "match_id": 20260097,
+    "match_date": "2026-07-09",
+    "stage": "Quarter-final",
+    "rival": "France",
+    "es_local": false,
+    "jornada": 6,
+    "total_distance_km": 108.25,
+    "high_intensity_distance_m": 7151.5,
+    "sprint_count": 373.0,
     "top_speed_kmh": 35.3
   },
   {
