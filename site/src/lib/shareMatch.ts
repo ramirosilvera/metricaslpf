@@ -56,7 +56,7 @@ const num = (v: number | null, digits: number, unit: string) =>
 export function composeMatchCard(m: MatchSummary, url?: string): Promise<Blob> {
   return new Promise((resolve, reject) => {
     try {
-      const H = 1080;
+      const H = 1350;
       const canvas = document.createElement("canvas");
       canvas.width = W;
       canvas.height = H;
@@ -114,29 +114,41 @@ export function composeMatchCard(m: MatchSummary, url?: string): Promise<Blob> {
       const hg = m.goleadores.filter((x) => x.team === m.home_team).map((x) => `${x.player} ${x.minute}'`).join(", ");
       const ag = m.goleadores.filter((x) => x.team === m.away_team).map((x) => `${x.player} ${x.minute}'`).join(", ");
       const goalY = cy + 120;
-      const goalMax = innerW / 2 - 60;
+      const goalMax = innerW / 2 - 24;
       ctx.font = `500 24px system-ui, -apple-system, Roboto, sans-serif`;
       ctx.fillStyle = SOFTER;
       if (hg) {
         ctx.textAlign = "left";
-        ctx.fillText(clip(ctx, hg, goalMax), PAD, goalY);
+        wrap(ctx, hg, goalMax, 2).forEach((ln, i) => ctx.fillText(ln, PAD, goalY + i * 30));
       }
       if (ag) {
         ctx.textAlign = "right";
-        ctx.fillText(clip(ctx, ag, goalMax), W - PAD, goalY);
+        wrap(ctx, ag, goalMax, 2).forEach((ln, i) => ctx.fillText(ln, W - PAD, goalY + i * 30));
       }
 
-      // filas de stats (hasta 4 con dato en ambos)
+      // jugador destacado (⭐) — igual que en la tarjeta del sitio
+      if (m.destacado) {
+        ctx.textAlign = "center";
+        ctx.fillStyle = SOFT;
+        ctx.font = `600 27px system-ui, -apple-system, Roboto, sans-serif`;
+        ctx.fillText(clip(ctx, `⭐ ${m.destacado.player} (${m.destacado.team}) · ${m.destacado.note}`, innerW), W / 2, cy + 200);
+      }
+
+      // filas de stats: TODAS las que tengan dato en ambos (mismas 6 que la
+      // tarjeta del sitio: posesión, remates, distancia, alta intensidad,
+      // sprints, velocidad punta)
       const defs: { label: string; hv: number | null; av: number | null; d: number; u: string }[] = [
         { label: "Posesión", hv: m.home.posesion_pct, av: m.away.posesion_pct, d: 0, u: "%" },
         { label: "Remates", hv: m.home.remates, av: m.away.remates, d: 0, u: "" },
         { label: "Distancia", hv: m.home.distancia_km, av: m.away.distancia_km, d: 1, u: " km" },
+        { label: "Alta intensidad", hv: m.home.alta_intensidad_m, av: m.away.alta_intensidad_m, d: 0, u: " m" },
         { label: "Sprints", hv: m.home.sprints, av: m.away.sprints, d: 0, u: "" },
+        { label: "Velocidad punta", hv: m.home.velocidad_punta_kmh, av: m.away.velocidad_punta_kmh, d: 1, u: " km/h" },
       ].filter((r) => r.hv != null && r.av != null);
 
-      let y = 520;
-      const rowH = 74;
-      for (const r of defs.slice(0, 4)) {
+      let y = 540;
+      const rowH = 70;
+      for (const r of defs.slice(0, 6)) {
         const total = (r.hv as number) + (r.av as number);
         const hpct = total > 0 ? (r.hv as number) / total : 0.5;
         // barra
