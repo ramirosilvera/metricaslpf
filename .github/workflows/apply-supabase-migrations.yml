@@ -1,0 +1,55 @@
+name: Aplicar migraciones Supabase
+
+# Aplica el schema-as-code de supabase/migrations/ contra el Postgres de
+# Supabase. Los archivos son idempotentes (create ... if not exists / create or
+# replace / drop policy if exists), así que correrlos de nuevo es inofensivo.
+#
+# Necesita el secret SUPABASE_DB_URL (la cadena de conexión Postgres del
+# proyecto: Project Settings -> Database -> Connection string -> URI, con la
+# contraseña). Si no está cargado, el workflow se saltea con un aviso, igual que
+# deploy-worker.yml con los secrets de Cloudflare.
+on:
+  push:
+    branches: [main, claude/metricas-mundial-architecture-gqk5x6]
+    paths:
+      - "supabase/migrations/**"
+      - ".github/workflows/apply-supabase-migrations.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verificar secret de conexión
+        id: check
+        run: |
+          if [ -z "${{ secrets.SUPABASE_DB_URL }}" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::Falta el secret SUPABASE_DB_URL -- se saltan las migraciones. Cargalo en Settings > Secrets (Project Settings > Database > Connection string > URI). Ver supabase/README.md."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Aplicar migraciones en orden
+        if: steps.check.outputs.skip == 'false'
+        env:
+          # El sslmode=require evita fallar por verificación de certificado; la
+          # conexión a Supabase igual va cifrada.
+          PGSSLMODE: require
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          files=(supabase/migrations/*.sql)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No hay migraciones que aplicar."; exit 0
+          fi
+          for f in $(printf '%s\n' "${files[@]}" | sort); do
+            echo "== Aplicando $f =="
+            psql "${{ secrets.SUPABASE_DB_URL }}" -v ON_ERROR_STOP=1 -f "$f"
+          done
+          echo "Migraciones aplicadas."
