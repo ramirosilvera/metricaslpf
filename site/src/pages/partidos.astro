@@ -116,7 +116,10 @@ const stageLabel = (s: string) => s || "Fase de grupos";
 
             {m.insight && <p class="mc-insight">{m.insight}</p>}
 
-            <a class="mc-link" href={`${base}analisis/`}>Ver análisis completo →</a>
+            <div class="mc-foot">
+              <button type="button" class="btn btn-share btn-share-sm mc-share" data-mid={m.match_id}>📲 Compartir</button>
+              <a class="mc-link" href={`${base}analisis/`}>Ver análisis →</a>
+            </div>
           </article>
         );
       })}
@@ -128,6 +131,33 @@ const stageLabel = (s: string) => s || "Fase de grupos";
     oficial de posesión). Remates = tiros al arco intentados (proxy de peligro, <strong>no</strong> xG). Marcador de
     FIFA; el detalle de goleadores puede demorar en los partidos más recientes.
   </p>
+
+  <script type="application/json" id="matches-json" set:html={JSON.stringify(matches)}></script>
+  <script>
+    import { shareMatch } from "../lib/shareMatch";
+    const raw = document.getElementById("matches-json")?.textContent || "[]";
+    const byId = new Map(JSON.parse(raw).map((m: any) => [String(m.match_id), m]));
+    document.querySelectorAll<HTMLButtonElement>(".mc-share").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const m = byId.get(btn.getAttribute("data-mid") || "");
+        if (!m || btn.disabled) return;
+        const orig = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Generando…";
+        try {
+          const res = await shareMatch(m);
+          btn.textContent = res === "downloaded" ? "Descargada ✓" : orig;
+        } catch {
+          btn.textContent = "No se pudo";
+        } finally {
+          window.setTimeout(() => {
+            btn.textContent = orig;
+            btn.disabled = false;
+          }, 3000);
+        }
+      });
+    });
+  </script>
 </Base>
 
 <style>
@@ -277,10 +307,17 @@ const stageLabel = (s: string) => s || "Fase de grupos";
     margin: 0;
     line-height: 1.45;
   }
+  .mc-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: auto;
+    flex-wrap: wrap;
+  }
   .mc-link {
     font-size: 0.82rem;
     font-weight: 600;
     text-decoration: none;
-    margin-top: auto;
   }
 </style>
