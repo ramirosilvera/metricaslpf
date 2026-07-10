@@ -1,0 +1,1942 @@
+[
+  {
+    "team": "Algeria",
+    "match_id": 20260019,
+    "match_date": "2026-06-16",
+    "stage": "Group J",
+    "rival": "Argentina",
+    "pass_accuracy_pct": 91.2,
+    "progresiones": 40,
+    "presiones": 37
+  },
+  {
+    "team": "Algeria",
+    "match_id": 20260044,
+    "match_date": "2026-06-22",
+    "stage": "Group J",
+    "rival": "Jordan",
+    "pass_accuracy_pct": 89.3,
+    "progresiones": 39,
+    "presiones": 48
+  },
+  {
+    "team": "Algeria",
+    "match_id": 20260069,
+    "match_date": "2026-06-27",
+    "stage": "Group J",
+    "rival": "Austria",
+    "pass_accuracy_pct": 93.3,
+    "progresiones": 26,
+    "presiones": 30
+  },
+  {
+    "team": "Algeria",
+    "match_id": 20260085,
+    "match_date": "2026-07-02",
+    "stage": "Round of 32",
+    "rival": "Switzerland",
+    "pass_accuracy_pct": 86.0,
+    "progresiones": 36,
+    "presiones": 37
+  },
+  {
+    "team": "Argentina",
+    "match_id": 20260019,
+    "match_date": "2026-06-16",
+    "stage": "Group J",
+    "rival": "Algeria",
+    "pass_accuracy_pct": 89.4,
+    "progresiones": 18,
+    "presiones": 57
+  },
+  {
+    "team": "Argentina",
+    "match_id": 20260043,
+    "match_date": "2026-06-22",
+    "stage": "Group J",
+    "rival": "Austria",
+    "pass_accuracy_pct": 90.2,
+    "progresiones": 14,
+    "presiones": 35
+  },
+  {
+    "team": "Argentina",
+    "match_id": 20260070,
+    "match_date": "2026-06-27",
+    "stage": "Group J",
+    "rival": "Jordan",
+    "pass_accuracy_pct": 92.5,
+    "progresiones": 25,
+    "presiones": 39
+  },
+  {
+    "team": "Argentina",
+    "match_id": 20260086,
+    "match_date": "2026-07-03",
+    "stage": "Round of 32",
+    "rival": "Cabo Verde",
+    "pass_accuracy_pct": 92.8,
+    "progresiones": 33,
+    "presiones": 51
+  },
+  {
+    "team": "Argentina",
+    "match_id": 20260095,
+    "match_date": "2026-07-07",
+    "stage": "Round of 16",
+    "rival": "Egypt",
+    "pass_accuracy_pct": 90.3,
+    "progresiones": 32,
+    "presiones": 36
+  },
+  {
+    "team": "Australia",
+    "match_id": 20260006,
+    "match_date": "2026-06-13",
+    "stage": "Group D",
+    "rival": "Türkiye",
+    "pass_accuracy_pct": 76.5,
+    "progresiones": 22,
+    "presiones": 57
+  },
+  {
+    "team": "Australia",
+    "match_id": 20260032,
+    "match_date": "2026-06-19",
+    "stage": "Group D",
+    "rival": "USA",
+    "pass_accuracy_pct": 77.3,
+    "progresiones": 31,
+    "presiones": 40
+  },
+  {
+    "team": "Australia",
+    "match_id": 20260060,
+    "match_date": "2026-06-25",
+    "stage": "Group D",
+    "rival": "Paraguay",
+    "pass_accuracy_pct": 84.8,
+    "progresiones": 30,
+    "presiones": 33
+  },
+  {
+    "team": "Australia",
+    "match_id": 20260088,
+    "match_date": "2026-07-03",
+    "stage": "Round of 32",
+    "rival": "Egypt",
+    "pass_accuracy_pct": 82.3,
+    "progresiones": 31,
+    "presiones": 32
+  },
+  {
+    "team": "Austria",
+    "match_id": 20260020,
+    "match_date": "2026-06-16",
+    "stage": "Group J",
+    "rival": "Jordan",
+    "pass_accuracy_pct": 85.0,
+    "progresiones": 35,
+    "presiones": 44
+  },
+  {
+    "team": "Austria",
+    "match_id": 20260043,
+    "match_date": "2026-06-22",
+    "stage": "Group J",
+    "rival": "Argentina",
+    "pass_accuracy_pct": 87.6,
+    "progresiones": 18,
+    "presiones": 48
+  },
+  {
+    "team": "Austria",
+    "match_id": 20260069,
+    "match_date": "2026-06-27",
+    "stage": "Group J",
+    "rival": "Algeria",
+    "pass_accuracy_pct": 87.7,
+    "progresiones": 10,
+    "presiones": 40
+  },
+  {
+    "team": "Austria",
+    "match_id": 20260084,
+    "match_date": "2026-07-02",
+    "stage": "Round of 32",
+    "rival": "Spain",
+    "pass_accuracy_pct": 80.8,
+    "progresiones": 17,
+    "presiones": 77
+  },
+  {
+    "team": "Belgium",
+    "match_id": 20260016,
+    "match_date": "2026-06-15",
+    "stage": "Group G",
+    "rival": "Egypt",
+    "pass_accuracy_pct": 87.2,
+    "progresiones": 36,
+    "presiones": 44
+  },
+  {
+    "team": "Belgium",
+    "match_id": 20260039,
+    "match_date": "2026-06-21",
+    "stage": "Group G",
+    "rival": "IR Iran",
+    "pass_accuracy_pct": 88.2,
+    "progresiones": 33,
+    "presiones": 13
+  },
+  {
+    "team": "Belgium",
+    "match_id": 20260064,
+    "match_date": "2026-06-26",
+    "stage": "Group G",
+    "rival": "New Zealand",
+    "pass_accuracy_pct": 89.6,
+    "progresiones": 38,
+    "presiones": 32
+  },
+  {
+    "team": "Belgium",
+    "match_id": 20260082,
+    "match_date": "2026-07-01",
+    "stage": "Round of 32",
+    "rival": "Senegal",
+    "pass_accuracy_pct": 87.3,
+    "progresiones": 26,
+    "presiones": 44
+  },
+  {
+    "team": "Belgium",
+    "match_id": 20260094,
+    "match_date": "2026-07-06",
+    "stage": "Round of 16",
+    "rival": "USA",
+    "pass_accuracy_pct": 80.4,
+    "progresiones": 26,
+    "presiones": 57
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "match_id": 20260003,
+    "match_date": "2026-06-12",
+    "stage": "Group B",
+    "rival": "Canada",
+    "pass_accuracy_pct": 66.7,
+    "progresiones": 22,
+    "presiones": 35
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "match_id": 20260026,
+    "match_date": "2026-06-18",
+    "stage": "Group B",
+    "rival": "Switzerland",
+    "pass_accuracy_pct": 80.5,
+    "progresiones": 24,
+    "presiones": 48
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "match_id": 20260052,
+    "match_date": "2026-06-24",
+    "stage": "Group B",
+    "rival": "Qatar",
+    "pass_accuracy_pct": 88.5,
+    "progresiones": 29,
+    "presiones": 41
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "match_id": 20260081,
+    "match_date": "2026-07-01",
+    "stage": "Round of 32",
+    "rival": "USA",
+    "pass_accuracy_pct": 83.0,
+    "progresiones": 16,
+    "presiones": 33
+  },
+  {
+    "team": "Brazil",
+    "match_id": 20260007,
+    "match_date": "2026-06-13",
+    "stage": "Group C",
+    "rival": "Morocco",
+    "pass_accuracy_pct": 88.9,
+    "progresiones": 30,
+    "presiones": 54
+  },
+  {
+    "team": "Brazil",
+    "match_id": 20260029,
+    "match_date": "2026-06-19",
+    "stage": "Group C",
+    "rival": "Haiti",
+    "pass_accuracy_pct": 87.8,
+    "progresiones": 21,
+    "presiones": 32
+  },
+  {
+    "team": "Brazil",
+    "match_id": 20260049,
+    "match_date": "2026-06-24",
+    "stage": "Group C",
+    "rival": "Scotland",
+    "pass_accuracy_pct": 92.8,
+    "progresiones": 20,
+    "presiones": 24
+  },
+  {
+    "team": "Brazil",
+    "match_id": 20260076,
+    "match_date": "2026-06-29",
+    "stage": "Round of 32",
+    "rival": "Japan",
+    "pass_accuracy_pct": 91.2,
+    "progresiones": 23,
+    "presiones": 35
+  },
+  {
+    "team": "Brazil",
+    "match_id": 20260091,
+    "match_date": "2026-07-05",
+    "stage": "Round of 16",
+    "rival": "Norway",
+    "pass_accuracy_pct": 85.9,
+    "progresiones": 30,
+    "presiones": 69
+  },
+  {
+    "team": "Cabo Verde",
+    "match_id": 20260014,
+    "match_date": "2026-06-15",
+    "stage": "Group H",
+    "rival": "Spain",
+    "pass_accuracy_pct": 74.2,
+    "progresiones": 23,
+    "presiones": 44
+  },
+  {
+    "team": "Cabo Verde",
+    "match_id": 20260037,
+    "match_date": "2026-06-21",
+    "stage": "Group H",
+    "rival": "Uruguay",
+    "pass_accuracy_pct": 74.4,
+    "progresiones": 29,
+    "presiones": 39
+  },
+  {
+    "team": "Cabo Verde",
+    "match_id": 20260065,
+    "match_date": "2026-06-26",
+    "stage": "Group H",
+    "rival": "Saudi Arabia",
+    "pass_accuracy_pct": 86.5,
+    "progresiones": 36,
+    "presiones": 34
+  },
+  {
+    "team": "Cabo Verde",
+    "match_id": 20260086,
+    "match_date": "2026-07-03",
+    "stage": "Round of 32",
+    "rival": "Argentina",
+    "pass_accuracy_pct": 86.6,
+    "progresiones": 29,
+    "presiones": 49
+  },
+  {
+    "team": "Canada",
+    "match_id": 20260003,
+    "match_date": "2026-06-12",
+    "stage": "Group B",
+    "rival": "Bosnia and Herzegovina",
+    "pass_accuracy_pct": 76.7,
+    "progresiones": 30,
+    "presiones": 38
+  },
+  {
+    "team": "Canada",
+    "match_id": 20260027,
+    "match_date": "2026-06-18",
+    "stage": "Group B",
+    "rival": "Qatar",
+    "pass_accuracy_pct": 93.0,
+    "progresiones": 16,
+    "presiones": 27
+  },
+  {
+    "team": "Canada",
+    "match_id": 20260051,
+    "match_date": "2026-06-24",
+    "stage": "Group B",
+    "rival": "Switzerland",
+    "pass_accuracy_pct": 77.9,
+    "progresiones": 21,
+    "presiones": 44
+  },
+  {
+    "team": "Canada",
+    "match_id": 20260073,
+    "match_date": "2026-06-28",
+    "stage": "Round of 32",
+    "rival": "South Africa",
+    "pass_accuracy_pct": 80.5,
+    "progresiones": 29,
+    "presiones": 62
+  },
+  {
+    "team": "Canada",
+    "match_id": 20260090,
+    "match_date": "2026-07-04",
+    "stage": "Round of 16",
+    "rival": "Morocco",
+    "pass_accuracy_pct": 76.6,
+    "progresiones": 21,
+    "presiones": 57
+  },
+  {
+    "team": "Colombia",
+    "match_id": 20260024,
+    "match_date": "2026-06-17",
+    "stage": "Group K",
+    "rival": "Uzbekistan",
+    "pass_accuracy_pct": 87.8,
+    "progresiones": 23,
+    "presiones": 32
+  },
+  {
+    "team": "Colombia",
+    "match_id": 20260048,
+    "match_date": "2026-06-23",
+    "stage": "Group K",
+    "rival": "Congo DR",
+    "pass_accuracy_pct": 86.7,
+    "progresiones": 14,
+    "presiones": 31
+  },
+  {
+    "team": "Colombia",
+    "match_id": 20260071,
+    "match_date": "2026-06-27",
+    "stage": "Group K",
+    "rival": "Portugal",
+    "pass_accuracy_pct": 89.8,
+    "progresiones": 20,
+    "presiones": 23
+  },
+  {
+    "team": "Colombia",
+    "match_id": 20260087,
+    "match_date": "2026-07-03",
+    "stage": "Round of 32",
+    "rival": "Ghana",
+    "pass_accuracy_pct": 90.3,
+    "progresiones": 19,
+    "presiones": 52
+  },
+  {
+    "team": "Colombia",
+    "match_id": 20260096,
+    "match_date": "2026-07-07",
+    "stage": "Round of 16",
+    "rival": "Switzerland",
+    "pass_accuracy_pct": 82.2,
+    "progresiones": 21,
+    "presiones": 53
+  },
+  {
+    "team": "Congo DR",
+    "match_id": 20260023,
+    "match_date": "2026-06-17",
+    "stage": "Group K",
+    "rival": "Portugal",
+    "pass_accuracy_pct": 79.9,
+    "progresiones": 24,
+    "presiones": 41
+  },
+  {
+    "team": "Congo DR",
+    "match_id": 20260048,
+    "match_date": "2026-06-23",
+    "stage": "Group K",
+    "rival": "Colombia",
+    "pass_accuracy_pct": 74.9,
+    "progresiones": 10,
+    "presiones": 47
+  },
+  {
+    "team": "Congo DR",
+    "match_id": 20260072,
+    "match_date": "2026-06-27",
+    "stage": "Group K",
+    "rival": "Uzbekistan",
+    "pass_accuracy_pct": 84.6,
+    "progresiones": 41,
+    "presiones": 31
+  },
+  {
+    "team": "Congo DR",
+    "match_id": 20260080,
+    "match_date": "2026-07-01",
+    "stage": "Round of 32",
+    "rival": "England",
+    "pass_accuracy_pct": 83.2,
+    "progresiones": 31,
+    "presiones": 60
+  },
+  {
+    "team": "Croatia",
+    "match_id": 20260022,
+    "match_date": "2026-06-17",
+    "stage": "Group L",
+    "rival": "England",
+    "pass_accuracy_pct": 86.9,
+    "progresiones": 20,
+    "presiones": 50
+  },
+  {
+    "team": "Croatia",
+    "match_id": 20260046,
+    "match_date": "2026-06-23",
+    "stage": "Group L",
+    "rival": "Panama",
+    "pass_accuracy_pct": 85.9,
+    "progresiones": 19,
+    "presiones": 51
+  },
+  {
+    "team": "Croatia",
+    "match_id": 20260068,
+    "match_date": "2026-06-27",
+    "stage": "Group L",
+    "rival": "Ghana",
+    "pass_accuracy_pct": 90.5,
+    "progresiones": 27,
+    "presiones": 30
+  },
+  {
+    "team": "Croatia",
+    "match_id": 20260083,
+    "match_date": "2026-07-02",
+    "stage": "Round of 32",
+    "rival": "Portugal",
+    "pass_accuracy_pct": 85.5,
+    "progresiones": 30,
+    "presiones": 43
+  },
+  {
+    "team": "Curaçao",
+    "match_id": 20260010,
+    "match_date": "2026-06-14",
+    "stage": "Group E",
+    "rival": "Germany",
+    "pass_accuracy_pct": 80.4,
+    "progresiones": 34,
+    "presiones": 48
+  },
+  {
+    "team": "Curaçao",
+    "match_id": 20260034,
+    "match_date": "2026-06-20",
+    "stage": "Group E",
+    "rival": "Ecuador",
+    "pass_accuracy_pct": 70.5,
+    "progresiones": 31,
+    "presiones": 50
+  },
+  {
+    "team": "Curaçao",
+    "match_id": 20260055,
+    "match_date": "2026-06-25",
+    "stage": "Group E",
+    "rival": "Côte d'Ivoire",
+    "pass_accuracy_pct": 84.6,
+    "progresiones": 27,
+    "presiones": 62
+  },
+  {
+    "team": "Czechia",
+    "match_id": 20260002,
+    "match_date": "2026-06-11",
+    "stage": "Group A",
+    "rival": "Korea Republic",
+    "pass_accuracy_pct": 73.7,
+    "progresiones": 10,
+    "presiones": 54
+  },
+  {
+    "team": "Czechia",
+    "match_id": 20260025,
+    "match_date": "2026-06-18",
+    "stage": "Group A",
+    "rival": "South Africa",
+    "pass_accuracy_pct": 79.3,
+    "progresiones": 22,
+    "presiones": 40
+  },
+  {
+    "team": "Czechia",
+    "match_id": 20260053,
+    "match_date": "2026-06-24",
+    "stage": "Group A",
+    "rival": "Mexico",
+    "pass_accuracy_pct": 83.2,
+    "progresiones": 18,
+    "presiones": 27
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "match_id": 20260009,
+    "match_date": "2026-06-14",
+    "stage": "Group E",
+    "rival": "Ecuador",
+    "pass_accuracy_pct": 87.7,
+    "progresiones": 39,
+    "presiones": 31
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "match_id": 20260033,
+    "match_date": "2026-06-20",
+    "stage": "Group E",
+    "rival": "Germany",
+    "pass_accuracy_pct": 86.2,
+    "progresiones": 50,
+    "presiones": 57
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "match_id": 20260055,
+    "match_date": "2026-06-25",
+    "stage": "Group E",
+    "rival": "Curaçao",
+    "pass_accuracy_pct": 89.1,
+    "progresiones": 26,
+    "presiones": 43
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "match_id": 20260078,
+    "match_date": "2026-06-30",
+    "stage": "Round of 32",
+    "rival": "Norway",
+    "pass_accuracy_pct": 86.9,
+    "progresiones": 27,
+    "presiones": 57
+  },
+  {
+    "team": "Ecuador",
+    "match_id": 20260009,
+    "match_date": "2026-06-14",
+    "stage": "Group E",
+    "rival": "Côte d'Ivoire",
+    "pass_accuracy_pct": 85.4,
+    "progresiones": 16,
+    "presiones": 61
+  },
+  {
+    "team": "Ecuador",
+    "match_id": 20260034,
+    "match_date": "2026-06-20",
+    "stage": "Group E",
+    "rival": "Curaçao",
+    "pass_accuracy_pct": 90.6,
+    "progresiones": 41,
+    "presiones": 49
+  },
+  {
+    "team": "Ecuador",
+    "match_id": 20260056,
+    "match_date": "2026-06-25",
+    "stage": "Group E",
+    "rival": "Germany",
+    "pass_accuracy_pct": 83.5,
+    "progresiones": 24,
+    "presiones": 58
+  },
+  {
+    "team": "Ecuador",
+    "match_id": 20260079,
+    "match_date": "2026-06-30",
+    "stage": "Round of 32",
+    "rival": "Mexico",
+    "pass_accuracy_pct": 84.0,
+    "progresiones": 23,
+    "presiones": 37
+  },
+  {
+    "team": "Egypt",
+    "match_id": 20260016,
+    "match_date": "2026-06-15",
+    "stage": "Group G",
+    "rival": "Belgium",
+    "pass_accuracy_pct": 82.5,
+    "progresiones": 22,
+    "presiones": 68
+  },
+  {
+    "team": "Egypt",
+    "match_id": 20260040,
+    "match_date": "2026-06-21",
+    "stage": "Group G",
+    "rival": "New Zealand",
+    "pass_accuracy_pct": 89.3,
+    "progresiones": 17,
+    "presiones": 45
+  },
+  {
+    "team": "Egypt",
+    "match_id": 20260063,
+    "match_date": "2026-06-26",
+    "stage": "Group G",
+    "rival": "IR Iran",
+    "pass_accuracy_pct": 89.3,
+    "progresiones": 30,
+    "presiones": 30
+  },
+  {
+    "team": "Egypt",
+    "match_id": 20260088,
+    "match_date": "2026-07-03",
+    "stage": "Round of 32",
+    "rival": "Australia",
+    "pass_accuracy_pct": 87.5,
+    "progresiones": 23,
+    "presiones": 56
+  },
+  {
+    "team": "Egypt",
+    "match_id": 20260095,
+    "match_date": "2026-07-07",
+    "stage": "Round of 16",
+    "rival": "Argentina",
+    "pass_accuracy_pct": 82.7,
+    "progresiones": 35,
+    "presiones": 39
+  },
+  {
+    "team": "England",
+    "match_id": 20260022,
+    "match_date": "2026-06-17",
+    "stage": "Group L",
+    "rival": "Croatia",
+    "pass_accuracy_pct": 87.3,
+    "progresiones": 23,
+    "presiones": 38
+  },
+  {
+    "team": "England",
+    "match_id": 20260045,
+    "match_date": "2026-06-23",
+    "stage": "Group L",
+    "rival": "Ghana",
+    "pass_accuracy_pct": 92.8,
+    "progresiones": 31,
+    "presiones": 39
+  },
+  {
+    "team": "England",
+    "match_id": 20260067,
+    "match_date": "2026-06-27",
+    "stage": "Group L",
+    "rival": "Panama",
+    "pass_accuracy_pct": 89.0,
+    "progresiones": 25,
+    "presiones": 46
+  },
+  {
+    "team": "England",
+    "match_id": 20260080,
+    "match_date": "2026-07-01",
+    "stage": "Round of 32",
+    "rival": "Congo DR",
+    "pass_accuracy_pct": 92.2,
+    "progresiones": 41,
+    "presiones": 44
+  },
+  {
+    "team": "England",
+    "match_id": 20260092,
+    "match_date": "2026-07-05",
+    "stage": "Round of 16",
+    "rival": "Mexico",
+    "pass_accuracy_pct": 80.3,
+    "progresiones": 17,
+    "presiones": 36
+  },
+  {
+    "team": "France",
+    "match_id": 20260017,
+    "match_date": "2026-06-16",
+    "stage": "Group I",
+    "rival": "Senegal",
+    "pass_accuracy_pct": 88.4,
+    "progresiones": 37,
+    "presiones": 49
+  },
+  {
+    "team": "France",
+    "match_id": 20260042,
+    "match_date": "2026-06-22",
+    "stage": "Group I",
+    "rival": "Iraq",
+    "pass_accuracy_pct": 91.6,
+    "progresiones": 38,
+    "presiones": 35
+  },
+  {
+    "team": "France",
+    "match_id": 20260061,
+    "match_date": "2026-06-26",
+    "stage": "Group I",
+    "rival": "Norway",
+    "pass_accuracy_pct": 89.6,
+    "progresiones": 28,
+    "presiones": 45
+  },
+  {
+    "team": "France",
+    "match_id": 20260077,
+    "match_date": "2026-06-30",
+    "stage": "Round of 32",
+    "rival": "Sweden",
+    "pass_accuracy_pct": 90.9,
+    "progresiones": 33,
+    "presiones": 38
+  },
+  {
+    "team": "France",
+    "match_id": 20260089,
+    "match_date": "2026-07-04",
+    "stage": "Round of 16",
+    "rival": "Paraguay",
+    "pass_accuracy_pct": 89.6,
+    "progresiones": 36,
+    "presiones": 23
+  },
+  {
+    "team": "France",
+    "match_id": 20260097,
+    "match_date": "2026-07-09",
+    "stage": "Quarter-final",
+    "rival": "Morocco",
+    "pass_accuracy_pct": 90.5,
+    "progresiones": 43,
+    "presiones": 31
+  },
+  {
+    "team": "Germany",
+    "match_id": 20260010,
+    "match_date": "2026-06-14",
+    "stage": "Group E",
+    "rival": "Curaçao",
+    "pass_accuracy_pct": 88.8,
+    "progresiones": 32,
+    "presiones": 55
+  },
+  {
+    "team": "Germany",
+    "match_id": 20260033,
+    "match_date": "2026-06-20",
+    "stage": "Group E",
+    "rival": "Côte d'Ivoire",
+    "pass_accuracy_pct": 91.2,
+    "progresiones": 28,
+    "presiones": 59
+  },
+  {
+    "team": "Germany",
+    "match_id": 20260056,
+    "match_date": "2026-06-25",
+    "stage": "Group E",
+    "rival": "Ecuador",
+    "pass_accuracy_pct": 87.7,
+    "progresiones": 25,
+    "presiones": 41
+  },
+  {
+    "team": "Germany",
+    "match_id": 20260074,
+    "match_date": "2026-06-29",
+    "stage": "Round of 32",
+    "rival": "Paraguay",
+    "pass_accuracy_pct": 90.2,
+    "progresiones": 46,
+    "presiones": 32
+  },
+  {
+    "team": "Ghana",
+    "match_id": 20260021,
+    "match_date": "2026-06-17",
+    "stage": "Group L",
+    "rival": "Panama",
+    "pass_accuracy_pct": 84.0,
+    "progresiones": 36,
+    "presiones": 60
+  },
+  {
+    "team": "Ghana",
+    "match_id": 20260045,
+    "match_date": "2026-06-23",
+    "stage": "Group L",
+    "rival": "England",
+    "pass_accuracy_pct": 71.5,
+    "progresiones": 11,
+    "presiones": 50
+  },
+  {
+    "team": "Ghana",
+    "match_id": 20260068,
+    "match_date": "2026-06-27",
+    "stage": "Group L",
+    "rival": "Croatia",
+    "pass_accuracy_pct": 88.2,
+    "progresiones": 27,
+    "presiones": 36
+  },
+  {
+    "team": "Ghana",
+    "match_id": 20260087,
+    "match_date": "2026-07-03",
+    "stage": "Round of 32",
+    "rival": "Colombia",
+    "pass_accuracy_pct": 84.4,
+    "progresiones": 29,
+    "presiones": 37
+  },
+  {
+    "team": "Haiti",
+    "match_id": 20260005,
+    "match_date": "2026-06-13",
+    "stage": "Group C",
+    "rival": "Scotland",
+    "pass_accuracy_pct": 87.7,
+    "progresiones": 24,
+    "presiones": 35
+  },
+  {
+    "team": "Haiti",
+    "match_id": 20260029,
+    "match_date": "2026-06-19",
+    "stage": "Group C",
+    "rival": "Brazil",
+    "pass_accuracy_pct": 84.1,
+    "progresiones": 29,
+    "presiones": 58
+  },
+  {
+    "team": "Haiti",
+    "match_id": 20260050,
+    "match_date": "2026-06-24",
+    "stage": "Group C",
+    "rival": "Morocco",
+    "pass_accuracy_pct": 80.0,
+    "progresiones": 32,
+    "presiones": 50
+  },
+  {
+    "team": "IR Iran",
+    "match_id": 20260015,
+    "match_date": "2026-06-15",
+    "stage": "Group G",
+    "rival": "New Zealand",
+    "pass_accuracy_pct": 79.9,
+    "progresiones": 31,
+    "presiones": 54
+  },
+  {
+    "team": "IR Iran",
+    "match_id": 20260039,
+    "match_date": "2026-06-21",
+    "stage": "Group G",
+    "rival": "Belgium",
+    "pass_accuracy_pct": 73.1,
+    "progresiones": 9,
+    "presiones": 49
+  },
+  {
+    "team": "IR Iran",
+    "match_id": 20260063,
+    "match_date": "2026-06-26",
+    "stage": "Group G",
+    "rival": "Egypt",
+    "pass_accuracy_pct": 78.0,
+    "progresiones": 21,
+    "presiones": 45
+  },
+  {
+    "team": "Iraq",
+    "match_id": 20260018,
+    "match_date": "2026-06-16",
+    "stage": "Group I",
+    "rival": "Norway",
+    "pass_accuracy_pct": 82.4,
+    "progresiones": 24,
+    "presiones": 64
+  },
+  {
+    "team": "Iraq",
+    "match_id": 20260042,
+    "match_date": "2026-06-22",
+    "stage": "Group I",
+    "rival": "France",
+    "pass_accuracy_pct": 85.9,
+    "progresiones": 26,
+    "presiones": 43
+  },
+  {
+    "team": "Iraq",
+    "match_id": 20260062,
+    "match_date": "2026-06-26",
+    "stage": "Group I",
+    "rival": "Senegal",
+    "pass_accuracy_pct": 71.4,
+    "progresiones": 17,
+    "presiones": 48
+  },
+  {
+    "team": "Japan",
+    "match_id": 20260011,
+    "match_date": "2026-06-14",
+    "stage": "Group F",
+    "rival": "Netherlands",
+    "pass_accuracy_pct": 84.8,
+    "progresiones": 21,
+    "presiones": 46
+  },
+  {
+    "team": "Japan",
+    "match_id": 20260036,
+    "match_date": "2026-06-20",
+    "stage": "Group F",
+    "rival": "Tunisia",
+    "pass_accuracy_pct": 90.2,
+    "progresiones": 17,
+    "presiones": 50
+  },
+  {
+    "team": "Japan",
+    "match_id": 20260057,
+    "match_date": "2026-06-25",
+    "stage": "Group F",
+    "rival": "Sweden",
+    "pass_accuracy_pct": 83.9,
+    "progresiones": 16,
+    "presiones": 47
+  },
+  {
+    "team": "Japan",
+    "match_id": 20260076,
+    "match_date": "2026-06-29",
+    "stage": "Round of 32",
+    "rival": "Brazil",
+    "pass_accuracy_pct": 84.5,
+    "progresiones": 12,
+    "presiones": 48
+  },
+  {
+    "team": "Jordan",
+    "match_id": 20260020,
+    "match_date": "2026-06-16",
+    "stage": "Group J",
+    "rival": "Austria",
+    "pass_accuracy_pct": 73.8,
+    "progresiones": 23,
+    "presiones": 42
+  },
+  {
+    "team": "Jordan",
+    "match_id": 20260044,
+    "match_date": "2026-06-22",
+    "stage": "Group J",
+    "rival": "Algeria",
+    "pass_accuracy_pct": 74.4,
+    "progresiones": 29,
+    "presiones": 76
+  },
+  {
+    "team": "Jordan",
+    "match_id": 20260070,
+    "match_date": "2026-06-27",
+    "stage": "Group J",
+    "rival": "Argentina",
+    "pass_accuracy_pct": 79.7,
+    "progresiones": 30,
+    "presiones": 48
+  },
+  {
+    "team": "Korea Republic",
+    "match_id": 20260002,
+    "match_date": "2026-06-11",
+    "stage": "Group A",
+    "rival": "Czechia",
+    "pass_accuracy_pct": 89.1,
+    "progresiones": 27,
+    "presiones": 22
+  },
+  {
+    "team": "Korea Republic",
+    "match_id": 20260028,
+    "match_date": "2026-06-18",
+    "stage": "Group A",
+    "rival": "Mexico",
+    "pass_accuracy_pct": 86.0,
+    "progresiones": 16,
+    "presiones": 37
+  },
+  {
+    "team": "Korea Republic",
+    "match_id": 20260054,
+    "match_date": "2026-06-24",
+    "stage": "Group A",
+    "rival": "South Africa",
+    "pass_accuracy_pct": 91.5,
+    "progresiones": 15,
+    "presiones": 27
+  },
+  {
+    "team": "Mexico",
+    "match_id": 20260001,
+    "match_date": "2026-06-11",
+    "stage": "Group A",
+    "rival": "South Africa",
+    "pass_accuracy_pct": 90.5,
+    "progresiones": 23,
+    "presiones": 26
+  },
+  {
+    "team": "Mexico",
+    "match_id": 20260028,
+    "match_date": "2026-06-18",
+    "stage": "Group A",
+    "rival": "Korea Republic",
+    "pass_accuracy_pct": 83.3,
+    "progresiones": 18,
+    "presiones": 39
+  },
+  {
+    "team": "Mexico",
+    "match_id": 20260053,
+    "match_date": "2026-06-24",
+    "stage": "Group A",
+    "rival": "Czechia",
+    "pass_accuracy_pct": 86.3,
+    "progresiones": 14,
+    "presiones": 23
+  },
+  {
+    "team": "Mexico",
+    "match_id": 20260079,
+    "match_date": "2026-06-30",
+    "stage": "Round of 32",
+    "rival": "Ecuador",
+    "pass_accuracy_pct": 81.7,
+    "progresiones": 15,
+    "presiones": 37
+  },
+  {
+    "team": "Mexico",
+    "match_id": 20260092,
+    "match_date": "2026-07-05",
+    "stage": "Round of 16",
+    "rival": "England",
+    "pass_accuracy_pct": 92.4,
+    "progresiones": 20,
+    "presiones": 52
+  },
+  {
+    "team": "Morocco",
+    "match_id": 20260007,
+    "match_date": "2026-06-13",
+    "stage": "Group C",
+    "rival": "Brazil",
+    "pass_accuracy_pct": 85.7,
+    "progresiones": 49,
+    "presiones": 41
+  },
+  {
+    "team": "Morocco",
+    "match_id": 20260030,
+    "match_date": "2026-06-19",
+    "stage": "Group C",
+    "rival": "Scotland",
+    "pass_accuracy_pct": 90.5,
+    "progresiones": 32,
+    "presiones": 56
+  },
+  {
+    "team": "Morocco",
+    "match_id": 20260050,
+    "match_date": "2026-06-24",
+    "stage": "Group C",
+    "rival": "Haiti",
+    "pass_accuracy_pct": 88.9,
+    "progresiones": 39,
+    "presiones": 57
+  },
+  {
+    "team": "Morocco",
+    "match_id": 20260075,
+    "match_date": "2026-06-29",
+    "stage": "Round of 32",
+    "rival": "Netherlands",
+    "pass_accuracy_pct": 91.2,
+    "progresiones": 26,
+    "presiones": 64
+  },
+  {
+    "team": "Morocco",
+    "match_id": 20260090,
+    "match_date": "2026-07-04",
+    "stage": "Round of 16",
+    "rival": "Canada",
+    "pass_accuracy_pct": 84.2,
+    "progresiones": 29,
+    "presiones": 41
+  },
+  {
+    "team": "Morocco",
+    "match_id": 20260097,
+    "match_date": "2026-07-09",
+    "stage": "Quarter-final",
+    "rival": "France",
+    "pass_accuracy_pct": 87.0,
+    "progresiones": 32,
+    "presiones": 42
+  },
+  {
+    "team": "Netherlands",
+    "match_id": 20260011,
+    "match_date": "2026-06-14",
+    "stage": "Group F",
+    "rival": "Japan",
+    "pass_accuracy_pct": 89.4,
+    "progresiones": 23,
+    "presiones": 30
+  },
+  {
+    "team": "Netherlands",
+    "match_id": 20260035,
+    "match_date": "2026-06-20",
+    "stage": "Group F",
+    "rival": "Sweden",
+    "pass_accuracy_pct": 89.0,
+    "progresiones": 25,
+    "presiones": 38
+  },
+  {
+    "team": "Netherlands",
+    "match_id": 20260058,
+    "match_date": "2026-06-25",
+    "stage": "Group F",
+    "rival": "Tunisia",
+    "pass_accuracy_pct": 92.7,
+    "progresiones": 25,
+    "presiones": 32
+  },
+  {
+    "team": "Netherlands",
+    "match_id": 20260075,
+    "match_date": "2026-06-29",
+    "stage": "Round of 32",
+    "rival": "Morocco",
+    "pass_accuracy_pct": 77.7,
+    "progresiones": 19,
+    "presiones": 43
+  },
+  {
+    "team": "New Zealand",
+    "match_id": 20260015,
+    "match_date": "2026-06-15",
+    "stage": "Group G",
+    "rival": "IR Iran",
+    "pass_accuracy_pct": 84.4,
+    "progresiones": 22,
+    "presiones": 42
+  },
+  {
+    "team": "New Zealand",
+    "match_id": 20260040,
+    "match_date": "2026-06-21",
+    "stage": "Group G",
+    "rival": "Egypt",
+    "pass_accuracy_pct": 81.2,
+    "progresiones": 23,
+    "presiones": 47
+  },
+  {
+    "team": "New Zealand",
+    "match_id": 20260064,
+    "match_date": "2026-06-26",
+    "stage": "Group G",
+    "rival": "Belgium",
+    "pass_accuracy_pct": 84.2,
+    "progresiones": 17,
+    "presiones": 51
+  },
+  {
+    "team": "Norway",
+    "match_id": 20260018,
+    "match_date": "2026-06-16",
+    "stage": "Group I",
+    "rival": "Iraq",
+    "pass_accuracy_pct": 90.0,
+    "progresiones": 34,
+    "presiones": 34
+  },
+  {
+    "team": "Norway",
+    "match_id": 20260041,
+    "match_date": "2026-06-22",
+    "stage": "Group I",
+    "rival": "Senegal",
+    "pass_accuracy_pct": 81.7,
+    "progresiones": 19,
+    "presiones": 33
+  },
+  {
+    "team": "Norway",
+    "match_id": 20260061,
+    "match_date": "2026-06-26",
+    "stage": "Group I",
+    "rival": "France",
+    "pass_accuracy_pct": 81.7,
+    "progresiones": 24,
+    "presiones": 43
+  },
+  {
+    "team": "Norway",
+    "match_id": 20260078,
+    "match_date": "2026-06-30",
+    "stage": "Round of 32",
+    "rival": "Côte d'Ivoire",
+    "pass_accuracy_pct": 89.8,
+    "progresiones": 36,
+    "presiones": 42
+  },
+  {
+    "team": "Norway",
+    "match_id": 20260091,
+    "match_date": "2026-07-05",
+    "stage": "Round of 16",
+    "rival": "Brazil",
+    "pass_accuracy_pct": 91.8,
+    "progresiones": 28,
+    "presiones": 23
+  },
+  {
+    "team": "Panama",
+    "match_id": 20260021,
+    "match_date": "2026-06-17",
+    "stage": "Group L",
+    "rival": "Ghana",
+    "pass_accuracy_pct": 88.1,
+    "progresiones": 22,
+    "presiones": 62
+  },
+  {
+    "team": "Panama",
+    "match_id": 20260046,
+    "match_date": "2026-06-23",
+    "stage": "Group L",
+    "rival": "Croatia",
+    "pass_accuracy_pct": 79.2,
+    "progresiones": 24,
+    "presiones": 58
+  },
+  {
+    "team": "Panama",
+    "match_id": 20260067,
+    "match_date": "2026-06-27",
+    "stage": "Group L",
+    "rival": "England",
+    "pass_accuracy_pct": 75.5,
+    "progresiones": 22,
+    "presiones": 55
+  },
+  {
+    "team": "Paraguay",
+    "match_id": 20260004,
+    "match_date": "2026-06-12",
+    "stage": "Group D",
+    "rival": "USA",
+    "pass_accuracy_pct": 74.1,
+    "progresiones": 17,
+    "presiones": 75
+  },
+  {
+    "team": "Paraguay",
+    "match_id": 20260031,
+    "match_date": "2026-06-19",
+    "stage": "Group D",
+    "rival": "Türkiye",
+    "pass_accuracy_pct": 53.8,
+    "progresiones": 17,
+    "presiones": 69
+  },
+  {
+    "team": "Paraguay",
+    "match_id": 20260060,
+    "match_date": "2026-06-25",
+    "stage": "Group D",
+    "rival": "Australia",
+    "pass_accuracy_pct": 82.5,
+    "progresiones": 18,
+    "presiones": 62
+  },
+  {
+    "team": "Paraguay",
+    "match_id": 20260074,
+    "match_date": "2026-06-29",
+    "stage": "Round of 32",
+    "rival": "Germany",
+    "pass_accuracy_pct": 62.9,
+    "progresiones": 28,
+    "presiones": 69
+  },
+  {
+    "team": "Paraguay",
+    "match_id": 20260089,
+    "match_date": "2026-07-04",
+    "stage": "Round of 16",
+    "rival": "France",
+    "pass_accuracy_pct": 56.5,
+    "progresiones": 13,
+    "presiones": 56
+  },
+  {
+    "team": "Portugal",
+    "match_id": 20260023,
+    "match_date": "2026-06-17",
+    "stage": "Group K",
+    "rival": "Congo DR",
+    "pass_accuracy_pct": 92.0,
+    "progresiones": 27,
+    "presiones": 24
+  },
+  {
+    "team": "Portugal",
+    "match_id": 20260047,
+    "match_date": "2026-06-23",
+    "stage": "Group K",
+    "rival": "Uzbekistan",
+    "pass_accuracy_pct": 90.3,
+    "progresiones": 43,
+    "presiones": 43
+  },
+  {
+    "team": "Portugal",
+    "match_id": 20260071,
+    "match_date": "2026-06-27",
+    "stage": "Group K",
+    "rival": "Colombia",
+    "pass_accuracy_pct": 92.3,
+    "progresiones": 32,
+    "presiones": 29
+  },
+  {
+    "team": "Portugal",
+    "match_id": 20260083,
+    "match_date": "2026-07-02",
+    "stage": "Round of 32",
+    "rival": "Croatia",
+    "pass_accuracy_pct": 91.5,
+    "progresiones": 32,
+    "presiones": 38
+  },
+  {
+    "team": "Portugal",
+    "match_id": 20260093,
+    "match_date": "2026-07-06",
+    "stage": "Round of 16",
+    "rival": "Spain",
+    "pass_accuracy_pct": 82.4,
+    "progresiones": 36,
+    "presiones": 27
+  },
+  {
+    "team": "Qatar",
+    "match_id": 20260008,
+    "match_date": "2026-06-13",
+    "stage": "Group B",
+    "rival": "Switzerland",
+    "pass_accuracy_pct": 73.7,
+    "progresiones": 13,
+    "presiones": 42
+  },
+  {
+    "team": "Qatar",
+    "match_id": 20260027,
+    "match_date": "2026-06-18",
+    "stage": "Group B",
+    "rival": "Canada",
+    "pass_accuracy_pct": 64.5,
+    "progresiones": 7,
+    "presiones": 43
+  },
+  {
+    "team": "Qatar",
+    "match_id": 20260052,
+    "match_date": "2026-06-24",
+    "stage": "Group B",
+    "rival": "Bosnia and Herzegovina",
+    "pass_accuracy_pct": 84.9,
+    "progresiones": 13,
+    "presiones": 37
+  },
+  {
+    "team": "Saudi Arabia",
+    "match_id": 20260013,
+    "match_date": "2026-06-15",
+    "stage": "Group H",
+    "rival": "Uruguay",
+    "pass_accuracy_pct": 73.4,
+    "progresiones": 13,
+    "presiones": 40
+  },
+  {
+    "team": "Saudi Arabia",
+    "match_id": 20260038,
+    "match_date": "2026-06-21",
+    "stage": "Group H",
+    "rival": "Spain",
+    "pass_accuracy_pct": 79.4,
+    "progresiones": 19,
+    "presiones": 34
+  },
+  {
+    "team": "Saudi Arabia",
+    "match_id": 20260065,
+    "match_date": "2026-06-26",
+    "stage": "Group H",
+    "rival": "Cabo Verde",
+    "pass_accuracy_pct": 81.3,
+    "progresiones": 21,
+    "presiones": 66
+  },
+  {
+    "team": "Scotland",
+    "match_id": 20260005,
+    "match_date": "2026-06-13",
+    "stage": "Group C",
+    "rival": "Haiti",
+    "pass_accuracy_pct": 81.6,
+    "progresiones": 21,
+    "presiones": 39
+  },
+  {
+    "team": "Scotland",
+    "match_id": 20260030,
+    "match_date": "2026-06-19",
+    "stage": "Group C",
+    "rival": "Morocco",
+    "pass_accuracy_pct": 87.6,
+    "progresiones": 26,
+    "presiones": 36
+  },
+  {
+    "team": "Scotland",
+    "match_id": 20260049,
+    "match_date": "2026-06-24",
+    "stage": "Group C",
+    "rival": "Brazil",
+    "pass_accuracy_pct": 89.6,
+    "progresiones": 15,
+    "presiones": 34
+  },
+  {
+    "team": "Senegal",
+    "match_id": 20260017,
+    "match_date": "2026-06-16",
+    "stage": "Group I",
+    "rival": "France",
+    "pass_accuracy_pct": 86.9,
+    "progresiones": 28,
+    "presiones": 44
+  },
+  {
+    "team": "Senegal",
+    "match_id": 20260041,
+    "match_date": "2026-06-22",
+    "stage": "Group I",
+    "rival": "Norway",
+    "pass_accuracy_pct": 88.7,
+    "progresiones": 27,
+    "presiones": 41
+  },
+  {
+    "team": "Senegal",
+    "match_id": 20260062,
+    "match_date": "2026-06-26",
+    "stage": "Group I",
+    "rival": "Iraq",
+    "pass_accuracy_pct": 89.4,
+    "progresiones": 40,
+    "presiones": 23
+  },
+  {
+    "team": "Senegal",
+    "match_id": 20260082,
+    "match_date": "2026-07-01",
+    "stage": "Round of 32",
+    "rival": "Belgium",
+    "pass_accuracy_pct": 87.0,
+    "progresiones": 33,
+    "presiones": 62
+  },
+  {
+    "team": "South Africa",
+    "match_id": 20260001,
+    "match_date": "2026-06-11",
+    "stage": "Group A",
+    "rival": "Mexico",
+    "pass_accuracy_pct": 82.6,
+    "progresiones": 8,
+    "presiones": 45
+  },
+  {
+    "team": "South Africa",
+    "match_id": 20260025,
+    "match_date": "2026-06-18",
+    "stage": "Group A",
+    "rival": "Czechia",
+    "pass_accuracy_pct": 88.7,
+    "progresiones": 20,
+    "presiones": 41
+  },
+  {
+    "team": "South Africa",
+    "match_id": 20260054,
+    "match_date": "2026-06-24",
+    "stage": "Group A",
+    "rival": "Korea Republic",
+    "pass_accuracy_pct": 80.9,
+    "progresiones": 21,
+    "presiones": 37
+  },
+  {
+    "team": "South Africa",
+    "match_id": 20260073,
+    "match_date": "2026-06-28",
+    "stage": "Round of 32",
+    "rival": "Canada",
+    "pass_accuracy_pct": 84.5,
+    "progresiones": 25,
+    "presiones": 43
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260014,
+    "match_date": "2026-06-15",
+    "stage": "Group H",
+    "rival": "Cabo Verde",
+    "pass_accuracy_pct": 93.1,
+    "progresiones": 23,
+    "presiones": 37
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260038,
+    "match_date": "2026-06-21",
+    "stage": "Group H",
+    "rival": "Saudi Arabia",
+    "pass_accuracy_pct": 92.6,
+    "progresiones": 25,
+    "presiones": 30
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260066,
+    "match_date": "2026-06-26",
+    "stage": "Group H",
+    "rival": "Uruguay",
+    "pass_accuracy_pct": 89.5,
+    "progresiones": 37,
+    "presiones": 35
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260084,
+    "match_date": "2026-07-02",
+    "stage": "Round of 32",
+    "rival": "Austria",
+    "pass_accuracy_pct": 91.6,
+    "progresiones": 42,
+    "presiones": 29
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260093,
+    "match_date": "2026-07-06",
+    "stage": "Round of 16",
+    "rival": "Portugal",
+    "pass_accuracy_pct": 89.4,
+    "progresiones": 29,
+    "presiones": 45
+  },
+  {
+    "team": "Sweden",
+    "match_id": 20260012,
+    "match_date": "2026-06-14",
+    "stage": "Group F",
+    "rival": "Tunisia",
+    "pass_accuracy_pct": 81.5,
+    "progresiones": 26,
+    "presiones": 44
+  },
+  {
+    "team": "Sweden",
+    "match_id": 20260035,
+    "match_date": "2026-06-20",
+    "stage": "Group F",
+    "rival": "Netherlands",
+    "pass_accuracy_pct": 86.1,
+    "progresiones": 20,
+    "presiones": 38
+  },
+  {
+    "team": "Sweden",
+    "match_id": 20260057,
+    "match_date": "2026-06-25",
+    "stage": "Group F",
+    "rival": "Japan",
+    "pass_accuracy_pct": 80.5,
+    "progresiones": 18,
+    "presiones": 26
+  },
+  {
+    "team": "Sweden",
+    "match_id": 20260077,
+    "match_date": "2026-06-30",
+    "stage": "Round of 32",
+    "rival": "France",
+    "pass_accuracy_pct": 81.1,
+    "progresiones": 16,
+    "presiones": 42
+  },
+  {
+    "team": "Switzerland",
+    "match_id": 20260008,
+    "match_date": "2026-06-13",
+    "stage": "Group B",
+    "rival": "Qatar",
+    "pass_accuracy_pct": 91.7,
+    "progresiones": 31,
+    "presiones": 33
+  },
+  {
+    "team": "Switzerland",
+    "match_id": 20260026,
+    "match_date": "2026-06-18",
+    "stage": "Group B",
+    "rival": "Bosnia and Herzegovina",
+    "pass_accuracy_pct": 88.4,
+    "progresiones": 24,
+    "presiones": 40
+  },
+  {
+    "team": "Switzerland",
+    "match_id": 20260051,
+    "match_date": "2026-06-24",
+    "stage": "Group B",
+    "rival": "Canada",
+    "pass_accuracy_pct": 82.6,
+    "progresiones": 16,
+    "presiones": 50
+  },
+  {
+    "team": "Switzerland",
+    "match_id": 20260085,
+    "match_date": "2026-07-02",
+    "stage": "Round of 32",
+    "rival": "Algeria",
+    "pass_accuracy_pct": 82.3,
+    "progresiones": 37,
+    "presiones": 51
+  },
+  {
+    "team": "Switzerland",
+    "match_id": 20260096,
+    "match_date": "2026-07-07",
+    "stage": "Round of 16",
+    "rival": "Colombia",
+    "pass_accuracy_pct": 87.5,
+    "progresiones": 26,
+    "presiones": 60
+  },
+  {
+    "team": "Tunisia",
+    "match_id": 20260012,
+    "match_date": "2026-06-14",
+    "stage": "Group F",
+    "rival": "Sweden",
+    "pass_accuracy_pct": 80.8,
+    "progresiones": 19,
+    "presiones": 45
+  },
+  {
+    "team": "Tunisia",
+    "match_id": 20260036,
+    "match_date": "2026-06-20",
+    "stage": "Group F",
+    "rival": "Japan",
+    "pass_accuracy_pct": 81.1,
+    "progresiones": 13,
+    "presiones": 35
+  },
+  {
+    "team": "Tunisia",
+    "match_id": 20260058,
+    "match_date": "2026-06-25",
+    "stage": "Group F",
+    "rival": "Netherlands",
+    "pass_accuracy_pct": 78.5,
+    "progresiones": 15,
+    "presiones": 51
+  },
+  {
+    "team": "Türkiye",
+    "match_id": 20260006,
+    "match_date": "2026-06-13",
+    "stage": "Group D",
+    "rival": "Australia",
+    "pass_accuracy_pct": 91.8,
+    "progresiones": 38,
+    "presiones": 31
+  },
+  {
+    "team": "Türkiye",
+    "match_id": 20260031,
+    "match_date": "2026-06-19",
+    "stage": "Group D",
+    "rival": "Paraguay",
+    "pass_accuracy_pct": 89.2,
+    "progresiones": 43,
+    "presiones": 36
+  },
+  {
+    "team": "Türkiye",
+    "match_id": 20260059,
+    "match_date": "2026-06-25",
+    "stage": "Group D",
+    "rival": "USA",
+    "pass_accuracy_pct": 77.4,
+    "progresiones": 24,
+    "presiones": 56
+  },
+  {
+    "team": "USA",
+    "match_id": 20260004,
+    "match_date": "2026-06-12",
+    "stage": "Group D",
+    "rival": "Paraguay",
+    "pass_accuracy_pct": 86.4,
+    "progresiones": 52,
+    "presiones": 39
+  },
+  {
+    "team": "USA",
+    "match_id": 20260032,
+    "match_date": "2026-06-19",
+    "stage": "Group D",
+    "rival": "Australia",
+    "pass_accuracy_pct": 87.6,
+    "progresiones": 33,
+    "presiones": 50
+  },
+  {
+    "team": "USA",
+    "match_id": 20260059,
+    "match_date": "2026-06-25",
+    "stage": "Group D",
+    "rival": "Türkiye",
+    "pass_accuracy_pct": 85.7,
+    "progresiones": 19,
+    "presiones": 50
+  },
+  {
+    "team": "USA",
+    "match_id": 20260081,
+    "match_date": "2026-07-01",
+    "stage": "Round of 32",
+    "rival": "Bosnia and Herzegovina",
+    "pass_accuracy_pct": 85.2,
+    "progresiones": 31,
+    "presiones": 38
+  },
+  {
+    "team": "USA",
+    "match_id": 20260094,
+    "match_date": "2026-07-06",
+    "stage": "Round of 16",
+    "rival": "Belgium",
+    "pass_accuracy_pct": 87.3,
+    "progresiones": 28,
+    "presiones": 39
+  },
+  {
+    "team": "Uruguay",
+    "match_id": 20260013,
+    "match_date": "2026-06-15",
+    "stage": "Group H",
+    "rival": "Saudi Arabia",
+    "pass_accuracy_pct": 90.9,
+    "progresiones": 32,
+    "presiones": 23
+  },
+  {
+    "team": "Uruguay",
+    "match_id": 20260037,
+    "match_date": "2026-06-21",
+    "stage": "Group H",
+    "rival": "Cabo Verde",
+    "pass_accuracy_pct": 85.9,
+    "progresiones": 31,
+    "presiones": 43
+  },
+  {
+    "team": "Uruguay",
+    "match_id": 20260066,
+    "match_date": "2026-06-26",
+    "stage": "Group H",
+    "rival": "Spain",
+    "pass_accuracy_pct": 79.0,
+    "progresiones": 24,
+    "presiones": 64
+  },
+  {
+    "team": "Uzbekistan",
+    "match_id": 20260024,
+    "match_date": "2026-06-17",
+    "stage": "Group K",
+    "rival": "Colombia",
+    "pass_accuracy_pct": 79.9,
+    "progresiones": 20,
+    "presiones": 36
+  },
+  {
+    "team": "Uzbekistan",
+    "match_id": 20260047,
+    "match_date": "2026-06-23",
+    "stage": "Group K",
+    "rival": "Portugal",
+    "pass_accuracy_pct": 80.1,
+    "progresiones": 21,
+    "presiones": 44
+  },
+  {
+    "team": "Uzbekistan",
+    "match_id": 20260072,
+    "match_date": "2026-06-27",
+    "stage": "Group K",
+    "rival": "Congo DR",
+    "pass_accuracy_pct": 74.9,
+    "progresiones": 16,
+    "presiones": 62
+  }
+]

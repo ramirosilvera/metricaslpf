@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import RadarCompare from "../islands/RadarCompare";
 import TimelineChart from "../islands/TimelineChart";
-import { loadJson, type RadarRow, type TimelineRow, type TeamPhysicalRankingRow, type TeamTacticalRankingRow } from "../lib/data";
+import { loadJson, type RadarRow, type TimelineRow, type TimelineTactical2026Row, type TeamPhysicalRankingRow, type TeamTacticalRankingRow } from "../lib/data";
 
 // Normaliza el shape {status, rows} de los agregados que aún no se scrapearon
 // a un array vacío, para que el radar arranque en un modo con datos.
@@ -16,6 +16,7 @@ const radar = loadJson<RadarRow[]>("radar_team_season.json");
 const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
 const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");
 const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
+const timeline2026 = loadArray<TimelineTactical2026Row>("timeline_tactical_2026.json");
 ---
 
 <Base title="Comparar" description="Comparación cabeza a cabeza y evolución dentro del torneo.">
@@ -35,9 +36,12 @@ const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
   </section>
 
   <section class="section">
-    <div class="section-head"><h2>Evolución durante el torneo</h2></div>
+    <div class="section-head">
+      <h2>Evolución durante el torneo</h2>
+      <p>Cómo cambia el juego de una selección partido a partido. El Mundial 2026 se actualiza a medida que avanza.</p>
+    </div>
     <div class="card">
-      <TimelineChart client:only="react" rows={timeline} />
+      <TimelineChart client:only="react" rows2026={timeline2026} rows={timeline} />
     </div>
   </section>
 </Base>

@@ -56,6 +56,19 @@ export interface TimelineRow {
   shots_total: number;
 }
 
+// Evolución táctica por partido del Mundial 2026 (en curso, se actualiza en cada
+// corrida del pipeline). Un punto por partido de cada selección, cronológico.
+export interface TimelineTactical2026Row {
+  team: string;
+  match_id: number;
+  match_date: string;
+  stage: string;
+  rival: string;
+  pass_accuracy_pct: number;
+  progresiones: number;
+  presiones: number;
+}
+
 export interface RadarRow {
   team: string;
   season: string;

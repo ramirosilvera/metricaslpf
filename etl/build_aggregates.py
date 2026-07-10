@@ -351,10 +351,38 @@ def build():
             team_tac[f"{c}_percentil"] = (team_tac[c].rank(pct=True) * 100).round(0)
         team_tac = team_tac.sort_values("progresiones_promedio", ascending=False)
         _write_json("team_tactical_ranking.json", _records(team_tac))
+
+        # --- Evolución TÁCTICA por partido del Mundial 2026 (timeline en curso) ---
+        # Un punto por partido de cada selección, en orden cronológico, para la
+        # "evolución durante el torneo" del comparador. Se reconstruye en cada
+        # corrida del pipeline, así se va actualizando a medida que entran partidos.
+        tl_matches = con.execute(
+            f"SELECT match_id, stage, match_date, home_team, away_team "
+            f"FROM read_parquet('{WAREHOUSE / 'matches.parquet'}') WHERE season = '2026'"
+        ).df()
+        tl_pm = (
+            tactical_players.groupby(["team", "match_id"])
+            .agg(
+                _compl=("passes_completed", "sum"),
+                _att=("passes_attempted", "sum"),
+                progresiones=("ball_progressions", "sum"),
+                presiones=("pressing_direct", "sum"),
+            )
+            .reset_index()
+        )
+        tl_pm["pass_accuracy_pct"] = (tl_pm["_compl"] / tl_pm["_att"] * 100).round(1).where(tl_pm["_att"] > 0)
+        tl = tl_pm.merge(tl_matches, on="match_id", how="inner")
+        tl["rival"] = tl.apply(lambda r: r["away_team"] if r["team"] == r["home_team"] else r["home_team"], axis=1)
+        tl = tl.sort_values(["team", "match_date", "match_id"])
+        _write_json(
+            "timeline_tactical_2026.json",
+            _records(tl[["team", "match_id", "match_date", "stage", "rival", "pass_accuracy_pct", "progresiones", "presiones"]]),
+        )
     else:
         _write_json("tactical_player_match_stats.json", {"status": "pending_first_scrape", "rows": []})
         _write_json("tactical_player_ranking.json", {"status": "pending_first_scrape", "rows": []})
         _write_json("team_tactical_ranking.json", {"status": "pending_first_scrape", "rows": []})
+        _write_json("timeline_tactical_2026.json", {"status": "pending_first_scrape", "rows": []})
 
     if has_squads:
         squads = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'squads.parquet'}')").df()
