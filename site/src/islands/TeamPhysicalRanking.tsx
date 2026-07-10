@@ -2,15 +2,25 @@ import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { TeamPhysicalRankingRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
+import { generateTeamPhysicalRankingInsights } from "../lib/insights";
 
 // Ranking físico COLECTIVO real del Mundial 2026 — las 48 selecciones, no un
 // proxy táctico. Es la distancia/intensidad SUMADA del equipo por partido
 // (11 jugadores), promediada entre los partidos ya cargados de cada selección.
-const METRICS: { key: keyof TeamPhysicalRankingRow; pctKey: keyof TeamPhysicalRankingRow; label: string; suffix: string }[] = [
-  { key: "distancia_promedio_km", pctKey: "distancia_promedio_km_percentil", label: "Distancia de equipo (promedio por partido)", suffix: " km" },
-  { key: "alta_intensidad_promedio_m", pctKey: "alta_intensidad_promedio_m_percentil", label: "Distancia a alta intensidad (equipo, promedio)", suffix: " m" },
-  { key: "sprints_promedio", pctKey: "sprints_promedio_percentil", label: "Sprints del equipo (promedio por partido)", suffix: "" },
-  { key: "velocidad_punta_kmh", pctKey: "velocidad_punta_kmh_percentil", label: "Velocidad punta del equipo", suffix: " km/h" },
+// `short` es la etiqueta breve para incrustar en la lectura automática; `running`
+// distingue las métricas de "correr" (para la salvedad de la hipótesis).
+const METRICS: {
+  key: keyof TeamPhysicalRankingRow;
+  pctKey: keyof TeamPhysicalRankingRow;
+  label: string;
+  short: string;
+  suffix: string;
+  running: boolean;
+}[] = [
+  { key: "distancia_promedio_km", pctKey: "distancia_promedio_km_percentil", label: "Distancia de equipo (promedio por partido)", short: "distancia recorrida", suffix: " km", running: true },
+  { key: "alta_intensidad_promedio_m", pctKey: "alta_intensidad_promedio_m_percentil", label: "Distancia a alta intensidad (equipo, promedio)", short: "distancia a alta intensidad", suffix: " m", running: true },
+  { key: "sprints_promedio", pctKey: "sprints_promedio_percentil", label: "Sprints del equipo (promedio por partido)", short: "sprints por partido", suffix: "", running: true },
+  { key: "velocidad_punta_kmh", pctKey: "velocidad_punta_kmh_percentil", label: "Velocidad punta del equipo", short: "velocidad punta", suffix: " km/h", running: false },
 ];
 
 interface Props {
@@ -34,6 +44,19 @@ export default function TeamPhysicalRanking({ rows }: Props) {
   const labels = sorted.map((r) => r.team);
   const values = sorted.map((r) => r[metric.key] as number);
   const isArgentina = sorted.map((r) => r.team === "Argentina");
+
+  // Lectura automática: dónde cae Argentina en esta métrica, con la salvedad de
+  // la hipótesis. Determinística, sin llamadas a IA.
+  const insights = useMemo(
+    () =>
+      generateTeamPhysicalRankingInsights(
+        sorted.map((r) => ({ team: r.team, value: r[metric.key] as number, percentile: r[metric.pctKey] as number })),
+        metric.short,
+        metric.suffix,
+        { focusTeam: "Argentina", isRunning: metric.running },
+      ),
+    [sorted, metricKey],
+  );
 
   const option = {
     grid: { left: narrow ? 92 : 130, right: narrow ? 16 : 44, top: 10, bottom: 30 },
@@ -107,6 +130,25 @@ export default function TeamPhysicalRanking({ rows }: Props) {
         </span>
       </div>
       <ReactECharts option={option} style={{ height: Math.max(360, sorted.length * (narrow ? 18 : 22)) }} notMerge={true} />
+
+      {insights.length > 0 && (
+        <div className="insight-card">
+          <div className="insight-head">
+            <span className="insight-dot" />
+            Lectura automática
+          </div>
+          <ul className="insight-list">
+            {insights.map((line, i) => (
+              <li key={i}>{line}</li>
+            ))}
+          </ul>
+          <p className="insight-note">
+            Resumen generado en tu navegador a partir del ranking real (no es una respuesta de IA en vivo). ¿Querés
+            profundizar? Preguntale al asistente.
+          </p>
+        </div>
+      )}
+
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Fuente: FIFA Training Centre (reportes oficiales por partido, Mundial 2026). Es la métrica del equipo (suma de
         los 11) por partido, promediada sobre los partidos ya cargados de cada selección — recordá que un equipo que

@@ -135,6 +135,88 @@ export function generateTeamComparisonInsights(
   return insights;
 }
 
+export interface RankedTeam {
+  team: string;
+  value: number;
+  percentile: number | null;
+}
+
+/** Cualificador para dónde cae una selección dentro de las 48. */
+function rankTier(pct: number): string {
+  if (pct >= 85) return "entre las que más registran del torneo";
+  if (pct >= 60) return "por encima de la media del torneo";
+  if (pct >= 40) return "en torno a la media del torneo";
+  if (pct >= 15) return "por debajo de la media del torneo";
+  return "entre las que menos registran del torneo";
+}
+
+/**
+ * Lectura automática del ranking físico colectivo, centrada en una selección
+ * (por defecto Argentina, que es la hipótesis del sitio). `ranked` viene ya
+ * ordenado de mayor a menor por el valor de la métrica elegida. Responde, con
+ * datos reales, la pregunta central "¿[foco] corre más o menos que el resto?"
+ * sin afirmar que eso mida el estado físico — mantiene la cautela del proyecto.
+ */
+export function generateTeamPhysicalRankingInsights(
+  ranked: RankedTeam[],
+  metricLabel: string,
+  suffix: string,
+  opts: { focusTeam?: string; isRunning?: boolean } = {},
+): string[] {
+  const focusTeam = opts.focusTeam ?? "Argentina";
+  const clean = ranked.filter((r) => Number.isFinite(r.value));
+  if (clean.length < 3) return [];
+
+  const n = clean.length;
+  const fmt = (v: number) => `${Math.round(v * 10) / 10}${suffix}`;
+  const leader = clean[0];
+  const last = clean[n - 1];
+  const insights: string[] = [];
+
+  // 1) Techo y piso del torneo.
+  insights.push(
+    `${leader.team} encabeza en ${metricLabel} (${fmt(leader.value)}) y ${last.team} es la que menos registra ` +
+      `(${fmt(last.value)}), sobre ${n} selecciones con datos.`,
+  );
+
+  // 2) Dónde cae la selección foco.
+  const idx = clean.findIndex((r) => r.team === focusTeam);
+  if (idx >= 0) {
+    const focus = clean[idx];
+    const pos = idx + 1;
+    const pct = focus.percentile != null && Number.isFinite(focus.percentile) ? Math.round(focus.percentile) : null;
+    const pctTxt = pct != null ? `, percentil ${pct}` : "";
+    insights.push(
+      `${focusTeam} aparece ${pos}° de ${n} en ${metricLabel} (${fmt(focus.value)}${pctTxt}): ` +
+        `${rankTier(pct ?? (1 - idx / n) * 100)}.`,
+    );
+
+    // 3) La lectura clave del proyecto: correr más o menos no ordena, por sí
+    //    solo, por rendimiento. La dirección se alinea con la banda de percentil
+    //    (no con un corte binario) para no chocar con el cualificador de arriba.
+    if (opts.isRunning && pct != null) {
+      if (pct <= 40) {
+        insights.push(
+          `Que corra menos que buena parte del torneo no implica peor estado físico: un equipo que controla la ` +
+            `pelota suele recorrer menos distancia porque persigue menos. Leelo junto al contexto táctico, no como un ranking de esfuerzo.`,
+        );
+      } else if (pct >= 60) {
+        insights.push(
+          `Corre más que buena parte del torneo, pero correr más tampoco es automáticamente "mejor": puede reflejar ` +
+            `que juega sin la pelota y persigue más. La cifra sola no ordena por rendimiento.`,
+        );
+      } else {
+        insights.push(
+          `Se ubica en la zona media: ni entre las que más corren ni entre las que menos. Con muestras chicas, la ` +
+            `distancia por sí sola no ordena por rendimiento — hay que leerla junto al contexto táctico.`,
+        );
+      }
+    }
+  }
+
+  return insights;
+}
+
 export interface PlayerMetricPoint {
   key: string;
   /** Etiqueta legible ("distancia por partido", "intercepciones"). */
