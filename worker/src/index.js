@@ -262,6 +262,16 @@ function json(body, status, extraHeaders) {
   });
 }
 
+// Gemini exige que functionResponse.response sea un OBJETO (Struct), no un
+// array. Las RPCs que devuelven TABLE dan un array (`[{...}, ...]`); mandarlo
+// crudo hace que Gemini rechace la request con 502 INVALID_ARGUMENT (justo
+// cuando la pregunta dispara una consulta de datos). Se envuelve en un objeto.
+function wrapFunctionResponse(raw) {
+  if (Array.isArray(raw)) return { rows: raw };
+  if (raw !== null && typeof raw === "object") return raw;
+  return { value: raw };
+}
+
 async function callSupabaseRpc(env, toolName, args) {
   const mapper = TOOL_RPC_MAP[toolName];
   if (!mapper) return { error: `herramienta desconocida: ${toolName}` };
@@ -389,7 +399,10 @@ export default {
         contents.push({ role: "model", parts: parts });
         const responses = await Promise.all(
           functionCalls.map(async (call) => ({
-            functionResponse: { name: call.name, response: await callSupabaseRpc(env, call.name, call.args) },
+            functionResponse: {
+              name: call.name,
+              response: wrapFunctionResponse(await callSupabaseRpc(env, call.name, call.args)),
+            },
           })),
         );
         contents.push({ role: "function", parts: responses });
