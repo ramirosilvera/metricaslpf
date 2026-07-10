@@ -9,8 +9,8 @@
   "id": "/metricasmundial2026/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#080c0d",
-  "theme_color": "#0a8f4c",
+  "background_color": "#060d09",
+  "theme_color": "#15a94f",
   "categories": ["sports", "news", "education"],
   "icons": [
     {

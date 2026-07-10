@@ -28,8 +28,8 @@ export interface ShareCardData {
 // Paleta fija de marca (independiente del tema del visitante) para que la
 // imagen compartida se vea siempre igual.
 const C = {
-  brand: "#0a8f4c",
-  brandStrong: "#05602f",
+  brand: "#15a94f",
+  brandStrong: "#0a7a39",
   ink: "#05170c",
   white: "#ffffff",
   soft: "rgba(255,255,255,0.90)",

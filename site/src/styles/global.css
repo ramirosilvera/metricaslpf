@@ -1,28 +1,36 @@
 :root {
+  /* Identidad "cancha": superficies claras con tinte menta (césped al sol) y
+     un verde de marca más vivo y fresco. Las superficies suben en luminosidad
+     respecto de la versión "broadcast" anterior para sentir más aire. */
   --surface-1: #ffffff;
-  --surface-2: #f1f4f2;
-  --page-plane: #f7f9f7;
-  --text-primary: #0a0f0c;
-  --text-secondary: #4a544e;
-  /* #667069 mantiene el tono "apagado" pero cumple WCAG AA (>=4.5) sobre
-     page-plane y surface-2 -- el valor anterior (#838d86) quedaba en ~3.2 */
-  --text-muted: #667069;
-  --gridline: #e0e6e2;
-  --baseline: #c1cac4;
-  --border: rgba(10, 15, 12, 0.1);
+  --surface-2: #e9f4ec;
+  --page-plane: #eef8f1;
+  --text-primary: #08160e;
+  --text-secondary: #445249;
+  /* #5f7367 mantiene el tono "apagado" pero cumple WCAG AA (>=4.5) sobre
+     page-plane y surface-2 (fondos con tinte verde claro) */
+  --text-muted: #5f7367;
+  --gridline: #d9eade;
+  --baseline: #bcd6c3;
+  --border: rgba(8, 22, 14, 0.1);
 
-  /* identidad de marca "cancha/transmisión" -- separada de la paleta de
-     datos (--series-*), que se mantiene fija para no romper la
-     codificación de color de los charts */
-  --brand: #0a8f4c;
-  --brand-strong: #067339;
-  --brand-soft: #d6f5e3;
+  /* identidad de marca "cancha/césped" -- separada de la paleta de datos
+     (--series-*), que se mantiene fija para no romper la codificación de
+     color de los charts. brand = verde césped vivo; brand-strong queda más
+     oscuro para texto blanco AA y para texto de marca sobre fondo claro. */
+  --brand: #15a94f;
+  --brand-strong: #0a7a39;
+  --brand-soft: #d3f4de;
   --brand-contrast: #ffffff;
-  --accent: #d97706;
-  --accent-soft: #fef3c7;
+  /* segundo verde para degradados de "campo" (más azulado/profundo) */
+  --brand-deep: #0e7a5a;
+  /* línea de cal de la cancha */
+  --pitch-line: rgba(255, 255, 255, 0.9);
+  --accent: #f59e0b;
+  --accent-soft: #fdf0d3;
 
   /* resultado de partido -- mismo lenguaje de color en toda la app */
-  --win: #0a8f4c;
+  --win: #12a150;
   --draw: #6b7280;
   --loss: #dc2626;
 
@@ -35,7 +43,7 @@
   --series-7: #e87ba4; /* magenta */
   --series-8: #eb6834; /* orange */
 
-  --status-good: #0a8f4c;
+  --status-good: #12a150;
   --status-warning: #fab219;
   --status-serious: #ec835a;
   --status-critical: #d03b3b;
@@ -53,20 +61,24 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --surface-1: #12181a;
-    --surface-2: #1a2222;
-    --page-plane: #080c0d;
-    --text-primary: #f2f6f3;
-    --text-secondary: #b9c4bd;
-    --text-muted: #7c8983;
-    --gridline: #253030;
-    --baseline: #364241;
+    /* Modo oscuro "cancha de noche": superficies con tinte verde muy oscuro
+       (no gris neutro) para que la identidad de césped se sostenga. */
+    --surface-1: #0f1a15;
+    --surface-2: #17241d;
+    --page-plane: #060d09;
+    --text-primary: #eef6f0;
+    --text-secondary: #b7c6bc;
+    --text-muted: #7c8d83;
+    --gridline: #223029;
+    --baseline: #34443a;
     --border: rgba(255, 255, 255, 0.1);
 
-    --brand: #2ee671;
+    --brand: #33e878;
     --brand-strong: #6cf29c;
-    --brand-soft: rgba(46, 230, 113, 0.14);
-    --brand-contrast: #05170c;
+    --brand-soft: rgba(51, 232, 120, 0.15);
+    --brand-contrast: #04150b;
+    --brand-deep: #1fae7f;
+    --pitch-line: rgba(226, 255, 238, 0.32);
     --accent: #fbbf24;
     --accent-soft: rgba(251, 191, 36, 0.14);
 
@@ -155,10 +167,18 @@ body {
     sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* Fondo "cancha": un resplandor de césped arriba, un toque cálido (pelota)
+     abajo a la izquierda, y una trama sutilísima de bandas verticales que
+     evoca el corte del pasto sin competir con el contenido. */
   background-image:
-    radial-gradient(700px circle at 100% -10%, color-mix(in srgb, var(--brand) 7%, transparent), transparent 60%),
-    radial-gradient(600px circle at -10% 10%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 55%);
-  background-repeat: no-repeat;
+    radial-gradient(760px circle at 100% -12%, color-mix(in srgb, var(--brand) 10%, transparent), transparent 62%),
+    radial-gradient(620px circle at -10% 8%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--brand) 2.6%, transparent) 0 44px,
+      transparent 44px 88px
+    );
+  background-repeat: no-repeat, no-repeat, repeat;
   background-attachment: fixed;
 }
 
@@ -612,17 +632,83 @@ p {
 }
 
 /* ---------- home: centro de análisis (action center) ----------
-   Portada mínima: una pregunta + 4 acciones grandes. Sin texto explicativo,
-   snapshots ni tablas (todo eso vive en sus páginas). */
+   Portada mínima: una pregunta + 4 acciones grandes, montadas sobre una
+   "cancha": bandas de corte de césped, línea de mitad y círculo central.
+   Sin texto explicativo, snapshots ni tablas (todo eso vive en sus páginas). */
 .home-hub {
-  padding: 1.5rem 0 1rem;
-  max-width: 780px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 1.25rem 0 0;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border-radius: var(--radius-lg);
+  color: #ffffff;
+  background: linear-gradient(158deg, var(--brand) 0%, var(--brand-deep) 96%);
+  box-shadow: var(--shadow-md);
+}
+
+/* En modo oscuro el verde de marca es casi neón: para el hero se usa un verde
+   "cancha de noche" más profundo, que deja el texto blanco con buen contraste
+   sin encandilar junto al fondo casi negro de la página. */
+@media (prefers-color-scheme: dark) {
+  .home-hub {
+    background: linear-gradient(158deg, #0e7d47 0%, #094f3c 96%);
+  }
+}
+
+/* bandas verticales del corte de pasto + línea de mitad de cancha (la banda
+   central más marcada hace de línea) */
+.home-hub::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, transparent calc(50% - 1px), var(--pitch-line) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.07) 0 54px,
+      rgba(255, 255, 255, 0) 54px 108px
+    );
+  opacity: 0.9;
+}
+
+/* círculo central + punto de penal, centrado sobre la línea de mitad */
+.home-hub::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  max-width: 64vw;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid var(--pitch-line);
+  opacity: 0.4;
+  /* punto central */
+  box-shadow: inset 0 0 0 140px transparent, 0 0 0 0 transparent;
+  background:
+    radial-gradient(circle at 50% 50%, var(--pitch-line) 0 4px, transparent 5px);
+}
+
+/* la eyebrow y el pie viven sobre verde: se aclaran para contraste */
+.home-hub .eyebrow {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.home-hub .eyebrow::before {
+  background: #ffffff;
 }
 
 .home-hub-title {
   font-size: clamp(2rem, 5vw, 3rem);
   max-width: 16ch;
   margin: 0 0 2rem;
+  color: #ffffff;
+  text-shadow: 0 1px 12px rgba(4, 30, 16, 0.28);
 }
 
 .cta-grid {
@@ -666,8 +752,20 @@ p {
 }
 
 .cta-icon {
-  font-size: 1.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--brand-soft);
+  font-size: 1.6rem;
   line-height: 1;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.cta-card:hover .cta-icon {
+  transform: rotate(-6deg) scale(1.05);
 }
 
 .cta-label {
@@ -692,15 +790,25 @@ p {
 .home-hub-foot {
   margin: 2rem 0 0;
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.75);
   display: flex;
   align-items: center;
   gap: 0.6rem;
   flex-wrap: wrap;
 }
 
+.home-hub-foot a {
+  color: #ffffff;
+  text-decoration-color: rgba(255, 255, 255, 0.5);
+}
+
+.home-hub-foot a:hover {
+  color: #ffffff;
+  text-decoration-color: #ffffff;
+}
+
 .home-hub-sep {
-  color: var(--baseline);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 @media (max-width: 560px) {
