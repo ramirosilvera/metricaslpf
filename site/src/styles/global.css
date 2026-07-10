@@ -897,6 +897,58 @@ p {
   color: var(--text-muted);
 }
 
+/* Toggle de dimensión (Físico 2026 / Táctico histórico) en el comparador.
+   Pills tipo segmented control, coherentes con la nav. */
+.mode-toggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.mode-toggle button {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.mode-toggle button:hover:not(.is-active):not(:disabled) {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--brand) 10%, transparent);
+}
+
+.mode-toggle button.is-active {
+  color: var(--brand-contrast);
+  background: var(--brand-strong);
+}
+
+.mode-toggle button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.mode-count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+}
+
 /* ---------- cards / callouts ---------- */
 
 .card {

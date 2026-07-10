@@ -3,9 +3,10 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import RadarCompare from "../islands/RadarCompare";
 import TimelineChart from "../islands/TimelineChart";
-import { loadJson, type RadarRow, type TimelineRow } from "../lib/data";
+import { loadJson, type RadarRow, type TimelineRow, type TeamPhysicalRankingRow } from "../lib/data";
 
 const radar = loadJson<RadarRow[]>("radar_team_season.json");
+const teamPhysical = loadJson<TeamPhysicalRankingRow[]>("team_physical_ranking.json");
 const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
 ---
 
@@ -14,13 +15,14 @@ const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
   <p class="eyebrow">Cabeza a cabeza</p>
   <h1>Comparar selecciones</h1>
   <p class="lede">
-    Elegí dos selecciones y el radar te muestra sus percentiles de contexto táctico, con una lectura automática de las
-    diferencias que más pesan.
+    Elegí dos selecciones y el radar te muestra sus percentiles, con una lectura automática de las diferencias que más
+    pesan. Podés comparar el <strong>físico de las 48 selecciones del Mundial 2026</strong> o el contexto táctico
+    histórico de 2018/2022.
   </p>
 
   <section class="section">
     <div class="card">
-      <RadarCompare client:only="react" rows={radar} />
+      <RadarCompare client:only="react" rows={radar} physicalRows={teamPhysical} />
     </div>
   </section>
 

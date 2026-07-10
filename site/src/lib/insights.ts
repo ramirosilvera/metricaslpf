@@ -31,6 +31,16 @@ const TEAM_HIGHER_MEANS: Record<string, string> = {
     "genera más volumen de remate, lo que sugiere una propuesta más ofensiva o mayor llegada al área rival",
   remates_al_arco_promedio_percentil:
     "llega con más peligro real al arco, lo que sugiere mejor selección y definición de sus situaciones",
+  // Físico de equipo (Mundial 2026, FIFA Training Centre) — correr más NO es
+  // automáticamente "mejor": se lee junto al contexto táctico.
+  distancia_promedio_km_percentil:
+    "recorre más distancia por partido, lo que puede reflejar un plan más de ida y vuelta (o menos control del balón)",
+  alta_intensidad_promedio_m_percentil:
+    "acumula más metros a alta intensidad, señal de un juego más vertical y de más transiciones",
+  sprints_promedio_percentil:
+    "produce más sprints por partido, típico de una propuesta de más quiebres y contraataque",
+  velocidad_punta_kmh_percentil:
+    "alcanza picos de velocidad más altos, lo que sugiere más recursos de profundidad y desmarque",
 };
 
 export interface MetricDef {
@@ -66,6 +76,9 @@ export function generateTeamComparisonInsights(
   a: RadarRow | undefined,
   b: RadarRow | undefined,
   metrics: MetricDef[],
+  // "contexto táctico" para el radar StatsBomb; "rendimiento físico" para el
+  // radar físico 2026. Solo cambia la redacción de la lectura de conjunto.
+  dimensionLabel = "contexto táctico",
 ): string[] {
   if (!a || !b) return [];
 
@@ -94,12 +107,12 @@ export function generateTeamComparisonInsights(
     const leader = avgA > avgB ? nameA : nameB;
     const other = avgA > avgB ? nameB : nameA;
     insights.push(
-      `En conjunto, ${leader} muestra un perfil de contexto táctico más marcado que ${other} ` +
+      `En conjunto, ${leader} muestra un perfil de ${dimensionLabel} más marcado que ${other} ` +
         `(promedio de percentiles ${round(Math.max(avgA, avgB))} contra ${round(Math.min(avgA, avgB))}).`,
     );
   } else {
     insights.push(
-      `${nameA} y ${nameB} tienen perfiles de contexto táctico parejos en promedio ` +
+      `${nameA} y ${nameB} tienen perfiles de ${dimensionLabel} parejos en promedio ` +
         `(percentiles ${round(avgA)} y ${round(avgB)}): las diferencias aparecen métrica por métrica, no en el conjunto.`,
     );
   }
