@@ -2,9 +2,9 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { DerivedTeamMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
-import { makeNormalizer, isLowerBetter } from "../lib/normalize";
+import { makeIndexer, isLowerBetter } from "../lib/normalize";
 
-// Sufijos para mostrar el valor OFICIAL en el tooltip (además del % del mejor).
+// Sufijos para mostrar el valor OFICIAL en el tooltip (además del índice).
 const METRIC_SUFFIX: Record<string, string> = {
   posesion_promedio_proxy: "",
   precision_pases_promedio: "%",
@@ -55,8 +55,9 @@ export default function TeamMetricsRadar({ rows }: Props) {
     (m) => a.some((r) => r.metric === m && r.value != null) && b.some((r) => r.metric === m && r.value != null),
   );
 
-  // Normalizador por (temporada, métrica): "% del mejor observado" en esa
-  // temporada. Cada equipo se compara contra el techo real de su Mundial.
+  // Índice de rendimiento por (temporada, métrica): estira el rango real de esa
+  // temporada a 40-100 para que las diferencias entre selecciones se VEAN (si no,
+  // los equipos de élite quedan todos pegados al borde). Estilo EA SPORTS FC.
   const normalizers = useMemo(() => {
     const map: Record<string, (v: number) => number> = {};
     for (const m of METRIC_ORDER) {
@@ -65,7 +66,7 @@ export default function TeamMetricsRadar({ rows }: Props) {
         if (r.metric !== m || r.value == null) continue;
         (bySeason.get(r.season) ?? bySeason.set(r.season, []).get(r.season)!).push(r.value);
       }
-      for (const [season, vals] of bySeason) map[`${season}|${m}`] = makeNormalizer(vals, isLowerBetter(m));
+      for (const [season, vals] of bySeason) map[`${season}|${m}`] = makeIndexer(vals, isLowerBetter(m));
     }
     return map;
   }, [rows]);
@@ -90,7 +91,7 @@ export default function TeamMetricsRadar({ rows }: Props) {
             .map((m) => {
               const raw = rawFor(list, m);
               const rawTxt = raw != null ? `${Math.round(raw * 10) / 10}${METRIC_SUFFIX[m] ?? ""}` : "—";
-              return `${METRIC_LABELS[m]}: <strong>${normFor(list, m)}%</strong> del mejor · ${rawTxt}`;
+              return `${METRIC_LABELS[m]}: índice <strong>${normFor(list, m)}</strong> · ${rawTxt}`;
             })
             .join("<br/>");
           return `<strong>${p.name}</strong><br/>${rowsTxt}`;
@@ -153,7 +154,7 @@ export default function TeamMetricsRadar({ rows }: Props) {
           style={{ height: narrow ? 360 : 440 }}
           share={{
             title: `${aLabel} vs ${bLabel}`,
-            subtitle: "Métricas derivadas (percentiles) · radar multi-fuente",
+            subtitle: "Métricas derivadas (índice de rendimiento) · radar multi-fuente",
             filenameBase: `${aLabel}-vs-${bLabel}`,
           }}
           shareLabel="🖼️ Compartir radar"
@@ -165,8 +166,9 @@ export default function TeamMetricsRadar({ rows }: Props) {
         </p>
       )}
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-        Cada eje es un percentil (0–100) calculado dentro de la misma temporada — combina lo táctico (StatsBomb),
-        físico (FIFA Training Centre) y de plantel (Transfermarkt) cuando hay datos de las tres fuentes.
+        Cada eje es un índice de rendimiento (0–100) calibrado al rango real de esa temporada — 100 = el mejor de ese
+        Mundial, ~40 = el más flojo del campo (estira las diferencias para que se vean, estilo EA SPORTS FC). Combina lo
+        táctico (StatsBomb), físico (FIFA Training Centre) y de plantel (Transfermarkt) cuando hay datos de las tres fuentes.
       </p>
     </div>
   );

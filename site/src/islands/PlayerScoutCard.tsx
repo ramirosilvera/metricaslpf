@@ -6,7 +6,7 @@ import { flagFor } from "../lib/flags";
 import ShareCardButton from "./ShareCardButton";
 import type { ShareStat } from "../lib/shareCard";
 import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights";
-import { makeNormalizer, isLowerBetter } from "../lib/normalize";
+import { makeIndexer, isLowerBetter } from "../lib/normalize";
 
 const METRIC_LABELS: Record<string, { label: string; suffix: string; group: "físico" | "táctico" }> = {
   distancia_promedio_km: { label: "Distancia / partido", suffix: " km", group: "físico" },
@@ -62,13 +62,14 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
 
   const squadInfo = squad?.[`${team}|${currentPlayer}`] ?? null;
 
-  // Normalizador por métrica sobre TODOS los jugadores medidos: "% del mejor
-  // registrado" en esa métrica. Reemplaza al percentil como base de la ficha.
+  // Índice de rendimiento por métrica sobre TODOS los jugadores medidos: estira
+  // el rango real a 40-100 para que las diferencias entre jugadores se VEAN en el
+  // radar (si no, quedan todos pegados al borde). Estilo EA SPORTS FC.
   const normalizers = useMemo(() => {
     const map: Record<string, (v: number) => number> = {};
     for (const m of RADAR_ORDER) {
       const vals = rows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number);
-      map[m] = makeNormalizer(vals, isLowerBetter(m));
+      map[m] = makeIndexer(vals, isLowerBetter(m));
     }
     return map;
   }, [rows]);
@@ -92,13 +93,13 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
     if (distance) {
       const dp = pctFor("distancia_promedio_km", distance.value);
       insight = `corre ${fmt(distance.value)} km promedio por partido en el Mundial 2026${
-        dp != null ? ` (el ${dp}% de la mayor distancia registrada)` : ""
+        dp != null ? ` (índice ${dp}/100 en distancia)` : ""
       }`;
       if (best && best.metric !== "distancia_promedio_km") {
-        insight += ` y llega al ${pctFor(best.metric, best.value) ?? 0}% del mejor en ${metricName(best.metric)}`;
+        insight += ` y saca índice ${pctFor(best.metric, best.value) ?? 0} en ${metricName(best.metric)}`;
       }
     } else if (best) {
-      insight = `registra ${fmt(best.value)}${METRIC_LABELS[best.metric].suffix} de ${metricName(best.metric)} en el Mundial 2026 (el ${pctFor(best.metric, best.value) ?? 0}% del mejor registrado)`;
+      insight = `registra ${fmt(best.value)}${METRIC_LABELS[best.metric].suffix} de ${metricName(best.metric)} en el Mundial 2026 (índice ${pctFor(best.metric, best.value) ?? 0}/100)`;
     } else {
       return null;
     }
@@ -134,7 +135,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
           key: r.metric,
           label: METRIC_LABELS[r.metric].label.toLowerCase().replace(" / partido", " por partido"),
           value: r.value,
-          percentile: pctFor(r.metric, r.value), // ahora es "% del mejor", no percentil
+          percentile: pctFor(r.metric, r.value), // ahora es el índice de rendimiento (0-100), no percentil
           suffix: METRIC_LABELS[r.metric].suffix,
           group: METRIC_LABELS[r.metric].group,
         })),
@@ -158,7 +159,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
               const row = playerRows.find((r) => r.metric === m);
               const pct = pctFor(m, row?.value ?? null) ?? 0;
               const raw = row?.value != null ? `${Math.round(row.value * 10) / 10}${METRIC_LABELS[m].suffix}` : "—";
-              return `${METRIC_LABELS[m].label}: <strong>${pct}%</strong> del mejor · ${raw}`;
+              return `${METRIC_LABELS[m].label}: índice <strong>${pct}</strong> · ${raw}`;
             })
             .join("<br/>");
         },
@@ -253,7 +254,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
           style={{ height: narrow ? 330 : 380 }}
           share={{
             title: currentPlayer,
-            subtitle: `${team} · ficha física y táctica (% del mejor) · Mundial 2026`,
+            subtitle: `${team} · ficha física y táctica (índice de rendimiento) · Mundial 2026`,
             insight: insights[0],
             filenameBase: `scout-${team}-${currentPlayer}`,
           }}
@@ -277,7 +278,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
             ))}
           </ul>
           <p className="insight-note">
-            Resumen generado en tu navegador a partir de los valores oficiales, expresados como % del mejor registrado (no es una respuesta de IA en
+            Resumen generado en tu navegador a partir de los valores oficiales, expresados como índice de rendimiento (0–100, calibrado al rango del torneo) (no es una respuesta de IA en
             vivo). ¿Querés profundizar? Preguntale al asistente.
           </p>
         </div>
@@ -314,7 +315,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
                 {METRIC_LABELS[r.metric].label}
                 {(() => {
                   const p = pctFor(r.metric, r.value);
-                  return p != null ? ` · ${p}% del mejor` : "";
+                  return p != null ? ` · índice ${p}` : "";
                 })()}
               </div>
             </div>
@@ -349,10 +350,11 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
       )}
 
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-        Percentil calculado dentro del propio dataset cargado (no es un ranking mundial completo). Combina métricas
-        físicas (FIFA Training Centre) y tácticas (mismos reportes, Mundial 2026 en curso) cuando ambas están
-        disponibles para el jugador. Los datos de plantel (dorsal, club, caps, partidos y goles del torneo) vienen de
-        Wikipedia y se cruzan por nombre — puede faltar en algunos jugadores.
+        El radar usa un índice de rendimiento (0–100) calibrado al rango de los jugadores medidos — 100 = el mejor del
+        dataset, ~40 = el más flojo (estira las diferencias para que se vean, estilo EA SPORTS FC); no es un ranking
+        mundial completo. Combina métricas físicas (FIFA Training Centre) y tácticas (mismos reportes, Mundial 2026 en
+        curso) cuando ambas están disponibles para el jugador. Los datos de plantel (dorsal, club, caps, partidos y
+        goles del torneo) vienen de Wikipedia y se cruzan por nombre — puede faltar en algunos jugadores.
       </p>
     </div>
   );

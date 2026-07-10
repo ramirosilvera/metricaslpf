@@ -23,22 +23,30 @@ const base = import.meta.env.BASE_URL;
   </section>
 
   <section class="section">
-    <h2>Cómo leer los números: escala "% del mejor"</h2>
+    <h2>Cómo leer los números: dos escalas, ningún percentil</h2>
     <p>
-      Los radares y las barras normalizadas <strong>no</strong> usan percentiles (posición en un ranking). Usan
-      <strong>cercanía al mejor rendimiento observado</strong>: un <strong>90</strong> se lee directo como "llega al 90%
-      del mejor valor registrado en esa métrica entre las selecciones del torneo". El mejor del torneo marca el 100.
+      Nada acá usa percentiles (posición en un ranking). Según el gráfico usamos una de dos escalas, y ninguna toca el
+      valor oficial — que siempre se muestra tal cual en el tooltip y en las barras.
     </p>
-    <p style="font-size:0.9rem; color: var(--text-secondary);">
+    <p>
+      <strong>1) En las tablas y rankings — "% del mejor".</strong> Un <strong>90</strong> se lee directo: "llega al 90%
+      del mejor valor registrado en esa métrica entre las selecciones del torneo". El mejor del torneo marca el 100.
       Ejemplo — velocidad punta, con un máximo observado de 34 km/h: un equipo a 34 km/h = 100; a 30,6 km/h = 90; a 17
-      km/h = 50. La escala mide <em>qué tan cerca está del techo</em>, no en qué puesto quedó. Por eso se entiende sin
-      saber estadística.
+      km/h = 50. Como la lista está ordenada, la magnitud se ve honesta de un vistazo.
+    </p>
+    <p>
+      <strong>2) En los radares — "índice de rendimiento" (estilo EA SPORTS FC).</strong> Ahí el "% del mejor" fallaba:
+      las selecciones de élite corren casi lo mismo, así que casi todas daban 90-100% y todos los radares quedaban
+      iguales (blobs). Como hace EA SPORTS FC con los atributos de sus jugadores (nadie tiene <em>pace</em> 5), estiramos
+      el rango real observado a una escala calibrada con un <strong>piso</strong>: el mejor del torneo marca 100 y el más
+      flojo del campo queda cerca de 40 (sigue siendo una selección de Mundial, no un cero). Así una diferencia real chica
+      se <em>ve</em> grande en el gráfico y cada selección tiene una forma distinta.
     </p>
     <p style="font-size:0.9rem; color: var(--text-secondary);">
       <strong>Los valores oficiales nunca se alteran</strong>: 110,4 km, 34 km/h, 530 sprints, 57% de posesión se
-      muestran siempre tal cual (en el tooltip y en las barras). La normalización es solo una capa visual para comparar.
-      En las pocas métricas donde <em>menos es mejor</em> (edad del plantel, faltas), el mejor es el valor más bajo y la
-      escala se invierte (el que menos comete marca el 100).
+      muestran siempre tal cual. Las dos escalas son solo una capa visual para comparar. En las pocas métricas donde
+      <em>menos es mejor</em> (edad del plantel, faltas, goles recibidos, tarjetas), el mejor es el valor más bajo y la
+      escala se invierte (el que menos registra marca el 100).
     </p>
   </section>
 

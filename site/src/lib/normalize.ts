@@ -81,6 +81,45 @@ export function bestValue(values: number[], lowerIsBetter = false): number | nul
   return lowerIsBetter ? Math.min(...finite) : Math.max(...finite);
 }
 
+// =============================================================================
+// Índice de rendimiento (estilo EA SPORTS FC) — para DIFERENCIAR visualmente
+// =============================================================================
+// Problema del "% del mejor": las selecciones de élite corren casi lo mismo, así
+// que casi todas dan 90-100% y los radares quedan iguales (blobs). EA FC lo
+// resuelve estirando el rango real observado a una escala calibrada con un
+// PISO (ningún jugador tiene pace 5). Acá igual: se mapea [mín, máx] del torneo
+// a [FLOOR, 100], así una diferencia real chica se ve grande en el gráfico.
+//
+//   más-es-mejor:  idx = FLOOR + (v - mín)/(máx - mín) * (100 - FLOOR)
+//   menos-es-mejor: idx = FLOOR + (máx - v)/(máx - mín) * (100 - FLOOR)
+//
+// 100 = el mejor del torneo; FLOOR ≈ el más flojo del rango (sigue siendo una
+// selección de Mundial, no un cero). El valor OFICIAL se muestra siempre aparte.
+export const INDEX_FLOOR = 40;
+
+export function makeIndexer(
+  values: number[],
+  lowerIsBetter = false,
+  floor = INDEX_FLOOR,
+): (v: number) => number {
+  const finite = values.filter((v) => Number.isFinite(v));
+  if (finite.length === 0) return () => 0;
+  const min = Math.min(...finite);
+  const max = Math.max(...finite);
+  const range = max - min;
+  return (v: number) => {
+    if (!Number.isFinite(v)) return 0;
+    if (range === 0) return 100;
+    const pos = lowerIsBetter ? (max - v) / range : (v - min) / range; // 0..1
+    return Math.round(floor + Math.max(0, Math.min(1, pos)) * (100 - floor));
+  };
+}
+
+/** Índice de una sola serie/valor (conveniencia; usa makeIndexer por dentro). */
+export function perfIndex(value: number, values: number[], lowerIsBetter = false, floor = INDEX_FLOOR): number {
+  return makeIndexer(values, lowerIsBetter, floor)(value);
+}
+
 function clamp(n: number): number {
   return Math.max(0, Math.min(100, n));
 }

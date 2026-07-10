@@ -12,8 +12,9 @@ function loadArray<T>(filename: string): T[] {
   return Array.isArray(raw) ? raw : [];
 }
 
-// El radar usa valores OFICIALES (no percentiles) para normalizar a "% del mejor",
-// por eso el histórico se alimenta de team_season_summary (valores absolutos).
+// El radar usa valores OFICIALES (no percentiles) para calcular el índice de
+// rendimiento (escala estirada estilo EA SPORTS FC), por eso el histórico se
+// alimenta de team_season_summary (valores absolutos).
 const summary = loadArray<TeamSeasonSummary>("team_season_summary.json");
 const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
 const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");

@@ -4,12 +4,14 @@ import type { TeamPhysicalRankingRow, TeamTacticalRankingRow, TeamSeasonSummary 
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { flagFor } from "../lib/flags";
 import { generateVsBestInsights, type VsBestMetric } from "../lib/insights";
-import { makeNormalizer, isLowerBetter } from "../lib/normalize";
+import { makeIndexer, isLowerBetter } from "../lib/normalize";
 
-// Los ejes del radar NO son percentiles (posición en un ranking) sino
-// "% del mejor rendimiento observado": un 90 = "llega al 90% del máximo del
-// torneo en esa métrica". Se entiende sin saber estadística. Los valores
-// oficiales se muestran igual en el tooltip.
+// Los ejes del radar NO son percentiles ni "% del mejor" (con eso las
+// selecciones de élite corrían casi lo mismo y todos los radares quedaban
+// iguales). Usamos un ÍNDICE de rendimiento estilo EA SPORTS FC: se estira el
+// rango real del torneo a una escala calibrada (40 = el más flojo del campo,
+// 100 = el mejor), así una diferencia real chica se VE en el gráfico. Los
+// valores oficiales se muestran igual en el tooltip.
 //
 // Tres modos, porque las fuentes miden cosas distintas en cada época:
 //  - fisico2026 / tactico2026: las 48 selecciones del Mundial 2026 (FIFA).
@@ -72,8 +74,8 @@ export default function RadarCompare({ physicalRows, tacticalRows, summaryRows }
         labelOf: (r: Record<string, number | string>) => String(r.team),
         defaultA: "Argentina",
         defaultB: "Brazil",
-        note: "Escala: % del mejor registrado entre las 48 selecciones del Mundial 2026 (100 = el máximo del torneo en esa métrica). Táctico de equipo derivado de FIFA Training Centre. El valor oficial está en el tooltip.",
-        subtitle: "Cabeza a cabeza · % del mejor rendimiento táctico · Mundial 2026",
+        note: "Escala: índice de rendimiento (0–100) calibrado al rango de las 48 selecciones del Mundial 2026 — 100 = el mejor del torneo, ~40 = el más flojo del campo. Estira las diferencias reales para que se vean (estilo EA SPORTS FC). Táctico de equipo derivado de FIFA Training Centre. El valor oficial está en el tooltip.",
+        subtitle: "Cabeza a cabeza · índice de rendimiento táctico · Mundial 2026",
       };
     }
     if (mode === "historico") {
@@ -83,8 +85,8 @@ export default function RadarCompare({ physicalRows, tacticalRows, summaryRows }
         labelOf: (r: Record<string, number | string>) => `${r.team} ${r.season}`,
         defaultA: "Argentina 2022",
         defaultB: "France 2022",
-        note: "Escala: % del mejor registrado en este conjunto (StatsBomb, Mundiales 2018 y 2022; el free tier no cubre 2026 a nivel de equipo). El valor oficial está en el tooltip.",
-        subtitle: "Cabeza a cabeza · % del mejor contexto táctico · 2018/2022",
+        note: "Escala: índice de rendimiento (0–100) calibrado al rango de este conjunto (StatsBomb, Mundiales 2018 y 2022; el free tier no cubre 2026 a nivel de equipo) — 100 = el mejor, ~40 = el más flojo del campo. El valor oficial está en el tooltip.",
+        subtitle: "Cabeza a cabeza · índice de contexto táctico · 2018/2022",
       };
     }
     return {
@@ -93,19 +95,20 @@ export default function RadarCompare({ physicalRows, tacticalRows, summaryRows }
       labelOf: (r: Record<string, number | string>) => String(r.team),
       defaultA: "Argentina",
       defaultB: "Brazil",
-      note: "Escala: % del mejor registrado entre las 48 selecciones del Mundial 2026 (100 = el máximo del torneo en esa métrica). Físico de equipo (FIFA Training Centre). Correr más no es automáticamente 'mejor': leelo junto al contexto táctico. El valor oficial está en el tooltip.",
-      subtitle: "Cabeza a cabeza · % del mejor rendimiento físico · Mundial 2026",
+      note: "Escala: índice de rendimiento (0–100) calibrado al rango de las 48 selecciones del Mundial 2026 — 100 = el mejor del torneo, ~40 = el más flojo del campo. Estira las diferencias reales para que se vean (estilo EA SPORTS FC). Físico de equipo (FIFA Training Centre). Correr más no es automáticamente 'mejor': leelo junto al contexto táctico. El valor oficial está en el tooltip.",
+      subtitle: "Cabeza a cabeza · índice de rendimiento físico · Mundial 2026",
     };
   }, [mode, physicalRows, tacticalRows, summaryRows]);
 
   const options = useMemo(() => cfg.rows.map(cfg.labelOf), [cfg]);
 
-  // Normalizador por métrica: máx/mín del conjunto -> función valor -> % del mejor.
+  // Índice de rendimiento por métrica: estira el rango del torneo a 40-100 para
+  // que las diferencias entre selecciones se VEAN (no todas pegadas al borde).
   const normalizers = useMemo(() => {
     const map: Record<string, (v: number) => number> = {};
     for (const m of cfg.metrics) {
       const vals = cfg.rows.map((r) => Number(r[m.key])).filter((v) => Number.isFinite(v));
-      map[m.key] = makeNormalizer(vals, isLowerBetter(m.key));
+      map[m.key] = makeIndexer(vals, isLowerBetter(m.key));
     }
     return map;
   }, [cfg]);
@@ -149,7 +152,7 @@ export default function RadarCompare({ physicalRows, tacticalRows, summaryRows }
             .map((m, i) => {
               const d = arr[i];
               const rawTxt = Number.isFinite(d.raw) ? `${Math.round(d.raw * 10) / 10}${m.suffix}` : "—";
-              return `${m.name.replace("\n", " ")}: <strong>${d.norm}%</strong> del mejor · ${rawTxt}`;
+              return `${m.name.replace("\n", " ")}: índice <strong>${d.norm}</strong> · ${rawTxt}`;
             })
             .join("<br/>");
           return `<strong>${p.name}</strong><br/>${rows}`;
@@ -261,8 +264,8 @@ export default function RadarCompare({ physicalRows, tacticalRows, summaryRows }
             ))}
           </ul>
           <p className="insight-note">
-            Resumen generado en tu navegador a partir de los valores oficiales del dataset, expresados como % del mejor
-            rendimiento observado (no es una respuesta de IA en vivo). ¿Querés profundizar? Preguntale al asistente.
+            Resumen generado en tu navegador a partir de los valores oficiales del dataset, expresados como índice de
+            rendimiento (0–100, calibrado al rango del torneo) (no es una respuesta de IA en vivo). ¿Querés profundizar? Preguntale al asistente.
           </p>
         </div>
       )}

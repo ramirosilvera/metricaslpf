@@ -247,7 +247,7 @@ export interface PlayerMetricPoint {
   /** Etiqueta legible ("distancia por partido", "intercepciones"). */
   label: string;
   value: number;
-  /** % del mejor valor observado (0..100), no percentil. */
+  /** Índice de rendimiento (0..100, calibrado al rango del torneo), no percentil. */
   percentile: number | null;
   /** Sufijo de unidad para el valor (" km", "%", ""). */
   suffix?: string;
@@ -255,14 +255,14 @@ export interface PlayerMetricPoint {
   group?: string;
 }
 
-/** Cualificador verbal según qué tan cerca está del mejor valor observado
- *  (el campo mide "% del mejor", no percentil). */
+/** Cualificador verbal según el índice de rendimiento (0-100, calibrado al
+ *  rango del torneo; 100 = el mejor, ~40 = el más flojo del campo). */
 function tier(p: number): string {
-  if (p >= 90) return "prácticamente al nivel del mejor registrado";
-  if (p >= 75) return "cerca del mejor del torneo";
-  if (p >= 60) return "en buen nivel respecto del mejor observado";
-  if (p >= 45) return "a media distancia del mejor observado";
-  if (p >= 30) return "bastante lejos del mejor";
+  if (p >= 90) return "prácticamente al nivel del mejor del torneo";
+  if (p >= 75) return "cerca del techo del torneo";
+  if (p >= 60) return "en la franja alta del torneo";
+  if (p >= 45) return "en la zona media del torneo";
+  if (p >= 30) return "en la franja baja del torneo";
   return "entre los valores más bajos de los jugadores medidos";
 }
 
@@ -294,7 +294,7 @@ export function generatePlayerInsights(
   const top = byPct[0];
   used.add(top.key);
   insights.push(
-    `${playerName} alcanza el ${round(top.percentile)}% del mejor registrado en ${top.label} ` +
+    `${playerName} saca un índice de ${round(top.percentile)} en ${top.label} ` +
       `(${fmtValue(top)}): ${tier(top.percentile)}.`,
   );
 
@@ -307,7 +307,7 @@ export function generatePlayerInsights(
     used.add(second.key);
     const nexo = second.group && top.group && second.group !== top.group ? "También" : "Además";
     insights.push(
-      `${nexo} aparece fuerte en ${second.label}: llega al ${round(second.percentile)}% del mejor ` +
+      `${nexo} aparece fuerte en ${second.label}: índice ${round(second.percentile)} ` +
         `(${fmtValue(second)}), ${tier(second.percentile)}.`,
     );
   }
@@ -316,7 +316,7 @@ export function generatePlayerInsights(
   const weakest = byPct[byPct.length - 1];
   if (weakest && !used.has(weakest.key) && weakest.percentile < 35) {
     insights.push(
-      `Donde más cede es en ${weakest.label}: ${round(weakest.percentile)}% del mejor ` +
+      `Donde más cede es en ${weakest.label}: índice ${round(weakest.percentile)} ` +
         `(${fmtValue(weakest)}), ${tier(weakest.percentile)}.`,
     );
   }
@@ -326,7 +326,7 @@ export function generatePlayerInsights(
   if (insights.length < 2) {
     const avg = valid.reduce((s, m) => s + m.percentile, 0) / valid.length;
     insights.push(
-      `En el resto de las métricas su rendimiento es parejo (en promedio ${round(avg)}% del mejor observado ` +
+      `En el resto de las métricas su rendimiento es parejo (índice promedio ${round(avg)} ` +
         `entre las ${valid.length} medidas), sin un pico ni un bache marcado.`,
     );
   }
@@ -335,16 +335,17 @@ export function generatePlayerInsights(
 }
 
 // =============================================================================
-// Lecturas "cercanía al mejor rendimiento" (sistema de normalización nuevo)
+// Lecturas por "índice de rendimiento" (sistema de normalización nuevo)
 // =============================================================================
 // Reemplazan a las lecturas por percentil en los radares: en vez de "está en el
-// percentil 82", dicen "alcanza el 94% de la mayor velocidad registrada". El
-// número es magnitud relativa al mejor observado, no posición en un ranking.
+// percentil 82", dicen "saca un índice de 82 en velocidad". El índice (0-100)
+// estira el rango real del torneo (estilo EA SPORTS FC) para que las diferencias
+// entre selecciones/jugadores se VEAN, no es posición en un ranking.
 
 export interface VsBestMetric {
   /** Etiqueta en minúscula para incrustar en la frase (ej. "distancia recorrida"). */
   label: string;
-  /** % del mejor observado (0..100) de cada equipo. */
+  /** Índice de rendimiento (0..100, calibrado al rango del torneo) de cada equipo. */
   aPct: number;
   bPct: number;
   /** Valor oficial (para citarlo tal cual). */
@@ -365,19 +366,19 @@ export function generateVsBestInsights(nameA: string, nameB: string, metrics: Vs
 
   const insights: string[] = [];
 
-  // 1) Lectura de conjunto: promedio de "% del mejor" de cada uno.
+  // 1) Lectura de conjunto: promedio del índice de rendimiento de cada uno.
   const avgA = Math.round(usable.reduce((s, m) => s + m.aPct, 0) / usable.length);
   const avgB = Math.round(usable.reduce((s, m) => s + m.bPct, 0) / usable.length);
   if (Math.abs(avgA - avgB) >= 8) {
     const leader = avgA > avgB ? nameA : nameB;
     const other = avgA > avgB ? nameB : nameA;
     insights.push(
-      `En conjunto, ${leader} está más cerca del techo del torneo: en promedio alcanza el ${Math.max(avgA, avgB)}% ` +
-        `del mejor rendimiento observado, contra el ${Math.min(avgA, avgB)}% de ${other}.`,
+      `En conjunto, ${leader} rinde más alto en el torneo: promedia un índice de ${Math.max(avgA, avgB)} ` +
+        `sobre 100, contra ${Math.min(avgA, avgB)} de ${other}.`,
     );
   } else {
     insights.push(
-      `${nameA} y ${nameB} llegan parejos al techo del torneo en promedio (${avgA}% y ${avgB}% del mejor observado): ` +
+      `${nameA} y ${nameB} promedian un índice parejo (${avgA} y ${avgB} sobre 100): ` +
         `las diferencias aparecen métrica por métrica, no en el conjunto.`,
     );
   }
@@ -393,7 +394,7 @@ export function generateVsBestInsights(nameA: string, nameB: string, metrics: Vs
     const hRaw = fmtRaw(aHigher ? m.aRaw : m.bRaw, m.suffix);
     const lRaw = fmtRaw(aHigher ? m.bRaw : m.aRaw, m.suffix);
     insights.push(
-      `En ${m.label}, ${higher} alcanza el ${hp}% del mejor del torneo (${hRaw}) y ${lower} el ${lp}% (${lRaw}).`,
+      `En ${m.label}, ${higher} saca ventaja (índice ${hp} contra ${lp}): ${hRaw} contra ${lRaw}.`,
     );
     if (insights.length >= 4) break;
   }
@@ -403,7 +404,7 @@ export function generateVsBestInsights(nameA: string, nameB: string, metrics: Vs
     const even = [...usable].reverse().find((m) => Math.abs(m.aPct - m.bPct) < MIN_GAP);
     if (even) {
       insights.push(
-        `En ${even.label} van prácticamente iguales (${Math.round(even.aPct)}% y ${Math.round(even.bPct)}% del mejor): ` +
+        `En ${even.label} van prácticamente iguales (índice ${Math.round(even.aPct)} contra ${Math.round(even.bPct)}): ` +
           `ahí no hay una ventaja para ninguno.`,
       );
     }
