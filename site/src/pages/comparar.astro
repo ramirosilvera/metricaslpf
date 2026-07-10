@@ -13,10 +13,12 @@ const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
   <DataStatusBanner />
   <p class="eyebrow">Cabeza a cabeza</p>
   <h1>Comparar selecciones</h1>
-  <p class="lede">Radar cabeza a cabeza (percentiles) y evolución partido a partido dentro de un mismo torneo.</p>
+  <p class="lede">
+    Elegí dos selecciones y el radar te muestra sus percentiles de contexto táctico, con una lectura automática de las
+    diferencias que más pesan.
+  </p>
 
   <section class="section">
-    <div class="section-head"><h2>Cabeza a cabeza</h2></div>
     <div class="card">
       <RadarCompare client:only="react" rows={radar} />
     </div>

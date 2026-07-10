@@ -835,6 +835,126 @@ p {
   margin-bottom: 0.4rem;
 }
 
+/* ---------- lectura automática (insights heurísticos, "la IA habla primero") ---------- */
+
+.insight-card {
+  margin-top: 1.25rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--brand);
+  border-radius: var(--radius-md);
+  /* leve tinte de marca para diferenciarlo de una nota al pie cualquiera */
+  background: color-mix(in srgb, var(--brand) 4%, var(--surface-1));
+  padding: 1.15rem 1.35rem;
+  overflow-wrap: anywhere;
+}
+
+.insight-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-strong);
+  margin-bottom: 0.75rem;
+}
+
+.insight-head .insight-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent);
+  flex-shrink: 0;
+}
+
+.insight-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.insight-list li {
+  position: relative;
+  padding-left: 1.35rem;
+  color: var(--text-primary);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.insight-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.1rem;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.insight-note {
+  margin: 0.9rem 0 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* ---------- bloque de compartir prominente ("Compartir este análisis") ---------- */
+
+.share-block {
+  margin-top: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--brand) 28%, var(--border));
+  border-radius: var(--radius-md);
+  background: var(--brand-soft);
+  padding: 1.05rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem 1.25rem;
+  flex-wrap: wrap;
+}
+
+.share-block .share-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.share-block .share-label strong {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.share-block .share-label span {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.share-block .share-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: auto;
+}
+
+@media (max-width: 640px) {
+  .share-block .share-actions {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .share-block .share-actions .btn,
+  .share-block .share-actions button {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
 /* ---------- badges / status ---------- */
 
 .badge {

@@ -4,6 +4,7 @@ import type { RadarRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import ShareCardButton from "./ShareCardButton";
 import { flagFor } from "../lib/flags";
+import { generateTeamComparisonInsights, type MetricDef } from "../lib/insights";
 
 const INDICATORS = [
   { key: "posesion_promedio_proxy_percentil", name: "Posesión (percentil)", short: "Posesión" },
@@ -11,6 +12,14 @@ const INDICATORS = [
   { key: "remates_promedio_percentil", name: "Remates (percentil)", short: "Remates" },
   { key: "remates_al_arco_promedio_percentil", name: "Remates al arco (percentil)", short: "Remates\nal arco" },
 ] as const;
+
+// Etiquetas en minúscula para incrustar en las frases de la lectura automática.
+const INSIGHT_METRICS: MetricDef[] = [
+  { key: "posesion_promedio_proxy_percentil", label: "posesión" },
+  { key: "precision_pases_promedio_percentil", label: "precisión de pase" },
+  { key: "remates_promedio_percentil", label: "remates" },
+  { key: "remates_al_arco_promedio_percentil", label: "remates al arco" },
+];
 
 interface Props {
   rows: RadarRow[];
@@ -75,6 +84,10 @@ export default function RadarCompare({ rows }: Props) {
     };
   }, [a, b, tokens, aLabel, bLabel, narrow]);
 
+  // Lectura automática: heurística determinística sobre los percentiles ya
+  // calculados. No hay llamada a ninguna API — el chat con IA queda aparte.
+  const insights = useMemo(() => generateTeamComparisonInsights(a, b, INSIGHT_METRICS), [a, b]);
+
   const shareStats =
     a && b
       ? INDICATORS.map((i) => ({
@@ -86,6 +99,16 @@ export default function RadarCompare({ rows }: Props) {
     a && b
       ? `${a.team} vs ${b.team} (percentiles de contexto táctico, Mundial 2026): posesión ${Math.round(a.posesion_promedio_proxy_percentil)} vs ${Math.round(b.posesion_promedio_proxy_percentil)}.`
       : undefined;
+
+  // Link de WhatsApp con la lectura automática como gancho (mismo patrón
+  // wa.me + encodeURIComponent que usa el hero del inicio).
+  const waLink = useMemo(() => {
+    if (!a || !b) return null;
+    const url = typeof window !== "undefined" ? window.location.href : undefined;
+    const lead = insights[0] ?? shareText ?? `${a.team} vs ${b.team}`;
+    const message = `${a.team} vs ${b.team} · Mundial 2026 — ${lead}${url ? ` Mirá el análisis completo: ${url}` : ""}`;
+    return `https://wa.me/?text=${encodeURIComponent(message)}`;
+  }, [a, b, insights, shareText]);
 
   return (
     <div>
@@ -105,17 +128,6 @@ export default function RadarCompare({ rows }: Props) {
             </option>
           ))}
         </select>
-        {a && b && (
-          <ShareCardButton
-            title={`${a.team} vs ${b.team}`}
-            subtitle={`${flagFor(a.team)} vs ${flagFor(b.team)} · Cabeza a cabeza`}
-            stats={shareStats}
-            tagline="Percentiles de contexto táctico (StatsBomb)"
-            shareText={shareText}
-            filenameBase={`${a.team}-vs-${b.team}`}
-            label="🖼️ Compartir"
-          />
-        )}
       </div>
       {a && b ? (
         <ReactECharts option={option} style={{ height: narrow ? 340 : 420 }} notMerge={true} />
@@ -126,6 +138,51 @@ export default function RadarCompare({ rows }: Props) {
         Valores expresados como percentil dentro del propio dataset (0–100), no valor absoluto — son variables de
         contexto táctico (StatsBomb), no métricas físicas.
       </p>
+
+      {a && b && insights.length > 0 && (
+        <div className="insight-card">
+          <div className="insight-head">
+            <span className="insight-dot" />
+            Lectura automática
+          </div>
+          <ul className="insight-list">
+            {insights.map((line, i) => (
+              <li key={i}>{line}</li>
+            ))}
+          </ul>
+          <p className="insight-note">
+            Resumen generado en tu navegador a partir de los percentiles del dataset (no es una respuesta de IA en
+            vivo). ¿Querés profundizar? Preguntale al asistente.
+          </p>
+        </div>
+      )}
+
+      {a && b && (
+        <div className="share-block">
+          <div className="share-label">
+            <strong>Compartir este análisis</strong>
+            <span>
+              {flagFor(a.team)} {a.team} vs {b.team} {flagFor(b.team)}
+            </span>
+          </div>
+          <div className="share-actions">
+            {waLink && (
+              <a className="btn btn-share" href={waLink} target="_blank" rel="noreferrer">
+                📲 WhatsApp
+              </a>
+            )}
+            <ShareCardButton
+              title={`${a.team} vs ${b.team}`}
+              subtitle={`${flagFor(a.team)} vs ${flagFor(b.team)} · Cabeza a cabeza`}
+              stats={shareStats}
+              tagline="Percentiles de contexto táctico (StatsBomb)"
+              shareText={shareText}
+              filenameBase={`${a.team}-vs-${b.team}`}
+              label="🖼️ Imagen"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

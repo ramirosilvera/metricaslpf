@@ -5,6 +5,7 @@ import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
 import { flagFor } from "../lib/flags";
 import ShareCardButton from "./ShareCardButton";
 import type { ShareStat } from "../lib/shareCard";
+import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights";
 
 const METRIC_LABELS: Record<string, { label: string; suffix: string; group: "físico" | "táctico" }> = {
   distancia_promedio_km: { label: "Distancia / partido", suffix: " km", group: "físico" },
@@ -109,6 +110,27 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
     return parts.length ? `${parts.join(" · ")} · ${team}` : team;
   }, [squadInfo, team]);
 
+  // Lectura automática del perfil: heurística determinística sobre los
+  // percentiles ya calculados (no hay llamada a ninguna API).
+  const insightPoints = useMemo<PlayerMetricPoint[]>(
+    () =>
+      playerRows
+        .filter((r) => METRIC_LABELS[r.metric])
+        .map((r) => ({
+          key: r.metric,
+          label: METRIC_LABELS[r.metric].label.toLowerCase().replace(" / partido", " por partido"),
+          value: r.value,
+          percentile: r.percentile,
+          suffix: METRIC_LABELS[r.metric].suffix,
+          group: METRIC_LABELS[r.metric].group,
+        })),
+    [playerRows],
+  );
+  const insights = useMemo(
+    () => (currentPlayer ? generatePlayerInsights(currentPlayer, insightPoints) : []),
+    [currentPlayer, insightPoints],
+  );
+
   const option = useMemo(() => {
     if (radarMetrics.length < 3) return null;
     return {
@@ -182,23 +204,6 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
             </option>
           ))}
         </select>
-        {waLink && (
-          <a className="btn btn-share" href={waLink} target="_blank" rel="noreferrer">
-            📲 WhatsApp
-          </a>
-        )}
-        {currentPlayer && shareStats.length > 0 && (
-          <ShareCardButton
-            title={currentPlayer}
-            subtitle={shareSubtitle}
-            flag={flagFor(team)}
-            stats={shareStats}
-            tagline="Rendimiento físico y táctico · Mundial 2026"
-            shareText={`${currentPlayer} (${team}) — ficha de rendimiento · Métricas Mundial 2026`}
-            filenameBase={`${team}-${currentPlayer}`}
-            label="🖼️ Imagen"
-          />
-        )}
       </div>
 
       {squadInfo && (
@@ -230,6 +235,24 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
         <p style={{ color: "var(--text-muted)" }}>
           {currentPlayer ? `${currentPlayer} todavía no tiene suficientes métricas cargadas para el radar.` : "Elegí un jugador."}
         </p>
+      )}
+
+      {insights.length > 0 && (
+        <div className="insight-card">
+          <div className="insight-head">
+            <span className="insight-dot" />
+            Lectura automática
+          </div>
+          <ul className="insight-list">
+            {insights.map((line, i) => (
+              <li key={i}>{line}</li>
+            ))}
+          </ul>
+          <p className="insight-note">
+            Resumen generado en tu navegador a partir de los percentiles del dataset (no es una respuesta de IA en
+            vivo). ¿Querés profundizar? Preguntale al asistente.
+          </p>
+        </div>
       )}
 
       <div className="stat-tiles" style={{ marginTop: "1rem" }}>
@@ -266,6 +289,34 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
             </div>
           ))}
       </div>
+      {currentPlayer && shareStats.length > 0 && (
+        <div className="share-block">
+          <div className="share-label">
+            <strong>Compartir esta ficha</strong>
+            <span>
+              {flagFor(team)} {currentPlayer} · {team}
+            </span>
+          </div>
+          <div className="share-actions">
+            {waLink && (
+              <a className="btn btn-share" href={waLink} target="_blank" rel="noreferrer">
+                📲 WhatsApp
+              </a>
+            )}
+            <ShareCardButton
+              title={currentPlayer}
+              subtitle={shareSubtitle}
+              flag={flagFor(team)}
+              stats={shareStats}
+              tagline="Rendimiento físico y táctico · Mundial 2026"
+              shareText={`${currentPlayer} (${team}) — ficha de rendimiento · Métricas Mundial 2026`}
+              filenameBase={`${team}-${currentPlayer}`}
+              label="🖼️ Imagen"
+            />
+          </div>
+        </div>
+      )}
+
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Percentil calculado dentro del propio dataset cargado (no es un ranking mundial completo). Combina métricas
         físicas (FIFA Training Centre) y tácticas (mismos reportes, Mundial 2026 en curso) cuando ambas están
