@@ -7,6 +7,7 @@ import PhysicalPlayerBar from "../islands/PhysicalPlayerBar";
 import PositionPhysicalRanking from "../islands/PositionPhysicalRanking";
 import PlayerGlobalIndexRanking from "../islands/PlayerGlobalIndexRanking";
 import { loadJson, type PlayerMinutesRow, type PlayerPhysicalPositionRow, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import { buildPlayerPositions } from "../lib/playerPositions";
 import type { PhysicalPlayerRankingRow } from "../islands/PhysicalPlayerBar";
 
 function loadArray<T>(filename: string): T[] {
@@ -21,29 +22,7 @@ const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
 
 // Posición por jugador para ponderar el índice global por posición (estilo EA FC).
-// Los nombres difieren entre fuentes (métricas "Kylian MBAPPE" vs plantel "Kylian
-// Mbappé"), así que se cruza normalizando mayúsculas y diacríticos (mismo criterio
-// que Analizar). Clave: `${team}|${player_name de las métricas}`.
-function normName(name: string): string {
-  return name
-    .normalize("NFD")
-    .replace(/\p{M}/gu, "")
-    .replace(/ø/gi, "o")
-    .replace(/đ/gi, "d")
-    .replace(/ł/gi, "l")
-    .toLowerCase()
-    .split(/\s+/)
-    .join(" ")
-    .trim();
-}
-const squadPosByNorm = new Map(squadRows.map((r) => [`${r.team}|${normName(r.player_name)}`, r.position]));
-const positions: Record<string, string> = {};
-for (const row of playerMetrics) {
-  const key = `${row.team}|${row.player_name}`;
-  if (key in positions) continue;
-  const pos = squadPosByNorm.get(`${row.team}|${normName(row.player_name)}`);
-  if (pos) positions[key] = pos;
-}
+const positions = buildPlayerPositions(playerMetrics, squadRows);
 ---
 
 <Base title="Jugadores" description="Ranking de minutos jugados y métricas físicas reales por jugador — Mundial 2026.">

@@ -2,8 +2,10 @@
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import RadarCompare from "../islands/RadarCompare";
+import PlayerCompare from "../islands/PlayerCompare";
 import TimelineChart from "../islands/TimelineChart";
-import { loadJson, type TeamSeasonSummary, type TimelineRow, type TimelineTactical2026Row, type TeamPhysicalRankingRow, type TeamTacticalRankingRow } from "../lib/data";
+import { loadJson, type TeamSeasonSummary, type TimelineRow, type TimelineTactical2026Row, type TeamPhysicalRankingRow, type TeamTacticalRankingRow, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import { buildPlayerPositions } from "../lib/playerPositions";
 
 // Normaliza el shape {status, rows} de los agregados que aún no se scrapearon
 // a un array vacío, para que el radar arranque en un modo con datos.
@@ -20,6 +22,11 @@ const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.js
 const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");
 const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
 const timeline2026 = loadArray<TimelineTactical2026Row>("timeline_tactical_2026.json");
+
+// Comparación jugador a jugador (índice por factor + GLOBAL ponderado por posición).
+const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
+const squadRows = loadArray<SquadPlayerRow>("squads.json");
+const playerPositions = buildPlayerPositions(playerMetrics, squadRows);
 ---
 
 <Base title="Comparar" description="Comparación cabeza a cabeza y evolución dentro del torneo.">
@@ -27,16 +34,35 @@ const timeline2026 = loadArray<TimelineTactical2026Row>("timeline_tactical_2026.
   <p class="eyebrow">Cara a cara · dos selecciones</p>
   <h1>Comparar</h1>
   <p class="lede">
-    El modo <strong>uno contra uno</strong>: elegí <strong>dos</strong> selecciones y miralas lado a lado en un radar,
-    con una lectura automática de las diferencias que más pesan. Físico o táctico del Mundial 2026, o el histórico
-    2018/2022. <em>¿Querés ver a las 48 ordenadas en una tabla? Eso está en Rankings.</em>
+    El modo <strong>uno contra uno</strong>: elegí <strong>dos</strong> y miralas lado a lado en un radar, con una
+    lectura automática de las diferencias que más pesan. Podés comparar <strong>selecciones</strong> o
+    <strong>jugadores</strong>. <em>¿Querés ver a las 48 ordenadas en una tabla? Eso está en Rankings.</em>
   </p>
 
   <section class="section">
+    <div class="section-head">
+      <h2>Dos selecciones</h2>
+      <p>Físico o táctico del Mundial 2026, o el histórico 2018/2022. El GLOBAL es el promedio del índice de cada factor.</p>
+    </div>
     <div class="card">
       <RadarCompare client:only="react" physicalRows={teamPhysical} tacticalRows={teamTactical} summaryRows={summary} />
     </div>
   </section>
+
+  {playerMetrics.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Dos jugadores</h2>
+        <p>
+          Cara a cara por cada factor físico y táctico (remates incluido), con el <strong>GLOBAL ponderado por posición</strong>
+          de cada uno — estilo EA SPORTS FC. <em>Tocá el radar para ver el valor oficial de cada factor.</em>
+        </p>
+      </div>
+      <div class="card">
+        <PlayerCompare client:only="react" rows={playerMetrics} positions={playerPositions} />
+      </div>
+    </section>
+  )}
 
   <section class="section">
     <div class="section-head">
