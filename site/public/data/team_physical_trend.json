@@ -286,6 +286,19 @@
     "top_speed_kmh": 33.7
   },
   {
+    "team": "Belgium",
+    "match_id": 20260098,
+    "match_date": "2026-07-10",
+    "stage": "Quarter-final",
+    "rival": "Spain",
+    "es_local": false,
+    "jornada": 6,
+    "total_distance_km": 116.16,
+    "high_intensity_distance_m": 7114.1,
+    "sprint_count": 443.0,
+    "top_speed_kmh": 32.7
+  },
+  {
     "team": "Bosnia and Herzegovina",
     "match_id": 20260003,
     "match_date": "2026-06-12",
@@ -2182,6 +2195,19 @@
     "high_intensity_distance_m": 8102.7,
     "sprint_count": 471.0,
     "top_speed_kmh": 33.6
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260098,
+    "match_date": "2026-07-10",
+    "stage": "Quarter-final",
+    "rival": "Belgium",
+    "es_local": true,
+    "jornada": 6,
+    "total_distance_km": 114.59,
+    "high_intensity_distance_m": 7227.3,
+    "sprint_count": 418.0,
+    "top_speed_kmh": 34.0
   },
   {
     "team": "Sweden",

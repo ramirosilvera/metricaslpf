@@ -11,13 +11,13 @@
     "intercepciones_promedio": 9.5,
     "precision_pases_pct": 90.1,
     "precision_pases_pct_percentil": 93.0,
-    "remates_promedio_percentil": 90.0,
+    "remates_promedio_percentil": 91.0,
     "progresiones_promedio_percentil": 100.0,
     "quiebres_linea_promedio_percentil": 90.0,
     "presiones_promedio_percentil": 17.0,
     "recuperaciones_promedio_percentil": 29.0,
     "tackles_promedio_percentil": 65.0,
-    "intercepciones_promedio_percentil": 82.0
+    "intercepciones_promedio_percentil": 84.0
   },
   {
     "team": "Côte d'Ivoire",
@@ -33,11 +33,11 @@
     "precision_pases_pct_percentil": 73.0,
     "remates_promedio_percentil": 50.0,
     "progresiones_promedio_percentil": 98.0,
-    "quiebres_linea_promedio_percentil": 77.0,
+    "quiebres_linea_promedio_percentil": 79.0,
     "presiones_promedio_percentil": 73.0,
     "recuperaciones_promedio_percentil": 56.0,
     "tackles_promedio_percentil": 85.0,
-    "intercepciones_promedio_percentil": 86.0
+    "intercepciones_promedio_percentil": 89.0
   },
   {
     "team": "Algeria",
@@ -53,8 +53,8 @@
     "precision_pases_pct_percentil": 96.0,
     "remates_promedio_percentil": 48.0,
     "progresiones_promedio_percentil": 96.0,
-    "quiebres_linea_promedio_percentil": 79.0,
-    "presiones_promedio_percentil": 22.0,
+    "quiebres_linea_promedio_percentil": 81.0,
+    "presiones_promedio_percentil": 23.0,
     "recuperaciones_promedio_percentil": 6.0,
     "tackles_promedio_percentil": 65.0,
     "intercepciones_promedio_percentil": 28.0
@@ -131,7 +131,7 @@
     "intercepciones_promedio": 9.2,
     "precision_pases_pct": 89.5,
     "precision_pases_pct_percentil": 88.0,
-    "remates_promedio_percentil": 92.0,
+    "remates_promedio_percentil": 94.0,
     "progresiones_promedio_percentil": 88.0,
     "quiebres_linea_promedio_percentil": 98.0,
     "presiones_promedio_percentil": 70.0,
@@ -150,14 +150,34 @@
     "tackles_promedio": 5.6,
     "intercepciones_promedio": 8.6,
     "precision_pases_pct": 86.5,
-    "precision_pases_pct_percentil": 51.0,
+    "precision_pases_pct_percentil": 53.0,
     "remates_promedio_percentil": 58.0,
     "progresiones_promedio_percentil": 85.0,
-    "quiebres_linea_promedio_percentil": 81.0,
+    "quiebres_linea_promedio_percentil": 83.0,
     "presiones_promedio_percentil": 48.0,
     "recuperaciones_promedio_percentil": 58.0,
     "tackles_promedio_percentil": 2.0,
     "intercepciones_promedio_percentil": 65.0
+  },
+  {
+    "team": "Spain",
+    "partidos": 6,
+    "remates_promedio": 18.3,
+    "progresiones_promedio": 32.0,
+    "quiebres_linea_promedio": 146.8,
+    "presiones_promedio": 33.2,
+    "recuperaciones_promedio": 50.0,
+    "tackles_promedio": 7.7,
+    "intercepciones_promedio": 9.2,
+    "precision_pases_pct": 91.2,
+    "precision_pases_pct_percentil": 98.0,
+    "remates_promedio_percentil": 91.0,
+    "progresiones_promedio_percentil": 82.0,
+    "quiebres_linea_promedio_percentil": 100.0,
+    "presiones_promedio_percentil": 6.0,
+    "recuperaciones_promedio_percentil": 82.0,
+    "tackles_promedio_percentil": 43.0,
+    "intercepciones_promedio_percentil": 77.0
   },
   {
     "team": "Senegal",
@@ -172,52 +192,32 @@
     "precision_pases_pct": 88.0,
     "precision_pases_pct_percentil": 77.0,
     "remates_promedio_percentil": 88.0,
-    "progresiones_promedio_percentil": 83.0,
+    "progresiones_promedio_percentil": 82.0,
     "quiebres_linea_promedio_percentil": 88.0,
     "presiones_promedio_percentil": 44.0,
-    "recuperaciones_promedio_percentil": 77.0,
-    "tackles_promedio_percentil": 52.0,
-    "intercepciones_promedio_percentil": 82.0
+    "recuperaciones_promedio_percentil": 79.0,
+    "tackles_promedio_percentil": 54.0,
+    "intercepciones_promedio_percentil": 84.0
   },
   {
     "team": "Belgium",
-    "partidos": 5,
-    "remates_promedio": 21.4,
-    "progresiones_promedio": 31.8,
-    "quiebres_linea_promedio": 106.4,
-    "presiones_promedio": 38.0,
-    "recuperaciones_promedio": 50.4,
-    "tackles_promedio": 8.0,
-    "intercepciones_promedio": 10.0,
-    "precision_pases_pct": 86.9,
-    "precision_pases_pct_percentil": 61.0,
-    "remates_promedio_percentil": 98.0,
-    "progresiones_promedio_percentil": 81.0,
-    "quiebres_linea_promedio_percentil": 83.0,
-    "presiones_promedio_percentil": 22.0,
-    "recuperaciones_promedio_percentil": 83.0,
-    "tackles_promedio_percentil": 49.0,
-    "intercepciones_promedio_percentil": 91.0
-  },
-  {
-    "team": "Spain",
-    "partidos": 5,
-    "remates_promedio": 18.6,
-    "progresiones_promedio": 31.2,
-    "quiebres_linea_promedio": 144.4,
-    "presiones_promedio": 35.2,
-    "recuperaciones_promedio": 49.6,
-    "tackles_promedio": 8.4,
-    "intercepciones_promedio": 8.8,
-    "precision_pases_pct": 91.4,
-    "precision_pases_pct_percentil": 100.0,
-    "remates_promedio_percentil": 94.0,
+    "partidos": 6,
+    "remates_promedio": 18.7,
+    "progresiones_promedio": 31.0,
+    "quiebres_linea_promedio": 102.0,
+    "presiones_promedio": 37.8,
+    "recuperaciones_promedio": 47.5,
+    "tackles_promedio": 7.3,
+    "intercepciones_promedio": 9.2,
+    "precision_pases_pct": 86.1,
+    "precision_pases_pct_percentil": 48.0,
+    "remates_promedio_percentil": 96.0,
     "progresiones_promedio_percentil": 79.0,
-    "quiebres_linea_promedio_percentil": 100.0,
-    "presiones_promedio_percentil": 8.0,
-    "recuperaciones_promedio_percentil": 79.0,
-    "tackles_promedio_percentil": 59.0,
-    "intercepciones_promedio_percentil": 71.0
+    "quiebres_linea_promedio_percentil": 77.0,
+    "presiones_promedio_percentil": 21.0,
+    "recuperaciones_promedio_percentil": 71.0,
+    "tackles_promedio_percentil": 34.0,
+    "intercepciones_promedio_percentil": 77.0
   },
   {
     "team": "Curaçao",
@@ -235,8 +235,8 @@
     "progresiones_promedio_percentil": 77.0,
     "quiebres_linea_promedio_percentil": 17.0,
     "presiones_promedio_percentil": 94.0,
-    "recuperaciones_promedio_percentil": 75.0,
-    "tackles_promedio_percentil": 55.0,
+    "recuperaciones_promedio_percentil": 77.0,
+    "tackles_promedio_percentil": 57.0,
     "intercepciones_promedio_percentil": 100.0
   },
   {
@@ -270,7 +270,7 @@
     "tackles_promedio": 9.0,
     "intercepciones_promedio": 10.7,
     "precision_pases_pct": 86.6,
-    "precision_pases_pct_percentil": 55.0,
+    "precision_pases_pct_percentil": 57.0,
     "remates_promedio_percentil": 85.0,
     "progresiones_promedio_percentil": 73.0,
     "quiebres_linea_promedio_percentil": 68.0,
@@ -316,7 +316,7 @@
     "quiebres_linea_promedio_percentil": 25.0,
     "presiones_promedio_percentil": 79.0,
     "recuperaciones_promedio_percentil": 36.0,
-    "tackles_promedio_percentil": 40.0,
+    "tackles_promedio_percentil": 43.0,
     "intercepciones_promedio_percentil": 18.0
   },
   {
@@ -334,7 +334,7 @@
     "remates_promedio_percentil": 40.0,
     "progresiones_promedio_percentil": 67.0,
     "quiebres_linea_promedio_percentil": 71.0,
-    "presiones_promedio_percentil": 6.0,
+    "presiones_promedio_percentil": 8.0,
     "recuperaciones_promedio_percentil": 3.0,
     "tackles_promedio_percentil": 22.0,
     "intercepciones_promedio_percentil": 48.0
@@ -375,8 +375,8 @@
     "progresiones_promedio_percentil": 62.0,
     "quiebres_linea_promedio_percentil": 12.0,
     "presiones_promedio_percentil": 96.0,
-    "recuperaciones_promedio_percentil": 71.0,
-    "tackles_promedio_percentil": 55.0,
+    "recuperaciones_promedio_percentil": 73.0,
+    "tackles_promedio_percentil": 57.0,
     "intercepciones_promedio_percentil": 69.0
   },
   {
@@ -390,14 +390,14 @@
     "tackles_promedio": 8.0,
     "intercepciones_promedio": 9.0,
     "precision_pases_pct": 86.9,
-    "precision_pases_pct_percentil": 61.0,
+    "precision_pases_pct_percentil": 62.0,
     "remates_promedio_percentil": 69.0,
     "progresiones_promedio_percentil": 60.0,
     "quiebres_linea_promedio_percentil": 85.0,
     "presiones_promedio_percentil": 70.0,
     "recuperaciones_promedio_percentil": 50.0,
-    "tackles_promedio_percentil": 49.0,
-    "intercepciones_promedio_percentil": 74.0
+    "tackles_promedio_percentil": 52.0,
+    "intercepciones_promedio_percentil": 72.0
   },
   {
     "team": "Congo DR",
@@ -416,7 +416,7 @@
     "quiebres_linea_promedio_percentil": 30.0,
     "presiones_promedio_percentil": 58.0,
     "recuperaciones_promedio_percentil": 40.0,
-    "tackles_promedio_percentil": 35.0,
+    "tackles_promedio_percentil": 38.0,
     "intercepciones_promedio_percentil": 55.0
   },
   {
@@ -430,14 +430,14 @@
     "tackles_promedio": 13.0,
     "intercepciones_promedio": 9.8,
     "precision_pases_pct": 86.5,
-    "precision_pases_pct_percentil": 51.0,
+    "precision_pases_pct_percentil": 53.0,
     "remates_promedio_percentil": 71.0,
     "progresiones_promedio_percentil": 56.0,
     "quiebres_linea_promedio_percentil": 55.0,
     "presiones_promedio_percentil": 88.0,
     "recuperaciones_promedio_percentil": 85.0,
     "tackles_promedio_percentil": 95.0,
-    "intercepciones_promedio_percentil": 86.0
+    "intercepciones_promedio_percentil": 89.0
   },
   {
     "team": "Ghana",
@@ -456,7 +456,7 @@
     "quiebres_linea_promedio_percentil": 6.0,
     "presiones_promedio_percentil": 62.0,
     "recuperaciones_promedio_percentil": 20.0,
-    "tackles_promedio_percentil": 45.0,
+    "tackles_promedio_percentil": 49.0,
     "intercepciones_promedio_percentil": 18.0
   },
   {
@@ -470,13 +470,13 @@
     "tackles_promedio": 8.4,
     "intercepciones_promedio": 6.0,
     "precision_pases_pct": 86.8,
-    "precision_pases_pct_percentil": 58.0,
+    "precision_pases_pct_percentil": 60.0,
     "remates_promedio_percentil": 73.0,
     "progresiones_promedio_percentil": 52.0,
     "quiebres_linea_promedio_percentil": 65.0,
     "presiones_promedio_percentil": 77.0,
     "recuperaciones_promedio_percentil": 67.0,
-    "tackles_promedio_percentil": 59.0,
+    "tackles_promedio_percentil": 60.0,
     "intercepciones_promedio_percentil": 6.0
   },
   {
@@ -510,7 +510,7 @@
     "tackles_promedio": 11.6,
     "intercepciones_promedio": 8.0,
     "precision_pases_pct": 91.3,
-    "precision_pases_pct_percentil": 98.0,
+    "precision_pases_pct_percentil": 100.0,
     "remates_promedio_percentil": 79.0,
     "progresiones_promedio_percentil": 48.0,
     "quiebres_linea_promedio_percentil": 94.0,
@@ -555,7 +555,7 @@
     "progresiones_promedio_percentil": 44.0,
     "quiebres_linea_promedio_percentil": 60.0,
     "presiones_promedio_percentil": 60.0,
-    "recuperaciones_promedio_percentil": 73.0,
+    "recuperaciones_promedio_percentil": 75.0,
     "tackles_promedio_percentil": 27.0,
     "intercepciones_promedio_percentil": 38.0
   },
@@ -615,9 +615,9 @@
     "progresiones_promedio_percentil": 38.0,
     "quiebres_linea_promedio_percentil": 52.0,
     "presiones_promedio_percentil": 98.0,
-    "recuperaciones_promedio_percentil": 81.0,
+    "recuperaciones_promedio_percentil": 82.0,
     "tackles_promedio_percentil": 83.0,
-    "intercepciones_promedio_percentil": 74.0
+    "intercepciones_promedio_percentil": 72.0
   },
   {
     "team": "Iraq",
@@ -656,7 +656,7 @@
     "quiebres_linea_promedio_percentil": 44.0,
     "presiones_promedio_percentil": 66.0,
     "recuperaciones_promedio_percentil": 92.0,
-    "tackles_promedio_percentil": 40.0,
+    "tackles_promedio_percentil": 43.0,
     "intercepciones_promedio_percentil": 48.0
   },
   {
@@ -670,7 +670,7 @@
     "tackles_promedio": 6.0,
     "intercepciones_promedio": 7.7,
     "precision_pases_pct": 86.6,
-    "precision_pases_pct_percentil": 55.0,
+    "precision_pases_pct_percentil": 57.0,
     "remates_promedio_percentil": 28.0,
     "progresiones_promedio_percentil": 32.0,
     "quiebres_linea_promedio_percentil": 58.0,
@@ -697,7 +697,7 @@
     "presiones_promedio_percentil": 83.0,
     "recuperaciones_promedio_percentil": 96.0,
     "tackles_promedio_percentil": 89.0,
-    "intercepciones_promedio_percentil": 91.0
+    "intercepciones_promedio_percentil": 92.0
   },
   {
     "team": "Austria",
@@ -751,12 +751,12 @@
     "intercepciones_promedio": 7.0,
     "precision_pases_pct": 87.4,
     "precision_pases_pct_percentil": 69.0,
-    "remates_promedio_percentil": 96.0,
+    "remates_promedio_percentil": 98.0,
     "progresiones_promedio_percentil": 23.0,
     "quiebres_linea_promedio_percentil": 73.0,
     "presiones_promedio_percentil": 25.0,
     "recuperaciones_promedio_percentil": 27.0,
-    "tackles_promedio_percentil": 45.0,
+    "tackles_promedio_percentil": 49.0,
     "intercepciones_promedio_percentil": 18.0
   },
   {
@@ -797,7 +797,7 @@
     "presiones_promedio_percentil": 75.0,
     "recuperaciones_promedio_percentil": 69.0,
     "tackles_promedio_percentil": 69.0,
-    "intercepciones_promedio_percentil": 79.0
+    "intercepciones_promedio_percentil": 81.0
   },
   {
     "team": "Paraguay",
@@ -910,7 +910,7 @@
     "tackles_promedio": 6.0,
     "intercepciones_promedio": 6.5,
     "precision_pases_pct": 86.4,
-    "precision_pases_pct_percentil": 48.0,
+    "precision_pases_pct_percentil": 50.0,
     "remates_promedio_percentil": 20.0,
     "progresiones_promedio_percentil": 6.0,
     "quiebres_linea_promedio_percentil": 30.0,
@@ -936,7 +936,7 @@
     "quiebres_linea_promedio_percentil": 10.0,
     "presiones_promedio_percentil": 56.0,
     "recuperaciones_promedio_percentil": 23.0,
-    "tackles_promedio_percentil": 40.0,
+    "tackles_promedio_percentil": 43.0,
     "intercepciones_promedio_percentil": 32.0
   },
   {
@@ -956,7 +956,7 @@
     "quiebres_linea_promedio_percentil": 4.0,
     "presiones_promedio_percentil": 35.0,
     "recuperaciones_promedio_percentil": 36.0,
-    "tackles_promedio_percentil": 33.0,
+    "tackles_promedio_percentil": 34.0,
     "intercepciones_promedio_percentil": 18.0
   }
 ]

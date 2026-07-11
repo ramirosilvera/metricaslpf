@@ -1,5 +1,36 @@
 [
   {
+    "match_id": 20260098,
+    "match_date": "2026-07-10",
+    "stage": "Quarter-final",
+    "home_team": "Spain",
+    "away_team": "Belgium",
+    "home_score": 2,
+    "away_score": 1,
+    "home": {
+      "distancia_km": 114.59,
+      "alta_intensidad_m": 7227.3,
+      "sprints": 418.0,
+      "velocidad_punta_kmh": 34.0,
+      "remates": 17,
+      "pases": 625,
+      "posesion_pct": 71.1
+    },
+    "away": {
+      "distancia_km": 116.16,
+      "alta_intensidad_m": 7114.1,
+      "sprints": 443.0,
+      "velocidad_punta_kmh": 32.7,
+      "remates": 5,
+      "pases": 254,
+      "posesion_pct": 28.9
+    },
+    "goleadores": [],
+    "goles_contra": [],
+    "destacado": null,
+    "insight": "Spain venció 2-1 a Belgium. Spain manejó más la pelota (71.1% de los pases)."
+  },
+  {
     "match_id": 20260097,
     "match_date": "2026-07-09",
     "stage": "Quarter-final",

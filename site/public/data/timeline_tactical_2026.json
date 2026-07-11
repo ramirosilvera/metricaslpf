@@ -220,6 +220,16 @@
     "presiones": 57
   },
   {
+    "team": "Belgium",
+    "match_id": 20260098,
+    "match_date": "2026-07-10",
+    "stage": "Quarter-final",
+    "rival": "Spain",
+    "pass_accuracy_pct": 79.4,
+    "progresiones": 27,
+    "presiones": 37
+  },
+  {
     "team": "Bosnia and Herzegovina",
     "match_id": 20260003,
     "match_date": "2026-06-12",
@@ -1678,6 +1688,16 @@
     "pass_accuracy_pct": 89.4,
     "progresiones": 29,
     "presiones": 45
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260098,
+    "match_date": "2026-07-10",
+    "stage": "Quarter-final",
+    "rival": "Belgium",
+    "pass_accuracy_pct": 90.2,
+    "progresiones": 36,
+    "presiones": 23
   },
   {
     "team": "Sweden",

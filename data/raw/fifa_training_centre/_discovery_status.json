@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-07-11T12:56:22.274683+00:00",
+  "checked_at": "2026-07-11T18:45:26.045167+00:00",
   "hub_url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
   "pages_visited": [
     "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
@@ -975,7 +975,17 @@
       "team_b": "Morocco",
       "stage_guess": "Knockout stage",
       "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M97-FRA-V-MAR.pdf"
+    },
+    {
+      "match_number": 98,
+      "match_id": 20260098,
+      "team_a_code": "ESP",
+      "team_b_code": "BEL",
+      "team_a": "Spain",
+      "team_b": "Belgium",
+      "stage_guess": "Knockout stage",
+      "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M98-ESP-V-BEL-ALT.pdf"
     }
   ],
-  "count": 97
+  "count": 98
 }

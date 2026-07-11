@@ -13,19 +13,6 @@
     "velocidad_punta_kmh_percentil": 60.0
   },
   {
-    "team": "Belgium",
-    "partidos": 5,
-    "distancia_promedio_km": 124.68,
-    "alta_intensidad_promedio_m": 8891.0,
-    "sprints_promedio": 511.8,
-    "velocidad_punta_kmh": 34.8,
-    "distancia_total_km": 623.4,
-    "distancia_promedio_km_percentil": 98.0,
-    "alta_intensidad_promedio_m_percentil": 92.0,
-    "sprints_promedio_percentil": 98.0,
-    "velocidad_punta_kmh_percentil": 50.0
-  },
-  {
     "team": "Australia",
     "partidos": 4,
     "distancia_promedio_km": 123.5,
@@ -33,10 +20,23 @@
     "sprints_promedio": 475.0,
     "velocidad_punta_kmh": 36.7,
     "distancia_total_km": 494.0,
-    "distancia_promedio_km_percentil": 96.0,
+    "distancia_promedio_km_percentil": 98.0,
     "alta_intensidad_promedio_m_percentil": 69.0,
     "sprints_promedio_percentil": 79.0,
     "velocidad_punta_kmh_percentil": 94.0
+  },
+  {
+    "team": "Belgium",
+    "partidos": 6,
+    "distancia_promedio_km": 123.26,
+    "alta_intensidad_promedio_m": 8595.0,
+    "sprints_promedio": 500.3,
+    "velocidad_punta_kmh": 34.8,
+    "distancia_total_km": 739.5,
+    "distancia_promedio_km_percentil": 96.0,
+    "alta_intensidad_promedio_m_percentil": 90.0,
+    "sprints_promedio_percentil": 96.0,
+    "velocidad_punta_kmh_percentil": 50.0
   },
   {
     "team": "Senegal",
@@ -48,7 +48,7 @@
     "distancia_total_km": 492.8,
     "distancia_promedio_km_percentil": 94.0,
     "alta_intensidad_promedio_m_percentil": 94.0,
-    "sprints_promedio_percentil": 96.0,
+    "sprints_promedio_percentil": 98.0,
     "velocidad_punta_kmh_percentil": 40.0
   },
   {
@@ -99,7 +99,7 @@
     "velocidad_punta_kmh": 34.7,
     "distancia_total_km": 592.6,
     "distancia_promedio_km_percentil": 85.0,
-    "alta_intensidad_promedio_m_percentil": 54.0,
+    "alta_intensidad_promedio_m_percentil": 56.0,
     "sprints_promedio_percentil": 38.0,
     "velocidad_punta_kmh_percentil": 40.0
   },
@@ -112,7 +112,7 @@
     "velocidad_punta_kmh": 34.7,
     "distancia_total_km": 590.2,
     "distancia_promedio_km_percentil": 83.0,
-    "alta_intensidad_promedio_m_percentil": 46.0,
+    "alta_intensidad_promedio_m_percentil": 48.0,
     "sprints_promedio_percentil": 75.0,
     "velocidad_punta_kmh_percentil": 40.0
   },
@@ -138,7 +138,7 @@
     "velocidad_punta_kmh": 34.8,
     "distancia_total_km": 350.8,
     "distancia_promedio_km_percentil": 79.0,
-    "alta_intensidad_promedio_m_percentil": 56.0,
+    "alta_intensidad_promedio_m_percentil": 58.0,
     "sprints_promedio_percentil": 40.0,
     "velocidad_punta_kmh_percentil": 50.0
   },
@@ -164,7 +164,7 @@
     "velocidad_punta_kmh": 35.5,
     "distancia_total_km": 697.9,
     "distancia_promedio_km_percentil": 75.0,
-    "alta_intensidad_promedio_m_percentil": 90.0,
+    "alta_intensidad_promedio_m_percentil": 92.0,
     "sprints_promedio_percentil": 81.0,
     "velocidad_punta_kmh_percentil": 80.0
   },
@@ -177,9 +177,9 @@
     "velocidad_punta_kmh": 34.0,
     "distancia_total_km": 348.8,
     "distancia_promedio_km_percentil": 73.0,
-    "alta_intensidad_promedio_m_percentil": 42.0,
+    "alta_intensidad_promedio_m_percentil": 44.0,
     "sprints_promedio_percentil": 73.0,
-    "velocidad_punta_kmh_percentil": 14.0
+    "velocidad_punta_kmh_percentil": 12.0
   },
   {
     "team": "Scotland",
@@ -203,7 +203,7 @@
     "velocidad_punta_kmh": 34.6,
     "distancia_total_km": 347.3,
     "distancia_promedio_km_percentil": 69.0,
-    "alta_intensidad_promedio_m_percentil": 58.0,
+    "alta_intensidad_promedio_m_percentil": 60.0,
     "sprints_promedio_percentil": 62.0,
     "velocidad_punta_kmh_percentil": 32.0
   },
@@ -216,9 +216,22 @@
     "velocidad_punta_kmh": 34.0,
     "distancia_total_km": 344.4,
     "distancia_promedio_km_percentil": 67.0,
-    "alta_intensidad_promedio_m_percentil": 50.0,
+    "alta_intensidad_promedio_m_percentil": 52.0,
     "sprints_promedio_percentil": 56.0,
-    "velocidad_punta_kmh_percentil": 14.0
+    "velocidad_punta_kmh_percentil": 12.0
+  },
+  {
+    "team": "Spain",
+    "partidos": 6,
+    "distancia_promedio_km": 114.09,
+    "alta_intensidad_promedio_m": 7655.0,
+    "sprints_promedio": 438.8,
+    "velocidad_punta_kmh": 34.0,
+    "distancia_total_km": 684.5,
+    "distancia_promedio_km_percentil": 64.0,
+    "alta_intensidad_promedio_m_percentil": 42.0,
+    "sprints_promedio_percentil": 46.0,
+    "velocidad_punta_kmh_percentil": 12.0
   },
   {
     "team": "Canada",
@@ -228,23 +241,10 @@
     "sprints_promedio": 512.0,
     "velocidad_punta_kmh": 35.2,
     "distancia_total_km": 570.5,
-    "distancia_promedio_km_percentil": 65.0,
+    "distancia_promedio_km_percentil": 64.0,
     "alta_intensidad_promedio_m_percentil": 98.0,
     "sprints_promedio_percentil": 100.0,
     "velocidad_punta_kmh_percentil": 73.0
-  },
-  {
-    "team": "Spain",
-    "partidos": 5,
-    "distancia_promedio_km": 113.99,
-    "alta_intensidad_promedio_m": 7741.0,
-    "sprints_promedio": 443.0,
-    "velocidad_punta_kmh": 33.7,
-    "distancia_total_km": 570.0,
-    "distancia_promedio_km_percentil": 62.0,
-    "alta_intensidad_promedio_m_percentil": 60.0,
-    "sprints_promedio_percentil": 48.0,
-    "velocidad_punta_kmh_percentil": 7.0
   },
   {
     "team": "Argentina",
@@ -281,8 +281,8 @@
     "velocidad_punta_kmh": 34.8,
     "distancia_total_km": 453.6,
     "distancia_promedio_km_percentil": 56.0,
-    "alta_intensidad_promedio_m_percentil": 44.0,
-    "sprints_promedio_percentil": 46.0,
+    "alta_intensidad_promedio_m_percentil": 46.0,
+    "sprints_promedio_percentil": 48.0,
     "velocidad_punta_kmh_percentil": 50.0
   },
   {
@@ -307,7 +307,7 @@
     "velocidad_punta_kmh": 34.1,
     "distancia_total_km": 451.9,
     "distancia_promedio_km_percentil": 52.0,
-    "alta_intensidad_promedio_m_percentil": 48.0,
+    "alta_intensidad_promedio_m_percentil": 50.0,
     "sprints_promedio_percentil": 50.0,
     "velocidad_punta_kmh_percentil": 19.0
   },
@@ -322,7 +322,7 @@
     "distancia_promedio_km_percentil": 50.0,
     "alta_intensidad_promedio_m_percentil": 79.0,
     "sprints_promedio_percentil": 85.0,
-    "velocidad_punta_kmh_percentil": 10.0
+    "velocidad_punta_kmh_percentil": 8.0
   },
   {
     "team": "Mexico",
@@ -476,7 +476,7 @@
     "velocidad_punta_kmh": 35.9,
     "distancia_total_km": 553.5,
     "distancia_promedio_km_percentil": 25.0,
-    "alta_intensidad_promedio_m_percentil": 52.0,
+    "alta_intensidad_promedio_m_percentil": 54.0,
     "sprints_promedio_percentil": 35.0,
     "velocidad_punta_kmh_percentil": 88.0
   },
@@ -556,7 +556,7 @@
     "distancia_promedio_km_percentil": 12.0,
     "alta_intensidad_promedio_m_percentil": 6.0,
     "sprints_promedio_percentil": 11.0,
-    "velocidad_punta_kmh_percentil": 7.0
+    "velocidad_punta_kmh_percentil": 6.0
   },
   {
     "team": "Colombia",

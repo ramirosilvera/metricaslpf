@@ -29,7 +29,7 @@
     "sprints_promedio": 56.7,
     "velocidad_punta_kmh": 31.6,
     "distancia_promedio_km_pct_pos": 100.0,
-    "alta_intensidad_promedio_m_pct_pos": 95.0,
+    "alta_intensidad_promedio_m_pct_pos": 96.0,
     "sprints_promedio_pct_pos": 99.0,
     "velocidad_punta_kmh_pct_pos": 40.0
   },
@@ -47,7 +47,7 @@
     "velocidad_punta_kmh": 32.7,
     "distancia_promedio_km_pct_pos": 99.0,
     "alta_intensidad_promedio_m_pct_pos": 23.0,
-    "sprints_promedio_pct_pos": 26.0,
+    "sprints_promedio_pct_pos": 27.0,
     "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
@@ -68,23 +68,6 @@
     "velocidad_punta_kmh_pct_pos": 86.0
   },
   {
-    "team": "Belgium",
-    "player_name": "Brandon MECHELE",
-    "position": "DF",
-    "jersey_number": 4,
-    "club": "Club Brugge",
-    "age_years": 33.4,
-    "partidos": 5,
-    "distancia_promedio_km": 11.53,
-    "alta_intensidad_promedio_m": 661.0,
-    "sprints_promedio": 39.0,
-    "velocidad_punta_kmh": 30.8,
-    "distancia_promedio_km_pct_pos": 99.0,
-    "alta_intensidad_promedio_m_pct_pos": 75.0,
-    "sprints_promedio_pct_pos": 78.0,
-    "velocidad_punta_kmh_pct_pos": 26.0
-  },
-  {
     "team": "Uruguay",
     "player_name": "Mathias OLIVERA",
     "position": "DF",
@@ -98,7 +81,7 @@
     "velocidad_punta_kmh": 28.4,
     "distancia_promedio_km_pct_pos": 99.0,
     "alta_intensidad_promedio_m_pct_pos": 81.0,
-    "sprints_promedio_pct_pos": 83.0,
+    "sprints_promedio_pct_pos": 84.0,
     "velocidad_punta_kmh_pct_pos": 9.0
   },
   {
@@ -113,7 +96,7 @@
     "alta_intensidad_promedio_m": 628.0,
     "sprints_promedio": 39.0,
     "velocidad_punta_kmh": 31.3,
-    "distancia_promedio_km_pct_pos": 98.0,
+    "distancia_promedio_km_pct_pos": 99.0,
     "alta_intensidad_promedio_m_pct_pos": 71.0,
     "sprints_promedio_pct_pos": 78.0,
     "velocidad_punta_kmh_pct_pos": 34.0
@@ -134,6 +117,23 @@
     "alta_intensidad_promedio_m_pct_pos": 91.0,
     "sprints_promedio_pct_pos": 95.0,
     "velocidad_punta_kmh_pct_pos": 22.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Brandon MECHELE",
+    "position": "DF",
+    "jersey_number": 4,
+    "club": "Club Brugge",
+    "age_years": 33.4,
+    "partidos": 6,
+    "distancia_promedio_km": 11.4,
+    "alta_intensidad_promedio_m": 639.0,
+    "sprints_promedio": 37.8,
+    "velocidad_punta_kmh": 30.8,
+    "distancia_promedio_km_pct_pos": 98.0,
+    "alta_intensidad_promedio_m_pct_pos": 72.0,
+    "sprints_promedio_pct_pos": 75.0,
+    "velocidad_punta_kmh_pct_pos": 27.0
   },
   {
     "team": "Senegal",
@@ -167,7 +167,7 @@
     "distancia_promedio_km_pct_pos": 97.0,
     "alta_intensidad_promedio_m_pct_pos": 96.0,
     "sprints_promedio_pct_pos": 94.0,
-    "velocidad_punta_kmh_pct_pos": 72.0
+    "velocidad_punta_kmh_pct_pos": 71.0
   },
   {
     "team": "Haiti",
@@ -200,7 +200,7 @@
     "velocidad_punta_kmh": 32.8,
     "distancia_promedio_km_pct_pos": 97.0,
     "alta_intensidad_promedio_m_pct_pos": 79.0,
-    "sprints_promedio_pct_pos": 79.0,
+    "sprints_promedio_pct_pos": 80.0,
     "velocidad_punta_kmh_pct_pos": 66.0
   },
   {
@@ -284,7 +284,7 @@
     "sprints_promedio": 51.5,
     "velocidad_punta_kmh": 34.0,
     "distancia_promedio_km_pct_pos": 96.0,
-    "alta_intensidad_promedio_m_pct_pos": 93.0,
+    "alta_intensidad_promedio_m_pct_pos": 94.0,
     "sprints_promedio_pct_pos": 95.0,
     "velocidad_punta_kmh_pct_pos": 89.0
   },
@@ -335,9 +335,26 @@
     "sprints_promedio": 46.0,
     "velocidad_punta_kmh": 34.0,
     "distancia_promedio_km_pct_pos": 95.0,
-    "alta_intensidad_promedio_m_pct_pos": 83.0,
+    "alta_intensidad_promedio_m_pct_pos": 84.0,
     "sprints_promedio_pct_pos": 89.0,
     "velocidad_punta_kmh_pct_pos": 89.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Timothy CASTAGNE",
+    "position": "DF",
+    "jersey_number": 21,
+    "club": "Fulham",
+    "age_years": 30.5,
+    "partidos": 6,
+    "distancia_promedio_km": 10.86,
+    "alta_intensidad_promedio_m": 940.0,
+    "sprints_promedio": 55.8,
+    "velocidad_punta_kmh": 32.6,
+    "distancia_promedio_km_pct_pos": 94.0,
+    "alta_intensidad_promedio_m_pct_pos": 95.0,
+    "sprints_promedio_pct_pos": 98.0,
+    "velocidad_punta_kmh_pct_pos": 62.0
   },
   {
     "team": "Netherlands",
@@ -370,7 +387,7 @@
     "velocidad_punta_kmh": 31.8,
     "distancia_promedio_km_pct_pos": 94.0,
     "alta_intensidad_promedio_m_pct_pos": 46.0,
-    "sprints_promedio_pct_pos": 46.0,
+    "sprints_promedio_pct_pos": 45.0,
     "velocidad_punta_kmh_pct_pos": 44.0
   },
   {
@@ -385,7 +402,7 @@
     "alta_intensidad_promedio_m": 906.0,
     "sprints_promedio": 49.5,
     "velocidad_punta_kmh": 33.8,
-    "distancia_promedio_km_pct_pos": 94.0,
+    "distancia_promedio_km_pct_pos": 93.0,
     "alta_intensidad_promedio_m_pct_pos": 94.0,
     "sprints_promedio_pct_pos": 93.0,
     "velocidad_punta_kmh_pct_pos": 86.0
@@ -408,6 +425,23 @@
     "velocidad_punta_kmh_pct_pos": 16.0
   },
   {
+    "team": "Spain",
+    "player_name": "Marc CUCURELLA",
+    "position": "DF",
+    "jersey_number": 24,
+    "club": "Chelsea",
+    "age_years": 27.9,
+    "partidos": 6,
+    "distancia_promedio_km": 10.77,
+    "alta_intensidad_promedio_m": 806.0,
+    "sprints_promedio": 43.5,
+    "velocidad_punta_kmh": 33.3,
+    "distancia_promedio_km_pct_pos": 93.0,
+    "alta_intensidad_promedio_m_pct_pos": 88.0,
+    "sprints_promedio_pct_pos": 87.0,
+    "velocidad_punta_kmh_pct_pos": 77.0
+  },
+  {
     "team": "Australia",
     "player_name": "Harry SOUTTAR",
     "position": "DF",
@@ -421,25 +455,8 @@
     "velocidad_punta_kmh": 30.7,
     "distancia_promedio_km_pct_pos": 93.0,
     "alta_intensidad_promedio_m_pct_pos": 23.0,
-    "sprints_promedio_pct_pos": 26.0,
+    "sprints_promedio_pct_pos": 27.0,
     "velocidad_punta_kmh_pct_pos": 24.0
-  },
-  {
-    "team": "Spain",
-    "player_name": "Marc CUCURELLA",
-    "position": "DF",
-    "jersey_number": 24,
-    "club": "Chelsea",
-    "age_years": 27.9,
-    "partidos": 5,
-    "distancia_promedio_km": 10.72,
-    "alta_intensidad_promedio_m": 798.0,
-    "sprints_promedio": 43.8,
-    "velocidad_punta_kmh": 32.2,
-    "distancia_promedio_km_pct_pos": 93.0,
-    "alta_intensidad_promedio_m_pct_pos": 87.0,
-    "sprints_promedio_pct_pos": 87.0,
-    "velocidad_punta_kmh_pct_pos": 51.0
   },
   {
     "team": "USA",
@@ -453,9 +470,9 @@
     "alta_intensidad_promedio_m": 401.0,
     "sprints_promedio": 24.2,
     "velocidad_punta_kmh": 30.7,
-    "distancia_promedio_km_pct_pos": 93.0,
+    "distancia_promedio_km_pct_pos": 92.0,
     "alta_intensidad_promedio_m_pct_pos": 33.0,
-    "sprints_promedio_pct_pos": 34.0,
+    "sprints_promedio_pct_pos": 35.0,
     "velocidad_punta_kmh_pct_pos": 24.0
   },
   {
@@ -473,24 +490,7 @@
     "distancia_promedio_km_pct_pos": 92.0,
     "alta_intensidad_promedio_m_pct_pos": 90.0,
     "sprints_promedio_pct_pos": 97.0,
-    "velocidad_punta_kmh_pct_pos": 26.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Timothy CASTAGNE",
-    "position": "DF",
-    "jersey_number": 21,
-    "club": "Fulham",
-    "age_years": 30.5,
-    "partidos": 5,
-    "distancia_promedio_km": 10.69,
-    "alta_intensidad_promedio_m": 966.0,
-    "sprints_promedio": 56.4,
-    "velocidad_punta_kmh": 32.6,
-    "distancia_promedio_km_pct_pos": 92.0,
-    "alta_intensidad_promedio_m_pct_pos": 97.0,
-    "sprints_promedio_pct_pos": 99.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 27.0
   },
   {
     "team": "Canada",
@@ -541,7 +541,7 @@
     "distancia_promedio_km_pct_pos": 91.0,
     "alta_intensidad_promedio_m_pct_pos": 50.0,
     "sprints_promedio_pct_pos": 48.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 38.0
   },
   {
     "team": "Croatia",
@@ -558,7 +558,7 @@
     "distancia_promedio_km_pct_pos": 91.0,
     "alta_intensidad_promedio_m_pct_pos": 93.0,
     "sprints_promedio_pct_pos": 92.0,
-    "velocidad_punta_kmh_pct_pos": 83.0
+    "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
     "team": "Germany",
@@ -607,7 +607,7 @@
     "sprints_promedio": 49.3,
     "velocidad_punta_kmh": 35.5,
     "distancia_promedio_km_pct_pos": 90.0,
-    "alta_intensidad_promedio_m_pct_pos": 96.0,
+    "alta_intensidad_promedio_m_pct_pos": 97.0,
     "sprints_promedio_pct_pos": 93.0,
     "velocidad_punta_kmh_pct_pos": 98.0
   },
@@ -663,23 +663,6 @@
     "velocidad_punta_kmh_pct_pos": 69.0
   },
   {
-    "team": "Spain",
-    "player_name": "Pau CUBARSI",
-    "position": "DF",
-    "jersey_number": 22,
-    "club": "Barcelona",
-    "age_years": 19.4,
-    "partidos": 5,
-    "distancia_promedio_km": 10.54,
-    "alta_intensidad_promedio_m": 616.0,
-    "sprints_promedio": 33.8,
-    "velocidad_punta_kmh": 32.0,
-    "distancia_promedio_km_pct_pos": 89.0,
-    "alta_intensidad_promedio_m_pct_pos": 69.0,
-    "sprints_promedio_pct_pos": 67.0,
-    "velocidad_punta_kmh_pct_pos": 47.0
-  },
-  {
     "team": "Australia",
     "player_name": "Jacob ITALIANO",
     "position": "DF",
@@ -728,7 +711,7 @@
     "distancia_promedio_km_pct_pos": 88.0,
     "alta_intensidad_promedio_m_pct_pos": 53.0,
     "sprints_promedio_pct_pos": 67.0,
-    "velocidad_punta_kmh_pct_pos": 13.0
+    "velocidad_punta_kmh_pct_pos": 12.0
   },
   {
     "team": "Mexico",
@@ -744,7 +727,7 @@
     "velocidad_punta_kmh": 30.7,
     "distancia_promedio_km_pct_pos": 88.0,
     "alta_intensidad_promedio_m_pct_pos": 51.0,
-    "sprints_promedio_pct_pos": 65.0,
+    "sprints_promedio_pct_pos": 66.0,
     "velocidad_punta_kmh_pct_pos": 24.0
   },
   {
@@ -759,7 +742,7 @@
     "alta_intensidad_promedio_m": 811.0,
     "sprints_promedio": 42.7,
     "velocidad_punta_kmh": 32.1,
-    "distancia_promedio_km_pct_pos": 87.0,
+    "distancia_promedio_km_pct_pos": 88.0,
     "alta_intensidad_promedio_m_pct_pos": 88.0,
     "sprints_promedio_pct_pos": 85.0,
     "velocidad_punta_kmh_pct_pos": 49.0
@@ -776,7 +759,7 @@
     "alta_intensidad_promedio_m": 517.0,
     "sprints_promedio": 30.0,
     "velocidad_punta_kmh": 33.1,
-    "distancia_promedio_km_pct_pos": 87.0,
+    "distancia_promedio_km_pct_pos": 88.0,
     "alta_intensidad_promedio_m_pct_pos": 54.0,
     "sprints_promedio_pct_pos": 56.0,
     "velocidad_punta_kmh_pct_pos": 73.0
@@ -812,8 +795,25 @@
     "velocidad_punta_kmh": 35.0,
     "distancia_promedio_km_pct_pos": 87.0,
     "alta_intensidad_promedio_m_pct_pos": 39.0,
-    "sprints_promedio_pct_pos": 36.0,
+    "sprints_promedio_pct_pos": 37.0,
     "velocidad_punta_kmh_pct_pos": 96.0
+  },
+  {
+    "team": "Spain",
+    "player_name": "Pau CUBARSI",
+    "position": "DF",
+    "jersey_number": 22,
+    "club": "Barcelona",
+    "age_years": 19.4,
+    "partidos": 6,
+    "distancia_promedio_km": 10.44,
+    "alta_intensidad_promedio_m": 589.0,
+    "sprints_promedio": 32.5,
+    "velocidad_punta_kmh": 32.0,
+    "distancia_promedio_km_pct_pos": 87.0,
+    "alta_intensidad_promedio_m_pct_pos": 67.0,
+    "sprints_promedio_pct_pos": 64.0,
+    "velocidad_punta_kmh_pct_pos": 47.0
   },
   {
     "team": "Egypt",
@@ -864,7 +864,7 @@
     "distancia_promedio_km_pct_pos": 86.0,
     "alta_intensidad_promedio_m_pct_pos": 65.0,
     "sprints_promedio_pct_pos": 73.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Türkiye",
@@ -878,10 +878,10 @@
     "alta_intensidad_promedio_m": 555.0,
     "sprints_promedio": 33.0,
     "velocidad_punta_kmh": 30.8,
-    "distancia_promedio_km_pct_pos": 85.0,
+    "distancia_promedio_km_pct_pos": 86.0,
     "alta_intensidad_promedio_m_pct_pos": 61.0,
-    "sprints_promedio_pct_pos": 65.0,
-    "velocidad_punta_kmh_pct_pos": 26.0
+    "sprints_promedio_pct_pos": 66.0,
+    "velocidad_punta_kmh_pct_pos": 27.0
   },
   {
     "team": "Spain",
@@ -890,15 +890,15 @@
     "jersey_number": 12,
     "club": "Tottenham Hotspur",
     "age_years": 26.7,
-    "partidos": 3,
+    "partidos": 4,
     "distancia_promedio_km": 10.35,
-    "alta_intensidad_promedio_m": 966.0,
-    "sprints_promedio": 52.3,
-    "velocidad_punta_kmh": 32.7,
+    "alta_intensidad_promedio_m": 901.0,
+    "sprints_promedio": 50.2,
+    "velocidad_punta_kmh": 33.2,
     "distancia_promedio_km_pct_pos": 85.0,
-    "alta_intensidad_promedio_m_pct_pos": 97.0,
-    "sprints_promedio_pct_pos": 96.0,
-    "velocidad_punta_kmh_pct_pos": 64.0
+    "alta_intensidad_promedio_m_pct_pos": 93.0,
+    "sprints_promedio_pct_pos": 95.0,
+    "velocidad_punta_kmh_pct_pos": 75.0
   },
   {
     "team": "Uzbekistan",
@@ -913,7 +913,7 @@
     "sprints_promedio": 53.5,
     "velocidad_punta_kmh": 32.2,
     "distancia_promedio_km_pct_pos": 85.0,
-    "alta_intensidad_promedio_m_pct_pos": 94.0,
+    "alta_intensidad_promedio_m_pct_pos": 95.0,
     "sprints_promedio_pct_pos": 97.0,
     "velocidad_punta_kmh_pct_pos": 51.0
   },
@@ -930,7 +930,7 @@
     "sprints_promedio": 29.8,
     "velocidad_punta_kmh": 30.3,
     "distancia_promedio_km_pct_pos": 85.0,
-    "alta_intensidad_promedio_m_pct_pos": 48.0,
+    "alta_intensidad_promedio_m_pct_pos": 49.0,
     "sprints_promedio_pct_pos": 54.0,
     "velocidad_punta_kmh_pct_pos": 20.0
   },
@@ -947,7 +947,7 @@
     "sprints_promedio": 39.0,
     "velocidad_punta_kmh": 33.5,
     "distancia_promedio_km_pct_pos": 84.0,
-    "alta_intensidad_promedio_m_pct_pos": 82.0,
+    "alta_intensidad_promedio_m_pct_pos": 83.0,
     "sprints_promedio_pct_pos": 78.0,
     "velocidad_punta_kmh_pct_pos": 80.0
   },
@@ -965,7 +965,7 @@
     "velocidad_punta_kmh": 30.9,
     "distancia_promedio_km_pct_pos": 84.0,
     "alta_intensidad_promedio_m_pct_pos": 78.0,
-    "sprints_promedio_pct_pos": 79.0,
+    "sprints_promedio_pct_pos": 80.0,
     "velocidad_punta_kmh_pct_pos": 28.0
   },
   {
@@ -997,7 +997,7 @@
     "alta_intensidad_promedio_m": 612.0,
     "sprints_promedio": 36.2,
     "velocidad_punta_kmh": 33.4,
-    "distancia_promedio_km_pct_pos": 83.0,
+    "distancia_promedio_km_pct_pos": 84.0,
     "alta_intensidad_promedio_m_pct_pos": 69.0,
     "sprints_promedio_pct_pos": 74.0,
     "velocidad_punta_kmh_pct_pos": 79.0
@@ -1050,7 +1050,7 @@
     "velocidad_punta_kmh": 33.8,
     "distancia_promedio_km_pct_pos": 83.0,
     "alta_intensidad_promedio_m_pct_pos": 83.0,
-    "sprints_promedio_pct_pos": 75.0,
+    "sprints_promedio_pct_pos": 76.0,
     "velocidad_punta_kmh_pct_pos": 86.0
   },
   {
@@ -1067,8 +1067,8 @@
     "velocidad_punta_kmh": 32.3,
     "distancia_promedio_km_pct_pos": 82.0,
     "alta_intensidad_promedio_m_pct_pos": 50.0,
-    "sprints_promedio_pct_pos": 52.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "sprints_promedio_pct_pos": 53.0,
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Tunisia",
@@ -1084,7 +1084,7 @@
     "velocidad_punta_kmh": 30.7,
     "distancia_promedio_km_pct_pos": 82.0,
     "alta_intensidad_promedio_m_pct_pos": 70.0,
-    "sprints_promedio_pct_pos": 65.0,
+    "sprints_promedio_pct_pos": 66.0,
     "velocidad_punta_kmh_pct_pos": 24.0
   },
   {
@@ -1102,7 +1102,7 @@
     "distancia_promedio_km_pct_pos": 82.0,
     "alta_intensidad_promedio_m_pct_pos": 65.0,
     "sprints_promedio_pct_pos": 78.0,
-    "velocidad_punta_kmh_pct_pos": 14.0
+    "velocidad_punta_kmh_pct_pos": 13.0
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -1151,8 +1151,8 @@
     "sprints_promedio": 51.7,
     "velocidad_punta_kmh": 34.1,
     "distancia_promedio_km_pct_pos": 81.0,
-    "alta_intensidad_promedio_m_pct_pos": 96.0,
-    "sprints_promedio_pct_pos": 95.0,
+    "alta_intensidad_promedio_m_pct_pos": 97.0,
+    "sprints_promedio_pct_pos": 96.0,
     "velocidad_punta_kmh_pct_pos": 91.0
   },
   {
@@ -1185,7 +1185,7 @@
     "sprints_promedio": 24.4,
     "velocidad_punta_kmh": 31.7,
     "distancia_promedio_km_pct_pos": 80.0,
-    "alta_intensidad_promedio_m_pct_pos": 40.0,
+    "alta_intensidad_promedio_m_pct_pos": 41.0,
     "sprints_promedio_pct_pos": 35.0,
     "velocidad_punta_kmh_pct_pos": 42.0
   },
@@ -1204,7 +1204,7 @@
     "distancia_promedio_km_pct_pos": 80.0,
     "alta_intensidad_promedio_m_pct_pos": 62.0,
     "sprints_promedio_pct_pos": 60.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 38.0
   },
   {
     "team": "Panama",
@@ -1235,10 +1235,10 @@
     "alta_intensidad_promedio_m": 580.0,
     "sprints_promedio": 32.7,
     "velocidad_punta_kmh": 33.0,
-    "distancia_promedio_km_pct_pos": 79.0,
+    "distancia_promedio_km_pct_pos": 80.0,
     "alta_intensidad_promedio_m_pct_pos": 65.0,
     "sprints_promedio_pct_pos": 65.0,
-    "velocidad_punta_kmh_pct_pos": 72.0
+    "velocidad_punta_kmh_pct_pos": 71.0
   },
   {
     "team": "Congo DR",
@@ -1255,7 +1255,7 @@
     "distancia_promedio_km_pct_pos": 79.0,
     "alta_intensidad_promedio_m_pct_pos": 89.0,
     "sprints_promedio_pct_pos": 92.0,
-    "velocidad_punta_kmh_pct_pos": 83.0
+    "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
     "team": "Switzerland",
@@ -1304,8 +1304,8 @@
     "sprints_promedio": 31.5,
     "velocidad_punta_kmh": 29.1,
     "distancia_promedio_km_pct_pos": 78.0,
-    "alta_intensidad_promedio_m_pct_pos": 52.0,
-    "sprints_promedio_pct_pos": 61.0,
+    "alta_intensidad_promedio_m_pct_pos": 53.0,
+    "sprints_promedio_pct_pos": 62.0,
     "velocidad_punta_kmh_pct_pos": 12.0
   },
   {
@@ -1321,8 +1321,8 @@
     "sprints_promedio": 39.5,
     "velocidad_punta_kmh": 33.6,
     "distancia_promedio_km_pct_pos": 78.0,
-    "alta_intensidad_promedio_m_pct_pos": 79.0,
-    "sprints_promedio_pct_pos": 80.0,
+    "alta_intensidad_promedio_m_pct_pos": 80.0,
+    "sprints_promedio_pct_pos": 81.0,
     "velocidad_punta_kmh_pct_pos": 82.0
   },
   {
@@ -1391,7 +1391,7 @@
     "distancia_promedio_km_pct_pos": 77.0,
     "alta_intensidad_promedio_m_pct_pos": 50.0,
     "sprints_promedio_pct_pos": 51.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "Curaçao",
@@ -1405,8 +1405,8 @@
     "alta_intensidad_promedio_m": 761.0,
     "sprints_promedio": 38.7,
     "velocidad_punta_kmh": 33.3,
-    "distancia_promedio_km_pct_pos": 76.0,
-    "alta_intensidad_promedio_m_pct_pos": 84.0,
+    "distancia_promedio_km_pct_pos": 77.0,
+    "alta_intensidad_promedio_m_pct_pos": 85.0,
     "sprints_promedio_pct_pos": 77.0,
     "velocidad_punta_kmh_pct_pos": 77.0
   },
@@ -1422,7 +1422,7 @@
     "alta_intensidad_promedio_m": 985.0,
     "sprints_promedio": 48.0,
     "velocidad_punta_kmh": 33.6,
-    "distancia_promedio_km_pct_pos": 76.0,
+    "distancia_promedio_km_pct_pos": 77.0,
     "alta_intensidad_promedio_m_pct_pos": 98.0,
     "sprints_promedio_pct_pos": 91.0,
     "velocidad_punta_kmh_pct_pos": 82.0
@@ -1440,9 +1440,9 @@
     "sprints_promedio": 41.0,
     "velocidad_punta_kmh": 32.4,
     "distancia_promedio_km_pct_pos": 76.0,
-    "alta_intensidad_promedio_m_pct_pos": 85.0,
+    "alta_intensidad_promedio_m_pct_pos": 86.0,
     "sprints_promedio_pct_pos": 82.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "Norway",
@@ -1473,7 +1473,7 @@
     "alta_intensidad_promedio_m": 991.0,
     "sprints_promedio": 50.0,
     "velocidad_punta_kmh": 32.7,
-    "distancia_promedio_km_pct_pos": 75.0,
+    "distancia_promedio_km_pct_pos": 76.0,
     "alta_intensidad_promedio_m_pct_pos": 98.0,
     "sprints_promedio_pct_pos": 94.0,
     "velocidad_punta_kmh_pct_pos": 64.0
@@ -1492,7 +1492,7 @@
     "velocidad_punta_kmh": 33.2,
     "distancia_promedio_km_pct_pos": 75.0,
     "alta_intensidad_promedio_m_pct_pos": 76.0,
-    "sprints_promedio_pct_pos": 80.0,
+    "sprints_promedio_pct_pos": 81.0,
     "velocidad_punta_kmh_pct_pos": 75.0
   },
   {
@@ -1510,24 +1510,7 @@
     "distancia_promedio_km_pct_pos": 75.0,
     "alta_intensidad_promedio_m_pct_pos": 68.0,
     "sprints_promedio_pct_pos": 75.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
-  },
-  {
-    "team": "Spain",
-    "player_name": "Aymeric LAPORTE",
-    "position": "DF",
-    "jersey_number": 14,
-    "club": "Athletic Bilbao",
-    "age_years": 32.0,
-    "partidos": 5,
-    "distancia_promedio_km": 9.92,
-    "alta_intensidad_promedio_m": 436.0,
-    "sprints_promedio": 26.6,
-    "velocidad_punta_kmh": 33.0,
-    "distancia_promedio_km_pct_pos": 75.0,
-    "alta_intensidad_promedio_m_pct_pos": 40.0,
-    "sprints_promedio_pct_pos": 43.0,
-    "velocidad_punta_kmh_pct_pos": 72.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "England",
@@ -1541,10 +1524,27 @@
     "alta_intensidad_promedio_m": 461.0,
     "sprints_promedio": 28.2,
     "velocidad_punta_kmh": 32.5,
-    "distancia_promedio_km_pct_pos": 74.0,
+    "distancia_promedio_km_pct_pos": 75.0,
     "alta_intensidad_promedio_m_pct_pos": 45.0,
     "sprints_promedio_pct_pos": 47.0,
     "velocidad_punta_kmh_pct_pos": 60.0
+  },
+  {
+    "team": "Spain",
+    "player_name": "Aymeric LAPORTE",
+    "position": "DF",
+    "jersey_number": 14,
+    "club": "Athletic Bilbao",
+    "age_years": 32.0,
+    "partidos": 6,
+    "distancia_promedio_km": 9.9,
+    "alta_intensidad_promedio_m": 423.0,
+    "sprints_promedio": 25.7,
+    "velocidad_punta_kmh": 33.0,
+    "distancia_promedio_km_pct_pos": 75.0,
+    "alta_intensidad_promedio_m_pct_pos": 37.0,
+    "sprints_promedio_pct_pos": 40.0,
+    "velocidad_punta_kmh_pct_pos": 71.0
   },
   {
     "team": "Scotland",
@@ -1560,8 +1560,8 @@
     "velocidad_punta_kmh": 32.4,
     "distancia_promedio_km_pct_pos": 74.0,
     "alta_intensidad_promedio_m_pct_pos": 30.0,
-    "sprints_promedio_pct_pos": 30.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "sprints_promedio_pct_pos": 31.0,
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "South Africa",
@@ -1678,7 +1678,7 @@
     "sprints_promedio": 25.5,
     "velocidad_punta_kmh": 31.3,
     "distancia_promedio_km_pct_pos": 72.0,
-    "alta_intensidad_promedio_m_pct_pos": 29.0,
+    "alta_intensidad_promedio_m_pct_pos": 30.0,
     "sprints_promedio_pct_pos": 39.0,
     "velocidad_punta_kmh_pct_pos": 34.0
   },
@@ -1695,9 +1695,9 @@
     "sprints_promedio": 21.8,
     "velocidad_punta_kmh": 32.3,
     "distancia_promedio_km_pct_pos": 72.0,
-    "alta_intensidad_promedio_m_pct_pos": 34.0,
-    "sprints_promedio_pct_pos": 28.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "alta_intensidad_promedio_m_pct_pos": 35.0,
+    "sprints_promedio_pct_pos": 29.0,
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Senegal",
@@ -1729,7 +1729,7 @@
     "sprints_promedio": 31.3,
     "velocidad_punta_kmh": 32.0,
     "distancia_promedio_km_pct_pos": 71.0,
-    "alta_intensidad_promedio_m_pct_pos": 46.0,
+    "alta_intensidad_promedio_m_pct_pos": 47.0,
     "sprints_promedio_pct_pos": 61.0,
     "velocidad_punta_kmh_pct_pos": 47.0
   },
@@ -1814,7 +1814,7 @@
     "sprints_promedio": 43.3,
     "velocidad_punta_kmh": 33.1,
     "distancia_promedio_km_pct_pos": 70.0,
-    "alta_intensidad_promedio_m_pct_pos": 93.0,
+    "alta_intensidad_promedio_m_pct_pos": 94.0,
     "sprints_promedio_pct_pos": 86.0,
     "velocidad_punta_kmh_pct_pos": 73.0
   },
@@ -1918,7 +1918,7 @@
     "distancia_promedio_km_pct_pos": 68.0,
     "alta_intensidad_promedio_m_pct_pos": 66.0,
     "sprints_promedio_pct_pos": 67.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "France",
@@ -1951,7 +1951,7 @@
     "velocidad_punta_kmh": 32.9,
     "distancia_promedio_km_pct_pos": 68.0,
     "alta_intensidad_promedio_m_pct_pos": 35.0,
-    "sprints_promedio_pct_pos": 36.0,
+    "sprints_promedio_pct_pos": 37.0,
     "velocidad_punta_kmh_pct_pos": 69.0
   },
   {
@@ -2018,7 +2018,7 @@
     "sprints_promedio": 17.0,
     "velocidad_punta_kmh": 30.0,
     "distancia_promedio_km_pct_pos": 67.0,
-    "alta_intensidad_promedio_m_pct_pos": 23.0,
+    "alta_intensidad_promedio_m_pct_pos": 24.0,
     "sprints_promedio_pct_pos": 19.0,
     "velocidad_punta_kmh_pct_pos": 17.0
   },
@@ -2052,7 +2052,7 @@
     "sprints_promedio": 41.0,
     "velocidad_punta_kmh": 33.5,
     "distancia_promedio_km_pct_pos": 66.0,
-    "alta_intensidad_promedio_m_pct_pos": 86.0,
+    "alta_intensidad_promedio_m_pct_pos": 87.0,
     "sprints_promedio_pct_pos": 82.0,
     "velocidad_punta_kmh_pct_pos": 80.0
   },
@@ -2121,7 +2121,7 @@
     "velocidad_punta_kmh": 35.1,
     "distancia_promedio_km_pct_pos": 65.0,
     "alta_intensidad_promedio_m_pct_pos": 43.0,
-    "sprints_promedio_pct_pos": 37.0,
+    "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 97.0
   },
   {
@@ -2155,8 +2155,8 @@
     "velocidad_punta_kmh": 33.0,
     "distancia_promedio_km_pct_pos": 64.0,
     "alta_intensidad_promedio_m_pct_pos": 84.0,
-    "sprints_promedio_pct_pos": 84.0,
-    "velocidad_punta_kmh_pct_pos": 72.0
+    "sprints_promedio_pct_pos": 85.0,
+    "velocidad_punta_kmh_pct_pos": 71.0
   },
   {
     "team": "Colombia",
@@ -2190,7 +2190,7 @@
     "distancia_promedio_km_pct_pos": 64.0,
     "alta_intensidad_promedio_m_pct_pos": 36.0,
     "sprints_promedio_pct_pos": 44.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -2256,9 +2256,9 @@
     "sprints_promedio": 38.5,
     "velocidad_punta_kmh": 31.0,
     "distancia_promedio_km_pct_pos": 62.0,
-    "alta_intensidad_promedio_m_pct_pos": 75.0,
-    "sprints_promedio_pct_pos": 76.0,
-    "velocidad_punta_kmh_pct_pos": 29.0
+    "alta_intensidad_promedio_m_pct_pos": 76.0,
+    "sprints_promedio_pct_pos": 77.0,
+    "velocidad_punta_kmh_pct_pos": 30.0
   },
   {
     "team": "Algeria",
@@ -2276,23 +2276,6 @@
     "alta_intensidad_promedio_m_pct_pos": 25.0,
     "sprints_promedio_pct_pos": 26.0,
     "velocidad_punta_kmh_pct_pos": 17.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Maxim DE CUYPER",
-    "position": "DF",
-    "jersey_number": 5,
-    "club": "Brighton & Hove Albion",
-    "age_years": 25.5,
-    "partidos": 5,
-    "distancia_promedio_km": 9.46,
-    "alta_intensidad_promedio_m": 812.0,
-    "sprints_promedio": 42.6,
-    "velocidad_punta_kmh": 32.9,
-    "distancia_promedio_km_pct_pos": 62.0,
-    "alta_intensidad_promedio_m_pct_pos": 88.0,
-    "sprints_promedio_pct_pos": 85.0,
-    "velocidad_punta_kmh_pct_pos": 69.0
   },
   {
     "team": "USA",
@@ -2323,7 +2306,7 @@
     "alta_intensidad_promedio_m": 559.0,
     "sprints_promedio": 30.0,
     "velocidad_punta_kmh": 34.1,
-    "distancia_promedio_km_pct_pos": 61.0,
+    "distancia_promedio_km_pct_pos": 62.0,
     "alta_intensidad_promedio_m_pct_pos": 62.0,
     "sprints_promedio_pct_pos": 56.0,
     "velocidad_punta_kmh_pct_pos": 91.0
@@ -2340,10 +2323,10 @@
     "alta_intensidad_promedio_m": 417.0,
     "sprints_promedio": 26.0,
     "velocidad_punta_kmh": 32.4,
-    "distancia_promedio_km_pct_pos": 61.0,
+    "distancia_promedio_km_pct_pos": 62.0,
     "alta_intensidad_promedio_m_pct_pos": 36.0,
     "sprints_promedio_pct_pos": 41.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "Argentina",
@@ -2359,7 +2342,7 @@
     "velocidad_punta_kmh": 32.5,
     "distancia_promedio_km_pct_pos": 61.0,
     "alta_intensidad_promedio_m_pct_pos": 38.0,
-    "sprints_promedio_pct_pos": 37.0,
+    "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 60.0
   },
   {
@@ -2374,10 +2357,27 @@
     "alta_intensidad_promedio_m": 530.0,
     "sprints_promedio": 38.0,
     "velocidad_punta_kmh": 29.9,
-    "distancia_promedio_km_pct_pos": 60.0,
+    "distancia_promedio_km_pct_pos": 61.0,
     "alta_intensidad_promedio_m_pct_pos": 57.0,
-    "sprints_promedio_pct_pos": 75.0,
+    "sprints_promedio_pct_pos": 76.0,
     "velocidad_punta_kmh_pct_pos": 16.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Nathan NGOY",
+    "position": "DF",
+    "jersey_number": 25,
+    "club": "Lille",
+    "age_years": 23.0,
+    "partidos": 4,
+    "distancia_promedio_km": 9.37,
+    "alta_intensidad_promedio_m": 470.0,
+    "sprints_promedio": 28.0,
+    "velocidad_punta_kmh": 34.5,
+    "distancia_promedio_km_pct_pos": 60.0,
+    "alta_intensidad_promedio_m_pct_pos": 45.0,
+    "sprints_promedio_pct_pos": 46.0,
+    "velocidad_punta_kmh_pct_pos": 94.0
   },
   {
     "team": "Iraq",
@@ -2394,7 +2394,7 @@
     "distancia_promedio_km_pct_pos": 60.0,
     "alta_intensidad_promedio_m_pct_pos": 38.0,
     "sprints_promedio_pct_pos": 42.0,
-    "velocidad_punta_kmh_pct_pos": 83.0
+    "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
     "team": "France",
@@ -2426,7 +2426,7 @@
     "sprints_promedio": 25.2,
     "velocidad_punta_kmh": 28.8,
     "distancia_promedio_km_pct_pos": 60.0,
-    "alta_intensidad_promedio_m_pct_pos": 30.0,
+    "alta_intensidad_promedio_m_pct_pos": 31.0,
     "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 11.0
   },
@@ -2461,7 +2461,7 @@
     "velocidad_punta_kmh": 31.7,
     "distancia_promedio_km_pct_pos": 59.0,
     "alta_intensidad_promedio_m_pct_pos": 63.0,
-    "sprints_promedio_pct_pos": 61.0,
+    "sprints_promedio_pct_pos": 62.0,
     "velocidad_punta_kmh_pct_pos": 42.0
   },
   {
@@ -2547,7 +2547,7 @@
     "distancia_promedio_km_pct_pos": 58.0,
     "alta_intensidad_promedio_m_pct_pos": 72.0,
     "sprints_promedio_pct_pos": 68.0,
-    "velocidad_punta_kmh_pct_pos": 83.0
+    "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
     "team": "Panama",
@@ -2613,7 +2613,7 @@
     "sprints_promedio": 30.7,
     "velocidad_punta_kmh": 36.8,
     "distancia_promedio_km_pct_pos": 57.0,
-    "alta_intensidad_promedio_m_pct_pos": 68.0,
+    "alta_intensidad_promedio_m_pct_pos": 69.0,
     "sprints_promedio_pct_pos": 59.0,
     "velocidad_punta_kmh_pct_pos": 100.0
   },
@@ -2631,7 +2631,7 @@
     "velocidad_punta_kmh": 31.6,
     "distancia_promedio_km_pct_pos": 56.0,
     "alta_intensidad_promedio_m_pct_pos": 40.0,
-    "sprints_promedio_pct_pos": 45.0,
+    "sprints_promedio_pct_pos": 44.0,
     "velocidad_punta_kmh_pct_pos": 40.0
   },
   {
@@ -2649,7 +2649,7 @@
     "distancia_promedio_km_pct_pos": 56.0,
     "alta_intensidad_promedio_m_pct_pos": 66.0,
     "sprints_promedio_pct_pos": 70.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 38.0
   },
   {
     "team": "Belgium",
@@ -2663,10 +2663,10 @@
     "alta_intensidad_promedio_m": 934.0,
     "sprints_promedio": 52.3,
     "velocidad_punta_kmh": 33.0,
-    "distancia_promedio_km_pct_pos": 55.0,
+    "distancia_promedio_km_pct_pos": 56.0,
     "alta_intensidad_promedio_m_pct_pos": 95.0,
-    "sprints_promedio_pct_pos": 96.0,
-    "velocidad_punta_kmh_pct_pos": 72.0
+    "sprints_promedio_pct_pos": 97.0,
+    "velocidad_punta_kmh_pct_pos": 71.0
   },
   {
     "team": "Colombia",
@@ -2680,7 +2680,7 @@
     "alta_intensidad_promedio_m": 951.0,
     "sprints_promedio": 50.0,
     "velocidad_punta_kmh": 32.0,
-    "distancia_promedio_km_pct_pos": 55.0,
+    "distancia_promedio_km_pct_pos": 56.0,
     "alta_intensidad_promedio_m_pct_pos": 96.0,
     "sprints_promedio_pct_pos": 94.0,
     "velocidad_punta_kmh_pct_pos": 47.0
@@ -2704,20 +2704,20 @@
   },
   {
     "team": "Belgium",
-    "player_name": "Nathan NGOY",
+    "player_name": "Maxim DE CUYPER",
     "position": "DF",
-    "jersey_number": 25,
-    "club": "Lille",
-    "age_years": 23.0,
-    "partidos": 3,
-    "distancia_promedio_km": 9.02,
-    "alta_intensidad_promedio_m": 488.0,
-    "sprints_promedio": 27.0,
-    "velocidad_punta_kmh": 34.5,
+    "jersey_number": 5,
+    "club": "Brighton & Hove Albion",
+    "age_years": 25.5,
+    "partidos": 6,
+    "distancia_promedio_km": 9.0,
+    "alta_intensidad_promedio_m": 735.0,
+    "sprints_promedio": 39.0,
+    "velocidad_punta_kmh": 32.9,
     "distancia_promedio_km_pct_pos": 55.0,
-    "alta_intensidad_promedio_m_pct_pos": 48.0,
-    "sprints_promedio_pct_pos": 43.0,
-    "velocidad_punta_kmh_pct_pos": 94.0
+    "alta_intensidad_promedio_m_pct_pos": 82.0,
+    "sprints_promedio_pct_pos": 78.0,
+    "velocidad_punta_kmh_pct_pos": 69.0
   },
   {
     "team": "Uzbekistan",
@@ -2731,7 +2731,7 @@
     "alta_intensidad_promedio_m": 393.0,
     "sprints_promedio": 26.7,
     "velocidad_punta_kmh": 31.4,
-    "distancia_promedio_km_pct_pos": 54.0,
+    "distancia_promedio_km_pct_pos": 55.0,
     "alta_intensidad_promedio_m_pct_pos": 31.0,
     "sprints_promedio_pct_pos": 43.0,
     "velocidad_punta_kmh_pct_pos": 36.0
@@ -2767,7 +2767,7 @@
     "velocidad_punta_kmh": 31.7,
     "distancia_promedio_km_pct_pos": 54.0,
     "alta_intensidad_promedio_m_pct_pos": 86.0,
-    "sprints_promedio_pct_pos": 75.0,
+    "sprints_promedio_pct_pos": 76.0,
     "velocidad_punta_kmh_pct_pos": 42.0
   },
   {
@@ -2785,7 +2785,7 @@
     "distancia_promedio_km_pct_pos": 54.0,
     "alta_intensidad_promedio_m_pct_pos": 46.0,
     "sprints_promedio_pct_pos": 49.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "Australia",
@@ -2850,9 +2850,9 @@
     "alta_intensidad_promedio_m": 477.0,
     "sprints_promedio": 30.5,
     "velocidad_punta_kmh": 33.3,
-    "distancia_promedio_km_pct_pos": 52.0,
+    "distancia_promedio_km_pct_pos": 53.0,
     "alta_intensidad_promedio_m_pct_pos": 47.0,
-    "sprints_promedio_pct_pos": 58.0,
+    "sprints_promedio_pct_pos": 59.0,
     "velocidad_punta_kmh_pct_pos": 77.0
   },
   {
@@ -2868,7 +2868,7 @@
     "sprints_promedio": 21.7,
     "velocidad_punta_kmh": 33.2,
     "distancia_promedio_km_pct_pos": 52.0,
-    "alta_intensidad_promedio_m_pct_pos": 26.0,
+    "alta_intensidad_promedio_m_pct_pos": 27.0,
     "sprints_promedio_pct_pos": 28.0,
     "velocidad_punta_kmh_pct_pos": 75.0
   },
@@ -2953,7 +2953,7 @@
     "sprints_promedio": 25.3,
     "velocidad_punta_kmh": 33.4,
     "distancia_promedio_km_pct_pos": 51.0,
-    "alta_intensidad_promedio_m_pct_pos": 32.0,
+    "alta_intensidad_promedio_m_pct_pos": 33.0,
     "sprints_promedio_pct_pos": 39.0,
     "velocidad_punta_kmh_pct_pos": 79.0
   },
@@ -2969,8 +2969,8 @@
     "alta_intensidad_promedio_m": 659.0,
     "sprints_promedio": 41.0,
     "velocidad_punta_kmh": 29.7,
-    "distancia_promedio_km_pct_pos": 50.0,
-    "alta_intensidad_promedio_m_pct_pos": 74.0,
+    "distancia_promedio_km_pct_pos": 51.0,
+    "alta_intensidad_promedio_m_pct_pos": 75.0,
     "sprints_promedio_pct_pos": 82.0,
     "velocidad_punta_kmh_pct_pos": 15.0
   },
@@ -3020,10 +3020,10 @@
     "alta_intensidad_promedio_m": 424.0,
     "sprints_promedio": 29.0,
     "velocidad_punta_kmh": 31.0,
-    "distancia_promedio_km_pct_pos": 49.0,
-    "alta_intensidad_promedio_m_pct_pos": 37.0,
+    "distancia_promedio_km_pct_pos": 50.0,
+    "alta_intensidad_promedio_m_pct_pos": 38.0,
     "sprints_promedio_pct_pos": 51.0,
-    "velocidad_punta_kmh_pct_pos": 29.0
+    "velocidad_punta_kmh_pct_pos": 30.0
   },
   {
     "team": "Iraq",
@@ -3037,10 +3037,10 @@
     "alta_intensidad_promedio_m": 376.0,
     "sprints_promedio": 22.0,
     "velocidad_punta_kmh": 30.1,
-    "distancia_promedio_km_pct_pos": 49.0,
+    "distancia_promedio_km_pct_pos": 50.0,
     "alta_intensidad_promedio_m_pct_pos": 28.0,
     "sprints_promedio_pct_pos": 29.0,
-    "velocidad_punta_kmh_pct_pos": 17.0
+    "velocidad_punta_kmh_pct_pos": 18.0
   },
   {
     "team": "Czechia",
@@ -3073,7 +3073,7 @@
     "velocidad_punta_kmh": 34.2,
     "distancia_promedio_km_pct_pos": 49.0,
     "alta_intensidad_promedio_m_pct_pos": 81.0,
-    "sprints_promedio_pct_pos": 75.0,
+    "sprints_promedio_pct_pos": 76.0,
     "velocidad_punta_kmh_pct_pos": 92.0
   },
   {
@@ -3088,10 +3088,10 @@
     "alta_intensidad_promedio_m": 612.0,
     "sprints_promedio": 37.5,
     "velocidad_punta_kmh": 33.7,
-    "distancia_promedio_km_pct_pos": 48.0,
+    "distancia_promedio_km_pct_pos": 49.0,
     "alta_intensidad_promedio_m_pct_pos": 69.0,
     "sprints_promedio_pct_pos": 75.0,
-    "velocidad_punta_kmh_pct_pos": 83.0
+    "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
     "team": "IR Iran",
@@ -3139,7 +3139,7 @@
     "alta_intensidad_promedio_m": 591.0,
     "sprints_promedio": 35.5,
     "velocidad_punta_kmh": 32.5,
-    "distancia_promedio_km_pct_pos": 47.0,
+    "distancia_promedio_km_pct_pos": 48.0,
     "alta_intensidad_promedio_m_pct_pos": 67.0,
     "sprints_promedio_pct_pos": 72.0,
     "velocidad_punta_kmh_pct_pos": 60.0
@@ -3156,8 +3156,8 @@
     "alta_intensidad_promedio_m": 402.0,
     "sprints_promedio": 24.6,
     "velocidad_punta_kmh": 31.3,
-    "distancia_promedio_km_pct_pos": 47.0,
-    "alta_intensidad_promedio_m_pct_pos": 33.0,
+    "distancia_promedio_km_pct_pos": 48.0,
+    "alta_intensidad_promedio_m_pct_pos": 34.0,
     "sprints_promedio_pct_pos": 36.0,
     "velocidad_punta_kmh_pct_pos": 34.0
   },
@@ -3227,7 +3227,7 @@
     "distancia_promedio_km_pct_pos": 46.0,
     "alta_intensidad_promedio_m_pct_pos": 45.0,
     "sprints_promedio_pct_pos": 47.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Qatar",
@@ -3311,7 +3311,7 @@
     "velocidad_punta_kmh": 31.9,
     "distancia_promedio_km_pct_pos": 45.0,
     "alta_intensidad_promedio_m_pct_pos": 32.0,
-    "sprints_promedio_pct_pos": 35.0,
+    "sprints_promedio_pct_pos": 36.0,
     "velocidad_punta_kmh_pct_pos": 45.0
   },
   {
@@ -3327,7 +3327,7 @@
     "sprints_promedio": 29.7,
     "velocidad_punta_kmh": 31.6,
     "distancia_promedio_km_pct_pos": 45.0,
-    "alta_intensidad_promedio_m_pct_pos": 48.0,
+    "alta_intensidad_promedio_m_pct_pos": 49.0,
     "sprints_promedio_pct_pos": 53.0,
     "velocidad_punta_kmh_pct_pos": 40.0
   },
@@ -3344,8 +3344,8 @@
     "sprints_promedio": 26.5,
     "velocidad_punta_kmh": 30.7,
     "distancia_promedio_km_pct_pos": 44.0,
-    "alta_intensidad_promedio_m_pct_pos": 48.0,
-    "sprints_promedio_pct_pos": 42.0,
+    "alta_intensidad_promedio_m_pct_pos": 49.0,
+    "sprints_promedio_pct_pos": 43.0,
     "velocidad_punta_kmh_pct_pos": 24.0
   },
   {
@@ -3397,7 +3397,7 @@
     "distancia_promedio_km_pct_pos": 43.0,
     "alta_intensidad_promedio_m_pct_pos": 54.0,
     "sprints_promedio_pct_pos": 56.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "New Zealand",
@@ -3414,7 +3414,7 @@
     "distancia_promedio_km_pct_pos": 43.0,
     "alta_intensidad_promedio_m_pct_pos": 74.0,
     "sprints_promedio_pct_pos": 71.0,
-    "velocidad_punta_kmh_pct_pos": 83.0
+    "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
     "team": "Norway",
@@ -3429,8 +3429,8 @@
     "sprints_promedio": 39.3,
     "velocidad_punta_kmh": 35.6,
     "distancia_promedio_km_pct_pos": 43.0,
-    "alta_intensidad_promedio_m_pct_pos": 81.0,
-    "sprints_promedio_pct_pos": 79.0,
+    "alta_intensidad_promedio_m_pct_pos": 82.0,
+    "sprints_promedio_pct_pos": 80.0,
     "velocidad_punta_kmh_pct_pos": 99.0
   },
   {
@@ -3445,9 +3445,9 @@
     "alta_intensidad_promedio_m": 381.0,
     "sprints_promedio": 23.5,
     "velocidad_punta_kmh": 32.1,
-    "distancia_promedio_km_pct_pos": 42.0,
+    "distancia_promedio_km_pct_pos": 43.0,
     "alta_intensidad_promedio_m_pct_pos": 29.0,
-    "sprints_promedio_pct_pos": 32.0,
+    "sprints_promedio_pct_pos": 33.0,
     "velocidad_punta_kmh_pct_pos": 49.0
   },
   {
@@ -3465,7 +3465,7 @@
     "distancia_promedio_km_pct_pos": 42.0,
     "alta_intensidad_promedio_m_pct_pos": 15.0,
     "sprints_promedio_pct_pos": 22.0,
-    "velocidad_punta_kmh_pct_pos": 26.0
+    "velocidad_punta_kmh_pct_pos": 27.0
   },
   {
     "team": "Congo DR",
@@ -3480,7 +3480,7 @@
     "sprints_promedio": 28.5,
     "velocidad_punta_kmh": 33.3,
     "distancia_promedio_km_pct_pos": 42.0,
-    "alta_intensidad_promedio_m_pct_pos": 36.0,
+    "alta_intensidad_promedio_m_pct_pos": 37.0,
     "sprints_promedio_pct_pos": 48.0,
     "velocidad_punta_kmh_pct_pos": 77.0
   },
@@ -3497,8 +3497,8 @@
     "sprints_promedio": 24.8,
     "velocidad_punta_kmh": 32.9,
     "distancia_promedio_km_pct_pos": 42.0,
-    "alta_intensidad_promedio_m_pct_pos": 38.0,
-    "sprints_promedio_pct_pos": 36.0,
+    "alta_intensidad_promedio_m_pct_pos": 39.0,
+    "sprints_promedio_pct_pos": 37.0,
     "velocidad_punta_kmh_pct_pos": 69.0
   },
   {
@@ -3533,7 +3533,7 @@
     "distancia_promedio_km_pct_pos": 41.0,
     "alta_intensidad_promedio_m_pct_pos": 11.0,
     "sprints_promedio_pct_pos": 15.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 38.0
   },
   {
     "team": "Senegal",
@@ -3565,9 +3565,9 @@
     "sprints_promedio": 43.5,
     "velocidad_punta_kmh": 32.4,
     "distancia_promedio_km_pct_pos": 41.0,
-    "alta_intensidad_promedio_m_pct_pos": 83.0,
+    "alta_intensidad_promedio_m_pct_pos": 84.0,
     "sprints_promedio_pct_pos": 87.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "Algeria",
@@ -3582,7 +3582,7 @@
     "sprints_promedio": 39.2,
     "velocidad_punta_kmh": 33.5,
     "distancia_promedio_km_pct_pos": 40.0,
-    "alta_intensidad_promedio_m_pct_pos": 77.0,
+    "alta_intensidad_promedio_m_pct_pos": 78.0,
     "sprints_promedio_pct_pos": 79.0,
     "velocidad_punta_kmh_pct_pos": 80.0
   },
@@ -3634,7 +3634,7 @@
     "velocidad_punta_kmh": 30.9,
     "distancia_promedio_km_pct_pos": 39.0,
     "alta_intensidad_promedio_m_pct_pos": 44.0,
-    "sprints_promedio_pct_pos": 45.0,
+    "sprints_promedio_pct_pos": 44.0,
     "velocidad_punta_kmh_pct_pos": 28.0
   },
   {
@@ -3651,7 +3651,7 @@
     "velocidad_punta_kmh": 33.8,
     "distancia_promedio_km_pct_pos": 39.0,
     "alta_intensidad_promedio_m_pct_pos": 71.0,
-    "sprints_promedio_pct_pos": 65.0,
+    "sprints_promedio_pct_pos": 66.0,
     "velocidad_punta_kmh_pct_pos": 86.0
   },
   {
@@ -3703,7 +3703,7 @@
     "distancia_promedio_km_pct_pos": 38.0,
     "alta_intensidad_promedio_m_pct_pos": 20.0,
     "sprints_promedio_pct_pos": 28.0,
-    "velocidad_punta_kmh_pct_pos": 26.0
+    "velocidad_punta_kmh_pct_pos": 27.0
   },
   {
     "team": "Czechia",
@@ -3751,8 +3751,8 @@
     "alta_intensidad_promedio_m": 364.0,
     "sprints_promedio": 22.3,
     "velocidad_punta_kmh": 32.2,
-    "distancia_promedio_km_pct_pos": 37.0,
-    "alta_intensidad_promedio_m_pct_pos": 26.0,
+    "distancia_promedio_km_pct_pos": 38.0,
+    "alta_intensidad_promedio_m_pct_pos": 27.0,
     "sprints_promedio_pct_pos": 30.0,
     "velocidad_punta_kmh_pct_pos": 51.0
   },
@@ -3802,7 +3802,7 @@
     "alta_intensidad_promedio_m": 414.0,
     "sprints_promedio": 23.0,
     "velocidad_punta_kmh": 33.5,
-    "distancia_promedio_km_pct_pos": 36.0,
+    "distancia_promedio_km_pct_pos": 37.0,
     "alta_intensidad_promedio_m_pct_pos": 35.0,
     "sprints_promedio_pct_pos": 31.0,
     "velocidad_punta_kmh_pct_pos": 80.0
@@ -3822,7 +3822,7 @@
     "distancia_promedio_km_pct_pos": 36.0,
     "alta_intensidad_promedio_m_pct_pos": 25.0,
     "sprints_promedio_pct_pos": 25.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "France",
@@ -3870,9 +3870,9 @@
     "alta_intensidad_promedio_m": 522.0,
     "sprints_promedio": 25.0,
     "velocidad_punta_kmh": 32.9,
-    "distancia_promedio_km_pct_pos": 35.0,
+    "distancia_promedio_km_pct_pos": 36.0,
     "alta_intensidad_promedio_m_pct_pos": 55.0,
-    "sprints_promedio_pct_pos": 37.0,
+    "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 69.0
   },
   {
@@ -3889,7 +3889,7 @@
     "velocidad_punta_kmh": 33.4,
     "distancia_promedio_km_pct_pos": 35.0,
     "alta_intensidad_promedio_m_pct_pos": 82.0,
-    "sprints_promedio_pct_pos": 83.0,
+    "sprints_promedio_pct_pos": 84.0,
     "velocidad_punta_kmh_pct_pos": 79.0
   },
   {
@@ -3906,7 +3906,7 @@
     "velocidad_punta_kmh": 28.1,
     "distancia_promedio_km_pct_pos": 35.0,
     "alta_intensidad_promedio_m_pct_pos": 13.0,
-    "sprints_promedio_pct_pos": 13.0,
+    "sprints_promedio_pct_pos": 14.0,
     "velocidad_punta_kmh_pct_pos": 8.0
   },
   {
@@ -3958,7 +3958,7 @@
     "distancia_promedio_km_pct_pos": 34.0,
     "alta_intensidad_promedio_m_pct_pos": 48.0,
     "sprints_promedio_pct_pos": 41.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Senegal",
@@ -3972,7 +3972,7 @@
     "alta_intensidad_promedio_m": 628.0,
     "sprints_promedio": 32.3,
     "velocidad_punta_kmh": 31.2,
-    "distancia_promedio_km_pct_pos": 33.0,
+    "distancia_promedio_km_pct_pos": 34.0,
     "alta_intensidad_promedio_m_pct_pos": 71.0,
     "sprints_promedio_pct_pos": 64.0,
     "velocidad_punta_kmh_pct_pos": 32.0
@@ -3989,7 +3989,7 @@
     "alta_intensidad_promedio_m": 607.0,
     "sprints_promedio": 30.0,
     "velocidad_punta_kmh": 34.8,
-    "distancia_promedio_km_pct_pos": 33.0,
+    "distancia_promedio_km_pct_pos": 34.0,
     "alta_intensidad_promedio_m_pct_pos": 68.0,
     "sprints_promedio_pct_pos": 56.0,
     "velocidad_punta_kmh_pct_pos": 96.0
@@ -4007,7 +4007,7 @@
     "sprints_promedio": 18.0,
     "velocidad_punta_kmh": 33.1,
     "distancia_promedio_km_pct_pos": 33.0,
-    "alta_intensidad_promedio_m_pct_pos": 27.0,
+    "alta_intensidad_promedio_m_pct_pos": 28.0,
     "sprints_promedio_pct_pos": 21.0,
     "velocidad_punta_kmh_pct_pos": 73.0
   },
@@ -4040,10 +4040,10 @@
     "alta_intensidad_promedio_m": 408.0,
     "sprints_promedio": 26.0,
     "velocidad_punta_kmh": 31.5,
-    "distancia_promedio_km_pct_pos": 32.0,
+    "distancia_promedio_km_pct_pos": 33.0,
     "alta_intensidad_promedio_m_pct_pos": 34.0,
     "sprints_promedio_pct_pos": 41.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 38.0
   },
   {
     "team": "Canada",
@@ -4144,8 +4144,8 @@
     "velocidad_punta_kmh": 33.7,
     "distancia_promedio_km_pct_pos": 31.0,
     "alta_intensidad_promedio_m_pct_pos": 89.0,
-    "sprints_promedio_pct_pos": 84.0,
-    "velocidad_punta_kmh_pct_pos": 83.0
+    "sprints_promedio_pct_pos": 85.0,
+    "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
     "team": "Egypt",
@@ -4159,7 +4159,7 @@
     "alta_intensidad_promedio_m": 480.0,
     "sprints_promedio": 25.3,
     "velocidad_punta_kmh": 31.2,
-    "distancia_promedio_km_pct_pos": 30.0,
+    "distancia_promedio_km_pct_pos": 31.0,
     "alta_intensidad_promedio_m_pct_pos": 47.0,
     "sprints_promedio_pct_pos": 39.0,
     "velocidad_punta_kmh_pct_pos": 32.0
@@ -4176,7 +4176,7 @@
     "alta_intensidad_promedio_m": 551.0,
     "sprints_promedio": 28.5,
     "velocidad_punta_kmh": 32.6,
-    "distancia_promedio_km_pct_pos": 30.0,
+    "distancia_promedio_km_pct_pos": 31.0,
     "alta_intensidad_promedio_m_pct_pos": 60.0,
     "sprints_promedio_pct_pos": 48.0,
     "velocidad_punta_kmh_pct_pos": 62.0
@@ -4213,7 +4213,7 @@
     "distancia_promedio_km_pct_pos": 30.0,
     "alta_intensidad_promedio_m_pct_pos": 78.0,
     "sprints_promedio_pct_pos": 67.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "Norway",
@@ -4227,7 +4227,7 @@
     "alta_intensidad_promedio_m": 391.0,
     "sprints_promedio": 23.7,
     "velocidad_punta_kmh": 30.2,
-    "distancia_promedio_km_pct_pos": 29.0,
+    "distancia_promedio_km_pct_pos": 30.0,
     "alta_intensidad_promedio_m_pct_pos": 30.0,
     "sprints_promedio_pct_pos": 33.0,
     "velocidad_punta_kmh_pct_pos": 19.0
@@ -4278,8 +4278,8 @@
     "alta_intensidad_promedio_m": 476.0,
     "sprints_promedio": 28.0,
     "velocidad_punta_kmh": 33.3,
-    "distancia_promedio_km_pct_pos": 28.0,
-    "alta_intensidad_promedio_m_pct_pos": 46.0,
+    "distancia_promedio_km_pct_pos": 29.0,
+    "alta_intensidad_promedio_m_pct_pos": 47.0,
     "sprints_promedio_pct_pos": 46.0,
     "velocidad_punta_kmh_pct_pos": 77.0
   },
@@ -4297,7 +4297,7 @@
     "velocidad_punta_kmh": 30.2,
     "distancia_promedio_km_pct_pos": 28.0,
     "alta_intensidad_promedio_m_pct_pos": 20.0,
-    "sprints_promedio_pct_pos": 17.0,
+    "sprints_promedio_pct_pos": 18.0,
     "velocidad_punta_kmh_pct_pos": 19.0
   },
   {
@@ -4313,7 +4313,7 @@
     "sprints_promedio": 16.3,
     "velocidad_punta_kmh": 33.4,
     "distancia_promedio_km_pct_pos": 28.0,
-    "alta_intensidad_promedio_m_pct_pos": 21.0,
+    "alta_intensidad_promedio_m_pct_pos": 22.0,
     "sprints_promedio_pct_pos": 18.0,
     "velocidad_punta_kmh_pct_pos": 79.0
   },
@@ -4346,10 +4346,10 @@
     "alta_intensidad_promedio_m": 297.0,
     "sprints_promedio": 16.0,
     "velocidad_punta_kmh": 33.0,
-    "distancia_promedio_km_pct_pos": 27.0,
+    "distancia_promedio_km_pct_pos": 28.0,
     "alta_intensidad_promedio_m_pct_pos": 18.0,
     "sprints_promedio_pct_pos": 17.0,
-    "velocidad_punta_kmh_pct_pos": 72.0
+    "velocidad_punta_kmh_pct_pos": 71.0
   },
   {
     "team": "Argentina",
@@ -4397,9 +4397,9 @@
     "alta_intensidad_promedio_m": 456.0,
     "sprints_promedio": 25.0,
     "velocidad_punta_kmh": 32.1,
-    "distancia_promedio_km_pct_pos": 26.0,
+    "distancia_promedio_km_pct_pos": 27.0,
     "alta_intensidad_promedio_m_pct_pos": 43.0,
-    "sprints_promedio_pct_pos": 37.0,
+    "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 49.0
   },
   {
@@ -4434,7 +4434,7 @@
     "distancia_promedio_km_pct_pos": 26.0,
     "alta_intensidad_promedio_m_pct_pos": 62.0,
     "sprints_promedio_pct_pos": 51.0,
-    "velocidad_punta_kmh_pct_pos": 29.0
+    "velocidad_punta_kmh_pct_pos": 30.0
   },
   {
     "team": "Uzbekistan",
@@ -4485,7 +4485,7 @@
     "distancia_promedio_km_pct_pos": 25.0,
     "alta_intensidad_promedio_m_pct_pos": 17.0,
     "sprints_promedio_pct_pos": 24.0,
-    "velocidad_punta_kmh_pct_pos": 26.0
+    "velocidad_punta_kmh_pct_pos": 27.0
   },
   {
     "team": "Saudi Arabia",
@@ -4500,7 +4500,7 @@
     "sprints_promedio": 29.0,
     "velocidad_punta_kmh": 31.3,
     "distancia_promedio_km_pct_pos": 25.0,
-    "alta_intensidad_promedio_m_pct_pos": 47.0,
+    "alta_intensidad_promedio_m_pct_pos": 48.0,
     "sprints_promedio_pct_pos": 51.0,
     "velocidad_punta_kmh_pct_pos": 34.0
   },
@@ -4518,7 +4518,7 @@
     "velocidad_punta_kmh": 31.8,
     "distancia_promedio_km_pct_pos": 25.0,
     "alta_intensidad_promedio_m_pct_pos": 61.0,
-    "sprints_promedio_pct_pos": 42.0,
+    "sprints_promedio_pct_pos": 43.0,
     "velocidad_punta_kmh_pct_pos": 44.0
   },
   {
@@ -4553,7 +4553,7 @@
     "distancia_promedio_km_pct_pos": 24.0,
     "alta_intensidad_promedio_m_pct_pos": 25.0,
     "sprints_promedio_pct_pos": 23.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "Korea Republic",
@@ -4587,7 +4587,7 @@
     "distancia_promedio_km_pct_pos": 23.0,
     "alta_intensidad_promedio_m_pct_pos": 75.0,
     "sprints_promedio_pct_pos": 71.0,
-    "velocidad_punta_kmh_pct_pos": 26.0
+    "velocidad_punta_kmh_pct_pos": 27.0
   },
   {
     "team": "Saudi Arabia",
@@ -4621,7 +4621,7 @@
     "distancia_promedio_km_pct_pos": 23.0,
     "alta_intensidad_promedio_m_pct_pos": 56.0,
     "sprints_promedio_pct_pos": 56.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Ecuador",
@@ -4688,7 +4688,7 @@
     "velocidad_punta_kmh": 32.8,
     "distancia_promedio_km_pct_pos": 22.0,
     "alta_intensidad_promedio_m_pct_pos": 43.0,
-    "sprints_promedio_pct_pos": 32.0,
+    "sprints_promedio_pct_pos": 33.0,
     "velocidad_punta_kmh_pct_pos": 66.0
   },
   {
@@ -4704,9 +4704,9 @@
     "sprints_promedio": 30.0,
     "velocidad_punta_kmh": 29.4,
     "distancia_promedio_km_pct_pos": 21.0,
-    "alta_intensidad_promedio_m_pct_pos": 60.0,
+    "alta_intensidad_promedio_m_pct_pos": 61.0,
     "sprints_promedio_pct_pos": 56.0,
-    "velocidad_punta_kmh_pct_pos": 14.0
+    "velocidad_punta_kmh_pct_pos": 13.0
   },
   {
     "team": "Paraguay",
@@ -4757,7 +4757,7 @@
     "distancia_promedio_km_pct_pos": 21.0,
     "alta_intensidad_promedio_m_pct_pos": 41.0,
     "sprints_promedio_pct_pos": 23.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 38.0
   },
   {
     "team": "Tunisia",
@@ -4791,7 +4791,7 @@
     "distancia_promedio_km_pct_pos": 20.0,
     "alta_intensidad_promedio_m_pct_pos": 12.0,
     "sprints_promedio_pct_pos": 12.0,
-    "velocidad_punta_kmh_pct_pos": 13.0
+    "velocidad_punta_kmh_pct_pos": 12.0
   },
   {
     "team": "Switzerland",
@@ -4822,7 +4822,7 @@
     "alta_intensidad_promedio_m": 239.0,
     "sprints_promedio": 14.0,
     "velocidad_punta_kmh": 32.9,
-    "distancia_promedio_km_pct_pos": 19.0,
+    "distancia_promedio_km_pct_pos": 20.0,
     "alta_intensidad_promedio_m_pct_pos": 14.0,
     "sprints_promedio_pct_pos": 14.0,
     "velocidad_punta_kmh_pct_pos": 69.0
@@ -4908,7 +4908,7 @@
     "sprints_promedio": 25.7,
     "velocidad_punta_kmh": 32.6,
     "distancia_promedio_km_pct_pos": 18.0,
-    "alta_intensidad_promedio_m_pct_pos": 54.0,
+    "alta_intensidad_promedio_m_pct_pos": 55.0,
     "sprints_promedio_pct_pos": 40.0,
     "velocidad_punta_kmh_pct_pos": 62.0
   },
@@ -4941,7 +4941,7 @@
     "alta_intensidad_promedio_m": 369.0,
     "sprints_promedio": 16.0,
     "velocidad_punta_kmh": 31.7,
-    "distancia_promedio_km_pct_pos": 17.0,
+    "distancia_promedio_km_pct_pos": 18.0,
     "alta_intensidad_promedio_m_pct_pos": 27.0,
     "sprints_promedio_pct_pos": 17.0,
     "velocidad_punta_kmh_pct_pos": 42.0
@@ -4976,7 +4976,7 @@
     "sprints_promedio": 21.0,
     "velocidad_punta_kmh": 31.9,
     "distancia_promedio_km_pct_pos": 17.0,
-    "alta_intensidad_promedio_m_pct_pos": 28.0,
+    "alta_intensidad_promedio_m_pct_pos": 29.0,
     "sprints_promedio_pct_pos": 28.0,
     "velocidad_punta_kmh_pct_pos": 45.0
   },
@@ -5027,7 +5027,7 @@
     "sprints_promedio": 19.0,
     "velocidad_punta_kmh": 30.6,
     "distancia_promedio_km_pct_pos": 16.0,
-    "alta_intensidad_promedio_m_pct_pos": 37.0,
+    "alta_intensidad_promedio_m_pct_pos": 38.0,
     "sprints_promedio_pct_pos": 23.0,
     "velocidad_punta_kmh_pct_pos": 22.0
   },
@@ -5044,7 +5044,7 @@
     "sprints_promedio": 19.8,
     "velocidad_punta_kmh": 35.9,
     "distancia_promedio_km_pct_pos": 16.0,
-    "alta_intensidad_promedio_m_pct_pos": 39.0,
+    "alta_intensidad_promedio_m_pct_pos": 40.0,
     "sprints_promedio_pct_pos": 25.0,
     "velocidad_punta_kmh_pct_pos": 99.0
   },
@@ -5060,7 +5060,7 @@
     "alta_intensidad_promedio_m": 300.0,
     "sprints_promedio": 20.0,
     "velocidad_punta_kmh": 30.2,
-    "distancia_promedio_km_pct_pos": 15.0,
+    "distancia_promedio_km_pct_pos": 16.0,
     "alta_intensidad_promedio_m_pct_pos": 18.0,
     "sprints_promedio_pct_pos": 25.0,
     "velocidad_punta_kmh_pct_pos": 19.0
@@ -5097,7 +5097,7 @@
     "distancia_promedio_km_pct_pos": 15.0,
     "alta_intensidad_promedio_m_pct_pos": 28.0,
     "sprints_promedio_pct_pos": 24.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
+    "velocidad_punta_kmh_pct_pos": 56.0
   },
   {
     "team": "Argentina",
@@ -5132,6 +5132,23 @@
     "alta_intensidad_promedio_m_pct_pos": 10.0,
     "sprints_promedio_pct_pos": 9.0,
     "velocidad_punta_kmh_pct_pos": 44.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Joaquin SEYS",
+    "position": "DF",
+    "jersey_number": 18,
+    "club": "Club Brugge",
+    "age_years": 21.2,
+    "partidos": 1,
+    "distancia_promedio_km": 3.68,
+    "alta_intensidad_promedio_m": 176.0,
+    "sprints_promedio": 13.0,
+    "velocidad_punta_kmh": 29.6,
+    "distancia_promedio_km_pct_pos": 14.0,
+    "alta_intensidad_promedio_m_pct_pos": 10.0,
+    "sprints_promedio_pct_pos": 12.0,
+    "velocidad_punta_kmh_pct_pos": 14.0
   },
   {
     "team": "Germany",
@@ -5284,7 +5301,7 @@
     "distancia_promedio_km_pct_pos": 12.0,
     "alta_intensidad_promedio_m_pct_pos": 19.0,
     "sprints_promedio_pct_pos": 19.0,
-    "velocidad_punta_kmh_pct_pos": 13.0
+    "velocidad_punta_kmh_pct_pos": 12.0
   },
   {
     "team": "Norway",
@@ -5333,7 +5350,7 @@
     "sprints_promedio": 15.0,
     "velocidad_punta_kmh": 29.3,
     "distancia_promedio_km_pct_pos": 11.0,
-    "alta_intensidad_promedio_m_pct_pos": 38.0,
+    "alta_intensidad_promedio_m_pct_pos": 39.0,
     "sprints_promedio_pct_pos": 15.0,
     "velocidad_punta_kmh_pct_pos": 13.0
   },
@@ -5452,7 +5469,7 @@
     "sprints_promedio": 9.0,
     "velocidad_punta_kmh": 28.6,
     "distancia_promedio_km_pct_pos": 9.0,
-    "alta_intensidad_promedio_m_pct_pos": 10.0,
+    "alta_intensidad_promedio_m_pct_pos": 11.0,
     "sprints_promedio_pct_pos": 8.0,
     "velocidad_punta_kmh_pct_pos": 10.0
   },
@@ -5505,7 +5522,7 @@
     "distancia_promedio_km_pct_pos": 8.0,
     "alta_intensidad_promedio_m_pct_pos": 9.0,
     "sprints_promedio_pct_pos": 11.0,
-    "velocidad_punta_kmh_pct_pos": 29.0
+    "velocidad_punta_kmh_pct_pos": 30.0
   },
   {
     "team": "Czechia",
@@ -5571,9 +5588,9 @@
     "sprints_promedio": 12.0,
     "velocidad_punta_kmh": 32.3,
     "distancia_promedio_km_pct_pos": 7.0,
-    "alta_intensidad_promedio_m_pct_pos": 15.0,
+    "alta_intensidad_promedio_m_pct_pos": 16.0,
     "sprints_promedio_pct_pos": 11.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Algeria",
@@ -6035,23 +6052,6 @@
     "velocidad_punta_kmh_pct_pos": 72.0
   },
   {
-    "team": "Belgium",
-    "player_name": "Leandro TROSSARD",
-    "position": "FW",
-    "jersey_number": 10,
-    "club": "Arsenal",
-    "age_years": 31.5,
-    "partidos": 5,
-    "distancia_promedio_km": 11.11,
-    "alta_intensidad_promedio_m": 814.0,
-    "sprints_promedio": 49.2,
-    "velocidad_punta_kmh": 33.2,
-    "distancia_promedio_km_pct_pos": 99.0,
-    "alta_intensidad_promedio_m_pct_pos": 91.0,
-    "sprints_promedio_pct_pos": 94.0,
-    "velocidad_punta_kmh_pct_pos": 67.0
-  },
-  {
     "team": "Ecuador",
     "player_name": "Gonzalo PLATA",
     "position": "FW",
@@ -6063,7 +6063,7 @@
     "alta_intensidad_promedio_m": 821.0,
     "sprints_promedio": 46.8,
     "velocidad_punta_kmh": 32.2,
-    "distancia_promedio_km_pct_pos": 98.0,
+    "distancia_promedio_km_pct_pos": 99.0,
     "alta_intensidad_promedio_m_pct_pos": 92.0,
     "sprints_promedio_pct_pos": 93.0,
     "velocidad_punta_kmh_pct_pos": 49.0
@@ -6114,7 +6114,7 @@
     "alta_intensidad_promedio_m": 739.0,
     "sprints_promedio": 38.4,
     "velocidad_punta_kmh": 32.4,
-    "distancia_promedio_km_pct_pos": 97.0,
+    "distancia_promedio_km_pct_pos": 98.0,
     "alta_intensidad_promedio_m_pct_pos": 87.0,
     "sprints_promedio_pct_pos": 81.0,
     "velocidad_punta_kmh_pct_pos": 53.0
@@ -6165,10 +6165,27 @@
     "alta_intensidad_promedio_m": 581.0,
     "sprints_promedio": 35.0,
     "velocidad_punta_kmh": 29.2,
-    "distancia_promedio_km_pct_pos": 96.0,
+    "distancia_promedio_km_pct_pos": 97.0,
     "alta_intensidad_promedio_m_pct_pos": 68.0,
     "sprints_promedio_pct_pos": 74.0,
     "velocidad_punta_kmh_pct_pos": 14.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Leandro TROSSARD",
+    "position": "FW",
+    "jersey_number": 10,
+    "club": "Arsenal",
+    "age_years": 31.5,
+    "partidos": 6,
+    "distancia_promedio_km": 10.52,
+    "alta_intensidad_promedio_m": 781.0,
+    "sprints_promedio": 46.0,
+    "velocidad_punta_kmh": 33.2,
+    "distancia_promedio_km_pct_pos": 96.0,
+    "alta_intensidad_promedio_m_pct_pos": 90.0,
+    "sprints_promedio_pct_pos": 92.0,
+    "velocidad_punta_kmh_pct_pos": 67.0
   },
   {
     "team": "Canada",
@@ -6218,7 +6235,7 @@
     "velocidad_punta_kmh": 31.9,
     "distancia_promedio_km_pct_pos": 95.0,
     "alta_intensidad_promedio_m_pct_pos": 89.0,
-    "sprints_promedio_pct_pos": 93.0,
+    "sprints_promedio_pct_pos": 94.0,
     "velocidad_punta_kmh_pct_pos": 44.0
   },
   {
@@ -6234,7 +6251,7 @@
     "sprints_promedio": 35.0,
     "velocidad_punta_kmh": 33.4,
     "distancia_promedio_km_pct_pos": 95.0,
-    "alta_intensidad_promedio_m_pct_pos": 80.0,
+    "alta_intensidad_promedio_m_pct_pos": 79.0,
     "sprints_promedio_pct_pos": 74.0,
     "velocidad_punta_kmh_pct_pos": 72.0
   },
@@ -6473,7 +6490,7 @@
     "velocidad_punta_kmh": 33.8,
     "distancia_promedio_km_pct_pos": 90.0,
     "alta_intensidad_promedio_m_pct_pos": 86.0,
-    "sprints_promedio_pct_pos": 88.0,
+    "sprints_promedio_pct_pos": 87.0,
     "velocidad_punta_kmh_pct_pos": 80.0
   },
   {
@@ -6525,7 +6542,7 @@
     "distancia_promedio_km_pct_pos": 89.0,
     "alta_intensidad_promedio_m_pct_pos": 97.0,
     "sprints_promedio_pct_pos": 93.0,
-    "velocidad_punta_kmh_pct_pos": 82.0
+    "velocidad_punta_kmh_pct_pos": 81.0
   },
   {
     "team": "Japan",
@@ -6608,7 +6625,7 @@
     "sprints_promedio": 42.6,
     "velocidad_punta_kmh": 34.2,
     "distancia_promedio_km_pct_pos": 87.0,
-    "alta_intensidad_promedio_m_pct_pos": 90.0,
+    "alta_intensidad_promedio_m_pct_pos": 91.0,
     "sprints_promedio_pct_pos": 88.0,
     "velocidad_punta_kmh_pct_pos": 85.0
   },
@@ -6694,7 +6711,7 @@
     "velocidad_punta_kmh": 29.3,
     "distancia_promedio_km_pct_pos": 85.0,
     "alta_intensidad_promedio_m_pct_pos": 69.0,
-    "sprints_promedio_pct_pos": 65.0,
+    "sprints_promedio_pct_pos": 64.0,
     "velocidad_punta_kmh_pct_pos": 15.0
   },
   {
@@ -6738,14 +6755,14 @@
     "jersey_number": 21,
     "club": "Real Sociedad",
     "age_years": 29.1,
-    "partidos": 5,
+    "partidos": 6,
     "distancia_promedio_km": 8.43,
-    "alta_intensidad_promedio_m": 754.0,
-    "sprints_promedio": 41.8,
+    "alta_intensidad_promedio_m": 745.0,
+    "sprints_promedio": 40.2,
     "velocidad_punta_kmh": 32.2,
     "distancia_promedio_km_pct_pos": 85.0,
-    "alta_intensidad_promedio_m_pct_pos": 88.0,
-    "sprints_promedio_pct_pos": 87.0,
+    "alta_intensidad_promedio_m_pct_pos": 87.0,
+    "sprints_promedio_pct_pos": 85.0,
     "velocidad_punta_kmh_pct_pos": 49.0
   },
   {
@@ -6795,7 +6812,7 @@
     "sprints_promedio": 30.6,
     "velocidad_punta_kmh": 31.6,
     "distancia_promedio_km_pct_pos": 84.0,
-    "alta_intensidad_promedio_m_pct_pos": 58.0,
+    "alta_intensidad_promedio_m_pct_pos": 57.0,
     "sprints_promedio_pct_pos": 60.0,
     "velocidad_punta_kmh_pct_pos": 40.0
   },
@@ -6830,7 +6847,7 @@
     "velocidad_punta_kmh": 37.6,
     "distancia_promedio_km_pct_pos": 83.0,
     "alta_intensidad_promedio_m_pct_pos": 70.0,
-    "sprints_promedio_pct_pos": 60.0,
+    "sprints_promedio_pct_pos": 59.0,
     "velocidad_punta_kmh_pct_pos": 100.0
   },
   {
@@ -6846,9 +6863,26 @@
     "sprints_promedio": 32.5,
     "velocidad_punta_kmh": 31.9,
     "distancia_promedio_km_pct_pos": 83.0,
-    "alta_intensidad_promedio_m_pct_pos": 59.0,
-    "sprints_promedio_pct_pos": 68.0,
+    "alta_intensidad_promedio_m_pct_pos": 58.0,
+    "sprints_promedio_pct_pos": 67.0,
     "velocidad_punta_kmh_pct_pos": 44.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Charles DE KETELAERE",
+    "position": "FW",
+    "jersey_number": 17,
+    "club": "Atalanta",
+    "age_years": 25.3,
+    "partidos": 5,
+    "distancia_promedio_km": 8.19,
+    "alta_intensidad_promedio_m": 696.0,
+    "sprints_promedio": 43.4,
+    "velocidad_punta_kmh": 33.5,
+    "distancia_promedio_km_pct_pos": 82.0,
+    "alta_intensidad_promedio_m_pct_pos": 82.0,
+    "sprints_promedio_pct_pos": 89.0,
+    "velocidad_punta_kmh_pct_pos": 74.0
   },
   {
     "team": "Morocco",
@@ -6896,7 +6930,7 @@
     "alta_intensidad_promedio_m": 710.0,
     "sprints_promedio": 38.3,
     "velocidad_punta_kmh": 34.0,
-    "distancia_promedio_km_pct_pos": 82.0,
+    "distancia_promedio_km_pct_pos": 81.0,
     "alta_intensidad_promedio_m_pct_pos": 84.0,
     "sprints_promedio_pct_pos": 80.0,
     "velocidad_punta_kmh_pct_pos": 83.0
@@ -6915,7 +6949,7 @@
     "velocidad_punta_kmh": 32.7,
     "distancia_promedio_km_pct_pos": 81.0,
     "alta_intensidad_promedio_m_pct_pos": 66.0,
-    "sprints_promedio_pct_pos": 67.0,
+    "sprints_promedio_pct_pos": 66.0,
     "velocidad_punta_kmh_pct_pos": 58.0
   },
   {
@@ -6930,9 +6964,9 @@
     "alta_intensidad_promedio_m": 537.0,
     "sprints_promedio": 30.7,
     "velocidad_punta_kmh": 32.6,
-    "distancia_promedio_km_pct_pos": 81.0,
-    "alta_intensidad_promedio_m_pct_pos": 62.0,
-    "sprints_promedio_pct_pos": 61.0,
+    "distancia_promedio_km_pct_pos": 80.0,
+    "alta_intensidad_promedio_m_pct_pos": 61.0,
+    "sprints_promedio_pct_pos": 60.0,
     "velocidad_punta_kmh_pct_pos": 55.0
   },
   {
@@ -6947,9 +6981,9 @@
     "alta_intensidad_promedio_m": 601.0,
     "sprints_promedio": 31.3,
     "velocidad_punta_kmh": 32.7,
-    "distancia_promedio_km_pct_pos": 81.0,
+    "distancia_promedio_km_pct_pos": 80.0,
     "alta_intensidad_promedio_m_pct_pos": 71.0,
-    "sprints_promedio_pct_pos": 64.0,
+    "sprints_promedio_pct_pos": 63.0,
     "velocidad_punta_kmh_pct_pos": 58.0
   },
   {
@@ -6981,10 +7015,10 @@
     "alta_intensidad_promedio_m": 716.0,
     "sprints_promedio": 42.2,
     "velocidad_punta_kmh": 33.9,
-    "distancia_promedio_km_pct_pos": 80.0,
+    "distancia_promedio_km_pct_pos": 79.0,
     "alta_intensidad_promedio_m_pct_pos": 84.0,
     "sprints_promedio_pct_pos": 87.0,
-    "velocidad_punta_kmh_pct_pos": 82.0
+    "velocidad_punta_kmh_pct_pos": 81.0
   },
   {
     "team": "Norway",
@@ -6998,7 +7032,7 @@
     "alta_intensidad_promedio_m": 723.0,
     "sprints_promedio": 37.8,
     "velocidad_punta_kmh": 33.7,
-    "distancia_promedio_km_pct_pos": 80.0,
+    "distancia_promedio_km_pct_pos": 79.0,
     "alta_intensidad_promedio_m_pct_pos": 85.0,
     "sprints_promedio_pct_pos": 80.0,
     "velocidad_punta_kmh_pct_pos": 78.0
@@ -7068,7 +7102,7 @@
     "velocidad_punta_kmh": 31.5,
     "distancia_promedio_km_pct_pos": 78.0,
     "alta_intensidad_promedio_m_pct_pos": 67.0,
-    "sprints_promedio_pct_pos": 68.0,
+    "sprints_promedio_pct_pos": 67.0,
     "velocidad_punta_kmh_pct_pos": 39.0
   },
   {
@@ -7083,9 +7117,9 @@
     "alta_intensidad_promedio_m": 824.0,
     "sprints_promedio": 43.0,
     "velocidad_punta_kmh": 32.3,
-    "distancia_promedio_km_pct_pos": 78.0,
+    "distancia_promedio_km_pct_pos": 77.0,
     "alta_intensidad_promedio_m_pct_pos": 92.0,
-    "sprints_promedio_pct_pos": 89.0,
+    "sprints_promedio_pct_pos": 88.0,
     "velocidad_punta_kmh_pct_pos": 51.0
   },
   {
@@ -7119,7 +7153,7 @@
     "velocidad_punta_kmh": 32.9,
     "distancia_promedio_km_pct_pos": 77.0,
     "alta_intensidad_promedio_m_pct_pos": 67.0,
-    "sprints_promedio_pct_pos": 62.0,
+    "sprints_promedio_pct_pos": 61.0,
     "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
@@ -7134,7 +7168,7 @@
     "alta_intensidad_promedio_m": 538.0,
     "sprints_promedio": 33.3,
     "velocidad_punta_kmh": 34.8,
-    "distancia_promedio_km_pct_pos": 77.0,
+    "distancia_promedio_km_pct_pos": 76.0,
     "alta_intensidad_promedio_m_pct_pos": 62.0,
     "sprints_promedio_pct_pos": 70.0,
     "velocidad_punta_kmh_pct_pos": 93.0
@@ -7155,23 +7189,6 @@
     "alta_intensidad_promedio_m_pct_pos": 81.0,
     "sprints_promedio_pct_pos": 91.0,
     "velocidad_punta_kmh_pct_pos": 49.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Charles DE KETELAERE",
-    "position": "FW",
-    "jersey_number": 17,
-    "club": "Atalanta",
-    "age_years": 25.3,
-    "partidos": 4,
-    "distancia_promedio_km": 7.62,
-    "alta_intensidad_promedio_m": 664.0,
-    "sprints_promedio": 40.0,
-    "velocidad_punta_kmh": 33.5,
-    "distancia_promedio_km_pct_pos": 76.0,
-    "alta_intensidad_promedio_m_pct_pos": 80.0,
-    "sprints_promedio_pct_pos": 84.0,
-    "velocidad_punta_kmh_pct_pos": 74.0
   },
   {
     "team": "Czechia",
@@ -7237,7 +7254,7 @@
     "sprints_promedio": 36.7,
     "velocidad_punta_kmh": 33.7,
     "distancia_promedio_km_pct_pos": 75.0,
-    "alta_intensidad_promedio_m_pct_pos": 81.0,
+    "alta_intensidad_promedio_m_pct_pos": 80.0,
     "sprints_promedio_pct_pos": 77.0,
     "velocidad_punta_kmh_pct_pos": 78.0
   },
@@ -7289,7 +7306,7 @@
     "velocidad_punta_kmh": 33.2,
     "distancia_promedio_km_pct_pos": 74.0,
     "alta_intensidad_promedio_m_pct_pos": 76.0,
-    "sprints_promedio_pct_pos": 89.0,
+    "sprints_promedio_pct_pos": 88.0,
     "velocidad_punta_kmh_pct_pos": 67.0
   },
   {
@@ -7323,7 +7340,7 @@
     "velocidad_punta_kmh": 33.1,
     "distancia_promedio_km_pct_pos": 73.0,
     "alta_intensidad_promedio_m_pct_pos": 53.0,
-    "sprints_promedio_pct_pos": 55.0,
+    "sprints_promedio_pct_pos": 54.0,
     "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
@@ -7356,8 +7373,8 @@
     "sprints_promedio": 31.0,
     "velocidad_punta_kmh": 32.4,
     "distancia_promedio_km_pct_pos": 72.0,
-    "alta_intensidad_promedio_m_pct_pos": 57.0,
-    "sprints_promedio_pct_pos": 62.0,
+    "alta_intensidad_promedio_m_pct_pos": 56.0,
+    "sprints_promedio_pct_pos": 61.0,
     "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
@@ -7480,6 +7497,23 @@
     "velocidad_punta_kmh_pct_pos": 89.0
   },
   {
+    "team": "Belgium",
+    "player_name": "Jeremy DOKU",
+    "position": "FW",
+    "jersey_number": 11,
+    "club": "Manchester City",
+    "age_years": 24.0,
+    "partidos": 5,
+    "distancia_promedio_km": 7.04,
+    "alta_intensidad_promedio_m": 544.0,
+    "sprints_promedio": 34.4,
+    "velocidad_punta_kmh": 34.7,
+    "distancia_promedio_km_pct_pos": 70.0,
+    "alta_intensidad_promedio_m_pct_pos": 63.0,
+    "sprints_promedio_pct_pos": 73.0,
+    "velocidad_punta_kmh_pct_pos": 91.0
+  },
+  {
     "team": "Senegal",
     "player_name": "Nicolas JACKSON",
     "position": "FW",
@@ -7491,8 +7525,8 @@
     "alta_intensidad_promedio_m": 689.0,
     "sprints_promedio": 38.5,
     "velocidad_punta_kmh": 33.5,
-    "distancia_promedio_km_pct_pos": 70.0,
-    "alta_intensidad_promedio_m_pct_pos": 82.0,
+    "distancia_promedio_km_pct_pos": 69.0,
+    "alta_intensidad_promedio_m_pct_pos": 81.0,
     "sprints_promedio_pct_pos": 81.0,
     "velocidad_punta_kmh_pct_pos": 74.0
   },
@@ -7510,7 +7544,7 @@
     "velocidad_punta_kmh": 34.7,
     "distancia_promedio_km_pct_pos": 69.0,
     "alta_intensidad_promedio_m_pct_pos": 74.0,
-    "sprints_promedio_pct_pos": 69.0,
+    "sprints_promedio_pct_pos": 68.0,
     "velocidad_punta_kmh_pct_pos": 91.0
   },
   {
@@ -7525,7 +7559,7 @@
     "alta_intensidad_promedio_m": 623.0,
     "sprints_promedio": 36.0,
     "velocidad_punta_kmh": 33.6,
-    "distancia_promedio_km_pct_pos": 69.0,
+    "distancia_promedio_km_pct_pos": 68.0,
     "alta_intensidad_promedio_m_pct_pos": 74.0,
     "sprints_promedio_pct_pos": 76.0,
     "velocidad_punta_kmh_pct_pos": 76.0
@@ -7542,7 +7576,7 @@
     "alta_intensidad_promedio_m": 555.0,
     "sprints_promedio": 30.0,
     "velocidad_punta_kmh": 28.6,
-    "distancia_promedio_km_pct_pos": 69.0,
+    "distancia_promedio_km_pct_pos": 68.0,
     "alta_intensidad_promedio_m_pct_pos": 64.0,
     "sprints_promedio_pct_pos": 59.0,
     "velocidad_punta_kmh_pct_pos": 10.0
@@ -7559,9 +7593,9 @@
     "alta_intensidad_promedio_m": 703.0,
     "sprints_promedio": 43.0,
     "velocidad_punta_kmh": 34.1,
-    "distancia_promedio_km_pct_pos": 68.0,
+    "distancia_promedio_km_pct_pos": 67.0,
     "alta_intensidad_promedio_m_pct_pos": 83.0,
-    "sprints_promedio_pct_pos": 89.0,
+    "sprints_promedio_pct_pos": 88.0,
     "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
@@ -7576,10 +7610,27 @@
     "alta_intensidad_promedio_m": 753.0,
     "sprints_promedio": 37.7,
     "velocidad_punta_kmh": 34.4,
-    "distancia_promedio_km_pct_pos": 68.0,
-    "alta_intensidad_promedio_m_pct_pos": 87.0,
+    "distancia_promedio_km_pct_pos": 67.0,
+    "alta_intensidad_promedio_m_pct_pos": 88.0,
     "sprints_promedio_pct_pos": 80.0,
     "velocidad_punta_kmh_pct_pos": 86.0
+  },
+  {
+    "team": "Spain",
+    "player_name": "Lamine YAMAL",
+    "position": "FW",
+    "jersey_number": 19,
+    "club": "Barcelona",
+    "age_years": 18.9,
+    "partidos": 6,
+    "distancia_promedio_km": 6.99,
+    "alta_intensidad_promedio_m": 508.0,
+    "sprints_promedio": 27.8,
+    "velocidad_punta_kmh": 32.8,
+    "distancia_promedio_km_pct_pos": 67.0,
+    "alta_intensidad_promedio_m_pct_pos": 58.0,
+    "sprints_promedio_pct_pos": 56.0,
+    "velocidad_punta_kmh_pct_pos": 59.0
   },
   {
     "team": "Czechia",
@@ -7612,7 +7663,7 @@
     "velocidad_punta_kmh": 34.3,
     "distancia_promedio_km_pct_pos": 67.0,
     "alta_intensidad_promedio_m_pct_pos": 75.0,
-    "sprints_promedio_pct_pos": 66.0,
+    "sprints_promedio_pct_pos": 65.0,
     "velocidad_punta_kmh_pct_pos": 85.0
   },
   {
@@ -7627,9 +7678,9 @@
     "alta_intensidad_promedio_m": 496.0,
     "sprints_promedio": 32.8,
     "velocidad_punta_kmh": 29.5,
-    "distancia_promedio_km_pct_pos": 67.0,
-    "alta_intensidad_promedio_m_pct_pos": 58.0,
-    "sprints_promedio_pct_pos": 69.0,
+    "distancia_promedio_km_pct_pos": 66.0,
+    "alta_intensidad_promedio_m_pct_pos": 57.0,
+    "sprints_promedio_pct_pos": 68.0,
     "velocidad_punta_kmh_pct_pos": 16.0
   },
   {
@@ -7644,9 +7695,9 @@
     "alta_intensidad_promedio_m": 557.0,
     "sprints_promedio": 31.8,
     "velocidad_punta_kmh": 31.3,
-    "distancia_promedio_km_pct_pos": 67.0,
+    "distancia_promedio_km_pct_pos": 66.0,
     "alta_intensidad_promedio_m_pct_pos": 65.0,
-    "sprints_promedio_pct_pos": 65.0,
+    "sprints_promedio_pct_pos": 64.0,
     "velocidad_punta_kmh_pct_pos": 36.0
   },
   {
@@ -7661,9 +7712,9 @@
     "alta_intensidad_promedio_m": 510.0,
     "sprints_promedio": 31.3,
     "velocidad_punta_kmh": 29.8,
-    "distancia_promedio_km_pct_pos": 66.0,
-    "alta_intensidad_promedio_m_pct_pos": 59.0,
-    "sprints_promedio_pct_pos": 64.0,
+    "distancia_promedio_km_pct_pos": 65.0,
+    "alta_intensidad_promedio_m_pct_pos": 58.0,
+    "sprints_promedio_pct_pos": 63.0,
     "velocidad_punta_kmh_pct_pos": 18.0
   },
   {
@@ -7678,7 +7729,7 @@
     "alta_intensidad_promedio_m": 649.0,
     "sprints_promedio": 32.2,
     "velocidad_punta_kmh": 35.1,
-    "distancia_promedio_km_pct_pos": 66.0,
+    "distancia_promedio_km_pct_pos": 65.0,
     "alta_intensidad_promedio_m_pct_pos": 77.0,
     "sprints_promedio_pct_pos": 66.0,
     "velocidad_punta_kmh_pct_pos": 95.0
@@ -7697,7 +7748,7 @@
     "velocidad_punta_kmh": 33.7,
     "distancia_promedio_km_pct_pos": 65.0,
     "alta_intensidad_promedio_m_pct_pos": 70.0,
-    "sprints_promedio_pct_pos": 71.0,
+    "sprints_promedio_pct_pos": 70.0,
     "velocidad_punta_kmh_pct_pos": 78.0
   },
   {
@@ -7712,10 +7763,27 @@
     "alta_intensidad_promedio_m": 531.0,
     "sprints_promedio": 28.2,
     "velocidad_punta_kmh": 32.9,
-    "distancia_promedio_km_pct_pos": 65.0,
+    "distancia_promedio_km_pct_pos": 64.0,
     "alta_intensidad_promedio_m_pct_pos": 61.0,
     "sprints_promedio_pct_pos": 57.0,
     "velocidad_punta_kmh_pct_pos": 61.0
+  },
+  {
+    "team": "Spain",
+    "player_name": "Dani OLMO",
+    "position": "FW",
+    "jersey_number": 10,
+    "club": "Barcelona",
+    "age_years": 28.1,
+    "partidos": 6,
+    "distancia_promedio_km": 6.74,
+    "alta_intensidad_promedio_m": 524.0,
+    "sprints_promedio": 33.2,
+    "velocidad_punta_kmh": 31.8,
+    "distancia_promedio_km_pct_pos": 64.0,
+    "alta_intensidad_promedio_m_pct_pos": 60.0,
+    "sprints_promedio_pct_pos": 69.0,
+    "velocidad_punta_kmh_pct_pos": 43.0
   },
   {
     "team": "Uruguay",
@@ -7729,8 +7797,8 @@
     "alta_intensidad_promedio_m": 520.0,
     "sprints_promedio": 34.0,
     "velocidad_punta_kmh": 32.2,
-    "distancia_promedio_km_pct_pos": 65.0,
-    "alta_intensidad_promedio_m_pct_pos": 60.0,
+    "distancia_promedio_km_pct_pos": 64.0,
+    "alta_intensidad_promedio_m_pct_pos": 59.0,
     "sprints_promedio_pct_pos": 72.0,
     "velocidad_punta_kmh_pct_pos": 49.0
   },
@@ -7746,7 +7814,7 @@
     "alta_intensidad_promedio_m": 427.0,
     "sprints_promedio": 28.7,
     "velocidad_punta_kmh": 30.1,
-    "distancia_promedio_km_pct_pos": 64.0,
+    "distancia_promedio_km_pct_pos": 63.0,
     "alta_intensidad_promedio_m_pct_pos": 46.0,
     "sprints_promedio_pct_pos": 57.0,
     "velocidad_punta_kmh_pct_pos": 23.0
@@ -7763,7 +7831,7 @@
     "alta_intensidad_promedio_m": 414.0,
     "sprints_promedio": 26.8,
     "velocidad_punta_kmh": 31.9,
-    "distancia_promedio_km_pct_pos": 64.0,
+    "distancia_promedio_km_pct_pos": 63.0,
     "alta_intensidad_promedio_m_pct_pos": 45.0,
     "sprints_promedio_pct_pos": 53.0,
     "velocidad_punta_kmh_pct_pos": 44.0
@@ -7780,7 +7848,7 @@
     "alta_intensidad_promedio_m": 339.0,
     "sprints_promedio": 19.0,
     "velocidad_punta_kmh": 30.1,
-    "distancia_promedio_km_pct_pos": 64.0,
+    "distancia_promedio_km_pct_pos": 62.0,
     "alta_intensidad_promedio_m_pct_pos": 36.0,
     "sprints_promedio_pct_pos": 34.0,
     "velocidad_punta_kmh_pct_pos": 23.0
@@ -7797,9 +7865,9 @@
     "alta_intensidad_promedio_m": 514.0,
     "sprints_promedio": 30.5,
     "velocidad_punta_kmh": 31.4,
-    "distancia_promedio_km_pct_pos": 64.0,
+    "distancia_promedio_km_pct_pos": 62.0,
     "alta_intensidad_promedio_m_pct_pos": 59.0,
-    "sprints_promedio_pct_pos": 60.0,
+    "sprints_promedio_pct_pos": 59.0,
     "velocidad_punta_kmh_pct_pos": 37.0
   },
   {
@@ -7814,9 +7882,9 @@
     "alta_intensidad_promedio_m": 571.0,
     "sprints_promedio": 31.0,
     "velocidad_punta_kmh": 35.1,
-    "distancia_promedio_km_pct_pos": 63.0,
+    "distancia_promedio_km_pct_pos": 62.0,
     "alta_intensidad_promedio_m_pct_pos": 66.0,
-    "sprints_promedio_pct_pos": 62.0,
+    "sprints_promedio_pct_pos": 61.0,
     "velocidad_punta_kmh_pct_pos": 95.0
   },
   {
@@ -7831,9 +7899,9 @@
     "alta_intensidad_promedio_m": 612.0,
     "sprints_promedio": 31.0,
     "velocidad_punta_kmh": 34.3,
-    "distancia_promedio_km_pct_pos": 63.0,
+    "distancia_promedio_km_pct_pos": 62.0,
     "alta_intensidad_promedio_m_pct_pos": 73.0,
-    "sprints_promedio_pct_pos": 62.0,
+    "sprints_promedio_pct_pos": 61.0,
     "velocidad_punta_kmh_pct_pos": 85.0
   },
   {
@@ -7848,7 +7916,7 @@
     "alta_intensidad_promedio_m": 471.0,
     "sprints_promedio": 26.3,
     "velocidad_punta_kmh": 35.8,
-    "distancia_promedio_km_pct_pos": 62.0,
+    "distancia_promedio_km_pct_pos": 61.0,
     "alta_intensidad_promedio_m_pct_pos": 53.0,
     "sprints_promedio_pct_pos": 52.0,
     "velocidad_punta_kmh_pct_pos": 98.0
@@ -7865,9 +7933,9 @@
     "alta_intensidad_promedio_m": 477.0,
     "sprints_promedio": 31.3,
     "velocidad_punta_kmh": 32.7,
-    "distancia_promedio_km_pct_pos": 62.0,
+    "distancia_promedio_km_pct_pos": 61.0,
     "alta_intensidad_promedio_m_pct_pos": 54.0,
-    "sprints_promedio_pct_pos": 64.0,
+    "sprints_promedio_pct_pos": 63.0,
     "velocidad_punta_kmh_pct_pos": 58.0
   },
   {
@@ -7882,7 +7950,7 @@
     "alta_intensidad_promedio_m": 644.0,
     "sprints_promedio": 34.0,
     "velocidad_punta_kmh": 33.5,
-    "distancia_promedio_km_pct_pos": 62.0,
+    "distancia_promedio_km_pct_pos": 61.0,
     "alta_intensidad_promedio_m_pct_pos": 77.0,
     "sprints_promedio_pct_pos": 72.0,
     "velocidad_punta_kmh_pct_pos": 74.0
@@ -7899,27 +7967,10 @@
     "alta_intensidad_promedio_m": 605.0,
     "sprints_promedio": 32.0,
     "velocidad_punta_kmh": 33.5,
-    "distancia_promedio_km_pct_pos": 61.0,
+    "distancia_promedio_km_pct_pos": 60.0,
     "alta_intensidad_promedio_m_pct_pos": 71.0,
-    "sprints_promedio_pct_pos": 66.0,
+    "sprints_promedio_pct_pos": 65.0,
     "velocidad_punta_kmh_pct_pos": 74.0
-  },
-  {
-    "team": "Spain",
-    "player_name": "Lamine YAMAL",
-    "position": "FW",
-    "jersey_number": 19,
-    "club": "Barcelona",
-    "age_years": 18.9,
-    "partidos": 5,
-    "distancia_promedio_km": 6.42,
-    "alta_intensidad_promedio_m": 501.0,
-    "sprints_promedio": 26.6,
-    "velocidad_punta_kmh": 32.8,
-    "distancia_promedio_km_pct_pos": 61.0,
-    "alta_intensidad_promedio_m_pct_pos": 58.0,
-    "sprints_promedio_pct_pos": 53.0,
-    "velocidad_punta_kmh_pct_pos": 59.0
   },
   {
     "team": "Panama",
@@ -7933,7 +7984,7 @@
     "alta_intensidad_promedio_m": 702.0,
     "sprints_promedio": 36.7,
     "velocidad_punta_kmh": 33.2,
-    "distancia_promedio_km_pct_pos": 61.0,
+    "distancia_promedio_km_pct_pos": 60.0,
     "alta_intensidad_promedio_m_pct_pos": 83.0,
     "sprints_promedio_pct_pos": 77.0,
     "velocidad_punta_kmh_pct_pos": 67.0
@@ -7950,7 +8001,7 @@
     "alta_intensidad_promedio_m": 449.0,
     "sprints_promedio": 26.5,
     "velocidad_punta_kmh": 32.5,
-    "distancia_promedio_km_pct_pos": 60.0,
+    "distancia_promedio_km_pct_pos": 59.0,
     "alta_intensidad_promedio_m_pct_pos": 51.0,
     "sprints_promedio_pct_pos": 53.0,
     "velocidad_punta_kmh_pct_pos": 54.0
@@ -7967,9 +8018,9 @@
     "alta_intensidad_promedio_m": 627.0,
     "sprints_promedio": 31.0,
     "velocidad_punta_kmh": 34.8,
-    "distancia_promedio_km_pct_pos": 60.0,
+    "distancia_promedio_km_pct_pos": 59.0,
     "alta_intensidad_promedio_m_pct_pos": 75.0,
-    "sprints_promedio_pct_pos": 62.0,
+    "sprints_promedio_pct_pos": 61.0,
     "velocidad_punta_kmh_pct_pos": 93.0
   },
   {
@@ -7984,7 +8035,7 @@
     "alta_intensidad_promedio_m": 754.0,
     "sprints_promedio": 38.5,
     "velocidad_punta_kmh": 33.8,
-    "distancia_promedio_km_pct_pos": 60.0,
+    "distancia_promedio_km_pct_pos": 59.0,
     "alta_intensidad_promedio_m_pct_pos": 88.0,
     "sprints_promedio_pct_pos": 81.0,
     "velocidad_punta_kmh_pct_pos": 80.0
@@ -8003,7 +8054,7 @@
     "velocidad_punta_kmh": 31.6,
     "distancia_promedio_km_pct_pos": 59.0,
     "alta_intensidad_promedio_m_pct_pos": 48.0,
-    "sprints_promedio_pct_pos": 55.0,
+    "sprints_promedio_pct_pos": 54.0,
     "velocidad_punta_kmh_pct_pos": 40.0
   },
   {
@@ -8018,7 +8069,7 @@
     "alta_intensidad_promedio_m": 657.0,
     "sprints_promedio": 34.0,
     "velocidad_punta_kmh": 33.8,
-    "distancia_promedio_km_pct_pos": 59.0,
+    "distancia_promedio_km_pct_pos": 58.0,
     "alta_intensidad_promedio_m_pct_pos": 79.0,
     "sprints_promedio_pct_pos": 72.0,
     "velocidad_punta_kmh_pct_pos": 80.0
@@ -8035,9 +8086,9 @@
     "alta_intensidad_promedio_m": 455.0,
     "sprints_promedio": 29.0,
     "velocidad_punta_kmh": 30.1,
-    "distancia_promedio_km_pct_pos": 59.0,
+    "distancia_promedio_km_pct_pos": 58.0,
     "alta_intensidad_promedio_m_pct_pos": 52.0,
-    "sprints_promedio_pct_pos": 58.0,
+    "sprints_promedio_pct_pos": 57.0,
     "velocidad_punta_kmh_pct_pos": 23.0
   },
   {
@@ -8054,7 +8105,7 @@
     "velocidad_punta_kmh": 31.2,
     "distancia_promedio_km_pct_pos": 58.0,
     "alta_intensidad_promedio_m_pct_pos": 50.0,
-    "sprints_promedio_pct_pos": 55.0,
+    "sprints_promedio_pct_pos": 54.0,
     "velocidad_punta_kmh_pct_pos": 35.0
   },
   {
@@ -8069,9 +8120,9 @@
     "alta_intensidad_promedio_m": 650.0,
     "sprints_promedio": 32.0,
     "velocidad_punta_kmh": 35.2,
-    "distancia_promedio_km_pct_pos": 58.0,
+    "distancia_promedio_km_pct_pos": 57.0,
     "alta_intensidad_promedio_m_pct_pos": 78.0,
-    "sprints_promedio_pct_pos": 66.0,
+    "sprints_promedio_pct_pos": 65.0,
     "velocidad_punta_kmh_pct_pos": 97.0
   },
   {
@@ -8088,7 +8139,7 @@
     "velocidad_punta_kmh": 32.1,
     "distancia_promedio_km_pct_pos": 57.0,
     "alta_intensidad_promedio_m_pct_pos": 62.0,
-    "sprints_promedio_pct_pos": 64.0,
+    "sprints_promedio_pct_pos": 63.0,
     "velocidad_punta_kmh_pct_pos": 47.0
   },
   {
@@ -8105,7 +8156,7 @@
     "velocidad_punta_kmh": 34.5,
     "distancia_promedio_km_pct_pos": 57.0,
     "alta_intensidad_promedio_m_pct_pos": 64.0,
-    "sprints_promedio_pct_pos": 68.0,
+    "sprints_promedio_pct_pos": 67.0,
     "velocidad_punta_kmh_pct_pos": 87.0
   },
   {
@@ -8120,27 +8171,10 @@
     "alta_intensidad_promedio_m": 422.0,
     "sprints_promedio": 25.4,
     "velocidad_punta_kmh": 31.5,
-    "distancia_promedio_km_pct_pos": 57.0,
+    "distancia_promedio_km_pct_pos": 56.0,
     "alta_intensidad_promedio_m_pct_pos": 45.0,
     "sprints_promedio_pct_pos": 49.0,
     "velocidad_punta_kmh_pct_pos": 39.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Jeremy DOKU",
-    "position": "FW",
-    "jersey_number": 11,
-    "club": "Manchester City",
-    "age_years": 24.0,
-    "partidos": 4,
-    "distancia_promedio_km": 6.16,
-    "alta_intensidad_promedio_m": 462.0,
-    "sprints_promedio": 28.8,
-    "velocidad_punta_kmh": 34.7,
-    "distancia_promedio_km_pct_pos": 57.0,
-    "alta_intensidad_promedio_m_pct_pos": 53.0,
-    "sprints_promedio_pct_pos": 57.0,
-    "velocidad_punta_kmh_pct_pos": 91.0
   },
   {
     "team": "Qatar",
@@ -8160,23 +8194,6 @@
     "velocidad_punta_kmh_pct_pos": 27.0
   },
   {
-    "team": "Spain",
-    "player_name": "Dani OLMO",
-    "position": "FW",
-    "jersey_number": 10,
-    "club": "Barcelona",
-    "age_years": 28.1,
-    "partidos": 5,
-    "distancia_promedio_km": 6.14,
-    "alta_intensidad_promedio_m": 493.0,
-    "sprints_promedio": 31.2,
-    "velocidad_punta_kmh": 31.8,
-    "distancia_promedio_km_pct_pos": 56.0,
-    "alta_intensidad_promedio_m_pct_pos": 57.0,
-    "sprints_promedio_pct_pos": 63.0,
-    "velocidad_punta_kmh_pct_pos": 43.0
-  },
-  {
     "team": "Switzerland",
     "player_name": "Ruben VARGAS",
     "position": "FW",
@@ -8190,7 +8207,7 @@
     "velocidad_punta_kmh": 34.3,
     "distancia_promedio_km_pct_pos": 55.0,
     "alta_intensidad_promedio_m_pct_pos": 66.0,
-    "sprints_promedio_pct_pos": 67.0,
+    "sprints_promedio_pct_pos": 66.0,
     "velocidad_punta_kmh_pct_pos": 85.0
   },
   {
@@ -8206,8 +8223,8 @@
     "sprints_promedio": 29.5,
     "velocidad_punta_kmh": 37.2,
     "distancia_promedio_km_pct_pos": 55.0,
-    "alta_intensidad_promedio_m_pct_pos": 63.0,
-    "sprints_promedio_pct_pos": 59.0,
+    "alta_intensidad_promedio_m_pct_pos": 62.0,
+    "sprints_promedio_pct_pos": 58.0,
     "velocidad_punta_kmh_pct_pos": 100.0
   },
   {
@@ -8326,7 +8343,7 @@
     "velocidad_punta_kmh": 30.2,
     "distancia_promedio_km_pct_pos": 53.0,
     "alta_intensidad_promedio_m_pct_pos": 59.0,
-    "sprints_promedio_pct_pos": 58.0,
+    "sprints_promedio_pct_pos": 57.0,
     "velocidad_punta_kmh_pct_pos": 25.0
   },
   {
@@ -8376,7 +8393,7 @@
     "sprints_promedio": 35.0,
     "velocidad_punta_kmh": 30.1,
     "distancia_promedio_km_pct_pos": 52.0,
-    "alta_intensidad_promedio_m_pct_pos": 56.0,
+    "alta_intensidad_promedio_m_pct_pos": 55.0,
     "sprints_promedio_pct_pos": 74.0,
     "velocidad_punta_kmh_pct_pos": 23.0
   },
@@ -8546,8 +8563,8 @@
     "sprints_promedio": 27.0,
     "velocidad_punta_kmh": 33.4,
     "distancia_promedio_km_pct_pos": 48.0,
-    "alta_intensidad_promedio_m_pct_pos": 55.0,
-    "sprints_promedio_pct_pos": 55.0,
+    "alta_intensidad_promedio_m_pct_pos": 54.0,
+    "sprints_promedio_pct_pos": 54.0,
     "velocidad_punta_kmh_pct_pos": 72.0
   },
   {
@@ -8631,8 +8648,8 @@
     "sprints_promedio": 27.0,
     "velocidad_punta_kmh": 34.1,
     "distancia_promedio_km_pct_pos": 47.0,
-    "alta_intensidad_promedio_m_pct_pos": 61.0,
-    "sprints_promedio_pct_pos": 55.0,
+    "alta_intensidad_promedio_m_pct_pos": 60.0,
+    "sprints_promedio_pct_pos": 54.0,
     "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
@@ -8700,7 +8717,7 @@
     "velocidad_punta_kmh": 29.9,
     "distancia_promedio_km_pct_pos": 45.0,
     "alta_intensidad_promedio_m_pct_pos": 45.0,
-    "sprints_promedio_pct_pos": 55.0,
+    "sprints_promedio_pct_pos": 54.0,
     "velocidad_punta_kmh_pct_pos": 19.0
   },
   {
@@ -8891,6 +8908,23 @@
     "velocidad_punta_kmh_pct_pos": 67.0
   },
   {
+    "team": "Spain",
+    "player_name": "Ferran TORRES",
+    "position": "FW",
+    "jersey_number": 7,
+    "club": "Barcelona",
+    "age_years": 26.3,
+    "partidos": 6,
+    "distancia_promedio_km": 4.33,
+    "alta_intensidad_promedio_m": 359.0,
+    "sprints_promedio": 23.0,
+    "velocidad_punta_kmh": 33.6,
+    "distancia_promedio_km_pct_pos": 41.0,
+    "alta_intensidad_promedio_m_pct_pos": 39.0,
+    "sprints_promedio_pct_pos": 44.0,
+    "velocidad_punta_kmh_pct_pos": 76.0
+  },
+  {
     "team": "Croatia",
     "player_name": "Marco PASALIC",
     "position": "FW",
@@ -8903,8 +8937,8 @@
     "sprints_promedio": 27.3,
     "velocidad_punta_kmh": 33.3,
     "distancia_promedio_km_pct_pos": 41.0,
-    "alta_intensidad_promedio_m_pct_pos": 60.0,
-    "sprints_promedio_pct_pos": 56.0,
+    "alta_intensidad_promedio_m_pct_pos": 59.0,
+    "sprints_promedio_pct_pos": 55.0,
     "velocidad_punta_kmh_pct_pos": 70.0
   },
   {
@@ -8919,27 +8953,10 @@
     "alta_intensidad_promedio_m": 346.0,
     "sprints_promedio": 20.0,
     "velocidad_punta_kmh": 32.2,
-    "distancia_promedio_km_pct_pos": 41.0,
+    "distancia_promedio_km_pct_pos": 40.0,
     "alta_intensidad_promedio_m_pct_pos": 37.0,
     "sprints_promedio_pct_pos": 36.0,
     "velocidad_punta_kmh_pct_pos": 49.0
-  },
-  {
-    "team": "Spain",
-    "player_name": "Ferran TORRES",
-    "position": "FW",
-    "jersey_number": 7,
-    "club": "Barcelona",
-    "age_years": 26.3,
-    "partidos": 5,
-    "distancia_promedio_km": 4.28,
-    "alta_intensidad_promedio_m": 356.0,
-    "sprints_promedio": 22.4,
-    "velocidad_punta_kmh": 33.6,
-    "distancia_promedio_km_pct_pos": 40.0,
-    "alta_intensidad_promedio_m_pct_pos": 39.0,
-    "sprints_promedio_pct_pos": 42.0,
-    "velocidad_punta_kmh_pct_pos": 76.0
   },
   {
     "team": "Croatia",
@@ -8971,7 +8988,7 @@
     "sprints_promedio": 22.8,
     "velocidad_punta_kmh": 34.6,
     "distancia_promedio_km_pct_pos": 40.0,
-    "alta_intensidad_promedio_m_pct_pos": 54.0,
+    "alta_intensidad_promedio_m_pct_pos": 53.0,
     "sprints_promedio_pct_pos": 43.0,
     "velocidad_punta_kmh_pct_pos": 89.0
   },
@@ -9061,23 +9078,6 @@
     "velocidad_punta_kmh_pct_pos": 15.0
   },
   {
-    "team": "Belgium",
-    "player_name": "Romelu LUKAKU",
-    "position": "FW",
-    "jersey_number": 9,
-    "club": "Napoli",
-    "age_years": 33.1,
-    "partidos": 5,
-    "distancia_promedio_km": 4.09,
-    "alta_intensidad_promedio_m": 225.0,
-    "sprints_promedio": 13.0,
-    "velocidad_punta_kmh": 32.4,
-    "distancia_promedio_km_pct_pos": 38.0,
-    "alta_intensidad_promedio_m_pct_pos": 19.0,
-    "sprints_promedio_pct_pos": 21.0,
-    "velocidad_punta_kmh_pct_pos": 53.0
-  },
-  {
     "team": "IR Iran",
     "player_name": "Shahriyar MOGHANLOO",
     "position": "FW",
@@ -9089,7 +9089,7 @@
     "alta_intensidad_promedio_m": 280.0,
     "sprints_promedio": 15.7,
     "velocidad_punta_kmh": 28.9,
-    "distancia_promedio_km_pct_pos": 37.0,
+    "distancia_promedio_km_pct_pos": 38.0,
     "alta_intensidad_promedio_m_pct_pos": 28.0,
     "sprints_promedio_pct_pos": 28.0,
     "velocidad_punta_kmh_pct_pos": 11.0
@@ -9107,8 +9107,8 @@
     "sprints_promedio": 32.0,
     "velocidad_punta_kmh": 29.2,
     "distancia_promedio_km_pct_pos": 37.0,
-    "alta_intensidad_promedio_m_pct_pos": 56.0,
-    "sprints_promedio_pct_pos": 66.0,
+    "alta_intensidad_promedio_m_pct_pos": 55.0,
+    "sprints_promedio_pct_pos": 65.0,
     "velocidad_punta_kmh_pct_pos": 14.0
   },
   {
@@ -9127,6 +9127,23 @@
     "alta_intensidad_promedio_m_pct_pos": 34.0,
     "sprints_promedio_pct_pos": 36.0,
     "velocidad_punta_kmh_pct_pos": 70.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Romelu LUKAKU",
+    "position": "FW",
+    "jersey_number": 9,
+    "club": "Napoli",
+    "age_years": 33.1,
+    "partidos": 6,
+    "distancia_promedio_km": 3.95,
+    "alta_intensidad_promedio_m": 225.0,
+    "sprints_promedio": 13.2,
+    "velocidad_punta_kmh": 32.4,
+    "distancia_promedio_km_pct_pos": 37.0,
+    "alta_intensidad_promedio_m_pct_pos": 19.0,
+    "sprints_promedio_pct_pos": 21.0,
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Austria",
@@ -9158,7 +9175,7 @@
     "sprints_promedio": 26.0,
     "velocidad_punta_kmh": 29.0,
     "distancia_promedio_km_pct_pos": 36.0,
-    "alta_intensidad_promedio_m_pct_pos": 53.0,
+    "alta_intensidad_promedio_m_pct_pos": 52.0,
     "sprints_promedio_pct_pos": 51.0,
     "velocidad_punta_kmh_pct_pos": 12.0
   },
@@ -9381,7 +9398,7 @@
     "distancia_promedio_km_pct_pos": 31.0,
     "alta_intensidad_promedio_m_pct_pos": 29.0,
     "sprints_promedio_pct_pos": 25.0,
-    "velocidad_punta_kmh_pct_pos": 82.0
+    "velocidad_punta_kmh_pct_pos": 81.0
   },
   {
     "team": "Iraq",
@@ -9413,7 +9430,7 @@
     "sprints_promedio": 14.3,
     "velocidad_punta_kmh": 30.2,
     "distancia_promedio_km_pct_pos": 31.0,
-    "alta_intensidad_promedio_m_pct_pos": 26.0,
+    "alta_intensidad_promedio_m_pct_pos": 27.0,
     "sprints_promedio_pct_pos": 25.0,
     "velocidad_punta_kmh_pct_pos": 25.0
   },
@@ -10104,15 +10121,15 @@
     "jersey_number": 17,
     "club": "Athletic Bilbao",
     "age_years": 23.9,
-    "partidos": 3,
-    "distancia_promedio_km": 2.26,
-    "alta_intensidad_promedio_m": 277.0,
+    "partidos": 4,
+    "distancia_promedio_km": 2.24,
+    "alta_intensidad_promedio_m": 266.0,
     "sprints_promedio": 16.0,
-    "velocidad_punta_kmh": 33.7,
+    "velocidad_punta_kmh": 33.9,
     "distancia_promedio_km_pct_pos": 17.0,
-    "alta_intensidad_promedio_m_pct_pos": 27.0,
+    "alta_intensidad_promedio_m_pct_pos": 26.0,
     "sprints_promedio_pct_pos": 29.0,
-    "velocidad_punta_kmh_pct_pos": 78.0
+    "velocidad_punta_kmh_pct_pos": 81.0
   },
   {
     "team": "Korea Republic",
@@ -10943,9 +10960,9 @@
     "sprints_promedio": 4.8,
     "velocidad_punta_kmh": 28.1,
     "distancia_promedio_km_pct_pos": 100.0,
-    "alta_intensidad_promedio_m_pct_pos": 97.0,
+    "alta_intensidad_promedio_m_pct_pos": 98.0,
     "sprints_promedio_pct_pos": 97.0,
-    "velocidad_punta_kmh_pct_pos": 88.0
+    "velocidad_punta_kmh_pct_pos": 89.0
   },
   {
     "team": "Paraguay",
@@ -10960,9 +10977,9 @@
     "sprints_promedio": 1.0,
     "velocidad_punta_kmh": 24.6,
     "distancia_promedio_km_pct_pos": 98.0,
-    "alta_intensidad_promedio_m_pct_pos": 44.0,
+    "alta_intensidad_promedio_m_pct_pos": 43.0,
     "sprints_promedio_pct_pos": 38.0,
-    "velocidad_punta_kmh_pct_pos": 41.0
+    "velocidad_punta_kmh_pct_pos": 40.0
   },
   {
     "team": "Norway",
@@ -10977,9 +10994,9 @@
     "sprints_promedio": 1.2,
     "velocidad_punta_kmh": 27.6,
     "distancia_promedio_km_pct_pos": 97.0,
-    "alta_intensidad_promedio_m_pct_pos": 47.0,
+    "alta_intensidad_promedio_m_pct_pos": 46.0,
     "sprints_promedio_pct_pos": 48.0,
-    "velocidad_punta_kmh_pct_pos": 82.0
+    "velocidad_punta_kmh_pct_pos": 83.0
   },
   {
     "team": "Switzerland",
@@ -10994,7 +11011,7 @@
     "sprints_promedio": 1.2,
     "velocidad_punta_kmh": 25.3,
     "distancia_promedio_km_pct_pos": 95.0,
-    "alta_intensidad_promedio_m_pct_pos": 44.0,
+    "alta_intensidad_promedio_m_pct_pos": 43.0,
     "sprints_promedio_pct_pos": 48.0,
     "velocidad_punta_kmh_pct_pos": 48.0
   },
@@ -11011,9 +11028,9 @@
     "sprints_promedio": 1.5,
     "velocidad_punta_kmh": 25.5,
     "distancia_promedio_km_pct_pos": 93.0,
-    "alta_intensidad_promedio_m_pct_pos": 51.0,
-    "sprints_promedio_pct_pos": 59.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "alta_intensidad_promedio_m_pct_pos": 50.0,
+    "sprints_promedio_pct_pos": 60.0,
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "USA",
@@ -11047,7 +11064,7 @@
     "distancia_promedio_km_pct_pos": 90.0,
     "alta_intensidad_promedio_m_pct_pos": 95.0,
     "sprints_promedio_pct_pos": 93.0,
-    "velocidad_punta_kmh_pct_pos": 78.0
+    "velocidad_punta_kmh_pct_pos": 79.0
   },
   {
     "team": "Egypt",
@@ -11061,10 +11078,10 @@
     "alta_intensidad_promedio_m": 40.0,
     "sprints_promedio": 2.8,
     "velocidad_punta_kmh": 26.2,
-    "distancia_promedio_km_pct_pos": 88.0,
-    "alta_intensidad_promedio_m_pct_pos": 83.0,
+    "distancia_promedio_km_pct_pos": 89.0,
+    "alta_intensidad_promedio_m_pct_pos": 84.0,
     "sprints_promedio_pct_pos": 82.0,
-    "velocidad_punta_kmh_pct_pos": 64.0
+    "velocidad_punta_kmh_pct_pos": 63.0
   },
   {
     "team": "Austria",
@@ -11096,9 +11113,9 @@
     "sprints_promedio": 2.0,
     "velocidad_punta_kmh": 24.4,
     "distancia_promedio_km_pct_pos": 86.0,
-    "alta_intensidad_promedio_m_pct_pos": 62.0,
+    "alta_intensidad_promedio_m_pct_pos": 61.0,
     "sprints_promedio_pct_pos": 72.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 36.0
   },
   {
     "team": "Spain",
@@ -11107,13 +11124,13 @@
     "jersey_number": 23,
     "club": "Athletic Bilbao",
     "age_years": 29.0,
-    "partidos": 5,
-    "distancia_promedio_km": 5.74,
-    "alta_intensidad_promedio_m": 76.0,
+    "partidos": 6,
+    "distancia_promedio_km": 5.72,
+    "alta_intensidad_promedio_m": 71.0,
     "sprints_promedio": 5.8,
     "velocidad_punta_kmh": 29.9,
-    "distancia_promedio_km_pct_pos": 83.0,
-    "alta_intensidad_promedio_m_pct_pos": 98.0,
+    "distancia_promedio_km_pct_pos": 84.0,
+    "alta_intensidad_promedio_m_pct_pos": 97.0,
     "sprints_promedio_pct_pos": 100.0,
     "velocidad_punta_kmh_pct_pos": 98.0
   },
@@ -11130,7 +11147,7 @@
     "sprints_promedio": 1.8,
     "velocidad_punta_kmh": 27.4,
     "distancia_promedio_km_pct_pos": 82.0,
-    "alta_intensidad_promedio_m_pct_pos": 66.0,
+    "alta_intensidad_promedio_m_pct_pos": 65.0,
     "sprints_promedio_pct_pos": 66.0,
     "velocidad_punta_kmh_pct_pos": 80.0
   },
@@ -11147,9 +11164,9 @@
     "sprints_promedio": 3.2,
     "velocidad_punta_kmh": 25.4,
     "distancia_promedio_km_pct_pos": 80.0,
-    "alta_intensidad_promedio_m_pct_pos": 83.0,
+    "alta_intensidad_promedio_m_pct_pos": 84.0,
     "sprints_promedio_pct_pos": 85.0,
-    "velocidad_punta_kmh_pct_pos": 51.0
+    "velocidad_punta_kmh_pct_pos": 50.0
   },
   {
     "team": "Netherlands",
@@ -11163,9 +11180,9 @@
     "alta_intensidad_promedio_m": 17.0,
     "sprints_promedio": 1.5,
     "velocidad_punta_kmh": 24.2,
-    "distancia_promedio_km_pct_pos": 78.0,
-    "alta_intensidad_promedio_m_pct_pos": 51.0,
-    "sprints_promedio_pct_pos": 59.0,
+    "distancia_promedio_km_pct_pos": 79.0,
+    "alta_intensidad_promedio_m_pct_pos": 50.0,
+    "sprints_promedio_pct_pos": 60.0,
     "velocidad_punta_kmh_pct_pos": 34.0
   },
   {
@@ -11181,9 +11198,9 @@
     "sprints_promedio": 0.7,
     "velocidad_punta_kmh": 26.8,
     "distancia_promedio_km_pct_pos": 77.0,
-    "alta_intensidad_promedio_m_pct_pos": 27.0,
+    "alta_intensidad_promedio_m_pct_pos": 26.0,
     "sprints_promedio_pct_pos": 25.0,
-    "velocidad_punta_kmh_pct_pos": 73.0
+    "velocidad_punta_kmh_pct_pos": 72.0
   },
   {
     "team": "Brazil",
@@ -11197,9 +11214,9 @@
     "alta_intensidad_promedio_m": 6.0,
     "sprints_promedio": 0.4,
     "velocidad_punta_kmh": 22.9,
-    "distancia_promedio_km_pct_pos": 74.0,
-    "alta_intensidad_promedio_m_pct_pos": 18.0,
-    "sprints_promedio_pct_pos": 17.0,
+    "distancia_promedio_km_pct_pos": 75.0,
+    "alta_intensidad_promedio_m_pct_pos": 17.0,
+    "sprints_promedio_pct_pos": 16.0,
     "velocidad_punta_kmh_pct_pos": 20.0
   },
   {
@@ -11214,10 +11231,10 @@
     "alta_intensidad_promedio_m": 23.0,
     "sprints_promedio": 2.2,
     "velocidad_punta_kmh": 25.4,
-    "distancia_promedio_km_pct_pos": 74.0,
-    "alta_intensidad_promedio_m_pct_pos": 63.0,
-    "sprints_promedio_pct_pos": 75.0,
-    "velocidad_punta_kmh_pct_pos": 51.0
+    "distancia_promedio_km_pct_pos": 75.0,
+    "alta_intensidad_promedio_m_pct_pos": 62.0,
+    "sprints_promedio_pct_pos": 76.0,
+    "velocidad_punta_kmh_pct_pos": 50.0
   },
   {
     "team": "Türkiye",
@@ -11265,9 +11282,9 @@
     "alta_intensidad_promedio_m": 20.0,
     "sprints_promedio": 1.3,
     "velocidad_punta_kmh": 29.6,
-    "distancia_promedio_km_pct_pos": 68.0,
+    "distancia_promedio_km_pct_pos": 69.0,
     "alta_intensidad_promedio_m_pct_pos": 57.0,
-    "sprints_promedio_pct_pos": 55.0,
+    "sprints_promedio_pct_pos": 56.0,
     "velocidad_punta_kmh_pct_pos": 95.0
   },
   {
@@ -11285,7 +11302,7 @@
     "distancia_promedio_km_pct_pos": 67.0,
     "alta_intensidad_promedio_m_pct_pos": 93.0,
     "sprints_promedio_pct_pos": 95.0,
-    "velocidad_punta_kmh_pct_pos": 76.0
+    "velocidad_punta_kmh_pct_pos": 75.0
   },
   {
     "team": "Curaçao",
@@ -11299,10 +11316,10 @@
     "alta_intensidad_promedio_m": 7.0,
     "sprints_promedio": 0.3,
     "velocidad_punta_kmh": 24.6,
-    "distancia_promedio_km_pct_pos": 65.0,
+    "distancia_promedio_km_pct_pos": 66.0,
     "alta_intensidad_promedio_m_pct_pos": 23.0,
     "sprints_promedio_pct_pos": 14.0,
-    "velocidad_punta_kmh_pct_pos": 41.0
+    "velocidad_punta_kmh_pct_pos": 40.0
   },
   {
     "team": "South Africa",
@@ -11316,10 +11333,10 @@
     "alta_intensidad_promedio_m": 26.0,
     "sprints_promedio": 1.8,
     "velocidad_punta_kmh": 25.7,
-    "distancia_promedio_km_pct_pos": 63.0,
+    "distancia_promedio_km_pct_pos": 64.0,
     "alta_intensidad_promedio_m_pct_pos": 69.0,
     "sprints_promedio_pct_pos": 66.0,
-    "velocidad_punta_kmh_pct_pos": 58.0
+    "velocidad_punta_kmh_pct_pos": 57.0
   },
   {
     "team": "Mexico",
@@ -11335,25 +11352,8 @@
     "velocidad_punta_kmh": 25.8,
     "distancia_promedio_km_pct_pos": 62.0,
     "alta_intensidad_promedio_m_pct_pos": 75.0,
-    "sprints_promedio_pct_pos": 79.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Thibaut COURTOIS",
-    "position": "GK",
-    "jersey_number": 1,
-    "club": "Real Madrid",
-    "age_years": 34.1,
-    "partidos": 5,
-    "distancia_promedio_km": 5.16,
-    "alta_intensidad_promedio_m": 40.0,
-    "sprints_promedio": 2.4,
-    "velocidad_punta_kmh": 26.6,
-    "distancia_promedio_km_pct_pos": 60.0,
-    "alta_intensidad_promedio_m_pct_pos": 83.0,
-    "sprints_promedio_pct_pos": 79.0,
-    "velocidad_punta_kmh_pct_pos": 68.0
+    "sprints_promedio_pct_pos": 80.0,
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "Japan",
@@ -11367,10 +11367,10 @@
     "alta_intensidad_promedio_m": 17.0,
     "sprints_promedio": 1.2,
     "velocidad_punta_kmh": 25.7,
-    "distancia_promedio_km_pct_pos": 58.0,
-    "alta_intensidad_promedio_m_pct_pos": 51.0,
+    "distancia_promedio_km_pct_pos": 61.0,
+    "alta_intensidad_promedio_m_pct_pos": 50.0,
     "sprints_promedio_pct_pos": 48.0,
-    "velocidad_punta_kmh_pct_pos": 58.0
+    "velocidad_punta_kmh_pct_pos": 57.0
   },
   {
     "team": "Uzbekistan",
@@ -11384,7 +11384,7 @@
     "alta_intensidad_promedio_m": 12.0,
     "sprints_promedio": 1.0,
     "velocidad_punta_kmh": 22.5,
-    "distancia_promedio_km_pct_pos": 57.0,
+    "distancia_promedio_km_pct_pos": 59.0,
     "alta_intensidad_promedio_m_pct_pos": 38.0,
     "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 16.0
@@ -11401,9 +11401,9 @@
     "alta_intensidad_promedio_m": 37.0,
     "sprints_promedio": 3.7,
     "velocidad_punta_kmh": 24.8,
-    "distancia_promedio_km_pct_pos": 55.0,
-    "alta_intensidad_promedio_m_pct_pos": 80.0,
-    "sprints_promedio_pct_pos": 88.0,
+    "distancia_promedio_km_pct_pos": 57.0,
+    "alta_intensidad_promedio_m_pct_pos": 82.0,
+    "sprints_promedio_pct_pos": 89.0,
     "velocidad_punta_kmh_pct_pos": 43.0
   },
   {
@@ -11418,10 +11418,10 @@
     "alta_intensidad_promedio_m": 28.0,
     "sprints_promedio": 1.2,
     "velocidad_punta_kmh": 26.2,
-    "distancia_promedio_km_pct_pos": 52.0,
+    "distancia_promedio_km_pct_pos": 55.0,
     "alta_intensidad_promedio_m_pct_pos": 72.0,
     "sprints_promedio_pct_pos": 48.0,
-    "velocidad_punta_kmh_pct_pos": 64.0
+    "velocidad_punta_kmh_pct_pos": 63.0
   },
   {
     "team": "Norway",
@@ -11435,7 +11435,7 @@
     "alta_intensidad_promedio_m": 5.0,
     "sprints_promedio": 0.0,
     "velocidad_punta_kmh": 22.5,
-    "distancia_promedio_km_pct_pos": 52.0,
+    "distancia_promedio_km_pct_pos": 55.0,
     "alta_intensidad_promedio_m_pct_pos": 12.0,
     "sprints_promedio_pct_pos": 7.0,
     "velocidad_punta_kmh_pct_pos": 16.0
@@ -11452,10 +11452,27 @@
     "alta_intensidad_promedio_m": 33.0,
     "sprints_promedio": 2.0,
     "velocidad_punta_kmh": 27.6,
-    "distancia_promedio_km_pct_pos": 50.0,
+    "distancia_promedio_km_pct_pos": 52.0,
     "alta_intensidad_promedio_m_pct_pos": 77.0,
     "sprints_promedio_pct_pos": 72.0,
-    "velocidad_punta_kmh_pct_pos": 82.0
+    "velocidad_punta_kmh_pct_pos": 83.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Thibaut COURTOIS",
+    "position": "GK",
+    "jersey_number": 1,
+    "club": "Real Madrid",
+    "age_years": 34.1,
+    "partidos": 6,
+    "distancia_promedio_km": 4.97,
+    "alta_intensidad_promedio_m": 35.0,
+    "sprints_promedio": 2.2,
+    "velocidad_punta_kmh": 26.6,
+    "distancia_promedio_km_pct_pos": 52.0,
+    "alta_intensidad_promedio_m_pct_pos": 80.0,
+    "sprints_promedio_pct_pos": 76.0,
+    "velocidad_punta_kmh_pct_pos": 66.0
   },
   {
     "team": "Senegal",
@@ -11469,7 +11486,7 @@
     "alta_intensidad_promedio_m": 9.0,
     "sprints_promedio": 1.0,
     "velocidad_punta_kmh": 22.6,
-    "distancia_promedio_km_pct_pos": 48.0,
+    "distancia_promedio_km_pct_pos": 49.0,
     "alta_intensidad_promedio_m_pct_pos": 30.0,
     "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 18.0
@@ -11486,10 +11503,10 @@
     "alta_intensidad_promedio_m": 9.0,
     "sprints_promedio": 0.5,
     "velocidad_punta_kmh": 25.0,
-    "distancia_promedio_km_pct_pos": 47.0,
+    "distancia_promedio_km_pct_pos": 48.0,
     "alta_intensidad_promedio_m_pct_pos": 30.0,
     "sprints_promedio_pct_pos": 19.0,
-    "velocidad_punta_kmh_pct_pos": 45.0
+    "velocidad_punta_kmh_pct_pos": 44.0
   },
   {
     "team": "Algeria",
@@ -11503,7 +11520,7 @@
     "alta_intensidad_promedio_m": 0.0,
     "sprints_promedio": 0.0,
     "velocidad_punta_kmh": 18.2,
-    "distancia_promedio_km_pct_pos": 44.0,
+    "distancia_promedio_km_pct_pos": 45.0,
     "alta_intensidad_promedio_m_pct_pos": 4.0,
     "sprints_promedio_pct_pos": 7.0,
     "velocidad_punta_kmh_pct_pos": 3.0
@@ -11520,10 +11537,10 @@
     "alta_intensidad_promedio_m": 9.0,
     "sprints_promedio": 0.7,
     "velocidad_punta_kmh": 23.4,
-    "distancia_promedio_km_pct_pos": 44.0,
+    "distancia_promedio_km_pct_pos": 45.0,
     "alta_intensidad_promedio_m_pct_pos": 30.0,
     "sprints_promedio_pct_pos": 25.0,
-    "velocidad_punta_kmh_pct_pos": 22.0
+    "velocidad_punta_kmh_pct_pos": 21.0
   },
   {
     "team": "Australia",
@@ -11537,8 +11554,8 @@
     "alta_intensidad_promedio_m": 34.0,
     "sprints_promedio": 1.2,
     "velocidad_punta_kmh": 24.0,
-    "distancia_promedio_km_pct_pos": 41.0,
-    "alta_intensidad_promedio_m_pct_pos": 78.0,
+    "distancia_promedio_km_pct_pos": 42.0,
+    "alta_intensidad_promedio_m_pct_pos": 79.0,
     "sprints_promedio_pct_pos": 48.0,
     "velocidad_punta_kmh_pct_pos": 29.0
   },
@@ -11554,10 +11571,10 @@
     "alta_intensidad_promedio_m": 20.0,
     "sprints_promedio": 1.6,
     "velocidad_punta_kmh": 26.7,
-    "distancia_promedio_km_pct_pos": 41.0,
+    "distancia_promedio_km_pct_pos": 42.0,
     "alta_intensidad_promedio_m_pct_pos": 57.0,
     "sprints_promedio_pct_pos": 62.0,
-    "velocidad_punta_kmh_pct_pos": 71.0
+    "velocidad_punta_kmh_pct_pos": 70.0
   },
   {
     "team": "Congo DR",
@@ -11571,10 +11588,10 @@
     "alta_intensidad_promedio_m": 24.0,
     "sprints_promedio": 1.8,
     "velocidad_punta_kmh": 26.7,
-    "distancia_promedio_km_pct_pos": 38.0,
-    "alta_intensidad_promedio_m_pct_pos": 66.0,
+    "distancia_promedio_km_pct_pos": 39.0,
+    "alta_intensidad_promedio_m_pct_pos": 65.0,
     "sprints_promedio_pct_pos": 66.0,
-    "velocidad_punta_kmh_pct_pos": 71.0
+    "velocidad_punta_kmh_pct_pos": 70.0
   },
   {
     "team": "Morocco",
@@ -11588,9 +11605,9 @@
     "alta_intensidad_promedio_m": 7.0,
     "sprints_promedio": 0.8,
     "velocidad_punta_kmh": 24.5,
-    "distancia_promedio_km_pct_pos": 37.0,
+    "distancia_promedio_km_pct_pos": 38.0,
     "alta_intensidad_promedio_m_pct_pos": 23.0,
-    "sprints_promedio_pct_pos": 31.0,
+    "sprints_promedio_pct_pos": 30.0,
     "velocidad_punta_kmh_pct_pos": 38.0
   },
   {
@@ -11605,10 +11622,10 @@
     "alta_intensidad_promedio_m": 18.0,
     "sprints_promedio": 1.8,
     "velocidad_punta_kmh": 25.7,
-    "distancia_promedio_km_pct_pos": 35.0,
-    "alta_intensidad_promedio_m_pct_pos": 55.0,
+    "distancia_promedio_km_pct_pos": 36.0,
+    "alta_intensidad_promedio_m_pct_pos": 54.0,
     "sprints_promedio_pct_pos": 66.0,
-    "velocidad_punta_kmh_pct_pos": 58.0
+    "velocidad_punta_kmh_pct_pos": 57.0
   },
   {
     "team": "Uzbekistan",
@@ -11622,10 +11639,10 @@
     "alta_intensidad_promedio_m": 17.0,
     "sprints_promedio": 1.0,
     "velocidad_punta_kmh": 25.1,
-    "distancia_promedio_km_pct_pos": 33.0,
-    "alta_intensidad_promedio_m_pct_pos": 51.0,
+    "distancia_promedio_km_pct_pos": 34.0,
+    "alta_intensidad_promedio_m_pct_pos": 50.0,
     "sprints_promedio_pct_pos": 38.0,
-    "velocidad_punta_kmh_pct_pos": 47.0
+    "velocidad_punta_kmh_pct_pos": 46.0
   },
   {
     "team": "Jordan",
@@ -11639,7 +11656,7 @@
     "alta_intensidad_promedio_m": 7.0,
     "sprints_promedio": 0.7,
     "velocidad_punta_kmh": 23.5,
-    "distancia_promedio_km_pct_pos": 32.0,
+    "distancia_promedio_km_pct_pos": 33.0,
     "alta_intensidad_promedio_m_pct_pos": 23.0,
     "sprints_promedio_pct_pos": 25.0,
     "velocidad_punta_kmh_pct_pos": 24.0
@@ -11656,7 +11673,7 @@
     "alta_intensidad_promedio_m": 45.0,
     "sprints_promedio": 4.3,
     "velocidad_punta_kmh": 27.8,
-    "distancia_promedio_km_pct_pos": 30.0,
+    "distancia_promedio_km_pct_pos": 31.0,
     "alta_intensidad_promedio_m_pct_pos": 92.0,
     "sprints_promedio_pct_pos": 92.0,
     "velocidad_punta_kmh_pct_pos": 87.0
@@ -11673,7 +11690,7 @@
     "alta_intensidad_promedio_m": 3.0,
     "sprints_promedio": 0.0,
     "velocidad_punta_kmh": 21.5,
-    "distancia_promedio_km_pct_pos": 28.0,
+    "distancia_promedio_km_pct_pos": 30.0,
     "alta_intensidad_promedio_m_pct_pos": 8.0,
     "sprints_promedio_pct_pos": 7.0,
     "velocidad_punta_kmh_pct_pos": 10.0
@@ -11690,8 +11707,8 @@
     "alta_intensidad_promedio_m": 6.0,
     "sprints_promedio": 0.7,
     "velocidad_punta_kmh": 24.0,
-    "distancia_promedio_km_pct_pos": 27.0,
-    "alta_intensidad_promedio_m_pct_pos": 18.0,
+    "distancia_promedio_km_pct_pos": 28.0,
+    "alta_intensidad_promedio_m_pct_pos": 17.0,
     "sprints_promedio_pct_pos": 25.0,
     "velocidad_punta_kmh_pct_pos": 29.0
   },
@@ -11707,10 +11724,10 @@
     "alta_intensidad_promedio_m": 21.0,
     "sprints_promedio": 1.2,
     "velocidad_punta_kmh": 26.9,
-    "distancia_promedio_km_pct_pos": 25.0,
-    "alta_intensidad_promedio_m_pct_pos": 60.0,
+    "distancia_promedio_km_pct_pos": 26.0,
+    "alta_intensidad_promedio_m_pct_pos": 59.0,
     "sprints_promedio_pct_pos": 48.0,
-    "velocidad_punta_kmh_pct_pos": 76.0
+    "velocidad_punta_kmh_pct_pos": 75.0
   },
   {
     "team": "Haiti",
@@ -11724,10 +11741,10 @@
     "alta_intensidad_promedio_m": 14.0,
     "sprints_promedio": 1.3,
     "velocidad_punta_kmh": 23.6,
-    "distancia_promedio_km_pct_pos": 23.0,
-    "alta_intensidad_promedio_m_pct_pos": 41.0,
-    "sprints_promedio_pct_pos": 55.0,
-    "velocidad_punta_kmh_pct_pos": 27.0
+    "distancia_promedio_km_pct_pos": 25.0,
+    "alta_intensidad_promedio_m_pct_pos": 40.0,
+    "sprints_promedio_pct_pos": 56.0,
+    "velocidad_punta_kmh_pct_pos": 26.0
   },
   {
     "team": "Saudi Arabia",
@@ -11741,10 +11758,10 @@
     "alta_intensidad_promedio_m": 5.0,
     "sprints_promedio": 0.3,
     "velocidad_punta_kmh": 24.1,
-    "distancia_promedio_km_pct_pos": 22.0,
+    "distancia_promedio_km_pct_pos": 23.0,
     "alta_intensidad_promedio_m_pct_pos": 12.0,
     "sprints_promedio_pct_pos": 14.0,
-    "velocidad_punta_kmh_pct_pos": 32.0
+    "velocidad_punta_kmh_pct_pos": 31.0
   },
   {
     "team": "Ecuador",
@@ -11758,10 +11775,10 @@
     "alta_intensidad_promedio_m": 6.0,
     "sprints_promedio": 0.8,
     "velocidad_punta_kmh": 21.6,
-    "distancia_promedio_km_pct_pos": 20.0,
-    "alta_intensidad_promedio_m_pct_pos": 18.0,
-    "sprints_promedio_pct_pos": 31.0,
-    "velocidad_punta_kmh_pct_pos": 12.0
+    "distancia_promedio_km_pct_pos": 21.0,
+    "alta_intensidad_promedio_m_pct_pos": 17.0,
+    "sprints_promedio_pct_pos": 30.0,
+    "velocidad_punta_kmh_pct_pos": 11.0
   },
   {
     "team": "Senegal",
@@ -11775,9 +11792,9 @@
     "alta_intensidad_promedio_m": 11.0,
     "sprints_promedio": 1.3,
     "velocidad_punta_kmh": 23.5,
-    "distancia_promedio_km_pct_pos": 18.0,
-    "alta_intensidad_promedio_m_pct_pos": 36.0,
-    "sprints_promedio_pct_pos": 55.0,
+    "distancia_promedio_km_pct_pos": 20.0,
+    "alta_intensidad_promedio_m_pct_pos": 35.0,
+    "sprints_promedio_pct_pos": 56.0,
     "velocidad_punta_kmh_pct_pos": 24.0
   },
   {
@@ -11792,7 +11809,7 @@
     "alta_intensidad_promedio_m": 0.0,
     "sprints_promedio": 0.0,
     "velocidad_punta_kmh": 19.7,
-    "distancia_promedio_km_pct_pos": 17.0,
+    "distancia_promedio_km_pct_pos": 18.0,
     "alta_intensidad_promedio_m_pct_pos": 4.0,
     "sprints_promedio_pct_pos": 7.0,
     "velocidad_punta_kmh_pct_pos": 7.0
@@ -11809,7 +11826,7 @@
     "alta_intensidad_promedio_m": 4.0,
     "sprints_promedio": 0.0,
     "velocidad_punta_kmh": 21.3,
-    "distancia_promedio_km_pct_pos": 15.0,
+    "distancia_promedio_km_pct_pos": 16.0,
     "alta_intensidad_promedio_m_pct_pos": 10.0,
     "sprints_promedio_pct_pos": 7.0,
     "velocidad_punta_kmh_pct_pos": 8.0
@@ -11826,9 +11843,9 @@
     "alta_intensidad_promedio_m": 31.0,
     "sprints_promedio": 2.3,
     "velocidad_punta_kmh": 29.7,
-    "distancia_promedio_km_pct_pos": 13.0,
-    "alta_intensidad_promedio_m_pct_pos": 73.0,
-    "sprints_promedio_pct_pos": 77.0,
+    "distancia_promedio_km_pct_pos": 15.0,
+    "alta_intensidad_promedio_m_pct_pos": 74.0,
+    "sprints_promedio_pct_pos": 79.0,
     "velocidad_punta_kmh_pct_pos": 97.0
   },
   {
@@ -11843,10 +11860,10 @@
     "alta_intensidad_promedio_m": 10.0,
     "sprints_promedio": 0.7,
     "velocidad_punta_kmh": 26.6,
-    "distancia_promedio_km_pct_pos": 12.0,
+    "distancia_promedio_km_pct_pos": 13.0,
     "alta_intensidad_promedio_m_pct_pos": 33.0,
     "sprints_promedio_pct_pos": 25.0,
-    "velocidad_punta_kmh_pct_pos": 68.0
+    "velocidad_punta_kmh_pct_pos": 66.0
   },
   {
     "team": "Iraq",
@@ -11860,8 +11877,8 @@
     "alta_intensidad_promedio_m": 11.0,
     "sprints_promedio": 1.0,
     "velocidad_punta_kmh": 24.2,
-    "distancia_promedio_km_pct_pos": 10.0,
-    "alta_intensidad_promedio_m_pct_pos": 36.0,
+    "distancia_promedio_km_pct_pos": 11.0,
+    "alta_intensidad_promedio_m_pct_pos": 35.0,
     "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 34.0
   },
@@ -11877,10 +11894,10 @@
     "alta_intensidad_promedio_m": 14.0,
     "sprints_promedio": 1.0,
     "velocidad_punta_kmh": 25.5,
-    "distancia_promedio_km_pct_pos": 8.0,
-    "alta_intensidad_promedio_m_pct_pos": 41.0,
+    "distancia_promedio_km_pct_pos": 10.0,
+    "alta_intensidad_promedio_m_pct_pos": 40.0,
     "sprints_promedio_pct_pos": 38.0,
-    "velocidad_punta_kmh_pct_pos": 54.0
+    "velocidad_punta_kmh_pct_pos": 53.0
   },
   {
     "team": "Ghana",
@@ -11894,8 +11911,8 @@
     "alta_intensidad_promedio_m": 6.0,
     "sprints_promedio": 0.5,
     "velocidad_punta_kmh": 22.3,
-    "distancia_promedio_km_pct_pos": 7.0,
-    "alta_intensidad_promedio_m_pct_pos": 18.0,
+    "distancia_promedio_km_pct_pos": 8.0,
+    "alta_intensidad_promedio_m_pct_pos": 17.0,
     "sprints_promedio_pct_pos": 19.0,
     "velocidad_punta_kmh_pct_pos": 13.0
   },
@@ -11911,10 +11928,27 @@
     "alta_intensidad_promedio_m": 44.0,
     "sprints_promedio": 3.0,
     "velocidad_punta_kmh": 28.2,
-    "distancia_promedio_km_pct_pos": 5.0,
+    "distancia_promedio_km_pct_pos": 7.0,
     "alta_intensidad_promedio_m_pct_pos": 89.0,
-    "sprints_promedio_pct_pos": 83.0,
+    "sprints_promedio_pct_pos": 84.0,
     "velocidad_punta_kmh_pct_pos": 90.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Senne LAMMENS",
+    "position": "GK",
+    "jersey_number": 12,
+    "club": "Manchester United",
+    "age_years": 23.9,
+    "partidos": 1,
+    "distancia_promedio_km": 1.61,
+    "alta_intensidad_promedio_m": 26.0,
+    "sprints_promedio": 1.0,
+    "velocidad_punta_kmh": 26.9,
+    "distancia_promedio_km_pct_pos": 5.0,
+    "alta_intensidad_promedio_m_pct_pos": 69.0,
+    "sprints_promedio_pct_pos": 38.0,
+    "velocidad_punta_kmh_pct_pos": 75.0
   },
   {
     "team": "Mexico",
@@ -12100,7 +12134,7 @@
     "velocidad_punta_kmh": 29.4,
     "distancia_promedio_km_pct_pos": 98.0,
     "alta_intensidad_promedio_m_pct_pos": 58.0,
-    "sprints_promedio_pct_pos": 74.0,
+    "sprints_promedio_pct_pos": 73.0,
     "velocidad_punta_kmh_pct_pos": 19.0
   },
   {
@@ -12155,6 +12189,23 @@
     "velocidad_punta_kmh_pct_pos": 77.0
   },
   {
+    "team": "Spain",
+    "player_name": "RODRI",
+    "position": "MF",
+    "jersey_number": 16,
+    "club": "Manchester City",
+    "age_years": 30.0,
+    "partidos": 6,
+    "distancia_promedio_km": 11.86,
+    "alta_intensidad_promedio_m": 679.0,
+    "sprints_promedio": 38.0,
+    "velocidad_punta_kmh": 31.5,
+    "distancia_promedio_km_pct_pos": 96.0,
+    "alta_intensidad_promedio_m_pct_pos": 77.0,
+    "sprints_promedio_pct_pos": 76.0,
+    "velocidad_punta_kmh_pct_pos": 57.0
+  },
+  {
     "team": "Australia",
     "player_name": "Aiden ONEILL",
     "position": "MF",
@@ -12170,23 +12221,6 @@
     "alta_intensidad_promedio_m_pct_pos": 82.0,
     "sprints_promedio_pct_pos": 92.0,
     "velocidad_punta_kmh_pct_pos": 83.0
-  },
-  {
-    "team": "Spain",
-    "player_name": "RODRI",
-    "position": "MF",
-    "jersey_number": 16,
-    "club": "Manchester City",
-    "age_years": 30.0,
-    "partidos": 5,
-    "distancia_promedio_km": 11.82,
-    "alta_intensidad_promedio_m": 648.0,
-    "sprints_promedio": 36.6,
-    "velocidad_punta_kmh": 31.5,
-    "distancia_promedio_km_pct_pos": 96.0,
-    "alta_intensidad_promedio_m_pct_pos": 73.0,
-    "sprints_promedio_pct_pos": 72.0,
-    "velocidad_punta_kmh_pct_pos": 57.0
   },
   {
     "team": "Morocco",
@@ -12507,7 +12541,7 @@
     "sprints_promedio": 21.7,
     "velocidad_punta_kmh": 26.7,
     "distancia_promedio_km_pct_pos": 90.0,
-    "alta_intensidad_promedio_m_pct_pos": 28.0,
+    "alta_intensidad_promedio_m_pct_pos": 29.0,
     "sprints_promedio_pct_pos": 33.0,
     "velocidad_punta_kmh_pct_pos": 3.0
   },
@@ -12541,7 +12575,7 @@
     "sprints_promedio": 44.2,
     "velocidad_punta_kmh": 30.9,
     "distancia_promedio_km_pct_pos": 90.0,
-    "alta_intensidad_promedio_m_pct_pos": 83.0,
+    "alta_intensidad_promedio_m_pct_pos": 84.0,
     "sprints_promedio_pct_pos": 89.0,
     "velocidad_punta_kmh_pct_pos": 42.0
   },
@@ -12560,7 +12594,7 @@
     "distancia_promedio_km_pct_pos": 89.0,
     "alta_intensidad_promedio_m_pct_pos": 58.0,
     "sprints_promedio_pct_pos": 63.0,
-    "velocidad_punta_kmh_pct_pos": 38.0
+    "velocidad_punta_kmh_pct_pos": 37.0
   },
   {
     "team": "Haiti",
@@ -12609,9 +12643,9 @@
     "sprints_promedio": 42.2,
     "velocidad_punta_kmh": 31.9,
     "distancia_promedio_km_pct_pos": 88.0,
-    "alta_intensidad_promedio_m_pct_pos": 82.0,
+    "alta_intensidad_promedio_m_pct_pos": 83.0,
     "sprints_promedio_pct_pos": 84.0,
-    "velocidad_punta_kmh_pct_pos": 65.0
+    "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
     "team": "New Zealand",
@@ -12679,7 +12713,7 @@
     "distancia_promedio_km_pct_pos": 87.0,
     "alta_intensidad_promedio_m_pct_pos": 96.0,
     "sprints_promedio_pct_pos": 98.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "Ecuador",
@@ -12818,23 +12852,6 @@
     "velocidad_punta_kmh_pct_pos": 54.0
   },
   {
-    "team": "Spain",
-    "player_name": "PEDRI",
-    "position": "MF",
-    "jersey_number": 20,
-    "club": "Barcelona",
-    "age_years": 23.5,
-    "partidos": 5,
-    "distancia_promedio_km": 10.31,
-    "alta_intensidad_promedio_m": 743.0,
-    "sprints_promedio": 43.0,
-    "velocidad_punta_kmh": 30.5,
-    "distancia_promedio_km_pct_pos": 84.0,
-    "alta_intensidad_promedio_m_pct_pos": 84.0,
-    "sprints_promedio_pct_pos": 85.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
-  },
-  {
     "team": "Korea Republic",
     "player_name": "LEE Gihyuk",
     "position": "MF",
@@ -12900,7 +12917,7 @@
     "distancia_promedio_km_pct_pos": 83.0,
     "alta_intensidad_promedio_m_pct_pos": 81.0,
     "sprints_promedio_pct_pos": 79.0,
-    "velocidad_punta_kmh_pct_pos": 38.0
+    "velocidad_punta_kmh_pct_pos": 37.0
   },
   {
     "team": "Tunisia",
@@ -12948,9 +12965,9 @@
     "alta_intensidad_promedio_m": 652.0,
     "sprints_promedio": 34.7,
     "velocidad_punta_kmh": 31.4,
-    "distancia_promedio_km_pct_pos": 82.0,
+    "distancia_promedio_km_pct_pos": 83.0,
     "alta_intensidad_promedio_m_pct_pos": 74.0,
-    "sprints_promedio_pct_pos": 67.0,
+    "sprints_promedio_pct_pos": 68.0,
     "velocidad_punta_kmh_pct_pos": 54.0
   },
   {
@@ -12999,7 +13016,7 @@
     "alta_intensidad_promedio_m": 718.0,
     "sprints_promedio": 37.0,
     "velocidad_punta_kmh": 32.5,
-    "distancia_promedio_km_pct_pos": 81.0,
+    "distancia_promedio_km_pct_pos": 82.0,
     "alta_intensidad_promedio_m_pct_pos": 82.0,
     "sprints_promedio_pct_pos": 73.0,
     "velocidad_punta_kmh_pct_pos": 77.0
@@ -13018,7 +13035,7 @@
     "velocidad_punta_kmh": 35.1,
     "distancia_promedio_km_pct_pos": 81.0,
     "alta_intensidad_promedio_m_pct_pos": 93.0,
-    "sprints_promedio_pct_pos": 83.0,
+    "sprints_promedio_pct_pos": 84.0,
     "velocidad_punta_kmh_pct_pos": 99.0
   },
   {
@@ -13118,7 +13135,7 @@
     "alta_intensidad_promedio_m": 460.0,
     "sprints_promedio": 29.0,
     "velocidad_punta_kmh": 30.1,
-    "distancia_promedio_km_pct_pos": 79.0,
+    "distancia_promedio_km_pct_pos": 80.0,
     "alta_intensidad_promedio_m_pct_pos": 47.0,
     "sprints_promedio_pct_pos": 54.0,
     "velocidad_punta_kmh_pct_pos": 31.0
@@ -13138,7 +13155,7 @@
     "distancia_promedio_km_pct_pos": 79.0,
     "alta_intensidad_promedio_m_pct_pos": 88.0,
     "sprints_promedio_pct_pos": 79.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "Panama",
@@ -13155,7 +13172,7 @@
     "distancia_promedio_km_pct_pos": 79.0,
     "alta_intensidad_promedio_m_pct_pos": 89.0,
     "sprints_promedio_pct_pos": 94.0,
-    "velocidad_punta_kmh_pct_pos": 65.0
+    "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
     "team": "Egypt",
@@ -13169,7 +13186,7 @@
     "alta_intensidad_promedio_m": 778.0,
     "sprints_promedio": 45.0,
     "velocidad_punta_kmh": 32.4,
-    "distancia_promedio_km_pct_pos": 78.0,
+    "distancia_promedio_km_pct_pos": 79.0,
     "alta_intensidad_promedio_m_pct_pos": 89.0,
     "sprints_promedio_pct_pos": 90.0,
     "velocidad_punta_kmh_pct_pos": 76.0
@@ -13189,7 +13206,7 @@
     "distancia_promedio_km_pct_pos": 78.0,
     "alta_intensidad_promedio_m_pct_pos": 64.0,
     "sprints_promedio_pct_pos": 56.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "France",
@@ -13220,7 +13237,7 @@
     "alta_intensidad_promedio_m": 354.0,
     "sprints_promedio": 19.7,
     "velocidad_punta_kmh": 31.2,
-    "distancia_promedio_km_pct_pos": 77.0,
+    "distancia_promedio_km_pct_pos": 78.0,
     "alta_intensidad_promedio_m_pct_pos": 29.0,
     "sprints_promedio_pct_pos": 28.0,
     "velocidad_punta_kmh_pct_pos": 48.0
@@ -13271,7 +13288,7 @@
     "alta_intensidad_promedio_m": 726.0,
     "sprints_promedio": 43.8,
     "velocidad_punta_kmh": 32.3,
-    "distancia_promedio_km_pct_pos": 76.0,
+    "distancia_promedio_km_pct_pos": 77.0,
     "alta_intensidad_promedio_m_pct_pos": 83.0,
     "sprints_promedio_pct_pos": 87.0,
     "velocidad_punta_kmh_pct_pos": 73.0
@@ -13288,7 +13305,7 @@
     "alta_intensidad_promedio_m": 807.0,
     "sprints_promedio": 44.0,
     "velocidad_punta_kmh": 33.3,
-    "distancia_promedio_km_pct_pos": 76.0,
+    "distancia_promedio_km_pct_pos": 77.0,
     "alta_intensidad_promedio_m_pct_pos": 91.0,
     "sprints_promedio_pct_pos": 88.0,
     "velocidad_punta_kmh_pct_pos": 88.0
@@ -13339,7 +13356,7 @@
     "alta_intensidad_promedio_m": 950.0,
     "sprints_promedio": 53.8,
     "velocidad_punta_kmh": 32.0,
-    "distancia_promedio_km_pct_pos": 75.0,
+    "distancia_promedio_km_pct_pos": 76.0,
     "alta_intensidad_promedio_m_pct_pos": 97.0,
     "sprints_promedio_pct_pos": 96.0,
     "velocidad_punta_kmh_pct_pos": 67.0
@@ -13373,9 +13390,9 @@
     "alta_intensidad_promedio_m": 745.0,
     "sprints_promedio": 41.2,
     "velocidad_punta_kmh": 31.4,
-    "distancia_promedio_km_pct_pos": 74.0,
+    "distancia_promedio_km_pct_pos": 75.0,
     "alta_intensidad_promedio_m_pct_pos": 85.0,
-    "sprints_promedio_pct_pos": 82.0,
+    "sprints_promedio_pct_pos": 83.0,
     "velocidad_punta_kmh_pct_pos": 54.0
   },
   {
@@ -13390,7 +13407,7 @@
     "alta_intensidad_promedio_m": 605.0,
     "sprints_promedio": 33.2,
     "velocidad_punta_kmh": 31.6,
-    "distancia_promedio_km_pct_pos": 74.0,
+    "distancia_promedio_km_pct_pos": 75.0,
     "alta_intensidad_promedio_m_pct_pos": 69.0,
     "sprints_promedio_pct_pos": 65.0,
     "velocidad_punta_kmh_pct_pos": 58.0
@@ -13425,9 +13442,26 @@
     "sprints_promedio": 23.0,
     "velocidad_punta_kmh": 28.8,
     "distancia_promedio_km_pct_pos": 74.0,
-    "alta_intensidad_promedio_m_pct_pos": 26.0,
+    "alta_intensidad_promedio_m_pct_pos": 27.0,
     "sprints_promedio_pct_pos": 38.0,
     "velocidad_punta_kmh_pct_pos": 15.0
+  },
+  {
+    "team": "Spain",
+    "player_name": "PEDRI",
+    "position": "MF",
+    "jersey_number": 20,
+    "club": "Barcelona",
+    "age_years": 23.5,
+    "partidos": 6,
+    "distancia_promedio_km": 9.46,
+    "alta_intensidad_promedio_m": 682.0,
+    "sprints_promedio": 39.0,
+    "velocidad_punta_kmh": 30.5,
+    "distancia_promedio_km_pct_pos": 74.0,
+    "alta_intensidad_promedio_m_pct_pos": 78.0,
+    "sprints_promedio_pct_pos": 78.0,
+    "velocidad_punta_kmh_pct_pos": 36.0
   },
   {
     "team": "Croatia",
@@ -13476,7 +13510,7 @@
     "sprints_promedio": 39.7,
     "velocidad_punta_kmh": 31.2,
     "distancia_promedio_km_pct_pos": 73.0,
-    "alta_intensidad_promedio_m_pct_pos": 71.0,
+    "alta_intensidad_promedio_m_pct_pos": 72.0,
     "sprints_promedio_pct_pos": 80.0,
     "velocidad_punta_kmh_pct_pos": 48.0
   },
@@ -13532,6 +13566,23 @@
     "velocidad_punta_kmh_pct_pos": 81.0
   },
   {
+    "team": "Belgium",
+    "player_name": "Kevin DE BRUYNE",
+    "position": "MF",
+    "jersey_number": 7,
+    "club": "Napoli",
+    "age_years": 35.0,
+    "partidos": 5,
+    "distancia_promedio_km": 9.32,
+    "alta_intensidad_promedio_m": 700.0,
+    "sprints_promedio": 40.8,
+    "velocidad_punta_kmh": 32.2,
+    "distancia_promedio_km_pct_pos": 72.0,
+    "alta_intensidad_promedio_m_pct_pos": 80.0,
+    "sprints_promedio_pct_pos": 82.0,
+    "velocidad_punta_kmh_pct_pos": 71.0
+  },
+  {
     "team": "Portugal",
     "player_name": "VITINHA",
     "position": "MF",
@@ -13543,7 +13594,7 @@
     "alta_intensidad_promedio_m": 568.0,
     "sprints_promedio": 34.8,
     "velocidad_punta_kmh": 31.4,
-    "distancia_promedio_km_pct_pos": 72.0,
+    "distancia_promedio_km_pct_pos": 71.0,
     "alta_intensidad_promedio_m_pct_pos": 65.0,
     "sprints_promedio_pct_pos": 68.0,
     "velocidad_punta_kmh_pct_pos": 54.0
@@ -13594,10 +13645,10 @@
     "alta_intensidad_promedio_m": 614.0,
     "sprints_promedio": 37.3,
     "velocidad_punta_kmh": 31.9,
-    "distancia_promedio_km_pct_pos": 71.0,
+    "distancia_promedio_km_pct_pos": 70.0,
     "alta_intensidad_promedio_m_pct_pos": 69.0,
     "sprints_promedio_pct_pos": 74.0,
-    "velocidad_punta_kmh_pct_pos": 65.0
+    "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
     "team": "Uzbekistan",
@@ -13685,23 +13736,6 @@
     "velocidad_punta_kmh_pct_pos": 14.0
   },
   {
-    "team": "Belgium",
-    "player_name": "Kevin DE BRUYNE",
-    "position": "MF",
-    "jersey_number": 7,
-    "club": "Napoli",
-    "age_years": 35.0,
-    "partidos": 4,
-    "distancia_promedio_km": 9.06,
-    "alta_intensidad_promedio_m": 668.0,
-    "sprints_promedio": 38.8,
-    "velocidad_punta_kmh": 31.7,
-    "distancia_promedio_km_pct_pos": 69.0,
-    "alta_intensidad_promedio_m_pct_pos": 76.0,
-    "sprints_promedio_pct_pos": 77.0,
-    "velocidad_punta_kmh_pct_pos": 59.0
-  },
-  {
     "team": "Morocco",
     "player_name": "Ismael SAIBARI",
     "position": "MF",
@@ -13783,7 +13817,7 @@
     "velocidad_punta_kmh": 32.2,
     "distancia_promedio_km_pct_pos": 67.0,
     "alta_intensidad_promedio_m_pct_pos": 92.0,
-    "sprints_promedio_pct_pos": 82.0,
+    "sprints_promedio_pct_pos": 83.0,
     "velocidad_punta_kmh_pct_pos": 71.0
   },
   {
@@ -13818,7 +13852,7 @@
     "distancia_promedio_km_pct_pos": 67.0,
     "alta_intensidad_promedio_m_pct_pos": 83.0,
     "sprints_promedio_pct_pos": 86.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "Uruguay",
@@ -13850,7 +13884,7 @@
     "sprints_promedio": 36.3,
     "velocidad_punta_kmh": 32.3,
     "distancia_promedio_km_pct_pos": 66.0,
-    "alta_intensidad_promedio_m_pct_pos": 77.0,
+    "alta_intensidad_promedio_m_pct_pos": 76.0,
     "sprints_promedio_pct_pos": 72.0,
     "velocidad_punta_kmh_pct_pos": 73.0
   },
@@ -13867,9 +13901,9 @@
     "sprints_promedio": 37.0,
     "velocidad_punta_kmh": 33.5,
     "distancia_promedio_km_pct_pos": 66.0,
-    "alta_intensidad_promedio_m_pct_pos": 74.0,
+    "alta_intensidad_promedio_m_pct_pos": 73.0,
     "sprints_promedio_pct_pos": 73.0,
-    "velocidad_punta_kmh_pct_pos": 91.0
+    "velocidad_punta_kmh_pct_pos": 90.0
   },
   {
     "team": "Ghana",
@@ -13886,7 +13920,7 @@
     "distancia_promedio_km_pct_pos": 65.0,
     "alta_intensidad_promedio_m_pct_pos": 73.0,
     "sprints_promedio_pct_pos": 66.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "Saudi Arabia",
@@ -13903,7 +13937,7 @@
     "distancia_promedio_km_pct_pos": 65.0,
     "alta_intensidad_promedio_m_pct_pos": 56.0,
     "sprints_promedio_pct_pos": 56.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "Canada",
@@ -13953,7 +13987,7 @@
     "velocidad_punta_kmh": 31.6,
     "distancia_promedio_km_pct_pos": 64.0,
     "alta_intensidad_promedio_m_pct_pos": 68.0,
-    "sprints_promedio_pct_pos": 69.0,
+    "sprints_promedio_pct_pos": 70.0,
     "velocidad_punta_kmh_pct_pos": 58.0
   },
   {
@@ -14005,7 +14039,7 @@
     "distancia_promedio_km_pct_pos": 63.0,
     "alta_intensidad_promedio_m_pct_pos": 46.0,
     "sprints_promedio_pct_pos": 48.0,
-    "velocidad_punta_kmh_pct_pos": 65.0
+    "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
     "team": "Sweden",
@@ -14089,7 +14123,7 @@
     "velocidad_punta_kmh": 35.0,
     "distancia_promedio_km_pct_pos": 62.0,
     "alta_intensidad_promedio_m_pct_pos": 72.0,
-    "sprints_promedio_pct_pos": 69.0,
+    "sprints_promedio_pct_pos": 70.0,
     "velocidad_punta_kmh_pct_pos": 99.0
   },
   {
@@ -14208,7 +14242,7 @@
     "velocidad_punta_kmh": 30.2,
     "distancia_promedio_km_pct_pos": 60.0,
     "alta_intensidad_promedio_m_pct_pos": 30.0,
-    "sprints_promedio_pct_pos": 30.0,
+    "sprints_promedio_pct_pos": 29.0,
     "velocidad_punta_kmh_pct_pos": 33.0
   },
   {
@@ -14394,7 +14428,7 @@
     "sprints_promedio": 40.2,
     "velocidad_punta_kmh": 34.0,
     "distancia_promedio_km_pct_pos": 56.0,
-    "alta_intensidad_promedio_m_pct_pos": 78.0,
+    "alta_intensidad_promedio_m_pct_pos": 77.0,
     "sprints_promedio_pct_pos": 80.0,
     "velocidad_punta_kmh_pct_pos": 94.0
   },
@@ -14431,23 +14465,6 @@
     "alta_intensidad_promedio_m_pct_pos": 65.0,
     "sprints_promedio_pct_pos": 62.0,
     "velocidad_punta_kmh_pct_pos": 48.0
-  },
-  {
-    "team": "Spain",
-    "player_name": "Alex BAENA",
-    "position": "MF",
-    "jersey_number": 15,
-    "club": "Atlético Madrid",
-    "age_years": 24.9,
-    "partidos": 4,
-    "distancia_promedio_km": 7.81,
-    "alta_intensidad_promedio_m": 628.0,
-    "sprints_promedio": 35.2,
-    "velocidad_punta_kmh": 33.5,
-    "distancia_promedio_km_pct_pos": 56.0,
-    "alta_intensidad_promedio_m_pct_pos": 71.0,
-    "sprints_promedio_pct_pos": 69.0,
-    "velocidad_punta_kmh_pct_pos": 91.0
   },
   {
     "team": "Ghana",
@@ -14495,7 +14512,7 @@
     "alta_intensidad_promedio_m": 308.0,
     "sprints_promedio": 18.2,
     "velocidad_punta_kmh": 30.9,
-    "distancia_promedio_km_pct_pos": 54.0,
+    "distancia_promedio_km_pct_pos": 55.0,
     "alta_intensidad_promedio_m_pct_pos": 23.0,
     "sprints_promedio_pct_pos": 25.0,
     "velocidad_punta_kmh_pct_pos": 42.0
@@ -14513,7 +14530,7 @@
     "sprints_promedio": 9.0,
     "velocidad_punta_kmh": 26.8,
     "distancia_promedio_km_pct_pos": 54.0,
-    "alta_intensidad_promedio_m_pct_pos": 6.0,
+    "alta_intensidad_promedio_m_pct_pos": 5.0,
     "sprints_promedio_pct_pos": 6.0,
     "velocidad_punta_kmh_pct_pos": 4.0
   },
@@ -14547,9 +14564,26 @@
     "sprints_promedio": 43.0,
     "velocidad_punta_kmh": 27.1,
     "distancia_promedio_km_pct_pos": 54.0,
-    "alta_intensidad_promedio_m_pct_pos": 77.0,
+    "alta_intensidad_promedio_m_pct_pos": 76.0,
     "sprints_promedio_pct_pos": 85.0,
     "velocidad_punta_kmh_pct_pos": 5.0
+  },
+  {
+    "team": "Spain",
+    "player_name": "Alex BAENA",
+    "position": "MF",
+    "jersey_number": 15,
+    "club": "Atlético Madrid",
+    "age_years": 24.9,
+    "partidos": 5,
+    "distancia_promedio_km": 7.58,
+    "alta_intensidad_promedio_m": 618.0,
+    "sprints_promedio": 34.2,
+    "velocidad_punta_kmh": 34.0,
+    "distancia_promedio_km_pct_pos": 54.0,
+    "alta_intensidad_promedio_m_pct_pos": 71.0,
+    "sprints_promedio_pct_pos": 67.0,
+    "velocidad_punta_kmh_pct_pos": 94.0
   },
   {
     "team": "Austria",
@@ -14601,6 +14635,23 @@
     "alta_intensidad_promedio_m_pct_pos": 95.0,
     "sprints_promedio_pct_pos": 94.0,
     "velocidad_punta_kmh_pct_pos": 21.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Nicolas RASKIN",
+    "position": "MF",
+    "jersey_number": 23,
+    "club": "Rangers",
+    "age_years": 25.3,
+    "partidos": 6,
+    "distancia_promedio_km": 7.48,
+    "alta_intensidad_promedio_m": 392.0,
+    "sprints_promedio": 21.3,
+    "velocidad_punta_kmh": 31.9,
+    "distancia_promedio_km_pct_pos": 52.0,
+    "alta_intensidad_promedio_m_pct_pos": 35.0,
+    "sprints_promedio_pct_pos": 32.0,
+    "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -14699,9 +14750,9 @@
     "alta_intensidad_promedio_m": 672.0,
     "sprints_promedio": 42.5,
     "velocidad_punta_kmh": 29.4,
-    "distancia_promedio_km_pct_pos": 51.0,
-    "alta_intensidad_promedio_m_pct_pos": 77.0,
-    "sprints_promedio_pct_pos": 84.0,
+    "distancia_promedio_km_pct_pos": 50.0,
+    "alta_intensidad_promedio_m_pct_pos": 76.0,
+    "sprints_promedio_pct_pos": 85.0,
     "velocidad_punta_kmh_pct_pos": 19.0
   },
   {
@@ -14718,7 +14769,7 @@
     "velocidad_punta_kmh": 31.7,
     "distancia_promedio_km_pct_pos": 50.0,
     "alta_intensidad_promedio_m_pct_pos": 73.0,
-    "sprints_promedio_pct_pos": 73.0,
+    "sprints_promedio_pct_pos": 72.0,
     "velocidad_punta_kmh_pct_pos": 59.0
   },
   {
@@ -14756,6 +14807,23 @@
     "velocidad_punta_kmh_pct_pos": 81.0
   },
   {
+    "team": "Belgium",
+    "player_name": "Hans VANAKEN",
+    "position": "MF",
+    "jersey_number": 20,
+    "club": "Club Brugge",
+    "age_years": 33.8,
+    "partidos": 6,
+    "distancia_promedio_km": 7.1,
+    "alta_intensidad_promedio_m": 460.0,
+    "sprints_promedio": 26.5,
+    "velocidad_punta_kmh": 30.6,
+    "distancia_promedio_km_pct_pos": 49.0,
+    "alta_intensidad_promedio_m_pct_pos": 47.0,
+    "sprints_promedio_pct_pos": 45.0,
+    "velocidad_punta_kmh_pct_pos": 37.0
+  },
+  {
     "team": "Algeria",
     "player_name": "Houssem AOUAR",
     "position": "MF",
@@ -14767,7 +14835,7 @@
     "alta_intensidad_promedio_m": 424.0,
     "sprints_promedio": 27.7,
     "velocidad_punta_kmh": 31.5,
-    "distancia_promedio_km_pct_pos": 50.0,
+    "distancia_promedio_km_pct_pos": 49.0,
     "alta_intensidad_promedio_m_pct_pos": 41.0,
     "sprints_promedio_pct_pos": 49.0,
     "velocidad_punta_kmh_pct_pos": 57.0
@@ -14785,26 +14853,9 @@
     "sprints_promedio": 24.0,
     "velocidad_punta_kmh": 31.8,
     "distancia_promedio_km_pct_pos": 49.0,
-    "alta_intensidad_promedio_m_pct_pos": 34.0,
+    "alta_intensidad_promedio_m_pct_pos": 33.0,
     "sprints_promedio_pct_pos": 40.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Hans VANAKEN",
-    "position": "MF",
-    "jersey_number": 20,
-    "club": "Club Brugge",
-    "age_years": 33.8,
-    "partidos": 5,
-    "distancia_promedio_km": 7.01,
-    "alta_intensidad_promedio_m": 452.0,
-    "sprints_promedio": 26.0,
-    "velocidad_punta_kmh": 29.5,
-    "distancia_promedio_km_pct_pos": 49.0,
-    "alta_intensidad_promedio_m_pct_pos": 45.0,
-    "sprints_promedio_pct_pos": 44.0,
-    "velocidad_punta_kmh_pct_pos": 21.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "New Zealand",
@@ -14819,8 +14870,8 @@
     "sprints_promedio": 36.7,
     "velocidad_punta_kmh": 31.7,
     "distancia_promedio_km_pct_pos": 48.0,
-    "alta_intensidad_promedio_m_pct_pos": 80.0,
-    "sprints_promedio_pct_pos": 73.0,
+    "alta_intensidad_promedio_m_pct_pos": 81.0,
+    "sprints_promedio_pct_pos": 72.0,
     "velocidad_punta_kmh_pct_pos": 59.0
   },
   {
@@ -14854,7 +14905,7 @@
     "velocidad_punta_kmh": 30.2,
     "distancia_promedio_km_pct_pos": 48.0,
     "alta_intensidad_promedio_m_pct_pos": 21.0,
-    "sprints_promedio_pct_pos": 17.0,
+    "sprints_promedio_pct_pos": 18.0,
     "velocidad_punta_kmh_pct_pos": 33.0
   },
   {
@@ -14869,7 +14920,7 @@
     "alta_intensidad_promedio_m": 492.0,
     "sprints_promedio": 30.8,
     "velocidad_punta_kmh": 30.9,
-    "distancia_promedio_km_pct_pos": 48.0,
+    "distancia_promedio_km_pct_pos": 47.0,
     "alta_intensidad_promedio_m_pct_pos": 52.0,
     "sprints_promedio_pct_pos": 58.0,
     "velocidad_punta_kmh_pct_pos": 42.0
@@ -14920,7 +14971,7 @@
     "alta_intensidad_promedio_m": 467.0,
     "sprints_promedio": 28.7,
     "velocidad_punta_kmh": 31.3,
-    "distancia_promedio_km_pct_pos": 47.0,
+    "distancia_promedio_km_pct_pos": 46.0,
     "alta_intensidad_promedio_m_pct_pos": 48.0,
     "sprints_promedio_pct_pos": 53.0,
     "velocidad_punta_kmh_pct_pos": 51.0
@@ -14975,23 +15026,6 @@
     "alta_intensidad_promedio_m_pct_pos": 39.0,
     "sprints_promedio_pct_pos": 44.0,
     "velocidad_punta_kmh_pct_pos": 96.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Nicolas RASKIN",
-    "position": "MF",
-    "jersey_number": 23,
-    "club": "Rangers",
-    "age_years": 25.3,
-    "partidos": 5,
-    "distancia_promedio_km": 6.64,
-    "alta_intensidad_promedio_m": 370.0,
-    "sprints_promedio": 20.2,
-    "velocidad_punta_kmh": 31.9,
-    "distancia_promedio_km_pct_pos": 46.0,
-    "alta_intensidad_promedio_m_pct_pos": 32.0,
-    "sprints_promedio_pct_pos": 29.0,
-    "velocidad_punta_kmh_pct_pos": 65.0
   },
   {
     "team": "Türkiye",
@@ -15142,7 +15176,7 @@
     "sprints_promedio": 22.3,
     "velocidad_punta_kmh": 31.3,
     "distancia_promedio_km_pct_pos": 43.0,
-    "alta_intensidad_promedio_m_pct_pos": 35.0,
+    "alta_intensidad_promedio_m_pct_pos": 34.0,
     "sprints_promedio_pct_pos": 36.0,
     "velocidad_punta_kmh_pct_pos": 51.0
   },
@@ -15161,7 +15195,7 @@
     "distancia_promedio_km_pct_pos": 43.0,
     "alta_intensidad_promedio_m_pct_pos": 78.0,
     "sprints_promedio_pct_pos": 76.0,
-    "velocidad_punta_kmh_pct_pos": 93.0
+    "velocidad_punta_kmh_pct_pos": 92.0
   },
   {
     "team": "Morocco",
@@ -15262,7 +15296,7 @@
     "velocidad_punta_kmh": 28.7,
     "distancia_promedio_km_pct_pos": 41.0,
     "alta_intensidad_promedio_m_pct_pos": 23.0,
-    "sprints_promedio_pct_pos": 19.0,
+    "sprints_promedio_pct_pos": 20.0,
     "velocidad_punta_kmh_pct_pos": 14.0
   },
   {
@@ -15552,7 +15586,7 @@
     "distancia_promedio_km_pct_pos": 35.0,
     "alta_intensidad_promedio_m_pct_pos": 57.0,
     "sprints_promedio_pct_pos": 46.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "USA",
@@ -15584,7 +15618,7 @@
     "sprints_promedio": 27.5,
     "velocidad_punta_kmh": 32.1,
     "distancia_promedio_km_pct_pos": 35.0,
-    "alta_intensidad_promedio_m_pct_pos": 46.0,
+    "alta_intensidad_promedio_m_pct_pos": 45.0,
     "sprints_promedio_pct_pos": 48.0,
     "velocidad_punta_kmh_pct_pos": 69.0
   },
@@ -15637,7 +15671,7 @@
     "distancia_promedio_km_pct_pos": 34.0,
     "alta_intensidad_promedio_m_pct_pos": 14.0,
     "sprints_promedio_pct_pos": 20.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "Senegal",
@@ -15653,7 +15687,7 @@
     "velocidad_punta_kmh": 30.1,
     "distancia_promedio_km_pct_pos": 34.0,
     "alta_intensidad_promedio_m_pct_pos": 14.0,
-    "sprints_promedio_pct_pos": 17.0,
+    "sprints_promedio_pct_pos": 18.0,
     "velocidad_punta_kmh_pct_pos": 31.0
   },
   {
@@ -15754,7 +15788,7 @@
     "sprints_promedio": 19.5,
     "velocidad_punta_kmh": 29.5,
     "distancia_promedio_km_pct_pos": 32.0,
-    "alta_intensidad_promedio_m_pct_pos": 25.0,
+    "alta_intensidad_promedio_m_pct_pos": 26.0,
     "sprints_promedio_pct_pos": 28.0,
     "velocidad_punta_kmh_pct_pos": 21.0
   },
@@ -15975,7 +16009,7 @@
     "sprints_promedio": 18.0,
     "velocidad_punta_kmh": 30.2,
     "distancia_promedio_km_pct_pos": 28.0,
-    "alta_intensidad_promedio_m_pct_pos": 27.0,
+    "alta_intensidad_promedio_m_pct_pos": 28.0,
     "sprints_promedio_pct_pos": 24.0,
     "velocidad_punta_kmh_pct_pos": 33.0
   },
@@ -16009,7 +16043,7 @@
     "sprints_promedio": 21.0,
     "velocidad_punta_kmh": 34.2,
     "distancia_promedio_km_pct_pos": 27.0,
-    "alta_intensidad_promedio_m_pct_pos": 29.0,
+    "alta_intensidad_promedio_m_pct_pos": 30.0,
     "sprints_promedio_pct_pos": 31.0,
     "velocidad_punta_kmh_pct_pos": 95.0
   },
@@ -16028,7 +16062,7 @@
     "distancia_promedio_km_pct_pos": 27.0,
     "alta_intensidad_promedio_m_pct_pos": 45.0,
     "sprints_promedio_pct_pos": 34.0,
-    "velocidad_punta_kmh_pct_pos": 91.0
+    "velocidad_punta_kmh_pct_pos": 90.0
   },
   {
     "team": "New Zealand",
@@ -16045,7 +16079,7 @@
     "distancia_promedio_km_pct_pos": 27.0,
     "alta_intensidad_promedio_m_pct_pos": 41.0,
     "sprints_promedio_pct_pos": 44.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 36.0
   },
   {
     "team": "Sweden",
@@ -16116,6 +16150,23 @@
     "velocidad_punta_kmh_pct_pos": 29.0
   },
   {
+    "team": "Spain",
+    "player_name": "Fabian RUIZ",
+    "position": "MF",
+    "jersey_number": 8,
+    "club": "Paris Saint-Germain",
+    "age_years": 30.2,
+    "partidos": 6,
+    "distancia_promedio_km": 4.23,
+    "alta_intensidad_promedio_m": 173.0,
+    "sprints_promedio": 12.2,
+    "velocidad_punta_kmh": 30.1,
+    "distancia_promedio_km_pct_pos": 25.0,
+    "alta_intensidad_promedio_m_pct_pos": 7.0,
+    "sprints_promedio_pct_pos": 9.0,
+    "velocidad_punta_kmh_pct_pos": 31.0
+  },
+  {
     "team": "Uzbekistan",
     "player_name": "Oston URUNOV",
     "position": "MF",
@@ -16144,7 +16195,7 @@
     "alta_intensidad_promedio_m": 480.0,
     "sprints_promedio": 24.0,
     "velocidad_punta_kmh": 30.0,
-    "distancia_promedio_km_pct_pos": 25.0,
+    "distancia_promedio_km_pct_pos": 24.0,
     "alta_intensidad_promedio_m_pct_pos": 50.0,
     "sprints_promedio_pct_pos": 40.0,
     "velocidad_punta_kmh_pct_pos": 29.0
@@ -16179,26 +16230,9 @@
     "sprints_promedio": 16.3,
     "velocidad_punta_kmh": 33.7,
     "distancia_promedio_km_pct_pos": 24.0,
-    "alta_intensidad_promedio_m_pct_pos": 28.0,
-    "sprints_promedio_pct_pos": 19.0,
-    "velocidad_punta_kmh_pct_pos": 92.0
-  },
-  {
-    "team": "Spain",
-    "player_name": "Mikel MERINO",
-    "position": "MF",
-    "jersey_number": 6,
-    "club": "Arsenal",
-    "age_years": 30.0,
-    "partidos": 5,
-    "distancia_promedio_km": 4.1,
-    "alta_intensidad_promedio_m": 268.0,
-    "sprints_promedio": 16.8,
-    "velocidad_punta_kmh": 30.5,
-    "distancia_promedio_km_pct_pos": 24.0,
-    "alta_intensidad_promedio_m_pct_pos": 17.0,
+    "alta_intensidad_promedio_m_pct_pos": 29.0,
     "sprints_promedio_pct_pos": 20.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 92.0
   },
   {
     "team": "Croatia",
@@ -16213,9 +16247,9 @@
     "sprints_promedio": 19.5,
     "velocidad_punta_kmh": 31.9,
     "distancia_promedio_km_pct_pos": 24.0,
-    "alta_intensidad_promedio_m_pct_pos": 33.0,
+    "alta_intensidad_promedio_m_pct_pos": 32.0,
     "sprints_promedio_pct_pos": 28.0,
-    "velocidad_punta_kmh_pct_pos": 65.0
+    "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
     "team": "New Zealand",
@@ -16298,9 +16332,9 @@
     "sprints_promedio": 22.2,
     "velocidad_punta_kmh": 31.8,
     "distancia_promedio_km_pct_pos": 22.0,
-    "alta_intensidad_promedio_m_pct_pos": 29.0,
+    "alta_intensidad_promedio_m_pct_pos": 30.0,
     "sprints_promedio_pct_pos": 35.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
   },
   {
     "team": "Colombia",
@@ -16316,7 +16350,7 @@
     "velocidad_punta_kmh": 31.0,
     "distancia_promedio_km_pct_pos": 22.0,
     "alta_intensidad_promedio_m_pct_pos": 10.0,
-    "sprints_promedio_pct_pos": 9.0,
+    "sprints_promedio_pct_pos": 8.0,
     "velocidad_punta_kmh_pct_pos": 44.0
   },
   {
@@ -16351,7 +16385,7 @@
     "distancia_promedio_km_pct_pos": 21.0,
     "alta_intensidad_promedio_m_pct_pos": 22.0,
     "sprints_promedio_pct_pos": 24.0,
-    "velocidad_punta_kmh_pct_pos": 37.0
+    "velocidad_punta_kmh_pct_pos": 36.0
   },
   {
     "team": "Korea Republic",
@@ -16383,9 +16417,9 @@
     "sprints_promedio": 14.5,
     "velocidad_punta_kmh": 31.9,
     "distancia_promedio_km_pct_pos": 20.0,
-    "alta_intensidad_promedio_m_pct_pos": 15.0,
+    "alta_intensidad_promedio_m_pct_pos": 16.0,
     "sprints_promedio_pct_pos": 14.0,
-    "velocidad_punta_kmh_pct_pos": 65.0
+    "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
     "team": "Austria",
@@ -16456,6 +16490,23 @@
     "velocidad_punta_kmh_pct_pos": 84.0
   },
   {
+    "team": "Spain",
+    "player_name": "Mikel MERINO",
+    "position": "MF",
+    "jersey_number": 6,
+    "club": "Arsenal",
+    "age_years": 30.0,
+    "partidos": 6,
+    "distancia_promedio_km": 3.7,
+    "alta_intensidad_promedio_m": 251.0,
+    "sprints_promedio": 15.7,
+    "velocidad_punta_kmh": 30.5,
+    "distancia_promedio_km_pct_pos": 19.0,
+    "alta_intensidad_promedio_m_pct_pos": 15.0,
+    "sprints_promedio_pct_pos": 17.0,
+    "velocidad_punta_kmh_pct_pos": 36.0
+  },
+  {
     "team": "Iraq",
     "player_name": "KEVIN YAKOB",
     "position": "MF",
@@ -16471,40 +16522,6 @@
     "alta_intensidad_promedio_m_pct_pos": 11.0,
     "sprints_promedio_pct_pos": 15.0,
     "velocidad_punta_kmh_pct_pos": 8.0
-  },
-  {
-    "team": "Spain",
-    "player_name": "Fabian RUIZ",
-    "position": "MF",
-    "jersey_number": 8,
-    "club": "Paris Saint-Germain",
-    "age_years": 30.2,
-    "partidos": 5,
-    "distancia_promedio_km": 3.59,
-    "alta_intensidad_promedio_m": 140.0,
-    "sprints_promedio": 9.8,
-    "velocidad_punta_kmh": 30.1,
-    "distancia_promedio_km_pct_pos": 19.0,
-    "alta_intensidad_promedio_m_pct_pos": 6.0,
-    "sprints_promedio_pct_pos": 7.0,
-    "velocidad_punta_kmh_pct_pos": 31.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Alexis SAELEMAEKERS",
-    "position": "MF",
-    "jersey_number": 22,
-    "club": "Milan",
-    "age_years": 27.0,
-    "partidos": 3,
-    "distancia_promedio_km": 3.57,
-    "alta_intensidad_promedio_m": 372.0,
-    "sprints_promedio": 17.0,
-    "velocidad_punta_kmh": 32.7,
-    "distancia_promedio_km_pct_pos": 18.0,
-    "alta_intensidad_promedio_m_pct_pos": 32.0,
-    "sprints_promedio_pct_pos": 21.0,
-    "velocidad_punta_kmh_pct_pos": 81.0
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -16552,9 +16569,9 @@
     "alta_intensidad_promedio_m": 232.0,
     "sprints_promedio": 16.0,
     "velocidad_punta_kmh": 30.8,
-    "distancia_promedio_km_pct_pos": 17.0,
+    "distancia_promedio_km_pct_pos": 18.0,
     "alta_intensidad_promedio_m_pct_pos": 13.0,
-    "sprints_promedio_pct_pos": 18.0,
+    "sprints_promedio_pct_pos": 19.0,
     "velocidad_punta_kmh_pct_pos": 41.0
   },
   {
@@ -16620,7 +16637,7 @@
     "alta_intensidad_promedio_m": 228.0,
     "sprints_promedio": 15.0,
     "velocidad_punta_kmh": 29.5,
-    "distancia_promedio_km_pct_pos": 16.0,
+    "distancia_promedio_km_pct_pos": 17.0,
     "alta_intensidad_promedio_m_pct_pos": 12.0,
     "sprints_promedio_pct_pos": 15.0,
     "velocidad_punta_kmh_pct_pos": 21.0
@@ -16638,7 +16655,7 @@
     "sprints_promedio": 13.5,
     "velocidad_punta_kmh": 32.0,
     "distancia_promedio_km_pct_pos": 16.0,
-    "alta_intensidad_promedio_m_pct_pos": 16.0,
+    "alta_intensidad_promedio_m_pct_pos": 17.0,
     "sprints_promedio_pct_pos": 11.0,
     "velocidad_punta_kmh_pct_pos": 67.0
   },
@@ -16671,7 +16688,7 @@
     "alta_intensidad_promedio_m": 271.0,
     "sprints_promedio": 15.0,
     "velocidad_punta_kmh": 30.7,
-    "distancia_promedio_km_pct_pos": 15.0,
+    "distancia_promedio_km_pct_pos": 16.0,
     "alta_intensidad_promedio_m_pct_pos": 17.0,
     "sprints_promedio_pct_pos": 15.0,
     "velocidad_punta_kmh_pct_pos": 39.0
@@ -16690,7 +16707,7 @@
     "velocidad_punta_kmh": 34.2,
     "distancia_promedio_km_pct_pos": 15.0,
     "alta_intensidad_promedio_m_pct_pos": 38.0,
-    "sprints_promedio_pct_pos": 32.0,
+    "sprints_promedio_pct_pos": 31.0,
     "velocidad_punta_kmh_pct_pos": 95.0
   },
   {
@@ -16722,10 +16739,27 @@
     "alta_intensidad_promedio_m": 283.0,
     "sprints_promedio": 18.5,
     "velocidad_punta_kmh": 31.8,
-    "distancia_promedio_km_pct_pos": 14.0,
+    "distancia_promedio_km_pct_pos": 15.0,
     "alta_intensidad_promedio_m_pct_pos": 19.0,
     "sprints_promedio_pct_pos": 26.0,
-    "velocidad_punta_kmh_pct_pos": 62.0
+    "velocidad_punta_kmh_pct_pos": 61.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Alexis SAELEMAEKERS",
+    "position": "MF",
+    "jersey_number": 22,
+    "club": "Milan",
+    "age_years": 27.0,
+    "partidos": 4,
+    "distancia_promedio_km": 3.06,
+    "alta_intensidad_promedio_m": 330.0,
+    "sprints_promedio": 16.0,
+    "velocidad_punta_kmh": 32.7,
+    "distancia_promedio_km_pct_pos": 14.0,
+    "alta_intensidad_promedio_m_pct_pos": 25.0,
+    "sprints_promedio_pct_pos": 19.0,
+    "velocidad_punta_kmh_pct_pos": 81.0
   },
   {
     "team": "France",
@@ -16809,7 +16843,7 @@
     "velocidad_punta_kmh": 27.1,
     "distancia_promedio_km_pct_pos": 13.0,
     "alta_intensidad_promedio_m_pct_pos": 22.0,
-    "sprints_promedio_pct_pos": 18.0,
+    "sprints_promedio_pct_pos": 19.0,
     "velocidad_punta_kmh_pct_pos": 5.0
   },
   {
@@ -16826,7 +16860,7 @@
     "velocidad_punta_kmh": 31.4,
     "distancia_promedio_km_pct_pos": 13.0,
     "alta_intensidad_promedio_m_pct_pos": 20.0,
-    "sprints_promedio_pct_pos": 18.0,
+    "sprints_promedio_pct_pos": 19.0,
     "velocidad_punta_kmh_pct_pos": 54.0
   },
   {
@@ -16929,7 +16963,7 @@
     "distancia_promedio_km_pct_pos": 11.0,
     "alta_intensidad_promedio_m_pct_pos": 11.0,
     "sprints_promedio_pct_pos": 9.0,
-    "velocidad_punta_kmh_pct_pos": 65.0
+    "velocidad_punta_kmh_pct_pos": 64.0
   },
   {
     "team": "Germany",
@@ -16981,6 +17015,23 @@
     "alta_intensidad_promedio_m_pct_pos": 22.0,
     "sprints_promedio_pct_pos": 15.0,
     "velocidad_punta_kmh_pct_pos": 23.0
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Axel WITSEL",
+    "position": "MF",
+    "jersey_number": 6,
+    "club": "Girona",
+    "age_years": 37.4,
+    "partidos": 2,
+    "distancia_promedio_km": 2.56,
+    "alta_intensidad_promedio_m": 147.0,
+    "sprints_promedio": 10.5,
+    "velocidad_punta_kmh": 26.4,
+    "distancia_promedio_km_pct_pos": 9.0,
+    "alta_intensidad_promedio_m_pct_pos": 6.0,
+    "sprints_promedio_pct_pos": 7.0,
+    "velocidad_punta_kmh_pct_pos": 2.0
   },
   {
     "team": "France",
@@ -17047,7 +17098,7 @@
     "velocidad_punta_kmh": 26.1,
     "distancia_promedio_km_pct_pos": 8.0,
     "alta_intensidad_promedio_m_pct_pos": 9.0,
-    "sprints_promedio_pct_pos": 18.0,
+    "sprints_promedio_pct_pos": 19.0,
     "velocidad_punta_kmh_pct_pos": 2.0
   },
   {
@@ -17063,7 +17114,7 @@
     "sprints_promedio": 7.0,
     "velocidad_punta_kmh": 27.7,
     "distancia_promedio_km_pct_pos": 8.0,
-    "alta_intensidad_promedio_m_pct_pos": 4.0,
+    "alta_intensidad_promedio_m_pct_pos": 3.0,
     "sprints_promedio_pct_pos": 4.0,
     "velocidad_punta_kmh_pct_pos": 8.0
   },
@@ -17096,7 +17147,7 @@
     "alta_intensidad_promedio_m": 349.0,
     "sprints_promedio": 16.5,
     "velocidad_punta_kmh": 32.8,
-    "distancia_promedio_km_pct_pos": 8.0,
+    "distancia_promedio_km_pct_pos": 7.0,
     "alta_intensidad_promedio_m_pct_pos": 28.0,
     "sprints_promedio_pct_pos": 20.0,
     "velocidad_punta_kmh_pct_pos": 83.0
@@ -17147,7 +17198,7 @@
     "alta_intensidad_promedio_m": 172.0,
     "sprints_promedio": 10.0,
     "velocidad_punta_kmh": 27.1,
-    "distancia_promedio_km_pct_pos": 7.0,
+    "distancia_promedio_km_pct_pos": 6.0,
     "alta_intensidad_promedio_m_pct_pos": 7.0,
     "sprints_promedio_pct_pos": 7.0,
     "velocidad_punta_kmh_pct_pos": 5.0
@@ -17182,7 +17233,7 @@
     "sprints_promedio": 10.0,
     "velocidad_punta_kmh": 27.4,
     "distancia_promedio_km_pct_pos": 6.0,
-    "alta_intensidad_promedio_m_pct_pos": 6.0,
+    "alta_intensidad_promedio_m_pct_pos": 5.0,
     "sprints_promedio_pct_pos": 7.0,
     "velocidad_punta_kmh_pct_pos": 7.0
   },
@@ -17199,7 +17250,7 @@
     "sprints_promedio": 10.0,
     "velocidad_punta_kmh": 30.1,
     "distancia_promedio_km_pct_pos": 6.0,
-    "alta_intensidad_promedio_m_pct_pos": 7.0,
+    "alta_intensidad_promedio_m_pct_pos": 6.0,
     "sprints_promedio_pct_pos": 7.0,
     "velocidad_punta_kmh_pct_pos": 31.0
   },
@@ -17215,7 +17266,7 @@
     "alta_intensidad_promedio_m": 200.0,
     "sprints_promedio": 14.0,
     "velocidad_punta_kmh": 29.2,
-    "distancia_promedio_km_pct_pos": 6.0,
+    "distancia_promedio_km_pct_pos": 5.0,
     "alta_intensidad_promedio_m_pct_pos": 9.0,
     "sprints_promedio_pct_pos": 12.0,
     "velocidad_punta_kmh_pct_pos": 18.0
@@ -17235,7 +17286,7 @@
     "distancia_promedio_km_pct_pos": 5.0,
     "alta_intensidad_promedio_m_pct_pos": 3.0,
     "sprints_promedio_pct_pos": 4.0,
-    "velocidad_punta_kmh_pct_pos": 2.0
+    "velocidad_punta_kmh_pct_pos": 1.0
   },
   {
     "team": "Colombia",
@@ -17249,7 +17300,7 @@
     "alta_intensidad_promedio_m": 131.0,
     "sprints_promedio": 7.5,
     "velocidad_punta_kmh": 27.2,
-    "distancia_promedio_km_pct_pos": 5.0,
+    "distancia_promedio_km_pct_pos": 4.0,
     "alta_intensidad_promedio_m_pct_pos": 5.0,
     "sprints_promedio_pct_pos": 5.0,
     "velocidad_punta_kmh_pct_pos": 6.0
@@ -17266,7 +17317,7 @@
     "alta_intensidad_promedio_m": 136.0,
     "sprints_promedio": 7.5,
     "velocidad_punta_kmh": 26.4,
-    "distancia_promedio_km_pct_pos": 5.0,
+    "distancia_promedio_km_pct_pos": 4.0,
     "alta_intensidad_promedio_m_pct_pos": 5.0,
     "sprints_promedio_pct_pos": 5.0,
     "velocidad_punta_kmh_pct_pos": 2.0
@@ -17301,7 +17352,7 @@
     "sprints_promedio": 6.0,
     "velocidad_punta_kmh": 24.3,
     "distancia_promedio_km_pct_pos": 4.0,
-    "alta_intensidad_promedio_m_pct_pos": 3.0,
+    "alta_intensidad_promedio_m_pct_pos": 2.0,
     "sprints_promedio_pct_pos": 3.0,
     "velocidad_punta_kmh_pct_pos": 1.0
   },
@@ -17317,7 +17368,7 @@
     "alta_intensidad_promedio_m": 84.0,
     "sprints_promedio": 5.0,
     "velocidad_punta_kmh": 26.6,
-    "distancia_promedio_km_pct_pos": 4.0,
+    "distancia_promedio_km_pct_pos": 3.0,
     "alta_intensidad_promedio_m_pct_pos": 2.0,
     "sprints_promedio_pct_pos": 2.0,
     "velocidad_punta_kmh_pct_pos": 3.0
@@ -17334,7 +17385,7 @@
     "alta_intensidad_promedio_m": 59.0,
     "sprints_promedio": 4.0,
     "velocidad_punta_kmh": 24.0,
-    "distancia_promedio_km_pct_pos": 4.0,
+    "distancia_promedio_km_pct_pos": 3.0,
     "alta_intensidad_promedio_m_pct_pos": 1.0,
     "sprints_promedio_pct_pos": 1.0,
     "velocidad_punta_kmh_pct_pos": 1.0
@@ -17368,7 +17419,7 @@
     "alta_intensidad_promedio_m": 186.0,
     "sprints_promedio": 8.0,
     "velocidad_punta_kmh": 29.5,
-    "distancia_promedio_km_pct_pos": 3.0,
+    "distancia_promedio_km_pct_pos": 2.0,
     "alta_intensidad_promedio_m_pct_pos": 8.0,
     "sprints_promedio_pct_pos": 6.0,
     "velocidad_punta_kmh_pct_pos": 21.0
@@ -17386,7 +17437,7 @@
     "sprints_promedio": 4.0,
     "velocidad_punta_kmh": 27.2,
     "distancia_promedio_km_pct_pos": 2.0,
-    "alta_intensidad_promedio_m_pct_pos": 2.0,
+    "alta_intensidad_promedio_m_pct_pos": 1.0,
     "sprints_promedio_pct_pos": 1.0,
     "velocidad_punta_kmh_pct_pos": 6.0
   },
@@ -17405,7 +17456,7 @@
     "distancia_promedio_km_pct_pos": 2.0,
     "alta_intensidad_promedio_m_pct_pos": 7.0,
     "sprints_promedio_pct_pos": 4.0,
-    "velocidad_punta_kmh_pct_pos": 38.0
+    "velocidad_punta_kmh_pct_pos": 37.0
   },
   {
     "team": "Canada",
@@ -17436,27 +17487,10 @@
     "alta_intensidad_promedio_m": 61.0,
     "sprints_promedio": 3.0,
     "velocidad_punta_kmh": 28.3,
-    "distancia_promedio_km_pct_pos": 2.0,
+    "distancia_promedio_km_pct_pos": 1.0,
     "alta_intensidad_promedio_m_pct_pos": 1.0,
     "sprints_promedio_pct_pos": 1.0,
     "velocidad_punta_kmh_pct_pos": 11.0
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Axel WITSEL",
-    "position": "MF",
-    "jersey_number": 6,
-    "club": "Girona",
-    "age_years": 37.4,
-    "partidos": 1,
-    "distancia_promedio_km": 0.81,
-    "alta_intensidad_promedio_m": 72.0,
-    "sprints_promedio": 6.0,
-    "velocidad_punta_kmh": 24.6,
-    "distancia_promedio_km_pct_pos": 1.0,
-    "alta_intensidad_promedio_m_pct_pos": 1.0,
-    "sprints_promedio_pct_pos": 3.0,
-    "velocidad_punta_kmh_pct_pos": 1.0
   },
   {
     "team": "Uzbekistan",
@@ -17471,7 +17505,7 @@
     "sprints_promedio": 6.0,
     "velocidad_punta_kmh": 26.8,
     "distancia_promedio_km_pct_pos": 1.0,
-    "alta_intensidad_promedio_m_pct_pos": 5.0,
+    "alta_intensidad_promedio_m_pct_pos": 4.0,
     "sprints_promedio_pct_pos": 3.0,
     "velocidad_punta_kmh_pct_pos": 4.0
   },

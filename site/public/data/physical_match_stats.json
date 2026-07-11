@@ -3296,5 +3296,39 @@
     "home_team": "France",
     "away_team": "Morocco",
     "match_date": "2026-07-09"
+  },
+  {
+    "match_id": 20260098,
+    "team": "Spain",
+    "total_distance_km": 114.59,
+    "high_intensity_distance_m": 7227.3,
+    "sprint_distance_m": 1884.8,
+    "sprint_count": 418.0,
+    "top_speed_kmh": 34.0,
+    "source": "fifa_training_centre_pmsr_pdf",
+    "source_url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M98-ESP-V-BEL-ALT.pdf",
+    "retrieved_at": "2026-07-11T18:45:26.090194+00:00",
+    "season": "2026",
+    "stage": "Quarter-final",
+    "home_team": "Spain",
+    "away_team": "Belgium",
+    "match_date": "2026-07-10"
+  },
+  {
+    "match_id": 20260098,
+    "team": "Belgium",
+    "total_distance_km": 116.16,
+    "high_intensity_distance_m": 7114.1,
+    "sprint_distance_m": 1555.5,
+    "sprint_count": 443.0,
+    "top_speed_kmh": 32.7,
+    "source": "fifa_training_centre_pmsr_pdf",
+    "source_url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M98-ESP-V-BEL-ALT.pdf",
+    "retrieved_at": "2026-07-11T18:45:26.090194+00:00",
+    "season": "2026",
+    "stage": "Quarter-final",
+    "home_team": "Spain",
+    "away_team": "Belgium",
+    "match_date": "2026-07-10"
   }
 ]
