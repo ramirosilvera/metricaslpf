@@ -13,6 +13,8 @@ import {
   type GoalsVsPhysicalRow,
 } from "../lib/data";
 
+const base = import.meta.env.BASE_URL;
+
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
   return Array.isArray(raw) ? raw : [];
@@ -117,7 +119,10 @@ for (const row of playerMetrics) {
   <section class="section">
     <div class="section-head">
       <h2>Ficha de jugador</h2>
-      <p>Percentil en cada métrica disponible (física y táctica) dentro del propio dataset.</p>
+      <p>
+        Índice de rendimiento en cada factor físico y táctico (remates incluido) y un <strong>GLOBAL ponderado por su
+        posición</strong>, estilo EA SPORTS FC. <em>¿Querés enfrentar dos jugadores? Está en <a href={`${base}comparar/`}>Comparar</a>.</em>
+      </p>
     </div>
     <div class="card">
       <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} />
