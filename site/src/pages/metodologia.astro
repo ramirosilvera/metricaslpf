@@ -135,11 +135,21 @@ const base = import.meta.env.BASE_URL;
   </section>
 
   <section class="section">
-    <h2>Arquitectura (por qué no hay base de datos)</h2>
+    <h2>Arquitectura (sitio estático + Supabase solo para la IA)</h2>
     <p>
-      Todo el proyecto es JAMstack: GitHub Pages + Astro (sitio estático) + Parquet versionado en git como fuente de
-      verdad + JSON pre-agregados para el frontend + GitHub Actions como motor ETL. Para consultas libres, el <a href={`${import.meta.env.BASE_URL}explorador/`}>explorador SQL</a> corre
-      DuckDB-WASM en el navegador directamente sobre los Parquet publicados — sin backend ni servidor de base de datos.
+      <strong>Todo lo que ves en el sitio es estático</strong>, a propósito: JAMstack sobre GitHub Pages + Astro, con
+      Parquet versionado en git como fuente de verdad, JSON pre-agregados para el frontend y GitHub Actions como motor
+      ETL. Los gráficos, rankings, comparaciones y fichas no consultan ningún servidor: leen esos archivos publicados.
+      El <a href={`${import.meta.env.BASE_URL}explorador/`}>Laboratorio SQL</a> corre DuckDB-WASM en tu navegador
+      directamente sobre los Parquet — motor SQL completo, sin backend.
+    </p>
+    <p>
+      La <strong>única pieza con base de datos es el asistente IA</strong>. Ahí sí hay un <a href="https://supabase.com/" target="_blank" rel="noreferrer">Supabase</a>
+      (Postgres) como base canónica: el mismo ETL que arma los Parquet <em>espeja</em> el warehouse a Supabase, y el
+      chat (un Cloudflare Worker con function-calling de Gemini) consulta ese Postgres a través de funciones RPC con RLS,
+      nunca con SQL libre. El <strong>schema está versionado como código</strong> (migraciones SQL en el repo, en
+      <code>supabase/migrations/</code>), así la base se reconstruye desde cero de forma reproducible. Resumen: el sitio
+      no necesita base para funcionar; Supabase existe para darle a la IA consultas en vivo y acotadas.
     </p>
   </section>
 </Base>
