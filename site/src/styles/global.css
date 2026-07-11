@@ -933,6 +933,137 @@ p {
   padding: 0.42rem 0.85rem;
 }
 
+/* ---------- Predicción de partido (MatchPredictor) ---------- */
+.predict-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.predict-score {
+  font-size: 1.9rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.predict-sub {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0.15rem 0 0.4rem;
+}
+.predict-scores {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.6rem 0 0.4rem;
+}
+.predict-scores-label {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+.predict-score-chip {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  background: var(--surface-2);
+  border: 1px solid var(--gridline);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.9rem;
+}
+.predict-score-p {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.predict-breakdown {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--gridline);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+.predict-fuerza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.55rem;
+  border-bottom: 1px solid var(--gridline);
+}
+.predict-fuerza-num {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.predict-fuerza-mid {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+}
+.predict-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.32rem 0;
+}
+.predict-row-label {
+  flex: 1 1 auto;
+  text-align: center;
+  min-width: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.predict-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 0 0 auto;
+}
+.predict-cell-r {
+  flex-direction: row;
+}
+.predict-minibar {
+  display: inline-block;
+  width: 54px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--gridline);
+  overflow: hidden;
+}
+.predict-cell .predict-minibar { direction: rtl; }
+.predict-cell-r .predict-minibar { direction: ltr; }
+.predict-fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+}
+.predict-val {
+  width: 1.7rem;
+  text-align: center;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+.predict-val.is-best { font-weight: 800; }
+@media (max-width: 420px) {
+  .predict-minibar { width: 34px; }
+  .predict-fuerza-num { font-size: 1.7rem; }
+}
+
 /* Panel "carta EA SPORTS FC": GLOBAL (promedio) + índice por factor. Acompaña
    al radar y se replica en el exportable. */
 .ratings-panel {

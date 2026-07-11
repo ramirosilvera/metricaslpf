@@ -32,6 +32,7 @@ function isActive(href: string) {
 
 const homeItem = { href: `${base}`, label: "Inicio" };
 const compararItem = { href: `${base}comparar/`, label: "Comparar" };
+const prediccionItem = { href: `${base}prediccion/`, label: "Predicción" };
 const partidosItem = { href: `${base}partidos/`, label: "Partidos" };
 const analizarItem = { href: `${base}analisis/`, label: "Analizar" };
 
@@ -117,6 +118,7 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
         <nav class="nav" id="nav-principal" aria-label="Navegación principal">
           <a href={homeItem.href} aria-current={isActive(homeItem.href) ? "page" : undefined}>{homeItem.label}</a>
           <a href={compararItem.href} aria-current={isActive(compararItem.href) ? "page" : undefined}>{compararItem.label}</a>
+          <a href={prediccionItem.href} aria-current={isActive(prediccionItem.href) ? "page" : undefined}>{prediccionItem.label}</a>
 
           <details class="nav-group">
             <summary class={rankingsActive ? "is-active" : undefined} aria-current={rankingsActive ? "page" : undefined}>Rankings</summary>
