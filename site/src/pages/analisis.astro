@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import TeamProfileRadar from "../islands/TeamProfileRadar";
-import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
+import PlayerScoutCard, { type SquadInfo, type PlayerMatchLite } from "../islands/PlayerScoutCard";
 import SquadDepthChart from "../islands/SquadDepthChart";
 import GoalsVsPhysical from "../islands/GoalsVsPhysical";
 import {
@@ -26,6 +26,41 @@ const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.js
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
 const goalsVsPhysical = loadArray<GoalsVsPhysicalRow>("goals_vs_physical.json");
+
+// De qué partidos salen las métricas de cada jugador: la duda "veo datos pero
+// no sé a qué partido corresponde". Se cruzan las stats por-partido (físicas y
+// tácticas) con la lista de partidos, por match_id.
+type MatchRow = { match_id: number; home_team: string; away_team: string; home_score: number; away_score: number; match_date: string; stage?: string };
+type PlayerMatchStat = { match_id: number; team: string; player_name: string };
+const physPM = loadArray<PlayerMatchStat>("physical_player_match_stats.json");
+const tacPM = loadArray<PlayerMatchStat>("tactical_player_match_stats.json");
+const matchById = new Map(loadArray<MatchRow>("matches.json").map((m) => [m.match_id, m]));
+const fmtDay = (iso?: string) => {
+  if (!iso) return "";
+  const d = new Date(iso + "T00:00:00");
+  return isNaN(d.getTime()) ? iso : d.toLocaleDateString("es-AR", { day: "numeric", month: "short" });
+};
+const playerMatches: Record<string, PlayerMatchLite[]> = {};
+{
+  const byPlayer: Record<string, Map<number, PlayerMatchLite>> = {};
+  for (const r of [...physPM, ...tacPM]) {
+    const m = matchById.get(r.match_id);
+    if (!m) continue;
+    const key = `${r.team}|${r.player_name}`;
+    const map = (byPlayer[key] ??= new Map());
+    if (!map.has(r.match_id)) {
+      map.set(r.match_id, {
+        label: `${m.home_team} ${m.home_score}-${m.away_score} ${m.away_team}`,
+        date: fmtDay(m.match_date),
+        stage: m.stage ?? "",
+      });
+    }
+  }
+  for (const [key, map] of Object.entries(byPlayer)) {
+    // orden cronológico por match_id (creciente = más viejo primero)
+    playerMatches[key] = [...map.entries()].sort((a, b) => a[0] - b[0]).map(([, v]) => v);
+  }
+}
 
 // Las métricas derivadas usan el nombre estilo FIFA ("Amine GOUIRI") y el
 // plantel el nombre editorial ("Amine Gouiri"), así que el cruce se hace en
@@ -132,7 +167,7 @@ for (const row of playerMetrics) {
       </p>
     </div>
     <div class="card">
-      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} />
+      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} matches={playerMatches} />
     </div>
   </section>
 </Base>

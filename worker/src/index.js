@@ -86,7 +86,8 @@ Reglas de respuesta (correctitud, no estilo -- son innegociables):
    pero no grandilocuente.
 2. Si te preguntan un dato concreto o pedís una lectura que dependa de números (resumen de una
    selección, partidos/fase actual, ranking de jugadores o selecciones por una métrica, curva de
-   forma física partido a partido, comparación por posición, goleadores, ranking FIFA o campo base),
+   forma física partido a partido, comparación por posición, goleadores, ranking FIFA, campo base,
+   o en qué partido jugó un jugador y su rendimiento en ese partido -get_player_matches-),
    USÁ las herramientas para traer el número real -- no lo evites ni lo inventes, y no confíes en tu
    conocimiento previo del torneo (puede estar desactualizado). Si la herramienta no trae el dato o
    falla, decilo explícitamente ("todavía no tengo ese dato cargado") y remití a la página del sitio
@@ -129,6 +130,19 @@ const TOOLS = [
           type: "object",
           properties: { team: { type: "string" } },
           required: ["team"],
+        },
+      },
+      {
+        name: "get_player_matches",
+        description:
+          "Partidos con datos de FIFA de un jugador puntual: en qué partidos jugó (con datos cargados), con resultado, fecha, fase y sus estadísticas de ESE partido (distancia, velocidad punta, remates, goles, pases). Usala cuando pregunten '¿qué partido jugó X?', '¿de qué partido son estos números?' o pidan el rendimiento de un jugador partido a partido. El nombre matchea parcial (ej. 'Senesi'); opcionalmente filtrá por selección.",
+        parameters: {
+          type: "object",
+          properties: {
+            player: { type: "string", description: "Nombre o apellido del jugador (matchea parcial, sin distinguir mayúsculas)." },
+            team: { type: "string", description: "Selección, opcional, para desambiguar." },
+          },
+          required: ["player"],
         },
       },
       {
@@ -248,6 +262,10 @@ const TOOLS = [
 const TOOL_RPC_MAP = {
   get_team_summary: (args) => ({ rpc: "get_team_summary", body: { p_team: String(args?.team ?? "") } }),
   get_team_matches: (args) => ({ rpc: "get_team_matches", body: { p_team: String(args?.team ?? "") } }),
+  get_player_matches: (args) => ({
+    rpc: "get_player_matches",
+    body: { p_player: String(args?.player ?? ""), p_team: args?.team ? String(args.team) : null },
+  }),
   get_player_ranking: (args) => ({ rpc: "get_player_ranking", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
   get_physical_leaders: (args) => ({ rpc: "get_physical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
   get_team_physical_trend: (args) => ({ rpc: "get_team_physical_trend", body: { p_team: String(args?.team ?? "") } }),

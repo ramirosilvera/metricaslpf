@@ -22,12 +22,21 @@ export interface SquadInfo {
   wc2026_goals: number | null;
 }
 
+// Un partido con datos FIFA del jugador (de qué partido salen sus métricas).
+export interface PlayerMatchLite {
+  label: string;
+  date: string;
+  stage: string;
+}
+
 interface Props {
   rows: DerivedPlayerMetricRow[];
   squad?: Record<string, SquadInfo>;
+  /** Partidos con datos FIFA por jugador, clave `${team}|${player_name}`. */
+  matches?: Record<string, PlayerMatchLite[]>;
 }
 
-export default function PlayerScoutCard({ rows, squad }: Props) {
+export default function PlayerScoutCard({ rows, squad, matches }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -47,6 +56,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
   );
 
   const squadInfo = squad?.[`${team}|${currentPlayer}`] ?? null;
+  const playerMatches = matches?.[`${team}|${currentPlayer}`] ?? [];
 
   // Índice de rendimiento por métrica sobre TODOS los jugadores medidos: estira
   // el rango real a 40-100 para que las diferencias entre jugadores se VEAN en el
@@ -254,6 +264,21 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
             </span>
           )}
         </div>
+      )}
+
+      {playerMatches.length > 0 && (
+        <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)", margin: "0 0 0.75rem" }}>
+          📅 Métricas calculadas sobre {playerMatches.length}{" "}
+          {playerMatches.length === 1 ? "partido con datos de FIFA" : "partidos con datos de FIFA"}:{" "}
+          {playerMatches.map((m, i) => (
+            <span key={i}>
+              {i > 0 ? " · " : ""}
+              <strong>{m.label}</strong> ({m.date}
+              {m.stage ? ` · ${m.stage}` : ""})
+            </span>
+          ))}
+          . Con muestra chica, leé los números con cautela.
+        </p>
       )}
 
       {option ? (

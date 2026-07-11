@@ -372,7 +372,47 @@ as $function$
   order by m.match_date, m.match_id;
 $function$;
 
+-- Partidos con datos FIFA de un jugador (responde "¿de qué partido salen estos
+-- números?" / "¿qué partido jugó X?"). Matchea el nombre por ILIKE (parcial,
+-- sin distinguir mayúsculas) y opcionalmente filtra por selección. Devuelve un
+-- registro por partido con el resultado y las estadísticas clave de ese partido.
+create or replace function metricas_mundial.get_player_matches(p_player text, p_team text default null)
+ returns table(
+   player_name text, team text, match_id bigint, match_date text, stage text,
+   home_team text, away_team text, home_score integer, away_score integer,
+   distancia_km double precision, velocidad_punta_kmh double precision,
+   remates integer, goles integer, pases_completados integer
+ )
+ language sql
+ stable
+ set search_path to 'metricas_mundial', 'pg_catalog'
+as $function$
+  with appearances as (
+    select ppms.player_name, ppms.team, ppms.match_id from metricas_mundial.physical_player_match_stats ppms
+    union
+    select tpms.player_name, tpms.team, tpms.match_id from metricas_mundial.tactical_player_match_stats tpms
+  )
+  select
+    a.player_name, a.team, m.match_id, m.match_date, m.stage,
+    m.home_team, m.away_team, m.home_score, m.away_score,
+    round((p.total_distance_m / 1000.0)::numeric, 2)::double precision as distancia_km,
+    p.top_speed_kmh as velocidad_punta_kmh,
+    t.attempts_at_goal as remates,
+    t.goals as goles,
+    t.passes_completed as pases_completados
+  from appearances a
+  join metricas_mundial.matches m on m.match_id = a.match_id
+  left join metricas_mundial.physical_player_match_stats p
+    on p.match_id = a.match_id and p.player_name = a.player_name and p.team = a.team
+  left join metricas_mundial.tactical_player_match_stats t
+    on t.match_id = a.match_id and t.player_name = a.player_name and t.team = a.team
+  where a.player_name ilike '%' || p_player || '%'
+    and (p_team is null or a.team = p_team)
+  order by m.match_date nulls last, m.match_id;
+$function$;
+
 -- ---------- grants de ejecución (solo lectura, para anon/authenticated) ----------
+grant execute on function metricas_mundial.get_player_matches(text, text) to anon, authenticated;
 grant execute on function metricas_mundial.get_team_summary(text) to anon, authenticated;
 grant execute on function metricas_mundial.get_team_matches(text) to anon, authenticated;
 grant execute on function metricas_mundial.get_player_ranking(text, integer) to anon, authenticated;
