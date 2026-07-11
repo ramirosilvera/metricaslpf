@@ -57706,6 +57706,8254 @@
   {
     "player_name": "ABDALLAH NASIB",
     "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ABDULAZIZ HATEM",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ABDULELAH ALAMRI",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "ABDULLAH ALHAMDDAN",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "ABDULLAH ALKHAIBARI",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "AHMED ALAAELDIN",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "AHMED ALGANEHI",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "AHMED BASIL",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "AHMED FATHY",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "AHMED FATOUH",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "AHMED MAKNAZI",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "AHMED QASEM",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "AIMAR SHER",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "AKAM HASHIM",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "AKRAM AFIF",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "ALA ALHAJJI",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ALEX SANDRO",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ALHASHMI ALHUSSEIN",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ALI ALHAMADI",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "ALI AZAIZEH",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "ALI JASIM",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "ALI LAJAMI",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ALI OLWAN",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "ALI YOUSIF",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ALISSON",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ALMOEZ ALI",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "AMER JAMOUS",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "AMIR ALAMMARI",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ASSIM MADIBO",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "AYMEN HUSSEIN",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "AYOUB ALOUI",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Aaron HICKEY",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Aaron WAN-BISSAKA",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Abbosbek FAYZULLAEV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Abdoulaye SECK",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Abdukodir KHUSANOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Abdul FATAWU",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Abdulkerim BARDAKCI",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Abdulla ABDULLAEV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Abduvohid NEMATOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Achraf HAKIMI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 2.3333333333333335,
+    "z_score": 1.98,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Adam HLOZEK",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Adil BOULBINA",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Adrien RABIOT",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 1.4,
+    "z_score": 0.86,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Agustin CANOBBIO",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Aiden ONEILL",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Aissa MANDI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ajdin HRUSTIC",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Akmal MOZGOVOY",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Alan FRANCO",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alan MINDA",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Alberto QUINTERO",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alejandro ROMERO GAMARRA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Aleksandar PAVLOVIC",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Alessandro CIRCATI",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Alex ARCE",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alex BAENA",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Alex FREEMAN",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "Alex ZENDEJAS",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Alexander BERNHARDSSON",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Alexander ISAK",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Alexander PRASS",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alexander SCHLAGER",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alexander SORLOTH",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Alexandr SOJKA",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alexandro MAIDANA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alexis MAC ALLISTER",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 1.2,
+    "z_score": 0.62,
+    "percentile": 80.7
+  },
+  {
+    "player_name": "Alexis SAELEMAEKERS",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Alexis VEGA",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ali ABDI",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Ali AHMED",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Ali ALIPOUR",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ali NEMATI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Alidu SEIDU",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alireza BEIRANVAND",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alireza JAHANBAKHSH",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Alistair JOHNSTON",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Alphonso DAVIES",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Alvaro FIDALGO",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Amad DIALLO",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Amadou ONANA",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Amar DEDIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Amar MEMIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Amine GOUIRI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Amine SBAI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Amir HADZIAHMETOVIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Amir MURILLO",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Amirhossein HOSSEINZADEH",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Anass SALAH EDDINE",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Andreas SCHJELDERUP",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Andrej KRAMARIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Andres ANDRADE",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Andres CUBAS",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "Andres GOMEZ",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Andy ROBERTSON",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ange-Yoan BONNY",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Angelo PRECIADO",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Angelo STILLER",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Angus GUNN",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Anibal GODOY",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Anis HADJ MOUSSA",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Anis SLIMANE",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Ante BUDIMIR",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Anthony ELANGA",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Anthony GORDON",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Anthony RALSTON",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Antoine SEMENYO",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Antonee ROBINSON",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Antonio NUSA",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Antonio RUEDIGER",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Antonio SANABRIA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ao TANAKA",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Arda GULER",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 4.0,
+    "z_score": 3.97,
+    "percentile": 99.2
+  },
+  {
+    "player_name": "Ardon JASHARI",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Arjan MALIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Armando GONZALEZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Armando OBISPO",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Armin GIGOVIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Arthur MASUAKU",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Arthur THEATE",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Arya YOUSEFI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Assane DIAO",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Aubrey MODIBA",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Aurelien TCHOUAMENI",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Auston TRUSTY",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Awer MABIL",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Axel TUANZEBE",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Axel WITSEL",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ayase UEDA",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 2.25,
+    "z_score": 1.88,
+    "percentile": 94.9
+  },
+  {
+    "player_name": "Aymen DAHMEN",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Aymeric LAPORTE",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "Ayoub EL KAABI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Ayoube AMAIMOUNI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ayumu SEKO",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ayyoub BOUADDI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Azarias LONDONO",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Aziz BEHICH",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Azizbek AMONOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Azizjon GANIEV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Azzedine OUNAHI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.8333333333333334,
+    "z_score": 0.18,
+    "percentile": 66.7
+  },
+  {
+    "player_name": "BERNARDO SILVA",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "BOUALEM KHOUKHI",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "BRUNO FERNANDES",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 1.8,
+    "z_score": 1.34,
+    "percentile": 90.7
+  },
+  {
+    "player_name": "BRUNO GUIMARAES",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 1.6,
+    "z_score": 1.1,
+    "percentile": 89.1
+  },
+  {
+    "player_name": "Baba RAHMAN",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Bamba DIENG",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Bara Sapoko NDIAYE",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Baris Alper YILMAZ",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Bart VERBRUGGEN",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Bazoumana TOURE",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Behruzjon KARIMOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ben GANNON-DOAK",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Ben OLD",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Benjamin ASARE",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Benjamin NYGREN",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Benjamin TAHIROVIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Besfort ZENELI",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Bilal EL KHANNOUSS",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Borja IGLESIAS",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Bradley BARCOLA",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 1.1666666666666667,
+    "z_score": 0.58,
+    "percentile": 80.3
+  },
+  {
+    "player_name": "Brahim DIAZ",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Braian OJEDA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Brandley KUWAS",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Brandon MECHELE",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Brandon THOMAS-ASANTE",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Breel EMBOLO",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 1.8,
+    "z_score": 1.34,
+    "percentile": 90.7
+  },
+  {
+    "player_name": "Brenden AARONSON",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Brian BROBBEY",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Brian CIPENGA",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Brian GUTIERREZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Brian RODRIGUEZ",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Bukayo SAKA",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "CASEMIRO",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "CASTROP Jens",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "CHO Guesung",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "CRISTIANO RONALDO",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 3.6,
+    "z_score": 3.49,
+    "percentile": 98.7
+  },
+  {
+    "player_name": "Caglar SOYUNCU",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Caleb YIRENKYI",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Callan ELLIOT",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Callum McCOWATT",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Cameron BURGESS",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Camilo VARGAS",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Can UZUN",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Carl STARFELT",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Carlens ARCUS",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Carlos HARVEY",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Carney CHUKWUEMEKA",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Cecilio WATERMAN",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Cedric BAKAMBU",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Cedric ITTEN",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Cesar BLACKMAN",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Cesar HUERTA",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Cesar MONTES",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Chadi RIAD",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Chancel MBEMBA",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Charles DE KETELAERE",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Charles PICKEL",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Che ADAMS",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Chemsdine TALBI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Chris RICHARDS",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Chris WOOD",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Christ Inao OULAI",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Christian FASSNACHT",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Christian PULISIC",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Christopher OPERI",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Cody GAKPO",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 2.5,
+    "z_score": 2.18,
+    "percentile": 96.0
+  },
+  {
+    "player_name": "Connor METCALFE",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Cristian MARTINEZ",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Cristian ROMERO",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Cristian VOLPATO",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Crysencio SUMMERVILLE",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Cucho HERNANDEZ",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Cyle LARIN",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 2.25,
+    "z_score": 1.88,
+    "percentile": 94.9
+  },
+  {
+    "player_name": "DAILON LIVRAMENTO",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "DANILO",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "DANILO SANTOS",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "DEROY DUARTE",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "DINEY BORGES",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "DIOGO COSTA",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "DIOGO DALOT",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "DOUGLAS SANTOS",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Daichi KAMADA",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Daizen MAEDA",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Damian BOBADILLA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Dan BURN",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Dan NDOYE",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 2.6,
+    "z_score": 2.3,
+    "percentile": 96.3
+  },
+  {
+    "player_name": "Dani OLMO",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 1.6,
+    "z_score": 1.1,
+    "percentile": 89.1
+  },
+  {
+    "player_name": "Daniel MUNOZ",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Daniel SVENSSON",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Danley JEAN JACQUES",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Darwin NUNEZ",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "David ALABA",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "David DOUDERA",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 4.0,
+    "z_score": 3.97,
+    "percentile": 99.2
+  },
+  {
+    "player_name": "David MOLLER WOLFE",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "David RAUM",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "David ZIMA",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Davinson SANCHEZ",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 1.2,
+    "z_score": 0.62,
+    "percentile": 80.7
+  },
+  {
+    "player_name": "Dayot UPAMECANO",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Declan RICE",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Deiver MACHADO",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Denis VISINSKY",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Denis ZAKARIA",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Deniz GUL",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Deniz UNDAV",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Dennis HADZIKADUNIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Denzel DUMFRIES",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Derek CORNELIUS",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Derrick ETIENNE",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Derrick LUCKASSEN",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Desire DOUE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 1.8333333333333333,
+    "z_score": 1.38,
+    "percentile": 91.1
+  },
+  {
+    "player_name": "Deveron FONVILLE",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Diego GOMEZ",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Diego MOREIRA",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Djed SPENCE",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "Djibril SOW",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Dodi LUKEBAKIO",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 2.3333333333333335,
+    "z_score": 1.98,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Dominik LIVAKOVIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Dominique SIMON",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Donyell MALEN",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Dostonbek KHAMDAMOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Duckens NAZON",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Dylan BRONN",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Dzenis BURNIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "EDERSON SILVA",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "EDMILSON JUNIOR",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "EHSAN HADDAD",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "EMAM ASHOUR",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "ENDRICK",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "EOM Jisung",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Eberechi EZE",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Edgar Yoel BARCENAS",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Edin DZEKO",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Edo KAYEMBE",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Edouard MENDY",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Edson ALVAREZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Egil SELVIK",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ehsan HAJISAFI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "El Hadji Malick DIOUF",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Eldor SHOMURODOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Elias ACHOURI",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Elias SAAD",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Elijah JUST",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 2.3333333333333335,
+    "z_score": 1.98,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Elisha OWUSU",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Elliot ANDERSON",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 1.4,
+    "z_score": 0.86,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Elliot STROUD",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Ellyes SKHIRI",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Eloy ROOM",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Elye WAHI",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Emiliano MARTINEZ",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Emmanuel AGBADOU",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Enner VALENCIA",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 2.5,
+    "z_score": 2.18,
+    "percentile": 96.0
+  },
+  {
+    "player_name": "Enzo FERNANDEZ",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Eren ELMALI",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Eric DAVIS",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Erik LIRA",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Erling HAALAND",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 4.25,
+    "z_score": 4.27,
+    "percentile": 99.4
+  },
+  {
+    "player_name": "Ermedin DEMIROVIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ermin MAHMIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Ernest NUAMAH",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Esmir BAJRAKTAREVIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Evann GUESSAND",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Evidence MAKGOPA",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Exequiel PALACIOS",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ezri KONSA",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "FABINHO",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "FERAS ALBRIKAN",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "FRANCISCO CONCEICAO",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "FRANCISCO TRINCAO",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "FRANS PUTROS",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Fabian BALBUENA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Fabian RIEDER",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Fabian RUIZ",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Facundo MEDINA",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Fares CHAIBI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 2.25,
+    "z_score": 1.88,
+    "percentile": 94.9
+  },
+  {
+    "player_name": "Fares GHEDJEMIS",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Farrukh SAYFIEV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Federico VALVERDE",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 3.3333333333333335,
+    "z_score": 3.18,
+    "percentile": 98.2
+  },
+  {
+    "player_name": "Federico VINAS",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Felix NMECHA",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Felix TORRES",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ferdi KADIOGLU",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Fernando MUSLERA",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ferran TORRES",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Fidel ESCOBAR",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Findlay CURTIS",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Finn SURMAN",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Firas CHAOUAT",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Fiston MAYELE",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 2.5,
+    "z_score": 2.18,
+    "percentile": 96.0
+  },
+  {
+    "player_name": "Florian GRILLITSCH",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Florian WIRTZ",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 2.5,
+    "z_score": 2.18,
+    "percentile": 96.0
+  },
+  {
+    "player_name": "Folarin BALOGUN",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 3.5,
+    "z_score": 3.38,
+    "percentile": 98.5
+  },
+  {
+    "player_name": "Francis DE VRIES",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Franck KESSIE",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Frantzdy PIERROT",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Fredrik AURSNES",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "Fredrik Andre BJORKAN",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Frenkie DE JONG",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "GABRIEL MAGALHAES",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "GABRIEL MARTINELLI",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "GARRY RODRIGUES",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "GAVI",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "GILSON BENCHIMOL",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "GONCALO RAMOS",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Gabriel AVALOS",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Gabriel GUDMUNDSSON",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Gedeon KALULU",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Gervane KASTANEER",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Gessime YASSINE",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Ghislain KONAN",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Gideon MENSAH",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Gilberto MORA",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Giovani LO CELSO",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Giovanni REYNA",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Giuliano SIMEONE",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Godfried ROEMERATOE",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Gonzalo MONTIEL",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Gonzalo PLATA",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Granit XHAKA",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 1.2,
+    "z_score": 0.62,
+    "percentile": 80.7
+  },
+  {
+    "player_name": "Grant HANLEY",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Gregor KOBEL",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Guela DOUE",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Guillermo MARTINEZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Guillermo OCHOA",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Guillermo VARELA",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Gustaf LAGERBIELKE",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Gustaf NILSSON",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Gustavo CABALLERO",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Gustavo GOMEZ",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Gustavo PUERTA",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 2.8,
+    "z_score": 2.54,
+    "percentile": 97.0
+  },
+  {
+    "player_name": "Gustavo VELAZQUEZ",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Guus TIL",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "HAISSEM HASSAN",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "HAMDY FATHY",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "HAMZA ABDELKARIM",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "HASSAN ALHAYDOS",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "HASSAN ALTAMBAKTI",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "HELIO VARELA",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "HOMAM AHMED",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "HOSSAM ABDELMAGUID",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "HUSAM ABUDAHAB",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "HUSSEIN ALI",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "HWANG Heechan",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "HWANG Inbeom",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Habib DIARRA",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Haji WRIGHT",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Hakan CALHANOGLU",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 5.5,
+    "z_score": 5.77,
+    "percentile": 99.9
+  },
+  {
+    "player_name": "Hannes DELCROIX",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Hannibal MEJBRI",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Hans VANAKEN",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Haris TABAKOVIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Harry KANE",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 3.8,
+    "z_score": 3.73,
+    "percentile": 98.9
+  },
+  {
+    "player_name": "Harry SOUTTAR",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Hazem MASTOURI",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Henrik FALCHENER",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Hernan GALINDEZ",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Hicham BOUDAOUI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Hiroki ITO",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Hossein KANANI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Houssem AOUAR",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "IBRAHIM ADEL",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "IBRAHIM BAYESH",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "IGOR THIAGO",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "ISSA LAYE",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Ibrahim MAZA",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 2.75,
+    "z_score": 2.48,
+    "percentile": 96.8
+  },
+  {
+    "player_name": "Ibrahim MBAYE",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ibrahim SANGARE",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Ibrahima KONATE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Idrissa Gana GUEYE",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Igor MATANOVIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Igor SERGEEV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Iliman NDIAYE",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ime OKON",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Inaki WILLIAMS",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Iqraam RAYNERS",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Irfan Can KAHVECI",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Isak HIEN",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Isidro PITTA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ismael DIAZ",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Ismael GHARBI",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ismael KONE",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ismael SAIBARI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Ismail JAKOBS",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Ismail YUKSEK",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 2.5,
+    "z_score": 2.18,
+    "percentile": 96.0
+  },
+  {
+    "player_name": "Ismaila SARR",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 4.25,
+    "z_score": 4.27,
+    "percentile": 99.4
+  },
+  {
+    "player_name": "Israel REYES",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Issa DIOP",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "Ivan BASIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Ivan PERISIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Ivan SUNJIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "JALAL HASSAN",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "JAMIRO MONTEIRO",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "JASSEM GABER",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "JOAO CANCELO",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "JOAO FELIX",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "JOAO NEVES",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "JOAO PAULO",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "JOVANE CABRAL",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Jack HENDRY",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jackson IRVINE",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Jackson POROZO",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jacob ITALIANO",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Jacob SHAFFELBURG",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Jacob WIDELL ZETTERSTROM",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jakhongir UROZOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jamal MUSIALA",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "James RODRIGUEZ",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 1.2,
+    "z_score": 0.62,
+    "percentile": 80.7
+  },
+  {
+    "player_name": "Jamie LEWELING",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Jaminton CAMPAZ",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Jamshid ISKANDEROV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jan Paul VAN HECKE",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Jaouen HADJAM",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Jarell QUANSAH",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jaroslav ZELENY",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Jason GERIA",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jayden ADAMS",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jayden NELSON",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Jean Michael SERI",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jean-Kevin DUVERNE",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Jean-Philippe MATETA",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Jean-Ricner BELLEGARDE",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Jearl MARGARITHA",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Jefferson LERMA",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Jens Petter HAUGE",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jeremy ANTONISSE",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Jeremy DOKU",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Jerome OPOKU",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jesper KARLSTROM",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Jesse RANDALL",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Jesus GALLARDO",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "Jhon ARIAS",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 1.8,
+    "z_score": 1.34,
+    "percentile": 90.7
+  },
+  {
+    "player_name": "Jhon CORDOBA",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Jhon LUCUMI",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Jiovany RAMOS",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Joe BELL",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Joe SCALLY",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Joel ORDONEZ",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Johan MANZAMBI",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Johan MOJICA",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Johan VASQUEZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "John McGINN",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "John STONES",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "John YEBOAH",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Johny PLACIDE",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jonas ADJETEY",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Jonathan DAVID",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 3.6,
+    "z_score": 3.49,
+    "percentile": 98.7
+  },
+  {
+    "player_name": "Jonathan OSORIO",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Jonathan TAH",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Jordan AYEW",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jordan BOS",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Jordan HENDERSON",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jordan PICKFORD",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jordy ALCIVAR",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Jordy CAICEDO",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Jorge GUTIERREZ",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jorge SANCHEZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Jorgen STRAND LARSEN",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Joris KAYEMBE",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Jorrel HATO",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jose CANALE",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jose CORDOBA",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Jose FAJARDO",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Jose Luis RODRIGUEZ",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Jose Manuel LOPEZ",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Joshua BRENET",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Joshua KIMMICH",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Josip STANISIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Josip SUTALO",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Josko GVARDIOL",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Josue CASIMIR",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Jovo LUKIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Juan Jose CACERES",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Juan Manuel SANABRIA",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Juan QUINTERO",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Jude BELLINGHAM",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 2.4,
+    "z_score": 2.06,
+    "percentile": 95.6
+  },
+  {
+    "player_name": "Juergen LOCADIA",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Jules KOUNDE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Julian ALVAREZ",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Julian QUINONES",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 2.8,
+    "z_score": 2.54,
+    "percentile": 97.0
+  },
+  {
+    "player_name": "Julian RYERSON",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Julio ENCISO",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 1.6,
+    "z_score": 1.1,
+    "percentile": 89.1
+  },
+  {
+    "player_name": "Juninho BACUNA",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Junior ALONSO",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Junnosuke SUZUKI",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Junya ITO",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Jurien GAARI",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Justin KLUIVERT",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "KARIM BOUDIAF",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "KARIM HAFEZ",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "KEVIN PINA",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "KEVIN YAKOB",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "KHALID ALGHANNAM",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "KIM Jingyu",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "KIM Minjae",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "KIM Moonhwan",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "KIM Seunggyu",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kaan AYHAN",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Kai HAVERTZ",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Kai TREWIN",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Kaishu SANO",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Kalidou KOULIBALY",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kamaldeen SULEMANA",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Kamogelo SEBELEBELE",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Keisuke GOTO",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Keito NAKAMURA",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Ken SEMA",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Kenan YILDIZ",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 4.666666666666667,
+    "z_score": 4.77,
+    "percentile": 99.7
+  },
+  {
+    "player_name": "Kendry PAEZ",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kenji GORRE",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kenny McLEAN",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Kento SHIOGAI",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kerem AKTURKOGLU",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Kerim ALAJBEGOVIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Kevin CASTANO",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kevin DANSO",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Kevin DE BRUYNE",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 4.5,
+    "z_score": 4.57,
+    "percentile": 99.6
+  },
+  {
+    "player_name": "Kevin RODRIGUEZ",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Khojiakbar ALIJONOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Khuliso MUDAU",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kieran TIERNEY",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Kojo Peprah OPPONG",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Koki OGAWA",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Konrad LAIMER",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Kou ITAKURA",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Krepin DIATTA",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Kristian THORSTVEDT",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Kristoffer AJER",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Kristoffer NORDFELDT",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kwasi SIBO",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Kylian MBAPPE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 5.0,
+    "z_score": 5.17,
+    "percentile": 99.8
+  },
+  {
+    "player_name": "LAROS DUARTE",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "LEE Gihyuk",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "LEE Hanbeom",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "LEE Jaesung",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "LEE Kangin",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "LEE Taeseok",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "LUCAS MENDES",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "LUCAS PAQUETA",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "LUIZ HENRIQUE",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ladislav KREJCI",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Lamine CAMARA",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Lamine YAMAL",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 3.4,
+    "z_score": 3.26,
+    "percentile": 98.4
+  },
+  {
+    "player_name": "Lautaro MARTINEZ",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 1.4,
+    "z_score": 0.86,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Lawrence Ati ZIGI",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Lawrence SHANKLAND",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Leandro BACUNA",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Leandro PAREDES",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Leandro TROSSARD",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 3.4,
+    "z_score": 3.26,
+    "percentile": 98.4
+  },
+  {
+    "player_name": "Lenny JOSEPH",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Leo OSTIGARD",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Leon GORETZKA",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Leroy SANE",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Lewis FERGUSON",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Liam MILLAR",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Liberato CACACE",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Lionel MESSI",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 5.8,
+    "z_score": 6.13,
+    "percentile": 100.0
+  },
+  {
+    "player_name": "Lionel MPASI",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Lisandro MARTINEZ",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Livano COMENENCIA",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Louicius DEEDSON",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Luc DE FOUGEROLLES",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Luca JAQUEZ",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Luca ZIDANE",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Lucas BERGVALL",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Lucas DIGNE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Lucas HERRINGTON",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Luis CHAVEZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Luis DIAZ",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 3.8,
+    "z_score": 3.73,
+    "percentile": 98.9
+  },
+  {
+    "player_name": "Luis ROMO",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Luis SUAREZ",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 1.8,
+    "z_score": 1.34,
+    "percentile": 90.7
+  },
+  {
+    "player_name": "Luka MODRIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Luka SUCIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Luka VUSKOVIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Lukas CERV",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Lukas PROVOD",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Lyle FOSTER",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Lyndon DYKES",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "MAHMOUD ABUNADA",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MAHMOUD ALMARDI",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "MAHMOUD SABER",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "MARAWAN ATTIA",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "MARKO FARJI",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MARQUINHOS",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "MATHEUS CUNHA",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "MATHEUS NUNES",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MAURICIO",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "MERCHAS DOSKI",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "MOHAMED ABDELMONEIM",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOHAMED HANY",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "MOHAMED KANNO",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "MOHAMED MANAI",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOHAMED SALAH",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 1.8,
+    "z_score": 1.34,
+    "percentile": 90.7
+  },
+  {
+    "player_name": "MOHAMMAD ABUALNADI",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOHAMMAD ABUHASHEESH",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOHAMMAD ABUZRAIQ",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOHAMMAD ALDAOUD",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOHAMMED ABU ALSHAMAT",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "MOHAMMED ALOWAIS",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOHANAD ALI",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOHANAD LASHIN",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "MOHANNAD ABUTAHA",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "MOSTAFA SHOUBIR",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOSTAFA ZICO",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 1.6,
+    "z_score": 1.1,
+    "percentile": 89.1
+  },
+  {
+    "player_name": "MOTEB ALHARBI",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MOUSA ALTAMARI",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 2.6666666666666665,
+    "z_score": 2.38,
+    "percentile": 96.6
+  },
+  {
+    "player_name": "MUNAF YOUNUS",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MUSAB ALJUWAYR",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "MUSTAFA SAADOON",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Maghnes AKLIOUCHE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Malick THIAW",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Malik TILLMAN",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 1.6,
+    "z_score": 1.1,
+    "percentile": 89.1
+  },
+  {
+    "player_name": "Malo GUSTO",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Manu KONE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Manuel AKANJI",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "Manuel NEUER",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Manuel UGARTE",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Marc CUCURELLA",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Marc GUEHI",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "Marc PUBILL",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Marcel SABITZER",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Marco FRIEDL",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Marco PASALIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Marcos LLORENTE",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Marcos SENESI",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Marcus HOLMGREN PEDERSEN",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Marcus RASHFORD",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 2.25,
+    "z_score": 1.88,
+    "percentile": 94.9
+  },
+  {
+    "player_name": "Marcus THURAM",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Marin PONGRACIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Mario PASALIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Mark McKENZIE",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Marko ARNAUTOVIC",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Marko STAMENIC",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Marten DE ROON",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Martin BATURINA",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Martin EXPERIENCE",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Martin ODEGAARD",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Marvin SENAYA",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Marwane SAADANE",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Matej KOVAR",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mateo CHAVEZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Mateo KOVACIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Mathew LECKIE",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Mathew RYAN",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mathias OLIVERA",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Mathieu CHOINIERE",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Matias FERNANDEZ-PARDO",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Matias GALARZA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Matias VINA",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Matt FREESE",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Matt TURNER",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mattias SVANBERG",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Max ARFSTEN",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Max CROCOMBE",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Maxence LACROIX",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Maxi ARAUJO",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Maxim DE CUYPER",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 1.8,
+    "z_score": 1.34,
+    "percentile": 90.7
+  },
+  {
+    "player_name": "Maxime CREPEAU",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Maximilian BEIER",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mbekezeli MBOKAZI",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Mehdi GHAYEDI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Mehdi TAREMI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Mehdi TORABI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Memphis DEPAY",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Merih DEMIRAL",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Mert MULDUR",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Meschack ELIA",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Michael BOXALL",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Michael GREGORITSCH",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Michael OLISE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 2.8333333333333335,
+    "z_score": 2.58,
+    "percentile": 97.2
+  },
+  {
+    "player_name": "Michal SADILEK",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 2.3333333333333335,
+    "z_score": 1.98,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "Michel AEBISCHER",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Micky VAN DE VEN",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Miguel ALMIRON",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Mike MAIGNAN",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mikel MERINO",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Mikel OYARZABAL",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 3.8,
+    "z_score": 3.73,
+    "percentile": 98.9
+  },
+  {
+    "player_name": "Milad MOHAMMADI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Miles ROBINSON",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Miro MUHEIM",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mohamed AMOURA",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mohamed Amine BEN HMIDA",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mohamed HADJ MAHMOUD",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mohamed TOURE",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Mohammad GHORBANI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Mohammad MOHEBBI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Moise BOMBITO",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Moises CAICEDO",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Mojmir CHYTIL",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Montassar TALBI",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Morgan ROGERS",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mortadha BEN OUANES",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Morten THORSBY",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mory DIAW",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Mouhib CHAMAKH",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Moussa NIAKHATE",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "NASSER ALDAWSARI",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "NAWAF BU WASHL",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "NELSON SEMEDO",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "NEYMAR JR",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "NIZAR ALRASHDAN",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "NOOR ALRAWABDEH",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "NUNO DA COSTA",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "NUNO MENDES",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Nabil BENTALEB",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Nadhir BENBOUALI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Nadiem AMIRI",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Nahuel MOLINA",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Nathan AKE",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Nathan NGOY",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Nathan PATTERSON",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Nathan SALIBA",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Nathanael MBUKU",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Nathaniel BROWN",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Neil EL AYNAOUI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 1.1666666666666667,
+    "z_score": 0.58,
+    "percentile": 80.3
+  },
+  {
+    "player_name": "Nestory IRANKUNDA",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Ngalayel MUKAU",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Nick WOLTEMADE",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Nico ELVEDI",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Nico GONZALEZ",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Nico OREILLY",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 1.4,
+    "z_score": 0.86,
+    "percentile": 85.9
+  },
+  {
+    "player_name": "Nico PAZ",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Nico SCHLOTTERBECK",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Nico WILLIAMS",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Nicolas DE LA CRUZ",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Nicolas JACKSON",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 1.75,
+    "z_score": 1.28,
+    "percentile": 90.3
+  },
+  {
+    "player_name": "Nicolas OTAMENDI",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Nicolas PEPE",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Nicolas RASKIN",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Nicolas SEIWALD",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Nicolas TAGLIAFICO",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Niko SIGUR",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Nikola KATIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Nikola VASILJ",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Nikola VLASIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Nilson ANGULO",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Nishan VELUPILLAY",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Nkosinathi SIBISI",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Noa LANG",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Noah OKAFOR",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Noah SADIKI",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Noni MADUEKE",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Noussair MAZRAOUI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ODEH FAKHOURY",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "OH Hyeongyu",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "OMAR MARMOUSH",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 2.2,
+    "z_score": 1.82,
+    "percentile": 94.6
+  },
+  {
+    "player_name": "Obed VARGAS",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Odiljon XAMROBEKOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Odilon KOSSOUNOU",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Oguz AYDIN",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ollie WATKINS",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Omar ALDERETE",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Omar REKIK",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Orbelin PINEDA",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Orjan NYLAND",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Orkun KOKCU",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Orlando GILL",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Orlando MOSQUERA",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Oscar BOBB",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Oston URUNOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Oswin APPOLLIS",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Otabek SHUKUROV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Oumar DIAKITE",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ousmane DEMBELE",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 2.6666666666666665,
+    "z_score": 2.38,
+    "percentile": 96.6
+  },
+  {
+    "player_name": "Ousmane DIOMANDE",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Oussama BENBOT",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ozan KABAK",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "PAIK Seungho",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "PARK Jinseob",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "PEDRI",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "PEDRO MIGUEL",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "PEDRO NETO",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "PICO LOPES",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Pape GUEYE",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Pape Matar SARR",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Pascal GROSS",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Pathe CISS",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Patrick BEACH",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Patrick BERG",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Patrick WIMMER",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Patrik SCHICK",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Pau CUBARSI",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Paul OKON-ENGSTLER",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Paul WANNER",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Pavel SULC",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Pedro PORRO",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Pedro VITE",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Pervis ESTUPINAN",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Petar MUSA",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Petar SUCIC",
+    "team": "Croatia",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Philipp LIENHART",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Phillip MWENE",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Piero HINCAPIE",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Prince ADU",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Promise DAVID",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Quinten TIMBER",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "RAFAEL LEAO",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "RAMY RABIA",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "RAPHINHA",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "RAYAN",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "REBIN SULAKA",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "RENATO VEIGA",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "RODRI",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "ROGER IBANEZ",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "RUBEN DIAS",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "RUBEN NEVES",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "RYAN MENDES",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Rafik BELGHALI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Ramin REZAEIAN",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Ramiz ZERROUKI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ramon SOSA",
+    "team": "Paraguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ramy BENSEBAINI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Rani KHEDIRA",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Raul JIMENEZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 4.5,
+    "z_score": 4.57,
+    "percentile": 99.6
+  },
+  {
+    "player_name": "Raul RANGEL",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Rayan AIT-NOURI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Rayan CHERKI",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Redouane HALHAL",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Reece JAMES",
+    "team": "England",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Relebohile MOFOKENG",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Remo FREULER",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Ricardo ADE",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Ricardo PEPI",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Ricardo RODRIGUEZ",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "Richard RIOS",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Richie LARYEA",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.4,
+    "z_score": -0.34,
+    "percentile": 48.0
+  },
+  {
+    "player_name": "Riechedly BAZOER",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ritsu DOAN",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Riyad MAHREZ",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Roberto ALVARADO",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Robin HRANAC",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Rodrigo AGUIRRE",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Rodrigo BENTANCUR",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Rodrigo DE PAUL",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Romano SCHMID",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Romelu LUKAKU",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 1.2,
+    "z_score": 0.62,
+    "percentile": 80.7
+  },
+  {
+    "player_name": "Ronwen WILLIAMS",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Roshon VAN EIJMA",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ross STEWART",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ruben PROVIDENCE",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Ruben VARGAS",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 1.2,
+    "z_score": 0.62,
+    "percentile": 80.7
+  },
+  {
+    "player_name": "Ruslanbek JIYANOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Rustam ASHURMATOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ryan CHRISTIE",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Ryan GRAVENBERCH",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 1.25,
+    "z_score": 0.68,
+    "percentile": 81.9
+  },
+  {
+    "player_name": "Ryan THOMAS",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "SAED ALROSAN",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "SALEEM OBAID",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "SALEM ALDAWSARI",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "SAMU COSTA",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "SAUD ABDULHAMID",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "SEOL Youngwoo",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "SIDNY LOPES CABRAL",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "SON Heungmin",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 2.3333333333333335,
+    "z_score": 1.98,
+    "percentile": 95.3
+  },
+  {
+    "player_name": "STEVEN MOREIRA",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "SULTAN ALBRAKE",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "SULTAN MANDASH",
+    "team": "Saudi Arabia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Sadio MANE",
+    "team": "Senegal",
+    "metric": "remates_promedio",
+    "value": 1.5,
+    "z_score": 0.98,
+    "percentile": 87.4
+  },
+  {
+    "player_name": "Saeid EZATOLAHI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Saleh HARDANI",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Salih OZCAN",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Saman GHODDOS",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Samed BAZDAR",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Samir CHERGUI",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Samir EL MOURABET",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Samuel MOUTOUSSAMY",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Sander BERGE",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Santiago ARIAS",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Santiago GIMENEZ",
+    "team": "Mexico",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Sarpreet SINGH",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Sasa KALAJDZIC",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Scott McKENNA",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Scott McTOMINAY",
+    "team": "Scotland",
+    "metric": "remates_promedio",
+    "value": 2.6666666666666665,
+    "z_score": 2.38,
+    "percentile": 96.6
+  },
+  {
+    "player_name": "Sead KOLASINAC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Sebastian BERHALTER",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Sebastian CACERES",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Sebastian TOUNEKTI",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Seko FOFANA",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 2.5,
+    "z_score": 2.18,
+    "percentile": 96.0
+  },
+  {
+    "player_name": "Sergino DEST",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Sergio ROCHET",
+    "team": "Uruguay",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Shahriyar MOGHANLOO",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Sherel FLORANUS",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Sherzod ESANOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Sherzod NASRULLAEV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Shogo TANIGUCHI",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Shoja KHALILZADEH",
+    "team": "IR Iran",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Shurandy SAMBO",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Shuto MACHINO",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Silvan WIDMER",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Simon ADINGRA",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Simon BANZA",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Sofyan AMRABAT",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Sondre LANGAS",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Sontje HANSEN",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Soufiane RAHIMI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Sphephelo SITHOLE",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Stefan POSCH",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Stepan CHALOUPEK",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Stephen EUSTAQUIO",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "Steve KAPUADI",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Stjepan RADELJIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "TELMO ARCANJO",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "TOMAS ARAUJO",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "TREZEGUET",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Taha ALI",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Tahith CHONG",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Tajon BUCHANAN",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 1.2,
+    "z_score": 0.62,
+    "percentile": 80.7
+  },
+  {
+    "player_name": "Takefusa KUBO",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Takehiro TOMIYASU",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Tani OLUWASEYI",
+    "team": "Canada",
+    "metric": "remates_promedio",
+    "value": 1.6,
+    "z_score": 1.1,
+    "percentile": 89.1
+  },
+  {
+    "player_name": "Tarik MUHAREMOVIC",
+    "team": "Bosnia and Herzegovina",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Teboho MOKOENA",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Tete YENGI",
+    "team": "Australia",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Teun KOOPMEINERS",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Thalente MBATHA",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Thapelo MASEKO",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 2.6666666666666665,
+    "z_score": 2.38,
+    "percentile": 96.6
+  },
+  {
+    "player_name": "Thelo AASGAARD",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 2.0,
+    "z_score": 1.58,
+    "percentile": 92.8
+  },
+  {
+    "player_name": "Themba ZWANE",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Theo BONGONDA",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Theo HERNANDEZ",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Thiago ALMADA",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Thibaut COURTOIS",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Thomas MEUNIER",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Thomas PARTEY",
+    "team": "Ghana",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Tijjani REIJNDERS",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 1.3333333333333333,
+    "z_score": 0.78,
+    "percentile": 84.2
+  },
+  {
+    "player_name": "Tim PAYNE",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Tim REAM",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Timothy CASTAGNE",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 0.6,
+    "z_score": -0.1,
+    "percentile": 58.3
+  },
+  {
+    "player_name": "Timothy WEAH",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Tomas CHORY",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Tomas HOLES",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Tomas RODRIGUEZ",
+    "team": "Panama",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Tomas SOUCEK",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Torbjorn HEGGEM",
+    "team": "Norway",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Tshepang MOREMI",
+    "team": "South Africa",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Tsuyoshi WATANABE",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Tyler ADAMS",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Tyler BINDON",
+    "team": "New Zealand",
+    "metric": "remates_promedio",
+    "value": 0.6666666666666666,
+    "z_score": -0.02,
+    "percentile": 61.0
+  },
+  {
+    "player_name": "Tyrese NOSLIN",
+    "team": "Curaçao",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Ugurcan CAKIR",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Unai SIMON",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Utkir YUSUPOV",
+    "team": "Uzbekistan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "VINICIUS JUNIOR",
+    "team": "Brazil",
+    "metric": "remates_promedio",
+    "value": 3.4,
+    "z_score": 3.26,
+    "percentile": 98.4
+  },
+  {
+    "player_name": "VITINHA",
+    "team": "Portugal",
+    "metric": "remates_promedio",
+    "value": 0.8,
+    "z_score": 0.14,
+    "percentile": 66.2
+  },
+  {
+    "player_name": "VOZINHA",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Valentin BARCO",
+    "team": "Argentina",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Victor LINDELOF",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Viktor GYOKERES",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 3.0,
+    "z_score": 2.78,
+    "percentile": 97.7
+  },
+  {
+    "player_name": "Virgil VAN DIJK",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Vladimir COUFAL",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Vladimir DARIDA",
+    "team": "Czechia",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "WAGNER PINA",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "WILLY SEMEDO",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Waldemar ANTON",
+    "team": "Germany",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Warren ZAIRE-EMERY",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Weston McKENNIE",
+    "team": "USA",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Wilfried SINGO",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "William SALIBA",
+    "team": "France",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "Willian PACHO",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "Wilson ISIDOR",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 1.6666666666666667,
+    "z_score": 1.18,
+    "percentile": 89.8
+  },
+  {
+    "player_name": "Wout WEGHORST",
+    "team": "Netherlands",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Xaver SCHLAGER",
+    "team": "Austria",
+    "metric": "remates_promedio",
+    "value": 0.25,
+    "z_score": -0.52,
+    "percentile": 38.5
+  },
+  {
+    "player_name": "YANG Hyunjun",
+    "team": "Korea Republic",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "YANNICK SEMEDO",
+    "team": "Cabo Verde",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "YASSER IBRAHIM",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.2,
+    "z_score": -0.58,
+    "percentile": 35.7
+  },
+  {
+    "player_name": "YAZAN ALARAB",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "YAZEED ABULAILA",
+    "team": "Jordan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "YOUSSEF AMYN",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "YUSUF ABDURISAG",
+    "team": "Qatar",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yahia FOFANA",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yaimar MEDINA",
+    "team": "Ecuador",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Yan DIOMANDE",
+    "team": "Côte d'Ivoire",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "Yan VALERY",
+    "team": "Tunisia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yasin AYARI",
+    "team": "Sweden",
+    "metric": "remates_promedio",
+    "value": 1.75,
+    "z_score": 1.28,
+    "percentile": 90.3
+  },
+  {
+    "player_name": "Yassin FORTUNE",
+    "team": "Haiti",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yassine BOUNOU",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yeremy PINO",
+    "team": "Spain",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yerry MINA",
+    "team": "Colombia",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yoane WISSA",
+    "team": "Congo DR",
+    "metric": "remates_promedio",
+    "value": 2.75,
+    "z_score": 2.48,
+    "percentile": 96.8
+  },
+  {
+    "player_name": "Youri TIELEMANS",
+    "team": "Belgium",
+    "metric": "remates_promedio",
+    "value": 2.2,
+    "z_score": 1.82,
+    "percentile": 94.6
+  },
+  {
+    "player_name": "Yuito SUZUKI",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yukinari SUGAWARA",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Yunus AKGUN",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Yuto NAGATOMO",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ZAID ISMAEL",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ZAID TAHSEEN",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 1.0,
+    "z_score": 0.38,
+    "percentile": 73.5
+  },
+  {
+    "player_name": "ZIDANE IQBAL",
+    "team": "Iraq",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ZIZO",
+    "team": "Egypt",
+    "metric": "remates_promedio",
+    "value": 0.75,
+    "z_score": 0.08,
+    "percentile": 64.3
+  },
+  {
+    "player_name": "Zakaria EL OUAHDI",
+    "team": "Morocco",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Zeki AMDOUNI",
+    "team": "Switzerland",
+    "metric": "remates_promedio",
+    "value": 0.3333333333333333,
+    "z_score": -0.42,
+    "percentile": 44.0
+  },
+  {
+    "player_name": "Zeki CELIK",
+    "team": "Türkiye",
+    "metric": "remates_promedio",
+    "value": 0.5,
+    "z_score": -0.22,
+    "percentile": 53.2
+  },
+  {
+    "player_name": "Zineddine BELAID",
+    "team": "Algeria",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "Zion SUZUKI",
+    "team": "Japan",
+    "metric": "remates_promedio",
+    "value": 0.0,
+    "z_score": -0.82,
+    "percentile": 17.6
+  },
+  {
+    "player_name": "ABDALLAH NASIB",
+    "team": "Jordan",
     "metric": "tackles_ganados_promedio",
     "value": 0.6666666666666666,
     "z_score": 0.29,

@@ -209,7 +209,7 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {} }: Props
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         <strong>Índice global</strong>: el índice de rendimiento de cada factor (0–100, calibrado al rango de todos los
         jugadores medidos) combinado con <strong>pesos según la posición</strong>, como el overall de EA SPORTS FC. A un
-        delantero le pesan más la velocidad, los sprints y la progresión; a un defensor, los quites, intercepciones y
+        delantero le pesan más los remates, la velocidad, los sprints y la progresión; a un defensor, los quites, intercepciones y
         recuperaciones; a un mediocampista, el pase y la circulación. Así un extremo no pierde por "pocos quites" ni un
         central por "poca velocidad punta". Tocá un jugador para ver el desglose factor por factor con su valor oficial.
         Sólo se rankean jugadores de campo con al menos {MIN_FACTORS} factores cargados (los arqueros quedan fuera: las

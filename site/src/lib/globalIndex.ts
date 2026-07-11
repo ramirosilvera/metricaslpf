@@ -16,6 +16,7 @@ export type Position = "GK" | "DF" | "MF" | "FW";
 //  representan; su overall en EA FC sale de atributos que este dataset no tiene.)
 export const POSITION_WEIGHTS: Record<Position, Record<string, number>> = {
   FW: {
+    remates_promedio: 3.5,
     velocidad_punta_kmh: 3,
     sprints_promedio: 3,
     progresiones_promedio: 3,
@@ -35,6 +36,7 @@ export const POSITION_WEIGHTS: Record<Position, Record<string, number>> = {
     presion_directa_promedio: 2.5,
     recuperaciones_promedio: 2.5,
     distancia_promedio_km: 2,
+    remates_promedio: 1.5,
     alta_intensidad_promedio_m: 1.5,
     sprints_promedio: 1.5,
     tackles_ganados_promedio: 1.5,
@@ -53,6 +55,7 @@ export const POSITION_WEIGHTS: Record<Position, Record<string, number>> = {
     progresiones_promedio: 1.5,
     sprints_promedio: 1,
     velocidad_punta_kmh: 1,
+    remates_promedio: 0.4,
   },
   // GK: sin pesos -> quien lo tenga cae al promedio plano; el ranking igual los
   // excluye con isFieldPosition().

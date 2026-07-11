@@ -16,6 +16,7 @@ export const PLAYER_METRIC_LABELS: Record<string, PlayerMetricDef> = {
   pases_completados_promedio: { label: "Pases completados / partido", suffix: "", group: "táctico" },
   precision_pases_promedio: { label: "Precisión de pase", suffix: "%", group: "táctico" },
   progresiones_promedio: { label: "Progresiones de balón / partido", suffix: "", group: "táctico" },
+  remates_promedio: { label: "Remates / partido", suffix: "", group: "táctico" },
   tackles_ganados_promedio: { label: "Tackles ganados / partido", suffix: "", group: "táctico" },
   intercepciones_promedio: { label: "Intercepciones / partido", suffix: "", group: "táctico" },
   presion_directa_promedio: { label: "Presiones directas / partido", suffix: "", group: "táctico" },

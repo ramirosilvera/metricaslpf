@@ -153,6 +153,9 @@ def _player_tactical_metrics(tactical_players: pd.DataFrame) -> pd.DataFrame:
             pases_completados_promedio=("passes_completed", "mean"),
             precision_pases_promedio=("pass_completion_pct", "mean"),
             progresiones_promedio=("ball_progressions", "mean"),
+            # remates (attempts_at_goal): la producción ofensiva que faltaba, clave
+            # para representar a los delanteros en el índice global.
+            remates_promedio=("attempts_at_goal", "mean"),
             tackles_ganados_promedio=("tackles_won", "mean"),
             intercepciones_promedio=("interceptions", "mean"),
             presion_directa_promedio=("pressing_direct", "mean"),
@@ -221,8 +224,8 @@ def build():
             id_vars=["player_name", "team"],
             value_vars=[
                 "pases_completados_promedio", "precision_pases_promedio", "progresiones_promedio",
-                "tackles_ganados_promedio", "intercepciones_promedio", "presion_directa_promedio",
-                "recuperaciones_promedio",
+                "remates_promedio", "tackles_ganados_promedio", "intercepciones_promedio",
+                "presion_directa_promedio", "recuperaciones_promedio",
             ],
             var_name="metric",
             value_name="value",
