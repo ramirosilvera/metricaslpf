@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
-import ShareableChart from "./ShareableChart";
+import ReactECharts from "echarts-for-react";
 import type { DerivedPlayerMetricRow, TeamPhysicalRankingRow, TeamTacticalRankingRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { flagFor } from "../lib/flags";
 import { buildPredictor, type TeamStrength } from "../lib/prediction";
+import { sharePrediction } from "../lib/sharePrediction";
 
 interface Props {
   physicalRows: TeamPhysicalRankingRow[];
@@ -42,11 +43,44 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
   const B = strengths.get(effB);
   const pred = useMemo(() => (A && B ? predict(A, B) : null), [A, B, predict]);
 
+  const [busy, setBusy] = useState(false);
+  const [note, setNote] = useState<string | null>(null);
+
   const colorA = tokens["--series-6"];
   const colorB = tokens["--series-1"];
   const colorDraw = tokens["--text-muted"];
 
   const probs = pred ? pct100([pred.pA, pred.pDraw, pred.pB]) : [0, 0, 0];
+
+  async function handleShare() {
+    if (!A || !B || !pred || busy) return;
+    setBusy(true);
+    setNote(null);
+    try {
+      const r = await sharePrediction({
+        teamA: effA,
+        teamB: effB,
+        colorA,
+        colorB,
+        xA: pred.xA,
+        xB: pred.xB,
+        probs: probs as [number, number, number],
+        topScores: pred.topScores,
+        fuerzaA: A.fuerza,
+        fuerzaB: B.fuerza,
+        scenario: pred.scenarios[0] ?? "",
+      });
+      if (r === "downloaded") {
+        setNote("Imagen descargada ✓");
+        setTimeout(() => setNote(null), 4000);
+      }
+    } catch {
+      setNote("No se pudo generar la imagen");
+      setTimeout(() => setNote(null), 4000);
+    } finally {
+      setBusy(false);
+    }
+  }
 
   const option = useMemo(() => {
     if (!pred) return {};
@@ -128,18 +162,17 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
           </div>
           <p className="predict-sub">goles esperados por el modelo · {headline}</p>
 
-          <ShareableChart
-            option={option}
-            style={{ height: 130 }}
-            share={{
-              title: `${effA} vs ${effB} — predicción`,
-              subtitle: `Probabilidad 1-X-2 y goles esperados · modelo por rendimiento · Mundial 2026`,
-              insight: `${headline}. Marcador más probable ${pred.topScores[0].a}-${pred.topScores[0].b}. ${pred.scenarios[0] ?? ""}`,
-              shareText: `${effA} ${probs[0]}% · empate ${probs[1]}% · ${effB} ${probs[2]}% — predicción por rendimiento`,
-              filenameBase: `prediccion-${effA}-vs-${effB}`,
-            }}
-            shareLabel="🖼️ Compartir predicción"
-          />
+          <ReactECharts option={option} style={{ height: 130 }} notMerge={true} />
+          <div className="chart-share-bar">
+            <button type="button" className="btn btn-share btn-share-sm" onClick={handleShare} disabled={busy} aria-busy={busy}>
+              {busy ? "Generando…" : "🖼️ Compartir predicción"}
+            </button>
+            {note && (
+              <span role="status" className="chart-share-note">
+                {note}
+              </span>
+            )}
+          </div>
 
           <div className="predict-scores">
             <span className="predict-scores-label">Marcadores más probables:</span>
