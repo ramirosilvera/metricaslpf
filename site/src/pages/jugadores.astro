@@ -1,23 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
-import ConfidenceBadge from "../layouts/ConfidenceBadge.astro";
-import PlayerMinutesBar from "../islands/PlayerMinutesBar";
-import PhysicalPlayerBar from "../islands/PhysicalPlayerBar";
-import PositionPhysicalRanking from "../islands/PositionPhysicalRanking";
 import PlayerGlobalIndexRanking from "../islands/PlayerGlobalIndexRanking";
-import { loadJson, type PlayerMinutesRow, type PlayerPhysicalPositionRow, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import PlayerFactorRanking from "../islands/PlayerFactorRanking";
+import { loadJson, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
 import { buildPlayerPositions } from "../lib/playerPositions";
-import type { PhysicalPlayerRankingRow } from "../islands/PhysicalPlayerBar";
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
   return Array.isArray(raw) ? raw : [];
 }
 
-const players = loadJson<PlayerMinutesRow[]>("player_minutes_ranking.json");
-const physicalPlayers = loadArray<PhysicalPlayerRankingRow>("physical_player_ranking.json");
-const byPosition = loadArray<PlayerPhysicalPositionRow>("player_physical_by_position.json");
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
 
@@ -25,66 +18,55 @@ const squadRows = loadArray<SquadPlayerRow>("squads.json");
 const positions = buildPlayerPositions(playerMetrics, squadRows);
 ---
 
-<Base title="Jugadores" description="Ranking de minutos jugados y métricas físicas reales por jugador — Mundial 2026.">
+<Base title="Jugadores" description="Ranking de jugadores del Mundial 2026: índice global y comparación por cada factor físico y táctico.">
   <DataStatusBanner />
   <p class="eyebrow">Ranking · jugador por jugador</p>
   <h1>Ranking de jugadores</h1>
   <p class="lede">
-    La misma <strong>tabla</strong>, pero a nivel jugador: quién corre más, comparado por posición y por minutos. Un
-    promedio de equipo esconde que algunos corren mucho y otros poco — esta es la unidad correcta para poner a prueba la
-    hipótesis. <em>Para la ficha completa de un jugador, entrá a Analizar.</em>
+    Dos maneras de ordenar a los jugadores del Mundial 2026: por un <strong>índice global</strong> que resume todo su
+    rendimiento, o <strong>factor por factor</strong> para ver quién manda en cada métrica física y táctica. En ambas
+    podés mirar el <strong>top del torneo</strong> o filtrar <strong>por selección</strong>. <em>Para la ficha completa de
+    un jugador, entrá a Analizar.</em>
   </p>
 
-  {playerMetrics.length > 0 && (
+  {playerMetrics.length > 0 ? (
+    <>
+      <section class="section">
+        <div class="section-head">
+          <h2>Índice global — el mejor de cada selección</h2>
+          <p>
+            El <strong>GLOBAL</strong> estilo EA SPORTS FC: un solo número (0–100) por jugador que combina su índice de
+            rendimiento en cada factor físico y táctico <strong>ponderado por su posición</strong> — al delantero le pesan
+            los remates, la velocidad y la progresión; al defensor, los quites y recuperaciones. Elegí una selección o el
+            top del torneo. <em>Tocá un jugador para ver el desglose factor por factor.</em>
+          </p>
+        </div>
+        <div class="card">
+          <PlayerGlobalIndexRanking client:only="react" rows={playerMetrics} positions={positions} />
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Comparación por factor — ¿quién manda en cada métrica?</h2>
+          <p>
+            Elegí <strong>cualquiera de los 12 factores</strong> físicos (distancia, alta intensidad, sprints, velocidad
+            punta) o tácticos (pases, precisión, progresiones, remates, tackles, intercepciones, presión, recuperaciones)
+            y ordená a los jugadores por ese factor — <strong>entre todas las selecciones</strong> o <strong>dentro de una
+            sola</strong>. <em>Tocá un jugador para ver su valor oficial y el índice.</em>
+          </p>
+        </div>
+        <div class="card">
+          <PlayerFactorRanking client:only="react" rows={playerMetrics} positions={positions} />
+        </div>
+      </section>
+    </>
+  ) : (
     <section class="section">
-      <div class="section-head">
-        <h2>Índice global — el mejor de cada selección</h2>
-        <p>
-          El <strong>GLOBAL</strong> estilo EA SPORTS FC: un solo número (0–100) por jugador que combina su índice de
-          rendimiento en cada factor físico y táctico <strong>ponderado por su posición</strong> — al delantero le pesan
-          los remates, la velocidad y la progresión; al defensor, los quites y recuperaciones. Elegí una selección para ver a sus
-          jugadores ordenados de mayor a menor, o mirá el top del torneo. <em>Tocá un jugador para ver el desglose factor
-          por factor.</em>
-        </p>
-      </div>
-      <div class="card">
-        <PlayerGlobalIndexRanking client:only="react" rows={playerMetrics} positions={positions} />
-      </div>
+      <p style="color: var(--text-muted);">
+        Todavía no hay métricas por jugador cargadas. Se completan a medida que el scraper procesa los partidos del
+        Mundial 2026 — mirá el estado arriba.
+      </p>
     </section>
   )}
-
-  {byPosition.length > 0 && (
-    <section class="section">
-      <div class="section-head">
-        <h2>Comparación física normalizada por posición</h2>
-        <p>
-          Un central y un extremo no se miden con la misma vara. Acá cada jugador se muestra como % del mejor de su
-          posición (arqueros, defensores, mediocampistas, delanteros), así la comparación es justa — y podés comparar
-          decenas de jugadores a la vez, no de a dos.
-        </p>
-      </div>
-      <div class="card">
-        <PositionPhysicalRanking client:only="react" rows={byPosition} />
-      </div>
-    </section>
-  )}
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Métricas físicas por selección — Mundial 2026</h2>
-      <ConfidenceBadge source="physical_performance" label="Fuente: FIFA Training Centre (PMSR)" />
-    </div>
-    <div class="card">
-      <PhysicalPlayerBar client:only="react" rows={physicalPlayers} />
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Minutos jugados (histórico StatsBomb, 2018 + 2022)</h2>
-    </div>
-    <div class="card">
-      <PlayerMinutesBar client:only="react" rows={players} />
-    </div>
-  </section>
 </Base>
