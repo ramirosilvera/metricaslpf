@@ -112,7 +112,7 @@ function wrapLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number
 function drawRatingsPanel(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, ratings: RatingsData) {
   const h = ratingsPanelHeight(ratings) - 24; // el -24 es aire externo, no del box
   const entities = ratings.entities;
-  const ovrs = entities.map((_, i) => ovrOf(ratings, i));
+  const ovrs = entities.map((e, i) => e.ovr ?? ovrOf(ratings, i));
   const dual = entities.length > 1;
 
   // caja

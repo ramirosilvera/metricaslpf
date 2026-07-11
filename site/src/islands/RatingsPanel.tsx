@@ -8,7 +8,7 @@ import { ovrOf, RATINGS_SCALE_LABEL } from "../lib/ratings";
 export default function RatingsPanel({ data }: { data: RatingsData }) {
   const { entities, factors } = data;
   if (entities.length === 0 || factors.length === 0) return null;
-  const ovrs = entities.map((_, i) => ovrOf(data, i));
+  const ovrs = entities.map((e, i) => e.ovr ?? ovrOf(data, i));
   const dual = entities.length > 1;
 
   return (

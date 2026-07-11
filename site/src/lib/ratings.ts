@@ -7,6 +7,9 @@ export interface RatingsEntity {
   name: string;
   /** Color CSS concreto (hex/rgb) para la insignia/columna de esta entidad. */
   color: string;
+  /** GLOBAL precalculado (ej. ponderado por posición). Si se define, se usa en
+   *  lugar del promedio plano de los factores (ovrOf). */
+  ovr?: number;
 }
 
 export interface RatingsFactor {

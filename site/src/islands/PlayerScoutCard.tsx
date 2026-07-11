@@ -8,6 +8,7 @@ import type { ShareStat } from "../lib/shareCard";
 import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS as METRIC_LABELS, PLAYER_RADAR_ORDER as RADAR_ORDER } from "../lib/playerMetrics";
+import { positionWeightedGlobal } from "../lib/globalIndex";
 
 // Datos de plantel (squads.json) ya cruzados por nombre en build — la clave es
 // `${team}|${player_name}` con el nombre tal como aparece en las métricas.
@@ -131,17 +132,26 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
     [currentPlayer, insightPoints],
   );
 
-  // Desglose "carta EA FC": GLOBAL (promedio) + índice por factor del jugador.
+  // Desglose "carta EA FC": GLOBAL (ponderado por posición) + índice por factor.
   const ratings = useMemo(() => {
     if (radarMetrics.length < 3) return undefined;
+    const perFactor = radarMetrics.map((m) => ({
+      metric: m,
+      label: METRIC_LABELS[m].label.replace(" / partido", ""),
+      idx: pctFor(m, playerRows.find((r) => r.metric === m)?.value ?? null) ?? 0,
+    }));
     return {
-      entities: [{ name: currentPlayer, color: tokens["--series-3"] }],
-      factors: radarMetrics.map((m) => ({
-        label: METRIC_LABELS[m].label.replace(" / partido", ""),
-        values: [pctFor(m, playerRows.find((r) => r.metric === m)?.value ?? null) ?? 0],
-      })),
+      entities: [
+        {
+          name: currentPlayer,
+          color: tokens["--series-3"],
+          // Mismo criterio que el ranking de índice global: ponderado por posición.
+          ovr: positionWeightedGlobal(perFactor, squadInfo?.position ?? null),
+        },
+      ],
+      factors: perFactor.map((f) => ({ label: f.label, values: [f.idx] })),
     };
-  }, [radarMetrics, playerRows, currentPlayer, tokens, normalizers]);
+  }, [radarMetrics, playerRows, currentPlayer, tokens, normalizers, squadInfo]);
 
   const option = useMemo(() => {
     if (radarMetrics.length < 3) return null;

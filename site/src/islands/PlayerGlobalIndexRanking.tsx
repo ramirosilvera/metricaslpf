@@ -5,12 +5,17 @@ import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { flagFor } from "../lib/flags";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
+import { positionWeightedGlobal, isFieldPosition } from "../lib/globalIndex";
 
 // Ranking por ÍNDICE GLOBAL (estilo "GLOBAL/OVR" de EA SPORTS FC): para cada
 // jugador se calcula el índice de rendimiento de cada factor (calibrado al rango
-// de TODOS los jugadores medidos) y se promedia -> un solo número 0-100. Se puede
-// ver por selección o el top de todo el torneo. Al tocar un jugador, el tooltip
-// muestra el desglose de cada factor (índice + valor oficial).
+// de TODOS los jugadores medidos) y se combina con PESOS SEGÚN LA POSICIÓN, así
+// un delantero no pierde por "pocos quites" ni un central por "poca velocidad".
+// Se puede ver por selección o el top del torneo. Al tocar un jugador, el tooltip
+// muestra el desglose de cada factor (índice + valor oficial). Los arqueros se
+// excluyen: las métricas de campo no los representan.
+
+const POS_LABEL: Record<string, string> = { GK: "Arquero", DF: "Defensor", MF: "Mediocampista", FW: "Delantero" };
 
 const ALL = "__all__";
 // Índice global sólo si hay una base mínima de factores (si no, un jugador con
@@ -28,15 +33,18 @@ interface Factor {
 interface PlayerRow {
   player: string;
   team: string;
+  position: string | null;
   global: number;
   factors: Factor[];
 }
 
 interface Props {
   rows: DerivedPlayerMetricRow[];
+  /** Posición por jugador, clave `${team}|${player_name}` (nombre de las métricas). */
+  positions?: Record<string, string>;
 }
 
-export default function PlayerGlobalIndexRanking({ rows }: Props) {
+export default function PlayerGlobalIndexRanking({ rows, positions = {} }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -76,12 +84,18 @@ export default function PlayerGlobalIndexRanking({ rows }: Props) {
       .map((e) => {
         // ordenar factores físico->táctico (orden canónico) para el tooltip
         e.factors.sort((a, b) => PLAYER_RADAR_ORDER.indexOf(a.metric) - PLAYER_RADAR_ORDER.indexOf(b.metric));
+        const position = positions[`${e.team}|${e.player}`] ?? null;
         return {
           ...e,
-          global: Math.round(e.factors.reduce((s, f) => s + f.idx, 0) / e.factors.length),
+          position,
+          // Global ponderado por posición (estilo EA FC): un delantero no pierde
+          // por pocos quites ni un central por poca velocidad.
+          global: positionWeightedGlobal(e.factors, position),
         };
-      });
-  }, [rows, indexers]);
+      })
+      // arqueros fuera: las métricas de campo no los representan
+      .filter((e) => e.position !== "GK");
+  }, [rows, indexers, positions]);
 
   const teams = useMemo(() => [...new Set(players.map((p) => p.team))].sort(), [players]);
   const [team, setTeam] = useState(() => (teams.includes("Argentina") ? "Argentina" : teams[0] ?? ALL));
@@ -115,7 +129,8 @@ export default function PlayerGlobalIndexRanking({ rows }: Props) {
           const i = Array.isArray(ps) ? ps[0]?.dataIndex : ps?.dataIndex;
           const p = ordered[i];
           if (!p) return "";
-          const head = `${flagFor(p.team)} <strong>${p.player}</strong> · ${p.team}<br/>índice global <strong>${p.global}</strong> · promedio de ${p.factors.length} factores`;
+          const posTxt = p.position ? ` · ${POS_LABEL[p.position] ?? p.position}` : "";
+          const head = `${flagFor(p.team)} <strong>${p.player}</strong> · ${p.team}${posTxt}<br/>índice global <strong>${p.global}</strong> · ${p.position ? "ponderado por posición" : "promedio"} · ${p.factors.length} factores`;
           const body = p.factors
             .map((f) => `${f.label}: índice <strong>${f.idx}</strong> · ${num(f.raw, f.suffix)}`)
             .join("<br/>");
@@ -184,7 +199,7 @@ export default function PlayerGlobalIndexRanking({ rows }: Props) {
           title: effectiveTeam === ALL ? "Índice global — top del torneo" : `Índice global — ${effectiveTeam}`,
           subtitle,
           insight: leader
-            ? `${leader.player} lidera con índice global ${leader.global} (promedio de sus ${leader.factors.length} factores medidos).`
+            ? `${leader.player} lidera con índice global ${leader.global}${leader.position ? ` (${POS_LABEL[leader.position] ?? leader.position})` : ""}, ponderado por posición sobre sus ${leader.factors.length} factores medidos.`
             : undefined,
           filenameBase: `indice-global-${effectiveTeam === ALL ? "torneo" : effectiveTeam}`,
         }}
@@ -192,10 +207,13 @@ export default function PlayerGlobalIndexRanking({ rows }: Props) {
       />
 
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-        <strong>Índice global</strong>: promedio del índice de rendimiento (0–100, calibrado al rango de todos los
-        jugadores medidos, estilo EA SPORTS FC) de cada factor físico y táctico del jugador. Tocá un jugador para ver el
-        desglose factor por factor con su valor oficial. Sólo se rankean jugadores con al menos {MIN_FACTORS} factores
-        cargados. Fuente: FIFA Training Centre (Mundial 2026 en curso); cobertura parcial según el scraper.
+        <strong>Índice global</strong>: el índice de rendimiento de cada factor (0–100, calibrado al rango de todos los
+        jugadores medidos) combinado con <strong>pesos según la posición</strong>, como el overall de EA SPORTS FC. A un
+        delantero le pesan más la velocidad, los sprints y la progresión; a un defensor, los quites, intercepciones y
+        recuperaciones; a un mediocampista, el pase y la circulación. Así un extremo no pierde por "pocos quites" ni un
+        central por "poca velocidad punta". Tocá un jugador para ver el desglose factor por factor con su valor oficial.
+        Sólo se rankean jugadores de campo con al menos {MIN_FACTORS} factores cargados (los arqueros quedan fuera: las
+        métricas de campo no los representan). Fuente: FIFA Training Centre (Mundial 2026 en curso); cobertura parcial.
       </p>
     </div>
   );
