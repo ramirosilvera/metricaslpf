@@ -5,7 +5,8 @@ import ConfidenceBadge from "../layouts/ConfidenceBadge.astro";
 import PlayerMinutesBar from "../islands/PlayerMinutesBar";
 import PhysicalPlayerBar from "../islands/PhysicalPlayerBar";
 import PositionPhysicalRanking from "../islands/PositionPhysicalRanking";
-import { loadJson, type PlayerMinutesRow, type PlayerPhysicalPositionRow } from "../lib/data";
+import PlayerGlobalIndexRanking from "../islands/PlayerGlobalIndexRanking";
+import { loadJson, type PlayerMinutesRow, type PlayerPhysicalPositionRow, type DerivedPlayerMetricRow } from "../lib/data";
 import type { PhysicalPlayerRankingRow } from "../islands/PhysicalPlayerBar";
 
 function loadArray<T>(filename: string): T[] {
@@ -16,6 +17,7 @@ function loadArray<T>(filename: string): T[] {
 const players = loadJson<PlayerMinutesRow[]>("player_minutes_ranking.json");
 const physicalPlayers = loadArray<PhysicalPlayerRankingRow>("physical_player_ranking.json");
 const byPosition = loadArray<PlayerPhysicalPositionRow>("player_physical_by_position.json");
+const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 ---
 
 <Base title="Jugadores" description="Ranking de minutos jugados y métricas físicas reales por jugador — Mundial 2026.">
@@ -27,6 +29,22 @@ const byPosition = loadArray<PlayerPhysicalPositionRow>("player_physical_by_posi
     promedio de equipo esconde que algunos corren mucho y otros poco — esta es la unidad correcta para poner a prueba la
     hipótesis. <em>Para la ficha completa de un jugador, entrá a Analizar.</em>
   </p>
+
+  {playerMetrics.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Índice global — el mejor de cada selección</h2>
+        <p>
+          El <strong>GLOBAL</strong> estilo EA SPORTS FC: un solo número (0–100) por jugador, promedio de su índice de
+          rendimiento en cada factor físico y táctico. Elegí una selección para ver a sus jugadores ordenados de mayor a
+          menor, o mirá el top del torneo. <em>Tocá un jugador para ver el desglose factor por factor.</em>
+        </p>
+      </div>
+      <div class="card">
+        <PlayerGlobalIndexRanking client:only="react" rows={playerMetrics} />
+      </div>
+    </section>
+  )}
 
   {byPosition.length > 0 && (
     <section class="section">

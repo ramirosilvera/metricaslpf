@@ -1,0 +1,202 @@
+import { useMemo, useState } from "react";
+import ShareableChart from "./ShareableChart";
+import type { DerivedPlayerMetricRow } from "../lib/data";
+import { useChartTokens, useIsNarrow } from "../lib/theme";
+import { flagFor } from "../lib/flags";
+import { makeIndexer, isLowerBetter } from "../lib/normalize";
+import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
+
+// Ranking por ÍNDICE GLOBAL (estilo "GLOBAL/OVR" de EA SPORTS FC): para cada
+// jugador se calcula el índice de rendimiento de cada factor (calibrado al rango
+// de TODOS los jugadores medidos) y se promedia -> un solo número 0-100. Se puede
+// ver por selección o el top de todo el torneo. Al tocar un jugador, el tooltip
+// muestra el desglose de cada factor (índice + valor oficial).
+
+const ALL = "__all__";
+// Índice global sólo si hay una base mínima de factores (si no, un jugador con
+// una sola métrica cargada podría "ganar" por ruido).
+const MIN_FACTORS = 4;
+const TOP_ALL = 25;
+
+interface Factor {
+  metric: string;
+  label: string;
+  idx: number;
+  raw: number;
+  suffix: string;
+}
+interface PlayerRow {
+  player: string;
+  team: string;
+  global: number;
+  factors: Factor[];
+}
+
+interface Props {
+  rows: DerivedPlayerMetricRow[];
+}
+
+export default function PlayerGlobalIndexRanking({ rows }: Props) {
+  const tokens = useChartTokens();
+  const narrow = useIsNarrow();
+
+  // Un indexador por métrica sobre TODOS los jugadores medidos (mismo criterio
+  // que la ficha de scout): estira el rango real a 40-100.
+  const indexers = useMemo(() => {
+    const map: Record<string, (v: number) => number> = {};
+    for (const m of PLAYER_RADAR_ORDER) {
+      const vals = rows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number);
+      map[m] = makeIndexer(vals, isLowerBetter(m));
+    }
+    return map;
+  }, [rows]);
+
+  // Agrupar por jugador -> factores + índice global (promedio de sus factores).
+  const players = useMemo<PlayerRow[]>(() => {
+    const byPlayer = new Map<string, { player: string; team: string; factors: Factor[] }>();
+    for (const r of rows) {
+      const def = PLAYER_METRIC_LABELS[r.metric];
+      if (!def || r.value == null) continue;
+      const key = `${r.team}|${r.player_name}`;
+      let e = byPlayer.get(key);
+      if (!e) {
+        e = { player: r.player_name, team: r.team, factors: [] };
+        byPlayer.set(key, e);
+      }
+      e.factors.push({
+        metric: r.metric,
+        label: def.label.replace(" / partido", ""),
+        idx: indexers[r.metric](r.value),
+        raw: r.value,
+        suffix: def.suffix,
+      });
+    }
+    return [...byPlayer.values()]
+      .filter((e) => e.factors.length >= MIN_FACTORS)
+      .map((e) => {
+        // ordenar factores físico->táctico (orden canónico) para el tooltip
+        e.factors.sort((a, b) => PLAYER_RADAR_ORDER.indexOf(a.metric) - PLAYER_RADAR_ORDER.indexOf(b.metric));
+        return {
+          ...e,
+          global: Math.round(e.factors.reduce((s, f) => s + f.idx, 0) / e.factors.length),
+        };
+      });
+  }, [rows, indexers]);
+
+  const teams = useMemo(() => [...new Set(players.map((p) => p.team))].sort(), [players]);
+  const [team, setTeam] = useState(() => (teams.includes("Argentina") ? "Argentina" : teams[0] ?? ALL));
+  const effectiveTeam = team === ALL || teams.includes(team) ? team : teams[0] ?? ALL;
+
+  // Filtrar por selección (o todas), ordenar por índice global desc.
+  const filtered = useMemo(() => {
+    const base = effectiveTeam === ALL ? players : players.filter((p) => p.team === effectiveTeam);
+    const sorted = [...base].sort((a, b) => b.global - a.global);
+    return effectiveTeam === ALL ? sorted.slice(0, TOP_ALL) : sorted;
+  }, [players, effectiveTeam]);
+
+  const num = (v: number, suffix: string) => `${Math.round(v * 10) / 10}${suffix}`;
+
+  const option = useMemo(() => {
+    if (filtered.length === 0) return {};
+    // ECharts pone la primera categoría abajo; invertimos para que el mejor
+    // quede ARRIBA.
+    const ordered = [...filtered].reverse();
+    const labels = ordered.map((p) => (effectiveTeam === ALL ? `${p.player} · ${p.team}` : p.player));
+    return {
+      grid: { left: 8, right: 44, top: 8, bottom: 8, containLabel: true },
+      tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
+        trigger: "axis",
+        axisPointer: { type: "shadow" },
+        backgroundColor: tokens["--surface-1"],
+        borderColor: tokens["--gridline"],
+        textStyle: { color: tokens["--text-primary"], fontSize: 12 },
+        formatter: (ps: any) => {
+          const i = Array.isArray(ps) ? ps[0]?.dataIndex : ps?.dataIndex;
+          const p = ordered[i];
+          if (!p) return "";
+          const head = `${flagFor(p.team)} <strong>${p.player}</strong> · ${p.team}<br/>índice global <strong>${p.global}</strong> · promedio de ${p.factors.length} factores`;
+          const body = p.factors
+            .map((f) => `${f.label}: índice <strong>${f.idx}</strong> · ${num(f.raw, f.suffix)}`)
+            .join("<br/>");
+          return `${head}<hr style="border:none;border-top:1px solid ${tokens["--gridline"]};margin:6px 0"/>${body}`;
+        },
+      },
+      xAxis: {
+        type: "value",
+        min: 0,
+        max: 100,
+        splitLine: { lineStyle: { color: tokens["--gridline"] } },
+        axisLabel: { color: tokens["--text-secondary"] },
+      },
+      yAxis: {
+        type: "category",
+        data: labels,
+        axisLabel: { color: tokens["--text-secondary"], fontSize: narrow ? 10 : 12 },
+        axisLine: { lineStyle: { color: tokens["--baseline"] } },
+      },
+      series: [
+        {
+          type: "bar",
+          data: ordered.map((p) => p.global),
+          barMaxWidth: 20,
+          itemStyle: { color: tokens["--brand"], borderRadius: [0, 4, 4, 0] },
+          label: {
+            show: true,
+            position: "right",
+            color: tokens["--text-primary"],
+            fontWeight: 700,
+            fontFamily: "ui-monospace, Menlo, monospace",
+          },
+        },
+      ],
+    };
+  }, [filtered, effectiveTeam, tokens, narrow]);
+
+  if (players.length === 0) {
+    return <p style={{ color: "var(--text-muted)" }}>Todavía no hay métricas por jugador cargadas para calcular el índice.</p>;
+  }
+
+  const chartHeight = Math.max(240, filtered.length * (narrow ? 26 : 30) + 40);
+  const leader = filtered[0];
+  const subtitle =
+    effectiveTeam === ALL
+      ? `Top ${filtered.length} del torneo por índice global · Mundial 2026`
+      : `${effectiveTeam} · jugadores por índice global · Mundial 2026`;
+
+  return (
+    <div>
+      <div className="controls-row">
+        <select value={effectiveTeam} onChange={(e) => setTeam(e.target.value)} aria-label="Selección">
+          <option value={ALL}>🌎 Todas las selecciones (top {TOP_ALL})</option>
+          {teams.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <ShareableChart
+        option={option}
+        style={{ height: chartHeight }}
+        share={{
+          title: effectiveTeam === ALL ? "Índice global — top del torneo" : `Índice global — ${effectiveTeam}`,
+          subtitle,
+          insight: leader
+            ? `${leader.player} lidera con índice global ${leader.global} (promedio de sus ${leader.factors.length} factores medidos).`
+            : undefined,
+          filenameBase: `indice-global-${effectiveTeam === ALL ? "torneo" : effectiveTeam}`,
+        }}
+        shareLabel="🖼️ Compartir ranking"
+      />
+
+      <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+        <strong>Índice global</strong>: promedio del índice de rendimiento (0–100, calibrado al rango de todos los
+        jugadores medidos, estilo EA SPORTS FC) de cada factor físico y táctico del jugador. Tocá un jugador para ver el
+        desglose factor por factor con su valor oficial. Sólo se rankean jugadores con al menos {MIN_FACTORS} factores
+        cargados. Fuente: FIFA Training Centre (Mundial 2026 en curso); cobertura parcial según el scraper.
+      </p>
+    </div>
+  );
+}

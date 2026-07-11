@@ -7,22 +7,7 @@ import ShareCardButton from "./ShareCardButton";
 import type { ShareStat } from "../lib/shareCard";
 import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
-
-const METRIC_LABELS: Record<string, { label: string; suffix: string; group: "físico" | "táctico" }> = {
-  distancia_promedio_km: { label: "Distancia / partido", suffix: " km", group: "físico" },
-  alta_intensidad_promedio_m: { label: "Alta intensidad / partido", suffix: " m", group: "físico" },
-  sprints_promedio: { label: "Sprints / partido", suffix: "", group: "físico" },
-  velocidad_punta_kmh: { label: "Velocidad punta", suffix: " km/h", group: "físico" },
-  pases_completados_promedio: { label: "Pases completados / partido", suffix: "", group: "táctico" },
-  precision_pases_promedio: { label: "Precisión de pase", suffix: "%", group: "táctico" },
-  progresiones_promedio: { label: "Progresiones de balón / partido", suffix: "", group: "táctico" },
-  tackles_ganados_promedio: { label: "Tackles ganados / partido", suffix: "", group: "táctico" },
-  intercepciones_promedio: { label: "Intercepciones / partido", suffix: "", group: "táctico" },
-  presion_directa_promedio: { label: "Presiones directas / partido", suffix: "", group: "táctico" },
-  recuperaciones_promedio: { label: "Recuperaciones de posesión / partido", suffix: "", group: "táctico" },
-};
-
-const RADAR_ORDER = Object.keys(METRIC_LABELS);
+import { PLAYER_METRIC_LABELS as METRIC_LABELS, PLAYER_RADAR_ORDER as RADAR_ORDER } from "../lib/playerMetrics";
 
 // Datos de plantel (squads.json) ya cruzados por nombre en build — la clave es
 // `${team}|${player_name}` con el nombre tal como aparece en las métricas.
