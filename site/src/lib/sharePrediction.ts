@@ -7,7 +7,6 @@
 import { shareCardBlob, type ShareResult } from "./shareCard";
 
 const W = 1080;
-const H = 1200;
 const PAD = 72;
 const BRAND = "#15a94f";
 const BRAND_DEEP = "#0a7a39";
@@ -28,7 +27,10 @@ export interface PredictionCardData {
   topScores: { a: number; b: number; p: number }[];
   fuerzaA: number;
   fuerzaB: number;
-  scenario: string;
+  /** Sub-índices (mismos que muestra la app): Físico, Ofensivo, Control, Defensivo, Individual. */
+  breakdown: { label: string; a: number; b: number }[];
+  /** Todos los escenarios de "cómo se puede desarrollar". */
+  scenarios: string[];
   url?: string;
 }
 
@@ -75,27 +77,50 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number, maxLine
   return lines;
 }
 
+const SCEN_FONT = `500 27px system-ui, -apple-system, Roboto, sans-serif`;
+const SCEN_LH = 37;
+
 export function composePredictionCard(d: PredictionCardData): Promise<Blob> {
   return new Promise((resolve, reject) => {
     try {
       const canvas = document.createElement("canvas");
-      canvas.width = W;
-      canvas.height = H;
       const ctx = canvas.getContext("2d");
       if (!ctx) return reject(new Error("Canvas no disponible"));
       const innerW = W - PAD * 2;
 
-      const g = ctx.createLinearGradient(0, 0, 0, H);
+      // --- posiciones fijas de la parte superior ---
+      const barY = 400;
+      const barH = 60;
+      const legY = barY + barH + 44; // 504
+      const scY = legY + 74; // 578 (marcadores)
+      const fY = scY + 128; // 706 (Fuerza)
+      const bdTop = fY + 96; // 802 (arranca el desglose)
+      const rowH = 50;
+      const bdBottom = bdTop + d.breakdown.length * rowH;
+      const scenHeadY = bdBottom + 40;
+      const scenFirstY = scenHeadY + 46;
+
+      // --- medir escenarios para el alto dinámico ---
+      ctx.font = SCEN_FONT;
+      const scenLines = d.scenarios.map((s) => wrap(ctx, s, innerW - 34, 3));
+      const scenBlockH = scenLines.reduce((sum, ls) => sum + ls.length * SCEN_LH + 18, 0);
+      const footerH = 88;
+      const totalH = scenFirstY + scenBlockH + 24 + footerH;
+
+      canvas.width = W;
+      canvas.height = totalH;
+
+      // fondo
+      const g = ctx.createLinearGradient(0, 0, 0, totalH);
       g.addColorStop(0, BRAND);
       g.addColorStop(1, BRAND_DEEP);
       ctx.fillStyle = g;
-      ctx.fillRect(0, 0, W, H);
+      ctx.fillRect(0, 0, W, totalH);
       ctx.strokeStyle = "rgba(255,255,255,0.10)";
       ctx.lineWidth = 4;
       ctx.beginPath();
       ctx.arc(W - 70, 130, 210, 0, Math.PI * 2);
       ctx.stroke();
-
       ctx.textBaseline = "alphabetic";
 
       // kicker
@@ -127,8 +152,6 @@ export function composePredictionCard(d: PredictionCardData): Promise<Blob> {
       ctx.fillText("goles esperados por el modelo", W / 2, 344);
 
       // barra de probabilidad 1-X-2
-      const barY = 400;
-      const barH = 60;
       ctx.save();
       roundRect(ctx, PAD, barY, innerW, barH, 16);
       ctx.clip();
@@ -145,7 +168,6 @@ export function composePredictionCard(d: PredictionCardData): Promise<Blob> {
         x += w;
       }
       ctx.restore();
-      // % dentro de cada segmento
       x = PAD;
       ctx.textBaseline = "middle";
       ctx.font = `800 30px system-ui, -apple-system, Roboto, sans-serif`;
@@ -160,18 +182,16 @@ export function composePredictionCard(d: PredictionCardData): Promise<Blob> {
       }
       ctx.textBaseline = "alphabetic";
 
-      // leyenda A · Empate · B
-      const legY = barY + barH + 44;
+      // leyenda
       ctx.font = `600 26px system-ui, -apple-system, Roboto, sans-serif`;
       const legend = [
         { c: d.colorA, t: `${clip(ctx, d.teamA, 240)} ganar` },
         { c: DRAW, t: "Empate" },
         { c: d.colorB, t: `${clip(ctx, d.teamB, 240)} ganar` },
       ];
-      // medir para centrar la fila
       const dot = 20;
       const gap = 18;
-      const itemGap = 44;
+      const itemGap = 40;
       const widths = legend.map((l) => dot + gap + ctx.measureText(l.t).width);
       const totalLeg = widths.reduce((a, b) => a + b, 0) + itemGap * 2;
       let lx = W / 2 - totalLeg / 2;
@@ -185,8 +205,7 @@ export function composePredictionCard(d: PredictionCardData): Promise<Blob> {
         lx += widths[i] + itemGap;
       });
 
-      // marcadores más probables
-      const scY = legY + 74;
+      // marcadores
       ctx.textAlign = "center";
       ctx.fillStyle = SOFTER;
       ctx.font = `600 26px system-ui, -apple-system, Roboto, sans-serif`;
@@ -196,33 +215,80 @@ export function composePredictionCard(d: PredictionCardData): Promise<Blob> {
       const chips = d.topScores.slice(0, 3).map((s) => `${s.a}-${s.b} (${Math.round(s.p * 100)}%)`).join("    ");
       ctx.fillText(clip(ctx, chips, innerW), W / 2, scY + 52);
 
-      // fuerza
-      const fY = scY + 128;
+      // Fuerza (número grande) + desglose de sub-índices
       ctx.font = `500 26px system-ui, -apple-system, Roboto, sans-serif`;
       ctx.fillStyle = SOFTER;
       ctx.textAlign = "center";
-      ctx.fillText("FUERZA (rendimiento observado)", W / 2, fY);
-      ctx.font = `800 52px system-ui, -apple-system, Roboto, sans-serif`;
+      ctx.fillText("FUERZA · rendimiento observado", W / 2, fY);
+      ctx.font = `800 50px system-ui, -apple-system, Roboto, sans-serif`;
       ctx.textAlign = "left";
       ctx.fillStyle = d.colorA;
-      ctx.fillText(String(d.fuerzaA), PAD, fY + 56);
+      ctx.fillText(String(d.fuerzaA), PAD, fY + 52);
       ctx.textAlign = "right";
       ctx.fillStyle = d.colorB;
-      ctx.fillText(String(d.fuerzaB), W - PAD, fY + 56);
+      ctx.fillText(String(d.fuerzaB), W - PAD, fY + 52);
 
-      // escenario clave
-      const esY = fY + 128;
+      // sub-índices: [val A][barra A]  etiqueta  [barra B][val B], ganador resaltado
+      const sbW = 150;
+      const sbH = 8;
+      d.breakdown.forEach((r, i) => {
+        const by = bdTop + i * rowH + 30;
+        const barMid = by - 10;
+        const aBest = r.a > r.b;
+        const bBest = r.b > r.a;
+        // etiqueta
+        ctx.textAlign = "center";
+        ctx.fillStyle = SOFT;
+        ctx.font = `500 25px system-ui, -apple-system, Roboto, sans-serif`;
+        ctx.fillText(clip(ctx, r.label, innerW - (sbW + 70) * 2), W / 2, by);
+        // A
+        ctx.textAlign = "left";
+        ctx.font = `${aBest ? 800 : 600} 27px ui-monospace, Menlo, monospace`;
+        ctx.fillStyle = aBest ? d.colorA : SOFT;
+        ctx.fillText(String(r.a), PAD, by);
+        const aBarX = PAD + 52;
+        ctx.fillStyle = "rgba(255,255,255,0.16)";
+        roundRect(ctx, aBarX, barMid, sbW, sbH, 4);
+        ctx.fill();
+        ctx.fillStyle = d.colorA;
+        roundRect(ctx, aBarX, barMid, Math.max(4, (sbW * clampPct(r.a)) / 100), sbH, 4);
+        ctx.fill();
+        // B
+        ctx.textAlign = "right";
+        ctx.font = `${bBest ? 800 : 600} 27px ui-monospace, Menlo, monospace`;
+        ctx.fillStyle = bBest ? d.colorB : SOFT;
+        ctx.fillText(String(r.b), W - PAD, by);
+        const bBarX = W - PAD - 52 - sbW;
+        ctx.fillStyle = "rgba(255,255,255,0.16)";
+        roundRect(ctx, bBarX, barMid, sbW, sbH, 4);
+        ctx.fill();
+        const bFill = Math.max(4, (sbW * clampPct(r.b)) / 100);
+        ctx.fillStyle = d.colorB;
+        roundRect(ctx, bBarX + sbW - bFill, barMid, bFill, sbH, 4);
+        ctx.fill();
+      });
+
+      // escenarios (todos)
       ctx.textAlign = "left";
       ctx.fillStyle = SOFTER;
       ctx.font = `700 24px system-ui, -apple-system, Roboto, sans-serif`;
-      ctx.fillText("CÓMO SE PUEDE DESARROLLAR", PAD, esY);
-      ctx.fillStyle = SOFT;
-      ctx.font = `500 30px system-ui, -apple-system, Roboto, sans-serif`;
-      wrap(ctx, d.scenario, innerW, 3).forEach((ln, i) => ctx.fillText(ln, PAD, esY + 46 + i * 40));
+      ctx.fillText("CÓMO SE PUEDE DESARROLLAR", PAD, scenHeadY);
+      let cy = scenFirstY;
+      scenLines.forEach((lines) => {
+        // viñeta
+        ctx.fillStyle = "rgba(255,255,255,0.55)";
+        ctx.beginPath();
+        ctx.arc(PAD + 6, cy - 9, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = SOFT;
+        ctx.font = SCEN_FONT;
+        lines.forEach((ln, li) => ctx.fillText(ln, PAD + 30, cy + li * SCEN_LH));
+        cy += lines.length * SCEN_LH + 18;
+      });
 
       // pie
       ctx.fillStyle = FOOTER;
-      ctx.fillRect(0, H - 88, W, 88);
+      ctx.fillRect(0, totalH - footerH, W, footerH);
       let urlText = "";
       let urlW = 0;
       if (d.url) {
@@ -233,12 +299,12 @@ export function composePredictionCard(d: PredictionCardData): Promise<Blob> {
       ctx.fillStyle = WHITE;
       ctx.font = `700 24px system-ui, -apple-system, Roboto, sans-serif`;
       ctx.textAlign = "left";
-      ctx.fillText(clip(ctx, "modelo por rendimiento · no es una predicción profesional", innerW - urlW - 24), PAD, H - 34);
+      ctx.fillText(clip(ctx, "modelo por rendimiento · no es una predicción profesional", innerW - urlW - 24), PAD, totalH - 34);
       if (urlText) {
         ctx.fillStyle = SOFTER;
         ctx.font = `500 22px ui-monospace, Menlo, monospace`;
         ctx.textAlign = "right";
-        ctx.fillText(urlText, W - PAD, H - 33);
+        ctx.fillText(urlText, W - PAD, totalH - 33);
       }
 
       canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("No se pudo generar la imagen"))), "image/png");
@@ -247,6 +313,8 @@ export function composePredictionCard(d: PredictionCardData): Promise<Blob> {
     }
   });
 }
+
+const clampPct = (v: number) => Math.max(0, Math.min(100, v));
 
 const round1 = (v: number) => Math.round(v * 10) / 10;
 

@@ -68,7 +68,8 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
         topScores: pred.topScores,
         fuerzaA: A.fuerza,
         fuerzaB: B.fuerza,
-        scenario: pred.scenarios[0] ?? "",
+        breakdown: rows,
+        scenarios: pred.scenarios,
       });
       if (r === "downloaded") {
         setNote("Imagen descargada ✓");
