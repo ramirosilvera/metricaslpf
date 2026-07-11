@@ -1,16 +1,17 @@
 ---
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
-import TeamMetricsRadar from "../islands/TeamMetricsRadar";
+import TeamProfileRadar from "../islands/TeamProfileRadar";
 import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
 import SquadDepthChart from "../islands/SquadDepthChart";
 import GoalsVsPhysical from "../islands/GoalsVsPhysical";
 import {
   loadJson,
-  type DerivedTeamMetricRow,
   type DerivedPlayerMetricRow,
   type SquadPlayerRow,
   type GoalsVsPhysicalRow,
+  type TeamPhysicalRankingRow,
+  type TeamTacticalRankingRow,
 } from "../lib/data";
 
 const base = import.meta.env.BASE_URL;
@@ -20,7 +21,8 @@ function loadArray<T>(filename: string): T[] {
   return Array.isArray(raw) ? raw : [];
 }
 
-const teamMetrics = loadArray<DerivedTeamMetricRow>("derived_team_metrics.json");
+const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
+const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
 const goalsVsPhysical = loadArray<GoalsVsPhysicalRow>("goals_vs_physical.json");
@@ -71,18 +73,23 @@ for (const row of playerMetrics) {
   <h1>Analizar en profundidad</h1>
   <p class="lede">
     Ni tabla ni duelo: acá entrás en <strong>un</strong> caso puntual y cruzás sus datos. Los goles vs. el físico de un
-    partido, el radar multi-fuente de una selección, el perfil del plantel y la ficha física-táctica de un jugador —
+    partido, el radar físico-táctico completo de una selección, el perfil del plantel y la ficha de un jugador —
     pensado para leerse como el reporte de un analista de video. <em>Para ordenar a todos usá Rankings; para enfrentar
     dos, Comparar.</em>
   </p>
 
   <section class="section">
     <div class="section-head">
-      <h2>Radar cabeza a cabeza (todas las fuentes)</h2>
-      <p>Combina táctico, físico y plantel en un mismo radar cuando hay datos de las tres fuentes.</p>
+      <h2>Radar completo de selección — físico + táctico</h2>
+      <p>
+        Los <strong>12 factores</strong> de una selección del Mundial 2026 en un solo radar: físico (distancia, alta
+        intensidad, sprints, velocidad) y táctico (precisión, progresiones, remates, presión, recuperaciones, tackles,
+        intercepciones, quiebres de línea), con el <strong>índice GLOBAL</strong> de cada una. <em>Tocá el radar para ver
+        el valor oficial de cada factor.</em>
+      </p>
     </div>
     <div class="card">
-      <TeamMetricsRadar client:only="react" rows={teamMetrics} />
+      <TeamProfileRadar client:only="react" physicalRows={teamPhysical} tacticalRows={teamTactical} />
     </div>
   </section>
 
