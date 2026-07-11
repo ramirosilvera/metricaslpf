@@ -42,6 +42,7 @@ export default function TeamPhysicalTrend({ rows }: Props) {
     color: [tokens["--series-1"]],
     grid: { left: narrow ? 44 : 62, right: narrow ? 14 : 30, top: 20, bottom: narrow ? 78 : 64 },
     tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
       trigger: "axis",
       backgroundColor: tokens["--surface-1"],
       borderColor: tokens["--gridline"],

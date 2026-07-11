@@ -43,6 +43,7 @@ export default function GoalsVsPhysical({ rows }: Props) {
       color: [tokens["--series-1"], tokens["--brand"] ?? tokens["--series-6"]],
       grid: { left: narrow ? 44 : 56, right: narrow ? 14 : 24, top: 20, bottom: narrow ? 78 : 56 },
       tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],
         textStyle: { color: tokens["--text-primary"] },

@@ -39,6 +39,7 @@ export default function MetricHeatmap({ rows }: Props) {
   const option = {
     grid: { left: narrow ? 96 : 150, right: narrow ? 8 : 20, top: 30, bottom: narrow ? 84 : 60 },
     tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
       backgroundColor: tokens["--surface-1"],
       borderColor: tokens["--gridline"],
       textStyle: { color: tokens["--text-primary"] },

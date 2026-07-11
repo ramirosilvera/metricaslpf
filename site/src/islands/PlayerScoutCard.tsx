@@ -162,6 +162,7 @@ export default function PlayerScoutCard({ rows, squad }: Props) {
     if (radarMetrics.length < 3) return null;
     return {
       tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],
         textStyle: { color: tokens["--text-primary"] },

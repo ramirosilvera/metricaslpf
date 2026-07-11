@@ -74,6 +74,7 @@ export default function SquadDepthChart({ rows }: Props) {
     grid: { left: narrow ? 44 : 60, right: narrow ? 14 : 30, top: 30, bottom: narrow ? 54 : 46 },
     legend: { top: 0, textStyle: { color: tokens["--text-secondary"] }, data: POS_ORDER.filter((pos) => squad.some((p) => p.position === pos)) },
     tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
       backgroundColor: tokens["--surface-1"],
       borderColor: tokens["--gridline"],
       textStyle: { color: tokens["--text-primary"] },

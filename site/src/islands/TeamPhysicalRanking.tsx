@@ -61,6 +61,7 @@ export default function TeamPhysicalRanking({ rows }: Props) {
   const option = {
     grid: { left: narrow ? 92 : 130, right: narrow ? 16 : 44, top: 10, bottom: 30 },
     tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
       trigger: "axis",
       axisPointer: { type: "none" },
       backgroundColor: tokens["--surface-1"],

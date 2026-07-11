@@ -36,6 +36,7 @@ export default function TimelineChart({ rows2026, rows }: Props) {
       color: [tokens["--series-1"], tokens["--series-4"]],
       grid: { left: narrow ? 40 : 55, right: narrow ? 40 : 58, top: narrow ? 48 : 30, bottom: narrow ? 82 : 64 },
       tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
         trigger: "axis",
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],
@@ -106,6 +107,7 @@ export default function TimelineChart({ rows2026, rows }: Props) {
       color: [tokens["--series-1"], tokens["--series-3"]],
       grid: { left: narrow ? 38 : 55, right: narrow ? 12 : 55, top: narrow ? 48 : 30, bottom: narrow ? 70 : 60 },
       tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
         trigger: "axis",
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],

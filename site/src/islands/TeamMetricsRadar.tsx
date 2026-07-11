@@ -82,6 +82,7 @@ export default function TeamMetricsRadar({ rows }: Props) {
     return {
       color: [tokens["--series-6"], tokens["--series-1"]],
       tooltip: {
+        confine: true, // el tooltip no se sale de la pantalla en móvil
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],
         textStyle: { color: tokens["--text-primary"] },
