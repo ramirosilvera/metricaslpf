@@ -1,49 +1,49 @@
 team,fifa_code,group,fifa_ranking,fifa_ranking_prev,base_camp_city,base_camp_facility,base_camp_country,base_camp_lat,base_camp_lon,source,retrieved_at
-Algeria,ALG,J,28,28,Lawrence,University of Kansas,US,38.97167,-95.23525,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Argentina,ARG,J,1,3,Kansas City,Sporting KC Training Centre,US,39.09973,-94.57857,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Australia,AUS,D,27,27,Oakland,Oakland Roots/Soul Training Facility,US,37.80437,-122.2708,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Austria,AUT,J,24,24,Goleta,UC Santa Barbara - Harder Stadium,US,34.43583,-119.82764,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Belgium,BEL,G,9,9,Renton,Seattle Sounders FC Performance Centre and Clubhouse,US,47.48288,-122.21707,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Bosnia and Herzegovina,BIH,B,64,65,Sandy,RSL Stadium,US,40.59161,-111.8841,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Brazil,BRA,C,6,6,Morristown,Columbia Park Training Facility,US,36.21398,-83.29489,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Canada,CAN,B,30,30,Vancouver,National Soccer Development Centre,CA,49.24966,-123.11934,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Côte d'Ivoire,CIV,E,33,34,Chester,Philadelphia Union,US,37.91366,-89.82205,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Congo DR,COD,K,46,46,Houston,Houston Training Centre,US,29.76328,-95.36327,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Colombia,COL,K,13,13,Guadalajara,Academia Atlas FC,MX,20.67738,-103.34749,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Cabo Verde,CPV,H,67,69,Tampa,Waters Sportsplex,US,27.94752,-82.45843,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Croatia,CRO,L,11,11,Alexandria,Episcopal High School,US,38.80484,-77.04692,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Curaçao,CUW,E,82,82,Boca Raton,Florida Atlantic University,US,26.35869,-80.0831,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Czechia,CZE,A,40,41,Mansfield,Mansfield Multipurpose Stadium,US,40.75839,-82.51545,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Ecuador,ECU,E,23,23,Columbus,Columbus Crew Performance Centre,US,39.96118,-82.99879,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Egypt,EGY,G,29,29,Spokane,Gonzaga University,US,47.65966,-117.42908,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-England,ENG,L,4,4,Kansas City,Swope Soccer Village,US,39.09973,-94.57857,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Spain,ESP,H,2,2,Chattanooga,Baylor School,US,35.04563,-85.30968,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-France,FRA,I,3,1,Boston,Bentley University,US,42.35843,-71.05977,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Germany,GER,E,10,10,Winston-Salem,Wake Forest University,US,36.09986,-80.24422,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Ghana,GHA,L,73,74,Smithfield,Bryant University,US,35.50849,-78.33945,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Haiti,HAI,C,83,83,Galloway,Stockton University,US,39.23176,-80.12203,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-IR Iran,IRN,G,20,21,Tijuana,Centro Xoloitzcuintle,MX,32.5027,-117.00371,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Iraq,IRQ,I,57,57,White Sulphur Springs,The Greenbrier Sports Performance Centre,US,46.54828,-110.90216,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Jordan,JOR,J,63,63,Portland,University of Portland,US,45.52345,-122.67621,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Japan,JPN,F,18,18,Nashville,Nashville SC,US,36.16589,-86.78444,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Korea Republic,KOR,A,25,25,Guadalajara,Chivas Verde Valle,MX,20.67738,-103.34749,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Saudi Arabia,KSA,H,61,61,Austin,Austin FC Stadium,US,30.26715,-97.74306,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Morocco,MAR,C,7,8,Basking Ridge,The Pingry School,US,40.70621,-74.54932,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Mexico,MEX,A,14,15,Mexico City,Centro de Alto Rendimiento (CAR),MX,19.42847,-99.12766,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Netherlands,NED,F,8,7,Kansas City,KC Current Training Facility,US,39.09973,-94.57857,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Norway,NOR,I,31,31,Greensboro,UNC Greensboro,US,36.07264,-79.79198,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-New Zealand,NZL,G,85,85,San Diego,University of San Diego - Torero Stadium,US,32.71571,-117.16472,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Panama,PAN,L,34,33,New Tecumseth,Nottawasaga Training Site,CA,,,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Paraguay,PAR,D,41,40,San Jose,Spartan Soccer Complex,US,37.33939,-121.89496,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Portugal,POR,K,5,5,Palm Beach Gardens,Gardens North County District Park,US,26.82339,-80.13865,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Qatar,QAT,B,56,55,Santa Barbara,Westmont College,US,34.42083,-119.69819,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-South Africa,RSA,A,60,60,Pachuca,CF Pachuca - Universidad del Futbol,MX,20.11697,-98.73329,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Scotland,SCO,C,42,43,Charlotte,Charlotte FC,US,35.22709,-80.84313,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Senegal,SEN,I,15,14,New Brunswick,Rutgers University,US,40.48622,-74.45182,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Switzerland,SUI,B,19,19,San Diego,San Diego Jewish Academy (SDJA),US,32.71571,-117.16472,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Sweden,SWE,F,38,38,Frisco,FC Dallas Stadium,US,33.15067,-96.82361,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Tunisia,TUN,F,45,44,Monterrey,Rayados Training Centre,MX,25.68435,-100.31721,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Türkiye,TUR,D,22,22,Mesa,Arizona Athletic Grounds,US,33.42227,-111.82264,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Uruguay,URU,H,16,17,Playa del Carmen,Mayakoba Training Centre Cancun,MX,20.6274,-87.07987,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-USA,USA,D,17,16,Irvine,Great Park Sports Complex,US,33.66946,-117.82311,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
-Uzbekistan,UZB,K,50,50,Marietta,Atlanta United Training Centre,US,33.9526,-84.54993,26worldcup (FIFA public API),2026-07-12T08:00:39.450838+00:00
+Algeria,ALG,J,28,28,Lawrence,University of Kansas,US,38.97167,-95.23525,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Argentina,ARG,J,1,3,Kansas City,Sporting KC Training Centre,US,39.09973,-94.57857,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Australia,AUS,D,27,27,Oakland,Oakland Roots/Soul Training Facility,US,37.80437,-122.2708,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Austria,AUT,J,24,24,Goleta,UC Santa Barbara - Harder Stadium,US,34.43583,-119.82764,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Belgium,BEL,G,9,9,Renton,Seattle Sounders FC Performance Centre and Clubhouse,US,47.48288,-122.21707,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Bosnia and Herzegovina,BIH,B,64,65,Sandy,RSL Stadium,US,40.59161,-111.8841,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Brazil,BRA,C,6,6,Morristown,Columbia Park Training Facility,US,36.21398,-83.29489,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Canada,CAN,B,30,30,Vancouver,National Soccer Development Centre,CA,49.24966,-123.11934,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Côte d'Ivoire,CIV,E,33,34,Chester,Philadelphia Union,US,37.91366,-89.82205,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Congo DR,COD,K,46,46,Houston,Houston Training Centre,US,29.76328,-95.36327,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Colombia,COL,K,13,13,Guadalajara,Academia Atlas FC,MX,20.67738,-103.34749,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Cabo Verde,CPV,H,67,69,Tampa,Waters Sportsplex,US,27.94752,-82.45843,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Croatia,CRO,L,11,11,Alexandria,Episcopal High School,US,38.80484,-77.04692,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Curaçao,CUW,E,82,82,Boca Raton,Florida Atlantic University,US,26.35869,-80.0831,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Czechia,CZE,A,40,41,Mansfield,Mansfield Multipurpose Stadium,US,40.75839,-82.51545,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Ecuador,ECU,E,23,23,Columbus,Columbus Crew Performance Centre,US,39.96118,-82.99879,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Egypt,EGY,G,29,29,Spokane,Gonzaga University,US,47.65966,-117.42908,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+England,ENG,L,4,4,Kansas City,Swope Soccer Village,US,39.09973,-94.57857,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Spain,ESP,H,2,2,Chattanooga,Baylor School,US,35.04563,-85.30968,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+France,FRA,I,3,1,Boston,Bentley University,US,42.35843,-71.05977,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Germany,GER,E,10,10,Winston-Salem,Wake Forest University,US,36.09986,-80.24422,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Ghana,GHA,L,73,74,Smithfield,Bryant University,US,35.50849,-78.33945,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Haiti,HAI,C,83,83,Galloway,Stockton University,US,39.23176,-80.12203,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+IR Iran,IRN,G,20,21,Tijuana,Centro Xoloitzcuintle,MX,32.5027,-117.00371,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Iraq,IRQ,I,57,57,White Sulphur Springs,The Greenbrier Sports Performance Centre,US,46.54828,-110.90216,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Jordan,JOR,J,63,63,Portland,University of Portland,US,45.52345,-122.67621,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Japan,JPN,F,18,18,Nashville,Nashville SC,US,36.16589,-86.78444,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Korea Republic,KOR,A,25,25,Guadalajara,Chivas Verde Valle,MX,20.67738,-103.34749,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Saudi Arabia,KSA,H,61,61,Austin,Austin FC Stadium,US,30.26715,-97.74306,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Morocco,MAR,C,7,8,Basking Ridge,The Pingry School,US,40.70621,-74.54932,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Mexico,MEX,A,14,15,Mexico City,Centro de Alto Rendimiento (CAR),MX,19.42847,-99.12766,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Netherlands,NED,F,8,7,Kansas City,KC Current Training Facility,US,39.09973,-94.57857,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Norway,NOR,I,31,31,Greensboro,UNC Greensboro,US,36.07264,-79.79198,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+New Zealand,NZL,G,85,85,San Diego,University of San Diego - Torero Stadium,US,32.71571,-117.16472,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Panama,PAN,L,34,33,New Tecumseth,Nottawasaga Training Site,CA,,,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Paraguay,PAR,D,41,40,San Jose,Spartan Soccer Complex,US,37.33939,-121.89496,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Portugal,POR,K,5,5,Palm Beach Gardens,Gardens North County District Park,US,26.82339,-80.13865,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Qatar,QAT,B,56,55,Santa Barbara,Westmont College,US,34.42083,-119.69819,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+South Africa,RSA,A,60,60,Pachuca,CF Pachuca - Universidad del Futbol,MX,20.11697,-98.73329,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Scotland,SCO,C,42,43,Charlotte,Charlotte FC,US,35.22709,-80.84313,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Senegal,SEN,I,15,14,New Brunswick,Rutgers University,US,40.48622,-74.45182,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Switzerland,SUI,B,19,19,San Diego,San Diego Jewish Academy (SDJA),US,32.71571,-117.16472,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Sweden,SWE,F,38,38,Frisco,FC Dallas Stadium,US,33.15067,-96.82361,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Tunisia,TUN,F,45,44,Monterrey,Rayados Training Centre,MX,25.68435,-100.31721,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Türkiye,TUR,D,22,22,Mesa,Arizona Athletic Grounds,US,33.42227,-111.82264,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Uruguay,URU,H,16,17,Playa del Carmen,Mayakoba Training Centre Cancun,MX,20.6274,-87.07987,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+USA,USA,D,17,16,Irvine,Great Park Sports Complex,US,33.66946,-117.82311,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
+Uzbekistan,UZB,K,50,50,Marietta,Atlanta United Training Centre,US,33.9526,-84.54993,26worldcup (FIFA public API),2026-07-12T12:57:01.505136+00:00
