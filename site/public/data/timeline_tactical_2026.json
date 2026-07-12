@@ -90,6 +90,16 @@
     "presiones": 36
   },
   {
+    "team": "Argentina",
+    "match_id": 20260100,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "rival": "Switzerland",
+    "pass_accuracy_pct": 87.8,
+    "progresiones": 21,
+    "presiones": 35
+  },
+  {
     "team": "Australia",
     "match_id": 20260006,
     "match_date": "2026-06-13",
@@ -780,6 +790,16 @@
     "presiones": 36
   },
   {
+    "team": "England",
+    "match_id": 20260099,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "rival": "Norway",
+    "pass_accuracy_pct": 90.8,
+    "progresiones": 40,
+    "presiones": 51
+  },
+  {
     "team": "France",
     "match_id": 20260017,
     "match_date": "2026-06-16",
@@ -1340,6 +1360,16 @@
     "presiones": 23
   },
   {
+    "team": "Norway",
+    "match_id": 20260099,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "rival": "England",
+    "pass_accuracy_pct": 86.6,
+    "progresiones": 23,
+    "presiones": 56
+  },
+  {
     "team": "Panama",
     "match_id": 20260021,
     "match_date": "2026-06-17",
@@ -1788,6 +1818,16 @@
     "pass_accuracy_pct": 87.5,
     "progresiones": 26,
     "presiones": 60
+  },
+  {
+    "team": "Switzerland",
+    "match_id": 20260100,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "rival": "Argentina",
+    "pass_accuracy_pct": 84.9,
+    "progresiones": 34,
+    "presiones": 47
   },
   {
     "team": "Tunisia",

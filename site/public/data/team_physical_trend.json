@@ -117,6 +117,19 @@
     "top_speed_kmh": 33.4
   },
   {
+    "team": "Argentina",
+    "match_id": 20260100,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "rival": "Switzerland",
+    "es_local": true,
+    "jornada": 6,
+    "total_distance_km": 136.75,
+    "high_intensity_distance_m": 7810.4,
+    "sprint_count": 430.0,
+    "top_speed_kmh": 35.0
+  },
+  {
     "team": "Australia",
     "match_id": 20260006,
     "match_date": "2026-06-13",
@@ -1014,6 +1027,19 @@
     "top_speed_kmh": 35.8
   },
   {
+    "team": "England",
+    "match_id": 20260099,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "rival": "Norway",
+    "es_local": false,
+    "jornada": 6,
+    "total_distance_km": 140.79,
+    "high_intensity_distance_m": 7447.5,
+    "sprint_count": 442.0,
+    "top_speed_kmh": 35.2
+  },
+  {
     "team": "France",
     "match_id": 20260017,
     "match_date": "2026-06-16",
@@ -1742,6 +1768,19 @@
     "top_speed_kmh": 33.1
   },
   {
+    "team": "Norway",
+    "match_id": 20260099,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "rival": "England",
+    "es_local": true,
+    "jornada": 6,
+    "total_distance_km": 148.94,
+    "high_intensity_distance_m": 8191.9,
+    "sprint_count": 484.0,
+    "top_speed_kmh": 35.1
+  },
+  {
     "team": "Panama",
     "match_id": 20260021,
     "match_date": "2026-06-17",
@@ -2325,6 +2364,19 @@
     "high_intensity_distance_m": 8552.1,
     "sprint_count": 518.0,
     "top_speed_kmh": 34.7
+  },
+  {
+    "team": "Switzerland",
+    "match_id": 20260100,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "rival": "Argentina",
+    "es_local": false,
+    "jornada": 6,
+    "total_distance_km": 138.04,
+    "high_intensity_distance_m": 7616.2,
+    "sprint_count": 434.0,
+    "top_speed_kmh": 33.6
   },
   {
     "team": "Tunisia",

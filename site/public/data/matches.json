@@ -1524,5 +1524,33 @@
     "away_score": 1,
     "stadium": "Los Angeles Stadium",
     "referee": null
+  },
+  {
+    "match_id": 20260099,
+    "competition": "FIFA World Cup",
+    "season": "2026",
+    "stage": "Quarter-final",
+    "group": null,
+    "match_date": "2026-07-11",
+    "home_team": "Norway",
+    "away_team": "England",
+    "home_score": 1,
+    "away_score": 2,
+    "stadium": "Miami Stadium",
+    "referee": null
+  },
+  {
+    "match_id": 20260100,
+    "competition": "FIFA World Cup",
+    "season": "2026",
+    "stage": "Quarter-final",
+    "group": null,
+    "match_date": "2026-07-11",
+    "home_team": "Argentina",
+    "away_team": "Switzerland",
+    "home_score": 3,
+    "away_score": 1,
+    "stadium": "Kansas City Stadium",
+    "referee": null
   }
 ]

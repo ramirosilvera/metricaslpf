@@ -2742,5 +2742,61 @@
     "home_team": "Spain",
     "away_team": "Belgium",
     "rival": "Spain"
+  },
+  {
+    "match_id": 20260100,
+    "team": "Argentina",
+    "total_distance_km": 136.75,
+    "high_intensity_distance_m": 7810.4,
+    "sprint_count": 430.0,
+    "top_speed_kmh": 35.0,
+    "goles_marcados": 0,
+    "stage": "Quarter-final",
+    "match_date": "2026-07-11",
+    "home_team": "Argentina",
+    "away_team": "Switzerland",
+    "rival": "Switzerland"
+  },
+  {
+    "match_id": 20260100,
+    "team": "Switzerland",
+    "total_distance_km": 138.04,
+    "high_intensity_distance_m": 7616.2,
+    "sprint_count": 434.0,
+    "top_speed_kmh": 33.6,
+    "goles_marcados": 0,
+    "stage": "Quarter-final",
+    "match_date": "2026-07-11",
+    "home_team": "Argentina",
+    "away_team": "Switzerland",
+    "rival": "Argentina"
+  },
+  {
+    "match_id": 20260099,
+    "team": "Norway",
+    "total_distance_km": 148.94,
+    "high_intensity_distance_m": 8191.9,
+    "sprint_count": 484.0,
+    "top_speed_kmh": 35.1,
+    "goles_marcados": 0,
+    "stage": "Quarter-final",
+    "match_date": "2026-07-11",
+    "home_team": "Norway",
+    "away_team": "England",
+    "rival": "England"
+  },
+  {
+    "match_id": 20260099,
+    "team": "England",
+    "total_distance_km": 140.79,
+    "high_intensity_distance_m": 7447.5,
+    "sprint_count": 442.0,
+    "top_speed_kmh": 35.2,
+    "goles_marcados": 0,
+    "stage": "Quarter-final",
+    "match_date": "2026-07-11",
+    "home_team": "Norway",
+    "away_team": "England",
+    "rival": "Norway"
   }
 ]

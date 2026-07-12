@@ -1,5 +1,67 @@
 [
   {
+    "match_id": 20260100,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "home_team": "Argentina",
+    "away_team": "Switzerland",
+    "home_score": 3,
+    "away_score": 1,
+    "home": {
+      "distancia_km": 136.75,
+      "alta_intensidad_m": 7810.4,
+      "sprints": 430.0,
+      "velocidad_punta_kmh": 35.0,
+      "remates": 22,
+      "pases": 629,
+      "posesion_pct": 60.9
+    },
+    "away": {
+      "distancia_km": 138.04,
+      "alta_intensidad_m": 7616.2,
+      "sprints": 434.0,
+      "velocidad_punta_kmh": 33.6,
+      "remates": 11,
+      "pases": 404,
+      "posesion_pct": 39.1
+    },
+    "goleadores": [],
+    "goles_contra": [],
+    "destacado": null,
+    "insight": "Argentina venció 3-1 a Switzerland. Argentina manejó más la pelota (60.9% de los pases)."
+  },
+  {
+    "match_id": 20260099,
+    "match_date": "2026-07-11",
+    "stage": "Quarter-final",
+    "home_team": "Norway",
+    "away_team": "England",
+    "home_score": 1,
+    "away_score": 2,
+    "home": {
+      "distancia_km": 148.94,
+      "alta_intensidad_m": 8191.9,
+      "sprints": 484.0,
+      "velocidad_punta_kmh": 35.1,
+      "remates": 13,
+      "pases": 504,
+      "posesion_pct": 45.9
+    },
+    "away": {
+      "distancia_km": 140.79,
+      "alta_intensidad_m": 7447.5,
+      "sprints": 442.0,
+      "velocidad_punta_kmh": 35.2,
+      "remates": 14,
+      "pases": 593,
+      "posesion_pct": 54.1
+    },
+    "goleadores": [],
+    "goles_contra": [],
+    "destacado": null,
+    "insight": "England venció 2-1 a Norway. Norway recorrió más (148.94 vs 140.79 km). England manejó más la pelota (54.1% de los pases)."
+  },
+  {
     "match_id": 20260098,
     "match_date": "2026-07-10",
     "stage": "Quarter-final",
