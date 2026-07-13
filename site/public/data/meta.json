@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T08:49:54.152744+00:00",
+  "generated_at": "2026-07-13T14:07:15.156818+00:00",
   "confidence_legend": {
     "alta": "Dato oficial (FIFA Training Centre / StatsBomb) o verificado contra fuente oficial, con cobertura alta.",
     "media": "Fuente verificada pero con cobertura parcial o en proceso de carga (backfill).",
@@ -25,7 +25,7 @@
       "coverage_detail": "11 partidos cargados de 2018, 2022",
       "method": "Eventos oficiales de StatsBomb; la posesión es un proxy por duración de eventos, no tracking.",
       "confidence": "media",
-      "as_of": "2026-07-13T08:49:54.152744+00:00",
+      "as_of": "2026-07-13T14:07:15.156818+00:00",
       "status": "ok"
     },
     "physical_performance": {
@@ -69,7 +69,7 @@
       "coverage_pct": 100,
       "method": "Hechos objetivos (edad, dorsal, caps) tomados del artículo de Wikipedia vía mirror comunitario.",
       "confidence": "complementaria",
-      "as_of": "2026-07-13T08:49:41.814862+00:00",
+      "as_of": "2026-07-13T14:06:29.337408+00:00",
       "status": "ok"
     },
     "team_profile": {
@@ -81,7 +81,7 @@
       "coverage_pct": 100,
       "method": "Ranking de la API pública de FIFA; el campo base proviene de Wikipedia vía el mismo mirror.",
       "confidence": "media",
-      "as_of": "2026-07-13T08:49:41.829656+00:00",
+      "as_of": "2026-07-13T14:06:29.353896+00:00",
       "status": "ok"
     },
     "derived_metrics": {
@@ -90,7 +90,7 @@
       "coverage_detail": "percentil y z-score por métrica dentro de cada temporada; k-means (5 métricas tácticas) para estilo",
       "method": "Percentil y z-score se calculan DENTRO de la misma temporada (2026 vs 2026). El estilo de juego es un k-means sobre 5 métricas tácticas estandarizadas: heurística descriptiva, no una clasificación validada.",
       "confidence": "derivada",
-      "as_of": "2026-07-13T08:49:54.152744+00:00",
+      "as_of": "2026-07-13T14:07:15.156818+00:00",
       "status": "ok"
     },
     "goal_events": {
@@ -104,7 +104,7 @@
       "method": "Goles evento a evento; verificados uno a uno contra el marcador final oficial de FIFA Training Centre.",
       "confidence": "alta",
       "cross_checked_against": "resultado final de matches.parquet (FIFA Training Centre)",
-      "as_of": "2026-07-13T08:49:40.674665+00:00",
+      "as_of": "2026-07-13T14:06:28.330980+00:00",
       "status": "ok",
       "matches_with_goals": 88,
       "matches_played_total": 100

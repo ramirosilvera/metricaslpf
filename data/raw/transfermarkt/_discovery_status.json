@@ -3,27 +3,28 @@
     {
       "url": "https://www.transfermarkt.com/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26",
       "status": "error",
-      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26"
+      "detail": "404 Client Error: Not Found for url: https://www.transfermarkt.com/fifa-world-cup-2026/teilnehmer/pokalwettbewerb/WM26"
     },
     {
       "url": "https://www.transfermarkt.com/weltmeisterschaft-2026/teilnehmer/pokalwettbewerb/WM26",
       "status": "error",
-      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/weltmeisterschaft-2026/teilnehmer/pokalwettbewerb/WM26"
+      "detail": "504 Server Error: Gateway Time-out for url: https://www.transfermarkt.com/weltmeisterschaft-2026/teilnehmer/pokalwettbewerb/WM26"
     },
     {
       "url": "https://www.transfermarkt.com/fifa-world-cup-2026-usa-mexico-canada/teilnehmer/pokalwettbewerb/WM26",
       "status": "error",
-      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/fifa-world-cup-2026-usa-mexico-canada/teilnehmer/pokalwettbewerb/WM26"
+      "detail": "504 Server Error: Gateway Time-out for url: https://www.transfermarkt.com/fifa-world-cup-2026-usa-mexico-canada/teilnehmer/pokalwettbewerb/WM26"
     },
     {
       "url": "https://www.transfermarkt.com/wm-2026/teilnehmer/pokalwettbewerb/WM26",
       "status": "error",
-      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/wm-2026/teilnehmer/pokalwettbewerb/WM26"
+      "detail": "404 Client Error: Not Found for url: https://www.transfermarkt.com/wm-2026/teilnehmer/pokalwettbewerb/WM26"
     },
     {
-      "url": "https://www.transfermarkt.com/schnellsuche/ergebnis/schnellsuche?query=FIFA+World+Cup+2026",
+      "url": "https://www.transfermarkt.com/weltmeisterschaft/teilnehmer/pokalwettbewerb/FIWC",
       "status": "error",
-      "detail": "403 Client Error: Forbidden for url: https://www.transfermarkt.com/schnellsuche/ergebnis/schnellsuche?query=FIFA+World+Cup+2026"
+      "detail": "504 Server Error: Gateway Time-out for url: https://www.transfermarkt.com/weltmeisterschaft/teilnehmer/pokalwettbewerb/FIWC",
+      "resuelto_via": "busqueda"
     }
   ]
 }
