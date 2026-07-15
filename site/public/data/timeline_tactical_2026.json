@@ -860,6 +860,16 @@
     "presiones": 31
   },
   {
+    "team": "France",
+    "match_id": 20260101,
+    "match_date": "2026-07-14",
+    "stage": "Semi-final",
+    "rival": "Spain",
+    "pass_accuracy_pct": 84.1,
+    "progresiones": 32,
+    "presiones": 47
+  },
+  {
     "team": "Germany",
     "match_id": 20260010,
     "match_date": "2026-06-14",
@@ -1728,6 +1738,16 @@
     "pass_accuracy_pct": 90.2,
     "progresiones": 36,
     "presiones": 23
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260101,
+    "match_date": "2026-07-14",
+    "stage": "Semi-final",
+    "rival": "France",
+    "pass_accuracy_pct": 84.9,
+    "progresiones": 24,
+    "presiones": 54
   },
   {
     "team": "Sweden",

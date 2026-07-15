@@ -1118,6 +1118,19 @@
     "top_speed_kmh": 35.5
   },
   {
+    "team": "France",
+    "match_id": 20260101,
+    "match_date": "2026-07-14",
+    "stage": "Semi-final",
+    "rival": "Spain",
+    "es_local": true,
+    "jornada": 7,
+    "total_distance_km": 113.98,
+    "high_intensity_distance_m": 7870.3,
+    "sprint_count": 472.0,
+    "top_speed_kmh": 35.3
+  },
+  {
     "team": "Germany",
     "match_id": 20260010,
     "match_date": "2026-06-14",
@@ -2247,6 +2260,19 @@
     "high_intensity_distance_m": 7227.3,
     "sprint_count": 418.0,
     "top_speed_kmh": 34.0
+  },
+  {
+    "team": "Spain",
+    "match_id": 20260101,
+    "match_date": "2026-07-14",
+    "stage": "Semi-final",
+    "rival": "France",
+    "es_local": false,
+    "jornada": 7,
+    "total_distance_km": 115.01,
+    "high_intensity_distance_m": 7850.5,
+    "sprint_count": 488.0,
+    "top_speed_kmh": 32.9
   },
   {
     "team": "Sweden",

@@ -2798,5 +2798,33 @@
     "home_team": "Norway",
     "away_team": "England",
     "rival": "Norway"
+  },
+  {
+    "match_id": 20260101,
+    "team": "France",
+    "total_distance_km": 113.98,
+    "high_intensity_distance_m": 7870.3,
+    "sprint_count": 472.0,
+    "top_speed_kmh": 35.3,
+    "goles_marcados": 0,
+    "stage": "Semi-final",
+    "match_date": "2026-07-14",
+    "home_team": "France",
+    "away_team": "Spain",
+    "rival": "Spain"
+  },
+  {
+    "match_id": 20260101,
+    "team": "Spain",
+    "total_distance_km": 115.01,
+    "high_intensity_distance_m": 7850.5,
+    "sprint_count": 488.0,
+    "top_speed_kmh": 32.9,
+    "goles_marcados": 0,
+    "stage": "Semi-final",
+    "match_date": "2026-07-14",
+    "home_team": "France",
+    "away_team": "Spain",
+    "rival": "France"
   }
 ]

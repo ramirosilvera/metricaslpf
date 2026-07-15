@@ -1,5 +1,36 @@
 [
   {
+    "match_id": 20260101,
+    "match_date": "2026-07-14",
+    "stage": "Semi-final",
+    "home_team": "France",
+    "away_team": "Spain",
+    "home_score": 0,
+    "away_score": 2,
+    "home": {
+      "distancia_km": 113.98,
+      "alta_intensidad_m": 7870.3,
+      "sprints": 472.0,
+      "velocidad_punta_kmh": 35.3,
+      "remates": 10,
+      "pases": 417,
+      "posesion_pct": 48.7
+    },
+    "away": {
+      "distancia_km": 115.01,
+      "alta_intensidad_m": 7850.5,
+      "sprints": 488.0,
+      "velocidad_punta_kmh": 32.9,
+      "remates": 10,
+      "pases": 439,
+      "posesion_pct": 51.3
+    },
+    "goleadores": [],
+    "goles_contra": [],
+    "destacado": null,
+    "insight": "Spain venció 2-0 a France."
+  },
+  {
     "match_id": 20260100,
     "match_date": "2026-07-11",
     "stage": "Quarter-final",

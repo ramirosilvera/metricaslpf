@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-07-15T07:51:19.514768+00:00",
+  "checked_at": "2026-07-15T13:13:23.648037+00:00",
   "hub_url": "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
   "pages_visited": [
     "https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/match-report-hub.php",
@@ -1005,7 +1005,17 @@
       "team_b": "Switzerland",
       "stage_guess": "Knockout stage",
       "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M100-ARG-V-SUI.pdf"
+    },
+    {
+      "match_number": 101,
+      "match_id": 20260101,
+      "team_a_code": "FRA",
+      "team_b_code": "ESP",
+      "team_a": "France",
+      "team_b": "Spain",
+      "stage_guess": "Knockout stage",
+      "url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M101-FRA-V-ESP.pdf"
     }
   ],
-  "count": 100
+  "count": 101
 }

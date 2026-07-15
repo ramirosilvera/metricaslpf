@@ -3398,5 +3398,39 @@
     "home_team": "Norway",
     "away_team": "England",
     "match_date": "2026-07-11"
+  },
+  {
+    "match_id": 20260101,
+    "team": "France",
+    "total_distance_km": 113.98,
+    "high_intensity_distance_m": 7870.3,
+    "sprint_distance_m": 1760.0,
+    "sprint_count": 472.0,
+    "top_speed_kmh": 35.3,
+    "source": "fifa_training_centre_pmsr_pdf",
+    "source_url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M101-FRA-V-ESP.pdf",
+    "retrieved_at": "2026-07-15T13:13:23.691568+00:00",
+    "season": "2026",
+    "stage": "Semi-final",
+    "home_team": "France",
+    "away_team": "Spain",
+    "match_date": "2026-07-14"
+  },
+  {
+    "match_id": 20260101,
+    "team": "Spain",
+    "total_distance_km": 115.01,
+    "high_intensity_distance_m": 7850.5,
+    "sprint_distance_m": 1926.6,
+    "sprint_count": 488.0,
+    "top_speed_kmh": 32.9,
+    "source": "fifa_training_centre_pmsr_pdf",
+    "source_url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M101-FRA-V-ESP.pdf",
+    "retrieved_at": "2026-07-15T13:13:23.691568+00:00",
+    "season": "2026",
+    "stage": "Semi-final",
+    "home_team": "France",
+    "away_team": "Spain",
+    "match_date": "2026-07-14"
   }
 ]

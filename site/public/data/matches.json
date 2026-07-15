@@ -1552,5 +1552,19 @@
     "away_score": 1,
     "stadium": "Kansas City Stadium",
     "referee": null
+  },
+  {
+    "match_id": 20260101,
+    "competition": "FIFA World Cup",
+    "season": "2026",
+    "stage": "Semi-final",
+    "group": null,
+    "match_date": "2026-07-14",
+    "home_team": "France",
+    "away_team": "Spain",
+    "home_score": 0,
+    "away_score": 2,
+    "stadium": "Dallas Stadium",
+    "referee": null
   }
 ]

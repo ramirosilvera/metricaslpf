@@ -564,7 +564,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 113.3975,
-    "z_score": -0.14,
+    "z_score": -0.15,
     "percentile": 54.2
   },
   {
@@ -580,7 +580,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 119.1075,
-    "z_score": 0.97,
+    "z_score": 0.96,
     "percentile": 85.4
   },
   {
@@ -589,14 +589,14 @@
     "metric": "distancia_promedio_km",
     "value": 114.09200000000001,
     "z_score": -0.01,
-    "percentile": 60.4
+    "percentile": 58.3
   },
   {
     "team": "Colombia",
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 108.356,
-    "z_score": -1.12,
+    "z_score": -1.13,
     "percentile": 10.4
   },
   {
@@ -604,7 +604,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 111.865,
-    "z_score": -0.44,
+    "z_score": -0.45,
     "percentile": 35.4
   },
   {
@@ -636,7 +636,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 108.735,
-    "z_score": -1.05,
+    "z_score": -1.06,
     "percentile": 14.6
   },
   {
@@ -667,9 +667,9 @@
     "team": "France",
     "season": "2026",
     "metric": "distancia_promedio_km",
-    "value": 109.68166666666667,
-    "z_score": -0.87,
-    "percentile": 18.8
+    "value": 110.2957142857143,
+    "z_score": -0.75,
+    "percentile": 20.8
   },
   {
     "team": "Germany",
@@ -684,7 +684,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 109.2025,
-    "z_score": -0.96,
+    "z_score": -0.97,
     "percentile": 16.7
   },
   {
@@ -700,7 +700,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 114.79,
-    "z_score": 0.13,
+    "z_score": 0.12,
     "percentile": 62.5
   },
   {
@@ -708,7 +708,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 108.46,
-    "z_score": -1.1,
+    "z_score": -1.11,
     "percentile": 12.5
   },
   {
@@ -732,7 +732,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 111.65333333333335,
-    "z_score": -0.48,
+    "z_score": -0.49,
     "percentile": 31.2
   },
   {
@@ -804,7 +804,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 103.34333333333332,
-    "z_score": -2.1,
+    "z_score": -2.11,
     "percentile": 2.1
   },
   {
@@ -843,9 +843,9 @@
     "team": "Spain",
     "season": "2026",
     "metric": "distancia_promedio_km",
-    "value": 114.08999999999999,
-    "z_score": -0.01,
-    "percentile": 58.3
+    "value": 114.22142857142856,
+    "z_score": 0.01,
+    "percentile": 60.4
   },
   {
     "team": "Sweden",
@@ -853,7 +853,7 @@
     "metric": "distancia_promedio_km",
     "value": 109.945,
     "z_score": -0.82,
-    "percentile": 20.8
+    "percentile": 18.8
   },
   {
     "team": "Switzerland",
@@ -868,7 +868,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 111.08666666666666,
-    "z_score": -0.59,
+    "z_score": -0.6,
     "percentile": 27.1
   },
   {
@@ -892,7 +892,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.48666666666668,
-    "z_score": -0.32,
+    "z_score": -0.33,
     "percentile": 43.8
   },
   {
@@ -900,7 +900,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.48,
-    "z_score": -0.32,
+    "z_score": -0.33,
     "percentile": 41.7
   },
   {
@@ -908,7 +908,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 423.5,
-    "z_score": -0.61,
+    "z_score": -0.63,
     "percentile": 33.3
   },
   {
@@ -916,15 +916,15 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 405.8333333333333,
-    "z_score": -1.13,
-    "percentile": 14.6
+    "z_score": -1.15,
+    "percentile": 12.5
   },
   {
     "team": "Australia",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 475.0,
-    "z_score": 0.91,
+    "z_score": 0.9,
     "percentile": 79.2
   },
   {
@@ -932,15 +932,15 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 444.0,
-    "z_score": -0.01,
-    "percentile": 50.0
+    "z_score": -0.02,
+    "percentile": 47.9
   },
   {
     "team": "Belgium",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 500.3333333333333,
-    "z_score": 1.65,
+    "z_score": 1.66,
     "percentile": 95.8
   },
   {
@@ -948,15 +948,15 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 439.0,
-    "z_score": -0.15,
-    "percentile": 47.9
+    "z_score": -0.17,
+    "percentile": 45.8
   },
   {
     "team": "Brazil",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 422.0,
-    "z_score": -0.66,
+    "z_score": -0.67,
     "percentile": 29.2
   },
   {
@@ -964,7 +964,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 420.25,
-    "z_score": -0.71,
+    "z_score": -0.72,
     "percentile": 27.1
   },
   {
@@ -980,7 +980,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 410.0,
-    "z_score": -1.01,
+    "z_score": -1.03,
     "percentile": 17.7
   },
   {
@@ -988,15 +988,15 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 445.0,
-    "z_score": 0.02,
-    "percentile": 52.1
+    "z_score": 0.01,
+    "percentile": 50.0
   },
   {
     "team": "Croatia",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 456.75,
-    "z_score": 0.37,
+    "z_score": 0.36,
     "percentile": 64.6
   },
   {
@@ -1004,7 +1004,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 410.0,
-    "z_score": -1.01,
+    "z_score": -1.03,
     "percentile": 17.7
   },
   {
@@ -1020,7 +1020,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 423.0,
-    "z_score": -0.63,
+    "z_score": -0.64,
     "percentile": 31.2
   },
   {
@@ -1028,7 +1028,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 448.25,
-    "z_score": 0.12,
+    "z_score": 0.11,
     "percentile": 54.2
   },
   {
@@ -1044,16 +1044,16 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 451.8333333333333,
-    "z_score": 0.22,
+    "z_score": 0.21,
     "percentile": 60.4
   },
   {
     "team": "France",
     "season": "2026",
     "metric": "sprints_promedio",
-    "value": 396.1666666666667,
-    "z_score": -1.42,
-    "percentile": 4.2
+    "value": 407.0,
+    "z_score": -1.12,
+    "percentile": 14.6
   },
   {
     "team": "Germany",
@@ -1068,7 +1068,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 418.0,
-    "z_score": -0.77,
+    "z_score": -0.79,
     "percentile": 25.0
   },
   {
@@ -1084,7 +1084,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 449.0,
-    "z_score": 0.14,
+    "z_score": 0.13,
     "percentile": 56.2
   },
   {
@@ -1092,15 +1092,15 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 401.0,
-    "z_score": -1.27,
-    "percentile": 10.4
+    "z_score": -1.3,
+    "percentile": 8.3
   },
   {
     "team": "Japan",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 417.25,
-    "z_score": -0.8,
+    "z_score": -0.81,
     "percentile": 22.9
   },
   {
@@ -1108,7 +1108,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 454.3333333333333,
-    "z_score": 0.3,
+    "z_score": 0.29,
     "percentile": 62.5
   },
   {
@@ -1116,7 +1116,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 432.6666666666667,
-    "z_score": -0.34,
+    "z_score": -0.36,
     "percentile": 41.7
   },
   {
@@ -1124,7 +1124,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 438.0,
-    "z_score": -0.18,
+    "z_score": -0.2,
     "percentile": 43.8
   },
   {
@@ -1140,15 +1140,15 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 397.5,
-    "z_score": -1.38,
-    "percentile": 8.3
+    "z_score": -1.4,
+    "percentile": 6.2
   },
   {
     "team": "New Zealand",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 497.3333333333333,
-    "z_score": 1.56,
+    "z_score": 1.57,
     "percentile": 91.7
   },
   {
@@ -1156,7 +1156,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 460.1666666666667,
-    "z_score": 0.47,
+    "z_score": 0.46,
     "percentile": 72.9
   },
   {
@@ -1164,7 +1164,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 457.3333333333333,
-    "z_score": 0.39,
+    "z_score": 0.38,
     "percentile": 68.8
   },
   {
@@ -1172,7 +1172,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 428.2,
-    "z_score": -0.47,
+    "z_score": -0.49,
     "percentile": 37.5
   },
   {
@@ -1180,7 +1180,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 426.8,
-    "z_score": -0.51,
+    "z_score": -0.53,
     "percentile": 35.4
   },
   {
@@ -1188,7 +1188,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 360.0,
-    "z_score": -2.48,
+    "z_score": -2.52,
     "percentile": 2.1
   },
   {
@@ -1204,7 +1204,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 417.0,
-    "z_score": -0.8,
+    "z_score": -0.82,
     "percentile": 20.8
   },
   {
@@ -1220,31 +1220,31 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 471.0,
-    "z_score": 0.79,
+    "z_score": 0.78,
     "percentile": 77.1
   },
   {
     "team": "Spain",
     "season": "2026",
     "metric": "sprints_promedio",
-    "value": 438.8333333333333,
-    "z_score": -0.16,
-    "percentile": 45.8
+    "value": 445.85714285714283,
+    "z_score": 0.04,
+    "percentile": 52.1
   },
   {
     "team": "Sweden",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 396.5,
-    "z_score": -1.41,
-    "percentile": 6.2
+    "z_score": -1.43,
+    "percentile": 4.2
   },
   {
     "team": "Switzerland",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 456.8333333333333,
-    "z_score": 0.37,
+    "z_score": 0.36,
     "percentile": 66.7
   },
   {
@@ -1252,15 +1252,15 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 404.3333333333333,
-    "z_score": -1.18,
-    "percentile": 12.5
+    "z_score": -1.2,
+    "percentile": 10.4
   },
   {
     "team": "Türkiye",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 429.6666666666667,
-    "z_score": -0.43,
+    "z_score": -0.44,
     "percentile": 39.6
   },
   {
@@ -1268,7 +1268,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 489.2,
-    "z_score": 1.32,
+    "z_score": 1.33,
     "percentile": 89.6
   },
   {
@@ -1284,7 +1284,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 451.3333333333333,
-    "z_score": 0.21,
+    "z_score": 0.2,
     "percentile": 58.3
   },
   {
@@ -1819,8 +1819,8 @@
     "team": "France",
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
-    "value": 498.4157303370786,
-    "z_score": 0.07,
+    "value": 497.4219047619048,
+    "z_score": 0.04,
     "percentile": 60.4
   },
   {
@@ -1980,7 +1980,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 549.9261538461539,
-    "z_score": 1.23,
+    "z_score": 1.24,
     "percentile": 87.5
   },
   {
@@ -1995,8 +1995,8 @@
     "team": "Spain",
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
-    "value": 493.89354838709676,
-    "z_score": -0.04,
+    "value": 493.4183486238532,
+    "z_score": -0.05,
     "percentile": 58.3
   },
   {
