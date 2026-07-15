@@ -390,16 +390,6 @@
     "velocidad_punta_kmh": 32.9
   },
   {
-    "team": "Canada",
-    "player_name": "Alistair JOHNSTON",
-    "partidos": 5,
-    "distancia_total_km": 53.5,
-    "distancia_promedio_km": 10.69,
-    "alta_intensidad_promedio_m": 1031.1,
-    "sprints_promedio": 52.8,
-    "velocidad_punta_kmh": 35.1
-  },
-  {
     "team": "Morocco",
     "player_name": "Azzedine OUNAHI",
     "partidos": 6,
@@ -408,6 +398,16 @@
     "alta_intensidad_promedio_m": 811.7,
     "sprints_promedio": 44.333333333333336,
     "velocidad_punta_kmh": 33.3
+  },
+  {
+    "team": "Canada",
+    "player_name": "Alistair JOHNSTON",
+    "partidos": 5,
+    "distancia_total_km": 53.5,
+    "distancia_promedio_km": 10.69,
+    "alta_intensidad_promedio_m": 1031.1,
+    "sprints_promedio": 52.8,
+    "velocidad_punta_kmh": 35.1
   },
   {
     "team": "Colombia",
@@ -430,14 +430,14 @@
     "velocidad_punta_kmh": 32.9
   },
   {
-    "team": "Brazil",
-    "player_name": "DOUGLAS SANTOS",
-    "partidos": 5,
+    "team": "England",
+    "player_name": "Nico OREILLY",
+    "partidos": 6,
     "distancia_total_km": 52.5,
-    "distancia_promedio_km": 10.49,
-    "alta_intensidad_promedio_m": 773.9,
-    "sprints_promedio": 44.0,
-    "velocidad_punta_kmh": 31.7
+    "distancia_promedio_km": 8.74,
+    "alta_intensidad_promedio_m": 702.1,
+    "sprints_promedio": 37.5,
+    "velocidad_punta_kmh": 34.2
   },
   {
     "team": "Canada",
@@ -450,14 +450,14 @@
     "velocidad_punta_kmh": 29.8
   },
   {
-    "team": "England",
-    "player_name": "Nico OREILLY",
-    "partidos": 6,
+    "team": "Brazil",
+    "player_name": "DOUGLAS SANTOS",
+    "partidos": 5,
     "distancia_total_km": 52.5,
-    "distancia_promedio_km": 8.74,
-    "alta_intensidad_promedio_m": 702.1,
-    "sprints_promedio": 37.5,
-    "velocidad_punta_kmh": 34.2
+    "distancia_promedio_km": 10.49,
+    "alta_intensidad_promedio_m": 773.9,
+    "sprints_promedio": 44.0,
+    "velocidad_punta_kmh": 31.7
   },
   {
     "team": "Canada",
@@ -490,16 +490,6 @@
     "velocidad_punta_kmh": 33.1
   },
   {
-    "team": "Egypt",
-    "player_name": "YASSER IBRAHIM",
-    "partidos": 5,
-    "distancia_total_km": 51.5,
-    "distancia_promedio_km": 10.3,
-    "alta_intensidad_promedio_m": 612.0,
-    "sprints_promedio": 36.2,
-    "velocidad_punta_kmh": 33.4
-  },
-  {
     "team": "Spain",
     "player_name": "Lamine YAMAL",
     "partidos": 7,
@@ -508,6 +498,16 @@
     "alta_intensidad_promedio_m": 544.6,
     "sprints_promedio": 30.285714285714285,
     "velocidad_punta_kmh": 32.9
+  },
+  {
+    "team": "Egypt",
+    "player_name": "YASSER IBRAHIM",
+    "partidos": 5,
+    "distancia_total_km": 51.5,
+    "distancia_promedio_km": 10.3,
+    "alta_intensidad_promedio_m": 612.0,
+    "sprints_promedio": 36.2,
+    "velocidad_punta_kmh": 33.4
   },
   {
     "team": "Argentina",
@@ -741,16 +741,6 @@
   },
   {
     "team": "Morocco",
-    "player_name": "Noussair MAZRAOUI",
-    "partidos": 6,
-    "distancia_total_km": 48.0,
-    "distancia_promedio_km": 8.01,
-    "alta_intensidad_promedio_m": 395.9,
-    "sprints_promedio": 24.333333333333332,
-    "velocidad_punta_kmh": 33.9
-  },
-  {
-    "team": "Morocco",
     "player_name": "Issa DIOP",
     "partidos": 5,
     "distancia_total_km": 48.0,
@@ -758,6 +748,16 @@
     "alta_intensidad_promedio_m": 318.9,
     "sprints_promedio": 20.4,
     "velocidad_punta_kmh": 32.7
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Noussair MAZRAOUI",
+    "partidos": 6,
+    "distancia_total_km": 48.0,
+    "distancia_promedio_km": 8.01,
+    "alta_intensidad_promedio_m": 395.9,
+    "sprints_promedio": 24.333333333333332,
+    "velocidad_punta_kmh": 33.9
   },
   {
     "team": "Brazil",
@@ -790,16 +790,6 @@
     "velocidad_punta_kmh": 31.6
   },
   {
-    "team": "France",
-    "player_name": "Lucas DIGNE",
-    "partidos": 5,
-    "distancia_total_km": 47.4,
-    "distancia_promedio_km": 9.48,
-    "alta_intensidad_promedio_m": 611.1,
-    "sprints_promedio": 37.4,
-    "velocidad_punta_kmh": 31.2
-  },
-  {
     "team": "England",
     "player_name": "Declan RICE",
     "partidos": 5,
@@ -808,6 +798,16 @@
     "alta_intensidad_promedio_m": 628.4,
     "sprints_promedio": 34.0,
     "velocidad_punta_kmh": 32.6
+  },
+  {
+    "team": "France",
+    "player_name": "Lucas DIGNE",
+    "partidos": 5,
+    "distancia_total_km": 47.4,
+    "distancia_promedio_km": 9.48,
+    "alta_intensidad_promedio_m": 611.1,
+    "sprints_promedio": 37.4,
+    "velocidad_punta_kmh": 31.2
   },
   {
     "team": "Spain",
@@ -820,14 +820,14 @@
     "velocidad_punta_kmh": 34.0
   },
   {
-    "team": "Australia",
-    "player_name": "Aiden ONEILL",
-    "partidos": 4,
+    "team": "USA",
+    "player_name": "Alex FREEMAN",
+    "partidos": 5,
     "distancia_total_km": 47.3,
-    "distancia_promedio_km": 11.83,
-    "alta_intensidad_promedio_m": 714.9,
-    "sprints_promedio": 46.5,
-    "velocidad_punta_kmh": 32.8
+    "distancia_promedio_km": 9.46,
+    "alta_intensidad_promedio_m": 543.1,
+    "sprints_promedio": 35.8,
+    "velocidad_punta_kmh": 34.6
   },
   {
     "team": "Mexico",
@@ -840,14 +840,14 @@
     "velocidad_punta_kmh": 33.0
   },
   {
-    "team": "USA",
-    "player_name": "Alex FREEMAN",
-    "partidos": 5,
+    "team": "Australia",
+    "player_name": "Aiden ONEILL",
+    "partidos": 4,
     "distancia_total_km": 47.3,
-    "distancia_promedio_km": 9.46,
-    "alta_intensidad_promedio_m": 543.1,
-    "sprints_promedio": 35.8,
-    "velocidad_punta_kmh": 34.6
+    "distancia_promedio_km": 11.83,
+    "alta_intensidad_promedio_m": 714.9,
+    "sprints_promedio": 46.5,
+    "velocidad_punta_kmh": 32.8
   },
   {
     "team": "Senegal",
@@ -1010,16 +1010,6 @@
     "velocidad_punta_kmh": 34.2
   },
   {
-    "team": "Germany",
-    "player_name": "Joshua KIMMICH",
-    "partidos": 4,
-    "distancia_total_km": 44.6,
-    "distancia_promedio_km": 11.16,
-    "alta_intensidad_promedio_m": 714.6,
-    "sprints_promedio": 39.25,
-    "velocidad_punta_kmh": 31.4
-  },
-  {
     "team": "Australia",
     "player_name": "Alessandro CIRCATI",
     "partidos": 4,
@@ -1028,6 +1018,16 @@
     "alta_intensidad_promedio_m": 586.1,
     "sprints_promedio": 35.5,
     "velocidad_punta_kmh": 33.4
+  },
+  {
+    "team": "Germany",
+    "player_name": "Joshua KIMMICH",
+    "partidos": 4,
+    "distancia_total_km": 44.6,
+    "distancia_promedio_km": 11.16,
+    "alta_intensidad_promedio_m": 714.6,
+    "sprints_promedio": 39.25,
+    "velocidad_punta_kmh": 31.4
   },
   {
     "team": "Algeria",
@@ -1040,16 +1040,6 @@
     "velocidad_punta_kmh": 32.7
   },
   {
-    "team": "USA",
-    "player_name": "Malik TILLMAN",
-    "partidos": 5,
-    "distancia_total_km": 44.4,
-    "distancia_promedio_km": 8.88,
-    "alta_intensidad_promedio_m": 712.0,
-    "sprints_promedio": 43.0,
-    "velocidad_punta_kmh": 32.9
-  },
-  {
     "team": "Canada",
     "player_name": "Luc DE FOUGEROLLES",
     "partidos": 5,
@@ -1060,14 +1050,14 @@
     "velocidad_punta_kmh": 32.8
   },
   {
-    "team": "Ecuador",
-    "player_name": "Gonzalo PLATA",
-    "partidos": 4,
-    "distancia_total_km": 44.3,
-    "distancia_promedio_km": 11.08,
-    "alta_intensidad_promedio_m": 820.7,
-    "sprints_promedio": 46.75,
-    "velocidad_punta_kmh": 32.2
+    "team": "USA",
+    "player_name": "Malik TILLMAN",
+    "partidos": 5,
+    "distancia_total_km": 44.4,
+    "distancia_promedio_km": 8.88,
+    "alta_intensidad_promedio_m": 712.0,
+    "sprints_promedio": 43.0,
+    "velocidad_punta_kmh": 32.9
   },
   {
     "team": "Egypt",
@@ -1078,6 +1068,16 @@
     "alta_intensidad_promedio_m": 702.7,
     "sprints_promedio": 40.25,
     "velocidad_punta_kmh": 31.6
+  },
+  {
+    "team": "Ecuador",
+    "player_name": "Gonzalo PLATA",
+    "partidos": 4,
+    "distancia_total_km": 44.3,
+    "distancia_promedio_km": 11.08,
+    "alta_intensidad_promedio_m": 820.7,
+    "sprints_promedio": 46.75,
+    "velocidad_punta_kmh": 32.2
   },
   {
     "team": "Switzerland",
@@ -1170,24 +1170,14 @@
     "velocidad_punta_kmh": 30.9
   },
   {
-    "team": "Argentina",
-    "player_name": "Rodrigo DE PAUL",
-    "partidos": 5,
+    "team": "Cabo Verde",
+    "player_name": "DINEY BORGES",
+    "partidos": 4,
     "distancia_total_km": 43.3,
-    "distancia_promedio_km": 8.67,
-    "alta_intensidad_promedio_m": 740.3,
-    "sprints_promedio": 43.8,
-    "velocidad_punta_kmh": 32.2
-  },
-  {
-    "team": "Argentina",
-    "player_name": "Nahuel MOLINA",
-    "partidos": 5,
-    "distancia_total_km": 43.3,
-    "distancia_promedio_km": 8.67,
-    "alta_intensidad_promedio_m": 644.3,
-    "sprints_promedio": 37.4,
-    "velocidad_punta_kmh": 33.7
+    "distancia_promedio_km": 10.83,
+    "alta_intensidad_promedio_m": 471.9,
+    "sprints_promedio": 27.75,
+    "velocidad_punta_kmh": 31.8
   },
   {
     "team": "Colombia",
@@ -1200,6 +1190,16 @@
     "velocidad_punta_kmh": 33.8
   },
   {
+    "team": "Argentina",
+    "player_name": "Nahuel MOLINA",
+    "partidos": 5,
+    "distancia_total_km": 43.3,
+    "distancia_promedio_km": 8.67,
+    "alta_intensidad_promedio_m": 644.3,
+    "sprints_promedio": 37.4,
+    "velocidad_punta_kmh": 33.7
+  },
+  {
     "team": "Mexico",
     "player_name": "Jesus GALLARDO",
     "partidos": 5,
@@ -1210,14 +1210,14 @@
     "velocidad_punta_kmh": 33.8
   },
   {
-    "team": "Cabo Verde",
-    "player_name": "DINEY BORGES",
-    "partidos": 4,
+    "team": "Argentina",
+    "player_name": "Rodrigo DE PAUL",
+    "partidos": 5,
     "distancia_total_km": 43.3,
-    "distancia_promedio_km": 10.83,
-    "alta_intensidad_promedio_m": 471.9,
-    "sprints_promedio": 27.75,
-    "velocidad_punta_kmh": 31.8
+    "distancia_promedio_km": 8.67,
+    "alta_intensidad_promedio_m": 740.3,
+    "sprints_promedio": 43.8,
+    "velocidad_punta_kmh": 32.2
   },
   {
     "team": "France",
@@ -1240,16 +1240,6 @@
     "velocidad_punta_kmh": 31.3
   },
   {
-    "team": "Australia",
-    "player_name": "Harry SOUTTAR",
-    "partidos": 4,
-    "distancia_total_km": 43.0,
-    "distancia_promedio_km": 10.76,
-    "alta_intensidad_promedio_m": 325.4,
-    "sprints_promedio": 20.5,
-    "velocidad_punta_kmh": 30.7
-  },
-  {
     "team": "Congo DR",
     "player_name": "Samuel MOUTOUSSAMY",
     "partidos": 4,
@@ -1260,14 +1250,14 @@
     "velocidad_punta_kmh": 31.9
   },
   {
-    "team": "Sweden",
-    "player_name": "Viktor GYOKERES",
+    "team": "Australia",
+    "player_name": "Harry SOUTTAR",
     "partidos": 4,
-    "distancia_total_km": 42.9,
-    "distancia_promedio_km": 10.71,
-    "alta_intensidad_promedio_m": 785.3,
-    "sprints_promedio": 44.25,
-    "velocidad_punta_kmh": 34.8
+    "distancia_total_km": 43.0,
+    "distancia_promedio_km": 10.76,
+    "alta_intensidad_promedio_m": 325.4,
+    "sprints_promedio": 20.5,
+    "velocidad_punta_kmh": 30.7
   },
   {
     "team": "USA",
@@ -1278,6 +1268,16 @@
     "alta_intensidad_promedio_m": 400.9,
     "sprints_promedio": 24.25,
     "velocidad_punta_kmh": 30.7
+  },
+  {
+    "team": "Sweden",
+    "player_name": "Viktor GYOKERES",
+    "partidos": 4,
+    "distancia_total_km": 42.9,
+    "distancia_promedio_km": 10.71,
+    "alta_intensidad_promedio_m": 785.3,
+    "sprints_promedio": 44.25,
+    "velocidad_punta_kmh": 34.8
   },
   {
     "team": "Egypt",
@@ -1310,14 +1310,14 @@
     "velocidad_punta_kmh": 32.6
   },
   {
-    "team": "Senegal",
-    "player_name": "Moussa NIAKHATE",
-    "partidos": 4,
+    "team": "Belgium",
+    "player_name": "Hans VANAKEN",
+    "partidos": 6,
     "distancia_total_km": 42.6,
-    "distancia_promedio_km": 10.65,
-    "alta_intensidad_promedio_m": 456.0,
-    "sprints_promedio": 29.75,
-    "velocidad_punta_kmh": 30.9
+    "distancia_promedio_km": 7.1,
+    "alta_intensidad_promedio_m": 460.5,
+    "sprints_promedio": 26.5,
+    "velocidad_punta_kmh": 30.6
   },
   {
     "team": "Austria",
@@ -1330,24 +1330,14 @@
     "velocidad_punta_kmh": 34.1
   },
   {
-    "team": "Belgium",
-    "player_name": "Hans VANAKEN",
-    "partidos": 6,
-    "distancia_total_km": 42.6,
-    "distancia_promedio_km": 7.1,
-    "alta_intensidad_promedio_m": 460.5,
-    "sprints_promedio": 26.5,
-    "velocidad_punta_kmh": 30.6
-  },
-  {
-    "team": "Croatia",
-    "player_name": "Josip STANISIC",
+    "team": "Senegal",
+    "player_name": "Moussa NIAKHATE",
     "partidos": 4,
     "distancia_total_km": 42.6,
     "distancia_promedio_km": 10.65,
-    "alta_intensidad_promedio_m": 896.2,
-    "sprints_promedio": 49.0,
-    "velocidad_punta_kmh": 33.7
+    "alta_intensidad_promedio_m": 456.0,
+    "sprints_promedio": 29.75,
+    "velocidad_punta_kmh": 30.9
   },
   {
     "team": "Germany",
@@ -1358,6 +1348,16 @@
     "alta_intensidad_promedio_m": 561.1,
     "sprints_promedio": 29.75,
     "velocidad_punta_kmh": 32.9
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Josip STANISIC",
+    "partidos": 4,
+    "distancia_total_km": 42.6,
+    "distancia_promedio_km": 10.65,
+    "alta_intensidad_promedio_m": 896.2,
+    "sprints_promedio": 49.0,
+    "velocidad_punta_kmh": 33.7
   },
   {
     "team": "Ecuador",
@@ -1390,16 +1390,6 @@
     "velocidad_punta_kmh": 30.7
   },
   {
-    "team": "Argentina",
-    "player_name": "Cristian ROMERO",
-    "partidos": 5,
-    "distancia_total_km": 41.8,
-    "distancia_promedio_km": 8.37,
-    "alta_intensidad_promedio_m": 211.0,
-    "sprints_promedio": 14.4,
-    "velocidad_punta_kmh": 31.5
-  },
-  {
     "team": "USA",
     "player_name": "Tyler ADAMS",
     "partidos": 4,
@@ -1408,6 +1398,16 @@
     "alta_intensidad_promedio_m": 745.0,
     "sprints_promedio": 43.75,
     "velocidad_punta_kmh": 32.2
+  },
+  {
+    "team": "Argentina",
+    "player_name": "Cristian ROMERO",
+    "partidos": 5,
+    "distancia_total_km": 41.8,
+    "distancia_promedio_km": 8.37,
+    "alta_intensidad_promedio_m": 211.0,
+    "sprints_promedio": 14.4,
+    "velocidad_punta_kmh": 31.5
   },
   {
     "team": "Cabo Verde",
@@ -1430,16 +1430,6 @@
     "velocidad_punta_kmh": 33.5
   },
   {
-    "team": "Congo DR",
-    "player_name": "Yoane WISSA",
-    "partidos": 4,
-    "distancia_total_km": 41.5,
-    "distancia_promedio_km": 10.37,
-    "alta_intensidad_promedio_m": 663.7,
-    "sprints_promedio": 35.0,
-    "velocidad_punta_kmh": 33.4
-  },
-  {
     "team": "Portugal",
     "player_name": "CRISTIANO RONALDO",
     "partidos": 5,
@@ -1448,6 +1438,16 @@
     "alta_intensidad_promedio_m": 499.3,
     "sprints_promedio": 30.6,
     "velocidad_punta_kmh": 31.6
+  },
+  {
+    "team": "Congo DR",
+    "player_name": "Yoane WISSA",
+    "partidos": 4,
+    "distancia_total_km": 41.5,
+    "distancia_promedio_km": 10.37,
+    "alta_intensidad_promedio_m": 663.7,
+    "sprints_promedio": 35.0,
+    "velocidad_punta_kmh": 33.4
   },
   {
     "team": "Austria",
@@ -1510,16 +1510,6 @@
     "velocidad_punta_kmh": 32.9
   },
   {
-    "team": "Congo DR",
-    "player_name": "Aaron WAN-BISSAKA",
-    "partidos": 4,
-    "distancia_total_km": 40.4,
-    "distancia_promedio_km": 10.1,
-    "alta_intensidad_promedio_m": 844.6,
-    "sprints_promedio": 48.5,
-    "velocidad_punta_kmh": 33.7
-  },
-  {
     "team": "Bosnia and Herzegovina",
     "player_name": "Ermedin DEMIROVIC",
     "partidos": 4,
@@ -1538,6 +1528,16 @@
     "alta_intensidad_promedio_m": 73.4,
     "sprints_promedio": 5.857142857142857,
     "velocidad_punta_kmh": 29.9
+  },
+  {
+    "team": "Congo DR",
+    "player_name": "Aaron WAN-BISSAKA",
+    "partidos": 4,
+    "distancia_total_km": 40.4,
+    "distancia_promedio_km": 10.1,
+    "alta_intensidad_promedio_m": 844.6,
+    "sprints_promedio": 48.5,
+    "velocidad_punta_kmh": 33.7
   },
   {
     "team": "Colombia",
@@ -1560,16 +1560,6 @@
     "velocidad_punta_kmh": 35.1
   },
   {
-    "team": "Ecuador",
-    "player_name": "Piero HINCAPIE",
-    "partidos": 4,
-    "distancia_total_km": 39.8,
-    "distancia_promedio_km": 9.96,
-    "alta_intensidad_promedio_m": 984.7,
-    "sprints_promedio": 48.0,
-    "velocidad_punta_kmh": 33.6
-  },
-  {
     "team": "Austria",
     "player_name": "Stefan POSCH",
     "partidos": 4,
@@ -1588,6 +1578,16 @@
     "alta_intensidad_promedio_m": 605.5,
     "sprints_promedio": 35.0,
     "velocidad_punta_kmh": 29.9
+  },
+  {
+    "team": "Ecuador",
+    "player_name": "Piero HINCAPIE",
+    "partidos": 4,
+    "distancia_total_km": 39.8,
+    "distancia_promedio_km": 9.96,
+    "alta_intensidad_promedio_m": 984.7,
+    "sprints_promedio": 48.0,
+    "velocidad_punta_kmh": 33.6
   },
   {
     "team": "Ghana",
@@ -1640,16 +1640,6 @@
     "velocidad_punta_kmh": 32.7
   },
   {
-    "team": "Japan",
-    "player_name": "Hiroki ITO",
-    "partidos": 4,
-    "distancia_total_km": 39.5,
-    "distancia_promedio_km": 9.88,
-    "alta_intensidad_promedio_m": 515.3,
-    "sprints_promedio": 29.75,
-    "velocidad_punta_kmh": 32.9
-  },
-  {
     "team": "Switzerland",
     "player_name": "Denis ZAKARIA",
     "partidos": 4,
@@ -1658,6 +1648,16 @@
     "alta_intensidad_promedio_m": 773.6,
     "sprints_promedio": 42.0,
     "velocidad_punta_kmh": 33.3
+  },
+  {
+    "team": "Japan",
+    "player_name": "Hiroki ITO",
+    "partidos": 4,
+    "distancia_total_km": 39.5,
+    "distancia_promedio_km": 9.88,
+    "alta_intensidad_promedio_m": 515.3,
+    "sprints_promedio": 29.75,
+    "velocidad_punta_kmh": 32.9
   },
   {
     "team": "Croatia",
@@ -1680,16 +1680,6 @@
     "velocidad_punta_kmh": 33.2
   },
   {
-    "team": "Argentina",
-    "player_name": "Leandro PAREDES",
-    "partidos": 5,
-    "distancia_total_km": 39.1,
-    "distancia_promedio_km": 7.81,
-    "alta_intensidad_promedio_m": 320.4,
-    "sprints_promedio": 19.0,
-    "velocidad_punta_kmh": 30.2
-  },
-  {
     "team": "South Africa",
     "player_name": "Khuliso MUDAU",
     "partidos": 4,
@@ -1698,6 +1688,16 @@
     "alta_intensidad_promedio_m": 843.6,
     "sprints_promedio": 47.25,
     "velocidad_punta_kmh": 34.3
+  },
+  {
+    "team": "Argentina",
+    "player_name": "Leandro PAREDES",
+    "partidos": 5,
+    "distancia_total_km": 39.1,
+    "distancia_promedio_km": 7.81,
+    "alta_intensidad_promedio_m": 320.4,
+    "sprints_promedio": 19.0,
+    "velocidad_punta_kmh": 30.2
   },
   {
     "team": "Portugal",
@@ -1800,16 +1800,6 @@
     "velocidad_punta_kmh": 31.4
   },
   {
-    "team": "Germany",
-    "player_name": "Leroy SANE",
-    "partidos": 4,
-    "distancia_total_km": 38.1,
-    "distancia_promedio_km": 9.52,
-    "alta_intensidad_promedio_m": 1157.6,
-    "sprints_promedio": 55.25,
-    "velocidad_punta_kmh": 34.4
-  },
-  {
     "team": "USA",
     "player_name": "Tim REAM",
     "partidos": 4,
@@ -1830,14 +1820,14 @@
     "velocidad_punta_kmh": 33.0
   },
   {
-    "team": "Switzerland",
-    "player_name": "Gregor KOBEL",
-    "partidos": 6,
-    "distancia_total_km": 38.0,
-    "distancia_promedio_km": 6.33,
-    "alta_intensidad_promedio_m": 27.0,
-    "sprints_promedio": 2.1666666666666665,
-    "velocidad_punta_kmh": 28.8
+    "team": "Germany",
+    "player_name": "Leroy SANE",
+    "partidos": 4,
+    "distancia_total_km": 38.1,
+    "distancia_promedio_km": 9.52,
+    "alta_intensidad_promedio_m": 1157.6,
+    "sprints_promedio": 55.25,
+    "velocidad_punta_kmh": 34.4
   },
   {
     "team": "Germany",
@@ -1860,6 +1850,16 @@
     "velocidad_punta_kmh": 32.0
   },
   {
+    "team": "Switzerland",
+    "player_name": "Gregor KOBEL",
+    "partidos": 6,
+    "distancia_total_km": 38.0,
+    "distancia_promedio_km": 6.33,
+    "alta_intensidad_promedio_m": 27.0,
+    "sprints_promedio": 2.1666666666666665,
+    "velocidad_punta_kmh": 28.8
+  },
+  {
     "team": "Algeria",
     "player_name": "Aissa MANDI",
     "partidos": 4,
@@ -1878,6 +1878,16 @@
     "alta_intensidad_promedio_m": 661.7,
     "sprints_promedio": 38.5,
     "velocidad_punta_kmh": 31.0
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Martin BATURINA",
+    "partidos": 4,
+    "distancia_total_km": 37.8,
+    "distancia_promedio_km": 9.45,
+    "alta_intensidad_promedio_m": 757.4,
+    "sprints_promedio": 43.75,
+    "velocidad_punta_kmh": 33.6
   },
   {
     "team": "Cabo Verde",
@@ -1900,16 +1910,6 @@
     "velocidad_punta_kmh": 36.3
   },
   {
-    "team": "Croatia",
-    "player_name": "Martin BATURINA",
-    "partidos": 4,
-    "distancia_total_km": 37.8,
-    "distancia_promedio_km": 9.45,
-    "alta_intensidad_promedio_m": 757.4,
-    "sprints_promedio": 43.75,
-    "velocidad_punta_kmh": 33.6
-  },
-  {
     "team": "Portugal",
     "player_name": "PEDRO NETO",
     "partidos": 5,
@@ -1918,16 +1918,6 @@
     "alta_intensidad_promedio_m": 796.2,
     "sprints_promedio": 41.6,
     "velocidad_punta_kmh": 35.3
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Nathan NGOY",
-    "partidos": 4,
-    "distancia_total_km": 37.5,
-    "distancia_promedio_km": 9.37,
-    "alta_intensidad_promedio_m": 469.6,
-    "sprints_promedio": 28.0,
-    "velocidad_punta_kmh": 34.5
   },
   {
     "team": "France",
@@ -1940,6 +1930,16 @@
     "velocidad_punta_kmh": 29.6
   },
   {
+    "team": "Belgium",
+    "player_name": "Nathan NGOY",
+    "partidos": 4,
+    "distancia_total_km": 37.5,
+    "distancia_promedio_km": 9.37,
+    "alta_intensidad_promedio_m": 469.6,
+    "sprints_promedio": 28.0,
+    "velocidad_punta_kmh": 34.5
+  },
+  {
     "team": "Netherlands",
     "player_name": "Ryan GRAVENBERCH",
     "partidos": 4,
@@ -1948,16 +1948,6 @@
     "alta_intensidad_promedio_m": 547.8,
     "sprints_promedio": 32.25,
     "velocidad_punta_kmh": 35.6
-  },
-  {
-    "team": "Sweden",
-    "player_name": "Victor LINDELOF",
-    "partidos": 4,
-    "distancia_total_km": 37.3,
-    "distancia_promedio_km": 9.32,
-    "alta_intensidad_promedio_m": 392.0,
-    "sprints_promedio": 25.25,
-    "velocidad_punta_kmh": 28.8
   },
   {
     "team": "Paraguay",
@@ -1970,24 +1960,14 @@
     "velocidad_punta_kmh": 32.7
   },
   {
-    "team": "Japan",
-    "player_name": "Keito NAKAMURA",
+    "team": "Sweden",
+    "player_name": "Victor LINDELOF",
     "partidos": 4,
-    "distancia_total_km": 36.9,
-    "distancia_promedio_km": 9.24,
-    "alta_intensidad_promedio_m": 704.5,
-    "sprints_promedio": 45.0,
-    "velocidad_punta_kmh": 33.1
-  },
-  {
-    "team": "Australia",
-    "player_name": "Jordan BOS",
-    "partidos": 4,
-    "distancia_total_km": 36.9,
-    "distancia_promedio_km": 9.23,
-    "alta_intensidad_promedio_m": 993.6,
-    "sprints_promedio": 55.75,
-    "velocidad_punta_kmh": 36.7
+    "distancia_total_km": 37.3,
+    "distancia_promedio_km": 9.32,
+    "alta_intensidad_promedio_m": 392.0,
+    "sprints_promedio": 25.25,
+    "velocidad_punta_kmh": 28.8
   },
   {
     "team": "USA",
@@ -2010,14 +1990,24 @@
     "velocidad_punta_kmh": 32.2
   },
   {
-    "team": "Sweden",
-    "player_name": "Gabriel GUDMUNDSSON",
+    "team": "Australia",
+    "player_name": "Jordan BOS",
     "partidos": 4,
-    "distancia_total_km": 36.8,
-    "distancia_promedio_km": 9.2,
-    "alta_intensidad_promedio_m": 631.5,
-    "sprints_promedio": 34.25,
-    "velocidad_punta_kmh": 33.7
+    "distancia_total_km": 36.9,
+    "distancia_promedio_km": 9.23,
+    "alta_intensidad_promedio_m": 993.6,
+    "sprints_promedio": 55.75,
+    "velocidad_punta_kmh": 36.7
+  },
+  {
+    "team": "Japan",
+    "player_name": "Keito NAKAMURA",
+    "partidos": 4,
+    "distancia_total_km": 36.9,
+    "distancia_promedio_km": 9.24,
+    "alta_intensidad_promedio_m": 704.5,
+    "sprints_promedio": 45.0,
+    "velocidad_punta_kmh": 33.1
   },
   {
     "team": "Portugal",
@@ -2030,14 +2020,14 @@
     "velocidad_punta_kmh": 32.9
   },
   {
-    "team": "Scotland",
-    "player_name": "Lewis FERGUSON",
-    "partidos": 3,
-    "distancia_total_km": 36.6,
-    "distancia_promedio_km": 12.19,
-    "alta_intensidad_promedio_m": 746.6,
-    "sprints_promedio": 39.666666666666664,
-    "velocidad_punta_kmh": 31.1
+    "team": "Sweden",
+    "player_name": "Gabriel GUDMUNDSSON",
+    "partidos": 4,
+    "distancia_total_km": 36.8,
+    "distancia_promedio_km": 9.2,
+    "alta_intensidad_promedio_m": 631.5,
+    "sprints_promedio": 34.25,
+    "velocidad_punta_kmh": 33.7
   },
   {
     "team": "Japan",
@@ -2048,6 +2038,16 @@
     "alta_intensidad_promedio_m": 618.9,
     "sprints_promedio": 35.25,
     "velocidad_punta_kmh": 33.3
+  },
+  {
+    "team": "Scotland",
+    "player_name": "Lewis FERGUSON",
+    "partidos": 3,
+    "distancia_total_km": 36.6,
+    "distancia_promedio_km": 12.19,
+    "alta_intensidad_promedio_m": 746.6,
+    "sprints_promedio": 39.666666666666664,
+    "velocidad_punta_kmh": 31.1
   },
   {
     "team": "Croatia",
@@ -2100,16 +2100,6 @@
     "velocidad_punta_kmh": 30.2
   },
   {
-    "team": "Norway",
-    "player_name": "Antonio NUSA",
-    "partidos": 6,
-    "distancia_total_km": 35.7,
-    "distancia_promedio_km": 5.95,
-    "alta_intensidad_promedio_m": 536.3,
-    "sprints_promedio": 29.333333333333332,
-    "velocidad_punta_kmh": 34.3
-  },
-  {
     "team": "Algeria",
     "player_name": "Ramy BENSEBAINI",
     "partidos": 4,
@@ -2120,16 +2110,6 @@
     "velocidad_punta_kmh": 33.3
   },
   {
-    "team": "Sweden",
-    "player_name": "Alexander ISAK",
-    "partidos": 4,
-    "distancia_total_km": 35.7,
-    "distancia_promedio_km": 8.91,
-    "alta_intensidad_promedio_m": 753.9,
-    "sprints_promedio": 38.75,
-    "velocidad_punta_kmh": 32.6
-  },
-  {
     "team": "Argentina",
     "player_name": "Lautaro MARTINEZ",
     "partidos": 6,
@@ -2138,6 +2118,26 @@
     "alta_intensidad_promedio_m": 398.9,
     "sprints_promedio": 23.5,
     "velocidad_punta_kmh": 31.5
+  },
+  {
+    "team": "Norway",
+    "player_name": "Antonio NUSA",
+    "partidos": 6,
+    "distancia_total_km": 35.7,
+    "distancia_promedio_km": 5.95,
+    "alta_intensidad_promedio_m": 536.3,
+    "sprints_promedio": 29.333333333333332,
+    "velocidad_punta_kmh": 34.3
+  },
+  {
+    "team": "Sweden",
+    "player_name": "Alexander ISAK",
+    "partidos": 4,
+    "distancia_total_km": 35.7,
+    "distancia_promedio_km": 8.91,
+    "alta_intensidad_promedio_m": 753.9,
+    "sprints_promedio": 38.75,
+    "velocidad_punta_kmh": 32.6
   },
   {
     "team": "South Africa",
@@ -2180,16 +2180,6 @@
     "velocidad_punta_kmh": 34.7
   },
   {
-    "team": "USA",
-    "player_name": "Folarin BALOGUN",
-    "partidos": 4,
-    "distancia_total_km": 35.0,
-    "distancia_promedio_km": 8.74,
-    "alta_intensidad_promedio_m": 756.6,
-    "sprints_promedio": 45.75,
-    "velocidad_punta_kmh": 35.6
-  },
-  {
     "team": "IR Iran",
     "player_name": "Ramin REZAEIAN",
     "partidos": 3,
@@ -2198,6 +2188,16 @@
     "alta_intensidad_promedio_m": 946.4,
     "sprints_promedio": 56.666666666666664,
     "velocidad_punta_kmh": 31.6
+  },
+  {
+    "team": "USA",
+    "player_name": "Folarin BALOGUN",
+    "partidos": 4,
+    "distancia_total_km": 35.0,
+    "distancia_promedio_km": 8.74,
+    "alta_intensidad_promedio_m": 756.6,
+    "sprints_promedio": 45.75,
+    "velocidad_punta_kmh": 35.6
   },
   {
     "team": "Ghana",
@@ -2320,6 +2320,16 @@
     "velocidad_punta_kmh": 31.9
   },
   {
+    "team": "Uruguay",
+    "player_name": "Rodrigo BENTANCUR",
+    "partidos": 3,
+    "distancia_total_km": 33.6,
+    "distancia_promedio_km": 11.21,
+    "alta_intensidad_promedio_m": 802.2,
+    "sprints_promedio": 48.333333333333336,
+    "velocidad_punta_kmh": 32.6
+  },
+  {
     "team": "Algeria",
     "player_name": "Nabil BENTALEB",
     "partidos": 4,
@@ -2330,16 +2340,6 @@
     "velocidad_punta_kmh": 31.0
   },
   {
-    "team": "Jordan",
-    "player_name": "ALI OLWAN",
-    "partidos": 3,
-    "distancia_total_km": 33.6,
-    "distancia_promedio_km": 11.19,
-    "alta_intensidad_promedio_m": 859.1,
-    "sprints_promedio": 46.0,
-    "velocidad_punta_kmh": 33.4
-  },
-  {
     "team": "Panama",
     "player_name": "Carlos HARVEY",
     "partidos": 3,
@@ -2348,6 +2348,16 @@
     "alta_intensidad_promedio_m": 688.0,
     "sprints_promedio": 39.333333333333336,
     "velocidad_punta_kmh": 32.8
+  },
+  {
+    "team": "Jordan",
+    "player_name": "ALI OLWAN",
+    "partidos": 3,
+    "distancia_total_km": 33.6,
+    "distancia_promedio_km": 11.19,
+    "alta_intensidad_promedio_m": 859.1,
+    "sprints_promedio": 46.0,
+    "velocidad_punta_kmh": 33.4
   },
   {
     "team": "Canada",
@@ -2370,14 +2380,14 @@
     "velocidad_punta_kmh": 30.4
   },
   {
-    "team": "Uruguay",
-    "player_name": "Rodrigo BENTANCUR",
-    "partidos": 3,
-    "distancia_total_km": 33.6,
-    "distancia_promedio_km": 11.21,
-    "alta_intensidad_promedio_m": 802.2,
-    "sprints_promedio": 48.333333333333336,
-    "velocidad_punta_kmh": 32.6
+    "team": "Brazil",
+    "player_name": "MATHEUS CUNHA",
+    "partidos": 5,
+    "distancia_total_km": 33.5,
+    "distancia_promedio_km": 6.7,
+    "alta_intensidad_promedio_m": 414.5,
+    "sprints_promedio": 26.8,
+    "velocidad_punta_kmh": 31.9
   },
   {
     "team": "Germany",
@@ -2388,16 +2398,6 @@
     "alta_intensidad_promedio_m": 612.6,
     "sprints_promedio": 35.0,
     "velocidad_punta_kmh": 32.3
-  },
-  {
-    "team": "Brazil",
-    "player_name": "MATHEUS CUNHA",
-    "partidos": 5,
-    "distancia_total_km": 33.5,
-    "distancia_promedio_km": 6.7,
-    "alta_intensidad_promedio_m": 414.5,
-    "sprints_promedio": 26.8,
-    "velocidad_punta_kmh": 31.9
   },
   {
     "team": "Brazil",
@@ -2450,16 +2450,6 @@
     "velocidad_punta_kmh": 33.3
   },
   {
-    "team": "Bosnia and Herzegovina",
-    "player_name": "Kerim ALAJBEGOVIC",
-    "partidos": 4,
-    "distancia_total_km": 33.0,
-    "distancia_promedio_km": 8.25,
-    "alta_intensidad_promedio_m": 503.1,
-    "sprints_promedio": 32.5,
-    "velocidad_punta_kmh": 31.9
-  },
-  {
     "team": "Paraguay",
     "player_name": "Omar ALDERETE",
     "partidos": 4,
@@ -2470,14 +2460,14 @@
     "velocidad_punta_kmh": 32.1
   },
   {
-    "team": "New Zealand",
-    "player_name": "Marko STAMENIC",
-    "partidos": 3,
-    "distancia_total_km": 32.9,
-    "distancia_promedio_km": 10.97,
-    "alta_intensidad_promedio_m": 853.0,
-    "sprints_promedio": 44.333333333333336,
-    "velocidad_punta_kmh": 32.3
+    "team": "Bosnia and Herzegovina",
+    "player_name": "Kerim ALAJBEGOVIC",
+    "partidos": 4,
+    "distancia_total_km": 33.0,
+    "distancia_promedio_km": 8.25,
+    "alta_intensidad_promedio_m": 503.1,
+    "sprints_promedio": 32.5,
+    "velocidad_punta_kmh": 31.9
   },
   {
     "team": "Norway",
@@ -2500,6 +2490,16 @@
     "velocidad_punta_kmh": 30.7
   },
   {
+    "team": "New Zealand",
+    "player_name": "Marko STAMENIC",
+    "partidos": 3,
+    "distancia_total_km": 32.9,
+    "distancia_promedio_km": 10.97,
+    "alta_intensidad_promedio_m": 853.0,
+    "sprints_promedio": 44.333333333333336,
+    "velocidad_punta_kmh": 32.3
+  },
+  {
     "team": "Mexico",
     "player_name": "Luis ROMO",
     "partidos": 4,
@@ -2510,16 +2510,6 @@
     "velocidad_punta_kmh": 32.2
   },
   {
-    "team": "IR Iran",
-    "player_name": "Saeid EZATOLAHI",
-    "partidos": 3,
-    "distancia_total_km": 32.8,
-    "distancia_promedio_km": 10.95,
-    "alta_intensidad_promedio_m": 350.9,
-    "sprints_promedio": 21.666666666666668,
-    "velocidad_punta_kmh": 26.7
-  },
-  {
     "team": "Congo DR",
     "player_name": "Arthur MASUAKU",
     "partidos": 4,
@@ -2528,6 +2518,16 @@
     "alta_intensidad_promedio_m": 421.6,
     "sprints_promedio": 28.5,
     "velocidad_punta_kmh": 33.3
+  },
+  {
+    "team": "IR Iran",
+    "player_name": "Saeid EZATOLAHI",
+    "partidos": 3,
+    "distancia_total_km": 32.8,
+    "distancia_promedio_km": 10.95,
+    "alta_intensidad_promedio_m": 350.9,
+    "sprints_promedio": 21.666666666666668,
+    "velocidad_punta_kmh": 26.7
   },
   {
     "team": "Uruguay",
@@ -2560,16 +2560,6 @@
     "velocidad_punta_kmh": 31.3
   },
   {
-    "team": "Croatia",
-    "player_name": "Mateo KOVACIC",
-    "partidos": 4,
-    "distancia_total_km": 32.5,
-    "distancia_promedio_km": 8.13,
-    "alta_intensidad_promedio_m": 491.3,
-    "sprints_promedio": 27.0,
-    "velocidad_punta_kmh": 32.2
-  },
-  {
     "team": "Korea Republic",
     "player_name": "HWANG Inbeom",
     "partidos": 3,
@@ -2578,6 +2568,16 @@
     "alta_intensidad_promedio_m": 526.9,
     "sprints_promedio": 32.333333333333336,
     "velocidad_punta_kmh": 30.6
+  },
+  {
+    "team": "Croatia",
+    "player_name": "Mateo KOVACIC",
+    "partidos": 4,
+    "distancia_total_km": 32.5,
+    "distancia_promedio_km": 8.13,
+    "alta_intensidad_promedio_m": 491.3,
+    "sprints_promedio": 27.0,
+    "velocidad_punta_kmh": 32.2
   },
   {
     "team": "Cabo Verde",
@@ -2630,16 +2630,6 @@
     "velocidad_punta_kmh": 28.7
   },
   {
-    "team": "Mexico",
-    "player_name": "Raul JIMENEZ",
-    "partidos": 4,
-    "distancia_total_km": 32.1,
-    "distancia_promedio_km": 8.02,
-    "alta_intensidad_promedio_m": 543.2,
-    "sprints_promedio": 35.25,
-    "velocidad_punta_kmh": 33.3
-  },
-  {
     "team": "Algeria",
     "player_name": "Rayan AIT-NOURI",
     "partidos": 4,
@@ -2650,14 +2640,24 @@
     "velocidad_punta_kmh": 33.5
   },
   {
+    "team": "Mexico",
+    "player_name": "Raul JIMENEZ",
+    "partidos": 4,
+    "distancia_total_km": 32.1,
+    "distancia_promedio_km": 8.02,
+    "alta_intensidad_promedio_m": 543.2,
+    "sprints_promedio": 35.25,
+    "velocidad_punta_kmh": 33.3
+  },
+  {
     "team": "Jordan",
-    "player_name": "MOHANNAD ABUTAHA",
+    "player_name": "NIZAR ALRASHDAN",
     "partidos": 3,
     "distancia_total_km": 31.9,
-    "distancia_promedio_km": 10.62,
-    "alta_intensidad_promedio_m": 906.8,
-    "sprints_promedio": 56.666666666666664,
-    "velocidad_punta_kmh": 31.8
+    "distancia_promedio_km": 10.65,
+    "alta_intensidad_promedio_m": 576.7,
+    "sprints_promedio": 34.333333333333336,
+    "velocidad_punta_kmh": 31.1
   },
   {
     "team": "England",
@@ -2670,6 +2670,16 @@
     "velocidad_punta_kmh": 32.3
   },
   {
+    "team": "Jordan",
+    "player_name": "MOHANNAD ABUTAHA",
+    "partidos": 3,
+    "distancia_total_km": 31.9,
+    "distancia_promedio_km": 10.62,
+    "alta_intensidad_promedio_m": 906.8,
+    "sprints_promedio": 56.666666666666664,
+    "velocidad_punta_kmh": 31.8
+  },
+  {
     "team": "South Africa",
     "player_name": "Thalente MBATHA",
     "partidos": 4,
@@ -2678,16 +2688,6 @@
     "alta_intensidad_promedio_m": 587.0,
     "sprints_promedio": 36.25,
     "velocidad_punta_kmh": 34.4
-  },
-  {
-    "team": "Jordan",
-    "player_name": "NIZAR ALRASHDAN",
-    "partidos": 3,
-    "distancia_total_km": 31.9,
-    "distancia_promedio_km": 10.65,
-    "alta_intensidad_promedio_m": 576.7,
-    "sprints_promedio": 34.333333333333336,
-    "velocidad_punta_kmh": 31.1
   },
   {
     "team": "Panama",
@@ -2701,16 +2701,6 @@
   },
   {
     "team": "Argentina",
-    "player_name": "Thiago ALMADA",
-    "partidos": 5,
-    "distancia_total_km": 31.8,
-    "distancia_promedio_km": 6.36,
-    "alta_intensidad_promedio_m": 508.1,
-    "sprints_promedio": 27.4,
-    "velocidad_punta_kmh": 33.3
-  },
-  {
-    "team": "Argentina",
     "player_name": "Nicolas TAGLIAFICO",
     "partidos": 5,
     "distancia_total_km": 31.8,
@@ -2720,14 +2710,14 @@
     "velocidad_punta_kmh": 31.1
   },
   {
-    "team": "Norway",
-    "player_name": "Andreas SCHJELDERUP",
-    "partidos": 6,
-    "distancia_total_km": 31.6,
-    "distancia_promedio_km": 5.27,
-    "alta_intensidad_promedio_m": 431.0,
-    "sprints_promedio": 22.833333333333332,
-    "velocidad_punta_kmh": 32.8
+    "team": "Argentina",
+    "player_name": "Thiago ALMADA",
+    "partidos": 5,
+    "distancia_total_km": 31.8,
+    "distancia_promedio_km": 6.36,
+    "alta_intensidad_promedio_m": 508.1,
+    "sprints_promedio": 27.4,
+    "velocidad_punta_kmh": 33.3
   },
   {
     "team": "Switzerland",
@@ -2750,6 +2740,16 @@
     "velocidad_punta_kmh": 32.9
   },
   {
+    "team": "Norway",
+    "player_name": "Andreas SCHJELDERUP",
+    "partidos": 6,
+    "distancia_total_km": 31.6,
+    "distancia_promedio_km": 5.27,
+    "alta_intensidad_promedio_m": 431.0,
+    "sprints_promedio": 22.833333333333332,
+    "velocidad_punta_kmh": 32.8
+  },
+  {
     "team": "Australia",
     "player_name": "Jackson IRVINE",
     "partidos": 4,
@@ -2758,16 +2758,6 @@
     "alta_intensidad_promedio_m": 518.1,
     "sprints_promedio": 31.25,
     "velocidad_punta_kmh": 29.9
-  },
-  {
-    "team": "Senegal",
-    "player_name": "Lamine CAMARA",
-    "partidos": 4,
-    "distancia_total_km": 31.5,
-    "distancia_promedio_km": 7.87,
-    "alta_intensidad_promedio_m": 746.4,
-    "sprints_promedio": 44.0,
-    "velocidad_punta_kmh": 32.6
   },
   {
     "team": "Ecuador",
@@ -2780,6 +2770,16 @@
     "velocidad_punta_kmh": 33.9
   },
   {
+    "team": "Senegal",
+    "player_name": "Lamine CAMARA",
+    "partidos": 4,
+    "distancia_total_km": 31.5,
+    "distancia_promedio_km": 7.87,
+    "alta_intensidad_promedio_m": 746.4,
+    "sprints_promedio": 44.0,
+    "velocidad_punta_kmh": 32.6
+  },
+  {
     "team": "Iraq",
     "player_name": "MERCHAS DOSKI",
     "partidos": 3,
@@ -2788,16 +2788,6 @@
     "alta_intensidad_promedio_m": 810.7,
     "sprints_promedio": 42.666666666666664,
     "velocidad_punta_kmh": 32.1
-  },
-  {
-    "team": "Paraguay",
-    "player_name": "Orlando GILL",
-    "partidos": 5,
-    "distancia_total_km": 31.4,
-    "distancia_promedio_km": 6.29,
-    "alta_intensidad_promedio_m": 15.0,
-    "sprints_promedio": 1.0,
-    "velocidad_punta_kmh": 24.6
   },
   {
     "team": "Austria",
@@ -2810,14 +2800,14 @@
     "velocidad_punta_kmh": 34.0
   },
   {
-    "team": "Côte d'Ivoire",
-    "player_name": "Guela DOUE",
-    "partidos": 4,
-    "distancia_total_km": 31.3,
-    "distancia_promedio_km": 7.83,
-    "alta_intensidad_promedio_m": 631.3,
-    "sprints_promedio": 33.0,
-    "velocidad_punta_kmh": 33.8
+    "team": "Paraguay",
+    "player_name": "Orlando GILL",
+    "partidos": 5,
+    "distancia_total_km": 31.4,
+    "distancia_promedio_km": 6.29,
+    "alta_intensidad_promedio_m": 15.0,
+    "sprints_promedio": 1.0,
+    "velocidad_punta_kmh": 24.6
   },
   {
     "team": "Argentina",
@@ -2830,34 +2820,14 @@
     "velocidad_punta_kmh": 27.6
   },
   {
-    "team": "New Zealand",
-    "player_name": "Chris WOOD",
-    "partidos": 3,
-    "distancia_total_km": 31.2,
-    "distancia_promedio_km": 10.4,
-    "alta_intensidad_promedio_m": 774.7,
-    "sprints_promedio": 48.0,
-    "velocidad_punta_kmh": 31.9
-  },
-  {
-    "team": "Switzerland",
-    "player_name": "Djibril SOW",
+    "team": "Côte d'Ivoire",
+    "player_name": "Guela DOUE",
     "partidos": 4,
-    "distancia_total_km": 31.2,
-    "distancia_promedio_km": 7.8,
-    "alta_intensidad_promedio_m": 630.0,
-    "sprints_promedio": 36.75,
-    "velocidad_punta_kmh": 31.7
-  },
-  {
-    "team": "Tunisia",
-    "player_name": "Hannibal MEJBRI",
-    "partidos": 3,
-    "distancia_total_km": 31.2,
-    "distancia_promedio_km": 10.41,
-    "alta_intensidad_promedio_m": 615.5,
-    "sprints_promedio": 34.0,
-    "velocidad_punta_kmh": 31.7
+    "distancia_total_km": 31.3,
+    "distancia_promedio_km": 7.83,
+    "alta_intensidad_promedio_m": 631.3,
+    "sprints_promedio": 33.0,
+    "velocidad_punta_kmh": 33.8
   },
   {
     "team": "Korea Republic",
@@ -2870,6 +2840,36 @@
     "velocidad_punta_kmh": 32.3
   },
   {
+    "team": "Switzerland",
+    "player_name": "Djibril SOW",
+    "partidos": 4,
+    "distancia_total_km": 31.2,
+    "distancia_promedio_km": 7.8,
+    "alta_intensidad_promedio_m": 630.0,
+    "sprints_promedio": 36.75,
+    "velocidad_punta_kmh": 31.7
+  },
+  {
+    "team": "New Zealand",
+    "player_name": "Chris WOOD",
+    "partidos": 3,
+    "distancia_total_km": 31.2,
+    "distancia_promedio_km": 10.4,
+    "alta_intensidad_promedio_m": 774.7,
+    "sprints_promedio": 48.0,
+    "velocidad_punta_kmh": 31.9
+  },
+  {
+    "team": "Tunisia",
+    "player_name": "Hannibal MEJBRI",
+    "partidos": 3,
+    "distancia_total_km": 31.2,
+    "distancia_promedio_km": 10.41,
+    "alta_intensidad_promedio_m": 615.5,
+    "sprints_promedio": 34.0,
+    "velocidad_punta_kmh": 31.7
+  },
+  {
     "team": "Algeria",
     "player_name": "Riyad MAHREZ",
     "partidos": 4,
@@ -2878,6 +2878,16 @@
     "alta_intensidad_promedio_m": 571.5,
     "sprints_promedio": 32.5,
     "velocidad_punta_kmh": 31.5
+  },
+  {
+    "team": "Ghana",
+    "player_name": "Marvin SENAYA",
+    "partidos": 4,
+    "distancia_total_km": 31.1,
+    "distancia_promedio_km": 7.78,
+    "alta_intensidad_promedio_m": 633.6,
+    "sprints_promedio": 42.75,
+    "velocidad_punta_kmh": 31.6
   },
   {
     "team": "Mexico",
@@ -2910,24 +2920,14 @@
     "velocidad_punta_kmh": 30.0
   },
   {
-    "team": "Ghana",
-    "player_name": "Marvin SENAYA",
-    "partidos": 4,
-    "distancia_total_km": 31.1,
-    "distancia_promedio_km": 7.78,
-    "alta_intensidad_promedio_m": 633.6,
-    "sprints_promedio": 42.75,
-    "velocidad_punta_kmh": 31.6
-  },
-  {
-    "team": "Ghana",
-    "player_name": "Thomas PARTEY",
+    "team": "South Africa",
+    "player_name": "Teboho MOKOENA",
     "partidos": 3,
     "distancia_total_km": 31.0,
-    "distancia_promedio_km": 10.34,
-    "alta_intensidad_promedio_m": 415.4,
-    "sprints_promedio": 25.666666666666668,
-    "velocidad_punta_kmh": 28.5
+    "distancia_promedio_km": 10.33,
+    "alta_intensidad_promedio_m": 691.6,
+    "sprints_promedio": 40.333333333333336,
+    "velocidad_punta_kmh": 31.4
   },
   {
     "team": "Cabo Verde",
@@ -2940,14 +2940,24 @@
     "velocidad_punta_kmh": 33.5
   },
   {
-    "team": "South Africa",
-    "player_name": "Teboho MOKOENA",
+    "team": "Ghana",
+    "player_name": "Thomas PARTEY",
     "partidos": 3,
     "distancia_total_km": 31.0,
-    "distancia_promedio_km": 10.33,
-    "alta_intensidad_promedio_m": 691.6,
-    "sprints_promedio": 40.333333333333336,
-    "velocidad_punta_kmh": 31.4
+    "distancia_promedio_km": 10.34,
+    "alta_intensidad_promedio_m": 415.4,
+    "sprints_promedio": 25.666666666666668,
+    "velocidad_punta_kmh": 28.5
+  },
+  {
+    "team": "New Zealand",
+    "player_name": "Finn SURMAN",
+    "partidos": 3,
+    "distancia_total_km": 30.9,
+    "distancia_promedio_km": 10.31,
+    "alta_intensidad_promedio_m": 643.8,
+    "sprints_promedio": 34.333333333333336,
+    "velocidad_punta_kmh": 33.2
   },
   {
     "team": "Jordan",
@@ -2970,16 +2980,6 @@
     "velocidad_punta_kmh": 32.8
   },
   {
-    "team": "New Zealand",
-    "player_name": "Finn SURMAN",
-    "partidos": 3,
-    "distancia_total_km": 30.9,
-    "distancia_promedio_km": 10.31,
-    "alta_intensidad_promedio_m": 643.8,
-    "sprints_promedio": 34.333333333333336,
-    "velocidad_punta_kmh": 33.2
-  },
-  {
     "team": "Panama",
     "player_name": "Jose CORDOBA",
     "partidos": 3,
@@ -2988,16 +2988,6 @@
     "alta_intensidad_promedio_m": 743.4,
     "sprints_promedio": 38.0,
     "velocidad_punta_kmh": 33.8
-  },
-  {
-    "team": "Panama",
-    "player_name": "Edgar Yoel BARCENAS",
-    "partidos": 3,
-    "distancia_total_km": 30.8,
-    "distancia_promedio_km": 10.26,
-    "alta_intensidad_promedio_m": 584.5,
-    "sprints_promedio": 33.666666666666664,
-    "velocidad_punta_kmh": 31.4
   },
   {
     "team": "IR Iran",
@@ -3010,14 +3000,14 @@
     "velocidad_punta_kmh": 32.3
   },
   {
-    "team": "South Africa",
-    "player_name": "Oswin APPOLLIS",
-    "partidos": 4,
-    "distancia_total_km": 30.7,
-    "distancia_promedio_km": 7.68,
-    "alta_intensidad_promedio_m": 687.7,
-    "sprints_promedio": 45.5,
-    "velocidad_punta_kmh": 32.2
+    "team": "Panama",
+    "player_name": "Edgar Yoel BARCENAS",
+    "partidos": 3,
+    "distancia_total_km": 30.8,
+    "distancia_promedio_km": 10.26,
+    "alta_intensidad_promedio_m": 584.5,
+    "sprints_promedio": 33.666666666666664,
+    "velocidad_punta_kmh": 31.4
   },
   {
     "team": "Tunisia",
@@ -3028,6 +3018,16 @@
     "alta_intensidad_promedio_m": 737.4,
     "sprints_promedio": 41.0,
     "velocidad_punta_kmh": 30.3
+  },
+  {
+    "team": "South Africa",
+    "player_name": "Oswin APPOLLIS",
+    "partidos": 4,
+    "distancia_total_km": 30.7,
+    "distancia_promedio_km": 7.68,
+    "alta_intensidad_promedio_m": 687.7,
+    "sprints_promedio": 45.5,
+    "velocidad_punta_kmh": 32.2
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -3050,6 +3050,16 @@
     "velocidad_punta_kmh": 30.9
   },
   {
+    "team": "England",
+    "player_name": "Noni MADUEKE",
+    "partidos": 5,
+    "distancia_total_km": 30.6,
+    "distancia_promedio_km": 6.12,
+    "alta_intensidad_promedio_m": 575.6,
+    "sprints_promedio": 29.4,
+    "velocidad_punta_kmh": 34.3
+  },
+  {
     "team": "Iraq",
     "player_name": "AMIR ALAMMARI",
     "partidos": 3,
@@ -3068,16 +3078,6 @@
     "alta_intensidad_promedio_m": 959.5,
     "sprints_promedio": 51.666666666666664,
     "velocidad_punta_kmh": 34.1
-  },
-  {
-    "team": "England",
-    "player_name": "Noni MADUEKE",
-    "partidos": 5,
-    "distancia_total_km": 30.6,
-    "distancia_promedio_km": 6.12,
-    "alta_intensidad_promedio_m": 575.6,
-    "sprints_promedio": 29.4,
-    "velocidad_punta_kmh": 34.3
   },
   {
     "team": "Scotland",
@@ -3160,6 +3160,16 @@
     "velocidad_punta_kmh": 32.2
   },
   {
+    "team": "Tunisia",
+    "player_name": "Montassar TALBI",
+    "partidos": 3,
+    "distancia_total_km": 29.9,
+    "distancia_promedio_km": 9.98,
+    "alta_intensidad_promedio_m": 489.9,
+    "sprints_promedio": 25.666666666666668,
+    "velocidad_punta_kmh": 30.6
+  },
+  {
     "team": "Côte d'Ivoire",
     "player_name": "Odilon KOSSOUNOU",
     "partidos": 4,
@@ -3180,16 +3190,6 @@
     "velocidad_punta_kmh": 34.8
   },
   {
-    "team": "Uzbekistan",
-    "player_name": "Otabek SHUKUROV",
-    "partidos": 3,
-    "distancia_total_km": 29.9,
-    "distancia_promedio_km": 9.96,
-    "alta_intensidad_promedio_m": 406.6,
-    "sprints_promedio": 28.333333333333332,
-    "velocidad_punta_kmh": 30.7
-  },
-  {
     "team": "Curaçao",
     "player_name": "Sherel FLORANUS",
     "partidos": 3,
@@ -3200,34 +3200,14 @@
     "velocidad_punta_kmh": 33.3
   },
   {
-    "team": "Tunisia",
-    "player_name": "Montassar TALBI",
+    "team": "Uzbekistan",
+    "player_name": "Otabek SHUKUROV",
     "partidos": 3,
     "distancia_total_km": 29.9,
-    "distancia_promedio_km": 9.98,
-    "alta_intensidad_promedio_m": 489.9,
-    "sprints_promedio": 25.666666666666668,
-    "velocidad_punta_kmh": 30.6
-  },
-  {
-    "team": "Saudi Arabia",
-    "player_name": "SAUD ABDULHAMID",
-    "partidos": 3,
-    "distancia_total_km": 29.8,
-    "distancia_promedio_km": 9.93,
-    "alta_intensidad_promedio_m": 990.8,
-    "sprints_promedio": 50.0,
-    "velocidad_punta_kmh": 32.7
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Thibaut COURTOIS",
-    "partidos": 6,
-    "distancia_total_km": 29.8,
-    "distancia_promedio_km": 4.97,
-    "alta_intensidad_promedio_m": 34.8,
-    "sprints_promedio": 2.1666666666666665,
-    "velocidad_punta_kmh": 26.6
+    "distancia_promedio_km": 9.96,
+    "alta_intensidad_promedio_m": 406.6,
+    "sprints_promedio": 28.333333333333332,
+    "velocidad_punta_kmh": 30.7
   },
   {
     "team": "Norway",
@@ -3240,6 +3220,26 @@
     "velocidad_punta_kmh": 35.6
   },
   {
+    "team": "Belgium",
+    "player_name": "Thibaut COURTOIS",
+    "partidos": 6,
+    "distancia_total_km": 29.8,
+    "distancia_promedio_km": 4.97,
+    "alta_intensidad_promedio_m": 34.8,
+    "sprints_promedio": 2.1666666666666665,
+    "velocidad_punta_kmh": 26.6
+  },
+  {
+    "team": "Saudi Arabia",
+    "player_name": "SAUD ABDULHAMID",
+    "partidos": 3,
+    "distancia_total_km": 29.8,
+    "distancia_promedio_km": 9.93,
+    "alta_intensidad_promedio_m": 990.8,
+    "sprints_promedio": 50.0,
+    "velocidad_punta_kmh": 32.7
+  },
+  {
     "team": "Panama",
     "player_name": "Cristian MARTINEZ",
     "partidos": 3,
@@ -3248,16 +3248,6 @@
     "alta_intensidad_promedio_m": 773.7,
     "sprints_promedio": 49.0,
     "velocidad_punta_kmh": 31.9
-  },
-  {
-    "team": "Austria",
-    "player_name": "David ALABA",
-    "partidos": 4,
-    "distancia_total_km": 29.6,
-    "distancia_promedio_km": 7.4,
-    "alta_intensidad_promedio_m": 310.5,
-    "sprints_promedio": 17.5,
-    "velocidad_punta_kmh": 31.2
   },
   {
     "team": "Côte d'Ivoire",
@@ -3270,34 +3260,14 @@
     "velocidad_punta_kmh": 31.4
   },
   {
-    "team": "Ecuador",
-    "player_name": "Enner VALENCIA",
+    "team": "Austria",
+    "player_name": "David ALABA",
     "partidos": 4,
-    "distancia_total_km": 29.5,
-    "distancia_promedio_km": 7.37,
-    "alta_intensidad_promedio_m": 467.2,
-    "sprints_promedio": 27.0,
-    "velocidad_punta_kmh": 33.1
-  },
-  {
-    "team": "Saudi Arabia",
-    "player_name": "SALEM ALDAWSARI",
-    "partidos": 3,
-    "distancia_total_km": 29.5,
-    "distancia_promedio_km": 9.82,
-    "alta_intensidad_promedio_m": 859.8,
-    "sprints_promedio": 53.333333333333336,
-    "velocidad_punta_kmh": 33.3
-  },
-  {
-    "team": "Senegal",
-    "player_name": "Ismail JAKOBS",
-    "partidos": 3,
-    "distancia_total_km": 29.5,
-    "distancia_promedio_km": 9.82,
-    "alta_intensidad_promedio_m": 891.9,
-    "sprints_promedio": 47.0,
-    "velocidad_punta_kmh": 34.7
+    "distancia_total_km": 29.6,
+    "distancia_promedio_km": 7.4,
+    "alta_intensidad_promedio_m": 310.5,
+    "sprints_promedio": 17.5,
+    "velocidad_punta_kmh": 31.2
   },
   {
     "team": "Curaçao",
@@ -3310,14 +3280,44 @@
     "velocidad_punta_kmh": 31.8
   },
   {
-    "team": "Czechia",
-    "player_name": "Robin HRANAC",
+    "team": "Saudi Arabia",
+    "player_name": "SALEM ALDAWSARI",
     "partidos": 3,
+    "distancia_total_km": 29.5,
+    "distancia_promedio_km": 9.82,
+    "alta_intensidad_promedio_m": 859.8,
+    "sprints_promedio": 53.333333333333336,
+    "velocidad_punta_kmh": 33.3
+  },
+  {
+    "team": "Ecuador",
+    "player_name": "Enner VALENCIA",
+    "partidos": 4,
+    "distancia_total_km": 29.5,
+    "distancia_promedio_km": 7.37,
+    "alta_intensidad_promedio_m": 467.2,
+    "sprints_promedio": 27.0,
+    "velocidad_punta_kmh": 33.1
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Ismail JAKOBS",
+    "partidos": 3,
+    "distancia_total_km": 29.5,
+    "distancia_promedio_km": 9.82,
+    "alta_intensidad_promedio_m": 891.9,
+    "sprints_promedio": 47.0,
+    "velocidad_punta_kmh": 34.7
+  },
+  {
+    "team": "Egypt",
+    "player_name": "MOSTAFA SHOUBIR",
+    "partidos": 5,
     "distancia_total_km": 29.4,
-    "distancia_promedio_km": 9.81,
-    "alta_intensidad_promedio_m": 474.5,
-    "sprints_promedio": 31.333333333333332,
-    "velocidad_punta_kmh": 32.0
+    "distancia_promedio_km": 5.88,
+    "alta_intensidad_promedio_m": 39.8,
+    "sprints_promedio": 2.8,
+    "velocidad_punta_kmh": 26.2
   },
   {
     "team": "Canada",
@@ -3340,14 +3340,14 @@
     "velocidad_punta_kmh": 32.7
   },
   {
-    "team": "Egypt",
-    "player_name": "MOSTAFA SHOUBIR",
-    "partidos": 5,
+    "team": "Czechia",
+    "player_name": "Robin HRANAC",
+    "partidos": 3,
     "distancia_total_km": 29.4,
-    "distancia_promedio_km": 5.88,
-    "alta_intensidad_promedio_m": 39.8,
-    "sprints_promedio": 2.8,
-    "velocidad_punta_kmh": 26.2
+    "distancia_promedio_km": 9.81,
+    "alta_intensidad_promedio_m": 474.5,
+    "sprints_promedio": 31.333333333333332,
+    "velocidad_punta_kmh": 32.0
   },
   {
     "team": "Senegal",
@@ -3371,6 +3371,16 @@
   },
   {
     "team": "Tunisia",
+    "player_name": "Ellyes SKHIRI",
+    "partidos": 3,
+    "distancia_total_km": 29.3,
+    "distancia_promedio_km": 9.78,
+    "alta_intensidad_promedio_m": 354.0,
+    "sprints_promedio": 19.666666666666668,
+    "velocidad_punta_kmh": 31.2
+  },
+  {
+    "team": "Tunisia",
     "player_name": "Yan VALERY",
     "partidos": 3,
     "distancia_total_km": 29.3,
@@ -3388,16 +3398,6 @@
     "alta_intensidad_promedio_m": 484.2,
     "sprints_promedio": 26.0,
     "velocidad_punta_kmh": 32.3
-  },
-  {
-    "team": "Tunisia",
-    "player_name": "Ellyes SKHIRI",
-    "partidos": 3,
-    "distancia_total_km": 29.3,
-    "distancia_promedio_km": 9.78,
-    "alta_intensidad_promedio_m": 354.0,
-    "sprints_promedio": 19.666666666666668,
-    "velocidad_punta_kmh": 31.2
   },
   {
     "team": "Norway",
@@ -3450,14 +3450,14 @@
     "velocidad_punta_kmh": 32.0
   },
   {
-    "team": "Bosnia and Herzegovina",
-    "player_name": "Tarik MUHAREMOVIC",
+    "team": "Haiti",
+    "player_name": "Ricardo ADE",
     "partidos": 3,
     "distancia_total_km": 28.8,
-    "distancia_promedio_km": 9.59,
-    "alta_intensidad_promedio_m": 446.4,
-    "sprints_promedio": 26.0,
-    "velocidad_punta_kmh": 31.4
+    "distancia_promedio_km": 9.61,
+    "alta_intensidad_promedio_m": 513.0,
+    "sprints_promedio": 31.666666666666668,
+    "velocidad_punta_kmh": 30.7
   },
   {
     "team": "Germany",
@@ -3470,14 +3470,14 @@
     "velocidad_punta_kmh": 33.1
   },
   {
-    "team": "Haiti",
-    "player_name": "Ricardo ADE",
+    "team": "Bosnia and Herzegovina",
+    "player_name": "Tarik MUHAREMOVIC",
     "partidos": 3,
     "distancia_total_km": 28.8,
-    "distancia_promedio_km": 9.61,
-    "alta_intensidad_promedio_m": 513.0,
-    "sprints_promedio": 31.666666666666668,
-    "velocidad_punta_kmh": 30.7
+    "distancia_promedio_km": 9.59,
+    "alta_intensidad_promedio_m": 446.4,
+    "sprints_promedio": 26.0,
+    "velocidad_punta_kmh": 31.4
   },
   {
     "team": "Spain",
@@ -3500,16 +3500,6 @@
     "velocidad_punta_kmh": 32.1
   },
   {
-    "team": "Austria",
-    "player_name": "Xaver SCHLAGER",
-    "partidos": 4,
-    "distancia_total_km": 28.6,
-    "distancia_promedio_km": 7.15,
-    "alta_intensidad_promedio_m": 388.5,
-    "sprints_promedio": 22.75,
-    "velocidad_punta_kmh": 32.7
-  },
-  {
     "team": "Bosnia and Herzegovina",
     "player_name": "Esmir BAJRAKTAREVIC",
     "partidos": 4,
@@ -3520,14 +3510,24 @@
     "velocidad_punta_kmh": 34.8
   },
   {
-    "team": "Côte d'Ivoire",
-    "player_name": "Emmanuel AGBADOU",
+    "team": "Austria",
+    "player_name": "Xaver SCHLAGER",
+    "partidos": 4,
+    "distancia_total_km": 28.6,
+    "distancia_promedio_km": 7.15,
+    "alta_intensidad_promedio_m": 388.5,
+    "sprints_promedio": 22.75,
+    "velocidad_punta_kmh": 32.7
+  },
+  {
+    "team": "Scotland",
+    "player_name": "John McGINN",
     "partidos": 3,
     "distancia_total_km": 28.5,
-    "distancia_promedio_km": 9.51,
-    "alta_intensidad_promedio_m": 413.9,
-    "sprints_promedio": 24.0,
-    "velocidad_punta_kmh": 34.4
+    "distancia_promedio_km": 9.49,
+    "alta_intensidad_promedio_m": 533.5,
+    "sprints_promedio": 32.666666666666664,
+    "velocidad_punta_kmh": 30.9
   },
   {
     "team": "Mexico",
@@ -3540,14 +3540,14 @@
     "velocidad_punta_kmh": 31.5
   },
   {
-    "team": "Scotland",
-    "player_name": "John McGINN",
+    "team": "Côte d'Ivoire",
+    "player_name": "Emmanuel AGBADOU",
     "partidos": 3,
     "distancia_total_km": 28.5,
-    "distancia_promedio_km": 9.49,
-    "alta_intensidad_promedio_m": 533.5,
-    "sprints_promedio": 32.666666666666664,
-    "velocidad_punta_kmh": 30.9
+    "distancia_promedio_km": 9.51,
+    "alta_intensidad_promedio_m": 413.9,
+    "sprints_promedio": 24.0,
+    "velocidad_punta_kmh": 34.4
   },
   {
     "team": "Korea Republic",
@@ -3610,6 +3610,26 @@
     "velocidad_punta_kmh": 31.0
   },
   {
+    "team": "Iraq",
+    "player_name": "AKAM HASHIM",
+    "partidos": 3,
+    "distancia_total_km": 28.1,
+    "distancia_promedio_km": 9.37,
+    "alta_intensidad_promedio_m": 428.9,
+    "sprints_promedio": 26.333333333333332,
+    "velocidad_punta_kmh": 33.7
+  },
+  {
+    "team": "Netherlands",
+    "player_name": "Crysencio SUMMERVILLE",
+    "partidos": 4,
+    "distancia_total_km": 28.1,
+    "distancia_promedio_km": 7.02,
+    "alta_intensidad_promedio_m": 619.0,
+    "sprints_promedio": 32.75,
+    "velocidad_punta_kmh": 34.7
+  },
+  {
     "team": "Canada",
     "player_name": "Maxime CREPEAU",
     "partidos": 5,
@@ -3628,26 +3648,6 @@
     "alta_intensidad_promedio_m": 688.9,
     "sprints_promedio": 38.5,
     "velocidad_punta_kmh": 33.5
-  },
-  {
-    "team": "Netherlands",
-    "player_name": "Crysencio SUMMERVILLE",
-    "partidos": 4,
-    "distancia_total_km": 28.1,
-    "distancia_promedio_km": 7.02,
-    "alta_intensidad_promedio_m": 619.0,
-    "sprints_promedio": 32.75,
-    "velocidad_punta_kmh": 34.7
-  },
-  {
-    "team": "Iraq",
-    "player_name": "AKAM HASHIM",
-    "partidos": 3,
-    "distancia_total_km": 28.1,
-    "distancia_promedio_km": 9.37,
-    "alta_intensidad_promedio_m": 428.9,
-    "sprints_promedio": 26.333333333333332,
-    "velocidad_punta_kmh": 33.7
   },
   {
     "team": "Morocco",
@@ -3680,16 +3680,6 @@
     "velocidad_punta_kmh": 36.5
   },
   {
-    "team": "USA",
-    "player_name": "Ricardo PEPI",
-    "partidos": 5,
-    "distancia_total_km": 27.9,
-    "distancia_promedio_km": 5.57,
-    "alta_intensidad_promedio_m": 534.9,
-    "sprints_promedio": 29.6,
-    "velocidad_punta_kmh": 33.2
-  },
-  {
     "team": "Canada",
     "player_name": "Ali AHMED",
     "partidos": 4,
@@ -3698,6 +3688,16 @@
     "alta_intensidad_promedio_m": 703.1,
     "sprints_promedio": 43.0,
     "velocidad_punta_kmh": 34.1
+  },
+  {
+    "team": "USA",
+    "player_name": "Ricardo PEPI",
+    "partidos": 5,
+    "distancia_total_km": 27.9,
+    "distancia_promedio_km": 5.57,
+    "alta_intensidad_promedio_m": 534.9,
+    "sprints_promedio": 29.6,
+    "velocidad_punta_kmh": 33.2
   },
   {
     "team": "England",
@@ -3720,14 +3720,14 @@
     "velocidad_punta_kmh": 29.5
   },
   {
-    "team": "Brazil",
-    "player_name": "LUCAS PAQUETA",
-    "partidos": 4,
+    "team": "Uruguay",
+    "player_name": "Maxi ARAUJO",
+    "partidos": 3,
     "distancia_total_km": 27.6,
-    "distancia_promedio_km": 6.89,
-    "alta_intensidad_promedio_m": 492.2,
-    "sprints_promedio": 30.75,
-    "velocidad_punta_kmh": 30.9
+    "distancia_promedio_km": 9.21,
+    "alta_intensidad_promedio_m": 798.3,
+    "sprints_promedio": 43.0,
+    "velocidad_punta_kmh": 32.4
   },
   {
     "team": "Iraq",
@@ -3740,24 +3740,14 @@
     "velocidad_punta_kmh": 31.9
   },
   {
-    "team": "Uruguay",
-    "player_name": "Maxi ARAUJO",
-    "partidos": 3,
-    "distancia_total_km": 27.6,
-    "distancia_promedio_km": 9.21,
-    "alta_intensidad_promedio_m": 798.3,
-    "sprints_promedio": 43.0,
-    "velocidad_punta_kmh": 32.4
-  },
-  {
-    "team": "Ecuador",
-    "player_name": "Alan FRANCO",
+    "team": "Brazil",
+    "player_name": "LUCAS PAQUETA",
     "partidos": 4,
-    "distancia_total_km": 27.5,
-    "distancia_promedio_km": 6.87,
-    "alta_intensidad_promedio_m": 563.8,
-    "sprints_promedio": 33.5,
-    "velocidad_punta_kmh": 32.2
+    "distancia_total_km": 27.6,
+    "distancia_promedio_km": 6.89,
+    "alta_intensidad_promedio_m": 492.2,
+    "sprints_promedio": 30.75,
+    "velocidad_punta_kmh": 30.9
   },
   {
     "team": "Uzbekistan",
@@ -3767,6 +3757,16 @@
     "distancia_promedio_km": 9.18,
     "alta_intensidad_promedio_m": 486.8,
     "sprints_promedio": 31.333333333333332,
+    "velocidad_punta_kmh": 32.2
+  },
+  {
+    "team": "Ecuador",
+    "player_name": "Alan FRANCO",
+    "partidos": 4,
+    "distancia_total_km": 27.5,
+    "distancia_promedio_km": 6.87,
+    "alta_intensidad_promedio_m": 563.8,
+    "sprints_promedio": 33.5,
     "velocidad_punta_kmh": 32.2
   },
   {
@@ -3790,16 +3790,6 @@
     "velocidad_punta_kmh": 31.5
   },
   {
-    "team": "Curaçao",
-    "player_name": "Tahith CHONG",
-    "partidos": 3,
-    "distancia_total_km": 27.3,
-    "distancia_promedio_km": 9.11,
-    "alta_intensidad_promedio_m": 756.0,
-    "sprints_promedio": 35.666666666666664,
-    "velocidad_punta_kmh": 34.0
-  },
-  {
     "team": "Australia",
     "player_name": "Nestory IRANKUNDA",
     "partidos": 4,
@@ -3808,6 +3798,16 @@
     "alta_intensidad_promedio_m": 649.1,
     "sprints_promedio": 32.25,
     "velocidad_punta_kmh": 35.1
+  },
+  {
+    "team": "Curaçao",
+    "player_name": "Tahith CHONG",
+    "partidos": 3,
+    "distancia_total_km": 27.3,
+    "distancia_promedio_km": 9.11,
+    "alta_intensidad_promedio_m": 756.0,
+    "sprints_promedio": 35.666666666666664,
+    "velocidad_punta_kmh": 34.0
   },
   {
     "team": "Netherlands",
@@ -3930,16 +3930,6 @@
     "velocidad_punta_kmh": 22.9
   },
   {
-    "team": "Congo DR",
-    "player_name": "Ngalayel MUKAU",
-    "partidos": 4,
-    "distancia_total_km": 26.6,
-    "distancia_promedio_km": 6.65,
-    "alta_intensidad_promedio_m": 417.0,
-    "sprints_promedio": 26.25,
-    "velocidad_punta_kmh": 34.4
-  },
-  {
     "team": "England",
     "player_name": "Reece JAMES",
     "partidos": 3,
@@ -3950,6 +3940,16 @@
     "velocidad_punta_kmh": 33.6
   },
   {
+    "team": "Congo DR",
+    "player_name": "Ngalayel MUKAU",
+    "partidos": 4,
+    "distancia_total_km": 26.6,
+    "distancia_promedio_km": 6.65,
+    "alta_intensidad_promedio_m": 417.0,
+    "sprints_promedio": 26.25,
+    "velocidad_punta_kmh": 34.4
+  },
+  {
     "team": "Qatar",
     "player_name": "PEDRO MIGUEL",
     "partidos": 3,
@@ -3958,16 +3958,6 @@
     "alta_intensidad_promedio_m": 400.2,
     "sprints_promedio": 25.333333333333332,
     "velocidad_punta_kmh": 33.4
-  },
-  {
-    "team": "Ghana",
-    "player_name": "Jonas ADJETEY",
-    "partidos": 3,
-    "distancia_total_km": 26.3,
-    "distancia_promedio_km": 8.75,
-    "alta_intensidad_promedio_m": 424.1,
-    "sprints_promedio": 29.0,
-    "velocidad_punta_kmh": 31.0
   },
   {
     "team": "New Zealand",
@@ -3988,6 +3978,16 @@
     "alta_intensidad_promedio_m": 370.5,
     "sprints_promedio": 22.75,
     "velocidad_punta_kmh": 30.2
+  },
+  {
+    "team": "Ghana",
+    "player_name": "Jonas ADJETEY",
+    "partidos": 3,
+    "distancia_total_km": 26.3,
+    "distancia_promedio_km": 8.75,
+    "alta_intensidad_promedio_m": 424.1,
+    "sprints_promedio": 29.0,
+    "velocidad_punta_kmh": 31.0
   },
   {
     "team": "IR Iran",
@@ -4030,6 +4030,16 @@
     "velocidad_punta_kmh": 30.7
   },
   {
+    "team": "Uruguay",
+    "player_name": "Federico VALVERDE",
+    "partidos": 3,
+    "distancia_total_km": 25.9,
+    "distancia_promedio_km": 8.64,
+    "alta_intensidad_promedio_m": 558.4,
+    "sprints_promedio": 33.0,
+    "velocidad_punta_kmh": 34.9
+  },
+  {
     "team": "Panama",
     "player_name": "Jose Luis RODRIGUEZ",
     "partidos": 3,
@@ -4040,14 +4050,14 @@
     "velocidad_punta_kmh": 32.3
   },
   {
-    "team": "Uruguay",
-    "player_name": "Federico VALVERDE",
-    "partidos": 3,
-    "distancia_total_km": 25.9,
-    "distancia_promedio_km": 8.64,
-    "alta_intensidad_promedio_m": 558.4,
-    "sprints_promedio": 33.0,
-    "velocidad_punta_kmh": 34.9
+    "team": "Mexico",
+    "player_name": "Gilberto MORA",
+    "partidos": 4,
+    "distancia_total_km": 25.8,
+    "distancia_promedio_km": 6.45,
+    "alta_intensidad_promedio_m": 457.9,
+    "sprints_promedio": 31.25,
+    "velocidad_punta_kmh": 29.5
   },
   {
     "team": "Mexico",
@@ -4068,16 +4078,6 @@
     "alta_intensidad_promedio_m": 450.5,
     "sprints_promedio": 24.5,
     "velocidad_punta_kmh": 31.1
-  },
-  {
-    "team": "Mexico",
-    "player_name": "Gilberto MORA",
-    "partidos": 4,
-    "distancia_total_km": 25.8,
-    "distancia_promedio_km": 6.45,
-    "alta_intensidad_promedio_m": 457.9,
-    "sprints_promedio": 31.25,
-    "velocidad_punta_kmh": 29.5
   },
   {
     "team": "England",
@@ -4110,16 +4110,6 @@
     "velocidad_punta_kmh": 31.8
   },
   {
-    "team": "Saudi Arabia",
-    "player_name": "MOHAMED KANNO",
-    "partidos": 3,
-    "distancia_total_km": 25.5,
-    "distancia_promedio_km": 8.5,
-    "alta_intensidad_promedio_m": 517.1,
-    "sprints_promedio": 29.333333333333332,
-    "velocidad_punta_kmh": 31.8
-  },
-  {
     "team": "Curaçao",
     "player_name": "Deveron FONVILLE",
     "partidos": 3,
@@ -4130,14 +4120,14 @@
     "velocidad_punta_kmh": 34.7
   },
   {
-    "team": "Qatar",
-    "player_name": "BOUALEM KHOUKHI",
+    "team": "Saudi Arabia",
+    "player_name": "MOHAMED KANNO",
     "partidos": 3,
-    "distancia_total_km": 25.4,
-    "distancia_promedio_km": 8.47,
-    "alta_intensidad_promedio_m": 275.6,
-    "sprints_promedio": 20.666666666666668,
-    "velocidad_punta_kmh": 31.6
+    "distancia_total_km": 25.5,
+    "distancia_promedio_km": 8.5,
+    "alta_intensidad_promedio_m": 517.1,
+    "sprints_promedio": 29.333333333333332,
+    "velocidad_punta_kmh": 31.8
   },
   {
     "team": "Paraguay",
@@ -4170,14 +4160,14 @@
     "velocidad_punta_kmh": 32.5
   },
   {
-    "team": "Morocco",
-    "player_name": "Soufiane RAHIMI",
-    "partidos": 6,
-    "distancia_total_km": 25.3,
-    "distancia_promedio_km": 4.22,
-    "alta_intensidad_promedio_m": 471.7,
-    "sprints_promedio": 22.833333333333332,
-    "velocidad_punta_kmh": 34.6
+    "team": "Qatar",
+    "player_name": "BOUALEM KHOUKHI",
+    "partidos": 3,
+    "distancia_total_km": 25.4,
+    "distancia_promedio_km": 8.47,
+    "alta_intensidad_promedio_m": 275.6,
+    "sprints_promedio": 20.666666666666668,
+    "velocidad_punta_kmh": 31.6
   },
   {
     "team": "Uzbekistan",
@@ -4188,6 +4178,16 @@
     "alta_intensidad_promedio_m": 776.8,
     "sprints_promedio": 47.0,
     "velocidad_punta_kmh": 33.9
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Soufiane RAHIMI",
+    "partidos": 6,
+    "distancia_total_km": 25.3,
+    "distancia_promedio_km": 4.22,
+    "alta_intensidad_promedio_m": 471.7,
+    "sprints_promedio": 22.833333333333332,
+    "velocidad_punta_kmh": 34.6
   },
   {
     "team": "Türkiye",
@@ -4220,14 +4220,14 @@
     "velocidad_punta_kmh": 33.8
   },
   {
-    "team": "Ecuador",
-    "player_name": "Nilson ANGULO",
-    "partidos": 4,
+    "team": "Sweden",
+    "player_name": "Alexander BERNHARDSSON",
+    "partidos": 3,
     "distancia_total_km": 25.1,
-    "distancia_promedio_km": 6.29,
-    "alta_intensidad_promedio_m": 657.5,
-    "sprints_promedio": 34.0,
-    "velocidad_punta_kmh": 33.8
+    "distancia_promedio_km": 8.37,
+    "alta_intensidad_promedio_m": 577.4,
+    "sprints_promedio": 30.0,
+    "velocidad_punta_kmh": 31.1
   },
   {
     "team": "Uruguay",
@@ -4250,14 +4250,14 @@
     "velocidad_punta_kmh": 33.6
   },
   {
-    "team": "Sweden",
-    "player_name": "Alexander BERNHARDSSON",
-    "partidos": 3,
+    "team": "Ecuador",
+    "player_name": "Nilson ANGULO",
+    "partidos": 4,
     "distancia_total_km": 25.1,
-    "distancia_promedio_km": 8.37,
-    "alta_intensidad_promedio_m": 577.4,
-    "sprints_promedio": 30.0,
-    "velocidad_punta_kmh": 31.1
+    "distancia_promedio_km": 6.29,
+    "alta_intensidad_promedio_m": 657.5,
+    "sprints_promedio": 34.0,
+    "velocidad_punta_kmh": 33.8
   },
   {
     "team": "New Zealand",
@@ -4270,16 +4270,6 @@
     "velocidad_punta_kmh": 33.7
   },
   {
-    "team": "England",
-    "player_name": "Morgan ROGERS",
-    "partidos": 5,
-    "distancia_total_km": 24.9,
-    "distancia_promedio_km": 4.99,
-    "alta_intensidad_promedio_m": 460.1,
-    "sprints_promedio": 26.6,
-    "velocidad_punta_kmh": 33.6
-  },
-  {
     "team": "Spain",
     "player_name": "Mikel MERINO",
     "partidos": 7,
@@ -4290,14 +4280,14 @@
     "velocidad_punta_kmh": 30.5
   },
   {
-    "team": "Mexico",
-    "player_name": "Israel REYES",
-    "partidos": 4,
-    "distancia_total_km": 24.8,
-    "distancia_promedio_km": 6.21,
-    "alta_intensidad_promedio_m": 311.6,
-    "sprints_promedio": 16.25,
-    "velocidad_punta_kmh": 30.2
+    "team": "England",
+    "player_name": "Morgan ROGERS",
+    "partidos": 5,
+    "distancia_total_km": 24.9,
+    "distancia_promedio_km": 4.99,
+    "alta_intensidad_promedio_m": 460.1,
+    "sprints_promedio": 26.6,
+    "velocidad_punta_kmh": 33.6
   },
   {
     "team": "Japan",
@@ -4311,6 +4301,16 @@
   },
   {
     "team": "Mexico",
+    "player_name": "Israel REYES",
+    "partidos": 4,
+    "distancia_total_km": 24.8,
+    "distancia_promedio_km": 6.21,
+    "alta_intensidad_promedio_m": 311.6,
+    "sprints_promedio": 16.25,
+    "velocidad_punta_kmh": 30.2
+  },
+  {
+    "team": "Mexico",
     "player_name": "Brian GUTIERREZ",
     "partidos": 4,
     "distancia_total_km": 24.5,
@@ -4318,16 +4318,6 @@
     "alta_intensidad_promedio_m": 437.9,
     "sprints_promedio": 28.0,
     "velocidad_punta_kmh": 34.8
-  },
-  {
-    "team": "Switzerland",
-    "player_name": "Johan MANZAMBI",
-    "partidos": 4,
-    "distancia_total_km": 24.4,
-    "distancia_promedio_km": 6.1,
-    "alta_intensidad_promedio_m": 485.7,
-    "sprints_promedio": 28.25,
-    "velocidad_punta_kmh": 33.9
   },
   {
     "team": "Japan",
@@ -4338,6 +4328,16 @@
     "alta_intensidad_promedio_m": 486.2,
     "sprints_promedio": 27.0,
     "velocidad_punta_kmh": 33.3
+  },
+  {
+    "team": "Switzerland",
+    "player_name": "Johan MANZAMBI",
+    "partidos": 4,
+    "distancia_total_km": 24.4,
+    "distancia_promedio_km": 6.1,
+    "alta_intensidad_promedio_m": 485.7,
+    "sprints_promedio": 28.25,
+    "velocidad_punta_kmh": 33.9
   },
   {
     "team": "Sweden",
@@ -4410,16 +4410,6 @@
     "velocidad_punta_kmh": 30.1
   },
   {
-    "team": "Qatar",
-    "player_name": "EDMILSON JUNIOR",
-    "partidos": 3,
-    "distancia_total_km": 23.9,
-    "distancia_promedio_km": 7.96,
-    "alta_intensidad_promedio_m": 565.3,
-    "sprints_promedio": 32.333333333333336,
-    "velocidad_punta_kmh": 32.7
-  },
-  {
     "team": "Korea Republic",
     "player_name": "PAIK Seungho",
     "partidos": 3,
@@ -4440,14 +4430,14 @@
     "velocidad_punta_kmh": 32.6
   },
   {
-    "team": "Morocco",
-    "player_name": "Chemsdine TALBI",
-    "partidos": 5,
-    "distancia_total_km": 23.8,
-    "distancia_promedio_km": 4.76,
-    "alta_intensidad_promedio_m": 504.7,
-    "sprints_promedio": 25.6,
-    "velocidad_punta_kmh": 35.3
+    "team": "Qatar",
+    "player_name": "EDMILSON JUNIOR",
+    "partidos": 3,
+    "distancia_total_km": 23.9,
+    "distancia_promedio_km": 7.96,
+    "alta_intensidad_promedio_m": 565.3,
+    "sprints_promedio": 32.333333333333336,
+    "velocidad_punta_kmh": 32.7
   },
   {
     "team": "Curaçao",
@@ -4480,6 +4470,16 @@
     "velocidad_punta_kmh": 26.7
   },
   {
+    "team": "Morocco",
+    "player_name": "Chemsdine TALBI",
+    "partidos": 5,
+    "distancia_total_km": 23.8,
+    "distancia_promedio_km": 4.76,
+    "alta_intensidad_promedio_m": 504.7,
+    "sprints_promedio": 25.6,
+    "velocidad_punta_kmh": 35.3
+  },
+  {
     "team": "Belgium",
     "player_name": "Romelu LUKAKU",
     "partidos": 6,
@@ -4498,16 +4498,6 @@
     "alta_intensidad_promedio_m": 411.5,
     "sprints_promedio": 20.6,
     "velocidad_punta_kmh": 33.5
-  },
-  {
-    "team": "Canada",
-    "player_name": "Nathan SALIBA",
-    "partidos": 3,
-    "distancia_total_km": 23.6,
-    "distancia_promedio_km": 7.88,
-    "alta_intensidad_promedio_m": 695.1,
-    "sprints_promedio": 40.666666666666664,
-    "velocidad_punta_kmh": 32.3
   },
   {
     "team": "Ecuador",
@@ -4530,14 +4520,14 @@
     "velocidad_punta_kmh": 28.2
   },
   {
-    "team": "Qatar",
-    "player_name": "AKRAM AFIF",
+    "team": "Canada",
+    "player_name": "Nathan SALIBA",
     "partidos": 3,
-    "distancia_total_km": 23.5,
-    "distancia_promedio_km": 7.85,
-    "alta_intensidad_promedio_m": 639.4,
-    "sprints_promedio": 34.666666666666664,
-    "velocidad_punta_kmh": 33.2
+    "distancia_total_km": 23.6,
+    "distancia_promedio_km": 7.88,
+    "alta_intensidad_promedio_m": 695.1,
+    "sprints_promedio": 40.666666666666664,
+    "velocidad_punta_kmh": 32.3
   },
   {
     "team": "Japan",
@@ -4550,14 +4540,14 @@
     "velocidad_punta_kmh": 32.0
   },
   {
-    "team": "South Africa",
-    "player_name": "Relebohile MOFOKENG",
+    "team": "Qatar",
+    "player_name": "AKRAM AFIF",
     "partidos": 3,
-    "distancia_total_km": 23.4,
-    "distancia_promedio_km": 7.81,
-    "alta_intensidad_promedio_m": 609.7,
-    "sprints_promedio": 33.333333333333336,
-    "velocidad_punta_kmh": 32.3
+    "distancia_total_km": 23.5,
+    "distancia_promedio_km": 7.85,
+    "alta_intensidad_promedio_m": 639.4,
+    "sprints_promedio": 34.666666666666664,
+    "velocidad_punta_kmh": 33.2
   },
   {
     "team": "Egypt",
@@ -4578,6 +4568,16 @@
     "alta_intensidad_promedio_m": 85.0,
     "sprints_promedio": 5.0,
     "velocidad_punta_kmh": 30.1
+  },
+  {
+    "team": "South Africa",
+    "player_name": "Relebohile MOFOKENG",
+    "partidos": 3,
+    "distancia_total_km": 23.4,
+    "distancia_promedio_km": 7.81,
+    "alta_intensidad_promedio_m": 609.7,
+    "sprints_promedio": 33.333333333333336,
+    "velocidad_punta_kmh": 32.3
   },
   {
     "team": "Australia",
@@ -4650,14 +4650,14 @@
     "velocidad_punta_kmh": 29.0
   },
   {
-    "team": "Saudi Arabia",
-    "player_name": "HASSAN ALTAMBAKTI",
-    "partidos": 3,
+    "team": "Bosnia and Herzegovina",
+    "player_name": "Nikola VASILJ",
+    "partidos": 4,
     "distancia_total_km": 22.7,
-    "distancia_promedio_km": 7.57,
-    "alta_intensidad_promedio_m": 363.6,
-    "sprints_promedio": 22.333333333333332,
-    "velocidad_punta_kmh": 32.2
+    "distancia_promedio_km": 5.69,
+    "alta_intensidad_promedio_m": 24.3,
+    "sprints_promedio": 1.75,
+    "velocidad_punta_kmh": 27.4
   },
   {
     "team": "Haiti",
@@ -4670,24 +4670,14 @@
     "velocidad_punta_kmh": 33.7
   },
   {
-    "team": "Bosnia and Herzegovina",
-    "player_name": "Nikola VASILJ",
-    "partidos": 4,
+    "team": "Saudi Arabia",
+    "player_name": "HASSAN ALTAMBAKTI",
+    "partidos": 3,
     "distancia_total_km": 22.7,
-    "distancia_promedio_km": 5.69,
-    "alta_intensidad_promedio_m": 24.3,
-    "sprints_promedio": 1.75,
-    "velocidad_punta_kmh": 27.4
-  },
-  {
-    "team": "Switzerland",
-    "player_name": "Silvan WIDMER",
-    "partidos": 5,
-    "distancia_total_km": 22.7,
-    "distancia_promedio_km": 4.53,
-    "alta_intensidad_promedio_m": 353.0,
-    "sprints_promedio": 19.4,
-    "velocidad_punta_kmh": 32.5
+    "distancia_promedio_km": 7.57,
+    "alta_intensidad_promedio_m": 363.6,
+    "sprints_promedio": 22.333333333333332,
+    "velocidad_punta_kmh": 32.2
   },
   {
     "team": "Iraq",
@@ -4698,6 +4688,16 @@
     "alta_intensidad_promedio_m": 579.8,
     "sprints_promedio": 37.333333333333336,
     "velocidad_punta_kmh": 33.5
+  },
+  {
+    "team": "Switzerland",
+    "player_name": "Silvan WIDMER",
+    "partidos": 5,
+    "distancia_total_km": 22.7,
+    "distancia_promedio_km": 4.53,
+    "alta_intensidad_promedio_m": 353.0,
+    "sprints_promedio": 19.4,
+    "velocidad_punta_kmh": 32.5
   },
   {
     "team": "England",
@@ -4730,16 +4730,6 @@
     "velocidad_punta_kmh": 33.5
   },
   {
-    "team": "Netherlands",
-    "player_name": "Brian BROBBEY",
-    "partidos": 4,
-    "distancia_total_km": 22.5,
-    "distancia_promedio_km": 5.63,
-    "alta_intensidad_promedio_m": 331.6,
-    "sprints_promedio": 19.25,
-    "velocidad_punta_kmh": 33.6
-  },
-  {
     "team": "Saudi Arabia",
     "player_name": "MOTEB ALHARBI",
     "partidos": 3,
@@ -4748,6 +4738,16 @@
     "alta_intensidad_promedio_m": 689.0,
     "sprints_promedio": 35.666666666666664,
     "velocidad_punta_kmh": 33.8
+  },
+  {
+    "team": "Netherlands",
+    "player_name": "Brian BROBBEY",
+    "partidos": 4,
+    "distancia_total_km": 22.5,
+    "distancia_promedio_km": 5.63,
+    "alta_intensidad_promedio_m": 331.6,
+    "sprints_promedio": 19.25,
+    "velocidad_punta_kmh": 33.6
   },
   {
     "team": "Paraguay",
@@ -4790,16 +4790,6 @@
     "velocidad_punta_kmh": 31.2
   },
   {
-    "team": "Tunisia",
-    "player_name": "Mohamed Amine BEN HMIDA",
-    "partidos": 3,
-    "distancia_total_km": 22.0,
-    "distancia_promedio_km": 7.34,
-    "alta_intensidad_promedio_m": 399.0,
-    "sprints_promedio": 23.333333333333332,
-    "velocidad_punta_kmh": 33.8
-  },
-  {
     "team": "Croatia",
     "player_name": "Nikola VLASIC",
     "partidos": 3,
@@ -4808,6 +4798,16 @@
     "alta_intensidad_promedio_m": 629.6,
     "sprints_promedio": 32.0,
     "velocidad_punta_kmh": 32.6
+  },
+  {
+    "team": "Tunisia",
+    "player_name": "Mohamed Amine BEN HMIDA",
+    "partidos": 3,
+    "distancia_total_km": 22.0,
+    "distancia_promedio_km": 7.34,
+    "alta_intensidad_promedio_m": 399.0,
+    "sprints_promedio": 23.333333333333332,
+    "velocidad_punta_kmh": 33.8
   },
   {
     "team": "Côte d'Ivoire",
@@ -4891,6 +4891,16 @@
   },
   {
     "team": "Türkiye",
+    "player_name": "Baris Alper YILMAZ",
+    "partidos": 3,
+    "distancia_total_km": 21.2,
+    "distancia_promedio_km": 7.06,
+    "alta_intensidad_promedio_m": 674.3,
+    "sprints_promedio": 35.333333333333336,
+    "velocidad_punta_kmh": 34.6
+  },
+  {
+    "team": "Türkiye",
     "player_name": "Merih DEMIRAL",
     "partidos": 2,
     "distancia_total_km": 21.2,
@@ -4908,16 +4918,6 @@
     "alta_intensidad_promedio_m": 451.6,
     "sprints_promedio": 24.0,
     "velocidad_punta_kmh": 32.5
-  },
-  {
-    "team": "Türkiye",
-    "player_name": "Baris Alper YILMAZ",
-    "partidos": 3,
-    "distancia_total_km": 21.2,
-    "distancia_promedio_km": 7.06,
-    "alta_intensidad_promedio_m": 674.3,
-    "sprints_promedio": 35.333333333333336,
-    "velocidad_punta_kmh": 34.6
   },
   {
     "team": "Algeria",
@@ -4950,36 +4950,6 @@
     "velocidad_punta_kmh": 29.2
   },
   {
-    "team": "Scotland",
-    "player_name": "Nathan PATTERSON",
-    "partidos": 3,
-    "distancia_total_km": 21.0,
-    "distancia_promedio_km": 7.01,
-    "alta_intensidad_promedio_m": 571.0,
-    "sprints_promedio": 28.666666666666668,
-    "velocidad_punta_kmh": 32.1
-  },
-  {
-    "team": "Australia",
-    "player_name": "Jacob ITALIANO",
-    "partidos": 2,
-    "distancia_total_km": 21.0,
-    "distancia_promedio_km": 10.49,
-    "alta_intensidad_promedio_m": 989.5,
-    "sprints_promedio": 60.5,
-    "velocidad_punta_kmh": 32.8
-  },
-  {
-    "team": "Saudi Arabia",
-    "player_name": "MUSAB ALJUWAYR",
-    "partidos": 3,
-    "distancia_total_km": 21.0,
-    "distancia_promedio_km": 6.99,
-    "alta_intensidad_promedio_m": 477.4,
-    "sprints_promedio": 28.333333333333332,
-    "velocidad_punta_kmh": 30.3
-  },
-  {
     "team": "Japan",
     "player_name": "Takehiro TOMIYASU",
     "partidos": 3,
@@ -4990,14 +4960,14 @@
     "velocidad_punta_kmh": 30.2
   },
   {
-    "team": "New Zealand",
-    "player_name": "Callum McCOWATT",
+    "team": "Haiti",
+    "player_name": "Josue CASIMIR",
     "partidos": 3,
     "distancia_total_km": 21.0,
     "distancia_promedio_km": 6.99,
-    "alta_intensidad_promedio_m": 711.1,
-    "sprints_promedio": 36.666666666666664,
-    "velocidad_punta_kmh": 31.7
+    "alta_intensidad_promedio_m": 752.6,
+    "sprints_promedio": 37.666666666666664,
+    "velocidad_punta_kmh": 34.4
   },
   {
     "team": "Switzerland",
@@ -5010,14 +4980,44 @@
     "velocidad_punta_kmh": 31.3
   },
   {
-    "team": "Haiti",
-    "player_name": "Josue CASIMIR",
+    "team": "Scotland",
+    "player_name": "Nathan PATTERSON",
+    "partidos": 3,
+    "distancia_total_km": 21.0,
+    "distancia_promedio_km": 7.01,
+    "alta_intensidad_promedio_m": 571.0,
+    "sprints_promedio": 28.666666666666668,
+    "velocidad_punta_kmh": 32.1
+  },
+  {
+    "team": "New Zealand",
+    "player_name": "Callum McCOWATT",
     "partidos": 3,
     "distancia_total_km": 21.0,
     "distancia_promedio_km": 6.99,
-    "alta_intensidad_promedio_m": 752.6,
-    "sprints_promedio": 37.666666666666664,
-    "velocidad_punta_kmh": 34.4
+    "alta_intensidad_promedio_m": 711.1,
+    "sprints_promedio": 36.666666666666664,
+    "velocidad_punta_kmh": 31.7
+  },
+  {
+    "team": "Saudi Arabia",
+    "player_name": "MUSAB ALJUWAYR",
+    "partidos": 3,
+    "distancia_total_km": 21.0,
+    "distancia_promedio_km": 6.99,
+    "alta_intensidad_promedio_m": 477.4,
+    "sprints_promedio": 28.333333333333332,
+    "velocidad_punta_kmh": 30.3
+  },
+  {
+    "team": "Australia",
+    "player_name": "Jacob ITALIANO",
+    "partidos": 2,
+    "distancia_total_km": 21.0,
+    "distancia_promedio_km": 10.49,
+    "alta_intensidad_promedio_m": 989.5,
+    "sprints_promedio": 60.5,
+    "velocidad_punta_kmh": 32.8
   },
   {
     "team": "Austria",
@@ -5040,14 +5040,14 @@
     "velocidad_punta_kmh": 34.3
   },
   {
-    "team": "South Africa",
-    "player_name": "Ronwen WILLIAMS",
-    "partidos": 4,
+    "team": "Australia",
+    "player_name": "Cristian VOLPATO",
+    "partidos": 3,
     "distancia_total_km": 20.7,
-    "distancia_promedio_km": 5.18,
-    "alta_intensidad_promedio_m": 26.0,
-    "sprints_promedio": 1.75,
-    "velocidad_punta_kmh": 25.7
+    "distancia_promedio_km": 6.9,
+    "alta_intensidad_promedio_m": 509.6,
+    "sprints_promedio": 31.333333333333332,
+    "velocidad_punta_kmh": 29.8
   },
   {
     "team": "Uzbekistan",
@@ -5060,14 +5060,14 @@
     "velocidad_punta_kmh": 32.2
   },
   {
-    "team": "Australia",
-    "player_name": "Cristian VOLPATO",
-    "partidos": 3,
+    "team": "South Africa",
+    "player_name": "Ronwen WILLIAMS",
+    "partidos": 4,
     "distancia_total_km": 20.7,
-    "distancia_promedio_km": 6.9,
-    "alta_intensidad_promedio_m": 509.6,
-    "sprints_promedio": 31.333333333333332,
-    "velocidad_punta_kmh": 29.8
+    "distancia_promedio_km": 5.18,
+    "alta_intensidad_promedio_m": 26.0,
+    "sprints_promedio": 1.75,
+    "velocidad_punta_kmh": 25.7
   },
   {
     "team": "Congo DR",
@@ -5090,16 +5090,6 @@
     "velocidad_punta_kmh": 31.8
   },
   {
-    "team": "Sweden",
-    "player_name": "Elliot STROUD",
-    "partidos": 4,
-    "distancia_total_km": 20.5,
-    "distancia_promedio_km": 5.13,
-    "alta_intensidad_promedio_m": 456.2,
-    "sprints_promedio": 23.5,
-    "velocidad_punta_kmh": 32.8
-  },
-  {
     "team": "Tunisia",
     "player_name": "Omar REKIK",
     "partidos": 2,
@@ -5110,14 +5100,14 @@
     "velocidad_punta_kmh": 30.7
   },
   {
-    "team": "Egypt",
-    "player_name": "KARIM HAFEZ",
-    "partidos": 3,
-    "distancia_total_km": 20.4,
-    "distancia_promedio_km": 6.81,
-    "alta_intensidad_promedio_m": 479.9,
-    "sprints_promedio": 25.333333333333332,
-    "velocidad_punta_kmh": 31.2
+    "team": "Sweden",
+    "player_name": "Elliot STROUD",
+    "partidos": 4,
+    "distancia_total_km": 20.5,
+    "distancia_promedio_km": 5.13,
+    "alta_intensidad_promedio_m": 456.2,
+    "sprints_promedio": 23.5,
+    "velocidad_punta_kmh": 32.8
   },
   {
     "team": "Japan",
@@ -5128,6 +5118,16 @@
     "alta_intensidad_promedio_m": 16.6,
     "sprints_promedio": 1.25,
     "velocidad_punta_kmh": 25.7
+  },
+  {
+    "team": "Egypt",
+    "player_name": "KARIM HAFEZ",
+    "partidos": 3,
+    "distancia_total_km": 20.4,
+    "distancia_promedio_km": 6.81,
+    "alta_intensidad_promedio_m": 479.9,
+    "sprints_promedio": 25.333333333333332,
+    "velocidad_punta_kmh": 31.2
   },
   {
     "team": "Uruguay",
@@ -5180,16 +5180,6 @@
     "velocidad_punta_kmh": 26.2
   },
   {
-    "team": "Jordan",
-    "player_name": "HUSAM ABUDAHAB",
-    "partidos": 2,
-    "distancia_total_km": 19.8,
-    "distancia_promedio_km": 9.92,
-    "alta_intensidad_promedio_m": 609.2,
-    "sprints_promedio": 37.5,
-    "velocidad_punta_kmh": 32.4
-  },
-  {
     "team": "Uzbekistan",
     "player_name": "Abdulla ABDULLAEV",
     "partidos": 2,
@@ -5208,6 +5198,16 @@
     "alta_intensidad_promedio_m": 355.3,
     "sprints_promedio": 22.2,
     "velocidad_punta_kmh": 31.8
+  },
+  {
+    "team": "Jordan",
+    "player_name": "HUSAM ABUDAHAB",
+    "partidos": 2,
+    "distancia_total_km": 19.8,
+    "distancia_promedio_km": 9.92,
+    "alta_intensidad_promedio_m": 609.2,
+    "sprints_promedio": 37.5,
+    "velocidad_punta_kmh": 32.4
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -5250,16 +5250,6 @@
     "velocidad_punta_kmh": 29.9
   },
   {
-    "team": "Congo DR",
-    "player_name": "Steve KAPUADI",
-    "partidos": 2,
-    "distancia_total_km": 19.5,
-    "distancia_promedio_km": 9.75,
-    "alta_intensidad_promedio_m": 540.9,
-    "sprints_promedio": 30.0,
-    "velocidad_punta_kmh": 32.8
-  },
-  {
     "team": "Australia",
     "player_name": "Mohamed TOURE",
     "partidos": 3,
@@ -5270,14 +5260,14 @@
     "velocidad_punta_kmh": 35.8
   },
   {
-    "team": "Czechia",
-    "player_name": "Adam HLOZEK",
-    "partidos": 3,
-    "distancia_total_km": 19.4,
-    "distancia_promedio_km": 6.47,
-    "alta_intensidad_promedio_m": 476.9,
-    "sprints_promedio": 31.333333333333332,
-    "velocidad_punta_kmh": 32.7
+    "team": "Congo DR",
+    "player_name": "Steve KAPUADI",
+    "partidos": 2,
+    "distancia_total_km": 19.5,
+    "distancia_promedio_km": 9.75,
+    "alta_intensidad_promedio_m": 540.9,
+    "sprints_promedio": 30.0,
+    "velocidad_punta_kmh": 32.8
   },
   {
     "team": "Morocco",
@@ -5290,6 +5280,16 @@
     "velocidad_punta_kmh": 32.8
   },
   {
+    "team": "Czechia",
+    "player_name": "Adam HLOZEK",
+    "partidos": 3,
+    "distancia_total_km": 19.4,
+    "distancia_promedio_km": 6.47,
+    "alta_intensidad_promedio_m": 476.9,
+    "sprints_promedio": 31.333333333333332,
+    "velocidad_punta_kmh": 32.7
+  },
+  {
     "team": "South Africa",
     "player_name": "Iqraam RAYNERS",
     "partidos": 4,
@@ -5300,24 +5300,14 @@
     "velocidad_punta_kmh": 34.1
   },
   {
-    "team": "USA",
-    "player_name": "Giovanni REYNA",
-    "partidos": 5,
-    "distancia_total_km": 19.2,
-    "distancia_promedio_km": 3.84,
-    "alta_intensidad_promedio_m": 230.5,
-    "sprints_promedio": 14.2,
-    "velocidad_punta_kmh": 27.3
-  },
-  {
-    "team": "Haiti",
-    "player_name": "Jean-Kevin DUVERNE",
+    "team": "Curaçao",
+    "player_name": "Joshua BRENET",
     "partidos": 2,
     "distancia_total_km": 19.2,
-    "distancia_promedio_km": 9.59,
-    "alta_intensidad_promedio_m": 790.8,
-    "sprints_promedio": 41.0,
-    "velocidad_punta_kmh": 33.5
+    "distancia_promedio_km": 9.58,
+    "alta_intensidad_promedio_m": 802.5,
+    "sprints_promedio": 48.5,
+    "velocidad_punta_kmh": 32.5
   },
   {
     "team": "Panama",
@@ -5330,14 +5320,24 @@
     "velocidad_punta_kmh": 33.2
   },
   {
-    "team": "Türkiye",
-    "player_name": "Orkun KOKCU",
-    "partidos": 3,
+    "team": "Haiti",
+    "player_name": "Jean-Kevin DUVERNE",
+    "partidos": 2,
     "distancia_total_km": 19.2,
-    "distancia_promedio_km": 6.41,
-    "alta_intensidad_promedio_m": 389.5,
-    "sprints_promedio": 22.333333333333332,
-    "velocidad_punta_kmh": 31.3
+    "distancia_promedio_km": 9.59,
+    "alta_intensidad_promedio_m": 790.8,
+    "sprints_promedio": 41.0,
+    "velocidad_punta_kmh": 33.5
+  },
+  {
+    "team": "USA",
+    "player_name": "Giovanni REYNA",
+    "partidos": 5,
+    "distancia_total_km": 19.2,
+    "distancia_promedio_km": 3.84,
+    "alta_intensidad_promedio_m": 230.5,
+    "sprints_promedio": 14.2,
+    "velocidad_punta_kmh": 27.3
   },
   {
     "team": "Canada",
@@ -5350,14 +5350,14 @@
     "velocidad_punta_kmh": 33.8
   },
   {
-    "team": "Curaçao",
-    "player_name": "Joshua BRENET",
-    "partidos": 2,
+    "team": "Türkiye",
+    "player_name": "Orkun KOKCU",
+    "partidos": 3,
     "distancia_total_km": 19.2,
-    "distancia_promedio_km": 9.58,
-    "alta_intensidad_promedio_m": 802.5,
-    "sprints_promedio": 48.5,
-    "velocidad_punta_kmh": 32.5
+    "distancia_promedio_km": 6.41,
+    "alta_intensidad_promedio_m": 389.5,
+    "sprints_promedio": 22.333333333333332,
+    "velocidad_punta_kmh": 31.3
   },
   {
     "team": "Türkiye",
@@ -5400,6 +5400,16 @@
     "velocidad_punta_kmh": 24.0
   },
   {
+    "team": "Netherlands",
+    "player_name": "Donyell MALEN",
+    "partidos": 3,
+    "distancia_total_km": 18.9,
+    "distancia_promedio_km": 6.3,
+    "alta_intensidad_promedio_m": 431.0,
+    "sprints_promedio": 27.0,
+    "velocidad_punta_kmh": 31.6
+  },
+  {
     "team": "Morocco",
     "player_name": "Sofyan AMRABAT",
     "partidos": 3,
@@ -5420,16 +5430,6 @@
     "velocidad_punta_kmh": 30.1
   },
   {
-    "team": "Netherlands",
-    "player_name": "Donyell MALEN",
-    "partidos": 3,
-    "distancia_total_km": 18.9,
-    "distancia_promedio_km": 6.3,
-    "alta_intensidad_promedio_m": 431.0,
-    "sprints_promedio": 27.0,
-    "velocidad_punta_kmh": 31.6
-  },
-  {
     "team": "Congo DR",
     "player_name": "Lionel MPASI",
     "partidos": 4,
@@ -5440,14 +5440,14 @@
     "velocidad_punta_kmh": 26.7
   },
   {
-    "team": "Korea Republic",
-    "player_name": "SON Heungmin",
-    "partidos": 3,
+    "team": "Croatia",
+    "player_name": "Josko GVARDIOL",
+    "partidos": 4,
     "distancia_total_km": 18.8,
-    "distancia_promedio_km": 6.25,
-    "alta_intensidad_promedio_m": 650.2,
-    "sprints_promedio": 32.0,
-    "velocidad_punta_kmh": 35.2
+    "distancia_promedio_km": 4.7,
+    "alta_intensidad_promedio_m": 445.5,
+    "sprints_promedio": 22.0,
+    "velocidad_punta_kmh": 34.1
   },
   {
     "team": "Congo DR",
@@ -5480,14 +5480,14 @@
     "velocidad_punta_kmh": 32.6
   },
   {
-    "team": "Croatia",
-    "player_name": "Josko GVARDIOL",
-    "partidos": 4,
+    "team": "Korea Republic",
+    "player_name": "SON Heungmin",
+    "partidos": 3,
     "distancia_total_km": 18.8,
-    "distancia_promedio_km": 4.7,
-    "alta_intensidad_promedio_m": 445.5,
-    "sprints_promedio": 22.0,
-    "velocidad_punta_kmh": 34.1
+    "distancia_promedio_km": 6.25,
+    "alta_intensidad_promedio_m": 650.2,
+    "sprints_promedio": 32.0,
+    "velocidad_punta_kmh": 35.2
   },
   {
     "team": "Ghana",
@@ -5500,16 +5500,6 @@
     "velocidad_punta_kmh": 29.2
   },
   {
-    "team": "Jordan",
-    "player_name": "ODEH FAKHOURY",
-    "partidos": 3,
-    "distancia_total_km": 18.7,
-    "distancia_promedio_km": 6.24,
-    "alta_intensidad_promedio_m": 552.0,
-    "sprints_promedio": 32.666666666666664,
-    "velocidad_punta_kmh": 34.5
-  },
-  {
     "team": "Croatia",
     "player_name": "Ante BUDIMIR",
     "partidos": 3,
@@ -5520,14 +5510,14 @@
     "velocidad_punta_kmh": 32.1
   },
   {
-    "team": "Netherlands",
-    "player_name": "Nathan AKE",
+    "team": "Jordan",
+    "player_name": "ODEH FAKHOURY",
     "partidos": 3,
-    "distancia_total_km": 18.6,
-    "distancia_promedio_km": 6.19,
-    "alta_intensidad_promedio_m": 318.4,
-    "sprints_promedio": 16.333333333333332,
-    "velocidad_punta_kmh": 33.4
+    "distancia_total_km": 18.7,
+    "distancia_promedio_km": 6.24,
+    "alta_intensidad_promedio_m": 552.0,
+    "sprints_promedio": 32.666666666666664,
+    "velocidad_punta_kmh": 34.5
   },
   {
     "team": "Senegal",
@@ -5540,6 +5530,16 @@
     "velocidad_punta_kmh": 34.7
   },
   {
+    "team": "Netherlands",
+    "player_name": "Nathan AKE",
+    "partidos": 3,
+    "distancia_total_km": 18.6,
+    "distancia_promedio_km": 6.19,
+    "alta_intensidad_promedio_m": 318.4,
+    "sprints_promedio": 16.333333333333332,
+    "velocidad_punta_kmh": 33.4
+  },
+  {
     "team": "Tunisia",
     "player_name": "Rani KHEDIRA",
     "partidos": 3,
@@ -5550,16 +5550,6 @@
     "velocidad_punta_kmh": 28.7
   },
   {
-    "team": "Panama",
-    "player_name": "Jiovany RAMOS",
-    "partidos": 2,
-    "distancia_total_km": 18.5,
-    "distancia_promedio_km": 9.25,
-    "alta_intensidad_promedio_m": 567.6,
-    "sprints_promedio": 31.5,
-    "velocidad_punta_kmh": 31.7
-  },
-  {
     "team": "Portugal",
     "player_name": "RAFAEL LEAO",
     "partidos": 5,
@@ -5568,6 +5558,16 @@
     "alta_intensidad_promedio_m": 305.6,
     "sprints_promedio": 15.0,
     "velocidad_punta_kmh": 34.9
+  },
+  {
+    "team": "Panama",
+    "player_name": "Jiovany RAMOS",
+    "partidos": 2,
+    "distancia_total_km": 18.5,
+    "distancia_promedio_km": 9.25,
+    "alta_intensidad_promedio_m": 567.6,
+    "sprints_promedio": 31.5,
+    "velocidad_punta_kmh": 31.7
   },
   {
     "team": "Brazil",
@@ -5590,16 +5590,6 @@
     "velocidad_punta_kmh": 31.8
   },
   {
-    "team": "Panama",
-    "player_name": "Cesar BLACKMAN",
-    "partidos": 2,
-    "distancia_total_km": 18.3,
-    "distancia_promedio_km": 9.17,
-    "alta_intensidad_promedio_m": 654.1,
-    "sprints_promedio": 32.0,
-    "velocidad_punta_kmh": 32.9
-  },
-  {
     "team": "Qatar",
     "player_name": "AHMED FATHY",
     "partidos": 3,
@@ -5610,14 +5600,14 @@
     "velocidad_punta_kmh": 29.5
   },
   {
-    "team": "Senegal",
-    "player_name": "Habib DIARRA",
-    "partidos": 3,
-    "distancia_total_km": 18.2,
-    "distancia_promedio_km": 6.08,
-    "alta_intensidad_promedio_m": 553.7,
-    "sprints_promedio": 30.666666666666668,
-    "velocidad_punta_kmh": 33.3
+    "team": "Panama",
+    "player_name": "Cesar BLACKMAN",
+    "partidos": 2,
+    "distancia_total_km": 18.3,
+    "distancia_promedio_km": 9.17,
+    "alta_intensidad_promedio_m": 654.1,
+    "sprints_promedio": 32.0,
+    "velocidad_punta_kmh": 32.9
   },
   {
     "team": "Czechia",
@@ -5638,6 +5628,16 @@
     "alta_intensidad_promedio_m": 586.2,
     "sprints_promedio": 32.5,
     "velocidad_punta_kmh": 34.4
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Habib DIARRA",
+    "partidos": 3,
+    "distancia_total_km": 18.2,
+    "distancia_promedio_km": 6.08,
+    "alta_intensidad_promedio_m": 553.7,
+    "sprints_promedio": 30.666666666666668,
+    "velocidad_punta_kmh": 33.3
   },
   {
     "team": "Iraq",
@@ -5690,6 +5690,16 @@
     "velocidad_punta_kmh": 30.2
   },
   {
+    "team": "Austria",
+    "player_name": "Phillip MWENE",
+    "partidos": 2,
+    "distancia_total_km": 17.9,
+    "distancia_promedio_km": 8.96,
+    "alta_intensidad_promedio_m": 774.4,
+    "sprints_promedio": 38.0,
+    "velocidad_punta_kmh": 31.7
+  },
+  {
     "team": "Czechia",
     "player_name": "Tomas SOUCEK",
     "partidos": 3,
@@ -5708,16 +5718,6 @@
     "alta_intensidad_promedio_m": 455.5,
     "sprints_promedio": 25.0,
     "velocidad_punta_kmh": 32.1
-  },
-  {
-    "team": "Austria",
-    "player_name": "Phillip MWENE",
-    "partidos": 2,
-    "distancia_total_km": 17.9,
-    "distancia_promedio_km": 8.96,
-    "alta_intensidad_promedio_m": 774.4,
-    "sprints_promedio": 38.0,
-    "velocidad_punta_kmh": 31.7
   },
   {
     "team": "Congo DR",
@@ -5810,16 +5810,6 @@
     "velocidad_punta_kmh": 28.9
   },
   {
-    "team": "Paraguay",
-    "player_name": "Jose CANALE",
-    "partidos": 4,
-    "distancia_total_km": 17.3,
-    "distancia_promedio_km": 4.33,
-    "alta_intensidad_promedio_m": 153.3,
-    "sprints_promedio": 9.25,
-    "velocidad_punta_kmh": 31.7
-  },
-  {
     "team": "Croatia",
     "player_name": "Dominik LIVAKOVIC",
     "partidos": 4,
@@ -5838,6 +5828,16 @@
     "alta_intensidad_promedio_m": 591.2,
     "sprints_promedio": 35.5,
     "velocidad_punta_kmh": 32.5
+  },
+  {
+    "team": "Paraguay",
+    "player_name": "Jose CANALE",
+    "partidos": 4,
+    "distancia_total_km": 17.3,
+    "distancia_promedio_km": 4.33,
+    "alta_intensidad_promedio_m": 153.3,
+    "sprints_promedio": 9.25,
+    "velocidad_punta_kmh": 31.7
   },
   {
     "team": "France",
@@ -5880,16 +5880,6 @@
     "velocidad_punta_kmh": 31.3
   },
   {
-    "team": "Canada",
-    "player_name": "Ismael KONE",
-    "partidos": 2,
-    "distancia_total_km": 17.0,
-    "distancia_promedio_km": 8.49,
-    "alta_intensidad_promedio_m": 461.6,
-    "sprints_promedio": 22.0,
-    "velocidad_punta_kmh": 28.5
-  },
-  {
     "team": "Ecuador",
     "player_name": "Hernan GALINDEZ",
     "partidos": 4,
@@ -5898,6 +5888,16 @@
     "alta_intensidad_promedio_m": 6.2,
     "sprints_promedio": 0.75,
     "velocidad_punta_kmh": 21.6
+  },
+  {
+    "team": "Canada",
+    "player_name": "Ismael KONE",
+    "partidos": 2,
+    "distancia_total_km": 17.0,
+    "distancia_promedio_km": 8.49,
+    "alta_intensidad_promedio_m": 461.6,
+    "sprints_promedio": 22.0,
+    "velocidad_punta_kmh": 28.5
   },
   {
     "team": "Türkiye",
@@ -5930,14 +5930,14 @@
     "velocidad_punta_kmh": 32.9
   },
   {
-    "team": "Iraq",
-    "player_name": "ZAID TAHSEEN",
-    "partidos": 2,
+    "team": "Netherlands",
+    "player_name": "Teun KOOPMEINERS",
+    "partidos": 4,
     "distancia_total_km": 16.8,
-    "distancia_promedio_km": 8.4,
-    "alta_intensidad_promedio_m": 395.8,
-    "sprints_promedio": 24.5,
-    "velocidad_punta_kmh": 31.9
+    "distancia_promedio_km": 4.19,
+    "alta_intensidad_promedio_m": 225.7,
+    "sprints_promedio": 14.25,
+    "velocidad_punta_kmh": 29.7
   },
   {
     "team": "Sweden",
@@ -5950,14 +5950,14 @@
     "velocidad_punta_kmh": 31.3
   },
   {
-    "team": "Netherlands",
-    "player_name": "Teun KOOPMEINERS",
-    "partidos": 4,
+    "team": "Iraq",
+    "player_name": "ZAID TAHSEEN",
+    "partidos": 2,
     "distancia_total_km": 16.8,
-    "distancia_promedio_km": 4.19,
-    "alta_intensidad_promedio_m": 225.7,
-    "sprints_promedio": 14.25,
-    "velocidad_punta_kmh": 29.7
+    "distancia_promedio_km": 8.4,
+    "alta_intensidad_promedio_m": 395.8,
+    "sprints_promedio": 24.5,
+    "velocidad_punta_kmh": 31.9
   },
   {
     "team": "Portugal",
@@ -6020,16 +6020,6 @@
     "velocidad_punta_kmh": 30.8
   },
   {
-    "team": "Uzbekistan",
-    "player_name": "Khojiakbar ALIJONOV",
-    "partidos": 2,
-    "distancia_total_km": 16.1,
-    "distancia_promedio_km": 8.04,
-    "alta_intensidad_promedio_m": 746.7,
-    "sprints_promedio": 43.5,
-    "velocidad_punta_kmh": 32.4
-  },
-  {
     "team": "Senegal",
     "player_name": "Kalidou KOULIBALY",
     "partidos": 2,
@@ -6038,6 +6028,16 @@
     "alta_intensidad_promedio_m": 394.2,
     "sprints_promedio": 22.0,
     "velocidad_punta_kmh": 31.1
+  },
+  {
+    "team": "Uzbekistan",
+    "player_name": "Khojiakbar ALIJONOV",
+    "partidos": 2,
+    "distancia_total_km": 16.1,
+    "distancia_promedio_km": 8.04,
+    "alta_intensidad_promedio_m": 746.7,
+    "sprints_promedio": 43.5,
+    "velocidad_punta_kmh": 32.4
   },
   {
     "team": "Portugal",
@@ -6050,16 +6050,6 @@
     "velocidad_punta_kmh": 29.6
   },
   {
-    "team": "Qatar",
-    "player_name": "MAHMOUD ABUNADA",
-    "partidos": 3,
-    "distancia_total_km": 16.0,
-    "distancia_promedio_km": 5.34,
-    "alta_intensidad_promedio_m": 8.4,
-    "sprints_promedio": 0.6666666666666666,
-    "velocidad_punta_kmh": 26.8
-  },
-  {
     "team": "Czechia",
     "player_name": "Lukas PROVOD",
     "partidos": 3,
@@ -6070,14 +6060,14 @@
     "velocidad_punta_kmh": 33.3
   },
   {
-    "team": "Uzbekistan",
-    "player_name": "Azizjon GANIEV",
-    "partidos": 2,
-    "distancia_total_km": 15.9,
-    "distancia_promedio_km": 7.93,
-    "alta_intensidad_promedio_m": 783.2,
-    "sprints_promedio": 48.0,
-    "velocidad_punta_kmh": 29.9
+    "team": "Qatar",
+    "player_name": "MAHMOUD ABUNADA",
+    "partidos": 3,
+    "distancia_total_km": 16.0,
+    "distancia_promedio_km": 5.34,
+    "alta_intensidad_promedio_m": 8.4,
+    "sprints_promedio": 0.6666666666666666,
+    "velocidad_punta_kmh": 26.8
   },
   {
     "team": "Türkiye",
@@ -6088,6 +6078,16 @@
     "alta_intensidad_promedio_m": 42.0,
     "sprints_promedio": 3.3333333333333335,
     "velocidad_punta_kmh": 28.8
+  },
+  {
+    "team": "Uzbekistan",
+    "player_name": "Azizjon GANIEV",
+    "partidos": 2,
+    "distancia_total_km": 15.9,
+    "distancia_promedio_km": 7.93,
+    "alta_intensidad_promedio_m": 783.2,
+    "sprints_promedio": 48.0,
+    "velocidad_punta_kmh": 29.9
   },
   {
     "team": "Qatar",
@@ -6110,16 +6110,6 @@
     "velocidad_punta_kmh": 31.8
   },
   {
-    "team": "Brazil",
-    "player_name": "RAPHINHA",
-    "partidos": 2,
-    "distancia_total_km": 15.8,
-    "distancia_promedio_km": 7.9,
-    "alta_intensidad_promedio_m": 1043.8,
-    "sprints_promedio": 54.0,
-    "velocidad_punta_kmh": 33.3
-  },
-  {
     "team": "Colombia",
     "player_name": "Juan QUINTERO",
     "partidos": 4,
@@ -6128,6 +6118,16 @@
     "alta_intensidad_promedio_m": 201.8,
     "sprints_promedio": 11.25,
     "velocidad_punta_kmh": 31.0
+  },
+  {
+    "team": "Brazil",
+    "player_name": "RAPHINHA",
+    "partidos": 2,
+    "distancia_total_km": 15.8,
+    "distancia_promedio_km": 7.9,
+    "alta_intensidad_promedio_m": 1043.8,
+    "sprints_promedio": 54.0,
+    "velocidad_punta_kmh": 33.3
   },
   {
     "team": "Canada",
@@ -6180,26 +6180,6 @@
     "velocidad_punta_kmh": 24.6
   },
   {
-    "team": "Colombia",
-    "player_name": "James RODRIGUEZ",
-    "partidos": 2,
-    "distancia_total_km": 15.5,
-    "distancia_promedio_km": 7.73,
-    "alta_intensidad_promedio_m": 137.6,
-    "sprints_promedio": 9.0,
-    "velocidad_punta_kmh": 26.8
-  },
-  {
-    "team": "Tunisia",
-    "player_name": "Elias SAAD",
-    "partidos": 2,
-    "distancia_total_km": 15.5,
-    "distancia_promedio_km": 7.74,
-    "alta_intensidad_promedio_m": 823.8,
-    "sprints_promedio": 43.0,
-    "velocidad_punta_kmh": 32.3
-  },
-  {
     "team": "Iraq",
     "player_name": "AHMED QASEM",
     "partidos": 3,
@@ -6220,6 +6200,26 @@
     "velocidad_punta_kmh": 30.4
   },
   {
+    "team": "Colombia",
+    "player_name": "James RODRIGUEZ",
+    "partidos": 2,
+    "distancia_total_km": 15.5,
+    "distancia_promedio_km": 7.73,
+    "alta_intensidad_promedio_m": 137.6,
+    "sprints_promedio": 9.0,
+    "velocidad_punta_kmh": 26.8
+  },
+  {
+    "team": "Tunisia",
+    "player_name": "Elias SAAD",
+    "partidos": 2,
+    "distancia_total_km": 15.5,
+    "distancia_promedio_km": 7.74,
+    "alta_intensidad_promedio_m": 823.8,
+    "sprints_promedio": 43.0,
+    "velocidad_punta_kmh": 32.3
+  },
+  {
     "team": "Algeria",
     "player_name": "Ramiz ZERROUKI",
     "partidos": 3,
@@ -6228,16 +6228,6 @@
     "alta_intensidad_promedio_m": 336.4,
     "sprints_promedio": 18.0,
     "velocidad_punta_kmh": 30.3
-  },
-  {
-    "team": "Egypt",
-    "player_name": "HAISSEM HASSAN",
-    "partidos": 2,
-    "distancia_total_km": 15.4,
-    "distancia_promedio_km": 7.7,
-    "alta_intensidad_promedio_m": 577.2,
-    "sprints_promedio": 31.0,
-    "velocidad_punta_kmh": 32.9
   },
   {
     "team": "Germany",
@@ -6250,6 +6240,16 @@
     "velocidad_punta_kmh": 31.9
   },
   {
+    "team": "Egypt",
+    "player_name": "HAISSEM HASSAN",
+    "partidos": 2,
+    "distancia_total_km": 15.4,
+    "distancia_promedio_km": 7.7,
+    "alta_intensidad_promedio_m": 577.2,
+    "sprints_promedio": 31.0,
+    "velocidad_punta_kmh": 32.9
+  },
+  {
     "team": "Türkiye",
     "player_name": "Kerem AKTURKOGLU",
     "partidos": 2,
@@ -6258,26 +6258,6 @@
     "alta_intensidad_promedio_m": 604.2,
     "sprints_promedio": 36.5,
     "velocidad_punta_kmh": 32.4
-  },
-  {
-    "team": "Mexico",
-    "player_name": "Alvaro FIDALGO",
-    "partidos": 3,
-    "distancia_total_km": 15.1,
-    "distancia_promedio_km": 5.02,
-    "alta_intensidad_promedio_m": 499.4,
-    "sprints_promedio": 29.0,
-    "velocidad_punta_kmh": 31.4
-  },
-  {
-    "team": "Panama",
-    "player_name": "Orlando MOSQUERA",
-    "partidos": 3,
-    "distancia_total_km": 15.1,
-    "distancia_promedio_km": 5.04,
-    "alta_intensidad_promedio_m": 36.9,
-    "sprints_promedio": 3.6666666666666665,
-    "velocidad_punta_kmh": 24.8
   },
   {
     "team": "Ecuador",
@@ -6300,14 +6280,24 @@
     "velocidad_punta_kmh": 31.5
   },
   {
-    "team": "Australia",
-    "player_name": "Cameron BURGESS",
-    "partidos": 2,
-    "distancia_total_km": 15.0,
-    "distancia_promedio_km": 7.52,
-    "alta_intensidad_promedio_m": 313.8,
-    "sprints_promedio": 16.5,
-    "velocidad_punta_kmh": 34.2
+    "team": "Mexico",
+    "player_name": "Alvaro FIDALGO",
+    "partidos": 3,
+    "distancia_total_km": 15.1,
+    "distancia_promedio_km": 5.02,
+    "alta_intensidad_promedio_m": 499.4,
+    "sprints_promedio": 29.0,
+    "velocidad_punta_kmh": 31.4
+  },
+  {
+    "team": "Panama",
+    "player_name": "Orlando MOSQUERA",
+    "partidos": 3,
+    "distancia_total_km": 15.1,
+    "distancia_promedio_km": 5.04,
+    "alta_intensidad_promedio_m": 36.9,
+    "sprints_promedio": 3.6666666666666665,
+    "velocidad_punta_kmh": 24.8
   },
   {
     "team": "Korea Republic",
@@ -6330,6 +6320,16 @@
     "velocidad_punta_kmh": 30.8
   },
   {
+    "team": "Australia",
+    "player_name": "Cameron BURGESS",
+    "partidos": 2,
+    "distancia_total_km": 15.0,
+    "distancia_promedio_km": 7.52,
+    "alta_intensidad_promedio_m": 313.8,
+    "sprints_promedio": 16.5,
+    "velocidad_punta_kmh": 34.2
+  },
+  {
     "team": "Ghana",
     "player_name": "Kamaldeen SULEMANA",
     "partidos": 2,
@@ -6338,16 +6338,6 @@
     "alta_intensidad_promedio_m": 552.8,
     "sprints_promedio": 37.5,
     "velocidad_punta_kmh": 33.2
-  },
-  {
-    "team": "Senegal",
-    "player_name": "Iliman NDIAYE",
-    "partidos": 3,
-    "distancia_total_km": 14.7,
-    "distancia_promedio_km": 4.89,
-    "alta_intensidad_promedio_m": 405.6,
-    "sprints_promedio": 24.666666666666668,
-    "velocidad_punta_kmh": 32.6
   },
   {
     "team": "Qatar",
@@ -6370,6 +6360,16 @@
     "velocidad_punta_kmh": 28.1
   },
   {
+    "team": "Senegal",
+    "player_name": "Iliman NDIAYE",
+    "partidos": 3,
+    "distancia_total_km": 14.7,
+    "distancia_promedio_km": 4.89,
+    "alta_intensidad_promedio_m": 405.6,
+    "sprints_promedio": 24.666666666666668,
+    "velocidad_punta_kmh": 32.6
+  },
+  {
     "team": "Morocco",
     "player_name": "Samir EL MOURABET",
     "partidos": 5,
@@ -6378,6 +6378,16 @@
     "alta_intensidad_promedio_m": 285.7,
     "sprints_promedio": 17.0,
     "velocidad_punta_kmh": 33.1
+  },
+  {
+    "team": "South Africa",
+    "player_name": "Jayden ADAMS",
+    "partidos": 3,
+    "distancia_total_km": 14.5,
+    "distancia_promedio_km": 4.83,
+    "alta_intensidad_promedio_m": 277.8,
+    "sprints_promedio": 19.0,
+    "velocidad_punta_kmh": 28.6
   },
   {
     "team": "Korea Republic",
@@ -6398,16 +6408,6 @@
     "alta_intensidad_promedio_m": 606.8,
     "sprints_promedio": 30.0,
     "velocidad_punta_kmh": 34.8
-  },
-  {
-    "team": "South Africa",
-    "player_name": "Jayden ADAMS",
-    "partidos": 3,
-    "distancia_total_km": 14.5,
-    "distancia_promedio_km": 4.83,
-    "alta_intensidad_promedio_m": 277.8,
-    "sprints_promedio": 19.0,
-    "velocidad_punta_kmh": 28.6
   },
   {
     "team": "Czechia",
@@ -6470,6 +6470,16 @@
     "velocidad_punta_kmh": 32.3
   },
   {
+    "team": "Algeria",
+    "player_name": "Jaouen HADJAM",
+    "partidos": 3,
+    "distancia_total_km": 13.7,
+    "distancia_promedio_km": 4.55,
+    "alta_intensidad_promedio_m": 519.5,
+    "sprints_promedio": 25.666666666666668,
+    "velocidad_punta_kmh": 32.6
+  },
+  {
     "team": "Germany",
     "player_name": "David RAUM",
     "partidos": 2,
@@ -6480,13 +6490,23 @@
     "velocidad_punta_kmh": 33.7
   },
   {
-    "team": "Algeria",
-    "player_name": "Jaouen HADJAM",
+    "team": "Jordan",
+    "player_name": "YAZEED ABULAILA",
     "partidos": 3,
-    "distancia_total_km": 13.7,
-    "distancia_promedio_km": 4.55,
-    "alta_intensidad_promedio_m": 519.5,
-    "sprints_promedio": 25.666666666666668,
+    "distancia_total_km": 13.6,
+    "distancia_promedio_km": 4.53,
+    "alta_intensidad_promedio_m": 6.8,
+    "sprints_promedio": 0.6666666666666666,
+    "velocidad_punta_kmh": 23.5
+  },
+  {
+    "team": "Qatar",
+    "player_name": "HOMAM AHMED",
+    "partidos": 2,
+    "distancia_total_km": 13.6,
+    "distancia_promedio_km": 6.81,
+    "alta_intensidad_promedio_m": 550.9,
+    "sprints_promedio": 28.5,
     "velocidad_punta_kmh": 32.6
   },
   {
@@ -6500,26 +6520,6 @@
     "velocidad_punta_kmh": 32.3
   },
   {
-    "team": "Qatar",
-    "player_name": "HOMAM AHMED",
-    "partidos": 2,
-    "distancia_total_km": 13.6,
-    "distancia_promedio_km": 6.81,
-    "alta_intensidad_promedio_m": 550.9,
-    "sprints_promedio": 28.5,
-    "velocidad_punta_kmh": 32.6
-  },
-  {
-    "team": "Jordan",
-    "player_name": "YAZEED ABULAILA",
-    "partidos": 3,
-    "distancia_total_km": 13.6,
-    "distancia_promedio_km": 4.53,
-    "alta_intensidad_promedio_m": 6.8,
-    "sprints_promedio": 0.6666666666666666,
-    "velocidad_punta_kmh": 23.5
-  },
-  {
     "team": "Belgium",
     "player_name": "Amadou ONANA",
     "partidos": 4,
@@ -6528,16 +6528,6 @@
     "alta_intensidad_promedio_m": 195.6,
     "sprints_promedio": 11.0,
     "velocidad_punta_kmh": 32.1
-  },
-  {
-    "team": "Japan",
-    "player_name": "Kou ITAKURA",
-    "partidos": 2,
-    "distancia_total_km": 13.4,
-    "distancia_promedio_km": 6.69,
-    "alta_intensidad_promedio_m": 270.6,
-    "sprints_promedio": 17.0,
-    "velocidad_punta_kmh": 30.9
   },
   {
     "team": "Algeria",
@@ -6550,14 +6540,14 @@
     "velocidad_punta_kmh": 27.8
   },
   {
-    "team": "Korea Republic",
-    "player_name": "LEE Taeseok",
+    "team": "Japan",
+    "player_name": "Kou ITAKURA",
     "partidos": 2,
-    "distancia_total_km": 13.3,
-    "distancia_promedio_km": 6.65,
-    "alta_intensidad_promedio_m": 679.6,
-    "sprints_promedio": 34.0,
-    "velocidad_punta_kmh": 32.4
+    "distancia_total_km": 13.4,
+    "distancia_promedio_km": 6.69,
+    "alta_intensidad_promedio_m": 270.6,
+    "sprints_promedio": 17.0,
+    "velocidad_punta_kmh": 30.9
   },
   {
     "team": "Haiti",
@@ -6570,6 +6560,16 @@
     "velocidad_punta_kmh": 32.0
   },
   {
+    "team": "Korea Republic",
+    "player_name": "LEE Taeseok",
+    "partidos": 2,
+    "distancia_total_km": 13.3,
+    "distancia_promedio_km": 6.65,
+    "alta_intensidad_promedio_m": 679.6,
+    "sprints_promedio": 34.0,
+    "velocidad_punta_kmh": 32.4
+  },
+  {
     "team": "IR Iran",
     "player_name": "Alireza BEIRANVAND",
     "partidos": 3,
@@ -6578,16 +6578,6 @@
     "alta_intensidad_promedio_m": 3.1,
     "sprints_promedio": 0.0,
     "velocidad_punta_kmh": 21.5
-  },
-  {
-    "team": "New Zealand",
-    "player_name": "Tyler BINDON",
-    "partidos": 3,
-    "distancia_total_km": 13.2,
-    "distancia_promedio_km": 4.39,
-    "alta_intensidad_promedio_m": 369.1,
-    "sprints_promedio": 16.0,
-    "velocidad_punta_kmh": 31.7
   },
   {
     "team": "Türkiye",
@@ -6610,6 +6600,26 @@
     "velocidad_punta_kmh": 31.4
   },
   {
+    "team": "New Zealand",
+    "player_name": "Tyler BINDON",
+    "partidos": 3,
+    "distancia_total_km": 13.2,
+    "distancia_promedio_km": 4.39,
+    "alta_intensidad_promedio_m": 369.1,
+    "sprints_promedio": 16.0,
+    "velocidad_punta_kmh": 31.7
+  },
+  {
+    "team": "New Zealand",
+    "player_name": "Max CROCOMBE",
+    "partidos": 3,
+    "distancia_total_km": 13.1,
+    "distancia_promedio_km": 4.35,
+    "alta_intensidad_promedio_m": 5.6,
+    "sprints_promedio": 0.6666666666666666,
+    "velocidad_punta_kmh": 24.0
+  },
+  {
     "team": "Sweden",
     "player_name": "Daniel SVENSSON",
     "partidos": 3,
@@ -6630,14 +6640,14 @@
     "velocidad_punta_kmh": 28.1
   },
   {
-    "team": "New Zealand",
-    "player_name": "Max CROCOMBE",
+    "team": "Croatia",
+    "player_name": "Marco PASALIC",
     "partidos": 3,
-    "distancia_total_km": 13.1,
-    "distancia_promedio_km": 4.35,
-    "alta_intensidad_promedio_m": 5.6,
-    "sprints_promedio": 0.6666666666666666,
-    "velocidad_punta_kmh": 24.0
+    "distancia_total_km": 13.0,
+    "distancia_promedio_km": 4.32,
+    "alta_intensidad_promedio_m": 520.3,
+    "sprints_promedio": 27.333333333333332,
+    "velocidad_punta_kmh": 33.3
   },
   {
     "team": "Côte d'Ivoire",
@@ -6660,14 +6670,24 @@
     "velocidad_punta_kmh": 30.5
   },
   {
-    "team": "Croatia",
-    "player_name": "Marco PASALIC",
+    "team": "Korea Republic",
+    "player_name": "HWANG Heechan",
     "partidos": 3,
-    "distancia_total_km": 13.0,
-    "distancia_promedio_km": 4.32,
-    "alta_intensidad_promedio_m": 520.3,
-    "sprints_promedio": 27.333333333333332,
-    "velocidad_punta_kmh": 33.3
+    "distancia_total_km": 12.9,
+    "distancia_promedio_km": 4.31,
+    "alta_intensidad_promedio_m": 343.9,
+    "sprints_promedio": 20.666666666666668,
+    "velocidad_punta_kmh": 30.1
+  },
+  {
+    "team": "Haiti",
+    "player_name": "Johny PLACIDE",
+    "partidos": 3,
+    "distancia_total_km": 12.9,
+    "distancia_promedio_km": 4.29,
+    "alta_intensidad_promedio_m": 14.1,
+    "sprints_promedio": 1.3333333333333333,
+    "velocidad_punta_kmh": 23.6
   },
   {
     "team": "Ghana",
@@ -6688,26 +6708,6 @@
     "alta_intensidad_promedio_m": 345.7,
     "sprints_promedio": 20.0,
     "velocidad_punta_kmh": 32.2
-  },
-  {
-    "team": "Haiti",
-    "player_name": "Johny PLACIDE",
-    "partidos": 3,
-    "distancia_total_km": 12.9,
-    "distancia_promedio_km": 4.29,
-    "alta_intensidad_promedio_m": 14.1,
-    "sprints_promedio": 1.3333333333333333,
-    "velocidad_punta_kmh": 23.6
-  },
-  {
-    "team": "Korea Republic",
-    "player_name": "HWANG Heechan",
-    "partidos": 3,
-    "distancia_total_km": 12.9,
-    "distancia_promedio_km": 4.31,
-    "alta_intensidad_promedio_m": 343.9,
-    "sprints_promedio": 20.666666666666668,
-    "velocidad_punta_kmh": 30.1
   },
   {
     "team": "USA",
@@ -6790,16 +6790,6 @@
     "velocidad_punta_kmh": 32.1
   },
   {
-    "team": "England",
-    "player_name": "Jarell QUANSAH",
-    "partidos": 2,
-    "distancia_total_km": 12.4,
-    "distancia_promedio_km": 6.22,
-    "alta_intensidad_promedio_m": 476.0,
-    "sprints_promedio": 28.0,
-    "velocidad_punta_kmh": 33.3
-  },
-  {
     "team": "Paraguay",
     "player_name": "Gustavo CABALLERO",
     "partidos": 2,
@@ -6810,34 +6800,14 @@
     "velocidad_punta_kmh": 34.7
   },
   {
-    "team": "Scotland",
-    "player_name": "Kieran TIERNEY",
+    "team": "England",
+    "player_name": "Jarell QUANSAH",
     "partidos": 2,
-    "distancia_total_km": 12.3,
-    "distancia_promedio_km": 6.15,
-    "alta_intensidad_promedio_m": 543.2,
-    "sprints_promedio": 32.5,
-    "velocidad_punta_kmh": 33.4
-  },
-  {
-    "team": "Algeria",
-    "player_name": "Anis HADJ MOUSSA",
-    "partidos": 3,
-    "distancia_total_km": 12.3,
-    "distancia_promedio_km": 4.1,
-    "alta_intensidad_promedio_m": 284.2,
-    "sprints_promedio": 20.0,
-    "velocidad_punta_kmh": 29.4
-  },
-  {
-    "team": "IR Iran",
-    "player_name": "Shahriyar MOGHANLOO",
-    "partidos": 3,
-    "distancia_total_km": 12.3,
-    "distancia_promedio_km": 4.08,
-    "alta_intensidad_promedio_m": 280.3,
-    "sprints_promedio": 15.666666666666666,
-    "velocidad_punta_kmh": 28.9
+    "distancia_total_km": 12.4,
+    "distancia_promedio_km": 6.22,
+    "alta_intensidad_promedio_m": 476.0,
+    "sprints_promedio": 28.0,
+    "velocidad_punta_kmh": 33.3
   },
   {
     "team": "Qatar",
@@ -6850,14 +6820,34 @@
     "velocidad_punta_kmh": 30.4
   },
   {
-    "team": "New Zealand",
-    "player_name": "Ben OLD",
+    "team": "Scotland",
+    "player_name": "Kieran TIERNEY",
+    "partidos": 2,
+    "distancia_total_km": 12.3,
+    "distancia_promedio_km": 6.15,
+    "alta_intensidad_promedio_m": 543.2,
+    "sprints_promedio": 32.5,
+    "velocidad_punta_kmh": 33.4
+  },
+  {
+    "team": "IR Iran",
+    "player_name": "Shahriyar MOGHANLOO",
     "partidos": 3,
-    "distancia_total_km": 12.2,
-    "distancia_promedio_km": 4.05,
-    "alta_intensidad_promedio_m": 514.0,
-    "sprints_promedio": 24.666666666666668,
-    "velocidad_punta_kmh": 32.4
+    "distancia_total_km": 12.3,
+    "distancia_promedio_km": 4.08,
+    "alta_intensidad_promedio_m": 280.3,
+    "sprints_promedio": 15.666666666666666,
+    "velocidad_punta_kmh": 28.9
+  },
+  {
+    "team": "Algeria",
+    "player_name": "Anis HADJ MOUSSA",
+    "partidos": 3,
+    "distancia_total_km": 12.3,
+    "distancia_promedio_km": 4.1,
+    "alta_intensidad_promedio_m": 284.2,
+    "sprints_promedio": 20.0,
+    "velocidad_punta_kmh": 29.4
   },
   {
     "team": "Belgium",
@@ -6868,6 +6858,26 @@
     "alta_intensidad_promedio_m": 330.1,
     "sprints_promedio": 16.0,
     "velocidad_punta_kmh": 32.7
+  },
+  {
+    "team": "New Zealand",
+    "player_name": "Ben OLD",
+    "partidos": 3,
+    "distancia_total_km": 12.2,
+    "distancia_promedio_km": 4.05,
+    "alta_intensidad_promedio_m": 514.0,
+    "sprints_promedio": 24.666666666666668,
+    "velocidad_punta_kmh": 32.4
+  },
+  {
+    "team": "Ghana",
+    "player_name": "Ernest NUAMAH",
+    "partidos": 3,
+    "distancia_total_km": 12.1,
+    "distancia_promedio_km": 4.02,
+    "alta_intensidad_promedio_m": 327.7,
+    "sprints_promedio": 20.0,
+    "velocidad_punta_kmh": 33.3
   },
   {
     "team": "Switzerland",
@@ -6888,16 +6898,6 @@
     "alta_intensidad_promedio_m": 406.1,
     "sprints_promedio": 21.666666666666668,
     "velocidad_punta_kmh": 29.9
-  },
-  {
-    "team": "Ghana",
-    "player_name": "Ernest NUAMAH",
-    "partidos": 3,
-    "distancia_total_km": 12.1,
-    "distancia_promedio_km": 4.02,
-    "alta_intensidad_promedio_m": 327.7,
-    "sprints_promedio": 20.0,
-    "velocidad_punta_kmh": 33.3
   },
   {
     "team": "USA",
@@ -6950,26 +6950,6 @@
     "velocidad_punta_kmh": 31.8
   },
   {
-    "team": "Uzbekistan",
-    "player_name": "Jakhongir UROZOV",
-    "partidos": 2,
-    "distancia_total_km": 11.5,
-    "distancia_promedio_km": 5.73,
-    "alta_intensidad_promedio_m": 282.8,
-    "sprints_promedio": 19.5,
-    "velocidad_punta_kmh": 30.8
-  },
-  {
-    "team": "IR Iran",
-    "player_name": "Ehsan HAJISAFI",
-    "partidos": 2,
-    "distancia_total_km": 11.5,
-    "distancia_promedio_km": 5.73,
-    "alta_intensidad_promedio_m": 368.0,
-    "sprints_promedio": 24.0,
-    "velocidad_punta_kmh": 28.2
-  },
-  {
     "team": "Switzerland",
     "player_name": "Zeki AMDOUNI",
     "partidos": 4,
@@ -6980,6 +6960,16 @@
     "velocidad_punta_kmh": 31.7
   },
   {
+    "team": "Uzbekistan",
+    "player_name": "Jakhongir UROZOV",
+    "partidos": 2,
+    "distancia_total_km": 11.5,
+    "distancia_promedio_km": 5.73,
+    "alta_intensidad_promedio_m": 282.8,
+    "sprints_promedio": 19.5,
+    "velocidad_punta_kmh": 30.8
+  },
+  {
     "team": "Australia",
     "player_name": "Ajdin HRUSTIC",
     "partidos": 2,
@@ -6988,6 +6978,16 @@
     "alta_intensidad_promedio_m": 514.4,
     "sprints_promedio": 29.0,
     "velocidad_punta_kmh": 30.2
+  },
+  {
+    "team": "IR Iran",
+    "player_name": "Ehsan HAJISAFI",
+    "partidos": 2,
+    "distancia_total_km": 11.5,
+    "distancia_promedio_km": 5.73,
+    "alta_intensidad_promedio_m": 368.0,
+    "sprints_promedio": 24.0,
+    "velocidad_punta_kmh": 28.2
   },
   {
     "team": "USA",
@@ -7020,16 +7020,6 @@
     "velocidad_punta_kmh": 33.0
   },
   {
-    "team": "Cabo Verde",
-    "player_name": "WAGNER PINA",
-    "partidos": 1,
-    "distancia_total_km": 11.2,
-    "distancia_promedio_km": 11.15,
-    "alta_intensidad_promedio_m": 1590.7,
-    "sprints_promedio": 74.0,
-    "velocidad_punta_kmh": 32.2
-  },
-  {
     "team": "Norway",
     "player_name": "Thelo AASGAARD",
     "partidos": 1,
@@ -7050,14 +7040,14 @@
     "velocidad_punta_kmh": 32.1
   },
   {
-    "team": "Tunisia",
-    "player_name": "Sebastian TOUNEKTI",
-    "partidos": 3,
-    "distancia_total_km": 11.1,
-    "distancia_promedio_km": 3.71,
-    "alta_intensidad_promedio_m": 317.3,
-    "sprints_promedio": 18.333333333333332,
-    "velocidad_punta_kmh": 32.9
+    "team": "Cabo Verde",
+    "player_name": "WAGNER PINA",
+    "partidos": 1,
+    "distancia_total_km": 11.2,
+    "distancia_promedio_km": 11.15,
+    "alta_intensidad_promedio_m": 1590.7,
+    "sprints_promedio": 74.0,
+    "velocidad_punta_kmh": 32.2
   },
   {
     "team": "Uruguay",
@@ -7070,6 +7060,16 @@
     "velocidad_punta_kmh": 29.7
   },
   {
+    "team": "Tunisia",
+    "player_name": "Sebastian TOUNEKTI",
+    "partidos": 3,
+    "distancia_total_km": 11.1,
+    "distancia_promedio_km": 3.71,
+    "alta_intensidad_promedio_m": 317.3,
+    "sprints_promedio": 18.333333333333332,
+    "velocidad_punta_kmh": 32.9
+  },
+  {
     "team": "Ecuador",
     "player_name": "Pervis ESTUPINAN",
     "partidos": 2,
@@ -7080,16 +7080,6 @@
     "velocidad_punta_kmh": 30.8
   },
   {
-    "team": "Bosnia and Herzegovina",
-    "player_name": "Armin GIGOVIC",
-    "partidos": 2,
-    "distancia_total_km": 10.9,
-    "distancia_promedio_km": 5.45,
-    "alta_intensidad_promedio_m": 546.0,
-    "sprints_promedio": 31.0,
-    "velocidad_punta_kmh": 30.7
-  },
-  {
     "team": "Czechia",
     "player_name": "Stepan CHALOUPEK",
     "partidos": 1,
@@ -7098,6 +7088,16 @@
     "alta_intensidad_promedio_m": 746.1,
     "sprints_promedio": 46.0,
     "velocidad_punta_kmh": 34.0
+  },
+  {
+    "team": "Bosnia and Herzegovina",
+    "player_name": "Armin GIGOVIC",
+    "partidos": 2,
+    "distancia_total_km": 10.9,
+    "distancia_promedio_km": 5.45,
+    "alta_intensidad_promedio_m": 546.0,
+    "sprints_promedio": 31.0,
+    "velocidad_punta_kmh": 30.7
   },
   {
     "team": "Ghana",
@@ -7130,26 +7130,6 @@
     "velocidad_punta_kmh": 31.1
   },
   {
-    "team": "Saudi Arabia",
-    "player_name": "ABDULLAH ALHAMDDAN",
-    "partidos": 3,
-    "distancia_total_km": 10.7,
-    "distancia_promedio_km": 3.58,
-    "alta_intensidad_promedio_m": 428.6,
-    "sprints_promedio": 23.333333333333332,
-    "velocidad_punta_kmh": 31.6
-  },
-  {
-    "team": "Côte d'Ivoire",
-    "player_name": "Christopher OPERI",
-    "partidos": 1,
-    "distancia_total_km": 10.7,
-    "distancia_promedio_km": 10.7,
-    "alta_intensidad_promedio_m": 845.6,
-    "sprints_promedio": 55.0,
-    "velocidad_punta_kmh": 30.8
-  },
-  {
     "team": "Spain",
     "player_name": "Nico WILLIAMS",
     "partidos": 5,
@@ -7160,14 +7140,14 @@
     "velocidad_punta_kmh": 33.9
   },
   {
-    "team": "Spain",
-    "player_name": "GAVI",
-    "partidos": 2,
+    "team": "Saudi Arabia",
+    "player_name": "ABDULLAH ALHAMDDAN",
+    "partidos": 3,
     "distancia_total_km": 10.7,
-    "distancia_promedio_km": 5.35,
-    "alta_intensidad_promedio_m": 406.5,
-    "sprints_promedio": 22.5,
-    "velocidad_punta_kmh": 29.9
+    "distancia_promedio_km": 3.58,
+    "alta_intensidad_promedio_m": 428.6,
+    "sprints_promedio": 23.333333333333332,
+    "velocidad_punta_kmh": 31.6
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -7180,14 +7160,34 @@
     "velocidad_punta_kmh": 31.3
   },
   {
-    "team": "Saudi Arabia",
-    "player_name": "NAWAF BU WASHL",
+    "team": "Spain",
+    "player_name": "GAVI",
+    "partidos": 2,
+    "distancia_total_km": 10.7,
+    "distancia_promedio_km": 5.35,
+    "alta_intensidad_promedio_m": 406.5,
+    "sprints_promedio": 22.5,
+    "velocidad_punta_kmh": 29.9
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "player_name": "Christopher OPERI",
+    "partidos": 1,
+    "distancia_total_km": 10.7,
+    "distancia_promedio_km": 10.7,
+    "alta_intensidad_promedio_m": 845.6,
+    "sprints_promedio": 55.0,
+    "velocidad_punta_kmh": 30.8
+  },
+  {
+    "team": "Sweden",
+    "player_name": "Jacob WIDELL ZETTERSTROM",
     "partidos": 2,
     "distancia_total_km": 10.6,
-    "distancia_promedio_km": 5.3,
-    "alta_intensidad_promedio_m": 455.8,
-    "sprints_promedio": 28.0,
-    "velocidad_punta_kmh": 32.6
+    "distancia_promedio_km": 5.28,
+    "alta_intensidad_promedio_m": 43.6,
+    "sprints_promedio": 4.0,
+    "velocidad_punta_kmh": 27.7
   },
   {
     "team": "Colombia",
@@ -7200,14 +7200,14 @@
     "velocidad_punta_kmh": 29.8
   },
   {
-    "team": "Sweden",
-    "player_name": "Jacob WIDELL ZETTERSTROM",
+    "team": "Saudi Arabia",
+    "player_name": "NAWAF BU WASHL",
     "partidos": 2,
     "distancia_total_km": 10.6,
-    "distancia_promedio_km": 5.28,
-    "alta_intensidad_promedio_m": 43.6,
-    "sprints_promedio": 4.0,
-    "velocidad_punta_kmh": 27.7
+    "distancia_promedio_km": 5.3,
+    "alta_intensidad_promedio_m": 455.8,
+    "sprints_promedio": 28.0,
+    "velocidad_punta_kmh": 32.6
   },
   {
     "team": "Côte d'Ivoire",
@@ -7230,16 +7230,6 @@
     "velocidad_punta_kmh": 29.2
   },
   {
-    "team": "Türkiye",
-    "player_name": "Ozan KABAK",
-    "partidos": 1,
-    "distancia_total_km": 10.4,
-    "distancia_promedio_km": 10.37,
-    "alta_intensidad_promedio_m": 555.0,
-    "sprints_promedio": 33.0,
-    "velocidad_punta_kmh": 30.8
-  },
-  {
     "team": "Curaçao",
     "player_name": "Jeremy ANTONISSE",
     "partidos": 2,
@@ -7250,14 +7240,14 @@
     "velocidad_punta_kmh": 31.3
   },
   {
-    "team": "USA",
-    "player_name": "Brenden AARONSON",
+    "team": "Türkiye",
+    "player_name": "Ozan KABAK",
     "partidos": 1,
-    "distancia_total_km": 10.3,
-    "distancia_promedio_km": 10.27,
-    "alta_intensidad_promedio_m": 1291.9,
-    "sprints_promedio": 70.0,
-    "velocidad_punta_kmh": 32.4
+    "distancia_total_km": 10.4,
+    "distancia_promedio_km": 10.37,
+    "alta_intensidad_promedio_m": 555.0,
+    "sprints_promedio": 33.0,
+    "velocidad_punta_kmh": 30.8
   },
   {
     "team": "Türkiye",
@@ -7268,16 +7258,6 @@
     "alta_intensidad_promedio_m": 1156.3,
     "sprints_promedio": 55.0,
     "velocidad_punta_kmh": 34.5
-  },
-  {
-    "team": "Senegal",
-    "player_name": "Pape Matar SARR",
-    "partidos": 2,
-    "distancia_total_km": 10.3,
-    "distancia_promedio_km": 5.16,
-    "alta_intensidad_promedio_m": 390.4,
-    "sprints_promedio": 22.0,
-    "velocidad_punta_kmh": 28.9
   },
   {
     "team": "Uzbekistan",
@@ -7298,6 +7278,26 @@
     "alta_intensidad_promedio_m": 257.6,
     "sprints_promedio": 17.666666666666668,
     "velocidad_punta_kmh": 32.2
+  },
+  {
+    "team": "USA",
+    "player_name": "Brenden AARONSON",
+    "partidos": 1,
+    "distancia_total_km": 10.3,
+    "distancia_promedio_km": 10.27,
+    "alta_intensidad_promedio_m": 1291.9,
+    "sprints_promedio": 70.0,
+    "velocidad_punta_kmh": 32.4
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Pape Matar SARR",
+    "partidos": 2,
+    "distancia_total_km": 10.3,
+    "distancia_promedio_km": 5.16,
+    "alta_intensidad_promedio_m": 390.4,
+    "sprints_promedio": 22.0,
+    "velocidad_punta_kmh": 28.9
   },
   {
     "team": "Iraq",
@@ -7340,14 +7340,14 @@
     "velocidad_punta_kmh": 30.2
   },
   {
-    "team": "Croatia",
-    "player_name": "Andrej KRAMARIC",
-    "partidos": 3,
+    "team": "Colombia",
+    "player_name": "Deiver MACHADO",
+    "partidos": 1,
     "distancia_total_km": 10.1,
-    "distancia_promedio_km": 3.35,
-    "alta_intensidad_promedio_m": 340.7,
-    "sprints_promedio": 16.666666666666668,
-    "velocidad_punta_kmh": 30.6
+    "distancia_promedio_km": 10.07,
+    "alta_intensidad_promedio_m": 976.0,
+    "sprints_promedio": 56.0,
+    "velocidad_punta_kmh": 34.0
   },
   {
     "team": "IR Iran",
@@ -7360,24 +7360,14 @@
     "velocidad_punta_kmh": 31.7
   },
   {
-    "team": "Colombia",
-    "player_name": "Deiver MACHADO",
-    "partidos": 1,
+    "team": "Croatia",
+    "player_name": "Andrej KRAMARIC",
+    "partidos": 3,
     "distancia_total_km": 10.1,
-    "distancia_promedio_km": 10.07,
-    "alta_intensidad_promedio_m": 976.0,
-    "sprints_promedio": 56.0,
-    "velocidad_punta_kmh": 34.0
-  },
-  {
-    "team": "Argentina",
-    "player_name": "Exequiel PALACIOS",
-    "partidos": 1,
-    "distancia_total_km": 10.0,
-    "distancia_promedio_km": 10.03,
-    "alta_intensidad_promedio_m": 718.2,
-    "sprints_promedio": 37.0,
-    "velocidad_punta_kmh": 32.5
+    "distancia_promedio_km": 3.35,
+    "alta_intensidad_promedio_m": 340.7,
+    "sprints_promedio": 16.666666666666668,
+    "velocidad_punta_kmh": 30.6
   },
   {
     "team": "Paraguay",
@@ -7388,16 +7378,6 @@
     "alta_intensidad_promedio_m": 400.2,
     "sprints_promedio": 22.5,
     "velocidad_punta_kmh": 31.1
-  },
-  {
-    "team": "Mexico",
-    "player_name": "Obed VARGAS",
-    "partidos": 3,
-    "distancia_total_km": 10.0,
-    "distancia_promedio_km": 3.35,
-    "alta_intensidad_promedio_m": 292.4,
-    "sprints_promedio": 15.666666666666666,
-    "velocidad_punta_kmh": 31.5
   },
   {
     "team": "Cabo Verde",
@@ -7420,14 +7400,24 @@
     "velocidad_punta_kmh": 34.8
   },
   {
-    "team": "Colombia",
-    "player_name": "Jhon CORDOBA",
+    "team": "Mexico",
+    "player_name": "Obed VARGAS",
     "partidos": 3,
-    "distancia_total_km": 9.9,
-    "distancia_promedio_km": 3.29,
-    "alta_intensidad_promedio_m": 190.9,
-    "sprints_promedio": 11.0,
-    "velocidad_punta_kmh": 32.1
+    "distancia_total_km": 10.0,
+    "distancia_promedio_km": 3.35,
+    "alta_intensidad_promedio_m": 292.4,
+    "sprints_promedio": 15.666666666666666,
+    "velocidad_punta_kmh": 31.5
+  },
+  {
+    "team": "Argentina",
+    "player_name": "Exequiel PALACIOS",
+    "partidos": 1,
+    "distancia_total_km": 10.0,
+    "distancia_promedio_km": 10.03,
+    "alta_intensidad_promedio_m": 718.2,
+    "sprints_promedio": 37.0,
+    "velocidad_punta_kmh": 32.5
   },
   {
     "team": "Brazil",
@@ -7438,6 +7428,16 @@
     "alta_intensidad_promedio_m": 203.4,
     "sprints_promedio": 12.0,
     "velocidad_punta_kmh": 28.1
+  },
+  {
+    "team": "Colombia",
+    "player_name": "Jhon CORDOBA",
+    "partidos": 3,
+    "distancia_total_km": 9.9,
+    "distancia_promedio_km": 3.29,
+    "alta_intensidad_promedio_m": 190.9,
+    "sprints_promedio": 11.0,
+    "velocidad_punta_kmh": 32.1
   },
   {
     "team": "Sweden",
@@ -7460,16 +7460,6 @@
     "velocidad_punta_kmh": 22.6
   },
   {
-    "team": "Australia",
-    "player_name": "Nishan VELUPILLAY",
-    "partidos": 2,
-    "distancia_total_km": 9.8,
-    "distancia_promedio_km": 4.92,
-    "alta_intensidad_promedio_m": 426.6,
-    "sprints_promedio": 26.5,
-    "velocidad_punta_kmh": 31.1
-  },
-  {
     "team": "Canada",
     "player_name": "Promise DAVID",
     "partidos": 4,
@@ -7480,6 +7470,16 @@
     "velocidad_punta_kmh": 30.1
   },
   {
+    "team": "Australia",
+    "player_name": "Nishan VELUPILLAY",
+    "partidos": 2,
+    "distancia_total_km": 9.8,
+    "distancia_promedio_km": 4.92,
+    "alta_intensidad_promedio_m": 426.6,
+    "sprints_promedio": 26.5,
+    "velocidad_punta_kmh": 31.1
+  },
+  {
     "team": "Japan",
     "player_name": "Ayumu SEKO",
     "partidos": 2,
@@ -7488,16 +7488,6 @@
     "alta_intensidad_promedio_m": 218.0,
     "sprints_promedio": 13.0,
     "velocidad_punta_kmh": 29.2
-  },
-  {
-    "team": "Austria",
-    "player_name": "Sasa KALAJDZIC",
-    "partidos": 3,
-    "distancia_total_km": 9.6,
-    "distancia_promedio_km": 3.21,
-    "alta_intensidad_promedio_m": 289.8,
-    "sprints_promedio": 20.666666666666668,
-    "velocidad_punta_kmh": 29.7
   },
   {
     "team": "Switzerland",
@@ -7520,24 +7510,14 @@
     "velocidad_punta_kmh": 30.0
   },
   {
-    "team": "Panama",
-    "player_name": "Jorge GUTIERREZ",
-    "partidos": 1,
-    "distancia_total_km": 9.5,
-    "distancia_promedio_km": 9.49,
-    "alta_intensidad_promedio_m": 792.9,
-    "sprints_promedio": 43.0,
-    "velocidad_punta_kmh": 30.2
-  },
-  {
-    "team": "Panama",
-    "player_name": "Fidel ESCOBAR",
-    "partidos": 1,
-    "distancia_total_km": 9.5,
-    "distancia_promedio_km": 9.54,
-    "alta_intensidad_promedio_m": 651.0,
-    "sprints_promedio": 45.0,
-    "velocidad_punta_kmh": 30.2
+    "team": "Austria",
+    "player_name": "Sasa KALAJDZIC",
+    "partidos": 3,
+    "distancia_total_km": 9.6,
+    "distancia_promedio_km": 3.21,
+    "alta_intensidad_promedio_m": 289.8,
+    "sprints_promedio": 20.666666666666668,
+    "velocidad_punta_kmh": 29.7
   },
   {
     "team": "Norway",
@@ -7560,24 +7540,24 @@
     "velocidad_punta_kmh": 32.9
   },
   {
-    "team": "Mexico",
-    "player_name": "Guillermo MARTINEZ",
-    "partidos": 2,
-    "distancia_total_km": 9.4,
-    "distancia_promedio_km": 4.68,
-    "alta_intensidad_promedio_m": 327.5,
-    "sprints_promedio": 23.0,
-    "velocidad_punta_kmh": 29.7
+    "team": "Panama",
+    "player_name": "Jorge GUTIERREZ",
+    "partidos": 1,
+    "distancia_total_km": 9.5,
+    "distancia_promedio_km": 9.49,
+    "alta_intensidad_promedio_m": 792.9,
+    "sprints_promedio": 43.0,
+    "velocidad_punta_kmh": 30.2
   },
   {
-    "team": "South Africa",
-    "player_name": "Nkosinathi SIBISI",
+    "team": "Panama",
+    "player_name": "Fidel ESCOBAR",
     "partidos": 1,
-    "distancia_total_km": 9.4,
-    "distancia_promedio_km": 9.39,
-    "alta_intensidad_promedio_m": 529.9,
-    "sprints_promedio": 38.0,
-    "velocidad_punta_kmh": 29.9
+    "distancia_total_km": 9.5,
+    "distancia_promedio_km": 9.54,
+    "alta_intensidad_promedio_m": 651.0,
+    "sprints_promedio": 45.0,
+    "velocidad_punta_kmh": 30.2
   },
   {
     "team": "Argentina",
@@ -7590,14 +7570,24 @@
     "velocidad_punta_kmh": 32.5
   },
   {
-    "team": "Egypt",
-    "player_name": "ZIZO",
-    "partidos": 4,
-    "distancia_total_km": 9.3,
-    "distancia_promedio_km": 2.33,
-    "alta_intensidad_promedio_m": 313.8,
-    "sprints_promedio": 12.5,
-    "velocidad_punta_kmh": 32.7
+    "team": "South Africa",
+    "player_name": "Nkosinathi SIBISI",
+    "partidos": 1,
+    "distancia_total_km": 9.4,
+    "distancia_promedio_km": 9.39,
+    "alta_intensidad_promedio_m": 529.9,
+    "sprints_promedio": 38.0,
+    "velocidad_punta_kmh": 29.9
+  },
+  {
+    "team": "Mexico",
+    "player_name": "Guillermo MARTINEZ",
+    "partidos": 2,
+    "distancia_total_km": 9.4,
+    "distancia_promedio_km": 4.68,
+    "alta_intensidad_promedio_m": 327.5,
+    "sprints_promedio": 23.0,
+    "velocidad_punta_kmh": 29.7
   },
   {
     "team": "Egypt",
@@ -7608,6 +7598,16 @@
     "alta_intensidad_promedio_m": 263.2,
     "sprints_promedio": 14.0,
     "velocidad_punta_kmh": 31.7
+  },
+  {
+    "team": "Egypt",
+    "player_name": "ZIZO",
+    "partidos": 4,
+    "distancia_total_km": 9.3,
+    "distancia_promedio_km": 2.33,
+    "alta_intensidad_promedio_m": 313.8,
+    "sprints_promedio": 12.5,
+    "velocidad_punta_kmh": 32.7
   },
   {
     "team": "New Zealand",
@@ -7630,6 +7630,16 @@
     "velocidad_punta_kmh": 30.0
   },
   {
+    "team": "Uzbekistan",
+    "player_name": "Abduvohid NEMATOV",
+    "partidos": 2,
+    "distancia_total_km": 9.2,
+    "distancia_promedio_km": 4.62,
+    "alta_intensidad_promedio_m": 16.6,
+    "sprints_promedio": 1.0,
+    "velocidad_punta_kmh": 25.1
+  },
+  {
     "team": "Argentina",
     "player_name": "Nico PAZ",
     "partidos": 2,
@@ -7650,26 +7660,6 @@
     "velocidad_punta_kmh": 30.2
   },
   {
-    "team": "Uzbekistan",
-    "player_name": "Abduvohid NEMATOV",
-    "partidos": 2,
-    "distancia_total_km": 9.2,
-    "distancia_promedio_km": 4.62,
-    "alta_intensidad_promedio_m": 16.6,
-    "sprints_promedio": 1.0,
-    "velocidad_punta_kmh": 25.1
-  },
-  {
-    "team": "Colombia",
-    "player_name": "Santiago ARIAS",
-    "partidos": 1,
-    "distancia_total_km": 9.0,
-    "distancia_promedio_km": 9.05,
-    "alta_intensidad_promedio_m": 950.9,
-    "sprints_promedio": 50.0,
-    "velocidad_punta_kmh": 32.0
-  },
-  {
     "team": "Côte d'Ivoire",
     "player_name": "Ousmane DIOMANDE",
     "partidos": 1,
@@ -7680,14 +7670,14 @@
     "velocidad_punta_kmh": 29.9
   },
   {
-    "team": "Panama",
-    "player_name": "Cecilio WATERMAN",
-    "partidos": 2,
-    "distancia_total_km": 8.8,
-    "distancia_promedio_km": 4.39,
-    "alta_intensidad_promedio_m": 320.8,
-    "sprints_promedio": 17.0,
-    "velocidad_punta_kmh": 30.3
+    "team": "Colombia",
+    "player_name": "Santiago ARIAS",
+    "partidos": 1,
+    "distancia_total_km": 9.0,
+    "distancia_promedio_km": 9.05,
+    "alta_intensidad_promedio_m": 950.9,
+    "sprints_promedio": 50.0,
+    "velocidad_punta_kmh": 32.0
   },
   {
     "team": "Australia",
@@ -7710,14 +7700,14 @@
     "velocidad_punta_kmh": 30.7
   },
   {
-    "team": "Iraq",
-    "player_name": "MUNAF YOUNUS",
-    "partidos": 1,
-    "distancia_total_km": 8.7,
-    "distancia_promedio_km": 8.75,
-    "alta_intensidad_promedio_m": 375.8,
-    "sprints_promedio": 22.0,
-    "velocidad_punta_kmh": 30.1
+    "team": "Panama",
+    "player_name": "Cecilio WATERMAN",
+    "partidos": 2,
+    "distancia_total_km": 8.8,
+    "distancia_promedio_km": 4.39,
+    "alta_intensidad_promedio_m": 320.8,
+    "sprints_promedio": 17.0,
+    "velocidad_punta_kmh": 30.3
   },
   {
     "team": "Morocco",
@@ -7728,6 +7718,16 @@
     "alta_intensidad_promedio_m": 948.1,
     "sprints_promedio": 59.0,
     "velocidad_punta_kmh": 32.3
+  },
+  {
+    "team": "Iraq",
+    "player_name": "MUNAF YOUNUS",
+    "partidos": 1,
+    "distancia_total_km": 8.7,
+    "distancia_promedio_km": 8.75,
+    "alta_intensidad_promedio_m": 375.8,
+    "sprints_promedio": 22.0,
+    "velocidad_punta_kmh": 30.1
   },
   {
     "team": "Sweden",
@@ -7750,6 +7750,26 @@
     "velocidad_punta_kmh": 32.1
   },
   {
+    "team": "Curaçao",
+    "player_name": "Riechedly BAZOER",
+    "partidos": 1,
+    "distancia_total_km": 8.5,
+    "distancia_promedio_km": 8.51,
+    "alta_intensidad_promedio_m": 305.9,
+    "sprints_promedio": 15.0,
+    "velocidad_punta_kmh": 27.8
+  },
+  {
+    "team": "Panama",
+    "player_name": "Azarias LONDONO",
+    "partidos": 3,
+    "distancia_total_km": 8.5,
+    "distancia_promedio_km": 2.85,
+    "alta_intensidad_promedio_m": 229.5,
+    "sprints_promedio": 13.666666666666666,
+    "velocidad_punta_kmh": 32.7
+  },
+  {
     "team": "Mexico",
     "player_name": "Mateo CHAVEZ",
     "partidos": 1,
@@ -7770,36 +7790,6 @@
     "velocidad_punta_kmh": 30.4
   },
   {
-    "team": "Brazil",
-    "player_name": "DANILO SANTOS",
-    "partidos": 4,
-    "distancia_total_km": 8.5,
-    "distancia_promedio_km": 2.11,
-    "alta_intensidad_promedio_m": 201.9,
-    "sprints_promedio": 10.75,
-    "velocidad_punta_kmh": 27.9
-  },
-  {
-    "team": "Panama",
-    "player_name": "Azarias LONDONO",
-    "partidos": 3,
-    "distancia_total_km": 8.5,
-    "distancia_promedio_km": 2.85,
-    "alta_intensidad_promedio_m": 229.5,
-    "sprints_promedio": 13.666666666666666,
-    "velocidad_punta_kmh": 32.7
-  },
-  {
-    "team": "Curaçao",
-    "player_name": "Riechedly BAZOER",
-    "partidos": 1,
-    "distancia_total_km": 8.5,
-    "distancia_promedio_km": 8.51,
-    "alta_intensidad_promedio_m": 305.9,
-    "sprints_promedio": 15.0,
-    "velocidad_punta_kmh": 27.8
-  },
-  {
     "team": "Saudi Arabia",
     "player_name": "SULTAN MANDASH",
     "partidos": 1,
@@ -7810,14 +7800,14 @@
     "velocidad_punta_kmh": 33.1
   },
   {
-    "team": "Scotland",
-    "player_name": "Aaron HICKEY",
-    "partidos": 1,
-    "distancia_total_km": 8.4,
-    "distancia_promedio_km": 8.36,
-    "alta_intensidad_promedio_m": 518.8,
-    "sprints_promedio": 30.0,
-    "velocidad_punta_kmh": 32.4
+    "team": "Brazil",
+    "player_name": "DANILO SANTOS",
+    "partidos": 4,
+    "distancia_total_km": 8.5,
+    "distancia_promedio_km": 2.11,
+    "alta_intensidad_promedio_m": 201.9,
+    "sprints_promedio": 10.75,
+    "velocidad_punta_kmh": 27.9
   },
   {
     "team": "Ghana",
@@ -7840,6 +7830,16 @@
     "velocidad_punta_kmh": 31.2
   },
   {
+    "team": "Scotland",
+    "player_name": "Aaron HICKEY",
+    "partidos": 1,
+    "distancia_total_km": 8.4,
+    "distancia_promedio_km": 8.36,
+    "alta_intensidad_promedio_m": 518.8,
+    "sprints_promedio": 30.0,
+    "velocidad_punta_kmh": 32.4
+  },
+  {
     "team": "Bosnia and Herzegovina",
     "player_name": "Jovo LUKIC",
     "partidos": 2,
@@ -7860,16 +7860,6 @@
     "velocidad_punta_kmh": 35.2
   },
   {
-    "team": "Qatar",
-    "player_name": "HASSAN ALHAYDOS",
-    "partidos": 2,
-    "distancia_total_km": 8.3,
-    "distancia_promedio_km": 4.15,
-    "alta_intensidad_promedio_m": 272.7,
-    "sprints_promedio": 21.5,
-    "velocidad_punta_kmh": 30.8
-  },
-  {
     "team": "Paraguay",
     "player_name": "Alexandro MAIDANA",
     "partidos": 2,
@@ -7878,6 +7868,16 @@
     "alta_intensidad_promedio_m": 423.6,
     "sprints_promedio": 19.0,
     "velocidad_punta_kmh": 30.6
+  },
+  {
+    "team": "Qatar",
+    "player_name": "HASSAN ALHAYDOS",
+    "partidos": 2,
+    "distancia_total_km": 8.3,
+    "distancia_promedio_km": 4.15,
+    "alta_intensidad_promedio_m": 272.7,
+    "sprints_promedio": 21.5,
+    "velocidad_punta_kmh": 30.8
   },
   {
     "team": "Netherlands",
@@ -7900,14 +7900,14 @@
     "velocidad_punta_kmh": 32.5
   },
   {
-    "team": "Australia",
-    "player_name": "Jason GERIA",
+    "team": "Portugal",
+    "player_name": "DIOGO DALOT",
     "partidos": 2,
     "distancia_total_km": 7.9,
-    "distancia_promedio_km": 3.96,
-    "alta_intensidad_promedio_m": 313.1,
-    "sprints_promedio": 14.5,
-    "velocidad_punta_kmh": 31.6
+    "distancia_promedio_km": 3.94,
+    "alta_intensidad_promedio_m": 374.2,
+    "sprints_promedio": 19.5,
+    "velocidad_punta_kmh": 32.4
   },
   {
     "team": "Haiti",
@@ -7920,14 +7920,14 @@
     "velocidad_punta_kmh": 30.5
   },
   {
-    "team": "Portugal",
-    "player_name": "DIOGO DALOT",
+    "team": "Australia",
+    "player_name": "Jason GERIA",
     "partidos": 2,
     "distancia_total_km": 7.9,
-    "distancia_promedio_km": 3.94,
-    "alta_intensidad_promedio_m": 374.2,
-    "sprints_promedio": 19.5,
-    "velocidad_punta_kmh": 32.4
+    "distancia_promedio_km": 3.96,
+    "alta_intensidad_promedio_m": 313.1,
+    "sprints_promedio": 14.5,
+    "velocidad_punta_kmh": 31.6
   },
   {
     "team": "Korea Republic",
@@ -7950,16 +7950,6 @@
     "velocidad_punta_kmh": 19.7
   },
   {
-    "team": "Netherlands",
-    "player_name": "Quinten TIMBER",
-    "partidos": 2,
-    "distancia_total_km": 7.8,
-    "distancia_promedio_km": 3.89,
-    "alta_intensidad_promedio_m": 252.6,
-    "sprints_promedio": 14.5,
-    "velocidad_punta_kmh": 31.9
-  },
-  {
     "team": "Japan",
     "player_name": "Takefusa KUBO",
     "partidos": 1,
@@ -7968,6 +7958,16 @@
     "alta_intensidad_promedio_m": 573.2,
     "sprints_promedio": 32.0,
     "velocidad_punta_kmh": 31.2
+  },
+  {
+    "team": "Netherlands",
+    "player_name": "Quinten TIMBER",
+    "partidos": 2,
+    "distancia_total_km": 7.8,
+    "distancia_promedio_km": 3.89,
+    "alta_intensidad_promedio_m": 252.6,
+    "sprints_promedio": 14.5,
+    "velocidad_punta_kmh": 31.9
   },
   {
     "team": "Paraguay",
@@ -7990,6 +7990,16 @@
     "velocidad_punta_kmh": 27.1
   },
   {
+    "team": "Colombia",
+    "player_name": "Cucho HERNANDEZ",
+    "partidos": 2,
+    "distancia_total_km": 7.5,
+    "distancia_promedio_km": 3.75,
+    "alta_intensidad_promedio_m": 304.6,
+    "sprints_promedio": 15.5,
+    "velocidad_punta_kmh": 32.3
+  },
+  {
     "team": "Brazil",
     "player_name": "IGOR THIAGO",
     "partidos": 1,
@@ -7998,16 +8008,6 @@
     "alta_intensidad_promedio_m": 639.6,
     "sprints_promedio": 43.0,
     "velocidad_punta_kmh": 33.2
-  },
-  {
-    "team": "Czechia",
-    "player_name": "Vladimir DARIDA",
-    "partidos": 1,
-    "distancia_total_km": 7.5,
-    "distancia_promedio_km": 7.51,
-    "alta_intensidad_promedio_m": 867.9,
-    "sprints_promedio": 49.0,
-    "velocidad_punta_kmh": 29.5
   },
   {
     "team": "Argentina",
@@ -8020,14 +8020,14 @@
     "velocidad_punta_kmh": 28.9
   },
   {
-    "team": "Colombia",
-    "player_name": "Cucho HERNANDEZ",
-    "partidos": 2,
+    "team": "Czechia",
+    "player_name": "Vladimir DARIDA",
+    "partidos": 1,
     "distancia_total_km": 7.5,
-    "distancia_promedio_km": 3.75,
-    "alta_intensidad_promedio_m": 304.6,
-    "sprints_promedio": 15.5,
-    "velocidad_punta_kmh": 32.3
+    "distancia_promedio_km": 7.51,
+    "alta_intensidad_promedio_m": 867.9,
+    "sprints_promedio": 49.0,
+    "velocidad_punta_kmh": 29.5
   },
   {
     "team": "Ghana",
@@ -8038,16 +8038,6 @@
     "alta_intensidad_promedio_m": 395.9,
     "sprints_promedio": 24.5,
     "velocidad_punta_kmh": 33.2
-  },
-  {
-    "team": "Congo DR",
-    "player_name": "Joris KAYEMBE",
-    "partidos": 4,
-    "distancia_total_km": 7.4,
-    "distancia_promedio_km": 1.84,
-    "alta_intensidad_promedio_m": 174.0,
-    "sprints_promedio": 8.5,
-    "velocidad_punta_kmh": 29.7
   },
   {
     "team": "Australia",
@@ -8070,6 +8060,16 @@
     "velocidad_punta_kmh": 30.1
   },
   {
+    "team": "Congo DR",
+    "player_name": "Joris KAYEMBE",
+    "partidos": 4,
+    "distancia_total_km": 7.4,
+    "distancia_promedio_km": 1.84,
+    "alta_intensidad_promedio_m": 174.0,
+    "sprints_promedio": 8.5,
+    "velocidad_punta_kmh": 29.7
+  },
+  {
     "team": "Germany",
     "player_name": "Waldemar ANTON",
     "partidos": 2,
@@ -8078,6 +8078,16 @@
     "alta_intensidad_promedio_m": 320.3,
     "sprints_promedio": 17.5,
     "velocidad_punta_kmh": 33.3
+  },
+  {
+    "team": "Belgium",
+    "player_name": "Matias FERNANDEZ-PARDO",
+    "partidos": 3,
+    "distancia_total_km": 7.1,
+    "distancia_promedio_km": 2.37,
+    "alta_intensidad_promedio_m": 349.2,
+    "sprints_promedio": 17.333333333333332,
+    "velocidad_punta_kmh": 34.8
   },
   {
     "team": "Iraq",
@@ -8090,14 +8100,14 @@
     "velocidad_punta_kmh": 24.2
   },
   {
-    "team": "Belgium",
-    "player_name": "Matias FERNANDEZ-PARDO",
-    "partidos": 3,
-    "distancia_total_km": 7.1,
-    "distancia_promedio_km": 2.37,
-    "alta_intensidad_promedio_m": 349.2,
-    "sprints_promedio": 17.333333333333332,
-    "velocidad_punta_kmh": 34.8
+    "team": "Croatia",
+    "player_name": "Luka VUSKOVIC",
+    "partidos": 1,
+    "distancia_total_km": 7.0,
+    "distancia_promedio_km": 7.01,
+    "alta_intensidad_promedio_m": 405.1,
+    "sprints_promedio": 21.0,
+    "velocidad_punta_kmh": 29.0
   },
   {
     "team": "Iraq",
@@ -8140,16 +8150,6 @@
     "velocidad_punta_kmh": 22.3
   },
   {
-    "team": "Croatia",
-    "player_name": "Luka VUSKOVIC",
-    "partidos": 1,
-    "distancia_total_km": 7.0,
-    "distancia_promedio_km": 7.01,
-    "alta_intensidad_promedio_m": 405.1,
-    "sprints_promedio": 21.0,
-    "velocidad_punta_kmh": 29.0
-  },
-  {
     "team": "Czechia",
     "player_name": "Denis VISINSKY",
     "partidos": 1,
@@ -8160,16 +8160,6 @@
     "velocidad_punta_kmh": 32.1
   },
   {
-    "team": "Norway",
-    "player_name": "Henrik FALCHENER",
-    "partidos": 1,
-    "distancia_total_km": 6.9,
-    "distancia_promedio_km": 6.89,
-    "alta_intensidad_promedio_m": 457.3,
-    "sprints_promedio": 23.0,
-    "velocidad_punta_kmh": 33.2
-  },
-  {
     "team": "Tunisia",
     "player_name": "Firas CHAOUAT",
     "partidos": 3,
@@ -8178,6 +8168,16 @@
     "alta_intensidad_promedio_m": 222.8,
     "sprints_promedio": 11.666666666666666,
     "velocidad_punta_kmh": 34.4
+  },
+  {
+    "team": "Norway",
+    "player_name": "Henrik FALCHENER",
+    "partidos": 1,
+    "distancia_total_km": 6.9,
+    "distancia_promedio_km": 6.89,
+    "alta_intensidad_promedio_m": 457.3,
+    "sprints_promedio": 23.0,
+    "velocidad_punta_kmh": 33.2
   },
   {
     "team": "Egypt",
@@ -8200,16 +8200,6 @@
     "velocidad_punta_kmh": 29.5
   },
   {
-    "team": "Cabo Verde",
-    "player_name": "TELMO ARCANJO",
-    "partidos": 2,
-    "distancia_total_km": 6.5,
-    "distancia_promedio_km": 3.26,
-    "alta_intensidad_promedio_m": 267.2,
-    "sprints_promedio": 13.5,
-    "velocidad_punta_kmh": 32.0
-  },
-  {
     "team": "Tunisia",
     "player_name": "Elias ACHOURI",
     "partidos": 3,
@@ -8218,16 +8208,6 @@
     "alta_intensidad_promedio_m": 229.0,
     "sprints_promedio": 13.333333333333334,
     "velocidad_punta_kmh": 30.3
-  },
-  {
-    "team": "IR Iran",
-    "player_name": "Alireza JAHANBAKHSH",
-    "partidos": 2,
-    "distancia_total_km": 6.5,
-    "distancia_promedio_km": 3.26,
-    "alta_intensidad_promedio_m": 250.2,
-    "sprints_promedio": 15.0,
-    "velocidad_punta_kmh": 30.1
   },
   {
     "team": "Uruguay",
@@ -8250,6 +8230,26 @@
     "velocidad_punta_kmh": 34.3
   },
   {
+    "team": "Cabo Verde",
+    "player_name": "TELMO ARCANJO",
+    "partidos": 2,
+    "distancia_total_km": 6.5,
+    "distancia_promedio_km": 3.26,
+    "alta_intensidad_promedio_m": 267.2,
+    "sprints_promedio": 13.5,
+    "velocidad_punta_kmh": 32.0
+  },
+  {
+    "team": "IR Iran",
+    "player_name": "Alireza JAHANBAKHSH",
+    "partidos": 2,
+    "distancia_total_km": 6.5,
+    "distancia_promedio_km": 3.26,
+    "alta_intensidad_promedio_m": 250.2,
+    "sprints_promedio": 15.0,
+    "velocidad_punta_kmh": 30.1
+  },
+  {
     "team": "Portugal",
     "player_name": "GONCALO RAMOS",
     "partidos": 2,
@@ -8270,16 +8270,6 @@
     "velocidad_punta_kmh": 33.7
   },
   {
-    "team": "Panama",
-    "player_name": "Ismael DIAZ",
-    "partidos": 2,
-    "distancia_total_km": 6.2,
-    "distancia_promedio_km": 3.08,
-    "alta_intensidad_promedio_m": 283.0,
-    "sprints_promedio": 18.5,
-    "velocidad_punta_kmh": 31.8
-  },
-  {
     "team": "Norway",
     "player_name": "Morten THORSBY",
     "partidos": 1,
@@ -8288,6 +8278,16 @@
     "alta_intensidad_promedio_m": 535.1,
     "sprints_promedio": 30.0,
     "velocidad_punta_kmh": 29.8
+  },
+  {
+    "team": "Ecuador",
+    "player_name": "Alan MINDA",
+    "partidos": 1,
+    "distancia_total_km": 6.2,
+    "distancia_promedio_km": 6.17,
+    "alta_intensidad_promedio_m": 485.2,
+    "sprints_promedio": 31.0,
+    "velocidad_punta_kmh": 35.5
   },
   {
     "team": "Korea Republic",
@@ -8300,14 +8300,14 @@
     "velocidad_punta_kmh": 30.9
   },
   {
-    "team": "Ecuador",
-    "player_name": "Alan MINDA",
-    "partidos": 1,
+    "team": "Panama",
+    "player_name": "Ismael DIAZ",
+    "partidos": 2,
     "distancia_total_km": 6.2,
-    "distancia_promedio_km": 6.17,
-    "alta_intensidad_promedio_m": 485.2,
-    "sprints_promedio": 31.0,
-    "velocidad_punta_kmh": 35.5
+    "distancia_promedio_km": 3.08,
+    "alta_intensidad_promedio_m": 283.0,
+    "sprints_promedio": 18.5,
+    "velocidad_punta_kmh": 31.8
   },
   {
     "team": "Qatar",
@@ -8350,16 +8350,6 @@
     "velocidad_punta_kmh": 33.6
   },
   {
-    "team": "Panama",
-    "player_name": "Tomas RODRIGUEZ",
-    "partidos": 2,
-    "distancia_total_km": 6.0,
-    "distancia_promedio_km": 3.02,
-    "alta_intensidad_promedio_m": 265.0,
-    "sprints_promedio": 16.0,
-    "velocidad_punta_kmh": 31.4
-  },
-  {
     "team": "South Africa",
     "player_name": "Lyle FOSTER",
     "partidos": 1,
@@ -8370,14 +8360,24 @@
     "velocidad_punta_kmh": 31.2
   },
   {
-    "team": "Germany",
-    "player_name": "Angelo STILLER",
+    "team": "Panama",
+    "player_name": "Tomas RODRIGUEZ",
+    "partidos": 2,
+    "distancia_total_km": 6.0,
+    "distancia_promedio_km": 3.02,
+    "alta_intensidad_promedio_m": 265.0,
+    "sprints_promedio": 16.0,
+    "velocidad_punta_kmh": 31.4
+  },
+  {
+    "team": "USA",
+    "player_name": "Matt TURNER",
     "partidos": 1,
     "distancia_total_km": 5.9,
-    "distancia_promedio_km": 5.95,
-    "alta_intensidad_promedio_m": 309.3,
-    "sprints_promedio": 18.0,
-    "velocidad_punta_kmh": 26.6
+    "distancia_promedio_km": 5.94,
+    "alta_intensidad_promedio_m": 26.4,
+    "sprints_promedio": 2.0,
+    "velocidad_punta_kmh": 28.3
   },
   {
     "team": "Tunisia",
@@ -8390,6 +8390,16 @@
     "velocidad_punta_kmh": 31.0
   },
   {
+    "team": "Germany",
+    "player_name": "Angelo STILLER",
+    "partidos": 1,
+    "distancia_total_km": 5.9,
+    "distancia_promedio_km": 5.95,
+    "alta_intensidad_promedio_m": 309.3,
+    "sprints_promedio": 18.0,
+    "velocidad_punta_kmh": 26.6
+  },
+  {
     "team": "Scotland",
     "player_name": "Lyndon DYKES",
     "partidos": 2,
@@ -8398,16 +8408,6 @@
     "alta_intensidad_promedio_m": 336.1,
     "sprints_promedio": 17.0,
     "velocidad_punta_kmh": 28.2
-  },
-  {
-    "team": "USA",
-    "player_name": "Matt TURNER",
-    "partidos": 1,
-    "distancia_total_km": 5.9,
-    "distancia_promedio_km": 5.94,
-    "alta_intensidad_promedio_m": 26.4,
-    "sprints_promedio": 2.0,
-    "velocidad_punta_kmh": 28.3
   },
   {
     "team": "Japan",
@@ -8430,36 +8430,6 @@
     "velocidad_punta_kmh": 31.0
   },
   {
-    "team": "IR Iran",
-    "player_name": "Arya YOUSEFI",
-    "partidos": 1,
-    "distancia_total_km": 5.8,
-    "distancia_promedio_km": 5.81,
-    "alta_intensidad_promedio_m": 523.0,
-    "sprints_promedio": 31.0,
-    "velocidad_punta_kmh": 30.6
-  },
-  {
-    "team": "Qatar",
-    "player_name": "ABDULAZIZ HATEM",
-    "partidos": 1,
-    "distancia_total_km": 5.8,
-    "distancia_promedio_km": 5.83,
-    "alta_intensidad_promedio_m": 455.5,
-    "sprints_promedio": 28.0,
-    "velocidad_punta_kmh": 27.1
-  },
-  {
-    "team": "Uzbekistan",
-    "player_name": "Farrukh SAYFIEV",
-    "partidos": 1,
-    "distancia_total_km": 5.8,
-    "distancia_promedio_km": 5.77,
-    "alta_intensidad_promedio_m": 587.9,
-    "sprints_promedio": 31.0,
-    "velocidad_punta_kmh": 30.6
-  },
-  {
     "team": "Japan",
     "player_name": "Junnosuke SUZUKI",
     "partidos": 2,
@@ -8468,6 +8438,16 @@
     "alta_intensidad_promedio_m": 308.8,
     "sprints_promedio": 17.0,
     "velocidad_punta_kmh": 29.2
+  },
+  {
+    "team": "IR Iran",
+    "player_name": "Arya YOUSEFI",
+    "partidos": 1,
+    "distancia_total_km": 5.8,
+    "distancia_promedio_km": 5.81,
+    "alta_intensidad_promedio_m": 523.0,
+    "sprints_promedio": 31.0,
+    "velocidad_punta_kmh": 30.6
   },
   {
     "team": "Mexico",
@@ -8480,6 +8460,16 @@
     "velocidad_punta_kmh": 31.4
   },
   {
+    "team": "Uzbekistan",
+    "player_name": "Farrukh SAYFIEV",
+    "partidos": 1,
+    "distancia_total_km": 5.8,
+    "distancia_promedio_km": 5.77,
+    "alta_intensidad_promedio_m": 587.9,
+    "sprints_promedio": 31.0,
+    "velocidad_punta_kmh": 30.6
+  },
+  {
     "team": "Brazil",
     "player_name": "NEYMAR JR",
     "partidos": 2,
@@ -8488,6 +8478,16 @@
     "alta_intensidad_promedio_m": 145.4,
     "sprints_promedio": 9.0,
     "velocidad_punta_kmh": 27.3
+  },
+  {
+    "team": "Qatar",
+    "player_name": "ABDULAZIZ HATEM",
+    "partidos": 1,
+    "distancia_total_km": 5.8,
+    "distancia_promedio_km": 5.83,
+    "alta_intensidad_promedio_m": 455.5,
+    "sprints_promedio": 28.0,
+    "velocidad_punta_kmh": 27.1
   },
   {
     "team": "Congo DR",
@@ -8530,16 +8530,6 @@
     "velocidad_punta_kmh": 30.1
   },
   {
-    "team": "South Africa",
-    "player_name": "Tshepang MOREMI",
-    "partidos": 2,
-    "distancia_total_km": 5.6,
-    "distancia_promedio_km": 2.79,
-    "alta_intensidad_promedio_m": 344.6,
-    "sprints_promedio": 20.5,
-    "velocidad_punta_kmh": 33.0
-  },
-  {
     "team": "Uzbekistan",
     "player_name": "Igor SERGEEV",
     "partidos": 3,
@@ -8548,6 +8538,16 @@
     "alta_intensidad_promedio_m": 129.0,
     "sprints_promedio": 8.666666666666666,
     "velocidad_punta_kmh": 27.0
+  },
+  {
+    "team": "South Africa",
+    "player_name": "Tshepang MOREMI",
+    "partidos": 2,
+    "distancia_total_km": 5.6,
+    "distancia_promedio_km": 2.79,
+    "alta_intensidad_promedio_m": 344.6,
+    "sprints_promedio": 20.5,
+    "velocidad_punta_kmh": 33.0
   },
   {
     "team": "Ecuador",
@@ -8560,14 +8560,24 @@
     "velocidad_punta_kmh": 30.5
   },
   {
-    "team": "Congo DR",
-    "player_name": "Theo BONGONDA",
-    "partidos": 2,
+    "team": "France",
+    "player_name": "Malo GUSTO",
+    "partidos": 4,
     "distancia_total_km": 5.5,
-    "distancia_promedio_km": 2.74,
-    "alta_intensidad_promedio_m": 177.1,
-    "sprints_promedio": 12.0,
-    "velocidad_punta_kmh": 32.0
+    "distancia_promedio_km": 1.37,
+    "alta_intensidad_promedio_m": 83.2,
+    "sprints_promedio": 5.5,
+    "velocidad_punta_kmh": 28.6
+  },
+  {
+    "team": "Korea Republic",
+    "player_name": "CASTROP Jens",
+    "partidos": 1,
+    "distancia_total_km": 5.5,
+    "distancia_promedio_km": 5.52,
+    "alta_intensidad_promedio_m": 530.1,
+    "sprints_promedio": 32.0,
+    "velocidad_punta_kmh": 31.2
   },
   {
     "team": "Congo DR",
@@ -8580,14 +8590,14 @@
     "velocidad_punta_kmh": 33.2
   },
   {
-    "team": "France",
-    "player_name": "Malo GUSTO",
-    "partidos": 4,
+    "team": "Congo DR",
+    "player_name": "Theo BONGONDA",
+    "partidos": 2,
     "distancia_total_km": 5.5,
-    "distancia_promedio_km": 1.37,
-    "alta_intensidad_promedio_m": 83.2,
-    "sprints_promedio": 5.5,
-    "velocidad_punta_kmh": 28.6
+    "distancia_promedio_km": 2.74,
+    "alta_intensidad_promedio_m": 177.1,
+    "sprints_promedio": 12.0,
+    "velocidad_punta_kmh": 32.0
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -8598,16 +8608,6 @@
     "alta_intensidad_promedio_m": 526.2,
     "sprints_promedio": 30.0,
     "velocidad_punta_kmh": 32.3
-  },
-  {
-    "team": "Korea Republic",
-    "player_name": "CASTROP Jens",
-    "partidos": 1,
-    "distancia_total_km": 5.5,
-    "distancia_promedio_km": 5.52,
-    "alta_intensidad_promedio_m": 530.1,
-    "sprints_promedio": 32.0,
-    "velocidad_punta_kmh": 31.2
   },
   {
     "team": "Germany",
@@ -8660,14 +8660,14 @@
     "velocidad_punta_kmh": 30.1
   },
   {
-    "team": "Brazil",
-    "player_name": "ROGER IBANEZ",
+    "team": "Ecuador",
+    "player_name": "Jordy ALCIVAR",
     "partidos": 1,
     "distancia_total_km": 5.1,
-    "distancia_promedio_km": 5.08,
-    "alta_intensidad_promedio_m": 553.8,
-    "sprints_promedio": 30.0,
-    "velocidad_punta_kmh": 29.4
+    "distancia_promedio_km": 5.07,
+    "alta_intensidad_promedio_m": 448.1,
+    "sprints_promedio": 23.0,
+    "velocidad_punta_kmh": 30.3
   },
   {
     "team": "Belgium",
@@ -8678,6 +8678,26 @@
     "alta_intensidad_promedio_m": 147.3,
     "sprints_promedio": 10.5,
     "velocidad_punta_kmh": 26.4
+  },
+  {
+    "team": "Germany",
+    "player_name": "Malick THIAW",
+    "partidos": 2,
+    "distancia_total_km": 5.1,
+    "distancia_promedio_km": 2.55,
+    "alta_intensidad_promedio_m": 172.8,
+    "sprints_promedio": 10.0,
+    "velocidad_punta_kmh": 32.2
+  },
+  {
+    "team": "Brazil",
+    "player_name": "ROGER IBANEZ",
+    "partidos": 1,
+    "distancia_total_km": 5.1,
+    "distancia_promedio_km": 5.08,
+    "alta_intensidad_promedio_m": 553.8,
+    "sprints_promedio": 30.0,
+    "velocidad_punta_kmh": 29.4
   },
   {
     "team": "Uzbekistan",
@@ -8700,24 +8720,14 @@
     "velocidad_punta_kmh": 29.9
   },
   {
-    "team": "Germany",
-    "player_name": "Malick THIAW",
-    "partidos": 2,
-    "distancia_total_km": 5.1,
-    "distancia_promedio_km": 2.55,
-    "alta_intensidad_promedio_m": 172.8,
-    "sprints_promedio": 10.0,
-    "velocidad_punta_kmh": 32.2
-  },
-  {
-    "team": "Ecuador",
-    "player_name": "Jordy ALCIVAR",
+    "team": "Norway",
+    "player_name": "Egil SELVIK",
     "partidos": 1,
-    "distancia_total_km": 5.1,
-    "distancia_promedio_km": 5.07,
-    "alta_intensidad_promedio_m": 448.1,
-    "sprints_promedio": 23.0,
-    "velocidad_punta_kmh": 30.3
+    "distancia_total_km": 5.0,
+    "distancia_promedio_km": 4.99,
+    "alta_intensidad_promedio_m": 4.6,
+    "sprints_promedio": 0.0,
+    "velocidad_punta_kmh": 22.5
   },
   {
     "team": "Korea Republic",
@@ -8738,16 +8748,6 @@
     "alta_intensidad_promedio_m": 217.8,
     "sprints_promedio": 13.0,
     "velocidad_punta_kmh": 27.8
-  },
-  {
-    "team": "Norway",
-    "player_name": "Egil SELVIK",
-    "partidos": 1,
-    "distancia_total_km": 5.0,
-    "distancia_promedio_km": 4.99,
-    "alta_intensidad_promedio_m": 4.6,
-    "sprints_promedio": 0.0,
-    "velocidad_punta_kmh": 22.5
   },
   {
     "team": "Curaçao",
@@ -8780,16 +8780,6 @@
     "velocidad_punta_kmh": 31.2
   },
   {
-    "team": "Austria",
-    "player_name": "Alexander PRASS",
-    "partidos": 2,
-    "distancia_total_km": 4.7,
-    "distancia_promedio_km": 2.34,
-    "alta_intensidad_promedio_m": 329.3,
-    "sprints_promedio": 14.0,
-    "velocidad_punta_kmh": 31.0
-  },
-  {
     "team": "IR Iran",
     "player_name": "Ali ALIPOUR",
     "partidos": 1,
@@ -8820,6 +8810,16 @@
     "velocidad_punta_kmh": 30.3
   },
   {
+    "team": "Austria",
+    "player_name": "Alexander PRASS",
+    "partidos": 2,
+    "distancia_total_km": 4.7,
+    "distancia_promedio_km": 2.34,
+    "alta_intensidad_promedio_m": 329.3,
+    "sprints_promedio": 14.0,
+    "velocidad_punta_kmh": 31.0
+  },
+  {
     "team": "Morocco",
     "player_name": "Ayoube AMAIMOUNI",
     "partidos": 2,
@@ -8838,6 +8838,16 @@
     "alta_intensidad_promedio_m": 219.6,
     "sprints_promedio": 14.0,
     "velocidad_punta_kmh": 28.3
+  },
+  {
+    "team": "Iraq",
+    "player_name": "ALI YOUSIF",
+    "partidos": 1,
+    "distancia_total_km": 4.5,
+    "distancia_promedio_km": 4.54,
+    "alta_intensidad_promedio_m": 488.3,
+    "sprints_promedio": 22.0,
+    "velocidad_punta_kmh": 32.4
   },
   {
     "team": "Curaçao",
@@ -8860,14 +8870,14 @@
     "velocidad_punta_kmh": 32.8
   },
   {
-    "team": "Iraq",
-    "player_name": "ALI YOUSIF",
-    "partidos": 1,
-    "distancia_total_km": 4.5,
-    "distancia_promedio_km": 4.54,
-    "alta_intensidad_promedio_m": 488.3,
-    "sprints_promedio": 22.0,
-    "velocidad_punta_kmh": 32.4
+    "team": "Korea Republic",
+    "player_name": "CHO Guesung",
+    "partidos": 2,
+    "distancia_total_km": 4.4,
+    "distancia_promedio_km": 2.2,
+    "alta_intensidad_promedio_m": 155.5,
+    "sprints_promedio": 11.0,
+    "velocidad_punta_kmh": 30.5
   },
   {
     "team": "Netherlands",
@@ -8900,14 +8910,14 @@
     "velocidad_punta_kmh": 31.5
   },
   {
-    "team": "Korea Republic",
-    "player_name": "CHO Guesung",
-    "partidos": 2,
-    "distancia_total_km": 4.4,
-    "distancia_promedio_km": 2.2,
-    "alta_intensidad_promedio_m": 155.5,
-    "sprints_promedio": 11.0,
-    "velocidad_punta_kmh": 30.5
+    "team": "Netherlands",
+    "player_name": "Guus TIL",
+    "partidos": 1,
+    "distancia_total_km": 4.3,
+    "distancia_promedio_km": 4.27,
+    "alta_intensidad_promedio_m": 448.1,
+    "sprints_promedio": 28.0,
+    "velocidad_punta_kmh": 30.0
   },
   {
     "team": "Germany",
@@ -8930,14 +8940,24 @@
     "velocidad_punta_kmh": 29.7
   },
   {
-    "team": "Netherlands",
-    "player_name": "Guus TIL",
+    "team": "Germany",
+    "player_name": "Nick WOLTEMADE",
     "partidos": 1,
-    "distancia_total_km": 4.3,
-    "distancia_promedio_km": 4.27,
-    "alta_intensidad_promedio_m": 448.1,
-    "sprints_promedio": 28.0,
-    "velocidad_punta_kmh": 30.0
+    "distancia_total_km": 4.2,
+    "distancia_promedio_km": 4.2,
+    "alta_intensidad_promedio_m": 298.5,
+    "sprints_promedio": 13.0,
+    "velocidad_punta_kmh": 31.4
+  },
+  {
+    "team": "Côte d'Ivoire",
+    "player_name": "Oumar DIAKITE",
+    "partidos": 2,
+    "distancia_total_km": 4.2,
+    "distancia_promedio_km": 2.09,
+    "alta_intensidad_promedio_m": 222.8,
+    "sprints_promedio": 11.0,
+    "velocidad_punta_kmh": 32.1
   },
   {
     "team": "Qatar",
@@ -8950,16 +8970,6 @@
     "velocidad_punta_kmh": 30.0
   },
   {
-    "team": "Germany",
-    "player_name": "Nick WOLTEMADE",
-    "partidos": 1,
-    "distancia_total_km": 4.2,
-    "distancia_promedio_km": 4.2,
-    "alta_intensidad_promedio_m": 298.5,
-    "sprints_promedio": 13.0,
-    "velocidad_punta_kmh": 31.4
-  },
-  {
     "team": "Jordan",
     "player_name": "SALEEM OBAID",
     "partidos": 3,
@@ -8970,14 +8980,24 @@
     "velocidad_punta_kmh": 26.7
   },
   {
-    "team": "Côte d'Ivoire",
-    "player_name": "Oumar DIAKITE",
-    "partidos": 2,
-    "distancia_total_km": 4.2,
-    "distancia_promedio_km": 2.09,
-    "alta_intensidad_promedio_m": 222.8,
-    "sprints_promedio": 11.0,
-    "velocidad_punta_kmh": 32.1
+    "team": "Qatar",
+    "player_name": "ALHASHMI ALHUSSEIN",
+    "partidos": 1,
+    "distancia_total_km": 4.1,
+    "distancia_promedio_km": 4.07,
+    "alta_intensidad_promedio_m": 300.4,
+    "sprints_promedio": 20.0,
+    "velocidad_punta_kmh": 30.2
+  },
+  {
+    "team": "Portugal",
+    "player_name": "FRANCISCO TRINCAO",
+    "partidos": 1,
+    "distancia_total_km": 4.1,
+    "distancia_promedio_km": 4.07,
+    "alta_intensidad_promedio_m": 485.6,
+    "sprints_promedio": 32.0,
+    "velocidad_punta_kmh": 29.2
   },
   {
     "team": "Australia",
@@ -8998,26 +9018,6 @@
     "alta_intensidad_promedio_m": 98.1,
     "sprints_promedio": 7.333333333333333,
     "velocidad_punta_kmh": 30.4
-  },
-  {
-    "team": "Portugal",
-    "player_name": "FRANCISCO TRINCAO",
-    "partidos": 1,
-    "distancia_total_km": 4.1,
-    "distancia_promedio_km": 4.07,
-    "alta_intensidad_promedio_m": 485.6,
-    "sprints_promedio": 32.0,
-    "velocidad_punta_kmh": 29.2
-  },
-  {
-    "team": "Qatar",
-    "player_name": "ALHASHMI ALHUSSEIN",
-    "partidos": 1,
-    "distancia_total_km": 4.1,
-    "distancia_promedio_km": 4.07,
-    "alta_intensidad_promedio_m": 300.4,
-    "sprints_promedio": 20.0,
-    "velocidad_punta_kmh": 30.2
   },
   {
     "team": "Senegal",
@@ -9060,6 +9060,16 @@
     "velocidad_punta_kmh": 30.1
   },
   {
+    "team": "Tunisia",
+    "player_name": "Mouhib CHAMAKH",
+    "partidos": 1,
+    "distancia_total_km": 3.9,
+    "distancia_promedio_km": 3.89,
+    "alta_intensidad_promedio_m": 4.2,
+    "sprints_promedio": 0.0,
+    "velocidad_punta_kmh": 21.3
+  },
+  {
     "team": "Brazil",
     "player_name": "LUIZ HENRIQUE",
     "partidos": 1,
@@ -9080,16 +9090,6 @@
     "velocidad_punta_kmh": 32.3
   },
   {
-    "team": "Tunisia",
-    "player_name": "Mouhib CHAMAKH",
-    "partidos": 1,
-    "distancia_total_km": 3.9,
-    "distancia_promedio_km": 3.89,
-    "alta_intensidad_promedio_m": 4.2,
-    "sprints_promedio": 0.0,
-    "velocidad_punta_kmh": 21.3
-  },
-  {
     "team": "England",
     "player_name": "Dan BURN",
     "partidos": 2,
@@ -9098,16 +9098,6 @@
     "alta_intensidad_promedio_m": 46.6,
     "sprints_promedio": 4.0,
     "velocidad_punta_kmh": 27.5
-  },
-  {
-    "team": "Algeria",
-    "player_name": "Zineddine BELAID",
-    "partidos": 2,
-    "distancia_total_km": 3.8,
-    "distancia_promedio_km": 1.89,
-    "alta_intensidad_promedio_m": 77.9,
-    "sprints_promedio": 6.0,
-    "velocidad_punta_kmh": 27.2
   },
   {
     "team": "Algeria",
@@ -9120,14 +9110,14 @@
     "velocidad_punta_kmh": 29.0
   },
   {
-    "team": "Belgium",
-    "player_name": "Joaquin SEYS",
-    "partidos": 1,
-    "distancia_total_km": 3.7,
-    "distancia_promedio_km": 3.68,
-    "alta_intensidad_promedio_m": 176.5,
-    "sprints_promedio": 13.0,
-    "velocidad_punta_kmh": 29.6
+    "team": "Algeria",
+    "player_name": "Zineddine BELAID",
+    "partidos": 2,
+    "distancia_total_km": 3.8,
+    "distancia_promedio_km": 1.89,
+    "alta_intensidad_promedio_m": 77.9,
+    "sprints_promedio": 6.0,
+    "velocidad_punta_kmh": 27.2
   },
   {
     "team": "Australia",
@@ -9140,14 +9130,14 @@
     "velocidad_punta_kmh": 31.1
   },
   {
-    "team": "Germany",
-    "player_name": "Maximilian BEIER",
+    "team": "Belgium",
+    "player_name": "Joaquin SEYS",
     "partidos": 1,
-    "distancia_total_km": 3.6,
-    "distancia_promedio_km": 3.57,
-    "alta_intensidad_promedio_m": 381.3,
-    "sprints_promedio": 16.0,
-    "velocidad_punta_kmh": 32.7
+    "distancia_total_km": 3.7,
+    "distancia_promedio_km": 3.68,
+    "alta_intensidad_promedio_m": 176.5,
+    "sprints_promedio": 13.0,
+    "velocidad_punta_kmh": 29.6
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -9158,6 +9148,16 @@
     "alta_intensidad_promedio_m": 337.9,
     "sprints_promedio": 13.0,
     "velocidad_punta_kmh": 29.8
+  },
+  {
+    "team": "Germany",
+    "player_name": "Maximilian BEIER",
+    "partidos": 1,
+    "distancia_total_km": 3.6,
+    "distancia_promedio_km": 3.57,
+    "alta_intensidad_promedio_m": 381.3,
+    "sprints_promedio": 16.0,
+    "velocidad_punta_kmh": 32.7
   },
   {
     "team": "Iraq",
@@ -9200,14 +9200,14 @@
     "velocidad_punta_kmh": 28.3
   },
   {
-    "team": "Colombia",
-    "player_name": "Kevin CASTANO",
-    "partidos": 2,
+    "team": "Ecuador",
+    "player_name": "Jackson POROZO",
+    "partidos": 1,
     "distancia_total_km": 3.2,
-    "distancia_promedio_km": 1.58,
-    "alta_intensidad_promedio_m": 131.2,
-    "sprints_promedio": 7.5,
-    "velocidad_punta_kmh": 27.2
+    "distancia_promedio_km": 3.23,
+    "alta_intensidad_promedio_m": 230.5,
+    "sprints_promedio": 13.0,
+    "velocidad_punta_kmh": 32.7
   },
   {
     "team": "IR Iran",
@@ -9220,6 +9220,16 @@
     "velocidad_punta_kmh": 29.0
   },
   {
+    "team": "Colombia",
+    "player_name": "Kevin CASTANO",
+    "partidos": 2,
+    "distancia_total_km": 3.2,
+    "distancia_promedio_km": 1.58,
+    "alta_intensidad_promedio_m": 131.2,
+    "sprints_promedio": 7.5,
+    "velocidad_punta_kmh": 27.2
+  },
+  {
     "team": "Germany",
     "player_name": "Pascal GROSS",
     "partidos": 1,
@@ -9228,16 +9238,6 @@
     "alta_intensidad_promedio_m": 270.9,
     "sprints_promedio": 15.0,
     "velocidad_punta_kmh": 30.7
-  },
-  {
-    "team": "Ecuador",
-    "player_name": "Jackson POROZO",
-    "partidos": 1,
-    "distancia_total_km": 3.2,
-    "distancia_promedio_km": 3.23,
-    "alta_intensidad_promedio_m": 230.5,
-    "sprints_promedio": 13.0,
-    "velocidad_punta_kmh": 32.7
   },
   {
     "team": "Sweden",
@@ -9260,6 +9260,16 @@
     "velocidad_punta_kmh": 28.2
   },
   {
+    "team": "Argentina",
+    "player_name": "Jose Manuel LOPEZ",
+    "partidos": 2,
+    "distancia_total_km": 3.1,
+    "distancia_promedio_km": 1.54,
+    "alta_intensidad_promedio_m": 123.4,
+    "sprints_promedio": 8.5,
+    "velocidad_punta_kmh": 30.1
+  },
+  {
     "team": "USA",
     "player_name": "Alex ZENDEJAS",
     "partidos": 1,
@@ -9268,16 +9278,6 @@
     "alta_intensidad_promedio_m": 338.0,
     "sprints_promedio": 20.0,
     "velocidad_punta_kmh": 27.9
-  },
-  {
-    "team": "France",
-    "player_name": "Warren ZAIRE-EMERY",
-    "partidos": 1,
-    "distancia_total_km": 3.1,
-    "distancia_promedio_km": 3.06,
-    "alta_intensidad_promedio_m": 230.9,
-    "sprints_promedio": 13.0,
-    "velocidad_punta_kmh": 33.0
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -9290,24 +9290,44 @@
     "velocidad_punta_kmh": 28.4
   },
   {
-    "team": "Argentina",
-    "player_name": "Jose Manuel LOPEZ",
-    "partidos": 2,
+    "team": "France",
+    "player_name": "Warren ZAIRE-EMERY",
+    "partidos": 1,
     "distancia_total_km": 3.1,
-    "distancia_promedio_km": 1.54,
-    "alta_intensidad_promedio_m": 123.4,
-    "sprints_promedio": 8.5,
-    "velocidad_punta_kmh": 30.1
+    "distancia_promedio_km": 3.06,
+    "alta_intensidad_promedio_m": 230.9,
+    "sprints_promedio": 13.0,
+    "velocidad_punta_kmh": 33.0
   },
   {
-    "team": "Korea Republic",
-    "player_name": "YANG Hyunjun",
+    "team": "Qatar",
+    "player_name": "ALMOEZ ALI",
     "partidos": 1,
     "distancia_total_km": 2.9,
-    "distancia_promedio_km": 2.94,
-    "alta_intensidad_promedio_m": 270.6,
-    "sprints_promedio": 21.0,
-    "velocidad_punta_kmh": 32.9
+    "distancia_promedio_km": 2.86,
+    "alta_intensidad_promedio_m": 158.0,
+    "sprints_promedio": 11.0,
+    "velocidad_punta_kmh": 26.6
+  },
+  {
+    "team": "Norway",
+    "player_name": "Sondre LANGAS",
+    "partidos": 1,
+    "distancia_total_km": 2.9,
+    "distancia_promedio_km": 2.88,
+    "alta_intensidad_promedio_m": 250.4,
+    "sprints_promedio": 11.0,
+    "velocidad_punta_kmh": 35.5
+  },
+  {
+    "team": "Portugal",
+    "player_name": "SAMU COSTA",
+    "partidos": 1,
+    "distancia_total_km": 2.9,
+    "distancia_promedio_km": 2.86,
+    "alta_intensidad_promedio_m": 209.2,
+    "sprints_promedio": 7.0,
+    "velocidad_punta_kmh": 30.6
   },
   {
     "team": "Switzerland",
@@ -9320,14 +9340,14 @@
     "velocidad_punta_kmh": 32.9
   },
   {
-    "team": "Norway",
-    "player_name": "Sondre LANGAS",
+    "team": "Korea Republic",
+    "player_name": "YANG Hyunjun",
     "partidos": 1,
     "distancia_total_km": 2.9,
-    "distancia_promedio_km": 2.88,
-    "alta_intensidad_promedio_m": 250.4,
-    "sprints_promedio": 11.0,
-    "velocidad_punta_kmh": 35.5
+    "distancia_promedio_km": 2.94,
+    "alta_intensidad_promedio_m": 270.6,
+    "sprints_promedio": 21.0,
+    "velocidad_punta_kmh": 32.9
   },
   {
     "team": "Mexico",
@@ -9348,26 +9368,6 @@
     "alta_intensidad_promedio_m": 168.2,
     "sprints_promedio": 8.0,
     "velocidad_punta_kmh": 33.8
-  },
-  {
-    "team": "Qatar",
-    "player_name": "ALMOEZ ALI",
-    "partidos": 1,
-    "distancia_total_km": 2.9,
-    "distancia_promedio_km": 2.86,
-    "alta_intensidad_promedio_m": 158.0,
-    "sprints_promedio": 11.0,
-    "velocidad_punta_kmh": 26.6
-  },
-  {
-    "team": "Portugal",
-    "player_name": "SAMU COSTA",
-    "partidos": 1,
-    "distancia_total_km": 2.9,
-    "distancia_promedio_km": 2.86,
-    "alta_intensidad_promedio_m": 209.2,
-    "sprints_promedio": 7.0,
-    "velocidad_punta_kmh": 30.6
   },
   {
     "team": "Argentina",
@@ -9400,16 +9400,6 @@
     "velocidad_punta_kmh": 30.0
   },
   {
-    "team": "Croatia",
-    "player_name": "Luka SUCIC",
-    "partidos": 1,
-    "distancia_total_km": 2.8,
-    "distancia_promedio_km": 2.77,
-    "alta_intensidad_promedio_m": 322.6,
-    "sprints_promedio": 17.0,
-    "velocidad_punta_kmh": 29.8
-  },
-  {
     "team": "Austria",
     "player_name": "Marco FRIEDL",
     "partidos": 1,
@@ -9418,6 +9408,16 @@
     "alta_intensidad_promedio_m": 211.8,
     "sprints_promedio": 12.0,
     "velocidad_punta_kmh": 29.5
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Zakaria EL OUAHDI",
+    "partidos": 1,
+    "distancia_total_km": 2.8,
+    "distancia_promedio_km": 2.85,
+    "alta_intensidad_promedio_m": 430.1,
+    "sprints_promedio": 15.0,
+    "velocidad_punta_kmh": 29.3
   },
   {
     "team": "Paraguay",
@@ -9430,14 +9430,14 @@
     "velocidad_punta_kmh": 28.0
   },
   {
-    "team": "Morocco",
-    "player_name": "Zakaria EL OUAHDI",
+    "team": "Croatia",
+    "player_name": "Luka SUCIC",
     "partidos": 1,
     "distancia_total_km": 2.8,
-    "distancia_promedio_km": 2.85,
-    "alta_intensidad_promedio_m": 430.1,
-    "sprints_promedio": 15.0,
-    "velocidad_punta_kmh": 29.3
+    "distancia_promedio_km": 2.77,
+    "alta_intensidad_promedio_m": 322.6,
+    "sprints_promedio": 17.0,
+    "velocidad_punta_kmh": 29.8
   },
   {
     "team": "Uzbekistan",
@@ -9460,26 +9460,6 @@
     "velocidad_punta_kmh": 30.0
   },
   {
-    "team": "Canada",
-    "player_name": "Alphonso DAVIES",
-    "partidos": 1,
-    "distancia_total_km": 2.6,
-    "distancia_promedio_km": 2.59,
-    "alta_intensidad_promedio_m": 299.9,
-    "sprints_promedio": 17.0,
-    "velocidad_punta_kmh": 29.9
-  },
-  {
-    "team": "Haiti",
-    "player_name": "Duckens NAZON",
-    "partidos": 1,
-    "distancia_total_km": 2.6,
-    "distancia_promedio_km": 2.6,
-    "alta_intensidad_promedio_m": 116.4,
-    "sprints_promedio": 8.0,
-    "velocidad_punta_kmh": 27.7
-  },
-  {
     "team": "Japan",
     "player_name": "Yuto NAGATOMO",
     "partidos": 1,
@@ -9498,6 +9478,26 @@
     "alta_intensidad_promedio_m": 79.4,
     "sprints_promedio": 6.0,
     "velocidad_punta_kmh": 27.9
+  },
+  {
+    "team": "Haiti",
+    "player_name": "Duckens NAZON",
+    "partidos": 1,
+    "distancia_total_km": 2.6,
+    "distancia_promedio_km": 2.6,
+    "alta_intensidad_promedio_m": 116.4,
+    "sprints_promedio": 8.0,
+    "velocidad_punta_kmh": 27.7
+  },
+  {
+    "team": "Canada",
+    "player_name": "Alphonso DAVIES",
+    "partidos": 1,
+    "distancia_total_km": 2.6,
+    "distancia_promedio_km": 2.59,
+    "alta_intensidad_promedio_m": 299.9,
+    "sprints_promedio": 17.0,
+    "velocidad_punta_kmh": 29.9
   },
   {
     "team": "Curaçao",
@@ -9530,16 +9530,6 @@
     "velocidad_punta_kmh": 32.6
   },
   {
-    "team": "Jordan",
-    "player_name": "SAED ALROSAN",
-    "partidos": 1,
-    "distancia_total_km": 2.4,
-    "distancia_promedio_km": 2.43,
-    "alta_intensidad_promedio_m": 155.8,
-    "sprints_promedio": 12.0,
-    "velocidad_punta_kmh": 31.0
-  },
-  {
     "team": "Iraq",
     "player_name": "MOHANAD ALI",
     "partidos": 1,
@@ -9550,6 +9540,16 @@
     "velocidad_punta_kmh": 28.9
   },
   {
+    "team": "Jordan",
+    "player_name": "SAED ALROSAN",
+    "partidos": 1,
+    "distancia_total_km": 2.4,
+    "distancia_promedio_km": 2.43,
+    "alta_intensidad_promedio_m": 155.8,
+    "sprints_promedio": 12.0,
+    "velocidad_punta_kmh": 31.0
+  },
+  {
     "team": "Sweden",
     "player_name": "Ken SEMA",
     "partidos": 1,
@@ -9558,6 +9558,26 @@
     "alta_intensidad_promedio_m": 114.6,
     "sprints_promedio": 7.0,
     "velocidad_punta_kmh": 27.7
+  },
+  {
+    "team": "Paraguay",
+    "player_name": "Ramon SOSA",
+    "partidos": 1,
+    "distancia_total_km": 2.3,
+    "distancia_promedio_km": 2.29,
+    "alta_intensidad_promedio_m": 200.1,
+    "sprints_promedio": 16.0,
+    "velocidad_punta_kmh": 26.1
+  },
+  {
+    "team": "Curaçao",
+    "player_name": "Kenji GORRE",
+    "partidos": 1,
+    "distancia_total_km": 2.3,
+    "distancia_promedio_km": 2.26,
+    "alta_intensidad_promedio_m": 134.1,
+    "sprints_promedio": 8.0,
+    "velocidad_punta_kmh": 28.0
   },
   {
     "team": "Ecuador",
@@ -9580,16 +9600,6 @@
     "velocidad_punta_kmh": 27.2
   },
   {
-    "team": "Curaçao",
-    "player_name": "Kenji GORRE",
-    "partidos": 1,
-    "distancia_total_km": 2.3,
-    "distancia_promedio_km": 2.26,
-    "alta_intensidad_promedio_m": 134.1,
-    "sprints_promedio": 8.0,
-    "velocidad_punta_kmh": 28.0
-  },
-  {
     "team": "Czechia",
     "player_name": "David ZIMA",
     "partidos": 1,
@@ -9608,16 +9618,6 @@
     "alta_intensidad_promedio_m": 59.8,
     "sprints_promedio": 3.0,
     "velocidad_punta_kmh": 29.0
-  },
-  {
-    "team": "Paraguay",
-    "player_name": "Ramon SOSA",
-    "partidos": 1,
-    "distancia_total_km": 2.3,
-    "distancia_promedio_km": 2.29,
-    "alta_intensidad_promedio_m": 200.1,
-    "sprints_promedio": 16.0,
-    "velocidad_punta_kmh": 26.1
   },
   {
     "team": "Japan",
@@ -9640,26 +9640,6 @@
     "velocidad_punta_kmh": 23.5
   },
   {
-    "team": "Mexico",
-    "player_name": "Armando GONZALEZ",
-    "partidos": 1,
-    "distancia_total_km": 2.1,
-    "distancia_promedio_km": 2.09,
-    "alta_intensidad_promedio_m": 265.3,
-    "sprints_promedio": 14.0,
-    "velocidad_punta_kmh": 32.0
-  },
-  {
-    "team": "Jordan",
-    "player_name": "AMER JAMOUS",
-    "partidos": 1,
-    "distancia_total_km": 2.1,
-    "distancia_promedio_km": 2.14,
-    "alta_intensidad_promedio_m": 172.0,
-    "sprints_promedio": 10.0,
-    "velocidad_punta_kmh": 27.1
-  },
-  {
     "team": "Netherlands",
     "player_name": "Noa LANG",
     "partidos": 2,
@@ -9678,6 +9658,26 @@
     "alta_intensidad_promedio_m": 126.6,
     "sprints_promedio": 8.0,
     "velocidad_punta_kmh": 28.4
+  },
+  {
+    "team": "Jordan",
+    "player_name": "AMER JAMOUS",
+    "partidos": 1,
+    "distancia_total_km": 2.1,
+    "distancia_promedio_km": 2.14,
+    "alta_intensidad_promedio_m": 172.0,
+    "sprints_promedio": 10.0,
+    "velocidad_punta_kmh": 27.1
+  },
+  {
+    "team": "Mexico",
+    "player_name": "Armando GONZALEZ",
+    "partidos": 1,
+    "distancia_total_km": 2.1,
+    "distancia_promedio_km": 2.09,
+    "alta_intensidad_promedio_m": 265.3,
+    "sprints_promedio": 14.0,
+    "velocidad_punta_kmh": 32.0
   },
   {
     "team": "South Africa",
@@ -9710,16 +9710,6 @@
     "velocidad_punta_kmh": 30.7
   },
   {
-    "team": "New Zealand",
-    "player_name": "Callan ELLIOT",
-    "partidos": 1,
-    "distancia_total_km": 1.9,
-    "distancia_promedio_km": 1.88,
-    "alta_intensidad_promedio_m": 135.8,
-    "sprints_promedio": 8.0,
-    "velocidad_punta_kmh": 30.9
-  },
-  {
     "team": "Mexico",
     "player_name": "Alexis VEGA",
     "partidos": 1,
@@ -9728,6 +9718,16 @@
     "alta_intensidad_promedio_m": 152.9,
     "sprints_promedio": 10.0,
     "velocidad_punta_kmh": 28.0
+  },
+  {
+    "team": "Senegal",
+    "player_name": "Bamba DIENG",
+    "partidos": 1,
+    "distancia_total_km": 1.9,
+    "distancia_promedio_km": 1.88,
+    "alta_intensidad_promedio_m": 235.4,
+    "sprints_promedio": 15.0,
+    "velocidad_punta_kmh": 26.9
   },
   {
     "team": "Curaçao",
@@ -9740,13 +9740,63 @@
     "velocidad_punta_kmh": 26.7
   },
   {
-    "team": "Senegal",
-    "player_name": "Bamba DIENG",
+    "team": "New Zealand",
+    "player_name": "Callan ELLIOT",
     "partidos": 1,
     "distancia_total_km": 1.9,
     "distancia_promedio_km": 1.88,
-    "alta_intensidad_promedio_m": 235.4,
+    "alta_intensidad_promedio_m": 135.8,
+    "sprints_promedio": 8.0,
+    "velocidad_punta_kmh": 30.9
+  },
+  {
+    "team": "Morocco",
+    "player_name": "Amine SBAI",
+    "partidos": 1,
+    "distancia_total_km": 1.8,
+    "distancia_promedio_km": 1.76,
+    "alta_intensidad_promedio_m": 282.1,
     "sprints_promedio": 15.0,
+    "velocidad_punta_kmh": 28.5
+  },
+  {
+    "team": "Japan",
+    "player_name": "Kento SHIOGAI",
+    "partidos": 1,
+    "distancia_total_km": 1.8,
+    "distancia_promedio_km": 1.76,
+    "alta_intensidad_promedio_m": 241.0,
+    "sprints_promedio": 11.0,
+    "velocidad_punta_kmh": 32.8
+  },
+  {
+    "team": "Haiti",
+    "player_name": "Derrick ETIENNE",
+    "partidos": 1,
+    "distancia_total_km": 1.8,
+    "distancia_promedio_km": 1.84,
+    "alta_intensidad_promedio_m": 227.8,
+    "sprints_promedio": 8.0,
+    "velocidad_punta_kmh": 33.7
+  },
+  {
+    "team": "Brazil",
+    "player_name": "ALEX SANDRO",
+    "partidos": 1,
+    "distancia_total_km": 1.8,
+    "distancia_promedio_km": 1.82,
+    "alta_intensidad_promedio_m": 129.4,
+    "sprints_promedio": 8.0,
+    "velocidad_punta_kmh": 26.6
+  },
+  {
+    "team": "Panama",
+    "player_name": "Eric DAVIS",
+    "partidos": 2,
+    "distancia_total_km": 1.8,
+    "distancia_promedio_km": 0.9,
+    "alta_intensidad_promedio_m": 142.3,
+    "sprints_promedio": 9.0,
     "velocidad_punta_kmh": 26.9
   },
   {
@@ -9770,76 +9820,6 @@
     "velocidad_punta_kmh": 28.3
   },
   {
-    "team": "Panama",
-    "player_name": "Eric DAVIS",
-    "partidos": 2,
-    "distancia_total_km": 1.8,
-    "distancia_promedio_km": 0.9,
-    "alta_intensidad_promedio_m": 142.3,
-    "sprints_promedio": 9.0,
-    "velocidad_punta_kmh": 26.9
-  },
-  {
-    "team": "Japan",
-    "player_name": "Kento SHIOGAI",
-    "partidos": 1,
-    "distancia_total_km": 1.8,
-    "distancia_promedio_km": 1.76,
-    "alta_intensidad_promedio_m": 241.0,
-    "sprints_promedio": 11.0,
-    "velocidad_punta_kmh": 32.8
-  },
-  {
-    "team": "Morocco",
-    "player_name": "Amine SBAI",
-    "partidos": 1,
-    "distancia_total_km": 1.8,
-    "distancia_promedio_km": 1.76,
-    "alta_intensidad_promedio_m": 282.1,
-    "sprints_promedio": 15.0,
-    "velocidad_punta_kmh": 28.5
-  },
-  {
-    "team": "Haiti",
-    "player_name": "Derrick ETIENNE",
-    "partidos": 1,
-    "distancia_total_km": 1.8,
-    "distancia_promedio_km": 1.84,
-    "alta_intensidad_promedio_m": 227.8,
-    "sprints_promedio": 8.0,
-    "velocidad_punta_kmh": 33.7
-  },
-  {
-    "team": "Brazil",
-    "player_name": "ALEX SANDRO",
-    "partidos": 1,
-    "distancia_total_km": 1.8,
-    "distancia_promedio_km": 1.82,
-    "alta_intensidad_promedio_m": 129.4,
-    "sprints_promedio": 8.0,
-    "velocidad_punta_kmh": 26.6
-  },
-  {
-    "team": "Jordan",
-    "player_name": "MOHAMMAD ABUHASHEESH",
-    "partidos": 1,
-    "distancia_total_km": 1.7,
-    "distancia_promedio_km": 1.66,
-    "alta_intensidad_promedio_m": 241.6,
-    "sprints_promedio": 12.0,
-    "velocidad_punta_kmh": 27.6
-  },
-  {
-    "team": "Switzerland",
-    "player_name": "Christian FASSNACHT",
-    "partidos": 1,
-    "distancia_total_km": 1.7,
-    "distancia_promedio_km": 1.74,
-    "alta_intensidad_promedio_m": 264.1,
-    "sprints_promedio": 14.0,
-    "velocidad_punta_kmh": 31.7
-  },
-  {
     "team": "Norway",
     "player_name": "Jens Petter HAUGE",
     "partidos": 1,
@@ -9848,16 +9828,6 @@
     "alta_intensidad_promedio_m": 200.5,
     "sprints_promedio": 14.0,
     "velocidad_punta_kmh": 29.2
-  },
-  {
-    "team": "South Africa",
-    "player_name": "Kamogelo SEBELEBELE",
-    "partidos": 1,
-    "distancia_total_km": 1.7,
-    "distancia_promedio_km": 1.74,
-    "alta_intensidad_promedio_m": 190.5,
-    "sprints_promedio": 11.0,
-    "velocidad_punta_kmh": 28.3
   },
   {
     "team": "Algeria",
@@ -9870,6 +9840,36 @@
     "velocidad_punta_kmh": 28.2
   },
   {
+    "team": "South Africa",
+    "player_name": "Kamogelo SEBELEBELE",
+    "partidos": 1,
+    "distancia_total_km": 1.7,
+    "distancia_promedio_km": 1.74,
+    "alta_intensidad_promedio_m": 190.5,
+    "sprints_promedio": 11.0,
+    "velocidad_punta_kmh": 28.3
+  },
+  {
+    "team": "Switzerland",
+    "player_name": "Christian FASSNACHT",
+    "partidos": 1,
+    "distancia_total_km": 1.7,
+    "distancia_promedio_km": 1.74,
+    "alta_intensidad_promedio_m": 264.1,
+    "sprints_promedio": 14.0,
+    "velocidad_punta_kmh": 31.7
+  },
+  {
+    "team": "Jordan",
+    "player_name": "MOHAMMAD ABUHASHEESH",
+    "partidos": 1,
+    "distancia_total_km": 1.7,
+    "distancia_promedio_km": 1.66,
+    "alta_intensidad_promedio_m": 241.6,
+    "sprints_promedio": 12.0,
+    "velocidad_punta_kmh": 27.6
+  },
+  {
     "team": "Jordan",
     "player_name": "MOHAMMAD ALDAOUD",
     "partidos": 1,
@@ -9878,26 +9878,6 @@
     "alta_intensidad_promedio_m": 109.1,
     "sprints_promedio": 7.0,
     "velocidad_punta_kmh": 25.9
-  },
-  {
-    "team": "Jordan",
-    "player_name": "MOHAMMAD ABUZRAIQ",
-    "partidos": 2,
-    "distancia_total_km": 1.6,
-    "distancia_promedio_km": 0.82,
-    "alta_intensidad_promedio_m": 112.9,
-    "sprints_promedio": 7.5,
-    "velocidad_punta_kmh": 31.4
-  },
-  {
-    "team": "Mexico",
-    "player_name": "Cesar HUERTA",
-    "partidos": 1,
-    "distancia_total_km": 1.6,
-    "distancia_promedio_km": 1.58,
-    "alta_intensidad_promedio_m": 137.2,
-    "sprints_promedio": 7.0,
-    "velocidad_punta_kmh": 28.4
   },
   {
     "team": "Belgium",
@@ -9920,14 +9900,24 @@
     "velocidad_punta_kmh": 29.7
   },
   {
-    "team": "Haiti",
-    "player_name": "Yassin FORTUNE",
+    "team": "Mexico",
+    "player_name": "Cesar HUERTA",
     "partidos": 1,
-    "distancia_total_km": 1.5,
-    "distancia_promedio_km": 1.5,
-    "alta_intensidad_promedio_m": 94.5,
-    "sprints_promedio": 5.0,
-    "velocidad_punta_kmh": 28.2
+    "distancia_total_km": 1.6,
+    "distancia_promedio_km": 1.58,
+    "alta_intensidad_promedio_m": 137.2,
+    "sprints_promedio": 7.0,
+    "velocidad_punta_kmh": 28.4
+  },
+  {
+    "team": "Jordan",
+    "player_name": "MOHAMMAD ABUZRAIQ",
+    "partidos": 2,
+    "distancia_total_km": 1.6,
+    "distancia_promedio_km": 0.82,
+    "alta_intensidad_promedio_m": 112.9,
+    "sprints_promedio": 7.5,
+    "velocidad_punta_kmh": 31.4
   },
   {
     "team": "Curaçao",
@@ -9938,6 +9928,26 @@
     "alta_intensidad_promedio_m": 94.1,
     "sprints_promedio": 6.0,
     "velocidad_punta_kmh": 24.3
+  },
+  {
+    "team": "Canada",
+    "player_name": "Jayden NELSON",
+    "partidos": 1,
+    "distancia_total_km": 1.5,
+    "distancia_promedio_km": 1.46,
+    "alta_intensidad_promedio_m": 112.8,
+    "sprints_promedio": 5.0,
+    "velocidad_punta_kmh": 29.0
+  },
+  {
+    "team": "Egypt",
+    "player_name": "MOHAMED ABDELMONEIM",
+    "partidos": 2,
+    "distancia_total_km": 1.5,
+    "distancia_promedio_km": 0.77,
+    "alta_intensidad_promedio_m": 70.5,
+    "sprints_promedio": 5.0,
+    "velocidad_punta_kmh": 27.9
   },
   {
     "team": "Qatar",
@@ -9960,24 +9970,14 @@
     "velocidad_punta_kmh": 30.8
   },
   {
-    "team": "Egypt",
-    "player_name": "MOHAMED ABDELMONEIM",
-    "partidos": 2,
-    "distancia_total_km": 1.5,
-    "distancia_promedio_km": 0.77,
-    "alta_intensidad_promedio_m": 70.5,
-    "sprints_promedio": 5.0,
-    "velocidad_punta_kmh": 27.9
-  },
-  {
-    "team": "Canada",
-    "player_name": "Jayden NELSON",
+    "team": "Haiti",
+    "player_name": "Yassin FORTUNE",
     "partidos": 1,
     "distancia_total_km": 1.5,
-    "distancia_promedio_km": 1.46,
-    "alta_intensidad_promedio_m": 112.8,
+    "distancia_promedio_km": 1.5,
+    "alta_intensidad_promedio_m": 94.5,
     "sprints_promedio": 5.0,
-    "velocidad_punta_kmh": 29.0
+    "velocidad_punta_kmh": 28.2
   },
   {
     "team": "France",
@@ -9990,14 +9990,14 @@
     "velocidad_punta_kmh": 26.6
   },
   {
-    "team": "Netherlands",
-    "player_name": "Marten DE ROON",
+    "team": "Japan",
+    "player_name": "Keisuke GOTO",
     "partidos": 1,
     "distancia_total_km": 1.4,
-    "distancia_promedio_km": 1.37,
-    "alta_intensidad_promedio_m": 59.0,
-    "sprints_promedio": 4.0,
-    "velocidad_punta_kmh": 24.0
+    "distancia_promedio_km": 1.4,
+    "alta_intensidad_promedio_m": 263.9,
+    "sprints_promedio": 10.0,
+    "velocidad_punta_kmh": 31.1
   },
   {
     "team": "Türkiye",
@@ -10010,14 +10010,14 @@
     "velocidad_punta_kmh": 24.2
   },
   {
-    "team": "Japan",
-    "player_name": "Keisuke GOTO",
+    "team": "Netherlands",
+    "player_name": "Marten DE ROON",
     "partidos": 1,
     "distancia_total_km": 1.4,
-    "distancia_promedio_km": 1.4,
-    "alta_intensidad_promedio_m": 263.9,
-    "sprints_promedio": 10.0,
-    "velocidad_punta_kmh": 31.1
+    "distancia_promedio_km": 1.37,
+    "alta_intensidad_promedio_m": 59.0,
+    "sprints_promedio": 4.0,
+    "velocidad_punta_kmh": 24.0
   },
   {
     "team": "Bosnia and Herzegovina",
@@ -10040,16 +10040,6 @@
     "velocidad_punta_kmh": 27.6
   },
   {
-    "team": "Congo DR",
-    "player_name": "Gedeon KALULU",
-    "partidos": 1,
-    "distancia_total_km": 1.2,
-    "distancia_promedio_km": 1.19,
-    "alta_intensidad_promedio_m": 139.7,
-    "sprints_promedio": 6.0,
-    "velocidad_punta_kmh": 28.0
-  },
-  {
     "team": "Morocco",
     "player_name": "Marwane SAADANE",
     "partidos": 1,
@@ -10058,26 +10048,6 @@
     "alta_intensidad_promedio_m": 35.0,
     "sprints_promedio": 2.0,
     "velocidad_punta_kmh": 21.6
-  },
-  {
-    "team": "Türkiye",
-    "player_name": "Kaan AYHAN",
-    "partidos": 1,
-    "distancia_total_km": 1.2,
-    "distancia_promedio_km": 1.24,
-    "alta_intensidad_promedio_m": 174.9,
-    "sprints_promedio": 7.0,
-    "velocidad_punta_kmh": 30.6
-  },
-  {
-    "team": "Panama",
-    "player_name": "Anibal GODOY",
-    "partidos": 1,
-    "distancia_total_km": 1.2,
-    "distancia_promedio_km": 1.24,
-    "alta_intensidad_promedio_m": 76.1,
-    "sprints_promedio": 4.0,
-    "velocidad_punta_kmh": 27.2
   },
   {
     "team": "Panama",
@@ -10090,14 +10060,34 @@
     "velocidad_punta_kmh": 29.5
   },
   {
-    "team": "Mexico",
-    "player_name": "Guillermo OCHOA",
+    "team": "Panama",
+    "player_name": "Anibal GODOY",
     "partidos": 1,
-    "distancia_total_km": 1.1,
-    "distancia_promedio_km": 1.15,
-    "alta_intensidad_promedio_m": 0.0,
-    "sprints_promedio": 0.0,
-    "velocidad_punta_kmh": 18.7
+    "distancia_total_km": 1.2,
+    "distancia_promedio_km": 1.24,
+    "alta_intensidad_promedio_m": 76.1,
+    "sprints_promedio": 4.0,
+    "velocidad_punta_kmh": 27.2
+  },
+  {
+    "team": "Türkiye",
+    "player_name": "Kaan AYHAN",
+    "partidos": 1,
+    "distancia_total_km": 1.2,
+    "distancia_promedio_km": 1.24,
+    "alta_intensidad_promedio_m": 174.9,
+    "sprints_promedio": 7.0,
+    "velocidad_punta_kmh": 30.6
+  },
+  {
+    "team": "Congo DR",
+    "player_name": "Gedeon KALULU",
+    "partidos": 1,
+    "distancia_total_km": 1.2,
+    "distancia_promedio_km": 1.19,
+    "alta_intensidad_promedio_m": 139.7,
+    "sprints_promedio": 6.0,
+    "velocidad_punta_kmh": 28.0
   },
   {
     "team": "Sweden",
@@ -10110,14 +10100,14 @@
     "velocidad_punta_kmh": 26.3
   },
   {
-    "team": "Egypt",
-    "player_name": "IBRAHIM ADEL",
+    "team": "Mexico",
+    "player_name": "Guillermo OCHOA",
     "partidos": 1,
-    "distancia_total_km": 1.0,
-    "distancia_promedio_km": 1.01,
-    "alta_intensidad_promedio_m": 158.6,
-    "sprints_promedio": 8.0,
-    "velocidad_punta_kmh": 27.9
+    "distancia_total_km": 1.1,
+    "distancia_promedio_km": 1.15,
+    "alta_intensidad_promedio_m": 0.0,
+    "sprints_promedio": 0.0,
+    "velocidad_punta_kmh": 18.7
   },
   {
     "team": "Türkiye",
@@ -10150,6 +10140,16 @@
     "velocidad_punta_kmh": 20.5
   },
   {
+    "team": "Egypt",
+    "player_name": "IBRAHIM ADEL",
+    "partidos": 1,
+    "distancia_total_km": 1.0,
+    "distancia_promedio_km": 1.01,
+    "alta_intensidad_promedio_m": 158.6,
+    "sprints_promedio": 8.0,
+    "velocidad_punta_kmh": 27.9
+  },
+  {
     "team": "Uruguay",
     "player_name": "Rodrigo AGUIRRE",
     "partidos": 1,
@@ -10180,14 +10180,14 @@
     "velocidad_punta_kmh": 29.2
   },
   {
-    "team": "Curaçao",
-    "player_name": "Shurandy SAMBO",
+    "team": "Sweden",
+    "player_name": "Gustaf NILSSON",
     "partidos": 1,
     "distancia_total_km": 0.7,
-    "distancia_promedio_km": 0.73,
-    "alta_intensidad_promedio_m": 54.7,
-    "sprints_promedio": 4.0,
-    "velocidad_punta_kmh": 24.9
+    "distancia_promedio_km": 0.71,
+    "alta_intensidad_promedio_m": 46.7,
+    "sprints_promedio": 2.0,
+    "velocidad_punta_kmh": 24.2
   },
   {
     "team": "Uzbekistan",
@@ -10200,14 +10200,14 @@
     "velocidad_punta_kmh": 26.8
   },
   {
-    "team": "Sweden",
-    "player_name": "Gustaf NILSSON",
+    "team": "Curaçao",
+    "player_name": "Shurandy SAMBO",
     "partidos": 1,
     "distancia_total_km": 0.7,
-    "distancia_promedio_km": 0.71,
-    "alta_intensidad_promedio_m": 46.7,
-    "sprints_promedio": 2.0,
-    "velocidad_punta_kmh": 24.2
+    "distancia_promedio_km": 0.73,
+    "alta_intensidad_promedio_m": 54.7,
+    "sprints_promedio": 4.0,
+    "velocidad_punta_kmh": 24.9
   },
   {
     "team": "Uzbekistan",
@@ -10260,14 +10260,14 @@
     "velocidad_punta_kmh": 26.0
   },
   {
-    "team": "Spain",
-    "player_name": "Borja IGLESIAS",
+    "team": "Algeria",
+    "player_name": "Fares GHEDJEMIS",
     "partidos": 1,
     "distancia_total_km": 0.3,
-    "distancia_promedio_km": 0.25,
-    "alta_intensidad_promedio_m": 38.7,
-    "sprints_promedio": 2.0,
-    "velocidad_punta_kmh": 29.3
+    "distancia_promedio_km": 0.3,
+    "alta_intensidad_promedio_m": 77.5,
+    "sprints_promedio": 4.0,
+    "velocidad_punta_kmh": 26.1
   },
   {
     "team": "France",
@@ -10280,24 +10280,24 @@
     "velocidad_punta_kmh": 22.1
   },
   {
-    "team": "Algeria",
-    "player_name": "Fares GHEDJEMIS",
+    "team": "Spain",
+    "player_name": "Borja IGLESIAS",
     "partidos": 1,
     "distancia_total_km": 0.3,
-    "distancia_promedio_km": 0.3,
-    "alta_intensidad_promedio_m": 77.5,
-    "sprints_promedio": 4.0,
-    "velocidad_punta_kmh": 26.1
+    "distancia_promedio_km": 0.25,
+    "alta_intensidad_promedio_m": 38.7,
+    "sprints_promedio": 2.0,
+    "velocidad_punta_kmh": 29.3
   },
   {
-    "team": "USA",
-    "player_name": "Max ARFSTEN",
+    "team": "Australia",
+    "player_name": "Mathew RYAN",
     "partidos": 1,
     "distancia_total_km": 0.2,
-    "distancia_promedio_km": 0.23,
-    "alta_intensidad_promedio_m": 54.7,
-    "sprints_promedio": 2.0,
-    "velocidad_punta_kmh": 27.4
+    "distancia_promedio_km": 0.21,
+    "alta_intensidad_promedio_m": 0.0,
+    "sprints_promedio": 0.0,
+    "velocidad_punta_kmh": 18.1
   },
   {
     "team": "Ghana",
@@ -10310,14 +10310,14 @@
     "velocidad_punta_kmh": 23.7
   },
   {
-    "team": "Australia",
-    "player_name": "Mathew RYAN",
+    "team": "USA",
+    "player_name": "Max ARFSTEN",
     "partidos": 1,
     "distancia_total_km": 0.2,
-    "distancia_promedio_km": 0.21,
-    "alta_intensidad_promedio_m": 0.0,
-    "sprints_promedio": 0.0,
-    "velocidad_punta_kmh": 18.1
+    "distancia_promedio_km": 0.23,
+    "alta_intensidad_promedio_m": 54.7,
+    "sprints_promedio": 2.0,
+    "velocidad_punta_kmh": 27.4
   },
   {
     "team": "Paraguay",
