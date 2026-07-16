@@ -3432,5 +3432,39 @@
     "home_team": "France",
     "away_team": "Spain",
     "match_date": "2026-07-14"
+  },
+  {
+    "match_id": 20260102,
+    "team": "England",
+    "total_distance_km": 107.65,
+    "high_intensity_distance_m": 6959.6,
+    "sprint_distance_m": 2067.8,
+    "sprint_count": 405.0,
+    "top_speed_kmh": 36.2,
+    "source": "fifa_training_centre_pmsr_pdf",
+    "source_url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M102-ENG-V-ARG.pdf",
+    "retrieved_at": "2026-07-16T07:56:24.327932+00:00",
+    "season": "2026",
+    "stage": "Semi-final",
+    "home_team": "England",
+    "away_team": "Argentina",
+    "match_date": "2026-07-15"
+  },
+  {
+    "match_id": 20260102,
+    "team": "Argentina",
+    "total_distance_km": 106.64,
+    "high_intensity_distance_m": 7260.1,
+    "sprint_distance_m": 1854.5,
+    "sprint_count": 419.0,
+    "top_speed_kmh": 33.0,
+    "source": "fifa_training_centre_pmsr_pdf",
+    "source_url": "https://www.fifatrainingcentre.com/media/native/tournaments/fifa-world-cup/2026/PMSR-M102-ENG-V-ARG.pdf",
+    "retrieved_at": "2026-07-16T07:56:24.327932+00:00",
+    "season": "2026",
+    "stage": "Semi-final",
+    "home_team": "England",
+    "away_team": "Argentina",
+    "match_date": "2026-07-15"
   }
 ]

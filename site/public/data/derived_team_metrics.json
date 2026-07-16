@@ -524,23 +524,23 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 110.5575,
-    "z_score": -0.7,
+    "z_score": -0.69,
     "percentile": 22.9
   },
   {
     "team": "Argentina",
     "season": "2026",
     "metric": "distancia_promedio_km",
-    "value": 117.74333333333334,
-    "z_score": 0.7,
-    "percentile": 79.2
+    "value": 116.15714285714286,
+    "z_score": 0.4,
+    "percentile": 68.8
   },
   {
     "team": "Australia",
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 123.505,
-    "z_score": 1.82,
+    "z_score": 1.85,
     "percentile": 97.9
   },
   {
@@ -548,7 +548,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.98,
-    "z_score": -0.23,
+    "z_score": -0.22,
     "percentile": 50.0
   },
   {
@@ -556,7 +556,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 123.25666666666666,
-    "z_score": 1.77,
+    "z_score": 1.8,
     "percentile": 95.8
   },
   {
@@ -564,7 +564,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 113.3975,
-    "z_score": -0.15,
+    "z_score": -0.14,
     "percentile": 54.2
   },
   {
@@ -572,7 +572,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.26199999999999,
-    "z_score": -0.37,
+    "z_score": -0.36,
     "percentile": 39.6
   },
   {
@@ -580,7 +580,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 119.1075,
-    "z_score": 0.96,
+    "z_score": 0.98,
     "percentile": 85.4
   },
   {
@@ -588,7 +588,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 114.09200000000001,
-    "z_score": -0.01,
+    "z_score": -0.0,
     "percentile": 58.3
   },
   {
@@ -604,7 +604,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 111.865,
-    "z_score": -0.45,
+    "z_score": -0.44,
     "percentile": 35.4
   },
   {
@@ -612,7 +612,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 113.08,
-    "z_score": -0.21,
+    "z_score": -0.2,
     "percentile": 52.1
   },
   {
@@ -628,15 +628,15 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 116.27333333333333,
-    "z_score": 0.41,
-    "percentile": 68.8
+    "z_score": 0.43,
+    "percentile": 72.9
   },
   {
     "team": "Côte d'Ivoire",
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 108.735,
-    "z_score": -1.06,
+    "z_score": -1.05,
     "percentile": 14.6
   },
   {
@@ -652,23 +652,23 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 121.04400000000001,
-    "z_score": 1.34,
+    "z_score": 1.36,
     "percentile": 87.5
   },
   {
     "team": "England",
     "season": "2026",
     "metric": "distancia_promedio_km",
-    "value": 117.25,
-    "z_score": 0.6,
-    "percentile": 77.1
+    "value": 115.87857142857142,
+    "z_score": 0.35,
+    "percentile": 66.7
   },
   {
     "team": "France",
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 110.2957142857143,
-    "z_score": -0.75,
+    "z_score": -0.74,
     "percentile": 20.8
   },
   {
@@ -676,7 +676,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 127.2325,
-    "z_score": 2.55,
+    "z_score": 2.58,
     "percentile": 100.0
   },
   {
@@ -684,7 +684,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 109.2025,
-    "z_score": -0.97,
+    "z_score": -0.96,
     "percentile": 16.7
   },
   {
@@ -700,7 +700,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 114.79,
-    "z_score": 0.12,
+    "z_score": 0.14,
     "percentile": 62.5
   },
   {
@@ -708,7 +708,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 108.46,
-    "z_score": -1.11,
+    "z_score": -1.1,
     "percentile": 12.5
   },
   {
@@ -716,7 +716,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 111.6875,
-    "z_score": -0.48,
+    "z_score": -0.47,
     "percentile": 33.3
   },
   {
@@ -724,7 +724,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 115.77333333333333,
-    "z_score": 0.32,
+    "z_score": 0.33,
     "percentile": 64.6
   },
   {
@@ -732,7 +732,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 111.65333333333335,
-    "z_score": -0.49,
+    "z_score": -0.48,
     "percentile": 31.2
   },
   {
@@ -740,7 +740,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.77000000000001,
-    "z_score": -0.27,
+    "z_score": -0.26,
     "percentile": 45.8
   },
   {
@@ -748,15 +748,15 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 116.325,
-    "z_score": 0.42,
-    "percentile": 70.8
+    "z_score": 0.44,
+    "percentile": 75.0
   },
   {
     "team": "Netherlands",
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 113.94,
-    "z_score": -0.04,
+    "z_score": -0.03,
     "percentile": 56.2
   },
   {
@@ -764,15 +764,15 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 116.34666666666668,
-    "z_score": 0.43,
-    "percentile": 72.9
+    "z_score": 0.44,
+    "percentile": 77.1
   },
   {
     "team": "Norway",
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 122.325,
-    "z_score": 1.59,
+    "z_score": 1.61,
     "percentile": 91.7
   },
   {
@@ -780,7 +780,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.24000000000001,
-    "z_score": -0.37,
+    "z_score": -0.36,
     "percentile": 37.5
   },
   {
@@ -788,7 +788,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 118.51199999999999,
-    "z_score": 0.85,
+    "z_score": 0.87,
     "percentile": 81.2
   },
   {
@@ -812,7 +812,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.82666666666667,
-    "z_score": -0.26,
+    "z_score": -0.25,
     "percentile": 47.9
   },
   {
@@ -820,15 +820,15 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 116.19,
-    "z_score": 0.4,
-    "percentile": 66.7
+    "z_score": 0.41,
+    "percentile": 70.8
   },
   {
     "team": "Senegal",
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 123.1975,
-    "z_score": 1.76,
+    "z_score": 1.79,
     "percentile": 93.8
   },
   {
@@ -844,7 +844,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 114.22142857142856,
-    "z_score": 0.01,
+    "z_score": 0.03,
     "percentile": 60.4
   },
   {
@@ -852,7 +852,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 109.945,
-    "z_score": -0.82,
+    "z_score": -0.81,
     "percentile": 18.8
   },
   {
@@ -860,7 +860,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 121.37833333333333,
-    "z_score": 1.41,
+    "z_score": 1.43,
     "percentile": 89.6
   },
   {
@@ -868,7 +868,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 111.08666666666666,
-    "z_score": -0.6,
+    "z_score": -0.59,
     "percentile": 27.1
   },
   {
@@ -876,15 +876,15 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 116.94,
-    "z_score": 0.54,
-    "percentile": 75.0
+    "z_score": 0.56,
+    "percentile": 79.2
   },
   {
     "team": "USA",
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 118.982,
-    "z_score": 0.94,
+    "z_score": 0.96,
     "percentile": 83.3
   },
   {
@@ -892,7 +892,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.48666666666668,
-    "z_score": -0.33,
+    "z_score": -0.32,
     "percentile": 43.8
   },
   {
@@ -900,7 +900,7 @@
     "season": "2026",
     "metric": "distancia_promedio_km",
     "value": 112.48,
-    "z_score": -0.33,
+    "z_score": -0.32,
     "percentile": 41.7
   },
   {
@@ -915,16 +915,16 @@
     "team": "Argentina",
     "season": "2026",
     "metric": "sprints_promedio",
-    "value": 405.8333333333333,
-    "z_score": -1.15,
-    "percentile": 12.5
+    "value": 407.7142857142857,
+    "z_score": -1.1,
+    "percentile": 14.6
   },
   {
     "team": "Australia",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 475.0,
-    "z_score": 0.9,
+    "z_score": 0.91,
     "percentile": 79.2
   },
   {
@@ -948,7 +948,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 439.0,
-    "z_score": -0.17,
+    "z_score": -0.16,
     "percentile": 45.8
   },
   {
@@ -972,7 +972,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 512.0,
-    "z_score": 2.0,
+    "z_score": 2.01,
     "percentile": 100.0
   },
   {
@@ -1029,23 +1029,23 @@
     "metric": "sprints_promedio",
     "value": 448.25,
     "z_score": 0.11,
-    "percentile": 54.2
+    "percentile": 56.2
   },
   {
     "team": "Egypt",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 487.4,
-    "z_score": 1.27,
+    "z_score": 1.28,
     "percentile": 87.5
   },
   {
     "team": "England",
     "season": "2026",
     "metric": "sprints_promedio",
-    "value": 451.8333333333333,
-    "z_score": 0.21,
-    "percentile": 60.4
+    "value": 445.14285714285717,
+    "z_score": 0.02,
+    "percentile": 52.1
   },
   {
     "team": "France",
@@ -1053,14 +1053,14 @@
     "metric": "sprints_promedio",
     "value": 407.0,
     "z_score": -1.12,
-    "percentile": 14.6
+    "percentile": 12.5
   },
   {
     "team": "Germany",
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 497.5,
-    "z_score": 1.57,
+    "z_score": 1.58,
     "percentile": 93.8
   },
   {
@@ -1085,7 +1085,7 @@
     "metric": "sprints_promedio",
     "value": 449.0,
     "z_score": 0.13,
-    "percentile": 56.2
+    "percentile": 58.3
   },
   {
     "team": "Iraq",
@@ -1116,7 +1116,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 432.6666666666667,
-    "z_score": -0.36,
+    "z_score": -0.35,
     "percentile": 41.7
   },
   {
@@ -1124,7 +1124,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 438.0,
-    "z_score": -0.2,
+    "z_score": -0.19,
     "percentile": 43.8
   },
   {
@@ -1156,7 +1156,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 460.1666666666667,
-    "z_score": 0.46,
+    "z_score": 0.47,
     "percentile": 72.9
   },
   {
@@ -1196,7 +1196,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 483.3333333333333,
-    "z_score": 1.15,
+    "z_score": 1.16,
     "percentile": 85.4
   },
   {
@@ -1212,7 +1212,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 502.5,
-    "z_score": 1.72,
+    "z_score": 1.73,
     "percentile": 97.9
   },
   {
@@ -1220,7 +1220,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 471.0,
-    "z_score": 0.78,
+    "z_score": 0.79,
     "percentile": 77.1
   },
   {
@@ -1229,7 +1229,7 @@
     "metric": "sprints_promedio",
     "value": 445.85714285714283,
     "z_score": 0.04,
-    "percentile": 52.1
+    "percentile": 54.2
   },
   {
     "team": "Sweden",
@@ -1244,7 +1244,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 456.8333333333333,
-    "z_score": 0.36,
+    "z_score": 0.37,
     "percentile": 66.7
   },
   {
@@ -1276,7 +1276,7 @@
     "season": "2026",
     "metric": "sprints_promedio",
     "value": 482.6666666666667,
-    "z_score": 1.13,
+    "z_score": 1.14,
     "percentile": 83.3
   },
   {
@@ -1285,7 +1285,7 @@
     "metric": "sprints_promedio",
     "value": 451.3333333333333,
     "z_score": 0.2,
-    "percentile": 58.3
+    "percentile": 60.4
   },
   {
     "team": "Algeria",
@@ -1300,7 +1300,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.2,
-    "z_score": 0.25,
+    "z_score": 0.24,
     "percentile": 72.9
   },
   {
@@ -1308,7 +1308,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 36.7,
-    "z_score": 1.86,
+    "z_score": 1.83,
     "percentile": 93.8
   },
   {
@@ -1324,7 +1324,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.8,
-    "z_score": -0.18,
+    "z_score": -0.19,
     "percentile": 50.0
   },
   {
@@ -1332,7 +1332,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.8,
-    "z_score": -0.18,
+    "z_score": -0.19,
     "percentile": 50.0
   },
   {
@@ -1348,7 +1348,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.0,
-    "z_score": 0.04,
+    "z_score": 0.03,
     "percentile": 60.4
   },
   {
@@ -1356,7 +1356,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.2,
-    "z_score": 0.25,
+    "z_score": 0.24,
     "percentile": 72.9
   },
   {
@@ -1364,7 +1364,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.1,
-    "z_score": 0.14,
+    "z_score": 0.13,
     "percentile": 65.6
   },
   {
@@ -1396,7 +1396,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.0,
-    "z_score": -1.04,
+    "z_score": -1.03,
     "percentile": 12.5
   },
   {
@@ -1412,7 +1412,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.5,
-    "z_score": 0.57,
+    "z_score": 0.56,
     "percentile": 80.2
   },
   {
@@ -1420,23 +1420,23 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.2,
-    "z_score": 0.25,
+    "z_score": 0.24,
     "percentile": 72.9
   },
   {
     "team": "England",
     "season": "2026",
     "metric": "velocidad_punta_kmh",
-    "value": 35.8,
-    "z_score": 0.89,
-    "percentile": 85.4
+    "value": 36.2,
+    "z_score": 1.3,
+    "percentile": 87.5
   },
   {
     "team": "France",
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 37.6,
-    "z_score": 2.82,
+    "z_score": 2.79,
     "percentile": 100.0
   },
   {
@@ -1444,7 +1444,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.0,
-    "z_score": 0.04,
+    "z_score": 0.03,
     "percentile": 60.4
   },
   {
@@ -1452,7 +1452,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.1,
-    "z_score": 0.14,
+    "z_score": 0.13,
     "percentile": 65.6
   },
   {
@@ -1468,7 +1468,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.0,
-    "z_score": -1.04,
+    "z_score": -1.03,
     "percentile": 12.5
   },
   {
@@ -1476,7 +1476,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 33.7,
-    "z_score": -1.36,
+    "z_score": -1.35,
     "percentile": 6.2
   },
   {
@@ -1484,7 +1484,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.0,
-    "z_score": 0.04,
+    "z_score": 0.03,
     "percentile": 60.4
   },
   {
@@ -1492,7 +1492,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.6,
-    "z_score": -0.39,
+    "z_score": -0.4,
     "percentile": 32.3
   },
   {
@@ -1500,7 +1500,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.2,
-    "z_score": 0.25,
+    "z_score": 0.24,
     "percentile": 72.9
   },
   {
@@ -1508,7 +1508,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.8,
-    "z_score": -0.18,
+    "z_score": -0.19,
     "percentile": 50.0
   },
   {
@@ -1516,7 +1516,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.5,
-    "z_score": 0.57,
+    "z_score": 0.56,
     "percentile": 80.2
   },
   {
@@ -1524,7 +1524,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 36.8,
-    "z_score": 1.97,
+    "z_score": 1.94,
     "percentile": 95.8
   },
   {
@@ -1532,7 +1532,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.6,
-    "z_score": -0.39,
+    "z_score": -0.4,
     "percentile": 32.3
   },
   {
@@ -1540,7 +1540,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 36.5,
-    "z_score": 1.64,
+    "z_score": 1.62,
     "percentile": 90.6
   },
   {
@@ -1564,15 +1564,15 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.9,
-    "z_score": 1.0,
-    "percentile": 87.5
+    "z_score": 0.98,
+    "percentile": 85.4
   },
   {
     "team": "Qatar",
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 33.4,
-    "z_score": -1.68,
+    "z_score": -1.67,
     "percentile": 2.1
   },
   {
@@ -1588,7 +1588,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.3,
-    "z_score": -0.71,
+    "z_score": -0.72,
     "percentile": 25.0
   },
   {
@@ -1604,7 +1604,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.2,
-    "z_score": 0.25,
+    "z_score": 0.24,
     "percentile": 72.9
   },
   {
@@ -1612,7 +1612,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.0,
-    "z_score": -1.04,
+    "z_score": -1.03,
     "percentile": 12.5
   },
   {
@@ -1620,7 +1620,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 37.2,
-    "z_score": 2.39,
+    "z_score": 2.36,
     "percentile": 97.9
   },
   {
@@ -1636,7 +1636,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.8,
-    "z_score": -0.18,
+    "z_score": -0.19,
     "percentile": 50.0
   },
   {
@@ -1644,7 +1644,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.8,
-    "z_score": -0.18,
+    "z_score": -0.19,
     "percentile": 50.0
   },
   {
@@ -1652,7 +1652,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 35.6,
-    "z_score": 0.68,
+    "z_score": 0.66,
     "percentile": 83.3
   },
   {
@@ -1660,7 +1660,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 34.9,
-    "z_score": -0.07,
+    "z_score": -0.08,
     "percentile": 56.2
   },
   {
@@ -1668,7 +1668,7 @@
     "season": "2026",
     "metric": "velocidad_punta_kmh",
     "value": 36.5,
-    "z_score": 1.64,
+    "z_score": 1.62,
     "percentile": 90.6
   },
   {
@@ -1683,8 +1683,8 @@
     "team": "Argentina",
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
-    "value": 430.22474226804127,
-    "z_score": -1.48,
+    "value": 433.5566371681416,
+    "z_score": -1.4,
     "percentile": 4.2
   },
   {
@@ -1708,7 +1708,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 531.6484536082475,
-    "z_score": 0.82,
+    "z_score": 0.83,
     "percentile": 77.1
   },
   {
@@ -1724,7 +1724,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 488.1333333333333,
-    "z_score": -0.17,
+    "z_score": -0.16,
     "percentile": 50.0
   },
   {
@@ -1740,7 +1740,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 578.8375,
-    "z_score": 1.89,
+    "z_score": 1.9,
     "percentile": 100.0
   },
   {
@@ -1764,7 +1764,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 541.3483870967742,
-    "z_score": 1.04,
+    "z_score": 1.05,
     "percentile": 83.3
   },
   {
@@ -1788,7 +1788,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 488.615625,
-    "z_score": -0.16,
+    "z_score": -0.15,
     "percentile": 54.2
   },
   {
@@ -1804,31 +1804,31 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 523.86875,
-    "z_score": 0.64,
+    "z_score": 0.65,
     "percentile": 72.9
   },
   {
     "team": "England",
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
-    "value": 504.44374999999997,
-    "z_score": 0.2,
-    "percentile": 62.5
+    "value": 494.51964285714286,
+    "z_score": -0.02,
+    "percentile": 60.4
   },
   {
     "team": "France",
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 497.4219047619048,
-    "z_score": 0.04,
-    "percentile": 60.4
+    "z_score": 0.05,
+    "percentile": 62.5
   },
   {
     "team": "Germany",
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 578.8138461538462,
-    "z_score": 1.89,
+    "z_score": 1.9,
     "percentile": 97.9
   },
   {
@@ -1844,7 +1844,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 532.5739130434783,
-    "z_score": 0.84,
+    "z_score": 0.85,
     "percentile": 79.2
   },
   {
@@ -1852,7 +1852,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 513.7511111111111,
-    "z_score": 0.41,
+    "z_score": 0.42,
     "percentile": 64.6
   },
   {
@@ -1900,7 +1900,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 551.6357894736842,
-    "z_score": 1.27,
+    "z_score": 1.28,
     "percentile": 91.7
   },
   {
@@ -1916,7 +1916,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 577.125,
-    "z_score": 1.85,
+    "z_score": 1.86,
     "percentile": 95.8
   },
   {
@@ -1932,7 +1932,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 533.8282608695652,
-    "z_score": 0.87,
+    "z_score": 0.88,
     "percentile": 81.2
   },
   {
@@ -1948,7 +1948,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 488.1417721518987,
-    "z_score": -0.17,
+    "z_score": -0.16,
     "percentile": 52.1
   },
   {
@@ -1988,7 +1988,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 548.1473684210526,
-    "z_score": 1.19,
+    "z_score": 1.2,
     "percentile": 85.4
   },
   {
@@ -1996,7 +1996,7 @@
     "season": "2026",
     "metric": "alta_intensidad_promedio_m",
     "value": 493.4183486238532,
-    "z_score": -0.05,
+    "z_score": -0.04,
     "percentile": 58.3
   },
   {

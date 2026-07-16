@@ -100,6 +100,16 @@
     "presiones": 35
   },
   {
+    "team": "Argentina",
+    "match_id": 20260102,
+    "match_date": "2026-07-15",
+    "stage": "Semi-final",
+    "rival": "England",
+    "pass_accuracy_pct": 90.0,
+    "progresiones": 26,
+    "presiones": 39
+  },
+  {
     "team": "Australia",
     "match_id": 20260006,
     "match_date": "2026-06-13",
@@ -798,6 +808,16 @@
     "pass_accuracy_pct": 90.8,
     "progresiones": 40,
     "presiones": 51
+  },
+  {
+    "team": "England",
+    "match_id": 20260102,
+    "match_date": "2026-07-15",
+    "stage": "Semi-final",
+    "rival": "Argentina",
+    "pass_accuracy_pct": 83.0,
+    "progresiones": 25,
+    "presiones": 40
   },
   {
     "team": "France",

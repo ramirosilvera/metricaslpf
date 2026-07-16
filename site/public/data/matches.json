@@ -1566,5 +1566,19 @@
     "away_score": 2,
     "stadium": "Dallas Stadium",
     "referee": null
+  },
+  {
+    "match_id": 20260102,
+    "competition": "FIFA World Cup",
+    "season": "2026",
+    "stage": "Semi-final",
+    "group": null,
+    "match_date": "2026-07-15",
+    "home_team": "England",
+    "away_team": "Argentina",
+    "home_score": 1,
+    "away_score": 2,
+    "stadium": "Atlanta Stadium",
+    "referee": null
   }
 ]

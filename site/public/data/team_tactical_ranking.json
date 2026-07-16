@@ -16,7 +16,7 @@
     "quiebres_linea_promedio_percentil": 79.0,
     "presiones_promedio_percentil": 73.0,
     "recuperaciones_promedio_percentil": 56.0,
-    "tackles_promedio_percentil": 85.0,
+    "tackles_promedio_percentil": 88.0,
     "intercepciones_promedio_percentil": 86.0
   },
   {
@@ -30,7 +30,7 @@
     "tackles_promedio": 9.0,
     "intercepciones_promedio": 10.1,
     "precision_pases_pct": 89.3,
-    "precision_pases_pct_percentil": 85.0,
+    "precision_pases_pct_percentil": 88.0,
     "remates_promedio_percentil": 91.0,
     "progresiones_promedio_percentil": 98.0,
     "quiebres_linea_promedio_percentil": 90.0,
@@ -57,7 +57,7 @@
     "presiones_promedio_percentil": 19.0,
     "recuperaciones_promedio_percentil": 4.0,
     "tackles_promedio_percentil": 64.0,
-    "intercepciones_promedio_percentil": 27.0
+    "intercepciones_promedio_percentil": 26.0
   },
   {
     "team": "Türkiye",
@@ -97,7 +97,7 @@
     "presiones_promedio_percentil": 85.0,
     "recuperaciones_promedio_percentil": 65.0,
     "tackles_promedio_percentil": 81.0,
-    "intercepciones_promedio_percentil": 27.0
+    "intercepciones_promedio_percentil": 26.0
   },
   {
     "team": "Portugal",
@@ -115,7 +115,7 @@
     "progresiones_promedio_percentil": 90.0,
     "quiebres_linea_promedio_percentil": 92.0,
     "presiones_promedio_percentil": 4.0,
-    "recuperaciones_promedio_percentil": 23.0,
+    "recuperaciones_promedio_percentil": 25.0,
     "tackles_promedio_percentil": 25.0,
     "intercepciones_promedio_percentil": 96.0
   },
@@ -130,7 +130,7 @@
     "tackles_promedio": 13.5,
     "intercepciones_promedio": 9.2,
     "precision_pases_pct": 89.5,
-    "precision_pases_pct_percentil": 88.0,
+    "precision_pases_pct_percentil": 90.0,
     "remates_promedio_percentil": 94.0,
     "progresiones_promedio_percentil": 88.0,
     "quiebres_linea_promedio_percentil": 98.0,
@@ -240,26 +240,6 @@
     "intercepciones_promedio_percentil": 100.0
   },
   {
-    "team": "England",
-    "partidos": 6,
-    "remates_promedio": 15.7,
-    "progresiones_promedio": 29.5,
-    "quiebres_linea_promedio": 100.2,
-    "presiones_promedio": 42.3,
-    "recuperaciones_promedio": 40.7,
-    "tackles_promedio": 6.5,
-    "intercepciones_promedio": 7.2,
-    "precision_pases_pct": 89.7,
-    "precision_pases_pct_percentil": 90.0,
-    "remates_promedio_percentil": 79.0,
-    "progresiones_promedio_percentil": 75.0,
-    "quiebres_linea_promedio_percentil": 75.0,
-    "presiones_promedio_percentil": 44.0,
-    "recuperaciones_promedio_percentil": 28.0,
-    "tackles_promedio_percentil": 15.0,
-    "intercepciones_promedio_percentil": 27.0
-  },
-  {
     "team": "Cabo Verde",
     "partidos": 4,
     "remates_promedio": 12.2,
@@ -272,11 +252,11 @@
     "precision_pases_pct": 81.8,
     "precision_pases_pct_percentil": 29.0,
     "remates_promedio_percentil": 62.0,
-    "progresiones_promedio_percentil": 73.0,
+    "progresiones_promedio_percentil": 75.0,
     "quiebres_linea_promedio_percentil": 40.0,
     "presiones_promedio_percentil": 39.0,
     "recuperaciones_promedio_percentil": 100.0,
-    "tackles_promedio_percentil": 90.0,
+    "tackles_promedio_percentil": 91.0,
     "intercepciones_promedio_percentil": 59.0
   },
   {
@@ -291,13 +271,33 @@
     "intercepciones_promedio": 10.7,
     "precision_pases_pct": 86.6,
     "precision_pases_pct_percentil": 58.0,
-    "remates_promedio_percentil": 84.0,
-    "progresiones_promedio_percentil": 71.0,
+    "remates_promedio_percentil": 85.0,
+    "progresiones_promedio_percentil": 73.0,
     "quiebres_linea_promedio_percentil": 67.0,
     "presiones_promedio_percentil": 52.0,
     "recuperaciones_promedio_percentil": 88.0,
     "tackles_promedio_percentil": 73.0,
     "intercepciones_promedio_percentil": 98.0
+  },
+  {
+    "team": "England",
+    "partidos": 7,
+    "remates_promedio": 14.1,
+    "progresiones_promedio": 28.9,
+    "quiebres_linea_promedio": 96.4,
+    "presiones_promedio": 42.0,
+    "recuperaciones_promedio": 39.1,
+    "tackles_promedio": 6.3,
+    "intercepciones_promedio": 7.6,
+    "precision_pases_pct": 89.0,
+    "precision_pases_pct_percentil": 84.0,
+    "remates_promedio_percentil": 77.0,
+    "progresiones_promedio_percentil": 71.0,
+    "quiebres_linea_promedio_percentil": 69.0,
+    "presiones_promedio_percentil": 44.0,
+    "recuperaciones_promedio_percentil": 12.0,
+    "tackles_promedio_percentil": 12.0,
+    "intercepciones_promedio_percentil": 39.0
   },
   {
     "team": "Australia",
@@ -373,7 +373,7 @@
     "precision_pases_pct_percentil": 73.0,
     "remates_promedio_percentil": 46.0,
     "progresiones_promedio_percentil": 61.0,
-    "quiebres_linea_promedio_percentil": 69.0,
+    "quiebres_linea_promedio_percentil": 71.0,
     "presiones_promedio_percentil": 25.0,
     "recuperaciones_promedio_percentil": 6.0,
     "tackles_promedio_percentil": 30.0,
@@ -455,7 +455,7 @@
     "progresiones_promedio_percentil": 54.0,
     "quiebres_linea_promedio_percentil": 6.0,
     "presiones_promedio_percentil": 62.0,
-    "recuperaciones_promedio_percentil": 18.0,
+    "recuperaciones_promedio_percentil": 20.0,
     "tackles_promedio_percentil": 48.0,
     "intercepciones_promedio_percentil": 17.0
   },
@@ -491,13 +491,33 @@
     "intercepciones_promedio": 8.6,
     "precision_pases_pct": 89.8,
     "precision_pases_pct_percentil": 92.0,
-    "remates_promedio_percentil": 77.0,
+    "remates_promedio_percentil": 79.0,
     "progresiones_promedio_percentil": 50.0,
-    "quiebres_linea_promedio_percentil": 73.0,
+    "quiebres_linea_promedio_percentil": 75.0,
     "presiones_promedio_percentil": 48.0,
     "recuperaciones_promedio_percentil": 52.0,
     "tackles_promedio_percentil": 79.0,
     "intercepciones_promedio_percentil": 65.0
+  },
+  {
+    "team": "Argentina",
+    "partidos": 7,
+    "remates_promedio": 16.1,
+    "progresiones_promedio": 24.1,
+    "quiebres_linea_promedio": 116.1,
+    "presiones_promedio": 41.7,
+    "recuperaciones_promedio": 42.9,
+    "tackles_promedio": 10.7,
+    "intercepciones_promedio": 7.4,
+    "precision_pases_pct": 90.6,
+    "precision_pases_pct_percentil": 100.0,
+    "remates_promedio_percentil": 81.0,
+    "progresiones_promedio_percentil": 48.0,
+    "quiebres_linea_promedio_percentil": 94.0,
+    "presiones_promedio_percentil": 42.0,
+    "recuperaciones_promedio_percentil": 48.0,
+    "tackles_promedio_percentil": 85.0,
+    "intercepciones_promedio_percentil": 33.0
   },
   {
     "team": "Croatia",
@@ -512,32 +532,12 @@
     "precision_pases_pct": 87.4,
     "precision_pases_pct_percentil": 69.0,
     "remates_promedio_percentil": 24.0,
-    "progresiones_promedio_percentil": 48.0,
+    "progresiones_promedio_percentil": 46.0,
     "quiebres_linea_promedio_percentil": 34.0,
     "presiones_promedio_percentil": 54.0,
     "recuperaciones_promedio_percentil": 2.0,
     "tackles_promedio_percentil": 64.0,
-    "intercepciones_promedio_percentil": 36.0
-  },
-  {
-    "team": "Argentina",
-    "partidos": 6,
-    "remates_promedio": 16.3,
-    "progresiones_promedio": 23.8,
-    "quiebres_linea_promedio": 116.3,
-    "presiones_promedio": 42.2,
-    "recuperaciones_promedio": 42.0,
-    "tackles_promedio": 11.0,
-    "intercepciones_promedio": 7.5,
-    "precision_pases_pct": 90.7,
-    "precision_pases_pct_percentil": 100.0,
-    "remates_promedio_percentil": 84.0,
-    "progresiones_promedio_percentil": 46.0,
-    "quiebres_linea_promedio_percentil": 94.0,
-    "presiones_promedio_percentil": 42.0,
-    "recuperaciones_promedio_percentil": 43.0,
-    "tackles_promedio_percentil": 90.0,
-    "intercepciones_promedio_percentil": 36.0
+    "intercepciones_promedio_percentil": 35.0
   },
   {
     "team": "Canada",
@@ -551,13 +551,13 @@
     "intercepciones_promedio": 7.6,
     "precision_pases_pct": 82.1,
     "precision_pases_pct_percentil": 31.0,
-    "remates_promedio_percentil": 81.0,
+    "remates_promedio_percentil": 83.0,
     "progresiones_promedio_percentil": 44.0,
     "quiebres_linea_promedio_percentil": 60.0,
     "presiones_promedio_percentil": 60.0,
     "recuperaciones_promedio_percentil": 75.0,
     "tackles_promedio_percentil": 25.0,
-    "intercepciones_promedio_percentil": 40.0
+    "intercepciones_promedio_percentil": 39.0
   },
   {
     "team": "Netherlands",
@@ -575,7 +575,7 @@
     "progresiones_promedio_percentil": 42.0,
     "quiebres_linea_promedio_percentil": 55.0,
     "presiones_promedio_percentil": 8.0,
-    "recuperaciones_promedio_percentil": 12.0,
+    "recuperaciones_promedio_percentil": 15.0,
     "tackles_promedio_percentil": 7.0,
     "intercepciones_promedio_percentil": 59.0
   },
@@ -596,7 +596,7 @@
     "quiebres_linea_promedio_percentil": 19.0,
     "presiones_promedio_percentil": 27.0,
     "recuperaciones_promedio_percentil": 54.0,
-    "tackles_promedio_percentil": 15.0,
+    "tackles_promedio_percentil": 16.0,
     "intercepciones_promedio_percentil": 49.0
   },
   {
@@ -637,7 +637,7 @@
     "presiones_promedio_percentil": 90.0,
     "recuperaciones_promedio_percentil": 61.0,
     "tackles_promedio_percentil": 95.0,
-    "intercepciones_promedio_percentil": 32.0
+    "intercepciones_promedio_percentil": 30.0
   },
   {
     "team": "New Zealand",
@@ -675,7 +675,7 @@
     "progresiones_promedio_percentil": 32.0,
     "quiebres_linea_promedio_percentil": 58.0,
     "presiones_promedio_percentil": 12.0,
-    "recuperaciones_promedio_percentil": 28.0,
+    "recuperaciones_promedio_percentil": 29.0,
     "tackles_promedio_percentil": 7.0,
     "intercepciones_promedio_percentil": 43.0
   },
@@ -696,7 +696,7 @@
     "quiebres_linea_promedio_percentil": 8.0,
     "presiones_promedio_percentil": 83.0,
     "recuperaciones_promedio_percentil": 96.0,
-    "tackles_promedio_percentil": 90.0,
+    "tackles_promedio_percentil": 91.0,
     "intercepciones_promedio_percentil": 90.0
   },
   {
@@ -715,7 +715,7 @@
     "progresiones_promedio_percentil": 26.0,
     "quiebres_linea_promedio_percentil": 46.0,
     "presiones_promedio_percentil": 92.0,
-    "recuperaciones_promedio_percentil": 18.0,
+    "recuperaciones_promedio_percentil": 20.0,
     "tackles_promedio_percentil": 30.0,
     "intercepciones_promedio_percentil": 17.0
   },
@@ -735,8 +735,8 @@
     "progresiones_promedio_percentil": 26.0,
     "quiebres_linea_promedio_percentil": 34.0,
     "presiones_promedio_percentil": 15.0,
-    "recuperaciones_promedio_percentil": 46.0,
-    "tackles_promedio_percentil": 15.0,
+    "recuperaciones_promedio_percentil": 44.0,
+    "tackles_promedio_percentil": 16.0,
     "intercepciones_promedio_percentil": 2.0
   },
   {
@@ -753,9 +753,9 @@
     "precision_pases_pct_percentil": 69.0,
     "remates_promedio_percentil": 98.0,
     "progresiones_promedio_percentil": 23.0,
-    "quiebres_linea_promedio_percentil": 71.0,
+    "quiebres_linea_promedio_percentil": 73.0,
     "presiones_promedio_percentil": 21.0,
-    "recuperaciones_promedio_percentil": 25.0,
+    "recuperaciones_promedio_percentil": 27.0,
     "tackles_promedio_percentil": 48.0,
     "intercepciones_promedio_percentil": 17.0
   },
@@ -770,7 +770,7 @@
     "tackles_promedio": 6.0,
     "intercepciones_promedio": 7.0,
     "precision_pases_pct": 89.0,
-    "precision_pases_pct_percentil": 83.0,
+    "precision_pases_pct_percentil": 84.0,
     "remates_promedio_percentil": 43.0,
     "progresiones_promedio_percentil": 21.0,
     "quiebres_linea_promedio_percentil": 62.0,
@@ -835,7 +835,7 @@
     "progresiones_promedio_percentil": 15.0,
     "quiebres_linea_promedio_percentil": 42.0,
     "presiones_promedio_percentil": 39.0,
-    "recuperaciones_promedio_percentil": 48.0,
+    "recuperaciones_promedio_percentil": 46.0,
     "tackles_promedio_percentil": 25.0,
     "intercepciones_promedio_percentil": 94.0
   },
@@ -875,7 +875,7 @@
     "progresiones_promedio_percentil": 10.0,
     "quiebres_linea_promedio_percentil": 15.0,
     "presiones_promedio_percentil": 66.0,
-    "recuperaciones_promedio_percentil": 43.0,
+    "recuperaciones_promedio_percentil": 42.0,
     "tackles_promedio_percentil": 73.0,
     "intercepciones_promedio_percentil": 49.0
   },
@@ -895,7 +895,7 @@
     "progresiones_promedio_percentil": 8.0,
     "quiebres_linea_promedio_percentil": 27.0,
     "presiones_promedio_percentil": 29.0,
-    "recuperaciones_promedio_percentil": 15.0,
+    "recuperaciones_promedio_percentil": 17.0,
     "tackles_promedio_percentil": 19.0,
     "intercepciones_promedio_percentil": 17.0
   },
@@ -935,9 +935,9 @@
     "progresiones_promedio_percentil": 4.0,
     "quiebres_linea_promedio_percentil": 10.0,
     "presiones_promedio_percentil": 56.0,
-    "recuperaciones_promedio_percentil": 21.0,
+    "recuperaciones_promedio_percentil": 23.0,
     "tackles_promedio_percentil": 42.0,
-    "intercepciones_promedio_percentil": 32.0
+    "intercepciones_promedio_percentil": 30.0
   },
   {
     "team": "Qatar",

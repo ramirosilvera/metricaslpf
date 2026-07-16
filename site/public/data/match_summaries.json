@@ -1,5 +1,36 @@
 [
   {
+    "match_id": 20260102,
+    "match_date": "2026-07-15",
+    "stage": "Semi-final",
+    "home_team": "England",
+    "away_team": "Argentina",
+    "home_score": 1,
+    "away_score": 2,
+    "home": {
+      "distancia_km": 107.65,
+      "alta_intensidad_m": 6959.6,
+      "sprints": 405.0,
+      "velocidad_punta_kmh": 36.2,
+      "remates": 5,
+      "pases": 293,
+      "posesion_pct": 34.8
+    },
+    "away": {
+      "distancia_km": 106.64,
+      "alta_intensidad_m": 7260.1,
+      "sprints": 419.0,
+      "velocidad_punta_kmh": 33.0,
+      "remates": 15,
+      "pases": 549,
+      "posesion_pct": 65.2
+    },
+    "goleadores": [],
+    "goles_contra": [],
+    "destacado": null,
+    "insight": "Argentina venció 2-1 a England. Argentina manejó más la pelota (65.2% de los pases)."
+  },
+  {
     "match_id": 20260101,
     "match_date": "2026-07-14",
     "stage": "Semi-final",

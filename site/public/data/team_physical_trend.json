@@ -130,6 +130,19 @@
     "top_speed_kmh": 35.0
   },
   {
+    "team": "Argentina",
+    "match_id": 20260102,
+    "match_date": "2026-07-15",
+    "stage": "Semi-final",
+    "rival": "England",
+    "es_local": false,
+    "jornada": 7,
+    "total_distance_km": 106.64,
+    "high_intensity_distance_m": 7260.1,
+    "sprint_count": 419.0,
+    "top_speed_kmh": 33.0
+  },
+  {
     "team": "Australia",
     "match_id": 20260006,
     "match_date": "2026-06-13",
@@ -1038,6 +1051,19 @@
     "high_intensity_distance_m": 7447.5,
     "sprint_count": 442.0,
     "top_speed_kmh": 35.2
+  },
+  {
+    "team": "England",
+    "match_id": 20260102,
+    "match_date": "2026-07-15",
+    "stage": "Semi-final",
+    "rival": "Argentina",
+    "es_local": true,
+    "jornada": 7,
+    "total_distance_km": 107.65,
+    "high_intensity_distance_m": 6959.6,
+    "sprint_count": 405.0,
+    "top_speed_kmh": 36.2
   },
   {
     "team": "France",
