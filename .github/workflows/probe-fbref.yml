@@ -36,32 +36,14 @@ jobs:
                   print(f"  [{label}] {url} -> ERROR {type(e).__name__}: {e}")
                   return None
 
-          # RelativePath de la temporada actual (2026), tomado de la sonda anterior
-          r = get("https://www.fotmob.com/api/stats/112/season/28207/topstats.json", label="topstats-v1")
-          if r is None or not r.ok:
-              r = get("https://www.fotmob.com/api/data/stats/season/topstats?id=112&season=28207", label="topstats-v2")
-          if r is None or not r.ok:
-              r = get("https://www.fotmob.com/api/leagues?id=112&season=28207&type=topstats", label="topstats-v3")
+          r = get("https://www.fotmob.com/api/data/leagues?id=112", label="fotmob-leagues")
           if r is not None and r.ok:
-              d = r.json()
-              print("  top keys:", list(d.keys()) if isinstance(d, dict) else type(d))
-              if isinstance(d, dict):
-                  for key in ("statTypes", "playerStats", "topLists", "data"):
-                      if key in d:
-                          v = d[key]
-                          print(f"  [{key}]:", type(v), len(v) if isinstance(v, (list, dict)) else v)
-              # buscar de forma generica cualquier lista de categorias/stats
-              def walk(obj, path="", depth=0):
-                  if depth > 3:
-                      return
-                  if isinstance(obj, dict):
-                      for k, v in obj.items():
-                          if isinstance(v, list) and v and isinstance(v[0], dict) and depth <= 2:
-                              print(f"    lista en {path}.{k}: len={len(v)} keys_ej={list(v[0].keys())[:8]}")
-                          walk(v, f"{path}.{k}", depth + 1)
-                  elif isinstance(obj, list):
-                      for item in obj[:3]:
-                          walk(item, path + "[]", depth + 1)
-              walk(d)
-              print("  RAW (primeros 2000 chars):", json.dumps(d, ensure_ascii=False)[:2000])
+              d0 = r.json()
+              players_leaders = ((d0.get("stats") or {}).get("players")) or []
+              print(f"  categorias de lideres (jugadores): {len(players_leaders)}")
+              for entry in players_leaders:
+                  header = entry.get("header")
+                  stat_name = ((entry.get("participant") or {}).get("stat") or {}).get("name")
+                  print(f"    - {header}  (stat={stat_name})")
+              print("  entry[0] completo:", json.dumps(players_leaders[0], ensure_ascii=False)[:800] if players_leaders else None)
           PY
