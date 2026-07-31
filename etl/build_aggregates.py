@@ -56,6 +56,7 @@ def build():
     has_derived_team_style = (WAREHOUSE / "derived_team_style.parquet").exists()
     has_derived_player_metrics = (WAREHOUSE / "derived_player_metrics.parquet").exists()
     has_player_season_stats = (WAREHOUSE / "player_season_stats.parquet").exists()
+    has_standings = (WAREHOUSE / "standings.parquet").exists()
 
     print("Generando agregados en site/public/data/ ...")
 
@@ -333,6 +334,24 @@ def build():
                     "Transfermarkt via etl/scrape_transfermarkt_squads.py queda como fallback "
                     "pero bloquea el scraping con HTTP 403)."
                 ),
+                "rows": [],
+            },
+        )
+
+    # Tabla de posiciones real de LPF (ESPN) -- puntos, PJ/PG/PE/PP, goles a
+    # favor/en contra, diferencia. Se fetcheaba desde el día uno (ver
+    # fetch_espn_lpf.py) pero no estaba conectada al warehouse ni publicada.
+    if has_standings:
+        standings = con.execute(
+            f"SELECT * FROM read_parquet('{WAREHOUSE / 'standings.parquet'}') ORDER BY posicion"
+        ).df()
+        _write_json("standings.json", _records(standings))
+    else:
+        _write_json(
+            "standings.json",
+            {
+                "status": "pending_first_scrape",
+                "note": "Se completa corriendo etl/fetch_espn_lpf.py (tabla de posiciones de ESPN).",
                 "rows": [],
             },
         )
@@ -688,7 +707,7 @@ def build():
                 "provider": "ESPN",
                 "provider_url": "https://site.api.espn.com/apis/v2/sports/soccer/arg.1/standings",
                 "license": "API pública sin key",
-                "coverage": "tabla de posiciones: puntos, partidos jugados, diferencia de gol",
+                "coverage": "lista de clubes de la Liga Profesional",
                 "coverage_detail": (
                     f"{teams_with_profile}/{teams_season_total} clubes" if teams_season_total else None
                 ),
@@ -697,6 +716,20 @@ def build():
                 "confidence": "alta",
                 "as_of": (_max_ts(team_profile, "retrieved_at") or generated_at) if has_team_profile else generated_at,
                 "status": "ok" if has_team_profile else "pending_first_scrape",
+            },
+            "standings": {
+                "provider": "ESPN",
+                "provider_url": "https://site.api.espn.com/apis/v2/sports/soccer/arg.1/standings",
+                "license": "API pública sin key",
+                "coverage": "tabla de posiciones: puntos, partidos jugados, ganados/empatados/perdidos, goles a favor/en contra, diferencia",
+                "coverage_detail": (
+                    f"{int(standings['team'].nunique())}/{teams_season_total} clubes" if has_standings and teams_season_total else None
+                ),
+                "coverage_pct": _pct(int(standings["team"].nunique()), teams_season_total) if has_standings else None,
+                "method": "Standings oficiales de ESPN para la Liga Profesional, tabla general.",
+                "confidence": "alta",
+                "as_of": generated_at,
+                "status": "ok" if has_standings else "pending_first_scrape",
             },
             "derived_metrics": {
                 "provider": "calculado internamente sobre las fuentes de arriba",

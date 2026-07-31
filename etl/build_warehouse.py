@@ -35,6 +35,7 @@ from schemas import (
     TeamProfileSchema,
     GoalEventsSchema,
     PlayerSeasonStatsSchema,
+    StandingsSchema,
 )
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -199,6 +200,23 @@ def build():
         print(f"team_profile.parquet: {len(team_profile)} filas")
     else:
         print("team_profile: sin datos todavia (correr etl/fetch_espn_lpf.py)")
+
+    # --- standings (LPF: tabla de posiciones real de ESPN -- puntos, PJ/PG/PE/PP,
+    # goles a favor/en contra, diferencia. Se fetcheaba desde el día uno pero no
+    # estaba conectada al warehouse) ---
+    standings = _read_csv_if_exists(RAW / "espn" / "_processed" / "standings.csv")
+    if standings is not None and len(standings) == 0:
+        standings = None
+    if standings is not None:
+        int_cols = ["posicion", "puntos", "jugados", "ganados", "empatados", "perdidos", "goles_favor", "goles_contra", "diferencia"]
+        for c in int_cols:
+            standings[c] = pd.to_numeric(standings[c], errors="coerce").astype("Int64")
+        standings = StandingsSchema.validate(standings)
+        con.register("standings_df", standings)
+        con.execute(f"COPY standings_df TO '{WAREHOUSE / 'standings.parquet'}' (FORMAT PARQUET)")
+        print(f"standings.parquet: {len(standings)} filas")
+    else:
+        print("standings: sin datos todavia (correr etl/fetch_espn_lpf.py)")
 
     # --- goal_events (LPF: ESPN -- goleador, minuto, penal/en contra, filtrado
     # por el flag real scoringPlay para no confundir "Goal Kick" con un gol;

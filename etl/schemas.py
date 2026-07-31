@@ -265,6 +265,28 @@ TeamProfileSchema = DataFrameSchema(
 # resultado final de cada partido ya se cruzó contra matches.parquet
 # (FIFA Training Centre) antes de llegar acá -- ver _score_discrepancies.json
 # si hubo alguna diferencia entre fuentes.
+# Tabla de posiciones de LPF -- ESPN (ver etl/fetch_espn_lpf.py). Se fetchea
+# desde el día uno pero no se conectó al warehouse hasta ahora: quedaba en
+# data/raw/espn/_processed/standings.csv sin publicarse en el sitio.
+StandingsSchema = DataFrameSchema(
+    {
+        "team": Column(str),
+        "season": Column(str),
+        "posicion": Column("Int64", Check.ge(1), nullable=True),
+        "puntos": Column("Int64", Check.ge(0), nullable=True),
+        "jugados": Column("Int64", Check.ge(0), nullable=True),
+        "ganados": Column("Int64", Check.ge(0), nullable=True),
+        "empatados": Column("Int64", Check.ge(0), nullable=True),
+        "perdidos": Column("Int64", Check.ge(0), nullable=True),
+        "goles_favor": Column("Int64", Check.ge(0), nullable=True),
+        "goles_contra": Column("Int64", Check.ge(0), nullable=True),
+        "diferencia": Column("Int64", nullable=True),
+        "forma": Column(str, nullable=True),
+    },
+    strict=False,
+    coerce=True,
+)
+
 # Estadística individual de jugadores de LPF -- FotMob (ver
 # etl/fetch_fotmob_lpf.py). Formato LARGO: una fila por (jugador, métrica).
 # Es agregado de TEMPORADA, no de partido -- distinto en granularidad al

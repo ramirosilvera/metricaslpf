@@ -1,0 +1,117 @@
+---
+import Base from "../../layouts/Base.astro";
+import DataStatusBanner from "../../layouts/DataStatusBanner.astro";
+import TeamSeasonRanking from "../../islands/TeamSeasonRanking";
+import ShareCardButton from "../../islands/ShareCardButton";
+import { loadJson, type StandingsRow, type TeamSeasonSummary } from "../../lib/data";
+
+function loadArray<T>(filename: string): T[] {
+  const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
+  return Array.isArray(raw) ? raw : [];
+}
+
+const standings = loadArray<StandingsRow>("standings.json").sort(
+  (a, b) => (a.posicion ?? 999) - (b.posicion ?? 999),
+);
+const summary = loadArray<TeamSeasonSummary>("team_season_summary.json");
+
+const nTeams = standings.length;
+const leader = standings[0] ?? null;
+const leaderStats = leader
+  ? [
+      { label: "Puntos", value: String(leader.puntos ?? "—") },
+      { label: "PJ", value: String(leader.jugados ?? "—") },
+      { label: "Diferencia de gol", value: leader.diferencia != null ? `${leader.diferencia > 0 ? "+" : ""}${leader.diferencia}` : "—" },
+    ]
+  : [];
+const leaderShareText = leader
+  ? `${leader.team} lidera la tabla de la Liga Profesional Argentina con ${leader.puntos} puntos en ${leader.jugados} partidos jugados.`
+  : undefined;
+---
+
+<Base title="Clubes" description="Tabla de posiciones real de la Liga Profesional Argentina y ranking de estadística de equipo.">
+  <DataStatusBanner />
+  <p class="eyebrow">Ranking · los {nTeams || 30} clubes</p>
+  <h1>Clubes — tabla de posiciones</h1>
+  <p class="lede">
+    La <strong>tabla oficial</strong> de la Liga Profesional (ESPN), y un <strong>ranking de estadística de equipo</strong>
+    por partido (posesión, precisión de pase, remates, faltas) para los {nTeams || 30} clubes. <em>Para enfrentar dos
+    entre sí cara a cara, usá Comparar.</em>
+  </p>
+
+  {leader && (
+    <div class="hero-actions" style="margin-bottom: 1.5rem;">
+      <ShareCardButton
+        client:only="react"
+        title={leader.team}
+        subtitle="🥇 Puntero de la Liga Profesional"
+        flag="⚽"
+        stats={leaderStats}
+        tagline={`Entre ${nTeams || 30} clubes`}
+        shareText={leaderShareText}
+        filenameBase={`${leader.team}-puntero`}
+      />
+    </div>
+  )}
+
+  {standings.length > 0 ? (
+    <section class="section">
+      <div class="section-head">
+        <h2>Tabla de posiciones</h2>
+        <p>Puntos, partidos jugados, ganados/empatados/perdidos y goles. Fuente: ESPN.</p>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Club</th>
+                <th>PJ</th>
+                <th>G</th>
+                <th>E</th>
+                <th>P</th>
+                <th>GF</th>
+                <th>GC</th>
+                <th>DIF</th>
+                <th>PTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {standings.map((r) => (
+                <tr>
+                  <td>{r.posicion}</td>
+                  <td>{r.team}</td>
+                  <td>{r.jugados}</td>
+                  <td>{r.ganados}</td>
+                  <td>{r.empatados}</td>
+                  <td>{r.perdidos}</td>
+                  <td>{r.goles_favor}</td>
+                  <td>{r.goles_contra}</td>
+                  <td>{r.diferencia != null ? (r.diferencia > 0 ? `+${r.diferencia}` : r.diferencia) : "—"}</td>
+                  <td><strong>{r.puntos}</strong></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="section">
+      <p style="color: var(--text-muted);">Todavía no hay tabla de posiciones cargada. Se completa corriendo etl/fetch_espn_lpf.py.</p>
+    </section>
+  )}
+
+  {summary.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Ranking de estadística de equipo</h2>
+        <p>Posesión, precisión de pase, remates y faltas por partido — elegí la métrica y mirá quién manda.</p>
+      </div>
+      <div class="card">
+        <TeamSeasonRanking client:only="react" rows={summary} />
+      </div>
+    </section>
+  )}
+</Base>

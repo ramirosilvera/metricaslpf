@@ -8,30 +8,30 @@ import Base from "../layouts/Base.astro";
 const base = import.meta.env.BASE_URL;
 
 // Cada acción es un MODO distinto, diferenciado por cuántas cosas mirás a la
-// vez: Comparar = dos (duelo), Rankings = las 48 (tabla), Analizar = una (lupa).
+// vez: Comparar = dos (duelo), Rankings = los 30 (tabla), Analizar = una (lupa).
 // La descripción corta deja claro qué hace cada una y evita que se pisen entre sí.
 const actions = [
-  { href: `${base}partidos/`, icon: "⚽", label: "Ver partidos", desc: "Resultado, goles y físico de cada partido" },
-  { href: `${base}comparar/`, icon: "🆚", label: "Comparar dos", desc: "Dos selecciones o jugadores cara a cara en un radar" },
+  { href: `${base}partidos/`, icon: "⚽", label: "Ver partidos", desc: "Resultado, goles y estadística de cada partido" },
+  { href: `${base}comparar/`, icon: "🆚", label: "Comparar dos", desc: "Dos clubes o jugadores cara a cara en un radar" },
   { href: `${base}prediccion/`, icon: "🔮", label: "Predecir un partido", desc: "Probabilidades y escenarios por rendimiento" },
-  { href: `${base}selecciones/`, icon: "📊", label: "Ver rankings", desc: "Las 48 selecciones ordenadas por cada métrica" },
-  { href: `${base}jugadores/`, icon: "👟", label: "Rankear jugadores", desc: "Físico, posición y minutos, jugador por jugador" },
+  { href: `${base}clubes/`, icon: "📊", label: "Ver rankings", desc: "Los 30 clubes de la Liga Profesional, tabla y estadística" },
+  { href: `${base}jugadores/`, icon: "👟", label: "Rankear jugadores", desc: "Goles, xG, tackles y más, jugador por jugador" },
   { href: `${base}analisis/`, icon: "🔎", label: "Analizar a fondo", desc: "La lupa en un partido o un jugador puntual" },
 ];
 
 // Compartir el sitio por WhatsApp (funcionalidad conservada, ahora liviana y
 // genérica: sin depender de datos en vivo, no queda desactualizado).
 const pageUrl = new URL(Astro.url.pathname, "https://ramirosilvera.github.io").href;
-const shareMessage = `Métricas Mundial 2026: análisis físico y táctico de las 48 selecciones con datos reales y abiertos. Comparás selecciones, jugadores y partidos vos mismo 🇦🇷⚽ ${pageUrl}`;
+const shareMessage = `Métricas LPF: análisis de la Liga Profesional Argentina con datos reales y abiertos. Comparás clubes, jugadores y partidos vos mismo 🇦🇷⚽ ${pageUrl}`;
 const waLink = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
 ---
 
 <Base
   title="Inicio"
-  description="Centro de análisis del Mundial 2026: compará selecciones, jugadores y partidos con datos reales y abiertos."
+  description="Centro de análisis de la Liga Profesional Argentina: compará clubes, jugadores y partidos con datos reales y abiertos."
 >
   <section class="home-hub">
-    <p class="eyebrow">Métricas Mundial 2026</p>
+    <p class="eyebrow">Métricas LPF</p>
     <h1 class="home-hub-title">¿Qué querés analizar hoy?</h1>
 
     <div class="cta-grid">

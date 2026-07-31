@@ -131,9 +131,44 @@ export interface Meta {
     tactical_2026?: SourceStatus;
     squad_ages: SourceStatus;
     team_profile?: SourceStatus;
+    standings?: SourceStatus;
     derived_metrics?: SourceStatus;
     goal_events?: SourceStatus;
+    player_season_stats?: SourceStatus;
   };
+}
+
+export interface StandingsRow {
+  team: string;
+  season: string;
+  posicion: number | null;
+  puntos: number | null;
+  jugados: number | null;
+  ganados: number | null;
+  empatados: number | null;
+  perdidos: number | null;
+  goles_favor: number | null;
+  goles_contra: number | null;
+  diferencia: number | null;
+  forma: string | null;
+}
+
+export interface PlayerSeasonStatRow {
+  player_name: string;
+  team: string;
+  fotmob_player_id: number | null;
+  fotmob_team_id: number | null;
+  country_code: string | null;
+  metric: string;
+  metric_label: string | null;
+  value: number | null;
+  sub_value: number | null;
+  minutes_played: number | null;
+  matches_played: number | null;
+  rank: number | null;
+  source: string;
+  source_url: string | null;
+  retrieved_at: string;
 }
 
 export interface DerivedTeamMetricRow {
