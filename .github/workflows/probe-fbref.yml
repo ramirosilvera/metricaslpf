@@ -1,0 +1,53 @@
+name: Probe fuentes LPF (fbref / wikipedia / api-football)
+
+# Sonda descartable: verifica desde GitHub Actions (IP de datacenter) qué fuentes
+# de datos de la Liga Profesional son accesibles, ANTES de reescribir el ETL.
+# Se borra una vez tomada la decisión de arquitectura.
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar requests
+        run: pip install requests
+      - name: Probar reachability de fuentes
+        run: |
+          python3 - <<'PY'
+          import requests
+          UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
+          def probe(name, url, headers=None):
+              h = {"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"}
+              if headers: h.update(headers)
+              try:
+                  r = requests.get(url, headers=h, timeout=30)
+                  body = r.text[:400].replace("\n"," ")
+                  print(f"[{name}] {r.status_code} len={len(r.content)}")
+                  # pistas de contenido
+                  low = r.text.lower()
+                  for token in ["liga profesional", "expected goals", "xg", "standings", "boca", "river"]:
+                      if token in low:
+                          print(f"    ↳ contiene '{token}'")
+                  if r.status_code >= 400:
+                      print("    ↳ body:", body[:200])
+              except Exception as e:
+                  print(f"[{name}] ERROR {type(e).__name__}: {e}")
+
+          print("=== FBREF (Liga Profesional comp) ===")
+          probe("fbref-comp", "https://fbref.com/en/comps/21/Liga-Profesional-Argentina-Stats")
+          probe("fbref-robots", "https://fbref.com/robots.txt")
+          probe("fbref-home", "https://fbref.com/en/")
+          print("=== WIKIPEDIA (control: debería andar) ===")
+          probe("wiki-es", "https://es.wikipedia.org/wiki/Liga_Profesional_de_F%C3%BAtbol_2025")
+          probe("wiki-api", "https://es.wikipedia.org/w/api.php?action=query&format=json&titles=Liga%20Profesional%20de%20F%C3%BAtbol%202025&prop=info")
+          print("=== API-FOOTBALL (free tier, sin key -> debería 499/401 pero conecta) ===")
+          probe("apifootball", "https://v3.football.api-sports.io/status")
+          print("=== FOTMOB (json publico) ===")
+          probe("fotmob", "https://www.fotmob.com/api/leagues?id=112&ccode3=ARG")
+          PY
