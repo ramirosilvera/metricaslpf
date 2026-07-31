@@ -25,13 +25,24 @@ el formato de CSV procesados que consume build_warehouse.py.
   gratuita disponible para "Liga Profesional, temporada actual".
 
 Limitación conocida y documentada (no se inventa nada para compensarla): el
-detalle de estadística POR JUGADOR (boxscore.players) vino vacío para los
-partidos de LPF probados -- ESPN parece no poblar esa sección para esta
-competición. Por eso player_match_appearances/tactical_player_match_stats
+detalle de estadística POR JUGADOR Y PARTIDO (boxscore.players) vino vacío
+para los partidos de LPF probados -- ESPN parece no poblar esa sección para
+esta competición. Por eso player_match_appearances/tactical_player_match_stats
 pueden quedar en 0 filas; el sitio ya maneja ese estado ("sin datos
 todavía") sin romperse. NO hay xG en esta fuente -> se usa el mismo proxy de
 peligrosidad (remates al arco/dentro/fuera del área) que en la variante
-API-Football, documentado como proxy, nunca como xG real.
+API-Football, documentado como proxy, nunca como xG real. Tampoco existe en
+ninguna fuente gratuita (ni esta ni ninguna otra probada: fbref, WhoScored,
+SofaScore, API-Football, FotMob) dato físico/GPS real (distancia, sprints,
+velocidad) -- es data propietaria de cada club vía proveedores de hardware
+(Catapult/STATSports), nunca publicada por las ligas.
+
+Lo que SÍ se pudo recuperar pese a lo anterior: el PLANTEL real de cada club
+(nombre, posición, edad, fecha de nacimiento, dorsal) vía el endpoint de
+roster de ESPN (/teams/{id}/roster) -- funciona aunque el boxscore por
+partido esté vacío, son endpoints independientes. Con esto, goleadores
+(desde goal_events) y plantillas tienen datos reales; lo que NO tiene
+respaldo real es el rendimiento individual partido a partido.
 
 Uso:
     python etl/fetch_espn_lpf.py
@@ -74,6 +85,7 @@ TACTICAL_CSV = OUT_DIR / "tactical_player_match_stats.csv"
 GOAL_EVENTS_CSV = OUT_DIR / "goal_events.csv"
 STANDINGS_CSV = OUT_DIR / "standings.csv"
 TEAM_PROFILE_CSV = OUT_DIR / "team_profile.csv"
+SQUADS_CSV = OUT_DIR / "squads.csv"
 
 MATCHES_COLS = ["match_id", "competition", "season", "stage", "group", "match_date",
                 "home_team", "away_team", "home_score", "away_score", "stadium", "referee"]
@@ -93,6 +105,9 @@ STANDINGS_COLS = ["team", "season", "posicion", "puntos", "jugados", "ganados", 
 TEAM_PROFILE_COLS = ["team", "fifa_code", "group", "fifa_ranking", "fifa_ranking_prev",
                      "base_camp_city", "base_camp_facility", "base_camp_country",
                      "base_camp_lat", "base_camp_lon", "source", "retrieved_at"]
+SQUADS_COLS = ["team", "player_name", "birth_date", "age_years", "market_value_eur", "position",
+              "club", "jersey_number", "caps", "career_goals", "captain",
+              "wc2026_apps", "wc2026_goals", "wc2026_yellow", "wc2026_red", "source", "retrieved_at"]
 
 # Nombre ESPN -> clave interna del proxy de peligrosidad / stats de equipo.
 _STAT_KEYS = {
@@ -158,6 +173,7 @@ def _write_all_empty() -> None:
     _write_csv(GOAL_EVENTS_CSV, GOAL_EVENTS_COLS, [])
     _write_csv(STANDINGS_CSV, STANDINGS_COLS, [])
     _write_csv(TEAM_PROFILE_CSV, TEAM_PROFILE_COLS, [])
+    _write_csv(SQUADS_CSV, SQUADS_COLS, [])
 
 
 def _date_chunks(start: date, end: date, chunk_days: int):
@@ -425,6 +441,86 @@ def _parse_standings(season: str) -> tuple[list[dict], list[dict]]:
     return standings, profile
 
 
+def _list_teams() -> list[dict]:
+    data = _get(f"{API_BASE}/{SLUG}/teams")
+    if not data:
+        return []
+    leagues = ((data.get("sports") or [{}])[0].get("leagues")) or [{}]
+    return [t.get("team") for t in (leagues[0].get("teams") or []) if t.get("team")]
+
+
+def _roster_cache_path(team_id: str) -> Path:
+    return CACHE_DIR / f"team_{team_id}_roster.json"
+
+
+def _get_roster_cached(team_id: str) -> dict | None:
+    p = _roster_cache_path(team_id)
+    if p.exists() and p.stat().st_size > 0:
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except ValueError:
+            pass
+    data = _get(f"{API_BASE}/{SLUG}/teams/{team_id}/roster")
+    if data is not None:
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    return data
+
+
+def _flatten_athletes(roster: dict) -> list[dict]:
+    blocks = roster.get("athletes") or []
+    flat: list[dict] = []
+    for block in blocks:
+        if isinstance(block, dict) and "items" in block:
+            flat.extend(block["items"])
+        elif isinstance(block, dict) and "fullName" in block:
+            flat.append(block)
+    return flat
+
+
+def _fetch_squads(retrieved_at: str) -> list[dict]:
+    """Plantel real por club (nombre, posición, edad, dorsal) vía el endpoint
+    de roster de ESPN -- funciona aunque el boxscore por partido esté vacío
+    (son endpoints independientes). 30 clubes -> 30 requests, cacheadas."""
+    teams = _list_teams()
+    rows: list[dict] = []
+    for t in teams:
+        team_id = t.get("id")
+        team_name = t.get("displayName")
+        if not team_id or not team_name:
+            continue
+        roster = _get_roster_cached(team_id)
+        if not roster:
+            continue
+        for a in _flatten_athletes(roster):
+            name = a.get("fullName") or a.get("displayName")
+            if not name:
+                continue
+            pos = (a.get("position") or {}).get("abbreviation")
+            jersey = a.get("jersey")
+            dob = (a.get("dateOfBirth") or "")[:10] or None
+            rows.append({
+                "team": team_name,
+                "player_name": name,
+                "birth_date": dob,
+                "age_years": _num(a.get("age")),
+                "market_value_eur": None,
+                "position": pos,
+                "club": team_name,
+                "jersey_number": int(jersey) if jersey and str(jersey).isdigit() else None,
+                "caps": None,
+                "career_goals": None,
+                "captain": None,
+                "wc2026_apps": None,
+                "wc2026_goals": None,
+                "wc2026_yellow": None,
+                "wc2026_red": None,
+                "source": SOURCE,
+                "retrieved_at": retrieved_at,
+            })
+    return rows
+
+
 def run() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     retrieved_at = datetime.now(timezone.utc).isoformat()
@@ -473,6 +569,7 @@ def run() -> None:
         goal_rows.extend(_parse_goal_events(summary, match_id, home_team, away_team, retrieved_at))
 
     standings_rows, profile_rows = _parse_standings(season)
+    squads_rows = _fetch_squads(retrieved_at)
 
     _write_csv(MATCHES_CSV, MATCHES_COLS, matches_rows)
     _write_csv(TEAM_STATS_CSV, TEAM_STATS_COLS, team_stats_rows)
@@ -481,11 +578,12 @@ def run() -> None:
     _write_csv(GOAL_EVENTS_CSV, GOAL_EVENTS_COLS, goal_rows)
     _write_csv(STANDINGS_CSV, STANDINGS_COLS, standings_rows)
     _write_csv(TEAM_PROFILE_CSV, TEAM_PROFILE_COLS, profile_rows)
+    _write_csv(SQUADS_CSV, SQUADS_COLS, squads_rows)
 
     print(
         f"LPF {season} (ESPN): {len(matches_rows)} partidos ({len(finished)} jugados), "
         f"{len(team_stats_rows)} filas de stats de equipo, {len(goal_rows)} goles, "
-        f"{len(standings_rows)} equipos en tabla."
+        f"{len(standings_rows)} equipos en tabla, {len(squads_rows)} jugadores en planteles."
     )
 
 

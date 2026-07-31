@@ -177,13 +177,15 @@ def build():
         con.execute(f"COPY tactical_players_df TO '{WAREHOUSE / 'tactical_player_match_stats.parquet'}' (FORMAT PARQUET)")
         print(f"tactical_player_match_stats.parquet: {len(tactical_players)} filas")
 
-    # --- squads (fuente-agnóstico: 26worldcup/Wikipedia primero -- ver
-    # fetch_26worldcup_squads.py --, Transfermarkt como fallback si algún día
-    # deja de devolver 403 en todos los candidatos de URL) ---
-    squads_source_path = RAW / "26worldcup" / "_processed" / "squads.csv"
-    if not (squads_source_path.exists() and squads_source_path.stat().st_size > 0):
-        squads_source_path = RAW / "transfermarkt" / "_processed" / "squads.csv"
+    # --- squads (LPF: plantel real por club vía roster de ESPN -- nombre,
+    # posición, edad, dorsal; sin valor de mercado ni estadística individual,
+    # que esta fuente no trae. Los CSV de 26worldcup/Transfermarkt eran
+    # planteles de SELECCIONES del Mundial -- no aplican al universo de
+    # clubes de la LPF, así que no se usan como fallback acá) ---
+    squads_source_path = RAW / "espn" / "_processed" / "squads.csv"
     squads = _read_csv_if_exists(squads_source_path)
+    if squads is not None and len(squads) == 0:
+        squads = None
     if squads is not None:
         squads["age_years"] = pd.to_numeric(squads["age_years"], errors="coerce")
         squads["market_value_eur"] = pd.to_numeric(squads.get("market_value_eur"), errors="coerce")
@@ -202,7 +204,7 @@ def build():
         con.execute(f"COPY squads_df TO '{WAREHOUSE / 'squads.parquet'}' (FORMAT PARQUET)")
         print(f"squads.parquet: {len(squads)} filas (fuente: {squads_source_path.parent.parent.name})")
     else:
-        print("squads: sin datos todavia (correr etl/fetch_26worldcup_squads.py)")
+        print("squads: sin datos todavia (correr etl/fetch_espn_lpf.py)")
 
     # --- team_profile (LPF: lista de clubes de la tabla ESPN; sin ranking FIFA
     # ni campo base, que eran propios del Mundial -- quedan nulos) ---
@@ -221,7 +223,7 @@ def build():
         con.execute(f"COPY team_profile_df TO '{WAREHOUSE / 'team_profile.parquet'}' (FORMAT PARQUET)")
         print(f"team_profile.parquet: {len(team_profile)} filas")
     else:
-        print("team_profile: sin datos todavia (correr etl/fetch_26worldcup_squads.py)")
+        print("team_profile: sin datos todavia (correr etl/fetch_espn_lpf.py)")
 
     # --- goal_events (openfootball/worldcup.json, CC0 -- primer dato a nivel
     # de evento de gol del proyecto: goleador, minuto, penal/en contra). El
