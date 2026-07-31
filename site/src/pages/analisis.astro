@@ -1,18 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
-import TeamProfileRadar from "../islands/TeamProfileRadar";
-import PlayerScoutCard, { type SquadInfo, type PlayerMatchLite } from "../islands/PlayerScoutCard";
+import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
 import SquadDepthChart from "../islands/SquadDepthChart";
-import GoalsVsPhysical from "../islands/GoalsVsPhysical";
-import {
-  loadJson,
-  type DerivedPlayerMetricRow,
-  type SquadPlayerRow,
-  type GoalsVsPhysicalRow,
-  type TeamPhysicalRankingRow,
-  type TeamTacticalRankingRow,
-} from "../lib/data";
+import { loadJson, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import { normName } from "../lib/playerPositions";
 
 const base = import.meta.env.BASE_URL;
 
@@ -21,62 +13,17 @@ function loadArray<T>(filename: string): T[] {
   return Array.isArray(raw) ? raw : [];
 }
 
-const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
-const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
-const goalsVsPhysical = loadArray<GoalsVsPhysicalRow>("goals_vs_physical.json");
 
-// De qué partidos salen las métricas de cada jugador: la duda "veo datos pero
-// no sé a qué partido corresponde". Se cruzan las stats por-partido (físicas y
-// tácticas) con la lista de partidos, por match_id.
-type MatchRow = { match_id: number; home_team: string; away_team: string; home_score: number; away_score: number; match_date: string; stage?: string };
-type PlayerMatchStat = { match_id: number; team: string; player_name: string };
-const physPM = loadArray<PlayerMatchStat>("physical_player_match_stats.json");
-const tacPM = loadArray<PlayerMatchStat>("tactical_player_match_stats.json");
-const matchById = new Map(loadArray<MatchRow>("matches.json").map((m) => [m.match_id, m]));
-const fmtDay = (iso?: string) => {
-  if (!iso) return "";
-  const d = new Date(iso + "T00:00:00");
-  return isNaN(d.getTime()) ? iso : d.toLocaleDateString("es-AR", { day: "numeric", month: "short" });
-};
-const playerMatches: Record<string, PlayerMatchLite[]> = {};
-{
-  const byPlayer: Record<string, Map<number, PlayerMatchLite>> = {};
-  for (const r of [...physPM, ...tacPM]) {
-    const m = matchById.get(r.match_id);
-    if (!m) continue;
-    const key = `${r.team}|${r.player_name}`;
-    const map = (byPlayer[key] ??= new Map());
-    if (!map.has(r.match_id)) {
-      map.set(r.match_id, {
-        label: `${m.home_team} ${m.home_score}-${m.away_score} ${m.away_team}`,
-        date: fmtDay(m.match_date),
-        stage: m.stage ?? "",
-      });
-    }
-  }
-  for (const [key, map] of Object.entries(byPlayer)) {
-    // orden cronológico por match_id (creciente = más viejo primero)
-    playerMatches[key] = [...map.entries()].sort((a, b) => a[0] - b[0]).map(([, v]) => v);
-  }
-}
-
-// Las métricas derivadas usan el nombre estilo FIFA ("Amine GOUIRI") y el
-// plantel el nombre editorial ("Amine Gouiri"), así que el cruce se hace en
-// build normalizando mayúsculas y diacríticos. Es un match best-effort: si un
-// jugador no cruza, la ficha simplemente no muestra datos de plantel.
-function normName(name: string): string {
-  return name
-    .normalize("NFD")
-    .replace(/\p{M}/gu, "")
-    .replace(/ø/gi, "o")
-    .replace(/đ/gi, "d")
-    .replace(/ł/gi, "l")
-    .toLowerCase()
-    .split(/\s+/)
-    .join(" ")
-    .trim();
+// Minutos jugados en la temporada (FotMob, metric="mins_played") por
+// jugador -- único dato real de "rodaje" disponible para LPF (ESPN no
+// publica caps ni partidos de club). Se cruza por nombre normalizado, mismo
+// criterio que buildPlayerPositions.
+const minutesByPlayer: Record<string, number> = {};
+for (const r of playerMetrics) {
+  if (r.metric !== "mins_played" || r.value == null) continue;
+  minutesByPlayer[`${r.team}|${normName(r.player_name)}`] = r.value;
 }
 
 const squadByNorm = new Map(squadRows.map((r) => [`${r.team}|${normName(r.player_name)}`, r]));
@@ -101,59 +48,28 @@ for (const row of playerMetrics) {
 
 <Base
   title="Análisis avanzado"
-  description="Percentiles y z-scores por selección y jugador — el mismo tipo de lectura que usa un analista de video."
+  description="Perfil de plantel y ficha de jugador de la Liga Profesional Argentina, con índice de rendimiento sobre las categorías reales de FotMob."
 >
   <DataStatusBanner />
   <p class="eyebrow">La lupa · un caso a la vez</p>
   <h1>Analizar en profundidad</h1>
   <p class="lede">
-    Ni tabla ni duelo: acá entrás en <strong>un</strong> caso puntual y cruzás sus datos. Los goles vs. el físico de un
-    partido, el radar físico-táctico completo de una selección, el perfil del plantel y la ficha de un jugador —
-    pensado para leerse como el reporte de un analista de video. <em>Para ordenar a todos usá Rankings; para enfrentar
-    dos, Comparar.</em>
+    Ni tabla ni duelo: acá entrás en <strong>un</strong> caso puntual y cruzás sus datos. El perfil del plantel de un
+    club y la ficha de un jugador — pensado para leerse como el reporte de un analista. <em>Para ordenar a todos usá
+    Rankings; para enfrentar dos, <a href={`${base}comparar/`}>Comparar</a>.</em>
   </p>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Radar completo de selección — físico + táctico</h2>
-      <p>
-        Los <strong>12 factores</strong> de una selección del Mundial 2026 en un solo radar: físico (distancia, alta
-        intensidad, sprints, velocidad) y táctico (precisión, progresiones, remates, presión, recuperaciones, tackles,
-        intercepciones, quiebres de línea), con el <strong>índice GLOBAL</strong> de cada una. <em>Tocá el radar para ver
-        el valor oficial de cada factor.</em>
-      </p>
-    </div>
-    <div class="card">
-      <TeamProfileRadar client:only="react" physicalRows={teamPhysical} tacticalRows={teamTactical} />
-    </div>
-  </section>
-
-  {goalsVsPhysical.length > 0 && (
-    <section class="section">
-      <div class="section-head">
-        <h2>Goles vs. rendimiento físico, mismo partido</h2>
-        <p>
-          Cruce directo entre goles convertidos y datos físicos del mismo partido — ¿corre más el equipo que más
-          convierte, o no hay relación visible?
-        </p>
-      </div>
-      <div class="card">
-        <GoalsVsPhysical client:only="react" rows={goalsVsPhysical} />
-      </div>
-    </section>
-  )}
 
   {squadRows.length > 0 && (
     <section class="section">
       <div class="section-head">
-        <h2>Perfil de plantel: edad y experiencia</h2>
+        <h2>Perfil de plantel: edad y minutos jugados</h2>
         <p>
-          ¿Es un plantel joven o veterano? ¿Dónde está concentrada la experiencia? Cada punto es un jugador — edad
-          contra caps/goles, por posición. Datos reales del plantel actual de las 48 selecciones.
+          ¿Es un plantel joven o veterano? ¿Quién acumula más rodaje? Cada punto es un jugador — edad contra minutos
+          jugados en la temporada, por posición. Plantel real de los 30 clubes de la Liga Profesional.
         </p>
       </div>
       <div class="card">
-        <SquadDepthChart client:only="react" rows={squadRows} />
+        <SquadDepthChart client:only="react" rows={squadRows} minutesByPlayer={minutesByPlayer} />
       </div>
     </section>
   )}
@@ -162,12 +78,12 @@ for (const row of playerMetrics) {
     <div class="section-head">
       <h2>Ficha de jugador</h2>
       <p>
-        Índice de rendimiento en cada factor físico y táctico (remates incluido) y un <strong>GLOBAL ponderado por su
-        posición</strong>, estilo EA SPORTS FC. <em>¿Querés enfrentar dos jugadores? Está en <a href={`${base}comparar/`}>Comparar</a>.</em>
+        Índice de rendimiento en cada categoría de FotMob que el jugador tenga cargada, con un <strong>GLOBAL
+        ponderado por su posición</strong>, estilo EA SPORTS FC. <em>¿Querés enfrentar dos jugadores? Está en <a href={`${base}comparar/`}>Comparar</a>.</em>
       </p>
     </div>
     <div class="card">
-      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} matches={playerMatches} />
+      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} />
     </div>
   </section>
 </Base>

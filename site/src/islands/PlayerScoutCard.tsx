@@ -80,25 +80,12 @@ export default function PlayerScoutCard({ rows, squad, matches }: Props) {
     const shareUrl = window.location.href;
     const fmt = (v: number) => Math.round(v * 10) / 10;
 
-    const metricName = (m: string) => METRIC_LABELS[m].label.toLowerCase().replace(" / partido", " por partido");
-    const distance = playerRows.find((r) => r.metric === "distancia_promedio_km");
+    const metricName = (m: string) => METRIC_LABELS[m].label.toLowerCase();
     const known = playerRows.filter((r) => METRIC_LABELS[r.metric] && r.value != null);
     const best = [...known].sort((a, b) => (pctFor(b.metric, b.value) ?? 0) - (pctFor(a.metric, a.value) ?? 0))[0];
 
-    let insight: string;
-    if (distance) {
-      const dp = pctFor("distancia_promedio_km", distance.value);
-      insight = `corre ${fmt(distance.value)} km promedio por partido en el Mundial 2026${
-        dp != null ? ` (índice ${dp}/100 en distancia)` : ""
-      }`;
-      if (best && best.metric !== "distancia_promedio_km") {
-        insight += ` y saca índice ${pctFor(best.metric, best.value) ?? 0} en ${metricName(best.metric)}`;
-      }
-    } else if (best) {
-      insight = `registra ${fmt(best.value)}${METRIC_LABELS[best.metric].suffix} de ${metricName(best.metric)} en el Mundial 2026 (índice ${pctFor(best.metric, best.value) ?? 0}/100)`;
-    } else {
-      return null;
-    }
+    if (!best) return null;
+    const insight = `registra ${fmt(best.value)}${METRIC_LABELS[best.metric].suffix} de ${metricName(best.metric)} en la Liga Profesional (índice ${pctFor(best.metric, best.value) ?? 0}/100)`;
 
     const message = `¿Sabías que ${currentPlayer} (${team}) ${insight}? Ficha completa acá: ${shareUrl}`;
     return `https://wa.me/?text=${encodeURIComponent(message)}`;
@@ -287,7 +274,7 @@ export default function PlayerScoutCard({ rows, squad, matches }: Props) {
           style={{ height: narrow ? 330 : 380 }}
           share={{
             title: currentPlayer,
-            subtitle: `${team} · ficha física y táctica (índice de rendimiento) · Mundial 2026`,
+            subtitle: `${team} · ficha de rendimiento (índice) · Liga Profesional`,
             insight: insights[0],
             filenameBase: `scout-${team}-${currentPlayer}`,
             ratings,
@@ -374,8 +361,8 @@ export default function PlayerScoutCard({ rows, squad, matches }: Props) {
               subtitle={shareSubtitle}
               flag={flagFor(team)}
               stats={shareStats}
-              tagline="Rendimiento físico y táctico · Mundial 2026"
-              shareText={`${currentPlayer} (${team}) — ficha de rendimiento · Métricas Mundial 2026`}
+              tagline="Rendimiento de temporada · Liga Profesional"
+              shareText={`${currentPlayer} (${team}) — ficha de rendimiento · Métricas LPF`}
               filenameBase={`${team}-${currentPlayer}`}
               label="🖼️ Imagen"
             />
@@ -386,9 +373,9 @@ export default function PlayerScoutCard({ rows, squad, matches }: Props) {
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         El radar usa un índice de rendimiento (0–100) calibrado al rango de los jugadores medidos — 100 = el mejor del
         dataset, ~40 = el más flojo (estira las diferencias para que se vean, estilo EA SPORTS FC); no es un ranking
-        mundial completo. Combina métricas físicas (FIFA Training Centre) y tácticas (mismos reportes, Mundial 2026 en
-        curso) cuando ambas están disponibles para el jugador. Los datos de plantel (dorsal, club, caps, partidos y
-        goles del torneo) vienen de Wikipedia y se cruzan por nombre — puede faltar en algunos jugadores.
+        completo de la liga. Combina las categorías de FotMob (agregado de TEMPORADA, no de partido) que el jugador
+        tenga cargadas. Los datos de plantel (dorsal, club, posición) vienen del roster de ESPN y se cruzan por
+        nombre — puede faltar en algunos jugadores.
       </p>
     </div>
   );

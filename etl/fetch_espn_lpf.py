@@ -109,6 +109,13 @@ SQUADS_COLS = ["team", "player_name", "birth_date", "age_years", "market_value_e
               "club", "jersey_number", "caps", "career_goals", "captain",
               "wc2026_apps", "wc2026_goals", "wc2026_yellow", "wc2026_red", "source", "retrieved_at"]
 
+# ESPN devuelve la posición del roster como una sola letra (G/D/M/F) -- se
+# mapea acá al código de 2 letras (GK/DF/MF/FW) que usa el resto del proyecto
+# (pesos del índice global, SquadDepthChart, etc.), así el dato ya sale
+# normalizado del fetcher en vez de necesitar el mismo mapeo repetido en cada
+# consumidor del lado del sitio.
+_POSITION_MAP = {"G": "GK", "D": "DF", "M": "MF", "F": "FW"}
+
 # Nombre ESPN -> clave interna del proxy de peligrosidad / stats de equipo.
 _STAT_KEYS = {
     "possessionPct": "possession",
@@ -496,7 +503,7 @@ def _fetch_squads(retrieved_at: str) -> list[dict]:
             name = a.get("fullName") or a.get("displayName")
             if not name:
                 continue
-            pos = (a.get("position") or {}).get("abbreviation")
+            pos = _POSITION_MAP.get((a.get("position") or {}).get("abbreviation"))
             jersey = a.get("jersey")
             dob = (a.get("dateOfBirth") or "")[:10] or None
             rows.append({

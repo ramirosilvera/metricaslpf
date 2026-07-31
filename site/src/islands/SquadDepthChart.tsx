@@ -2,26 +2,25 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { SquadPlayerRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
-import { flagFor } from "../lib/flags";
+import { normName } from "../lib/playerPositions";
 
-// Perfil de plantel: edad vs. experiencia (caps) por jugador, color por
-// posición. Deja ver de un vistazo si una selección es joven o veterana, y
-// dónde está concentrada su experiencia. Todo dato real (26worldcup/Wikipedia);
-// el valor de mercado NO se grafica porque esa columna todavía viene vacía.
+// Perfil de plantel: edad vs. minutos jugados en la temporada, por jugador,
+// color por posición. Deja ver de un vistazo si un club es joven o veterano,
+// y quiénes acumulan más rodaje. Plantel real (roster de ESPN); minutos
+// jugados reales (FotMob, agregado de temporada -- ver etl/fetch_fotmob_lpf.py,
+// cruzado por nombre normalizado). ESPN no publica caps ni goles de carrera
+// para esta liga, así que esas columnas no se muestran (siempre vienen nulas).
 const POS_COLORS: Record<string, string> = {};
 const POS_ORDER = ["GK", "DF", "MF", "FW"];
-
-const Y_METRICS: { key: keyof SquadPlayerRow; label: string }[] = [
-  { key: "caps", label: "Partidos internacionales (caps)" },
-  { key: "career_goals", label: "Goles de carrera" },
-  { key: "wc2026_apps", label: "Partidos jugados · Mundial 2026" },
-];
+const POS_LABEL: Record<string, string> = { GK: "Arquero", DF: "Defensor", MF: "Mediocampista", FW: "Delantero" };
 
 interface Props {
   rows: SquadPlayerRow[];
+  /** Minutos jugados en la temporada (FotMob), clave `${team}|${normName(player_name)}`. */
+  minutesByPlayer?: Record<string, number>;
 }
 
-export default function SquadDepthChart({ rows }: Props) {
+export default function SquadDepthChart({ rows, minutesByPlayer = {} }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -31,13 +30,15 @@ export default function SquadDepthChart({ rows }: Props) {
   POS_COLORS.FW = tokens["--series-6"];
 
   const teams = useMemo(() => [...new Set(rows.map((r) => r.team))].sort(), [rows]);
-  const [team, setTeam] = useState(teams.includes("Argentina") ? "Argentina" : teams[0] ?? "");
-  const [yKey, setYKey] = useState<string>(Y_METRICS[0].key as string);
-  const yMetric = Y_METRICS.find((m) => m.key === yKey)!;
+  const [team, setTeam] = useState(teams.includes("Boca Juniors") ? "Boca Juniors" : teams[0] ?? "");
+  const effTeam = teams.includes(team) ? team : teams[0] ?? "";
 
   const squad = useMemo(
-    () => rows.filter((r) => r.team === team && r.age_years != null),
-    [rows, team],
+    () =>
+      rows
+        .filter((r) => r.team === effTeam && r.age_years != null)
+        .map((r) => ({ ...r, minutes: minutesByPlayer[`${r.team}|${normName(r.player_name)}`] ?? 0 })),
+    [rows, effTeam, minutesByPlayer],
   );
 
   const stats = useMemo(() => {
@@ -45,42 +46,33 @@ export default function SquadDepthChart({ rows }: Props) {
     const ages = squad.map((p) => p.age_years as number);
     const avgAge = ages.reduce((a, b) => a + b, 0) / ages.length;
     const youngest = squad.reduce((m, p) => ((p.age_years as number) < (m.age_years as number) ? p : m));
-    const oldest = squad.reduce((m, p) => ((p.age_years as number) > (m.age_years as number) ? p : m));
-    const capsVals = squad.map((p) => p.caps ?? 0);
-    const mostCapped = squad.reduce((m, p) => ((p.caps ?? 0) > (m.caps ?? 0) ? p : m));
-    return {
-      n: squad.length,
-      avgAge,
-      youngest,
-      oldest,
-      avgCaps: capsVals.reduce((a, b) => a + b, 0) / capsVals.length,
-      mostCapped,
-    };
+    const mostMinutes = squad.reduce((m, p) => (p.minutes > m.minutes ? p : m));
+    return { n: squad.length, avgAge, youngest, mostMinutes };
   }, [squad]);
 
   const seriesByPos = useMemo(() => {
     return POS_ORDER.filter((pos) => squad.some((p) => p.position === pos)).map((pos) => ({
-      name: pos,
+      name: POS_LABEL[pos],
       type: "scatter" as const,
       color: POS_COLORS[pos],
-      symbolSize: (d: any) => 10 + Math.min(22, Math.sqrt(Math.max(0, d[2])) * 2.2),
+      symbolSize: (d: any) => 8 + Math.min(24, Math.sqrt(Math.max(0, d[2])) * 1.4),
       data: squad
         .filter((p) => p.position === pos)
-        .map((p) => [p.age_years, (p[yKey as keyof SquadPlayerRow] as number) ?? 0, (p[yKey as keyof SquadPlayerRow] as number) ?? 0, p.player_name, p.jersey_number, p.captain]),
+        .map((p) => [p.age_years, p.minutes, p.minutes, p.player_name, p.jersey_number, p.captain]),
     }));
-  }, [squad, yKey]);
+  }, [squad]);
 
   const option = {
-    grid: { left: narrow ? 44 : 60, right: narrow ? 14 : 30, top: 30, bottom: narrow ? 54 : 46 },
-    legend: { top: 0, textStyle: { color: tokens["--text-secondary"] }, data: POS_ORDER.filter((pos) => squad.some((p) => p.position === pos)) },
+    grid: { left: narrow ? 44 : 64, right: narrow ? 14 : 30, top: 30, bottom: narrow ? 54 : 46 },
+    legend: { top: 0, textStyle: { color: tokens["--text-secondary"] }, data: POS_ORDER.filter((pos) => squad.some((p) => p.position === pos)).map((pos) => POS_LABEL[pos]) },
     tooltip: {
-        confine: true, // el tooltip no se sale de la pantalla en móvil
+      confine: true,
       backgroundColor: tokens["--surface-1"],
       borderColor: tokens["--gridline"],
       textStyle: { color: tokens["--text-primary"] },
       formatter: (p: any) => {
-        const [age, y, , name, jersey, captain] = p.data;
-        return `<strong>${name}</strong>${jersey != null ? ` #${jersey}` : ""}${captain ? " (C)" : ""}<br/>${p.seriesName} · ${age} años<br/>${yMetric.label}: ${y}`;
+        const [age, minutes, , name, jersey, captain] = p.data;
+        return `<strong>${name}</strong>${jersey != null ? ` #${jersey}` : ""}${captain ? " (C)" : ""}<br/>${p.seriesName} · ${age} años<br/>${minutes} minutos jugados`;
       },
     },
     xAxis: {
@@ -95,7 +87,7 @@ export default function SquadDepthChart({ rows }: Props) {
     yAxis: {
       type: "value",
       scale: true,
-      name: narrow ? "" : yMetric.label,
+      name: narrow ? "" : "minutos jugados",
       nameTextStyle: { color: tokens["--text-muted"] },
       axisLine: { lineStyle: { color: tokens["--baseline"] } },
       axisLabel: { color: tokens["--text-muted"] },
@@ -111,17 +103,10 @@ export default function SquadDepthChart({ rows }: Props) {
   return (
     <div>
       <div className="controls-row">
-        <select value={team} onChange={(e) => setTeam(e.target.value)}>
+        <select value={effTeam} onChange={(e) => setTeam(e.target.value)} aria-label="Club">
           {teams.map((t) => (
             <option key={t} value={t}>
               {t}
-            </option>
-          ))}
-        </select>
-        <select value={yKey} onChange={(e) => setYKey(e.target.value)}>
-          {Y_METRICS.map((m) => (
-            <option key={m.key as string} value={m.key as string}>
-              {m.label}
             </option>
           ))}
         </select>
@@ -142,8 +127,8 @@ export default function SquadDepthChart({ rows }: Props) {
             <div className="label">más joven · {stats.youngest.player_name}</div>
           </div>
           <div className="stat-tile">
-            <div className="value">{stats.mostCapped.caps}</div>
-            <div className="label">más internacional · {stats.mostCapped.player_name}</div>
+            <div className="value">{stats.mostMinutes.minutes}</div>
+            <div className="label">más minutos · {stats.mostMinutes.player_name}</div>
           </div>
         </div>
       )}
@@ -152,15 +137,15 @@ export default function SquadDepthChart({ rows }: Props) {
         option={option}
         style={{ height: narrow ? 330 : 400 }}
         share={{
-          title: `${team} · ${yMetric.label}`,
-          subtitle: "Plantel: edad vs. trayectoria · Mundial 2026",
-          filenameBase: `plantel-${team}`,
+          title: `${effTeam} · edad vs. minutos jugados`,
+          subtitle: "Plantel · Liga Profesional",
+          filenameBase: `plantel-${effTeam}`,
         }}
       />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-        {flagFor(team)} {team} — fuente: 26worldcup (mirror de Wikipedia, CC BY-SA). Cada punto es un jugador: edad en
-        el eje horizontal, experiencia en el vertical, color por posición y tamaño proporcional al valor elegido. El
-        valor de mercado no se muestra porque esa columna todavía viene vacía en la fuente.
+        {effTeam} — plantel: roster de ESPN. Minutos jugados: FotMob (agregado de temporada, cruzado por nombre). Cada
+        punto es un jugador: edad en el eje horizontal, minutos jugados en el vertical, color por posición. ESPN no
+        publica caps ni goles de carrera para esta liga.
       </p>
     </div>
   );
