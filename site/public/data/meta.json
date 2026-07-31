@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T21:19:43.179858+00:00",
+  "generated_at": "2026-07-31T21:38:38.290144+00:00",
   "confidence_legend": {
     "alta": "Dato de partido real (ESPN), con cobertura alta sobre la temporada en curso.",
     "media": "Fuente real pero con cobertura parcial, o dato agregado/proxy (no oficial-oficial).",
@@ -24,7 +24,7 @@
       "coverage_detail": "282 partidos con estadística cargada de 2026",
       "method": "Remates, posesión-proxy, pases y precisión, faltas, córners, offsides y atajadas por equipo y partido.",
       "confidence": "alta",
-      "as_of": "2026-07-31T21:19:43.179858+00:00",
+      "as_of": "2026-07-31T21:38:38.290144+00:00",
       "status": "ok"
     },
     "physical_performance": {
@@ -34,7 +34,7 @@
       "coverage_pct": null,
       "method": "No existe una fuente gratuita de datos físicos/GPS (distancia, sprints, velocidad punta) para la Liga Profesional Argentina. Es data propietaria de cada club vía su proveedor de hardware (Catapult/STATSports), nunca publicada por las ligas. Se investigó a fondo: fbref, WhoScored y SofaScore bloquean el acceso automatizado (Cloudflare); API-Football, ESPN, FotMob y los sitios oficiales de AFA/Liga Profesional no publican este dato para ninguna competición.",
       "confidence": null,
-      "as_of": "2026-07-31T21:19:43.179858+00:00",
+      "as_of": "2026-07-31T21:38:38.290144+00:00",
       "status": "missing"
     },
     "player_match_stats": {
@@ -45,8 +45,21 @@
       "coverage_detail": "0 partidos -- ESPN no puebla esta sección para esta competición",
       "method": "boxscore.players del endpoint de resumen de partido; vino vacío en todas las pruebas realizadas.",
       "confidence": null,
-      "as_of": "2026-07-31T21:19:43.179858+00:00",
+      "as_of": "2026-07-31T21:38:38.290144+00:00",
       "status": "missing"
+    },
+    "player_season_stats": {
+      "provider": "FotMob",
+      "provider_url": "https://www.fotmob.com/api/data/leagues?id=112",
+      "license": "API pública sin key ni login, uso no documentado formalmente (misma API que usa el sitio fotmob.com)",
+      "license_short": "FotMob (API pública, sin key)",
+      "coverage": "Estadística individual agregada de TEMPORADA (no de partido): goles, asistencias, xG, xGOT, xA, remates, pases, tackles, intercepciones, atajadas, tarjetas y más.",
+      "coverage_detail": "898 jugadores de 30/30 clubes · 37 categorías de estadística",
+      "coverage_pct": 100,
+      "method": "37 categorías de líderes de estadística por liga, cada una con su lista completa de temporada (no solo el top-3 visible en la web). Es la única fuente gratuita encontrada con rendimiento real por jugador para esta liga -- ESPN no publica boxscore por partido acá (ver player_match_stats arriba). Al ser agregado de TEMPORADA y no de partido, no es directamente comparable con las tablas por-partido del resto del proyecto.",
+      "confidence": "media",
+      "as_of": "2026-07-31T21:38:38.290144+00:00",
+      "status": "ok"
     },
     "squad_ages": {
       "provider": "ESPN",
@@ -57,7 +70,7 @@
       "coverage_pct": 100,
       "method": "Endpoint de roster de ESPN por club. No incluye valor de mercado, caps ni estadística individual.",
       "confidence": "alta",
-      "as_of": "2026-07-31T21:11:22.133519+00:00",
+      "as_of": "2026-07-31T21:37:45.728185+00:00",
       "status": "ok"
     },
     "team_profile": {
@@ -69,7 +82,7 @@
       "coverage_pct": 100,
       "method": "Standings oficiales de ESPN para la Liga Profesional.",
       "confidence": "alta",
-      "as_of": "2026-07-31T21:12:06.814187+00:00",
+      "as_of": "2026-07-31T21:38:13.114305+00:00",
       "status": "ok"
     },
     "derived_metrics": {
@@ -78,7 +91,7 @@
       "coverage_detail": "percentil y z-score por métrica dentro de cada temporada; k-means (5 métricas tácticas) para estilo",
       "method": "Percentil y z-score se calculan DENTRO de la misma temporada (2026 vs 2026). El estilo de juego es un k-means sobre 5 métricas tácticas estandarizadas: heurística descriptiva, no una clasificación validada.",
       "confidence": "derivada",
-      "as_of": "2026-07-31T21:19:43.179858+00:00",
+      "as_of": "2026-07-31T21:38:38.290144+00:00",
       "status": "ok"
     },
     "goal_events": {
@@ -91,7 +104,7 @@
       "method": "Eventos con flag scoringPlay del resumen de partido de ESPN, filtrado por goleador identificable.",
       "confidence": "alta",
       "cross_checked_against": "marcador final del mismo partido (ambos publicados por ESPN)",
-      "as_of": "2026-07-31T21:11:22.133519+00:00",
+      "as_of": "2026-07-31T21:37:45.728185+00:00",
       "status": "ok",
       "matches_with_goals": 245,
       "matches_played_total": 282
