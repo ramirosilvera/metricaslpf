@@ -1,33 +1,33 @@
 :root {
-  /* Identidad "cancha": superficies claras con tinte menta (césped al sol) y
-     un verde de marca más vivo y fresco. Las superficies suben en luminosidad
-     respecto de la versión "broadcast" anterior para sentir más aire. */
+  /* Identidad "Liga Profesional": superficies claras con un tinte celeste muy
+     tenue (cielo argentino) y un azul de marca vivo. Reskin propio de la LPF
+     —no reproduce la marca oficial— con azul + navy + oro de trofeo. */
   --surface-1: #ffffff;
-  --surface-2: #e9f4ec;
-  --page-plane: #eef8f1;
-  --text-primary: #08160e;
-  --text-secondary: #445249;
-  /* #5f7367 mantiene el tono "apagado" pero cumple WCAG AA (>=4.5) sobre
-     page-plane y surface-2 (fondos con tinte verde claro) */
-  --text-muted: #5f7367;
-  --gridline: #d9eade;
-  --baseline: #bcd6c3;
-  --border: rgba(8, 22, 14, 0.1);
+  --surface-2: #eaf1fb;
+  --page-plane: #f1f6fd;
+  --text-primary: #0a1424;
+  --text-secondary: #43506a;
+  /* #5d6b83 mantiene el tono "apagado" pero cumple WCAG AA (>=4.5) sobre
+     page-plane y surface-2 (fondos con tinte celeste claro) */
+  --text-muted: #5d6b83;
+  --gridline: #d7e3f4;
+  --baseline: #bcd0ec;
+  --border: rgba(10, 20, 36, 0.1);
 
-  /* identidad de marca "cancha/césped" -- separada de la paleta de datos
-     (--series-*), que se mantiene fija para no romper la codificación de
-     color de los charts. brand = verde césped vivo; brand-strong queda más
-     oscuro para texto blanco AA y para texto de marca sobre fondo claro. */
-  --brand: #15a94f;
-  --brand-strong: #0a7a39;
-  --brand-soft: #d3f4de;
+  /* identidad de marca "cancha nocturna / celeste" -- separada de la paleta de
+     datos (--series-*), que se mantiene fija para no romper la codificación de
+     color de los charts. brand = azul LPF vivo; brand-strong queda más oscuro
+     (navy) para texto blanco AA y para texto de marca sobre fondo claro. */
+  --brand: #1d5fd6;
+  --brand-strong: #123a86;
+  --brand-soft: #dce8fc;
   --brand-contrast: #ffffff;
-  /* segundo verde para degradados de "campo" (más azulado/profundo) */
-  --brand-deep: #0e7a5a;
+  /* segundo azul (navy profundo) para degradados de "campo" */
+  --brand-deep: #0b2d6b;
   /* línea de cal de la cancha */
   --pitch-line: rgba(255, 255, 255, 0.9);
-  --accent: #f59e0b;
-  --accent-soft: #fdf0d3;
+  --accent: #f4a900;
+  --accent-soft: #fdefcf;
 
   /* resultado de partido -- mismo lenguaje de color en toda la app */
   --win: #12a150;
@@ -61,26 +61,26 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Modo oscuro "cancha de noche": superficies con tinte verde muy oscuro
-       (no gris neutro) para que la identidad de césped se sostenga. */
-    --surface-1: #0f1a15;
-    --surface-2: #17241d;
-    --page-plane: #060d09;
-    --text-primary: #eef6f0;
-    --text-secondary: #b7c6bc;
-    --text-muted: #7c8d83;
-    --gridline: #223029;
-    --baseline: #34443a;
+    /* Modo oscuro "cancha de noche": superficies con tinte navy muy oscuro
+       (no gris neutro) para que la identidad celeste/azul se sostenga. */
+    --surface-1: #101a2e;
+    --surface-2: #172441;
+    --page-plane: #070c17;
+    --text-primary: #eef3fb;
+    --text-secondary: #b6c2d8;
+    --text-muted: #7c8aa3;
+    --gridline: #223353;
+    --baseline: #34456a;
     --border: rgba(255, 255, 255, 0.1);
 
-    --brand: #33e878;
-    --brand-strong: #6cf29c;
-    --brand-soft: rgba(51, 232, 120, 0.15);
-    --brand-contrast: #04150b;
-    --brand-deep: #1fae7f;
-    --pitch-line: rgba(226, 255, 238, 0.32);
-    --accent: #fbbf24;
-    --accent-soft: rgba(251, 191, 36, 0.14);
+    --brand: #4d9bff;
+    --brand-strong: #86bcff;
+    --brand-soft: rgba(77, 155, 255, 0.16);
+    --brand-contrast: #04122b;
+    --brand-deep: #2f6fd6;
+    --pitch-line: rgba(226, 240, 255, 0.32);
+    --accent: #ffc233;
+    --accent-soft: rgba(255, 194, 51, 0.14);
 
     --win: #2ee671;
     --draw: #9aa5a0;

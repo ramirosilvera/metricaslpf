@@ -1,7 +1,7 @@
 {
-  "name": "Métricas Mundial 2026",
-  "short_name": "Métricas M26",
-  "description": "Análisis abierto del rendimiento físico y táctico en el Mundial 2026. 100% datos abiertos y metodología a la vista.",
+  "name": "Métricas LPF",
+  "short_name": "Métricas LPF",
+  "description": "Análisis abierto del rendimiento de los clubes de la Liga Profesional Argentina. 100% datos abiertos y metodología a la vista.",
   "lang": "es",
   "dir": "ltr",
   "start_url": "/metricasmundial2026/",
@@ -9,8 +9,8 @@
   "id": "/metricasmundial2026/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#060d09",
-  "theme_color": "#15a94f",
+  "background_color": "#070c17",
+  "theme_color": "#1d5fd6",
   "categories": ["sports", "news", "education"],
   "icons": [
     {

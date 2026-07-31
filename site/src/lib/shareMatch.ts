@@ -7,9 +7,9 @@ import type { MatchSummary } from "./data";
 
 const W = 1080;
 const PAD = 72;
-const BRAND = "#15a94f";
-const BRAND_DEEP = "#0e7a5a";
-const FOOTER = "#043c1e";
+const BRAND = "#1d5fd6";
+const BRAND_DEEP = "#0b2d6b";
+const FOOTER = "#0b2d6b";
 const WHITE = "#ffffff";
 const SOFT = "rgba(255,255,255,0.92)";
 const SOFTER = "rgba(255,255,255,0.66)";
@@ -87,7 +87,7 @@ export function composeMatchCard(m: MatchSummary, url?: string): Promise<Blob> {
       ctx.textAlign = "left";
       ctx.fillStyle = SOFTER;
       ctx.font = `700 26px system-ui, -apple-system, Roboto, sans-serif`;
-      ctx.fillText("MÉTRICAS MUNDIAL 2026", PAD, 84);
+      ctx.fillText("MÉTRICAS LPF", PAD, 84);
       ctx.textAlign = "right";
       ctx.fillStyle = SOFT;
       ctx.font = `600 26px system-ui, -apple-system, Roboto, sans-serif`;
@@ -232,7 +232,7 @@ export async function shareMatch(m: MatchSummary): Promise<ShareResult> {
   const title = `${m.home_team} ${m.home_score}-${m.away_score} ${m.away_team}`;
   return shareCardBlob(blob, {
     filename: `${slug(`${m.home_team}-${m.away_team}`)}-mundial-2026.png`,
-    title: `${title} · Métricas Mundial 2026`,
+    title: `${title} · Métricas LPF`,
     text: `${title} — ${m.insight}`,
     url,
   });

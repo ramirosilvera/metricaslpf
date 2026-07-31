@@ -1,5 +1,5 @@
 /*
- * Service worker mínimo de Métricas Mundial 2026.
+ * Service worker mínimo de Métricas LPF.
  *
  * Objetivo: hacer la app instalable (PWA) y dar un "app shell" offline, SIN
  * arriesgar la carga de datos. Por eso es deliberadamente conservador:
@@ -17,10 +17,10 @@
  * Resultado: nunca se sirve dato/WASM viejo desde caché; si algo falla, el peor
  * caso es que el SW no aporte (comportamiento idéntico a no tenerlo).
  */
-// v2: se sube la versión para purgar cualquier app-shell/CSS viejo cacheado en
-// dispositivos (el handler de 'activate' borra las caches que no sean esta), así
-// un layout viejo no queda pegado en el navegador del usuario.
-const CACHE = "mm26-shell-v2";
+// lpf-v1: se sube la versión al rebrand LPF para purgar el app-shell/CSS verde
+// del Mundial cacheado en dispositivos (el handler de 'activate' borra las
+// caches que no sean esta), así el layout viejo no queda pegado en el navegador.
+const CACHE = "lpf-shell-v1";
 
 // Rutas que el SW NO debe tocar bajo ninguna circunstancia.
 const BYPASS = /\/(data|data-parquet)\/|\.(parquet|wasm|json|csv)(\?|$)|duckdb|\.worker\./i;

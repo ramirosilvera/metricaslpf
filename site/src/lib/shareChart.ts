@@ -16,9 +16,9 @@ const PAD = 64;
 
 // Paleta fija de marca (igual que shareCard.ts) para que la imagen se vea
 // siempre consistente sin importar el tema del visitante.
-const BRAND = "#15a94f";
-const BRAND_STRONG = "#0a7a39";
-const FOOTER = "#043c1e";
+const BRAND = "#1d5fd6";
+const BRAND_STRONG = "#123a86";
+const FOOTER = "#0b2d6b";
 const WHITE = "#ffffff";
 const SOFT = "rgba(255,255,255,0.92)";
 const SOFTER = "rgba(255,255,255,0.66)";
@@ -275,7 +275,7 @@ export function composeChartCard(data: ChartCardData): Promise<Blob> {
         ctx.textBaseline = "alphabetic";
         ctx.fillStyle = SOFTER;
         ctx.font = `700 28px system-ui, -apple-system, Roboto, sans-serif`;
-        ctx.fillText("MÉTRICAS MUNDIAL 2026", PAD, kickerY);
+        ctx.fillText("MÉTRICAS LPF", PAD, kickerY);
 
         ctx.fillStyle = WHITE;
         ctx.font = `800 ${titlePx}px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;

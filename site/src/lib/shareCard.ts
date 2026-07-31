@@ -28,15 +28,15 @@ export interface ShareCardData {
 // Paleta fija de marca (independiente del tema del visitante) para que la
 // imagen compartida se vea siempre igual.
 const C = {
-  brand: "#15a94f",
-  brandStrong: "#0a7a39",
-  ink: "#05170c",
+  brand: "#1d5fd6",
+  brandStrong: "#123a86",
+  ink: "#050d1a",
   white: "#ffffff",
   soft: "rgba(255,255,255,0.90)",
   softer: "rgba(255,255,255,0.62)",
   tile: "rgba(255,255,255,0.10)",
   tileBorder: "rgba(255,255,255,0.22)",
-  footer: "#043c1e",
+  footer: "#0b2d6b",
 };
 
 const W = 1080;
@@ -98,7 +98,7 @@ export function renderShareCard(data: ShareCardData): Promise<Blob> {
   ctx.textAlign = "left";
   ctx.fillStyle = C.softer;
   ctx.font = `700 30px system-ui, -apple-system, Roboto, sans-serif`;
-  ctx.fillText("MÉTRICAS MUNDIAL 2026", PAD, 120);
+  ctx.fillText("MÉTRICAS LPF", PAD, 120);
 
   // Bandera (emoji grande). Baseline en 250 -> ocupa ~150-250.
   if (data.flag) {

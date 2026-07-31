@@ -9,11 +9,11 @@ interface Props {
   image?: string;
 }
 
-const { title, description = "Análisis abierto del rendimiento físico y táctico en el Mundial 2026.", image } = Astro.props;
+const { title, description = "Análisis abierto del rendimiento de los clubes de la Liga Profesional Argentina.", image } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const origin = "https://ramirosilvera.github.io";
 
-const fullTitle = `${title} · Métricas Mundial 2026`;
+const fullTitle = `${title} · Métricas LPF`;
 // En build estático Astro.url ya refleja site + base (astro.config.mjs), así que
 // la URL canónica se arma contra el origin conocido de GitHub Pages.
 const canonicalUrl = new URL(Astro.url.pathname, origin).href;
@@ -37,7 +37,7 @@ const partidosItem = { href: `${base}partidos/`, label: "Partidos" };
 const analizarItem = { href: `${base}analisis/`, label: "Analizar" };
 
 const rankingsItems = [
-  { href: `${base}selecciones/`, label: "Selecciones" },
+  { href: `${base}clubes/`, label: "Clubes" },
   { href: `${base}jugadores/`, label: "Jugadores" },
   { href: `${base}goleadores/`, label: "Goleadores" },
 ];
@@ -56,13 +56,13 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{title} · Métricas Mundial 2026</title>
+    <title>{title} · Métricas LPF</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <meta name="theme-color" content="#15a94f" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#060d09" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#1d5fd6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#070c17" media="(prefers-color-scheme: dark)" />
 
-    <meta property="og:site_name" content="Métricas Mundial 2026" />
+    <meta property="og:site_name" content="Métricas LPF" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -71,19 +71,19 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Métricas Mundial 2026 — análisis físico y táctico con datos abiertos" />
+    <meta property="og:image:alt" content="Métricas LPF — análisis de la Liga Profesional Argentina con datos abiertos" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%2315a94f%22/><g stroke=%22white%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><circle cx=%2250%22 cy=%2252%22 r=%2230%22/><path d=%22M50 40 L62.4 48 L57.6 62.5 L42.4 62.5 L37.6 48 Z%22 fill=%22white%22 stroke=%22none%22/><path d=%22M50 40 V22 M62.4 48 L78.5 42.7 M57.6 62.5 L67.6 76.3 M42.4 62.5 L32.4 76.3 M37.6 48 L21.5 42.7%22/></g></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%231d5fd6%22/><g stroke=%22white%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><circle cx=%2250%22 cy=%2252%22 r=%2230%22/><path d=%22M50 40 L62.4 48 L57.6 62.5 L42.4 62.5 L37.6 48 Z%22 fill=%22white%22 stroke=%22none%22/><path d=%22M50 40 V22 M62.4 48 L78.5 42.7 M57.6 62.5 L67.6 76.3 M42.4 62.5 L32.4 76.3 M37.6 48 L21.5 42.7%22/></g></svg>" />
     <link rel="icon" type="image/png" sizes="32x32" href={`${base}favicon-32.png`} />
     <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
     <link rel="manifest" href={`${base}manifest.webmanifest`} />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Métricas M26" />
+    <meta name="apple-mobile-web-app-title" content="Métricas LPF" />
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -103,8 +103,8 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
             </svg>
           </span>
           <span class="brand-text">
-            <strong>Métricas Mundial 2026</strong>
-            <span>análisis físico y táctico · 100% datos abiertos</span>
+            <strong>Métricas LPF</strong>
+            <span>Liga Profesional Argentina · 100% datos abiertos</span>
           </span>
         </a>
 
@@ -154,7 +154,7 @@ const secondaryActive = secondaryItems.some((i) => isActive(i.href));
       <div class="wrap">
         <p>
           Proyecto abierto, sin fines de lucro. Código y datos versionados en <a href="https://github.com/ramirosilvera/metricasmundial2026" target="_blank" rel="noreferrer">GitHub</a>.
-          Fuentes: FIFA Training Centre, StatsBomb Open Data, openfootball (CC0) y 26worldcup/Wikipedia. Ver <a href={`${base}fuentes/`}>fuentes</a> y <a href={`${base}metodologia/`}>metodología</a> para
+          Fuentes: API-Football (Liga Profesional, temporada actual) y Wikipedia. Ver <a href={`${base}fuentes/`}>fuentes</a> y <a href={`${base}metodologia/`}>metodología</a> para
           licencias, cobertura, limitaciones y sesgos conocidos.
         </p>
       </div>
