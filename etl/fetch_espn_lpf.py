@@ -322,33 +322,52 @@ def _parse_player_stats(summary: dict, match_id: str, retrieved_at: str) -> tupl
     return apps, tactical
 
 
+def _extract_goal_player_name(ev: dict) -> str | None:
+    """Busca el nombre del goleador en las formas en que ESPN lo referencia
+    dentro de un evento de jugada. Devuelve None si no se puede identificar
+    con certeza -- no se inventa ni se deja un player_name vacío."""
+    for a in ev.get("athletesInvolved") or []:
+        name = a.get("displayName")
+        if name:
+            return name
+    for p in ev.get("participants") or []:
+        athlete = p.get("athlete") or {}
+        name = athlete.get("displayName")
+        if name:
+            return name
+    athlete = ev.get("athlete") or {}
+    return athlete.get("displayName") or None
+
+
 def _parse_goal_events(summary: dict, match_id: str, home_team: str, away_team: str, retrieved_at: str) -> list[dict]:
-    """Intenta leer los goles del partido desde las claves que ESPN suele usar
-    para jugadas clave ('keyEvents'/'scoringPlays'/'plays'). Si ninguna está
-    presente, devuelve lista vacía -- el resultado del partido (matches.csv)
-    no depende de esto, solo se pierde el detalle de goleador/minuto."""
+    """Lee los goles del partido desde las claves que ESPN usa para jugadas
+    clave ('keyEvents'/'scoringPlays'/'plays'). Filtra por el flag real
+    'scoringPlay' (NO por substring de texto -- "Goal Kick" contiene "goal"
+    y no es un gol, así que un match de texto ingenuo genera falsos
+    positivos sin goleador real). Si un evento marcado como scoringPlay no
+    trae un goleador identificable, se DESCARTA esa fila en vez de dejar
+    player_name vacío -- un gol sin autor conocido no es un dato utilizable,
+    y goal_events exige player_name no nulo (ver GoalEventsSchema)."""
     candidates = summary.get("keyEvents") or summary.get("scoringPlays") or summary.get("plays") or []
     rows: list[dict] = []
     for ev in candidates:
-        text = (ev.get("type") or {}).get("text") or ev.get("shortText") or ""
-        if "goal" not in text.lower() and not ev.get("scoringPlay"):
+        if ev.get("scoringPlay") is not True:
             continue
-        team_id = ((ev.get("team") or {}).get("id"))
+        player_name = _extract_goal_player_name(ev)
+        if not player_name:
+            continue
+        text = ((ev.get("type") or {}).get("text") or ev.get("shortText") or "").lower()
         team_name = None
-        # ESPN a veces referencia el equipo por id; se resuelve contra
-        # home/away si no viene el nombre directo.
         if isinstance(ev.get("team"), dict) and ev["team"].get("displayName"):
             team_name = ev["team"]["displayName"]
-        athlete = (ev.get("athletesInvolved") or [{}])
-        player_name = athlete[0].get("displayName") if athlete else ev.get("athlete", {}).get("displayName", "")
         clock = ev.get("clock") or {}
         minute_display = clock.get("displayValue") or ""
-        own_goal = "own goal" in text.lower()
-        penalty = "penalty" in text.lower()
+        own_goal = "own goal" in text
+        penalty = "penalty" in text
         rows.append({
             "match_id": match_id,
             "team": team_name or home_team,
-            "player_name": player_name or "",
+            "player_name": player_name,
             "minute": None,
             "minute_stoppage": None,
             "minute_display": minute_display,
