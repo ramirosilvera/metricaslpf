@@ -49,8 +49,6 @@ def build():
     has_matches = (WAREHOUSE / "matches.parquet").exists()
     has_tactical = (WAREHOUSE / "team_match_stats_tactical.parquet").exists()
     has_appearances = (WAREHOUSE / "player_match_appearances.parquet").exists()
-    has_physical = (WAREHOUSE / "physical_match_stats.parquet").exists()
-    has_physical_players = (WAREHOUSE / "physical_player_match_stats.parquet").exists()
     has_squads = (WAREHOUSE / "squads.parquet").exists()
     has_team_profile = (WAREHOUSE / "team_profile.parquet").exists()
     has_goal_events = (WAREHOUSE / "goal_events.parquet").exists()
@@ -144,144 +142,41 @@ def build():
             },
         )
 
-    if has_physical:
-        physical = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')").df()
-        if has_matches:
-            matches_for_physical = con.execute(f"SELECT match_id, season, stage, home_team, away_team, match_date FROM read_parquet('{WAREHOUSE / 'matches.parquet'}')").df()
-            physical = physical.merge(matches_for_physical, on="match_id", how="left")
-        _write_json("physical_match_stats.json", _records(physical))
-    else:
-        _write_json(
-            "physical_match_stats.json",
-            {
-                "status": "pending_first_scrape",
-                "note": (
-                    "Todavia no hay datos fisicos cargados. Se completan corriendo "
-                    "etl/scrape_fifa_training_centre.py en GitHub Actions (requiere red sin "
-                    "restricciones; no corre en el entorno de desarrollo sandboxed)."
-                ),
-                "rows": [],
-            },
-        )
+    # Físico (distancia, sprints, velocidad punta): NO existe para Métricas LPF.
+    # Se investigó a fondo (fbref, WhoScored, SofaScore, API-Football, FotMob,
+    # sitios oficiales AFA/LPF) y ninguna fuente gratuita lo publica -- es data
+    # propietaria de cada club vía su proveedor de hardware (Catapult/
+    # STATSports). status="missing" (no "pending_first_scrape": no es que
+    # falte correr algo, es que la fuente no existe).
+    _write_json(
+        "physical_match_stats.json",
+        {
+            "status": "missing",
+            "note": (
+                "No existe una fuente gratuita de datos físicos/GPS (distancia, sprints, velocidad "
+                "punta) para la Liga Profesional Argentina. Es data propietaria de cada club vía su "
+                "proveedor de hardware (Catapult/STATSports), nunca publicada por las ligas."
+            ),
+            "rows": [],
+        },
+    )
 
-    # --- Rendimiento fisico COLECTIVO del Mundial 2026 (todas las selecciones) ---
-    # El sitio ya tenia el fisico por jugador, pero el fisico a nivel equipo de
-    # las 48 selecciones (96 partidos) no se surface-aba en ningun lado salvo la
-    # fila de Argentina en la home. Estos dos agregados alimentan el ranking
-    # colectivo y la curva de forma partido a partido.
-    if has_physical and has_matches:
-        phys_team = con.execute(
-            f"SELECT * FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')"
-        ).df()
-        m2026 = con.execute(
-            f"SELECT match_id, season, stage, match_date, home_team, away_team FROM read_parquet('{WAREHOUSE / 'matches.parquet'}') WHERE season = '2026'"
-        ).df()
-        pt = phys_team.merge(m2026, on="match_id", how="inner")
-        if len(pt):
-            pt["rival"] = pt.apply(
-                lambda r: r["away_team"] if r["team"] == r["home_team"] else r["home_team"], axis=1
-            )
-            pt["es_local"] = pt["team"] == pt["home_team"]
-            pt = pt.sort_values(["team", "match_date", "match_id"])
-            # indice de jornada relativo por seleccion (1 = su primer partido con dato fisico)
-            pt["jornada"] = pt.groupby("team").cumcount() + 1
-
-            trend_cols = [
-                "team", "match_id", "match_date", "stage", "rival", "es_local", "jornada",
-                "total_distance_km", "high_intensity_distance_m", "sprint_count", "top_speed_kmh",
-            ]
-            _write_json("team_physical_trend.json", _records(pt[trend_cols]))
-
-            # ranking colectivo: promedio por seleccion + percentil dentro de las 48
-            team_phys = (
-                pt.groupby("team")
-                .agg(
-                    partidos=("match_id", "nunique"),
-                    distancia_promedio_km=("total_distance_km", lambda s: round(s.mean(), 2)),
-                    alta_intensidad_promedio_m=("high_intensity_distance_m", lambda s: round(s.mean(), 0)),
-                    sprints_promedio=("sprint_count", lambda s: round(s.mean(), 1)),
-                    velocidad_punta_kmh=("top_speed_kmh", "max"),
-                    distancia_total_km=("total_distance_km", lambda s: round(s.sum(), 1)),
-                )
-                .reset_index()
-            )
-            for metric in [
-                "distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh",
-            ]:
-                team_phys[f"{metric}_percentil"] = (team_phys[metric].rank(pct=True) * 100).round(0)
-            team_phys = team_phys.sort_values("distancia_promedio_km", ascending=False)
-            _write_json("team_physical_ranking.json", _records(team_phys))
-    else:
-        _write_json("team_physical_trend.json", {"status": "pending_first_scrape", "rows": []})
-        _write_json("team_physical_ranking.json", {"status": "pending_first_scrape", "rows": []})
-
-    if has_physical_players:
-        physical_players = con.execute(
-            f"SELECT * FROM read_parquet('{WAREHOUSE / 'physical_player_match_stats.parquet'}')"
-        ).df()
-        physical_players["high_intensity_m"] = physical_players["zone4_m"] + physical_players["zone5_m"]
-
-        # ranking acumulado por jugador (puede sumar varios partidos si ya
-        # hay mas de uno cargado para ese jugador)
-        player_physical_ranking = (
-            physical_players.groupby(["team", "player_name"])
-            .agg(
-                partidos=("match_id", "nunique"),
-                distancia_total_km=("total_distance_m", lambda s: round(s.sum() / 1000, 1)),
-                distancia_promedio_km=("total_distance_m", lambda s: round(s.mean() / 1000, 2)),
-                alta_intensidad_promedio_m=("high_intensity_m", lambda s: round(s.mean(), 1)),
-                sprints_promedio=("sprint_count", "mean"),
-                velocidad_punta_kmh=("top_speed_kmh", "max"),
-            )
-            .reset_index()
-            .sort_values("distancia_total_km", ascending=False)
-        )
-        _write_json("physical_player_ranking.json", _records(player_physical_ranking))
-
-        physical_players_out = physical_players.drop(columns=["high_intensity_m"])
-        _write_json("physical_player_match_stats.json", _records(physical_players_out))
-
-        # --- Percentiles NORMALIZADOS POR POSICION (analisis individual justo) ---
-        # Un arquero recorre ~5 km y un defensor ~8.3 km por partido: compararlos
-        # en la misma escala de percentil es enganoso. Se cruza el fisico por
-        # jugador con el plantel (squads) por dorsal+seleccion (match 100%) para
-        # traer la posicion, y el percentil se calcula DENTRO de cada posicion.
-        if has_squads:
-            squads_pos = con.execute(
-                f"SELECT team, jersey_number, position, age_years, market_value_eur, club, caps FROM read_parquet('{WAREHOUSE / 'squads.parquet'}')"
-            ).df()
-            squads_pos = squads_pos.dropna(subset=["jersey_number"]).drop_duplicates(["team", "jersey_number"])
-            pl = physical_players.dropna(subset=["jersey_number"]).copy()
-            pl = pl.merge(squads_pos, on=["team", "jersey_number"], how="inner")
-            if len(pl):
-                agg = (
-                    pl.groupby(["team", "player_name", "position"])
-                    .agg(
-                        jersey_number=("jersey_number", "first"),
-                        club=("club", "first"),
-                        age_years=("age_years", "first"),
-                        partidos=("match_id", "nunique"),
-                        distancia_promedio_km=("total_distance_m", lambda s: round(s.mean() / 1000, 2)),
-                        alta_intensidad_promedio_m=("high_intensity_m", lambda s: round(s.mean(), 0)),
-                        sprints_promedio=("sprint_count", lambda s: round(s.mean(), 1)),
-                        velocidad_punta_kmh=("top_speed_kmh", "max"),
-                    )
-                    .reset_index()
-                )
-                # percentil dentro de la posicion (GK/DF/MF/FW) para cada metrica
-                for metric in [
-                    "distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh",
-                ]:
-                    agg[f"{metric}_pct_pos"] = (
-                        agg.groupby("position")[metric].rank(pct=True) * 100
-                    ).round(0)
-                agg = agg.sort_values(["position", "distancia_promedio_km"], ascending=[True, False])
-                _write_json("player_physical_by_position.json", _records(agg))
-        else:
-            _write_json("player_physical_by_position.json", {"status": "pending_first_scrape", "rows": []})
-    else:
-        _write_json("physical_player_ranking.json", {"status": "pending_first_scrape", "rows": []})
-        _write_json("player_physical_by_position.json", {"status": "pending_first_scrape", "rows": []})
+    # Físico de equipo y por jugador (distancia, sprints, velocidad punta,
+    # percentiles por posición): NO existe para Métricas LPF, ver nota arriba
+    # de physical_match_stats.json. Se escribe el mismo placeholder honesto
+    # ("missing", no "pending") para las cuatro salidas que dependían de esto.
+    _PHYSICAL_MISSING = {
+        "status": "missing",
+        "note": (
+            "No existe una fuente gratuita de datos físicos/GPS para la Liga Profesional Argentina."
+        ),
+        "rows": [],
+    }
+    _write_json("team_physical_trend.json", _PHYSICAL_MISSING)
+    _write_json("team_physical_ranking.json", _PHYSICAL_MISSING)
+    _write_json("physical_player_ranking.json", _PHYSICAL_MISSING)
+    _write_json("physical_player_match_stats.json", _PHYSICAL_MISSING)
+    _write_json("player_physical_by_position.json", _PHYSICAL_MISSING)
 
     has_tactical_players = (WAREHOUSE / "tactical_player_match_stats.parquet").exists()
     if has_tactical_players:
@@ -471,71 +366,48 @@ def build():
         _write_json("goal_events.json", {"status": "pending_first_scrape", "rows": []})
         _write_json("goal_scorer_ranking.json", {"status": "pending_first_scrape", "rows": []})
 
-    # --- Goles vs. rendimiento fisico del MISMO partido ---
-    # goal_events y physical_match_stats comparten (match_id, team): cuantos
-    # goles metio cada seleccion en un partido, al lado de cuanto corrio ese
-    # mismo partido. Descriptivo, no causal -- no se afirma que correr mas
-    # genere goles, solo se deja ver la relacion (o ausencia de ella).
-    if has_physical and has_goal_events:
-        phys_for_goals = con.execute(
-            f"SELECT match_id, team, total_distance_km, high_intensity_distance_m, sprint_count, top_speed_kmh "
-            f"FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')"
-        ).df()
-        goals_for_join = con.execute(
-            f"SELECT match_id, team FROM read_parquet('{WAREHOUSE / 'goal_events.parquet'}') WHERE NOT own_goal"
-        ).df()
-        goals_count = goals_for_join.groupby(["match_id", "team"]).size().reset_index(name="goles_marcados")
-        gvp = phys_for_goals.merge(goals_count, on=["match_id", "team"], how="left")
-        gvp["goles_marcados"] = gvp["goles_marcados"].fillna(0).astype(int)
-        if has_matches:
-            matches_for_gvp = con.execute(
-                f"SELECT match_id, stage, match_date, home_team, away_team "
-                f"FROM read_parquet('{WAREHOUSE / 'matches.parquet'}') WHERE season = '2026'"
-            ).df()
-            gvp = gvp.merge(matches_for_gvp, on="match_id", how="inner")
-            gvp["rival"] = gvp.apply(lambda r: r["away_team"] if r["team"] == r["home_team"] else r["home_team"], axis=1)
-        _write_json("goals_vs_physical.json", _records(gvp))
-    else:
-        _write_json("goals_vs_physical.json", {"status": "pending_first_scrape", "rows": []})
+    # goals_vs_physical: dependía de datos físicos que no existen para LPF (ver
+    # nota de physical_match_stats.json más arriba). No hay un reemplazo real
+    # con lo que sí tenemos (remates/posesión no son "esfuerzo físico"), así
+    # que queda como placeholder honesto en vez de forzar una comparación que
+    # no tiene sentido con otra métrica.
+    _write_json("goals_vs_physical.json", dict(_PHYSICAL_MISSING))
 
-    # --- Resumen por partido del Mundial 2026 (vista "Partidos") -------------
-    # Una tarjeta por partido jugado, con TODO lo que tenemos de datos oficiales:
-    # resultado, goles con minuto, físico de cada equipo (distancia, sprints,
-    # alta intensidad, velocidad punta), remates (proxy de peligro -- NO es xG,
-    # que no existe en ninguna fuente libre para 2026), posesión-proxy (share de
-    # pases), jugador destacado y una lectura automática. Se reconstruye en cada
+    # --- Resumen por partido (vista "Partidos") -------------------------------
+    # Una tarjeta por partido jugado, con lo que sí tenemos de ESPN: resultado,
+    # goles con minuto, posesión-proxy/remates/pases/faltas de cada equipo
+    # (team_match_stats_tactical, real) y una lectura automática. Ya NO incluye
+    # físico (no existe para LPF, ver nota arriba). Se reconstruye en cada
     # corrida -> se va actualizando con cada partido nuevo.
-    if has_matches and has_physical and has_goal_events:
+    if has_matches and has_tactical and has_goal_events:
         played = matches[(matches["season"] == "2026") & matches["home_score"].notna()].copy()
-        ms_phys = con.execute(
-            f"SELECT match_id, team, total_distance_km, high_intensity_distance_m, sprint_count, top_speed_kmh "
-            f"FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')"
+        ms_team = con.execute(
+            f"SELECT match_id, team, possession_share_proxy, shots_total, shots_on_target, "
+            f"passes_attempted, passes_completed, fouls_committed, corners "
+            f"FROM read_parquet('{WAREHOUSE / 'team_match_stats_tactical.parquet'}')"
         ).df()
         ms_goals = con.execute(
             f"SELECT match_id, team, player_name, minute, minute_display, own_goal, penalty "
             f"FROM read_parquet('{WAREHOUSE / 'goal_events.parquet'}')"
         ).df()
-        if (WAREHOUSE / "tactical_player_match_stats.parquet").exists():
-            ms_tac = con.execute(
-                f"SELECT match_id, team, sum(attempts_at_goal) AS remates, sum(passes_completed) AS pases "
-                f"FROM read_parquet('{WAREHOUSE / 'tactical_player_match_stats.parquet'}') GROUP BY match_id, team"
-            ).df()
-        else:
-            ms_tac = pd.DataFrame(columns=["match_id", "team", "remates", "pases"])
 
         def _num(df, col):
             return float(df[col].iloc[0]) if len(df) and pd.notna(df[col].iloc[0]) else None
 
         def _team_block(mid, t):
-            p = ms_phys[(ms_phys["match_id"] == mid) & (ms_phys["team"] == t)]
-            tr = ms_tac[(ms_tac["match_id"] == mid) & (ms_tac["team"] == t)]
+            r = ms_team[(ms_team["match_id"] == mid) & (ms_team["team"] == t)]
+            posesion = _num(r, "possession_share_proxy")
             return {
-                "distancia_km": _num(p, "total_distance_km"),
-                "alta_intensidad_m": _num(p, "high_intensity_distance_m"),
-                "sprints": _num(p, "sprint_count"),
-                "velocidad_punta_kmh": _num(p, "top_speed_kmh"),
-                "remates": int(tr["remates"].iloc[0]) if len(tr) and pd.notna(tr["remates"].iloc[0]) else None,
-                "pases": int(tr["pases"].iloc[0]) if len(tr) and pd.notna(tr["pases"].iloc[0]) else None,
+                "posesion_pct": round(posesion * 100, 1) if posesion is not None else None,
+                "remates": int(_num(r, "shots_total")) if _num(r, "shots_total") is not None else None,
+                "remates_al_arco": int(_num(r, "shots_on_target")) if _num(r, "shots_on_target") is not None else None,
+                "pases": int(_num(r, "passes_attempted")) if _num(r, "passes_attempted") is not None else None,
+                "precision_pases_pct": (
+                    round(_num(r, "passes_completed") / _num(r, "passes_attempted") * 100, 1)
+                    if _num(r, "passes_attempted") else None
+                ),
+                "faltas": int(_num(r, "fouls_committed")) if _num(r, "fouls_committed") is not None else None,
+                "corners": int(_num(r, "corners")) if _num(r, "corners") is not None else None,
             }
 
         summaries = []
@@ -543,12 +415,6 @@ def build():
             mid, home, away = m["match_id"], m["home_team"], m["away_team"]
             hs, as_ = int(m["home_score"]), int(m["away_score"])
             h, a = _team_block(mid, home), _team_block(mid, away)
-            # posesión-proxy = share de pases completados (no es posesión oficial)
-            if h["pases"] and a["pases"] and (h["pases"] + a["pases"]) > 0:
-                h["posesion_pct"] = round(h["pases"] / (h["pases"] + a["pases"]) * 100, 1)
-                a["posesion_pct"] = round(100 - h["posesion_pct"], 1)
-            else:
-                h["posesion_pct"] = a["posesion_pct"] = None
 
             gm = ms_goals[(ms_goals["match_id"] == mid) & (~ms_goals["own_goal"])].sort_values("minute")
             goleadores = [
@@ -566,7 +432,7 @@ def build():
                 (pn, tm), n = top.index[0], int(top.iloc[0])
                 destacado = {"player": pn, "team": tm, "note": f"{n} gol{'es' if n > 1 else ''}"}
 
-            # lectura automática: resultado + quién corrió más + quién manejó más la pelota
+            # lectura automática: resultado + quién manejó más la pelota + quién remató más
             if hs > as_:
                 res = f"{home} venció {hs}-{as_} a {away}"
             elif as_ > hs:
@@ -574,12 +440,12 @@ def build():
             else:
                 res = f"{home} y {away} empataron {hs}-{as_}"
             bits = [res + "."]
-            if h["distancia_km"] and a["distancia_km"] and abs(h["distancia_km"] - a["distancia_km"]) >= 2:
-                mteam, mv, ov = (home, h["distancia_km"], a["distancia_km"]) if h["distancia_km"] > a["distancia_km"] else (away, a["distancia_km"], h["distancia_km"])
-                bits.append(f"{mteam} recorrió más ({mv} vs {ov} km).")
             if h["posesion_pct"] and a["posesion_pct"] and abs(h["posesion_pct"] - a["posesion_pct"]) >= 6:
                 pteam, pv = (home, h["posesion_pct"]) if h["posesion_pct"] > a["posesion_pct"] else (away, a["posesion_pct"])
-                bits.append(f"{pteam} manejó más la pelota ({pv}% de los pases).")
+                bits.append(f"{pteam} manejó más la pelota ({pv}% de posesión).")
+            if h["remates"] is not None and a["remates"] is not None and abs(h["remates"] - a["remates"]) >= 4:
+                rteam, rv, ov = (home, h["remates"], a["remates"]) if h["remates"] > a["remates"] else (away, a["remates"], h["remates"])
+                bits.append(f"{rteam} remató más al arco rival ({rv} vs {ov} remates).")
             insight = " ".join(bits)
 
             summaries.append({
@@ -610,11 +476,10 @@ def build():
     else:
         _write_json("derived_player_metrics.json", {"status": "pending_first_scrape", "rows": []})
 
-    discovery_path = ROOT / "data" / "raw" / "fifa_training_centre" / "_discovery_status.json"
-    total_matches_2026 = None
-    if discovery_path.exists():
-        total_matches_2026 = json.loads(discovery_path.read_text()).get("count")
-    matches_with_physical = int(physical["match_id"].nunique()) if has_physical else 0
+    # Total de partidos de la temporada = todos los fixtures que ESPN devolvió
+    # (jugados + programados), no un archivo de descubrimiento separado -- ya
+    # no existe (era propio del scraper de FIFA Training Centre del Mundial).
+    total_matches_season = int(len(matches[matches["season"] == "2026"])) if has_matches else None
 
     # --- Cobertura y frescura: números reales computados en vivo sobre el
     # warehouse (nunca hardcodeados) para que cada dato de la UI sea verificable ---
@@ -625,15 +490,14 @@ def build():
         except Exception:
             return None
 
-    # 48 selecciones participan del Mundial 2026 (fuente de verdad: matches.parquet)
-    teams_2026_total = (
+    # 30 clubes participan de la Liga Profesional 2026 (fuente de verdad: matches.parquet)
+    teams_season_total = (
         int(matches[matches["season"] == "2026"][["home_team", "away_team"]].stack().nunique())
         if has_matches
         else None
     )
-    teams_with_physical = int(physical["team"].nunique()) if has_physical else 0
-    teams_with_tactical_2026 = int(tactical_players["team"].nunique()) if has_tactical_players else 0
-    matches_with_tactical_2026 = int(tactical_players["match_id"].nunique()) if has_tactical_players else 0
+    teams_with_tactical_players = int(tactical_players["team"].nunique()) if has_tactical_players else 0
+    matches_with_tactical_players = int(tactical_players["match_id"].nunique()) if has_tactical_players else 0
     teams_with_squads = int(squads["team"].nunique()) if has_squads else 0
     teams_with_profile = int(team_profile["team"].nunique()) if has_team_profile else 0
 
@@ -642,20 +506,25 @@ def build():
             return None
         return round(min(100, (part / whole) * 100), 1)
 
-    # Contexto táctico StatsBomb (histórico 2018/2022): partidos y torneos cargados
+    # Partidos y torneos con estadística de equipo cargada (ESPN, LPF temporada actual)
     if has_tactical:
         _ctx = con.execute(
             f"""SELECT count(DISTINCT t.match_id) AS m, list(DISTINCT m.season) AS seasons
                 FROM read_parquet('{WAREHOUSE / 'team_match_stats_tactical.parquet'}') t
                 JOIN read_parquet('{WAREHOUSE / 'matches.parquet'}') m USING(match_id)"""
         ).fetchone()
-        statsbomb_matches, statsbomb_seasons = int(_ctx[0]), sorted(_ctx[1])
+        espn_stats_matches, espn_stats_seasons = int(_ctx[0]), sorted(_ctx[1])
     else:
-        statsbomb_matches, statsbomb_seasons = 0, []
+        espn_stats_matches, espn_stats_seasons = 0, []
 
-    # --- Cross-verificación openfootball (CC0) vs. resultado oficial FIFA ---
-    # Señal de confianza real: contamos los goles evento-a-evento de openfootball
-    # y los comparamos contra el marcador final oficial de cada partido jugado.
+    # --- Consistencia interna de goal_events vs. el marcador final -- ambos
+    # salen del mismo proveedor (ESPN), así que esto NO es una verificación
+    # cruzada entre fuentes independientes (como sí lo era openfootball vs.
+    # FIFA Training Centre en el Mundial): es un chequeo de que los eventos de
+    # gol que ESPN reporta partido a partido efectivamente suman el marcador
+    # final que el mismo ESPN publica para ese partido. Sigue siendo una señal
+    # real y útil (detecta partidos con eventos incompletos), pero se etiqueta
+    # con honestidad -- no se presenta como algo que no es. ---
     cross_verification = None
     if has_goal_events and has_matches:
         played = matches[(matches["season"] == "2026") & matches["home_score"].notna()].copy()
@@ -668,11 +537,15 @@ def build():
                 matched += 1
         cross_verification = {
             "description": (
-                "Cada gol de openfootball (CC0) se contrastó contra el marcador final "
-                "oficial de FIFA Training Centre, partido por partido."
+                "Consistencia interna: se suman los goles evento a evento que ESPN reporta "
+                "para cada partido y se contrastan contra el marcador final que la misma ESPN "
+                "publica para ese partido. No es una verificación entre fuentes independientes "
+                "(ambos números vienen del mismo proveedor) -- es un chequeo de que los eventos "
+                "de gol cargados son consistentes con el resultado, útil para detectar partidos "
+                "con eventos incompletos."
             ),
-            "source_a": "openfootball/worldcup.json (goles evento a evento)",
-            "source_b": "FIFA Training Centre (marcador final del partido)",
+            "source_a": "ESPN (goles evento a evento)",
+            "source_b": "ESPN (marcador final del partido)",
             "matches_checked": checked,
             "matches_matched": matched,
             "discrepancies": checked - matched,
@@ -680,14 +553,14 @@ def build():
 
     # Rubro de confianza (honesto, sin inventar un score: se deriva de
     # oficialidad de la fuente + cobertura real).
-    #   alta          -> dato oficial (FIFA/StatsBomb) o verificado contra oficial, cobertura alta
-    #   media         -> fuente verificada pero cobertura parcial / en backfill
-    #   complementaria-> fuente secundaria (Wikipedia) sin contraste oficial disponible
+    #   alta          -> dato de partido real de ESPN, cobertura alta
+    #   media         -> fuente real pero cobertura parcial / dato agregado no oficial
+    #   complementaria-> dato complementario (plantel) sin estadística de rendimiento
     #   derivada      -> métrica calculada por el proyecto sobre las fuentes de arriba
     confidence_legend = {
-        "alta": "Dato oficial (FIFA Training Centre / StatsBomb) o verificado contra fuente oficial, con cobertura alta.",
-        "media": "Fuente verificada pero con cobertura parcial o en proceso de carga (backfill).",
-        "complementaria": "Fuente secundaria (Wikipedia/mirror comunitario) sin contraste oficial disponible.",
+        "alta": "Dato de partido real (ESPN), con cobertura alta sobre la temporada en curso.",
+        "media": "Fuente real pero con cobertura parcial, o dato agregado/proxy (no oficial-oficial).",
+        "complementaria": "Dato complementario (ej. plantel) sin estadística de rendimiento asociada.",
         "derivada": "Métrica calculada por el proyecto sobre las fuentes de arriba (percentiles, z-scores, clustering).",
     }
 
@@ -699,93 +572,74 @@ def build():
         "cross_verification": cross_verification,
         "sources": {
             "tactical_context": {
-                "provider": "StatsBomb Open Data",
-                "provider_url": "https://github.com/statsbomb/open-data",
-                "license": "https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf (uso no comercial)",
-                "license_short": "StatsBomb Open Data (uso no comercial)",
-                "license_url": "https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf",
-                "coverage": "Mundial 2018 y 2022 -- partidos de Argentina cargados como semilla inicial",
+                "provider": "ESPN",
+                "provider_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/",
+                "license": "API pública sin key, uso no documentado formalmente (fuente ampliamente usada en proyectos de datos deportivos)",
+                "license_short": "ESPN (API pública, sin key)",
+                "coverage": "Liga Profesional Argentina, temporada en curso -- estadística de partido por equipo",
                 "coverage_detail": (
-                    f"{statsbomb_matches} partidos cargados de {', '.join(statsbomb_seasons)}"
-                    if statsbomb_seasons
+                    f"{espn_stats_matches} partidos con estadística cargada de {', '.join(espn_stats_seasons)}"
+                    if espn_stats_seasons
                     else "sin partidos cargados"
                 ),
-                "method": "Eventos oficiales de StatsBomb; la posesión es un proxy por duración de eventos, no tracking.",
-                "confidence": "media",
+                "method": "Remates, posesión-proxy, pases y precisión, faltas, córners, offsides y atajadas por equipo y partido.",
+                "confidence": "alta",
                 "as_of": generated_at,
                 "status": "ok" if has_tactical else "missing",
             },
             "physical_performance": {
-                "provider": "FIFA Training Centre",
-                "provider_url": "https://www.fifatrainingcentre.com/",
-                "license": "Datos oficiales FIFA publicados en informes del Mundial 2026",
-                "coverage": "Mundial 2026 (en curso)",
-                "coverage_detail": (
-                    f"{teams_with_physical}/{teams_2026_total} selecciones · {matches_with_physical}/{total_matches_2026} partidos"
-                    if teams_2026_total
-                    else None
+                "provider": None,
+                "coverage": "No disponible para ninguna liga sin datos GPS propios publicados",
+                "coverage_detail": None,
+                "coverage_pct": None,
+                "method": (
+                    "No existe una fuente gratuita de datos físicos/GPS (distancia, sprints, velocidad "
+                    "punta) para la Liga Profesional Argentina. Es data propietaria de cada club vía su "
+                    "proveedor de hardware (Catapult/STATSports), nunca publicada por las ligas. Se "
+                    "investigó a fondo: fbref, WhoScored y SofaScore bloquean el acceso automatizado "
+                    "(Cloudflare); API-Football, ESPN, FotMob y los sitios oficiales de AFA/Liga "
+                    "Profesional no publican este dato para ninguna competición."
                 ),
-                "coverage_pct": _pct(matches_with_physical, total_matches_2026),
-                "method": "Distancia, alta intensidad, sprints y velocidad punta de los informes físicos oficiales FIFA (GPS/tracking).",
-                "confidence": "alta",
-                "as_of": (_max_ts(physical, "retrieved_at") or generated_at) if has_physical else generated_at,
-                "status": "ok" if has_physical else "pending_first_scrape",
-                "matches_loaded": matches_with_physical,
-                "matches_total": total_matches_2026,
-                "teams_loaded": teams_with_physical,
-                "teams_total": teams_2026_total,
+                "confidence": None,
+                "as_of": generated_at,
+                "status": "missing",
             },
-            "tactical_2026": {
-                "provider": "FIFA Training Centre",
-                "provider_url": "https://www.fifatrainingcentre.com/",
-                "license": "Datos oficiales FIFA publicados en informes del Mundial 2026",
-                "coverage": "pases, presión, duelos y ofertas de recepción por jugador -- Mundial 2026 (en curso)",
-                "coverage_detail": (
-                    f"{matches_with_tactical_2026}/{total_matches_2026} partidos · {teams_with_tactical_2026}/{teams_2026_total} selecciones (backfill en curso)"
-                    if teams_2026_total
-                    else None
-                ),
-                "coverage_pct": _pct(matches_with_tactical_2026, total_matches_2026),
-                "method": "Métricas tácticas por jugador de los informes oficiales FIFA; la carga histórica se completa progresivamente.",
-                "confidence": "media",
-                "as_of": (_max_ts(tactical_players, "retrieved_at") or generated_at) if has_tactical_players else generated_at,
-                "status": "ok" if has_tactical_players else "pending_first_scrape",
-                "matches_loaded": matches_with_tactical_2026,
-                "matches_total": total_matches_2026,
+            "player_match_stats": {
+                "provider": "ESPN",
+                "provider_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/",
+                "license": "API pública sin key",
+                "coverage": "Estadística individual por partido (pases, remates, quites, rating)",
+                "coverage_detail": "0 partidos -- ESPN no puebla esta sección para esta competición",
+                "method": "boxscore.players del endpoint de resumen de partido; vino vacío en todas las pruebas realizadas.",
+                "confidence": None,
+                "as_of": generated_at,
+                "status": "missing",
             },
             "squad_ages": {
-                "provider": "26worldcup (Wikipedia)",
-                "provider_url": "https://github.com/26worldcup/26worldcup.github.io",
-                "license": "Código MIT · hechos de Wikipedia (texto CC BY-SA 4.0)",
-                "license_url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
-                "provider_note": (
-                    "Mirror JSON MIT (github.com/26worldcup/26worldcup.github.io) de hechos "
-                    "extraidos del articulo de Wikipedia '2026 FIFA World Cup squads' "
-                    "(texto CC BY-SA 4.0). No incluye valor de mercado -- Transfermarkt "
-                    "(etl/scrape_transfermarkt_squads.py) queda como fallback si algun dia "
-                    "deja de bloquear el scraping con HTTP 403."
-                ),
-                "coverage": "edad, dorsal, caps, goles de carrera, capitania y stats del Mundial 2026 del plantel actual",
+                "provider": "ESPN",
+                "provider_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/",
+                "license": "API pública sin key",
+                "coverage": "plantel por club: nombre, posición, edad, fecha de nacimiento, dorsal",
                 "coverage_detail": (
-                    f"{teams_with_squads}/{teams_2026_total} selecciones" if teams_2026_total else None
+                    f"{teams_with_squads}/{teams_season_total} clubes" if teams_season_total else None
                 ),
-                "coverage_pct": _pct(teams_with_squads, teams_2026_total),
-                "method": "Hechos objetivos (edad, dorsal, caps) tomados del artículo de Wikipedia vía mirror comunitario.",
-                "confidence": "complementaria",
+                "coverage_pct": _pct(teams_with_squads, teams_season_total),
+                "method": "Endpoint de roster de ESPN por club. No incluye valor de mercado, caps ni estadística individual.",
+                "confidence": "alta",
                 "as_of": (_max_ts(squads, "retrieved_at") or generated_at) if has_squads else generated_at,
                 "status": "ok" if has_squads else "pending_first_scrape",
             },
             "team_profile": {
-                "provider": "26worldcup (FIFA public API)",
-                "provider_url": "https://github.com/26worldcup/26worldcup.github.io",
-                "license": "Código MIT · ranking de la API pública FIFA · campo base de Wikipedia",
-                "coverage": "ranking FIFA (actual y anterior) y ubicacion del campo base por seleccion",
+                "provider": "ESPN",
+                "provider_url": "https://site.api.espn.com/apis/v2/sports/soccer/arg.1/standings",
+                "license": "API pública sin key",
+                "coverage": "tabla de posiciones: puntos, partidos jugados, diferencia de gol",
                 "coverage_detail": (
-                    f"{teams_with_profile}/{teams_2026_total} selecciones" if teams_2026_total else None
+                    f"{teams_with_profile}/{teams_season_total} clubes" if teams_season_total else None
                 ),
-                "coverage_pct": _pct(teams_with_profile, teams_2026_total),
-                "method": "Ranking de la API pública de FIFA; el campo base proviene de Wikipedia vía el mismo mirror.",
-                "confidence": "media",
+                "coverage_pct": _pct(teams_with_profile, teams_season_total),
+                "method": "Standings oficiales de ESPN para la Liga Profesional.",
+                "confidence": "alta",
                 "as_of": (_max_ts(team_profile, "retrieved_at") or generated_at) if has_team_profile else generated_at,
                 "status": "ok" if has_team_profile else "pending_first_scrape",
             },
@@ -803,20 +657,19 @@ def build():
                 "status": "ok" if has_derived_team_metrics else "pending_first_scrape",
             },
             "goal_events": {
-                "provider": "openfootball/worldcup.json",
-                "provider_url": "https://github.com/openfootball/worldcup.json",
-                "license": "CC0-1.0 (dominio publico) -- https://github.com/openfootball/worldcup.json",
-                "license_short": "CC0-1.0 (dominio público)",
-                "license_url": "https://github.com/openfootball/worldcup.json",
-                "coverage": "goleador, minuto y flags de penal/gol en contra de cada gol del Mundial 2026",
+                "provider": "ESPN",
+                "provider_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/",
+                "license": "API pública sin key",
+                "license_short": "ESPN (API pública, sin key)",
+                "coverage": "goleador, minuto y flags de penal/gol en contra de cada gol de la temporada en curso",
                 "coverage_detail": (
-                    f"{int(goal_events['match_id'].nunique())} partidos con goles · verificado {cross_verification['matches_matched']}/{cross_verification['matches_checked']} contra FIFA"
+                    f"{int(goal_events['match_id'].nunique())} partidos con goles · consistencia interna {cross_verification['matches_matched']}/{cross_verification['matches_checked']}"
                     if has_goal_events and cross_verification
                     else None
                 ),
-                "method": "Goles evento a evento; verificados uno a uno contra el marcador final oficial de FIFA Training Centre.",
+                "method": "Eventos con flag scoringPlay del resumen de partido de ESPN, filtrado por goleador identificable.",
                 "confidence": "alta",
-                "cross_checked_against": "resultado final de matches.parquet (FIFA Training Centre)",
+                "cross_checked_against": "marcador final del mismo partido (ambos publicados por ESPN)",
                 "as_of": (_max_ts(goal_events, "retrieved_at") or generated_at) if has_goal_events else generated_at,
                 "status": "ok" if has_goal_events else "pending_first_scrape",
                 # partidos con al menos un gol propio (un 0-0 matcheado

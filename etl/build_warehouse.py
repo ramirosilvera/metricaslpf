@@ -3,18 +3,15 @@ warehouse Parquet versionado en data/warehouse/. Esta es la "fuente de
 verdad" del proyecto: todo lo que consume el sitio sale, en última
 instancia, de estos Parquet.
 
-Fuentes que combina (cada una opcional -- si no existe el CSV, se saltea):
-  - data/raw/statsbomb/_processed/*.csv        (contexto táctico, real)
-  - data/raw/fifa_training_centre/_processed/*.csv (métricas físicas)
-  - data/raw/26worldcup/_processed/squads.csv  (edad/plantel -- fuente
-    primaria desde que Transfermarkt bloquea el scraping con 403; ver
-    fetch_26worldcup_squads.py)
-  - data/raw/transfermarkt/_processed/squads.csv (edad de planteles --
-    fallback si algún día Transfermarkt deja de bloquear el scraping;
-    el paso "squads" más abajo prueba 26worldcup primero)
-  - data/raw/26worldcup/_processed/team_profile.csv (ranking FIFA, campo base)
-  - data/raw/openfootball/_processed/goal_events.csv (goleador/minuto/penal
-    de cada gol del Mundial 2026, CC0; ver fetch_openfootball_2026.py)
+Fuente única para Métricas LPF (cada tabla es opcional -- si no existe el CSV,
+se saltea): data/raw/espn/_processed/*.csv -- ver fetch_espn_lpf.py para el
+detalle de qué trae cada archivo y por qué ESPN es la fuente elegida (fbref
+bloqueado por Cloudflare, API-Football gratis no cubre la temporada actual).
+data/raw/api_football/_processed/*.csv queda como fallback histórico opcional
+(temporadas 2022-2024, no se usa por defecto). Las fuentes del Mundial
+(FIFA Training Centre, StatsBomb, openfootball, 26worldcup, Transfermarkt) se
+retiraron por completo en la transformación a LPF -- no existe dato físico/GPS
+para esta liga en ninguna fuente gratuita (ver docstring de fetch_espn_lpf.py).
 
 Uso:
     python etl/build_warehouse.py
@@ -30,8 +27,6 @@ from schemas import (
     MatchesSchema,
     TeamMatchStatsSchema,
     PlayerAppearancesSchema,
-    PhysicalMatchStatsSchema,
-    PhysicalPlayerMatchStatsSchema,
     TacticalPlayerMatchStatsSchema,
     SquadsSchema,
     TeamProfileSchema,
@@ -60,8 +55,6 @@ def build():
     matches_sources = [
         _read_csv_if_exists(RAW / "espn" / "_processed" / "matches.csv"),
         _read_csv_if_exists(RAW / "api_football" / "_processed" / "matches.csv"),
-        _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "matches.csv"),
-        _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "matches_fifa2026.csv"),
     ]
     matches_sources = [m for m in matches_sources if m is not None]
     if matches_sources:
@@ -76,12 +69,10 @@ def build():
 
     # --- team_match_stats (Métricas LPF: ESPN por partido -- remates,
     # posesión, pases/precisión, faltas, córners, offsides, atajadas y proxy de
-    # peligrosidad; API-Football/StatsBomb como fallback) ---
+    # peligrosidad; API-Football como fallback histórico) ---
     team_stats = _read_csv_if_exists(RAW / "espn" / "_processed" / "team_match_stats.csv")
     if team_stats is None:
         team_stats = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_match_stats.csv")
-    if team_stats is None:
-        team_stats = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "team_match_stats.csv")
     if team_stats is not None:
         num_cols = ["passes_attempted", "passes_completed", "shots_total", "shots_on_target", "goals", "fouls_committed"]
         for c in num_cols:
@@ -100,13 +91,11 @@ def build():
         print(f"team_match_stats_tactical.parquet: {len(team_stats)} filas")
 
     # --- player_match_appearances (LPF: ESPN por partido -- suele venir vacío
-    # para esta competición, ver docstring del fetcher; API-Football/StatsBomb
-    # como fallback) ---
+    # para esta competición, ver docstring del fetcher; API-Football como
+    # fallback histórico) ---
     appearances = _read_csv_if_exists(RAW / "espn" / "_processed" / "player_match_appearances.csv")
     if appearances is None:
         appearances = _read_csv_if_exists(RAW / "api_football" / "_processed" / "player_match_appearances.csv")
-    if appearances is None:
-        appearances = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "player_match_appearances.csv")
     if appearances is not None:
         appearances["minutes_played"] = pd.to_numeric(appearances["minutes_played"], errors="coerce").fillna(0)
         appearances = appearances.astype({"match_id": "int64", "minutes_played": "int64"})
@@ -115,41 +104,25 @@ def build():
         con.execute(f"COPY app_df TO '{WAREHOUSE / 'player_match_appearances.parquet'}' (FORMAT PARQUET)")
         print(f"player_match_appearances.parquet: {len(appearances)} filas")
 
-    # --- physical_match_stats (FIFA Training Centre) ---
-    physical = _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "physical_match_stats.csv")
-    if physical is not None:
-        physical = physical.astype({"match_id": "int64"})
-        for c in ["total_distance_km", "high_intensity_distance_m", "sprint_distance_m", "sprint_count", "top_speed_kmh"]:
-            physical[c] = pd.to_numeric(physical[c], errors="coerce")
-        physical = PhysicalMatchStatsSchema.validate(physical)
-        con.register("phys_df", physical)
-        con.execute(f"COPY phys_df TO '{WAREHOUSE / 'physical_match_stats.parquet'}' (FORMAT PARQUET)")
-        print(f"physical_match_stats.parquet: {len(physical)} filas")
-    else:
-        print("physical_match_stats: sin datos todavia (pendiente de la primera corrida del scraper en GitHub Actions)")
-
-    # --- physical_player_match_stats (FIFA Training Centre, por jugador) ---
-    physical_players = _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "physical_player_match_stats.csv")
-    if physical_players is not None:
-        physical_players = physical_players.astype({"match_id": "int64"})
-        physical_players["jersey_number"] = pd.to_numeric(physical_players["jersey_number"], errors="coerce").astype("Int64")
-        for c in ["total_distance_m", "zone1_m", "zone2_m", "zone3_m", "zone4_m", "zone5_m", "high_speed_runs_count", "sprint_count", "top_speed_kmh"]:
-            physical_players[c] = pd.to_numeric(physical_players[c], errors="coerce")
-        physical_players = PhysicalPlayerMatchStatsSchema.validate(physical_players)
-        con.register("phys_players_df", physical_players)
-        con.execute(f"COPY phys_players_df TO '{WAREHOUSE / 'physical_player_match_stats.parquet'}' (FORMAT PARQUET)")
-        print(f"physical_player_match_stats.parquet: {len(physical_players)} filas")
+    # --- físico (equipo y jugador): NO existe para Métricas LPF. Ninguna fuente
+    # gratuita publica datos GPS/tracking (distancia, sprints, velocidad punta)
+    # de la Liga Profesional -- es data propietaria de cada club vía su
+    # proveedor de hardware (Catapult/STATSports), nunca liberada por las
+    # ligas (se investigó a fondo: fbref, WhoScored, SofaScore, API-Football,
+    # FotMob, sitios oficiales AFA/LPF -- ninguno la tiene). physical_match_
+    # stats.parquet y physical_player_match_stats.parquet directamente no se
+    # generan; build_aggregates.py ya maneja su ausencia con un estado
+    # explícito, nunca inventando valores.
+    print("physical_match_stats / physical_player_match_stats: no existen para Métricas LPF (sin fuente gratuita de datos GPS)")
 
     # --- tactical_player_match_stats (LPF: ESPN por jugador -- pases, remates,
     # quites, intercepciones, duelos, gambetas, rating; suele venir vacío para
     # esta competición, ver docstring del fetcher. Los campos propios de FIFA
     # -- offers/line_breaks/pressing -- no existen en esta fuente y quedan
-    # nulos. API-Football/FIFA Training Centre como fallback) ---
+    # nulos. API-Football como fallback histórico) ---
     tactical_players = _read_csv_if_exists(RAW / "espn" / "_processed" / "tactical_player_match_stats.csv")
     if tactical_players is None:
         tactical_players = _read_csv_if_exists(RAW / "api_football" / "_processed" / "tactical_player_match_stats.csv")
-    if tactical_players is None:
-        tactical_players = _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "tactical_player_match_stats.csv")
     if tactical_players is not None:
         tactical_players = tactical_players.astype({"match_id": "int64"})
         tactical_players["jersey_number"] = pd.to_numeric(tactical_players.get("jersey_number"), errors="coerce").astype("Int64")
@@ -211,8 +184,6 @@ def build():
     team_profile = _read_csv_if_exists(RAW / "espn" / "_processed" / "team_profile.csv")
     if team_profile is None:
         team_profile = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_profile.csv")
-    if team_profile is None:
-        team_profile = _read_csv_if_exists(RAW / "26worldcup" / "_processed" / "team_profile.csv")
     if team_profile is not None:
         for c in ["fifa_ranking", "fifa_ranking_prev"]:
             team_profile[c] = pd.to_numeric(team_profile[c], errors="coerce").astype("Int64")
@@ -225,16 +196,12 @@ def build():
     else:
         print("team_profile: sin datos todavia (correr etl/fetch_espn_lpf.py)")
 
-    # --- goal_events (openfootball/worldcup.json, CC0 -- primer dato a nivel
-    # de evento de gol del proyecto: goleador, minuto, penal/en contra). El
-    # resultado final de cada partido ya se cruzó contra matches (arriba,
-    # fuente FIFA Training Centre) dentro de fetch_openfootball_2026.py --
-    # ver data/raw/openfootball/_score_discrepancies.json si hubo diferencias. ---
+    # --- goal_events (LPF: ESPN -- goleador, minuto, penal/en contra, filtrado
+    # por el flag real scoringPlay para no confundir "Goal Kick" con un gol;
+    # ver docstring de fetch_espn_lpf.py. API-Football como fallback histórico) ---
     goal_events = _read_csv_if_exists(RAW / "espn" / "_processed" / "goal_events.csv")
     if goal_events is None:
         goal_events = _read_csv_if_exists(RAW / "api_football" / "_processed" / "goal_events.csv")
-    if goal_events is None:
-        goal_events = _read_csv_if_exists(RAW / "openfootball" / "_processed" / "goal_events.csv")
     if goal_events is not None:
         goal_events["match_id"] = goal_events["match_id"].astype("int64")
         goal_events["minute"] = pd.to_numeric(goal_events["minute"], errors="coerce").astype("Int64")
@@ -246,7 +213,7 @@ def build():
         con.execute(f"COPY goal_events_df TO '{WAREHOUSE / 'goal_events.parquet'}' (FORMAT PARQUET)")
         print(f"goal_events.parquet: {len(goal_events)} filas")
     else:
-        print("goal_events: sin datos todavia (correr etl/fetch_openfootball_2026.py)")
+        print("goal_events: sin datos todavia (correr etl/fetch_espn_lpf.py)")
 
     con.close()
 
