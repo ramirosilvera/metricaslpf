@@ -1,11 +1,10 @@
-name: Probe estadistica INDIVIDUAL de jugador LPF (FotMob stats / ESPN leaders)
+name: Probe FotMob topstats.json (categorias de estadistica individual LPF)
 
-# Sonda final: se investigo a fondo estadistica de partido por jugador (vacia
-# en ESPN para esta liga). Esta sonda prueba dos pistas no exploradas todavia
-# que podrian dar estadistica AGREGADA de temporada por jugador (no partido a
-# partido, pero real y por jugador): la clave "stats" del payload grande de
-# FotMob, y la clave "leaders" del resumen de partido de ESPN. Se borra tras
-# decidir.
+# Sonda final: FotMob expone stats.seasonStatLinks con una ruta directa a
+# stats/112/season/28207/topstats.json -- se investiga que tan profundo es
+# (cuantas categorias: goles, asistencias, remates, tarjetas, rating, etc.)
+# para decidir si alcanza para construir un ranking real de jugadores de la
+# temporada actual de LPF. Se borra tras decidir.
 on:
   workflow_dispatch:
 
@@ -19,61 +18,46 @@ jobs:
           python-version: "3.11"
       - name: Instalar requests
         run: pip install requests
-      - name: Explorar stats individuales
+      - name: Explorar topstats.json
         run: |
           python3 - <<'PY'
           import json, requests
 
           UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                 "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
+          H = {"User-Agent": UA, "Accept": "application/json", "Accept-Language": "es-AR,es;q=0.9"}
 
           def get(url, label=""):
-              h = {"User-Agent": UA, "Accept": "application/json", "Accept-Language": "es-AR,es;q=0.9"}
               try:
-                  r = requests.get(url, headers=h, timeout=25)
+                  r = requests.get(url, headers=H, timeout=25)
                   print(f"  [{label}] {url} -> {r.status_code} len={len(r.content)}")
                   return r
               except Exception as e:
                   print(f"  [{label}] {url} -> ERROR {type(e).__name__}: {e}")
                   return None
 
-          print("=== 1) FotMob: clave 'stats' de /api/data/leagues?id=112 ===")
-          r = get("https://www.fotmob.com/api/data/leagues?id=112", label="fotmob-leagues")
+          # RelativePath de la temporada actual (2026), tomado de la sonda anterior
+          r = get("https://www.fotmob.com/api/data/stats/112/season/28207/topstats.json", label="topstats")
           if r is not None and r.ok:
               d = r.json()
-              stats = d.get("stats")
-              print("  stats type:", type(stats))
-              if isinstance(stats, dict):
-                  print("  stats keys:", list(stats.keys()))
-                  # buscar algo tipo "squads"/"players"/"topPlayers" adentro
-                  for k, v in stats.items():
-                      if isinstance(v, dict):
-                          summary = f"dict keys={list(v.keys())[:10]}"
-                      elif isinstance(v, list):
-                          summary = f"list len={len(v)} sample={json.dumps(v[0], ensure_ascii=False)[:200] if v else None}"
-                      else:
-                          summary = repr(v)[:200]
-                      print(f"    [{k}]: {summary}")
-              elif isinstance(stats, list):
-                  print("  stats[0]:", json.dumps(stats[0], ensure_ascii=False)[:500] if stats else None)
-
-          print("=== 2) ESPN: 'leaders' del resumen de un partido reciente ===")
-          r2 = get("https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard?dates=20260701-20260731", label="espn-scoreboard")
-          if r2 is not None and r2.ok:
-              events = r2.json().get("events") or []
-              finished = [e for e in events if e.get("status", {}).get("type", {}).get("state") == "post"]
-              print(f"  eventos finalizados en julio: {len(finished)}")
-              if finished:
-                  eid = finished[-1]["id"]
-                  r3 = get(f"https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/summary?event={eid}", label="espn-summary")
-                  if r3 is not None and r3.ok:
-                      d3 = r3.json()
-                      leaders = d3.get("leaders")
-                      print("  leaders type:", type(leaders))
-                      if leaders:
-                          print("  leaders:", json.dumps(leaders, ensure_ascii=False)[:1500])
-
-          print("=== 3) ESPN: endpoint de estadisticas de temporada de la liga (si existe) ===")
-          get("https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/statistics", label="espn-league-stats")
-          get("https://site.api.espn.com/apis/common/v3/sports/soccer/arg.1/statistics/byathlete", label="espn-byathlete-guess")
+              print("  top keys:", list(d.keys()) if isinstance(d, dict) else type(d))
+              if isinstance(d, dict):
+                  for key in ("statTypes", "playerStats", "topLists", "data"):
+                      if key in d:
+                          v = d[key]
+                          print(f"  [{key}]:", type(v), len(v) if isinstance(v, (list, dict)) else v)
+              # buscar de forma generica cualquier lista de categorias/stats
+              def walk(obj, path="", depth=0):
+                  if depth > 3:
+                      return
+                  if isinstance(obj, dict):
+                      for k, v in obj.items():
+                          if isinstance(v, list) and v and isinstance(v[0], dict) and depth <= 2:
+                              print(f"    lista en {path}.{k}: len={len(v)} keys_ej={list(v[0].keys())[:8]}")
+                          walk(v, f"{path}.{k}", depth + 1)
+                  elif isinstance(obj, list):
+                      for item in obj[:3]:
+                          walk(item, path + "[]", depth + 1)
+              walk(d)
+              print("  RAW (primeros 2000 chars):", json.dumps(d, ensure_ascii=False)[:2000])
           PY
