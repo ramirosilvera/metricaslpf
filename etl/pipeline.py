@@ -65,15 +65,19 @@ def main():
     args = parser.parse_args()
 
     if not args.skip_scrape:
-        # Métricas LPF: una sola fuente de datos, API-Football (temporada actual
-        # de la Liga Profesional). Escribe a data/raw/api_football/_processed; el
-        # warehouse se reconstruye de ahí. Es incremental/cacheado y respeta el
-        # free tier (100 req/día) -- ver fetch_api_football_lpf.py. Si no está la
-        # API key, escribe CSV vacíos-válidos y el pipeline sigue (nunca inventa
-        # datos). Los scrapers del Mundial (FIFA/openfootball/26worldcup) se
-        # retiraron en la transformación a LPF.
+        # Métricas LPF: fuente primaria ESPN (site.api.espn.com) -- API "oculta"
+        # sin key ni límite documentado, verificada desde GitHub Actions con
+        # datos reales de la temporada EN CURSO (fixtures, resultados, tabla y
+        # estadística de partido: remates/posesión/pases/tackles/etc). Se probó
+        # primero fbref (INACCESIBLE desde CI, bloqueado por Cloudflare incluso
+        # con navegador real) y API-Football free tier (accesible pero limitado
+        # a temporadas 2022-2024, no la actual) -- ver docstrings de
+        # fetch_espn_lpf.py y fetch_api_football_lpf.py para el detalle de cada
+        # decisión. Escribe a data/raw/espn/_processed; el warehouse se
+        # reconstruye de ahí. Los scrapers del Mundial (FIFA/openfootball/
+        # 26worldcup) se retiraron en la transformación a LPF.
         scrapers = (
-            "fetch_api_football_lpf.py",
+            "fetch_espn_lpf.py",
         )
         for script in scrapers:
             print(f"\n=== {script} ===")

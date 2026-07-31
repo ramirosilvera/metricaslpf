@@ -25,3 +25,7 @@ data/raw/fifa_training_centre/pdfs/
 # Métricas LPF: cache de JSON crudos por fixture de API-Football (regenerable,
 # no se versiona para no inflar el repo). Los _processed sí se commitean.
 data/raw/api_football/cache/
+
+# Métricas LPF: cache de JSON crudos por fixture de ESPN (regenerable, no
+# se versiona para no inflar el repo). Los _processed sí se commitean.
+data/raw/espn/cache/

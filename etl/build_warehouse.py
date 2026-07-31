@@ -53,10 +53,12 @@ def build():
     WAREHOUSE.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect()
 
-    # --- matches (Métricas LPF: API-Football, temporada actual de la Liga
-    # Profesional; se conservan las fuentes históricas del Mundial como opcionales
-    # por si algún CSV viejo sigue presente, pero en LPF no existen) ---
+    # --- matches (Métricas LPF: ESPN -- temporada actual, fuente primaria --
+    # + API-Football como histórico opcional (2022-2024, ver docstring del
+    # fetcher); se conservan las fuentes del Mundial como fallback por si algún
+    # CSV viejo sigue presente, pero en LPF no se generan) ---
     matches_sources = [
+        _read_csv_if_exists(RAW / "espn" / "_processed" / "matches.csv"),
         _read_csv_if_exists(RAW / "api_football" / "_processed" / "matches.csv"),
         _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "matches.csv"),
         _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "matches_fifa2026.csv"),
@@ -72,10 +74,12 @@ def build():
         con.execute(f"COPY matches_df TO '{WAREHOUSE / 'matches.parquet'}' (FORMAT PARQUET)")
         print(f"matches.parquet: {len(matches)} filas")
 
-    # --- team_match_stats (Métricas LPF: API-Football por partido -- remates,
+    # --- team_match_stats (Métricas LPF: ESPN por partido -- remates,
     # posesión, pases/precisión, faltas, córners, offsides, atajadas y proxy de
-    # peligrosidad; StatsBomb como fallback histórico) ---
-    team_stats = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_match_stats.csv")
+    # peligrosidad; API-Football/StatsBomb como fallback) ---
+    team_stats = _read_csv_if_exists(RAW / "espn" / "_processed" / "team_match_stats.csv")
+    if team_stats is None:
+        team_stats = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_match_stats.csv")
     if team_stats is None:
         team_stats = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "team_match_stats.csv")
     if team_stats is not None:
@@ -91,8 +95,12 @@ def build():
         con.execute(f"COPY team_stats_df TO '{WAREHOUSE / 'team_match_stats_tactical.parquet'}' (FORMAT PARQUET)")
         print(f"team_match_stats_tactical.parquet: {len(team_stats)} filas")
 
-    # --- player_match_appearances (LPF: API-Football por partido; StatsBomb fallback) ---
-    appearances = _read_csv_if_exists(RAW / "api_football" / "_processed" / "player_match_appearances.csv")
+    # --- player_match_appearances (LPF: ESPN por partido -- suele venir vacío
+    # para esta competición, ver docstring del fetcher; API-Football/StatsBomb
+    # como fallback) ---
+    appearances = _read_csv_if_exists(RAW / "espn" / "_processed" / "player_match_appearances.csv")
+    if appearances is None:
+        appearances = _read_csv_if_exists(RAW / "api_football" / "_processed" / "player_match_appearances.csv")
     if appearances is None:
         appearances = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "player_match_appearances.csv")
     if appearances is not None:
@@ -127,11 +135,14 @@ def build():
         con.execute(f"COPY phys_players_df TO '{WAREHOUSE / 'physical_player_match_stats.parquet'}' (FORMAT PARQUET)")
         print(f"physical_player_match_stats.parquet: {len(physical_players)} filas")
 
-    # --- tactical_player_match_stats (LPF: API-Football por jugador -- pases,
-    # remates, quites, intercepciones, duelos, gambetas; los campos propios de
-    # FIFA -- offers/line_breaks/pressing -- no existen en API-Football y quedan
-    # nulos. FIFA Training Centre como fallback histórico) ---
-    tactical_players = _read_csv_if_exists(RAW / "api_football" / "_processed" / "tactical_player_match_stats.csv")
+    # --- tactical_player_match_stats (LPF: ESPN por jugador -- pases, remates,
+    # quites, intercepciones, duelos, gambetas, rating; suele venir vacío para
+    # esta competición, ver docstring del fetcher. Los campos propios de FIFA
+    # -- offers/line_breaks/pressing -- no existen en esta fuente y quedan
+    # nulos. API-Football/FIFA Training Centre como fallback) ---
+    tactical_players = _read_csv_if_exists(RAW / "espn" / "_processed" / "tactical_player_match_stats.csv")
+    if tactical_players is None:
+        tactical_players = _read_csv_if_exists(RAW / "api_football" / "_processed" / "tactical_player_match_stats.csv")
     if tactical_players is None:
         tactical_players = _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "tactical_player_match_stats.csv")
     if tactical_players is not None:
@@ -188,8 +199,11 @@ def build():
     else:
         print("squads: sin datos todavia (correr etl/fetch_26worldcup_squads.py)")
 
-    # --- team_profile (26worldcup/teams.json: ranking FIFA + campo base) ---
-    team_profile = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_profile.csv")
+    # --- team_profile (LPF: lista de clubes de la tabla ESPN; sin ranking FIFA
+    # ni campo base, que eran propios del Mundial -- quedan nulos) ---
+    team_profile = _read_csv_if_exists(RAW / "espn" / "_processed" / "team_profile.csv")
+    if team_profile is None:
+        team_profile = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_profile.csv")
     if team_profile is None:
         team_profile = _read_csv_if_exists(RAW / "26worldcup" / "_processed" / "team_profile.csv")
     if team_profile is not None:
@@ -209,7 +223,9 @@ def build():
     # resultado final de cada partido ya se cruzó contra matches (arriba,
     # fuente FIFA Training Centre) dentro de fetch_openfootball_2026.py --
     # ver data/raw/openfootball/_score_discrepancies.json si hubo diferencias. ---
-    goal_events = _read_csv_if_exists(RAW / "api_football" / "_processed" / "goal_events.csv")
+    goal_events = _read_csv_if_exists(RAW / "espn" / "_processed" / "goal_events.csv")
+    if goal_events is None:
+        goal_events = _read_csv_if_exists(RAW / "api_football" / "_processed" / "goal_events.csv")
     if goal_events is None:
         goal_events = _read_csv_if_exists(RAW / "openfootball" / "_processed" / "goal_events.csv")
     if goal_events is not None:
