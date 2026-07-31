@@ -265,6 +265,34 @@ TeamProfileSchema = DataFrameSchema(
 # resultado final de cada partido ya se cruzó contra matches.parquet
 # (FIFA Training Centre) antes de llegar acá -- ver _score_discrepancies.json
 # si hubo alguna diferencia entre fuentes.
+# Estadística individual de jugadores de LPF -- FotMob (ver
+# etl/fetch_fotmob_lpf.py). Formato LARGO: una fila por (jugador, métrica).
+# Es agregado de TEMPORADA, no de partido -- distinto en granularidad al
+# resto de las tablas por-jugador del proyecto (que son por partido cuando
+# existen). value/sub_value/minutes_played/matches_played/rank vienen tal
+# cual los publica FotMob, sin transformación.
+PlayerSeasonStatsSchema = DataFrameSchema(
+    {
+        "player_name": Column(str),
+        "team": Column(str),
+        "fotmob_player_id": Column("Int64", nullable=True),
+        "fotmob_team_id": Column("Int64", nullable=True),
+        "country_code": Column(str, nullable=True),
+        "metric": Column(str),
+        "metric_label": Column(str, nullable=True),
+        "value": Column(float, nullable=True),
+        "sub_value": Column(float, nullable=True),
+        "minutes_played": Column(float, Check.ge(0), nullable=True),
+        "matches_played": Column(float, Check.ge(0), nullable=True),
+        "rank": Column("Int64", Check.ge(1), nullable=True),
+        "source": Column(str),
+        "source_url": Column(str, nullable=True),
+        "retrieved_at": Column(str),
+    },
+    strict=False,
+    coerce=True,
+)
+
 GoalEventsSchema = DataFrameSchema(
     {
         "match_id": Column(int),

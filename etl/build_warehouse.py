@@ -12,6 +12,9 @@ data/raw/api_football/_processed/*.csv queda como fallback histórico opcional
 (FIFA Training Centre, StatsBomb, openfootball, 26worldcup, Transfermarkt) se
 retiraron por completo en la transformación a LPF -- no existe dato físico/GPS
 para esta liga en ninguna fuente gratuita (ver docstring de fetch_espn_lpf.py).
+data/raw/fotmob/_processed/player_season_stats.csv aporta lo único que ESPN no
+tiene: estadística individual por jugador (agregada de temporada, no de
+partido -- ver docstring de fetch_fotmob_lpf.py).
 
 Uso:
     python etl/build_warehouse.py
@@ -31,6 +34,7 @@ from schemas import (
     SquadsSchema,
     TeamProfileSchema,
     GoalEventsSchema,
+    PlayerSeasonStatsSchema,
 )
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -214,6 +218,27 @@ def build():
         print(f"goal_events.parquet: {len(goal_events)} filas")
     else:
         print("goal_events: sin datos todavia (correr etl/fetch_espn_lpf.py)")
+
+    # --- player_season_stats (LPF: FotMob -- estadística individual agregada
+    # de TEMPORADA, 37 categorías incluyendo xG/xGOT/xA; ver docstring de
+    # fetch_fotmob_lpf.py. Es lo único con estadística por jugador real para
+    # esta liga, dado que ESPN no publica boxscore por partido acá. Formato
+    # largo, no requiere fallback -- FotMob es la única fuente que la tiene) ---
+    player_season_stats = _read_csv_if_exists(RAW / "fotmob" / "_processed" / "player_season_stats.csv")
+    if player_season_stats is not None and len(player_season_stats) == 0:
+        player_season_stats = None
+    if player_season_stats is not None:
+        for c in ["fotmob_player_id", "fotmob_team_id"]:
+            player_season_stats[c] = pd.to_numeric(player_season_stats[c], errors="coerce").astype("Int64")
+        for c in ["value", "sub_value", "minutes_played", "matches_played"]:
+            player_season_stats[c] = pd.to_numeric(player_season_stats[c], errors="coerce")
+        player_season_stats["rank"] = pd.to_numeric(player_season_stats["rank"], errors="coerce").astype("Int64")
+        player_season_stats = PlayerSeasonStatsSchema.validate(player_season_stats)
+        con.register("player_season_stats_df", player_season_stats)
+        con.execute(f"COPY player_season_stats_df TO '{WAREHOUSE / 'player_season_stats.parquet'}' (FORMAT PARQUET)")
+        print(f"player_season_stats.parquet: {len(player_season_stats)} filas")
+    else:
+        print("player_season_stats: sin datos todavia (correr etl/fetch_fotmob_lpf.py)")
 
     con.close()
 

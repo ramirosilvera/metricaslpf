@@ -55,6 +55,7 @@ def build():
     has_derived_team_metrics = (WAREHOUSE / "derived_team_metrics.parquet").exists()
     has_derived_team_style = (WAREHOUSE / "derived_team_style.parquet").exists()
     has_derived_player_metrics = (WAREHOUSE / "derived_player_metrics.parquet").exists()
+    has_player_season_stats = (WAREHOUSE / "player_season_stats.parquet").exists()
 
     print("Generando agregados en site/public/data/ ...")
 
@@ -138,6 +139,29 @@ def build():
             {
                 "status": "pending_first_scrape",
                 "note": "ESPN no publica estadística de partido por jugador para la Liga Profesional (boxscore.players vacío).",
+                "rows": [],
+            },
+        )
+
+    # Estadística individual REAL de jugadores de LPF -- FotMob (ver docstring
+    # de fetch_fotmob_lpf.py). Es lo único con rendimiento por jugador para
+    # esta liga, ya que ESPN no publica boxscore por partido acá (ver
+    # player_match_stats en meta.sources más abajo). Formato largo (una fila
+    # por jugador+métrica) tal cual sale del warehouse -- 37 categorías,
+    # incluye xG/xGOT/xA. Es agregado de TEMPORADA, no de partido: se
+    # documenta esa granularidad en meta.sources para no confundirla con las
+    # tablas por-partido del resto del proyecto.
+    if has_player_season_stats:
+        player_season_stats = con.execute(
+            f"SELECT * FROM read_parquet('{WAREHOUSE / 'player_season_stats.parquet'}')"
+        ).df()
+        _write_json("player_season_stats.json", _records(player_season_stats))
+    else:
+        _write_json(
+            "player_season_stats.json",
+            {
+                "status": "pending_first_scrape",
+                "note": "Se completa corriendo etl/fetch_fotmob_lpf.py (FotMob, estadística de temporada por jugador).",
                 "rows": [],
             },
         )
@@ -500,6 +524,13 @@ def build():
     matches_with_tactical_players = int(tactical_players["match_id"].nunique()) if has_tactical_players else 0
     teams_with_squads = int(squads["team"].nunique()) if has_squads else 0
     teams_with_profile = int(team_profile["team"].nunique()) if has_team_profile else 0
+    teams_with_season_stats = int(player_season_stats["team"].nunique()) if has_player_season_stats else 0
+    players_with_season_stats = (
+        int(player_season_stats[["player_name", "team"]].drop_duplicates().shape[0])
+        if has_player_season_stats
+        else 0
+    )
+    categories_with_season_stats = int(player_season_stats["metric"].nunique()) if has_player_season_stats else 0
 
     def _pct(part, whole):
         if not whole:
@@ -614,6 +645,30 @@ def build():
                 "confidence": None,
                 "as_of": generated_at,
                 "status": "missing",
+            },
+            "player_season_stats": {
+                "provider": "FotMob",
+                "provider_url": f"https://www.fotmob.com/api/data/leagues?id={112}",
+                "license": "API pública sin key ni login, uso no documentado formalmente (misma API que usa el sitio fotmob.com)",
+                "license_short": "FotMob (API pública, sin key)",
+                "coverage": "Estadística individual agregada de TEMPORADA (no de partido): goles, asistencias, xG, xGOT, xA, remates, pases, tackles, intercepciones, atajadas, tarjetas y más.",
+                "coverage_detail": (
+                    f"{players_with_season_stats} jugadores de {teams_with_season_stats}/{teams_season_total} "
+                    f"clubes · {categories_with_season_stats} categorías de estadística"
+                    if has_player_season_stats and teams_season_total
+                    else None
+                ),
+                "coverage_pct": _pct(teams_with_season_stats, teams_season_total),
+                "method": (
+                    "37 categorías de líderes de estadística por liga, cada una con su lista completa de "
+                    "temporada (no solo el top-3 visible en la web). Es la única fuente gratuita encontrada "
+                    "con rendimiento real por jugador para esta liga -- ESPN no publica boxscore por partido "
+                    "acá (ver player_match_stats arriba). Al ser agregado de TEMPORADA y no de partido, no es "
+                    "directamente comparable con las tablas por-partido del resto del proyecto."
+                ),
+                "confidence": "media",
+                "as_of": generated_at,
+                "status": "ok" if has_player_season_stats else "pending_first_scrape",
             },
             "squad_ages": {
                 "provider": "ESPN",

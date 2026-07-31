@@ -76,8 +76,15 @@ def main():
         # decisión. Escribe a data/raw/espn/_processed; el warehouse se
         # reconstruye de ahí. Los scrapers del Mundial (FIFA/openfootball/
         # 26worldcup) se retiraron en la transformación a LPF.
+        #
+        # fetch_fotmob_lpf.py cubre lo único que ESPN no tiene para esta liga:
+        # estadística individual por jugador (agregada de temporada, incluye
+        # xG/xGOT/xA) -- ver docstring del fetcher para el detalle de la
+        # búsqueda de fuente y la verificación de cobertura completa (282
+        # jugadores/30 equipos en goles, 415 en tackles, no solo delanteros).
         scrapers = (
             "fetch_espn_lpf.py",
+            "fetch_fotmob_lpf.py",
         )
         for script in scrapers:
             print(f"\n=== {script} ===")

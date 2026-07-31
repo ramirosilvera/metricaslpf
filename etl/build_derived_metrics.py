@@ -172,6 +172,7 @@ def build():
     physical_players = _read_parquet_if_exists("physical_player_match_stats.parquet")
     tactical_players = _read_parquet_if_exists("tactical_player_match_stats.parquet")
     squads = _read_parquet_if_exists("squads.parquet")
+    player_season_stats = _read_parquet_if_exists("player_season_stats.parquet")
 
     team_metric_frames = []
     team_season_tactical = None
@@ -230,6 +231,15 @@ def build():
             var_name="metric",
             value_name="value",
         ))
+
+    if player_season_stats is not None and not player_season_stats.empty:
+        # FotMob: unica fuente con estadistica REAL por jugador para LPF (ver
+        # docstring de fetch_fotmob_lpf.py). Es agregado de TEMPORADA -- se
+        # mezcla igual en el mismo pool de percentiles/z-score que las demas
+        # metricas por jugador porque _zscore_percentile normaliza DENTRO de
+        # cada "metric" (no compara entre metricas de distinta unidad).
+        fm = player_season_stats[["player_name", "team", "metric", "value"]].dropna(subset=["value"])
+        player_metric_frames.append(fm)
 
     if player_metric_frames:
         player_long = pd.concat(player_metric_frames, ignore_index=True).dropna(subset=["value"])
