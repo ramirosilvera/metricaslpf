@@ -4,7 +4,7 @@ import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import RadarCompare from "../islands/RadarCompare";
 import PlayerCompare from "../islands/PlayerCompare";
 import TimelineChart from "../islands/TimelineChart";
-import { loadJson, type TeamSeasonSummary, type TimelineRow, type TimelineTactical2026Row, type TeamPhysicalRankingRow, type TeamTacticalRankingRow, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import { loadJson, type TeamSeasonSummary, type TimelineRow, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
 import { buildPlayerPositions } from "../lib/playerPositions";
 
 // Normaliza el shape {status, rows} de los agregados que aún no se scrapearon
@@ -14,14 +14,11 @@ function loadArray<T>(filename: string): T[] {
   return Array.isArray(raw) ? raw : [];
 }
 
-// El radar usa valores OFICIALES (no percentiles) para calcular el índice de
-// rendimiento (escala estirada estilo EA SPORTS FC), por eso el histórico se
-// alimenta de team_season_summary (valores absolutos).
+// Estadística de equipo real para LPF: team_season_summary / timeline_tactical
+// (ambos de ESPN, por partido). No hay dato físico/GPS ni táctico por jugador
+// para esta liga -- ver etl/fetch_espn_lpf.py.
 const summary = loadArray<TeamSeasonSummary>("team_season_summary.json");
-const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
-const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");
 const timeline = loadJson<TimelineRow[]>("timeline_tactical.json");
-const timeline2026 = loadArray<TimelineTactical2026Row>("timeline_tactical_2026.json");
 
 // Comparación jugador a jugador (índice por factor + GLOBAL ponderado por posición).
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
@@ -29,24 +26,24 @@ const squadRows = loadArray<SquadPlayerRow>("squads.json");
 const playerPositions = buildPlayerPositions(playerMetrics, squadRows);
 ---
 
-<Base title="Comparar" description="Comparación cabeza a cabeza y evolución dentro del torneo.">
+<Base title="Comparar" description="Comparación cabeza a cabeza y evolución dentro de la temporada.">
   <DataStatusBanner />
-  <p class="eyebrow">Cara a cara · dos selecciones</p>
+  <p class="eyebrow">Cara a cara · dos clubes</p>
   <h1>Comparar</h1>
   <p class="lede">
-    El modo <strong>uno contra uno</strong>: elegí <strong>dos</strong> y miralas lado a lado en un radar, con una
-    lectura automática de las diferencias que más pesan. Podés comparar <strong>selecciones</strong> o
-    <strong>jugadores</strong>. <em>¿Querés ver a las 48 ordenadas en una tabla? Eso está en Rankings. ¿Y quién ganaría?
+    El modo <strong>uno contra uno</strong>: elegí <strong>dos</strong> y miralos lado a lado en un radar, con una
+    lectura automática de las diferencias que más pesan. Podés comparar <strong>clubes</strong> o
+    <strong>jugadores</strong>. <em>¿Querés ver a los 30 ordenados en una tabla? Eso está en Rankings. ¿Y quién ganaría?
     Probalo en <a href={`${import.meta.env.BASE_URL}prediccion/`}>Predicción</a>.</em>
   </p>
 
   <section class="section">
     <div class="section-head">
-      <h2>Dos selecciones</h2>
-      <p>Físico o táctico del Mundial 2026, o el histórico 2018/2022. El GLOBAL es el promedio del índice de cada factor.</p>
+      <h2>Dos clubes</h2>
+      <p>Estadística de equipo por partido (posesión, precisión de pase, remates, remates al arco, faltas). El GLOBAL es el promedio del índice de cada factor.</p>
     </div>
     <div class="card">
-      <RadarCompare client:only="react" physicalRows={teamPhysical} tacticalRows={teamTactical} summaryRows={summary} />
+      <RadarCompare client:only="react" summaryRows={summary} />
     </div>
   </section>
 
@@ -68,11 +65,11 @@ const playerPositions = buildPlayerPositions(playerMetrics, squadRows);
 
   <section class="section">
     <div class="section-head">
-      <h2>Evolución durante el torneo</h2>
-      <p>Cómo cambia el juego de una selección partido a partido. El Mundial 2026 se actualiza a medida que avanza.</p>
+      <h2>Evolución durante la temporada</h2>
+      <p>Cómo cambia el juego de un club partido a partido. Se actualiza a medida que avanza la temporada.</p>
     </div>
     <div class="card">
-      <TimelineChart client:only="react" rows2026={timeline2026} rows={timeline} />
+      <TimelineChart client:only="react" rows={timeline} />
     </div>
   </section>
 </Base>
