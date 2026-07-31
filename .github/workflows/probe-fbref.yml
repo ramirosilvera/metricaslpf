@@ -37,7 +37,11 @@ jobs:
                   return None
 
           # RelativePath de la temporada actual (2026), tomado de la sonda anterior
-          r = get("https://www.fotmob.com/api/data/stats/112/season/28207/topstats.json", label="topstats")
+          r = get("https://www.fotmob.com/api/stats/112/season/28207/topstats.json", label="topstats-v1")
+          if r is None or not r.ok:
+              r = get("https://www.fotmob.com/api/data/stats/season/topstats?id=112&season=28207", label="topstats-v2")
+          if r is None or not r.ok:
+              r = get("https://www.fotmob.com/api/leagues?id=112&season=28207&type=topstats", label="topstats-v3")
           if r is not None and r.ok:
               d = r.json()
               print("  top keys:", list(d.keys()) if isinstance(d, dict) else type(d))
