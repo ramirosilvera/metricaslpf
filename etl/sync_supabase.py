@@ -23,6 +23,13 @@ producción (matches/team_profile/squad_market_value con miles de filas
 Mundial nunca limpiadas) y se limpió a mano una vez; de acá en más el modo
 REPLACE lo previene solo en cada corrida.
 
+El delete-all necesita un filtro explícito (PostgREST no permite un DELETE sin
+WHERE), y ese filtro tiene que apuntar a una columna que exista en la tabla y
+sea NOT NULL -- no todas las tablas tienen un "id" serrogate, varias usan una
+clave natural/compuesta como PK. Por eso TABLES lleva, por tabla, el nombre de
+la columna a usar en el filtro `?<col>=not.is.null` (matchea todo sin
+arriesgar un delete accidental sin filtro).
+
 Uso:
     python etl/sync_supabase.py
 """
@@ -43,33 +50,27 @@ REQUEST_TIMEOUT_S = 30
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
 SUPABASE_SERVICE_ROLE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 
-# Sentinela: la tabla no tiene clave natural única (solo un id serrogate), así
-# que un upsert por merge-duplicates duplicaría filas en cada corrida. Para esas
-# se hace reemplazo total: borrar todo e insertar de nuevo (idempotente).
-REPLACE = "__replace__"
-
-# (archivo en data/warehouse/, tabla en Supabase, conflict) -- todas opcionales,
-# se saltean si el Parquet todavía no existe. Todas en modo REPLACE (ver
-# docstring del módulo) salvo que en el futuro alguna tabla vuelva a tener un
-# universo de entidades estable entre corridas.
+# (archivo en data/warehouse/, tabla en Supabase, columna NOT NULL para el
+# filtro del delete-all) -- todas opcionales, se saltean si el Parquet todavía
+# no existe. Todas en modo REPLACE (ver docstring del módulo).
 #
 # physical_match_stats / physical_player_match_stats NO están acá: no existe
 # dato físico/GPS gratuito para LPF y build_warehouse.py ya no genera esos
 # Parquet (ver docstring de fetch_espn_lpf.py) -- se limpiaron a mano una vez
 # en Supabase, no van a volver a poblarse.
 TABLES = [
-    ("matches.parquet", "matches", REPLACE),
-    ("team_match_stats_tactical.parquet", "team_match_stats_tactical", REPLACE),
-    ("player_match_appearances.parquet", "player_match_appearances", REPLACE),
-    ("tactical_player_match_stats.parquet", "tactical_player_match_stats", REPLACE),
-    ("squads.parquet", "squad_market_value", REPLACE),
-    ("team_profile.parquet", "team_profile", REPLACE),
-    ("standings.parquet", "standings", REPLACE),
-    ("player_season_stats.parquet", "player_season_stats", REPLACE),
-    ("goal_events.parquet", "goal_events", REPLACE),
-    ("derived_team_metrics.parquet", "derived_team_metrics", REPLACE),
-    ("derived_team_style.parquet", "derived_team_style", REPLACE),
-    ("derived_player_metrics.parquet", "derived_player_metrics", REPLACE),
+    ("matches.parquet", "matches", "match_id"),
+    ("team_match_stats_tactical.parquet", "team_match_stats_tactical", "match_id"),
+    ("player_match_appearances.parquet", "player_match_appearances", "match_id"),
+    ("tactical_player_match_stats.parquet", "tactical_player_match_stats", "id"),
+    ("squads.parquet", "squad_market_value", "team"),
+    ("team_profile.parquet", "team_profile", "team"),
+    ("standings.parquet", "standings", "team"),
+    ("player_season_stats.parquet", "player_season_stats", "id"),
+    ("goal_events.parquet", "goal_events", "id"),
+    ("derived_team_metrics.parquet", "derived_team_metrics", "team"),
+    ("derived_team_style.parquet", "derived_team_style", "team"),
+    ("derived_player_metrics.parquet", "derived_player_metrics", "player_name"),
 ]
 
 
@@ -90,35 +91,28 @@ def _base_headers() -> dict:
     }
 
 
-def _delete_all(table: str) -> None:
-    # PostgREST exige un filtro para borrar; `id=gte.0` matchea todo (los id son
-    # bigserial >= 1). Evita un DELETE sin WHERE accidental.
-    url = f"{SUPABASE_URL}/rest/v1/{table}?id=gte.0"
+def _delete_all(table: str, filter_col: str) -> None:
+    # PostgREST exige un filtro para borrar; `<col>=not.is.null` matchea todo
+    # (la columna es NOT NULL -- PK o parte de una). Evita un DELETE sin WHERE
+    # accidental sin asumir que la tabla tiene un "id" serrogate (la mayoría no
+    # lo tiene: usan clave natural/compuesta).
+    url = f"{SUPABASE_URL}/rest/v1/{table}?{filter_col}=not.is.null"
     headers = {**_base_headers(), "Prefer": "return=minimal"}
     resp = requests.delete(url, headers=headers, timeout=REQUEST_TIMEOUT_S)
     if not resp.ok:
         raise RuntimeError(f"{table} (delete): HTTP {resp.status_code} -- {resp.text[:500]}")
 
 
-def _upsert(table: str, rows: list[dict], conflict: str | None = None) -> None:
-    # REPLACE: borrar todo ANTES de mirar si hay filas nuevas -- una tabla que
-    # hoy tiene 0 filas reales (ej. tactical_player_match_stats, siempre vacía
-    # para LPF) igual tiene que vaciarse de datos viejos en cada corrida, no
-    # solo cuando hay algo para insertar.
-    if conflict == REPLACE:
-        _delete_all(table)
-        if not rows:
-            return
-        url = f"{SUPABASE_URL}/rest/v1/{table}"
-        headers = {**_base_headers(), "Prefer": "return=minimal"}
-    else:
-        if not rows:
-            return
-        # on_conflict explícito cuando la clave natural NO es la PK (id surrogate
-        # + UNIQUE aparte); si no, merge-duplicates concilia por PK y nunca dedup.
-        params = f"?on_conflict={conflict}" if conflict else ""
-        url = f"{SUPABASE_URL}/rest/v1/{table}{params}"
-        headers = {**_base_headers(), "Prefer": "resolution=merge-duplicates,return=minimal"}
+def _upsert(table: str, rows: list[dict], filter_col: str) -> None:
+    # Borrar todo ANTES de mirar si hay filas nuevas -- una tabla que hoy tiene
+    # 0 filas reales (ej. tactical_player_match_stats, siempre vacía para LPF)
+    # igual tiene que vaciarse de datos viejos en cada corrida, no solo cuando
+    # hay algo para insertar.
+    _delete_all(table, filter_col)
+    if not rows:
+        return
+    url = f"{SUPABASE_URL}/rest/v1/{table}"
+    headers = {**_base_headers(), "Prefer": "return=minimal"}
     for i in range(0, len(rows), CHUNK_SIZE):
         chunk = rows[i : i + CHUNK_SIZE]
         resp = requests.post(url, json=chunk, headers=headers, timeout=REQUEST_TIMEOUT_S)
@@ -131,14 +125,13 @@ def sync():
         print("SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY no configurados -- se saltea la sincronizacion.")
         return
 
-    for filename, table, conflict in TABLES:
+    for filename, table, filter_col in TABLES:
         path = WAREHOUSE / filename
         if not path.exists():
             continue
         rows = _records(pd.read_parquet(path))
-        _upsert(table, rows, conflict)
-        modo = "reemplazo" if conflict == REPLACE else (f"upsert on {conflict}" if conflict else "upsert (PK)")
-        print(f"  {table}: {len(rows)} filas sincronizadas ({modo})")
+        _upsert(table, rows, filter_col)
+        print(f"  {table}: {len(rows)} filas sincronizadas (reemplazo)")
 
 
 if __name__ == "__main__":
