@@ -1,1183 +1,1974 @@
 [
   {
-    "team": "Argentina",
-    "player_name": "Lionel Messi",
+    "team": "Independiente",
+    "player_name": "Gabriel Ávalos",
+    "goles": 11,
+    "penales": 2,
+    "partidos_con_gol": 10
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "player_name": "Cristian Tarragona",
+    "goles": 9,
+    "penales": 2,
+    "partidos_con_gol": 9
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Jordy Caicedo",
+    "goles": 9,
+    "penales": 3,
+    "partidos_con_gol": 9
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "player_name": "Junior Marabel",
     "goles": 8,
+    "penales": 2,
+    "partidos_con_gol": 8
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "player_name": "Fabrizio Sartori Prieto",
+    "goles": 7,
+    "penales": 0,
+    "partidos_con_gol": 6
+  },
+  {
+    "team": "Tigre",
+    "player_name": "José Romero",
+    "goles": 7,
+    "penales": 0,
+    "partidos_con_gol": 7
+  },
+  {
+    "team": "Atlético Tucumán",
+    "player_name": "Leandro Díaz",
+    "goles": 7,
+    "penales": 3,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "player_name": "Marcelo Torres",
+    "goles": 7,
+    "penales": 3,
+    "partidos_con_gol": 7
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "player_name": "Florián Monzón",
+    "goles": 6,
+    "penales": 1,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "Banfield",
+    "player_name": "Mauro Méndez",
+    "goles": 6,
+    "penales": 0,
+    "partidos_con_gol": 6
+  },
+  {
+    "team": "Banfield",
+    "player_name": "Tiziano Perrota",
+    "goles": 6,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Agustín Módica",
+    "goles": 5,
     "penales": 0,
     "partidos_con_gol": 5
   },
   {
-    "team": "Norway",
-    "player_name": "Erling Haaland",
-    "goles": 7,
+    "team": "Instituto (Córdoba)",
+    "player_name": "Alex Luna",
+    "goles": 5,
+    "penales": 2,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "Lanús",
+    "player_name": "Dylan Aquino",
+    "goles": 5,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Rosario Central",
+    "player_name": "Enzo Copetti",
+    "goles": 5,
+    "penales": 0,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Facundo Colidio",
+    "goles": 5,
+    "penales": 1,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "Independiente",
+    "player_name": "Matías Abaldo",
+    "goles": 5,
+    "penales": 0,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "Boca Juniors",
+    "player_name": "Miguel Merentiel",
+    "goles": 5,
     "penales": 0,
     "partidos_con_gol": 4
   },
   {
-    "team": "France",
-    "player_name": "Kylian Mbappé",
-    "goles": 7,
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Nicolás Fernández",
+    "goles": 5,
     "penales": 1,
     "partidos_con_gol": 4
   },
   {
-    "team": "England",
-    "player_name": "Harry Kane",
-    "goles": 6,
+    "team": "San Lorenzo",
+    "player_name": "Rodrigo Auzmendi",
+    "goles": 5,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Sebastián Driussi",
+    "goles": 5,
+    "penales": 0,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "Rosario Central",
+    "player_name": "Ángel Di María",
+    "goles": 5,
+    "penales": 1,
+    "partidos_con_gol": 5
+  },
+  {
+    "team": "Racing Club",
+    "player_name": "Adrián Martínez",
+    "goles": 4,
+    "penales": 1,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Alan Lescano",
+    "goles": 4,
+    "penales": 1,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "player_name": "Alejo Osella",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Rosario Central",
+    "player_name": "Alejo Veliz",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "San Lorenzo",
+    "player_name": "Alexis Cuello",
+    "goles": 4,
+    "penales": 1,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Francisco Gonzalez Metilli",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Gonzalo Montiel",
+    "goles": 4,
     "penales": 2,
     "partidos_con_gol": 4
   },
   {
-    "team": "Senegal",
-    "player_name": "Ismaïla Sarr",
+    "team": "Tigre",
+    "player_name": "Ignacio Russo",
     "goles": 4,
     "penales": 0,
     "partidos_con_gol": 3
   },
   {
-    "team": "England",
-    "player_name": "Jude Bellingham",
-    "goles": 4,
-    "penales": 0,
-    "partidos_con_gol": 3
-  },
-  {
-    "team": "Mexico",
-    "player_name": "Julián Quiñones",
+    "team": "Independiente Rivadavia",
+    "player_name": "José Florentín",
     "goles": 4,
     "penales": 0,
     "partidos_con_gol": 4
   },
   {
-    "team": "Spain",
-    "player_name": "Mikel Oyarzabal",
+    "team": "Defensa y Justicia",
+    "player_name": "Juan Gutiérrez",
     "goles": 4,
     "penales": 0,
-    "partidos_con_gol": 2
+    "partidos_con_gol": 4
   },
   {
-    "team": "France",
-    "player_name": "Ousmane Dembélé",
+    "team": "Newell's Old Boys",
+    "player_name": "Juan Ramírez",
+    "goles": 4,
+    "penales": 1,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "player_name": "Leonel Bucca",
     "goles": 4,
     "penales": 0,
-    "partidos_con_gol": 2
+    "partidos_con_gol": 4
   },
   {
-    "team": "Brazil",
-    "player_name": "Vinícius Júnior",
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Lucas Zelarayán",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "player_name": "Manuel Lanzini",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "player_name": "Marcelo Estigarribia",
+    "goles": 4,
+    "penales": 2,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "player_name": "Michael Santos",
+    "goles": 4,
+    "penales": 1,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Boca Juniors",
+    "player_name": "Milton Gimenez",
+    "goles": 4,
+    "penales": 1,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "player_name": "Nicolas Schelotto",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "player_name": "Ronaldo Martínez",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Tomás Molina",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 4
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "player_name": "Valentín Dávila",
     "goles": 4,
     "penales": 0,
     "partidos_con_gol": 3
   },
   {
-    "team": "Netherlands",
-    "player_name": "Brian Brobbey",
+    "team": "Defensa y Justicia",
+    "player_name": "Aaron Molinas",
     "goles": 3,
-    "penales": 0,
-    "partidos_con_gol": 2
+    "penales": 3,
+    "partidos_con_gol": 3
   },
   {
-    "team": "Netherlands",
-    "player_name": "Cody Gakpo",
-    "goles": 3,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Portugal",
-    "player_name": "Cristiano Ronaldo",
-    "goles": 3,
-    "penales": 1,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Germany",
-    "player_name": "Deniz Undav",
-    "goles": 3,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "New Zealand",
-    "player_name": "Elijah Just",
-    "goles": 3,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "USA",
-    "player_name": "Folarin Balogun",
-    "goles": 3,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Morocco",
-    "player_name": "Ismael Saibari",
+    "team": "Boca Juniors",
+    "player_name": "Adam Bareiro",
     "goles": 3,
     "penales": 0,
     "partidos_con_gol": 3
   },
   {
-    "team": "Switzerland",
-    "player_name": "Johan Manzambi",
-    "goles": 3,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Canada",
-    "player_name": "Jonathan David",
+    "team": "Estudiantes de La Plata",
+    "player_name": "Adolfo Gaich",
     "goles": 3,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Germany",
-    "player_name": "Kai Havertz",
-    "goles": 3,
-    "penales": 1,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Brazil",
-    "player_name": "Matheus Cunha",
-    "goles": 3,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Mexico",
-    "player_name": "Raúl Jiménez",
-    "goles": 3,
-    "penales": 1,
-    "partidos_con_gol": 3
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Romelu Lukaku",
+    "team": "Independiente Rivadavia",
+    "player_name": "Alex Arce",
     "goles": 3,
     "penales": 0,
     "partidos_con_gol": 3
   },
   {
-    "team": "Congo DR",
-    "player_name": "Yoane Wissa",
+    "team": "Estudiantes de La Plata",
+    "player_name": "Alexis Castro",
     "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Deportivo Riestra",
+    "player_name": "Antony Alonso",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "player_name": "Augusto Schott",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Defensa y Justicia",
+    "player_name": "Ayrton Portillo",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "player_name": "Braian Cuello",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Defensa y Justicia",
+    "player_name": "David Barbona",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "player_name": "Diego Barrera",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "player_name": "Fabricio Pérez",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "player_name": "Giuliano Cerato",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Hernan Lopez",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Juan Fernando Quintero",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "player_name": "Julián Palacio",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Banfield",
+    "player_name": "Lautaro Gómez",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Lanús",
+    "player_name": "Marcelino Moreno",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "player_name": "Matías Pellegrini",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Racing Club",
+    "player_name": "Matías Zaracho",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Barracas Central",
+    "player_name": "Rodrigo Insúa",
+    "goles": 3,
+    "penales": 2,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Independiente",
+    "player_name": "Santiago Montiel",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "player_name": "Tiago Palacios",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Racing Club",
+    "player_name": "Tomás Conechny",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Tomás Galván",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "player_name": "Agustín Auzmendi",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Tigre",
+    "player_name": "Alan Barrionuevo",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Boca Juniors",
+    "player_name": "Alan Velasco",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "player_name": "Alexandro Maidana",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Platense",
+    "player_name": "Augusto Lotti",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Platense",
+    "player_name": "Bautista Merlini",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Lanús",
+    "player_name": "Carlos Izquierdoz",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "player_name": "Diego Churín",
+    "goles": 2,
     "penales": 1,
     "partidos_con_gol": 2
   },
   {
-    "team": "Côte d'Ivoire",
-    "player_name": "Amad Diallo",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Sweden",
-    "player_name": "Anthony Elanga",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Japan",
-    "player_name": "Ayase Ueda",
+    "team": "Racing Club",
+    "player_name": "Duván Vergara",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Morocco",
-    "player_name": "Azzedine Ounahi",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "France",
-    "player_name": "Bradley Barcola",
+    "team": "Defensa y Justicia",
+    "player_name": "Elías Pereyra",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Switzerland",
-    "player_name": "Breel Embolo",
+    "team": "Gimnasia La Plata",
+    "player_name": "Enzo Martínez",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Ezequiel Muñoz",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "player_name": "Ezequiel Naya",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Facundo Lencioni",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Aldosivi",
+    "player_name": "Federico Acevedo",
     "goles": 2,
     "penales": 1,
     "partidos_con_gol": 2
   },
   {
-    "team": "Belgium",
-    "player_name": "Charles De Ketelaere",
+    "team": "Barracas Central",
+    "player_name": "Fernando Tobio",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Francisco Álvarez",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Atlético Tucumán",
+    "player_name": "Franco Albanell",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "player_name": "Franco Torres",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Franco Vázquez",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Platense",
+    "player_name": "Franco Zapiola",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Rosario Central",
+    "player_name": "Gastón Ávila",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Tigre",
+    "player_name": "Gonzalo Martínez",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "San Lorenzo",
+    "player_name": "Gregorio Rodríguez",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "player_name": "Ignacio Fernández",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Iván Morales",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Barracas Central",
+    "player_name": "Javier Morales",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "player_name": "Joaquín García",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Juan Bisanz",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Defensa y Justicia",
+    "player_name": "Juan Miritello",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Netherlands",
-    "player_name": "Crysencio Summerville",
+    "team": "Rosario Central",
+    "player_name": "Julián Fernández",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Canada",
-    "player_name": "Cyle Larin",
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Lautaro Gutierrez",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Japan",
-    "player_name": "Daichi Kamada",
+    "team": "Boca Juniors",
+    "player_name": "Leandro Paredes",
+    "goles": 2,
+    "penales": 2,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Lucas Martínez Quarta",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Colombia",
-    "player_name": "Daniel Muñoz",
+    "team": "San Lorenzo",
+    "player_name": "Luciano Vietto",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Egypt",
-    "player_name": "Emam Ashour",
+    "team": "Racing Club",
+    "player_name": "Marco Di Cesare",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Bosnia and Herzegovina",
-    "player_name": "Ermin Mahmic",
+    "team": "Unión (Santa Fe)",
+    "player_name": "Mateo Del Blanco",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Senegal",
-    "player_name": "Habib Diarra",
+    "team": "Instituto (Córdoba)",
+    "player_name": "Matias Tissera",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Belgium",
-    "player_name": "Leandro Trossard",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "USA",
-    "player_name": "Malik Tillman",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Austria",
-    "player_name": "Marko Arnautovic",
+    "team": "Newell's Old Boys",
+    "player_name": "Matías Cóccaro",
     "goles": 2,
     "penales": 1,
     "partidos_con_gol": 2
   },
   {
-    "team": "Uruguay",
-    "player_name": "Maxi Araújo",
+    "team": "Independiente Rivadavia",
+    "player_name": "Matías Fernández",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Egypt",
-    "player_name": "Mostafa Zico",
+    "team": "Independiente",
+    "player_name": "Maximiliano Gutiérrez",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Côte d'Ivoire",
-    "player_name": "Nicolas Pépé",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Senegal",
-    "player_name": "Pape Gueye",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "IR Iran",
-    "player_name": "Ramin Rezaeian",
+    "team": "Estudiantes de La Plata",
+    "player_name": "Mikel Amondarain",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Algeria",
-    "player_name": "Riyad Mahrez",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Switzerland",
-    "player_name": "Rubén Vargas",
+    "team": "Aldosivi",
+    "player_name": "Nicolás Cordero",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
   },
   {
-    "team": "Morocco",
-    "player_name": "Soufiane Rahimi",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Sweden",
-    "player_name": "Yasin Ayari",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Belgium",
-    "player_name": "Youri Tielemans",
+    "team": "Argentinos Juniors",
+    "player_name": "Nicolás Oroz",
     "goles": 2,
     "penales": 1,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Oscar Cortés",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Newell's Old Boys",
+    "player_name": "Oscar Salómon",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Lanús",
+    "player_name": "Ramiro Carrera",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Ramiro Hernandes",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Atlético Tucumán",
+    "player_name": "Renzo Tesuri",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "player_name": "Rick",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Boca Juniors",
+    "player_name": "Santiago Ascacibar",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Banfield",
+    "player_name": "Santiago López Garcia",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Racing Club",
+    "player_name": "Santiago Solari",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Sebastián Prieto",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "player_name": "Sheyko Studer",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Thaiel Peralta",
+    "goles": 2,
+    "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Uzbekistan",
-    "player_name": "Abbosbek Fayzullaev",
+    "team": "Platense",
+    "player_name": "Tomás Nasif",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Lanús",
+    "player_name": "Walter Bou",
+    "goles": 2,
+    "penales": 1,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Lanús",
+    "player_name": "Yoshan Valois",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Óscar Romero",
+    "goles": 2,
+    "penales": 2,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Racing Club",
+    "player_name": "Adrián Fernández",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Saudi Arabia",
-    "player_name": "Abdulelah Al-Amri",
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Adrián Sánchez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Morocco",
-    "player_name": "Achraf Hakimi",
+    "team": "Unión (Santa Fe)",
+    "player_name": "Agustin Colazo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Uruguay",
-    "player_name": "Agustín Cano",
+    "team": "Defensa y Justicia",
+    "player_name": "Agustin Hausch",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "USA",
-    "player_name": "Alex Freeman",
+    "team": "Central Córdoba (Santiago del Estero)",
+    "player_name": "Alejandro Maciel",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Sweden",
-    "player_name": "Alexander Isak",
+    "team": "Deportivo Riestra",
+    "player_name": "Alexander Díaz",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Belgium",
-    "player_name": "Alexis Saelemaekers",
+    "team": "Rosario Central",
+    "player_name": "Alexis Soto",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Jordan",
-    "player_name": "Ali Olwan",
+    "team": "Gimnasia La Plata",
+    "player_name": "Alexis Steimbach",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Algeria",
-    "player_name": "Amine Gouiri",
+    "team": "Tigre",
+    "player_name": "Alfio Oviedo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Croatia",
-    "player_name": "Ante Budimir",
+    "team": "Gimnasia La Plata",
+    "player_name": "Bautista Barros Schelotto",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Norway",
-    "player_name": "Antonio Nusa",
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Blas Armoa",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Türkiye",
-    "player_name": "Arda Güler",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "USA",
-    "player_name": "Auston Trusty",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Iraq",
-    "player_name": "Aymen Hussein",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Türkiye",
-    "player_name": "Baris Alper Yilmaz",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Congo DR",
-    "player_name": "Brian Cipenga",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Ghana",
-    "player_name": "Caleb Yirenkyi",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Brazil",
-    "player_name": "Casemiro",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Australia",
-    "player_name": "Connor Metcalfe",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Argentina",
-    "player_name": "Cristian Romero",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Japan",
-    "player_name": "Daizen Maeda",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Switzerland",
-    "player_name": "Dan Ndoye",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Cabo Verde",
-    "player_name": "Deroy Duarte",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Ghana",
-    "player_name": "Derrick Luckassen",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "France",
-    "player_name": "Désiré Doué",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Uzbekistan",
-    "player_name": "Eldor Shomurodov",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Argentina",
-    "player_name": "Enzo Fernández",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Germany",
-    "player_name": "Felix Nmecha",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "New Zealand",
-    "player_name": "Finn Surman",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Congo DR",
-    "player_name": "Fiston Mayele",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Côte d'Ivoire",
-    "player_name": "Franck Kessié",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Brazil",
-    "player_name": "Gabriel Martinelli",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Morocco",
-    "player_name": "Gessime Yassine",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Argentina",
-    "player_name": "Giovani Lo Celso",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "USA",
-    "player_name": "Giovanni Reyna",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Ecuador",
-    "player_name": "Gonzalo Plata",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Portugal",
-    "player_name": "Gonçalo Ramos",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Switzerland",
-    "player_name": "Granit Xhaka",
+    "team": "Vélez Sarsfield",
+    "player_name": "Braian Romero",
     "goles": 1,
     "penales": 1,
     "partidos_con_gol": 1
   },
   {
-    "team": "Belgium",
-    "player_name": "Hans Vanaken",
+    "team": "Estudiantes de La Plata",
+    "player_name": "Brian Aguirre",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Qatar",
-    "player_name": "Hassan Al-Haydos",
+    "team": "Deportivo Riestra",
+    "player_name": "Brian Sánchez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Tunisia",
-    "player_name": "Hazem Mastouri",
+    "team": "Banfield",
+    "player_name": "Bruno Sepúlveda",
+    "goles": 1,
+    "penales": 1,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Atlético Tucumán",
+    "player_name": "Carlos Abeldano",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Korea Republic",
-    "player_name": "Hwang In-Beom",
+    "team": "San Lorenzo",
+    "player_name": "Carlos Insaurralde",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Cabo Verde",
-    "player_name": "Hélio Varela",
+    "team": "Sarmiento (Junín)",
+    "player_name": "Carlos Villalba",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Senegal",
-    "player_name": "Ibrahim Mbaye",
+    "team": "Atlético Tucumán",
+    "player_name": "Clever Ferreira",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Senegal",
-    "player_name": "Iliman Ndiaye",
+    "team": "Sarmiento (Junín)",
+    "player_name": "Cristian Zabala",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Morocco",
-    "player_name": "Issa Diop",
+    "team": "Barracas Central",
+    "player_name": "Damián Martínez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Croatia",
-    "player_name": "Ivan Perisic",
+    "team": "Banfield",
+    "player_name": "David Salazar",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Germany",
-    "player_name": "Jamal Musiala",
+    "team": "Unión (Santa Fe)",
+    "player_name": "Diego Diaz",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Netherlands",
-    "player_name": "Jan Paul van Hecke",
+    "team": "San Lorenzo",
+    "player_name": "Diego Herazo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Colombia",
-    "player_name": "Jhon Arias",
+    "team": "Argentinos Juniors",
+    "player_name": "Diego Porcel",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Scotland",
-    "player_name": "John McGinn",
+    "team": "Instituto (Córdoba)",
+    "player_name": "Diego Sosa",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Bosnia and Herzegovina",
-    "player_name": "Jovo Lukić",
+    "team": "Vélez Sarsfield",
+    "player_name": "Diego Valdés",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Portugal",
-    "player_name": "João Neves",
+    "team": "Lanús",
+    "player_name": "Eduardo Salvio",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Paraguay",
-    "player_name": "Julio Enciso",
+    "team": "Rosario Central",
+    "player_name": "Elías Verón",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Japan",
-    "player_name": "Junya Ito",
+    "team": "Defensa y Justicia",
+    "player_name": "Emiliano Amor",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Colombia",
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Emiliano Rigoni",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Emiliano Viveros",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Rosario Central",
+    "player_name": "Enzo Giménez",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Erik Godoy",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Boca Juniors",
+    "player_name": "Exequiel Zeballos",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "San Lorenzo",
+    "player_name": "Ezequiel Herrera",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "San Lorenzo",
+    "player_name": "Fabricio Gabriel López",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Barracas Central",
+    "player_name": "Facundo Bruera",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "player_name": "Facundo Cobos",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Newell's Old Boys",
+    "player_name": "Facundo Gauch",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Facundo Jainikoski",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Facundo Waller",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Aldosivi",
+    "player_name": "Felipe Anso",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "player_name": "Fernando Martínez",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Newell's Old Boys",
+    "player_name": "Francisco Scarpeccio",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Newell's Old Boys",
+    "player_name": "Franco García",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "player_name": "Franco Jara",
+    "goles": 1,
+    "penales": 1,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "player_name": "Gabriel Alanís",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Racing Club",
+    "player_name": "Gabriel Rojas",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Argentinos Juniors",
+    "player_name": "Gastón Verón",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Rosario Central",
+    "player_name": "Giovanni Cantizano",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Giuliano Galoppo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Barracas Central",
+    "player_name": "Gonzalo Maroni",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "player_name": "Gonzalo Rios",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "player_name": "Guido Carrillo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Hugo Nervo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Platense",
+    "player_name": "Héctor Bobadilla",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Ian Subiabre",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Ignacio Campo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Rosario Central",
+    "player_name": "Ignacio Ovando",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Independiente",
+    "player_name": "Ignacio Pussetto",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Platense",
+    "player_name": "Ignacio Vázquez",
+    "goles": 1,
+    "penales": 1,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Boca Juniors",
+    "player_name": "Iker Zufiaurre",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Independiente",
+    "player_name": "Iván Marcone",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Barracas Central",
+    "player_name": "Iván Tapia",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Tigre",
+    "player_name": "Jalil Elías",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "player_name": "Jano Gordon",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "player_name": "Jeremías Lázaro",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Newell's Old Boys",
+    "player_name": "Jeronimo Russo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "player_name": "Jhon Córdoba",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Barracas Central",
+    "player_name": "Jhonatan Candia",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Joaquin Freitas",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "player_name": "Jonathan Gómez",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "player_name": "Jonathan Herrera",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Independiente",
+    "player_name": "Juan Fedorco",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "player_name": "Juan Ludueña",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "player_name": "Juan Manuel Elordi",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Julián Mavilla",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Rosario Central",
     "player_name": "Jáminton Campaz",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Türkiye",
-    "player_name": "Kaan Ayhan",
+    "team": "River Plate",
+    "player_name": "Kendry Páez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Japan",
-    "player_name": "Kaishu Sano",
+    "team": "Barracas Central",
+    "player_name": "Kevin Jappert",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Japan",
-    "player_name": "Keito Nakamura",
+    "team": "Boca Juniors",
+    "player_name": "Lautaro Blanco",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Bosnia and Herzegovina",
-    "player_name": "Kerim Alajbegovic",
+    "team": "Boca Juniors",
+    "player_name": "Lautaro Di Lollo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Belgium",
-    "player_name": "Kevin De Bruyne",
+    "team": "Independiente",
+    "player_name": "Lautaro Millán",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Cabo Verde",
-    "player_name": "Kevin Pina",
+    "team": "River Plate",
+    "player_name": "Lautaruo Rivero",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Czechia",
-    "player_name": "Ladislav Krejcí",
+    "team": "Estudiantes de La Plata",
+    "player_name": "Leandro González Pírez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Spain",
-    "player_name": "Lamine Yamal",
+    "team": "Independiente Rivadavia",
+    "player_name": "Leonard Costa",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Argentina",
-    "player_name": "Lautaro Martínez",
+    "team": "Huracán",
+    "player_name": "Leonardo Gil",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Leonardo Morales",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "player_name": "Luca Rafaelli",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "player_name": "Lucas Alario",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Huracán",
+    "player_name": "Lucas Blondel",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Barracas Central",
+    "player_name": "Lucas Gamba",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "player_name": "Lucas Menossi",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "player_name": "Lucas Robertone",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Defensa y Justicia",
+    "player_name": "Lucas Souto",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Independiente",
+    "player_name": "Luciano Cabral",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Luciano Cingolani",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "player_name": "Luciano Gómez",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Luciano Paredes",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "player_name": "Maizon Rodríguez",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "player_name": "Manuel Panaro",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "River Plate",
+    "player_name": "Marcos Acuña",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Deportivo Riestra",
+    "player_name": "Mariano Bracamonte",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "player_name": "Martin Rio",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Atlético Tucumán",
+    "player_name": "Martín Benítez",
     "goles": 1,
     "penales": 1,
     "partidos_con_gol": 1
   },
   {
-    "team": "Norway",
-    "player_name": "Leo Østigard",
+    "team": "Estudiantes de Río Cuarto",
+    "player_name": "Martín Garnerone",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Germany",
-    "player_name": "Leroy Sané",
+    "team": "Estudiantes de Río Cuarto",
+    "player_name": "Mateo Bajamich",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Argentina",
-    "player_name": "Lisandro Martínez",
+    "team": "Instituto (Córdoba)",
+    "player_name": "Matias Fonseca",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Curaçao",
-    "player_name": "Livano Comenencia",
+    "team": "Racing Club",
+    "player_name": "Matko Miljevic",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Colombia",
-    "player_name": "Luis Díaz",
+    "team": "Instituto (Córdoba)",
+    "player_name": "Matías Gallardo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Mexico",
-    "player_name": "Luis Romo",
+    "team": "Argentinos Juniors",
+    "player_name": "Matías Giménez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Egypt",
-    "player_name": "Mahmoud Saber",
+    "team": "Estudiantes de Río Cuarto",
+    "player_name": "Mauro Valiente",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Austria",
-    "player_name": "Marcel Sabitzer",
+    "team": "Atlético Tucumán",
+    "player_name": "Maxi Villa",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Norway",
-    "player_name": "Marcus Holmgren Pedersen",
+    "team": "River Plate",
+    "player_name": "Maximiliano Salas",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "England",
-    "player_name": "Marcus Rashford",
+    "team": "Newell's Old Boys",
+    "player_name": "Michael Hoyos",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Croatia",
-    "player_name": "Martin Baturina",
+    "team": "Racing Club",
+    "player_name": "Nazareno Colombo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Mexico",
-    "player_name": "Mateo Chávez",
+    "team": "Banfield",
+    "player_name": "Neyder Moreno",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Sweden",
-    "player_name": "Mattias Svanberg",
+    "team": "Platense",
+    "player_name": "Nicolas Retamar",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Paraguay",
-    "player_name": "Matías Galarza",
+    "team": "Deportivo Riestra",
+    "player_name": "Nicolás Benegas",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Paraguay",
-    "player_name": "Mauricio",
+    "team": "Instituto (Córdoba)",
+    "player_name": "Nicolás Guerra",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Czechia",
-    "player_name": "Michal Sadílek",
+    "team": "Atlético Tucumán",
+    "player_name": "Nicolás Laméndola",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Spain",
-    "player_name": "Mikel Merino",
+    "team": "Sarmiento (Junín)",
+    "player_name": "Nicolás Pasquini",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Egypt",
-    "player_name": "Mohamed Salah",
+    "team": "Barracas Central",
+    "player_name": "Norberto Briasco",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "IR Iran",
-    "player_name": "Mohammad Mohebbi",
+    "team": "Sarmiento (Junín)",
+    "player_name": "Pablo Magnin",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Jordan",
-    "player_name": "Mousa Al-Tamari",
+    "team": "Deportivo Riestra",
+    "player_name": "Pedro Ramirez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Algeria",
-    "player_name": "Nadhir Benbouali",
+    "team": "Unión (Santa Fe)",
+    "player_name": "Rafael Profini",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Canada",
-    "player_name": "Nathan Saliba",
+    "team": "Belgrano (Córdoba)",
+    "player_name": "Ramiro Tulián",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Germany",
-    "player_name": "Nathaniel Brown",
+    "team": "Sarmiento (Junín)",
+    "player_name": "Renzo Orihuela",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Australia",
-    "player_name": "Nestory Irankunda",
+    "team": "Vélez Sarsfield",
+    "player_name": "Rodrigo Aliendro",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Brazil",
-    "player_name": "Neymar",
-    "goles": 1,
-    "penales": 1,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Germany",
-    "player_name": "Nico Schlotterbeck",
+    "team": "Lanús",
+    "player_name": "Rodrigo Castillo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Croatia",
-    "player_name": "Nikola Vlasic",
+    "team": "Argentinos Juniors",
+    "player_name": "Román Riquelme",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Ecuador",
-    "player_name": "Nilson Angulo",
+    "team": "Defensa y Justicia",
+    "player_name": "Rubén Botta",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Jordan",
-    "player_name": "Nizar Al-Rashdan",
+    "team": "Argentinos Juniors",
+    "player_name": "Ryoga Kida",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Portugal",
-    "player_name": "Nuno Mendes",
+    "team": "Aldosivi",
+    "player_name": "Santiago Moyano",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Korea Republic",
-    "player_name": "Oh Hyeon-Gyu",
+    "team": "Estudiantes de La Plata",
+    "player_name": "Santiago Núñez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Tunisia",
-    "player_name": "Omar Rekik",
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Santiago Rodríguez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Spain",
-    "player_name": "Pedro Porro",
+    "team": "Racing Club",
+    "player_name": "Santiago Sosa",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Croatia",
-    "player_name": "Petar Musa",
+    "team": "Lanús",
+    "player_name": "Sasha Marcich",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Croatia",
-    "player_name": "Petar Sucic",
+    "team": "Estudiantes de Río Cuarto",
+    "player_name": "Sergio Ojeda",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Canada",
-    "player_name": "Promise David",
+    "team": "Vélez Sarsfield",
+    "player_name": "Thiago Silveor",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Portugal",
-    "player_name": "Rafael Leão",
+    "team": "Tigre",
+    "player_name": "Tiago Serrago",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Algeria",
-    "player_name": "Rafik Belghali",
+    "team": "Vélez Sarsfield",
+    "player_name": "Tobías Andrada",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Austria",
-    "player_name": "Romano Schmid",
+    "team": "Boca Juniors",
+    "player_name": "Tomás Aranda",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Austria",
-    "player_name": "Sasa Kalajdzic",
+    "team": "Aldosivi",
+    "player_name": "Tomás Fernandez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "USA",
-    "player_name": "Sebastian Berhalter",
+    "team": "Deportivo Riestra",
+    "player_name": "Tomás González",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Cabo Verde",
-    "player_name": "Sidny Lopes Cabral",
+    "team": "Barracas Central",
+    "player_name": "Tomás Porra",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Canada",
-    "player_name": "Stephan Eustáquio",
+    "team": "Talleres (Córdoba)",
+    "player_name": "Valentin Depietri",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "South Africa",
-    "player_name": "Teboho Mokoena",
-    "goles": 1,
-    "penales": 1,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "South Africa",
-    "player_name": "Thapelo Maseko",
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Valentino Simoni",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Norway",
-    "player_name": "Thelo Aasgaard",
+    "team": "Rosario Central",
+    "player_name": "Vicente Pizarro",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Egypt",
-    "player_name": "Trézéguet",
+    "team": "Independiente",
+    "player_name": "Víctor Malcorra",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Sweden",
-    "player_name": "Viktor Gyökeres",
+    "team": "Newell's Old Boys",
+    "player_name": "Walter Mazzantti",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Netherlands",
-    "player_name": "Virgil van Dijk",
+    "team": "Newell's Old Boys",
+    "player_name": "Walter Núñez",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
   },
   {
-    "team": "Haiti",
-    "player_name": "Wilson Isidor",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Egypt",
-    "player_name": "Yasser Ibrahim",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Spain",
-    "player_name": "Álex Baena",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Mexico",
-    "player_name": "Álvaro Fidalgo",
+    "team": "Boca Juniors",
+    "player_name": "Ángel Romero",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1

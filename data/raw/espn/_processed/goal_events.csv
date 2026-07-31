@@ -1,1 +1,587 @@
 match_id,team,player_name,minute,minute_stoppage,minute_display,own_goal,penalty,source,source_url,retrieved_at
+762776,Banfield,Mauro Méndez,,,47',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762776,Huracán,Jordy Caicedo,,,84',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762779,Gimnasia (Mendoza),Valentino Simoni,,,5',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762783,Vélez Sarsfield,Tobías Andrada,,,90'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762785,Lanús,Rodrigo Castillo,,,24',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762785,Lanús,Carlos Izquierdoz,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762785,San Lorenzo,Alexis Cuello,,,53',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762785,Lanús,Marcelino Moreno,,,73',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762785,San Lorenzo,Alexis Cuello,,,86',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762781,Independiente,Luciano Cabral,,,45',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762781,Estudiantes de La Plata,Fabricio Pérez,,,46',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762782,Independiente Rivadavia,Matías Fernández,,,9',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762782,Atlético Tucumán,Leandro Díaz,,,41',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762782,Independiente Rivadavia,Alejo Osella,,,79',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762786,Talleres (Córdoba),Ronaldo Martínez,,,58',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762786,Talleres (Córdoba),Valentin Depietri,,,86',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762786,Newell's Old Boys,Walter Núñez,,,90',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762777,River Plate,Gonzalo Montiel,,,59',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762780,Gimnasia La Plata,Nicolas Schelotto,,,10',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762780,Gimnasia La Plata,Franco Torres,,,49',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762780,Racing Club,Tomás Conechny,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762784,Rosario Central,Ángel Di María,,,45'+3',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762784,Belgrano (Córdoba),Facundo Mallo,,,88',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762784,Belgrano (Córdoba),Lautaro Gutierrez,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762778,Boca Juniors,Lautaro Di Lollo,,,77',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762775,Argentinos Juniors,Tomás Molina,,,90'+7',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762787,Tigre,Alan Barrionuevo,,,53',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762787,Tigre,Jalil Elías,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762799,Platense,Franco Zapiola,,,29',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762799,Instituto (Córdoba),Alex Luna,,,73',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762799,Platense,Tomás Nasif,,,75',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762802,Talleres (Córdoba),Augusto Schott,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762802,Vélez Sarsfield,Manuel Lanzini,,,52',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762802,Vélez Sarsfield,Joaquín García,,,79',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762795,San Lorenzo,Diego Herazo,,,70',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762796,Huracán,Jordy Caicedo,,,39',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762796,Independiente Rivadavia,Fabrizio Sartori Prieto,,,53',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762796,Independiente Rivadavia,Sheyko Studer,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762798,Independiente,Gabriel Ávalos,,,34',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762798,Newell's Old Boys,Michael Hoyos,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762800,Rosario Central,Ángel Di María,,,24',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762800,Rosario Central,Alejo Veliz,,,35',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762800,Racing Club,Adrián Martínez,,,45'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762801,River Plate,Juan Fernando Quintero,,,41',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762801,River Plate,Juan Fernando Quintero,,,50',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762794,Estudiantes de La Plata,Santiago Núñez,,,28',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762794,Estudiantes de La Plata,Leandro González Pírez,,,39',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762794,Boca Juniors,Exequiel Zeballos,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762792,Defensa y Justicia,Rubén Botta,,,29',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762791,Tigre,José Romero,,,62',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762791,Belgrano (Córdoba),Lautaro Gutierrez,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762797,Lanús,Ramiro Carrera,,,45'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762797,Lanús,Marcelino Moreno,,,56',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762797,Unión (Santa Fe),Cristian Tarragona,,,66',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762790,Sarmiento (Junín),Diego Churín,,,45'+6',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762815,San Lorenzo,Gregorio Rodríguez,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762811,Vélez Sarsfield,Jano Gordon,,,31',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762811,Independiente,Jano Gordon,,,32',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762818,Atlético Tucumán,Leandro Díaz,,,45'+6',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762818,Huracán,Jordy Caicedo,,,66',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762805,Platense,Ignacio Vázquez,,,21',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762805,Talleres (Córdoba),Ignacio Vázquez,,,51',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762805,Platense,Gabriel Báez,,,83',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762807,Deportivo Riestra,Antony Alonso,,,24',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762807,Barracas Central,Rodrigo Insúa,,,90'+14',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762808,Boca Juniors,Lautaro Blanco,,,40',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762808,Boca Juniors,Leandro Paredes,,,56',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762810,Gimnasia La Plata,Nicolas Schelotto,,,14',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762810,Aldosivi,Federico Acevedo,,,41',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762810,Gimnasia La Plata,Agustín Auzmendi,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762810,Gimnasia La Plata,Marcelo Torres,,,85',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762817,Tigre,José Romero,,,45'+4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762817,Racing Club,Gabriel Rojas,,,80',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762817,Tigre,Ignacio Russo,,,85',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762817,Tigre,Gonzalo Martínez,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762816,Unión (Santa Fe),Rafael Profini,,,4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762816,Unión (Santa Fe),Luciano Paredes,,,41',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762816,Unión (Santa Fe),Marcelo Estigarribia,,,78',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762816,Unión (Santa Fe),Diego Diaz,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762806,Estudiantes de Río Cuarto,Martín Garnerone,,,14',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762806,Banfield,Lautaro Gómez,,,57',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762806,Banfield,Mauro Méndez,,,88',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762812,Independiente Rivadavia,Fabrizio Sartori Prieto,,,21',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762812,Independiente Rivadavia,Alejo Osella,,,52',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762812,Sarmiento (Junín),Junior Marabel,,,69',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762813,Instituto (Córdoba),Franco Jara,,,25',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762813,Lanús,Sasha Marcich,,,54',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762813,Lanús,Marcelino Moreno,,,71',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762813,Instituto (Córdoba),Matías Gallardo,,,90'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762822,Central Córdoba (Santiago del Estero),Michael Santos,,,76',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762819,Rosario Central,Ignacio Ovando,,,4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762819,Aldosivi,Nicolás Cordero,,,87',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762830,Racing Club,Tomás Conechny,,,20',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762830,Racing Club,Santiago Solari,,,44',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762830,Argentinos Juniors,Erik Godoy,,,47',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762831,Tigre,Tiago Serrago,,,6',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762831,Tigre,José Romero,,,16',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762831,Tigre,Ignacio Russo,,,49',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762831,Tigre,Ignacio Russo,,,68',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762831,River Plate,Lautaruo Rivero,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762821,Belgrano (Córdoba),Lucas Zelarayán,,,54',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762828,Defensa y Justicia,Juan Miritello,,,31',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762828,Defensa y Justicia,Juan Miritello,,,45'+4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762828,Defensa y Justicia,Ayrton Portillo,,,63',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762828,Newell's Old Boys,Matías Cóccaro,,,76',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762828,Newell's Old Boys,Oscar Salómon,,,90'+7',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762829,Independiente,Santiago Montiel,,,64',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762832,Sarmiento (Junín),Junior Marabel,,,19',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762832,Sarmiento (Junín),Diego Churín,,,36',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762832,Atlético Tucumán,Maxi Villa,,,71',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762826,Huracán,Jordy Caicedo,,,50',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762825,Gimnasia (Mendoza),Facundo Lencioni,,,73',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762833,Vélez Sarsfield,Matías Pellegrini,,,63',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762833,Vélez Sarsfield,Matías Pellegrini,,,66',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762833,Boca Juniors,Iker Zufiaurre,,,90',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762820,Barracas Central,Kevin Jappert,,,35',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762820,Barracas Central,Iván Tapia,,,61',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762824,Estudiantes de La Plata,Guido Carrillo,,,75',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762827,Talleres (Córdoba),Martin Rio,,,90'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762827,Lanús,Dylan Aquino,,,90'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762823,Independiente Rivadavia,Juan Antonini,,,69',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762847,Tigre,José Romero,,,12',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762834,Argentinos Juniors,Hernan Lopez,,,35',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762842,Independiente,Matías Abaldo,,,57',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762842,Independiente,Gabriel Ávalos,,,63',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762838,Defensa y Justicia,Juan Gutiérrez,,,14',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762838,Vélez Sarsfield,Matías Pellegrini,,,60',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762836,Racing Club,Marco Di Cesare,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762836,Racing Club,Adrián Martínez,,,45'+1',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762841,Huracán,Juan Bisanz,,,67',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762846,Talleres (Córdoba),Valentín Dávila,,,36',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762846,Gimnasia (Mendoza),Agustín Módica,,,44',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762846,Talleres (Córdoba),Valentín Dávila,,,67',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762835,Atlético Tucumán,Renzo Tesuri,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762835,Atlético Tucumán,Leandro Díaz,,,38',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762835,Atlético Tucumán,Leandro Díaz,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762835,Atlético Tucumán,Nicolás Laméndola,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762843,Belgrano (Córdoba),Franco Vázquez,,,37',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762844,Instituto (Córdoba),Matias Fonseca,,,4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762844,Instituto (Córdoba),Alex Luna,,,31',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762845,Rosario Central,Enzo Copetti,,,58',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762845,Rosario Central,Ángel Di María,,,90',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762839,Deportivo Riestra,Nicolás Benegas,,,35',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762839,Newell's Old Boys,Juan Ramírez,,,88',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762853,Belgrano (Córdoba),Lucas Zelarayán,,,54',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762853,Defensa y Justicia,Aaron Molinas,,,90'+6',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762855,Estudiantes de La Plata,Alexis Castro,,,50',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762858,Instituto (Córdoba),Alex Luna,,,35',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762858,Atlético Tucumán,Carlos Abeldano,,,46',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762858,Instituto (Córdoba),Giuliano Cerato,,,90'+2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762856,Gimnasia La Plata,Marcelo Torres,,,28',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762860,Talleres (Córdoba),Ronaldo Martínez,,,42',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762857,Independiente Rivadavia,Alejo Osella,,,17',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762857,Independiente,Gabriel Ávalos,,,48',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762857,Independiente,Matías Abaldo,,,52',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762857,Independiente Rivadavia,Fabrizio Sartori Prieto,,,74',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762857,Independiente Rivadavia,Fabrizio Sartori Prieto,,,85',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762859,Platense,Augusto Lotti,,,86',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762863,Banfield,Tiziano Perrota,,,52',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762863,Banfield,Mauro Méndez,,,67',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762863,Banfield,Tiziano Perrota,,,72',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762861,San Lorenzo,Luciano Vietto,,,1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762861,San Lorenzo,Alexis Cuello,,,85',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762862,Vélez Sarsfield,Manuel Lanzini,,,6',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762850,Unión (Santa Fe),Cristian Tarragona,,,67',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762868,Instituto (Córdoba),Diego Sosa,,,38',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762868,San Lorenzo,Luciano Vietto,,,86',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762874,Central Córdoba (Santiago del Estero),Diego Barrera,,,62',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762874,Central Córdoba (Santiago del Estero),Michael Santos,,,73',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762873,Belgrano (Córdoba),Emiliano Rigoni,,,38',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762873,Belgrano (Córdoba),Nicolás Fernández,,,53',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762873,Belgrano (Córdoba),Julián Mavilla,,,77',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762873,Atlético Tucumán,Martín Benítez,,,89',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762877,Gimnasia (Mendoza),Santiago Rodríguez,,,6',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762877,Independiente,Víctor Malcorra,,,42',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762872,Tigre,Ignacio Russo,,,22',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762872,Barracas Central,Fernando Tobio,,,51',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762872,Barracas Central,Facundo Bruera,,,54',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762876,Gimnasia La Plata,Ignacio Fernández,,,4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762876,Rosario Central,Enzo Giménez,,,52',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762876,Rosario Central,Gastón Ávila,,,75',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762864,Estudiantes de La Plata,Tiago Palacios,,,52',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762864,Estudiantes de La Plata,Fabricio Pérez,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762866,Independiente Rivadavia,Matías Fernández,,,53',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762866,Racing Club,Tomás Conechny,,,78',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762869,Unión (Santa Fe),Julián Palacio,,,10',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762869,Unión (Santa Fe),Braian Cuello,,,13',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762869,Unión (Santa Fe),Cristian Tarragona,,,49',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762869,Sarmiento (Junín),Junior Marabel,,,56',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762875,Estudiantes de Río Cuarto,Mateo Bajamich,,,32',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762875,Estudiantes de Río Cuarto,Gabriel Alanís,,,90'+4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762867,River Plate,Lucas Martínez Quarta,,,13',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762867,Banfield,Mauro Méndez,,,45',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762867,River Plate,Sebastián Driussi,,,46',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762867,River Plate,Joaquin Freitas,,,58',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762882,Gimnasia (Mendoza),Luciano Paredes,,,15',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762882,Boca Juniors,Miguel Merentiel,,,41',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762887,Independiente,Gabriel Ávalos,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762887,Independiente,Iván Marcone,,,90'+5',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762890,Rosario Central,Ángel Di María,,,51',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762890,Rosario Central,Enzo Copetti,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762879,Barracas Central,Rodrigo Insúa,,,10',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762879,Argentinos Juniors,Ryoga Kida,,,90',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762889,Unión (Santa Fe),Cristian Tarragona,,,43',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762889,Instituto (Córdoba),Luca Rafaelli,,,48',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762889,Unión (Santa Fe),Mateo Del Blanco,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762883,Defensa y Justicia,Emiliano Amor,,,32',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762883,Lanús,Walter Bou,,,41',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762893,Gimnasia La Plata,Enzo Martínez,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762893,Tigre,José Romero,,,37',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762893,Gimnasia La Plata,Marcelo Torres,,,38',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762893,Tigre,Alan Barrionuevo,,,59',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762885,Vélez Sarsfield,Florián Monzón,,,58',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762881,Banfield,Lautaro Gómez,,,36',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762881,Banfield,Lautaro Gómez,,,73',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762888,Independiente Rivadavia,Gonzalo Rios,,,17',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762888,River Plate,Gonzalo Montiel,,,38',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762891,Sarmiento (Junín),Junior Marabel,,,11',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762886,Huracán,Thaiel Peralta,,,14',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762886,Huracán,Oscar Cortés,,,21',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762886,Huracán,Thaiel Peralta,,,57',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762886,Belgrano (Córdoba),Franco Vázquez,,,67',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762880,Racing Club,Duván Vergara,,,35',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762880,Racing Club,Duván Vergara,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762880,Racing Club,Santiago Solari,,,90'+5',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762878,Boca Juniors,Santiago Ascacibar,,,15',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762878,Boca Juniors,Miguel Merentiel,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762878,Boca Juniors,Miguel Merentiel,,,64',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762918,Unión (Santa Fe),Cristian Tarragona,,,14',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762918,Unión (Santa Fe),Braian Cuello,,,20',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762918,Unión (Santa Fe),Mateo Del Blanco,,,39',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762918,Independiente,Ignacio Pussetto,,,45'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762918,Independiente,Gabriel Ávalos,,,49',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762918,Unión (Santa Fe),Maizon Rodríguez,,,64',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762918,Independiente,Gabriel Ávalos,,,68',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762918,Independiente,Juan Fedorco,,,90'+9',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762914,Tigre,José Romero,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762914,Vélez Sarsfield,Braian Romero,,,68',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762920,Newell's Old Boys,Facundo Gauch,,,23',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762920,Platense,Augusto Lotti,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762911,Gimnasia La Plata,Manuel Panaro,,,19',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762911,Gimnasia La Plata,Nicolas Schelotto,,,35',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762911,Banfield,Santiago López Garcia,,,77',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762912,Boca Juniors,Santiago Ascacibar,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762912,San Lorenzo,Gregorio Rodríguez,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762923,Aldosivi,Federico Acevedo,,,21',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762923,Atlético Tucumán,Franco Albanell,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762919,Barracas Central,Javier Morales,,,34',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762919,Barracas Central,Jhonatan Candia,,,44',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762919,Independiente Rivadavia,José Florentín,,,84',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762913,Defensa y Justicia,Elías Pereyra,,,58',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762913,Central Córdoba (Santiago del Estero),Michael Santos,,,78',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762915,Belgrano (Córdoba),Francisco Gonzalez Metilli,,,59',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762922,Talleres (Córdoba),Valentín Dávila,,,31',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762922,Talleres (Córdoba),Rick,,,90'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762917,River Plate,Sebastián Driussi,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762917,Huracán,Jordy Caicedo,,,45'+2',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762917,River Plate,Gonzalo Montiel,,,85',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762916,Lanús,Dylan Aquino,,,75',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762932,Vélez Sarsfield,Florián Monzón,,,8',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762932,Vélez Sarsfield,Lucas Robertone,,,49',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762935,Banfield,Mauro Méndez,,,35',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762935,Rosario Central,Santiago López Garcia,,,64',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762935,Rosario Central,Jáminton Campaz,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762928,Gimnasia La Plata,Enzo Martínez,,,2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762928,Independiente Rivadavia,Fabrizio Sartori Prieto,,,25',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762928,Gimnasia La Plata,Marcelo Torres,,,28',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762928,Independiente Rivadavia,José Florentín,,,39',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762928,Independiente Rivadavia,Enzo Martínez,,,90'+4',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762934,River Plate,Sebastián Driussi,,,41',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762934,River Plate,Ian Subiabre,,,71',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762937,Argentinos Juniors,Francisco Álvarez,,,47',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762937,Tigre,Alfio Oviedo,,,61',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762938,Unión (Santa Fe),Julián Palacio,,,41',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762938,Boca Juniors,Miguel Merentiel,,,57',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762925,Barracas Central,Gonzalo Maroni,,,13',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762925,Atlético Tucumán,Nicolás De Martini,,,70',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762925,Barracas Central,Lucas Gamba,,,71',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762936,Defensa y Justicia,Elías Pereyra,,,2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762936,Defensa y Justicia,Juan Gutiérrez,,,45',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762936,Defensa y Justicia,Aaron Molinas,,,64',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762936,San Lorenzo,Rodrigo Auzmendi,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762936,Defensa y Justicia,Agustin Hausch,,,75',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762936,San Lorenzo,Rodrigo Auzmendi,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762936,Defensa y Justicia,David Barbona,,,90'+2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762933,Racing Club,Adrián Martínez,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762933,Racing Club,Adrián Martínez,,,90'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762930,Independiente,Matías Abaldo,,,13',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762930,Instituto (Córdoba),Alex Luna,,,14',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762930,Instituto (Córdoba),Giuliano Cerato,,,34',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762931,Lanús,Walter Bou,,,16',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762931,Lanús,Dylan Aquino,,,37',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762931,Lanús,Dylan Aquino,,,40',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762931,Lanús,Dylan Aquino,,,54',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762931,Lanús,Eduardo Salvio,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762927,Central Córdoba (Santiago del Estero),Ezequiel Naya,,,45'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762929,Gimnasia (Mendoza),Agustín Módica,,,45'+2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762929,Estudiantes de La Plata,Tiago Palacios,,,60',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762929,Estudiantes de La Plata,Tiago Palacios,,,66',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762940,Atlético Tucumán,Clever Ferreira,,,12',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762941,Banfield,Tiziano Perrota,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762953,Lanús,Carlos Izquierdoz,,,71',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762944,Defensa y Justicia,Lucas Souto,,,70',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762944,Defensa y Justicia,Juan Gutiérrez,,,79',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762951,Newell's Old Boys,Walter Mazzantti,,,85',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762949,Independiente,Gabriel Ávalos,,,58',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762949,Talleres (Córdoba),Augusto Schott,,,69',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762949,Talleres (Córdoba),Valentín Dávila,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762942,Racing Club,Adrián Fernández,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762942,Belgrano (Córdoba),Lucas Zelarayán,,,54',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762942,Racing Club,Marco Di Cesare,,,61',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762952,Sarmiento (Junín),Cristian Zabala,,,45',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762952,Sarmiento (Junín),Junior Marabel,,,86',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762946,River Plate,Gonzalo Montiel,,,70',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762946,River Plate,Maximiliano Salas,,,90'+10',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762943,Boca Juniors,Tomás Aranda,,,51',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762943,Boca Juniors,Adam Bareiro,,,56',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762939,Argentinos Juniors,Alan Lescano,,,90'+14',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762950,Independiente Rivadavia,Luciano Gómez,,,16',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762950,Independiente Rivadavia,Alex Arce,,,29',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762947,Estudiantes de La Plata,Alexis Castro,,,47',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762947,Estudiantes de La Plata,Mikel Amondarain,,,70',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762947,Estudiantes de La Plata,Adolfo Gaich,,,80',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762947,Estudiantes de La Plata,Adolfo Gaich,,,85',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762947,Estudiantes de La Plata,Adolfo Gaich,,,88',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762945,Deportivo Riestra,Antony Alonso,,,31',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762945,San Lorenzo,Alexis Cuello,,,78',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762849,Argentinos Juniors,Hernan Lopez,,,53',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762849,Argentinos Juniors,Nicolás Oroz,,,61',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762849,Lanús,Ramiro Carrera,,,85',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762871,Argentinos Juniors,Iván Morales,,,29',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762871,Argentinos Juniors,Román Riquelme,,,37',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762955,Sarmiento (Junín),Junior Marabel,,,24',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762955,Sarmiento (Junín),Carlos Villalba,,,40',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762955,Barracas Central,Rodrigo Insúa,,,69',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762964,Independiente Rivadavia,José Florentín,,,26',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762964,Independiente Rivadavia,Leonel Bucca,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762963,Boca Juniors,Adam Bareiro,,,71',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762956,Vélez Sarsfield,Florián Monzón,,,3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762956,Vélez Sarsfield,Manuel Lanzini,,,11',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762956,Gimnasia (Mendoza),Ezequiel Muñoz,,,45'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762956,Gimnasia (Mendoza),Agustín Módica,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762956,Gimnasia (Mendoza),Emanuel Mammana,,,90'+1',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762965,Unión (Santa Fe),Marcelo Estigarribia,,,21',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762965,Unión (Santa Fe),Cristian Tarragona,,,90'+5',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762962,San Lorenzo,Carlos Insaurralde,,,11',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762957,Independiente,Gabriel Ávalos,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762961,Rosario Central,Alejo Veliz,,,31',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762961,Atlético Tucumán,Leandro Díaz,,,38',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762961,Rosario Central,Alejo Veliz,,,75',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762968,Huracán,Ignacio Campo,,,17',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762968,Huracán,Lucas Blondel,,,66',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762968,Huracán,Jordy Caicedo,,,84',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762960,River Plate,Tomás Galván,,,36',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762960,River Plate,Facundo Colidio,,,58',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762960,River Plate,Tomás Galván,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762954,Newell's Old Boys,Franco García,,,10',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762954,Newell's Old Boys,Oscar Salómon,,,40',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762954,Central Córdoba (Santiago del Estero),Diego Barrera,,,64',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762954,Newell's Old Boys,Francisco Scarpeccio,,,90'+5',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762966,Argentinos Juniors,Nicolás Oroz,,,14',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762966,Argentinos Juniors,Emiliano Viveros,,,20',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762966,Banfield,David Salazar,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762966,Banfield,Mauro Méndez,,,47',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762966,Argentinos Juniors,Alan Lescano,,,71',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762958,Instituto (Córdoba),Nicolás Guerra,,,25',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762958,Instituto (Córdoba),Matias Tissera,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762969,Belgrano (Córdoba),Lucas Zelarayán,,,28',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762972,Instituto (Córdoba),Alex Luna,,,59',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762980,Independiente Rivadavia,Juan Manuel Elordi,,,9',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762980,Independiente Rivadavia,Leonel Bucca,,,23',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762980,Argentinos Juniors,Sebastián Prieto,,,45'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762980,Independiente Rivadavia,Alejo Osella,,,52',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762981,Unión (Santa Fe),Marcelo Estigarribia,,,36',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762981,Estudiantes de La Plata,Fabricio Pérez,,,59',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762981,Estudiantes de La Plata,Mikel Amondarain,,,90'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762970,Independiente,Matías Abaldo,,,9',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762970,Boca Juniors,Milton Gimenez,,,45'+11',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762973,Barracas Central,Damián Martínez,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762973,Barracas Central,Norberto Briasco,,,39',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762973,Estudiantes de Río Cuarto,Facundo Cobos,,,43',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762977,Platense,Tomás Nasif,,,14',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762977,Gimnasia (Mendoza),Facundo Lencioni,,,74',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762983,Rosario Central,Enzo Copetti,,,2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762983,Huracán,Jordy Caicedo,,,45'+3',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762983,Huracán,Juan Bisanz,,,85',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762983,Huracán,Hugo Nervo,,,90',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762976,River Plate,Facundo Colidio,,,33',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762976,River Plate,Sebastián Driussi,,,90'+2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762971,Talleres (Córdoba),Alexandro Maidana,,,15',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762971,Talleres (Córdoba),Alexandro Maidana,,,61',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762971,Defensa y Justicia,Ayrton Portillo,,,79',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762975,Gimnasia La Plata,Agustín Auzmendi,,,43',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762975,Sarmiento (Junín),Pablo Magnin,,,50',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762975,Gimnasia La Plata,Franco Torres,,,90'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762979,Lanús,Yoshan Valois,,,88',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762974,Vélez Sarsfield,Joaquín García,,,10',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762984,Unión (Santa Fe),Marcelo Estigarribia,,,4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762984,Newell's Old Boys,Matias Mansilla,,,13',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762984,Newell's Old Boys,Jeronimo Russo,,,38',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762984,Newell's Old Boys,Juan Ramírez,,,76',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762984,Unión (Santa Fe),Lucas Menossi,,,87',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762991,Gimnasia La Plata,Marcelo Torres,,,40',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762994,Estudiantes de La Plata,Brian Aguirre,,,51',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762993,Defensa y Justicia,Aaron Molinas,,,8',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762993,Independiente,Gabriel Ávalos,,,15',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762993,Independiente,Maximiliano Gutiérrez,,,29',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762993,Independiente,Lautaro Millán,,,90'+3',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762987,Argentinos Juniors,Tomás Molina,,,61',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762986,Aldosivi,Felipe Anso,,,43',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762986,Racing Club,Matías Zaracho,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762995,Boca Juniors,Leandro Paredes,,,45'+6',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762996,Rosario Central,Alejo Veliz,,,42',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762996,Sarmiento (Junín),Jonathan Gómez,,,77',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762996,Rosario Central,Vicente Pizarro,,,90'+11',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762998,Talleres (Córdoba),Ronaldo Martínez,,,10',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762998,Talleres (Córdoba),Augusto Schott,,,25',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762990,Platense,Franco Zapiola,,,20',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762990,Central Córdoba (Santiago del Estero),Alejandro Maciel,,,24',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762990,Central Córdoba (Santiago del Estero),Fernando Martínez,,,35',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762990,Central Córdoba (Santiago del Estero),Ezequiel Naya,,,50',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762990,Platense,Nicolas Retamar,,,71',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762990,Central Córdoba (Santiago del Estero),Diego Barrera,,,76',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762990,Platense,Bautista Merlini,,,87',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762992,Gimnasia (Mendoza),Agustín Módica,,,54',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762985,Tigre,Gonzalo Martínez,,,48',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762985,Huracán,Jordy Caicedo,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763011,Boca Juniors,Milton Gimenez,,,22',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763011,Boca Juniors,Alan Velasco,,,77',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763011,Boca Juniors,Adam Bareiro,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763011,Boca Juniors,Miguel Merentiel,,,90'+2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763010,Deportivo Riestra,Mariano Bracamonte,,,13',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763010,Deportivo Riestra,Pedro Ramirez,,,80',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763009,Rosario Central,Enzo Copetti,,,6',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763009,Rosario Central,Julián Fernández,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763009,Estudiantes de Río Cuarto,Mauro Valiente,,,60',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763012,San Lorenzo,Rodrigo Auzmendi,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763013,Racing Club,Matías Zaracho,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763013,Barracas Central,Fernando Tobio,,,80',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763002,Sarmiento (Junín),Nicolás Pasquini,,,10',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763001,River Plate,Giuliano Galoppo,,,39',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763001,Aldosivi,Tomás Fernandez,,,72',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763001,River Plate,Facundo Colidio,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763001,River Plate,Kendry Páez,,,90'+6',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763006,Gimnasia (Mendoza),Blas Armoa,,,1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763006,Independiente Rivadavia,Sheyko Studer,,,18',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763006,Independiente Rivadavia,Fabrizio Sartori Prieto,,,50',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763006,Independiente Rivadavia,Alex Arce,,,70',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763006,Independiente Rivadavia,Leonard Costa,,,79',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763006,Independiente Rivadavia,Leonel Bucca,,,83',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763000,Gimnasia La Plata,Nicolas Schelotto,,,41',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763004,Instituto (Córdoba),Saúl Salcedo,,,61',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763004,Newell's Old Boys,Juan Ramírez,,,80',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762999,Atlético Tucumán,Franco Albanell,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762999,Banfield,Neyder Moreno,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763003,Vélez Sarsfield,Florián Monzón,,,11',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763003,Unión (Santa Fe),Julián Palacio,,,16',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763003,Vélez Sarsfield,Florián Monzón,,,45'+1',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763003,Unión (Santa Fe),Agustin Colazo,,,68',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763007,Huracán,Facundo Waller,,,13',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763007,Argentinos Juniors,Tomás Molina,,,34',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+763007,Argentinos Juniors,Iván Morales,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762905,Banfield,Tiziano Perrota,,,8',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762905,Barracas Central,Facundo Sanguinetti,,,16',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762905,Banfield,Santiago López Garcia,,,90'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762907,Boca Juniors,Alan Velasco,,,43',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762907,Boca Juniors,Milton Gimenez,,,45',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762907,Central Córdoba (Santiago del Estero),Michael Santos,,,56',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762901,Independiente,Matías Abaldo,,,16',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762901,Independiente,Maximiliano Gutiérrez,,,54',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762901,San Lorenzo,Ezequiel Herrera,,,72',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762902,Talleres (Córdoba),Rick,,,18',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762902,Unión (Santa Fe),Cristian Tarragona,,,90'+5',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762897,Estudiantes de La Plata,Alexis Castro,,,70',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762897,Estudiantes de La Plata,Lucas Alario,,,78',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762904,Aldosivi,Santiago Moyano,,,4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762904,Independiente Rivadavia,Leonel Bucca,,,8',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762906,Belgrano (Córdoba),Francisco Gonzalez Metilli,,,36',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762906,Belgrano (Córdoba),Lucas Suarez,,,43',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762906,Belgrano (Córdoba),Ramiro Hernandes,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762906,Belgrano (Córdoba),Ramiro Tulián,,,86',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762894,Gimnasia La Plata,Marcelo Torres,,,13',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762894,Gimnasia La Plata,Ignacio Fernández,,,59',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762900,Rosario Central,Alexis Soto,,,38',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762900,Tigre,José Romero,,,81',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762899,Atlético Tucumán,Renzo Tesuri,,,19',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762895,Defensa y Justicia,Ayrton Portillo,,,12',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762895,Gimnasia (Mendoza),Ezequiel Muñoz,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762895,Gimnasia (Mendoza),Luciano Cingolani,,,73',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762903,Vélez Sarsfield,Florián Monzón,,,56',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762903,Newell's Old Boys,Juan Ramírez,,,60',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762908,Instituto (Córdoba),Jeremías Lázaro,,,18',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+762908,Instituto (Córdoba),Jhon Córdoba,,,63',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871432,Belgrano (Córdoba),Francisco Gonzalez Metilli,,,48',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871437,Huracán,Leonardo Gil,,,5',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871437,Boca Juniors,Milton Gimenez,,,87',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871437,Huracán,Óscar Romero,,,94',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871437,Huracán,Óscar Romero,,,103',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871437,Boca Juniors,Ángel Romero,,,116',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871433,Unión (Santa Fe),Braian Cuello,,,34',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871433,Unión (Santa Fe),Cristian Tarragona,,,49',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871433,Independiente Rivadavia,Fabrizio Sartori Prieto,,,70',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871435,Argentinos Juniors,Francisco Álvarez,,,28',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871435,Argentinos Juniors,Alan Lescano,,,90'+6',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871431,Independiente,Gabriel Ávalos,,,36',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871431,Rosario Central,Ángel Di María,,,45'+2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871431,Rosario Central,Giovanni Cantizano,,,84',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871431,Rosario Central,Elías Verón,,,90'+2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871434,Racing Club,Santiago Sosa,,,89',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871430,San Lorenzo,Rodrigo Auzmendi,,,37',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871430,River Plate,Marcos Acuña,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871430,San Lorenzo,Fabricio Gabriel López,,,94',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871430,River Plate,Juan Fernando Quintero,,,120'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401871436,Gimnasia La Plata,Marcelo Torres,,,13',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872290,Belgrano (Córdoba),Adrián Sánchez,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872290,Belgrano (Córdoba),Ramiro Hernandes,,,90'+6',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872291,Argentinos Juniors,Tomás Molina,,,95',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872179,Racing Club,Matías Zaracho,,,41',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872179,Rosario Central,Gastón Ávila,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872179,Rosario Central,Enzo Copetti,,,106',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872546,River Plate,Sebastián Driussi,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872546,River Plate,Lucas Martínez Quarta,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872650,River Plate,Facundo Colidio,,,62',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872677,Argentinos Juniors,Facundo Jainikoski,,,7',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401872677,Belgrano (Córdoba),Nicolás Fernández,,,90'+4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401873392,River Plate,Facundo Colidio,,,18',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401873392,Belgrano (Córdoba),Leonardo Morales,,,26',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401873392,River Plate,Tomás Galván,,,59',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401873392,Belgrano (Córdoba),Nicolás Fernández,,,85',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401873392,Belgrano (Córdoba),Nicolás Fernández,,,88',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841435,Belgrano (Córdoba),Nicolás Fernández,,,36',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841435,Rosario Central,Julián Fernández,,,77',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841435,Belgrano (Córdoba),Francisco Gonzalez Metilli,,,88',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841437,Sarmiento (Junín),Junior Marabel,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841437,Argentinos Juniors,Alan Lescano,,,48',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841437,Argentinos Juniors,Sebastián Prieto,,,58',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841437,Sarmiento (Junín),Renzo Orihuela,,,69',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841437,Argentinos Juniors,Diego Porcel,,,90',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841448,Aldosivi,Nicolás Cordero,,,16',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841448,Defensa y Justicia,David Barbona,,,29',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841444,Gimnasia (Mendoza),Agustín Módica,,,66',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841439,Racing Club,Matko Miljevic,,,6',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841439,Gimnasia La Plata,Bautista Barros Schelotto,,,32',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841439,Racing Club,Nazareno Colombo,,,69',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841436,Vélez Sarsfield,Manuel Lanzini,,,45'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841443,Huracán,Jordy Caicedo,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841440,Platense,Tomás Fagioli,,,24',True,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841440,Unión (Santa Fe),Juan Ludueña,,,72',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841440,Unión (Santa Fe),Cristian Tarragona,,,79',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841440,Platense,Bautista Merlini,,,87',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841446,Estudiantes de Río Cuarto,Sergio Ojeda,,,70',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841441,Newell's Old Boys,Matías Cóccaro,,,55',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841438,Barracas Central,Javier Morales,,,22',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841442,Lanús,Yoshan Valois,,,65',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841445,Independiente,Gabriel Ávalos,,,76',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841445,Independiente,Santiago Montiel,,,82',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841447,Deportivo Riestra,Brian Sánchez,,,7',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841447,Deportivo Riestra,Antony Alonso,,,23',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841447,Deportivo Riestra,Alexander Díaz,,,38',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841462,Banfield,Tiziano Perrota,,,53',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841462,Banfield,Tiziano Perrota,,,59',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841462,Banfield,Bruno Sepúlveda,,,82',False,True,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841462,Sarmiento (Junín),Jonathan Herrera,,,84',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841462,Sarmiento (Junín),Junior Marabel,,,86',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841452,San Lorenzo,Rodrigo Auzmendi,,,86',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841449,Argentinos Juniors,Gastón Verón,,,30',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841449,Argentinos Juniors,Matías Giménez,,,70',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841449,Argentinos Juniors,Hernan Lopez,,,88',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841461,Barracas Central,Tomás Porra,,,40',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841458,Defensa y Justicia,Juan Gutiérrez,,,23',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841458,Defensa y Justicia,David Barbona,,,37',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841458,Deportivo Riestra,Tomás González,,,72',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841457,Gimnasia La Plata,Alexis Steimbach,,,80',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841454,Instituto (Córdoba),Giuliano Cerato,,,13',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841454,Instituto (Córdoba),Matias Tissera,,,55',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841454,Platense,Héctor Bobadilla,,,90'+4',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841455,Independiente Rivadavia,Alex Arce,,,22',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841455,Independiente Rivadavia,José Florentín,,,45'+1',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841455,Huracán,Oscar Cortés,,,47',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841451,Talleres (Córdoba),Ronaldo Martínez,,,27',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841451,Vélez Sarsfield,Rodrigo Aliendro,,,45',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841451,Vélez Sarsfield,Thiago Silveor,,,79',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841451,Vélez Sarsfield,Diego Valdés,,,90',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841459,Atlético Tucumán,Leandro Díaz,,,63',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841459,Atlético Tucumán,Leandro Díaz,,,90'+2',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00
+401841456,Independiente,Santiago Montiel,,,41',False,False,espn,https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1,2026-07-31T20:57:24.574473+00:00

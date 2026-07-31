@@ -1,72 +1,77 @@
 [
   {
-    "equipo_beneficiado": "Argentina",
-    "player_name": "Diney Borges",
+    "equipo_beneficiado": "Atlético Tucumán",
+    "player_name": "Nicolás De Martini",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Australia",
-    "player_name": "Mohamed Hany",
+    "equipo_beneficiado": "Barracas Central",
+    "player_name": "Facundo Sanguinetti",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Austria",
-    "player_name": "Yazan Al-Arab",
+    "equipo_beneficiado": "Belgrano (Córdoba)",
+    "player_name": "Facundo Mallo",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Belgium",
-    "player_name": "Mohamed Hany",
+    "equipo_beneficiado": "Belgrano (Córdoba)",
+    "player_name": "Lucas Suarez",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Bosnia and Herzegovina",
-    "player_name": "Mahmoud Abunada",
+    "equipo_beneficiado": "Gimnasia (Mendoza)",
+    "player_name": "Emanuel Mammana",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Canada",
-    "player_name": "Mohamed Manai",
+    "equipo_beneficiado": "Independiente",
+    "player_name": "Jano Gordon",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Haiti",
-    "player_name": "Yassine Bounou",
+    "equipo_beneficiado": "Independiente Rivadavia",
+    "player_name": "Enzo Martínez",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Netherlands",
-    "player_name": "Ellyes Skhiri",
+    "equipo_beneficiado": "Independiente Rivadavia",
+    "player_name": "Juan Antonini",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Norway",
-    "player_name": "Aymen Hussein",
+    "equipo_beneficiado": "Instituto (Córdoba)",
+    "player_name": "Saúl Salcedo",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Portugal",
-    "player_name": "Abduvohid Nematov",
+    "equipo_beneficiado": "Newell's Old Boys",
+    "player_name": "Matias Mansilla",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Qatar",
-    "player_name": "Miro Muheim",
+    "equipo_beneficiado": "Platense",
+    "player_name": "Gabriel Báez",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "Spain",
-    "player_name": "Hassan Al-Tambakti",
+    "equipo_beneficiado": "Platense",
+    "player_name": "Tomás Fagioli",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "USA",
-    "player_name": "Cameron Burgess",
+    "equipo_beneficiado": "Rosario Central",
+    "player_name": "Santiago López Garcia",
     "goles_en_contra": 1
   },
   {
-    "equipo_beneficiado": "USA",
-    "player_name": "Damian Bobadilla",
+    "equipo_beneficiado": "Talleres (Córdoba)",
+    "player_name": "Ignacio Vázquez",
+    "goles_en_contra": 1
+  },
+  {
+    "equipo_beneficiado": "Unión (Santa Fe)",
+    "player_name": "Luciano Paredes",
     "goles_en_contra": 1
   }
 ]

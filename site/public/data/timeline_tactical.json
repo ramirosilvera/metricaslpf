@@ -1,200 +1,5078 @@
 [
   {
-    "team": "Argentina",
-    "season": "2018",
-    "match_date": "2018-06-16",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.7505,
-    "pass_accuracy_pct": 87.2,
-    "shots_total": 28
-  },
-  {
-    "team": "Argentina",
-    "season": "2018",
-    "match_date": "2018-06-21",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.586,
-    "pass_accuracy_pct": 77.2,
-    "shots_total": 10
-  },
-  {
-    "team": "Argentina",
-    "season": "2018",
-    "match_date": "2018-06-26",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.6555,
-    "pass_accuracy_pct": 80.5,
-    "shots_total": 8
-  },
-  {
-    "team": "Argentina",
-    "season": "2018",
-    "match_date": "2018-06-30",
-    "stage": "Round of 16",
-    "possession_share_proxy": 0.5936,
-    "pass_accuracy_pct": 83.7,
-    "shots_total": 12
-  },
-  {
-    "team": "Argentina",
-    "season": "2022",
-    "match_date": "2022-11-22",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.673,
-    "pass_accuracy_pct": 83.9,
-    "shots_total": 15
-  },
-  {
-    "team": "Argentina",
-    "season": "2022",
-    "match_date": "2022-11-26",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.5654,
-    "pass_accuracy_pct": 84.0,
-    "shots_total": 5
-  },
-  {
-    "team": "Argentina",
-    "season": "2022",
-    "match_date": "2022-11-30",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.7153,
-    "pass_accuracy_pct": 90.9,
-    "shots_total": 24
-  },
-  {
-    "team": "Argentina",
-    "season": "2022",
-    "match_date": "2022-12-03",
-    "stage": "Round of 16",
-    "possession_share_proxy": 0.5935,
-    "pass_accuracy_pct": 88.7,
-    "shots_total": 14
-  },
-  {
-    "team": "Argentina",
-    "season": "2022",
-    "match_date": "2022-12-09",
-    "stage": "Quarter-finals",
-    "possession_share_proxy": 0.4852,
-    "pass_accuracy_pct": 83.0,
-    "shots_total": 19
-  },
-  {
-    "team": "Argentina",
-    "season": "2022",
-    "match_date": "2022-12-13",
-    "stage": "Semi-finals",
-    "possession_share_proxy": 0.4254,
-    "pass_accuracy_pct": 82.9,
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-01-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.445,
+    "pass_accuracy_pct": 68.4,
     "shots_total": 9
   },
   {
-    "team": "Argentina",
-    "season": "2022",
-    "match_date": "2022-12-18",
-    "stage": "Final",
-    "possession_share_proxy": 0.53,
-    "pass_accuracy_pct": 80.8,
-    "shots_total": 24
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.588,
+    "pass_accuracy_pct": 79.4,
+    "shots_total": 8
   },
   {
-    "team": "Australia",
-    "season": "2022",
-    "match_date": "2022-12-03",
-    "stage": "Round of 16",
-    "possession_share_proxy": 0.4065,
-    "pass_accuracy_pct": 80.3,
-    "shots_total": 5
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-02-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.498,
+    "pass_accuracy_pct": 72.8,
+    "shots_total": 13
   },
   {
-    "team": "Croatia",
-    "season": "2018",
-    "match_date": "2018-06-21",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.414,
-    "pass_accuracy_pct": 71.7,
-    "shots_total": 14
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-02-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.385,
+    "pass_accuracy_pct": 71.5,
+    "shots_total": 15
   },
   {
-    "team": "Croatia",
-    "season": "2022",
-    "match_date": "2022-12-13",
-    "stage": "Semi-finals",
-    "possession_share_proxy": 0.5746,
-    "pass_accuracy_pct": 86.3,
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-02-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.556,
+    "pass_accuracy_pct": 75.3,
+    "shots_total": 10
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-02-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.534,
+    "pass_accuracy_pct": 74.4,
     "shots_total": 12
   },
   {
-    "team": "France",
-    "season": "2018",
-    "match_date": "2018-06-30",
-    "stage": "Round of 16",
-    "possession_share_proxy": 0.4064,
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-03-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.655,
+    "pass_accuracy_pct": 78.7,
+    "shots_total": 14
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.369,
+    "pass_accuracy_pct": 55.9,
+    "shots_total": 7
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.406,
+    "pass_accuracy_pct": 67.1,
+    "shots_total": 12
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-03-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.59,
+    "pass_accuracy_pct": 78.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-03-31",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.256,
+    "pass_accuracy_pct": 69.3,
+    "shots_total": 11
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-04-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.349,
+    "pass_accuracy_pct": 61.4,
+    "shots_total": 11
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.308,
+    "pass_accuracy_pct": 69.6,
+    "shots_total": 9
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.293,
+    "pass_accuracy_pct": 56.8,
+    "shots_total": 8
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.297,
+    "pass_accuracy_pct": 67.9,
+    "shots_total": 5
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.398,
+    "pass_accuracy_pct": 66.1,
+    "shots_total": 18
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-07-24",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.285,
+    "pass_accuracy_pct": 69.1,
+    "shots_total": 8
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.485,
+    "pass_accuracy_pct": 76.0,
+    "shots_total": 9
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-01-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.699,
+    "pass_accuracy_pct": 83.8,
+    "shots_total": 24
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-01-30",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.736,
+    "pass_accuracy_pct": 86.3,
+    "shots_total": 11
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-02-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.604,
+    "pass_accuracy_pct": 86.5,
+    "shots_total": 17
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-02-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.511,
+    "pass_accuracy_pct": 75.5,
+    "shots_total": 12
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-02-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.479,
+    "pass_accuracy_pct": 74.4,
+    "shots_total": 14
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-03-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.725,
+    "pass_accuracy_pct": 85.1,
+    "shots_total": 19
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.584,
+    "pass_accuracy_pct": 79.1,
+    "shots_total": 12
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.648,
+    "pass_accuracy_pct": 85.2,
+    "shots_total": 8
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-03-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.692,
+    "pass_accuracy_pct": 78.4,
+    "shots_total": 22
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-03-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.619,
+    "pass_accuracy_pct": 85.6,
+    "shots_total": 16
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-03-31",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.744,
+    "pass_accuracy_pct": 88.0,
+    "shots_total": 5
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-04-06",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.672,
+    "pass_accuracy_pct": 88.1,
+    "shots_total": 17
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.539,
+    "pass_accuracy_pct": 82.3,
+    "shots_total": 7
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.676,
+    "pass_accuracy_pct": 86.9,
+    "shots_total": 14
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-04-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.545,
+    "pass_accuracy_pct": 80.9,
+    "shots_total": 5
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.645,
+    "pass_accuracy_pct": 86.1,
+    "shots_total": 14
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.484,
+    "pass_accuracy_pct": 79.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-05-13",
+    "stage": "apertura---quarterfinals",
+    "possession_share_proxy": 0.616,
+    "pass_accuracy_pct": 81.6,
+    "shots_total": 18
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-05-17",
+    "stage": "apertura---semifinals",
+    "possession_share_proxy": 0.564,
+    "pass_accuracy_pct": 79.9,
+    "shots_total": 18
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-07-23",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.552,
+    "pass_accuracy_pct": 83.5,
+    "shots_total": 13
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.7,
+    "pass_accuracy_pct": 86.1,
+    "shots_total": 17
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-01-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.579,
+    "pass_accuracy_pct": 67.6,
+    "shots_total": 14
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.628,
+    "pass_accuracy_pct": 79.1,
+    "shots_total": 21
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-02-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.476,
+    "pass_accuracy_pct": 65.7,
+    "shots_total": 11
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.504,
+    "pass_accuracy_pct": 66.2,
+    "shots_total": 5
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-02-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.486,
+    "pass_accuracy_pct": 66.2,
+    "shots_total": 18
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-02-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.352,
+    "pass_accuracy_pct": 59.1,
+    "shots_total": 7
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.501,
+    "pass_accuracy_pct": 77.3,
+    "shots_total": 11
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-03-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.46,
+    "pass_accuracy_pct": 65.6,
+    "shots_total": 14
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.631,
+    "pass_accuracy_pct": 70.1,
+    "shots_total": 17
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.553,
+    "pass_accuracy_pct": 81.8,
+    "shots_total": 13
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.365,
+    "pass_accuracy_pct": 66.7,
+    "shots_total": 16
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-04-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.326,
+    "pass_accuracy_pct": 71.0,
+    "shots_total": 17
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.493,
+    "pass_accuracy_pct": 69.2,
+    "shots_total": 7
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.324,
+    "pass_accuracy_pct": 66.9,
+    "shots_total": 4
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.53,
+    "pass_accuracy_pct": 75.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.24,
+    "pass_accuracy_pct": 56.4,
+    "shots_total": 5
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-07-26",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.4,
+    "pass_accuracy_pct": 67.4,
+    "shots_total": 5
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-07-31",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.411,
+    "pass_accuracy_pct": 76.1,
+    "shots_total": 8
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-01-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.377,
+    "pass_accuracy_pct": 66.1,
+    "shots_total": 14
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-01-30",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.39,
+    "pass_accuracy_pct": 66.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-02-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.569,
+    "pass_accuracy_pct": 69.9,
+    "shots_total": 14
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.367,
+    "pass_accuracy_pct": 79.1,
+    "shots_total": 6
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.431,
+    "pass_accuracy_pct": 66.4,
+    "shots_total": 11
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.525,
+    "pass_accuracy_pct": 72.2,
+    "shots_total": 17
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-02-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.353,
+    "pass_accuracy_pct": 65.7,
+    "shots_total": 6
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-03-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.345,
+    "pass_accuracy_pct": 66.2,
+    "shots_total": 14
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.542,
+    "pass_accuracy_pct": 81.0,
+    "shots_total": 18
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-03-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.286,
+    "pass_accuracy_pct": 67.0,
+    "shots_total": 7
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.273,
+    "pass_accuracy_pct": 55.8,
+    "shots_total": 12
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-04-06",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.328,
+    "pass_accuracy_pct": 74.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-04-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.341,
+    "pass_accuracy_pct": 77.9,
+    "shots_total": 12
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-04-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.386,
+    "pass_accuracy_pct": 63.7,
+    "shots_total": 16
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.47,
+    "pass_accuracy_pct": 68.3,
+    "shots_total": 10
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.502,
+    "pass_accuracy_pct": 79.8,
+    "shots_total": 16
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.417,
+    "pass_accuracy_pct": 73.7,
+    "shots_total": 5
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-07-28",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.393,
+    "pass_accuracy_pct": 71.7,
+    "shots_total": 16
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-01-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.33,
+    "pass_accuracy_pct": 61.6,
+    "shots_total": 11
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.412,
+    "pass_accuracy_pct": 64.0,
+    "shots_total": 8
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-02-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.641,
+    "pass_accuracy_pct": 79.6,
+    "shots_total": 11
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.333,
+    "pass_accuracy_pct": 71.5,
+    "shots_total": 13
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-02-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.338,
+    "pass_accuracy_pct": 73.4,
+    "shots_total": 3
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.353,
+    "pass_accuracy_pct": 68.3,
+    "shots_total": 6
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.537,
+    "pass_accuracy_pct": 78.0,
+    "shots_total": 11
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-03-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.275,
+    "pass_accuracy_pct": 58.4,
+    "shots_total": 13
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.271,
+    "pass_accuracy_pct": 61.6,
+    "shots_total": 8
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.447,
+    "pass_accuracy_pct": 73.4,
+    "shots_total": 9
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-03-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.314,
+    "pass_accuracy_pct": 63.2,
+    "shots_total": 5
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-04-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.468,
+    "pass_accuracy_pct": 84.1,
+    "shots_total": 14
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.25,
+    "pass_accuracy_pct": 61.7,
+    "shots_total": 11
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-04-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.322,
+    "pass_accuracy_pct": 66.3,
+    "shots_total": 12
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-04-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.498,
+    "pass_accuracy_pct": 78.7,
+    "shots_total": 17
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.498,
+    "pass_accuracy_pct": 77.4,
+    "shots_total": 15
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.24,
+    "pass_accuracy_pct": 51.3,
+    "shots_total": 4
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.515,
+    "pass_accuracy_pct": 81.7,
+    "shots_total": 10
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-01-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.496,
+    "pass_accuracy_pct": 80.4,
+    "shots_total": 13
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-01-29",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.597,
+    "pass_accuracy_pct": 80.5,
+    "shots_total": 12
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.396,
+    "pass_accuracy_pct": 73.4,
+    "shots_total": 12
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.633,
+    "pass_accuracy_pct": 86.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.516,
+    "pass_accuracy_pct": 81.1,
+    "shots_total": 11
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.428,
+    "pass_accuracy_pct": 75.7,
+    "shots_total": 13
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.499,
+    "pass_accuracy_pct": 75.7,
+    "shots_total": 11
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.486,
+    "pass_accuracy_pct": 81.3,
+    "shots_total": 9
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.464,
+    "pass_accuracy_pct": 70.0,
+    "shots_total": 8
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.479,
+    "pass_accuracy_pct": 73.9,
+    "shots_total": 8
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.46,
+    "pass_accuracy_pct": 73.9,
+    "shots_total": 13
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.336,
+    "pass_accuracy_pct": 71.0,
+    "shots_total": 9
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.692,
+    "pass_accuracy_pct": 88.1,
+    "shots_total": 15
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.678,
+    "pass_accuracy_pct": 87.3,
+    "shots_total": 11
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.459,
+    "pass_accuracy_pct": 73.7,
+    "shots_total": 7
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.526,
+    "pass_accuracy_pct": 75.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-05-09",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.444,
+    "pass_accuracy_pct": 69.9,
+    "shots_total": 14
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-05-12",
+    "stage": "apertura---quarterfinals",
+    "possession_share_proxy": 0.535,
+    "pass_accuracy_pct": 79.5,
+    "shots_total": 17
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-05-17",
+    "stage": "apertura---semifinals",
+    "possession_share_proxy": 0.436,
+    "pass_accuracy_pct": 69.5,
+    "shots_total": 9
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-05-24",
+    "stage": "apertura---final",
+    "possession_share_proxy": 0.379,
+    "pass_accuracy_pct": 71.1,
+    "shots_total": 13
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-07-23",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.476,
+    "pass_accuracy_pct": 83.8,
+    "shots_total": 13
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-01-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.793,
+    "pass_accuracy_pct": 88.0,
+    "shots_total": 19
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-01-29",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.67,
+    "pass_accuracy_pct": 85.6,
+    "shots_total": 10
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-02-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.596,
+    "pass_accuracy_pct": 79.6,
+    "shots_total": 8
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.498,
     "pass_accuracy_pct": 80.9,
     "shots_total": 9
   },
   {
-    "team": "France",
-    "season": "2022",
-    "match_date": "2022-12-18",
-    "stage": "Final",
-    "possession_share_proxy": 0.47,
-    "pass_accuracy_pct": 76.1,
-    "shots_total": 14
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-02-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.628,
+    "pass_accuracy_pct": 81.1,
+    "shots_total": 10
   },
   {
-    "team": "Iceland",
-    "season": "2018",
-    "match_date": "2018-06-16",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.2495,
-    "pass_accuracy_pct": 61.2,
-    "shots_total": 9
-  },
-  {
-    "team": "Mexico",
-    "season": "2022",
-    "match_date": "2022-11-26",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.4346,
-    "pass_accuracy_pct": 75.4,
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-02-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.472,
+    "pass_accuracy_pct": 65.8,
     "shots_total": 4
   },
   {
-    "team": "Netherlands",
-    "season": "2022",
-    "match_date": "2022-12-09",
-    "stage": "Quarter-finals",
-    "possession_share_proxy": 0.5148,
-    "pass_accuracy_pct": 82.8,
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-02-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.707,
+    "pass_accuracy_pct": 84.9,
+    "shots_total": 19
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-03-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.52,
+    "pass_accuracy_pct": 82.9,
+    "shots_total": 11
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.697,
+    "pass_accuracy_pct": 84.3,
+    "shots_total": 11
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.606,
+    "pass_accuracy_pct": 85.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-03-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.686,
+    "pass_accuracy_pct": 88.5,
+    "shots_total": 18
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-04-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.521,
+    "pass_accuracy_pct": 85.2,
+    "shots_total": 8
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.613,
+    "pass_accuracy_pct": 84.1,
     "shots_total": 12
   },
   {
-    "team": "Nigeria",
-    "season": "2018",
-    "match_date": "2018-06-26",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.3445,
-    "pass_accuracy_pct": 65.2,
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.321,
+    "pass_accuracy_pct": 59.6,
+    "shots_total": 10
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-04-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.478,
+    "pass_accuracy_pct": 81.1,
+    "shots_total": 11
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.648,
+    "pass_accuracy_pct": 84.4,
+    "shots_total": 11
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-05-09",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.688,
+    "pass_accuracy_pct": 83.3,
+    "shots_total": 36
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-07-26",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.818,
+    "pass_accuracy_pct": 89.2,
+    "shots_total": 13
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-01-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.69,
+    "pass_accuracy_pct": 84.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.372,
+    "pass_accuracy_pct": 62.0,
+    "shots_total": 3
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-01-31",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.474,
+    "pass_accuracy_pct": 74.8,
+    "shots_total": 8
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-02-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.493,
+    "pass_accuracy_pct": 81.2,
     "shots_total": 9
   },
   {
-    "team": "Poland",
-    "season": "2022",
-    "match_date": "2022-11-30",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.2847,
-    "pass_accuracy_pct": 79.2,
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-02-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.539,
+    "pass_accuracy_pct": 72.1,
+    "shots_total": 8
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-02-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.391,
+    "pass_accuracy_pct": 78.8,
+    "shots_total": 14
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-02-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.371,
+    "pass_accuracy_pct": 69.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-02-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.26,
+    "pass_accuracy_pct": 60.9,
+    "shots_total": 7
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.434,
+    "pass_accuracy_pct": 81.6,
+    "shots_total": 8
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-03-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.516,
+    "pass_accuracy_pct": 74.6,
     "shots_total": 4
   },
   {
-    "team": "Saudi Arabia",
-    "season": "2022",
-    "match_date": "2022-11-22",
-    "stage": "Group Stage",
-    "possession_share_proxy": 0.327,
-    "pass_accuracy_pct": 68.9,
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-03-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.448,
+    "pass_accuracy_pct": 74.6,
+    "shots_total": 4
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-04-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.382,
+    "pass_accuracy_pct": 69.4,
+    "shots_total": 6
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-04-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.439,
+    "pass_accuracy_pct": 68.5,
+    "shots_total": 11
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-04-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.281,
+    "pass_accuracy_pct": 67.0,
+    "shots_total": 10
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-04-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.342,
+    "pass_accuracy_pct": 68.1,
+    "shots_total": 9
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.352,
+    "pass_accuracy_pct": 67.7,
+    "shots_total": 14
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-07-24",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.369,
+    "pass_accuracy_pct": 76.2,
+    "shots_total": 8
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-07-31",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.589,
+    "pass_accuracy_pct": 81.3,
+    "shots_total": 10
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-01-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.555,
+    "pass_accuracy_pct": 70.1,
+    "shots_total": 10
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-01-29",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.46,
+    "pass_accuracy_pct": 66.6,
+    "shots_total": 5
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-02-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.627,
+    "pass_accuracy_pct": 88.7,
+    "shots_total": 14
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.419,
+    "pass_accuracy_pct": 59.9,
+    "shots_total": 4
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.342,
+    "pass_accuracy_pct": 73.4,
+    "shots_total": 6
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-02-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.572,
+    "pass_accuracy_pct": 83.7,
+    "shots_total": 11
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-02-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.513,
+    "pass_accuracy_pct": 83.1,
+    "shots_total": 9
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-03-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.446,
+    "pass_accuracy_pct": 81.4,
+    "shots_total": 13
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.566,
+    "pass_accuracy_pct": 84.6,
+    "shots_total": 11
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.473,
+    "pass_accuracy_pct": 83.2,
+    "shots_total": 11
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.361,
+    "pass_accuracy_pct": 78.6,
+    "shots_total": 10
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-04-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.609,
+    "pass_accuracy_pct": 83.7,
+    "shots_total": 9
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-04-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.517,
+    "pass_accuracy_pct": 86.3,
+    "shots_total": 17
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-04-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.502,
+    "pass_accuracy_pct": 80.3,
+    "shots_total": 9
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-04-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.522,
+    "pass_accuracy_pct": 83.1,
+    "shots_total": 8
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-05-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.595,
+    "pass_accuracy_pct": 77.7,
+    "shots_total": 11
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-07-24",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.715,
+    "pass_accuracy_pct": 84.8,
+    "shots_total": 15
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.617,
+    "pass_accuracy_pct": 76.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-01-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.207,
+    "pass_accuracy_pct": 51.6,
+    "shots_total": 6
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-01-29",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.54,
+    "pass_accuracy_pct": 67.6,
+    "shots_total": 12
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-02-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.359,
+    "pass_accuracy_pct": 66.2,
+    "shots_total": 9
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.278,
+    "pass_accuracy_pct": 53.4,
+    "shots_total": 8
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-02-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.497,
+    "pass_accuracy_pct": 55.1,
+    "shots_total": 16
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.514,
+    "pass_accuracy_pct": 60.4,
+    "shots_total": 9
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.291,
+    "pass_accuracy_pct": 60.4,
+    "shots_total": 10
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-03-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.407,
+    "pass_accuracy_pct": 61.6,
+    "shots_total": 8
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.553,
+    "pass_accuracy_pct": 52.2,
+    "shots_total": 14
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-03-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.484,
+    "pass_accuracy_pct": 65.3,
+    "shots_total": 11
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-03-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.353,
+    "pass_accuracy_pct": 56.2,
+    "shots_total": 9
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-04-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.278,
+    "pass_accuracy_pct": 57.7,
+    "shots_total": 8
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.532,
+    "pass_accuracy_pct": 56.6,
+    "shots_total": 14
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.291,
+    "pass_accuracy_pct": 57.5,
+    "shots_total": 9
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-04-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.312,
+    "pass_accuracy_pct": 51.6,
+    "shots_total": 8
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.288,
+    "pass_accuracy_pct": 47.2,
+    "shots_total": 5
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-07-26",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.182,
+    "pass_accuracy_pct": 50.0,
+    "shots_total": 6
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.383,
+    "pass_accuracy_pct": 51.0,
+    "shots_total": 18
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-01-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.601,
+    "pass_accuracy_pct": 80.2,
+    "shots_total": 11
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-01-29",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.33,
+    "pass_accuracy_pct": 74.3,
+    "shots_total": 13
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-02-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.373,
+    "pass_accuracy_pct": 75.5,
+    "shots_total": 9
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.722,
+    "pass_accuracy_pct": 86.9,
+    "shots_total": 16
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-02-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.59,
+    "pass_accuracy_pct": 86.2,
+    "shots_total": 14
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-02-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.422,
+    "pass_accuracy_pct": 72.3,
+    "shots_total": 12
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.621,
+    "pass_accuracy_pct": 86.7,
+    "shots_total": 17
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-03-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.569,
+    "pass_accuracy_pct": 83.4,
+    "shots_total": 12
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-03-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.574,
+    "pass_accuracy_pct": 85.1,
+    "shots_total": 17
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-03-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.58,
+    "pass_accuracy_pct": 81.6,
+    "shots_total": 10
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-03-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.552,
+    "pass_accuracy_pct": 82.9,
+    "shots_total": 25
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-04-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.564,
+    "pass_accuracy_pct": 82.7,
+    "shots_total": 13
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.631,
+    "pass_accuracy_pct": 82.8,
+    "shots_total": 10
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-04-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.418,
+    "pass_accuracy_pct": 69.9,
+    "shots_total": 4
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-04-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.547,
+    "pass_accuracy_pct": 83.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.48,
+    "pass_accuracy_pct": 76.2,
+    "shots_total": 16
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.476,
+    "pass_accuracy_pct": 70.9,
+    "shots_total": 13
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-07-26",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.598,
+    "pass_accuracy_pct": 78.0,
+    "shots_total": 15
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-01-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.483,
+    "pass_accuracy_pct": 72.4,
+    "shots_total": 9
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-01-30",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.264,
+    "pass_accuracy_pct": 65.5,
+    "shots_total": 7
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-02-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.431,
+    "pass_accuracy_pct": 60.5,
+    "shots_total": 15
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-02-10",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.489,
+    "pass_accuracy_pct": 64.7,
+    "shots_total": 12
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-02-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.514,
+    "pass_accuracy_pct": 61.6,
+    "shots_total": 5
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-02-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.505,
+    "pass_accuracy_pct": 72.4,
+    "shots_total": 11
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-02-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.353,
+    "pass_accuracy_pct": 70.3,
+    "shots_total": 18
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-03-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.472,
+    "pass_accuracy_pct": 67.4,
+    "shots_total": 10
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.536,
+    "pass_accuracy_pct": 70.2,
+    "shots_total": 16
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.438,
+    "pass_accuracy_pct": 77.7,
     "shots_total": 3
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-03-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.429,
+    "pass_accuracy_pct": 71.7,
+    "shots_total": 7
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-04-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.651,
+    "pass_accuracy_pct": 79.2,
+    "shots_total": 13
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.75,
+    "pass_accuracy_pct": 86.2,
+    "shots_total": 16
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-04-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.543,
+    "pass_accuracy_pct": 77.9,
+    "shots_total": 14
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-04-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.431,
+    "pass_accuracy_pct": 75.2,
+    "shots_total": 14
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-05-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.426,
+    "pass_accuracy_pct": 71.7,
+    "shots_total": 9
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.384,
+    "pass_accuracy_pct": 73.7,
+    "shots_total": 8
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.3,
+    "pass_accuracy_pct": 67.5,
+    "shots_total": 12
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-01-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.31,
+    "pass_accuracy_pct": 66.5,
+    "shots_total": 11
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-01-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.583,
+    "pass_accuracy_pct": 72.3,
+    "shots_total": 13
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-02-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.42,
+    "pass_accuracy_pct": 79.6,
+    "shots_total": 4
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.457,
+    "pass_accuracy_pct": 75.1,
+    "shots_total": 12
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.375,
+    "pass_accuracy_pct": 71.3,
+    "shots_total": 8
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.588,
+    "pass_accuracy_pct": 82.7,
+    "shots_total": 26
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.473,
+    "pass_accuracy_pct": 66.2,
+    "shots_total": 6
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-02-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.293,
+    "pass_accuracy_pct": 60.7,
+    "shots_total": 6
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.447,
+    "pass_accuracy_pct": 57.8,
+    "shots_total": 7
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-03-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.42,
+    "pass_accuracy_pct": 75.8,
+    "shots_total": 13
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.426,
+    "pass_accuracy_pct": 72.7,
+    "shots_total": 10
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-04-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.439,
+    "pass_accuracy_pct": 79.4,
+    "shots_total": 16
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.478,
+    "pass_accuracy_pct": 72.3,
+    "shots_total": 8
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-04-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.424,
+    "pass_accuracy_pct": 71.0,
+    "shots_total": 19
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.408,
+    "pass_accuracy_pct": 70.5,
+    "shots_total": 7
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-05-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.405,
+    "pass_accuracy_pct": 67.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-07-24",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.631,
+    "pass_accuracy_pct": 86.7,
+    "shots_total": 22
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-07-28",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.493,
+    "pass_accuracy_pct": 83.7,
+    "shots_total": 13
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-01-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.26,
+    "pass_accuracy_pct": 59.3,
+    "shots_total": 7
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.293,
+    "pass_accuracy_pct": 67.5,
+    "shots_total": 3
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-02-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.502,
+    "pass_accuracy_pct": 80.0,
+    "shots_total": 14
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.667,
+    "pass_accuracy_pct": 86.6,
+    "shots_total": 12
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-02-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.41,
+    "pass_accuracy_pct": 78.1,
+    "shots_total": 11
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.412,
+    "pass_accuracy_pct": 71.4,
+    "shots_total": 9
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.446,
+    "pass_accuracy_pct": 80.3,
+    "shots_total": 13
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-03-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.474,
+    "pass_accuracy_pct": 73.4,
+    "shots_total": 5
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.458,
+    "pass_accuracy_pct": 76.0,
+    "shots_total": 13
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-03-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.486,
+    "pass_accuracy_pct": 79.8,
+    "shots_total": 9
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.635,
+    "pass_accuracy_pct": 80.8,
+    "shots_total": 10
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-04-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.668,
+    "pass_accuracy_pct": 85.6,
+    "shots_total": 25
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-04-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.562,
+    "pass_accuracy_pct": 76.7,
+    "shots_total": 17
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-04-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.457,
+    "pass_accuracy_pct": 78.9,
+    "shots_total": 15
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.541,
+    "pass_accuracy_pct": 81.3,
+    "shots_total": 6
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.355,
+    "pass_accuracy_pct": 72.5,
+    "shots_total": 12
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-05-11",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.287,
+    "pass_accuracy_pct": 65.1,
+    "shots_total": 7
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-05-14",
+    "stage": "apertura---quarterfinals",
+    "possession_share_proxy": 0.43,
+    "pass_accuracy_pct": 68.5,
+    "shots_total": 12
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-07-24",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.433,
+    "pass_accuracy_pct": 73.7,
+    "shots_total": 9
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.259,
+    "pass_accuracy_pct": 60.3,
+    "shots_total": 14
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-01-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.623,
+    "pass_accuracy_pct": 77.2,
+    "shots_total": 11
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-01-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.611,
+    "pass_accuracy_pct": 80.0,
+    "shots_total": 9
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-02-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.524,
+    "pass_accuracy_pct": 68.6,
+    "shots_total": 9
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.479,
+    "pass_accuracy_pct": 61.9,
+    "shots_total": 8
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.549,
+    "pass_accuracy_pct": 71.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.486,
+    "pass_accuracy_pct": 64.2,
+    "shots_total": 7
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-02-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.647,
+    "pass_accuracy_pct": 81.0,
+    "shots_total": 10
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-03-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.514,
+    "pass_accuracy_pct": 82.1,
+    "shots_total": 20
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-03-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.4,
+    "pass_accuracy_pct": 75.2,
+    "shots_total": 15
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.594,
+    "pass_accuracy_pct": 78.9,
+    "shots_total": 14
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-03-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.686,
+    "pass_accuracy_pct": 84.2,
+    "shots_total": 15
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-04-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.332,
+    "pass_accuracy_pct": 67.6,
+    "shots_total": 10
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.43,
+    "pass_accuracy_pct": 77.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-04-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.632,
+    "pass_accuracy_pct": 84.6,
+    "shots_total": 5
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-04-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.455,
+    "pass_accuracy_pct": 73.8,
+    "shots_total": 11
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.363,
+    "pass_accuracy_pct": 50.0,
+    "shots_total": 5
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-05-09",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.312,
+    "pass_accuracy_pct": 65.4,
+    "shots_total": 8
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-05-13",
+    "stage": "apertura---quarterfinals",
+    "possession_share_proxy": 0.384,
+    "pass_accuracy_pct": 66.3,
+    "shots_total": 11
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.583,
+    "pass_accuracy_pct": 81.7,
+    "shots_total": 21
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-07-30",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.645,
+    "pass_accuracy_pct": 81.5,
+    "shots_total": 14
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-01-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.399,
+    "pass_accuracy_pct": 72.2,
+    "shots_total": 13
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.493,
+    "pass_accuracy_pct": 63.9,
+    "shots_total": 6
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-01-31",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.535,
+    "pass_accuracy_pct": 71.7,
+    "shots_total": 13
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.489,
+    "pass_accuracy_pct": 67.9,
+    "shots_total": 10
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-02-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.498,
+    "pass_accuracy_pct": 79.0,
+    "shots_total": 17
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.621,
+    "pass_accuracy_pct": 78.1,
+    "shots_total": 17
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.527,
+    "pass_accuracy_pct": 74.1,
+    "shots_total": 8
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-02-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.74,
+    "pass_accuracy_pct": 82.4,
+    "shots_total": 28
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-03-10",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.57,
+    "pass_accuracy_pct": 74.1,
+    "shots_total": 13
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-03-17",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.644,
+    "pass_accuracy_pct": 82.6,
+    "shots_total": 12
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.521,
+    "pass_accuracy_pct": 73.6,
+    "shots_total": 16
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-04-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.483,
+    "pass_accuracy_pct": 60.9,
+    "shots_total": 8
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.387,
+    "pass_accuracy_pct": 69.1,
+    "shots_total": 9
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-04-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.498,
+    "pass_accuracy_pct": 78.2,
+    "shots_total": 14
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-04-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.688,
+    "pass_accuracy_pct": 83.4,
+    "shots_total": 13
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.422,
+    "pass_accuracy_pct": 76.3,
+    "shots_total": 13
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.396,
+    "pass_accuracy_pct": 70.7,
+    "shots_total": 6
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-07-26",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.402,
+    "pass_accuracy_pct": 65.1,
+    "shots_total": 14
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-07-31",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.484,
+    "pass_accuracy_pct": 78.9,
+    "shots_total": 12
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-01-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.421,
+    "pass_accuracy_pct": 63.4,
+    "shots_total": 11
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-01-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.389,
+    "pass_accuracy_pct": 67.7,
+    "shots_total": 8
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-02-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.41,
+    "pass_accuracy_pct": 68.3,
+    "shots_total": 19
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-02-10",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.511,
+    "pass_accuracy_pct": 66.1,
+    "shots_total": 15
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-02-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.484,
+    "pass_accuracy_pct": 77.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.379,
+    "pass_accuracy_pct": 65.9,
+    "shots_total": 18
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-02-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.477,
+    "pass_accuracy_pct": 70.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-03-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.299,
+    "pass_accuracy_pct": 65.7,
+    "shots_total": 12
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.729,
+    "pass_accuracy_pct": 86.7,
+    "shots_total": 22
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-03-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.514,
+    "pass_accuracy_pct": 81.7,
+    "shots_total": 13
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-03-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.284,
+    "pass_accuracy_pct": 68.9,
+    "shots_total": 8
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-04-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.513,
+    "pass_accuracy_pct": 75.1,
+    "shots_total": 13
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.461,
+    "pass_accuracy_pct": 80.4,
+    "shots_total": 11
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-04-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.614,
+    "pass_accuracy_pct": 80.3,
+    "shots_total": 16
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.592,
+    "pass_accuracy_pct": 75.3,
+    "shots_total": 23
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.602,
+    "pass_accuracy_pct": 78.3,
+    "shots_total": 15
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.612,
+    "pass_accuracy_pct": 73.6,
+    "shots_total": 18
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-07-26",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.6,
+    "pass_accuracy_pct": 78.8,
+    "shots_total": 9
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-07-30",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.355,
+    "pass_accuracy_pct": 72.1,
+    "shots_total": 21
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-01-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.47,
+    "pass_accuracy_pct": 71.2,
+    "shots_total": 13
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-01-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.549,
+    "pass_accuracy_pct": 74.6,
+    "shots_total": 10
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.497,
+    "pass_accuracy_pct": 75.8,
+    "shots_total": 11
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.543,
+    "pass_accuracy_pct": 73.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.461,
+    "pass_accuracy_pct": 65.3,
+    "shots_total": 11
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.648,
+    "pass_accuracy_pct": 73.2,
+    "shots_total": 15
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.434,
+    "pass_accuracy_pct": 70.5,
+    "shots_total": 15
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.632,
+    "pass_accuracy_pct": 80.3,
+    "shots_total": 8
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.592,
+    "pass_accuracy_pct": 81.2,
+    "shots_total": 17
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-17",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.356,
+    "pass_accuracy_pct": 68.6,
+    "shots_total": 11
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.314,
+    "pass_accuracy_pct": 72.7,
+    "shots_total": 12
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.391,
+    "pass_accuracy_pct": 68.4,
+    "shots_total": 14
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.468,
+    "pass_accuracy_pct": 63.8,
+    "shots_total": 16
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-18",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.582,
+    "pass_accuracy_pct": 80.2,
+    "shots_total": 16
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.486,
+    "pass_accuracy_pct": 76.0,
+    "shots_total": 6
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-05-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.574,
+    "pass_accuracy_pct": 82.7,
+    "shots_total": 22
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-07-24",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.422,
+    "pass_accuracy_pct": 71.5,
+    "shots_total": 19
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-07-30",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.471,
+    "pass_accuracy_pct": 76.2,
+    "shots_total": 16
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-01-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.408,
+    "pass_accuracy_pct": 73.3,
+    "shots_total": 13
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-01-29",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.598,
+    "pass_accuracy_pct": 83.3,
+    "shots_total": 15
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-02-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.503,
+    "pass_accuracy_pct": 80.2,
+    "shots_total": 11
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.451,
+    "pass_accuracy_pct": 82.6,
+    "shots_total": 9
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-02-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.502,
+    "pass_accuracy_pct": 76.5,
+    "shots_total": 5
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-03-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.554,
+    "pass_accuracy_pct": 85.0,
+    "shots_total": 10
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-03-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.48,
+    "pass_accuracy_pct": 81.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-03-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.426,
+    "pass_accuracy_pct": 82.0,
+    "shots_total": 7
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-03-17",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.631,
+    "pass_accuracy_pct": 91.0,
+    "shots_total": 14
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.412,
+    "pass_accuracy_pct": 70.0,
+    "shots_total": 16
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-03-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.381,
+    "pass_accuracy_pct": 72.9,
+    "shots_total": 11
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-04-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.591,
+    "pass_accuracy_pct": 84.4,
+    "shots_total": 12
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-04-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.659,
+    "pass_accuracy_pct": 86.9,
+    "shots_total": 18
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-04-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.576,
+    "pass_accuracy_pct": 79.5,
+    "shots_total": 8
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-04-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.658,
+    "pass_accuracy_pct": 84.8,
+    "shots_total": 15
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.712,
+    "pass_accuracy_pct": 79.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.516,
+    "pass_accuracy_pct": 76.0,
+    "shots_total": 9
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-07-26",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.499,
+    "pass_accuracy_pct": 80.4,
+    "shots_total": 23
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-01-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.286,
+    "pass_accuracy_pct": 69.8,
+    "shots_total": 10
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.507,
+    "pass_accuracy_pct": 65.8,
+    "shots_total": 12
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-02-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.404,
+    "pass_accuracy_pct": 74.2,
+    "shots_total": 6
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.581,
+    "pass_accuracy_pct": 73.0,
+    "shots_total": 23
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-02-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.503,
+    "pass_accuracy_pct": 58.3,
+    "shots_total": 7
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.475,
+    "pass_accuracy_pct": 66.8,
+    "shots_total": 10
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.379,
+    "pass_accuracy_pct": 74.4,
+    "shots_total": 14
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-03-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.381,
+    "pass_accuracy_pct": 65.0,
+    "shots_total": 7
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.356,
+    "pass_accuracy_pct": 67.1,
+    "shots_total": 6
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-03-17",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.369,
+    "pass_accuracy_pct": 83.6,
+    "shots_total": 5
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.574,
+    "pass_accuracy_pct": 85.6,
+    "shots_total": 16
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-04-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.618,
+    "pass_accuracy_pct": 83.0,
+    "shots_total": 14
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.44,
+    "pass_accuracy_pct": 70.2,
+    "shots_total": 13
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-04-17",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.274,
+    "pass_accuracy_pct": 61.7,
+    "shots_total": 5
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.514,
+    "pass_accuracy_pct": 80.8,
+    "shots_total": 11
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-05-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.391,
+    "pass_accuracy_pct": 73.4,
+    "shots_total": 9
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.329,
+    "pass_accuracy_pct": 75.2,
+    "shots_total": 11
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-07-31",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.516,
+    "pass_accuracy_pct": 78.0,
+    "shots_total": 2
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-01-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.478,
+    "pass_accuracy_pct": 70.2,
+    "shots_total": 13
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-01-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.451,
+    "pass_accuracy_pct": 72.4,
+    "shots_total": 10
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-02-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.402,
+    "pass_accuracy_pct": 72.9,
+    "shots_total": 5
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.511,
+    "pass_accuracy_pct": 64.8,
+    "shots_total": 5
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-02-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.372,
+    "pass_accuracy_pct": 70.2,
+    "shots_total": 14
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.647,
+    "pass_accuracy_pct": 84.6,
+    "shots_total": 14
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-02-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.487,
+    "pass_accuracy_pct": 80.4,
+    "shots_total": 10
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-03-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.593,
+    "pass_accuracy_pct": 74.9,
+    "shots_total": 9
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.644,
+    "pass_accuracy_pct": 78.3,
+    "shots_total": 19
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-03-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.509,
+    "pass_accuracy_pct": 75.7,
+    "shots_total": 14
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-03-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.308,
+    "pass_accuracy_pct": 53.7,
+    "shots_total": 9
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-04-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.409,
+    "pass_accuracy_pct": 78.7,
+    "shots_total": 3
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.522,
+    "pass_accuracy_pct": 76.5,
+    "shots_total": 12
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-04-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.719,
+    "pass_accuracy_pct": 83.4,
+    "shots_total": 19
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-04-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.565,
+    "pass_accuracy_pct": 77.8,
+    "shots_total": 23
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.52,
+    "pass_accuracy_pct": 76.6,
+    "shots_total": 18
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.568,
+    "pass_accuracy_pct": 79.7,
+    "shots_total": 16
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-07-30",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.529,
+    "pass_accuracy_pct": 82.3,
+    "shots_total": 15
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-01-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.74,
+    "pass_accuracy_pct": 82.9,
+    "shots_total": 13
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.705,
+    "pass_accuracy_pct": 82.0,
+    "shots_total": 21
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-02-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.667,
+    "pass_accuracy_pct": 87.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-02-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.489,
+    "pass_accuracy_pct": 70.0,
+    "shots_total": 14
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.569,
+    "pass_accuracy_pct": 78.2,
+    "shots_total": 11
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-02-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.528,
+    "pass_accuracy_pct": 74.6,
+    "shots_total": 6
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-02-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.523,
+    "pass_accuracy_pct": 79.6,
+    "shots_total": 13
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-03-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.54,
+    "pass_accuracy_pct": 77.5,
+    "shots_total": 11
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.482,
+    "pass_accuracy_pct": 72.2,
+    "shots_total": 9
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.562,
+    "pass_accuracy_pct": 81.3,
+    "shots_total": 22
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-03-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.54,
+    "pass_accuracy_pct": 75.8,
+    "shots_total": 7
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-04-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.517,
+    "pass_accuracy_pct": 61.0,
+    "shots_total": 10
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.496,
+    "pass_accuracy_pct": 74.4,
+    "shots_total": 12
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.707,
+    "pass_accuracy_pct": 83.6,
+    "shots_total": 21
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-04-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.502,
+    "pass_accuracy_pct": 75.3,
+    "shots_total": 5
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.637,
+    "pass_accuracy_pct": 70.4,
+    "shots_total": 9
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.524,
+    "pass_accuracy_pct": 74.8,
+    "shots_total": 8
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-05-13",
+    "stage": "apertura---quarterfinals",
+    "possession_share_proxy": 0.359,
+    "pass_accuracy_pct": 65.8,
+    "shots_total": 10
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-07-24",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.567,
+    "pass_accuracy_pct": 80.9,
+    "shots_total": 18
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.407,
+    "pass_accuracy_pct": 73.9,
+    "shots_total": 5
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-01-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.67,
+    "pass_accuracy_pct": 83.4,
+    "shots_total": 20
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.707,
+    "pass_accuracy_pct": 87.6,
+    "shots_total": 17
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-02-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.657,
+    "pass_accuracy_pct": 84.3,
+    "shots_total": 17
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-02-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.707,
+    "pass_accuracy_pct": 84.0,
+    "shots_total": 17
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-02-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.521,
+    "pass_accuracy_pct": 74.6,
+    "shots_total": 9
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-02-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.631,
+    "pass_accuracy_pct": 78.7,
+    "shots_total": 12
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-02-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.647,
+    "pass_accuracy_pct": 82.5,
+    "shots_total": 25
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-03-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.701,
+    "pass_accuracy_pct": 84.2,
+    "shots_total": 12
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-03-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.6,
+    "pass_accuracy_pct": 83.6,
+    "shots_total": 10
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-03-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.788,
+    "pass_accuracy_pct": 88.7,
+    "shots_total": 34
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-03-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.571,
+    "pass_accuracy_pct": 84.3,
+    "shots_total": 9
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-04-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.664,
+    "pass_accuracy_pct": 84.2,
+    "shots_total": 20
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.504,
+    "pass_accuracy_pct": 73.9,
+    "shots_total": 10
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.679,
+    "pass_accuracy_pct": 82.1,
+    "shots_total": 13
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-04-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.703,
+    "pass_accuracy_pct": 87.2,
+    "shots_total": 24
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.76,
+    "pass_accuracy_pct": 86.6,
+    "shots_total": 19
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.733,
+    "pass_accuracy_pct": 85.5,
+    "shots_total": 30
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-05-14",
+    "stage": "apertura---quarterfinals",
+    "possession_share_proxy": 0.57,
+    "pass_accuracy_pct": 78.2,
+    "shots_total": 18
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-05-16",
+    "stage": "apertura---semifinals",
+    "possession_share_proxy": 0.539,
+    "pass_accuracy_pct": 77.6,
+    "shots_total": 11
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-05-24",
+    "stage": "apertura---final",
+    "possession_share_proxy": 0.621,
+    "pass_accuracy_pct": 77.1,
+    "shots_total": 8
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.76,
+    "pass_accuracy_pct": 85.1,
+    "shots_total": 15
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.741,
+    "pass_accuracy_pct": 87.7,
+    "shots_total": 10
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-01-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.504,
+    "pass_accuracy_pct": 82.3,
+    "shots_total": 17
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-01-28",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.295,
+    "pass_accuracy_pct": 53.2,
+    "shots_total": 6
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-02-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.343,
+    "pass_accuracy_pct": 67.2,
+    "shots_total": 9
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-02-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.615,
+    "pass_accuracy_pct": 85.8,
+    "shots_total": 10
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-02-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.662,
+    "pass_accuracy_pct": 86.4,
+    "shots_total": 19
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.683,
+    "pass_accuracy_pct": 83.7,
+    "shots_total": 14
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.554,
+    "pass_accuracy_pct": 83.5,
+    "shots_total": 9
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-03-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.619,
+    "pass_accuracy_pct": 78.8,
+    "shots_total": 11
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.416,
+    "pass_accuracy_pct": 76.5,
+    "shots_total": 11
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-03-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.714,
+    "pass_accuracy_pct": 86.5,
+    "shots_total": 21
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-03-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.716,
+    "pass_accuracy_pct": 88.0,
+    "shots_total": 13
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-04-05",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.674,
+    "pass_accuracy_pct": 83.5,
+    "shots_total": 18
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.57,
+    "pass_accuracy_pct": 84.4,
+    "shots_total": 7
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.64,
+    "pass_accuracy_pct": 84.5,
+    "shots_total": 22
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-04-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.569,
+    "pass_accuracy_pct": 80.2,
+    "shots_total": 12
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.435,
+    "pass_accuracy_pct": 77.0,
+    "shots_total": 15
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.604,
+    "pass_accuracy_pct": 78.6,
+    "shots_total": 14
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-05-13",
+    "stage": "apertura---quarterfinals",
+    "possession_share_proxy": 0.641,
+    "pass_accuracy_pct": 80.1,
+    "shots_total": 19
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-05-16",
+    "stage": "apertura---semifinals",
+    "possession_share_proxy": 0.461,
+    "pass_accuracy_pct": 73.2,
+    "shots_total": 7
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-07-23",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.524,
+    "pass_accuracy_pct": 85.4,
+    "shots_total": 10
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-07-29",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.593,
+    "pass_accuracy_pct": 86.2,
+    "shots_total": 13
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-01-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.592,
+    "pass_accuracy_pct": 81.3,
+    "shots_total": 17
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-01-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.417,
+    "pass_accuracy_pct": 56.6,
+    "shots_total": 9
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-01-31",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.526,
+    "pass_accuracy_pct": 78.8,
+    "shots_total": 11
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.521,
+    "pass_accuracy_pct": 63.9,
+    "shots_total": 5
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.458,
+    "pass_accuracy_pct": 67.0,
+    "shots_total": 5
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-02-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.495,
+    "pass_accuracy_pct": 77.4,
+    "shots_total": 8
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-02-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.566,
+    "pass_accuracy_pct": 80.8,
+    "shots_total": 11
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-03-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.426,
+    "pass_accuracy_pct": 70.5,
+    "shots_total": 11
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.303,
+    "pass_accuracy_pct": 65.0,
+    "shots_total": 4
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.527,
+    "pass_accuracy_pct": 83.8,
+    "shots_total": 17
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-03-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.647,
+    "pass_accuracy_pct": 75.3,
+    "shots_total": 7
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-04-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.436,
+    "pass_accuracy_pct": 75.0,
+    "shots_total": 10
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.56,
+    "pass_accuracy_pct": 80.4,
+    "shots_total": 5
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-04-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.523,
+    "pass_accuracy_pct": 76.1,
+    "shots_total": 12
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-04-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.435,
+    "pass_accuracy_pct": 72.8,
+    "shots_total": 10
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.578,
+    "pass_accuracy_pct": 83.9,
+    "shots_total": 25
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.267,
+    "pass_accuracy_pct": 57.7,
+    "shots_total": 5
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-07-26",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.501,
+    "pass_accuracy_pct": 77.1,
+    "shots_total": 13
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-07-28",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.507,
+    "pass_accuracy_pct": 81.8,
+    "shots_total": 13
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-01-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.301,
+    "pass_accuracy_pct": 59.6,
+    "shots_total": 2
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-01-30",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.61,
+    "pass_accuracy_pct": 78.9,
+    "shots_total": 23
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-02-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.59,
+    "pass_accuracy_pct": 77.1,
+    "shots_total": 16
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-02-08",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.496,
+    "pass_accuracy_pct": 69.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.451,
+    "pass_accuracy_pct": 64.5,
+    "shots_total": 3
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-02-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.578,
+    "pass_accuracy_pct": 81.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-02-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.625,
+    "pass_accuracy_pct": 80.9,
+    "shots_total": 14
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-03-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.528,
+    "pass_accuracy_pct": 73.3,
+    "shots_total": 12
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-03-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.518,
+    "pass_accuracy_pct": 73.6,
+    "shots_total": 8
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-03-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.212,
+    "pass_accuracy_pct": 56.5,
+    "shots_total": 2
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-03-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.41,
+    "pass_accuracy_pct": 69.9,
+    "shots_total": 10
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-04-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.532,
+    "pass_accuracy_pct": 84.5,
+    "shots_total": 13
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-04-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.438,
+    "pass_accuracy_pct": 69.7,
+    "shots_total": 11
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.36,
+    "pass_accuracy_pct": 70.5,
+    "shots_total": 5
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-04-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.477,
+    "pass_accuracy_pct": 66.5,
+    "shots_total": 10
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.474,
+    "pass_accuracy_pct": 73.0,
+    "shots_total": 6
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-07-23",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.448,
+    "pass_accuracy_pct": 73.7,
+    "shots_total": 11
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-07-28",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.607,
+    "pass_accuracy_pct": 76.9,
+    "shots_total": 13
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-01-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.714,
+    "pass_accuracy_pct": 86.3,
+    "shots_total": 17
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-01-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.472,
+    "pass_accuracy_pct": 71.8,
+    "shots_total": 21
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.598,
+    "pass_accuracy_pct": 77.9,
+    "shots_total": 12
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.549,
+    "pass_accuracy_pct": 83.9,
+    "shots_total": 12
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.625,
+    "pass_accuracy_pct": 81.7,
+    "shots_total": 13
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.317,
+    "pass_accuracy_pct": 69.1,
+    "shots_total": 8
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-02-24",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.629,
+    "pass_accuracy_pct": 83.5,
+    "shots_total": 11
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.574,
+    "pass_accuracy_pct": 74.9,
+    "shots_total": 15
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.408,
+    "pass_accuracy_pct": 71.5,
+    "shots_total": 5
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-15",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.521,
+    "pass_accuracy_pct": 77.9,
+    "shots_total": 11
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.479,
+    "pass_accuracy_pct": 72.9,
+    "shots_total": 8
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.479,
+    "pass_accuracy_pct": 85.1,
+    "shots_total": 15
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-13",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.483,
+    "pass_accuracy_pct": 81.2,
+    "shots_total": 8
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-19",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.709,
+    "pass_accuracy_pct": 83.5,
+    "shots_total": 15
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-04-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.453,
+    "pass_accuracy_pct": 83.6,
+    "shots_total": 10
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.378,
+    "pass_accuracy_pct": 65.6,
+    "shots_total": 8
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-05-09",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.556,
+    "pass_accuracy_pct": 74.0,
+    "shots_total": 16
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.671,
+    "pass_accuracy_pct": 90.1,
+    "shots_total": 17
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-07-30",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.629,
+    "pass_accuracy_pct": 86.2,
+    "shots_total": 20
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-01-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.517,
+    "pass_accuracy_pct": 73.9,
+    "shots_total": 11
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-01-29",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.403,
+    "pass_accuracy_pct": 69.3,
+    "shots_total": 6
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-02-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.333,
+    "pass_accuracy_pct": 64.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-02-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.293,
+    "pass_accuracy_pct": 61.2,
+    "shots_total": 11
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-02-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.444,
+    "pass_accuracy_pct": 66.4,
+    "shots_total": 14
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-02-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.609,
+    "pass_accuracy_pct": 82.5,
+    "shots_total": 16
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.463,
+    "pass_accuracy_pct": 77.4,
+    "shots_total": 15
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-03-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.526,
+    "pass_accuracy_pct": 74.3,
+    "shots_total": 21
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-03-10",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.411,
+    "pass_accuracy_pct": 67.7,
+    "shots_total": 16
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.352,
+    "pass_accuracy_pct": 68.4,
+    "shots_total": 6
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.727,
+    "pass_accuracy_pct": 79.3,
+    "shots_total": 22
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-04-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.487,
+    "pass_accuracy_pct": 75.4,
+    "shots_total": 18
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-04-12",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.507,
+    "pass_accuracy_pct": 70.8,
+    "shots_total": 12
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-04-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.368,
+    "pass_accuracy_pct": 73.4,
+    "shots_total": 9
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-04-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.523,
+    "pass_accuracy_pct": 71.0,
+    "shots_total": 15
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-05-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.565,
+    "pass_accuracy_pct": 76.7,
+    "shots_total": 17
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.616,
+    "pass_accuracy_pct": 81.6,
+    "shots_total": 18
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-01-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.522,
+    "pass_accuracy_pct": 74.5,
+    "shots_total": 19
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-01-29",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.402,
+    "pass_accuracy_pct": 74.1,
+    "shots_total": 15
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-02-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.58,
+    "pass_accuracy_pct": 84.6,
+    "shots_total": 17
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-02-07",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.507,
+    "pass_accuracy_pct": 80.4,
+    "shots_total": 16
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.542,
+    "pass_accuracy_pct": 73.4,
+    "shots_total": 23
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-02-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.466,
+    "pass_accuracy_pct": 78.0,
+    "shots_total": 20
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-02-26",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.375,
+    "pass_accuracy_pct": 58.7,
+    "shots_total": 16
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-03-01",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.368,
+    "pass_accuracy_pct": 68.6,
+    "shots_total": 7
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-03-10",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.43,
+    "pass_accuracy_pct": 67.0,
+    "shots_total": 9
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-03-16",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.394,
+    "pass_accuracy_pct": 78.5,
+    "shots_total": 14
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.639,
+    "pass_accuracy_pct": 85.9,
+    "shots_total": 19
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-04-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.722,
+    "pass_accuracy_pct": 83.8,
+    "shots_total": 26
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-04-11",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.369,
+    "pass_accuracy_pct": 68.8,
+    "shots_total": 12
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-04-17",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.726,
+    "pass_accuracy_pct": 81.3,
+    "shots_total": 28
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-04-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.425,
+    "pass_accuracy_pct": 71.8,
+    "shots_total": 14
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-05-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.622,
+    "pass_accuracy_pct": 76.9,
+    "shots_total": 25
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-05-10",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.388,
+    "pass_accuracy_pct": 59.1,
+    "shots_total": 10
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-05-12",
+    "stage": "apertura---quarterfinals",
+    "possession_share_proxy": 0.465,
+    "pass_accuracy_pct": 72.4,
+    "shots_total": 12
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-07-25",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.432,
+    "pass_accuracy_pct": 70.9,
+    "shots_total": 10
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-01-23",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.53,
+    "pass_accuracy_pct": 74.9,
+    "shots_total": 7
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-01-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.528,
+    "pass_accuracy_pct": 77.5,
+    "shots_total": 10
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-01-31",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.465,
+    "pass_accuracy_pct": 60.9,
+    "shots_total": 12
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-02-09",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.502,
+    "pass_accuracy_pct": 83.8,
+    "shots_total": 15
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-02-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.658,
+    "pass_accuracy_pct": 82.4,
+    "shots_total": 12
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-02-22",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.369,
+    "pass_accuracy_pct": 60.6,
+    "shots_total": 9
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-02-25",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.709,
+    "pass_accuracy_pct": 82.0,
+    "shots_total": 12
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-03-02",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.431,
+    "pass_accuracy_pct": 77.5,
+    "shots_total": 9
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-03-10",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.589,
+    "pass_accuracy_pct": 77.4,
+    "shots_total": 9
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-03-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.491,
+    "pass_accuracy_pct": 71.4,
+    "shots_total": 14
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-03-21",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.588,
+    "pass_accuracy_pct": 80.4,
+    "shots_total": 10
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-04-03",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.561,
+    "pass_accuracy_pct": 79.6,
+    "shots_total": 11
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-04-14",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.561,
+    "pass_accuracy_pct": 77.6,
+    "shots_total": 21
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-04-20",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.477,
+    "pass_accuracy_pct": 76.0,
+    "shots_total": 10
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-04-27",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.575,
+    "pass_accuracy_pct": 79.4,
+    "shots_total": 12
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-05-04",
+    "stage": "torneo-apertura",
+    "possession_share_proxy": 0.609,
+    "pass_accuracy_pct": 85.4,
+    "shots_total": 15
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-05-11",
+    "stage": "apertura---round-of-16",
+    "possession_share_proxy": 0.713,
+    "pass_accuracy_pct": 84.2,
+    "shots_total": 27
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-07-24",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.578,
+    "pass_accuracy_pct": 80.9,
+    "shots_total": 8
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-07-30",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.371,
+    "pass_accuracy_pct": 72.8,
+    "shots_total": 11
   }
 ]

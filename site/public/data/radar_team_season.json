@@ -1,106 +1,242 @@
 [
   {
-    "team": "Argentina",
-    "season": "2018",
-    "posesion_promedio_proxy_percentil": 100.0,
-    "precision_pases_promedio_percentil": 76.9,
-    "remates_promedio_percentil": 92.3,
-    "remates_al_arco_promedio_percentil": 69.2
+    "team": "Aldosivi",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 13.3,
+    "precision_pases_promedio_percentil": 13.3,
+    "remates_promedio_percentil": 26.7,
+    "remates_al_arco_promedio_percentil": 10.0
   },
   {
-    "team": "Argentina",
-    "season": "2022",
-    "posesion_promedio_proxy_percentil": 84.6,
-    "precision_pases_promedio_percentil": 92.3,
-    "remates_promedio_percentil": 100.0,
-    "remates_al_arco_promedio_percentil": 96.2
-  },
-  {
-    "team": "Australia",
-    "season": "2022",
-    "posesion_promedio_proxy_percentil": 42.3,
-    "precision_pases_promedio_percentil": 61.5,
-    "remates_promedio_percentil": 30.8,
-    "remates_al_arco_promedio_percentil": 19.2
-  },
-  {
-    "team": "Croatia",
-    "season": "2018",
-    "posesion_promedio_proxy_percentil": 53.8,
-    "precision_pases_promedio_percentil": 30.8,
-    "remates_promedio_percentil": 80.8,
-    "remates_al_arco_promedio_percentil": 76.9
-  },
-  {
-    "team": "Croatia",
-    "season": "2022",
-    "posesion_promedio_proxy_percentil": 92.3,
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 96.7,
     "precision_pases_promedio_percentil": 100.0,
-    "remates_promedio_percentil": 65.4,
-    "remates_al_arco_promedio_percentil": 38.5
+    "remates_promedio_percentil": 90.0,
+    "remates_al_arco_promedio_percentil": 93.3
   },
   {
-    "team": "France",
-    "season": "2018",
-    "posesion_promedio_proxy_percentil": 42.3,
-    "precision_pases_promedio_percentil": 69.2,
-    "remates_promedio_percentil": 46.2,
-    "remates_al_arco_promedio_percentil": 61.5
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 30.0,
+    "precision_pases_promedio_percentil": 6.7,
+    "remates_promedio_percentil": 40.0,
+    "remates_al_arco_promedio_percentil": 16.7
   },
   {
-    "team": "France",
-    "season": "2022",
-    "posesion_promedio_proxy_percentil": 69.2,
-    "precision_pases_promedio_percentil": 46.2,
-    "remates_promedio_percentil": 80.8,
-    "remates_al_arco_promedio_percentil": 96.2
+    "team": "Banfield",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 10.0,
+    "precision_pases_promedio_percentil": 16.7,
+    "remates_promedio_percentil": 50.0,
+    "remates_al_arco_promedio_percentil": 36.7
   },
   {
-    "team": "Iceland",
-    "season": "2018",
-    "posesion_promedio_proxy_percentil": 7.7,
-    "precision_pases_promedio_percentil": 7.7,
-    "remates_promedio_percentil": 46.2,
-    "remates_al_arco_promedio_percentil": 38.5
+    "team": "Barracas Central",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 6.7,
+    "precision_pases_promedio_percentil": 10.0,
+    "remates_promedio_percentil": 11.7,
+    "remates_al_arco_promedio_percentil": 26.7
   },
   {
-    "team": "Mexico",
-    "season": "2022",
-    "posesion_promedio_proxy_percentil": 61.5,
-    "precision_pases_promedio_percentil": 38.5,
-    "remates_promedio_percentil": 19.2,
-    "remates_al_arco_promedio_percentil": 19.2
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 56.7,
+    "precision_pases_promedio_percentil": 73.3,
+    "remates_promedio_percentil": 46.7,
+    "remates_al_arco_promedio_percentil": 30.0
   },
   {
-    "team": "Netherlands",
-    "season": "2022",
-    "posesion_promedio_proxy_percentil": 76.9,
-    "precision_pases_promedio_percentil": 84.6,
-    "remates_promedio_percentil": 65.4,
-    "remates_al_arco_promedio_percentil": 84.6
+    "team": "Boca Juniors",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 93.3,
+    "precision_pases_promedio_percentil": 93.3,
+    "remates_promedio_percentil": 73.3,
+    "remates_al_arco_promedio_percentil": 83.3
   },
   {
-    "team": "Nigeria",
-    "season": "2018",
-    "posesion_promedio_proxy_percentil": 30.8,
-    "precision_pases_promedio_percentil": 15.4,
-    "remates_promedio_percentil": 46.2,
-    "remates_al_arco_promedio_percentil": 53.8
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 16.7,
+    "precision_pases_promedio_percentil": 36.7,
+    "remates_promedio_percentil": 3.3,
+    "remates_al_arco_promedio_percentil": 6.7
   },
   {
-    "team": "Poland",
-    "season": "2022",
-    "posesion_promedio_proxy_percentil": 15.4,
-    "precision_pases_promedio_percentil": 53.8,
-    "remates_promedio_percentil": 19.2,
-    "remates_al_arco_promedio_percentil": 7.7
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 70.0,
+    "precision_pases_promedio_percentil": 80.0,
+    "remates_promedio_percentil": 20.0,
+    "remates_al_arco_promedio_percentil": 50.0
   },
   {
-    "team": "Saudi Arabia",
-    "season": "2022",
-    "posesion_promedio_proxy_percentil": 23.1,
-    "precision_pases_promedio_percentil": 23.1,
-    "remates_promedio_percentil": 7.7,
-    "remates_al_arco_promedio_percentil": 38.5
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 3.3,
+    "precision_pases_promedio_percentil": 3.3,
+    "remates_promedio_percentil": 6.7,
+    "remates_al_arco_promedio_percentil": 23.3
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 76.7,
+    "precision_pases_promedio_percentil": 83.3,
+    "remates_promedio_percentil": 80.0,
+    "remates_al_arco_promedio_percentil": 86.7
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 33.3,
+    "precision_pases_promedio_percentil": 20.0,
+    "remates_promedio_percentil": 30.0,
+    "remates_al_arco_promedio_percentil": 3.3
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 23.3,
+    "precision_pases_promedio_percentil": 33.3,
+    "remates_promedio_percentil": 43.3,
+    "remates_al_arco_promedio_percentil": 53.3
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 26.7,
+    "precision_pases_promedio_percentil": 60.0,
+    "remates_promedio_percentil": 33.3,
+    "remates_al_arco_promedio_percentil": 43.3
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 60.0,
+    "precision_pases_promedio_percentil": 46.7,
+    "remates_promedio_percentil": 36.7,
+    "remates_al_arco_promedio_percentil": 70.0
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 66.7,
+    "precision_pases_promedio_percentil": 50.0,
+    "remates_promedio_percentil": 68.3,
+    "remates_al_arco_promedio_percentil": 56.7
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 43.3,
+    "precision_pases_promedio_percentil": 40.0,
+    "remates_promedio_percentil": 93.3,
+    "remates_al_arco_promedio_percentil": 90.0
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 53.3,
+    "precision_pases_promedio_percentil": 43.3,
+    "remates_promedio_percentil": 83.3,
+    "remates_al_arco_promedio_percentil": 66.7
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 73.3,
+    "precision_pases_promedio_percentil": 90.0,
+    "remates_promedio_percentil": 56.7,
+    "remates_al_arco_promedio_percentil": 63.3
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 20.0,
+    "precision_pases_promedio_percentil": 30.0,
+    "remates_promedio_percentil": 11.7,
+    "remates_al_arco_promedio_percentil": 13.3
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 63.3,
+    "precision_pases_promedio_percentil": 63.3,
+    "remates_promedio_percentil": 63.3,
+    "remates_al_arco_promedio_percentil": 46.7
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 86.7,
+    "precision_pases_promedio_percentil": 66.7,
+    "remates_promedio_percentil": 53.3,
+    "remates_al_arco_promedio_percentil": 20.0
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 100.0,
+    "precision_pases_promedio_percentil": 96.7,
+    "remates_promedio_percentil": 96.7,
+    "remates_al_arco_promedio_percentil": 100.0
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 90.0,
+    "precision_pases_promedio_percentil": 86.7,
+    "remates_promedio_percentil": 76.7,
+    "remates_al_arco_promedio_percentil": 80.0
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 46.7,
+    "precision_pases_promedio_percentil": 53.3,
+    "remates_promedio_percentil": 23.3,
+    "remates_al_arco_promedio_percentil": 40.0
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 40.0,
+    "precision_pases_promedio_percentil": 23.3,
+    "remates_promedio_percentil": 16.7,
+    "remates_al_arco_promedio_percentil": 33.3
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 80.0,
+    "precision_pases_promedio_percentil": 76.7,
+    "remates_promedio_percentil": 68.3,
+    "remates_al_arco_promedio_percentil": 60.0
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 36.7,
+    "precision_pases_promedio_percentil": 26.7,
+    "remates_promedio_percentil": 86.7,
+    "remates_al_arco_promedio_percentil": 76.7
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 50.0,
+    "precision_pases_promedio_percentil": 56.7,
+    "remates_promedio_percentil": 100.0,
+    "remates_al_arco_promedio_percentil": 96.7
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "posesion_promedio_proxy_percentil": 83.3,
+    "precision_pases_promedio_percentil": 70.0,
+    "remates_promedio_percentil": 60.0,
+    "remates_al_arco_promedio_percentil": 73.3
   }
 ]
