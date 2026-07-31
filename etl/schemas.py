@@ -218,7 +218,11 @@ SquadsSchema = DataFrameSchema(
         "jersey_number": Column("Int64", Check.in_range(1, 99), nullable=True),
         "caps": Column("Int64", Check.ge(0), nullable=True),
         "career_goals": Column("Int64", Check.ge(0), nullable=True),
-        "captain": Column(bool, nullable=True),
+        # "boolean" (no bool de Python/numpy) -- el nullable de pandas admite
+        # pd.NA. Con bool a secas, una columna 100% nula (ninguna fuente LPF
+        # expone flag de capitán) revienta la coerción de Pandera: numpy bool
+        # no puede representar nulos, ni siquiera con nullable=True declarado.
+        "captain": Column("boolean", nullable=True),
         "wc2026_apps": Column("Int64", Check.in_range(0, 7), nullable=True),
         "wc2026_goals": Column("Int64", Check.ge(0), nullable=True),
         "wc2026_yellow": Column("Int64", Check.ge(0), nullable=True),
