@@ -65,15 +65,15 @@ def main():
     args = parser.parse_args()
 
     if not args.skip_scrape:
-        # Orden: primero lo que baja de fuentes HTTP directas y confiables
-        # (openfootball CC0, 26worldcup) y despues los scrapers mas fragiles
-        # (FIFA por PDF, Transfermarkt bloqueado). Todos escriben a data/raw/*/
-        # _processed; el warehouse se reconstruye de ahi.
+        # Métricas LPF: una sola fuente de datos, API-Football (temporada actual
+        # de la Liga Profesional). Escribe a data/raw/api_football/_processed; el
+        # warehouse se reconstruye de ahí. Es incremental/cacheado y respeta el
+        # free tier (100 req/día) -- ver fetch_api_football_lpf.py. Si no está la
+        # API key, escribe CSV vacíos-válidos y el pipeline sigue (nunca inventa
+        # datos). Los scrapers del Mundial (FIFA/openfootball/26worldcup) se
+        # retiraron en la transformación a LPF.
         scrapers = (
-            "fetch_openfootball_2026.py",
-            "fetch_26worldcup_squads.py",
-            "scrape_fifa_training_centre.py",
-            "scrape_transfermarkt_squads.py",
+            "fetch_api_football_lpf.py",
         )
         for script in scrapers:
             print(f"\n=== {script} ===")

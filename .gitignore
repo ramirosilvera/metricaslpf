@@ -21,3 +21,7 @@ data/raw/fifa_training_centre/pdfs/
 .DS_Store
 .vscode/
 *.log
+
+# Métricas LPF: cache de JSON crudos por fixture de API-Football (regenerable,
+# no se versiona para no inflar el repo). Los _processed sí se commitean.
+data/raw/api_football/cache/

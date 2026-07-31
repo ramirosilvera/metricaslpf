@@ -53,8 +53,11 @@ def build():
     WAREHOUSE.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect()
 
-    # --- matches (StatsBomb 2018/2022 + registro propio FIFA 2026 desde los PDF PMSR) ---
+    # --- matches (Métricas LPF: API-Football, temporada actual de la Liga
+    # Profesional; se conservan las fuentes históricas del Mundial como opcionales
+    # por si algún CSV viejo sigue presente, pero en LPF no existen) ---
     matches_sources = [
+        _read_csv_if_exists(RAW / "api_football" / "_processed" / "matches.csv"),
         _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "matches.csv"),
         _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "matches_fifa2026.csv"),
     ]
@@ -69,20 +72,29 @@ def build():
         con.execute(f"COPY matches_df TO '{WAREHOUSE / 'matches.parquet'}' (FORMAT PARQUET)")
         print(f"matches.parquet: {len(matches)} filas")
 
-    # --- team_match_stats (StatsBomb: contexto táctico) ---
-    team_stats = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "team_match_stats.csv")
+    # --- team_match_stats (Métricas LPF: API-Football por partido -- remates,
+    # posesión, pases/precisión, faltas, córners, offsides, atajadas y proxy de
+    # peligrosidad; StatsBomb como fallback histórico) ---
+    team_stats = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_match_stats.csv")
+    if team_stats is None:
+        team_stats = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "team_match_stats.csv")
     if team_stats is not None:
         num_cols = ["passes_attempted", "passes_completed", "shots_total", "shots_on_target", "goals", "fouls_committed"]
+        for c in num_cols:
+            if c not in team_stats.columns:
+                team_stats[c] = 0
         team_stats = team_stats.astype({"match_id": "int64", **{c: "int64" for c in num_cols}})
-        team_stats["possession_share_proxy"] = team_stats["possession_share_proxy"].astype(float)
-        team_stats["pass_accuracy_pct"] = pd.to_numeric(team_stats["pass_accuracy_pct"], errors="coerce")
+        team_stats["possession_share_proxy"] = pd.to_numeric(team_stats["possession_share_proxy"], errors="coerce").astype(float)
+        team_stats["pass_accuracy_pct"] = pd.to_numeric(team_stats.get("pass_accuracy_pct"), errors="coerce")
         team_stats = TeamMatchStatsSchema.validate(team_stats)
         con.register("team_stats_df", team_stats)
         con.execute(f"COPY team_stats_df TO '{WAREHOUSE / 'team_match_stats_tactical.parquet'}' (FORMAT PARQUET)")
         print(f"team_match_stats_tactical.parquet: {len(team_stats)} filas")
 
-    # --- player_match_appearances ---
-    appearances = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "player_match_appearances.csv")
+    # --- player_match_appearances (LPF: API-Football por partido; StatsBomb fallback) ---
+    appearances = _read_csv_if_exists(RAW / "api_football" / "_processed" / "player_match_appearances.csv")
+    if appearances is None:
+        appearances = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "player_match_appearances.csv")
     if appearances is not None:
         appearances = appearances.astype({"match_id": "int64", "minutes_played": "int64"})
         appearances = PlayerAppearancesSchema.validate(appearances)
@@ -115,11 +127,16 @@ def build():
         con.execute(f"COPY phys_players_df TO '{WAREHOUSE / 'physical_player_match_stats.parquet'}' (FORMAT PARQUET)")
         print(f"physical_player_match_stats.parquet: {len(physical_players)} filas")
 
-    # --- tactical_player_match_stats (FIFA Training Centre, por jugador -- Mundial 2026) ---
-    tactical_players = _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "tactical_player_match_stats.csv")
+    # --- tactical_player_match_stats (LPF: API-Football por jugador -- pases,
+    # remates, quites, intercepciones, duelos, gambetas; los campos propios de
+    # FIFA -- offers/line_breaks/pressing -- no existen en API-Football y quedan
+    # nulos. FIFA Training Centre como fallback histórico) ---
+    tactical_players = _read_csv_if_exists(RAW / "api_football" / "_processed" / "tactical_player_match_stats.csv")
+    if tactical_players is None:
+        tactical_players = _read_csv_if_exists(RAW / "fifa_training_centre" / "_processed" / "tactical_player_match_stats.csv")
     if tactical_players is not None:
         tactical_players = tactical_players.astype({"match_id": "int64"})
-        tactical_players["jersey_number"] = pd.to_numeric(tactical_players["jersey_number"], errors="coerce").astype("Int64")
+        tactical_players["jersey_number"] = pd.to_numeric(tactical_players.get("jersey_number"), errors="coerce").astype("Int64")
         int_cols = [
             "passes_attempted", "passes_completed", "switches_of_play", "crosses_attempted", "crosses_completed",
             "line_breaks_attempted", "line_breaks_completed", "ball_progressions", "take_ons", "step_ins",
@@ -129,9 +146,15 @@ def build():
             "duels_won_physical", "possession_contests_won", "clearances", "loose_ball_receptions", "pushing_on",
             "pushing_on_into_pressing", "possession_regains", "possession_interrupted",
         ]
+        # Las columnas que la fuente no trae se agregan como nulas para cumplir el
+        # contrato del esquema sin inventar valores.
         for c in int_cols:
+            if c not in tactical_players.columns:
+                tactical_players[c] = pd.NA
             tactical_players[c] = pd.to_numeric(tactical_players[c], errors="coerce").astype("Int64")
         for c in ["pass_completion_pct", "line_break_completion_pct"]:
+            if c not in tactical_players.columns:
+                tactical_players[c] = pd.NA
             tactical_players[c] = pd.to_numeric(tactical_players[c], errors="coerce")
         tactical_players = TacticalPlayerMatchStatsSchema.validate(tactical_players)
         con.register("tactical_players_df", tactical_players)
@@ -166,7 +189,9 @@ def build():
         print("squads: sin datos todavia (correr etl/fetch_26worldcup_squads.py)")
 
     # --- team_profile (26worldcup/teams.json: ranking FIFA + campo base) ---
-    team_profile = _read_csv_if_exists(RAW / "26worldcup" / "_processed" / "team_profile.csv")
+    team_profile = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_profile.csv")
+    if team_profile is None:
+        team_profile = _read_csv_if_exists(RAW / "26worldcup" / "_processed" / "team_profile.csv")
     if team_profile is not None:
         for c in ["fifa_ranking", "fifa_ranking_prev"]:
             team_profile[c] = pd.to_numeric(team_profile[c], errors="coerce").astype("Int64")
@@ -184,7 +209,9 @@ def build():
     # resultado final de cada partido ya se cruzó contra matches (arriba,
     # fuente FIFA Training Centre) dentro de fetch_openfootball_2026.py --
     # ver data/raw/openfootball/_score_discrepancies.json si hubo diferencias. ---
-    goal_events = _read_csv_if_exists(RAW / "openfootball" / "_processed" / "goal_events.csv")
+    goal_events = _read_csv_if_exists(RAW / "api_football" / "_processed" / "goal_events.csv")
+    if goal_events is None:
+        goal_events = _read_csv_if_exists(RAW / "openfootball" / "_processed" / "goal_events.csv")
     if goal_events is not None:
         goal_events["match_id"] = goal_events["match_id"].astype("int64")
         goal_events["minute"] = pd.to_numeric(goal_events["minute"], errors="coerce").astype("Int64")
