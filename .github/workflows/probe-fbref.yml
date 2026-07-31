@@ -1,11 +1,10 @@
-name: Probe fuentes LPF temporada actual (ESPN / SofaScore / FotMob)
+name: Probe fuentes LPF -- riqueza de stats en partido ya jugado (ESPN/FotMob)
 
-# Sonda decisiva y descartable: API-Football gratis NO cubre la temporada
-# actual (solo 2022-2024). Esta sonda busca una fuente gratis alternativa con
-# metricas avanzadas (remates/posesion/pases) de la LPF EN CURSO, probando
-# tres APIs "ocultas" (no oficiales, sin key) que se usan en proyectos de
-# scraping deportivo: ESPN, SofaScore y FotMob (reintento con otros
-# endpoints). Se borra tras decidir.
+# Sonda decisiva final: ESPN (site.api.espn.com) y FotMob (/api/data/leagues)
+# respondieron 200 con fixtures REALES de la temporada actual de la LPF. Esta
+# sonda confirma si, para un partido YA JUGADO (no "Scheduled"), traen
+# estadisticas de partido (remates/posesion/pases) o solo resultado. Decide
+# la arquitectura de datos final para Metricas LPF. Se borra tras decidir.
 on:
   workflow_dispatch:
 
@@ -19,7 +18,7 @@ jobs:
           python-version: "3.11"
       - name: Instalar requests
         run: pip install requests
-      - name: Probar ESPN / SofaScore / FotMob
+      - name: Inspeccionar stats de partido jugado
         run: |
           python3 - <<'PY'
           import json, requests
@@ -27,10 +26,8 @@ jobs:
           UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                 "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
 
-          def get(url, headers=None, label=""):
+          def get(url, label=""):
               h = {"User-Agent": UA, "Accept": "application/json", "Accept-Language": "es-AR,es;q=0.9"}
-              if headers:
-                  h.update(headers)
               try:
                   r = requests.get(url, headers=h, timeout=25)
                   print(f"  [{label}] {url} -> {r.status_code} len={len(r.content)}")
@@ -39,37 +36,67 @@ jobs:
                   print(f"  [{label}] {url} -> ERROR {type(e).__name__}: {e}")
                   return None
 
-          print("=== 1) ESPN (site.api.espn.com) -- slug arg.1 = Primera Division Argentina ===")
-          r = get("https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard", label="espn-scoreboard")
+          print("=== ESPN: buscar un partido FINALIZADO reciente ===")
+          # scoreboard con rango de fechas hacia atras (ultimos 10 dias) para
+          # encontrar partidos con status "Final".
+          r = get("https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard?dates=20260715-20260731", label="espn-scoreboard-range")
+          finished_id = None
           if r is not None and r.ok:
-              try:
-                  d = r.json()
-                  events = d.get("events") or []
-                  print(f"    eventos: {len(events)}")
-                  if events:
-                      ev = events[0]
-                      print("    ejemplo:", ev.get("name"), ev.get("date"), ev.get("status", {}).get("type", {}).get("description"))
-                      eid = ev.get("id")
-                      r2 = get(f"https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/summary?event={eid}", label="espn-summary")
-                      if r2 is not None and r2.ok:
-                          d2 = r2.json()
-                          print("    summary keys:", list(d2.keys())[:15])
-                          boxscore = d2.get("boxscore")
-                          if boxscore:
-                              teams = boxscore.get("teams") or []
-                              for t in teams:
-                                  stats = [s.get("name") for s in (t.get("statistics") or [])]
-                                  print("    stats de equipo disponibles:", stats[:20])
-              except Exception as e:
-                  print("    parse err:", type(e).__name__, e)
-          # standings
-          get("https://site.api.espn.com/apis/v2/sports/soccer/arg.1/standings", label="espn-standings")
+              d = r.json()
+              events = d.get("events") or []
+              print(f"    eventos en rango: {len(events)}")
+              for ev in events:
+                  status = ev.get("status", {}).get("type", {}).get("state")
+                  if status == "post":
+                      finished_id = ev.get("id")
+                      print("    partido finalizado encontrado:", ev.get("name"), ev.get("date"), "id=", finished_id)
+                      break
+          if finished_id:
+              r2 = get(f"https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/summary?event={finished_id}", label="espn-summary-final")
+              if r2 is not None and r2.ok:
+                  d2 = r2.json()
+                  box = d2.get("boxscore") or {}
+                  teams = box.get("teams") or []
+                  for t in teams:
+                      name = (t.get("team") or {}).get("displayName")
+                      stats = {s.get("name"): s.get("displayValue") for s in (t.get("statistics") or [])}
+                      print(f"    {name}: {stats}")
+                  players = box.get("players") or []
+                  print(f"    bloques de jugadores (por equipo): {len(players)}")
+                  if players:
+                      stats_defs = players[0].get("statistics") or []
+                      for sd in stats_defs:
+                          print("    categoria jugador:", sd.get("name"), "labels:", sd.get("labels"))
+          else:
+              print("    no se encontro partido finalizado en el rango probado")
 
-          print("=== 2) SofaScore (api.sofascore.com) ===")
-          get("https://api.sofascore.com/api/v1/search/all?q=liga%20profesional", label="sofa-search")
-          get("https://api.sofascore.com/api/v1/unique-tournament/155/season/58766/standings/total", label="sofa-standings-guess")
-
-          print("=== 3) FotMob reintento (endpoints alternativos) ===")
-          get("https://www.fotmob.com/api/data/leagues?id=112", label="fotmob-data-leagues")
-          get("https://www.fotmob.com/api/leagues?id=112&tab=table&type=league&timeZone=America%2FArgentina%2FBuenos_Aires", label="fotmob-leagues-fulltab")
+          print("=== FotMob: estructura de /api/data/leagues?id=112 ===")
+          r3 = get("https://www.fotmob.com/api/data/leagues?id=112", label="fotmob-data-leagues")
+          if r3 is not None and r3.ok:
+              d3 = r3.json()
+              print("    top keys:", list(d3.keys()))
+              matches = d3.get("matches") or {}
+              if isinstance(matches, dict):
+                  print("    matches keys:", list(matches.keys()))
+                  allm = matches.get("allMatches") or []
+                  print("    allMatches count:", len(allm))
+                  finished_fm = [m for m in allm if (m.get("status") or {}).get("finished")]
+                  print("    finished count:", len(finished_fm))
+                  if finished_fm:
+                      mid = finished_fm[-1].get("id")
+                      print("    probando matchDetails con id=", mid)
+                      r4 = get(f"https://www.fotmob.com/api/data/matchDetails?matchId={mid}", label="fotmob-data-matchdetails")
+                      if r4 is not None and r4.ok:
+                          d4 = r4.json()
+                          print("    matchDetails top keys:", list(d4.keys()))
+                          content = d4.get("content") or {}
+                          print("    content keys:", list(content.keys()))
+                          stats = content.get("stats")
+                          if stats:
+                              print("    TIENE stats:", json.dumps(stats)[:500])
+                          shotmap = content.get("shotmap")
+                          if shotmap:
+                              print("    TIENE shotmap (posible xG por remate):", list(shotmap.keys()) if isinstance(shotmap, dict) else len(shotmap))
+              table = d3.get("table")
+              print("    tiene 'table':", bool(table))
           PY
