@@ -7,7 +7,9 @@
     "precision_pases_promedio": 69.872,
     "remates_promedio": 10.611,
     "remates_al_arco_promedio": 2.611,
+    "remates_al_arco_recibidos_promedio": 4.0,
     "goles_totales": 7,
+    "goles_recibidos_promedio": 1.167,
     "faltas_promedio": 14.833
   },
   {
@@ -18,7 +20,9 @@
     "precision_pases_promedio": 82.99,
     "remates_promedio": 14.238,
     "remates_al_arco_promedio": 5.19,
+    "remates_al_arco_recibidos_promedio": 2.952,
     "goles_totales": 27,
+    "goles_recibidos_promedio": 0.762,
     "faltas_promedio": 11.571
   },
   {
@@ -29,7 +33,9 @@
     "precision_pases_promedio": 69.328,
     "remates_promedio": 11.611,
     "remates_al_arco_promedio": 3.333,
+    "remates_al_arco_recibidos_promedio": 3.278,
     "goles_totales": 17,
+    "goles_recibidos_promedio": 1.111,
     "faltas_promedio": 13.111
   },
   {
@@ -40,7 +46,9 @@
     "precision_pases_promedio": 70.35,
     "remates_promedio": 11.778,
     "remates_al_arco_promedio": 3.722,
+    "remates_al_arco_recibidos_promedio": 5.444,
     "goles_totales": 20,
+    "goles_recibidos_promedio": 1.222,
     "faltas_promedio": 11.278
   },
   {
@@ -51,7 +59,9 @@
     "precision_pases_promedio": 69.678,
     "remates_promedio": 10.056,
     "remates_al_arco_promedio": 3.556,
+    "remates_al_arco_recibidos_promedio": 4.667,
     "goles_totales": 17,
+    "goles_recibidos_promedio": 0.833,
     "faltas_promedio": 12.833
   },
   {
@@ -62,7 +72,9 @@
     "precision_pases_promedio": 77.205,
     "remates_promedio": 11.714,
     "remates_al_arco_promedio": 3.571,
+    "remates_al_arco_recibidos_promedio": 3.81,
     "goles_totales": 26,
+    "goles_recibidos_promedio": 0.81,
     "faltas_promedio": 11.048
   },
   {
@@ -73,7 +85,9 @@
     "precision_pases_promedio": 81.889,
     "remates_promedio": 13.111,
     "remates_al_arco_promedio": 4.556,
+    "remates_al_arco_recibidos_promedio": 2.722,
     "goles_totales": 24,
+    "goles_recibidos_promedio": 0.833,
     "faltas_promedio": 9.444
   },
   {
@@ -84,7 +98,9 @@
     "precision_pases_promedio": 72.956,
     "remates_promedio": 8.778,
     "remates_al_arco_promedio": 2.5,
+    "remates_al_arco_recibidos_promedio": 5.222,
     "goles_totales": 11,
+    "goles_recibidos_promedio": 1.333,
     "faltas_promedio": 13.222
   },
   {
@@ -95,7 +111,9 @@
     "precision_pases_promedio": 79.178,
     "remates_promedio": 10.278,
     "remates_al_arco_promedio": 3.944,
+    "remates_al_arco_recibidos_promedio": 3.833,
     "goles_totales": 21,
+    "goles_recibidos_promedio": 1.278,
     "faltas_promedio": 9.389
   },
   {
@@ -106,7 +124,9 @@
     "precision_pases_promedio": 56.756,
     "remates_promedio": 10.0,
     "remates_al_arco_promedio": 3.389,
+    "remates_al_arco_recibidos_promedio": 4.278,
     "goles_totales": 9,
+    "goles_recibidos_promedio": 0.778,
     "faltas_promedio": 17.056
   },
   {
@@ -117,7 +137,9 @@
     "precision_pases_promedio": 79.95,
     "remates_promedio": 13.5,
     "remates_al_arco_promedio": 4.778,
+    "remates_al_arco_recibidos_promedio": 3.0,
     "goles_totales": 19,
+    "goles_recibidos_promedio": 0.556,
     "faltas_promedio": 11.667
   },
   {
@@ -128,7 +150,9 @@
     "precision_pases_promedio": 71.433,
     "remates_promedio": 11.056,
     "remates_al_arco_promedio": 2.333,
+    "remates_al_arco_recibidos_promedio": 4.111,
     "goles_totales": 6,
+    "goles_recibidos_promedio": 1.5,
     "faltas_promedio": 11.222
   },
   {
@@ -139,7 +163,9 @@
     "precision_pases_promedio": 72.9,
     "remates_promedio": 11.667,
     "remates_al_arco_promedio": 4.0,
+    "remates_al_arco_recibidos_promedio": 4.444,
     "goles_totales": 15,
+    "goles_recibidos_promedio": 1.278,
     "faltas_promedio": 12.5
   },
   {
@@ -150,7 +176,9 @@
     "precision_pases_promedio": 74.79,
     "remates_promedio": 11.15,
     "remates_al_arco_promedio": 3.8,
+    "remates_al_arco_recibidos_promedio": 4.2,
     "goles_totales": 22,
+    "goles_recibidos_promedio": 1.15,
     "faltas_promedio": 12.15
   },
   {
@@ -161,7 +189,9 @@
     "precision_pases_promedio": 73.68,
     "remates_promedio": 11.4,
     "remates_al_arco_promedio": 4.25,
+    "remates_al_arco_recibidos_promedio": 3.45,
     "goles_totales": 22,
+    "goles_recibidos_promedio": 0.9,
     "faltas_promedio": 13.55
   },
   {
@@ -172,7 +202,9 @@
     "precision_pases_promedio": 73.8,
     "remates_promedio": 12.737,
     "remates_al_arco_promedio": 4.105,
+    "remates_al_arco_recibidos_promedio": 3.421,
     "goles_totales": 28,
+    "goles_recibidos_promedio": 1.211,
     "faltas_promedio": 11.842
   },
   {
@@ -183,7 +215,9 @@
     "precision_pases_promedio": 73.511,
     "remates_promedio": 14.579,
     "remates_al_arco_promedio": 5.053,
+    "remates_al_arco_recibidos_promedio": 3.684,
     "goles_totales": 32,
+    "goles_recibidos_promedio": 0.947,
     "faltas_promedio": 11.737
   },
   {
@@ -194,7 +228,9 @@
     "precision_pases_promedio": 73.622,
     "remates_promedio": 13.556,
     "remates_al_arco_promedio": 4.222,
+    "remates_al_arco_recibidos_promedio": 3.444,
     "goles_totales": 19,
+    "goles_recibidos_promedio": 1.056,
     "faltas_promedio": 13.611
   },
   {
@@ -205,7 +241,9 @@
     "precision_pases_promedio": 80.539,
     "remates_promedio": 12.056,
     "remates_al_arco_promedio": 4.167,
+    "remates_al_arco_recibidos_promedio": 3.944,
     "goles_totales": 19,
+    "goles_recibidos_promedio": 0.944,
     "faltas_promedio": 13.5
   },
   {
@@ -216,7 +254,9 @@
     "precision_pases_promedio": 72.55,
     "remates_promedio": 10.056,
     "remates_al_arco_promedio": 3.278,
+    "remates_al_arco_recibidos_promedio": 4.889,
     "goles_totales": 16,
+    "goles_recibidos_promedio": 1.556,
     "faltas_promedio": 13.111
   },
   {
@@ -227,7 +267,9 @@
     "precision_pases_promedio": 75.172,
     "remates_promedio": 12.667,
     "remates_al_arco_promedio": 3.833,
+    "remates_al_arco_recibidos_promedio": 4.111,
     "goles_totales": 13,
+    "goles_recibidos_promedio": 1.056,
     "faltas_promedio": 11.5
   },
   {
@@ -238,7 +280,9 @@
     "precision_pases_promedio": 76.06,
     "remates_promedio": 11.85,
     "remates_al_arco_promedio": 3.35,
+    "remates_al_arco_recibidos_promedio": 3.7,
     "goles_totales": 21,
+    "goles_recibidos_promedio": 0.9,
     "faltas_promedio": 14.75
   },
   {
@@ -249,7 +293,9 @@
     "precision_pases_promedio": 82.777,
     "remates_promedio": 16.364,
     "remates_al_arco_promedio": 5.455,
+    "remates_al_arco_recibidos_promedio": 3.364,
     "goles_totales": 29,
+    "goles_recibidos_promedio": 0.864,
     "faltas_promedio": 11.955
   },
   {
@@ -260,7 +306,9 @@
     "precision_pases_promedio": 80.238,
     "remates_promedio": 13.19,
     "remates_al_arco_promedio": 4.524,
+    "remates_al_arco_recibidos_promedio": 3.762,
     "goles_totales": 26,
+    "goles_recibidos_promedio": 1.0,
     "faltas_promedio": 11.333
   },
   {
@@ -271,7 +319,9 @@
     "precision_pases_promedio": 73.958,
     "remates_promedio": 10.421,
     "remates_al_arco_promedio": 3.737,
+    "remates_al_arco_recibidos_promedio": 5.0,
     "goles_totales": 17,
+    "goles_recibidos_promedio": 0.895,
     "faltas_promedio": 12.947
   },
   {
@@ -282,7 +332,9 @@
     "precision_pases_promedio": 72.172,
     "remates_promedio": 10.167,
     "remates_al_arco_promedio": 3.611,
+    "remates_al_arco_recibidos_promedio": 5.611,
     "goles_totales": 17,
+    "goles_recibidos_promedio": 1.444,
     "faltas_promedio": 13.5
   },
   {
@@ -293,7 +345,9 @@
     "precision_pases_promedio": 78.984,
     "remates_promedio": 12.737,
     "remates_al_arco_promedio": 4.158,
+    "remates_al_arco_recibidos_promedio": 3.737,
     "goles_totales": 18,
+    "goles_recibidos_promedio": 0.947,
     "faltas_promedio": 11.947
   },
   {
@@ -304,7 +358,9 @@
     "precision_pases_promedio": 72.547,
     "remates_promedio": 14.059,
     "remates_al_arco_promedio": 4.412,
+    "remates_al_arco_recibidos_promedio": 3.0,
     "goles_totales": 18,
+    "goles_recibidos_promedio": 0.941,
     "faltas_promedio": 12.588
   },
   {
@@ -315,7 +371,9 @@
     "precision_pases_promedio": 74.142,
     "remates_promedio": 16.421,
     "remates_al_arco_promedio": 5.316,
+    "remates_al_arco_recibidos_promedio": 4.368,
     "goles_totales": 28,
+    "goles_recibidos_promedio": 1.316,
     "faltas_promedio": 11.842
   },
   {
@@ -326,7 +384,9 @@
     "precision_pases_promedio": 77.089,
     "remates_promedio": 12.316,
     "remates_al_arco_promedio": 4.263,
+    "remates_al_arco_recibidos_promedio": 4.526,
     "goles_totales": 22,
+    "goles_recibidos_promedio": 0.737,
     "faltas_promedio": 10.737
   }
 ]
