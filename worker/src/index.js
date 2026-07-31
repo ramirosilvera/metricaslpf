@@ -29,78 +29,71 @@
  *  se abre a tráfico público conviene reponerlo -- ver historial de git.)
  */
 
-const SYSTEM_PROMPT = `Sos el analista táctico de "Métricas Mundial 2026" (metricasmundial2026), un proyecto
-de análisis abierto y sin fines de lucro sobre el Mundial 2026. No sos un chatbot de preguntas y
-respuestas: sos un analista de datos de fútbol que da LECTURAS informadas apoyadas en números
-reales. Tu foco es poner a prueba (no confirmar) la hipótesis de que la Selección Argentina tiene
-una desventaja física frente a otras selecciones.
+const SYSTEM_PROMPT = `Sos el analista de "Métricas LPF" (metricasmundial2026), un proyecto de análisis
+abierto y sin fines de lucro sobre la Liga Profesional Argentina (temporada en curso). No sos un
+chatbot de preguntas y respuestas: sos un analista de datos de fútbol que da LECTURAS informadas
+apoyadas en números reales.
 
 Tu manera de trabajar (el rasgo que te distingue de un bot genérico):
 - Traés el dato con la herramienta y después lo INTERPRETÁS: contextualizás el número, lo comparás
-  contra el promedio del torneo o de la posición, y explicás qué patrón táctico sugiere. Ejemplo de
-  registro buscado: "Francia recorre ~4% menos que el promedio del torneo, pero lidera en
-  progresiones de balón: es la huella típica de un equipo que domina la posesión y hace correr al
-  rival, no de un equipo 'flojo físicamente'." Siempre número + lectura, nunca número solo ni
-  lectura sin número.
-- Cuando tenga sentido, encadená más de una herramienta para cruzar físico con táctico o con
-  contexto (ranking FIFA, edad de plantel) antes de dar la lectura.
-- Escalas del sitio (ninguna es percentil ni puesto): las TABLAS y rankings usan "% del mejor
-  rendimiento observado" (100 = el máximo del torneo en esa métrica); los RADARES usan un "índice
-  de rendimiento" (0-100) que estira el rango real del torneo -estilo EA SPORTS FC- para que las
-  diferencias se vean (100 = el mejor, ~40 = el más flojo del campo). Cuando ayude a la comprensión,
-  enmarcá tus lecturas con magnitud relativa: "alcanza el 94% de la mayor velocidad registrada del
-  torneo" se entiende mejor que "está en el percentil 82". Igual, mostrá siempre el valor oficial
-  real (ej. 33,6 km/h); la escala es solo para dimensionar. NUNCA alteres el dato oficial que trae
-  la herramienta.
+  contra el promedio de la liga y explicás qué patrón sugiere. Ejemplo de registro buscado: "River
+  Plate tiene 62% de posesión promedio, muy por encima de la media de LPF, pero no es el que más
+  remata al arco: es la huella típica de un equipo que circula mucho sin ser directo." Siempre
+  número + lectura, nunca número solo ni lectura sin número.
+- Cuando tenga sentido, encadená más de una herramienta para cruzar estadística de equipo con
+  estadística de jugadores o con la tabla de posiciones antes de dar la lectura.
+- Escalas del sitio (ninguna es percentil ni puesto): las TABLAS y rankings de jugadores usan el
+  valor oficial de FotMob; los RADARES usan un "índice de rendimiento" (0-100) que estira el rango
+  real de la liga -estilo EA SPORTS FC- para que las diferencias se vean (100 = el mejor, ~40 = el
+  más flojo del campo). Mostrá siempre el valor oficial real (ej. 11 goles); la escala es solo para
+  dimensionar. NUNCA alteres el dato oficial que trae la herramienta.
 - "Índice global" de un jugador (lo que el sitio muestra como GLOBAL, estilo overall de EA SPORTS
-  FC): promedia el índice de rendimiento de sus factores físicos y tácticos PERO ponderado por su
-  posición -a un delantero le pesan los remates, la velocidad y la progresión; a un defensor los
-  quites, intercepciones y recuperaciones; a un mediocampista el pase y la circulación-, así un
-  extremo no pierde por "pocos quites" ni un central por "poca velocidad". Los arqueros quedan
-  fuera de ese ranking. Si te preguntan "quién es el mejor jugador" en general, aclarará que es un
-  índice de rendimiento por acciones (físico+táctico, remates incluidos), no incluye definición
-  fina ni regate porque el free tier no los trae por jugador.
+  FC): promedia el índice de rendimiento de sus categorías de FotMob PERO ponderado por su
+  posición -a un delantero le pesan los goles y el xG; a un defensor los tackles, intercepciones y
+  despejes; a un mediocampista el pase y la creación; a un arquero las atajadas y goles evitados-,
+  así un extremo no pierde por "pocos tackles" ni un central por "poco xG". Esta cuenta se hace en
+  el navegador del usuario a partir de get_player_season_stats -- vos no la calculás, así que si
+  preguntan "quién es el mejor jugador" en general remití a la página Jugadores del sitio para ver
+  ese índice compuesto, y ofrecé en cambio el líder de una categoría puntual con la herramienta.
 
 Contexto real del proyecto que tenés que respetar siempre:
 - Es un sitio 100% estático, datos abiertos versionados en GitHub, con Supabase como base de
   datos canónica (schema metricas_mundial) para lo que necesita consultas en vivo.
-- Fuentes: FIFA Training Centre (métricas físicas reales por partido y por jugador del Mundial 2026
-  en curso para las 48 selecciones: distancia, zonas de velocidad, alta intensidad, sprints,
-  velocidad punta -- cobertura parcial y creciente), StatsBomb Open Data (contexto táctico histórico
-  2018/2022: posesión-proxy, pases, remates), openfootball (goles del torneo) y 26worldcup/Wikipedia
-  (edad, dorsal, caps, goles y posición del plantel actual; el valor de mercado todavía no está
-  disponible, no lo inventes).
-- Postura metodológica explícita: con pocos partidos por selección y por torneo, NO hay
-  significancia estadística. El proyecto es descriptivo, no causal. La distancia recorrida sola NO
-  mide "estado físico" -- los equipos que dominan el balón corren menos, no más, porque no
-  persiguen. Y un arquero recorre ~5 km y un central ~8 km por partido: nunca compares distancia
-  entre posiciones distintas sin normalizar (para eso está get_position_leaders, que da el percentil
-  dentro de la posición).
-- El Mundial 2026 está en curso. NUNCA asumas en qué fase está una selección de memoria (la fase
-  actual cambia con cada partido) -- si te preguntan por resultados, fase actual o si una
-  selección sigue con vida, usá SIEMPRE get_team_matches (o get_team_physical_trend, que trae la
-  secuencia real de partidos) y respondé con el resultado más reciente, nunca de memoria.
+- Fuentes: ESPN (site.api.espn.com, API pública sin key) para partidos, resultados, tabla de
+  posiciones y estadística de equipo por partido (posesión-proxy, remates, precisión de pase,
+  faltas) y planteles (nombre, posición, edad, dorsal); FotMob (API pública sin key) para
+  estadística individual de jugadores -- 37 categorías agregadas de TEMPORADA (no de partido):
+  goles, asistencias, xG, xGOT, xA, remates, pases, tackles, intercepciones, atajadas, tarjetas.
+- Limitación real, no la escondas si preguntan: ESPN no publica estadística de jugador POR
+  PARTIDO para esta liga (no hay boxscore.players), así que no existe "en qué partido jugó X y
+  cómo le fue ese día" -- get_player_season_stats es agregado de toda la temporada. Tampoco existe
+  ninguna fuente gratuita de datos físicos/GPS (distancia, sprints, velocidad) para ninguna liga:
+  es data propietaria de cada club vía su proveedor de hardware, nunca publicada. Si te preguntan
+  por esto, decilo explícitamente en vez de inventar o de usar remates/posesión como si fueran
+  "físico".
+- Postura metodológica explícita: con pocos partidos jugados todavía en la temporada, NO hay
+  significancia estadística en comparaciones finas. El proyecto es descriptivo, no causal.
+- La temporada está en curso. NUNCA asumas de memoria en qué posición está un club o cuántos
+  puntos tiene -- si te preguntan por la tabla, resultados o si un club viene bien o mal, usá
+  SIEMPRE get_standings o get_team_match_trend y respondé con el dato más reciente, nunca de
+  memoria (puede estar desactualizado).
 
 Reglas de respuesta (correctitud, no estilo -- son innegociables):
 1. Respondé siempre en español rioplatense, con tono de analista: preciso y con criterio, cercano
    pero no grandilocuente.
-2. Si te preguntan un dato concreto o pedís una lectura que dependa de números (resumen de una
-   selección, partidos/fase actual, ranking de jugadores o selecciones por una métrica, curva de
-   forma física partido a partido, comparación por posición, goleadores, ranking FIFA, campo base,
-   o en qué partido jugó un jugador y su rendimiento en ese partido -get_player_matches-),
-   USÁ las herramientas para traer el número real -- no lo evites ni lo inventes, y no confíes en tu
-   conocimiento previo del torneo (puede estar desactualizado). Si la herramienta no trae el dato o
-   falla, decilo explícitamente ("todavía no tengo ese dato cargado") y remití a la página del sitio
-   (Selecciones, Comparar, Jugadores, Análisis avanzado, Explorador SQL).
+2. Si te preguntan un dato concreto o pedís una lectura que dependa de números (resumen de un
+   club, tabla de posiciones, ranking de jugadores o clubes por una métrica, evolución partido a
+   partido, perfil de plantel, goleadores), USÁ las herramientas para traer el número real -- no
+   lo evites ni lo inventes, y no confíes en tu conocimiento previo (puede estar desactualizado).
+   Si la herramienta no trae el dato o falla, decilo explícitamente ("todavía no tengo ese dato
+   cargado") y remití a la página del sitio (Clubes, Comparar, Jugadores, Analizar, Explorador SQL).
 3. NUNCA inventes un número, resultado o valor que no venga de una herramienta o del contexto de
    arriba. Si das una lectura, que se apoye en datos que efectivamente trajiste.
-4. Si te preguntan si "Argentina corre menos", no des un veredicto categórico: mostrá el número real,
-   explicá los sesgos (posesión, estado del marcador, posición, tamaño de muestra) y remití a
-   Metodología. Honestidad metodológica ante todo: si la muestra es de 1-2 partidos, decilo.
+4. Honestidad metodológica ante todo: si la muestra es de pocos partidos, decilo.
 5. Extensión de analista, no de ensayo: normalmente 3-6 oraciones. Podés usar un dato y su lectura;
    no te vayas a párrafos largos ni a listas interminables.
 6. Si te preguntan algo totalmente ajeno al proyecto (no es de fútbol/datos/este sitio), respondé
-   con amabilidad que estás para ayudar específicamente con Métricas Mundial 2026.`;
+   con amabilidad que estás para ayudar específicamente con Métricas LPF.`;
 
 const MAX_MESSAGE_LENGTH = 600;
 const MAX_HISTORY_TURNS = 6;
@@ -114,18 +107,34 @@ const TOOLS = [
   {
     function_declarations: [
       {
-        name: "get_team_summary",
-        description:
-          "Resumen estadístico de una selección: partidos jugados, posesión promedio, precisión de pases, remates, distancia física promedio, alta intensidad, sprints, velocidad punta, edad promedio del plantel y valor de mercado total.",
+        name: "get_standings",
+        description: "Tabla de posiciones de la Liga Profesional: puntos, partidos jugados, ganados/empatados/perdidos, goles a favor/en contra y diferencia. Sin 'team' devuelve la tabla completa; con 'team' filtra a un club.",
         parameters: {
           type: "object",
-          properties: { team: { type: "string", description: "Nombre de la selección en inglés, ej. 'Argentina', 'France', 'Brazil'." } },
+          properties: { team: { type: "string", description: "Opcional. Nombre del club, ej. 'Boca Juniors', 'River Plate'. Omitir para la tabla completa." } },
+        },
+      },
+      {
+        name: "get_team_summary",
+        description: "Resumen estadístico de un club: partidos jugados, posesión promedio, precisión de pases, remates, remates al arco, faltas, edad promedio del plantel, puntos y posición en la tabla.",
+        parameters: {
+          type: "object",
+          properties: { team: { type: "string", description: "Nombre del club, ej. 'Boca Juniors', 'River Plate'." } },
+          required: ["team"],
+        },
+      },
+      {
+        name: "get_team_profile",
+        description: "Perfil de un club: posición y puntos en la tabla, partidos jugados, edad promedio del plantel, capitán y cantidad de jugadores en el plantel.",
+        parameters: {
+          type: "object",
+          properties: { team: { type: "string", description: "Nombre del club." } },
           required: ["team"],
         },
       },
       {
         name: "get_team_matches",
-        description: "Partidos jugados por una selección: competencia, temporada, fase, fecha y resultado.",
+        description: "Partidos jugados por un club: competencia, temporada, fase, fecha y resultado.",
         parameters: {
           type: "object",
           properties: { team: { type: "string" } },
@@ -133,126 +142,88 @@ const TOOLS = [
         },
       },
       {
-        name: "get_player_matches",
-        description:
-          "Partidos con datos de FIFA de un jugador puntual: en qué partidos jugó (con datos cargados), con resultado, fecha, fase y sus estadísticas de ESE partido (distancia, velocidad punta, remates, goles, pases). Usala cuando pregunten '¿qué partido jugó X?', '¿de qué partido son estos números?' o pidan el rendimiento de un jugador partido a partido. El nombre matchea parcial (ej. 'Senesi'); opcionalmente filtrá por selección.",
+        name: "get_team_match_trend",
+        description: "Evolución de un club partido a partido en orden cronológico: fecha, fase, rival, condición de local/visitante, posesión, remates, remates al arco y goles de CADA partido. Usala para responder si un club viene jugando mejor o peor, o para explicar un pico/caída puntual.",
         parameters: {
           type: "object",
-          properties: {
-            player: { type: "string", description: "Nombre o apellido del jugador (matchea parcial, sin distinguir mayúsculas)." },
-            team: { type: "string", description: "Selección, opcional, para desambiguar." },
-          },
-          required: ["player"],
+          properties: { team: { type: "string" } },
+          required: ["team"],
         },
       },
       {
-        name: "get_player_ranking",
-        description: "Ranking de jugadores según una métrica física o de plantel.",
+        name: "get_team_tactical_leaders",
+        description: "Ranking de CLUBES (no jugadores) según una métrica de equipo por partido: posesión, precisión de pase, remates, remates al arco, remates al arco recibidos (defensivo), goles recibidos (defensivo) o faltas.",
         parameters: {
           type: "object",
           properties: {
             metric: {
               type: "string",
-              enum: ["minutos_jugados", "distancia_total_km", "distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh", "edad", "valor_mercado_eur", "caps", "goles_seleccion"],
+              enum: ["posesion_promedio_proxy", "precision_pases_promedio", "remates_promedio", "remates_al_arco_promedio", "remates_al_arco_recibidos_promedio", "goles_recibidos_promedio", "faltas_promedio"],
             },
-            limit: { type: "integer", description: "Cantidad de jugadores a devolver, por defecto 10." },
-          },
-          required: ["metric"],
-        },
-      },
-      {
-        name: "get_physical_leaders",
-        description: "Ranking de SELECCIONES (no jugadores) según una métrica física agregada por equipo.",
-        parameters: {
-          type: "object",
-          properties: {
-            metric: { type: "string", enum: ["distancia_promedio_km", "sprints_promedio", "velocidad_punta_kmh", "alta_intensidad_promedio_m"] },
             limit: { type: "integer" },
           },
           required: ["metric"],
         },
       },
       {
-        name: "get_team_tactical_leaders",
-        description:
-          "Ranking de SELECCIONES (no jugadores) segun una metrica TACTICA de equipo del Mundial 2026, agregando la estadistica por jugador de FIFA: progresiones de balon, presion sobre el rival, recuperaciones, remates, tackles ganados, intercepciones, quiebres de linea y precision de pase del equipo. Usala para '¿que seleccion progresa/presiona/recupera mas la pelota?' o para comparar el juego con la pelota entre selecciones. Para el ranking FISICO de selecciones usa get_physical_leaders; para jugadores individuales usa get_tactical_leaders.",
+        name: "get_player_season_stats",
+        description: "Ranking de JUGADORES según una categoría de estadística de FotMob, agregado de TEMPORADA completa (no de un partido puntual): goles, asistencias, xG, xGOT, xA, remates, pases, tackles, intercepciones, atajadas, tarjetas, etc.",
         parameters: {
           type: "object",
           properties: {
             metric: {
               type: "string",
               enum: [
-                "progresiones_promedio",
-                "precision_pases_pct",
-                "presiones_promedio",
-                "recuperaciones_promedio",
-                "remates_promedio",
-                "tackles_promedio",
-                "intercepciones_promedio",
-                "quiebres_linea_promedio",
+                "goals", "goal_assist", "_goals_and_goal_assist", "rating", "mins_played", "goals_per_90",
+                "expected_goals", "expected_goals_per_90", "expected_goalsontarget", "ontarget_scoring_att",
+                "total_scoring_att", "accurate_pass", "big_chance_created", "total_att_assist", "accurate_long_balls",
+                "expected_assists", "expected_assists_per_90", "_expected_goals_and_expected_assists_per_90",
+                "won_contest", "big_chance_missed", "penalty_won", "defensive_contributions", "total_tackle",
+                "interception", "effective_clearance", "outfielder_block", "ball_recovery", "penalty_conceded",
+                "poss_won_att_3rd", "clean_sheet", "_save_percentage", "saves", "_goals_prevented", "goals_conceded",
+                "fouls", "yellow_card", "red_card",
               ],
+              description: "goals=goles, goal_assist=asistencias, expected_goals=xG, expected_assists=xA, expected_goalsontarget=xGOT, total_tackle=tackles, interception=intercepciones, saves=atajadas, clean_sheet=vallas invictas, yellow_card/red_card=tarjetas, rating=puntaje FotMob.",
             },
-            limit: { type: "integer" },
+            limit: { type: "integer", description: "Cantidad de jugadores a devolver, por defecto 10." },
           },
           required: ["metric"],
         },
       },
       {
-        name: "get_tactical_leaders",
-        description: "Ranking de jugadores según una métrica táctica del Mundial 2026 (pases, progresiones, tackles, intercepciones, presión, recuperaciones, goles).",
-        parameters: {
-          type: "object",
-          properties: {
-            metric: { type: "string", enum: ["pases_completados", "precision_pases", "progresiones", "tackles_ganados", "intercepciones", "presion_directa", "recuperaciones", "goles"] },
-            limit: { type: "integer" },
-          },
-          required: ["metric"],
-        },
-      },
-      {
-        name: "get_goal_scorers",
-        description:
-          "Tabla de goleadores del Mundial 2026: goles convertidos (sin contar goles en contra), cuántos fueron de penal y en cuántos partidos distintos marcó cada jugador. Sin 'team' devuelve el ranking general del torneo; con 'team' filtra a los goleadores de esa selección.",
-        parameters: {
-          type: "object",
-          properties: {
-            team: { type: "string", description: "Opcional. Nombre de la selección en inglés, ej. 'Argentina', 'France'. Omitir para el ranking general del torneo." },
-            limit: { type: "integer", description: "Cantidad de goleadores a devolver, por defecto 10." },
-          },
-        },
-      },
-      {
-        name: "get_team_profile",
-        description:
-          "Perfil de una selección: ranking FIFA actual y previo, grupo del Mundial 2026, ciudad/instalación/país de su campo base, edad promedio del plantel, capitán y promedio de partidos internacionales (caps) del plantel.",
-        parameters: {
-          type: "object",
-          properties: { team: { type: "string", description: "Nombre de la selección en inglés, ej. 'Argentina', 'France', 'Brazil'." } },
-          required: ["team"],
-        },
-      },
-      {
-        name: "get_team_physical_trend",
-        description:
-          "Curva de forma física de una selección partido a partido dentro del Mundial 2026: fecha, fase, rival, condición de local/visitante, distancia, alta intensidad, sprints y velocidad punta de CADA partido en orden cronológico. Usala para responder si un equipo viene corriendo más o menos a medida que avanza el torneo, o para explicar un pico/caída puntual (ej. tiempo extra, rotación).",
-        parameters: {
-          type: "object",
-          properties: { team: { type: "string", description: "Nombre de la selección en inglés, ej. 'Argentina', 'France', 'Brazil'." } },
-          required: ["team"],
-        },
-      },
-      {
-        name: "get_position_leaders",
-        description:
-          "Ranking de jugadores por una métrica física, pero comparando solo DENTRO de la misma posición (GK, DF, MF o FW) -- así un arquero nunca compite contra un delantero en distancia recorrida. Devuelve el valor y el percentil dentro de esa posición. Usala siempre que te pidan comparar el rendimiento físico de jugadores en distintas posiciones, o si te preguntan si un jugador puntual corre 'mucho' o 'poco' para su puesto.",
+        name: "get_player_position_leaders",
+        description: "Ranking de JUGADORES por una categoría de FotMob, pero comparando solo DENTRO de la misma posición (GK, DF, MF o FW) -- así un arquero nunca compite contra un delantero en goles. Usala cuando te pidan comparar jugadores de la misma posición o el mejor de una posición puntual.",
         parameters: {
           type: "object",
           properties: {
             position: { type: "string", enum: ["GK", "DF", "MF", "FW"], description: "Posición: GK=arquero, DF=defensor, MF=mediocampista, FW=delantero." },
-            metric: { type: "string", enum: ["distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh"] },
+            metric: {
+              type: "string",
+              enum: [
+                "goals", "goal_assist", "_goals_and_goal_assist", "rating", "mins_played", "goals_per_90",
+                "expected_goals", "expected_goals_per_90", "expected_goalsontarget", "ontarget_scoring_att",
+                "total_scoring_att", "accurate_pass", "big_chance_created", "total_att_assist", "accurate_long_balls",
+                "expected_assists", "expected_assists_per_90", "_expected_goals_and_expected_assists_per_90",
+                "won_contest", "big_chance_missed", "penalty_won", "defensive_contributions", "total_tackle",
+                "interception", "effective_clearance", "outfielder_block", "ball_recovery", "penalty_conceded",
+                "poss_won_att_3rd", "clean_sheet", "_save_percentage", "saves", "_goals_prevented", "goals_conceded",
+                "fouls", "yellow_card", "red_card",
+              ],
+            },
             limit: { type: "integer", description: "Cantidad de jugadores a devolver, por defecto 10." },
           },
           required: ["position", "metric"],
+        },
+      },
+      {
+        name: "get_goal_scorers",
+        description: "Tabla de goleadores de la Liga Profesional: goles convertidos (sin contar goles en contra), cuántos fueron de penal y en cuántos partidos distintos marcó cada jugador. Sin 'team' devuelve el ranking general de la liga; con 'team' filtra a los goleadores de ese club.",
+        parameters: {
+          type: "object",
+          properties: {
+            team: { type: "string", description: "Opcional. Nombre del club. Omitir para el ranking general de la liga." },
+            limit: { type: "integer", description: "Cantidad de goleadores a devolver, por defecto 10." },
+          },
         },
       },
     ],
@@ -260,23 +231,18 @@ const TOOLS = [
 ];
 
 const TOOL_RPC_MAP = {
+  get_standings: (args) => ({ rpc: "get_standings", body: { p_team: args?.team ? String(args.team) : null } }),
   get_team_summary: (args) => ({ rpc: "get_team_summary", body: { p_team: String(args?.team ?? "") } }),
+  get_team_profile: (args) => ({ rpc: "get_team_profile", body: { p_team: String(args?.team ?? "") } }),
   get_team_matches: (args) => ({ rpc: "get_team_matches", body: { p_team: String(args?.team ?? "") } }),
-  get_player_matches: (args) => ({
-    rpc: "get_player_matches",
-    body: { p_player: String(args?.player ?? ""), p_team: args?.team ? String(args.team) : null },
-  }),
-  get_player_ranking: (args) => ({ rpc: "get_player_ranking", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
-  get_physical_leaders: (args) => ({ rpc: "get_physical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
-  get_team_physical_trend: (args) => ({ rpc: "get_team_physical_trend", body: { p_team: String(args?.team ?? "") } }),
-  get_position_leaders: (args) => ({
-    rpc: "get_position_leaders",
+  get_team_match_trend: (args) => ({ rpc: "get_team_match_trend", body: { p_team: String(args?.team ?? "") } }),
+  get_team_tactical_leaders: (args) => ({ rpc: "get_team_tactical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
+  get_player_season_stats: (args) => ({ rpc: "get_player_season_stats", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
+  get_player_position_leaders: (args) => ({
+    rpc: "get_player_position_leaders",
     body: { p_position: String(args?.position ?? ""), p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) },
   }),
-  get_tactical_leaders: (args) => ({ rpc: "get_tactical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
-  get_team_tactical_leaders: (args) => ({ rpc: "get_team_tactical_leaders", body: { p_metric: String(args?.metric ?? ""), p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
   get_goal_scorers: (args) => ({ rpc: "get_goal_scorers", body: { p_team: args?.team ? String(args.team) : null, p_limit: Math.min(Number(args?.limit) || 10, 25) } }),
-  get_team_profile: (args) => ({ rpc: "get_team_profile", body: { p_team: String(args?.team ?? "") } }),
 };
 
 function corsHeaders(origin, allowedOrigin) {

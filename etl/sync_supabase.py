@@ -13,6 +13,16 @@ las políticas RLS de estas tablas son de solo lectura para anon/authenticated;
 solo el service role, que bypassea RLS, puede escribir). Si no están
 seteadas, se saltea sin romper el pipeline, igual que los scrapers opcionales.
 
+Todas las tablas sincronizan en modo REPLACE (delete-all + insert), no upsert
+por PK. Motivo: la transformación Mundial 2026 -> LPF cambió el universo de
+entidades por completo (48 selecciones -> 30 clubes de otro país). Un upsert
+por PK nunca hubiera borrado las filas viejas (claves distintas, sin
+conflicto) -- quedaban conviviendo selecciones del Mundial y clubes de LPF en
+la misma tabla para siempre. Se detectó exactamente eso corriendo en
+producción (matches/team_profile/squad_market_value con miles de filas
+Mundial nunca limpiadas) y se limpió a mano una vez; de acá en más el modo
+REPLACE lo previene solo en cada corrida.
+
 Uso:
     python etl/sync_supabase.py
 """
@@ -39,27 +49,27 @@ SUPABASE_SERVICE_ROLE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 REPLACE = "__replace__"
 
 # (archivo en data/warehouse/, tabla en Supabase, conflict) -- todas opcionales,
-# se saltean si el Parquet todavía no existe. `conflict` define cómo dedup el
-# upsert de PostgREST:
-#   None                 -> merge-duplicates sobre la PRIMARY KEY (sirve cuando
-#                           la PK ES la clave natural).
-#   "col,col,..."        -> on_conflict explícito (para tablas con id surrogate
-#                           como PK y un UNIQUE aparte -- si no, PostgREST intenta
-#                           conciliar por el id, nunca choca, e inserta => 409).
-#   REPLACE              -> delete-all + insert (tablas sin clave natural única).
+# se saltean si el Parquet todavía no existe. Todas en modo REPLACE (ver
+# docstring del módulo) salvo que en el futuro alguna tabla vuelva a tener un
+# universo de entidades estable entre corridas.
+#
+# physical_match_stats / physical_player_match_stats NO están acá: no existe
+# dato físico/GPS gratuito para LPF y build_warehouse.py ya no genera esos
+# Parquet (ver docstring de fetch_espn_lpf.py) -- se limpiaron a mano una vez
+# en Supabase, no van a volver a poblarse.
 TABLES = [
-    ("matches.parquet", "matches", None),
-    ("team_match_stats_tactical.parquet", "team_match_stats_tactical", None),
-    ("player_match_appearances.parquet", "player_match_appearances", None),
-    ("physical_match_stats.parquet", "physical_match_stats", None),
-    ("physical_player_match_stats.parquet", "physical_player_match_stats", "match_id,team,player_name"),
-    ("tactical_player_match_stats.parquet", "tactical_player_match_stats", "match_id,team,jersey_number"),
-    ("squads.parquet", "squad_market_value", None),
-    ("team_profile.parquet", "team_profile", None),
+    ("matches.parquet", "matches", REPLACE),
+    ("team_match_stats_tactical.parquet", "team_match_stats_tactical", REPLACE),
+    ("player_match_appearances.parquet", "player_match_appearances", REPLACE),
+    ("tactical_player_match_stats.parquet", "tactical_player_match_stats", REPLACE),
+    ("squads.parquet", "squad_market_value", REPLACE),
+    ("team_profile.parquet", "team_profile", REPLACE),
+    ("standings.parquet", "standings", REPLACE),
+    ("player_season_stats.parquet", "player_season_stats", REPLACE),
     ("goal_events.parquet", "goal_events", REPLACE),
-    ("derived_team_metrics.parquet", "derived_team_metrics", None),
-    ("derived_team_style.parquet", "derived_team_style", None),
-    ("derived_player_metrics.parquet", "derived_player_metrics", None),
+    ("derived_team_metrics.parquet", "derived_team_metrics", REPLACE),
+    ("derived_team_style.parquet", "derived_team_style", REPLACE),
+    ("derived_player_metrics.parquet", "derived_player_metrics", REPLACE),
 ]
 
 
@@ -91,15 +101,19 @@ def _delete_all(table: str) -> None:
 
 
 def _upsert(table: str, rows: list[dict], conflict: str | None = None) -> None:
-    if not rows:
-        return
-    # REPLACE: tablas sin clave natural única -> borrar todo antes de insertar,
-    # así no se acumulan duplicados corrida tras corrida.
+    # REPLACE: borrar todo ANTES de mirar si hay filas nuevas -- una tabla que
+    # hoy tiene 0 filas reales (ej. tactical_player_match_stats, siempre vacía
+    # para LPF) igual tiene que vaciarse de datos viejos en cada corrida, no
+    # solo cuando hay algo para insertar.
     if conflict == REPLACE:
         _delete_all(table)
+        if not rows:
+            return
         url = f"{SUPABASE_URL}/rest/v1/{table}"
         headers = {**_base_headers(), "Prefer": "return=minimal"}
     else:
+        if not rows:
+            return
         # on_conflict explícito cuando la clave natural NO es la PK (id surrogate
         # + UNIQUE aparte); si no, merge-duplicates concilia por PK y nunca dedup.
         params = f"?on_conflict={conflict}" if conflict else ""
