@@ -107,10 +107,17 @@ def build():
             _records(radar_df[["team", "season"] + [f"{m}_percentil" for m in radar_metrics]]),
         )
 
+    # "position" nunca fue parte de PlayerAppearancesSchema (venía como columna
+    # extra tolerada por strict=False cuando la fuente era StatsBomb); ESPN
+    # (fuente LPF) no la trae, y la tabla en sí viene en 0 filas para esta
+    # competición (ver docstring de fetch_espn_lpf.py). Sin datos reales que
+    # agregar, se escribe el mismo placeholder "pending" que ya usan el resto
+    # de las secciones sin fuente -- nunca se inventa un ranking vacío.
     if has_appearances:
         appearances = con.execute(
             f"SELECT * FROM read_parquet('{WAREHOUSE / 'player_match_appearances.parquet'}')"
         ).df()
+    if has_appearances and len(appearances) and "position" in appearances.columns:
         # agrupar solo por jugador -- la posicion puede variar de partido a
         # partido (ej. un central que juega de lateral un dia) y agruparla
         # tambien duplicaba jugadores en el ranking
@@ -127,6 +134,15 @@ def build():
             .sort_values("minutos_totales", ascending=False)
         )
         _write_json("player_minutes_ranking.json", _records(player_minutes))
+    else:
+        _write_json(
+            "player_minutes_ranking.json",
+            {
+                "status": "pending_first_scrape",
+                "note": "ESPN no publica estadística de partido por jugador para la Liga Profesional (boxscore.players vacío).",
+                "rows": [],
+            },
+        )
 
     if has_physical:
         physical = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'physical_match_stats.parquet'}')").df()
