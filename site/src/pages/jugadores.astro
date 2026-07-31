@@ -18,27 +18,27 @@ const squadRows = loadArray<SquadPlayerRow>("squads.json");
 const positions = buildPlayerPositions(playerMetrics, squadRows);
 ---
 
-<Base title="Jugadores" description="Ranking de jugadores del Mundial 2026: índice global y comparación por cada factor físico y táctico.">
+<Base title="Jugadores" description="Ranking de jugadores de la Liga Profesional Argentina: índice global y comparación por cada categoría de estadística de FotMob.">
   <DataStatusBanner />
   <p class="eyebrow">Ranking · jugador por jugador</p>
   <h1>Ranking de jugadores</h1>
   <p class="lede">
-    Dos maneras de ordenar a los jugadores del Mundial 2026: por un <strong>índice global</strong> que resume todo su
-    rendimiento, o <strong>factor por factor</strong> para ver quién manda en cada métrica física y táctica. En ambas
-    podés mirar el <strong>top del torneo</strong> o filtrar <strong>por selección</strong>. <em>Para la ficha completa de
-    un jugador, entrá a Analizar.</em>
+    Dos maneras de ordenar a los jugadores de la Liga Profesional: por un <strong>índice global</strong> que resume todo su
+    rendimiento de la temporada, o <strong>factor por factor</strong> para ver quién manda en cada una de las 37
+    categorías de FotMob. En ambas podés mirar el <strong>top de la liga</strong> o filtrar <strong>por club</strong>.
+    <em>Para la ficha completa de un jugador, entrá a Analizar.</em>
   </p>
 
   {playerMetrics.length > 0 ? (
     <>
       <section class="section">
         <div class="section-head">
-          <h2>Índice global — el mejor de cada selección</h2>
+          <h2>Índice global — el mejor de cada club</h2>
           <p>
             El <strong>GLOBAL</strong> estilo EA SPORTS FC: un solo número (0–100) por jugador que combina su índice de
-            rendimiento en cada factor físico y táctico <strong>ponderado por su posición</strong> — al delantero le pesan
-            los remates, la velocidad y la progresión; al defensor, los quites y recuperaciones. Elegí una selección o el
-            top del torneo. <em>Tocá un jugador para ver el desglose factor por factor.</em>
+            rendimiento en cada categoría <strong>ponderado por su posición</strong> — al delantero le pesan los goles y
+            el xG; al defensor, los tackles y despejes; al arquero, las atajadas y goles evitados. Elegí un club o el
+            top de la liga. <em>Tocá un jugador para ver el desglose factor por factor.</em>
           </p>
         </div>
         <div class="card">
@@ -50,10 +50,10 @@ const positions = buildPlayerPositions(playerMetrics, squadRows);
         <div class="section-head">
           <h2>Comparación por factor — ¿quién manda en cada métrica?</h2>
           <p>
-            Elegí <strong>cualquiera de los 12 factores</strong> físicos (distancia, alta intensidad, sprints, velocidad
-            punta) o tácticos (pases, precisión, progresiones, remates, tackles, intercepciones, presión, recuperaciones)
-            y ordená a los jugadores por ese factor — <strong>entre todas las selecciones</strong> o <strong>dentro de una
-            sola</strong>. <em>Tocá un jugador para ver su valor oficial y el índice.</em>
+            Elegí <strong>cualquiera de las 37 categorías</strong> de FotMob (goles, xG, xA, remates, pases, tackles,
+            intercepciones, atajadas, tarjetas y más) y ordená a los jugadores por ese factor — <strong>entre todos los
+            clubes</strong> o <strong>dentro de uno solo</strong>. <em>Tocá un jugador para ver su valor oficial y el
+            índice.</em>
           </p>
         </div>
         <div class="card">
@@ -64,8 +64,8 @@ const positions = buildPlayerPositions(playerMetrics, squadRows);
   ) : (
     <section class="section">
       <p style="color: var(--text-muted);">
-        Todavía no hay métricas por jugador cargadas. Se completan a medida que el scraper procesa los partidos del
-        Mundial 2026 — mirá el estado arriba.
+        Todavía no hay métricas por jugador cargadas. Se completan corriendo etl/fetch_fotmob_lpf.py — mirá el estado
+        arriba.
       </p>
     </section>
   )}

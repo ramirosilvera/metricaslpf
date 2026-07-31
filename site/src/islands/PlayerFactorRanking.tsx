@@ -6,11 +6,12 @@ import { flagFor } from "../lib/flags";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
 
-// Ranking por FACTOR: elegí cualquier factor físico o táctico (los 12) y mirá qué
-// jugador manda en ese factor — entre TODAS las selecciones o dentro de una sola.
-// Ordena por el valor real de la métrica; el índice (0-100, calibrado a todos los
-// jugadores medidos) va en el tooltip para dimensionar. Complementa al índice
-// global: uno resume, éste te deja bucear factor por factor.
+// Ranking por FACTOR: elegí cualquiera de las 37 categorías de FotMob (goles,
+// xG, tackles, atajadas, etc.) y mirá qué jugador manda en ese factor — entre
+// TODOS los clubes o dentro de uno solo. Ordena por el valor real de la
+// métrica; el índice (0-100, calibrado a todos los jugadores medidos) va en el
+// tooltip para dimensionar. Complementa al índice global: uno resume, éste te
+// deja bucear factor por factor.
 
 const ALL = "__all__";
 const TOP_ALL = 25;
@@ -131,7 +132,7 @@ export default function PlayerFactorRanking({ rows, positions = {} }: Props) {
   const chartHeight = Math.max(240, filtered.length * (narrow ? 26 : 30) + 40);
   const leader = filtered[0];
   const subtitle =
-    effTeam === ALL ? `Top ${filtered.length} del torneo · ${label}` : `${effTeam} · ${label}`;
+    effTeam === ALL ? `Top ${filtered.length} de la liga · ${label}` : `${effTeam} · ${label}`;
 
   return (
     <div>
@@ -143,8 +144,8 @@ export default function PlayerFactorRanking({ rows, positions = {} }: Props) {
             </option>
           ))}
         </select>
-        <select value={effTeam} onChange={(e) => setTeam(e.target.value)} aria-label="Selección">
-          <option value={ALL}>🌎 Todas las selecciones (top {TOP_ALL})</option>
+        <select value={effTeam} onChange={(e) => setTeam(e.target.value)} aria-label="Club">
+          <option value={ALL}>⚽ Todos los clubes (top {TOP_ALL})</option>
           {teams.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -157,19 +158,19 @@ export default function PlayerFactorRanking({ rows, positions = {} }: Props) {
         option={option}
         style={{ height: chartHeight }}
         share={{
-          title: `${label} — ${effTeam === ALL ? "top del torneo" : effTeam}`,
+          title: `${label} — ${effTeam === ALL ? "top de la liga" : effTeam}`,
           subtitle,
           insight: leader ? `${leader.player} (${leader.team}) lidera en ${label.toLowerCase()} con ${fmt(leader.value)} (índice ${leader.idx}).` : undefined,
-          filenameBase: `ranking-${metric}-${effTeam === ALL ? "torneo" : effTeam}`,
+          filenameBase: `ranking-${metric}-${effTeam === ALL ? "liga" : effTeam}`,
         }}
         shareLabel="🖼️ Compartir ranking"
       />
 
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-        Elegí un <strong>factor físico o táctico</strong> y una <strong>selección</strong> (o "todas") para ver quién
-        manda en ese factor. Ordena por el valor real; el <strong>índice</strong> (0–100, calibrado al rango de todos los
-        jugadores medidos) aparece en el tooltip para dimensionar. Fuente: FIFA Training Centre (Mundial 2026 en curso);
-        cobertura parcial según el scraper.
+        Elegí una de las <strong>37 categorías de FotMob</strong> (goles, xG, tackles, atajadas y más) y un
+        <strong> club</strong> (o "todos") para ver quién manda en ese factor. Ordena por el valor real; el
+        <strong> índice</strong> (0–100, calibrado al rango de todos los jugadores medidos) aparece en el tooltip para
+        dimensionar. Fuente: FotMob — agregado de TEMPORADA (no de partido), cobertura completa de los 30 clubes.
       </p>
     </div>
   );

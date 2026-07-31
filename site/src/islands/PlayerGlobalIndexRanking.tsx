@@ -5,15 +5,16 @@ import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { flagFor } from "../lib/flags";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
-import { positionWeightedGlobal, isFieldPosition } from "../lib/globalIndex";
+import { positionWeightedGlobal } from "../lib/globalIndex";
 
 // Ranking por ÍNDICE GLOBAL (estilo "GLOBAL/OVR" de EA SPORTS FC): para cada
 // jugador se calcula el índice de rendimiento de cada factor (calibrado al rango
-// de TODOS los jugadores medidos) y se combina con PESOS SEGÚN LA POSICIÓN, así
-// un delantero no pierde por "pocos quites" ni un central por "poca velocidad".
-// Se puede ver por selección o el top del torneo. Al tocar un jugador, el tooltip
-// muestra el desglose de cada factor (índice + valor oficial). Los arqueros se
-// excluyen: las métricas de campo no los representan.
+// de TODOS los jugadores medidos, agregado de TEMPORADA -- ver FotMob en
+// etl/fetch_fotmob_lpf.py) y se combina con PESOS SEGÚN LA POSICIÓN, así un
+// delantero no pierde por "pocos tackles" ni un central por "poco xG". Incluye
+// arqueros (FotMob publica atajadas, vallas invictas y goles evitados). Se
+// puede ver por club o el top de la liga. Al tocar un jugador, el tooltip
+// muestra el desglose de cada factor (índice + valor oficial).
 
 const POS_LABEL: Record<string, string> = { GK: "Arquero", DF: "Defensor", MF: "Mediocampista", FW: "Delantero" };
 
@@ -92,9 +93,7 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {} }: Props
           // por pocos quites ni un central por poca velocidad.
           global: positionWeightedGlobal(e.factors, position),
         };
-      })
-      // arqueros fuera: las métricas de campo no los representan
-      .filter((e) => e.position !== "GK");
+      });
   }, [rows, indexers, positions]);
 
   const teams = useMemo(() => [...new Set(players.map((p) => p.team))].sort(), [players]);
@@ -176,14 +175,14 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {} }: Props
   const leader = filtered[0];
   const subtitle =
     effectiveTeam === ALL
-      ? `Top ${filtered.length} del torneo por índice global · Mundial 2026`
-      : `${effectiveTeam} · jugadores por índice global · Mundial 2026`;
+      ? `Top ${filtered.length} de la liga por índice global · Liga Profesional`
+      : `${effectiveTeam} · jugadores por índice global · Liga Profesional`;
 
   return (
     <div>
       <div className="controls-row">
-        <select value={effectiveTeam} onChange={(e) => setTeam(e.target.value)} aria-label="Selección">
-          <option value={ALL}>🌎 Todas las selecciones (top {TOP_ALL})</option>
+        <select value={effectiveTeam} onChange={(e) => setTeam(e.target.value)} aria-label="Club">
+          <option value={ALL}>⚽ Todos los clubes (top {TOP_ALL})</option>
           {teams.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -209,11 +208,11 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {} }: Props
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         <strong>Índice global</strong>: el índice de rendimiento de cada factor (0–100, calibrado al rango de todos los
         jugadores medidos) combinado con <strong>pesos según la posición</strong>, como el overall de EA SPORTS FC. A un
-        delantero le pesan más los remates, la velocidad, los sprints y la progresión; a un defensor, los quites, intercepciones y
-        recuperaciones; a un mediocampista, el pase y la circulación. Así un extremo no pierde por "pocos quites" ni un
-        central por "poca velocidad punta". Tocá un jugador para ver el desglose factor por factor con su valor oficial.
-        Sólo se rankean jugadores de campo con al menos {MIN_FACTORS} factores cargados (los arqueros quedan fuera: las
-        métricas de campo no los representan). Fuente: FIFA Training Centre (Mundial 2026 en curso); cobertura parcial.
+        delantero le pesan más los goles, el xG y los remates al arco; a un defensor, los tackles, intercepciones y
+        despejes; a un mediocampista, el pase y la creación; a un arquero, las atajadas y los goles evitados. Así un
+        extremo no pierde por "pocos tackles" ni un central por "poco xG". Tocá un jugador para ver el desglose factor
+        por factor con su valor oficial. Sólo se rankean jugadores con al menos {MIN_FACTORS} factores cargados.
+        Fuente: FotMob — agregado de TEMPORADA (no de partido), 37 categorías, cobertura completa de los 30 clubes.
       </p>
     </div>
   );

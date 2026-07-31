@@ -2,16 +2,15 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
-import { flagFor } from "../lib/flags";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
 import { positionWeightedGlobal } from "../lib/globalIndex";
 import { generateVsBestInsights, type VsBestMetric } from "../lib/insights";
 
 // Comparación CABEZA A CABEZA de dos jugadores: mismo lenguaje que el radar de
-// selecciones pero a nivel jugador. Ejes = índice de rendimiento (0-100,
-// calibrado al rango de todos los jugadores) de cada factor físico y táctico,
-// remates incluido. El GLOBAL de cada uno es ponderado por su posición (estilo
+// clubes pero a nivel jugador. Ejes = índice de rendimiento (0-100, calibrado
+// al rango de todos los jugadores) de cada categoría de FotMob que ambos
+// tengan cargada. El GLOBAL de cada uno es ponderado por su posición (estilo
 // EA FC). El valor oficial se muestra en el tooltip.
 
 const POS_LABEL: Record<string, string> = { GK: "Arquero", DF: "Defensor", MF: "Mediocampista", FW: "Delantero" };
@@ -66,8 +65,8 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
     return prefer.find((n) => list.includes(n)) ?? list[0] ?? "";
   };
 
-  const teamA0 = teams.includes("Argentina") ? "Argentina" : teams[0] ?? "";
-  const teamB0 = teams.includes("France") ? "France" : teams[1] ?? teams[0] ?? "";
+  const teamA0 = teams.includes("Boca Juniors") ? "Boca Juniors" : teams[0] ?? "";
+  const teamB0 = teams.includes("River Plate") ? "River Plate" : teams[1] ?? teams[0] ?? "";
   const [teamA, setTeamA] = useState(teamA0);
   const [teamB, setTeamB] = useState(teamB0);
   const [playerA, setPlayerA] = useState("");
@@ -75,8 +74,8 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
 
   const effTeamA = teams.includes(teamA) ? teamA : teamA0;
   const effTeamB = teams.includes(teamB) ? teamB : teamB0;
-  const effPlayerA = playersOf(effTeamA).includes(playerA) ? playerA : pick(effTeamA, ["Lionel MESSI"]);
-  const effPlayerB = playersOf(effTeamB).includes(playerB) ? playerB : pick(effTeamB, ["Kylian MBAPPE"]);
+  const effPlayerA = playersOf(effTeamA).includes(playerA) ? playerA : pick(effTeamA, []);
+  const effPlayerB = playersOf(effTeamB).includes(playerB) ? playerB : pick(effTeamB, []);
 
   const a = players.find((p) => p.team === effTeamA && p.player === effPlayerA);
   const b = players.find((p) => p.team === effTeamB && p.player === effPlayerB);
@@ -175,7 +174,7 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
           setTeam(e.target.value);
           setPlayer("");
         }}
-        aria-label="Selección"
+        aria-label="Club"
         style={{ flex: "0 0 auto", maxWidth: "45%" }}
       >
         {teams.map((t) => (
@@ -208,7 +207,7 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
           style={{ height: narrow ? 360 : 440 }}
           share={{
             title: `${a.player} vs ${b.player}`,
-            subtitle: `Cabeza a cabeza · índice de rendimiento por factor · Mundial 2026`,
+            subtitle: `Cabeza a cabeza · índice de rendimiento por factor · Liga Profesional`,
             insight: insights[0],
             shareText: `${a.player} vs ${b.player} · comparación jugador a jugador`,
             filenameBase: `${a.player}-vs-${b.player}`,
@@ -242,9 +241,9 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
 
       {a && b && (
         <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-          {flagFor(a.team)} {a.player} ({a.team}) vs {flagFor(b.team)} {b.player} ({b.team}). Cada eje es el índice de
-          rendimiento de ese factor (calibrado al rango de todos los jugadores medidos), remates incluido; el GLOBAL de
-          cada uno pondera los factores según su posición. Fuente: FIFA Training Centre (Mundial 2026 en curso).
+          {a.player} ({a.team}) vs {b.player} ({b.team}). Cada eje es el índice de rendimiento de esa categoría
+          (calibrado al rango de todos los jugadores medidos); el GLOBAL de cada uno pondera los factores según su
+          posición. Fuente: FotMob — agregado de TEMPORADA (no de partido).
         </p>
       )}
     </div>

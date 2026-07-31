@@ -2,64 +2,72 @@
 // ---------------------------------------------------------------------------
 // Un promedio plano de todos los factores premia a mediocampistas y defensores
 // (acumulan pases, quites, intercepciones, recuperaciones) y castiga a los
-// delanteros, que hacen menos de eso aunque su valor esté en velocidad y ataque.
+// delanteros, que hacen menos de eso aunque su valor esté en remates y ataque.
 // EA FC no promedia igual para todos: el overall de un delantero pesa distinto
-// que el de un defensor. Acá hacemos lo mismo -> cada factor tiene un peso según
-// la posición, así un extremo no pierde por "pocos quites" ni un central por
-// "poca velocidad punta". Los índices por factor NO cambian; cambia cómo se
-// combinan en el número global.
+// que el de un defensor. Acá hacemos lo mismo -> cada factor (de las 37
+// categorías de FotMob, ver lib/playerMetrics.ts) tiene un peso según la
+// posición, así un extremo no pierde por "pocos tackles" ni un central por
+// "poco xG". Los índices por factor NO cambian; cambia cómo se combinan en el
+// número global.
 
 export type Position = "GK" | "DF" | "MF" | "FW";
 
-// Peso 0..3 de cada factor por posición. 0 = no cuenta para esa posición.
-// (Los arqueros se excluyen del ranking: las métricas de campo no los
-//  representan; su overall en EA FC sale de atributos que este dataset no tiene.)
+// Peso 0..3.5 de cada factor por posición. 0 = no cuenta para esa posición.
+// A diferencia de la versión física/táctica anterior, acá SÍ hay pesos reales
+// para arqueros (FotMob publica atajadas, % de atajadas, vallas invictas y
+// goles evitados) -- ya no hace falta excluirlos del ranking.
 export const POSITION_WEIGHTS: Record<Position, Record<string, number>> = {
   FW: {
-    remates_promedio: 3.5,
-    velocidad_punta_kmh: 3,
-    sprints_promedio: 3,
-    progresiones_promedio: 3,
-    alta_intensidad_promedio_m: 2,
-    precision_pases_promedio: 1.5,
-    distancia_promedio_km: 1,
-    pases_completados_promedio: 1,
-    presion_directa_promedio: 1,
-    recuperaciones_promedio: 0.5,
-    tackles_ganados_promedio: 0.3,
-    intercepciones_promedio: 0.3,
+    goals_per_90: 3.5,
+    expected_goals_per_90: 3,
+    ontarget_scoring_att: 2.5,
+    total_scoring_att: 2,
+    _expected_goals_and_expected_assists_per_90: 2,
+    big_chance_created: 1.5,
+    won_contest: 1.5,
+    expected_assists_per_90: 1,
+    accurate_pass: 0.8,
+    rating: 1,
+    penalty_won: 0.5,
+    big_chance_missed: 0.3,
   },
   MF: {
-    pases_completados_promedio: 3,
-    precision_pases_promedio: 3,
-    progresiones_promedio: 3,
-    presion_directa_promedio: 2.5,
-    recuperaciones_promedio: 2.5,
-    distancia_promedio_km: 2,
-    remates_promedio: 1.5,
-    alta_intensidad_promedio_m: 1.5,
-    sprints_promedio: 1.5,
-    tackles_ganados_promedio: 1.5,
-    intercepciones_promedio: 1.5,
-    velocidad_punta_kmh: 1,
+    accurate_pass: 3,
+    total_att_assist: 2.5,
+    expected_assists_per_90: 2.5,
+    ball_recovery: 2,
+    defensive_contributions: 2,
+    interception: 1.5,
+    total_tackle: 1.5,
+    goals_per_90: 1,
+    won_contest: 1,
+    rating: 1,
+    accurate_long_balls: 1,
+    poss_won_att_3rd: 1,
   },
   DF: {
-    tackles_ganados_promedio: 3,
-    intercepciones_promedio: 3,
-    recuperaciones_promedio: 3,
-    precision_pases_promedio: 2.5,
-    presion_directa_promedio: 2,
-    pases_completados_promedio: 2,
-    distancia_promedio_km: 1.5,
-    alta_intensidad_promedio_m: 1.5,
-    progresiones_promedio: 1.5,
-    sprints_promedio: 1,
-    velocidad_punta_kmh: 1,
-    remates_promedio: 0.4,
+    total_tackle: 3,
+    interception: 3,
+    effective_clearance: 2.5,
+    defensive_contributions: 2.5,
+    ball_recovery: 2,
+    accurate_pass: 1.5,
+    accurate_long_balls: 1.5,
+    outfielder_block: 1.5,
+    rating: 1,
+    poss_won_att_3rd: 1,
+    penalty_conceded: 0.5,
+    fouls: 0.3,
   },
-  // GK: sin pesos -> quien lo tenga cae al promedio plano; el ranking igual los
-  // excluye con isFieldPosition().
-  GK: {},
+  GK: {
+    saves: 3,
+    _save_percentage: 3,
+    clean_sheet: 2.5,
+    _goals_prevented: 2.5,
+    goals_conceded: 2,
+    rating: 1,
+    accurate_pass: 0.5,
+  },
 };
 
 export function isFieldPosition(position?: string | null): boolean {

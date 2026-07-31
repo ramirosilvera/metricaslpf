@@ -21,6 +21,13 @@ export const LOWER_IS_BETTER: ReadonlySet<string> = new Set([
   "goles_recibidos",
   "tarjetas_amarillas",
   "tarjetas_rojas",
+  // métricas de jugador de FotMob (ver lib/playerMetrics.ts) donde menos es mejor
+  "big_chance_missed",
+  "penalty_conceded",
+  "goals_conceded",
+  "fouls",
+  "yellow_card",
+  "red_card",
 ]);
 
 export function isLowerBetter(metricKey: string): boolean {
