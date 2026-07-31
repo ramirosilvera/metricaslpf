@@ -1,0 +1,78 @@
+name: Probe roster ESPN LPF (plantel por club)
+
+# Sonda: player_match_appearances y tactical_player_match_stats vinieron en 0
+# filas en la corrida real del pipeline (ESPN no puebla boxscore.players para
+# esta competicion). Antes de decidir si el producto pierde toda la mitad
+# centrada en jugadores, se prueba el endpoint de ROSTER de ESPN (plantel del
+# club, no estadistica de partido) -- patron estandar de su API que puede
+# funcionar aunque el boxscore por partido este vacio. Se borra tras decidir.
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar requests
+        run: pip install requests
+      - name: Probar roster + player stats de ESPN
+        run: |
+          python3 - <<'PY'
+          import json, requests
+
+          UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
+
+          def get(url, label=""):
+              h = {"User-Agent": UA, "Accept": "application/json", "Accept-Language": "es-AR,es;q=0.9"}
+              try:
+                  r = requests.get(url, headers=h, timeout=20)
+                  print(f"  [{label}] {url} -> {r.status_code} len={len(r.content)}")
+                  return r
+              except Exception as e:
+                  print(f"  [{label}] {url} -> ERROR {type(e).__name__}: {e}")
+                  return None
+
+          SLUG = "arg.1"
+          BASE = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{SLUG}"
+
+          print("=== 1) lista de equipos (para sacar un teamId real) ===")
+          r = get(f"{BASE}/teams", label="teams")
+          team_id = None
+          if r is not None and r.ok:
+              d = r.json()
+              teams = ((d.get("sports") or [{}])[0].get("leagues") or [{}])[0].get("teams") or []
+              print(f"    equipos: {len(teams)}")
+              if teams:
+                  t0 = teams[0]["team"]
+                  team_id = t0.get("id")
+                  print("    ejemplo:", t0.get("displayName"), "id=", team_id)
+
+          if team_id:
+              print("=== 2) roster del club ===")
+              r2 = get(f"{BASE}/teams/{team_id}/roster", label="roster")
+              if r2 is not None and r2.ok:
+                  d2 = r2.json()
+                  print("    top keys:", list(d2.keys()))
+                  athletes = d2.get("athletes") or []
+                  print(f"    bloques de plantel: {len(athletes)}")
+                  # a veces viene plano, a veces agrupado por posicion
+                  flat = []
+                  for block in athletes:
+                      if isinstance(block, dict) and "items" in block:
+                          flat.extend(block["items"])
+                      elif isinstance(block, dict) and "fullName" in block:
+                          flat.append(block)
+                  print(f"    jugadores (aplanado): {len(flat)}")
+                  if flat:
+                      p0 = flat[0]
+                      print("    ejemplo jugador:", json.dumps(p0, ensure_ascii=False)[:500])
+
+          print("=== 3) leaders (goleadores/asistencias temporada) ===")
+          get(f"{BASE}/scoreboard", label="scoreboard-check")
+          r3 = get(f"https://site.web.api.espn.com/apis/site/v2/sports/soccer/{SLUG}/statistics/byteam", label="stats-byteam-guess")
+          PY
