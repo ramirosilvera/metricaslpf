@@ -46,4 +46,23 @@ jobs:
                   stat_name = ((entry.get("participant") or {}).get("stat") or {}).get("name")
                   print(f"    - {header}  (stat={stat_name})")
               print("  entry[0] completo:", json.dumps(players_leaders[0], ensure_ascii=False)[:800] if players_leaders else None)
+
+              print("=== fetchAllUrl (lista completa, no solo top 3) ===")
+              if players_leaders:
+                  url = players_leaders[0].get("fetchAllUrl")
+                  r2 = get(url, label="fetchall-goals")
+                  if r2 is not None and r2.ok:
+                      d2 = r2.json()
+                      print("  top keys:", list(d2.keys()) if isinstance(d2, dict) else type(d2))
+                      rows = d2.get("TopLists") or d2.get("statList") or d2
+                      print("  shape:", type(rows), len(rows) if isinstance(rows, (list, dict)) else rows)
+                      print("  RAW (primeros 1500 chars):", json.dumps(d2, ensure_ascii=False)[:1500])
+
+                  # tambien probamos una categoria defensiva (tackles) para
+                  # confirmar que no es solo delanteros
+                  tackles_entry = next((e for e in players_leaders if (e.get("participant") or {}).get("stat", {}).get("name") == "total_tackle"), None)
+                  if tackles_entry:
+                      r3 = get(tackles_entry.get("fetchAllUrl"), label="fetchall-tackles")
+                      if r3 is not None and r3.ok:
+                          print("  tackles RAW (primeros 800 chars):", json.dumps(r3.json(), ensure_ascii=False)[:800])
           PY
