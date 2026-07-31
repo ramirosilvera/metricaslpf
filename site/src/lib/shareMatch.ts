@@ -7,9 +7,9 @@ import type { MatchSummary } from "./data";
 
 const W = 1080;
 const PAD = 72;
-const BRAND = "#1d5fd6";
-const BRAND_DEEP = "#0b2d6b";
-const FOOTER = "#0b2d6b";
+const BRAND = "#4fa8de";
+const BRAND_DEEP = "#0b3d66";
+const FOOTER = "#0b3d66";
 const WHITE = "#ffffff";
 const SOFT = "rgba(255,255,255,0.92)";
 const SOFTER = "rgba(255,255,255,0.66)";

@@ -10,7 +10,7 @@
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#070c17",
-  "theme_color": "#1d5fd6",
+  "theme_color": "#4fa8de",
   "categories": ["sports", "news", "education"],
   "icons": [
     {

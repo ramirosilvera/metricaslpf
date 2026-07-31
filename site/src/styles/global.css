@@ -1,7 +1,7 @@
 :root {
-  /* Identidad "Liga Profesional": superficies claras con un tinte celeste muy
-     tenue (cielo argentino) y un azul de marca vivo. Reskin propio de la LPF
-     —no reproduce la marca oficial— con azul + navy + oro de trofeo. */
+  /* Identidad "Liga Profesional": celeste albiceleste (el mismo azul de la
+     camiseta/escudo de AFA, Pantone 279C) + blanco + dorado del Sol de Mayo.
+     Superficies claras con un tinte celeste muy tenue (cielo argentino). */
   --surface-1: #ffffff;
   --surface-2: #eaf1fb;
   --page-plane: #f1f6fd;
@@ -14,20 +14,21 @@
   --baseline: #bcd0ec;
   --border: rgba(10, 20, 36, 0.1);
 
-  /* identidad de marca "cancha nocturna / celeste" -- separada de la paleta de
-     datos (--series-*), que se mantiene fija para no romper la codificación de
-     color de los charts. brand = azul LPF vivo; brand-strong queda más oscuro
-     (navy) para texto blanco AA y para texto de marca sobre fondo claro. */
-  --brand: #1d5fd6;
-  --brand-strong: #123a86;
-  --brand-soft: #dce8fc;
+  /* identidad de marca "albiceleste" -- separada de la paleta de datos
+     (--series-*), que se mantiene fija para no romper la codificación de
+     color de los charts. brand = celeste AFA (Pantone 279C); brand-strong
+     queda más saturado/oscuro para texto blanco AA y texto de marca sobre
+     fondo claro. accent = dorado del Sol de Mayo del escudo. */
+  --brand: #4fa8de;
+  --brand-strong: #1b5d96;
+  --brand-soft: #dceefb;
   --brand-contrast: #ffffff;
-  /* segundo azul (navy profundo) para degradados de "campo" */
-  --brand-deep: #0b2d6b;
+  /* azul profundo (no navy genérico) para degradados de "campo" */
+  --brand-deep: #0b3d66;
   /* línea de cal de la cancha */
   --pitch-line: rgba(255, 255, 255, 0.9);
-  --accent: #f4a900;
-  --accent-soft: #fdefcf;
+  --accent: #ffc72c;
+  --accent-soft: #fff3d6;
 
   /* resultado de partido -- mismo lenguaje de color en toda la app */
   --win: #12a150;
@@ -73,14 +74,14 @@
     --baseline: #34456a;
     --border: rgba(255, 255, 255, 0.1);
 
-    --brand: #4d9bff;
-    --brand-strong: #86bcff;
-    --brand-soft: rgba(77, 155, 255, 0.16);
+    --brand: #7fc4f2;
+    --brand-strong: #bee3fa;
+    --brand-soft: rgba(127, 196, 242, 0.16);
     --brand-contrast: #04122b;
-    --brand-deep: #2f6fd6;
+    --brand-deep: #2e7cb8;
     --pitch-line: rgba(226, 240, 255, 0.32);
-    --accent: #ffc233;
-    --accent-soft: rgba(255, 194, 51, 0.14);
+    --accent: #ffd35c;
+    --accent-soft: rgba(255, 211, 92, 0.14);
 
     --win: #2ee671;
     --draw: #9aa5a0;

@@ -16,9 +16,9 @@ const PAD = 64;
 
 // Paleta fija de marca (igual que shareCard.ts) para que la imagen se vea
 // siempre consistente sin importar el tema del visitante.
-const BRAND = "#1d5fd6";
-const BRAND_STRONG = "#123a86";
-const FOOTER = "#0b2d6b";
+const BRAND = "#4fa8de";
+const BRAND_STRONG = "#1b5d96";
+const FOOTER = "#0b3d66";
 const WHITE = "#ffffff";
 const SOFT = "rgba(255,255,255,0.92)";
 const SOFTER = "rgba(255,255,255,0.66)";
