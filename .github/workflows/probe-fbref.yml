@@ -1,8 +1,9 @@
-name: Probe fuentes LPF (fbref / wikipedia / api-football)
+name: Probe fuentes LPF (fotmob data-structure)
 
-# Sonda descartable: verifica desde GitHub Actions (IP de datacenter) qué fuentes
-# de datos de la Liga Profesional son accesibles, ANTES de reescribir el ETL.
-# Se borra una vez tomada la decisión de arquitectura.
+# Sonda descartable: verifica desde GitHub Actions (IP de datacenter) la
+# RIQUEZA de datos de FotMob para la Liga Profesional (id de liga, tabla,
+# partidos, xG por partido, stats de jugador) ANTES de reescribir el ETL.
+# Se borra una vez confirmada la arquitectura de datos.
 on:
   workflow_dispatch:
 
@@ -16,38 +17,58 @@ jobs:
           python-version: "3.11"
       - name: Instalar requests
         run: pip install requests
-      - name: Probar reachability de fuentes
+      - name: Explorar estructura FotMob para LPF
         run: |
           python3 - <<'PY'
-          import requests
+          import json, requests
           UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                 "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
-          def probe(name, url, headers=None):
-              h = {"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"}
-              if headers: h.update(headers)
-              try:
-                  r = requests.get(url, headers=h, timeout=30)
-                  body = r.text[:400].replace("\n"," ")
-                  print(f"[{name}] {r.status_code} len={len(r.content)}")
-                  # pistas de contenido
-                  low = r.text.lower()
-                  for token in ["liga profesional", "expected goals", "xg", "standings", "boca", "river"]:
-                      if token in low:
-                          print(f"    ↳ contiene '{token}'")
-                  if r.status_code >= 400:
-                      print("    ↳ body:", body[:200])
-              except Exception as e:
-                  print(f"[{name}] ERROR {type(e).__name__}: {e}")
+          H = {"User-Agent": UA, "Accept": "application/json", "Accept-Language": "es-AR,es;q=0.9"}
 
-          print("=== FBREF (Liga Profesional comp) ===")
-          probe("fbref-comp", "https://fbref.com/en/comps/21/Liga-Profesional-Argentina-Stats")
-          probe("fbref-robots", "https://fbref.com/robots.txt")
-          probe("fbref-home", "https://fbref.com/en/")
-          print("=== WIKIPEDIA (control: debería andar) ===")
-          probe("wiki-es", "https://es.wikipedia.org/wiki/Liga_Profesional_de_F%C3%BAtbol_2025")
-          probe("wiki-api", "https://es.wikipedia.org/w/api.php?action=query&format=json&titles=Liga%20Profesional%20de%20F%C3%BAtbol%202025&prop=info")
-          print("=== API-FOOTBALL (free tier, sin key -> debería 499/401 pero conecta) ===")
-          probe("apifootball", "https://v3.football.api-sports.io/status")
-          print("=== FOTMOB (json publico) ===")
-          probe("fotmob", "https://www.fotmob.com/api/leagues?id=112&ccode3=ARG")
+          def get(url):
+              r = requests.get(url, headers=H, timeout=30)
+              print(f"  GET {url} -> {r.status_code} len={len(r.content)}")
+              return r
+
+          print("=== 1) SEARCH liga (para resolver id) ===")
+          try:
+              r = get("https://apigw.fotmob.com/searchapi/suggest?term=liga%20profesional&lang=es")
+              if r.ok:
+                  d = r.json()
+                  print("   keys:", list(d.keys())[:10])
+                  print("   raw[:800]:", json.dumps(d)[:800])
+          except Exception as e:
+              print("   search err:", type(e).__name__, e)
+
+          print("=== 2) LEAGUE endpoints (probamos varios ids candidatos) ===")
+          for lid in (112, 10007, 9987, 113):
+              try:
+                  r = get(f"https://www.fotmob.com/api/leagues?id={lid}")
+                  if r.ok:
+                      d = r.json()
+                      details = d.get("details", {})
+                      print(f"   id={lid} name={details.get('name')!r} country={details.get('country')!r}")
+                      tbl = d.get("table")
+                      if tbl:
+                          print(f"   id={lid} TIENE tabla/standings")
+                      matches = d.get("matches") or {}
+                      print(f"   id={lid} matches keys:", list(matches.keys())[:8] if isinstance(matches, dict) else type(matches))
+              except Exception as e:
+                  print(f"   id={lid} err:", type(e).__name__, e)
+
+          print("=== 3) MATCH details (xG/shots) — endpoint matchDetails ===")
+          # probamos un matchId cualquiera de LPF reciente si aparece arriba;
+          # aquí solo verificamos que el endpoint responde y trae xG.
+          try:
+              r = get("https://www.fotmob.com/api/matchDetails?matchId=4506205")
+              if r.ok:
+                  d = r.json()
+                  print("   matchDetails top keys:", list(d.keys())[:15])
+                  content = d.get("content", {})
+                  print("   content keys:", list(content.keys())[:15])
+                  stats = content.get("stats")
+                  if stats:
+                      print("   TIENE stats (posible xG/shots)")
+          except Exception as e:
+              print("   matchDetails err:", type(e).__name__, e)
           PY
