@@ -238,7 +238,16 @@ def build():
         player_long.to_parquet(WAREHOUSE / "derived_player_metrics.parquet", index=False)
         print(f"derived_player_metrics.parquet: {len(player_long)} filas")
     else:
-        print("derived_player_metrics: sin datos por jugador todavia")
+        # Escribir un parquet vacío-pero-válido (mismo esquema) en vez de no
+        # tocar el archivo: si no se pisa, un derived_player_metrics.parquet
+        # viejo (de una fuente anterior con jugadores que ya no aplican, ej.
+        # Mundial) queda commiteado para siempre y build_aggregates.py lo
+        # sigue publicando como si fuera vigente. Sin jugadores -> archivo
+        # vacío, nunca datos de otro contexto.
+        empty = pd.DataFrame(columns=["player_name", "team", "metric", "value", "z_score", "percentile"])
+        empty = DerivedPlayerMetricsSchema.validate(empty)
+        empty.to_parquet(WAREHOUSE / "derived_player_metrics.parquet", index=False)
+        print("derived_player_metrics.parquet: 0 filas (sin datos por jugador todavia)")
 
 
 if __name__ == "__main__":
