@@ -262,7 +262,7 @@ def _parse_team_stats(summary: dict, match_id: str, score_by_team: dict) -> list
             "shots_inside_box": None,
             "shots_outside_box": None,
             "shots_blocked": int(by_espn_name.get("blockedShots") or 0),
-            "goals": score_by_team.get(name, 0),
+            "goals": int(score_by_team.get(name) or 0),
             "fouls_committed": int(by_espn_name.get("foulsCommitted") or 0),
             "corners": int(by_espn_name.get("wonCorners") or 0),
             "offsides": int(by_espn_name.get("offsides") or 0),

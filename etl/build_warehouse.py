@@ -87,6 +87,10 @@ def build():
         for c in num_cols:
             if c not in team_stats.columns:
                 team_stats[c] = 0
+            # pd.to_numeric antes de castear a int64: algunas fuentes escriben
+            # el conteo como "1.0" (float-string), que .astype("int64") directo
+            # rechaza -- to_numeric lo interpreta bien como float primero.
+            team_stats[c] = pd.to_numeric(team_stats[c], errors="coerce").fillna(0)
         team_stats = team_stats.astype({"match_id": "int64", **{c: "int64" for c in num_cols}})
         team_stats["possession_share_proxy"] = pd.to_numeric(team_stats["possession_share_proxy"], errors="coerce").astype(float)
         team_stats["pass_accuracy_pct"] = pd.to_numeric(team_stats.get("pass_accuracy_pct"), errors="coerce")
@@ -104,6 +108,7 @@ def build():
     if appearances is None:
         appearances = _read_csv_if_exists(RAW / "statsbomb" / "_processed" / "player_match_appearances.csv")
     if appearances is not None:
+        appearances["minutes_played"] = pd.to_numeric(appearances["minutes_played"], errors="coerce").fillna(0)
         appearances = appearances.astype({"match_id": "int64", "minutes_played": "int64"})
         appearances = PlayerAppearancesSchema.validate(appearances)
         con.register("app_df", appearances)
