@@ -54,14 +54,14 @@ const norm = (s: string) =>
 const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${stageLabel(m.stage)} ${m.match_date}`);
 ---
 
-<Base title="Partidos" description="Resumen de cada partido del Mundial 2026: resultado, goles, físico y una lectura automática, con datos oficiales.">
+<Base title="Partidos" description="Resumen de cada partido de la Liga Profesional Argentina: resultado, goles, estadística de equipo y una lectura automática, con datos reales de ESPN.">
   <DataStatusBanner />
-  <p class="eyebrow">Partido por partido · Mundial 2026</p>
+  <p class="eyebrow">Partido por partido · Liga Profesional</p>
   <h1>Partidos</h1>
   <p class="lede">
-    Cada partido jugado, resumido para entenderlo en <strong>30 segundos</strong>: resultado, goles, quién corrió y
-    manejó más la pelota, y una lectura automática — todo con datos oficiales. <em>Nota: no mostramos xG (ninguna fuente
-    libre lo publica para 2026); usamos remates como proxy de peligro.</em>
+    Cada partido jugado, resumido para entenderlo en <strong>30 segundos</strong>: resultado, goles, quién manejó más
+    la pelota y remató más, y una lectura automática — todo con datos reales de ESPN. <em>Nota: no mostramos xG
+    (ninguna fuente libre lo publica para esta liga); usamos remates como proxy de peligro.</em>
   </p>
 
   {matches.length === 0 ? (
@@ -73,7 +73,7 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
         type="search"
         id="match-search"
         class="match-search"
-        placeholder="Buscar selección o fase… (ej. Argentina, cuartos)"
+        placeholder="Buscar club o fase… (ej. Boca, cuartos)"
         autocomplete="off"
         aria-label="Buscar partidos"
       />
@@ -149,9 +149,9 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
   )}
 
   <p style="font-size:0.8rem; color: var(--text-muted); margin-top: 1.5rem;">
-    Físico: FIFA Training Centre. Goles: openfootball (CC0). Posesión = cuota de pases completados (proxy, no dato
-    oficial de posesión). Remates = tiros al arco intentados (proxy de peligro, <strong>no</strong> xG). Marcador de
-    FIFA; el detalle de goleadores puede demorar en los partidos más recientes.
+    Estadística de equipo y goles: ESPN. Posesión = cuota de pases completados (proxy, no dato oficial de posesión).
+    Remates = tiros intentados (proxy de peligro, <strong>no</strong> xG). El detalle de goleadores puede demorar en
+    los partidos más recientes.
   </p>
 
   <script type="application/json" id="matches-json" set:html={JSON.stringify(matches)}></script>
@@ -160,7 +160,7 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
     const raw = document.getElementById("matches-json")?.textContent || "[]";
     const byId = new Map(JSON.parse(raw).map((m: any) => [String(m.match_id), m]));
 
-    // Buscador: filtra las tarjetas por selección / fase / fecha, sin recargar.
+    // Buscador: filtra las tarjetas por club / fase / fecha, sin recargar.
     const input = document.getElementById("match-search") as HTMLInputElement | null;
     const cards = Array.from(document.querySelectorAll<HTMLElement>(".match-card"));
     const countEl = document.getElementById("match-count");
