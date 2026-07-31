@@ -35,7 +35,11 @@ export interface TeamSeasonSummary {
   precision_pases_promedio: number;
   remates_promedio: number;
   remates_al_arco_promedio: number;
+  /** Remates al arco recibidos por partido (lo que hizo el rival) -- dimensión defensiva. */
+  remates_al_arco_recibidos_promedio: number;
   goles_totales: number;
+  /** Goles recibidos por partido -- dimensión defensiva. */
+  goles_recibidos_promedio: number;
   faltas_promedio: number;
 }
 

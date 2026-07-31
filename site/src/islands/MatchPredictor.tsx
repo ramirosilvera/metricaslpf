@@ -1,14 +1,12 @@
 import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
-import type { DerivedPlayerMetricRow, TeamPhysicalRankingRow, TeamTacticalRankingRow } from "../lib/data";
-import { useChartTokens, useIsNarrow } from "../lib/theme";
-import { flagFor } from "../lib/flags";
-import { buildPredictor, type TeamStrength } from "../lib/prediction";
+import type { DerivedPlayerMetricRow, TeamSeasonSummary } from "../lib/data";
+import { useChartTokens } from "../lib/theme";
+import { buildPredictor } from "../lib/prediction";
 import { sharePrediction } from "../lib/sharePrediction";
 
 interface Props {
-  physicalRows: TeamPhysicalRankingRow[];
-  tacticalRows: TeamTacticalRankingRow[];
+  teamRows: TeamSeasonSummary[];
   playerRows: DerivedPlayerMetricRow[];
   positions?: Record<string, string>;
 }
@@ -24,20 +22,19 @@ function pct100(parts: number[]): number[] {
   return out;
 }
 
-export default function MatchPredictor({ physicalRows, tacticalRows, playerRows, positions = {} }: Props) {
+export default function MatchPredictor({ teamRows, playerRows, positions = {} }: Props) {
   const tokens = useChartTokens();
-  const narrow = useIsNarrow();
 
   const { strengths, predict } = useMemo(
-    () => buildPredictor(physicalRows as any, tacticalRows as any, playerRows as any, positions),
-    [physicalRows, tacticalRows, playerRows, positions],
+    () => buildPredictor(teamRows as any, playerRows as any, positions),
+    [teamRows, playerRows, positions],
   );
 
   const teams = useMemo(() => [...strengths.keys()].sort(), [strengths]);
   const [aTeam, setATeam] = useState("");
   const [bTeam, setBTeam] = useState("");
-  const effA = teams.includes(aTeam) ? aTeam : teams.includes("Argentina") ? "Argentina" : teams[0] ?? "";
-  const effB = teams.includes(bTeam) ? bTeam : teams.includes("Brazil") ? "Brazil" : teams[1] ?? teams[0] ?? "";
+  const effA = teams.includes(aTeam) ? aTeam : teams.includes("Boca Juniors") ? "Boca Juniors" : teams[0] ?? "";
+  const effB = teams.includes(bTeam) ? bTeam : teams.includes("River Plate") ? "River Plate" : teams[1] ?? teams[0] ?? "";
 
   const A = strengths.get(effA);
   const B = strengths.get(effB);
@@ -51,6 +48,15 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
   const colorDraw = tokens["--text-muted"];
 
   const probs = pred ? pct100([pred.pA, pred.pDraw, pred.pB]) : [0, 0, 0];
+
+  const rows: { label: string; a: number; b: number }[] = A && B
+    ? [
+        { label: "Ofensivo", a: A.ofensivo, b: B.ofensivo },
+        { label: "Control (pelota)", a: A.control, b: B.control },
+        { label: "Defensivo", a: A.defensivo, b: B.defensivo },
+        { label: "Individual (mejores 11)", a: A.individual, b: B.individual },
+      ]
+    : [];
 
   async function handleShare() {
     if (!A || !B || !pred || busy) return;
@@ -110,7 +116,7 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
   }, [pred, probs, effA, effB, tokens, colorA, colorB, colorDraw]);
 
   if (teams.length === 0) {
-    return <p style={{ color: "var(--text-muted)" }}>Todavía no hay selecciones con datos suficientes para predecir.</p>;
+    return <p style={{ color: "var(--text-muted)" }}>Todavía no hay clubes con datos suficientes para predecir.</p>;
   }
 
   const headline =
@@ -122,20 +128,10 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
           : `Partido parejo (empate ${probs[1]}%)`
       : "";
 
-  const rows: { label: string; a: number; b: number }[] = A && B
-    ? [
-        { label: "Físico colectivo", a: A.fisico, b: B.fisico },
-        { label: "Ofensivo", a: A.ofensivo, b: B.ofensivo },
-        { label: "Control (pelota)", a: A.control, b: B.control },
-        { label: "Defensivo", a: A.defensivo, b: B.defensivo },
-        { label: "Individual (mejores 11)", a: A.individual, b: B.individual },
-      ]
-    : [];
-
   return (
     <div>
       <div className="controls-row" style={{ flexWrap: "wrap" }}>
-        <select value={effA} onChange={(e) => setATeam(e.target.value)} aria-label="Primera selección">
+        <select value={effA} onChange={(e) => setATeam(e.target.value)} aria-label="Primer club">
           {teams.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -143,7 +139,7 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
           ))}
         </select>
         <span style={{ color: "var(--text-muted)" }}>vs.</span>
-        <select value={effB} onChange={(e) => setBTeam(e.target.value)} aria-label="Segunda selección">
+        <select value={effB} onChange={(e) => setBTeam(e.target.value)} aria-label="Segundo club">
           {teams.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -155,11 +151,11 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
       {pred && A && B ? (
         <>
           <div className="predict-head">
-            <span style={{ color: colorA }}>{flagFor(effA)} {effA}</span>
+            <span style={{ color: colorA }}>{effA}</span>
             <strong className="predict-score">
               {Math.round(pred.xA * 10) / 10} – {Math.round(pred.xB * 10) / 10}
             </strong>
-            <span style={{ color: colorB }}>{effB} {flagFor(effB)}</span>
+            <span style={{ color: colorB }}>{effB}</span>
           </div>
           <p className="predict-sub">goles esperados por el modelo · {headline}</p>
 
@@ -222,15 +218,15 @@ export default function MatchPredictor({ physicalRows, tacticalRows, playerRows,
 
           <p style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
             <strong>Es un modelo heurístico y transparente, no una predicción profesional.</strong> Combina el
-            rendimiento observado hasta ahora en el Mundial 2026 —físico y táctico colectivo (por equipo) e individual
-            ponderado por posición (mejores 11)— en una "Fuerza" 0–100; la diferencia de Fuerza se traduce a goles
-            esperados y las probabilidades salen de una distribución de Poisson. <strong>No</strong> usa cuotas,
-            historial, localía, lesiones, clima ni el momento del torneo. Sirve para dimensionar quién llega mejor, no
-            para acertar el resultado.
+            rendimiento observado hasta ahora en la Liga Profesional —ofensivo, control de la pelota y defensivo por
+            equipo (ESPN), e individual ponderado por posición (mejores 11, FotMob)— en una "Fuerza" 0–100; la
+            diferencia de Fuerza se traduce a goles esperados y las probabilidades salen de una distribución de
+            Poisson. <strong>No</strong> usa cuotas, historial, localía, lesiones, clima ni la fecha del campeonato.
+            Sirve para dimensionar quién llega mejor, no para acertar el resultado.
           </p>
         </>
       ) : (
-        <p>Elegí dos selecciones.</p>
+        <p>Elegí dos clubes.</p>
       )}
     </div>
   );

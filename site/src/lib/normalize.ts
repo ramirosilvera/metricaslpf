@@ -19,6 +19,8 @@ export const LOWER_IS_BETTER: ReadonlySet<string> = new Set([
   "edad_years",
   "age_years",
   "goles_recibidos",
+  "goles_recibidos_promedio",
+  "remates_al_arco_recibidos_promedio",
   "tarjetas_amarillas",
   "tarjetas_rojas",
   // métricas de jugador de FotMob (ver lib/playerMetrics.ts) donde menos es mejor

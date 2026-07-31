@@ -1,48 +1,51 @@
 // =============================================================================
 // Predicción de partido — modelo HEURÍSTICO y transparente (no una casa de
-// apuestas). Combina rendimiento observado hasta ahora en el Mundial 2026:
-//   · físico colectivo   (FIFA Training Centre, por equipo)
-//   · táctico colectivo  (ofensivo / control / defensivo, por equipo)
+// apuestas). Combina rendimiento observado hasta ahora en la Liga Profesional:
+//   · ofensivo colectivo   (remates y remates al arco por partido, ESPN)
+//   · control de la pelota (posesión-proxy y precisión de pase, ESPN)
+//   · defensivo colectivo  (remates al arco y goles RECIBIDOS por partido --
+//     lo que le hizo el rival en el mismo partido, ver build_aggregates.py)
 //   · individual ponderado (calidad de los mejores jugadores, índice global
-//     por posición estilo EA FC)
-// -> una "Fuerza" 0-100 por selección. La diferencia de Fuerza se traduce a una
+//     por posición estilo EA FC, sobre las 37 categorías de FotMob)
+// -> una "Fuerza" 0-100 por club. La diferencia de Fuerza se traduce a una
 // ventaja de goles y con Poisson salen las probabilidades 1-X-2 y los marcadores
 // más probables. Es un modelo simple y explicable, no una predicción profesional:
-// no usa cuotas, historial ni contexto (lesiones, clima, fase). Sirve para
-// dimensionar "quién llega mejor", no para acertar el resultado.
+// no usa cuotas, historial ni contexto (lesiones, clima, fecha del campeonato).
+// Sirve para dimensionar "quién llega mejor", no para acertar el resultado.
+//
+// No hay dimensión física (no existe dato GPS/físico gratuito para LPF, ver
+// docstring de etl/fetch_espn_lpf.py) ni táctico por jugador (ESPN no publica
+// boxscore.players para esta liga) -- a diferencia de la versión Mundial de
+// este modelo, que sí tenía ambas.
 // =============================================================================
 
-import { makeIndexer } from "./normalize";
+import { makeIndexer, isLowerBetter } from "./normalize";
 import { positionWeightedGlobal } from "./globalIndex";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "./playerMetrics";
 
-// Promedio de goles por partido del torneo (97 partidos 2026). Calibra el total.
-export const AVG_TOTAL_GOALS = 2.9;
+// Promedio de goles por partido de la liga. Calibra el total esperado.
+export const AVG_TOTAL_GOALS = 2.6;
 
-// Pesos de la Fuerza (suman 1). La jerarquía individual y el juego con la pelota
-// pesan más; el físico es contexto.
-const W = { fisico: 0.15, ofensivo: 0.25, control: 0.15, defensivo: 0.15, individual: 0.3 };
+// Pesos de la Fuerza (suman 1). La jerarquía individual y el juego ofensivo
+// pesan más; el control de la pelota y lo defensivo completan el cuadro.
+const W = { ofensivo: 0.3, control: 0.2, defensivo: 0.25, individual: 0.25 };
 
 // ~7 puntos de índice de diferencia ≈ 1 gol de ventaja esperada. El índice está
 // calibrado con piso (40-100), así que comprime las diferencias entre equipos;
 // este factor las vuelve a abrir un poco para que el favoritismo se note.
 const DIFF_PER_GOAL = 7;
 
-const PHYS_KEYS = ["distancia_promedio_km", "alta_intensidad_promedio_m", "sprints_promedio", "velocidad_punta_kmh"];
-const OFF_KEYS = ["remates_promedio", "progresiones_promedio", "quiebres_linea_promedio"];
-const DEF_KEYS = ["tackles_promedio", "intercepciones_promedio", "recuperaciones_promedio", "presiones_promedio"];
-const CONTROL_KEY = "precision_pases_pct";
+const OFF_KEYS = ["remates_promedio", "remates_al_arco_promedio"];
+const CONTROL_KEYS = ["posesion_promedio_proxy", "precision_pases_promedio"];
+const DEF_KEYS = ["remates_al_arco_recibidos_promedio", "goles_recibidos_promedio"];
 
 export interface TeamStrength {
   team: string;
-  fisico: number;
   ofensivo: number;
   control: number;
   defensivo: number;
   individual: number;
   fuerza: number;
-  velocidad: number; // índice de velocidad punta (para escenarios de transición)
-  presion: number; // índice de presión (para escenarios)
   topPlayer: string | null; // mejor jugador por índice global (para la narrativa)
 }
 
@@ -65,22 +68,26 @@ function avgIdx(indexers: Record<string, (v: number) => number>, row: Row | unde
 }
 
 export function buildPredictor(
-  physicalRows: Row[],
-  tacticalRows: Row[],
+  teamRows: Row[],
   playerRows: { player_name: string; team: string; metric: string; value: number | null }[],
   positions: Record<string, string>,
   avgTotalGoals = AVG_TOTAL_GOALS,
 ) {
-  // Indexadores por métrica de EQUIPO sobre las 48 selecciones.
+  // Indexadores por métrica de EQUIPO sobre los 30 clubes. Las métricas
+  // "conceded" (menos es mejor) se detectan vía isLowerBetter -- si no, un
+  // club que recibe más goles rankearía como mejor defensor.
   const teamIndexers: Record<string, (v: number) => number> = {};
-  for (const k of PHYS_KEYS) teamIndexers[k] = makeIndexer(physicalRows.map((r) => Number(r[k])).filter(Number.isFinite));
-  for (const k of [...OFF_KEYS, ...DEF_KEYS, CONTROL_KEY])
-    teamIndexers[k] = makeIndexer(tacticalRows.map((r) => Number(r[k])).filter(Number.isFinite));
+  for (const k of [...OFF_KEYS, ...CONTROL_KEYS, ...DEF_KEYS]) {
+    teamIndexers[k] = makeIndexer(teamRows.map((r) => Number(r[k])).filter(Number.isFinite), isLowerBetter(k));
+  }
 
   // Indexadores por métrica de JUGADOR sobre todos los medidos (para el índice global).
   const playerIndexers: Record<string, (v: number) => number> = {};
   for (const m of PLAYER_RADAR_ORDER) {
-    playerIndexers[m] = makeIndexer(playerRows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number));
+    playerIndexers[m] = makeIndexer(
+      playerRows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number),
+      isLowerBetter(m),
+    );
   }
 
   // Índice global (ponderado por posición) por jugador -> mejores 11 por equipo.
@@ -99,39 +106,30 @@ export function buildPredictor(
   for (const e of byPlayer.values()) {
     if (e.factors.length < 4) continue;
     const pos = positions[`${e.team}|${e.player}`] ?? null;
-    if (pos === "GK") continue; // el índice global excluye arqueros
     const g = positionWeightedGlobal(e.factors, pos);
     (teamPlayers.get(e.team) ?? teamPlayers.set(e.team, []).get(e.team)!).push({ player: e.player, global: g });
   }
 
-  const physByTeam = new Map(physicalRows.map((r) => [String(r.team), r]));
-  const tacByTeam = new Map(tacticalRows.map((r) => [String(r.team), r]));
+  const teamByName = new Map(teamRows.map((r) => [String(r.team), r]));
 
   const strengths = new Map<string, TeamStrength>();
-  for (const team of new Set([...physByTeam.keys()].filter((t) => tacByTeam.has(t)))) {
-    const p = physByTeam.get(team);
-    const t = tacByTeam.get(team);
+  for (const team of teamByName.keys()) {
+    const t = teamByName.get(team);
     const players = (teamPlayers.get(team) ?? []).sort((a, b) => b.global - a.global);
     const top11 = players.slice(0, 11);
     const individual = top11.length ? Math.round(top11.reduce((s, x) => s + x.global, 0) / top11.length) : 50;
 
-    const fisico = avgIdx(teamIndexers, p, PHYS_KEYS);
     const ofensivo = avgIdx(teamIndexers, t, OFF_KEYS);
+    const control = avgIdx(teamIndexers, t, CONTROL_KEYS);
     const defensivo = avgIdx(teamIndexers, t, DEF_KEYS);
-    const control = teamIndexers[CONTROL_KEY]?.(Number(t?.[CONTROL_KEY])) ?? 0;
-    const fuerza = Math.round(
-      W.fisico * fisico + W.ofensivo * ofensivo + W.control * control + W.defensivo * defensivo + W.individual * individual,
-    );
+    const fuerza = Math.round(W.ofensivo * ofensivo + W.control * control + W.defensivo * defensivo + W.individual * individual);
     strengths.set(team, {
       team,
-      fisico: Math.round(fisico),
       ofensivo: Math.round(ofensivo),
       control: Math.round(control),
       defensivo: Math.round(defensivo),
       individual,
       fuerza,
-      velocidad: teamIndexers["velocidad_punta_kmh"]?.(Number(p?.["velocidad_punta_kmh"])) ?? 0,
-      presion: teamIndexers["presiones_promedio"]?.(Number(t?.["presiones_promedio"])) ?? 0,
       topPlayer: top11[0]?.player ?? null,
     });
   }
@@ -158,14 +156,14 @@ export function buildPredictor(
       }
     }
     const topScores = scores.sort((x, y) => y.p - x.p).slice(0, 3);
-    return { pA, pDraw, pB, xA, xB, topScores, scenarios: buildScenarios(A, B, xA, xB) };
+    return { pA, pDraw, pB, xA, xB, topScores, scenarios: buildScenarios(A, B) };
   }
 
   return { strengths, predict };
 }
 
 // --- narrativa determinística de "cómo se puede desarrollar" ---
-function buildScenarios(A: TeamStrength, B: TeamStrength, xA: number, xB: number): string[] {
+function buildScenarios(A: TeamStrength, B: TeamStrength): string[] {
   const out: string[] = [];
   const diff = A.fuerza - B.fuerza;
   const strong = Math.abs(diff) >= 5 ? (diff > 0 ? A : B) : null;
@@ -181,12 +179,11 @@ function buildScenarios(A: TeamStrength, B: TeamStrength, xA: number, xB: number
   }
 
   // 2) dónde saca ventaja (la mayor brecha entre sub-índices) — siempre da textura
-  const dims: { key: string; a: number; b: number; hi: string; lo: string }[] = [
-    { key: "juego ofensivo", a: A.ofensivo, b: B.ofensivo, hi: "genera más volumen ofensivo (remates y progresiones)", lo: "" },
-    { key: "control de la pelota", a: A.control, b: B.control, hi: "maneja mejor la pelota (más precisión de pase)", lo: "" },
-    { key: "trabajo defensivo", a: A.defensivo, b: B.defensivo, hi: "es más sólida sin la pelota (quites, intercepciones, recuperaciones)", lo: "" },
-    { key: "despliegue físico", a: A.fisico, b: B.fisico, hi: "corre e insiste más a alta intensidad", lo: "" },
-    { key: "jerarquía individual", a: A.individual, b: B.individual, hi: "tiene mejores individualidades (índice global)", lo: "" },
+  const dims: { key: string; a: number; b: number; hi: string }[] = [
+    { key: "juego ofensivo", a: A.ofensivo, b: B.ofensivo, hi: "genera más volumen ofensivo (remates y remates al arco)" },
+    { key: "control de la pelota", a: A.control, b: B.control, hi: "maneja mejor la pelota (más posesión y precisión de pase)" },
+    { key: "solidez defensiva", a: A.defensivo, b: B.defensivo, hi: "es más sólida atrás (recibe menos remates y goles)" },
+    { key: "jerarquía individual", a: A.individual, b: B.individual, hi: "tiene mejores individualidades (índice global)" },
   ];
   const biggest = dims.map((d) => ({ ...d, diff: d.a - d.b })).sort((x, y) => Math.abs(y.diff) - Math.abs(x.diff))[0];
   if (biggest && Math.abs(biggest.diff) >= 3) {
@@ -195,39 +192,25 @@ function buildScenarios(A: TeamStrength, B: TeamStrength, xA: number, xB: number
     out.push(`Donde más se diferencian es en ${biggest.key}: ${w2.team} saca ${mag} — ${biggest.hi}.`);
   }
 
-  // 2) quién maneja la pelota / presión
+  // 3) quién maneja la pelota
   if (Math.abs(A.control - B.control) >= 8) {
     const dom = A.control > B.control ? A : B;
-    const other = dom === A ? B : A;
-    let s = `${dom.team} tiende a manejar más la pelota (mejor precisión de pase).`;
-    if (other.presion - dom.presion >= 8) s += ` ${other.team} intentará presionarlo arriba para robar y salir rápido.`;
-    out.push(s);
-  } else if (Math.max(A.presion, B.presion) >= 70) {
-    const pr = A.presion > B.presion ? A : B;
-    out.push(`${pr.team} presiona fuerte: puede ser un partido de mucha disputa y transiciones, con la pelota cambiando de dueño seguido.`);
+    out.push(`${dom.team} tiende a manejar más la pelota (mejor posesión y precisión de pase).`);
   }
 
-  // 3) amenaza ofensiva / velocidad
+  // 4) amenaza ofensiva vs. solidez defensiva
   const offLeader = A.ofensivo >= B.ofensivo ? A : B;
   const offOther = offLeader === A ? B : A;
   if (offLeader.ofensivo - offOther.ofensivo >= 8) {
-    let s = `${offLeader.team} genera más volumen ofensivo (remates y progresiones).`;
-    if (offLeader.velocidad >= 70) s += ` Con su velocidad punta, es peligrosa a la espalda y en contra.`;
-    out.push(s);
+    out.push(`${offLeader.team} genera más volumen ofensivo (remates y remates al arco por partido).`);
   } else if (Math.min(A.ofensivo, B.ofensivo) <= 55 && Math.max(A.defensivo, B.defensivo) >= 65) {
     out.push(`Los dos generan poco y defienden bien: pinta partido cerrado, de pocas situaciones claras.`);
   }
 
-  // 4) jerarquía individual
+  // 5) jerarquía individual
   if (Math.abs(A.individual - B.individual) >= 8) {
     const q = A.individual > B.individual ? A : B;
     if (q.topPlayer) out.push(`La diferencia la puede marcar la jerarquía individual: ${q.topPlayer} es el jugador de mejor índice global del cruce.`);
-  }
-
-  // 5) físico en el tramo final
-  if (Math.abs(A.fisico - B.fisico) >= 10) {
-    const fit = A.fisico > B.fisico ? A : B;
-    out.push(`${fit.team} corre e insiste más a alta intensidad: puede pesar en el tramo final si el partido se estira.`);
   }
 
   return out.slice(0, 4);

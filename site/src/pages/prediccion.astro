@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import MatchPredictor from "../islands/MatchPredictor";
-import { loadJson, type TeamPhysicalRankingRow, type TeamTacticalRankingRow, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import { loadJson, type TeamSeasonSummary, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
 import { buildPlayerPositions } from "../lib/playerPositions";
 
 function loadArray<T>(filename: string): T[] {
@@ -10,28 +10,28 @@ function loadArray<T>(filename: string): T[] {
   return Array.isArray(raw) ? raw : [];
 }
 
-const teamPhysical = loadArray<TeamPhysicalRankingRow>("team_physical_ranking.json");
-const teamTactical = loadArray<TeamTacticalRankingRow>("team_tactical_ranking.json");
+const teamRows = loadArray<TeamSeasonSummary>("team_season_summary.json");
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
 const positions = buildPlayerPositions(playerMetrics, squadRows);
 
 const base = import.meta.env.BASE_URL;
-const ready = teamPhysical.length > 0 && teamTactical.length > 0;
+const ready = teamRows.length > 0;
 ---
 
 <Base
   title="Predicción de partido"
-  description="Predicción de un partido del Mundial 2026 a partir del rendimiento físico y táctico colectivo e individual: probabilidades, goles esperados y escenarios."
+  description="Predicción de un partido de la Liga Profesional Argentina a partir del rendimiento de equipo e individual: probabilidades, goles esperados y escenarios."
 >
   <DataStatusBanner />
   <p class="eyebrow">¿Qué puede pasar?</p>
   <h1>Predicción de partido</h1>
   <p class="lede">
-    Elegí dos selecciones y el modelo estima <strong>quién llega mejor</strong> según su rendimiento en el Mundial 2026:
-    físico y táctico <strong>colectivo</strong> más la calidad <strong>individual</strong> ponderada por posición. Sale una
-    probabilidad 1-X-2, un marcador esperado y <strong>escenarios de cómo se puede desarrollar</strong>. Es un modelo
-    transparente para dimensionar el cruce, no una bola de cristal.
+    Elegí dos clubes y el modelo estima <strong>quién llega mejor</strong> según su rendimiento en la Liga
+    Profesional: ofensivo, control de la pelota y defensivo <strong>de equipo</strong> más la calidad
+    <strong>individual</strong> ponderada por posición. Sale una probabilidad 1-X-2, un marcador esperado y
+    <strong>escenarios de cómo se puede desarrollar</strong>. Es un modelo transparente para dimensionar el cruce, no
+    una bola de cristal.
   </p>
 
   {ready ? (
@@ -39,8 +39,7 @@ const ready = teamPhysical.length > 0 && teamTactical.length > 0;
       <div class="card">
         <MatchPredictor
           client:only="react"
-          physicalRows={teamPhysical}
-          tacticalRows={teamTactical}
+          teamRows={teamRows}
           playerRows={playerMetrics}
           positions={positions}
         />
@@ -49,9 +48,9 @@ const ready = teamPhysical.length > 0 && teamTactical.length > 0;
   ) : (
     <section class="section">
       <p style="color: var(--text-muted);">
-        Todavía no hay suficientes datos de equipo cargados para predecir. Se completan a medida que el scraper procesa
-        los partidos — mirá el estado arriba. Mientras tanto podés mirar el <a href={`${base}comparar/`}>radar cabeza a
-        cabeza</a>.
+        Todavía no hay suficientes datos de equipo cargados para predecir. Se completan a medida que el pipeline
+        procesa los partidos — mirá el estado arriba. Mientras tanto podés mirar el <a href={`${base}comparar/`}>radar
+        cabeza a cabeza</a>.
       </p>
     </section>
   )}

@@ -70,6 +70,16 @@ def build():
 
         merged = tactical.merge(matches[["match_id", "season", "stage", "match_date"]], on="match_id", how="left")
 
+        # "Conceded": lo que le hizo el RIVAL en el mismo partido (remates al arco
+        # y goles recibidos) -- self-join por match_id contra la fila del OTRO
+        # equipo. Es la única forma de tener una dimensión DEFENSIVA real para
+        # LPF (ESPN no publica tackles/intercepciones a nivel equipo).
+        conceded = merged[["match_id", "team", "shots_on_target", "goals"]].rename(
+            columns={"team": "rival", "shots_on_target": "remates_al_arco_recibidos", "goals": "goles_recibidos"}
+        )
+        merged = merged.merge(conceded, on="match_id")
+        merged = merged[merged["team"] != merged["rival"]].drop(columns=["rival"])
+
         team_season_summary = (
             merged.groupby(["team", "season"])
             .agg(
@@ -78,7 +88,9 @@ def build():
                 precision_pases_promedio=("pass_accuracy_pct", "mean"),
                 remates_promedio=("shots_total", "mean"),
                 remates_al_arco_promedio=("shots_on_target", "mean"),
+                remates_al_arco_recibidos_promedio=("remates_al_arco_recibidos", "mean"),
                 goles_totales=("goals", "sum"),
+                goles_recibidos_promedio=("goles_recibidos", "mean"),
                 faltas_promedio=("fouls_committed", "mean"),
             )
             .reset_index()
