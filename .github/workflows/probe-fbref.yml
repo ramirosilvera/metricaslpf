@@ -64,5 +64,23 @@ jobs:
                   if tackles_entry:
                       r3 = get(tackles_entry.get("fetchAllUrl"), label="fetchall-tackles")
                       if r3 is not None and r3.ok:
-                          print("  tackles RAW (primeros 800 chars):", json.dumps(r3.json(), ensure_ascii=False)[:800])
+                          d3 = r3.json()
+                          sl3 = d3["TopLists"][0]["StatList"]
+                          print(f"  tackles: {len(sl3)} jugadores en la lista")
+
+                  sl2 = d2["TopLists"][0]["StatList"]
+                  print(f"  goals: {len(sl2)} jugadores en la lista")
+                  teams_in_goals = {row["TeamName"] for row in sl2}
+                  print(f"  goals: {len(teams_in_goals)} equipos distintos representados")
+                  # ultimo (rank mas bajo) para ver si llega a jugadores con StatValue 0/1
+                  print("  goals ultimos 3:", json.dumps(sl2[-3:], ensure_ascii=False))
+
+                  saves_entry = next((e for e in players_leaders if (e.get("participant") or {}).get("stat", {}).get("name") == "saves"), None)
+                  if saves_entry:
+                      r4 = get(saves_entry.get("fetchAllUrl"), label="fetchall-saves")
+                      if r4 is not None and r4.ok:
+                          d4 = r4.json()
+                          sl4 = d4["TopLists"][0]["StatList"]
+                          print(f"  saves (arqueros): {len(sl4)} jugadores en la lista")
+                          print("  saves top 3:", json.dumps(sl4[:3], ensure_ascii=False))
           PY
