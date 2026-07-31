@@ -43,17 +43,17 @@ const topScorerStats = topScorer
     ]
   : [];
 const topScorerShareText = topScorer
-  ? `${topScorer.player_name} (${topScorer.team}) lidera la tabla de goleadores del Mundial 2026 con ${topScorer.goles} goles en ${topScorer.partidos_con_gol} partidos.`
+  ? `${topScorer.player_name} (${topScorer.team}) lidera la tabla de goleadores de la Liga Profesional con ${topScorer.goles} goles en ${topScorer.partidos_con_gol} partidos.`
   : undefined;
 ---
 
-<Base title="Goleadores" description="Tabla de goleadores del Mundial 2026: goles, penales y partidos con gol por jugador, con datos abiertos de openfootball.">
+<Base title="Goleadores" description="Tabla de goleadores de la Liga Profesional Argentina: goles, penales y partidos con gol por jugador, con datos reales de ESPN.">
   <DataStatusBanner />
-  <p class="eyebrow">Mundial 2026 · en curso</p>
+  <p class="eyebrow">Liga Profesional · temporada en curso</p>
   <h1>Goleadores</h1>
   <p class="lede">
-    Todos los goles del torneo, gol por gol, desde datos abiertos (openfootball). Los penales convertidos están
-    incluidos en el total de goles; los goles en contra no suman a ningún goleador y se listan aparte.
+    Todos los goles de la temporada, gol por gol, con datos reales de ESPN. Los penales convertidos están incluidos
+    en el total de goles; los goles en contra no suman a ningún goleador y se listan aparte.
   </p>
 
   {topScorer && (
@@ -61,7 +61,7 @@ const topScorerShareText = topScorer
       <ShareCardButton
         client:only="react"
         title={topScorer.player_name}
-        subtitle={`${flagFor(topScorer.team)} ${topScorer.team} · Goleador del Mundial 2026`}
+        subtitle={`${flagFor(topScorer.team)} ${topScorer.team} · Goleador de la Liga Profesional`}
         flag={flagFor(topScorer.team)}
         stats={topScorerStats}
         tagline="Máximo goleador del torneo"
@@ -75,7 +75,7 @@ const topScorerShareText = topScorer
     <div class="stat-tiles">
       <div class="stat-tile">
         <div class="value">{totalGoals}</div>
-        <div class="label">goles en el torneo</div>
+        <div class="label">goles en la temporada</div>
       </div>
       <div class="stat-tile">
         <div class="value">{scorers.length}</div>
@@ -95,7 +95,7 @@ const topScorerShareText = topScorer
   <section class="section">
     <div class="section-head">
       <h2>Tabla de goleadores</h2>
-      <ConfidenceBadge source="goal_events" label="Fuente: openfootball (datos abiertos)" />
+      <ConfidenceBadge source="goal_events" label="Fuente: ESPN" />
     </div>
     <div class="card">
       <div class="table-scroll">
@@ -105,7 +105,7 @@ const topScorerShareText = topScorer
             <tr>
               <th>#</th>
               <th>Jugador</th>
-              <th>Selección</th>
+              <th>Club</th>
               <th>Goles</th>
               <th>Penales</th>
               <th>Partidos con gol</th>
@@ -135,7 +135,7 @@ const topScorerShareText = topScorer
                 <tr>
                   <th>#</th>
                   <th>Jugador</th>
-                  <th>Selección</th>
+                  <th>Club</th>
                   <th>Goles</th>
                   <th>Penales</th>
                   <th>Partidos con gol</th>
@@ -165,7 +165,7 @@ const topScorerShareText = topScorer
       <div class="callout warning">
         <h3>Goles en contra ({ownGoals.length})</h3>
         <p>
-          No suman en la tabla de goleadores — se acreditan a la selección beneficiada, no al jugador.
+          No suman en la tabla de goleadores — se acreditan al club beneficiado, no al jugador.
         </p>
         <ul class="own-goal-list">
           {ownGoals.map((o) => (

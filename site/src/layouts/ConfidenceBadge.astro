@@ -3,10 +3,10 @@
 //
 // Dos modos, ambos leen SIEMPRE de meta.json (nada inventado):
 //   - Agregado (sin prop `source`): resume la verificabilidad de todo el
-//     dataset. Muestra "✓ Datos verificados" y, al desplegar, la verificación
-//     cruzada real (96/96 partidos contra FIFA) + una fila por fuente con su
-//     nivel de confianza, cobertura, licencia y fecha, más el enlace al
-//     registro completo (/fuentes/).
+//     dataset. Muestra "✓ Datos verificados" y, al desplegar, la consistencia
+//     interna real (goles evento a evento vs. marcador final, ambos de ESPN)
+//     + una fila por fuente con su nivel de confianza, cobertura, licencia y
+//     fecha, más el enlace al registro completo (/fuentes/).
 //   - Individual (`source="physical_performance"`): sella un dato concreto con
 //     una etiqueta acorde a su confianza real y despliega su ficha (proveedor,
 //     licencia, cobertura, método, fecha).
@@ -27,12 +27,14 @@ const meta = loadJson<Meta>("meta.json");
 const base = import.meta.env.BASE_URL;
 
 const LABELS: Record<string, string> = {
-  physical_performance: "Físico (FIFA)",
-  tactical_2026: "Táctico 2026 (FIFA)",
-  tactical_context: "Contexto táctico (StatsBomb)",
-  goal_events: "Goles (openfootball)",
-  squad_ages: "Planteles (26worldcup/Wikipedia)",
-  team_profile: "Ranking y campo base (26worldcup)",
+  physical_performance: "Físico/GPS (no disponible)",
+  tactical_context: "Estadística de equipo (ESPN)",
+  player_match_stats: "Estadística de jugador por partido (no disponible)",
+  player_season_stats: "Estadística de jugador por temporada (FotMob)",
+  goal_events: "Goles (ESPN)",
+  squad_ages: "Planteles (ESPN)",
+  team_profile: "Clubes (ESPN)",
+  standings: "Tabla de posiciones (ESPN)",
   derived_metrics: "Métricas derivadas (cálculo propio)",
 };
 
@@ -52,12 +54,14 @@ const SUMMARY_BY_CONF: Record<ConfidenceLevel, string> = {
 };
 
 const order: (keyof Meta["sources"])[] = [
-  "physical_performance",
-  "tactical_2026",
-  "goal_events",
+  "standings",
   "tactical_context",
+  "goal_events",
   "squad_ages",
   "team_profile",
+  "player_season_stats",
+  "player_match_stats",
+  "physical_performance",
   "derived_metrics",
 ];
 
@@ -107,7 +111,7 @@ const aggSources = order
       </p>
       {cv && cv.matches_checked > 0 && (
         <p class="cb-cross">
-          ✓ {cv.matches_matched}/{cv.matches_checked} partidos verificados contra FIFA
+          ✓ {cv.matches_matched}/{cv.matches_checked} partidos con goles consistentes con el marcador final
           {cv.discrepancies === 0 ? " · 0 discrepancias" : ` · ${cv.discrepancies} discrepancia(s)`}.
         </p>
       )}

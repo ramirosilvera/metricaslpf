@@ -139,6 +139,7 @@ export interface Meta {
     derived_metrics?: SourceStatus;
     goal_events?: SourceStatus;
     player_season_stats?: SourceStatus;
+    player_match_stats?: SourceStatus;
   };
 }
 
