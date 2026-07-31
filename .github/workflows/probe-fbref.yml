@@ -1,0 +1,75 @@
+name: Probe fuentes LPF temporada actual (ESPN / SofaScore / FotMob)
+
+# Sonda decisiva y descartable: API-Football gratis NO cubre la temporada
+# actual (solo 2022-2024). Esta sonda busca una fuente gratis alternativa con
+# metricas avanzadas (remates/posesion/pases) de la LPF EN CURSO, probando
+# tres APIs "ocultas" (no oficiales, sin key) que se usan en proyectos de
+# scraping deportivo: ESPN, SofaScore y FotMob (reintento con otros
+# endpoints). Se borra tras decidir.
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar requests
+        run: pip install requests
+      - name: Probar ESPN / SofaScore / FotMob
+        run: |
+          python3 - <<'PY'
+          import json, requests
+
+          UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
+
+          def get(url, headers=None, label=""):
+              h = {"User-Agent": UA, "Accept": "application/json", "Accept-Language": "es-AR,es;q=0.9"}
+              if headers:
+                  h.update(headers)
+              try:
+                  r = requests.get(url, headers=h, timeout=25)
+                  print(f"  [{label}] {url} -> {r.status_code} len={len(r.content)}")
+                  return r
+              except Exception as e:
+                  print(f"  [{label}] {url} -> ERROR {type(e).__name__}: {e}")
+                  return None
+
+          print("=== 1) ESPN (site.api.espn.com) -- slug arg.1 = Primera Division Argentina ===")
+          r = get("https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard", label="espn-scoreboard")
+          if r is not None and r.ok:
+              try:
+                  d = r.json()
+                  events = d.get("events") or []
+                  print(f"    eventos: {len(events)}")
+                  if events:
+                      ev = events[0]
+                      print("    ejemplo:", ev.get("name"), ev.get("date"), ev.get("status", {}).get("type", {}).get("description"))
+                      eid = ev.get("id")
+                      r2 = get(f"https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/summary?event={eid}", label="espn-summary")
+                      if r2 is not None and r2.ok:
+                          d2 = r2.json()
+                          print("    summary keys:", list(d2.keys())[:15])
+                          boxscore = d2.get("boxscore")
+                          if boxscore:
+                              teams = boxscore.get("teams") or []
+                              for t in teams:
+                                  stats = [s.get("name") for s in (t.get("statistics") or [])]
+                                  print("    stats de equipo disponibles:", stats[:20])
+              except Exception as e:
+                  print("    parse err:", type(e).__name__, e)
+          # standings
+          get("https://site.api.espn.com/apis/v2/sports/soccer/arg.1/standings", label="espn-standings")
+
+          print("=== 2) SofaScore (api.sofascore.com) ===")
+          get("https://api.sofascore.com/api/v1/search/all?q=liga%20profesional", label="sofa-search")
+          get("https://api.sofascore.com/api/v1/unique-tournament/155/season/58766/standings/total", label="sofa-standings-guess")
+
+          print("=== 3) FotMob reintento (endpoints alternativos) ===")
+          get("https://www.fotmob.com/api/data/leagues?id=112", label="fotmob-data-leagues")
+          get("https://www.fotmob.com/api/leagues?id=112&tab=table&type=league&timeZone=America%2FArgentina%2FBuenos_Aires", label="fotmob-leagues-fulltab")
+          PY
