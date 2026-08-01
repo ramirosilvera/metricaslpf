@@ -529,66 +529,31 @@
     "home_score": 3,
     "away_score": 2,
     "home": {
-      "posesion_pct": 39.3,
-      "remates": 16,
-      "remates_al_arco": 8,
-      "pases": 247,
-      "precision_pases_pct": 71.7,
-      "faltas": 11,
-      "corners": 4,
-      "offsides": 1,
-      "atajadas": 2
+      "posesion_pct": null,
+      "remates": null,
+      "remates_al_arco": null,
+      "pases": null,
+      "precision_pases_pct": null,
+      "faltas": null,
+      "corners": null,
+      "offsides": null,
+      "atajadas": null
     },
     "away": {
-      "posesion_pct": 60.7,
-      "remates": 13,
-      "remates_al_arco": 5,
-      "pases": 389,
-      "precision_pases_pct": 76.9,
-      "faltas": 10,
-      "corners": 4,
-      "offsides": 1,
-      "atajadas": 5
+      "posesion_pct": null,
+      "remates": null,
+      "remates_al_arco": null,
+      "pases": null,
+      "precision_pases_pct": null,
+      "faltas": null,
+      "corners": null,
+      "offsides": null,
+      "atajadas": null
     },
-    "goleadores": [
-      {
-        "player": "Tiziano Perrota",
-        "team": "Banfield",
-        "minute": "53'",
-        "penalty": false
-      },
-      {
-        "player": "Tiziano Perrota",
-        "team": "Banfield",
-        "minute": "59'",
-        "penalty": false
-      },
-      {
-        "player": "Bruno Sepúlveda",
-        "team": "Banfield",
-        "minute": "82'",
-        "penalty": true
-      },
-      {
-        "player": "Jonathan Herrera",
-        "team": "Sarmiento (Junín)",
-        "minute": "84'",
-        "penalty": false
-      },
-      {
-        "player": "Junior Marabel",
-        "team": "Sarmiento (Junín)",
-        "minute": "86'",
-        "penalty": false
-      }
-    ],
+    "goleadores": [],
     "goles_contra": [],
-    "destacado": {
-      "player": "Tiziano Perrota",
-      "team": "Banfield",
-      "note": "2 goles"
-    },
-    "insight": "Banfield venció 3-2 a Sarmiento (Junín). Sarmiento (Junín) manejó más la pelota (60.7% de posesión)."
+    "destacado": null,
+    "insight": "Banfield venció 3-2 a Sarmiento (Junín)."
   },
   {
     "match_id": 401841452,

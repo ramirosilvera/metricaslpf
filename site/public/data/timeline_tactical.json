@@ -666,15 +666,6 @@
     "shots_total": 5
   },
   {
-    "team": "Banfield",
-    "season": "2026",
-    "match_date": "2026-07-28",
-    "stage": "torneo-clausura",
-    "possession_share_proxy": 0.393,
-    "pass_accuracy_pct": 71.7,
-    "shots_total": 16
-  },
-  {
     "team": "Barracas Central",
     "season": "2026",
     "match_date": "2026-01-24",
@@ -4399,15 +4390,6 @@
     "possession_share_proxy": 0.448,
     "pass_accuracy_pct": 73.7,
     "shots_total": 11
-  },
-  {
-    "team": "Sarmiento (Junín)",
-    "season": "2026",
-    "match_date": "2026-07-28",
-    "stage": "torneo-clausura",
-    "possession_share_proxy": 0.607,
-    "pass_accuracy_pct": 76.9,
-    "shots_total": 13
   },
   {
     "team": "Talleres (Córdoba)",

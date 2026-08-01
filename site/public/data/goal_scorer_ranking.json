@@ -21,13 +21,6 @@
     "partidos_con_gol": 9
   },
   {
-    "team": "Sarmiento (Junín)",
-    "player_name": "Junior Marabel",
-    "goles": 8,
-    "penales": 2,
-    "partidos_con_gol": 8
-  },
-  {
     "team": "Independiente Rivadavia",
     "player_name": "Fabrizio Sartori Prieto",
     "goles": 7,
@@ -39,6 +32,13 @@
     "player_name": "José Romero",
     "goles": 7,
     "penales": 0,
+    "partidos_con_gol": 7
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "player_name": "Junior Marabel",
+    "goles": 7,
+    "penales": 2,
     "partidos_con_gol": 7
   },
   {
@@ -68,13 +68,6 @@
     "goles": 6,
     "penales": 0,
     "partidos_con_gol": 6
-  },
-  {
-    "team": "Banfield",
-    "player_name": "Tiziano Perrota",
-    "goles": 6,
-    "penales": 0,
-    "partidos_con_gol": 4
   },
   {
     "team": "Gimnasia (Mendoza)",
@@ -285,6 +278,13 @@
     "goles": 4,
     "penales": 0,
     "partidos_con_gol": 4
+  },
+  {
+    "team": "Banfield",
+    "player_name": "Tiziano Perrota",
+    "goles": 4,
+    "penales": 0,
+    "partidos_con_gol": 3
   },
   {
     "team": "Argentinos Juniors",
@@ -994,13 +994,6 @@
     "partidos_con_gol": 1
   },
   {
-    "team": "Banfield",
-    "player_name": "Bruno Sepúlveda",
-    "goles": 1,
-    "penales": 1,
-    "partidos_con_gol": 1
-  },
-  {
     "team": "Atlético Tucumán",
     "player_name": "Carlos Abeldano",
     "goles": 1,
@@ -1402,13 +1395,6 @@
   {
     "team": "Sarmiento (Junín)",
     "player_name": "Jonathan Gómez",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Sarmiento (Junín)",
-    "player_name": "Jonathan Herrera",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
