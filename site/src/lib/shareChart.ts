@@ -9,7 +9,7 @@
 // shareCard.ts para el share nativo / descarga.
 
 import type { RatingsData } from "./ratings";
-import { ovrOf } from "./ratings";
+import { displayOvr } from "./ratings";
 
 const W = 1080;
 const PAD = 64;
@@ -112,7 +112,7 @@ function wrapLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number
 function drawRatingsPanel(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, ratings: RatingsData) {
   const h = ratingsPanelHeight(ratings) - 24; // el -24 es aire externo, no del box
   const entities = ratings.entities;
-  const ovrs = entities.map((e, i) => e.ovr ?? ovrOf(ratings, i));
+  const ovrs = entities.map((_, i) => displayOvr(ratings, i));
   const dual = entities.length > 1;
 
   // caja
@@ -136,8 +136,9 @@ function drawRatingsPanel(ctx: CanvasRenderingContext2D, x: number, y: number, w
     ctx.textBaseline = "alphabetic";
     ctx.fillStyle = e.color;
     ctx.font = `800 66px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
-    ctx.fillText(String(ovrs[i]), cx, oy + 58);
-    const numW = ctx.measureText(String(ovrs[i])).width;
+    const ovrTxt = ovrs[i] == null ? "—" : String(ovrs[i]);
+    ctx.fillText(ovrTxt, cx, oy + 58);
+    const numW = ctx.measureText(ovrTxt).width;
     ctx.fillStyle = SOFTER;
     ctx.font = `700 20px system-ui, -apple-system, Roboto, sans-serif`;
     ctx.fillText("GLOBAL", cx + numW + 14, oy + 26);

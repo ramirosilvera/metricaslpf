@@ -3,9 +3,10 @@ import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { flagOrCrestHtml } from "../lib/flags";
-import { makeIndexer, isLowerBetter } from "../lib/normalize";
+import { buildIndexers } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
 import { positionWeightedGlobal } from "../lib/globalIndex";
+import { sampleTier, MIN_MATCHES_QUALIFIED, MIN_MINUTES_RANKED } from "../lib/playerSampleGate";
 
 // Ranking por ÍNDICE GLOBAL (estilo "GLOBAL/OVR" de EA SPORTS FC): para cada
 // jugador se calcula el índice de rendimiento de cada factor (calibrado al rango
@@ -15,13 +16,15 @@ import { positionWeightedGlobal } from "../lib/globalIndex";
 // arqueros (FotMob publica atajadas, vallas invictas y goles evitados). Se
 // puede ver por club o el top de la liga. Al tocar un jugador, el tooltip
 // muestra el desglose de cada factor (índice + valor oficial).
+//
+// Sólo entran al ranking jugadores con muestra suficiente (>={MIN_MATCHES_QUALIFIED}
+// partidos y >={MIN_MINUTES_RANKED} minutos) -- ver lib/playerSampleGate.ts.
+// Por debajo de eso un par de eventos (una racha de goles, una tarjeta)
+// mueven el índice de forma artificial.
 
 const POS_LABEL: Record<string, string> = { GK: "Arquero", DF: "Defensor", MF: "Mediocampista", FW: "Delantero" };
 
 const ALL = "__all__";
-// Índice global sólo si hay una base mínima de factores (si no, un jugador con
-// una sola métrica cargada podría "ganar" por ruido).
-const MIN_FACTORS = 4;
 const TOP_ALL = 25;
 
 interface Factor {
@@ -51,28 +54,27 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {}, crests 
   const narrow = useIsNarrow();
 
   // Un indexador por métrica sobre TODOS los jugadores medidos (mismo criterio
-  // que la ficha de scout): estira el rango real a 40-100.
-  const indexers = useMemo(() => {
-    const map: Record<string, (v: number) => number> = {};
-    for (const m of PLAYER_RADAR_ORDER) {
-      const vals = rows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number);
-      map[m] = makeIndexer(vals, isLowerBetter(m));
-    }
-    return map;
-  }, [rows]);
+  // que la ficha de scout): estira el rango real a 40-100. metricsWithData
+  // marca qué métricas de las tablas de peso tienen al menos un dato real.
+  const { indexers, metricsWithData } = useMemo(() => buildIndexers(rows, PLAYER_RADAR_ORDER), [rows]);
 
-  // Agrupar por jugador -> factores + índice global (promedio de sus factores).
+  // Agrupar por jugador -> factores + índice global (ponderado por posición).
   const players = useMemo<PlayerRow[]>(() => {
-    const byPlayer = new Map<string, { player: string; team: string; factors: Factor[] }>();
+    const byPlayer = new Map<
+      string,
+      { player: string; team: string; factors: Factor[]; matchesPlayed: number | null; minsPlayed: number | null }
+    >();
     for (const r of rows) {
       const def = PLAYER_METRIC_LABELS[r.metric];
       if (!def || r.value == null) continue;
       const key = `${r.team}|${r.player_name}`;
       let e = byPlayer.get(key);
       if (!e) {
-        e = { player: r.player_name, team: r.team, factors: [] };
+        e = { player: r.player_name, team: r.team, factors: [], matchesPlayed: null, minsPlayed: null };
         byPlayer.set(key, e);
       }
+      if (r.metric === "matches_played") e.matchesPlayed = r.value;
+      if (r.metric === "mins_played") e.minsPlayed = r.value;
       e.factors.push({
         metric: r.metric,
         label: def.label.replace(" / partido", ""),
@@ -81,21 +83,17 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {}, crests 
         suffix: def.suffix,
       });
     }
-    return [...byPlayer.values()]
-      .filter((e) => e.factors.length >= MIN_FACTORS)
-      .map((e) => {
-        // ordenar factores físico->táctico (orden canónico) para el tooltip
-        e.factors.sort((a, b) => PLAYER_RADAR_ORDER.indexOf(a.metric) - PLAYER_RADAR_ORDER.indexOf(b.metric));
-        const position = positions[`${e.team}|${e.player}`] ?? null;
-        return {
-          ...e,
-          position,
-          // Global ponderado por posición (estilo EA FC): un delantero no pierde
-          // por pocos quites ni un central por poca velocidad.
-          global: positionWeightedGlobal(e.factors, position),
-        };
-      });
-  }, [rows, indexers, positions]);
+    const out: PlayerRow[] = [];
+    for (const e of byPlayer.values()) {
+      if (sampleTier(e.matchesPlayed, e.minsPlayed) !== "ranked") continue;
+      const position = positions[`${e.team}|${e.player}`] ?? null;
+      const global = positionWeightedGlobal(e.factors, position, indexers, metricsWithData);
+      if (global == null) continue;
+      e.factors.sort((a, b) => PLAYER_RADAR_ORDER.indexOf(a.metric) - PLAYER_RADAR_ORDER.indexOf(b.metric));
+      out.push({ player: e.player, team: e.team, position, global, factors: e.factors });
+    }
+    return out;
+  }, [rows, indexers, metricsWithData, positions]);
 
   const teams = useMemo(() => [...new Set(players.map((p) => p.team))].sort(), [players]);
   const [team, setTeam] = useState(() => (teams.includes("Argentina") ? "Argentina" : teams[0] ?? ALL));
@@ -130,7 +128,7 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {}, crests 
           const p = ordered[i];
           if (!p) return "";
           const posTxt = p.position ? ` · ${POS_LABEL[p.position] ?? p.position}` : "";
-          const head = `${flagOrCrestHtml(p.team, crests)} <strong>${p.player}</strong> · ${p.team}${posTxt}<br/>índice global <strong>${p.global}</strong> · ${p.position ? "ponderado por posición" : "promedio"} · ${p.factors.length} factores`;
+          const head = `${flagOrCrestHtml(p.team, crests)} <strong>${p.player}</strong> · ${p.team}${posTxt}<br/>índice global <strong>${p.global}</strong> · ponderado por posición · ${p.factors.length} factores`;
           const body = p.factors
             .map((f) => `${f.label}: índice <strong>${f.idx}</strong> · ${num(f.raw, f.suffix)}`)
             .join("<br/>");
@@ -169,7 +167,12 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {}, crests 
   }, [filtered, effectiveTeam, tokens, narrow]);
 
   if (players.length === 0) {
-    return <p style={{ color: "var(--text-muted)" }}>Todavía no hay métricas por jugador cargadas para calcular el índice.</p>;
+    return (
+      <p style={{ color: "var(--text-muted)" }}>
+        Todavía no hay jugadores con muestra suficiente (≥{MIN_MATCHES_QUALIFIED} partidos, ≥{MIN_MINUTES_RANKED}{" "}
+        minutos) para calcular el índice global.
+      </p>
+    );
   }
 
   const chartHeight = Math.max(240, filtered.length * (narrow ? 26 : 30) + 40);
@@ -210,9 +213,11 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {}, crests 
         <strong>Índice global</strong>: el índice de rendimiento de cada factor (0–100, calibrado al rango de todos los
         jugadores medidos) combinado con <strong>pesos según la posición</strong>, como el overall de EA SPORTS FC. A un
         delantero le pesan más los goles, el xG y los remates al arco; a un defensor, los tackles, intercepciones y
-        despejes; a un mediocampista, el pase y la creación; a un arquero, las atajadas y los goles evitados. Así un
-        extremo no pierde por "pocos tackles" ni un central por "poco xG". Tocá un jugador para ver el desglose factor
-        por factor con su valor oficial. Sólo se rankean jugadores con al menos {MIN_FACTORS} factores cargados.
+        despejes; a un mediocampista, el pase y la creación; a un arquero, las atajadas y los goles evitados. Los
+        totales crudos de temporada (goles, ocasiones falladas, tarjetas) no puntúan directo -- se usan sus tasas por
+        90' para no premiar minutos jugados. Tocá un jugador para ver el desglose factor por factor con su valor
+        oficial. Sólo se rankean jugadores con <strong>al menos {MIN_MATCHES_QUALIFIED} partidos y {MIN_MINUTES_RANKED}{" "}
+        minutos</strong> jugados, para que un par de eventos en poca muestra no distorsione el número.
         Fuente: FotMob — agregado de TEMPORADA (no de partido), 37 categorías, cobertura completa de los 30 clubes.
       </p>
     </div>

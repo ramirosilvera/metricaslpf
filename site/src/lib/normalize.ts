@@ -23,13 +23,17 @@ export const LOWER_IS_BETTER: ReadonlySet<string> = new Set([
   "remates_al_arco_recibidos_promedio",
   "tarjetas_amarillas",
   "tarjetas_rojas",
-  // métricas de jugador de FotMob (ver lib/playerMetrics.ts) donde menos es mejor
-  "big_chance_missed",
-  "penalty_conceded",
+  // métricas de jugador de FotMob (ver lib/playerMetrics.ts) donde menos es mejor.
+  // big_chance_missed NO va acá: correlaciona +0.78 con xG (a más ocasiones
+  // claras recibidas, más se falla en términos absolutos) -- es señal de
+  // exposición ofensiva, no un defecto. penalty_conceded/penalty_won/red_card
+  // tampoco: son eventos rarísimos (rango de liga 1-2), cualquier dirección
+  // sobre esa muestra es ruido. Ninguna de las cuatro puntúa en el GLOBAL
+  // (ver globalIndex.ts); se muestran tal cual en la ficha del jugador.
   "goals_conceded",
   "fouls",
   "yellow_card",
-  "red_card",
+  "yellow_card_per_90",
 ]);
 
 export function isLowerBetter(metricKey: string): boolean {
@@ -133,4 +137,26 @@ export function perfIndex(value: number, values: number[], lowerIsBetter = false
 
 function clamp(n: number): number {
   return Math.max(0, Math.min(100, n));
+}
+
+/**
+ * Construye, en una sola pasada sobre `rows`, un indexador por métrica (sobre
+ * TODOS los jugadores medidos) y el set de métricas que tienen al menos un
+ * dato real en el dataset. `metricsWithData` es lo que globalIndex.ts usa
+ * para distinguir "el jugador no anotó" (se imputa 0) de "la fuente de esta
+ * métrica no tiene ningún dato" (esa métrica no debería contar ni en el
+ * denominador del GLOBAL).
+ */
+export function buildIndexers(
+  rows: { metric: string; value: number | null | undefined }[],
+  metricKeys: readonly string[],
+): { indexers: Record<string, (v: number) => number>; metricsWithData: ReadonlySet<string> } {
+  const indexers: Record<string, (v: number) => number> = {};
+  const metricsWithData = new Set<string>();
+  for (const m of metricKeys) {
+    const vals = rows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number);
+    if (vals.length > 0) metricsWithData.add(m);
+    indexers[m] = makeIndexer(vals, isLowerBetter(m));
+  }
+  return { indexers, metricsWithData };
 }

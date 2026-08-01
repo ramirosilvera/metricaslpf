@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
-import { makeIndexer, isLowerBetter } from "../lib/normalize";
+import { buildIndexers } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
 import { positionWeightedGlobal } from "../lib/globalIndex";
 import { generateVsBestInsights, type VsBestMetric } from "../lib/insights";
@@ -32,14 +32,7 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
-  const indexers = useMemo(() => {
-    const map: Record<string, (v: number) => number> = {};
-    for (const m of PLAYER_RADAR_ORDER) {
-      const vals = rows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number);
-      map[m] = makeIndexer(vals, isLowerBetter(m));
-    }
-    return map;
-  }, [rows]);
+  const { indexers, metricsWithData } = useMemo(() => buildIndexers(rows, PLAYER_RADAR_ORDER), [rows]);
 
   const players = useMemo(() => {
     const map = new Map<string, PlayerData>();
@@ -95,8 +88,8 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
     const facB = sharedMetrics.map((m) => ({ metric: m, idx: b.byMetric.get(m)!.idx }));
     return {
       entities: [
-        { name: a.player, color: tokens["--series-6"], ovr: positionWeightedGlobal(facA, a.position) },
-        { name: b.player, color: tokens["--series-1"], ovr: positionWeightedGlobal(facB, b.position) },
+        { name: a.player, color: tokens["--series-6"], ovr: positionWeightedGlobal(facA, a.position, indexers, metricsWithData) },
+        { name: b.player, color: tokens["--series-1"], ovr: positionWeightedGlobal(facB, b.position, indexers, metricsWithData) },
       ],
       factors: sharedMetrics.map((m) => ({ label: shortLabel(m), values: [a.byMetric.get(m)!.idx, b.byMetric.get(m)!.idx] })),
     };

@@ -23,7 +23,10 @@ export const PLAYER_METRIC_LABELS: Record<string, PlayerMetricDef> = {
   expected_goalsontarget: { label: "xG al arco (xGOT)", suffix: "", group: "ataque" },
   ontarget_scoring_att: { label: "Remates al arco cada 90'", suffix: "", group: "ataque" },
   total_scoring_att: { label: "Remates cada 90'", suffix: "", group: "ataque" },
-  accurate_pass: { label: "Pases precisos cada 90'", suffix: "", group: "creación" },
+  // Es VOLUMEN de pases completados cada 90' (no un % de precisión) -- por
+  // eso el grupo es "general" y no "creación": mide participación, no
+  // creación de juego (ver auditoría de criterio del índice GLOBAL).
+  accurate_pass: { label: "Volumen de pases precisos cada 90'", suffix: "", group: "general" },
   big_chance_created: { label: "Ocasiones claras creadas", suffix: "", group: "creación" },
   total_att_assist: { label: "Ocasiones creadas", suffix: "", group: "creación" },
   accurate_long_balls: { label: "Pases largos precisos cada 90'", suffix: "", group: "creación" },
@@ -49,6 +52,16 @@ export const PLAYER_METRIC_LABELS: Record<string, PlayerMetricDef> = {
   fouls: { label: "Faltas cometidas cada 90'", suffix: "", group: "disciplina" },
   yellow_card: { label: "Tarjetas amarillas", suffix: "", group: "disciplina" },
   red_card: { label: "Tarjetas rojas", suffix: "", group: "disciplina" },
+  // --- derivadas en el ETL a partir de los totales crudos de FotMob (que
+  // sólo listan a quien tiene >=1 -- ver etl/build_derived_metrics.py) para
+  // que puedan puntuar en el índice GLOBAL sin premiar minutos jugados.
+  goal_assist_per_90: { label: "Asistencias cada 90'", suffix: "", group: "creación" },
+  big_chance_created_per_90: { label: "Ocasiones claras creadas cada 90'", suffix: "", group: "creación" },
+  total_att_assist_per_90: { label: "Ocasiones creadas cada 90'", suffix: "", group: "creación" },
+  yellow_card_per_90: { label: "Tarjetas amarillas cada 90'", suffix: "", group: "disciplina" },
+  clean_sheet_ratio: { label: "Vallas invictas por partido", suffix: "", group: "portería" },
+  _goals_prevented_per_90: { label: "Goles evitados cada 90'", suffix: "", group: "portería" },
+  matches_played: { label: "Partidos jugados", suffix: "", group: "general" },
 };
 
 export const PLAYER_RADAR_ORDER = Object.keys(PLAYER_METRIC_LABELS);

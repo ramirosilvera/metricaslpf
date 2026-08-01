@@ -28,6 +28,27 @@ from schemas import DerivedPlayerMetricsSchema, DerivedTeamMetricsSchema, Derive
 ROOT = Path(__file__).resolve().parent.parent
 WAREHOUSE = ROOT / "data" / "warehouse"
 
+# Umbral de partidos que usa FotMob para publicar sus listas "cada 90'" sin
+# huecos -- confirmado empíricamente (auditoría de criterio del índice
+# GLOBAL, ver site/src/lib/playerSampleGate.ts, mismo número en los dos
+# lugares a propósito). Se usa acá para saber, dentro de qué población,
+# "el jugador no aparece en la lista" significa CERO en vez de "sin dato".
+MIN_MATCHES_QUALIFIED = 11
+
+# Categorías crudas de FotMob censuradas en cero: sólo listan jugadores con
+# valor >= 1 (ej. "yellow_card.json" arranca en 1 -- el resto de la liga,
+# que tiene 0 amarillas, no aparece). Tratar la ausencia como "sin dato" -- en
+# vez de como el cero real que es -- infla el índice de cualquiera que
+# aparezca apenas una vez en una de estas listas (el bug reportado: un
+# delantero con una amarilla y dos ocasiones falladas en 416', valorado alto).
+# Se derivan a tasa por 90' imputando 0 SÓLO dentro del set calificado.
+FOTMOB_ZERO_CENSORED_TO_PER90 = {
+    "goal_assist": "goal_assist_per_90",
+    "big_chance_created": "big_chance_created_per_90",
+    "total_att_assist": "total_att_assist_per_90",
+    "yellow_card": "yellow_card_per_90",
+}
+
 # Etiquetas por rank de posesión promedio dentro del cluster (de mayor a
 # menor). Si hay menos/mas clusters que etiquetas, se completa con "Estilo N".
 STYLE_LABELS = [
@@ -165,6 +186,71 @@ def _player_tactical_metrics(tactical_players: pd.DataFrame) -> pd.DataFrame:
     )
 
 
+def _fotmob_qualification(player_season_stats: pd.DataFrame) -> pd.DataFrame:
+    """matches_played/minutes_played canónicos por jugador: FotMob no siempre
+    repite exactamente el mismo valor en cada categoría (se recalcula por
+    request), así que se toma el máximo observado entre todas sus filas como
+    el más completo/reciente."""
+    return player_season_stats.groupby(["player_name", "team"], as_index=False).agg(
+        matches_played=("matches_played", "max"),
+        minutes_played=("minutes_played", "max"),
+    )
+
+
+def _fotmob_per90_derived(player_season_stats: pd.DataFrame) -> pd.DataFrame:
+    """Deriva tasas por 90' (imputando 0 dentro del set calificado, ver H2/R2
+    de la auditoría de criterio) para los totales crudos de FotMob que están
+    censurados en cero, más matches_played como métrica propia (gate de
+    muestra mínima en el frontend, ver lib/playerSampleGate.ts)."""
+    qual = _fotmob_qualification(player_season_stats)
+    qualified = qual["matches_played"].fillna(0) >= MIN_MATCHES_QUALIFIED
+
+    wide = player_season_stats.pivot_table(
+        index=["player_name", "team"], columns="metric", values="value", aggfunc="first"
+    ).reset_index()
+    merged = qual.assign(qualified=qualified).merge(wide, on=["player_name", "team"], how="left")
+
+    rows: list[pd.DataFrame] = []
+
+    for raw_key, per90_key in FOTMOB_ZERO_CENSORED_TO_PER90.items():
+        if raw_key not in merged.columns:
+            continue
+        sub = merged[merged["qualified"] & (merged["minutes_played"] > 0)].copy()
+        raw_val = sub[raw_key].fillna(0.0)  # ausente en la lista censurada-en-0 == 0 real
+        sub["value"] = (raw_val * 90 / sub["minutes_played"]).round(3)
+        sub["metric"] = per90_key
+        rows.append(sub[["player_name", "team", "metric", "value"]])
+
+    # clean_sheet_ratio: mérito colectivo tanto como individual -- se deriva
+    # como proporción de partidos con valla invicta, no depende de minutos.
+    if "clean_sheet" in merged.columns:
+        sub = merged[merged["qualified"] & (merged["matches_played"] > 0)].copy()
+        cs = sub["clean_sheet"].fillna(0.0)
+        sub["value"] = (cs / sub["matches_played"]).round(3)
+        sub["metric"] = "clean_sheet_ratio"
+        rows.append(sub[["player_name", "team", "metric", "value"]])
+
+    # _goals_prevented_per_90: SOLO para quien ya tiene el dato (arqueros) --
+    # nunca se imputa 0 para jugadores de campo (no es su métrica).
+    if "_goals_prevented" in merged.columns:
+        sub = merged[merged["_goals_prevented"].notna() & (merged["minutes_played"] > 0)].copy()
+        sub["value"] = (sub["_goals_prevented"] * 90 / sub["minutes_played"]).round(3)
+        sub["metric"] = "_goals_prevented_per_90"
+        rows.append(sub[["player_name", "team", "metric", "value"]])
+
+    # matches_played como métrica propia -- el frontend la usa (junto con
+    # mins_played, que ya es una categoría FotMob nativa) para el gate de
+    # muestra mínima del índice GLOBAL.
+    mp = qual[["player_name", "team", "matches_played"]].rename(columns={"matches_played": "value"})
+    mp = mp.dropna(subset=["value"])
+    mp["metric"] = "matches_played"
+    rows.append(mp[["player_name", "team", "metric", "value"]])
+
+    if not rows:
+        return pd.DataFrame(columns=["player_name", "team", "metric", "value"])
+    return pd.concat(rows, ignore_index=True)
+
+
 def build():
     matches = _read_parquet_if_exists("matches.parquet")
     tactical = _read_parquet_if_exists("team_match_stats_tactical.parquet")
@@ -240,6 +326,7 @@ def build():
         # cada "metric" (no compara entre metricas de distinta unidad).
         fm = player_season_stats[["player_name", "team", "metric", "value"]].dropna(subset=["value"])
         player_metric_frames.append(fm)
+        player_metric_frames.append(_fotmob_per90_derived(player_season_stats))
 
     if player_metric_frames:
         player_long = pd.concat(player_metric_frames, ignore_index=True).dropna(subset=["value"])

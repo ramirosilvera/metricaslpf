@@ -1,5 +1,5 @@
 import type { RatingsData } from "../lib/ratings";
-import { ovrOf, RATINGS_SCALE_LABEL } from "../lib/ratings";
+import { displayOvr, RATINGS_SCALE_LABEL } from "../lib/ratings";
 
 // Panel "carta EA SPORTS FC": un número GLOBAL grande por selección/jugador
 // (promedio de los índices) y el desglose factor por factor. Para dos entidades
@@ -8,7 +8,7 @@ import { ovrOf, RATINGS_SCALE_LABEL } from "../lib/ratings";
 export default function RatingsPanel({ data }: { data: RatingsData }) {
   const { entities, factors } = data;
   if (entities.length === 0 || factors.length === 0) return null;
-  const ovrs = entities.map((e, i) => e.ovr ?? ovrOf(data, i));
+  const ovrs = entities.map((_, i) => displayOvr(data, i));
   const dual = entities.length > 1;
 
   return (
@@ -17,7 +17,7 @@ export default function RatingsPanel({ data }: { data: RatingsData }) {
         {entities.map((e, i) => (
           <div className="ratings-ovr" key={i}>
             <span className="ratings-ovr-num" style={{ color: e.color }}>
-              {ovrs[i]}
+              {ovrs[i] ?? "—"}
             </span>
             <span className="ratings-ovr-meta">
               <span className="ratings-ovr-kicker">GLOBAL</span>

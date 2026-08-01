@@ -19,9 +19,10 @@
 // este modelo, que sí tenía ambas.
 // =============================================================================
 
-import { makeIndexer, isLowerBetter } from "./normalize";
+import { makeIndexer, isLowerBetter, buildIndexers } from "./normalize";
 import { positionWeightedGlobal } from "./globalIndex";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "./playerMetrics";
+import { sampleTier } from "./playerSampleGate";
 
 // Promedio de goles por partido de la liga. Calibra el total esperado.
 export const AVG_TOTAL_GOALS = 2.6;
@@ -82,31 +83,34 @@ export function buildPredictor(
   }
 
   // Indexadores por métrica de JUGADOR sobre todos los medidos (para el índice global).
-  const playerIndexers: Record<string, (v: number) => number> = {};
-  for (const m of PLAYER_RADAR_ORDER) {
-    playerIndexers[m] = makeIndexer(
-      playerRows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number),
-      isLowerBetter(m),
-    );
-  }
+  const { indexers: playerIndexers, metricsWithData } = buildIndexers(playerRows, PLAYER_RADAR_ORDER);
 
   // Índice global (ponderado por posición) por jugador -> mejores 11 por equipo.
-  const byPlayer = new Map<string, { team: string; player: string; factors: { metric: string; idx: number }[] }>();
+  // Mismo gate de muestra mínima que el ranking de jugadores (ver
+  // playerSampleGate.ts): un jugador con pocos minutos no debería mover la
+  // "Fuerza" estimada de su equipo.
+  const byPlayer = new Map<
+    string,
+    { team: string; player: string; factors: { metric: string; idx: number }[]; matchesPlayed: number | null; minsPlayed: number | null }
+  >();
   for (const r of playerRows) {
     if (!PLAYER_METRIC_LABELS[r.metric] || r.value == null) continue;
     const key = `${r.team}|${r.player_name}`;
     let e = byPlayer.get(key);
     if (!e) {
-      e = { team: r.team, player: r.player_name, factors: [] };
+      e = { team: r.team, player: r.player_name, factors: [], matchesPlayed: null, minsPlayed: null };
       byPlayer.set(key, e);
     }
+    if (r.metric === "matches_played") e.matchesPlayed = r.value;
+    if (r.metric === "mins_played") e.minsPlayed = r.value;
     e.factors.push({ metric: r.metric, idx: playerIndexers[r.metric](r.value) });
   }
   const teamPlayers = new Map<string, { player: string; global: number }[]>();
   for (const e of byPlayer.values()) {
-    if (e.factors.length < 4) continue;
+    if (sampleTier(e.matchesPlayed, e.minsPlayed) !== "ranked") continue;
     const pos = positions[`${e.team}|${e.player}`] ?? null;
-    const g = positionWeightedGlobal(e.factors, pos);
+    const g = positionWeightedGlobal(e.factors, pos, playerIndexers, metricsWithData);
+    if (g == null) continue;
     (teamPlayers.get(e.team) ?? teamPlayers.set(e.team, []).get(e.team)!).push({ player: e.player, global: g });
   }
 

@@ -7,9 +7,10 @@ import TeamBadge from "./TeamBadge";
 import ShareCardButton from "./ShareCardButton";
 import type { ShareStat } from "../lib/shareCard";
 import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights";
-import { makeIndexer, isLowerBetter } from "../lib/normalize";
+import { buildIndexers } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS as METRIC_LABELS, PLAYER_RADAR_ORDER as RADAR_ORDER } from "../lib/playerMetrics";
 import { positionWeightedGlobal } from "../lib/globalIndex";
+import { sampleTier } from "../lib/playerSampleGate";
 
 // Datos de plantel (squads.json) ya cruzados por nombre en build — la clave es
 // `${team}|${player_name}` con el nombre tal como aparece en las métricas.
@@ -63,15 +64,12 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
   // Índice de rendimiento por métrica sobre TODOS los jugadores medidos: estira
   // el rango real a 40-100 para que las diferencias entre jugadores se VEAN en el
   // radar (si no, quedan todos pegados al borde). Estilo EA SPORTS FC.
-  const normalizers = useMemo(() => {
-    const map: Record<string, (v: number) => number> = {};
-    for (const m of RADAR_ORDER) {
-      const vals = rows.filter((r) => r.metric === m && r.value != null).map((r) => r.value as number);
-      map[m] = makeIndexer(vals, isLowerBetter(m));
-    }
-    return map;
-  }, [rows]);
+  const { indexers: normalizers, metricsWithData } = useMemo(() => buildIndexers(rows, RADAR_ORDER), [rows]);
   const pctFor = (m: string, v: number | null | undefined) => (v == null ? null : normalizers[m]?.(v) ?? null);
+
+  const matchesPlayed = playerRows.find((r) => r.metric === "matches_played")?.value ?? null;
+  const minsPlayed = playerRows.find((r) => r.metric === "mins_played")?.value ?? null;
+  const tier = sampleTier(matchesPlayed, minsPlayed);
 
   const radarMetrics = RADAR_ORDER.filter((m) => playerRows.some((r) => r.metric === m && r.value != null));
 
@@ -132,6 +130,8 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
   );
 
   // Desglose "carta EA FC": GLOBAL (ponderado por posición) + índice por factor.
+  // Sin muestra suficiente (ver playerSampleGate.ts) no se calcula GLOBAL --
+  // el radar de factores igual se muestra con los valores crudos que tenga.
   const ratings = useMemo(() => {
     if (radarMetrics.length < 3) return undefined;
     const perFactor = radarMetrics.map((m) => ({
@@ -145,12 +145,15 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
           name: currentPlayer,
           color: tokens["--series-3"],
           // Mismo criterio que el ranking de índice global: ponderado por posición.
-          ovr: positionWeightedGlobal(perFactor, squadInfo?.position ?? null),
+          ovr:
+            tier === "insufficient"
+              ? null
+              : positionWeightedGlobal(perFactor, squadInfo?.position ?? null, normalizers, metricsWithData),
         },
       ],
       factors: perFactor.map((f) => ({ label: f.label, values: [f.idx] })),
     };
-  }, [radarMetrics, playerRows, currentPlayer, tokens, normalizers, squadInfo]);
+  }, [radarMetrics, playerRows, currentPlayer, tokens, normalizers, metricsWithData, squadInfo, tier]);
 
   const option = useMemo(() => {
     if (radarMetrics.length < 3) return null;
@@ -253,6 +256,13 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
             </span>
           )}
         </div>
+      )}
+
+      {tier === "small_sample" && (
+        <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)", margin: "0 0 0.75rem" }}>
+          ⚠️ <strong>Muestra chica</strong>: {currentPlayer} tiene GLOBAL calculado pero menos de 600' jugados -- no
+          entra al ranking ni a los podios de la liga, sólo se muestra en esta ficha.
+        </p>
       )}
 
       {playerMatches.length > 0 && (

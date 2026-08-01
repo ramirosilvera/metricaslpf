@@ -8,8 +8,10 @@ export interface RatingsEntity {
   /** Color CSS concreto (hex/rgb) para la insignia/columna de esta entidad. */
   color: string;
   /** GLOBAL precalculado (ej. ponderado por posición). Si se define, se usa en
-   *  lugar del promedio plano de los factores (ovrOf). */
-  ovr?: number;
+   *  lugar del promedio plano de los factores (ovrOf). `null` explícito
+   *  (distinto de `undefined`) significa "no hay muestra suficiente para
+   *  calcular un GLOBAL" -- se muestra "—", NO se cae al promedio plano. */
+  ovr?: number | null;
 }
 
 export interface RatingsFactor {
@@ -35,3 +37,14 @@ export function ovrOf(data: RatingsData, entityIndex: number): number {
 }
 
 export const RATINGS_SCALE_LABEL = "GLOBAL = promedio del índice de rendimiento (0-100, calibrado al rango del torneo)";
+
+/**
+ * GLOBAL a mostrar para una entidad: `null` explícito en `ovr` = sin muestra
+ * suficiente, se muestra `null` (el caller lo renderiza como "—"). Sin `ovr`
+ * definido, cae al promedio plano de los factores mostrados (ovrOf).
+ */
+export function displayOvr(data: RatingsData, entityIndex: number): number | null {
+  const ovr = data.entities[entityIndex]?.ovr;
+  if (ovr === null) return null;
+  return ovr ?? ovrOf(data, entityIndex);
+}
