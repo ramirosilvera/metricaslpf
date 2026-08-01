@@ -120,6 +120,24 @@ const base = import.meta.env.BASE_URL;
   </section>
 
   <section class="section">
+    <h2>Consistencia club-jugador</h2>
+    <p>
+      La página <a href={`${base}consistencia/`}>Consistencia</a> cruza la mediana del índice GLOBAL de los jugadores de un
+      club (sólo los que tienen muestra suficiente: ≥11 partidos, ≥600 minutos) contra lo que ese club rinde en la
+      tabla. Dos decisiones de diseño importantes:
+    </p>
+    <ul>
+      <li>Se usa el <strong>último torneo con una cantidad razonable de fechas jugadas</strong> (recalculado directo
+        de los partidos, no la tabla en vivo) — comparar contra una tabla con 1-2 fechas jugadas da una correlación
+        cercana a cero por pura falta de muestra, no porque no haya relación real entre plantel y resultado.</li>
+      <li>Un desvío grande <strong>no es un error del índice</strong>: puede ser una defensa que gana pocos duelos
+        porque el rival casi no la pisa (el equipo controla el partido antes de que el duelo ocurra), un plantel con
+        mejor promedio individual que resultado colectivo (rotación, mala fortuna), o al revés. La página no
+        etiqueta "buenos" o "malos" clubes — muestra el desvío para que se investigue el porqué.</li>
+    </ul>
+  </section>
+
+  <section class="section">
     <h2>Cómo se valida acá</h2>
     <ul>
       <li>Comparar un club contra rivales de perfil similar en la tabla, no contra "el resto" en abstracto.</li>

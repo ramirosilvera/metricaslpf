@@ -29,7 +29,7 @@ function normPosition(position: string | null): string | null {
 // auditoría de criterio del índice: ~145 jugadores calificados, titulares
 // reales, quedaban sin ponderar por esto). Clave = nombre tal como aparece en
 // las métricas de FotMob, valor = nombre tal como aparece en squads.json (ESPN).
-const TEAM_ALIAS_FOTMOB_TO_ESPN: Record<string, string> = {
+export const TEAM_ALIAS_FOTMOB_TO_ESPN: Record<string, string> = {
   "Belgrano": "Belgrano (Córdoba)",
   "Gimnasia de Mendoza": "Gimnasia (Mendoza)",
   "Instituto": "Instituto (Córdoba)",
