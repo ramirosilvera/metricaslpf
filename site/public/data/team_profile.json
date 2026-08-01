@@ -11,7 +11,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Estudiantes de La Plata",
@@ -25,7 +26,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Independiente",
@@ -39,7 +41,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Lanús",
@@ -53,7 +56,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Newell's Old Boys",
@@ -67,7 +71,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "San Lorenzo",
@@ -81,7 +86,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Talleres (Córdoba)",
@@ -95,7 +101,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Unión (Santa Fe)",
@@ -109,7 +116,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Vélez Sarsfield",
@@ -123,7 +131,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Instituto (Córdoba)",
@@ -137,7 +146,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Platense",
@@ -151,7 +161,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Defensa y Justicia",
@@ -165,7 +176,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Gimnasia (Mendoza)",
@@ -179,7 +191,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Central Córdoba (Santiago del Estero)",
@@ -193,7 +206,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Deportivo Riestra",
@@ -207,7 +221,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Argentinos Juniors",
@@ -221,7 +236,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Belgrano (Córdoba)",
@@ -235,7 +251,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Gimnasia La Plata",
@@ -249,7 +266,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Huracán",
@@ -263,7 +281,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Racing Club",
@@ -277,7 +296,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "River Plate",
@@ -291,7 +311,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Rosario Central",
@@ -305,7 +326,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Banfield",
@@ -319,7 +341,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Tigre",
@@ -333,7 +356,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Aldosivi",
@@ -347,7 +371,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Independiente Rivadavia",
@@ -361,7 +386,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Atlético Tucumán",
@@ -375,7 +401,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Barracas Central",
@@ -389,7 +416,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Sarmiento (Junín)",
@@ -403,7 +431,8 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   },
   {
     "team": "Estudiantes de Río Cuarto",
@@ -417,6 +446,7 @@
     "base_camp_lat": null,
     "base_camp_lon": null,
     "source": "espn",
-    "retrieved_at": "2026-08-01T01:55:56.406926+00:00"
+    "retrieved_at": "2026-08-01T01:26:51.098308+00:00",
+    "crest_url": null
   }
 ]

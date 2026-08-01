@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { TeamSeasonSummary } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
-import { flagFor } from "../lib/flags";
+import TeamBadge from "./TeamBadge";
 import { generateVsBestInsights, type VsBestMetric } from "../lib/insights";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 
@@ -41,9 +41,10 @@ const LPF_METRICS: Metric[] = [
 
 interface Props {
   summaryRows: TeamSeasonSummary[];
+  crests?: Record<string, string>;
 }
 
-export default function RadarCompare({ summaryRows }: Props) {
+export default function RadarCompare({ summaryRows, crests }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -240,7 +241,8 @@ export default function RadarCompare({ summaryRows }: Props) {
           <div className="share-label">
             <strong>Compartir este análisis</strong>
             <span>
-              {flagFor(nameA)} {nameA} vs {nameB} {flagFor(nameB)} — la imagen del radar se comparte con el botón de arriba
+              <TeamBadge team={nameA} crests={crests} /> {nameA} vs {nameB}{" "}
+              <TeamBadge team={nameB} crests={crests} /> — la imagen del radar se comparte con el botón de arriba
             </span>
           </div>
           <div className="share-actions">

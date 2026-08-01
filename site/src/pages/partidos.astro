@@ -1,8 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
-import { loadJson, type MatchSummary } from "../lib/data";
-import { flagFor } from "../lib/flags";
+import { loadJson, loadCrestMap, type MatchSummary } from "../lib/data";
+import TeamBadge from "../components/TeamBadge.astro";
 
 const base = import.meta.env.BASE_URL;
 
@@ -11,6 +11,7 @@ function loadArray<T>(filename: string): T[] {
   return Array.isArray(raw) ? raw : [];
 }
 const matches = loadArray<MatchSummary>("match_summaries.json");
+const crests = loadCrestMap();
 
 // Filas de comparación cara a cara: valor de cada equipo + su cuota del total
 // (barra), para leer en un vistazo quién dominó cada faceta. Se omite la fila si
@@ -98,7 +99,7 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
 
             <div class="mc-score">
               <div class={`mc-team ${homeWin ? "win" : ""}`}>
-                <span class="mc-flag">{flagFor(m.home_team)}</span>
+                <TeamBadge team={m.home_team} crestUrl={crests[m.home_team]} class="mc-flag" />
                 <span class="mc-name">{m.home_team}</span>
               </div>
               <div class="mc-result">
@@ -106,7 +107,7 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
               </div>
               <div class={`mc-team mc-team-r ${awayWin ? "win" : ""}`}>
                 <span class="mc-name">{m.away_team}</span>
-                <span class="mc-flag">{flagFor(m.away_team)}</span>
+                <TeamBadge team={m.away_team} crestUrl={crests[m.away_team]} class="mc-flag" />
               </div>
             </div>
 

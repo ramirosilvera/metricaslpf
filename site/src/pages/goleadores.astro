@@ -2,15 +2,17 @@
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import ConfidenceBadge from "../layouts/ConfidenceBadge.astro";
-import { loadJson, type GoalEventRow, type GoalScorerRankingRow, type OwnGoalRow } from "../lib/data";
+import { loadJson, loadCrestMap, type GoalEventRow, type GoalScorerRankingRow, type OwnGoalRow } from "../lib/data";
 import { flagFor } from "../lib/flags";
 import ShareCardButton from "../islands/ShareCardButton";
+import TeamBadge from "../components/TeamBadge.astro";
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
   return Array.isArray(raw) ? raw : [];
 }
 
+const crests = loadCrestMap();
 const scorers = loadArray<GoalScorerRankingRow>("goal_scorer_ranking.json");
 const ownGoals = loadArray<OwnGoalRow>("own_goals.json");
 const goalEvents = loadArray<GoalEventRow>("goal_events.json");
@@ -116,7 +118,7 @@ const topScorerShareText = topScorer
               <tr>
                 <td class="match-score">{posByGoals.get(r.goles)}</td>
                 <td>{r.player_name}</td>
-                <td><span class="team-flag">{flagFor(r.team)}</span>{r.team}</td>
+                <td><TeamBadge team={r.team} crestUrl={crests[r.team]} class="team-flag" />{r.team}</td>
                 <td class="match-score">{r.goles}</td>
                 <td>{r.penales > 0 ? r.penales : "—"}</td>
                 <td>{r.partidos_con_gol}</td>
@@ -146,7 +148,7 @@ const topScorerShareText = topScorer
                   <tr>
                     <td class="match-score">{posByGoals.get(r.goles)}</td>
                     <td>{r.player_name}</td>
-                    <td><span class="team-flag">{flagFor(r.team)}</span>{r.team}</td>
+                    <td><TeamBadge team={r.team} crestUrl={crests[r.team]} class="team-flag" />{r.team}</td>
                     <td class="match-score">{r.goles}</td>
                     <td>{r.penales > 0 ? r.penales : "—"}</td>
                     <td>{r.partidos_con_gol}</td>
@@ -172,7 +174,7 @@ const topScorerShareText = topScorer
             <li>
               {o.player_name}
               {o.goles_en_contra > 1 ? ` (×${o.goles_en_contra})` : ""} — benefició a{" "}
-              <span class="team-flag">{flagFor(o.equipo_beneficiado)}</span>{o.equipo_beneficiado}
+              <TeamBadge team={o.equipo_beneficiado} crestUrl={crests[o.equipo_beneficiado]} class="team-flag" />{o.equipo_beneficiado}
             </li>
           ))}
         </ul>

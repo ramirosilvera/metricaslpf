@@ -4,8 +4,10 @@ import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import RadarCompare from "../islands/RadarCompare";
 import PlayerCompare from "../islands/PlayerCompare";
 import TimelineChart from "../islands/TimelineChart";
-import { loadJson, type TeamSeasonSummary, type TimelineRow, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import { loadJson, loadCrestMap, type TeamSeasonSummary, type TimelineRow, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
 import { buildPlayerPositions } from "../lib/playerPositions";
+
+const crests = loadCrestMap();
 
 // Normaliza el shape {status, rows} de los agregados que aún no se scrapearon
 // a un array vacío, para que el radar arranque en un modo con datos.
@@ -43,7 +45,7 @@ const playerPositions = buildPlayerPositions(playerMetrics, squadRows);
       <p>Estadística de equipo por partido (posesión, precisión de pase, remates, remates al arco, faltas). El GLOBAL es el promedio del índice de cada factor.</p>
     </div>
     <div class="card">
-      <RadarCompare client:only="react" summaryRows={summary} />
+      <RadarCompare client:only="react" summaryRows={summary} crests={crests} />
     </div>
   </section>
 

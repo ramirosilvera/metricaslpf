@@ -194,6 +194,12 @@ def build():
             team_profile[c] = pd.to_numeric(team_profile[c], errors="coerce").astype("Int64")
         for c in ["base_camp_lat", "base_camp_lon"]:
             team_profile[c] = pd.to_numeric(team_profile[c], errors="coerce")
+        # crest_url se agregó después de que ya hubiera CSVs de team_profile
+        # commiteados sin esa columna -- se rellena con None en vez de romper
+        # una corrida local en modo --skip-scrape contra datos viejos. Un
+        # fetch_espn_lpf.py real siempre la trae.
+        if "crest_url" not in team_profile.columns:
+            team_profile["crest_url"] = None
         team_profile = TeamProfileSchema.validate(team_profile)
         con.register("team_profile_df", team_profile)
         con.execute(f"COPY team_profile_df TO '{WAREHOUSE / 'team_profile.parquet'}' (FORMAT PARQUET)")

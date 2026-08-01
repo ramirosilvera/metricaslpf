@@ -1918,6 +1918,19 @@ button:focus-visible {
   margin-right: 0.4rem;
 }
 
+/* Escudo de club (TeamBadge.astro / TeamBadge.tsx): mismo bloque inline que el
+   emoji de fallback antes ocupaba, en vez de depender del tamaño natural del
+   glifo. Se aplica a cualquier <img> dentro de una de las clases "flag"
+   existentes (team-flag, mc-flag) para no tener que tocar cada call site. */
+.team-flag img,
+.mc-flag img {
+  width: 1.1em;
+  height: 1.1em;
+  object-fit: contain;
+  vertical-align: -0.2em;
+  border-radius: 3px;
+}
+
 .stage-pill {
   display: inline-flex;
   align-items: center;

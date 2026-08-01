@@ -104,7 +104,7 @@ STANDINGS_COLS = ["team", "season", "posicion", "puntos", "jugados", "ganados", 
                   "perdidos", "goles_favor", "goles_contra", "diferencia", "forma"]
 TEAM_PROFILE_COLS = ["team", "fifa_code", "group", "fifa_ranking", "fifa_ranking_prev",
                      "base_camp_city", "base_camp_facility", "base_camp_country",
-                     "base_camp_lat", "base_camp_lon", "source", "retrieved_at"]
+                     "base_camp_lat", "base_camp_lon", "crest_url", "source", "retrieved_at"]
 SQUADS_COLS = ["team", "player_name", "birth_date", "age_years", "market_value_eur", "position",
               "club", "jersey_number", "caps", "career_goals", "captain",
               "wc2026_apps", "wc2026_goals", "wc2026_yellow", "wc2026_red", "source", "retrieved_at"]
@@ -413,9 +413,19 @@ def _parse_standings(season: str) -> tuple[list[dict], list[dict]]:
     for group in data.get("children") or [data]:
         entries = ((group.get("standings") or {}).get("entries")) or []
         for entry in entries:
-            team = (entry.get("team") or {}).get("displayName")
+            team_obj = entry.get("team") or {}
+            team = team_obj.get("displayName")
             if not team:
                 continue
+            # Escudo del club: ESPN trae un array "logos" en el mismo objeto de
+            # equipo que ya usamos para el nombre (mismo shape que en cualquier
+            # otro deporte de su site API) -- se toma el primero disponible tal
+            # cual, sin re-hostear la imagen (hotlink directo al CDN de ESPN).
+            # Si el campo no viene (cambia el shape, o no está poblado para
+            # esta competición), crest_url queda None y el sitio cae al
+            # fallback de emoji -- nunca se inventa una URL.
+            logos = team_obj.get("logos") or []
+            crest_url = logos[0].get("href") if logos and isinstance(logos[0], dict) else None
             stats = {s.get("name"): s.get("value") for s in entry.get("stats") or []}
             standings.append({
                 "team": team,
@@ -442,6 +452,7 @@ def _parse_standings(season: str) -> tuple[list[dict], list[dict]]:
                 "base_camp_country": None,
                 "base_camp_lat": None,
                 "base_camp_lon": None,
+                "crest_url": crest_url,
                 "source": SOURCE,
                 "retrieved_at": retrieved_at,
             })

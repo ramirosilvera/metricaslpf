@@ -3,10 +3,11 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
 import SquadDepthChart from "../islands/SquadDepthChart";
-import { loadJson, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import { loadJson, loadCrestMap, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
 import { normName } from "../lib/playerPositions";
 
 const base = import.meta.env.BASE_URL;
+const crests = loadCrestMap();
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
@@ -83,7 +84,7 @@ for (const row of playerMetrics) {
       </p>
     </div>
     <div class="card">
-      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} />
+      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} crests={crests} />
     </div>
   </section>
 </Base>

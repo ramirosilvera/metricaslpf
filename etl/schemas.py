@@ -251,6 +251,9 @@ TeamProfileSchema = DataFrameSchema(
         "base_camp_country": Column(str, nullable=True),
         "base_camp_lat": Column(float, Check.in_range(-90, 90), nullable=True),
         "base_camp_lon": Column(float, Check.in_range(-180, 180), nullable=True),
+        # URL del escudo del club, hotlink directo al CDN de ESPN (mismo
+        # proveedor que el resto de esta tabla) -- no se re-hostea la imagen.
+        "crest_url": Column(str, nullable=True),
         "source": Column(str),
         "retrieved_at": Column(str),
     },

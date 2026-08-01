@@ -236,8 +236,26 @@ export interface TeamProfileRow {
   base_camp_country: string | null;
   base_camp_lat: number | null;
   base_camp_lon: number | null;
+  crest_url: string | null;
   source: string;
   retrieved_at: string;
+}
+
+/**
+ * Mapa team -> URL de escudo (team_profile.json), para reemplazar el emoji
+ * genérico de flags.ts donde ESPN trae el dato real. Se usa en páginas Astro
+ * directamente (loadJson corre server-side); los islands React reciben este
+ * mismo mapa como prop desde su página .astro padre, ya que no pueden leer
+ * archivos en el navegador.
+ */
+export function loadCrestMap(): Record<string, string> {
+  const raw = loadJson<TeamProfileRow[] | { status: string; rows: [] }>("team_profile.json");
+  const rows = Array.isArray(raw) ? raw : [];
+  const map: Record<string, string> = {};
+  for (const r of rows) {
+    if (r.crest_url) map[r.team] = r.crest_url;
+  }
+  return map;
 }
 
 export interface SquadPlayerRow {

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
-import { flagFor } from "../lib/flags";
+import { flagOrCrestHtml } from "../lib/flags";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
 import { positionWeightedGlobal } from "../lib/globalIndex";
@@ -43,9 +43,10 @@ interface Props {
   rows: DerivedPlayerMetricRow[];
   /** Posición por jugador, clave `${team}|${player_name}` (nombre de las métricas). */
   positions?: Record<string, string>;
+  crests?: Record<string, string>;
 }
 
-export default function PlayerGlobalIndexRanking({ rows, positions = {} }: Props) {
+export default function PlayerGlobalIndexRanking({ rows, positions = {}, crests }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -129,7 +130,7 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {} }: Props
           const p = ordered[i];
           if (!p) return "";
           const posTxt = p.position ? ` · ${POS_LABEL[p.position] ?? p.position}` : "";
-          const head = `${flagFor(p.team)} <strong>${p.player}</strong> · ${p.team}${posTxt}<br/>índice global <strong>${p.global}</strong> · ${p.position ? "ponderado por posición" : "promedio"} · ${p.factors.length} factores`;
+          const head = `${flagOrCrestHtml(p.team, crests)} <strong>${p.player}</strong> · ${p.team}${posTxt}<br/>índice global <strong>${p.global}</strong> · ${p.position ? "ponderado por posición" : "promedio"} · ${p.factors.length} factores`;
           const body = p.factors
             .map((f) => `${f.label}: índice <strong>${f.idx}</strong> · ${num(f.raw, f.suffix)}`)
             .join("<br/>");

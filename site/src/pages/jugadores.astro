@@ -3,8 +3,10 @@ import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import PlayerGlobalIndexRanking from "../islands/PlayerGlobalIndexRanking";
 import PlayerFactorRanking from "../islands/PlayerFactorRanking";
-import { loadJson, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
+import { loadJson, loadCrestMap, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
 import { buildPlayerPositions } from "../lib/playerPositions";
+
+const crests = loadCrestMap();
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
@@ -42,7 +44,7 @@ const positions = buildPlayerPositions(playerMetrics, squadRows);
           </p>
         </div>
         <div class="card">
-          <PlayerGlobalIndexRanking client:only="react" rows={playerMetrics} positions={positions} />
+          <PlayerGlobalIndexRanking client:only="react" rows={playerMetrics} positions={positions} crests={crests} />
         </div>
       </section>
 
@@ -57,7 +59,7 @@ const positions = buildPlayerPositions(playerMetrics, squadRows);
           </p>
         </div>
         <div class="card">
-          <PlayerFactorRanking client:only="react" rows={playerMetrics} positions={positions} />
+          <PlayerFactorRanking client:only="react" rows={playerMetrics} positions={positions} crests={crests} />
         </div>
       </section>
     </>

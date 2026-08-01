@@ -3,6 +3,7 @@ import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
 import { flagFor } from "../lib/flags";
+import TeamBadge from "./TeamBadge";
 import ShareCardButton from "./ShareCardButton";
 import type { ShareStat } from "../lib/shareCard";
 import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights";
@@ -34,9 +35,10 @@ interface Props {
   squad?: Record<string, SquadInfo>;
   /** Partidos con datos FIFA por jugador, clave `${team}|${player_name}`. */
   matches?: Record<string, PlayerMatchLite[]>;
+  crests?: Record<string, string>;
 }
 
-export default function PlayerScoutCard({ rows, squad, matches }: Props) {
+export default function PlayerScoutCard({ rows, squad, matches, crests }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -235,7 +237,7 @@ export default function PlayerScoutCard({ rows, squad, matches }: Props) {
           style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", margin: "0 0 0.75rem" }}
         >
           <strong style={{ fontSize: "0.95rem" }}>
-            {flagFor(team)} {currentPlayer}
+            <TeamBadge team={team} crests={crests} /> {currentPlayer}
           </strong>
           {squadInfo.jersey_number != null && <span className="badge">#{squadInfo.jersey_number}</span>}
           {squadInfo.position && (
@@ -347,7 +349,7 @@ export default function PlayerScoutCard({ rows, squad, matches }: Props) {
           <div className="share-label">
             <strong>Compartir esta ficha</strong>
             <span>
-              {flagFor(team)} {currentPlayer} · {team}
+              <TeamBadge team={team} crests={crests} /> {currentPlayer} · {team}
             </span>
           </div>
           <div className="share-actions">

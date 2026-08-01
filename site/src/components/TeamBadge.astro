@@ -1,0 +1,25 @@
+---
+// Escudo de club (imagen real, hotlink al CDN de ESPN) con fallback al emoji
+// genérico de flags.ts cuando no hay crest_url cargado para ese club. Mismo
+// componente para toda página Astro server-rendered; los islands React usan
+// su propio TeamBadge.tsx (no pueden leer archivos en el navegador).
+import { flagFor } from "../lib/flags";
+
+interface Props {
+  team: string;
+  crestUrl?: string | null;
+  class?: string;
+}
+
+const { team, crestUrl, class: klass } = Astro.props;
+---
+
+{
+  crestUrl ? (
+    <img src={crestUrl} alt="" class={klass} loading="lazy" width="20" height="20" />
+  ) : (
+    <span class={klass} aria-hidden="true">
+      {flagFor(team)}
+    </span>
+  )
+}

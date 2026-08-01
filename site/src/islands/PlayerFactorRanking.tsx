@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
-import { flagFor } from "../lib/flags";
+import { flagOrCrestHtml } from "../lib/flags";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
 
@@ -20,6 +20,7 @@ const POS_LABEL: Record<string, string> = { GK: "Arquero", DF: "Defensor", MF: "
 interface Props {
   rows: DerivedPlayerMetricRow[];
   positions?: Record<string, string>;
+  crests?: Record<string, string>;
 }
 
 interface Row {
@@ -30,7 +31,7 @@ interface Row {
   position: string | null;
 }
 
-export default function PlayerFactorRanking({ rows, positions = {} }: Props) {
+export default function PlayerFactorRanking({ rows, positions = {}, crests }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -92,7 +93,7 @@ export default function PlayerFactorRanking({ rows, positions = {} }: Props) {
           const r = ordered[i];
           if (!r) return "";
           const pos = r.position ? ` · ${POS_LABEL[r.position] ?? r.position}` : "";
-          return `${flagFor(r.team)} <strong>${r.player}</strong> · ${r.team}${pos}<br/>${label}: <strong>${fmt(r.value)}</strong> · índice ${r.idx}`;
+          return `${flagOrCrestHtml(r.team, crests)} <strong>${r.player}</strong> · ${r.team}${pos}<br/>${label}: <strong>${fmt(r.value)}</strong> · índice ${r.idx}`;
         },
       },
       xAxis: {
