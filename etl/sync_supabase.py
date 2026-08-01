@@ -76,8 +76,22 @@ TABLES = [
 
 def _records(df: pd.DataFrame) -> list[dict]:
     """Igual que build_aggregates._records: NaN/NaT -> None antes de mandar
-    JSON, porque Postgres/PostgREST no entiende el NaN de pandas."""
-    return df.astype(object).where(df.notna(), None).to_dict(orient="records")
+    JSON, porque Postgres/PostgREST no entiende el NaN de pandas.
+
+    Además, un entero con algún NaN en la columna (ej. jersey_number con
+    algunos jugadores sin dorsal) pierde el dtype entero en pandas y pasa a
+    float64 -- valores como 42 quedan en 42.0 y se serializan como "42.0",
+    que Postgres rechaza para columnas integer/bigint (su parser no acepta
+    punto decimal, aunque el valor sea entero). Los floats sin parte
+    fraccionaria se bajan a int acá: es seguro también para columnas
+    numeric/double precision, que aceptan literales enteros sin problema.
+    """
+    records = df.astype(object).where(df.notna(), None).to_dict(orient="records")
+    for row in records:
+        for key, value in row.items():
+            if isinstance(value, float) and value.is_integer():
+                row[key] = int(value)
+    return records
 
 
 def _base_headers() -> dict:
