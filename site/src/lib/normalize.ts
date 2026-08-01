@@ -93,17 +93,19 @@ export function bestValue(values: number[], lowerIsBetter = false): number | nul
 // =============================================================================
 // Índice de rendimiento (estilo EA SPORTS FC) — para DIFERENCIAR visualmente
 // =============================================================================
-// Problema del "% del mejor": las selecciones de élite corren casi lo mismo, así
-// que casi todas dan 90-100% y los radares quedan iguales (blobs). EA FC lo
-// resuelve estirando el rango real observado a una escala calibrada con un
-// PISO (ningún jugador tiene pace 5). Acá igual: se mapea [mín, máx] del torneo
-// a [FLOOR, 100], así una diferencia real chica se ve grande en el gráfico.
+// Problema del "% del mejor": los clubes de arriba de tabla rinden parecido en
+// varias métricas, así que casi todos dan 90-100% y los radares quedan
+// iguales (blobs). EA FC lo resuelve estirando el rango real observado a una
+// escala calibrada con un PISO (ningún jugador tiene pace 5). Acá igual: se
+// mapea [mín, máx] de la temporada a [FLOOR, 100], así una diferencia real
+// chica se ve grande en el gráfico.
 //
 //   más-es-mejor:  idx = FLOOR + (v - mín)/(máx - mín) * (100 - FLOOR)
 //   menos-es-mejor: idx = FLOOR + (máx - v)/(máx - mín) * (100 - FLOOR)
 //
-// 100 = el mejor del torneo; FLOOR ≈ el más flojo del rango (sigue siendo una
-// selección de Mundial, no un cero). El valor OFICIAL se muestra siempre aparte.
+// 100 = el mejor de la temporada; FLOOR ≈ el más flojo del rango (sigue siendo
+// un club de Primera División, no un cero). El valor OFICIAL se muestra
+// siempre aparte.
 export const INDEX_FLOOR = 40;
 
 export function makeIndexer(

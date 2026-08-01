@@ -3,22 +3,40 @@ import Base from "../layouts/Base.astro";
 const base = import.meta.env.BASE_URL;
 ---
 
-<Base title="Metodología" description="Sesgos, variables de confusión y cómo leer los datos de este proyecto.">
+<Base title="Metodología" description="Qué mide cada fuente, qué no mide, y cómo leer los números de este proyecto.">
   <p class="eyebrow">Leer antes de cualquier gráfico</p>
   <h1>Metodología</h1>
   <p class="lede">
-    Este proyecto pone a prueba una hipótesis específica: que la Selección Argentina corre menos, hace menos
-    esfuerzos de alta intensidad, o tiene menor capacidad física que otras selecciones — posiblemente asociado a la
-    edad promedio del plantel. Antes de mostrar un solo gráfico, hay que ser honestos sobre qué puede y qué no puede
-    responder este dataset.
+    Métricas LPF junta en un solo lugar los datos abiertos de la Liga Profesional Argentina: resultados y tabla de
+    posiciones, estadística táctica por partido (ESPN) y rendimiento individual de temporada (FotMob). Son dos
+    fuentes de naturaleza distinta —una es por partido, la otra es un acumulado de toda la temporada— y antes de
+    mostrar un solo gráfico hay que ser honestos sobre qué puede y qué no puede responder cada una.
   </p>
 
   <section class="section">
-    <h2>Por qué esto es descriptivo, no un estudio causal</h2>
+    <h2>Qué mide cada fuente, y qué NO mide</h2>
     <p>
-      Con 4 a 7 partidos por selección en un solo torneo, ninguna diferencia entre selecciones tiene el tamaño de
-      muestra necesario para inferencia causal sobre "capacidad física". Los gráficos muestran los valores reales y su
-      dispersión cuando corresponde, y el tamaño de muestra siempre está a la vista.
+      <strong>Estadística táctica de equipo (ESPN) es por partido.</strong> Remates, posesión-proxy, pases, faltas,
+      córners, offsides y atajadas están cargados partido a partido, así que se pueden promediar, ver en el tiempo o
+      comparar entre rivales de una misma fecha.
+    </p>
+    <p>
+      <strong>Rendimiento individual de jugador (FotMob) es un acumulado de TEMPORADA, no de partido.</strong> Goles,
+      asistencias, xG, xGOT, xA, remates, pases, tackles, intercepciones, atajadas, tarjetas y el resto de las 37
+      categorías vienen ya sumadas o promediadas sobre todos los partidos jugados hasta la fecha — no hay forma de
+      abrir "cómo jugó tal jugador el partido tal" con esta fuente. Es la única fuente gratuita con rendimiento real
+      por jugador para esta liga (ESPN no publica esa sección acá, ver más abajo), pero por ser agregado de temporada
+      no es directamente comparable con las tablas por-partido del resto del proyecto.
+    </p>
+    <p style="font-size:0.9rem; color: var(--text-secondary);">
+      <strong>No existe estadística individual por partido</strong> (pases, remates, quites de un jugador en un
+      partido puntual): el endpoint de ESPN que la publicaría (<code>boxscore.players</code>) viene vacío para esta
+      competición en todas las pruebas realizadas. <strong>Tampoco existe dato físico/GPS</strong> (distancia,
+      sprints, velocidad punta) para ningún jugador ni equipo: se investigó a fondo —fbref, WhoScored y SofaScore
+      bloquean el acceso automatizado; API-Football, ESPN, FotMob y los sitios oficiales de AFA/Liga Profesional no
+      lo publican— y es data propietaria de cada club vía su proveedor de hardware, nunca liberada por ninguna liga
+      del mundo de forma gratuita. Antes de asumir que un gráfico muestra algo físico, no lo hace: todo acá es
+      estadística de partido o de temporada.
     </p>
   </section>
 
@@ -30,54 +48,54 @@ const base = import.meta.env.BASE_URL;
     </p>
     <p>
       <strong>1) En las tablas y rankings — "% del mejor".</strong> Un <strong>90</strong> se lee directo: "llega al 90%
-      del mejor valor registrado en esa métrica entre las selecciones del torneo". El mejor del torneo marca el 100.
-      Ejemplo — velocidad punta, con un máximo observado de 34 km/h: un equipo a 34 km/h = 100; a 30,6 km/h = 90; a 17
-      km/h = 50. Como la lista está ordenada, la magnitud se ve honesta de un vistazo.
+      del mejor valor registrado en esa métrica entre los clubes de la temporada". El mejor de la temporada marca el
+      100. Ejemplo — remates a puerta por partido, con un máximo observado de 6: un equipo con 6 = 100; con 5,4 = 90;
+      con 3 = 50. Como la lista está ordenada, la magnitud se ve honesta de un vistazo.
     </p>
     <p>
       <strong>2) En los radares — "índice de rendimiento" (estilo EA SPORTS FC).</strong> Ahí el "% del mejor" fallaba:
-      las selecciones de élite corren casi lo mismo, así que casi todas daban 90-100% y todos los radares quedaban
-      iguales (blobs). Como hace EA SPORTS FC con los atributos de sus jugadores (nadie tiene <em>pace</em> 5), estiramos
-      el rango real observado a una escala calibrada con un <strong>piso</strong>: el mejor del torneo marca 100 y el más
-      flojo del campo queda cerca de 40 (sigue siendo una selección de Mundial, no un cero). Así una diferencia real chica
-      se <em>ve</em> grande en el gráfico y cada selección tiene una forma distinta.
+      los clubes de arriba de tabla rinden de forma parecida en varias métricas, así que casi todos daban 90-100% y
+      todos los radares quedaban iguales (blobs). Como hace EA SPORTS FC con los atributos de sus jugadores (nadie
+      tiene <em>pace</em> 5), estiramos el rango real observado a una escala calibrada con un <strong>piso</strong>: el
+      mejor de la temporada marca 100 y el más flojo del campo queda cerca de 40 (sigue siendo un club de Primera
+      División, no un cero). Así una diferencia real chica se <em>ve</em> grande en el gráfico y cada club tiene una
+      forma distinta.
     </p>
     <p style="font-size:0.9rem; color: var(--text-secondary);">
-      <strong>Los valores oficiales nunca se alteran</strong>: 110,4 km, 34 km/h, 530 sprints, 57% de posesión se
-      muestran siempre tal cual. Las dos escalas son solo una capa visual para comparar. En las pocas métricas donde
-      <em>menos es mejor</em> (edad del plantel, faltas, goles recibidos, tarjetas), el mejor es el valor más bajo y la
-      escala se invierte (el que menos registra marca el 100).
+      <strong>Los valores oficiales nunca se alteran</strong>: 14 remates, 57% de posesión, 3 córners se muestran
+      siempre tal cual. Las dos escalas son solo una capa visual para comparar. En las pocas métricas donde
+      <em>menos es mejor</em> (faltas, goles recibidos, tarjetas), el mejor es el valor más bajo y la escala se
+      invierte (el que menos registra marca el 100).
     </p>
     <h3 style="margin-top:1.5rem;">El "índice global" de un jugador (GLOBAL, estilo EA SPORTS FC)</h3>
     <p>
-      El número <strong>GLOBAL</strong> de un jugador combina su índice de rendimiento en cada factor físico y táctico
-      —incluidos los <strong>remates</strong>, la producción ofensiva— pero <strong>ponderado por su posición</strong>,
-      igual que el <em>overall</em> del videojuego. Un promedio plano premiaría a mediocampistas y defensores (acumulan
-      pases, quites, recuperaciones) y castigaría a los delanteros; por eso a un <strong>delantero</strong> le pesan más
-      los remates, la velocidad y la progresión; a un <strong>defensor</strong>, los quites, intercepciones y
-      recuperaciones; a un <strong>mediocampista</strong>, el pase y la circulación. Así un extremo explosivo no pierde
-      por "pocos quites" ni un central por "poca velocidad punta".
+      El número <strong>GLOBAL</strong> de un jugador combina su índice de rendimiento en cada una de las 37
+      categorías de FotMob —remates, xG, pases, tackles, intercepciones, atajadas, etc.— pero
+      <strong>ponderado por su posición</strong>, igual que el <em>overall</em> del videojuego. Un promedio plano
+      premiaría a mediocampistas y defensores (acumulan pases, quites, recuperaciones) y castigaría a los delanteros;
+      por eso a un <strong>delantero</strong> le pesan más los goles, el xG y los remates; a un
+      <strong>defensor</strong>, los quites, intercepciones y despejes; a un <strong>mediocampista</strong>, el pase y
+      la recuperación; a un <strong>arquero</strong>, las atajadas, el % de atajadas y las vallas invictas. Así un
+      extremo goleador no pierde por "pocos quites" ni un central por "poco xG".
     </p>
     <p style="font-size:0.9rem; color: var(--text-secondary);">
-      Es un índice de rendimiento por <em>acciones medidas</em> (físicas y tácticas de FIFA Training Centre): no incluye
-      definición fina ni regate porque ninguna fuente abierta los publica por jugador. Los arqueros quedan fuera (las
-      métricas de campo no los representan). Sirve para comparar rendimiento observado, no para coronar al "mejor" en
-      abstracto.
+      Es un índice sobre <em>estadística de temporada agregada</em> (FotMob, ver arriba): no incluye lo que no
+      publica esa fuente (definición fina fuera de xG, regate más allá de "regates exitosos por 90", nada por
+      partido). Sirve para comparar rendimiento observado en lo que hay disponible, no para coronar al "mejor" en
+      abstracto — y menos con pocos minutos jugados (ver sesgos, abajo).
     </p>
   </section>
 
   <section class="section">
     <h2>Sesgos y variables de confusión</h2>
     <ol>
-      <li><strong>Estilo de posesión invierte la métrica.</strong> Los equipos que dominan el balón corren menos, no más — no tienen que perseguir. FIFA Training Centre lo señala explícitamente en su análisis "Why do teams run" del Mundial 2022.</li>
-      <li><strong>Estado del marcador.</strong> Equipos que ganan bajan intensidad a propósito en los últimos minutos; los que pierden la suben. Es estrategia, no fitness.</li>
-      <li><strong>Calidad y estilo del rival.</strong> Correr mucho contra un rival que también presiona alto no es comparable a correr poco contra un bloque bajo.</li>
-      <li><strong>Fase del torneo y descanso entre partidos.</strong> Grupos vs. octavos vs. final tienen distinto descanso, clima y motivación.</li>
-      <li><strong>Clima y sede.</strong> El Mundial 2026 se juega en EE.UU./México/Canadá, con climas y altitudes muy distintas entre sedes — afecta de forma mecánica, independiente de la selección.</li>
-      <li><strong>Rotación y gestión de carga.</strong> Un plantel con banco largo puede mostrar métricas de equipo "peores" sin que eso hable de su techo físico.</li>
-      <li><strong>Tamaño de muestra desigual.</strong> Un eliminado en octavos tiene 4 partidos; un finalista, 7. Promediar "el torneo" sin ponderar esto sesga la comparación.</li>
-      <li><strong>Sesgo de percepción previo.</strong> La narrativa "Argentina es lenta/vieja" está instalada en medios desde hace años — exactamente lo que este proyecto pone a prueba, y exactamente por qué el diseño evita arrancar con un ranking crudo como titular.</li>
-      <li><strong>Edad promedio como proxy físico es débil.</strong> La relación edad–rendimiento físico es no lineal y depende de posición, historial de lesiones y carga de la temporada de clubes — no solo de la edad cronológica del plantel. Hay que ponderar por minutos jugados, no promediar el plantel completo.</li>
+      <li><strong>Muestra de minutos desigual entre jugadores.</strong> Un titular con 1500 minutos y un suplente con 90 pueden aparecer en el mismo ranking; los totales de temporada premian a quien jugó más, no necesariamente a quien rindió mejor por minuto. Varias categorías de FotMob ya vienen "por 90", pero no todas (goles totales, tarjetas, minutos jugados no se normalizan).</li>
+      <li><strong>Estilo de posesión invierte varias métricas.</strong> Un equipo que domina el balón corre menos riesgo defensivo, presiona distinto y acumula pases de otra forma que uno que juega de contragolpe — comparar "pases" o "posesión-proxy" sin mirar el estilo de juego sesga la lectura.</li>
+      <li><strong>Calidad del rival y localía.</strong> Rendir bien contra un candidato al descenso no es lo mismo que rendir bien contra el líder; jugar de local en la mayoría de los partidos infla las métricas ofensivas de un plantel sobre otro con fixture más parejo.</li>
+      <li><strong>Fase de la temporada y calendario congestionado.</strong> Rotación por doble competencia (copas) o descansos distintos entre fechas cambian el nivel de esfuerzo sin que eso hable del techo real del plantel.</li>
+      <li><strong>Posesión-proxy no es posesión oficial.</strong> Es una estimación calculada a partir de eventos de ESPN (no un dato de tracking oficial de balón en juego) — útil como proxy de estilo, no como cifra exacta.</li>
+      <li><strong>Agregado de temporada vs. por partido.</strong> Los datos de jugador (FotMob) son un acumulado de todos los partidos jugados; los datos de equipo (ESPN) son por partido. No se pueden cruzar directamente sin tener en cuenta esa diferencia de granularidad.</li>
+      <li><strong>Emparejamiento de nombres entre fuentes.</strong> Cruzar un jugador de FotMob con su plantel de ESPN se hace por nombre y club — con nombres compuestos o abreviaturas distintas entre fuentes, algún cruce puede fallar silenciosamente y ese jugador queda sin posición/edad asociada en vez de con un dato incorrecto.</li>
     </ol>
   </section>
 
@@ -86,31 +104,29 @@ const base = import.meta.env.BASE_URL;
     <div class="table-scroll">
     <table>
       <thead>
-        <tr><th>Métrica</th><th>Qué mide realmente</th><th>Confiabilidad física</th></tr>
+        <tr><th>Métrica</th><th>Qué mide realmente</th><th>Confiabilidad</th></tr>
       </thead>
       <tbody>
-        <tr><td>Distancia total (km/partido)</td><td>Mezcla física + decisión táctica</td><td>Baja si se usa sola</td></tr>
-        <tr><td>Distancia a alta intensidad (&gt;20 km/h)</td><td>Esfuerzo real, menos influido por estilo</td><td>Media-alta</td></tr>
-        <tr><td>Sprints y velocidad punta</td><td>Capacidad neuromuscular</td><td>Alta</td></tr>
-        <tr><td>Distancia sin balón</td><td>Aísla el componente físico del táctico</td><td>Alta (poco reportada)</td></tr>
-        <tr><td>Distancia último tramo vs. primer tramo</td><td>Fatiga intra-partido</td><td>Alta si hay splits</td></tr>
-        <tr><td>Edad promedio simple del plantel</td><td>Proxy demográfico</td><td>Baja — usar como control, no resultado</td></tr>
-        <tr><td>Edad ponderada por minutos jugados</td><td>Proxy más honesto</td><td>Media</td></tr>
-        <tr><td>Posesión, PPDA</td><td>Estilo de juego</td><td>Es contexto táctico, no físico</td></tr>
+        <tr><td>Posesión-proxy</td><td>Estimación de estilo a partir de eventos, no dato oficial de tracking</td><td>Media — usar como proxy de estilo, no como cifra exacta</td></tr>
+        <tr><td>Remates totales</td><td>Volumen ofensivo bruto, sin filtrar calidad de ocasión</td><td>Media si se usa sola</td></tr>
+        <tr><td>Remates a puerta / xG (FotMob)</td><td>Peligro real generado, filtra volumen de calidad</td><td>Alta</td></tr>
+        <tr><td>Goles / asistencias totales (temporada)</td><td>Producción acumulada, sesgada por minutos jugados</td><td>Media — cruzar siempre con minutos</td></tr>
+        <tr><td>xG / xA por 90 (FotMob)</td><td>Producción esperada normalizada por tiempo en cancha</td><td>Alta</td></tr>
+        <tr><td>Faltas, tarjetas</td><td>Disciplina, también influida por el árbitro y el estilo del rival</td><td>Media</td></tr>
+        <tr><td>Atajadas, % de atajadas (arqueros)</td><td>Rendimiento del arquero, con muestra chica en varios casos</td><td>Media — revisar partidos jugados antes de comparar</td></tr>
       </tbody>
     </table>
     </div>
   </section>
 
   <section class="section">
-    <h2>Cómo se valida acá (dado el n chico)</h2>
+    <h2>Cómo se valida acá</h2>
     <ul>
-      <li>Comparar Argentina contra selecciones de perfil similar y contra sí misma en el tiempo (2018 vs. 2022 vs. 2026), no contra "el resto" en abstracto.</li>
-      <li>Normalizar siempre por 90 minutos, por fase de posesión y por fase del torneo.</li>
-      <li>Mostrar rango/dispersión, no solo el promedio.</li>
-      <li>Separar variable de control (edad, contexto táctico) de variable de resultado (métricas físicas) en toda la interfaz.</li>
-      <li>Bajar a nivel jugador, no solo selección — un promedio de equipo esconde variación individual real.</li>
-      <li>Dejar el resultado abierto: mostrar si la hipótesis se sostiene, no se sostiene, o es inconclusa con los datos disponibles — nunca una conclusión editorializada de antemano.</li>
+      <li>Comparar un club contra rivales de perfil similar en la tabla, no contra "el resto" en abstracto.</li>
+      <li>Normalizar por 90 minutos cuando la fuente lo permite, y mostrar siempre los minutos/partidos jugados junto al número.</li>
+      <li>Separar variable de contexto (rival, localía, calendario) de variable de resultado (la métrica en sí) en toda la interfaz.</li>
+      <li>No mezclar datos de partido (ESPN) con datos de temporada (FotMob) sin aclarar la diferencia de granularidad.</li>
+      <li>Dejar el resultado abierto: los gráficos muestran lo que el dato dice, no una conclusión editorializada de antemano.</li>
     </ul>
   </section>
 
@@ -122,10 +138,9 @@ const base = import.meta.env.BASE_URL;
         <tr><th>Fuente</th><th>Qué aporta</th><th>Cobertura</th><th>Limitación principal</th></tr>
       </thead>
       <tbody>
-        <tr><td>FIFA Training Centre</td><td>Métricas físicas oficiales (GPS/tracking)</td><td>Mundiales 2018, 2022, 2026 en curso</td><td>No es API — páginas HTML editoriales, requiere scraping</td></tr>
-        <tr><td>StatsBomb Open Data</td><td>Contexto táctico (eventos, posesión-proxy, formaciones)</td><td>Mundial 2018 y 2022 completos</td><td>Sin datos de distancia/sprints — es dataset de eventos, no tracking</td></tr>
-        <tr><td>26worldcup (Wikipedia)</td><td>Edad, fecha de nacimiento, club, caps, capitanía, ranking FIFA</td><td>Los 48 planteles del Mundial 2026</td><td>Hechos editoriales de Wikipedia, no fuente oficial FIFA</td></tr>
-        <tr><td>openfootball/worldcup.json</td><td>Goleadores y minuto de gol, dominio público (CC0)</td><td>Partidos jugados del Mundial 2026</td><td>Solo resultados y goles, sin datos físicos ni tácticos</td></tr>
+        <tr><td>ESPN — tabla y estadística de partido</td><td>Resultados, tabla de posiciones, remates/posesión-proxy/pases/faltas/córners/offsides/atajadas por equipo y partido, goles con minuto</td><td>30/30 clubes, temporada en curso</td><td>API pública sin key, uso no documentado formalmente; no publica estadística individual por partido para esta liga</td></tr>
+        <tr><td>ESPN — planteles</td><td>Nombre, posición, edad, fecha de nacimiento y dorsal por jugador</td><td>30/30 clubes</td><td>Sin valor de mercado, caps ni estadística individual</td></tr>
+        <tr><td>FotMob — rendimiento individual</td><td>Goles, asistencias, xG, xGOT, xA, remates, pases, tackles, intercepciones, atajadas, tarjetas y más (37 categorías)</td><td>898 jugadores de 30/30 clubes</td><td>Acumulado de TEMPORADA, no de partido; API pública sin key ni login, uso no documentado formalmente</td></tr>
       </tbody>
     </table>
     </div>
