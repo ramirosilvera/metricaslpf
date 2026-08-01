@@ -23,12 +23,12 @@ interface ChatContext {
 // Preguntas de arranque genéricas (fallback). Interpretativas, no triviales:
 // buscan que el copiloto traiga un dato y lo lea, no un simple sí/no.
 const DEFAULT_CONTEXT: ChatContext = {
-  intro: "Soy tu copiloto de datos del Mundial 2026. Puedo traer los números y ayudarte a interpretarlos.",
-  placeholder: "¿Qué querés saber del torneo?",
+  intro: "Soy tu copiloto de datos de la Liga Profesional Argentina. Puedo traer los números y ayudarte a interpretarlos.",
+  placeholder: "¿Qué querés saber de la LPF?",
   chips: [
-    "¿Argentina corre menos que el resto?",
-    "¿Quién es el goleador del torneo?",
-    "¿Qué selección tiene el plantel más joven?",
+    "¿Cómo está la tabla de posiciones?",
+    "¿Quién es el goleador del campeonato?",
+    "¿Qué equipo remata más por partido?",
   ],
 };
 
@@ -39,38 +39,38 @@ const DEFAULT_CONTEXT: ChatContext = {
 function contextFor(pathname: string): ChatContext {
   const p = (pathname || "").toLowerCase();
 
-  if (p.includes("/selecciones")) {
+  if (p.includes("/clubes")) {
     return {
-      intro: "Estás viendo el físico y el perfil de las selecciones. Puedo leer estos rankings con vos.",
-      placeholder: "¿Qué querés saber de estas selecciones?",
+      intro: "Estás viendo el perfil de los clubes. Puedo leer su tabla, su plantel y su rendimiento reciente con vos.",
+      placeholder: "¿Qué querés saber de este club?",
       chips: [
-        "¿Qué selección corre más y cuál menos?",
-        "¿Argentina corre menos que el promedio del torneo?",
-        "¿Qué selección tiene el plantel más joven?",
+        "¿Cómo le fue a River en los últimos partidos?",
+        "¿Qué equipo tiene el plantel más joven?",
+        "¿Cómo evolucionó la posesión de un equipo partido a partido?",
       ],
     };
   }
 
   if (p.includes("/comparar")) {
     return {
-      intro: "Estás comparando selecciones. Puedo cruzar sus números físicos y tácticos y decirte qué patrón sugieren.",
+      intro: "Estás comparando clubes. Puedo cruzar sus números tácticos (remates, posesión, pases, faltas) y decirte qué patrón sugieren.",
       placeholder: "¿Qué querés comparar?",
       chips: [
-        "¿En qué se diferencian físicamente Argentina y Francia?",
-        "¿Correr menos significa estar peor físicamente?",
-        "¿Qué mide la alta intensidad al comparar dos selecciones?",
+        "¿En qué se diferencian Boca y River en remates y posesión?",
+        "¿Qué equipo comete más faltas por partido?",
+        "¿Qué mide la posesión-proxy al comparar dos equipos?",
       ],
     };
   }
 
   if (p.includes("/jugadores")) {
     return {
-      intro: "Estás viendo a los jugadores. Puedo rankearlos por métrica y normalizar por posición para que la comparación sea justa.",
+      intro: "Estás viendo a los jugadores. Puedo rankearlos por métrica (goles, xG, pases, tackles) y normalizar por posición para que la comparación sea justa.",
       placeholder: "¿Qué querés saber de los jugadores?",
       chips: [
-        "¿Quién es el jugador que más corre del torneo?",
-        "¿Quién lidera en alta intensidad por posición?",
-        "¿Qué significa 'alta intensidad'?",
+        "¿Quién lidera en goles esperados (xG) por 90?",
+        "¿Quién lidera en tackles por posición?",
+        "¿Qué significa el índice GLOBAL de un jugador?",
       ],
     };
   }
@@ -80,21 +80,45 @@ function contextFor(pathname: string): ChatContext {
       intro: "Estás viendo a los goleadores. Puedo traer el ranking real y ponerlo en contexto.",
       placeholder: "¿Qué querés saber de los goleadores?",
       chips: [
-        "¿Quién es el goleador del torneo?",
-        "¿Cuántos goles lleva Argentina y quién los hizo?",
-        "¿Quién es el goleador más joven?",
+        "¿Quién es el goleador del campeonato?",
+        "¿Cuántos goles lleva mi equipo y quién los hizo?",
+        "¿Quién lidera en asistencias?",
       ],
     };
   }
 
   if (p.includes("/analisis")) {
     return {
-      intro: "Estás en el análisis avanzado. Puedo leer los líderes físicos y tácticos y explicar qué patrón muestran.",
+      intro: "Estás en el análisis avanzado. Puedo leer los líderes tácticos y de temporada y explicar qué patrón muestran.",
       placeholder: "¿Qué querés que interprete?",
       chips: [
-        "¿Qué selección tiene la huella física de un equipo que domina el balón?",
-        "¿Correr más siempre es mejor?",
-        "¿Qué selección lidera en alta intensidad?",
+        "¿Qué equipo tiene el estilo más ofensivo?",
+        "¿Rematar más siempre es mejor?",
+        "¿Qué equipo lidera en remates a puerta por partido?",
+      ],
+    };
+  }
+
+  if (p.includes("/partidos")) {
+    return {
+      intro: "Estás viendo los partidos. Puedo traer el resultado, la estadística de un partido puntual o el historial de un equipo.",
+      placeholder: "¿Qué partido querés que revise?",
+      chips: [
+        "¿Cómo le fue de local a un equipo en su último partido?",
+        "¿Quién ganó más partidos como visitante?",
+        "¿Cómo se reparten los goles de un partido entre ambos equipos?",
+      ],
+    };
+  }
+
+  if (p.includes("/prediccion")) {
+    return {
+      intro: "Estás en el predictor de partidos. Puedo traerte los números recientes de cada equipo para que los tengas en cuenta.",
+      placeholder: "¿Qué querés saber antes de predecir?",
+      chips: [
+        "¿Cómo vienen de racha los dos equipos?",
+        "¿Quién metió más goles en los últimos partidos?",
+        "¿Qué tan confiable es esta predicción?",
       ],
     };
   }
@@ -104,8 +128,8 @@ function contextFor(pathname: string): ChatContext {
       intro: "Estás en el explorador de datos. Puedo ayudarte a entender qué hay disponible y cómo leerlo.",
       placeholder: "¿Qué datos querés explorar?",
       chips: [
-        "¿Qué métricas físicas hay cargadas por selección?",
-        "¿Qué selección corre más y cuál menos?",
+        "¿Qué tablas hay disponibles para consultar?",
+        "¿Los datos de jugadores son por partido o por temporada?",
         "¿De dónde salen estos datos?",
       ],
     };
@@ -117,8 +141,8 @@ function contextFor(pathname: string): ChatContext {
       placeholder: "¿Qué querés saber de los datos?",
       chips: [
         "¿De dónde salen estos datos?",
-        "¿Por qué la distancia recorrida no mide el estado físico?",
-        "¿Se puede sacar una conclusión con tan pocos partidos?",
+        "¿Por qué no hay estadística física ni por partido de cada jugador?",
+        "¿Qué diferencia hay entre los datos de ESPN y los de FotMob?",
       ],
     };
   }
@@ -196,9 +220,9 @@ export default function ChatAssistant() {
   return (
     <div className="chat-widget">
       {open && (
-        <div className="chat-panel" role="dialog" aria-label="Asistente de Métricas Mundial 2026">
+        <div className="chat-panel" role="dialog" aria-label="Asistente de Métricas LPF">
           <div className="chat-panel-header">
-            <strong>Asistente · Métricas Mundial 2026</strong>
+            <strong>Asistente · Métricas LPF</strong>
             <button
               type="button"
               className="chat-close"
