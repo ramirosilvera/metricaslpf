@@ -410,7 +410,6 @@ def _parse_standings(season: str) -> tuple[list[dict], list[dict]]:
     retrieved_at = datetime.now(timezone.utc).isoformat()
     if not data:
         return standings, profile
-    _debug_printed = False
     for group in data.get("children") or [data]:
         entries = ((group.get("standings") or {}).get("entries")) or []
         for entry in entries:
@@ -418,13 +417,6 @@ def _parse_standings(season: str) -> tuple[list[dict], list[dict]]:
             team = team_obj.get("displayName")
             if not team:
                 continue
-            if not _debug_printed:
-                # DEBUG temporal: confirmar el shape real del objeto "team" que
-                # trae el endpoint de standings (se saca en el próximo commit
-                # una vez confirmado dónde vienen los escudos).
-                print("DEBUG team_obj keys:", sorted(team_obj.keys()), file=sys.stderr)
-                print("DEBUG team_obj json:", json.dumps(team_obj, ensure_ascii=False)[:2000], file=sys.stderr)
-                _debug_printed = True
             # Escudo del club: ESPN trae un array "logos" en el mismo objeto de
             # equipo que ya usamos para el nombre (mismo shape que en cualquier
             # otro deporte de su site API) -- se toma el primero disponible tal

@@ -117,12 +117,7 @@ def _delete_all(table: str, filter_col: str) -> None:
         raise RuntimeError(f"{table} (delete): HTTP {resp.status_code} -- {resp.text[:500]}")
 
 
-def _upsert(table: str, rows: list[dict], filter_col: str) -> None:
-    # Borrar todo ANTES de mirar si hay filas nuevas -- una tabla que hoy tiene
-    # 0 filas reales (ej. tactical_player_match_stats, siempre vacía para LPF)
-    # igual tiene que vaciarse de datos viejos en cada corrida, no solo cuando
-    # hay algo para insertar.
-    _delete_all(table, filter_col)
+def _insert(table: str, rows: list[dict]) -> None:
     if not rows:
         return
     url = f"{SUPABASE_URL}/rest/v1/{table}"
@@ -139,12 +134,24 @@ def sync():
         print("SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY no configurados -- se saltea la sincronizacion.")
         return
 
-    for filename, table, filter_col in TABLES:
+    # Dos pasadas en vez de un delete+insert por tabla: goal_events,
+    # team_match_stats_tactical, player_match_appearances y
+    # tactical_player_match_stats tienen foreign key a matches.match_id.
+    # Borrar matches (tabla padre, primera en TABLES) antes que sus hijas
+    # revienta esa FK -- "still referenced from table goal_events" -- así que
+    # el borrado va en orden INVERSO (hijas primero, matches al final) y la
+    # inserción en el orden normal de TABLES (matches primero, para que sus
+    # filas ya existan cuando se insertan las hijas).
+    for filename, table, filter_col in reversed(TABLES):
+        if (WAREHOUSE / filename).exists():
+            _delete_all(table, filter_col)
+
+    for filename, table, _ in TABLES:
         path = WAREHOUSE / filename
         if not path.exists():
             continue
         rows = _records(pd.read_parquet(path))
-        _upsert(table, rows, filter_col)
+        _insert(table, rows)
         print(f"  {table}: {len(rows)} filas sincronizadas (reemplazo)")
 
 
