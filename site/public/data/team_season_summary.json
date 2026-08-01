@@ -41,15 +41,15 @@
   {
     "team": "Banfield",
     "season": "2026",
-    "partidos": 17,
-    "posesion_promedio_proxy": 0.406,
-    "precision_pases_promedio": 70.271,
-    "remates_promedio": 11.529,
-    "remates_al_arco_promedio": 3.471,
-    "remates_al_arco_recibidos_promedio": 5.471,
-    "goles_totales": 17,
-    "goles_recibidos_promedio": 1.176,
-    "faltas_promedio": 11.294
+    "partidos": 18,
+    "posesion_promedio_proxy": 0.405,
+    "precision_pases_promedio": 70.35,
+    "remates_promedio": 11.778,
+    "remates_al_arco_promedio": 3.722,
+    "remates_al_arco_recibidos_promedio": 5.444,
+    "goles_totales": 20,
+    "goles_recibidos_promedio": 1.222,
+    "faltas_promedio": 11.278
   },
   {
     "team": "Barracas Central",
@@ -327,15 +327,15 @@
   {
     "team": "Sarmiento (Junín)",
     "season": "2026",
-    "partidos": 17,
-    "posesion_promedio_proxy": 0.473,
-    "precision_pases_promedio": 71.894,
-    "remates_promedio": 10.0,
-    "remates_al_arco_promedio": 3.529,
-    "remates_al_arco_recibidos_promedio": 5.471,
-    "goles_totales": 15,
-    "goles_recibidos_promedio": 1.353,
-    "faltas_promedio": 13.706
+    "partidos": 18,
+    "posesion_promedio_proxy": 0.481,
+    "precision_pases_promedio": 72.172,
+    "remates_promedio": 10.167,
+    "remates_al_arco_promedio": 3.611,
+    "remates_al_arco_recibidos_promedio": 5.611,
+    "goles_totales": 17,
+    "goles_recibidos_promedio": 1.444,
+    "faltas_promedio": 13.5
   },
   {
     "team": "Talleres (Córdoba)",

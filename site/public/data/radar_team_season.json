@@ -20,7 +20,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 30.0,
     "precision_pases_promedio_percentil": 6.7,
-    "remates_promedio_percentil": 43.3,
+    "remates_promedio_percentil": 40.0,
     "remates_al_arco_promedio_percentil": 16.7
   },
   {
@@ -28,24 +28,24 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 10.0,
     "precision_pases_promedio_percentil": 16.7,
-    "remates_promedio_percentil": 40.0,
-    "remates_al_arco_promedio_percentil": 26.7
+    "remates_promedio_percentil": 50.0,
+    "remates_al_arco_promedio_percentil": 36.7
   },
   {
     "team": "Barracas Central",
     "season": "2026",
     "posesion_promedio_proxy_percentil": 6.7,
     "precision_pases_promedio_percentil": 10.0,
-    "remates_promedio_percentil": 15.0,
-    "remates_al_arco_promedio_percentil": 33.3
+    "remates_promedio_percentil": 11.7,
+    "remates_al_arco_promedio_percentil": 26.7
   },
   {
     "team": "Belgrano (Córdoba)",
     "season": "2026",
     "posesion_promedio_proxy_percentil": 56.7,
     "precision_pases_promedio_percentil": 73.3,
-    "remates_promedio_percentil": 50.0,
-    "remates_al_arco_promedio_percentil": 36.7
+    "remates_promedio_percentil": 46.7,
+    "remates_al_arco_promedio_percentil": 30.0
   },
   {
     "team": "Boca Juniors",
@@ -76,7 +76,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 3.3,
     "precision_pases_promedio_percentil": 3.3,
-    "remates_promedio_percentil": 8.3,
+    "remates_promedio_percentil": 6.7,
     "remates_al_arco_promedio_percentil": 23.3
   },
   {
@@ -100,7 +100,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 23.3,
     "precision_pases_promedio_percentil": 33.3,
-    "remates_promedio_percentil": 46.7,
+    "remates_promedio_percentil": 43.3,
     "remates_al_arco_promedio_percentil": 53.3
   },
   {
@@ -156,7 +156,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 20.0,
     "precision_pases_promedio_percentil": 30.0,
-    "remates_promedio_percentil": 15.0,
+    "remates_promedio_percentil": 11.7,
     "remates_al_arco_promedio_percentil": 13.3
   },
   {
@@ -202,10 +202,10 @@
   {
     "team": "Sarmiento (Junín)",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 36.7,
+    "posesion_promedio_proxy_percentil": 40.0,
     "precision_pases_promedio_percentil": 23.3,
-    "remates_promedio_percentil": 8.3,
-    "remates_al_arco_promedio_percentil": 30.0
+    "remates_promedio_percentil": 16.7,
+    "remates_al_arco_promedio_percentil": 33.3
   },
   {
     "team": "Talleres (Córdoba)",
@@ -218,7 +218,7 @@
   {
     "team": "Tigre",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 40.0,
+    "posesion_promedio_proxy_percentil": 36.7,
     "precision_pases_promedio_percentil": 26.7,
     "remates_promedio_percentil": 86.7,
     "remates_al_arco_promedio_percentil": 76.7
