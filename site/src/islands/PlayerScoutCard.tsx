@@ -8,8 +8,8 @@ import ShareCardButton from "./ShareCardButton";
 import type { ShareStat } from "../lib/shareCard";
 import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights";
 import { buildIndexers } from "../lib/normalize";
-import { PLAYER_METRIC_LABELS as METRIC_LABELS, PLAYER_RADAR_ORDER as RADAR_ORDER } from "../lib/playerMetrics";
-import { positionWeightedGlobal } from "../lib/globalIndex";
+import { PLAYER_METRIC_LABELS as METRIC_LABELS, PLAYER_RADAR_ORDER as RADAR_ORDER, INSIGHT_EXCLUDED_METRICS } from "../lib/playerMetrics";
+import { computeGlobalIndex } from "../lib/globalIndex";
 import { sampleTier } from "../lib/playerSampleGate";
 
 // Datos de plantel (squads.json) ya cruzados por nombre en build — la clave es
@@ -71,7 +71,45 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
   const minsPlayed = playerRows.find((r) => r.metric === "mins_played")?.value ?? null;
   const tier = sampleTier(matchesPlayed, minsPlayed);
 
-  const radarMetrics = RADAR_ORDER.filter((m) => playerRows.some((r) => r.metric === m && r.value != null));
+  // GLOBAL normalizado DENTRO de cada posición (ver globalIndex.ts) -- se
+  // calcula sobre TODO el pool de `rows`, no sólo el jugador elegido, porque
+  // necesita la distribución real de su posición como referencia. Se hace acá
+  // (no en el componente padre) porque este es el único lugar con acceso a
+  // `squad` (la posición real de cada jugador).
+  const globalByKey = useMemo(() => {
+    const byPlayer = new Map<
+      string,
+      { factors: { metric: string; idx: number }[]; matchesPlayed: number | null; minsPlayed: number | null }
+    >();
+    for (const r of rows) {
+      if (!METRIC_LABELS[r.metric] || r.value == null) continue;
+      const key = `${r.team}|${r.player_name}`;
+      let e = byPlayer.get(key);
+      if (!e) {
+        e = { factors: [], matchesPlayed: null, minsPlayed: null };
+        byPlayer.set(key, e);
+      }
+      if (r.metric === "matches_played") e.matchesPlayed = r.value;
+      if (r.metric === "mins_played") e.minsPlayed = r.value;
+      e.factors.push({ metric: r.metric, idx: normalizers[r.metric](r.value) });
+    }
+    const withPosition = [...byPlayer.entries()].map(([key, e]) => ({
+      key,
+      position: squad?.[key]?.position ?? null,
+      factors: e.factors,
+      matchesPlayed: e.matchesPlayed,
+      minsPlayed: e.minsPlayed,
+    }));
+    return computeGlobalIndex(withPosition, normalizers, metricsWithData);
+  }, [rows, normalizers, metricsWithData, squad]);
+
+  // Se excluyen del radar/GLOBAL los totales crudos con variante _per_90 ya
+  // disponible y los eventos censurados en 0 (ver INSIGHT_EXCLUDED_METRICS) --
+  // igual criterio que el índice GLOBAL, para no mostrar ejes duplicados
+  // (goles Y goles cada 90') ni "logros" fabricados sobre listas censuradas.
+  const radarMetrics = RADAR_ORDER.filter(
+    (m) => !INSIGHT_EXCLUDED_METRICS.has(m) && playerRows.some((r) => r.metric === m && r.value != null),
+  );
 
   // Link "compartir por WhatsApp" con las métricas reales del jugador elegido.
   // Componente client:only, así que window está disponible; se guarda igual por prudencia.
@@ -81,7 +119,7 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
     const fmt = (v: number) => Math.round(v * 10) / 10;
 
     const metricName = (m: string) => METRIC_LABELS[m].label.toLowerCase();
-    const known = playerRows.filter((r) => METRIC_LABELS[r.metric] && r.value != null);
+    const known = playerRows.filter((r) => METRIC_LABELS[r.metric] && r.value != null && !INSIGHT_EXCLUDED_METRICS.has(r.metric));
     const best = [...known].sort((a, b) => (pctFor(b.metric, b.value) ?? 0) - (pctFor(a.metric, a.value) ?? 0))[0];
 
     if (!best) return null;
@@ -95,7 +133,7 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
   // (prioriza percentil alto) tomadas de lo que ya se muestra en la ficha.
   const shareStats = useMemo<ShareStat[]>(() => {
     const fmt = (v: number) => `${Math.round(v * 10) / 10}`;
-    const known = playerRows.filter((r) => METRIC_LABELS[r.metric]);
+    const known = playerRows.filter((r) => METRIC_LABELS[r.metric] && !INSIGHT_EXCLUDED_METRICS.has(r.metric));
     const ranked = [...known].sort((a, b) => (b.percentile ?? 0) - (a.percentile ?? 0));
     return ranked.slice(0, 3).map((r) => ({
       label: METRIC_LABELS[r.metric].label.replace(" / partido", ""),
@@ -113,7 +151,7 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
   const insightPoints = useMemo<PlayerMetricPoint[]>(
     () =>
       playerRows
-        .filter((r) => METRIC_LABELS[r.metric])
+        .filter((r) => METRIC_LABELS[r.metric] && !INSIGHT_EXCLUDED_METRICS.has(r.metric))
         .map((r) => ({
           key: r.metric,
           label: METRIC_LABELS[r.metric].label.toLowerCase().replace(" / partido", " por partido"),
@@ -124,9 +162,11 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
         })),
     [playerRows],
   );
+  // Sin muestra suficiente no se genera lectura automática -- un puñado de
+  // eventos en pocos minutos no alcanza para decir "su fortaleza es...".
   const insights = useMemo(
-    () => (currentPlayer ? generatePlayerInsights(currentPlayer, insightPoints) : []),
-    [currentPlayer, insightPoints],
+    () => (currentPlayer && tier !== "insufficient" ? generatePlayerInsights(currentPlayer, insightPoints) : []),
+    [currentPlayer, insightPoints, tier],
   );
 
   // Desglose "carta EA FC": GLOBAL (ponderado por posición) + índice por factor.
@@ -144,16 +184,15 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
         {
           name: currentPlayer,
           color: tokens["--series-3"],
-          // Mismo criterio que el ranking de índice global: ponderado por posición.
-          ovr:
-            tier === "insufficient"
-              ? null
-              : positionWeightedGlobal(perFactor, squadInfo?.position ?? null, normalizers, metricsWithData),
+          // Mismo GLOBAL que el resto del sitio (ranking, comparador): ya viene
+          // normalizado dentro de la posición, calculado sobre el perfil
+          // COMPLETO del jugador (no sólo radarMetrics).
+          ovr: tier === "insufficient" ? null : (globalByKey.get(`${team}|${currentPlayer}`) ?? null),
         },
       ],
       factors: perFactor.map((f) => ({ label: f.label, values: [f.idx] })),
     };
-  }, [radarMetrics, playerRows, currentPlayer, tokens, normalizers, metricsWithData, squadInfo, tier]);
+  }, [radarMetrics, playerRows, currentPlayer, tokens, globalByKey, team, tier]);
 
   const option = useMemo(() => {
     if (radarMetrics.length < 3) return null;

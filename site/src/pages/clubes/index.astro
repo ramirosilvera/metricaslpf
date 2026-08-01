@@ -16,6 +16,7 @@ const standings = loadArray<StandingsRow>("standings.json").sort(
 const summary = loadArray<TeamSeasonSummary>("team_season_summary.json");
 
 const nTeams = standings.length;
+const minJugados = standings.length ? Math.min(...standings.map((r) => r.jugados ?? 0)) : 0;
 const leader = standings[0] ?? null;
 const leaderStats = leader
   ? [
@@ -51,6 +52,17 @@ const leaderShareText = leader
         shareText={leaderShareText}
         filenameBase={`${leader.team}-puntero`}
       />
+    </div>
+  )}
+
+  {standings.length > 0 && minJugados > 0 && minJugados < 5 && (
+    <div class="callout warning" style="margin-bottom: 1.5rem;">
+      <h3>Torneo recién arrancado</h3>
+      <p>
+        El club con menos fecha jugada todavía tiene sólo {minJugados} partido{minJugados === 1 ? "" : "s"}. Con tan
+        poca muestra la tabla se mueve mucho de fecha a fecha -- es la tabla real y en vivo, pero todavía no conviene
+        sacar conclusiones fuertes de la posición de nadie.
+      </p>
     </div>
   )}
 

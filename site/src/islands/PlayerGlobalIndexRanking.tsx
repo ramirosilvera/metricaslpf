@@ -2,10 +2,10 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
-import { flagOrCrestHtml } from "../lib/flags";
+import { flagOrCrestHtml, escapeHtml } from "../lib/flags";
 import { buildIndexers } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
-import { positionWeightedGlobal } from "../lib/globalIndex";
+import { computeGlobalIndex } from "../lib/globalIndex";
 import { sampleTier, MIN_MATCHES_QUALIFIED, MIN_MINUTES_RANKED } from "../lib/playerSampleGate";
 
 // Ranking por ÍNDICE GLOBAL (estilo "GLOBAL/OVR" de EA SPORTS FC): para cada
@@ -83,12 +83,23 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {}, crests 
         suffix: def.suffix,
       });
     }
+    // GLOBAL normalizado DENTRO de cada posición (ver globalIndex.ts) --
+    // necesita el pool completo de una sola vez, no jugador por jugador.
+    const withPosition = [...byPlayer.entries()].map(([key, e]) => ({
+      key,
+      position: positions[`${e.team}|${e.player}`] ?? null,
+      factors: e.factors,
+      matchesPlayed: e.matchesPlayed,
+      minsPlayed: e.minsPlayed,
+    }));
+    const globals = computeGlobalIndex(withPosition, indexers, metricsWithData);
+
     const out: PlayerRow[] = [];
-    for (const e of byPlayer.values()) {
+    for (const [key, e] of byPlayer) {
       if (sampleTier(e.matchesPlayed, e.minsPlayed) !== "ranked") continue;
-      const position = positions[`${e.team}|${e.player}`] ?? null;
-      const global = positionWeightedGlobal(e.factors, position, indexers, metricsWithData);
+      const global = globals.get(key);
       if (global == null) continue;
+      const position = positions[`${e.team}|${e.player}`] ?? null;
       e.factors.sort((a, b) => PLAYER_RADAR_ORDER.indexOf(a.metric) - PLAYER_RADAR_ORDER.indexOf(b.metric));
       out.push({ player: e.player, team: e.team, position, global, factors: e.factors });
     }
@@ -128,9 +139,9 @@ export default function PlayerGlobalIndexRanking({ rows, positions = {}, crests 
           const p = ordered[i];
           if (!p) return "";
           const posTxt = p.position ? ` · ${POS_LABEL[p.position] ?? p.position}` : "";
-          const head = `${flagOrCrestHtml(p.team, crests)} <strong>${p.player}</strong> · ${p.team}${posTxt}<br/>índice global <strong>${p.global}</strong> · ponderado por posición · ${p.factors.length} factores`;
+          const head = `${flagOrCrestHtml(p.team, crests)} <strong>${escapeHtml(p.player)}</strong> · ${escapeHtml(p.team)}${posTxt}<br/>índice global <strong>${p.global}</strong> · ponderado por posición · ${p.factors.length} factores`;
           const body = p.factors
-            .map((f) => `${f.label}: índice <strong>${f.idx}</strong> · ${num(f.raw, f.suffix)}`)
+            .map((f) => `${escapeHtml(f.label)}: índice <strong>${f.idx}</strong> · ${num(f.raw, f.suffix)}`)
             .join("<br/>");
           return `${head}<hr style="border:none;border-top:1px solid ${tokens["--gridline"]};margin:6px 0"/>${body}`;
         },

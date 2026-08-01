@@ -5,6 +5,7 @@ import { useChartTokens, useIsNarrow } from "../lib/theme";
 import TeamBadge from "./TeamBadge";
 import { generateVsBestInsights, type VsBestMetric } from "../lib/insights";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
+import { escapeHtml } from "../lib/flags";
 
 // Los ejes del radar NO son percentiles ni "% del mejor" (con eso los clubes
 // de arriba de tabla rendían casi lo mismo y todos los radares quedaban
@@ -116,7 +117,7 @@ export default function RadarCompare({ summaryRows, crests }: Props) {
               return `${m.name.replace("\n", " ")}: índice <strong>${d.norm}</strong> · ${rawTxt}`;
             })
             .join("<br/>");
-          return `<strong>${p.name}</strong><br/>${rows}`;
+          return `<strong>${escapeHtml(p.name)}</strong><br/>${rows}`;
         },
       },
       legend: { bottom: 0, textStyle: { color: tokens["--text-secondary"] } },

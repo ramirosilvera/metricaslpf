@@ -20,7 +20,7 @@
 
 import type { MatchRow, DerivedPlayerMetricRow } from "./data";
 import { buildIndexers } from "./normalize";
-import { positionWeightedGlobal } from "./globalIndex";
+import { computeGlobalIndex } from "./globalIndex";
 import { sampleTier } from "./playerSampleGate";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "./playerMetrics";
 import { TEAM_ALIAS_FOTMOB_TO_ESPN } from "./playerPositions";
@@ -168,14 +168,21 @@ export function computeClubConsistency(
 
   const byPlayer = new Map<
     string,
-    { team: string; player: string; factors: { metric: string; idx: number }[]; matchesPlayed: number | null; minsPlayed: number | null }
+    {
+      team: string;
+      player: string;
+      position: string | null;
+      factors: { metric: string; idx: number }[];
+      matchesPlayed: number | null;
+      minsPlayed: number | null;
+    }
   >();
   for (const r of playerRows) {
     if (!PLAYER_METRIC_LABELS[r.metric] || r.value == null) continue;
     const key = `${r.team}|${r.player_name}`;
     let e = byPlayer.get(key);
     if (!e) {
-      e = { team: r.team, player: r.player_name, factors: [], matchesPlayed: null, minsPlayed: null };
+      e = { team: r.team, player: r.player_name, position: positions[key] ?? null, factors: [], matchesPlayed: null, minsPlayed: null };
       byPlayer.set(key, e);
     }
     if (r.metric === "matches_played") e.matchesPlayed = r.value;
@@ -183,14 +190,28 @@ export function computeClubConsistency(
     e.factors.push({ metric: r.metric, idx: indexers[r.metric](r.value) });
   }
 
+  // GLOBAL normalizado dentro de cada posición (ver globalIndex.ts) -- clave
+  // para que la mediana por club no quede sesgada por cuántos arqueros le
+  // tocó calificar a cada plantel.
+  const globals = computeGlobalIndex(
+    [...byPlayer.entries()].map(([key, e]) => ({
+      key,
+      position: e.position,
+      factors: e.factors,
+      matchesPlayed: e.matchesPlayed,
+      minsPlayed: e.minsPlayed,
+    })),
+    indexers,
+    metricsWithData,
+  );
+
   // Las métricas de jugador vienen con el nombre de club de FotMob -- se
   // pasan al nombre de ESPN (el que usan matches/standings/squads) con el
   // mismo alias que arregla el cruce de posición (ver playerPositions.ts).
   const globalsByEspnTeam = new Map<string, number[]>();
-  for (const e of byPlayer.values()) {
+  for (const [key, e] of byPlayer) {
     if (sampleTier(e.matchesPlayed, e.minsPlayed) !== "ranked") continue;
-    const pos = positions[`${e.team}|${e.player}`] ?? null;
-    const g = positionWeightedGlobal(e.factors, pos, indexers, metricsWithData);
+    const g = globals.get(key);
     if (g == null) continue;
     const espnTeam = TEAM_ALIAS_FOTMOB_TO_ESPN[e.team] ?? e.team;
     const list = globalsByEspnTeam.get(espnTeam);

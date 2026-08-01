@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import ShareableChart from "./ShareableChart";
 import type { ClubConsistencyRow } from "../lib/clubConsistency";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
-import { flagOrCrestHtml } from "../lib/flags";
+import { flagOrCrestHtml, escapeHtml } from "../lib/flags";
 
 // Cruce club-jugador: puntos de la tabla de referencia (eje X) vs. mediana
 // del índice GLOBAL de los jugadores del club con muestra suficiente (eje
@@ -31,9 +31,10 @@ export default function ClubConsistencyScatter({ rows, crests }: Props) {
 
     const colorFor = (gap: number) => {
       const t = Math.max(-1, Math.min(1, gap / maxAbsGap)); // -1..1
-      // rojo (individual > tabla) <-> gris <-> verde (tabla > individual)
-      if (t >= 0) return tokens["--status-good"];
-      return tokens["--status-critical"];
+      // rojo (individual > tabla, el equipo rinde por debajo de su talento)
+      // <-> verde (tabla > individual, el equipo rinde por encima de su talento)
+      if (t >= 0) return tokens["--status-critical"];
+      return tokens["--status-good"];
     };
 
     return {
@@ -53,7 +54,7 @@ export default function ClubConsistencyScatter({ rows, crests }: Props) {
                 : r.gap < -0.15
                   ? `<br/>El club rinde <strong>más</strong> que la suma de sus individualidades`
                   : `<br/>Consistente con lo esperado`;
-          return `${flagOrCrestHtml(r.team, crests)} <strong>${r.team}</strong><br/>${r.points} pts · DG ${r.gd > 0 ? "+" : ""}${r.gd} · ${r.played} PJ<br/>mediana GLOBAL <strong>${r.medianGlobal}</strong> (${r.nRanked} jugadores con muestra suficiente)${gapTxt}`;
+          return `${flagOrCrestHtml(r.team, crests)} <strong>${escapeHtml(r.team)}</strong><br/>${r.points} pts · DG ${r.gd > 0 ? "+" : ""}${r.gd} · ${r.played} PJ<br/>mediana GLOBAL <strong>${r.medianGlobal}</strong> (${r.nRanked} jugadores con muestra suficiente)${gapTxt}`;
         },
       },
       xAxis: {
@@ -88,6 +89,10 @@ export default function ClubConsistencyScatter({ rows, crests }: Props) {
             fontSize: 10,
             color: tokens["--text-secondary"],
           },
+          // En el cúmulo de clubes de puntaje/GLOBAL parecido las etiquetas se
+          // pisan (más en mobile, menos ancho) -- ECharts las esconde solas
+          // cuando se superponen en vez de renderizar texto ilegible.
+          labelLayout: { hideOverlap: true, moveOverlap: "shiftY" },
           data: plotted.map((r) => [r.points, r.medianGlobal, r]),
         },
       ],
@@ -125,29 +130,30 @@ export default function ClubConsistencyScatter({ rows, crests }: Props) {
         shareLabel="🖼️ Compartir gráfico"
       />
 
+      <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", margin: "0.5rem 0 0" }}>
+        <span style={{ color: "var(--status-critical)" }}>●</span> individual &gt; tabla (el equipo rinde por debajo
+        de su talento) &nbsp;·&nbsp; <span style={{ color: "var(--status-good)" }}>●</span> tabla &gt; individual (el
+        equipo rinde por encima de su talento). El tamaño del punto es la cantidad de jugadores con muestra
+        suficiente que entraron en la mediana del club -- clubes con pocos (dot chico) son una lectura menos firme.
+      </p>
+
       {mismatches.length > 0 && (
-        <div className="table-scroll" style={{ marginTop: "1rem" }}>
+        <div className="table-scroll" style={{ marginTop: "0.75rem" }}>
           <table>
             <thead>
               <tr>
                 <th>Club</th>
+                <th>Lectura</th>
                 <th>Pts</th>
                 <th>DG</th>
                 <th>Mediana GLOBAL</th>
                 <th>Jugadores</th>
-                <th>Lectura</th>
               </tr>
             </thead>
             <tbody>
               {mismatches.map((r) => (
                 <tr key={r.team}>
                   <td>{r.team}</td>
-                  <td>{r.points}</td>
-                  <td>{r.gd > 0 ? `+${r.gd}` : r.gd}</td>
-                  <td>
-                    <strong>{r.medianGlobal}</strong>
-                  </td>
-                  <td>{r.nRanked}</td>
                   <td>
                     {r.gap != null && r.gap > 0
                       ? "individual > tabla"
@@ -155,6 +161,12 @@ export default function ClubConsistencyScatter({ rows, crests }: Props) {
                         ? "tabla > individual"
                         : "—"}
                   </td>
+                  <td>{r.points}</td>
+                  <td>{r.gd > 0 ? `+${r.gd}` : r.gd}</td>
+                  <td>
+                    <strong>{r.medianGlobal}</strong>
+                  </td>
+                  <td>{r.nRanked}</td>
                 </tr>
               ))}
             </tbody>

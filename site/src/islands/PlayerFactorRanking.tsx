@@ -2,9 +2,10 @@ import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
-import { flagOrCrestHtml } from "../lib/flags";
+import { flagOrCrestHtml, escapeHtml } from "../lib/flags";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
+import { sampleTier } from "../lib/playerSampleGate";
 
 // Ranking por FACTOR: elegí cualquiera de las 37 categorías de FotMob (goles,
 // xG, tackles, atajadas, etc.) y mirá qué jugador manda en ese factor — entre
@@ -42,16 +43,40 @@ export default function PlayerFactorRanking({ rows, positions = {}, crests }: Pr
   const label = def.label.replace(" / partido", "");
   const suffix = def.suffix;
 
+  // matches_played/mins_played por jugador -- gate de muestra mínima (mismo
+  // criterio que el ranking de índice global, ver playerSampleGate.ts). Sin
+  // esto un jugador de pocos minutos podía liderar una tasa "cada 90'" por
+  // pura casualidad de muestra chica (ej. un delantero con 14 partidos
+  // liderando goles cada 90', o alguien con 27 minutos en el top de
+  // tarjetas amarillas).
+  const sampleByPlayer = useMemo(() => {
+    const map = new Map<string, { matchesPlayed: number | null; minsPlayed: number | null }>();
+    for (const r of rows) {
+      if (r.metric !== "matches_played" && r.metric !== "mins_played") continue;
+      const key = `${r.team}|${r.player_name}`;
+      const e = map.get(key) ?? { matchesPlayed: null, minsPlayed: null };
+      if (r.metric === "matches_played") e.matchesPlayed = r.value;
+      if (r.metric === "mins_played") e.minsPlayed = r.value;
+      map.set(key, e);
+    }
+    return map;
+  }, [rows]);
+
   // índice del factor elegido sobre todos los jugadores medidos.
   const indexer = useMemo(() => {
     const vals = rows.filter((r) => r.metric === metric && r.value != null).map((r) => r.value as number);
     return makeIndexer(vals, isLowerBetter(metric));
   }, [rows, metric]);
 
-  // filas del factor elegido, con posición.
+  // filas del factor elegido, con posición -- sólo jugadores con muestra
+  // suficiente ("ranked").
   const factorRows = useMemo<Row[]>(() => {
     return rows
       .filter((r) => r.metric === metric && r.value != null)
+      .filter((r) => {
+        const s = sampleByPlayer.get(`${r.team}|${r.player_name}`);
+        return sampleTier(s?.matchesPlayed, s?.minsPlayed) === "ranked";
+      })
       .map((r) => ({
         player: r.player_name,
         team: r.team,
@@ -59,7 +84,7 @@ export default function PlayerFactorRanking({ rows, positions = {}, crests }: Pr
         idx: indexer(r.value as number),
         position: positions[`${r.team}|${r.player_name}`] ?? null,
       }));
-  }, [rows, metric, indexer, positions]);
+  }, [rows, metric, indexer, positions, sampleByPlayer]);
 
   const teams = useMemo(() => [...new Set(factorRows.map((r) => r.team))].sort(), [factorRows]);
   const effTeam = team === ALL || teams.includes(team) ? team : ALL;
@@ -93,13 +118,16 @@ export default function PlayerFactorRanking({ rows, positions = {}, crests }: Pr
           const r = ordered[i];
           if (!r) return "";
           const pos = r.position ? ` · ${POS_LABEL[r.position] ?? r.position}` : "";
-          return `${flagOrCrestHtml(r.team, crests)} <strong>${r.player}</strong> · ${r.team}${pos}<br/>${label}: <strong>${fmt(r.value)}</strong> · índice ${r.idx}`;
+          return `${flagOrCrestHtml(r.team, crests)} <strong>${escapeHtml(r.player)}</strong> · ${escapeHtml(r.team)}${pos}<br/>${label}: <strong>${fmt(r.value)}</strong> · índice ${r.idx}`;
         },
       },
       xAxis: {
         type: "value",
+        // Menos ticks en mobile -- si no, el eje termina con los números
+        // pegados unos a otros (ilegible en pantallas angostas).
+        splitNumber: narrow ? 4 : 5,
         splitLine: { lineStyle: { color: tokens["--gridline"] } },
-        axisLabel: { color: tokens["--text-secondary"] },
+        axisLabel: { color: tokens["--text-secondary"], fontSize: narrow ? 10 : 12 },
       },
       yAxis: {
         type: "category",
@@ -171,7 +199,9 @@ export default function PlayerFactorRanking({ rows, positions = {}, crests }: Pr
         Elegí una de las <strong>37 categorías de FotMob</strong> (goles, xG, tackles, atajadas y más) y un
         <strong> club</strong> (o "todos") para ver quién manda en ese factor. Ordena por el valor real; el
         <strong> índice</strong> (0–100, calibrado al rango de todos los jugadores medidos) aparece en el tooltip para
-        dimensionar. Fuente: FotMob — agregado de TEMPORADA (no de partido), cobertura completa de los 30 clubes.
+        dimensionar. Sólo entran jugadores con muestra suficiente (≥11 partidos, ≥600 minutos -- mismo criterio que el
+        índice global), para que un par de eventos en poca cancha no lidere una tasa "cada 90'". Fuente: FotMob —
+        agregado de TEMPORADA (no de partido), cobertura completa de los 30 clubes.
       </p>
     </div>
   );

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T08:05:45.459961+00:00",
+  "generated_at": "2026-08-01T11:08:10.845119+00:00",
   "confidence_legend": {
     "alta": "Dato de partido real (ESPN), con cobertura alta sobre la temporada en curso.",
     "media": "Fuente real pero con cobertura parcial, o dato agregado/proxy (no oficial-oficial).",
@@ -24,7 +24,7 @@
       "coverage_detail": "282 partidos con estadística cargada de 2026",
       "method": "Remates, posesión-proxy, pases y precisión, faltas, córners, offsides y atajadas por equipo y partido.",
       "confidence": "alta",
-      "as_of": "2026-08-01T08:05:45.459961+00:00",
+      "as_of": "2026-08-01T11:08:10.845119+00:00",
       "status": "ok"
     },
     "physical_performance": {
@@ -34,7 +34,7 @@
       "coverage_pct": null,
       "method": "No existe una fuente gratuita de datos físicos/GPS (distancia, sprints, velocidad punta) para la Liga Profesional Argentina. Es data propietaria de cada club vía su proveedor de hardware (Catapult/STATSports), nunca publicada por las ligas. Se investigó a fondo: fbref, WhoScored y SofaScore bloquean el acceso automatizado (Cloudflare); API-Football, ESPN, FotMob y los sitios oficiales de AFA/Liga Profesional no publican este dato para ninguna competición.",
       "confidence": null,
-      "as_of": "2026-08-01T08:05:45.459961+00:00",
+      "as_of": "2026-08-01T11:08:10.845119+00:00",
       "status": "missing"
     },
     "player_match_stats": {
@@ -45,7 +45,7 @@
       "coverage_detail": "0 partidos -- ESPN no puebla esta sección para esta competición",
       "method": "boxscore.players del endpoint de resumen de partido; vino vacío en todas las pruebas realizadas.",
       "confidence": null,
-      "as_of": "2026-08-01T08:05:45.459961+00:00",
+      "as_of": "2026-08-01T11:08:10.845119+00:00",
       "status": "missing"
     },
     "player_season_stats": {
@@ -58,7 +58,7 @@
       "coverage_pct": 100,
       "method": "37 categorías de líderes de estadística por liga, cada una con su lista completa de temporada (no solo el top-3 visible en la web). Es la única fuente gratuita encontrada con rendimiento real por jugador para esta liga -- ESPN no publica boxscore por partido acá (ver player_match_stats arriba). Al ser agregado de TEMPORADA y no de partido, no es directamente comparable con las tablas por-partido del resto del proyecto.",
       "confidence": "media",
-      "as_of": "2026-08-01T08:05:45.459961+00:00",
+      "as_of": "2026-08-01T11:08:10.845119+00:00",
       "status": "ok"
     },
     "squad_ages": {
@@ -94,7 +94,7 @@
       "coverage_pct": 100,
       "method": "Standings oficiales de ESPN para la Liga Profesional, tabla general.",
       "confidence": "alta",
-      "as_of": "2026-08-01T08:05:45.459961+00:00",
+      "as_of": "2026-08-01T11:08:10.845119+00:00",
       "status": "ok"
     },
     "derived_metrics": {
@@ -103,7 +103,7 @@
       "coverage_detail": "percentil y z-score por métrica dentro de cada temporada; k-means (5 métricas tácticas) para estilo",
       "method": "Percentil y z-score se calculan DENTRO de la misma temporada (2026 vs 2026). El estilo de juego es un k-means sobre 5 métricas tácticas estandarizadas: heurística descriptiva, no una clasificación validada.",
       "confidence": "derivada",
-      "as_of": "2026-08-01T08:05:45.459961+00:00",
+      "as_of": "2026-08-01T11:08:10.845119+00:00",
       "status": "ok"
     },
     "goal_events": {

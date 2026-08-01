@@ -177,11 +177,11 @@ const base = import.meta.env.BASE_URL;
       directamente sobre los Parquet — motor SQL completo, sin backend.
     </p>
     <p>
-      La <strong>única pieza con base de datos es el asistente IA</strong>. Ahí sí hay un <a href="https://supabase.com/" target="_blank" rel="noreferrer">Supabase</a>
-      (Postgres) como base canónica: el mismo ETL que arma los Parquet <em>espeja</em> el warehouse a Supabase, y el
+      La <strong>única pieza con base de datos es el asistente IA</strong>. Ahí sí hay un <a href="https://supabase.com/" target="_blank" rel="noreferrer">Supabase</a> (Postgres)
+      como base canónica: el mismo ETL que arma los Parquet <em>espeja</em> el warehouse a Supabase, y el
       chat (un Cloudflare Worker con function-calling de Gemini) consulta ese Postgres a través de funciones RPC con RLS,
-      nunca con SQL libre. El <strong>schema está versionado como código</strong> (migraciones SQL en el repo, en
-      <code>supabase/migrations/</code>), así la base se reconstruye desde cero de forma reproducible. Resumen: el sitio
+      nunca con SQL libre. El <strong>schema está versionado como código</strong> (migraciones SQL en el repo, en <code>supabase/migrations/</code>),
+      así la base se reconstruye desde cero de forma reproducible. Resumen: el sitio
       no necesita base para funcionar; Supabase existe para darle a la IA consultas en vivo y acotadas.
     </p>
   </section>

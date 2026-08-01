@@ -24,8 +24,21 @@ PARQUET_OUT = ROOT / "site" / "public" / "data-parquet"
 
 def _publish_parquet_for_explorer() -> None:
     """Copia el warehouse Parquet a site/public/ para que el explorador SQL
-    (DuckDB-WASM) lo pueda leer por HTTP desde el propio sitio estático."""
+    (DuckDB-WASM) lo pueda leer por HTTP desde el propio sitio estático.
+
+    Espejo COMPLETO del warehouse -- primero borra en destino cualquier
+    *.parquet que ya no exista en `data/warehouse/` antes de copiar. Sin este
+    borrado, una tabla que dejó de generarse (ej. los datos físicos del
+    Mundial 2026 al pivotar el proyecto a la Liga Profesional) quedaba viva
+    para siempre en el Explorador SQL -- el resto del sitio mostraba
+    correctamente "sin dato" para esa fuente, pero acá se podía seguir
+    consultando un dataset de OTRA competencia como si fuera vigente."""
     PARQUET_OUT.mkdir(parents=True, exist_ok=True)
+    current = {p.name for p in WAREHOUSE.glob("*.parquet")}
+    for stale in PARQUET_OUT.glob("*.parquet"):
+        if stale.name not in current:
+            stale.unlink()
+            print(f"  data-parquet/{stale.name} (borrado -- ya no está en el warehouse)")
     for path in WAREHOUSE.glob("*.parquet"):
         shutil.copy(path, PARQUET_OUT / path.name)
         print(f"  data-parquet/{path.name}")
@@ -500,9 +513,13 @@ def build():
             if h["posesion_pct"] and a["posesion_pct"] and abs(h["posesion_pct"] - a["posesion_pct"]) >= 6:
                 pteam, pv = (home, h["posesion_pct"]) if h["posesion_pct"] > a["posesion_pct"] else (away, a["posesion_pct"])
                 bits.append(f"{pteam} manejó más la pelota ({pv}% de posesión).")
-            if h["remates"] is not None and a["remates"] is not None and abs(h["remates"] - a["remates"]) >= 4:
-                rteam, rv, ov = (home, h["remates"], a["remates"]) if h["remates"] > a["remates"] else (away, a["remates"], h["remates"])
-                bits.append(f"{rteam} remató más al arco rival ({rv} vs {ov} remates).")
+            if h["remates_al_arco"] is not None and a["remates_al_arco"] is not None and abs(h["remates_al_arco"] - a["remates_al_arco"]) >= 2:
+                rteam, rv, ov = (
+                    (home, h["remates_al_arco"], a["remates_al_arco"])
+                    if h["remates_al_arco"] > a["remates_al_arco"]
+                    else (away, a["remates_al_arco"], h["remates_al_arco"])
+                )
+                bits.append(f"{rteam} remató más al arco rival ({rv} vs {ov} remates al arco).")
             insight = " ".join(bits)
 
             summaries.append({

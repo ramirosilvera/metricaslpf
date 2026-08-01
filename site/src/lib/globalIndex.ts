@@ -1,23 +1,38 @@
 // Índice GLOBAL ajustado por posición (estilo EA SPORTS FC).
 // ---------------------------------------------------------------------------
-// Revisado tras una auditoría de criterio futbolístico (ver /metodologia/):
-// un promedio plano de todos los factores cargados premiaba el VOLUMEN de
-// actividad (pases, quites, recuperaciones) sobre la calidad del rendimiento,
-// y colaba métricas de conteo crudo censuradas en cero (ej. "1 tarjeta
-// amarilla" = índice 100 porque la lista de FotMob sólo incluye a quien tiene
-// >=1). Este archivo ahora:
-//   1. usa SIEMPRE el mismo denominador fijo por posición (la suma de pesos
-//      de la tabla), nunca el promedio plano de "lo que el jugador tenga
-//      cargado" -- así no convertir un gol, por ejemplo, ya no le borra el
-//      peso a ese factor en vez de penalizarlo;
-//   2. imputa 0 (vía el indexador real de esa métrica, que ya sabe si es
-//      "menos es mejor") para un factor de la tabla que el jugador no tiene
-//      cargado, en vez de dejarlo afuera del cálculo;
-//   3. NO tiene fallback de promedio plano: sin posición conocida, o con
-//      menos del 85% del peso de la tabla resoluble (la fuente de esa
-//      métrica no tiene ningún dato en todo el dataset), no se emite GLOBAL.
+// Revisado tras dos auditorías de criterio futbolístico (ver /metodologia/):
+//
+// Ronda 1 (ya aplicada): un promedio plano de todos los factores cargados
+// premiaba el VOLUMEN de actividad sobre la calidad, y colaba métricas de
+// conteo crudo censuradas en cero. Se resolvió con denominador fijo por
+// posición + imputación de 0 vía el indexador real de cada métrica + sin
+// fallback de promedio plano.
+//
+// Ronda 2 (esta): el número que salía de la ronda 1 NO era comparable ENTRE
+// posiciones -- cada posición se indexa contra su propia población de
+// referencia (29 arqueros de rango angosto vs. 200-400 jugadores de campo
+// muy sesgados a la derecha), así que un arquero promedio quedaba con GLOBAL
+// más alto que un delantero top sólo por la forma de la distribución de su
+// posición, no por ser mejor jugador. Verificado con datos reales: 47% del
+// top 30 de la liga eran arqueros; en 14 de 30 clubes el arquero figuraba
+// como "el mejor del club" por delante de sus delanteros/mediocampistas.
+//
+// La solución (`computeGlobalIndex`) agrega un segundo paso: el número crudo
+// ponderado (`rawWeightedGlobal`, ronda 1) se re-expresa como el mismo
+// estiramiento [40,100] que ya se usa para CADA factor individual
+// (`makeIndexer` en normalize.ts), pero calibrado sobre la distribución de
+// esa MISMA posición (sólo jugadores con muestra suficiente, ver
+// playerSampleGate.ts). Así un 70 de un arquero y un 70 de un delantero
+// significan lo mismo: mismo percentil relativo dentro de su propia
+// posición. Esto requiere el pool COMPLETO de jugadores (no uno solo) --
+// por eso `computeGlobalIndex` recibe la lista entera y no un jugador
+// suelto como la vieja `positionWeightedGlobal`.
+
+import { makeIndexer } from "./normalize";
+import { sampleTier, type SampleTier } from "./playerSampleGate";
 
 export type Position = "GK" | "DF" | "MF" | "FW";
+const POSITIONS: Position[] = ["GK", "DF", "MF", "FW"];
 
 // Peso 0..5 de cada factor por posición (cada tabla suma 20.00 -- denominador
 // fijo, comparable entre jugadores de la misma posición). Sólo entran
@@ -103,24 +118,26 @@ export function isFieldPosition(position?: string | null): boolean {
   return position === "DF" || position === "MF" || position === "FW";
 }
 
+function isPosition(position: string | null | undefined): position is Position {
+  return position === "GK" || position === "DF" || position === "MF" || position === "FW";
+}
+
 /**
- * Global ponderado por posición a partir de los índices por factor del
- * jugador. Denominador SIEMPRE fijo (suma de pesos de la tabla de la
- * posición): un factor de la tabla que el jugador no tiene cargado se imputa
- * pasando el valor crudo 0 por el indexador real de esa métrica (que ya
- * conoce la dirección -- para "menos es mejor" un 0 es el mejor caso
- * posible, ej. 0 amarillas cada 90'). Si no hay posición conocida, o si una
- * métrica de la tabla no tiene NINGÚN dato en el dataset (fuente caída), no
- * se emite número -- null, no un promedio plano que mezcle bases distintas.
+ * Global ponderado CRUDO (sin normalizar entre posiciones) a partir de los
+ * índices por factor del jugador. Denominador SIEMPRE fijo (suma de pesos de
+ * la tabla de la posición): un factor de la tabla que el jugador no tiene
+ * cargado se imputa pasando el valor crudo 0 por el indexador real de esa
+ * métrica. Uso interno de `computeGlobalIndex` -- no exportar/usar
+ * directamente para mostrar un número (no es comparable entre posiciones,
+ * ver comentario de cabecera).
  */
-export function positionWeightedGlobal(
+function rawWeightedGlobal(
   factors: { metric: string; idx: number }[],
-  position: string | null | undefined,
+  position: Position,
   indexers: Record<string, (v: number) => number>,
   metricsWithData: ReadonlySet<string>,
 ): number | null {
-  const w = position ? POSITION_WEIGHTS[position as Position] : undefined;
-  if (!w) return null;
+  const w = POSITION_WEIGHTS[position];
   const byMetric = new Map(factors.map((f) => [f.metric, f.idx]));
   let num = 0;
   let den = 0;
@@ -135,5 +152,61 @@ export function positionWeightedGlobal(
     }
   }
   if (den === 0 || covered / den < MIN_COVERAGE) return null;
-  return Math.round(num / den);
+  return num / den;
 }
+
+export interface PlayerGlobalInput {
+  key: string;
+  position: string | null | undefined;
+  factors: { metric: string; idx: number }[];
+  /** Partidos/minutos jugados -- determina si este jugador entra en la
+   *  población de referencia usada para calibrar su posición (ver cabecera). */
+  matchesPlayed: number | null | undefined;
+  minsPlayed: number | null | undefined;
+}
+
+/**
+ * GLOBAL final (0-100, normalizado DENTRO de cada posición) para TODO un
+ * pool de jugadores a la vez -- necesita el pool completo porque calibra
+ * cada posición contra su propia distribución real. Sólo los jugadores con
+ * muestra suficiente ("ranked", ver playerSampleGate.ts) entran en la
+ * distribución de referencia de su posición; un jugador de muestra chica
+ * igual recibe un número (calculado sobre esa misma distribución), pero no
+ * la integra -- así una racha de pocos minutos no le corre la escala a
+ * nadie más.
+ */
+export function computeGlobalIndex(
+  players: PlayerGlobalInput[],
+  indexers: Record<string, (v: number) => number>,
+  metricsWithData: ReadonlySet<string>,
+): Map<string, number | null> {
+  const raw = new Map<string, number | null>();
+  const byPosition: Record<Position, number[]> = { GK: [], DF: [], MF: [], FW: [] };
+
+  for (const p of players) {
+    if (!isPosition(p.position)) {
+      raw.set(p.key, null);
+      continue;
+    }
+    const w = rawWeightedGlobal(p.factors, p.position, indexers, metricsWithData);
+    raw.set(p.key, w);
+    if (w != null && sampleTier(p.matchesPlayed, p.minsPlayed) === "ranked") {
+      byPosition[p.position].push(w);
+    }
+  }
+
+  const posIndexer: Partial<Record<Position, (v: number) => number>> = {};
+  for (const pos of POSITIONS) {
+    if (byPosition[pos].length > 0) posIndexer[pos] = makeIndexer(byPosition[pos], false);
+  }
+
+  const out = new Map<string, number | null>();
+  for (const p of players) {
+    const w = raw.get(p.key);
+    const idxFn = isPosition(p.position) ? posIndexer[p.position] : undefined;
+    out.set(p.key, w != null && idxFn ? Math.round(idxFn(w)) : null);
+  }
+  return out;
+}
+
+export type { SampleTier };

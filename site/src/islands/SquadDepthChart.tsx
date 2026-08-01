@@ -3,6 +3,7 @@ import ShareableChart from "./ShareableChart";
 import type { SquadPlayerRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { normName } from "../lib/playerPositions";
+import { escapeHtml } from "../lib/flags";
 
 // Perfil de plantel: edad vs. minutos jugados en la temporada, por jugador,
 // color por posición. Deja ver de un vistazo si un club es joven o veterano,
@@ -72,7 +73,7 @@ export default function SquadDepthChart({ rows, minutesByPlayer = {} }: Props) {
       textStyle: { color: tokens["--text-primary"] },
       formatter: (p: any) => {
         const [age, minutes, , name, jersey, captain] = p.data;
-        return `<strong>${name}</strong>${jersey != null ? ` #${jersey}` : ""}${captain ? " (C)" : ""}<br/>${p.seriesName} · ${age} años<br/>${minutes} minutos jugados`;
+        return `<strong>${escapeHtml(name)}</strong>${jersey != null ? ` #${jersey}` : ""}${captain ? " (C)" : ""}<br/>${p.seriesName} · ${age} años<br/>${minutes} minutos jugados`;
       },
     },
     xAxis: {

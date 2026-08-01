@@ -4,7 +4,7 @@ import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
 import SquadDepthChart from "../islands/SquadDepthChart";
 import { loadJson, loadCrestMap, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
-import { normName } from "../lib/playerPositions";
+import { normName, TEAM_ALIAS_FOTMOB_TO_ESPN } from "../lib/playerPositions";
 
 const base = import.meta.env.BASE_URL;
 const crests = loadCrestMap();
@@ -21,10 +21,16 @@ const squadRows = loadArray<SquadPlayerRow>("squads.json");
 // jugador -- único dato real de "rodaje" disponible para LPF (ESPN no
 // publica caps ni partidos de club). Se cruza por nombre normalizado, mismo
 // criterio que buildPlayerPositions.
+// FotMob (playerMetrics) y ESPN (squadRows) usan nombre de club distinto
+// para 6 de los 30 clubes -- mismo alias que arregla el cruce de posición
+// del índice global (ver lib/playerPositions.ts), acá también hace falta
+// para que "Perfil de plantel" y "Ficha de jugador" no dejen a esos 6
+// clubes sin minutos/dorsal/posición.
 const minutesByPlayer: Record<string, number> = {};
 for (const r of playerMetrics) {
   if (r.metric !== "mins_played" || r.value == null) continue;
-  minutesByPlayer[`${r.team}|${normName(r.player_name)}`] = r.value;
+  const espnTeam = TEAM_ALIAS_FOTMOB_TO_ESPN[r.team] ?? r.team;
+  minutesByPlayer[`${espnTeam}|${normName(r.player_name)}`] = r.value;
 }
 
 const squadByNorm = new Map(squadRows.map((r) => [`${r.team}|${normName(r.player_name)}`, r]));
@@ -32,7 +38,8 @@ const squadInfo: Record<string, SquadInfo> = {};
 for (const row of playerMetrics) {
   const key = `${row.team}|${row.player_name}`;
   if (key in squadInfo) continue;
-  const sq = squadByNorm.get(`${row.team}|${normName(row.player_name)}`);
+  const espnTeam = TEAM_ALIAS_FOTMOB_TO_ESPN[row.team] ?? row.team;
+  const sq = squadByNorm.get(`${espnTeam}|${normName(row.player_name)}`);
   if (sq) {
     squadInfo[key] = {
       jersey_number: sq.jersey_number,

@@ -2,18 +2,9 @@ name: Actualizar datos
 
 on:
   schedule:
-    # cada 6 horas -- ajustar la frecuencia durante el Mundial si hace falta
+    # cada 6 horas
     - cron: "0 */6 * * *"
-  workflow_dispatch:
-    inputs:
-      pmsr_limit:
-        description: "Maximo de PDFs PMSR a descargar/parsear en esta corrida (vacio = sin limite)"
-        required: false
-        default: ""
-      pmsr_max_seconds:
-        description: "Corte por tiempo total de descarga de PDFs en segundos (vacio = sin limite)"
-        required: false
-        default: ""
+  workflow_dispatch: {}
 
 permissions:
   contents: write
@@ -25,10 +16,9 @@ concurrency:
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    # Margen para el backfill de PDFs de FIFA. El scraper igual se auto-corta por
-    # PMSR_MAX_SECONDS (abajo) bastante antes de este techo, para que build +
-    # validación + agregados + sync + commit siempre lleguen a correr. Sin esto,
-    # el job moría por timeout a mitad del scraping y NO commiteaba nada.
+    # Margen para el scraping de ESPN (~300 partidos) + FotMob (37 categorías) --
+    # ninguno de los dos tiene corte propio por tiempo, así que el límite real
+    # es este timeout del job.
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -45,17 +35,10 @@ jobs:
         working-directory: .
         env:
           PYTHONUNBUFFERED: "1"
-          PMSR_LIMIT: ${{ github.event.inputs.pmsr_limit }}
-          # Corte de scraping por tiempo. En dispatch se puede pasar un valor;
-          # si no (o en las corridas programadas) usa 1200s = 20 min, bien por
-          # debajo del timeout-minutes del job, para que el scraper corte solo y
-          # el pipeline llegue a validar/agregar/commitear el progreso. El skip
-          # incremental (por el CSV ya commiteado) hace que cada corrida avance
-          # sobre los partidos que todavía faltan.
-          PMSR_MAX_SECONDS: ${{ github.event.inputs.pmsr_max_seconds || '1200' }}
-          # API-Football (Liga Profesional, temporada actual). Sin este secret,
-          # fetch_api_football_lpf.py escribe CSV vacíos-válidos y no rompe el
-          # pipeline (ver docstring del fetcher).
+          # API-Football: fallback histórico opcional, no lo corre el pipeline
+          # hoy (ver etl/pipeline.py) -- el secret queda cargado por si se
+          # reactiva. Sin él, fetch_api_football_lpf.py (si se corre a mano)
+          # escribe CSV vacíos-válidos y no rompe nada.
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           # Sincroniza el warehouse a Supabase (schema metricas_mundial).
           # Si estos secrets no están cargados, sync_supabase.py se

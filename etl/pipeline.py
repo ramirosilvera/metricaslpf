@@ -2,14 +2,12 @@
 (.github/workflows/update-data.yml) y lo que se puede correr en local.
 
 Pasos:
-  1. (opcional, --skip-scrape) bajar fuentes externas: openfootball (goles),
-     26worldcup (planteles + perfil de seleccion), FIFA Training Centre (fisico)
-     y Transfermarkt (bloqueado, fallback)
-  2. reconstruir data/raw/statsbomb/_processed desde los JSON crudos
-  3. construir el warehouse Parquet (data/warehouse/)
-  4. validar contra los esquemas de Pandera
-  5. construir los agregados JSON que consume el sitio (site/public/data/)
-  6. sincronizar el warehouse a Supabase (best-effort: un fallo del espejo NO
+  1. (opcional, --skip-scrape) bajar fuentes externas: ESPN (partidos, tabla,
+     estadistica tactica) y FotMob (estadistica individual de jugador)
+  2. construir el warehouse Parquet (data/warehouse/)
+  3. validar contra los esquemas de Pandera
+  4. construir los agregados JSON que consume el sitio (site/public/data/)
+  5. sincronizar el warehouse a Supabase (best-effort: un fallo del espejo NO
      frena el publish del sitio, pero queda visible como ::error:: en Actions)
 
 Uso:
@@ -96,7 +94,6 @@ def main():
                 )
                 sys.exit(result.returncode)
 
-    run("build_statsbomb_features.py")
     run("build_warehouse.py")
     run("build_derived_metrics.py")
     run("validate.py")

@@ -49,7 +49,7 @@
       "team": "Atlético Tucumán",
       "note": "2 goles"
     },
-    "insight": "Atlético Tucumán venció 2-0 a Central Córdoba (Santiago del Estero). Central Córdoba (Santiago del Estero) manejó más la pelota (58.9% de posesión)."
+    "insight": "Atlético Tucumán venció 2-0 a Central Córdoba (Santiago del Estero). Central Córdoba (Santiago del Estero) manejó más la pelota (58.9% de posesión). Atlético Tucumán remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 401841456,
@@ -95,7 +95,7 @@
       "team": "Independiente",
       "note": "1 gol"
     },
-    "insight": "Independiente venció 1-0 a Newell's Old Boys. Independiente remató más al arco rival (12 vs 2 remates)."
+    "insight": "Independiente venció 1-0 a Newell's Old Boys. Independiente remató más al arco rival (4 vs 1 remates al arco)."
   },
   {
     "match_id": 401841455,
@@ -153,7 +153,7 @@
       "team": "Independiente Rivadavia",
       "note": "1 gol"
     },
-    "insight": "Independiente Rivadavia venció 2-1 a Huracán. Huracán manejó más la pelota (64.5% de posesión). Independiente Rivadavia remató más al arco rival (21 vs 14 remates)."
+    "insight": "Independiente Rivadavia venció 2-1 a Huracán. Huracán manejó más la pelota (64.5% de posesión)."
   },
   {
     "match_id": 401841454,
@@ -211,7 +211,7 @@
       "team": "Instituto (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Instituto (Córdoba) venció 2-1 a Platense."
+    "insight": "Instituto (Córdoba) venció 2-1 a Platense. Instituto (Córdoba) remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 401841451,
@@ -275,7 +275,7 @@
       "team": "Vélez Sarsfield",
       "note": "1 gol"
     },
-    "insight": "Vélez Sarsfield venció 3-1 a Talleres (Córdoba). Talleres (Córdoba) manejó más la pelota (62.9% de posesión). Talleres (Córdoba) remató más al arco rival (20 vs 11 remates)."
+    "insight": "Vélez Sarsfield venció 3-1 a Talleres (Córdoba). Talleres (Córdoba) manejó más la pelota (62.9% de posesión)."
   },
   {
     "match_id": 401841461,
@@ -321,7 +321,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Barracas Central venció 1-0 a Aldosivi."
+    "insight": "Barracas Central venció 1-0 a Aldosivi. Barracas Central remató más al arco rival (4 vs 1 remates al arco)."
   },
   {
     "match_id": 401841458,
@@ -379,7 +379,7 @@
       "team": "Defensa y Justicia",
       "note": "1 gol"
     },
-    "insight": "Defensa y Justicia venció 2-1 a Deportivo Riestra. Defensa y Justicia manejó más la pelota (61.7% de posesión). Deportivo Riestra remató más al arco rival (18 vs 12 remates)."
+    "insight": "Defensa y Justicia venció 2-1 a Deportivo Riestra. Defensa y Justicia manejó más la pelota (61.7% de posesión). Defensa y Justicia remató más al arco rival (7 vs 5 remates al arco)."
   },
   {
     "match_id": 401841457,
@@ -425,7 +425,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Gimnasia La Plata venció 1-0 a River Plate. River Plate manejó más la pelota (74.1% de posesión). Gimnasia La Plata remató más al arco rival (14 vs 10 remates)."
+    "insight": "Gimnasia La Plata venció 1-0 a River Plate. River Plate manejó más la pelota (74.1% de posesión)."
   },
   {
     "match_id": 401841453,
@@ -460,7 +460,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Rosario Central y Racing Club empataron 0-0. Rosario Central manejó más la pelota (59.3% de posesión). Rosario Central remató más al arco rival (13 vs 5 remates)."
+    "insight": "Rosario Central y Racing Club empataron 0-0. Rosario Central manejó más la pelota (59.3% de posesión)."
   },
   {
     "match_id": 401841449,
@@ -518,7 +518,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 3-0 a Estudiantes de Río Cuarto. Argentinos Juniors manejó más la pelota (70.0% de posesión). Argentinos Juniors remató más al arco rival (17 vs 12 remates)."
+    "insight": "Argentinos Juniors venció 3-0 a Estudiantes de Río Cuarto. Argentinos Juniors manejó más la pelota (70.0% de posesión). Argentinos Juniors remató más al arco rival (9 vs 4 remates al arco)."
   },
   {
     "match_id": 401841462,
@@ -588,7 +588,7 @@
       "team": "Banfield",
       "note": "2 goles"
     },
-    "insight": "Banfield venció 3-2 a Sarmiento (Junín). Sarmiento (Junín) manejó más la pelota (60.7% de posesión)."
+    "insight": "Banfield venció 3-2 a Sarmiento (Junín). Sarmiento (Junín) manejó más la pelota (60.7% de posesión). Banfield remató más al arco rival (8 vs 5 remates al arco)."
   },
   {
     "match_id": 401841452,
@@ -634,7 +634,7 @@
       "team": "San Lorenzo",
       "note": "1 gol"
     },
-    "insight": "San Lorenzo venció 1-0 a Gimnasia (Mendoza)."
+    "insight": "San Lorenzo venció 1-0 a Gimnasia (Mendoza). San Lorenzo remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 401841447,
@@ -692,7 +692,7 @@
       "team": "Deportivo Riestra",
       "note": "1 gol"
     },
-    "insight": "Deportivo Riestra venció 3-0 a Boca Juniors. Boca Juniors manejó más la pelota (81.8% de posesión). Boca Juniors remató más al arco rival (13 vs 6 remates)."
+    "insight": "Deportivo Riestra venció 3-0 a Boca Juniors. Boca Juniors manejó más la pelota (81.8% de posesión)."
   },
   {
     "match_id": 401841445,
@@ -744,7 +744,7 @@
       "team": "Independiente",
       "note": "1 gol"
     },
-    "insight": "Independiente venció 2-0 a Estudiantes de La Plata. Estudiantes de La Plata manejó más la pelota (59.8% de posesión)."
+    "insight": "Independiente venció 2-0 a Estudiantes de La Plata. Estudiantes de La Plata manejó más la pelota (59.8% de posesión). Independiente remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 401841442,
@@ -790,7 +790,7 @@
       "team": "Lanús",
       "note": "1 gol"
     },
-    "insight": "Lanús venció 1-0 a San Lorenzo. Lanús remató más al arco rival (23 vs 13 remates)."
+    "insight": "Lanús venció 1-0 a San Lorenzo. Lanús remató más al arco rival (10 vs 5 remates al arco)."
   },
   {
     "match_id": 401841434,
@@ -825,7 +825,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Atlético Tucumán y Independiente Rivadavia empataron 0-0. Independiente Rivadavia manejó más la pelota (60.0% de posesión). Independiente Rivadavia remató más al arco rival (9 vs 5 remates)."
+    "insight": "Atlético Tucumán y Independiente Rivadavia empataron 0-0. Independiente Rivadavia manejó más la pelota (60.0% de posesión). Independiente Rivadavia remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 401841446,
@@ -871,7 +871,7 @@
       "team": "Estudiantes de Río Cuarto",
       "note": "1 gol"
     },
-    "insight": "Estudiantes de Río Cuarto venció 1-0 a Tigre. Tigre manejó más la pelota (61.6% de posesión). Tigre remató más al arco rival (18 vs 8 remates)."
+    "insight": "Estudiantes de Río Cuarto venció 1-0 a Tigre. Tigre manejó más la pelota (61.6% de posesión). Tigre remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 401841443,
@@ -917,7 +917,7 @@
       "team": "Huracán",
       "note": "1 gol"
     },
-    "insight": "Huracán venció 1-0 a Banfield. Huracán manejó más la pelota (58.3% de posesión). Huracán remató más al arco rival (21 vs 5 remates)."
+    "insight": "Huracán venció 1-0 a Banfield. Huracán manejó más la pelota (58.3% de posesión). Huracán remató más al arco rival (11 vs 1 remates al arco)."
   },
   {
     "match_id": 401841441,
@@ -963,7 +963,7 @@
       "team": "Newell's Old Boys",
       "note": "1 gol"
     },
-    "insight": "Newell's Old Boys venció 1-0 a Talleres (Córdoba). Talleres (Córdoba) manejó más la pelota (67.1% de posesión). Talleres (Córdoba) remató más al arco rival (17 vs 11 remates)."
+    "insight": "Newell's Old Boys venció 1-0 a Talleres (Córdoba). Talleres (Córdoba) manejó más la pelota (67.1% de posesión)."
   },
   {
     "match_id": 401841440,
@@ -1027,7 +1027,7 @@
       "team": "Platense",
       "note": "1 gol"
     },
-    "insight": "Platense y Unión (Santa Fe) empataron 2-2. Platense manejó más la pelota (56.8% de posesión). Platense remató más al arco rival (16 vs 10 remates)."
+    "insight": "Platense y Unión (Santa Fe) empataron 2-2. Platense manejó más la pelota (56.8% de posesión)."
   },
   {
     "match_id": 401841438,
@@ -1073,7 +1073,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Barracas Central venció 1-0 a River Plate. River Plate manejó más la pelota (76.0% de posesión). River Plate remató más al arco rival (15 vs 4 remates)."
+    "insight": "Barracas Central venció 1-0 a River Plate. River Plate manejó más la pelota (76.0% de posesión). River Plate remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 401841448,
@@ -1125,7 +1125,7 @@
       "team": "Defensa y Justicia",
       "note": "1 gol"
     },
-    "insight": "Defensa y Justicia y Aldosivi empataron 1-1. Defensa y Justicia manejó más la pelota (71.5% de posesión). Defensa y Justicia remató más al arco rival (15 vs 8 remates)."
+    "insight": "Defensa y Justicia y Aldosivi empataron 1-1. Defensa y Justicia manejó más la pelota (71.5% de posesión). Defensa y Justicia remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 401841444,
@@ -1171,7 +1171,7 @@
       "team": "Gimnasia (Mendoza)",
       "note": "1 gol"
     },
-    "insight": "Gimnasia (Mendoza) venció 1-0 a Central Córdoba (Santiago del Estero). Gimnasia (Mendoza) manejó más la pelota (63.1% de posesión). Gimnasia (Mendoza) remató más al arco rival (22 vs 8 remates)."
+    "insight": "Gimnasia (Mendoza) venció 1-0 a Central Córdoba (Santiago del Estero). Gimnasia (Mendoza) manejó más la pelota (63.1% de posesión). Gimnasia (Mendoza) remató más al arco rival (8 vs 3 remates al arco)."
   },
   {
     "match_id": 401841439,
@@ -1229,7 +1229,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Racing Club venció 2-1 a Gimnasia La Plata. Racing Club manejó más la pelota (56.7% de posesión). Racing Club remató más al arco rival (18 vs 9 remates)."
+    "insight": "Racing Club venció 2-1 a Gimnasia La Plata. Racing Club manejó más la pelota (56.7% de posesión). Racing Club remató más al arco rival (7 vs 5 remates al arco)."
   },
   {
     "match_id": 401841436,
@@ -1275,7 +1275,7 @@
       "team": "Vélez Sarsfield",
       "note": "1 gol"
     },
-    "insight": "Vélez Sarsfield venció 1-0 a Instituto (Córdoba). Vélez Sarsfield manejó más la pelota (57.8% de posesión). Instituto (Córdoba) remató más al arco rival (19 vs 8 remates)."
+    "insight": "Vélez Sarsfield venció 1-0 a Instituto (Córdoba). Vélez Sarsfield manejó más la pelota (57.8% de posesión). Vélez Sarsfield remató más al arco rival (5 vs 2 remates al arco)."
   },
   {
     "match_id": 401841437,
@@ -1345,7 +1345,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 3-2 a Sarmiento (Junín). Argentinos Juniors manejó más la pelota (55.2% de posesión)."
+    "insight": "Argentinos Juniors venció 3-2 a Sarmiento (Junín). Argentinos Juniors manejó más la pelota (55.2% de posesión). Argentinos Juniors remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 401841435,
@@ -1403,7 +1403,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 2-1 a Rosario Central."
+    "insight": "Belgrano (Córdoba) venció 2-1 a Rosario Central. Belgrano (Córdoba) remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 401873392,
@@ -1473,7 +1473,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "2 goles"
     },
-    "insight": "Belgrano (Córdoba) venció 3-2 a River Plate. River Plate manejó más la pelota (62.1% de posesión). Belgrano (Córdoba) remató más al arco rival (13 vs 8 remates)."
+    "insight": "Belgrano (Córdoba) venció 3-2 a River Plate. River Plate manejó más la pelota (62.1% de posesión). Belgrano (Córdoba) remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 401872677,
@@ -1525,7 +1525,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors y Belgrano (Córdoba) empataron 1-1. Argentinos Juniors manejó más la pelota (56.4% de posesión). Argentinos Juniors remató más al arco rival (18 vs 9 remates)."
+    "insight": "Argentinos Juniors y Belgrano (Córdoba) empataron 1-1. Argentinos Juniors manejó más la pelota (56.4% de posesión). Argentinos Juniors remató más al arco rival (8 vs 3 remates al arco)."
   },
   {
     "match_id": 401872650,
@@ -1571,7 +1571,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "River Plate venció 1-0 a Rosario Central. River Plate manejó más la pelota (53.9% de posesión). River Plate remató más al arco rival (11 vs 7 remates)."
+    "insight": "River Plate venció 1-0 a Rosario Central. River Plate manejó más la pelota (53.9% de posesión). River Plate remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 401872546,
@@ -1623,7 +1623,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "River Plate venció 2-0 a Gimnasia La Plata. River Plate manejó más la pelota (57.0% de posesión). River Plate remató más al arco rival (18 vs 12 remates)."
+    "insight": "River Plate venció 2-0 a Gimnasia La Plata. River Plate manejó más la pelota (57.0% de posesión). River Plate remató más al arco rival (8 vs 6 remates al arco)."
   },
   {
     "match_id": 401872291,
@@ -1669,7 +1669,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 1-0 a Huracán. Argentinos Juniors manejó más la pelota (61.6% de posesión). Argentinos Juniors remató más al arco rival (18 vs 11 remates)."
+    "insight": "Argentinos Juniors venció 1-0 a Huracán. Argentinos Juniors manejó más la pelota (61.6% de posesión)."
   },
   {
     "match_id": 401872179,
@@ -1727,7 +1727,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 2-1 a Racing Club. Rosario Central manejó más la pelota (64.1% de posesión). Rosario Central remató más al arco rival (19 vs 10 remates)."
+    "insight": "Rosario Central venció 2-1 a Racing Club. Rosario Central manejó más la pelota (64.1% de posesión). Rosario Central remató más al arco rival (10 vs 2 remates al arco)."
   },
   {
     "match_id": 401872290,
@@ -1779,7 +1779,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 2-0 a Unión (Santa Fe). Belgrano (Córdoba) manejó más la pelota (53.5% de posesión). Belgrano (Córdoba) remató más al arco rival (17 vs 12 remates)."
+    "insight": "Belgrano (Córdoba) venció 2-0 a Unión (Santa Fe). Belgrano (Córdoba) manejó más la pelota (53.5% de posesión). Belgrano (Córdoba) remató más al arco rival (8 vs 4 remates al arco)."
   },
   {
     "match_id": 401871436,
@@ -1825,7 +1825,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Gimnasia La Plata venció 1-0 a Vélez Sarsfield. Vélez Sarsfield manejó más la pelota (71.3% de posesión). Vélez Sarsfield remató más al arco rival (27 vs 7 remates)."
+    "insight": "Gimnasia La Plata venció 1-0 a Vélez Sarsfield. Vélez Sarsfield manejó más la pelota (71.3% de posesión). Vélez Sarsfield remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 401871435,
@@ -1877,7 +1877,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 2-0 a Lanús. Argentinos Juniors remató más al arco rival (16 vs 9 remates)."
+    "insight": "Argentinos Juniors venció 2-0 a Lanús. Argentinos Juniors remató más al arco rival (8 vs 3 remates al arco)."
   },
   {
     "match_id": 401871434,
@@ -1923,7 +1923,7 @@
       "team": "Racing Club",
       "note": "1 gol"
     },
-    "insight": "Racing Club venció 1-0 a Estudiantes de La Plata. Estudiantes de La Plata remató más al arco rival (13 vs 8 remates)."
+    "insight": "Racing Club venció 1-0 a Estudiantes de La Plata. Estudiantes de La Plata remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 401871433,
@@ -1981,7 +1981,7 @@
       "team": "Unión (Santa Fe)",
       "note": "1 gol"
     },
-    "insight": "Unión (Santa Fe) venció 2-1 a Independiente Rivadavia. Independiente Rivadavia manejó más la pelota (61.2% de posesión). Independiente Rivadavia remató más al arco rival (18 vs 10 remates)."
+    "insight": "Unión (Santa Fe) venció 2-1 a Independiente Rivadavia. Independiente Rivadavia manejó más la pelota (61.2% de posesión). Unión (Santa Fe) remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 401871431,
@@ -2045,7 +2045,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 3-1 a Independiente. Rosario Central manejó más la pelota (60.4% de posesión). Rosario Central remató más al arco rival (14 vs 6 remates)."
+    "insight": "Rosario Central venció 3-1 a Independiente. Rosario Central manejó más la pelota (60.4% de posesión). Rosario Central remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 401871430,
@@ -2109,7 +2109,7 @@
       "team": "San Lorenzo",
       "note": "1 gol"
     },
-    "insight": "River Plate y San Lorenzo empataron 2-2. River Plate manejó más la pelota (73.3% de posesión). River Plate remató más al arco rival (30 vs 5 remates)."
+    "insight": "River Plate y San Lorenzo empataron 2-2. River Plate manejó más la pelota (73.3% de posesión). River Plate remató más al arco rival (12 vs 4 remates al arco)."
   },
   {
     "match_id": 401871437,
@@ -2179,7 +2179,7 @@
       "team": "Huracán",
       "note": "2 goles"
     },
-    "insight": "Huracán venció 3-2 a Boca Juniors. Boca Juniors manejó más la pelota (68.8% de posesión). Boca Juniors remató más al arco rival (36 vs 8 remates)."
+    "insight": "Huracán venció 3-2 a Boca Juniors. Boca Juniors manejó más la pelota (68.8% de posesión). Boca Juniors remató más al arco rival (11 vs 4 remates al arco)."
   },
   {
     "match_id": 401871432,
@@ -2277,7 +2277,7 @@
       "team": "Instituto (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Instituto (Córdoba) venció 2-0 a Estudiantes de Río Cuarto. Instituto (Córdoba) manejó más la pelota (57.4% de posesión). Instituto (Córdoba) remató más al arco rival (22 vs 9 remates)."
+    "insight": "Instituto (Córdoba) venció 2-0 a Estudiantes de Río Cuarto. Instituto (Córdoba) manejó más la pelota (57.4% de posesión). Instituto (Córdoba) remató más al arco rival (7 vs 2 remates al arco)."
   },
   {
     "match_id": 762903,
@@ -2329,7 +2329,7 @@
       "team": "Vélez Sarsfield",
       "note": "1 gol"
     },
-    "insight": "Vélez Sarsfield y Newell's Old Boys empataron 1-1. Vélez Sarsfield manejó más la pelota (60.9% de posesión). Vélez Sarsfield remató más al arco rival (15 vs 9 remates)."
+    "insight": "Vélez Sarsfield y Newell's Old Boys empataron 1-1. Vélez Sarsfield manejó más la pelota (60.9% de posesión). Newell's Old Boys remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762895,
@@ -2451,7 +2451,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 4-0 a Sarmiento (Junín). Belgrano (Córdoba) remató más al arco rival (12 vs 6 remates)."
+    "insight": "Belgrano (Córdoba) venció 4-0 a Sarmiento (Junín). Belgrano (Córdoba) remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762904,
@@ -2601,7 +2601,7 @@
       "team": "Atlético Tucumán",
       "note": "1 gol"
     },
-    "insight": "Atlético Tucumán venció 1-0 a River Plate. River Plate manejó más la pelota (76.0% de posesión). River Plate remató más al arco rival (19 vs 5 remates)."
+    "insight": "Atlético Tucumán venció 1-0 a River Plate. River Plate manejó más la pelota (76.0% de posesión). River Plate remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762898,
@@ -2636,7 +2636,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Racing Club y Huracán empataron 0-0. Racing Club manejó más la pelota (63.7% de posesión). Racing Club remató más al arco rival (9 vs 5 remates)."
+    "insight": "Racing Club y Huracán empataron 0-0. Racing Club manejó más la pelota (63.7% de posesión)."
   },
   {
     "match_id": 762897,
@@ -2798,7 +2798,7 @@
       "team": "Boca Juniors",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors venció 2-1 a Central Córdoba (Santiago del Estero). Boca Juniors manejó más la pelota (64.8% de posesión)."
+    "insight": "Boca Juniors venció 2-1 a Central Córdoba (Santiago del Estero). Boca Juniors manejó más la pelota (64.8% de posesión). Boca Juniors remató más al arco rival (8 vs 4 remates al arco)."
   },
   {
     "match_id": 762905,
@@ -2908,7 +2908,7 @@
       "team": "Unión (Santa Fe)",
       "note": "1 gol"
     },
-    "insight": "Unión (Santa Fe) y Talleres (Córdoba) empataron 1-1. Unión (Santa Fe) manejó más la pelota (62.2% de posesión). Unión (Santa Fe) remató más al arco rival (25 vs 8 remates)."
+    "insight": "Unión (Santa Fe) y Talleres (Córdoba) empataron 1-1. Unión (Santa Fe) manejó más la pelota (62.2% de posesión). Unión (Santa Fe) remató más al arco rival (7 vs 1 remates al arco)."
   },
   {
     "match_id": 762901,
@@ -2966,7 +2966,7 @@
       "team": "San Lorenzo",
       "note": "1 gol"
     },
-    "insight": "Independiente venció 2-1 a San Lorenzo. San Lorenzo manejó más la pelota (57.8% de posesión). San Lorenzo remató más al arco rival (25 vs 13 remates)."
+    "insight": "Independiente venció 2-1 a San Lorenzo. San Lorenzo manejó más la pelota (57.8% de posesión). San Lorenzo remató más al arco rival (7 vs 5 remates al arco)."
   },
   {
     "match_id": 762896,
@@ -3001,7 +3001,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Lanús y Deportivo Riestra empataron 0-0. Lanús manejó más la pelota (71.2% de posesión). Lanús remató más al arco rival (12 vs 5 remates)."
+    "insight": "Lanús y Deportivo Riestra empataron 0-0. Lanús manejó más la pelota (71.2% de posesión). Lanús remató más al arco rival (7 vs 2 remates al arco)."
   },
   {
     "match_id": 763007,
@@ -3059,7 +3059,7 @@
       "team": "Huracán",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 2-1 a Huracán. Argentinos Juniors manejó más la pelota (54.5% de posesión). Huracán remató más al arco rival (11 vs 5 remates)."
+    "insight": "Argentinos Juniors venció 2-1 a Huracán. Argentinos Juniors manejó más la pelota (54.5% de posesión). Huracán remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 763003,
@@ -3199,7 +3199,7 @@
       "team": "Independiente Rivadavia",
       "note": "1 gol"
     },
-    "insight": "Independiente Rivadavia venció 5-1 a Gimnasia (Mendoza). Independiente Rivadavia manejó más la pelota (59.2% de posesión). Independiente Rivadavia remató más al arco rival (23 vs 7 remates)."
+    "insight": "Independiente Rivadavia venció 5-1 a Gimnasia (Mendoza). Independiente Rivadavia manejó más la pelota (59.2% de posesión). Independiente Rivadavia remató más al arco rival (10 vs 2 remates al arco)."
   },
   {
     "match_id": 763004,
@@ -3251,7 +3251,7 @@
       "team": "Newell's Old Boys",
       "note": "1 gol"
     },
-    "insight": "Newell's Old Boys y Instituto (Córdoba) empataron 1-1. Newell's Old Boys remató más al arco rival (11 vs 6 remates)."
+    "insight": "Newell's Old Boys y Instituto (Córdoba) empataron 1-1."
   },
   {
     "match_id": 763001,
@@ -3315,7 +3315,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "River Plate venció 3-1 a Aldosivi. River Plate manejó más la pelota (70.3% de posesión). River Plate remató más al arco rival (24 vs 5 remates)."
+    "insight": "River Plate venció 3-1 a Aldosivi. River Plate manejó más la pelota (70.3% de posesión). River Plate remató más al arco rival (6 vs 2 remates al arco)."
   },
   {
     "match_id": 763000,
@@ -3361,7 +3361,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Gimnasia La Plata venció 1-0 a Belgrano (Córdoba). Gimnasia La Plata manejó más la pelota (54.1% de posesión)."
+    "insight": "Gimnasia La Plata venció 1-0 a Belgrano (Córdoba). Gimnasia La Plata manejó más la pelota (54.1% de posesión). Gimnasia La Plata remató más al arco rival (2 vs 0 remates al arco)."
   },
   {
     "match_id": 762999,
@@ -3413,7 +3413,7 @@
       "team": "Atlético Tucumán",
       "note": "1 gol"
     },
-    "insight": "Atlético Tucumán y Banfield empataron 1-1. Atlético Tucumán manejó más la pelota (53.0% de posesión). Atlético Tucumán remató más al arco rival (16 vs 10 remates)."
+    "insight": "Atlético Tucumán y Banfield empataron 1-1. Atlético Tucumán manejó más la pelota (53.0% de posesión). Atlético Tucumán remató más al arco rival (7 vs 2 remates al arco)."
   },
   {
     "match_id": 763013,
@@ -3465,7 +3465,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Racing Club y Barracas Central empataron 1-1. Barracas Central remató más al arco rival (17 vs 5 remates)."
+    "insight": "Racing Club y Barracas Central empataron 1-1. Barracas Central remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 763012,
@@ -3511,7 +3511,7 @@
       "team": "San Lorenzo",
       "note": "1 gol"
     },
-    "insight": "San Lorenzo venció 1-0 a Platense. Platense manejó más la pelota (56.5% de posesión). Platense remató más al arco rival (23 vs 10 remates)."
+    "insight": "San Lorenzo venció 1-0 a Platense. Platense manejó más la pelota (56.5% de posesión)."
   },
   {
     "match_id": 763008,
@@ -3546,7 +3546,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Estudiantes de La Plata y Talleres (Córdoba) empataron 0-0. Estudiantes de La Plata manejó más la pelota (54.7% de posesión). Estudiantes de La Plata remató más al arco rival (16 vs 10 remates)."
+    "insight": "Estudiantes de La Plata y Talleres (Córdoba) empataron 0-0. Estudiantes de La Plata manejó más la pelota (54.7% de posesión)."
   },
   {
     "match_id": 763002,
@@ -3592,7 +3592,7 @@
       "team": "Sarmiento (Junín)",
       "note": "1 gol"
     },
-    "insight": "Sarmiento (Junín) venció 1-0 a Tigre. Tigre remató más al arco rival (15 vs 10 remates)."
+    "insight": "Sarmiento (Junín) venció 1-0 a Tigre. Sarmiento (Junín) remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 763010,
@@ -3644,7 +3644,7 @@
       "team": "Deportivo Riestra",
       "note": "1 gol"
     },
-    "insight": "Deportivo Riestra venció 2-0 a Independiente. Independiente manejó más la pelota (68.8% de posesión). Independiente remató más al arco rival (13 vs 8 remates)."
+    "insight": "Deportivo Riestra venció 2-0 a Independiente. Independiente manejó más la pelota (68.8% de posesión). Deportivo Riestra remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 763009,
@@ -3702,7 +3702,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 2-1 a Estudiantes de Río Cuarto. Rosario Central manejó más la pelota (56.9% de posesión)."
+    "insight": "Rosario Central venció 2-1 a Estudiantes de Río Cuarto. Rosario Central manejó más la pelota (56.9% de posesión). Rosario Central remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 763005,
@@ -3737,7 +3737,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Lanús y Central Córdoba (Santiago del Estero) empataron 0-0. Lanús manejó más la pelota (65.8% de posesión). Lanús remató más al arco rival (15 vs 9 remates)."
+    "insight": "Lanús y Central Córdoba (Santiago del Estero) empataron 0-0. Lanús manejó más la pelota (65.8% de posesión). Lanús remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 763011,
@@ -3801,7 +3801,7 @@
       "team": "Boca Juniors",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors venció 4-0 a Defensa y Justicia."
+    "insight": "Boca Juniors venció 4-0 a Defensa y Justicia. Boca Juniors remató más al arco rival (7 vs 1 remates al arco)."
   },
   {
     "match_id": 762992,
@@ -3847,7 +3847,7 @@
       "team": "Gimnasia (Mendoza)",
       "note": "1 gol"
     },
-    "insight": "Gimnasia (Mendoza) venció 1-0 a Lanús. Lanús manejó más la pelota (57.6% de posesión). Gimnasia (Mendoza) remató más al arco rival (19 vs 8 remates)."
+    "insight": "Gimnasia (Mendoza) venció 1-0 a Lanús. Lanús manejó más la pelota (57.6% de posesión). Gimnasia (Mendoza) remató más al arco rival (4 vs 0 remates al arco)."
   },
   {
     "match_id": 762985,
@@ -3899,7 +3899,7 @@
       "team": "Tigre",
       "note": "1 gol"
     },
-    "insight": "Tigre y Huracán empataron 1-1. Huracán manejó más la pelota (63.2% de posesión). Tigre remató más al arco rival (9 vs 5 remates)."
+    "insight": "Tigre y Huracán empataron 1-1. Huracán manejó más la pelota (63.2% de posesión)."
   },
   {
     "match_id": 762997,
@@ -3934,7 +3934,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "San Lorenzo y Vélez Sarsfield empataron 0-0."
+    "insight": "San Lorenzo y Vélez Sarsfield empataron 0-0. San Lorenzo remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762990,
@@ -4016,7 +4016,7 @@
       "team": "Central Córdoba (Santiago del Estero)",
       "note": "1 gol"
     },
-    "insight": "Central Córdoba (Santiago del Estero) venció 4-3 a Platense. Platense manejó más la pelota (71.9% de posesión). Platense remató más al arco rival (19 vs 10 remates)."
+    "insight": "Central Córdoba (Santiago del Estero) venció 4-3 a Platense. Platense manejó más la pelota (71.9% de posesión). Platense remató más al arco rival (7 vs 4 remates al arco)."
   },
   {
     "match_id": 762989,
@@ -4086,7 +4086,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Banfield y Independiente Rivadavia empataron 0-0. Independiente Rivadavia manejó más la pelota (61.4% de posesión)."
+    "insight": "Banfield y Independiente Rivadavia empataron 0-0. Independiente Rivadavia manejó más la pelota (61.4% de posesión). Banfield remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762998,
@@ -4138,7 +4138,7 @@
       "team": "Talleres (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Talleres (Córdoba) venció 2-0 a Deportivo Riestra. Talleres (Córdoba) manejó más la pelota (70.9% de posesión). Talleres (Córdoba) remató más al arco rival (15 vs 9 remates)."
+    "insight": "Talleres (Córdoba) venció 2-0 a Deportivo Riestra. Talleres (Córdoba) manejó más la pelota (70.9% de posesión). Talleres (Córdoba) remató más al arco rival (8 vs 1 remates al arco)."
   },
   {
     "match_id": 762996,
@@ -4196,7 +4196,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 2-1 a Sarmiento (Junín). Rosario Central manejó más la pelota (64.0% de posesión). Rosario Central remató más al arco rival (22 vs 5 remates)."
+    "insight": "Rosario Central venció 2-1 a Sarmiento (Junín). Rosario Central manejó más la pelota (64.0% de posesión). Rosario Central remató más al arco rival (6 vs 1 remates al arco)."
   },
   {
     "match_id": 762995,
@@ -4242,7 +4242,7 @@
       "team": "Boca Juniors",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors venció 1-0 a River Plate. River Plate manejó más la pelota (67.9% de posesión)."
+    "insight": "Boca Juniors venció 1-0 a River Plate. River Plate manejó más la pelota (67.9% de posesión). Boca Juniors remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762987,
@@ -4288,7 +4288,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 1-0 a Atlético Tucumán. Argentinos Juniors manejó más la pelota (67.6% de posesión). Argentinos Juniors remató más al arco rival (14 vs 4 remates)."
+    "insight": "Argentinos Juniors venció 1-0 a Atlético Tucumán. Argentinos Juniors manejó más la pelota (67.6% de posesión). Argentinos Juniors remató más al arco rival (6 vs 0 remates al arco)."
   },
   {
     "match_id": 762986,
@@ -4340,7 +4340,7 @@
       "team": "Aldosivi",
       "note": "1 gol"
     },
-    "insight": "Aldosivi y Racing Club empataron 1-1. Racing Club manejó más la pelota (70.7% de posesión). Racing Club remató más al arco rival (21 vs 8 remates)."
+    "insight": "Aldosivi y Racing Club empataron 1-1. Racing Club manejó más la pelota (70.7% de posesión). Aldosivi remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 762994,
@@ -4386,7 +4386,7 @@
       "team": "Estudiantes de La Plata",
       "note": "1 gol"
     },
-    "insight": "Estudiantes de La Plata venció 1-0 a Instituto (Córdoba). Instituto (Córdoba) manejó más la pelota (58.2% de posesión). Instituto (Córdoba) remató más al arco rival (16 vs 4 remates)."
+    "insight": "Estudiantes de La Plata venció 1-0 a Instituto (Córdoba). Instituto (Córdoba) manejó más la pelota (58.2% de posesión)."
   },
   {
     "match_id": 762993,
@@ -4450,7 +4450,7 @@
       "team": "Defensa y Justicia",
       "note": "1 gol"
     },
-    "insight": "Independiente venció 3-1 a Defensa y Justicia. Independiente remató más al arco rival (14 vs 9 remates)."
+    "insight": "Independiente venció 3-1 a Defensa y Justicia. Independiente remató más al arco rival (6 vs 1 remates al arco)."
   },
   {
     "match_id": 762991,
@@ -4566,7 +4566,7 @@
       "team": "Newell's Old Boys",
       "note": "1 gol"
     },
-    "insight": "Newell's Old Boys venció 3-2 a Unión (Santa Fe). Unión (Santa Fe) manejó más la pelota (72.6% de posesión). Unión (Santa Fe) remató más al arco rival (28 vs 5 remates)."
+    "insight": "Newell's Old Boys venció 3-2 a Unión (Santa Fe). Unión (Santa Fe) manejó más la pelota (72.6% de posesión). Unión (Santa Fe) remató más al arco rival (10 vs 3 remates al arco)."
   },
   {
     "match_id": 762974,
@@ -4612,7 +4612,7 @@
       "team": "Vélez Sarsfield",
       "note": "1 gol"
     },
-    "insight": "Vélez Sarsfield venció 1-0 a Central Córdoba (Santiago del Estero). Vélez Sarsfield manejó más la pelota (56.1% de posesión). Vélez Sarsfield remató más al arco rival (21 vs 11 remates)."
+    "insight": "Vélez Sarsfield venció 1-0 a Central Córdoba (Santiago del Estero). Vélez Sarsfield manejó más la pelota (56.1% de posesión). Vélez Sarsfield remató más al arco rival (8 vs 2 remates al arco)."
   },
   {
     "match_id": 762979,
@@ -4658,7 +4658,7 @@
       "team": "Lanús",
       "note": "1 gol"
     },
-    "insight": "Lanús venció 1-0 a Banfield. Lanús manejó más la pelota (65.9% de posesión). Lanús remató más al arco rival (18 vs 12 remates)."
+    "insight": "Lanús venció 1-0 a Banfield. Lanús manejó más la pelota (65.9% de posesión)."
   },
   {
     "match_id": 762975,
@@ -4716,7 +4716,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Gimnasia La Plata venció 2-1 a Sarmiento (Junín). Gimnasia La Plata manejó más la pelota (56.2% de posesión). Gimnasia La Plata remató más al arco rival (17 vs 11 remates)."
+    "insight": "Gimnasia La Plata venció 2-1 a Sarmiento (Junín). Gimnasia La Plata manejó más la pelota (56.2% de posesión). Gimnasia La Plata remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762971,
@@ -4774,7 +4774,7 @@
       "team": "Talleres (Córdoba)",
       "note": "2 goles"
     },
-    "insight": "Talleres (Córdoba) venció 2-1 a Defensa y Justicia. Defensa y Justicia remató más al arco rival (17 vs 8 remates)."
+    "insight": "Talleres (Córdoba) venció 2-1 a Defensa y Justicia."
   },
   {
     "match_id": 762983,
@@ -4838,7 +4838,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Huracán venció 3-1 a Rosario Central. Rosario Central manejó más la pelota (57.0% de posesión). Huracán remató más al arco rival (16 vs 7 remates)."
+    "insight": "Huracán venció 3-1 a Rosario Central. Rosario Central manejó más la pelota (57.0% de posesión). Huracán remató más al arco rival (8 vs 1 remates al arco)."
   },
   {
     "match_id": 762982,
@@ -4873,7 +4873,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Atlético Tucumán y Tigre empataron 0-0. Tigre remató más al arco rival (12 vs 7 remates)."
+    "insight": "Atlético Tucumán y Tigre empataron 0-0. Tigre remató más al arco rival (4 vs 1 remates al arco)."
   },
   {
     "match_id": 762978,
@@ -4908,7 +4908,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Newell's Old Boys y San Lorenzo empataron 0-0. San Lorenzo manejó más la pelota (56.0% de posesión). Newell's Old Boys remató más al arco rival (13 vs 5 remates)."
+    "insight": "Newell's Old Boys y San Lorenzo empataron 0-0. San Lorenzo manejó más la pelota (56.0% de posesión). Newell's Old Boys remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762977,
@@ -4960,7 +4960,7 @@
       "team": "Gimnasia (Mendoza)",
       "note": "1 gol"
     },
-    "insight": "Platense y Gimnasia (Mendoza) empataron 1-1. Platense remató más al arco rival (12 vs 8 remates)."
+    "insight": "Platense y Gimnasia (Mendoza) empataron 1-1."
   },
   {
     "match_id": 762976,
@@ -5070,7 +5070,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Barracas Central venció 2-1 a Estudiantes de Río Cuarto. Estudiantes de Río Cuarto manejó más la pelota (75.0% de posesión). Estudiantes de Río Cuarto remató más al arco rival (16 vs 11 remates)."
+    "insight": "Barracas Central venció 2-1 a Estudiantes de Río Cuarto. Estudiantes de Río Cuarto manejó más la pelota (75.0% de posesión)."
   },
   {
     "match_id": 762981,
@@ -5192,7 +5192,7 @@
       "team": "Independiente Rivadavia",
       "note": "1 gol"
     },
-    "insight": "Independiente Rivadavia venció 3-1 a Argentinos Juniors. Argentinos Juniors manejó más la pelota (53.9% de posesión). Independiente Rivadavia remató más al arco rival (11 vs 7 remates)."
+    "insight": "Independiente Rivadavia venció 3-1 a Argentinos Juniors. Argentinos Juniors manejó más la pelota (53.9% de posesión). Independiente Rivadavia remató más al arco rival (7 vs 1 remates al arco)."
   },
   {
     "match_id": 762972,
@@ -5238,7 +5238,7 @@
       "team": "Instituto (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Instituto (Córdoba) venció 1-0 a Deportivo Riestra. Deportivo Riestra manejó más la pelota (53.2% de posesión)."
+    "insight": "Instituto (Córdoba) venció 1-0 a Deportivo Riestra. Deportivo Riestra manejó más la pelota (53.2% de posesión). Instituto (Córdoba) remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 762970,
@@ -5290,7 +5290,7 @@
       "team": "Independiente",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors y Independiente empataron 1-1. Boca Juniors manejó más la pelota (61.3% de posesión)."
+    "insight": "Boca Juniors y Independiente empataron 1-1. Boca Juniors manejó más la pelota (61.3% de posesión). Boca Juniors remató más al arco rival (5 vs 1 remates al arco)."
   },
   {
     "match_id": 762969,
@@ -5336,7 +5336,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 1-0 a Aldosivi. Belgrano (Córdoba) manejó más la pelota (69.2% de posesión). Belgrano (Córdoba) remató más al arco rival (15 vs 9 remates)."
+    "insight": "Belgrano (Córdoba) venció 1-0 a Aldosivi. Belgrano (Córdoba) manejó más la pelota (69.2% de posesión). Aldosivi remató más al arco rival (4 vs 1 remates al arco)."
   },
   {
     "match_id": 762958,
@@ -5388,7 +5388,7 @@
       "team": "Instituto (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Instituto (Córdoba) venció 2-0 a Defensa y Justicia. Defensa y Justicia manejó más la pelota (60.9% de posesión). Instituto (Córdoba) remató más al arco rival (14 vs 9 remates)."
+    "insight": "Instituto (Córdoba) venció 2-0 a Defensa y Justicia. Defensa y Justicia manejó más la pelota (60.9% de posesión)."
   },
   {
     "match_id": 762966,
@@ -5458,7 +5458,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 3-2 a Banfield. Argentinos Juniors manejó más la pelota (67.2% de posesión). Argentinos Juniors remató más al arco rival (17 vs 9 remates)."
+    "insight": "Argentinos Juniors venció 3-2 a Banfield. Argentinos Juniors manejó más la pelota (67.2% de posesión). Argentinos Juniors remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762968,
@@ -5516,7 +5516,7 @@
       "team": "Huracán",
       "note": "1 gol"
     },
-    "insight": "Huracán venció 3-0 a Gimnasia La Plata. Gimnasia La Plata manejó más la pelota (66.8% de posesión). Gimnasia La Plata remató más al arco rival (25 vs 10 remates)."
+    "insight": "Huracán venció 3-0 a Gimnasia La Plata. Gimnasia La Plata manejó más la pelota (66.8% de posesión)."
   },
   {
     "match_id": 762961,
@@ -5574,7 +5574,7 @@
       "team": "Rosario Central",
       "note": "2 goles"
     },
-    "insight": "Rosario Central venció 2-1 a Atlético Tucumán. Rosario Central manejó más la pelota (67.4% de posesión)."
+    "insight": "Rosario Central venció 2-1 a Atlético Tucumán. Rosario Central manejó más la pelota (67.4% de posesión). Rosario Central remató más al arco rival (8 vs 4 remates al arco)."
   },
   {
     "match_id": 762960,
@@ -5632,7 +5632,7 @@
       "team": "River Plate",
       "note": "2 goles"
     },
-    "insight": "River Plate venció 3-0 a Belgrano (Córdoba). River Plate manejó más la pelota (66.4% de posesión). River Plate remató más al arco rival (20 vs 9 remates)."
+    "insight": "River Plate venció 3-0 a Belgrano (Córdoba). River Plate manejó más la pelota (66.4% de posesión). River Plate remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762954,
@@ -5696,7 +5696,7 @@
       "team": "Central Córdoba (Santiago del Estero)",
       "note": "1 gol"
     },
-    "insight": "Newell's Old Boys venció 3-1 a Central Córdoba (Santiago del Estero). Newell's Old Boys manejó más la pelota (61.8% de posesión). Newell's Old Boys remató más al arco rival (14 vs 6 remates)."
+    "insight": "Newell's Old Boys venció 3-1 a Central Córdoba (Santiago del Estero). Newell's Old Boys manejó más la pelota (61.8% de posesión). Newell's Old Boys remató más al arco rival (5 vs 2 remates al arco)."
   },
   {
     "match_id": 762967,
@@ -5777,7 +5777,7 @@
       "team": "Independiente",
       "note": "1 gol"
     },
-    "insight": "Independiente venció 1-0 a Racing Club."
+    "insight": "Independiente venció 1-0 a Racing Club. Independiente remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762965,
@@ -5829,7 +5829,7 @@
       "team": "Unión (Santa Fe)",
       "note": "1 gol"
     },
-    "insight": "Unión (Santa Fe) venció 2-0 a Deportivo Riestra. Unión (Santa Fe) manejó más la pelota (72.2% de posesión). Unión (Santa Fe) remató más al arco rival (26 vs 8 remates)."
+    "insight": "Unión (Santa Fe) venció 2-0 a Deportivo Riestra. Unión (Santa Fe) manejó más la pelota (72.2% de posesión). Unión (Santa Fe) remató más al arco rival (9 vs 5 remates al arco)."
   },
   {
     "match_id": 762962,
@@ -5945,7 +5945,7 @@
       "team": "Gimnasia (Mendoza)",
       "note": "1 gol"
     },
-    "insight": "Gimnasia (Mendoza) venció 3-2 a Vélez Sarsfield. Vélez Sarsfield manejó más la pelota (56.1% de posesión). Gimnasia (Mendoza) remató más al arco rival (16 vs 11 remates)."
+    "insight": "Gimnasia (Mendoza) venció 3-2 a Vélez Sarsfield. Vélez Sarsfield manejó más la pelota (56.1% de posesión). Gimnasia (Mendoza) remató más al arco rival (9 vs 3 remates al arco)."
   },
   {
     "match_id": 762964,
@@ -5997,7 +5997,7 @@
       "team": "Independiente Rivadavia",
       "note": "1 gol"
     },
-    "insight": "Independiente Rivadavia venció 2-0 a Tigre. Tigre remató más al arco rival (18 vs 13 remates)."
+    "insight": "Independiente Rivadavia venció 2-0 a Tigre. Tigre remató más al arco rival (7 vs 4 remates al arco)."
   },
   {
     "match_id": 762963,
@@ -6043,7 +6043,7 @@
       "team": "Boca Juniors",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors venció 1-0 a Talleres (Córdoba). Talleres (Córdoba) remató más al arco rival (15 vs 8 remates)."
+    "insight": "Boca Juniors venció 1-0 a Talleres (Córdoba)."
   },
   {
     "match_id": 762955,
@@ -6136,7 +6136,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Lanús y Platense empataron 0-0. Lanús manejó más la pelota (59.1% de posesión). Lanús remató más al arco rival (12 vs 3 remates)."
+    "insight": "Lanús y Platense empataron 0-0. Lanús manejó más la pelota (59.1% de posesión)."
   },
   {
     "match_id": 762871,
@@ -6188,7 +6188,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 2-0 a Aldosivi. Argentinos Juniors manejó más la pelota (74.4% de posesión). Aldosivi remató más al arco rival (11 vs 5 remates)."
+    "insight": "Argentinos Juniors venció 2-0 a Aldosivi. Argentinos Juniors manejó más la pelota (74.4% de posesión)."
   },
   {
     "match_id": 762849,
@@ -6246,7 +6246,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 2-1 a Lanús. Argentinos Juniors manejó más la pelota (61.9% de posesión). Argentinos Juniors remató más al arco rival (16 vs 11 remates)."
+    "insight": "Argentinos Juniors venció 2-1 a Lanús. Argentinos Juniors manejó más la pelota (61.9% de posesión). Argentinos Juniors remató más al arco rival (5 vs 1 remates al arco)."
   },
   {
     "match_id": 762945,
@@ -6333,7 +6333,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Huracán y Barracas Central empataron 0-0. Huracán manejó más la pelota (68.6% de posesión). Huracán remató más al arco rival (15 vs 5 remates)."
+    "insight": "Huracán y Barracas Central empataron 0-0. Huracán manejó más la pelota (68.6% de posesión). Huracán remató más al arco rival (4 vs 1 remates al arco)."
   },
   {
     "match_id": 762950,
@@ -6385,7 +6385,7 @@
       "team": "Independiente Rivadavia",
       "note": "1 gol"
     },
-    "insight": "Independiente Rivadavia venció 2-0 a Rosario Central. Rosario Central manejó más la pelota (71.6% de posesión). Rosario Central remató más al arco rival (13 vs 8 remates)."
+    "insight": "Independiente Rivadavia venció 2-0 a Rosario Central. Rosario Central manejó más la pelota (71.6% de posesión)."
   },
   {
     "match_id": 762947,
@@ -6455,7 +6455,7 @@
       "team": "Estudiantes de La Plata",
       "note": "3 goles"
     },
-    "insight": "Estudiantes de La Plata venció 5-0 a Central Córdoba (Santiago del Estero). Estudiantes de La Plata manejó más la pelota (55.2% de posesión). Estudiantes de La Plata remató más al arco rival (25 vs 4 remates)."
+    "insight": "Estudiantes de La Plata venció 5-0 a Central Córdoba (Santiago del Estero). Estudiantes de La Plata manejó más la pelota (55.2% de posesión). Estudiantes de La Plata remató más al arco rival (13 vs 1 remates al arco)."
   },
   {
     "match_id": 762939,
@@ -6501,7 +6501,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 1-0 a Platense. Argentinos Juniors manejó más la pelota (69.2% de posesión). Argentinos Juniors remató más al arco rival (22 vs 9 remates)."
+    "insight": "Argentinos Juniors venció 1-0 a Platense. Argentinos Juniors manejó más la pelota (69.2% de posesión). Argentinos Juniors remató más al arco rival (4 vs 1 remates al arco)."
   },
   {
     "match_id": 762952,
@@ -6553,7 +6553,7 @@
       "team": "Sarmiento (Junín)",
       "note": "1 gol"
     },
-    "insight": "Sarmiento (Junín) venció 2-0 a Aldosivi. Aldosivi manejó más la pelota (59.0% de posesión)."
+    "insight": "Sarmiento (Junín) venció 2-0 a Aldosivi. Aldosivi manejó más la pelota (59.0% de posesión). Sarmiento (Junín) remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762946,
@@ -6605,7 +6605,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "River Plate venció 2-0 a Estudiantes de Río Cuarto. River Plate manejó más la pelota (57.1% de posesión)."
+    "insight": "River Plate venció 2-0 a Estudiantes de Río Cuarto. River Plate manejó más la pelota (57.1% de posesión). River Plate remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762943,
@@ -6657,7 +6657,7 @@
       "team": "Boca Juniors",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors venció 2-0 a Instituto (Córdoba). Boca Juniors manejó más la pelota (68.6% de posesión). Boca Juniors remató más al arco rival (18 vs 12 remates)."
+    "insight": "Boca Juniors venció 2-0 a Instituto (Córdoba). Boca Juniors manejó más la pelota (68.6% de posesión)."
   },
   {
     "match_id": 762942,
@@ -6715,7 +6715,7 @@
       "team": "Racing Club",
       "note": "1 gol"
     },
-    "insight": "Racing Club venció 2-1 a Belgrano (Córdoba). Racing Club manejó más la pelota (54.0% de posesión). Belgrano (Córdoba) remató más al arco rival (13 vs 7 remates)."
+    "insight": "Racing Club venció 2-1 a Belgrano (Córdoba). Racing Club manejó más la pelota (54.0% de posesión)."
   },
   {
     "match_id": 762953,
@@ -6761,7 +6761,7 @@
       "team": "Lanús",
       "note": "1 gol"
     },
-    "insight": "Lanús venció 1-0 a Vélez Sarsfield. Vélez Sarsfield manejó más la pelota (58.8% de posesión). Lanús remató más al arco rival (16 vs 10 remates)."
+    "insight": "Lanús venció 1-0 a Vélez Sarsfield. Vélez Sarsfield manejó más la pelota (58.8% de posesión). Lanús remató más al arco rival (7 vs 5 remates al arco)."
   },
   {
     "match_id": 762951,
@@ -6807,7 +6807,7 @@
       "team": "Newell's Old Boys",
       "note": "1 gol"
     },
-    "insight": "Newell's Old Boys venció 1-0 a Gimnasia (Mendoza). Newell's Old Boys manejó más la pelota (57.4% de posesión). Newell's Old Boys remató más al arco rival (16 vs 10 remates)."
+    "insight": "Newell's Old Boys venció 1-0 a Gimnasia (Mendoza). Newell's Old Boys manejó más la pelota (57.4% de posesión). Newell's Old Boys remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762949,
@@ -6865,7 +6865,7 @@
       "team": "Talleres (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Talleres (Córdoba) venció 2-1 a Independiente. Independiente remató más al arco rival (16 vs 8 remates)."
+    "insight": "Talleres (Córdoba) venció 2-1 a Independiente."
   },
   {
     "match_id": 762944,
@@ -6917,7 +6917,7 @@
       "team": "Defensa y Justicia",
       "note": "1 gol"
     },
-    "insight": "Defensa y Justicia venció 2-0 a Unión (Santa Fe). Unión (Santa Fe) manejó más la pelota (63.9% de posesión). Unión (Santa Fe) remató más al arco rival (19 vs 10 remates)."
+    "insight": "Defensa y Justicia venció 2-0 a Unión (Santa Fe). Unión (Santa Fe) manejó más la pelota (63.9% de posesión). Defensa y Justicia remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 762941,
@@ -6963,7 +6963,7 @@
       "team": "Banfield",
       "note": "1 gol"
     },
-    "insight": "Banfield venció 1-0 a Tigre. Tigre manejó más la pelota (72.7% de posesión). Tigre remató más al arco rival (22 vs 12 remates)."
+    "insight": "Banfield venció 1-0 a Tigre. Tigre manejó más la pelota (72.7% de posesión)."
   },
   {
     "match_id": 762940,
@@ -7009,7 +7009,7 @@
       "team": "Atlético Tucumán",
       "note": "1 gol"
     },
-    "insight": "Atlético Tucumán venció 1-0 a Gimnasia La Plata. Gimnasia La Plata manejó más la pelota (63.5% de posesión). Atlético Tucumán remató más al arco rival (16 vs 10 remates)."
+    "insight": "Atlético Tucumán venció 1-0 a Gimnasia La Plata. Gimnasia La Plata manejó más la pelota (63.5% de posesión)."
   },
   {
     "match_id": 762929,
@@ -7067,7 +7067,7 @@
       "team": "Estudiantes de La Plata",
       "note": "2 goles"
     },
-    "insight": "Estudiantes de La Plata venció 2-1 a Gimnasia (Mendoza). Estudiantes de La Plata manejó más la pelota (58.0% de posesión)."
+    "insight": "Estudiantes de La Plata venció 2-1 a Gimnasia (Mendoza). Estudiantes de La Plata manejó más la pelota (58.0% de posesión). Estudiantes de La Plata remató más al arco rival (6 vs 2 remates al arco)."
   },
   {
     "match_id": 762927,
@@ -7113,7 +7113,7 @@
       "team": "Central Córdoba (Santiago del Estero)",
       "note": "1 gol"
     },
-    "insight": "Central Córdoba (Santiago del Estero) venció 1-0 a Deportivo Riestra. Deportivo Riestra remató más al arco rival (11 vs 4 remates)."
+    "insight": "Central Córdoba (Santiago del Estero) venció 1-0 a Deportivo Riestra. Deportivo Riestra remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762931,
@@ -7183,7 +7183,7 @@
       "team": "Lanús",
       "note": "3 goles"
     },
-    "insight": "Lanús venció 5-0 a Newell's Old Boys. Lanús manejó más la pelota (63.1% de posesión). Lanús remató más al arco rival (14 vs 5 remates)."
+    "insight": "Lanús venció 5-0 a Newell's Old Boys. Lanús manejó más la pelota (63.1% de posesión). Lanús remató más al arco rival (7 vs 2 remates al arco)."
   },
   {
     "match_id": 762930,
@@ -7293,7 +7293,7 @@
       "team": "Unión (Santa Fe)",
       "note": "1 gol"
     },
-    "insight": "Unión (Santa Fe) y Boca Juniors empataron 1-1. Boca Juniors manejó más la pelota (60.6% de posesión)."
+    "insight": "Unión (Santa Fe) y Boca Juniors empataron 1-1. Boca Juniors manejó más la pelota (60.6% de posesión). Boca Juniors remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762937,
@@ -7427,7 +7427,7 @@
       "team": "San Lorenzo",
       "note": "2 goles"
     },
-    "insight": "Defensa y Justicia venció 5-2 a San Lorenzo. San Lorenzo remató más al arco rival (17 vs 11 remates)."
+    "insight": "Defensa y Justicia venció 5-2 a San Lorenzo."
   },
   {
     "match_id": 762933,
@@ -7479,7 +7479,7 @@
       "team": "Racing Club",
       "note": "2 goles"
     },
-    "insight": "Racing Club venció 2-0 a Estudiantes de Río Cuarto. Racing Club manejó más la pelota (56.2% de posesión). Racing Club remató más al arco rival (22 vs 3 remates)."
+    "insight": "Racing Club venció 2-0 a Estudiantes de Río Cuarto. Racing Club manejó más la pelota (56.2% de posesión). Racing Club remató más al arco rival (3 vs 0 remates al arco)."
   },
   {
     "match_id": 762925,
@@ -7537,7 +7537,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Barracas Central venció 2-1 a Atlético Tucumán. Atlético Tucumán manejó más la pelota (55.3% de posesión). Atlético Tucumán remató más al arco rival (13 vs 9 remates)."
+    "insight": "Barracas Central venció 2-1 a Atlético Tucumán. Atlético Tucumán manejó más la pelota (55.3% de posesión)."
   },
   {
     "match_id": 762924,
@@ -7572,7 +7572,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Aldosivi y Huracán empataron 0-0. Huracán manejó más la pelota (59.4% de posesión)."
+    "insight": "Aldosivi y Huracán empataron 0-0. Huracán manejó más la pelota (59.4% de posesión). Huracán remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762935,
@@ -7630,7 +7630,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 2-1 a Banfield. Rosario Central manejó más la pelota (71.4% de posesión). Rosario Central remató más al arco rival (21 vs 7 remates)."
+    "insight": "Rosario Central venció 2-1 a Banfield. Rosario Central manejó más la pelota (71.4% de posesión). Rosario Central remató más al arco rival (6 vs 2 remates al arco)."
   },
   {
     "match_id": 762934,
@@ -7682,7 +7682,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "River Plate venció 2-0 a Sarmiento (Junín). River Plate manejó más la pelota (78.8% de posesión). River Plate remató más al arco rival (34 vs 2 remates)."
+    "insight": "River Plate venció 2-0 a Sarmiento (Junín). River Plate manejó más la pelota (78.8% de posesión). River Plate remató más al arco rival (12 vs 1 remates al arco)."
   },
   {
     "match_id": 762928,
@@ -7752,7 +7752,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Independiente Rivadavia venció 3-2 a Gimnasia La Plata. Independiente Rivadavia remató más al arco rival (13 vs 9 remates)."
+    "insight": "Independiente Rivadavia venció 3-2 a Gimnasia La Plata."
   },
   {
     "match_id": 762926,
@@ -7787,7 +7787,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Belgrano (Córdoba) y Talleres (Córdoba) empataron 0-0."
+    "insight": "Belgrano (Córdoba) y Talleres (Córdoba) empataron 0-0. Talleres (Córdoba) remató más al arco rival (2 vs 0 remates al arco)."
   },
   {
     "match_id": 762932,
@@ -7839,7 +7839,7 @@
       "team": "Vélez Sarsfield",
       "note": "1 gol"
     },
-    "insight": "Vélez Sarsfield venció 2-0 a Platense."
+    "insight": "Vélez Sarsfield venció 2-0 a Platense. Vélez Sarsfield remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 762917,
@@ -7897,7 +7897,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "River Plate venció 2-1 a Huracán. River Plate manejó más la pelota (60.0% de posesión). Huracán remató más al arco rival (15 vs 10 remates)."
+    "insight": "River Plate venció 2-1 a Huracán. River Plate manejó más la pelota (60.0% de posesión). River Plate remató más al arco rival (7 vs 5 remates al arco)."
   },
   {
     "match_id": 762916,
@@ -7943,7 +7943,7 @@
       "team": "Lanús",
       "note": "1 gol"
     },
-    "insight": "Lanús venció 1-0 a Estudiantes de La Plata. Estudiantes de La Plata manejó más la pelota (57.4% de posesión). Estudiantes de La Plata remató más al arco rival (17 vs 7 remates)."
+    "insight": "Lanús venció 1-0 a Estudiantes de La Plata. Estudiantes de La Plata manejó más la pelota (57.4% de posesión)."
   },
   {
     "match_id": 762923,
@@ -7995,7 +7995,7 @@
       "team": "Aldosivi",
       "note": "1 gol"
     },
-    "insight": "Atlético Tucumán y Aldosivi empataron 1-1. Atlético Tucumán manejó más la pelota (63.1% de posesión). Atlético Tucumán remató más al arco rival (17 vs 7 remates)."
+    "insight": "Atlético Tucumán y Aldosivi empataron 1-1. Atlético Tucumán manejó más la pelota (63.1% de posesión). Atlético Tucumán remató más al arco rival (5 vs 1 remates al arco)."
   },
   {
     "match_id": 762922,
@@ -8047,7 +8047,7 @@
       "team": "Talleres (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Talleres (Córdoba) venció 2-0 a Instituto (Córdoba). Instituto (Córdoba) manejó más la pelota (59.2% de posesión). Instituto (Córdoba) remató más al arco rival (17 vs 5 remates)."
+    "insight": "Talleres (Córdoba) venció 2-0 a Instituto (Córdoba). Instituto (Córdoba) manejó más la pelota (59.2% de posesión). Instituto (Córdoba) remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762919,
@@ -8105,7 +8105,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Barracas Central venció 2-1 a Independiente Rivadavia. Independiente Rivadavia manejó más la pelota (72.9% de posesión). Independiente Rivadavia remató más al arco rival (22 vs 8 remates)."
+    "insight": "Barracas Central venció 2-1 a Independiente Rivadavia. Independiente Rivadavia manejó más la pelota (72.9% de posesión). Independiente Rivadavia remató más al arco rival (11 vs 3 remates al arco)."
   },
   {
     "match_id": 762915,
@@ -8151,7 +8151,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 1-0 a Estudiantes de Río Cuarto. Estudiantes de Río Cuarto manejó más la pelota (53.6% de posesión). Estudiantes de Río Cuarto remató más al arco rival (16 vs 8 remates)."
+    "insight": "Belgrano (Córdoba) venció 1-0 a Estudiantes de Río Cuarto. Estudiantes de Río Cuarto manejó más la pelota (53.6% de posesión)."
   },
   {
     "match_id": 762913,
@@ -8238,7 +8238,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Deportivo Riestra y Gimnasia (Mendoza) empataron 0-0. Deportivo Riestra manejó más la pelota (55.3% de posesión). Deportivo Riestra remató más al arco rival (14 vs 7 remates)."
+    "insight": "Deportivo Riestra y Gimnasia (Mendoza) empataron 0-0. Deportivo Riestra manejó más la pelota (55.3% de posesión). Deportivo Riestra remató más al arco rival (7 vs 2 remates al arco)."
   },
   {
     "match_id": 762921,
@@ -8273,7 +8273,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Sarmiento (Junín) y Racing Club empataron 0-0."
+    "insight": "Sarmiento (Junín) y Racing Club empataron 0-0. Racing Club remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762920,
@@ -8325,7 +8325,7 @@
       "team": "Platense",
       "note": "1 gol"
     },
-    "insight": "Newell's Old Boys y Platense empataron 1-1. Platense manejó más la pelota (64.4% de posesión). Platense remató más al arco rival (19 vs 6 remates)."
+    "insight": "Newell's Old Boys y Platense empataron 1-1. Platense manejó más la pelota (64.4% de posesión). Platense remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762912,
@@ -8377,7 +8377,7 @@
       "team": "San Lorenzo",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors y San Lorenzo empataron 1-1. Boca Juniors manejó más la pelota (69.7% de posesión). Boca Juniors remató más al arco rival (11 vs 4 remates)."
+    "insight": "Boca Juniors y San Lorenzo empataron 1-1. Boca Juniors manejó más la pelota (69.7% de posesión)."
   },
   {
     "match_id": 762911,
@@ -8435,7 +8435,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Gimnasia La Plata venció 2-1 a Banfield. Banfield manejó más la pelota (54.2% de posesión). Banfield remató más al arco rival (18 vs 13 remates)."
+    "insight": "Gimnasia La Plata venció 2-1 a Banfield. Banfield manejó más la pelota (54.2% de posesión)."
   },
   {
     "match_id": 762909,
@@ -8470,7 +8470,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Argentinos Juniors y Rosario Central empataron 0-0. Argentinos Juniors manejó más la pelota (58.4% de posesión)."
+    "insight": "Argentinos Juniors y Rosario Central empataron 0-0. Argentinos Juniors manejó más la pelota (58.4% de posesión). Rosario Central remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762918,
@@ -8558,7 +8558,7 @@
       "team": "Independiente",
       "note": "2 goles"
     },
-    "insight": "Independiente y Unión (Santa Fe) empataron 4-4. Independiente manejó más la pelota (57.0% de posesión). Independiente remató más al arco rival (13 vs 9 remates)."
+    "insight": "Independiente y Unión (Santa Fe) empataron 4-4. Independiente manejó más la pelota (57.0% de posesión)."
   },
   {
     "match_id": 762914,
@@ -8610,7 +8610,7 @@
       "team": "Vélez Sarsfield",
       "note": "1 gol"
     },
-    "insight": "Tigre y Vélez Sarsfield empataron 1-1. Vélez Sarsfield manejó más la pelota (58.9% de posesión). Tigre remató más al arco rival (16 vs 9 remates)."
+    "insight": "Tigre y Vélez Sarsfield empataron 1-1. Vélez Sarsfield manejó más la pelota (58.9% de posesión)."
   },
   {
     "match_id": 762878,
@@ -8668,7 +8668,7 @@
       "team": "Boca Juniors",
       "note": "2 goles"
     },
-    "insight": "Boca Juniors venció 3-0 a Lanús."
+    "insight": "Boca Juniors venció 3-0 a Lanús. Boca Juniors remató más al arco rival (5 vs 2 remates al arco)."
   },
   {
     "match_id": 762880,
@@ -8824,7 +8824,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "Independiente Rivadavia y River Plate empataron 1-1. River Plate manejó más la pelota (70.1% de posesión)."
+    "insight": "Independiente Rivadavia y River Plate empataron 1-1. River Plate manejó más la pelota (70.1% de posesión). Independiente Rivadavia remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762886,
@@ -8888,7 +8888,7 @@
       "team": "Huracán",
       "note": "2 goles"
     },
-    "insight": "Huracán venció 3-1 a Belgrano (Córdoba). Huracán remató más al arco rival (20 vs 9 remates)."
+    "insight": "Huracán venció 3-1 a Belgrano (Córdoba). Huracán remató más al arco rival (7 vs 2 remates al arco)."
   },
   {
     "match_id": 762881,
@@ -8940,7 +8940,7 @@
       "team": "Banfield",
       "note": "2 goles"
     },
-    "insight": "Banfield venció 2-0 a Aldosivi. Aldosivi manejó más la pelota (65.5% de posesión)."
+    "insight": "Banfield venció 2-0 a Aldosivi. Aldosivi manejó más la pelota (65.5% de posesión). Banfield remató más al arco rival (2 vs 0 remates al arco)."
   },
   {
     "match_id": 762893,
@@ -9004,7 +9004,7 @@
       "team": "Tigre",
       "note": "1 gol"
     },
-    "insight": "Tigre y Gimnasia La Plata empataron 2-2. Tigre remató más al arco rival (21 vs 5 remates)."
+    "insight": "Tigre y Gimnasia La Plata empataron 2-2. Tigre remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762885,
@@ -9137,7 +9137,7 @@
       "team": "Defensa y Justicia",
       "note": "1 gol"
     },
-    "insight": "Defensa y Justicia y Lanús empataron 1-1. Lanús manejó más la pelota (55.4% de posesión)."
+    "insight": "Defensa y Justicia y Lanús empataron 1-1. Lanús manejó más la pelota (55.4% de posesión). Defensa y Justicia remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762892,
@@ -9172,7 +9172,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Talleres (Córdoba) y San Lorenzo empataron 0-0. Talleres (Córdoba) manejó más la pelota (57.4% de posesión). Talleres (Córdoba) remató más al arco rival (15 vs 11 remates)."
+    "insight": "Talleres (Córdoba) y San Lorenzo empataron 0-0. Talleres (Córdoba) manejó más la pelota (57.4% de posesión)."
   },
   {
     "match_id": 762890,
@@ -9224,7 +9224,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 2-0 a Newell's Old Boys. Rosario Central manejó más la pelota (61.9% de posesión). Rosario Central remató más al arco rival (11 vs 7 remates)."
+    "insight": "Rosario Central venció 2-0 a Newell's Old Boys. Rosario Central manejó más la pelota (61.9% de posesión). Rosario Central remató más al arco rival (6 vs 2 remates al arco)."
   },
   {
     "match_id": 762889,
@@ -9334,7 +9334,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors y Barracas Central empataron 1-1. Argentinos Juniors manejó más la pelota (72.5% de posesión). Argentinos Juniors remató más al arco rival (19 vs 13 remates)."
+    "insight": "Argentinos Juniors y Barracas Central empataron 1-1. Argentinos Juniors manejó más la pelota (72.5% de posesión). Argentinos Juniors remató más al arco rival (8 vs 5 remates al arco)."
   },
   {
     "match_id": 762887,
@@ -9386,7 +9386,7 @@
       "team": "Independiente",
       "note": "1 gol"
     },
-    "insight": "Independiente venció 2-0 a Central Córdoba (Santiago del Estero). Independiente manejó más la pelota (74.0% de posesión). Independiente remató más al arco rival (28 vs 7 remates)."
+    "insight": "Independiente venció 2-0 a Central Córdoba (Santiago del Estero). Independiente manejó más la pelota (74.0% de posesión). Independiente remató más al arco rival (8 vs 2 remates al arco)."
   },
   {
     "match_id": 762882,
@@ -9438,7 +9438,7 @@
       "team": "Gimnasia (Mendoza)",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors y Gimnasia (Mendoza) empataron 1-1. Boca Juniors manejó más la pelota (70.7% de posesión). Boca Juniors remató más al arco rival (19 vs 6 remates)."
+    "insight": "Boca Juniors y Gimnasia (Mendoza) empataron 1-1. Boca Juniors manejó más la pelota (70.7% de posesión). Boca Juniors remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762875,
@@ -9490,7 +9490,7 @@
       "team": "Estudiantes de Río Cuarto",
       "note": "1 gol"
     },
-    "insight": "Estudiantes de Río Cuarto venció 2-0 a Huracán. Huracán manejó más la pelota (64.7% de posesión). Estudiantes de Río Cuarto remató más al arco rival (18 vs 10 remates)."
+    "insight": "Estudiantes de Río Cuarto venció 2-0 a Huracán. Huracán manejó más la pelota (64.7% de posesión). Estudiantes de Río Cuarto remató más al arco rival (7 vs 2 remates al arco)."
   },
   {
     "match_id": 762869,
@@ -9554,7 +9554,7 @@
       "team": "Unión (Santa Fe)",
       "note": "1 gol"
     },
-    "insight": "Unión (Santa Fe) venció 3-1 a Sarmiento (Junín). Sarmiento (Junín) manejó más la pelota (62.5% de posesión)."
+    "insight": "Unión (Santa Fe) venció 3-1 a Sarmiento (Junín). Sarmiento (Junín) manejó más la pelota (62.5% de posesión). Unión (Santa Fe) remató más al arco rival (8 vs 6 remates al arco)."
   },
   {
     "match_id": 762867,
@@ -9618,7 +9618,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "River Plate venció 3-1 a Banfield. River Plate manejó más la pelota (64.7% de posesión). River Plate remató más al arco rival (25 vs 6 remates)."
+    "insight": "River Plate venció 3-1 a Banfield. River Plate manejó más la pelota (64.7% de posesión). River Plate remató más al arco rival (8 vs 2 remates al arco)."
   },
   {
     "match_id": 762866,
@@ -9670,7 +9670,7 @@
       "team": "Independiente Rivadavia",
       "note": "1 gol"
     },
-    "insight": "Racing Club y Independiente Rivadavia empataron 1-1. Racing Club remató más al arco rival (13 vs 9 remates)."
+    "insight": "Racing Club y Independiente Rivadavia empataron 1-1. Racing Club remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762877,
@@ -9780,7 +9780,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 2-1 a Gimnasia La Plata. Rosario Central manejó más la pelota (55.4% de posesión). Gimnasia La Plata remató más al arco rival (13 vs 9 remates)."
+    "insight": "Rosario Central venció 2-1 a Gimnasia La Plata. Rosario Central manejó más la pelota (55.4% de posesión). Gimnasia La Plata remató más al arco rival (6 vs 2 remates al arco)."
   },
   {
     "match_id": 762873,
@@ -9844,7 +9844,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 3-1 a Atlético Tucumán."
+    "insight": "Belgrano (Córdoba) venció 3-1 a Atlético Tucumán. Belgrano (Córdoba) remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762872,
@@ -9902,7 +9902,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Barracas Central venció 2-1 a Tigre. Barracas Central manejó más la pelota (53.7% de posesión). Tigre remató más al arco rival (15 vs 11 remates)."
+    "insight": "Barracas Central venció 2-1 a Tigre. Barracas Central manejó más la pelota (53.7% de posesión)."
   },
   {
     "match_id": 762870,
@@ -9989,7 +9989,7 @@
       "team": "Estudiantes de La Plata",
       "note": "1 gol"
     },
-    "insight": "Estudiantes de La Plata venció 2-0 a Newell's Old Boys. Estudiantes de La Plata manejó más la pelota (62.1% de posesión)."
+    "insight": "Estudiantes de La Plata venció 2-0 a Newell's Old Boys. Estudiantes de La Plata manejó más la pelota (62.1% de posesión). Estudiantes de La Plata remató más al arco rival (7 vs 1 remates al arco)."
   },
   {
     "match_id": 762874,
@@ -10093,7 +10093,7 @@
       "team": "Instituto (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "San Lorenzo y Instituto (Córdoba) empataron 1-1. San Lorenzo manejó más la pelota (56.6% de posesión). Instituto (Córdoba) remató más al arco rival (15 vs 11 remates)."
+    "insight": "San Lorenzo y Instituto (Córdoba) empataron 1-1. San Lorenzo manejó más la pelota (56.6% de posesión). Instituto (Córdoba) remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762865,
@@ -10174,7 +10174,7 @@
       "team": "Unión (Santa Fe)",
       "note": "1 gol"
     },
-    "insight": "Unión (Santa Fe) venció 1-0 a Aldosivi. Aldosivi manejó más la pelota (53.4% de posesión). Unión (Santa Fe) remató más al arco rival (20 vs 12 remates)."
+    "insight": "Unión (Santa Fe) venció 1-0 a Aldosivi. Aldosivi manejó más la pelota (53.4% de posesión). Unión (Santa Fe) remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762862,
@@ -10272,7 +10272,7 @@
       "team": "San Lorenzo",
       "note": "1 gol"
     },
-    "insight": "San Lorenzo venció 2-0 a Estudiantes de Río Cuarto."
+    "insight": "San Lorenzo venció 2-0 a Estudiantes de Río Cuarto. San Lorenzo remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 762852,
@@ -10307,7 +10307,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Central Córdoba (Santiago del Estero) y Tigre empataron 0-0. Tigre manejó más la pelota (60.9% de posesión)."
+    "insight": "Central Córdoba (Santiago del Estero) y Tigre empataron 0-0. Tigre manejó más la pelota (60.9% de posesión). Tigre remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762863,
@@ -10365,7 +10365,7 @@
       "team": "Banfield",
       "note": "2 goles"
     },
-    "insight": "Banfield venció 3-0 a Newell's Old Boys. Banfield remató más al arco rival (17 vs 10 remates)."
+    "insight": "Banfield venció 3-0 a Newell's Old Boys. Banfield remató más al arco rival (9 vs 2 remates al arco)."
   },
   {
     "match_id": 762860,
@@ -10411,7 +10411,7 @@
       "team": "Talleres (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Talleres (Córdoba) venció 1-0 a Rosario Central. Rosario Central manejó más la pelota (68.3% de posesión). Rosario Central remató más al arco rival (14 vs 8 remates)."
+    "insight": "Talleres (Córdoba) venció 1-0 a Rosario Central. Rosario Central manejó más la pelota (68.3% de posesión)."
   },
   {
     "match_id": 762859,
@@ -10457,7 +10457,7 @@
       "team": "Platense",
       "note": "1 gol"
     },
-    "insight": "Platense venció 1-0 a Barracas Central. Platense manejó más la pelota (64.7% de posesión). Platense remató más al arco rival (14 vs 6 remates)."
+    "insight": "Platense venció 1-0 a Barracas Central. Platense manejó más la pelota (64.7% de posesión). Platense remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762857,
@@ -10573,7 +10573,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Gimnasia La Plata venció 1-0 a Gimnasia (Mendoza). Gimnasia (Mendoza) manejó más la pelota (58.8% de posesión). Gimnasia (Mendoza) remató más al arco rival (26 vs 9 remates)."
+    "insight": "Gimnasia La Plata venció 1-0 a Gimnasia (Mendoza). Gimnasia (Mendoza) manejó más la pelota (58.8% de posesión). Gimnasia (Mendoza) remató más al arco rival (6 vs 2 remates al arco)."
   },
   {
     "match_id": 762854,
@@ -10666,7 +10666,7 @@
       "team": "Instituto (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Instituto (Córdoba) venció 2-1 a Atlético Tucumán. Instituto (Córdoba) manejó más la pelota (64.8% de posesión). Instituto (Córdoba) remató más al arco rival (15 vs 7 remates)."
+    "insight": "Instituto (Córdoba) venció 2-1 a Atlético Tucumán. Instituto (Córdoba) manejó más la pelota (64.8% de posesión). Instituto (Córdoba) remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762855,
@@ -10712,7 +10712,7 @@
       "team": "Estudiantes de La Plata",
       "note": "1 gol"
     },
-    "insight": "Estudiantes de La Plata venció 1-0 a Sarmiento (Junín). Sarmiento (Junín) manejó más la pelota (57.8% de posesión)."
+    "insight": "Estudiantes de La Plata venció 1-0 a Sarmiento (Junín). Sarmiento (Junín) manejó más la pelota (57.8% de posesión). Estudiantes de La Plata remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762853,
@@ -10799,7 +10799,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Boca Juniors y Racing Club empataron 0-0."
+    "insight": "Boca Juniors y Racing Club empataron 0-0. Racing Club remató más al arco rival (2 vs 0 remates al arco)."
   },
   {
     "match_id": 762845,
@@ -10851,7 +10851,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 2-0 a Barracas Central. Rosario Central manejó más la pelota (66.2% de posesión). Rosario Central remató más al arco rival (19 vs 3 remates)."
+    "insight": "Rosario Central venció 2-0 a Barracas Central. Rosario Central manejó más la pelota (66.2% de posesión). Rosario Central remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762844,
@@ -10903,7 +10903,7 @@
       "team": "Instituto (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Instituto (Córdoba) venció 2-0 a Central Córdoba (Santiago del Estero). Central Córdoba (Santiago del Estero) manejó más la pelota (53.9% de posesión)."
+    "insight": "Instituto (Córdoba) venció 2-0 a Central Córdoba (Santiago del Estero). Central Córdoba (Santiago del Estero) manejó más la pelota (53.9% de posesión). Instituto (Córdoba) remató más al arco rival (2 vs 0 remates al arco)."
   },
   {
     "match_id": 762839,
@@ -10955,7 +10955,7 @@
       "team": "Newell's Old Boys",
       "note": "1 gol"
     },
-    "insight": "Deportivo Riestra y Newell's Old Boys empataron 1-1. Deportivo Riestra remató más al arco rival (16 vs 7 remates)."
+    "insight": "Deportivo Riestra y Newell's Old Boys empataron 1-1."
   },
   {
     "match_id": 762843,
@@ -11001,7 +11001,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 1-0 a Independiente Rivadavia. Independiente Rivadavia remató más al arco rival (16 vs 11 remates)."
+    "insight": "Belgrano (Córdoba) venció 1-0 a Independiente Rivadavia."
   },
   {
     "match_id": 762840,
@@ -11036,7 +11036,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Gimnasia La Plata y Estudiantes de La Plata empataron 0-0. Estudiantes de La Plata manejó más la pelota (59.0% de posesión)."
+    "insight": "Gimnasia La Plata y Estudiantes de La Plata empataron 0-0. Estudiantes de La Plata manejó más la pelota (59.0% de posesión). Estudiantes de La Plata remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762837,
@@ -11071,7 +11071,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Boca Juniors y Platense empataron 0-0. Boca Juniors manejó más la pelota (62.8% de posesión). Platense remató más al arco rival (14 vs 10 remates)."
+    "insight": "Boca Juniors y Platense empataron 0-0. Boca Juniors manejó más la pelota (62.8% de posesión). Boca Juniors remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762835,
@@ -11135,7 +11135,7 @@
       "team": "Atlético Tucumán",
       "note": "2 goles"
     },
-    "insight": "Atlético Tucumán venció 4-0 a Estudiantes de Río Cuarto. Atlético Tucumán remató más al arco rival (18 vs 5 remates)."
+    "insight": "Atlético Tucumán venció 4-0 a Estudiantes de Río Cuarto. Atlético Tucumán remató más al arco rival (7 vs 0 remates al arco)."
   },
   {
     "match_id": 762848,
@@ -11170,7 +11170,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Unión (Santa Fe) y San Lorenzo empataron 0-0. Unión (Santa Fe) manejó más la pelota (54.2% de posesión). Unión (Santa Fe) remató más al arco rival (23 vs 5 remates)."
+    "insight": "Unión (Santa Fe) y San Lorenzo empataron 0-0. Unión (Santa Fe) manejó más la pelota (54.2% de posesión). Unión (Santa Fe) remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762846,
@@ -11228,7 +11228,7 @@
       "team": "Talleres (Córdoba)",
       "note": "2 goles"
     },
-    "insight": "Talleres (Córdoba) venció 2-1 a Gimnasia (Mendoza). Talleres (Córdoba) manejó más la pelota (62.5% de posesión). Talleres (Córdoba) remató más al arco rival (13 vs 8 remates)."
+    "insight": "Talleres (Córdoba) venció 2-1 a Gimnasia (Mendoza). Talleres (Córdoba) manejó más la pelota (62.5% de posesión)."
   },
   {
     "match_id": 762841,
@@ -11274,7 +11274,7 @@
       "team": "Huracán",
       "note": "1 gol"
     },
-    "insight": "Huracán venció 1-0 a Sarmiento (Junín). Huracán manejó más la pelota (54.9% de posesión). Huracán remató más al arco rival (9 vs 3 remates)."
+    "insight": "Huracán venció 1-0 a Sarmiento (Junín). Huracán manejó más la pelota (54.9% de posesión). Huracán remató más al arco rival (4 vs 0 remates al arco)."
   },
   {
     "match_id": 762838,
@@ -11326,7 +11326,7 @@
       "team": "Defensa y Justicia",
       "note": "1 gol"
     },
-    "insight": "Defensa y Justicia y Vélez Sarsfield empataron 1-1. Vélez Sarsfield manejó más la pelota (65.8% de posesión). Vélez Sarsfield remató más al arco rival (12 vs 6 remates)."
+    "insight": "Defensa y Justicia y Vélez Sarsfield empataron 1-1. Vélez Sarsfield manejó más la pelota (65.8% de posesión)."
   },
   {
     "match_id": 762836,
@@ -11378,7 +11378,7 @@
       "team": "Racing Club",
       "note": "1 gol"
     },
-    "insight": "Racing Club venció 2-0 a Banfield. Racing Club manejó más la pelota (56.9% de posesión)."
+    "insight": "Racing Club venció 2-0 a Banfield. Racing Club manejó más la pelota (56.9% de posesión). Racing Club remató más al arco rival (5 vs 2 remates al arco)."
   },
   {
     "match_id": 762842,
@@ -11430,7 +11430,7 @@
       "team": "Independiente",
       "note": "1 gol"
     },
-    "insight": "Independiente venció 2-0 a Lanús. Independiente remató más al arco rival (17 vs 5 remates)."
+    "insight": "Independiente venció 2-0 a Lanús. Independiente remató más al arco rival (3 vs 0 remates al arco)."
   },
   {
     "match_id": 762834,
@@ -11476,7 +11476,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 1-0 a River Plate. Argentinos Juniors remató más al arco rival (14 vs 9 remates)."
+    "insight": "Argentinos Juniors venció 1-0 a River Plate. Argentinos Juniors remató más al arco rival (5 vs 1 remates al arco)."
   },
   {
     "match_id": 762847,
@@ -11522,7 +11522,7 @@
       "team": "Tigre",
       "note": "1 gol"
     },
-    "insight": "Tigre venció 1-0 a Aldosivi. Aldosivi manejó más la pelota (55.6% de posesión). Tigre remató más al arco rival (14 vs 10 remates)."
+    "insight": "Tigre venció 1-0 a Aldosivi. Aldosivi manejó más la pelota (55.6% de posesión). Tigre remató más al arco rival (6 vs 0 remates al arco)."
   },
   {
     "match_id": 762823,
@@ -11563,7 +11563,7 @@
       }
     ],
     "destacado": null,
-    "insight": "Independiente Rivadavia venció 1-0 a Estudiantes de Río Cuarto."
+    "insight": "Independiente Rivadavia venció 1-0 a Estudiantes de Río Cuarto. Independiente Rivadavia remató más al arco rival (3 vs 0 remates al arco)."
   },
   {
     "match_id": 762833,
@@ -11621,7 +11621,7 @@
       "team": "Vélez Sarsfield",
       "note": "2 goles"
     },
-    "insight": "Vélez Sarsfield venció 2-1 a Boca Juniors. Vélez Sarsfield remató más al arco rival (15 vs 9 remates)."
+    "insight": "Vélez Sarsfield venció 2-1 a Boca Juniors."
   },
   {
     "match_id": 762827,
@@ -11765,7 +11765,7 @@
       "team": "Estudiantes de La Plata",
       "note": "1 gol"
     },
-    "insight": "Estudiantes de La Plata venció 1-0 a Deportivo Riestra. Estudiantes de La Plata manejó más la pelota (72.2% de posesión). Estudiantes de La Plata remató más al arco rival (16 vs 8 remates)."
+    "insight": "Estudiantes de La Plata venció 1-0 a Deportivo Riestra. Estudiantes de La Plata manejó más la pelota (72.2% de posesión). Estudiantes de La Plata remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762820,
@@ -11817,7 +11817,7 @@
       "team": "Barracas Central",
       "note": "1 gol"
     },
-    "insight": "Barracas Central venció 2-0 a Gimnasia La Plata. Gimnasia La Plata manejó más la pelota (66.7% de posesión)."
+    "insight": "Barracas Central venció 2-0 a Gimnasia La Plata. Gimnasia La Plata manejó más la pelota (66.7% de posesión). Barracas Central remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 762832,
@@ -11875,7 +11875,7 @@
       "team": "Sarmiento (Junín)",
       "note": "1 gol"
     },
-    "insight": "Sarmiento (Junín) venció 2-1 a Atlético Tucumán. Sarmiento (Junín) remató más al arco rival (12 vs 5 remates)."
+    "insight": "Sarmiento (Junín) venció 2-1 a Atlético Tucumán. Sarmiento (Junín) remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762829,
@@ -11921,7 +11921,7 @@
       "team": "Independiente",
       "note": "1 gol"
     },
-    "insight": "Independiente venció 1-0 a Platense. Independiente remató más al arco rival (10 vs 5 remates)."
+    "insight": "Independiente venció 1-0 a Platense. Independiente remató más al arco rival (5 vs 1 remates al arco)."
   },
   {
     "match_id": 762828,
@@ -11991,7 +11991,7 @@
       "team": "Defensa y Justicia",
       "note": "2 goles"
     },
-    "insight": "Defensa y Justicia venció 3-2 a Newell's Old Boys. Newell's Old Boys manejó más la pelota (58.1% de posesión). Newell's Old Boys remató más al arco rival (23 vs 4 remates)."
+    "insight": "Defensa y Justicia venció 3-2 a Newell's Old Boys. Newell's Old Boys manejó más la pelota (58.1% de posesión). Newell's Old Boys remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762826,
@@ -12037,7 +12037,7 @@
       "team": "Huracán",
       "note": "1 gol"
     },
-    "insight": "Huracán venció 1-0 a San Lorenzo."
+    "insight": "Huracán venció 1-0 a San Lorenzo. Huracán remató más al arco rival (3 vs 0 remates al arco)."
   },
   {
     "match_id": 762821,
@@ -12083,7 +12083,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 1-0 a Banfield. Belgrano (Córdoba) manejó más la pelota (63.3% de posesión). Belgrano (Córdoba) remató más al arco rival (16 vs 6 remates)."
+    "insight": "Belgrano (Córdoba) venció 1-0 a Banfield. Belgrano (Córdoba) manejó más la pelota (63.3% de posesión). Belgrano (Córdoba) remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762831,
@@ -12153,7 +12153,7 @@
       "team": "Tigre",
       "note": "2 goles"
     },
-    "insight": "Tigre venció 4-1 a River Plate. River Plate manejó más la pelota (70.7% de posesión). River Plate remató más al arco rival (17 vs 11 remates)."
+    "insight": "Tigre venció 4-1 a River Plate. River Plate manejó más la pelota (70.7% de posesión)."
   },
   {
     "match_id": 762830,
@@ -12211,7 +12211,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Racing Club venció 2-1 a Argentinos Juniors."
+    "insight": "Racing Club venció 2-1 a Argentinos Juniors. Argentinos Juniors remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762822,
@@ -12257,7 +12257,7 @@
       "team": "Central Córdoba (Santiago del Estero)",
       "note": "1 gol"
     },
-    "insight": "Central Córdoba (Santiago del Estero) venció 1-0 a Unión (Santa Fe). Unión (Santa Fe) remató más al arco rival (16 vs 9 remates)."
+    "insight": "Central Córdoba (Santiago del Estero) venció 1-0 a Unión (Santa Fe)."
   },
   {
     "match_id": 762819,
@@ -12309,7 +12309,7 @@
       "team": "Rosario Central",
       "note": "1 gol"
     },
-    "insight": "Aldosivi y Rosario Central empataron 1-1. Rosario Central manejó más la pelota (61.5% de posesión). Aldosivi remató más al arco rival (15 vs 10 remates)."
+    "insight": "Aldosivi y Rosario Central empataron 1-1. Rosario Central manejó más la pelota (61.5% de posesión)."
   },
   {
     "match_id": 762813,
@@ -12373,7 +12373,7 @@
       "team": "Instituto (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Instituto (Córdoba) y Lanús empataron 2-2."
+    "insight": "Instituto (Córdoba) y Lanús empataron 2-2. Lanús remató más al arco rival (7 vs 4 remates al arco)."
   },
   {
     "match_id": 762812,
@@ -12495,7 +12495,7 @@
       "team": "Unión (Santa Fe)",
       "note": "1 gol"
     },
-    "insight": "Unión (Santa Fe) venció 4-0 a Gimnasia (Mendoza). Unión (Santa Fe) manejó más la pelota (58.0% de posesión). Unión (Santa Fe) remató más al arco rival (17 vs 4 remates)."
+    "insight": "Unión (Santa Fe) venció 4-0 a Gimnasia (Mendoza). Unión (Santa Fe) manejó más la pelota (58.0% de posesión). Unión (Santa Fe) remató más al arco rival (7 vs 1 remates al arco)."
   },
   {
     "match_id": 762806,
@@ -12588,7 +12588,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Argentinos Juniors y Belgrano (Córdoba) empataron 0-0. Argentinos Juniors manejó más la pelota (60.4% de posesión). Argentinos Juniors remató más al arco rival (17 vs 12 remates)."
+    "insight": "Argentinos Juniors y Belgrano (Córdoba) empataron 0-0. Argentinos Juniors manejó más la pelota (60.4% de posesión)."
   },
   {
     "match_id": 762817,
@@ -12652,7 +12652,7 @@
       "team": "Racing Club",
       "note": "1 gol"
     },
-    "insight": "Tigre venció 3-1 a Racing Club. Racing Club manejó más la pelota (66.7% de posesión)."
+    "insight": "Tigre venció 3-1 a Racing Club. Racing Club manejó más la pelota (66.7% de posesión). Tigre remató más al arco rival (8 vs 3 remates al arco)."
   },
   {
     "match_id": 762814,
@@ -12687,7 +12687,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Rosario Central y River Plate empataron 0-0. River Plate manejó más la pelota (65.7% de posesión). River Plate remató más al arco rival (17 vs 9 remates)."
+    "insight": "Rosario Central y River Plate empataron 0-0. River Plate manejó más la pelota (65.7% de posesión)."
   },
   {
     "match_id": 762810,
@@ -12751,7 +12751,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Gimnasia La Plata venció 3-1 a Aldosivi."
+    "insight": "Gimnasia La Plata venció 3-1 a Aldosivi. Gimnasia La Plata remató más al arco rival (6 vs 1 remates al arco)."
   },
   {
     "match_id": 762809,
@@ -12786,7 +12786,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Defensa y Justicia y Estudiantes de La Plata empataron 0-0. Defensa y Justicia manejó más la pelota (62.7% de posesión). Defensa y Justicia remató más al arco rival (14 vs 9 remates)."
+    "insight": "Defensa y Justicia y Estudiantes de La Plata empataron 0-0. Defensa y Justicia manejó más la pelota (62.7% de posesión). Defensa y Justicia remató más al arco rival (6 vs 1 remates al arco)."
   },
   {
     "match_id": 762818,
@@ -12838,7 +12838,7 @@
       "team": "Huracán",
       "note": "1 gol"
     },
-    "insight": "Atlético Tucumán y Huracán empataron 1-1."
+    "insight": "Atlético Tucumán y Huracán empataron 1-1. Atlético Tucumán remató más al arco rival (4 vs 1 remates al arco)."
   },
   {
     "match_id": 762808,
@@ -12890,7 +12890,7 @@
       "team": "Boca Juniors",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors venció 2-0 a Newell's Old Boys. Boca Juniors manejó más la pelota (59.6% de posesión)."
+    "insight": "Boca Juniors venció 2-0 a Newell's Old Boys. Boca Juniors manejó más la pelota (59.6% de posesión). Boca Juniors remató más al arco rival (5 vs 1 remates al arco)."
   },
   {
     "match_id": 762807,
@@ -12942,7 +12942,7 @@
       "team": "Deportivo Riestra",
       "note": "1 gol"
     },
-    "insight": "Barracas Central y Deportivo Riestra empataron 1-1. Barracas Central manejó más la pelota (64.1% de posesión)."
+    "insight": "Barracas Central y Deportivo Riestra empataron 1-1. Barracas Central manejó más la pelota (64.1% de posesión). Barracas Central remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762805,
@@ -12999,7 +12999,7 @@
       "team": "Platense",
       "note": "1 gol"
     },
-    "insight": "Platense venció 2-1 a Talleres (Córdoba). Talleres (Córdoba) manejó más la pelota (59.8% de posesión). Talleres (Córdoba) remató más al arco rival (12 vs 5 remates)."
+    "insight": "Platense venció 2-1 a Talleres (Córdoba). Talleres (Córdoba) manejó más la pelota (59.8% de posesión)."
   },
   {
     "match_id": 762815,
@@ -13045,7 +13045,7 @@
       "team": "San Lorenzo",
       "note": "1 gol"
     },
-    "insight": "San Lorenzo venció 1-0 a Central Córdoba (Santiago del Estero)."
+    "insight": "San Lorenzo venció 1-0 a Central Córdoba (Santiago del Estero). Central Córdoba (Santiago del Estero) remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762811,
@@ -13132,7 +13132,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Estudiantes de Río Cuarto y Argentinos Juniors empataron 0-0. Argentinos Juniors manejó más la pelota (73.6% de posesión). Argentinos Juniors remató más al arco rival (11 vs 7 remates)."
+    "insight": "Estudiantes de Río Cuarto y Argentinos Juniors empataron 0-0. Argentinos Juniors manejó más la pelota (73.6% de posesión). Argentinos Juniors remató más al arco rival (3 vs 0 remates al arco)."
   },
   {
     "match_id": 762790,
@@ -13178,7 +13178,7 @@
       "team": "Sarmiento (Junín)",
       "note": "1 gol"
     },
-    "insight": "Sarmiento (Junín) venció 1-0 a Banfield. Sarmiento (Junín) manejó más la pelota (61.0% de posesión). Sarmiento (Junín) remató más al arco rival (23 vs 9 remates)."
+    "insight": "Sarmiento (Junín) venció 1-0 a Banfield. Sarmiento (Junín) manejó más la pelota (61.0% de posesión). Sarmiento (Junín) remató más al arco rival (9 vs 2 remates al arco)."
   },
   {
     "match_id": 762797,
@@ -13294,7 +13294,7 @@
       "team": "Boca Juniors",
       "note": "1 gol"
     },
-    "insight": "Estudiantes de La Plata venció 2-1 a Boca Juniors. Boca Juniors manejó más la pelota (67.0% de posesión)."
+    "insight": "Estudiantes de La Plata venció 2-1 a Boca Juniors. Boca Juniors manejó más la pelota (67.0% de posesión). Estudiantes de La Plata remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762792,
@@ -13340,7 +13340,7 @@
       "team": "Defensa y Justicia",
       "note": "1 gol"
     },
-    "insight": "Defensa y Justicia venció 1-0 a Deportivo Riestra. Deportivo Riestra manejó más la pelota (54.0% de posesión). Deportivo Riestra remató más al arco rival (12 vs 5 remates)."
+    "insight": "Defensa y Justicia venció 1-0 a Deportivo Riestra. Deportivo Riestra manejó más la pelota (54.0% de posesión)."
   },
   {
     "match_id": 762791,
@@ -13392,7 +13392,7 @@
       "team": "Tigre",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) y Tigre empataron 1-1. Belgrano (Córdoba) manejó más la pelota (59.7% de posesión). Belgrano (Córdoba) remató más al arco rival (12 vs 6 remates)."
+    "insight": "Belgrano (Córdoba) y Tigre empataron 1-1. Belgrano (Córdoba) manejó más la pelota (59.7% de posesión). Tigre remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762803,
@@ -13427,7 +13427,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Atlético Tucumán y Central Córdoba (Santiago del Estero) empataron 0-0. Atlético Tucumán manejó más la pelota (62.8% de posesión). Atlético Tucumán remató más al arco rival (21 vs 3 remates)."
+    "insight": "Atlético Tucumán y Central Córdoba (Santiago del Estero) empataron 0-0. Atlético Tucumán manejó más la pelota (62.8% de posesión). Atlético Tucumán remató más al arco rival (5 vs 2 remates al arco)."
   },
   {
     "match_id": 762801,
@@ -13479,7 +13479,7 @@
       "team": "River Plate",
       "note": "2 goles"
     },
-    "insight": "River Plate venció 2-0 a Gimnasia La Plata. River Plate manejó más la pelota (70.7% de posesión). River Plate remató más al arco rival (17 vs 3 remates)."
+    "insight": "River Plate venció 2-0 a Gimnasia La Plata. River Plate manejó más la pelota (70.7% de posesión). River Plate remató más al arco rival (8 vs 1 remates al arco)."
   },
   {
     "match_id": 762800,
@@ -13537,7 +13537,7 @@
       "team": "Racing Club",
       "note": "1 gol"
     },
-    "insight": "Rosario Central venció 2-1 a Racing Club. Racing Club manejó más la pelota (70.5% de posesión). Racing Club remató más al arco rival (21 vs 6 remates)."
+    "insight": "Rosario Central venció 2-1 a Racing Club. Racing Club manejó más la pelota (70.5% de posesión). Racing Club remató más al arco rival (7 vs 3 remates al arco)."
   },
   {
     "match_id": 762798,
@@ -13589,7 +13589,7 @@
       "team": "Independiente",
       "note": "1 gol"
     },
-    "insight": "Newell's Old Boys y Independiente empataron 1-1. Newell's Old Boys remató más al arco rival (12 vs 6 remates)."
+    "insight": "Newell's Old Boys y Independiente empataron 1-1. Newell's Old Boys remató más al arco rival (4 vs 2 remates al arco)."
   },
   {
     "match_id": 762789,
@@ -13682,7 +13682,7 @@
       "team": "Talleres (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Vélez Sarsfield venció 2-1 a Talleres (Córdoba). Talleres (Córdoba) remató más al arco rival (21 vs 10 remates)."
+    "insight": "Vélez Sarsfield venció 2-1 a Talleres (Córdoba). Talleres (Córdoba) remató más al arco rival (8 vs 4 remates al arco)."
   },
   {
     "match_id": 762796,
@@ -13740,7 +13740,7 @@
       "team": "Independiente Rivadavia",
       "note": "1 gol"
     },
-    "insight": "Independiente Rivadavia venció 2-1 a Huracán. Huracán manejó más la pelota (61.1% de posesión)."
+    "insight": "Independiente Rivadavia venció 2-1 a Huracán. Huracán manejó más la pelota (61.1% de posesión). Independiente Rivadavia remató más al arco rival (6 vs 2 remates al arco)."
   },
   {
     "match_id": 762795,
@@ -13786,7 +13786,7 @@
       "team": "San Lorenzo",
       "note": "1 gol"
     },
-    "insight": "San Lorenzo venció 1-0 a Gimnasia (Mendoza). Gimnasia (Mendoza) manejó más la pelota (58.3% de posesión). Gimnasia (Mendoza) remató más al arco rival (13 vs 9 remates)."
+    "insight": "San Lorenzo venció 1-0 a Gimnasia (Mendoza). Gimnasia (Mendoza) manejó más la pelota (58.3% de posesión). Gimnasia (Mendoza) remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762799,
@@ -13942,7 +13942,7 @@
       "team": "Argentinos Juniors",
       "note": "1 gol"
     },
-    "insight": "Argentinos Juniors venció 1-0 a Sarmiento (Junín). Argentinos Juniors manejó más la pelota (69.9% de posesión). Argentinos Juniors remató más al arco rival (24 vs 2 remates)."
+    "insight": "Argentinos Juniors venció 1-0 a Sarmiento (Junín). Argentinos Juniors manejó más la pelota (69.9% de posesión). Argentinos Juniors remató más al arco rival (11 vs 1 remates al arco)."
   },
   {
     "match_id": 762784,
@@ -14000,7 +14000,7 @@
       "team": "Belgrano (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Belgrano (Córdoba) venció 2-1 a Rosario Central. Rosario Central remató más al arco rival (17 vs 13 remates)."
+    "insight": "Belgrano (Córdoba) venció 2-1 a Rosario Central. Rosario Central remató más al arco rival (8 vs 6 remates al arco)."
   },
   {
     "match_id": 762778,
@@ -14046,7 +14046,7 @@
       "team": "Boca Juniors",
       "note": "1 gol"
     },
-    "insight": "Boca Juniors venció 1-0 a Deportivo Riestra. Boca Juniors manejó más la pelota (79.3% de posesión). Boca Juniors remató más al arco rival (19 vs 6 remates)."
+    "insight": "Boca Juniors venció 1-0 a Deportivo Riestra. Boca Juniors manejó más la pelota (79.3% de posesión). Boca Juniors remató más al arco rival (3 vs 1 remates al arco)."
   },
   {
     "match_id": 762786,
@@ -14104,7 +14104,7 @@
       "team": "Talleres (Córdoba)",
       "note": "1 gol"
     },
-    "insight": "Talleres (Córdoba) venció 2-1 a Newell's Old Boys. Talleres (Córdoba) manejó más la pelota (71.4% de posesión). Talleres (Córdoba) remató más al arco rival (17 vs 10 remates)."
+    "insight": "Talleres (Córdoba) venció 2-1 a Newell's Old Boys. Talleres (Córdoba) manejó más la pelota (71.4% de posesión). Talleres (Córdoba) remató más al arco rival (6 vs 3 remates al arco)."
   },
   {
     "match_id": 762782,
@@ -14220,7 +14220,7 @@
       "team": "Gimnasia La Plata",
       "note": "1 gol"
     },
-    "insight": "Gimnasia La Plata venció 2-1 a Racing Club. Racing Club manejó más la pelota (74.0% de posesión). Racing Club remató más al arco rival (13 vs 7 remates)."
+    "insight": "Gimnasia La Plata venció 2-1 a Racing Club. Racing Club manejó más la pelota (74.0% de posesión). Gimnasia La Plata remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762777,
@@ -14266,7 +14266,7 @@
       "team": "River Plate",
       "note": "1 gol"
     },
-    "insight": "River Plate venció 1-0 a Barracas Central. River Plate manejó más la pelota (67.0% de posesión). River Plate remató más al arco rival (20 vs 11 remates)."
+    "insight": "River Plate venció 1-0 a Barracas Central. River Plate manejó más la pelota (67.0% de posesión). River Plate remató más al arco rival (7 vs 2 remates al arco)."
   },
   {
     "match_id": 762785,
@@ -14336,7 +14336,7 @@
       "team": "San Lorenzo",
       "note": "2 goles"
     },
-    "insight": "Lanús venció 3-2 a San Lorenzo. San Lorenzo manejó más la pelota (59.2% de posesión). San Lorenzo remató más al arco rival (17 vs 13 remates)."
+    "insight": "Lanús venció 3-2 a San Lorenzo. San Lorenzo manejó más la pelota (59.2% de posesión). Lanús remató más al arco rival (6 vs 4 remates al arco)."
   },
   {
     "match_id": 762783,
@@ -14382,7 +14382,7 @@
       "team": "Vélez Sarsfield",
       "note": "1 gol"
     },
-    "insight": "Vélez Sarsfield venció 1-0 a Instituto (Córdoba). Vélez Sarsfield manejó más la pelota (53.0% de posesión). Instituto (Córdoba) remató más al arco rival (13 vs 7 remates)."
+    "insight": "Vélez Sarsfield venció 1-0 a Instituto (Córdoba). Vélez Sarsfield manejó más la pelota (53.0% de posesión). Instituto (Córdoba) remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762781,
@@ -14480,7 +14480,7 @@
       "team": "Gimnasia (Mendoza)",
       "note": "1 gol"
     },
-    "insight": "Gimnasia (Mendoza) venció 1-0 a Central Córdoba (Santiago del Estero). Central Córdoba (Santiago del Estero) manejó más la pelota (69.0% de posesión). Central Córdoba (Santiago del Estero) remató más al arco rival (16 vs 11 remates)."
+    "insight": "Gimnasia (Mendoza) venció 1-0 a Central Córdoba (Santiago del Estero). Central Córdoba (Santiago del Estero) manejó más la pelota (69.0% de posesión)."
   },
   {
     "match_id": 762788,
@@ -14515,7 +14515,7 @@
     "goleadores": [],
     "goles_contra": [],
     "destacado": null,
-    "insight": "Unión (Santa Fe) y Platense empataron 0-0. Unión (Santa Fe) remató más al arco rival (19 vs 13 remates)."
+    "insight": "Unión (Santa Fe) y Platense empataron 0-0. Platense remató más al arco rival (5 vs 3 remates al arco)."
   },
   {
     "match_id": 762776,

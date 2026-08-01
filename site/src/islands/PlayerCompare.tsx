@@ -3,8 +3,9 @@ import ShareableChart from "./ShareableChart";
 import type { DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow, wrapAxisName } from "../lib/theme";
 import { buildIndexers } from "../lib/normalize";
-import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
-import { positionWeightedGlobal } from "../lib/globalIndex";
+import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER, INSIGHT_EXCLUDED_METRICS } from "../lib/playerMetrics";
+import { computeGlobalIndex } from "../lib/globalIndex";
+import { escapeHtml } from "../lib/flags";
 import { generateVsBestInsights, type VsBestMetric } from "../lib/insights";
 
 // Comparación CABEZA A CABEZA de dos jugadores: mismo lenguaje que el radar de
@@ -26,6 +27,8 @@ interface PlayerData {
   player: string;
   position: string | null;
   byMetric: Map<string, { idx: number; raw: number }>;
+  matchesPlayed: number | null;
+  minsPlayed: number | null;
 }
 
 export default function PlayerCompare({ rows, positions = {} }: Props) {
@@ -41,14 +44,39 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
       const key = `${r.team}|${r.player_name}`;
       let e = map.get(key);
       if (!e) {
-        e = { key, team: r.team, player: r.player_name, position: positions[key] ?? null, byMetric: new Map() };
+        e = {
+          key,
+          team: r.team,
+          player: r.player_name,
+          position: positions[key] ?? null,
+          byMetric: new Map(),
+          matchesPlayed: null,
+          minsPlayed: null,
+        };
         map.set(key, e);
       }
+      if (r.metric === "matches_played") e.matchesPlayed = r.value;
+      if (r.metric === "mins_played") e.minsPlayed = r.value;
       e.byMetric.set(r.metric, { idx: indexers[r.metric](r.value), raw: r.value });
     }
     // sólo jugadores con base mínima de factores
     return [...map.values()].filter((p) => p.byMetric.size >= 4);
   }, [rows, indexers, positions]);
+
+  // GLOBAL normalizado dentro de cada posición (ver globalIndex.ts), sobre el
+  // perfil COMPLETO de cada jugador -- no sólo los factores que comparte con
+  // el rival de turno, para que sea el mismo GLOBAL que se ve en el resto del
+  // sitio (ranking, ficha).
+  const globalByKey = useMemo(() => {
+    const withPosition = players.map((p) => ({
+      key: p.key,
+      position: p.position,
+      factors: [...p.byMetric.entries()].map(([metric, v]) => ({ metric, idx: v.idx })),
+      matchesPlayed: p.matchesPlayed,
+      minsPlayed: p.minsPlayed,
+    }));
+    return computeGlobalIndex(withPosition, indexers, metricsWithData);
+  }, [players, indexers, metricsWithData]);
 
   const teams = useMemo(() => [...new Set(players.map((p) => p.team))].sort(), [players]);
   const playersOf = (team: string) => players.filter((p) => p.team === team).map((p) => p.player).sort();
@@ -73,10 +101,14 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
   const a = players.find((p) => p.team === effTeamA && p.player === effPlayerA);
   const b = players.find((p) => p.team === effTeamB && p.player === effPlayerB);
 
-  // ejes: factores que ambos tienen, en orden canónico
+  // ejes: factores que ambos tienen, en orden canónico. Se excluyen los
+  // totales crudos con variante _per_90 ya disponible y los eventos
+  // censurados en 0 (mismo criterio que el índice GLOBAL) -- si no, el radar
+  // duplicaba ejes (goles Y goles cada 90') y la lectura automática podía
+  // destacar "ventaja en tarjetas rojas" como si fuera un logro.
   const sharedMetrics = useMemo(() => {
     if (!a || !b) return [];
-    return PLAYER_RADAR_ORDER.filter((m) => a.byMetric.has(m) && b.byMetric.has(m));
+    return PLAYER_RADAR_ORDER.filter((m) => !INSIGHT_EXCLUDED_METRICS.has(m) && a.byMetric.has(m) && b.byMetric.has(m));
   }, [a, b]);
 
   const num = (m: string, v: number) => `${Math.round(v * 10) / 10}${PLAYER_METRIC_LABELS[m].suffix}`;
@@ -84,16 +116,14 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
 
   const ratings = useMemo(() => {
     if (!a || !b || sharedMetrics.length < 3) return undefined;
-    const facA = sharedMetrics.map((m) => ({ metric: m, idx: a.byMetric.get(m)!.idx }));
-    const facB = sharedMetrics.map((m) => ({ metric: m, idx: b.byMetric.get(m)!.idx }));
     return {
       entities: [
-        { name: a.player, color: tokens["--series-6"], ovr: positionWeightedGlobal(facA, a.position, indexers, metricsWithData) },
-        { name: b.player, color: tokens["--series-1"], ovr: positionWeightedGlobal(facB, b.position, indexers, metricsWithData) },
+        { name: a.player, color: tokens["--series-6"], ovr: globalByKey.get(a.key) ?? null },
+        { name: b.player, color: tokens["--series-1"], ovr: globalByKey.get(b.key) ?? null },
       ],
       factors: sharedMetrics.map((m) => ({ label: shortLabel(m), values: [a.byMetric.get(m)!.idx, b.byMetric.get(m)!.idx] })),
     };
-  }, [a, b, sharedMetrics, tokens]);
+  }, [a, b, sharedMetrics, tokens, globalByKey]);
 
   const insights = useMemo(() => {
     if (!a || !b || sharedMetrics.length === 0) return [];
@@ -126,7 +156,7 @@ export default function PlayerCompare({ rows, positions = {} }: Props) {
             })
             .join("<br/>");
           const pos = who.position ? ` · ${POS_LABEL[who.position] ?? who.position}` : "";
-          return `<strong>${who.player}</strong> · ${who.team}${pos}<br/>${rowsTxt}`;
+          return `<strong>${escapeHtml(who.player)}</strong> · ${escapeHtml(who.team)}${pos}<br/>${rowsTxt}`;
         },
       },
       legend: { bottom: 0, textStyle: { color: tokens["--text-secondary"] } },

@@ -12,8 +12,12 @@ const PARQUET_TABLES: { table: string; file: string }[] = [
   { table: "matches", file: "matches.parquet" },
   { table: "team_match_stats_tactical", file: "team_match_stats_tactical.parquet" },
   { table: "player_match_appearances", file: "player_match_appearances.parquet" },
-  { table: "physical_match_stats", file: "physical_match_stats.parquet" },
-  { table: "physical_player_match_stats", file: "physical_player_match_stats.parquet" },
+  // physical_match_stats / physical_player_match_stats: NO existen para la
+  // Liga Profesional (no hay fuente gratuita de datos físicos/GPS, ver
+  // README) -- sacadas de esta lista a propósito. Estaban acá desde la
+  // versión Mundial 2026 del sitio (selecciones); dejarlas listadas hacía
+  // que el explorador sirviera datos reales pero de OTRA competencia en vez
+  // de directamente no tener la tabla.
   { table: "tactical_player_match_stats", file: "tactical_player_match_stats.parquet" },
   { table: "squads", file: "squads.parquet" },
   { table: "derived_team_metrics", file: "derived_team_metrics.parquet" },
@@ -79,7 +83,7 @@ export default function SqlExplorer() {
         for (const { table, file } of PARQUET_TABLES) {
           try {
             const resp = await fetch(`${base}data-parquet/${file}`);
-            if (!resp.ok) continue; // tabla todavia no publicada (ej. physical_match_stats antes del primer scrape)
+            if (!resp.ok) continue; // tabla todavia no publicada (esta fuente no corrió/no tiene datos todavía)
             const buf = new Uint8Array(await resp.arrayBuffer());
             if (buf.length === 0) continue;
             await db.registerFileBuffer(file, buf);

@@ -3,6 +3,7 @@ import ShareableChart from "./ShareableChart";
 import type { TeamSeasonSummary } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
+import { escapeHtml } from "../lib/flags";
 
 // Ranking de estadística de EQUIPO real para LPF (ESPN, por partido -- ver
 // etl/fetch_espn_lpf.py). Único dato de equipo disponible para esta liga: no
@@ -57,7 +58,7 @@ export default function TeamSeasonRanking({ rows }: Props) {
         const p = params[0];
         const row = sorted[p.dataIndex];
         const idx = indexer(Number(row[metric.key]));
-        return `<strong>${row.team}</strong><br/>${metric.label}: ${p.value}${metric.suffix}<br/>índice <strong>${idx}</strong> · ${row.partidos} partido(s)`;
+        return `<strong>${escapeHtml(row.team)}</strong><br/>${metric.label}: ${p.value}${metric.suffix}<br/>índice <strong>${idx}</strong> · ${row.partidos} partido(s)`;
       },
     },
     xAxis: {

@@ -61,7 +61,7 @@ def build():
         _read_csv_if_exists(RAW / "espn" / "_processed" / "matches.csv"),
         _read_csv_if_exists(RAW / "api_football" / "_processed" / "matches.csv"),
     ]
-    matches_sources = [m for m in matches_sources if m is not None]
+    matches_sources = [m for m in matches_sources if m is not None and len(m) > 0]
     if matches_sources:
         matches = pd.concat(matches_sources, ignore_index=True)
         matches["match_id"] = matches["match_id"].astype("int64")
@@ -78,6 +78,8 @@ def build():
     team_stats = _read_csv_if_exists(RAW / "espn" / "_processed" / "team_match_stats.csv")
     if team_stats is None:
         team_stats = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_match_stats.csv")
+    if team_stats is not None and len(team_stats) == 0:
+        team_stats = None
     if team_stats is not None:
         num_cols = ["passes_attempted", "passes_completed", "shots_total", "shots_on_target", "goals", "fouls_committed"]
         for c in num_cols:
@@ -101,6 +103,8 @@ def build():
     appearances = _read_csv_if_exists(RAW / "espn" / "_processed" / "player_match_appearances.csv")
     if appearances is None:
         appearances = _read_csv_if_exists(RAW / "api_football" / "_processed" / "player_match_appearances.csv")
+    if appearances is not None and len(appearances) == 0:
+        appearances = None
     if appearances is not None:
         appearances["minutes_played"] = pd.to_numeric(appearances["minutes_played"], errors="coerce").fillna(0)
         appearances = appearances.astype({"match_id": "int64", "minutes_played": "int64"})
@@ -128,6 +132,8 @@ def build():
     tactical_players = _read_csv_if_exists(RAW / "espn" / "_processed" / "tactical_player_match_stats.csv")
     if tactical_players is None:
         tactical_players = _read_csv_if_exists(RAW / "api_football" / "_processed" / "tactical_player_match_stats.csv")
+    if tactical_players is not None and len(tactical_players) == 0:
+        tactical_players = None
     if tactical_players is not None:
         tactical_players = tactical_players.astype({"match_id": "int64"})
         tactical_players["jersey_number"] = pd.to_numeric(tactical_players.get("jersey_number"), errors="coerce").astype("Int64")
@@ -189,6 +195,8 @@ def build():
     team_profile = _read_csv_if_exists(RAW / "espn" / "_processed" / "team_profile.csv")
     if team_profile is None:
         team_profile = _read_csv_if_exists(RAW / "api_football" / "_processed" / "team_profile.csv")
+    if team_profile is not None and len(team_profile) == 0:
+        team_profile = None
     if team_profile is not None:
         for c in ["fifa_ranking", "fifa_ranking_prev"]:
             team_profile[c] = pd.to_numeric(team_profile[c], errors="coerce").astype("Int64")
@@ -230,6 +238,8 @@ def build():
     goal_events = _read_csv_if_exists(RAW / "espn" / "_processed" / "goal_events.csv")
     if goal_events is None:
         goal_events = _read_csv_if_exists(RAW / "api_football" / "_processed" / "goal_events.csv")
+    if goal_events is not None and len(goal_events) == 0:
+        goal_events = None
     if goal_events is not None:
         goal_events["match_id"] = goal_events["match_id"].astype("int64")
         goal_events["minute"] = pd.to_numeric(goal_events["minute"], errors="coerce").astype("Int64")

@@ -11,6 +11,7 @@ ALLOWED_ORIGIN = "https://ramirosilvera.github.io"
 # mantiene apuntando al modelo flash vigente, para no repetir este
 # problema cada vez que rotan los modelos disponibles.
 GEMINI_MODEL = "gemini-flash-latest"
+RATE_LIMIT_PER_HOUR = "15"
 
 # Supabase: para que el asistente pueda hacer function-calling (consultar
 # datos reales en vez de solo texto grounded). SUPABASE_ANON_KEY es segura
@@ -21,9 +22,20 @@ GEMINI_MODEL = "gemini-flash-latest"
 SUPABASE_URL = "https://arzzwzuuoysqhgnaprha.supabase.co"
 SUPABASE_ANON_KEY = "sb_publishable_GqaTEmCMmWWkd970obRKBg_mSAH3wJX"
 
-# Sin rate limiting por IP: el asistente es de uso particular. Si en el futuro
-# se abriera a tráfico público conviene reponer un límite (había una capa con
-# Workers KV, ver historial de git) para acotar el gasto de la clave de Gemini.
+# Rate limiting por IP es opcional: si no se crea/bindea este namespace KV,
+# el Worker sigue funcionando (ver checkRateLimit en src/index.js), solo
+# que sin el límite adicional por hora -- y con un warning en los logs,
+# porque en un repo PÚBLICO la URL del Worker no es secreta (va en el
+# bundle del sitio) y sin esta capa cualquiera que la encuentre puede
+# agotar la clave prepaga de Gemini pegándole directo, sin pasar por CORS.
+#
+# Para activarlo:
+#   npx wrangler kv namespace create RATE_LIMIT
+# y descomentar las siguientes 3 líneas con el id que devuelva ese comando:
+#
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "REEMPLAZAR_CON_EL_ID_REAL"
 
 # GEMINI_API_KEY NO va acá -- se carga como secreto de Cloudflare
 # (`wrangler secret put GEMINI_API_KEY`), nunca en texto plano en este archivo.

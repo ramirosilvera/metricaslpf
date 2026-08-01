@@ -32,8 +32,14 @@ export const LOWER_IS_BETTER: ReadonlySet<string> = new Set([
   // (ver globalIndex.ts); se muestran tal cual en la ficha del jugador.
   "goals_conceded",
   "fouls",
-  "yellow_card",
   "yellow_card_per_90",
+  // OJO: "yellow_card" (el conteo crudo) NO va acá a propósito -- está
+  // censurado en 0 (FotMob sólo lista a quien tiene >=1, ver H2 de la
+  // auditoría del índice GLOBAL), así que invertirlo ("menos es mejor")
+  // hacía que "1 amarilla" sacara índice 100 como si fuera una virtud. La
+  // versión segura es yellow_card_per_90 (imputada a 0 dentro del set
+  // calificado en el ETL) -- el conteo crudo se muestra tal cual en la
+  // ficha, sin indexar como "bueno" en ninguna dirección.
 ]);
 
 export function isLowerBetter(metricKey: string): boolean {

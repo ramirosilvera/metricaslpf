@@ -65,3 +65,37 @@ export const PLAYER_METRIC_LABELS: Record<string, PlayerMetricDef> = {
 };
 
 export const PLAYER_RADAR_ORDER = Object.keys(PLAYER_METRIC_LABELS);
+
+// Métricas que NUNCA deben usarse para elegir "la fortaleza" o "el punto
+// flojo" de un jugador en una lectura automática (insights.ts) ni en un eje
+// de comparación cabeza a cabeza (PlayerCompare) -- el mismo criterio que ya
+// se aplica al índice GLOBAL (ver globalIndex.ts), aplicado acá porque estos
+// componentes construían su propia lista de factores sin ese filtro y
+// terminaban generando frases como "índice 100 en tarjetas rojas: prácticamente
+// al nivel del mejor del torneo" (auditoría de metodología, agosto 2026):
+//   - mins_played/matches_played: contexto, no rendimiento.
+//   - totales crudos de temporada con una variante _per_90/ratio ya
+//     disponible (premian minutos jugados; la variante normalizada es la
+//     que corresponde destacar).
+//   - eventos rarísimos censurados en 0 por FotMob (sólo lista a quien tiene
+//     >=1 -- ver H2 de la auditoría del índice GLOBAL): cualquier "índice"
+//     sobre esa lista es ruido, nunca un logro real.
+export const INSIGHT_EXCLUDED_METRICS: ReadonlySet<string> = new Set([
+  "mins_played",
+  "matches_played",
+  "goals",
+  "goal_assist",
+  "_goals_and_goal_assist",
+  "expected_goals",
+  "expected_goalsontarget",
+  "expected_assists",
+  "big_chance_created",
+  "total_att_assist",
+  "clean_sheet",
+  "_goals_prevented",
+  "yellow_card",
+  "red_card",
+  "penalty_conceded",
+  "penalty_won",
+  "big_chance_missed",
+]);

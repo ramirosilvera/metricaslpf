@@ -16,8 +16,6 @@ from schemas import (
     MatchesSchema,
     TeamMatchStatsSchema,
     PlayerAppearancesSchema,
-    PhysicalMatchStatsSchema,
-    PhysicalPlayerMatchStatsSchema,
     TacticalPlayerMatchStatsSchema,
     SquadsSchema,
     TeamProfileSchema,
@@ -25,20 +23,25 @@ from schemas import (
     DerivedTeamMetricsSchema,
     DerivedTeamStyleSchema,
     DerivedPlayerMetricsSchema,
+    StandingsSchema,
+    PlayerSeasonStatsSchema,
 )
 
 WAREHOUSE = Path(__file__).resolve().parent.parent / "data" / "warehouse"
 
+# physical_match_stats/physical_player_match_stats NO están acá a propósito:
+# no existen para Métricas LPF (sin fuente gratuita de datos GPS, ver
+# build_warehouse.py) -- nunca se generan, así que no hay nada que validar.
 CHECKS = [
     ("matches.parquet", MatchesSchema),
     ("team_match_stats_tactical.parquet", TeamMatchStatsSchema),
     ("player_match_appearances.parquet", PlayerAppearancesSchema),
-    ("physical_match_stats.parquet", PhysicalMatchStatsSchema),
-    ("physical_player_match_stats.parquet", PhysicalPlayerMatchStatsSchema),
     ("tactical_player_match_stats.parquet", TacticalPlayerMatchStatsSchema),
     ("squads.parquet", SquadsSchema),
     ("team_profile.parquet", TeamProfileSchema),
     ("goal_events.parquet", GoalEventsSchema),
+    ("standings.parquet", StandingsSchema),
+    ("player_season_stats.parquet", PlayerSeasonStatsSchema),
     ("derived_team_metrics.parquet", DerivedTeamMetricsSchema),
     ("derived_team_style.parquet", DerivedTeamStyleSchema),
     ("derived_player_metrics.parquet", DerivedPlayerMetricsSchema),
