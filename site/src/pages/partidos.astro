@@ -20,6 +20,13 @@ function rows(m: MatchSummary): Row[] {
   const defs: { label: string; key: keyof MatchSummary["home"]; unit: string; digits: number }[] = [
     { label: "Posesión", key: "posesion_pct", unit: "%", digits: 0 },
     { label: "Remates", key: "remates", unit: "", digits: 0 },
+    { label: "Remates al arco", key: "remates_al_arco", unit: "", digits: 0 },
+    { label: "Pases", key: "pases", unit: "", digits: 0 },
+    { label: "Precisión de pase", key: "precision_pases_pct", unit: "%", digits: 0 },
+    { label: "Córners", key: "corners", unit: "", digits: 0 },
+    { label: "Faltas", key: "faltas", unit: "", digits: 0 },
+    { label: "Offsides", key: "offsides", unit: "", digits: 0 },
+    { label: "Atajadas", key: "atajadas", unit: "", digits: 0 },
   ];
   const out: Row[] = [];
   for (const d of defs) {

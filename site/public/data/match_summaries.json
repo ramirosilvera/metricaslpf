@@ -14,7 +14,9 @@
       "pases": 519,
       "precision_pases_pct": 81.3,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 41.1,
@@ -23,7 +25,9 @@
       "pases": 368,
       "precision_pases_pct": 76.1,
       "faltas": 13,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -62,7 +66,9 @@
       "pases": 408,
       "precision_pases_pct": 78.9,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 51.6,
@@ -71,7 +77,9 @@
       "pases": 449,
       "precision_pases_pct": 78.0,
       "faltas": 7,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -104,7 +112,9 @@
       "pases": 262,
       "precision_pases_pct": 72.1,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 5,
+      "atajadas": 6
     },
     "away": {
       "posesion_pct": 64.5,
@@ -113,7 +123,9 @@
       "pases": 481,
       "precision_pases_pct": 81.5,
       "faltas": 8,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -158,7 +170,9 @@
       "pases": 369,
       "precision_pases_pct": 76.2,
       "faltas": 18,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 52.9,
@@ -167,7 +181,9 @@
       "pases": 429,
       "precision_pases_pct": 82.3,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -212,7 +228,9 @@
       "pases": 618,
       "precision_pases_pct": 86.2,
       "faltas": 10,
-      "corners": 8
+      "corners": 8,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 37.1,
@@ -221,7 +239,9 @@
       "pases": 364,
       "precision_pases_pct": 72.8,
       "faltas": 6,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -272,7 +292,9 @@
       "pases": 454,
       "precision_pases_pct": 81.7,
       "faltas": 12,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 48.5,
@@ -281,7 +303,9 @@
       "pases": 405,
       "precision_pases_pct": 76.0,
       "faltas": 17,
-      "corners": 8
+      "corners": 8,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -314,7 +338,9 @@
       "pases": 433,
       "precision_pases_pct": 76.0,
       "faltas": 13,
-      "corners": 5
+      "corners": 5,
+      "offsides": 4,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 38.3,
@@ -323,7 +349,9 @@
       "pases": 255,
       "precision_pases_pct": 51.0,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -368,7 +396,9 @@
       "pases": 209,
       "precision_pases_pct": 60.3,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 74.1,
@@ -377,7 +407,9 @@
       "pases": 617,
       "precision_pases_pct": 87.7,
       "faltas": 11,
-      "corners": 8
+      "corners": 8,
+      "offsides": 2,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -410,7 +442,9 @@
       "pases": 441,
       "precision_pases_pct": 86.2,
       "faltas": 12,
-      "corners": 6
+      "corners": 6,
+      "offsides": 5,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 40.7,
@@ -419,7 +453,9 @@
       "pases": 306,
       "precision_pases_pct": 73.9,
       "faltas": 20,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 1
     },
     "goleadores": [],
     "goles_contra": [],
@@ -441,7 +477,9 @@
       "pases": 639,
       "precision_pases_pct": 86.1,
       "faltas": 7,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 30.0,
@@ -450,7 +488,9 @@
       "pases": 265,
       "precision_pases_pct": 67.5,
       "faltas": 5,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -495,7 +535,9 @@
       "pases": 247,
       "precision_pases_pct": 71.7,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 60.7,
@@ -504,7 +546,9 @@
       "pases": 389,
       "precision_pases_pct": 76.9,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -561,7 +605,9 @@
       "pases": 446,
       "precision_pases_pct": 81.8,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 4,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 49.3,
@@ -570,7 +616,9 @@
       "pases": 430,
       "precision_pases_pct": 83.7,
       "faltas": 14,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -603,7 +651,9 @@
       "pases": 180,
       "precision_pases_pct": 50.0,
       "faltas": 20,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 81.8,
@@ -612,7 +662,9 @@
       "pases": 795,
       "precision_pases_pct": 89.2,
       "faltas": 8,
-      "corners": 8
+      "corners": 8,
+      "offsides": 0,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -657,7 +709,9 @@
       "pases": 378,
       "precision_pases_pct": 78.0,
       "faltas": 15,
-      "corners": 5
+      "corners": 5,
+      "offsides": 4,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 40.2,
@@ -666,7 +720,9 @@
       "pases": 261,
       "precision_pases_pct": 65.1,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -705,7 +761,9 @@
       "pases": 443,
       "precision_pases_pct": 80.4,
       "faltas": 15,
-      "corners": 8
+      "corners": 8,
+      "offsides": 2,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 50.1,
@@ -714,7 +772,9 @@
       "pases": 450,
       "precision_pases_pct": 77.1,
       "faltas": 13,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 9
     },
     "goleadores": [
       {
@@ -747,7 +807,9 @@
       "pases": 227,
       "precision_pases_pct": 67.4,
       "faltas": 13,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 60.0,
@@ -756,7 +818,9 @@
       "pases": 359,
       "precision_pases_pct": 78.8,
       "faltas": 15,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 1
     },
     "goleadores": [],
     "goles_contra": [],
@@ -778,7 +842,9 @@
       "pases": 315,
       "precision_pases_pct": 73.7,
       "faltas": 18,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 61.6,
@@ -787,7 +853,9 @@
       "pases": 494,
       "precision_pases_pct": 81.6,
       "faltas": 13,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -820,7 +888,9 @@
       "pases": 481,
       "precision_pases_pct": 81.7,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 41.7,
@@ -829,7 +899,9 @@
       "pases": 335,
       "precision_pases_pct": 73.7,
       "faltas": 12,
-      "corners": 2
+      "corners": 2,
+      "offsides": 5,
+      "atajadas": 10
     },
     "goleadores": [
       {
@@ -862,7 +934,9 @@
       "pases": 290,
       "precision_pases_pct": 75.2,
       "faltas": 14,
-      "corners": 8
+      "corners": 8,
+      "offsides": 3,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 67.1,
@@ -871,7 +945,9 @@
       "pases": 588,
       "precision_pases_pct": 90.1,
       "faltas": 12,
-      "corners": 9
+      "corners": 9,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -904,7 +980,9 @@
       "pases": 438,
       "precision_pases_pct": 79.7,
       "faltas": 12,
-      "corners": 6
+      "corners": 6,
+      "offsides": 4,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 43.2,
@@ -913,7 +991,9 @@
       "pases": 340,
       "precision_pases_pct": 70.9,
       "faltas": 15,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -964,7 +1044,9 @@
       "pases": 612,
       "precision_pases_pct": 85.1,
       "faltas": 8,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 24.0,
@@ -973,7 +1055,9 @@
       "pases": 199,
       "precision_pases_pct": 51.3,
       "faltas": 21,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -1006,7 +1090,9 @@
       "pases": 598,
       "precision_pases_pct": 84.8,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 28.5,
@@ -1015,7 +1101,9 @@
       "pases": 236,
       "precision_pases_pct": 69.1,
       "faltas": 16,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -1054,7 +1142,9 @@
       "pases": 518,
       "precision_pases_pct": 86.7,
       "faltas": 6,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 36.9,
@@ -1063,7 +1153,9 @@
       "pases": 302,
       "precision_pases_pct": 76.2,
       "faltas": 13,
-      "corners": 3
+      "corners": 3,
+      "offsides": 5,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -1096,7 +1188,9 @@
       "pases": 498,
       "precision_pases_pct": 80.9,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 43.3,
@@ -1105,7 +1199,9 @@
       "pases": 373,
       "precision_pases_pct": 73.7,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -1150,7 +1246,9 @@
       "pases": 533,
       "precision_pases_pct": 80.9,
       "faltas": 7,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 42.2,
@@ -1159,7 +1257,9 @@
       "pases": 358,
       "precision_pases_pct": 71.5,
       "faltas": 9,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -1192,7 +1292,9 @@
       "pases": 353,
       "precision_pases_pct": 73.7,
       "faltas": 15,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 55.2,
@@ -1201,7 +1303,9 @@
       "pases": 462,
       "precision_pases_pct": 83.5,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -1258,7 +1362,9 @@
       "pases": 395,
       "precision_pases_pct": 83.8,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 52.4,
@@ -1267,7 +1373,9 @@
       "pases": 432,
       "precision_pases_pct": 85.4,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -1312,7 +1420,9 @@
       "pases": 419,
       "precision_pases_pct": 77.1,
       "faltas": 7,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 37.9,
@@ -1321,7 +1431,9 @@
       "pases": 246,
       "precision_pases_pct": 71.1,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -1378,7 +1490,9 @@
       "pases": 547,
       "precision_pases_pct": 79.9,
       "faltas": 17,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 43.6,
@@ -1387,7 +1501,9 @@
       "pases": 426,
       "precision_pases_pct": 69.5,
       "faltas": 22,
-      "corners": 3
+      "corners": 3,
+      "offsides": 4,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -1426,7 +1542,9 @@
       "pases": 366,
       "precision_pases_pct": 77.6,
       "faltas": 17,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 46.1,
@@ -1435,7 +1553,9 @@
       "pases": 321,
       "precision_pases_pct": 73.2,
       "faltas": 19,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -1468,7 +1588,9 @@
       "pases": 459,
       "precision_pases_pct": 78.2,
       "faltas": 21,
-      "corners": 7
+      "corners": 7,
+      "offsides": 3,
+      "atajadas": 6
     },
     "away": {
       "posesion_pct": 43.0,
@@ -1477,7 +1599,9 @@
       "pases": 333,
       "precision_pases_pct": 68.5,
       "faltas": 16,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -1516,7 +1640,9 @@
       "pases": 636,
       "precision_pases_pct": 81.6,
       "faltas": 14,
-      "corners": 9
+      "corners": 9,
+      "offsides": 4,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 38.4,
@@ -1525,7 +1651,9 @@
       "pases": 398,
       "precision_pases_pct": 66.3,
       "faltas": 29,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -1558,7 +1686,9 @@
       "pases": 584,
       "precision_pases_pct": 80.1,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 4,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 35.9,
@@ -1567,7 +1697,9 @@
       "pases": 339,
       "precision_pases_pct": 65.8,
       "faltas": 24,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -1612,7 +1744,9 @@
       "pases": 400,
       "precision_pases_pct": 79.5,
       "faltas": 4,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 46.5,
@@ -1621,7 +1755,9 @@
       "pases": 344,
       "precision_pases_pct": 72.4,
       "faltas": 8,
-      "corners": 7
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -1660,7 +1796,9 @@
       "pases": 526,
       "precision_pases_pct": 84.2,
       "faltas": 9,
-      "corners": 17
+      "corners": 17,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 28.7,
@@ -1669,7 +1807,9 @@
       "pases": 232,
       "precision_pases_pct": 65.1,
       "faltas": 13,
-      "corners": 0
+      "corners": 0,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -1702,7 +1842,9 @@
       "pases": 404,
       "precision_pases_pct": 79.5,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 51.6,
@@ -1711,7 +1853,9 @@
       "pases": 420,
       "precision_pases_pct": 76.0,
       "faltas": 16,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -1750,7 +1894,9 @@
       "pases": 357,
       "precision_pases_pct": 70.9,
       "faltas": 1,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 52.4,
@@ -1759,7 +1905,9 @@
       "pases": 389,
       "precision_pases_pct": 74.8,
       "faltas": 18,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -1792,7 +1940,9 @@
       "pases": 401,
       "precision_pases_pct": 73.6,
       "faltas": 6,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 38.8,
@@ -1801,7 +1951,9 @@
       "pases": 254,
       "precision_pases_pct": 59.1,
       "faltas": 15,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -1846,7 +1998,9 @@
       "pases": 444,
       "precision_pases_pct": 78.6,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 39.6,
@@ -1855,7 +2009,9 @@
       "pases": 280,
       "precision_pases_pct": 70.7,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -1906,7 +2062,9 @@
       "pases": 705,
       "precision_pases_pct": 85.5,
       "faltas": 14,
-      "corners": 6
+      "corners": 6,
+      "offsides": 8,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 26.7,
@@ -1915,7 +2073,9 @@
       "pases": 267,
       "precision_pases_pct": 57.7,
       "faltas": 13,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 10
     },
     "goleadores": [
       {
@@ -1966,7 +2126,9 @@
       "pases": 690,
       "precision_pases_pct": 83.3,
       "faltas": 10,
-      "corners": 17
+      "corners": 17,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 31.2,
@@ -1975,7 +2137,9 @@
       "pases": 335,
       "precision_pases_pct": 65.4,
       "faltas": 15,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 10
     },
     "goleadores": [
       {
@@ -2032,7 +2196,9 @@
       "pases": 311,
       "precision_pases_pct": 74.0,
       "faltas": 13,
-      "corners": 8
+      "corners": 8,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 44.4,
@@ -2041,7 +2207,9 @@
       "pases": 259,
       "precision_pases_pct": 69.9,
       "faltas": 20,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -2074,7 +2242,9 @@
       "pases": 339,
       "precision_pases_pct": 71.7,
       "faltas": 6,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 57.4,
@@ -2083,7 +2253,9 @@
       "pases": 446,
       "precision_pases_pct": 82.7,
       "faltas": 15,
-      "corners": 8
+      "corners": 8,
+      "offsides": 4,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -2122,7 +2294,9 @@
       "pases": 507,
       "precision_pases_pct": 85.4,
       "faltas": 10,
-      "corners": 7
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 39.1,
@@ -2131,7 +2305,9 @@
       "pases": 331,
       "precision_pases_pct": 73.4,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 4,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -2170,7 +2346,9 @@
       "pases": 280,
       "precision_pases_pct": 67.9,
       "faltas": 10,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 59.5,
@@ -2179,7 +2357,9 @@
       "pases": 394,
       "precision_pases_pct": 77.7,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -2224,7 +2404,9 @@
       "pases": 364,
       "precision_pases_pct": 75.0,
       "faltas": 8,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 47.4,
@@ -2233,7 +2415,9 @@
       "pases": 330,
       "precision_pases_pct": 73.0,
       "faltas": 8,
-      "corners": 2
+      "corners": 2,
+      "offsides": 6,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -2284,7 +2468,9 @@
       "pases": 286,
       "precision_pases_pct": 66.1,
       "faltas": 7,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 60.2,
@@ -2293,7 +2479,9 @@
       "pases": 443,
       "precision_pases_pct": 78.3,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -2332,7 +2520,9 @@
       "pases": 282,
       "precision_pases_pct": 77.0,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 56.5,
@@ -2341,7 +2531,9 @@
       "pases": 347,
       "precision_pases_pct": 76.7,
       "faltas": 17,
-      "corners": 11
+      "corners": 11,
+      "offsides": 4,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -2380,7 +2572,9 @@
       "pases": 703,
       "precision_pases_pct": 86.6,
       "faltas": 6,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 24.0,
@@ -2389,7 +2583,9 @@
       "pases": 220,
       "precision_pases_pct": 56.4,
       "faltas": 16,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -2422,7 +2618,9 @@
       "pases": 425,
       "precision_pases_pct": 70.4,
       "faltas": 15,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 36.3,
@@ -2431,7 +2629,9 @@
       "pases": 248,
       "precision_pases_pct": 50.0,
       "faltas": 11,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 1
     },
     "goleadores": [],
     "goles_contra": [],
@@ -2453,7 +2653,9 @@
       "pases": 351,
       "precision_pases_pct": 76.6,
       "faltas": 10,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 48.0,
@@ -2462,7 +2664,9 @@
       "pases": 332,
       "precision_pases_pct": 76.2,
       "faltas": 12,
-      "corners": 6
+      "corners": 6,
+      "offsides": 4,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -2501,7 +2705,9 @@
       "pases": 291,
       "precision_pases_pct": 72.5,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 64.5,
@@ -2510,7 +2716,9 @@
       "pases": 512,
       "precision_pases_pct": 86.1,
       "faltas": 17,
-      "corners": 11
+      "corners": 11,
+      "offsides": 1,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -2549,7 +2757,9 @@
       "pases": 285,
       "precision_pases_pct": 67.7,
       "faltas": 16,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 6
     },
     "away": {
       "posesion_pct": 64.8,
@@ -2558,7 +2768,9 @@
       "pases": 538,
       "precision_pases_pct": 84.4,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -2603,7 +2815,9 @@
       "pases": 434,
       "precision_pases_pct": 77.4,
       "faltas": 10,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 50.2,
@@ -2612,7 +2826,9 @@
       "pases": 426,
       "precision_pases_pct": 79.8,
       "faltas": 7,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -2657,7 +2873,9 @@
       "pases": 432,
       "precision_pases_pct": 76.9,
       "faltas": 14,
-      "corners": 8
+      "corners": 8,
+      "offsides": 4,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 37.8,
@@ -2666,7 +2884,9 @@
       "pases": 282,
       "precision_pases_pct": 65.6,
       "faltas": 13,
-      "corners": 0
+      "corners": 0,
+      "offsides": 1,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -2705,7 +2925,9 @@
       "pases": 460,
       "precision_pases_pct": 83.9,
       "faltas": 13,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 42.2,
@@ -2714,7 +2936,9 @@
       "pases": 346,
       "precision_pases_pct": 76.3,
       "faltas": 19,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -2759,7 +2983,9 @@
       "pases": 580,
       "precision_pases_pct": 79.0,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 28.8,
@@ -2768,7 +2994,9 @@
       "pases": 229,
       "precision_pases_pct": 47.2,
       "faltas": 20,
-      "corners": 7
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 7
     },
     "goleadores": [],
     "goles_contra": [],
@@ -2790,7 +3018,9 @@
       "pases": 343,
       "precision_pases_pct": 73.8,
       "faltas": 15,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 54.5,
@@ -2799,7 +3029,9 @@
       "pases": 424,
       "precision_pases_pct": 80.9,
       "faltas": 11,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -2844,7 +3076,9 @@
       "pases": 451,
       "precision_pases_pct": 79.4,
       "faltas": 8,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 42.5,
@@ -2853,7 +3087,9 @@
       "pases": 323,
       "precision_pases_pct": 71.8,
       "faltas": 9,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -2904,7 +3140,9 @@
       "pases": 255,
       "precision_pases_pct": 75.3,
       "faltas": 15,
-      "corners": 11
+      "corners": 11,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 40.8,
@@ -2913,7 +3151,9 @@
       "pases": 183,
       "precision_pases_pct": 70.5,
       "faltas": 18,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -2976,7 +3216,9 @@
       "pases": 386,
       "precision_pases_pct": 80.8,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 48.6,
@@ -2985,7 +3227,9 @@
       "pases": 366,
       "precision_pases_pct": 76.0,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -3024,7 +3268,9 @@
       "pases": 578,
       "precision_pases_pct": 87.2,
       "faltas": 12,
-      "corners": 8
+      "corners": 8,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 29.7,
@@ -3033,7 +3279,9 @@
       "pases": 246,
       "precision_pases_pct": 67.9,
       "faltas": 16,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -3084,7 +3332,9 @@
       "pases": 361,
       "precision_pases_pct": 73.7,
       "faltas": 16,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 54.1,
@@ -3093,7 +3343,9 @@
       "pases": 428,
       "precision_pases_pct": 81.3,
       "faltas": 9,
-      "corners": 6
+      "corners": 6,
+      "offsides": 5,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -3126,7 +3378,9 @@
       "pases": 388,
       "precision_pases_pct": 75.5,
       "faltas": 19,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 47.0,
@@ -3135,7 +3389,9 @@
       "pases": 347,
       "precision_pases_pct": 68.3,
       "faltas": 12,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -3174,7 +3430,9 @@
       "pases": 377,
       "precision_pases_pct": 75.3,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 49.8,
@@ -3183,7 +3441,9 @@
       "pases": 371,
       "precision_pases_pct": 78.7,
       "faltas": 8,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -3222,7 +3482,9 @@
       "pases": 406,
       "precision_pases_pct": 77.8,
       "faltas": 16,
-      "corners": 8
+      "corners": 8,
+      "offsides": 0,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 43.5,
@@ -3231,7 +3493,9 @@
       "pases": 320,
       "precision_pases_pct": 72.8,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -3264,7 +3528,9 @@
       "pases": 455,
       "precision_pases_pct": 83.5,
       "faltas": 8,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 45.3,
@@ -3273,7 +3539,9 @@
       "pases": 383,
       "precision_pases_pct": 83.6,
       "faltas": 10,
-      "corners": 1
+      "corners": 1,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -3295,7 +3563,9 @@
       "pases": 346,
       "precision_pases_pct": 66.5,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 52.3,
@@ -3304,7 +3574,9 @@
       "pases": 372,
       "precision_pases_pct": 71.0,
       "faltas": 15,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -3337,7 +3609,9 @@
       "pases": 219,
       "precision_pases_pct": 51.6,
       "faltas": 16,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 68.8,
@@ -3346,7 +3620,9 @@
       "pases": 477,
       "precision_pases_pct": 83.4,
       "faltas": 13,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -3385,7 +3661,9 @@
       "pases": 310,
       "precision_pases_pct": 75.2,
       "faltas": 12,
-      "corners": 0
+      "corners": 0,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 56.9,
@@ -3394,7 +3672,9 @@
       "pases": 429,
       "precision_pases_pct": 80.2,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -3439,7 +3719,9 @@
       "pases": 604,
       "precision_pases_pct": 84.8,
       "faltas": 11,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 34.2,
@@ -3448,7 +3730,9 @@
       "pases": 317,
       "precision_pases_pct": 68.1,
       "faltas": 17,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [],
     "goles_contra": [],
@@ -3470,7 +3754,9 @@
       "pases": 408,
       "precision_pases_pct": 83.1,
       "faltas": 5,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 47.8,
@@ -3479,7 +3765,9 @@
       "pases": 381,
       "precision_pases_pct": 81.1,
       "faltas": 11,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -3530,7 +3818,9 @@
       "pases": 283,
       "precision_pases_pct": 71.0,
       "faltas": 17,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 57.6,
@@ -3539,7 +3829,9 @@
       "pases": 395,
       "precision_pases_pct": 79.5,
       "faltas": 18,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -3572,7 +3864,9 @@
       "pases": 305,
       "precision_pases_pct": 73.4,
       "faltas": 15,
-      "corners": 0
+      "corners": 0,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 63.2,
@@ -3581,7 +3875,9 @@
       "pases": 532,
       "precision_pases_pct": 84.6,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -3620,7 +3916,9 @@
       "pases": 385,
       "precision_pases_pct": 76.1,
       "faltas": 13,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 47.7,
@@ -3629,7 +3927,9 @@
       "pases": 354,
       "precision_pases_pct": 76.0,
       "faltas": 16,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [],
     "goles_contra": [],
@@ -3651,7 +3951,9 @@
       "pases": 206,
       "precision_pases_pct": 67.0,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 5,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 71.9,
@@ -3660,7 +3962,9 @@
       "pases": 517,
       "precision_pases_pct": 83.4,
       "faltas": 7,
-      "corners": 7
+      "corners": 7,
+      "offsides": 0,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -3729,7 +4033,9 @@
       "pases": 252,
       "precision_pases_pct": 66.3,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 67.8,
@@ -3738,7 +4044,9 @@
       "pases": 552,
       "precision_pases_pct": 87.3,
       "faltas": 7,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 2
     },
     "goleadores": [],
     "goles_contra": [],
@@ -3760,7 +4068,9 @@
       "pases": 245,
       "precision_pases_pct": 63.7,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 3,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 61.4,
@@ -3769,7 +4079,9 @@
       "pases": 402,
       "precision_pases_pct": 80.3,
       "faltas": 8,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [],
     "goles_contra": [],
@@ -3791,7 +4103,9 @@
       "pases": 552,
       "precision_pases_pct": 83.5,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 29.1,
@@ -3800,7 +4114,9 @@
       "pases": 212,
       "precision_pases_pct": 57.5,
       "faltas": 13,
-      "corners": 7
+      "corners": 7,
+      "offsides": 4,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -3839,7 +4155,9 @@
       "pases": 502,
       "precision_pases_pct": 84.5,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 36.0,
@@ -3848,7 +4166,9 @@
       "pases": 285,
       "precision_pases_pct": 70.5,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -3893,7 +4213,9 @@
       "pases": 468,
       "precision_pases_pct": 82.1,
       "faltas": 14,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 32.1,
@@ -3902,7 +4224,9 @@
       "pases": 225,
       "precision_pases_pct": 59.6,
       "faltas": 19,
-      "corners": 1
+      "corners": 1,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -3935,7 +4259,9 @@
       "pases": 533,
       "precision_pases_pct": 86.9,
       "faltas": 5,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 32.4,
@@ -3944,7 +4270,9 @@
       "pases": 257,
       "precision_pases_pct": 66.9,
       "faltas": 12,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -3977,7 +4305,9 @@
       "pases": 220,
       "precision_pases_pct": 56.8,
       "faltas": 15,
-      "corners": 1
+      "corners": 1,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 70.7,
@@ -3986,7 +4316,9 @@
       "pases": 519,
       "precision_pases_pct": 83.6,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -4025,7 +4357,9 @@
       "pases": 368,
       "precision_pases_pct": 80.2,
       "faltas": 16,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 41.8,
@@ -4034,7 +4368,9 @@
       "pases": 279,
       "precision_pases_pct": 69.9,
       "faltas": 17,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -4067,7 +4403,9 @@
       "pases": 403,
       "precision_pases_pct": 78.2,
       "faltas": 7,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 50.2,
@@ -4076,7 +4414,9 @@
       "pases": 412,
       "precision_pases_pct": 80.3,
       "faltas": 12,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -4127,7 +4467,9 @@
       "pases": 327,
       "precision_pases_pct": 78.9,
       "faltas": 12,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 54.3,
@@ -4136,7 +4478,9 @@
       "pases": 389,
       "precision_pases_pct": 77.9,
       "faltas": 13,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -4169,7 +4513,9 @@
       "pases": 471,
       "precision_pases_pct": 81.3,
       "faltas": 8,
-      "corners": 15
+      "corners": 15,
+      "offsides": 3,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 27.4,
@@ -4178,7 +4524,9 @@
       "pases": 188,
       "precision_pases_pct": 61.7,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 8
     },
     "goleadores": [
       {
@@ -4235,7 +4583,9 @@
       "pases": 397,
       "precision_pases_pct": 77.6,
       "faltas": 8,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 43.9,
@@ -4244,7 +4594,9 @@
       "pases": 302,
       "precision_pases_pct": 68.5,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 4,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -4277,7 +4629,9 @@
       "pases": 543,
       "precision_pases_pct": 86.9,
       "faltas": 19,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 34.1,
@@ -4286,7 +4640,9 @@
       "pases": 276,
       "precision_pases_pct": 77.9,
       "faltas": 10,
-      "corners": 1
+      "corners": 1,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -4319,7 +4675,9 @@
       "pases": 307,
       "precision_pases_pct": 69.7,
       "faltas": 17,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 56.2,
@@ -4328,7 +4686,9 @@
       "pases": 403,
       "precision_pases_pct": 76.7,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -4373,7 +4733,9 @@
       "pases": 437,
       "precision_pases_pct": 86.3,
       "faltas": 7,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 48.3,
@@ -4382,7 +4744,9 @@
       "pases": 432,
       "precision_pases_pct": 81.2,
       "faltas": 12,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -4427,7 +4791,9 @@
       "pases": 342,
       "precision_pases_pct": 77.5,
       "faltas": 15,
-      "corners": 10
+      "corners": 10,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 57.0,
@@ -4436,7 +4802,9 @@
       "pases": 473,
       "precision_pases_pct": 84.4,
       "faltas": 8,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -4487,7 +4855,9 @@
       "pases": 341,
       "precision_pases_pct": 69.2,
       "faltas": 13,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 50.7,
@@ -4496,7 +4866,9 @@
       "pases": 366,
       "precision_pases_pct": 70.8,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 1
     },
     "goleadores": [],
     "goles_contra": [],
@@ -4518,7 +4890,9 @@
       "pases": 292,
       "precision_pases_pct": 70.2,
       "faltas": 9,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 56.0,
@@ -4527,7 +4901,9 @@
       "pases": 383,
       "precision_pases_pct": 80.4,
       "faltas": 23,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -4549,7 +4925,9 @@
       "pases": 404,
       "precision_pases_pct": 76.5,
       "faltas": 12,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 47.8,
@@ -4558,7 +4936,9 @@
       "pases": 372,
       "precision_pases_pct": 72.3,
       "faltas": 15,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -4597,7 +4977,9 @@
       "pases": 379,
       "precision_pases_pct": 74.4,
       "faltas": 16,
-      "corners": 8
+      "corners": 8,
+      "offsides": 7,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 50.4,
@@ -4606,7 +4988,9 @@
       "pases": 394,
       "precision_pases_pct": 73.9,
       "faltas": 7,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -4645,7 +5029,9 @@
       "pases": 574,
       "precision_pases_pct": 86.2,
       "faltas": 12,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 25.0,
@@ -4654,7 +5040,9 @@
       "pases": 193,
       "precision_pases_pct": 61.7,
       "faltas": 20,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -4699,7 +5087,9 @@
       "pases": 487,
       "precision_pases_pct": 82.8,
       "faltas": 17,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 36.9,
@@ -4708,7 +5098,9 @@
       "pases": 285,
       "precision_pases_pct": 68.8,
       "faltas": 14,
-      "corners": 6
+      "corners": 6,
+      "offsides": 4,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -4753,7 +5145,9 @@
       "pases": 336,
       "precision_pases_pct": 80.4,
       "faltas": 13,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 53.9,
@@ -4762,7 +5156,9 @@
       "pases": 395,
       "precision_pases_pct": 82.3,
       "faltas": 17,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -4813,7 +5209,9 @@
       "pases": 332,
       "precision_pases_pct": 56.6,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 4,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 46.8,
@@ -4822,7 +5220,9 @@
       "pases": 307,
       "precision_pases_pct": 63.8,
       "faltas": 15,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -4855,7 +5255,9 @@
       "pases": 558,
       "precision_pases_pct": 84.1,
       "faltas": 7,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 38.7,
@@ -4864,7 +5266,9 @@
       "pases": 350,
       "precision_pases_pct": 69.1,
       "faltas": 17,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -4903,7 +5307,9 @@
       "pases": 452,
       "precision_pases_pct": 88.1,
       "faltas": 6,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 30.8,
@@ -4912,7 +5318,9 @@
       "pases": 191,
       "precision_pases_pct": 69.6,
       "faltas": 19,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -4945,7 +5353,9 @@
       "pases": 304,
       "precision_pases_pct": 68.4,
       "faltas": 13,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 60.9,
@@ -4954,7 +5364,9 @@
       "pases": 479,
       "precision_pases_pct": 83.7,
       "faltas": 7,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -4993,7 +5405,9 @@
       "pases": 556,
       "precision_pases_pct": 88.1,
       "faltas": 9,
-      "corners": 9
+      "corners": 9,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 32.8,
@@ -5002,7 +5416,9 @@
       "pases": 259,
       "precision_pases_pct": 74.9,
       "faltas": 10,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -5059,7 +5475,9 @@
       "pases": 562,
       "precision_pases_pct": 85.6,
       "faltas": 6,
-      "corners": 8
+      "corners": 8,
+      "offsides": 5,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 33.2,
@@ -5068,7 +5486,9 @@
       "pases": 281,
       "precision_pases_pct": 67.6,
       "faltas": 19,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -5113,7 +5533,9 @@
       "pases": 460,
       "precision_pases_pct": 83.5,
       "faltas": 12,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 32.6,
@@ -5122,7 +5544,9 @@
       "pases": 217,
       "precision_pases_pct": 71.0,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -5167,7 +5591,9 @@
       "pases": 524,
       "precision_pases_pct": 84.2,
       "faltas": 15,
-      "corners": 8
+      "corners": 8,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 33.6,
@@ -5176,7 +5602,9 @@
       "pases": 259,
       "precision_pases_pct": 71.0,
       "faltas": 10,
-      "corners": 1
+      "corners": 1,
+      "offsides": 5,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -5221,7 +5649,9 @@
       "pases": 310,
       "precision_pases_pct": 69.4,
       "faltas": 16,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 61.8,
@@ -5230,7 +5660,9 @@
       "pases": 513,
       "precision_pases_pct": 83.0,
       "faltas": 10,
-      "corners": 2
+      "corners": 2,
+      "offsides": 4,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -5281,7 +5713,9 @@
       "pases": 241,
       "precision_pases_pct": 61.4,
       "faltas": 16,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 65.1,
@@ -5290,7 +5724,9 @@
       "pases": 472,
       "precision_pases_pct": 79.2,
       "faltas": 11,
-      "corners": 10
+      "corners": 10,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -5312,7 +5748,9 @@
       "pases": 258,
       "precision_pases_pct": 60.9,
       "faltas": 9,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 51.7,
@@ -5321,7 +5759,9 @@
       "pases": 287,
       "precision_pases_pct": 61.0,
       "faltas": 15,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -5354,7 +5794,9 @@
       "pases": 506,
       "precision_pases_pct": 83.8,
       "faltas": 10,
-      "corners": 9
+      "corners": 9,
+      "offsides": 0,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 27.8,
@@ -5363,7 +5805,9 @@
       "pases": 201,
       "precision_pases_pct": 57.7,
       "faltas": 17,
-      "corners": 0
+      "corners": 0,
+      "offsides": 1,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -5402,7 +5846,9 @@
       "pases": 340,
       "precision_pases_pct": 75.0,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 56.4,
@@ -5411,7 +5857,9 @@
       "pases": 450,
       "precision_pases_pct": 82.7,
       "faltas": 15,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -5444,7 +5892,9 @@
       "pases": 360,
       "precision_pases_pct": 79.4,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 56.1,
@@ -5453,7 +5903,9 @@
       "pases": 471,
       "precision_pases_pct": 79.6,
       "faltas": 12,
-      "corners": 0
+      "corners": 0,
+      "offsides": 1,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -5510,7 +5962,9 @@
       "pases": 317,
       "precision_pases_pct": 75.4,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 51.3,
@@ -5519,7 +5973,9 @@
       "pases": 350,
       "precision_pases_pct": 75.1,
       "faltas": 16,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -5558,7 +6014,9 @@
       "pases": 396,
       "precision_pases_pct": 85.1,
       "faltas": 9,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 52.1,
@@ -5567,7 +6025,9 @@
       "pases": 445,
       "precision_pases_pct": 85.2,
       "faltas": 7,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -5600,7 +6060,9 @@
       "pases": 422,
       "precision_pases_pct": 84.1,
       "faltas": 12,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 53.2,
@@ -5609,7 +6071,9 @@
       "pases": 490,
       "precision_pases_pct": 84.5,
       "faltas": 14,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -5654,7 +6118,9 @@
       "pases": 525,
       "precision_pases_pct": 84.4,
       "faltas": 6,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 40.9,
@@ -5663,7 +6129,9 @@
       "pases": 371,
       "precision_pases_pct": 78.7,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [],
     "goles_contra": [],
@@ -5685,7 +6153,9 @@
       "pases": 228,
       "precision_pases_pct": 69.3,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 74.4,
@@ -5694,7 +6164,9 @@
       "pases": 702,
       "precision_pases_pct": 88.0,
       "faltas": 11,
-      "corners": 7
+      "corners": 7,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -5733,7 +6205,9 @@
       "pases": 576,
       "precision_pases_pct": 85.6,
       "faltas": 10,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 38.1,
@@ -5742,7 +6216,9 @@
       "pases": 350,
       "precision_pases_pct": 72.9,
       "faltas": 14,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -5787,7 +6263,9 @@
       "pases": 226,
       "precision_pases_pct": 56.2,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 5,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 64.7,
@@ -5796,7 +6274,9 @@
       "pases": 425,
       "precision_pases_pct": 75.3,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -5835,7 +6315,9 @@
       "pases": 532,
       "precision_pases_pct": 84.2,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 31.4,
@@ -5844,7 +6326,9 @@
       "pases": 239,
       "precision_pases_pct": 63.2,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [],
     "goles_contra": [],
@@ -5866,7 +6350,9 @@
       "pases": 212,
       "precision_pases_pct": 68.9,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 71.6,
@@ -5875,7 +6361,9 @@
       "pases": 533,
       "precision_pases_pct": 88.0,
       "faltas": 10,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -5914,7 +6402,9 @@
       "pases": 415,
       "precision_pases_pct": 82.9,
       "faltas": 10,
-      "corners": 8
+      "corners": 8,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 44.8,
@@ -5923,7 +6413,9 @@
       "pases": 338,
       "precision_pases_pct": 74.6,
       "faltas": 13,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -5980,7 +6472,9 @@
       "pases": 485,
       "precision_pases_pct": 78.4,
       "faltas": 13,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 30.8,
@@ -5989,7 +6483,9 @@
       "pases": 218,
       "precision_pases_pct": 53.7,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -6022,7 +6518,9 @@
       "pases": 279,
       "precision_pases_pct": 69.9,
       "faltas": 8,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 59.0,
@@ -6031,7 +6529,9 @@
       "pases": 381,
       "precision_pases_pct": 78.0,
       "faltas": 8,
-      "corners": 7
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -6070,7 +6570,9 @@
       "pases": 300,
       "precision_pases_pct": 71.7,
       "faltas": 7,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 57.1,
@@ -6079,7 +6581,9 @@
       "pases": 401,
       "precision_pases_pct": 84.3,
       "faltas": 8,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -6118,7 +6622,9 @@
       "pases": 609,
       "precision_pases_pct": 88.5,
       "faltas": 3,
-      "corners": 7
+      "corners": 7,
+      "offsides": 0,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 31.4,
@@ -6127,7 +6633,9 @@
       "pases": 267,
       "precision_pases_pct": 72.7,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -6166,7 +6674,9 @@
       "pases": 345,
       "precision_pases_pct": 73.9,
       "faltas": 8,
-      "corners": 8
+      "corners": 8,
+      "offsides": 5,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 54.0,
@@ -6175,7 +6685,9 @@
       "pases": 413,
       "precision_pases_pct": 75.8,
       "faltas": 17,
-      "corners": 2
+      "corners": 2,
+      "offsides": 4,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -6220,7 +6732,9 @@
       "pases": 491,
       "precision_pases_pct": 80.4,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 6
     },
     "away": {
       "posesion_pct": 41.2,
@@ -6229,7 +6743,9 @@
       "pases": 340,
       "precision_pases_pct": 70.0,
       "faltas": 18,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -6262,7 +6778,9 @@
       "pases": 381,
       "precision_pases_pct": 85.6,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 42.6,
@@ -6271,7 +6789,9 @@
       "pases": 289,
       "precision_pases_pct": 72.7,
       "faltas": 15,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -6304,7 +6824,9 @@
       "pases": 363,
       "precision_pases_pct": 73.6,
       "faltas": 8,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 47.9,
@@ -6313,7 +6835,9 @@
       "pases": 347,
       "precision_pases_pct": 72.9,
       "faltas": 16,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -6358,7 +6882,9 @@
       "pases": 290,
       "precision_pases_pct": 78.6,
       "faltas": 9,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 63.9,
@@ -6367,7 +6893,9 @@
       "pases": 490,
       "precision_pases_pct": 85.9,
       "faltas": 12,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -6406,7 +6934,9 @@
       "pases": 190,
       "precision_pases_pct": 55.8,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 72.7,
@@ -6415,7 +6945,9 @@
       "pases": 513,
       "precision_pases_pct": 79.3,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 3,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -6448,7 +6980,9 @@
       "pases": 270,
       "precision_pases_pct": 66.7,
       "faltas": 12,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 63.5,
@@ -6457,7 +6991,9 @@
       "pases": 474,
       "precision_pases_pct": 80.8,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -6490,7 +7026,9 @@
       "pases": 314,
       "precision_pases_pct": 75.8,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 58.0,
@@ -6499,7 +7037,9 @@
       "pases": 446,
       "precision_pases_pct": 81.6,
       "faltas": 17,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -6544,7 +7084,9 @@
       "pases": 354,
       "precision_pases_pct": 74.6,
       "faltas": 7,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 48.4,
@@ -6553,7 +7095,9 @@
       "pases": 323,
       "precision_pases_pct": 65.3,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -6586,7 +7130,9 @@
       "pases": 565,
       "precision_pases_pct": 91.0,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 36.9,
@@ -6595,7 +7141,9 @@
       "pases": 330,
       "precision_pases_pct": 83.6,
       "faltas": 7,
-      "corners": 0
+      "corners": 0,
+      "offsides": 0,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -6652,7 +7200,9 @@
       "pases": 226,
       "precision_pases_pct": 68.6,
       "faltas": 20,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 64.4,
@@ -6661,7 +7211,9 @@
       "pases": 403,
       "precision_pases_pct": 82.6,
       "faltas": 12,
-      "corners": 9
+      "corners": 9,
+      "offsides": 4,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -6706,7 +7258,9 @@
       "pases": 339,
       "precision_pases_pct": 78.5,
       "faltas": 7,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 60.6,
@@ -6715,7 +7269,9 @@
       "pases": 552,
       "precision_pases_pct": 85.5,
       "faltas": 8,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -6754,7 +7310,9 @@
       "pases": 288,
       "precision_pases_pct": 68.4,
       "faltas": 15,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 64.8,
@@ -6763,7 +7321,9 @@
       "pases": 549,
       "precision_pases_pct": 85.2,
       "faltas": 16,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -6802,7 +7362,9 @@
       "pases": 407,
       "precision_pases_pct": 83.8,
       "faltas": 5,
-      "corners": 9
+      "corners": 9,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 47.3,
@@ -6811,7 +7373,9 @@
       "pases": 387,
       "precision_pases_pct": 83.2,
       "faltas": 7,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -6880,7 +7444,9 @@
       "pases": 450,
       "precision_pases_pct": 81.3,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 4,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 43.8,
@@ -6889,7 +7455,9 @@
       "pases": 364,
       "precision_pases_pct": 77.7,
       "faltas": 13,
-      "corners": 1
+      "corners": 1,
+      "offsides": 7,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -6928,7 +7496,9 @@
       "pases": 349,
       "precision_pases_pct": 73.4,
       "faltas": 8,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 55.3,
@@ -6937,7 +7507,9 @@
       "pases": 418,
       "precision_pases_pct": 81.8,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -6982,7 +7554,9 @@
       "pases": 280,
       "precision_pases_pct": 67.1,
       "faltas": 17,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 59.4,
@@ -6991,7 +7565,9 @@
       "pases": 436,
       "precision_pases_pct": 78.9,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [],
     "goles_contra": [],
@@ -7013,7 +7589,9 @@
       "pases": 587,
       "precision_pases_pct": 86.5,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 28.6,
@@ -7022,7 +7600,9 @@
       "pases": 233,
       "precision_pases_pct": 67.0,
       "faltas": 12,
-      "corners": 0
+      "corners": 0,
+      "offsides": 2,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -7067,7 +7647,9 @@
       "pases": 692,
       "precision_pases_pct": 88.7,
       "faltas": 11,
-      "corners": 10
+      "corners": 10,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 21.2,
@@ -7076,7 +7658,9 @@
       "pases": 186,
       "precision_pases_pct": 56.5,
       "faltas": 15,
-      "corners": 2
+      "corners": 2,
+      "offsides": 5,
+      "atajadas": 10
     },
     "goleadores": [
       {
@@ -7115,7 +7699,9 @@
       "pases": 356,
       "precision_pases_pct": 79.8,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 51.4,
@@ -7124,7 +7710,9 @@
       "pases": 388,
       "precision_pases_pct": 81.7,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -7181,7 +7769,9 @@
       "pases": 283,
       "precision_pases_pct": 73.9,
       "faltas": 17,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 52.1,
@@ -7190,7 +7780,9 @@
       "pases": 312,
       "precision_pases_pct": 77.9,
       "faltas": 16,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 0
     },
     "goleadores": [],
     "goles_contra": [],
@@ -7212,7 +7804,9 @@
       "pases": 379,
       "precision_pases_pct": 75.7,
       "faltas": 11,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 49.1,
@@ -7221,7 +7815,9 @@
       "pases": 371,
       "precision_pases_pct": 71.4,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -7260,7 +7856,9 @@
       "pases": 286,
       "precision_pases_pct": 75.2,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 60.0,
@@ -7269,7 +7867,9 @@
       "pases": 438,
       "precision_pases_pct": 83.6,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -7314,7 +7914,9 @@
       "pases": 502,
       "precision_pases_pct": 85.1,
       "faltas": 7,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 42.6,
@@ -7323,7 +7925,9 @@
       "pases": 377,
       "precision_pases_pct": 82.0,
       "faltas": 13,
-      "corners": 5
+      "corners": 5,
+      "offsides": 4,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -7356,7 +7960,9 @@
       "pases": 415,
       "precision_pases_pct": 70.1,
       "faltas": 10,
-      "corners": 11
+      "corners": 11,
+      "offsides": 0,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 36.9,
@@ -7365,7 +7971,9 @@
       "pases": 245,
       "precision_pases_pct": 55.9,
       "faltas": 18,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -7404,7 +8012,9 @@
       "pases": 295,
       "precision_pases_pct": 71.5,
       "faltas": 10,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 59.2,
@@ -7413,7 +8023,9 @@
       "pases": 410,
       "precision_pases_pct": 81.2,
       "faltas": 18,
-      "corners": 8
+      "corners": 8,
+      "offsides": 4,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -7452,7 +8064,9 @@
       "pases": 513,
       "precision_pases_pct": 86.7,
       "faltas": 9,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 27.1,
@@ -7461,7 +8075,9 @@
       "pases": 203,
       "precision_pases_pct": 61.6,
       "faltas": 11,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 10
     },
     "goleadores": [
       {
@@ -7506,7 +8122,9 @@
       "pases": 382,
       "precision_pases_pct": 70.2,
       "faltas": 4,
-      "corners": 8
+      "corners": 8,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 46.4,
@@ -7515,7 +8133,9 @@
       "pases": 350,
       "precision_pases_pct": 70.0,
       "faltas": 10,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -7548,7 +8168,9 @@
       "pases": 422,
       "precision_pases_pct": 84.6,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 43.4,
@@ -7557,7 +8179,9 @@
       "pases": 326,
       "precision_pases_pct": 81.6,
       "faltas": 10,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -7596,7 +8220,9 @@
       "pases": 314,
       "precision_pases_pct": 52.2,
       "faltas": 20,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 44.7,
@@ -7605,7 +8231,9 @@
       "pases": 258,
       "precision_pases_pct": 57.8,
       "faltas": 13,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 7
     },
     "goleadores": [],
     "goles_contra": [],
@@ -7627,7 +8255,9 @@
       "pases": 337,
       "precision_pases_pct": 73.6,
       "faltas": 8,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 48.2,
@@ -7636,7 +8266,9 @@
       "pases": 313,
       "precision_pases_pct": 72.2,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -7658,7 +8290,9 @@
       "pases": 240,
       "precision_pases_pct": 67.1,
       "faltas": 17,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 6
     },
     "away": {
       "posesion_pct": 64.4,
@@ -7667,7 +8301,9 @@
       "pases": 438,
       "precision_pases_pct": 78.3,
       "faltas": 14,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -7706,7 +8342,9 @@
       "pases": 509,
       "precision_pases_pct": 84.3,
       "faltas": 8,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 30.3,
@@ -7715,7 +8353,9 @@
       "pases": 217,
       "precision_pases_pct": 65.0,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -7754,7 +8394,9 @@
       "pases": 385,
       "precision_pases_pct": 81.0,
       "faltas": 12,
-      "corners": 8
+      "corners": 8,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 45.8,
@@ -7763,7 +8405,9 @@
       "pases": 346,
       "precision_pases_pct": 76.0,
       "faltas": 6,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -7808,7 +8452,9 @@
       "pases": 488,
       "precision_pases_pct": 79.1,
       "faltas": 11,
-      "corners": 5
+      "corners": 5,
+      "offsides": 4,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 41.6,
@@ -7817,7 +8463,9 @@
       "pases": 344,
       "precision_pases_pct": 76.5,
       "faltas": 12,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [],
     "goles_contra": [],
@@ -7839,7 +8487,9 @@
       "pases": 374,
       "precision_pases_pct": 74.1,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 43.0,
@@ -7848,7 +8498,9 @@
       "pases": 291,
       "precision_pases_pct": 67.0,
       "faltas": 10,
-      "corners": 3
+      "corners": 3,
+      "offsides": 4,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -7923,7 +8575,9 @@
       "pases": 294,
       "precision_pases_pct": 67.7,
       "faltas": 16,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 58.9,
@@ -7932,7 +8586,9 @@
       "pases": 439,
       "precision_pases_pct": 77.4,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -7971,7 +8627,9 @@
       "pases": 476,
       "precision_pases_pct": 81.9,
       "faltas": 9,
-      "corners": 8
+      "corners": 8,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 52.0,
@@ -7980,7 +8638,9 @@
       "pases": 532,
       "precision_pases_pct": 82.9,
       "faltas": 8,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -8025,7 +8685,9 @@
       "pases": 282,
       "precision_pases_pct": 65.6,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 6,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 54.0,
@@ -8034,7 +8696,9 @@
       "pases": 338,
       "precision_pases_pct": 77.5,
       "faltas": 15,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -8079,7 +8743,9 @@
       "pases": 348,
       "precision_pases_pct": 73.3,
       "faltas": 18,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 47.2,
@@ -8088,7 +8754,9 @@
       "pases": 307,
       "precision_pases_pct": 67.4,
       "faltas": 12,
-      "corners": 8
+      "corners": 8,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -8121,7 +8789,9 @@
       "pases": 233,
       "precision_pases_pct": 65.7,
       "faltas": 13,
-      "corners": 2
+      "corners": 2,
+      "offsides": 4,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 70.1,
@@ -8130,7 +8800,9 @@
       "pases": 577,
       "precision_pases_pct": 84.2,
       "faltas": 10,
-      "corners": 2
+      "corners": 2,
+      "offsides": 4,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -8169,7 +8841,9 @@
       "pases": 396,
       "precision_pases_pct": 82.1,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 48.6,
@@ -8178,7 +8852,9 @@
       "pases": 369,
       "precision_pases_pct": 81.3,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -8229,7 +8905,9 @@
       "pases": 234,
       "precision_pases_pct": 66.2,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 65.5,
@@ -8238,7 +8916,9 @@
       "pases": 451,
       "precision_pases_pct": 78.7,
       "faltas": 7,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -8277,7 +8957,9 @@
       "pases": 342,
       "precision_pases_pct": 74.3,
       "faltas": 9,
-      "corners": 9
+      "corners": 9,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 47.4,
@@ -8286,7 +8968,9 @@
       "pases": 327,
       "precision_pases_pct": 73.4,
       "faltas": 18,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -8337,7 +9021,9 @@
       "pases": 415,
       "precision_pases_pct": 83.4,
       "faltas": 13,
-      "corners": 9
+      "corners": 9,
+      "offsides": 3,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 43.1,
@@ -8346,7 +9032,9 @@
       "pases": 316,
       "precision_pases_pct": 77.5,
       "faltas": 16,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -8379,7 +9067,9 @@
       "pases": 268,
       "precision_pases_pct": 61.6,
       "faltas": 14,
-      "corners": 7
+      "corners": 7,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 59.3,
@@ -8388,7 +9078,9 @@
       "pases": 391,
       "precision_pases_pct": 74.9,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 4
     },
     "goleadores": [],
     "goles_contra": [],
@@ -8410,7 +9102,9 @@
       "pases": 420,
       "precision_pases_pct": 81.4,
       "faltas": 8,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 55.4,
@@ -8419,7 +9113,9 @@
       "pases": 534,
       "precision_pases_pct": 85.0,
       "faltas": 10,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -8458,7 +9154,9 @@
       "pases": 363,
       "precision_pases_pct": 74.9,
       "faltas": 12,
-      "corners": 12
+      "corners": 12,
+      "offsides": 1,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 42.6,
@@ -8467,7 +9165,9 @@
       "pases": 271,
       "precision_pases_pct": 70.5,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [],
     "goles_contra": [],
@@ -8489,7 +9189,9 @@
       "pases": 257,
       "precision_pases_pct": 65.0,
       "faltas": 24,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 61.9,
@@ -8498,7 +9200,9 @@
       "pases": 419,
       "precision_pases_pct": 78.8,
       "faltas": 7,
-      "corners": 8
+      "corners": 8,
+      "offsides": 2,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -8537,7 +9241,9 @@
       "pases": 493,
       "precision_pases_pct": 80.3,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 36.8,
@@ -8546,7 +9252,9 @@
       "pases": 283,
       "precision_pases_pct": 68.6,
       "faltas": 13,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -8591,7 +9299,9 @@
       "pases": 584,
       "precision_pases_pct": 85.1,
       "faltas": 8,
-      "corners": 8
+      "corners": 8,
+      "offsides": 7,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 27.5,
@@ -8600,7 +9310,9 @@
       "pases": 231,
       "precision_pases_pct": 58.4,
       "faltas": 8,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -8639,7 +9351,9 @@
       "pases": 523,
       "precision_pases_pct": 82.4,
       "faltas": 7,
-      "corners": 11
+      "corners": 11,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 26.0,
@@ -8648,7 +9362,9 @@
       "pases": 192,
       "precision_pases_pct": 60.9,
       "faltas": 15,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -8687,7 +9403,9 @@
       "pases": 575,
       "precision_pases_pct": 84.9,
       "faltas": 11,
-      "corners": 9
+      "corners": 9,
+      "offsides": 3,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 29.3,
@@ -8696,7 +9414,9 @@
       "pases": 247,
       "precision_pases_pct": 60.7,
       "faltas": 17,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -8735,7 +9455,9 @@
       "pases": 246,
       "precision_pases_pct": 70.3,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 64.7,
@@ -8744,7 +9466,9 @@
       "pases": 457,
       "precision_pases_pct": 81.0,
       "faltas": 10,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -8783,7 +9507,9 @@
       "pases": 451,
       "precision_pases_pct": 80.9,
       "faltas": 14,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 37.5,
@@ -8792,7 +9518,9 @@
       "pases": 276,
       "precision_pases_pct": 58.7,
       "faltas": 17,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -8843,7 +9571,9 @@
       "pases": 537,
       "precision_pases_pct": 82.5,
       "faltas": 15,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 35.3,
@@ -8852,7 +9582,9 @@
       "pases": 280,
       "precision_pases_pct": 65.7,
       "faltas": 13,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -8903,7 +9635,9 @@
       "pases": 392,
       "precision_pases_pct": 79.6,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 47.7,
@@ -8912,7 +9646,9 @@
       "pases": 357,
       "precision_pases_pct": 70.9,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -8951,7 +9687,9 @@
       "pases": 343,
       "precision_pases_pct": 66.2,
       "faltas": 12,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 52.7,
@@ -8960,7 +9698,9 @@
       "pases": 394,
       "precision_pases_pct": 74.1,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 6,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -8999,7 +9739,9 @@
       "pases": 365,
       "precision_pases_pct": 80.3,
       "faltas": 14,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 55.4,
@@ -9008,7 +9750,9 @@
       "pases": 467,
       "precision_pases_pct": 83.5,
       "faltas": 20,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -9053,7 +9797,9 @@
       "pases": 383,
       "precision_pases_pct": 75.7,
       "faltas": 12,
-      "corners": 0
+      "corners": 0,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 50.1,
@@ -9062,7 +9808,9 @@
       "pases": 375,
       "precision_pases_pct": 77.3,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -9113,7 +9861,9 @@
       "pases": 391,
       "precision_pases_pct": 78.0,
       "faltas": 18,
-      "corners": 0
+      "corners": 0,
+      "offsides": 0,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 46.3,
@@ -9122,7 +9872,9 @@
       "pases": 327,
       "precision_pases_pct": 77.4,
       "faltas": 12,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -9167,7 +9919,9 @@
       "pases": 583,
       "precision_pases_pct": 82.0,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 29.1,
@@ -9176,7 +9930,9 @@
       "pases": 240,
       "precision_pases_pct": 60.4,
       "faltas": 18,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -9198,7 +9954,9 @@
       "pases": 273,
       "precision_pases_pct": 74.4,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 62.1,
@@ -9207,7 +9965,9 @@
       "pases": 473,
       "precision_pases_pct": 86.7,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -9246,7 +10006,9 @@
       "pases": 292,
       "precision_pases_pct": 69.9,
       "faltas": 11,
-      "corners": 1
+      "corners": 1,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 62.9,
@@ -9255,7 +10017,9 @@
       "pases": 484,
       "precision_pases_pct": 83.5,
       "faltas": 8,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -9294,7 +10058,9 @@
       "pases": 426,
       "precision_pases_pct": 80.8,
       "faltas": 6,
-      "corners": 0
+      "corners": 0,
+      "offsides": 1,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 43.4,
@@ -9303,7 +10069,9 @@
       "pases": 315,
       "precision_pases_pct": 70.5,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -9342,7 +10110,9 @@
       "pases": 357,
       "precision_pases_pct": 80.4,
       "faltas": 7,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 51.3,
@@ -9351,7 +10121,9 @@
       "pases": 390,
       "precision_pases_pct": 83.1,
       "faltas": 7,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [],
     "goles_contra": [],
@@ -9373,7 +10145,9 @@
       "pases": 336,
       "precision_pases_pct": 78.0,
       "faltas": 14,
-      "corners": 1
+      "corners": 1,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 53.4,
@@ -9382,7 +10156,9 @@
       "pases": 390,
       "precision_pases_pct": 74.4,
       "faltas": 9,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -9415,7 +10191,9 @@
       "pases": 327,
       "precision_pases_pct": 60.6,
       "faltas": 9,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 63.1,
@@ -9424,7 +10202,9 @@
       "pases": 569,
       "precision_pases_pct": 78.7,
       "faltas": 14,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -9457,7 +10237,9 @@
       "pases": 350,
       "precision_pases_pct": 77.4,
       "faltas": 13,
-      "corners": 3
+      "corners": 3,
+      "offsides": 4,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 50.5,
@@ -9466,7 +10248,9 @@
       "pases": 351,
       "precision_pases_pct": 72.4,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 4,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -9505,7 +10289,9 @@
       "pases": 297,
       "precision_pases_pct": 78.8,
       "faltas": 19,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 60.9,
@@ -9514,7 +10300,9 @@
       "pases": 463,
       "precision_pases_pct": 82.5,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 1
     },
     "goleadores": [],
     "goles_contra": [],
@@ -9536,7 +10324,9 @@
       "pases": 255,
       "precision_pases_pct": 72.2,
       "faltas": 15,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 47.5,
@@ -9545,7 +10335,9 @@
       "pases": 235,
       "precision_pases_pct": 66.8,
       "faltas": 18,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -9590,7 +10382,9 @@
       "pases": 484,
       "precision_pases_pct": 83.7,
       "faltas": 9,
-      "corners": 12
+      "corners": 12,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 31.7,
@@ -9599,7 +10393,9 @@
       "pases": 236,
       "precision_pases_pct": 69.1,
       "faltas": 18,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -9632,7 +10428,9 @@
       "pases": 508,
       "precision_pases_pct": 84.6,
       "faltas": 16,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 35.3,
@@ -9641,7 +10439,9 @@
       "pases": 290,
       "precision_pases_pct": 68.3,
       "faltas": 17,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -9674,7 +10474,9 @@
       "pases": 232,
       "precision_pases_pct": 65.9,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 62.1,
@@ -9683,7 +10485,9 @@
       "pases": 384,
       "precision_pases_pct": 78.1,
       "faltas": 6,
-      "corners": 9
+      "corners": 9,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -9740,7 +10544,9 @@
       "pases": 433,
       "precision_pases_pct": 82.7,
       "faltas": 10,
-      "corners": 7
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 41.2,
@@ -9749,7 +10555,9 @@
       "pases": 315,
       "precision_pases_pct": 71.4,
       "faltas": 16,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -9782,7 +10590,9 @@
       "pases": 278,
       "precision_pases_pct": 60.4,
       "faltas": 21,
-      "corners": 8
+      "corners": 8,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 48.6,
@@ -9791,7 +10601,9 @@
       "pases": 268,
       "precision_pases_pct": 64.2,
       "faltas": 10,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [],
     "goles_contra": [],
@@ -9813,7 +10625,9 @@
       "pases": 399,
       "precision_pases_pct": 73.2,
       "faltas": 9,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 35.2,
@@ -9822,7 +10636,9 @@
       "pases": 220,
       "precision_pases_pct": 59.1,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -9867,7 +10683,9 @@
       "pases": 274,
       "precision_pases_pct": 72.3,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 57.8,
@@ -9876,7 +10694,9 @@
       "pases": 389,
       "precision_pases_pct": 81.0,
       "faltas": 8,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -9909,7 +10729,9 @@
       "pases": 448,
       "precision_pases_pct": 83.7,
       "faltas": 7,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 42.8,
@@ -9918,7 +10740,9 @@
       "pases": 341,
       "precision_pases_pct": 75.7,
       "faltas": 9,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -9957,7 +10781,9 @@
       "pases": 310,
       "precision_pases_pct": 65.8,
       "faltas": 12,
-      "corners": 8
+      "corners": 8,
+      "offsides": 5,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 52.8,
@@ -9966,7 +10792,9 @@
       "pases": 354,
       "precision_pases_pct": 74.6,
       "faltas": 15,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 0
     },
     "goleadores": [],
     "goles_contra": [],
@@ -9988,7 +10816,9 @@
       "pases": 528,
       "precision_pases_pct": 86.4,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 33.8,
@@ -9997,7 +10827,9 @@
       "pases": 274,
       "precision_pases_pct": 73.4,
       "faltas": 16,
-      "corners": 0
+      "corners": 0,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -10036,7 +10868,9 @@
       "pases": 271,
       "precision_pases_pct": 65.3,
       "faltas": 22,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 53.9,
@@ -10045,7 +10879,9 @@
       "pases": 323,
       "precision_pases_pct": 72.1,
       "faltas": 18,
-      "corners": 5
+      "corners": 5,
+      "offsides": 2,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -10084,7 +10920,9 @@
       "pases": 276,
       "precision_pases_pct": 55.1,
       "faltas": 17,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 50.3,
@@ -10093,7 +10931,9 @@
       "pases": 278,
       "precision_pases_pct": 58.3,
       "faltas": 6,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -10132,7 +10972,9 @@
       "pases": 315,
       "precision_pases_pct": 77.5,
       "faltas": 14,
-      "corners": 8
+      "corners": 8,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 51.6,
@@ -10141,7 +10983,9 @@
       "pases": 355,
       "precision_pases_pct": 81.1,
       "faltas": 12,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -10174,7 +11018,9 @@
       "pases": 292,
       "precision_pases_pct": 78.1,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 59.0,
@@ -10183,7 +11029,9 @@
       "pases": 428,
       "precision_pases_pct": 86.2,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 0,
+      "atajadas": 2
     },
     "goleadores": [],
     "goles_contra": [],
@@ -10205,7 +11053,9 @@
       "pases": 524,
       "precision_pases_pct": 81.1,
       "faltas": 6,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 37.2,
@@ -10214,7 +11064,9 @@
       "pases": 299,
       "precision_pases_pct": 70.2,
       "faltas": 12,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -10236,7 +11088,9 @@
       "pases": 266,
       "precision_pases_pct": 66.2,
       "faltas": 13,
-      "corners": 7
+      "corners": 7,
+      "offsides": 7,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 51.4,
@@ -10245,7 +11099,9 @@
       "pases": 279,
       "precision_pases_pct": 61.6,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -10296,7 +11152,9 @@
       "pases": 334,
       "precision_pases_pct": 73.4,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 45.8,
@@ -10305,7 +11163,9 @@
       "pases": 291,
       "precision_pases_pct": 67.0,
       "faltas": 14,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [],
     "goles_contra": [],
@@ -10327,7 +11187,9 @@
       "pases": 486,
       "precision_pases_pct": 81.7,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 37.5,
@@ -10336,7 +11198,9 @@
       "pases": 286,
       "precision_pases_pct": 71.3,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -10381,7 +11245,9 @@
       "pases": 310,
       "precision_pases_pct": 71.9,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 45.1,
@@ -10390,7 +11256,9 @@
       "pases": 265,
       "precision_pases_pct": 64.5,
       "faltas": 23,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -10423,7 +11291,9 @@
       "pases": 290,
       "precision_pases_pct": 73.4,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 65.8,
@@ -10432,7 +11302,9 @@
       "pases": 564,
       "precision_pases_pct": 82.4,
       "faltas": 10,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -10471,7 +11343,9 @@
       "pases": 277,
       "precision_pases_pct": 66.4,
       "faltas": 7,
-      "corners": 8
+      "corners": 8,
+      "offsides": 4,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 56.9,
@@ -10480,7 +11354,9 @@
       "pases": 390,
       "precision_pases_pct": 78.2,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -10519,7 +11395,9 @@
       "pases": 362,
       "precision_pases_pct": 79.0,
       "faltas": 18,
-      "corners": 7
+      "corners": 7,
+      "offsides": 3,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 50.2,
@@ -10528,7 +11406,9 @@
       "pases": 379,
       "precision_pases_pct": 76.5,
       "faltas": 14,
-      "corners": 1
+      "corners": 1,
+      "offsides": 5,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -10567,7 +11447,9 @@
       "pases": 402,
       "precision_pases_pct": 74.4,
       "faltas": 9,
-      "corners": 1
+      "corners": 1,
+      "offsides": 5,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 52.1,
@@ -10576,7 +11458,9 @@
       "pases": 433,
       "precision_pases_pct": 74.6,
       "faltas": 17,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -10609,7 +11493,9 @@
       "pases": 283,
       "precision_pases_pct": 66.4,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 0,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 55.6,
@@ -10618,7 +11504,9 @@
       "pases": 344,
       "precision_pases_pct": 75.3,
       "faltas": 17,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -10651,7 +11539,9 @@
       "pases": 346,
       "precision_pases_pct": 64.7,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 51.1,
@@ -10660,7 +11550,9 @@
       "pases": 363,
       "precision_pases_pct": 66.1,
       "faltas": 9,
-      "corners": 4
+      "corners": 4,
+      "offsides": 5,
+      "atajadas": 0
     },
     "goleadores": [],
     "goles_contra": [
@@ -10688,7 +11580,9 @@
       "pases": 470,
       "precision_pases_pct": 83.8,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 49.8,
@@ -10697,7 +11591,9 @@
       "pases": 465,
       "precision_pases_pct": 80.9,
       "faltas": 10,
-      "corners": 7
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -10742,7 +11638,9 @@
       "pases": 465,
       "precision_pases_pct": 82.6,
       "faltas": 12,
-      "corners": 0
+      "corners": 0,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 54.9,
@@ -10751,7 +11649,9 @@
       "pases": 573,
       "precision_pases_pct": 83.9,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -10790,7 +11690,9 @@
       "pases": 337,
       "precision_pases_pct": 75.1,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 54.3,
@@ -10799,7 +11701,9 @@
       "pases": 404,
       "precision_pases_pct": 73.0,
       "faltas": 8,
-      "corners": 7
+      "corners": 7,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -10832,7 +11736,9 @@
       "pases": 503,
       "precision_pases_pct": 86.9,
       "faltas": 7,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 27.8,
@@ -10841,7 +11747,9 @@
       "pases": 193,
       "precision_pases_pct": 53.4,
       "faltas": 22,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -10874,7 +11782,9 @@
       "pases": 277,
       "precision_pases_pct": 71.5,
       "faltas": 17,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 66.7,
@@ -10883,7 +11793,9 @@
       "pases": 531,
       "precision_pases_pct": 86.6,
       "faltas": 10,
-      "corners": 7
+      "corners": 7,
+      "offsides": 4,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -10922,7 +11834,9 @@
       "pases": 300,
       "precision_pases_pct": 69.0,
       "faltas": 18,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 50.4,
@@ -10931,7 +11845,9 @@
       "pases": 299,
       "precision_pases_pct": 66.2,
       "faltas": 14,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -10976,7 +11892,9 @@
       "pases": 318,
       "precision_pases_pct": 64.8,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 48.9,
@@ -10985,7 +11903,9 @@
       "pases": 305,
       "precision_pases_pct": 67.9,
       "faltas": 9,
-      "corners": 1
+      "corners": 1,
+      "offsides": 5,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -11018,7 +11938,9 @@
       "pases": 282,
       "precision_pases_pct": 73.0,
       "faltas": 18,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 41.9,
@@ -11027,7 +11949,9 @@
       "pases": 217,
       "precision_pases_pct": 59.9,
       "faltas": 14,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -11084,7 +12008,9 @@
       "pases": 281,
       "precision_pases_pct": 61.9,
       "faltas": 17,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 52.1,
@@ -11093,7 +12019,9 @@
       "pases": 316,
       "precision_pases_pct": 63.9,
       "faltas": 22,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -11126,7 +12054,9 @@
       "pases": 517,
       "precision_pases_pct": 86.5,
       "faltas": 16,
-      "corners": 11
+      "corners": 11,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 36.7,
@@ -11135,7 +12065,9 @@
       "pases": 296,
       "precision_pases_pct": 79.1,
       "faltas": 9,
-      "corners": 1
+      "corners": 1,
+      "offsides": 2,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -11168,7 +12100,9 @@
       "pases": 544,
       "precision_pases_pct": 84.0,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 29.3,
@@ -11177,7 +12111,9 @@
       "pases": 232,
       "precision_pases_pct": 61.2,
       "faltas": 13,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -11234,7 +12170,9 @@
       "pases": 277,
       "precision_pases_pct": 70.0,
       "faltas": 16,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 51.1,
@@ -11243,7 +12181,9 @@
       "pases": 286,
       "precision_pases_pct": 75.5,
       "faltas": 14,
-      "corners": 7
+      "corners": 7,
+      "offsides": 3,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -11288,7 +12228,9 @@
       "pases": 404,
       "precision_pases_pct": 81.2,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 50.7,
@@ -11297,7 +12239,9 @@
       "pases": 424,
       "precision_pases_pct": 80.4,
       "faltas": 16,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -11330,7 +12274,9 @@
       "pases": 298,
       "precision_pases_pct": 71.5,
       "faltas": 20,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 61.5,
@@ -11339,7 +12285,9 @@
       "pases": 500,
       "precision_pases_pct": 85.8,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -11378,7 +12326,9 @@
       "pases": 360,
       "precision_pases_pct": 75.8,
       "faltas": 14,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 50.3,
@@ -11387,7 +12337,9 @@
       "pases": 379,
       "precision_pases_pct": 80.2,
       "faltas": 15,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -11438,7 +12390,9 @@
       "pases": 278,
       "precision_pases_pct": 68.3,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 6
     },
     "away": {
       "posesion_pct": 59.0,
@@ -11447,7 +12401,9 @@
       "pases": 401,
       "precision_pases_pct": 77.1,
       "faltas": 10,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -11492,7 +12448,9 @@
       "pases": 494,
       "precision_pases_pct": 84.6,
       "faltas": 13,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 42.0,
@@ -11501,7 +12459,9 @@
       "pases": 353,
       "precision_pases_pct": 79.6,
       "faltas": 9,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -11552,7 +12512,9 @@
       "pases": 322,
       "precision_pases_pct": 69.9,
       "faltas": 7,
-      "corners": 4
+      "corners": 4,
+      "offsides": 5,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 43.1,
@@ -11561,7 +12523,9 @@
       "pases": 248,
       "precision_pases_pct": 60.5,
       "faltas": 13,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -11606,7 +12570,9 @@
       "pases": 594,
       "precision_pases_pct": 86.5,
       "faltas": 7,
-      "corners": 5
+      "corners": 5,
+      "offsides": 4,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 39.6,
@@ -11615,7 +12581,9 @@
       "pases": 387,
       "precision_pases_pct": 73.4,
       "faltas": 6,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 6
     },
     "goleadores": [],
     "goles_contra": [],
@@ -11637,7 +12605,9 @@
       "pases": 203,
       "precision_pases_pct": 64.0,
       "faltas": 10,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 66.7,
@@ -11646,7 +12616,9 @@
       "pases": 407,
       "precision_pases_pct": 87.0,
       "faltas": 13,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -11697,7 +12669,9 @@
       "pases": 265,
       "precision_pases_pct": 67.2,
       "faltas": 10,
-      "corners": 6
+      "corners": 6,
+      "offsides": 5,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 65.7,
@@ -11706,7 +12680,9 @@
       "pases": 521,
       "precision_pases_pct": 84.3,
       "faltas": 16,
-      "corners": 3
+      "corners": 3,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -11728,7 +12704,9 @@
       "pases": 345,
       "precision_pases_pct": 80.0,
       "faltas": 13,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 49.8,
@@ -11737,7 +12715,9 @@
       "pases": 331,
       "precision_pases_pct": 72.8,
       "faltas": 17,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -11788,7 +12768,9 @@
       "pases": 461,
       "precision_pases_pct": 88.7,
       "faltas": 8,
-      "corners": 3
+      "corners": 3,
+      "offsides": 6,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 37.3,
@@ -11797,7 +12779,9 @@
       "pases": 278,
       "precision_pases_pct": 75.5,
       "faltas": 8,
-      "corners": 0
+      "corners": 0,
+      "offsides": 0,
+      "atajadas": 6
     },
     "goleadores": [],
     "goles_contra": [],
@@ -11819,7 +12803,9 @@
       "pases": 286,
       "precision_pases_pct": 65.7,
       "faltas": 9,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 52.4,
@@ -11828,7 +12814,9 @@
       "pases": 331,
       "precision_pases_pct": 68.6,
       "faltas": 15,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -11867,7 +12855,9 @@
       "pases": 401,
       "precision_pases_pct": 79.6,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 40.4,
@@ -11876,7 +12866,9 @@
       "pases": 267,
       "precision_pases_pct": 74.2,
       "faltas": 23,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -11915,7 +12907,9 @@
       "pases": 471,
       "precision_pases_pct": 79.6,
       "faltas": 8,
-      "corners": 0
+      "corners": 0,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 35.9,
@@ -11924,7 +12918,9 @@
       "pases": 263,
       "precision_pases_pct": 66.2,
       "faltas": 19,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -11963,7 +12959,9 @@
       "pases": 443,
       "precision_pases_pct": 77.9,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 40.2,
@@ -11972,7 +12970,9 @@
       "pases": 303,
       "precision_pases_pct": 72.9,
       "faltas": 10,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -12016,7 +13016,9 @@
       "pases": 344,
       "precision_pases_pct": 78.8,
       "faltas": 12,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 47.4,
@@ -12025,7 +13027,9 @@
       "pases": 305,
       "precision_pases_pct": 74.8,
       "faltas": 17,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -12058,7 +13062,9 @@
       "pases": 339,
       "precision_pases_pct": 71.7,
       "faltas": 9,
-      "corners": 3
+      "corners": 3,
+      "offsides": 7,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 46.5,
@@ -12067,7 +13073,9 @@
       "pases": 294,
       "precision_pases_pct": 60.9,
       "faltas": 14,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -12106,7 +13114,9 @@
       "pases": 229,
       "precision_pases_pct": 65.5,
       "faltas": 18,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 73.6,
@@ -12115,7 +13125,9 @@
       "pases": 652,
       "precision_pases_pct": 86.3,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 0
     },
     "goleadores": [],
     "goles_contra": [],
@@ -12137,7 +13149,9 @@
       "pases": 384,
       "precision_pases_pct": 78.9,
       "faltas": 14,
-      "corners": 9
+      "corners": 9,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 39.0,
@@ -12146,7 +13160,9 @@
       "pases": 242,
       "precision_pases_pct": 66.9,
       "faltas": 18,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 8
     },
     "goleadores": [
       {
@@ -12179,7 +13195,9 @@
       "pases": 522,
       "precision_pases_pct": 83.3,
       "faltas": 7,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 40.2,
@@ -12188,7 +13206,9 @@
       "pases": 343,
       "precision_pases_pct": 74.1,
       "faltas": 9,
-      "corners": 7
+      "corners": 7,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -12233,7 +13253,9 @@
       "pases": 230,
       "precision_pases_pct": 74.3,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 67.0,
@@ -12242,7 +13264,9 @@
       "pases": 464,
       "precision_pases_pct": 85.6,
       "faltas": 8,
-      "corners": 7
+      "corners": 7,
+      "offsides": 4,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -12287,7 +13311,9 @@
       "pases": 333,
       "precision_pases_pct": 67.6,
       "faltas": 19,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 46.0,
@@ -12296,7 +13322,9 @@
       "pases": 293,
       "precision_pases_pct": 66.6,
       "faltas": 10,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -12329,7 +13357,9 @@
       "pases": 441,
       "precision_pases_pct": 80.5,
       "faltas": 6,
-      "corners": 7
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 40.3,
@@ -12338,7 +13368,9 @@
       "pases": 316,
       "precision_pases_pct": 69.3,
       "faltas": 8,
-      "corners": 1
+      "corners": 1,
+      "offsides": 0,
+      "atajadas": 0
     },
     "goleadores": [
       {
@@ -12377,7 +13409,9 @@
       "pases": 440,
       "precision_pases_pct": 79.1,
       "faltas": 17,
-      "corners": 5
+      "corners": 5,
+      "offsides": 3,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 37.2,
@@ -12386,7 +13420,9 @@
       "pases": 266,
       "precision_pases_pct": 62.0,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 5
     },
     "goleadores": [],
     "goles_contra": [],
@@ -12408,7 +13444,9 @@
       "pases": 635,
       "precision_pases_pct": 87.6,
       "faltas": 12,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 29.3,
@@ -12417,7 +13455,9 @@
       "pases": 255,
       "precision_pases_pct": 67.5,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 5,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -12456,7 +13496,9 @@
       "pases": 484,
       "precision_pases_pct": 82.0,
       "faltas": 16,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 29.5,
@@ -12465,7 +13507,9 @@
       "pases": 205,
       "precision_pases_pct": 53.2,
       "faltas": 11,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 6
     },
     "goleadores": [
       {
@@ -12510,7 +13554,9 @@
       "pases": 231,
       "precision_pases_pct": 65.8,
       "faltas": 13,
-      "corners": 6
+      "corners": 6,
+      "offsides": 5,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 49.3,
@@ -12519,7 +13565,9 @@
       "pases": 244,
       "precision_pases_pct": 63.9,
       "faltas": 19,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -12558,7 +13606,9 @@
       "pases": 433,
       "precision_pases_pct": 79.4,
       "faltas": 16,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 41.2,
@@ -12567,7 +13617,9 @@
       "pases": 311,
       "precision_pases_pct": 64.0,
       "faltas": 5,
-      "corners": 1
+      "corners": 1,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -12589,7 +13641,9 @@
       "pases": 351,
       "precision_pases_pct": 77.5,
       "faltas": 8,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 7
     },
     "away": {
       "posesion_pct": 47.2,
@@ -12598,7 +13652,9 @@
       "pases": 312,
       "precision_pases_pct": 71.8,
       "faltas": 11,
-      "corners": 7
+      "corners": 7,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -12643,7 +13699,9 @@
       "pases": 420,
       "precision_pases_pct": 80.0,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 38.9,
@@ -12652,7 +13710,9 @@
       "pases": 269,
       "precision_pases_pct": 67.7,
       "faltas": 14,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -12697,7 +13757,9 @@
       "pases": 346,
       "precision_pases_pct": 72.3,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 0
     },
     "away": {
       "posesion_pct": 41.7,
@@ -12706,7 +13768,9 @@
       "pases": 251,
       "precision_pases_pct": 56.6,
       "faltas": 12,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -12739,7 +13803,9 @@
       "pases": 323,
       "precision_pases_pct": 72.4,
       "faltas": 12,
-      "corners": 3
+      "corners": 3,
+      "offsides": 4,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 54.9,
@@ -12748,7 +13814,9 @@
       "pases": 394,
       "precision_pases_pct": 74.6,
       "faltas": 13,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -12793,7 +13861,9 @@
       "pases": 357,
       "precision_pases_pct": 73.9,
       "faltas": 16,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 48.3,
@@ -12802,7 +13872,9 @@
       "pases": 326,
       "precision_pases_pct": 72.4,
       "faltas": 9,
-      "corners": 6
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 1
     },
     "goleadores": [
       {
@@ -12841,7 +13913,9 @@
       "pases": 421,
       "precision_pases_pct": 83.8,
       "faltas": 8,
-      "corners": 9
+      "corners": 9,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 30.1,
@@ -12850,7 +13924,9 @@
       "pases": 183,
       "precision_pases_pct": 59.6,
       "faltas": 21,
-      "corners": 2
+      "corners": 2,
+      "offsides": 3,
+      "atajadas": 9
     },
     "goleadores": [
       {
@@ -12883,7 +13959,9 @@
       "pases": 379,
       "precision_pases_pct": 82.3,
       "faltas": 6,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 49.6,
@@ -12892,7 +13970,9 @@
       "pases": 382,
       "precision_pases_pct": 80.4,
       "faltas": 11,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 7
     },
     "goleadores": [
       {
@@ -12937,7 +14017,9 @@
       "pases": 574,
       "precision_pases_pct": 88.0,
       "faltas": 9,
-      "corners": 12
+      "corners": 12,
+      "offsides": 0,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 20.7,
@@ -12946,7 +14028,9 @@
       "pases": 155,
       "precision_pases_pct": 51.6,
       "faltas": 19,
-      "corners": 1
+      "corners": 1,
+      "offsides": 2,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -12979,7 +14063,9 @@
       "pases": 517,
       "precision_pases_pct": 86.3,
       "faltas": 10,
-      "corners": 11
+      "corners": 11,
+      "offsides": 2,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 28.6,
@@ -12988,7 +14074,9 @@
       "pases": 192,
       "precision_pases_pct": 69.8,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -13033,7 +14121,9 @@
       "pases": 216,
       "precision_pases_pct": 63.4,
       "faltas": 13,
-      "corners": 1
+      "corners": 1,
+      "offsides": 3,
+      "atajadas": 4
     },
     "away": {
       "posesion_pct": 57.9,
@@ -13042,7 +14132,9 @@
       "pases": 296,
       "precision_pases_pct": 67.6,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -13087,7 +14179,9 @@
       "pases": 199,
       "precision_pases_pct": 59.3,
       "faltas": 13,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 74.0,
@@ -13096,7 +14190,9 @@
       "pases": 566,
       "precision_pases_pct": 82.9,
       "faltas": 15,
-      "corners": 5
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -13141,7 +14237,9 @@
       "pases": 229,
       "precision_pases_pct": 61.6,
       "faltas": 15,
-      "corners": 6
+      "corners": 6,
+      "offsides": 4,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 67.0,
@@ -13150,7 +14248,9 @@
       "pases": 475,
       "precision_pases_pct": 83.4,
       "faltas": 9,
-      "corners": 6
+      "corners": 6,
+      "offsides": 5,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -13183,7 +14283,9 @@
       "pases": 395,
       "precision_pases_pct": 81.3,
       "faltas": 14,
-      "corners": 6
+      "corners": 6,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 40.8,
@@ -13192,7 +14294,9 @@
       "pases": 285,
       "precision_pases_pct": 73.3,
       "faltas": 20,
-      "corners": 8
+      "corners": 8,
+      "offsides": 2,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -13249,7 +14353,9 @@
       "pases": 320,
       "precision_pases_pct": 71.2,
       "faltas": 10,
-      "corners": 4
+      "corners": 4,
+      "offsides": 4,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 53.0,
@@ -13258,7 +14364,9 @@
       "pases": 375,
       "precision_pases_pct": 74.9,
       "faltas": 16,
-      "corners": 2
+      "corners": 2,
+      "offsides": 2,
+      "atajadas": 5
     },
     "goleadores": [
       {
@@ -13291,7 +14399,9 @@
       "pases": 284,
       "precision_pases_pct": 72.2,
       "faltas": 9,
-      "corners": 10
+      "corners": 10,
+      "offsides": 1,
+      "atajadas": 1
     },
     "away": {
       "posesion_pct": 60.1,
@@ -13300,7 +14410,9 @@
       "pases": 445,
       "precision_pases_pct": 80.2,
       "faltas": 10,
-      "corners": 5
+      "corners": 5,
+      "offsides": 1,
+      "atajadas": 2
     },
     "goleadores": [
       {
@@ -13339,7 +14451,9 @@
       "pases": 524,
       "precision_pases_pct": 84.5,
       "faltas": 9,
-      "corners": 14
+      "corners": 14,
+      "offsides": 1,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 31.0,
@@ -13348,7 +14462,9 @@
       "pases": 245,
       "precision_pases_pct": 66.5,
       "faltas": 10,
-      "corners": 2
+      "corners": 2,
+      "offsides": 0,
+      "atajadas": 4
     },
     "goleadores": [
       {
@@ -13381,7 +14497,9 @@
       "pases": 424,
       "precision_pases_pct": 74.5,
       "faltas": 11,
-      "corners": 3
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 5
     },
     "away": {
       "posesion_pct": 47.8,
@@ -13390,7 +14508,9 @@
       "pases": 393,
       "precision_pases_pct": 70.2,
       "faltas": 7,
-      "corners": 4
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],
@@ -13412,7 +14532,9 @@
       "pases": 236,
       "precision_pases_pct": 66.1,
       "faltas": 8,
-      "corners": 4
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 3
     },
     "away": {
       "posesion_pct": 62.3,
@@ -13421,7 +14543,9 @@
       "pases": 408,
       "precision_pases_pct": 77.2,
       "faltas": 14,
-      "corners": 2
+      "corners": 2,
+      "offsides": 1,
+      "atajadas": 3
     },
     "goleadores": [
       {
@@ -13460,7 +14584,9 @@
       "pases": 244,
       "precision_pases_pct": 68.4,
       "faltas": 18,
-      "corners": 4
+      "corners": 4,
+      "offsides": 3,
+      "atajadas": 2
     },
     "away": {
       "posesion_pct": 55.5,
@@ -13469,7 +14595,9 @@
       "pases": 301,
       "precision_pases_pct": 70.1,
       "faltas": 6,
-      "corners": 4
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 3
     },
     "goleadores": [],
     "goles_contra": [],

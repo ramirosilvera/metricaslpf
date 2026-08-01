@@ -357,16 +357,19 @@ export interface PlayerPhysicalPositionRow {
   velocidad_punta_kmh_pct_pos: number;
 }
 
-// Resumen por partido del Mundial 2026 (vista "Partidos"). Todo dato oficial;
-// `remates` es proxy de peligro (NO xG, que no existe en fuentes libres 2026).
+// Resumen por partido (vista "Partidos"), datos ESPN reales por equipo y
+// partido. `remates` es volumen total (NO xG, que no existe en fuentes libres
+// para esta liga).
 export interface MatchTeamStats {
-  distancia_km: number | null;
-  alta_intensidad_m: number | null;
-  sprints: number | null;
-  velocidad_punta_kmh: number | null;
-  remates: number | null;
-  pases: number | null;
   posesion_pct: number | null;
+  remates: number | null;
+  remates_al_arco: number | null;
+  pases: number | null;
+  precision_pases_pct: number | null;
+  faltas: number | null;
+  corners: number | null;
+  offsides: number | null;
+  atajadas: number | null;
 }
 export interface MatchGoal {
   player: string;

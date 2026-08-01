@@ -438,7 +438,7 @@ def build():
         played = matches[(matches["season"] == "2026") & matches["home_score"].notna()].copy()
         ms_team = con.execute(
             f"SELECT match_id, team, possession_share_proxy, shots_total, shots_on_target, "
-            f"passes_attempted, passes_completed, fouls_committed, corners "
+            f"passes_attempted, passes_completed, fouls_committed, corners, offsides, gk_saves "
             f"FROM read_parquet('{WAREHOUSE / 'team_match_stats_tactical.parquet'}')"
         ).df()
         ms_goals = con.execute(
@@ -463,6 +463,8 @@ def build():
                 ),
                 "faltas": int(_num(r, "fouls_committed")) if _num(r, "fouls_committed") is not None else None,
                 "corners": int(_num(r, "corners")) if _num(r, "corners") is not None else None,
+                "offsides": int(_num(r, "offsides")) if _num(r, "offsides") is not None else None,
+                "atajadas": int(_num(r, "gk_saves")) if _num(r, "gk_saves") is not None else None,
             }
 
         summaries = []

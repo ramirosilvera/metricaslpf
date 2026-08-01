@@ -134,16 +134,15 @@ export function composeMatchCard(m: MatchSummary, url?: string): Promise<Blob> {
         ctx.fillText(clip(ctx, `⭐ ${m.destacado.player} (${m.destacado.team}) · ${m.destacado.note}`, innerW), W / 2, cy + 200);
       }
 
-      // filas de stats: TODAS las que tengan dato en ambos (mismas 6 que la
-      // tarjeta del sitio: posesión, remates, distancia, alta intensidad,
-      // sprints, velocidad punta)
+      // filas de stats: TODAS las que tengan dato en ambos (mismas que la
+      // tarjeta del sitio: posesión, remates, pases, faltas, córners, etc.)
       const defs: { label: string; hv: number | null; av: number | null; d: number; u: string }[] = [
         { label: "Posesión", hv: m.home.posesion_pct, av: m.away.posesion_pct, d: 0, u: "%" },
         { label: "Remates", hv: m.home.remates, av: m.away.remates, d: 0, u: "" },
-        { label: "Distancia", hv: m.home.distancia_km, av: m.away.distancia_km, d: 1, u: " km" },
-        { label: "Alta intensidad", hv: m.home.alta_intensidad_m, av: m.away.alta_intensidad_m, d: 0, u: " m" },
-        { label: "Sprints", hv: m.home.sprints, av: m.away.sprints, d: 0, u: "" },
-        { label: "Velocidad punta", hv: m.home.velocidad_punta_kmh, av: m.away.velocidad_punta_kmh, d: 1, u: " km/h" },
+        { label: "Remates al arco", hv: m.home.remates_al_arco, av: m.away.remates_al_arco, d: 0, u: "" },
+        { label: "Pases", hv: m.home.pases, av: m.away.pases, d: 0, u: "" },
+        { label: "Faltas", hv: m.home.faltas, av: m.away.faltas, d: 0, u: "" },
+        { label: "Córners", hv: m.home.corners, av: m.away.corners, d: 0, u: "" },
       ].filter((r) => r.hv != null && r.av != null);
 
       let y = 540;
