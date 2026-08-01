@@ -94,9 +94,9 @@ export default function ShareableChart({
       });
 
       const result = await shareCardBlob(blob, {
-        filename: `${slug(share.filenameBase ?? share.title)}-metricas-mundial-2026.png`,
-        title: `${share.title} · Métricas Mundial 2026`,
-        text: share.shareText ?? `${share.title} — Métricas Mundial 2026`,
+        filename: `${slug(share.filenameBase ?? share.title)}-metricas-lpf.png`,
+        title: `${share.title} · Métricas LPF`,
+        text: share.shareText ?? `${share.title} — Métricas LPF`,
         url: pageUrl,
       });
       if (result === "downloaded") {

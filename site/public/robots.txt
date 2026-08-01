@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ramirosilvera.github.io/metricasmundial2026/sitemap.xml
+Sitemap: https://ramirosilvera.github.io/metricaslpf/sitemap.xml

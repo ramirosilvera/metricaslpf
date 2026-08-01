@@ -50,9 +50,9 @@ export default function ShareCardButton({
       const pageUrl = url ?? (typeof window !== "undefined" ? window.location.href : undefined);
       const blob = await renderShareCard({ title, subtitle, flag, stats, tagline, url: pageUrl });
       const result = await shareCardBlob(blob, {
-        filename: `${slug(filenameBase ?? title)}-metricas-mundial-2026.png`,
-        title: `${title} · Métricas Mundial 2026`,
-        text: shareText ?? `${title} — Métricas Mundial 2026`,
+        filename: `${slug(filenameBase ?? title)}-metricas-lpf.png`,
+        title: `${title} · Métricas LPF`,
+        text: shareText ?? `${title} — Métricas LPF`,
         url: pageUrl,
       });
       setNote(result === "downloaded" ? "Imagen descargada ✓" : null);

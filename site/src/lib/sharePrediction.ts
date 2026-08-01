@@ -334,7 +334,7 @@ export async function sharePrediction(d: PredictionCardData): Promise<ShareResul
   const url = typeof window !== "undefined" ? window.location.href : undefined;
   const blob = await composePredictionCard({ ...d, url: d.url ?? url });
   const title = `${d.teamA} vs ${d.teamB} · predicción`;
-  const text = `${d.teamA} ${d.probs[0]}% · empate ${d.probs[1]}% · ${d.teamB} ${d.probs[2]}% — predicción por rendimiento · Métricas Mundial 2026`;
+  const text = `${d.teamA} ${d.probs[0]}% · empate ${d.probs[1]}% · ${d.teamB} ${d.probs[2]}% — predicción por rendimiento · Métricas LPF`;
   return shareCardBlob(blob, {
     filename: `prediccion-${slug(d.teamA)}-vs-${slug(d.teamB)}.png`,
     title,

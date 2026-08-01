@@ -36,7 +36,7 @@ python etl/pipeline.py --skip-scrape   # reconstruye desde los datos ya versiona
 # 2. Sitio
 cd site
 npm install
-npm run dev       # http://localhost:4321/metricasmundial2026/
+npm run dev       # http://localhost:4321/metricaslpf/
 npm run build      # genera site/dist/
 ```
 
