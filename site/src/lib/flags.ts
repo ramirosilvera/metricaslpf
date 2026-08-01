@@ -1,26 +1,8 @@
-// Bandera (emoji) por selección -- no hay assets de imagen en el proyecto
-// (100% estático, sin build de recursos gráficos), así que el emoji regional
-// da identidad visual "deportiva" sin depender de ningún CDN externo.
-const FLAGS: Record<string, string> = {
-  Argentina: "🇦🇷", Algeria: "🇩🇿", Austria: "🇦🇹", Jordan: "🇯🇴",
-  Mexico: "🇲🇽", "South Africa": "🇿🇦", "South Korea": "🇰🇷", Czechia: "🇨🇿",
-  Canada: "🇨🇦", "Bosnia and Herzegovina": "🇧🇦", Qatar: "🇶🇦", Switzerland: "🇨🇭",
-  Haiti: "🇭🇹", Scotland: "🏴", Brazil: "🇧🇷", Morocco: "🇲🇦",
-  "United States": "🇺🇸", Paraguay: "🇵🇾", Australia: "🇦🇺", Turkey: "🇹🇷",
-  "Ivory Coast": "🇨🇮", Ecuador: "🇪🇨", Germany: "🇩🇪", Curacao: "🇨🇼",
-  Netherlands: "🇳🇱", Japan: "🇯🇵", Sweden: "🇸🇪", Tunisia: "🇹🇳",
-  Iran: "🇮🇷", "New Zealand": "🇳🇿", Belgium: "🇧🇪", Egypt: "🇪🇬",
-  "Saudi Arabia": "🇸🇦", Uruguay: "🇺🇾", Spain: "🇪🇸", "Cape Verde": "🇨🇻",
-  "Cabo Verde": "🇨🇻", France: "🇫🇷", Senegal: "🇸🇳", Iraq: "🇮🇶", Norway: "🇳🇴",
-  Ghana: "🇬🇭", England: "🏴", Croatia: "🇭🇷", Portugal: "🇵🇹",
-  "DR Congo": "🇨🇩", Uzbekistan: "🇺🇿", Colombia: "🇨🇴", Panama: "🇵🇦",
-  Nigeria: "🇳🇬", Iceland: "🇮🇸", Poland: "🇵🇱",
-  // alias con la nomenclatura FIFA que usan team_profile.json y los datos de
-  // goles (openfootball / API pública de FIFA)
-  "Congo DR": "🇨🇩", "Curaçao": "🇨🇼", "Côte d'Ivoire": "🇨🇮", "IR Iran": "🇮🇷",
-  "Korea Republic": "🇰🇷", "Türkiye": "🇹🇷", USA: "🇺🇸",
-};
-
-export function flagFor(team: string): string {
-  return FLAGS[team] ?? "⚽";
+// Ícono por club -- no hay assets de imagen en el proyecto (100% estático,
+// sin build de recursos gráficos ni CDN externo), así que se usa un emoji fijo
+// en vez de un escudo real. Hubo un diccionario de banderas por país acá de la
+// era Mundial 2026 (selecciones); no tiene sentido para clubes de la LPF y se
+// sacó -- mantenía ~50 entradas que nunca iban a matchear un nombre de club.
+export function flagFor(_team: string): string {
+  return "⚽";
 }
