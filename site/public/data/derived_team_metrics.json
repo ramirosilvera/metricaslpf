@@ -1212,7 +1212,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.866666666666667,
-    "z_score": -0.33,
+    "z_score": -0.34,
     "percentile": 46.7
   },
   {
@@ -1228,7 +1228,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.77777777777778,
-    "z_score": -0.39,
+    "z_score": -0.4,
     "percentile": 38.3
   },
   {
@@ -1251,16 +1251,16 @@
     "team": "Boca Juniors",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 24.977777777777778,
-    "z_score": -0.26,
-    "percentile": 50.0
+    "value": 25.113636363636363,
+    "z_score": -0.17,
+    "percentile": 53.3
   },
   {
     "team": "Central Córdoba (Santiago del Estero)",
     "season": "2026",
     "metric": "edad_promedio",
     "value": 25.464285714285715,
-    "z_score": 0.07,
+    "z_score": 0.06,
     "percentile": 60.0
   },
   {
@@ -1268,7 +1268,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 25.451612903225808,
-    "z_score": 0.06,
+    "z_score": 0.05,
     "percentile": 56.7
   },
   {
@@ -1276,7 +1276,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 28.352941176470587,
-    "z_score": 2.0,
+    "z_score": 2.01,
     "percentile": 100.0
   },
   {
@@ -1284,7 +1284,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.18,
-    "z_score": -0.79,
+    "z_score": -0.8,
     "percentile": 26.7
   },
   {
@@ -1308,7 +1308,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.77777777777778,
-    "z_score": -0.39,
+    "z_score": -0.4,
     "percentile": 38.3
   },
   {
@@ -1324,16 +1324,16 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.862068965517242,
-    "z_score": -0.33,
+    "z_score": -0.34,
     "percentile": 43.3
   },
   {
     "team": "Independiente Rivadavia",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 23.466666666666665,
-    "z_score": -1.27,
-    "percentile": 10.0
+    "value": 23.644444444444446,
+    "z_score": -1.16,
+    "percentile": 13.3
   },
   {
     "team": "Instituto (Córdoba)",
@@ -1348,7 +1348,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 23.08,
-    "z_score": -1.53,
+    "z_score": -1.54,
     "percentile": 3.3
   },
   {
@@ -1356,15 +1356,15 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 25.0,
-    "z_score": -0.24,
-    "percentile": 53.3
+    "z_score": -0.25,
+    "percentile": 50.0
   },
   {
     "team": "Platense",
     "season": "2026",
     "metric": "edad_promedio",
     "value": 23.708333333333332,
-    "z_score": -1.11,
+    "z_score": -1.12,
     "percentile": 16.7
   },
   {
@@ -1380,7 +1380,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 23.807692307692307,
-    "z_score": -1.04,
+    "z_score": -1.05,
     "percentile": 23.3
   },
   {
@@ -1388,7 +1388,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 23.764705882352942,
-    "z_score": -1.07,
+    "z_score": -1.08,
     "percentile": 20.0
   },
   {
@@ -1396,7 +1396,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.68421052631579,
-    "z_score": -0.45,
+    "z_score": -0.46,
     "percentile": 33.3
   },
   {
@@ -1404,7 +1404,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 26.848484848484848,
-    "z_score": 0.99,
+    "z_score": 1.0,
     "percentile": 83.3
   },
   {
@@ -1412,7 +1412,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.5,
-    "z_score": -0.58,
+    "z_score": -0.59,
     "percentile": 30.0
   },
   {
@@ -1420,15 +1420,15 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 23.229166666666668,
-    "z_score": -1.43,
+    "z_score": -1.44,
     "percentile": 6.7
   },
   {
     "team": "Unión (Santa Fe)",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 26.37037037037037,
-    "z_score": 0.67,
+    "value": 26.321428571428573,
+    "z_score": 0.64,
     "percentile": 76.7
   },
   {
@@ -1436,7 +1436,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 23.571428571428573,
-    "z_score": -1.2,
-    "percentile": 13.3
+    "z_score": -1.21,
+    "percentile": 10.0
   }
 ]
