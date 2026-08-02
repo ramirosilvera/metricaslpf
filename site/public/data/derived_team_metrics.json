@@ -1213,7 +1213,7 @@
     "metric": "edad_promedio",
     "value": 25.129032258064516,
     "z_score": -0.17,
-    "percentile": 51.7
+    "percentile": 48.3
   },
   {
     "team": "Atlético Tucumán",
@@ -1259,16 +1259,16 @@
     "team": "Defensa y Justicia",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 25.0625,
-    "z_score": -0.21,
-    "percentile": 48.3
+    "value": 25.25,
+    "z_score": -0.09,
+    "percentile": 55.2
   },
   {
     "team": "Deportivo Riestra",
     "season": "2026",
     "metric": "edad_promedio",
     "value": 28.470588235294116,
-    "z_score": 2.05,
+    "z_score": 2.04,
     "percentile": 100.0
   },
   {
@@ -1324,7 +1324,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 23.755555555555556,
-    "z_score": -1.07,
+    "z_score": -1.08,
     "percentile": 20.7
   },
   {
@@ -1349,7 +1349,7 @@
     "metric": "edad_promedio",
     "value": 25.24137931034483,
     "z_score": -0.09,
-    "percentile": 55.2
+    "percentile": 51.7
   },
   {
     "team": "Platense",
@@ -1387,8 +1387,8 @@
     "team": "San Lorenzo",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 24.710526315789473,
-    "z_score": -0.44,
+    "value": 24.594594594594593,
+    "z_score": -0.52,
     "percentile": 37.9
   },
   {
