@@ -3753,6 +3753,15 @@
     "shots_total": 5
   },
   {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.631,
+    "pass_accuracy_pct": 83.5,
+    "shots_total": 11
+  },
+  {
     "team": "River Plate",
     "season": "2026",
     "match_date": "2026-01-24",
@@ -4795,6 +4804,15 @@
     "possession_share_proxy": 0.616,
     "pass_accuracy_pct": 81.6,
     "shots_total": 18
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.369,
+    "pass_accuracy_pct": 70.8,
+    "shots_total": 11
   },
   {
     "team": "Unión (Santa Fe)",

@@ -12,7 +12,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 96.7,
     "precision_pases_promedio_percentil": 100.0,
-    "remates_promedio_percentil": 86.7,
+    "remates_promedio_percentil": 90.0,
     "remates_al_arco_promedio_percentil": 93.3
   },
   {
@@ -77,7 +77,7 @@
     "posesion_promedio_proxy_percentil": 3.3,
     "precision_pases_promedio_percentil": 3.3,
     "remates_promedio_percentil": 6.7,
-    "remates_al_arco_promedio_percentil": 23.3
+    "remates_al_arco_promedio_percentil": 20.0
   },
   {
     "team": "Estudiantes de La Plata",
@@ -100,7 +100,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 25.0,
     "precision_pases_promedio_percentil": 36.7,
-    "remates_promedio_percentil": 46.7,
+    "remates_promedio_percentil": 50.0,
     "remates_al_arco_promedio_percentil": 56.7
   },
   {
@@ -172,8 +172,8 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 86.7,
     "precision_pases_promedio_percentil": 66.7,
-    "remates_promedio_percentil": 50.0,
-    "remates_al_arco_promedio_percentil": 20.0
+    "remates_promedio_percentil": 46.7,
+    "remates_al_arco_promedio_percentil": 23.3
   },
   {
     "team": "River Plate",
@@ -220,7 +220,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 36.7,
     "precision_pases_promedio_percentil": 26.7,
-    "remates_promedio_percentil": 90.0,
+    "remates_promedio_percentil": 86.7,
     "remates_al_arco_promedio_percentil": 76.7
   },
   {

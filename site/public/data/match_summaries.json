@@ -58,6 +58,70 @@
     "insight": "Estudiantes de La Plata venció 3-0 a Defensa y Justicia. Defensa y Justicia manejó más la pelota (59.3% de posesión)."
   },
   {
+    "match_id": 401841475,
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "home_team": "Racing Club",
+    "away_team": "Tigre",
+    "home_score": 1,
+    "away_score": 3,
+    "home": {
+      "posesion_pct": 63.1,
+      "remates": 11,
+      "remates_al_arco": 5,
+      "pases": 562,
+      "precision_pases_pct": 83.5,
+      "faltas": 15,
+      "corners": 6,
+      "offsides": 1,
+      "atajadas": 2
+    },
+    "away": {
+      "posesion_pct": 36.9,
+      "remates": 11,
+      "remates_al_arco": 5,
+      "pases": 329,
+      "precision_pases_pct": 70.8,
+      "faltas": 9,
+      "corners": 0,
+      "offsides": 2,
+      "atajadas": 4
+    },
+    "goleadores": [
+      {
+        "player": "Gonzalo Martínez",
+        "team": "Tigre",
+        "minute": "19'",
+        "penalty": false
+      },
+      {
+        "player": "Hector Garay",
+        "team": "Tigre",
+        "minute": "26'",
+        "penalty": false
+      },
+      {
+        "player": "Ignacio Russo",
+        "team": "Tigre",
+        "minute": "51'",
+        "penalty": false
+      },
+      {
+        "player": "Duván Vergara",
+        "team": "Racing Club",
+        "minute": "65'",
+        "penalty": false
+      }
+    ],
+    "goles_contra": [],
+    "destacado": {
+      "player": "Duván Vergara",
+      "team": "Racing Club",
+      "note": "1 gol"
+    },
+    "insight": "Tigre venció 3-1 a Racing Club. Racing Club manejó más la pelota (63.1% de posesión)."
+  },
+  {
     "match_id": 401841469,
     "match_date": "2026-08-01",
     "stage": "torneo-clausura",

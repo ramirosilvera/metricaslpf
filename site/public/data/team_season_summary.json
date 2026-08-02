@@ -275,15 +275,15 @@
   {
     "team": "Racing Club",
     "season": "2026",
-    "partidos": 20,
-    "posesion_promedio_proxy": 0.553,
-    "precision_pases_promedio": 76.06,
-    "remates_promedio": 11.85,
-    "remates_al_arco_promedio": 3.35,
-    "remates_al_arco_recibidos_promedio": 3.7,
-    "goles_totales": 21,
-    "goles_recibidos_promedio": 0.9,
-    "faltas_promedio": 14.75
+    "partidos": 21,
+    "posesion_promedio_proxy": 0.557,
+    "precision_pases_promedio": 76.414,
+    "remates_promedio": 11.81,
+    "remates_al_arco_promedio": 3.429,
+    "remates_al_arco_recibidos_promedio": 3.762,
+    "goles_totales": 22,
+    "goles_recibidos_promedio": 1.0,
+    "faltas_promedio": 14.762
   },
   {
     "team": "River Plate",
@@ -353,15 +353,15 @@
   {
     "team": "Tigre",
     "season": "2026",
-    "partidos": 17,
-    "posesion_promedio_proxy": 0.479,
-    "precision_pases_promedio": 72.547,
-    "remates_promedio": 14.059,
-    "remates_al_arco_promedio": 4.412,
-    "remates_al_arco_recibidos_promedio": 3.0,
-    "goles_totales": 18,
-    "goles_recibidos_promedio": 0.941,
-    "faltas_promedio": 12.588
+    "partidos": 18,
+    "posesion_promedio_proxy": 0.473,
+    "precision_pases_promedio": 72.45,
+    "remates_promedio": 13.889,
+    "remates_al_arco_promedio": 4.444,
+    "remates_al_arco_recibidos_promedio": 3.111,
+    "goles_totales": 21,
+    "goles_recibidos_promedio": 0.944,
+    "faltas_promedio": 12.389
   },
   {
     "team": "Unión (Santa Fe)",

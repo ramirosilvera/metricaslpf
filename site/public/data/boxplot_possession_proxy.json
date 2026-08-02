@@ -3430,5 +3430,17 @@
     "season": "2026",
     "match_id": 401841478,
     "possession_share_proxy": 0.593
+  },
+  {
+    "team": "Racing Club",
+    "season": "2026",
+    "match_id": 401841475,
+    "possession_share_proxy": 0.631
+  },
+  {
+    "team": "Tigre",
+    "season": "2026",
+    "match_id": 401841475,
+    "possession_share_proxy": 0.369
   }
 ]
