@@ -351,6 +351,15 @@
     "shots_total": 17
   },
   {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.64,
+    "pass_accuracy_pct": 90.2,
+    "shots_total": 9
+  },
+  {
     "team": "Atlético Tucumán",
     "season": "2026",
     "match_date": "2026-01-24",
@@ -673,6 +682,15 @@
     "possession_share_proxy": 0.393,
     "pass_accuracy_pct": 71.7,
     "shots_total": 16
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.427,
+    "pass_accuracy_pct": 62.2,
+    "shots_total": 14
   },
   {
     "team": "Barracas Central",
@@ -1024,6 +1042,15 @@
     "possession_share_proxy": 0.476,
     "pass_accuracy_pct": 83.8,
     "shots_total": 13
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.36,
+    "pass_accuracy_pct": 79.1,
+    "shots_total": 10
   },
   {
     "team": "Boca Juniors",
@@ -1512,6 +1539,15 @@
     "shots_total": 12
   },
   {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.593,
+    "pass_accuracy_pct": 84.6,
+    "shots_total": 20
+  },
+  {
     "team": "Deportivo Riestra",
     "season": "2026",
     "match_date": "2026-01-25",
@@ -1836,6 +1872,15 @@
     "shots_total": 15
   },
   {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.407,
+    "pass_accuracy_pct": 81.4,
+    "shots_total": 15
+  },
+  {
     "team": "Estudiantes de Río Cuarto",
     "season": "2026",
     "match_date": "2026-01-26",
@@ -1998,6 +2043,15 @@
     "shots_total": 12
   },
   {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.573,
+    "pass_accuracy_pct": 72.5,
+    "shots_total": 8
+  },
+  {
     "team": "Gimnasia (Mendoza)",
     "season": "2026",
     "match_date": "2026-01-23",
@@ -2158,6 +2212,15 @@
     "possession_share_proxy": 0.493,
     "pass_accuracy_pct": 83.7,
     "shots_total": 13
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.517,
+    "pass_accuracy_pct": 76.7,
+    "shots_total": 15
   },
   {
     "team": "Gimnasia La Plata",
@@ -4903,6 +4966,15 @@
     "possession_share_proxy": 0.432,
     "pass_accuracy_pct": 70.9,
     "shots_total": 10
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_date": "2026-08-01",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.483,
+    "pass_accuracy_pct": 79.2,
+    "shots_total": 13
   },
   {
     "team": "Vélez Sarsfield",

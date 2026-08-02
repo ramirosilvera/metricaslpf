@@ -3382,5 +3382,53 @@
     "season": "2026",
     "match_id": 401841456,
     "possession_share_proxy": 0.516
+  },
+  {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "match_id": 401841466,
+    "possession_share_proxy": 0.573
+  },
+  {
+    "team": "Banfield",
+    "season": "2026",
+    "match_id": 401841466,
+    "possession_share_proxy": 0.427
+  },
+  {
+    "team": "Gimnasia (Mendoza)",
+    "season": "2026",
+    "match_id": 401841464,
+    "possession_share_proxy": 0.517
+  },
+  {
+    "team": "Unión (Santa Fe)",
+    "season": "2026",
+    "match_id": 401841464,
+    "possession_share_proxy": 0.483
+  },
+  {
+    "team": "Belgrano (Córdoba)",
+    "season": "2026",
+    "match_id": 401841469,
+    "possession_share_proxy": 0.36
+  },
+  {
+    "team": "Argentinos Juniors",
+    "season": "2026",
+    "match_id": 401841469,
+    "possession_share_proxy": 0.64
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "season": "2026",
+    "match_id": 401841478,
+    "possession_share_proxy": 0.407
+  },
+  {
+    "team": "Defensa y Justicia",
+    "season": "2026",
+    "match_id": 401841478,
+    "possession_share_proxy": 0.593
   }
 ]

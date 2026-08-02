@@ -28,6 +28,13 @@
     "partidos_con_gol": 8
   },
   {
+    "team": "Gimnasia (Mendoza)",
+    "player_name": "Agustín Módica",
+    "goles": 7,
+    "penales": 1,
+    "partidos_con_gol": 6
+  },
+  {
     "team": "Independiente Rivadavia",
     "player_name": "Fabrizio Sartori Prieto",
     "goles": 7,
@@ -75,13 +82,6 @@
     "goles": 6,
     "penales": 0,
     "partidos_con_gol": 4
-  },
-  {
-    "team": "Gimnasia (Mendoza)",
-    "player_name": "Agustín Módica",
-    "goles": 5,
-    "penales": 0,
-    "partidos_con_gol": 5
   },
   {
     "team": "Instituto (Córdoba)",
@@ -385,6 +385,13 @@
     "partidos_con_gol": 3
   },
   {
+    "team": "Argentinos Juniors",
+    "player_name": "Francisco Álvarez",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
     "team": "Instituto (Córdoba)",
     "player_name": "Giuliano Cerato",
     "goles": 3,
@@ -588,13 +595,6 @@
     "partidos_con_gol": 2
   },
   {
-    "team": "Argentinos Juniors",
-    "player_name": "Francisco Álvarez",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
     "team": "Atlético Tucumán",
     "player_name": "Franco Albanell",
     "goles": 2,
@@ -639,6 +639,13 @@
   {
     "team": "San Lorenzo",
     "player_name": "Gregorio Rodríguez",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "player_name": "Guido Carrillo",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
@@ -1148,6 +1155,13 @@
     "partidos_con_gol": 1
   },
   {
+    "team": "Estudiantes de La Plata",
+    "player_name": "Ezequiel Piovi",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
     "team": "San Lorenzo",
     "player_name": "Fabricio Gabriel López",
     "goles": 1,
@@ -1269,13 +1283,6 @@
   {
     "team": "Independiente Rivadavia",
     "player_name": "Gonzalo Rios",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
-    "team": "Estudiantes de La Plata",
-    "player_name": "Guido Carrillo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
@@ -1835,7 +1842,7 @@
   },
   {
     "team": "Aldosivi",
-    "player_name": "Santiago Moyano",
+    "player_name": "Santiago Moya",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
@@ -1913,6 +1920,13 @@
   {
     "team": "Deportivo Riestra",
     "player_name": "Tomás González",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Estudiantes de La Plata",
+    "player_name": "Tomás Palacios",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1

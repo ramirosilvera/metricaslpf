@@ -8,7 +8,7 @@
   {
     "team": "Argentinos Juniors",
     "season": "2026",
-    "cluster_id": 1,
+    "cluster_id": 2,
     "cluster_label": "Posesión dominante"
   },
   {
@@ -32,13 +32,13 @@
   {
     "team": "Belgrano (Córdoba)",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "Boca Juniors",
     "season": "2026",
-    "cluster_id": 1,
+    "cluster_id": 2,
     "cluster_label": "Posesión dominante"
   },
   {
@@ -50,19 +50,19 @@
   {
     "team": "Defensa y Justicia",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "Deportivo Riestra",
     "season": "2026",
-    "cluster_id": 2,
+    "cluster_id": 3,
     "cluster_label": "Bloque bajo / transición"
   },
   {
     "team": "Estudiantes de La Plata",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
@@ -92,25 +92,25 @@
   {
     "team": "Independiente",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "Independiente Rivadavia",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "Instituto (Córdoba)",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "Lanús",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
@@ -122,7 +122,7 @@
   {
     "team": "Platense",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
@@ -134,14 +134,14 @@
   {
     "team": "River Plate",
     "season": "2026",
-    "cluster_id": 1,
+    "cluster_id": 2,
     "cluster_label": "Posesión dominante"
   },
   {
     "team": "Rosario Central",
     "season": "2026",
     "cluster_id": 1,
-    "cluster_label": "Posesión dominante"
+    "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "San Lorenzo",
@@ -158,25 +158,25 @@
   {
     "team": "Talleres (Córdoba)",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "Tigre",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "Unión (Santa Fe)",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   },
   {
     "team": "Vélez Sarsfield",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 1,
     "cluster_label": "Posesión alta, directo al arco"
   }
 ]
