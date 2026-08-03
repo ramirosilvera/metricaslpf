@@ -1225,6 +1225,13 @@
     "partidos_con_gol": 1
   },
   {
+    "team": "Instituto (Córdoba)",
+    "player_name": "Fernando Alarcón",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
     "team": "Central Córdoba (Santiago del Estero)",
     "player_name": "Fernando Martínez",
     "goles": 1,

@@ -3490,5 +3490,17 @@
     "season": "2026",
     "match_id": 401841476,
     "possession_share_proxy": 0.348
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_id": 401841472,
+    "possession_share_proxy": 0.621
+  },
+  {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_id": 401841472,
+    "possession_share_proxy": 0.379
   }
 ]

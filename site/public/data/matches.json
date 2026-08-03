@@ -4082,8 +4082,8 @@
     "match_date": "2026-08-03",
     "home_team": "Lanús",
     "away_team": "Instituto (Córdoba)",
-    "home_score": null,
-    "away_score": null,
+    "home_score": 0,
+    "away_score": 1,
     "stadium": "Ciudad de Lanús",
     "referee": null
   },

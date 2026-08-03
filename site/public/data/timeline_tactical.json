@@ -3132,6 +3132,15 @@
     "shots_total": 16
   },
   {
+    "team": "Instituto (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.379,
+    "pass_accuracy_pct": 76.6,
+    "shots_total": 19
+  },
+  {
     "team": "Lanús",
     "season": "2026",
     "match_date": "2026-01-23",
@@ -3292,6 +3301,15 @@
     "possession_share_proxy": 0.499,
     "pass_accuracy_pct": 80.4,
     "shots_total": 23
+  },
+  {
+    "team": "Lanús",
+    "season": "2026",
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.621,
+    "pass_accuracy_pct": 84.1,
+    "shots_total": 15
   },
   {
     "team": "Newell's Old Boys",

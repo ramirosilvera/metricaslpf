@@ -1,5 +1,51 @@
 [
   {
+    "match_id": 401841472,
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "home_team": "Lanús",
+    "away_team": "Instituto (Córdoba)",
+    "home_score": 0,
+    "away_score": 1,
+    "home": {
+      "posesion_pct": 62.1,
+      "remates": 15,
+      "remates_al_arco": 3,
+      "pases": 554,
+      "precision_pases_pct": 84.1,
+      "faltas": 5,
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 5
+    },
+    "away": {
+      "posesion_pct": 37.9,
+      "remates": 19,
+      "remates_al_arco": 7,
+      "pases": 334,
+      "precision_pases_pct": 76.6,
+      "faltas": 16,
+      "corners": 7,
+      "offsides": 0,
+      "atajadas": 3
+    },
+    "goleadores": [
+      {
+        "player": "Fernando Alarcón",
+        "team": "Instituto (Córdoba)",
+        "minute": "90'+2'",
+        "penalty": false
+      }
+    ],
+    "goles_contra": [],
+    "destacado": {
+      "player": "Fernando Alarcón",
+      "team": "Instituto (Córdoba)",
+      "note": "1 gol"
+    },
+    "insight": "Instituto (Córdoba) venció 1-0 a Lanús. Lanús manejó más la pelota (62.1% de posesión). Instituto (Córdoba) remató más al arco rival (7 vs 3 remates al arco)."
+  },
+  {
     "match_id": 401841476,
     "match_date": "2026-08-02",
     "stage": "torneo-clausura",

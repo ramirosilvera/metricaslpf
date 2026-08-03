@@ -42,7 +42,7 @@
   {
     "team": "Belgrano (Córdoba)",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 50.0,
+    "posesion_promedio_proxy_percentil": 53.3,
     "precision_pases_promedio_percentil": 73.3,
     "remates_promedio_percentil": 43.3,
     "remates_al_arco_promedio_percentil": 26.7
@@ -69,7 +69,7 @@
     "posesion_promedio_proxy_percentil": 70.0,
     "precision_pases_promedio_percentil": 83.3,
     "remates_promedio_percentil": 23.3,
-    "remates_al_arco_promedio_percentil": 56.7
+    "remates_al_arco_promedio_percentil": 60.0
   },
   {
     "team": "Deportivo Riestra",
@@ -84,7 +84,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 73.3,
     "precision_pases_promedio_percentil": 86.7,
-    "remates_promedio_percentil": 83.3,
+    "remates_promedio_percentil": 80.0,
     "remates_al_arco_promedio_percentil": 86.7
   },
   {
@@ -101,7 +101,7 @@
     "posesion_promedio_proxy_percentil": 23.3,
     "precision_pases_promedio_percentil": 36.7,
     "remates_promedio_percentil": 50.0,
-    "remates_al_arco_promedio_percentil": 56.7
+    "remates_al_arco_promedio_percentil": 60.0
   },
   {
     "team": "Gimnasia La Plata",
@@ -115,9 +115,9 @@
     "team": "Huracán",
     "season": "2026",
     "posesion_promedio_proxy_percentil": 60.0,
-    "precision_pases_promedio_percentil": 46.7,
+    "precision_pases_promedio_percentil": 43.3,
     "remates_promedio_percentil": 36.7,
-    "remates_al_arco_promedio_percentil": 70.0
+    "remates_al_arco_promedio_percentil": 66.7
   },
   {
     "team": "Independiente",
@@ -125,7 +125,7 @@
     "posesion_promedio_proxy_percentil": 66.7,
     "precision_pases_promedio_percentil": 50.0,
     "remates_promedio_percentil": 68.3,
-    "remates_al_arco_promedio_percentil": 50.0
+    "remates_al_arco_promedio_percentil": 51.7
   },
   {
     "team": "Independiente Rivadavia",
@@ -138,10 +138,10 @@
   {
     "team": "Instituto (Córdoba)",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 56.7,
-    "precision_pases_promedio_percentil": 43.3,
-    "remates_promedio_percentil": 80.0,
-    "remates_al_arco_promedio_percentil": 66.7
+    "posesion_promedio_proxy_percentil": 46.7,
+    "precision_pases_promedio_percentil": 46.7,
+    "remates_promedio_percentil": 83.3,
+    "remates_al_arco_promedio_percentil": 73.3
   },
   {
     "team": "Lanús",
@@ -149,7 +149,7 @@
     "posesion_promedio_proxy_percentil": 76.7,
     "precision_pases_promedio_percentil": 90.0,
     "remates_promedio_percentil": 56.7,
-    "remates_al_arco_promedio_percentil": 63.3
+    "remates_al_arco_promedio_percentil": 51.7
   },
   {
     "team": "Newell's Old Boys",
@@ -194,7 +194,7 @@
   {
     "team": "San Lorenzo",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 46.7,
+    "posesion_promedio_proxy_percentil": 50.0,
     "precision_pases_promedio_percentil": 53.3,
     "remates_promedio_percentil": 20.0,
     "remates_al_arco_promedio_percentil": 40.0
@@ -213,7 +213,7 @@
     "posesion_promedio_proxy_percentil": 80.0,
     "precision_pases_promedio_percentil": 76.7,
     "remates_promedio_percentil": 68.3,
-    "remates_al_arco_promedio_percentil": 56.7
+    "remates_al_arco_promedio_percentil": 60.0
   },
   {
     "team": "Tigre",
@@ -226,7 +226,7 @@
   {
     "team": "Unión (Santa Fe)",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 53.3,
+    "posesion_promedio_proxy_percentil": 56.7,
     "precision_pases_promedio_percentil": 56.7,
     "remates_promedio_percentil": 96.7,
     "remates_al_arco_promedio_percentil": 96.7
@@ -237,6 +237,6 @@
     "posesion_promedio_proxy_percentil": 83.3,
     "precision_pases_promedio_percentil": 70.0,
     "remates_promedio_percentil": 60.0,
-    "remates_al_arco_promedio_percentil": 73.3
+    "remates_al_arco_promedio_percentil": 70.0
   }
 ]

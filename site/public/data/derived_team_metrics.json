@@ -45,7 +45,7 @@
     "metric": "posesion_promedio_proxy",
     "value": 0.4897727272727273,
     "z_score": -0.12,
-    "percentile": 50.0
+    "percentile": 53.3
   },
   {
     "team": "Boca Juniors",
@@ -139,16 +139,16 @@
     "team": "Instituto (Córdoba)",
     "season": "2026",
     "metric": "posesion_promedio_proxy",
-    "value": 0.49388888888888893,
-    "z_score": -0.06,
-    "percentile": 56.7
+    "value": 0.4878421052631579,
+    "z_score": -0.15,
+    "percentile": 46.7
   },
   {
     "team": "Lanús",
     "season": "2026",
     "metric": "posesion_promedio_proxy",
-    "value": 0.5309444444444444,
-    "z_score": 0.52,
+    "value": 0.5356842105263158,
+    "z_score": 0.59,
     "percentile": 76.7
   },
   {
@@ -197,7 +197,7 @@
     "metric": "posesion_promedio_proxy",
     "value": 0.4886842105263158,
     "z_score": -0.14,
-    "percentile": 46.7
+    "percentile": 50.0
   },
   {
     "team": "Sarmiento (Junín)",
@@ -212,7 +212,7 @@
     "season": "2026",
     "metric": "posesion_promedio_proxy",
     "value": 0.5391578947368421,
-    "z_score": 0.65,
+    "z_score": 0.64,
     "percentile": 80.0
   },
   {
@@ -229,14 +229,14 @@
     "metric": "posesion_promedio_proxy",
     "value": 0.49284999999999995,
     "z_score": -0.08,
-    "percentile": 53.3
+    "percentile": 56.7
   },
   {
     "team": "Vélez Sarsfield",
     "season": "2026",
     "metric": "posesion_promedio_proxy",
     "value": 0.5423684210526316,
-    "z_score": 0.7,
+    "z_score": 0.69,
     "percentile": 83.3
   },
   {
@@ -252,7 +252,7 @@
     "season": "2026",
     "metric": "precision_pases_promedio",
     "value": 83.31818181818181,
-    "z_score": 1.65,
+    "z_score": 1.64,
     "percentile": 100.0
   },
   {
@@ -316,7 +316,7 @@
     "season": "2026",
     "metric": "precision_pases_promedio",
     "value": 56.578947368421055,
-    "z_score": -3.46,
+    "z_score": -3.45,
     "percentile": 3.3
   },
   {
@@ -357,7 +357,7 @@
     "metric": "precision_pases_promedio",
     "value": 73.67999999999999,
     "z_score": -0.19,
-    "percentile": 46.7
+    "percentile": 43.3
   },
   {
     "team": "Independiente",
@@ -372,23 +372,23 @@
     "season": "2026",
     "metric": "precision_pases_promedio",
     "value": 73.51052631578948,
-    "z_score": -0.22,
+    "z_score": -0.23,
     "percentile": 40.0
   },
   {
     "team": "Instituto (Córdoba)",
     "season": "2026",
     "metric": "precision_pases_promedio",
-    "value": 73.62222222222222,
-    "z_score": -0.2,
-    "percentile": 43.3
+    "value": 73.77894736842104,
+    "z_score": -0.17,
+    "percentile": 46.7
   },
   {
     "team": "Lanús",
     "season": "2026",
     "metric": "precision_pases_promedio",
-    "value": 80.53888888888889,
-    "z_score": 1.12,
+    "value": 80.72631578947369,
+    "z_score": 1.15,
     "percentile": 90.0
   },
   {
@@ -468,7 +468,7 @@
     "season": "2026",
     "metric": "precision_pases_promedio",
     "value": 74.39500000000001,
-    "z_score": -0.05,
+    "z_score": -0.06,
     "percentile": 56.7
   },
   {
@@ -484,7 +484,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 11.0,
-    "z_score": -0.64,
+    "z_score": -0.65,
     "percentile": 30.0
   },
   {
@@ -492,7 +492,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 14.0,
-    "z_score": 1.01,
+    "z_score": 0.99,
     "percentile": 90.0
   },
   {
@@ -508,7 +508,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 11.894736842105264,
-    "z_score": -0.15,
+    "z_score": -0.16,
     "percentile": 53.3
   },
   {
@@ -516,7 +516,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 10.052631578947368,
-    "z_score": -1.16,
+    "z_score": -1.17,
     "percentile": 10.0
   },
   {
@@ -524,7 +524,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 11.636363636363637,
-    "z_score": -0.29,
+    "z_score": -0.3,
     "percentile": 43.3
   },
   {
@@ -532,7 +532,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 13.263157894736842,
-    "z_score": 0.6,
+    "z_score": 0.59,
     "percentile": 76.7
   },
   {
@@ -556,7 +556,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 10.105263157894736,
-    "z_score": -1.13,
+    "z_score": -1.14,
     "percentile": 13.3
   },
   {
@@ -564,8 +564,8 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 13.578947368421053,
-    "z_score": 0.78,
-    "percentile": 83.3
+    "z_score": 0.76,
+    "percentile": 80.0
   },
   {
     "team": "Estudiantes de Río Cuarto",
@@ -580,7 +580,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 11.842105263157896,
-    "z_score": -0.18,
+    "z_score": -0.19,
     "percentile": 50.0
   },
   {
@@ -588,7 +588,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 11.142857142857142,
-    "z_score": -0.56,
+    "z_score": -0.57,
     "percentile": 33.3
   },
   {
@@ -596,7 +596,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 11.4,
-    "z_score": -0.42,
+    "z_score": -0.43,
     "percentile": 36.7
   },
   {
@@ -604,7 +604,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 12.736842105263158,
-    "z_score": 0.31,
+    "z_score": 0.3,
     "percentile": 68.3
   },
   {
@@ -612,23 +612,23 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 14.578947368421053,
-    "z_score": 1.32,
+    "z_score": 1.31,
     "percentile": 93.3
   },
   {
     "team": "Instituto (Córdoba)",
     "season": "2026",
     "metric": "remates_promedio",
-    "value": 13.555555555555555,
-    "z_score": 0.76,
-    "percentile": 80.0
+    "value": 13.842105263157896,
+    "z_score": 0.91,
+    "percentile": 83.3
   },
   {
     "team": "Lanús",
     "season": "2026",
     "metric": "remates_promedio",
-    "value": 12.055555555555555,
-    "z_score": -0.06,
+    "value": 12.210526315789474,
+    "z_score": 0.02,
     "percentile": 56.7
   },
   {
@@ -644,7 +644,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 12.666666666666666,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 63.3
   },
   {
@@ -660,7 +660,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 16.73913043478261,
-    "z_score": 2.51,
+    "z_score": 2.49,
     "percentile": 100.0
   },
   {
@@ -668,7 +668,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 13.136363636363637,
-    "z_score": 0.53,
+    "z_score": 0.52,
     "percentile": 73.3
   },
   {
@@ -692,7 +692,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 12.736842105263158,
-    "z_score": 0.31,
+    "z_score": 0.3,
     "percentile": 68.3
   },
   {
@@ -700,7 +700,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 13.88888888888889,
-    "z_score": 0.95,
+    "z_score": 0.93,
     "percentile": 86.7
   },
   {
@@ -708,7 +708,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 16.25,
-    "z_score": 2.24,
+    "z_score": 2.22,
     "percentile": 96.7
   },
   {
@@ -716,7 +716,7 @@
     "season": "2026",
     "metric": "remates_promedio",
     "value": 12.31578947368421,
-    "z_score": 0.08,
+    "z_score": 0.07,
     "percentile": 60.0
   },
   {
@@ -732,7 +732,7 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 5.136363636363637,
-    "z_score": 1.48,
+    "z_score": 1.47,
     "percentile": 93.3
   },
   {
@@ -748,7 +748,7 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 3.6842105263157894,
-    "z_score": -0.37,
+    "z_score": -0.38,
     "percentile": 36.7
   },
   {
@@ -756,7 +756,7 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 3.526315789473684,
-    "z_score": -0.57,
+    "z_score": -0.58,
     "percentile": 30.0
   },
   {
@@ -772,7 +772,7 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 4.526315789473684,
-    "z_score": 0.7,
+    "z_score": 0.69,
     "percentile": 83.3
   },
   {
@@ -789,7 +789,7 @@
     "metric": "remates_al_arco_promedio",
     "value": 4.157894736842105,
     "z_score": 0.23,
-    "percentile": 56.7
+    "percentile": 60.0
   },
   {
     "team": "Deportivo Riestra",
@@ -821,14 +821,14 @@
     "metric": "remates_al_arco_promedio",
     "value": 4.157894736842105,
     "z_score": 0.23,
-    "percentile": 56.7
+    "percentile": 60.0
   },
   {
     "team": "Gimnasia La Plata",
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 3.8095238095238093,
-    "z_score": -0.21,
+    "z_score": -0.22,
     "percentile": 43.3
   },
   {
@@ -836,8 +836,8 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 4.25,
-    "z_score": 0.35,
-    "percentile": 70.0
+    "z_score": 0.34,
+    "percentile": 66.7
   },
   {
     "team": "Independiente",
@@ -845,31 +845,31 @@
     "metric": "remates_al_arco_promedio",
     "value": 4.105263157894737,
     "z_score": 0.16,
-    "percentile": 50.0
+    "percentile": 51.7
   },
   {
     "team": "Independiente Rivadavia",
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 5.052631578947368,
-    "z_score": 1.37,
+    "z_score": 1.36,
     "percentile": 90.0
   },
   {
     "team": "Instituto (Córdoba)",
     "season": "2026",
     "metric": "remates_al_arco_promedio",
-    "value": 4.222222222222222,
-    "z_score": 0.31,
-    "percentile": 66.7
+    "value": 4.368421052631579,
+    "z_score": 0.49,
+    "percentile": 73.3
   },
   {
     "team": "Lanús",
     "season": "2026",
     "metric": "remates_al_arco_promedio",
-    "value": 4.166666666666667,
-    "z_score": 0.24,
-    "percentile": 63.3
+    "value": 4.105263157894737,
+    "z_score": 0.16,
+    "percentile": 51.7
   },
   {
     "team": "Newell's Old Boys",
@@ -884,7 +884,7 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 3.8333333333333335,
-    "z_score": -0.18,
+    "z_score": -0.19,
     "percentile": 46.7
   },
   {
@@ -900,7 +900,7 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 5.478260869565218,
-    "z_score": 1.91,
+    "z_score": 1.9,
     "percentile": 100.0
   },
   {
@@ -908,7 +908,7 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 4.454545454545454,
-    "z_score": 0.61,
+    "z_score": 0.6,
     "percentile": 80.0
   },
   {
@@ -933,14 +933,14 @@
     "metric": "remates_al_arco_promedio",
     "value": 4.157894736842105,
     "z_score": 0.23,
-    "percentile": 56.7
+    "percentile": 60.0
   },
   {
     "team": "Tigre",
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 4.444444444444445,
-    "z_score": 0.6,
+    "z_score": 0.59,
     "percentile": 76.7
   },
   {
@@ -948,7 +948,7 @@
     "season": "2026",
     "metric": "remates_al_arco_promedio",
     "value": 5.25,
-    "z_score": 1.62,
+    "z_score": 1.61,
     "percentile": 96.7
   },
   {
@@ -957,14 +957,14 @@
     "metric": "remates_al_arco_promedio",
     "value": 4.2631578947368425,
     "z_score": 0.36,
-    "percentile": 73.3
+    "percentile": 70.0
   },
   {
     "team": "Aldosivi",
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 14.578947368421053,
-    "z_score": 1.43,
+    "z_score": 1.45,
     "percentile": 93.3
   },
   {
@@ -972,7 +972,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 11.363636363636363,
-    "z_score": -0.69,
+    "z_score": -0.68,
     "percentile": 16.7
   },
   {
@@ -980,8 +980,8 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 13.11111111111111,
-    "z_score": 0.46,
-    "percentile": 73.3
+    "z_score": 0.47,
+    "percentile": 76.7
   },
   {
     "team": "Banfield",
@@ -1020,8 +1020,8 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 13.222222222222221,
-    "z_score": 0.54,
-    "percentile": 76.7
+    "z_score": 0.55,
+    "percentile": 80.0
   },
   {
     "team": "Defensa y Justicia",
@@ -1036,7 +1036,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 16.94736842105263,
-    "z_score": 3.0,
+    "z_score": 3.01,
     "percentile": 100.0
   },
   {
@@ -1044,7 +1044,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 11.789473684210526,
-    "z_score": -0.41,
+    "z_score": -0.4,
     "percentile": 36.7
   },
   {
@@ -1060,7 +1060,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 12.578947368421053,
-    "z_score": 0.11,
+    "z_score": 0.12,
     "percentile": 60.0
   },
   {
@@ -1068,7 +1068,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 12.095238095238095,
-    "z_score": -0.21,
+    "z_score": -0.2,
     "percentile": 53.3
   },
   {
@@ -1076,7 +1076,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 13.55,
-    "z_score": 0.75,
+    "z_score": 0.76,
     "percentile": 86.7
   },
   {
@@ -1099,17 +1099,17 @@
     "team": "Instituto (Córdoba)",
     "season": "2026",
     "metric": "faltas_promedio",
-    "value": 13.61111111111111,
-    "z_score": 0.79,
+    "value": 13.736842105263158,
+    "z_score": 0.89,
     "percentile": 90.0
   },
   {
     "team": "Lanús",
     "season": "2026",
     "metric": "faltas_promedio",
-    "value": 13.5,
-    "z_score": 0.72,
-    "percentile": 81.7
+    "value": 13.052631578947368,
+    "z_score": 0.43,
+    "percentile": 71.7
   },
   {
     "team": "Newell's Old Boys",
@@ -1117,14 +1117,14 @@
     "metric": "faltas_promedio",
     "value": 13.052631578947368,
     "z_score": 0.43,
-    "percentile": 70.0
+    "percentile": 71.7
   },
   {
     "team": "Platense",
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 11.5,
-    "z_score": -0.6,
+    "z_score": -0.59,
     "percentile": 25.0
   },
   {
@@ -1132,7 +1132,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 14.761904761904763,
-    "z_score": 1.55,
+    "z_score": 1.57,
     "percentile": 96.7
   },
   {
@@ -1148,7 +1148,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 11.5,
-    "z_score": -0.6,
+    "z_score": -0.59,
     "percentile": 25.0
   },
   {
@@ -1164,8 +1164,8 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 13.5,
-    "z_score": 0.72,
-    "percentile": 81.7
+    "z_score": 0.73,
+    "percentile": 83.3
   },
   {
     "team": "Talleres (Córdoba)",
@@ -1188,7 +1188,7 @@
     "season": "2026",
     "metric": "faltas_promedio",
     "value": 12.0,
-    "z_score": -0.27,
+    "z_score": -0.26,
     "percentile": 46.7
   },
   {
@@ -1213,7 +1213,7 @@
     "metric": "edad_promedio",
     "value": 25.096774193548388,
     "z_score": -0.17,
-    "percentile": 55.0
+    "percentile": 56.7
   },
   {
     "team": "Atlético Tucumán",
@@ -1228,7 +1228,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.428571428571427,
-    "z_score": -0.61,
+    "z_score": -0.62,
     "percentile": 30.0
   },
   {
@@ -1252,7 +1252,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.847826086956523,
-    "z_score": -0.33,
+    "z_score": -0.34,
     "percentile": 43.3
   },
   {
@@ -1267,9 +1267,9 @@
     "team": "Defensa y Justicia",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 25.096774193548388,
-    "z_score": -0.17,
-    "percentile": 55.0
+    "value": 25.0,
+    "z_score": -0.23,
+    "percentile": 50.0
   },
   {
     "team": "Deportivo Riestra",
@@ -1291,8 +1291,8 @@
     "team": "Estudiantes de Río Cuarto",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 27.236842105263158,
-    "z_score": 1.26,
+    "value": 27.263157894736842,
+    "z_score": 1.28,
     "percentile": 90.0
   },
   {
@@ -1324,7 +1324,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.862068965517242,
-    "z_score": -0.32,
+    "z_score": -0.33,
     "percentile": 46.7
   },
   {
@@ -1347,24 +1347,24 @@
     "team": "Lanús",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 23.08,
-    "z_score": -1.51,
+    "value": 23.1,
+    "z_score": -1.5,
     "percentile": 3.3
   },
   {
     "team": "Newell's Old Boys",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 25.0625,
-    "z_score": -0.19,
-    "percentile": 50.0
+    "value": 25.09375,
+    "z_score": -0.17,
+    "percentile": 53.3
   },
   {
     "team": "Platense",
     "season": "2026",
     "metric": "edad_promedio",
     "value": 23.708333333333332,
-    "z_score": -1.09,
+    "z_score": -1.1,
     "percentile": 13.3
   },
   {
@@ -1419,7 +1419,7 @@
     "team": "Tigre",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 23.306122448979593,
+    "value": 23.32,
     "z_score": -1.36,
     "percentile": 6.7
   },
@@ -1435,8 +1435,8 @@
     "team": "Vélez Sarsfield",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 23.571428571428573,
-    "z_score": -1.19,
+    "value": 23.607142857142858,
+    "z_score": -1.16,
     "percentile": 10.0
   }
 ]
