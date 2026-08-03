@@ -2,15 +2,15 @@
   {
     "team": "Aldosivi",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.428,
-    "precision_pases_promedio": 69.872,
-    "remates_promedio": 10.611,
-    "remates_al_arco_promedio": 2.611,
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.432,
+    "precision_pases_promedio": 69.874,
+    "remates_promedio": 11.0,
+    "remates_al_arco_promedio": 2.684,
     "remates_al_arco_recibidos_promedio": 4.0,
-    "goles_totales": 7,
-    "goles_recibidos_promedio": 1.167,
-    "faltas_promedio": 14.833
+    "goles_totales": 8,
+    "goles_recibidos_promedio": 1.211,
+    "faltas_promedio": 14.579
   },
   {
     "team": "Argentinos Juniors",
@@ -54,15 +54,15 @@
   {
     "team": "Barracas Central",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.391,
-    "precision_pases_promedio": 69.678,
-    "remates_promedio": 10.056,
-    "remates_al_arco_promedio": 3.556,
-    "remates_al_arco_recibidos_promedio": 4.667,
-    "goles_totales": 17,
-    "goles_recibidos_promedio": 0.833,
-    "faltas_promedio": 12.833
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.402,
+    "precision_pases_promedio": 69.737,
+    "remates_promedio": 10.053,
+    "remates_al_arco_promedio": 3.526,
+    "remates_al_arco_recibidos_promedio": 4.632,
+    "goles_totales": 18,
+    "goles_recibidos_promedio": 0.789,
+    "faltas_promedio": 12.947
   },
   {
     "team": "Belgrano (Córdoba)",
@@ -80,15 +80,15 @@
   {
     "team": "Boca Juniors",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.609,
-    "precision_pases_promedio": 81.889,
-    "remates_promedio": 13.111,
-    "remates_al_arco_promedio": 4.556,
-    "remates_al_arco_recibidos_promedio": 2.722,
-    "goles_totales": 24,
-    "goles_recibidos_promedio": 0.833,
-    "faltas_promedio": 9.444
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.608,
+    "precision_pases_promedio": 82.126,
+    "remates_promedio": 13.263,
+    "remates_al_arco_promedio": 4.526,
+    "remates_al_arco_recibidos_promedio": 2.684,
+    "goles_totales": 26,
+    "goles_recibidos_promedio": 0.895,
+    "faltas_promedio": 9.526
   },
   {
     "team": "Central Córdoba (Santiago del Estero)",
@@ -119,15 +119,15 @@
   {
     "team": "Deportivo Riestra",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.375,
-    "precision_pases_promedio": 56.756,
-    "remates_promedio": 10.0,
-    "remates_al_arco_promedio": 3.389,
-    "remates_al_arco_recibidos_promedio": 4.278,
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.376,
+    "precision_pases_promedio": 56.579,
+    "remates_promedio": 10.105,
+    "remates_al_arco_promedio": 3.421,
+    "remates_al_arco_recibidos_promedio": 4.211,
     "goles_totales": 9,
-    "goles_recibidos_promedio": 0.778,
-    "faltas_promedio": 17.056
+    "goles_recibidos_promedio": 0.789,
+    "faltas_promedio": 16.947
   },
   {
     "team": "Estudiantes de La Plata",
@@ -171,15 +171,15 @@
   {
     "team": "Gimnasia La Plata",
     "season": "2026",
-    "partidos": 20,
-    "posesion_promedio_proxy": 0.452,
-    "precision_pases_promedio": 74.79,
-    "remates_promedio": 11.15,
-    "remates_al_arco_promedio": 3.8,
-    "remates_al_arco_recibidos_promedio": 4.2,
-    "goles_totales": 22,
-    "goles_recibidos_promedio": 1.15,
-    "faltas_promedio": 12.15
+    "partidos": 21,
+    "posesion_promedio_proxy": 0.454,
+    "precision_pases_promedio": 74.838,
+    "remates_promedio": 11.143,
+    "remates_al_arco_promedio": 3.81,
+    "remates_al_arco_recibidos_promedio": 4.19,
+    "goles_totales": 24,
+    "goles_recibidos_promedio": 1.143,
+    "faltas_promedio": 12.095
   },
   {
     "team": "Huracán",
@@ -249,15 +249,15 @@
   {
     "team": "Newell's Old Boys",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.439,
-    "precision_pases_promedio": 72.55,
-    "remates_promedio": 10.056,
-    "remates_al_arco_promedio": 3.278,
-    "remates_al_arco_recibidos_promedio": 4.889,
-    "goles_totales": 16,
-    "goles_recibidos_promedio": 1.556,
-    "faltas_promedio": 13.111
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.437,
+    "precision_pases_promedio": 72.763,
+    "remates_promedio": 10.0,
+    "remates_al_arco_promedio": 3.211,
+    "remates_al_arco_recibidos_promedio": 4.842,
+    "goles_totales": 18,
+    "goles_recibidos_promedio": 1.579,
+    "faltas_promedio": 13.053
   },
   {
     "team": "Platense",
@@ -288,28 +288,28 @@
   {
     "team": "River Plate",
     "season": "2026",
-    "partidos": 22,
+    "partidos": 23,
     "posesion_promedio_proxy": 0.658,
-    "precision_pases_promedio": 82.777,
-    "remates_promedio": 16.364,
-    "remates_al_arco_promedio": 5.455,
-    "remates_al_arco_recibidos_promedio": 3.364,
+    "precision_pases_promedio": 82.652,
+    "remates_promedio": 16.739,
+    "remates_al_arco_promedio": 5.478,
+    "remates_al_arco_recibidos_promedio": 3.348,
     "goles_totales": 29,
-    "goles_recibidos_promedio": 0.864,
-    "faltas_promedio": 11.955
+    "goles_recibidos_promedio": 0.87,
+    "faltas_promedio": 12.087
   },
   {
     "team": "Rosario Central",
     "season": "2026",
-    "partidos": 21,
-    "posesion_promedio_proxy": 0.563,
-    "precision_pases_promedio": 80.238,
-    "remates_promedio": 13.19,
-    "remates_al_arco_promedio": 4.524,
-    "remates_al_arco_recibidos_promedio": 3.762,
-    "goles_totales": 26,
-    "goles_recibidos_promedio": 1.0,
-    "faltas_promedio": 11.333
+    "partidos": 22,
+    "posesion_promedio_proxy": 0.554,
+    "precision_pases_promedio": 79.159,
+    "remates_promedio": 13.136,
+    "remates_al_arco_promedio": 4.455,
+    "remates_al_arco_recibidos_promedio": 3.864,
+    "goles_totales": 27,
+    "goles_recibidos_promedio": 0.955,
+    "faltas_promedio": 11.5
   },
   {
     "team": "San Lorenzo",

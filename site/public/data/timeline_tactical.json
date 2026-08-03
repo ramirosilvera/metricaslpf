@@ -162,6 +162,15 @@
     "shots_total": 9
   },
   {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_date": "2026-08-02",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.503,
+    "pass_accuracy_pct": 69.9,
+    "shots_total": 18
+  },
+  {
     "team": "Argentinos Juniors",
     "season": "2026",
     "match_date": "2026-01-26",
@@ -855,6 +864,15 @@
     "shots_total": 10
   },
   {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_date": "2026-08-02",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.596,
+    "pass_accuracy_pct": 70.8,
+    "shots_total": 10
+  },
+  {
     "team": "Belgrano (Córdoba)",
     "season": "2026",
     "match_date": "2026-01-25",
@@ -1213,6 +1231,15 @@
     "possession_share_proxy": 0.818,
     "pass_accuracy_pct": 89.2,
     "shots_total": 13
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_date": "2026-08-02",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.598,
+    "pass_accuracy_pct": 86.4,
+    "shots_total": 16
   },
   {
     "team": "Central Córdoba (Santiago del Estero)",
@@ -1708,6 +1735,15 @@
     "possession_share_proxy": 0.383,
     "pass_accuracy_pct": 51.0,
     "shots_total": 18
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_date": "2026-08-02",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.404,
+    "pass_accuracy_pct": 53.4,
+    "shots_total": 12
   },
   {
     "team": "Estudiantes de La Plata",
@@ -2401,6 +2437,15 @@
     "possession_share_proxy": 0.259,
     "pass_accuracy_pct": 60.3,
     "shots_total": 14
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_date": "2026-08-02",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.497,
+    "pass_accuracy_pct": 75.8,
+    "shots_total": 11
   },
   {
     "team": "Huracán",
@@ -3411,6 +3456,15 @@
     "shots_total": 2
   },
   {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_date": "2026-08-02",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.402,
+    "pass_accuracy_pct": 76.6,
+    "shots_total": 9
+  },
+  {
     "team": "Platense",
     "season": "2026",
     "match_date": "2026-01-22",
@@ -3960,6 +4014,15 @@
     "shots_total": 10
   },
   {
+    "team": "River Plate",
+    "season": "2026",
+    "match_date": "2026-08-02",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.652,
+    "pass_accuracy_pct": 79.9,
+    "shots_total": 25
+  },
+  {
     "team": "Rosario Central",
     "season": "2026",
     "match_date": "2026-01-25",
@@ -4147,6 +4210,15 @@
     "possession_share_proxy": 0.593,
     "pass_accuracy_pct": 86.2,
     "shots_total": 13
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_date": "2026-08-02",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.348,
+    "pass_accuracy_pct": 56.5,
+    "shots_total": 12
   },
   {
     "team": "San Lorenzo",

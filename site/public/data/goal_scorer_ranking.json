@@ -322,6 +322,20 @@
     "partidos_con_gol": 1
   },
   {
+    "team": "Gimnasia La Plata",
+    "player_name": "Agustín Auzmendi",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Boca Juniors",
+    "player_name": "Alan Velasco",
+    "goles": 3,
+    "penales": 0,
+    "partidos_con_gol": 3
+  },
+  {
     "team": "Independiente Rivadavia",
     "player_name": "Alex Arce",
     "goles": 3,
@@ -448,6 +462,13 @@
     "partidos_con_gol": 3
   },
   {
+    "team": "Newell's Old Boys",
+    "player_name": "Matías Cóccaro",
+    "goles": 3,
+    "penales": 1,
+    "partidos_con_gol": 3
+  },
+  {
     "team": "Vélez Sarsfield",
     "player_name": "Matías Pellegrini",
     "goles": 3,
@@ -466,6 +487,13 @@
     "player_name": "Rodrigo Insúa",
     "goles": 3,
     "penales": 2,
+    "partidos_con_gol": 3
+  },
+  {
+    "team": "Boca Juniors",
+    "player_name": "Santiago Ascacibar",
+    "goles": 3,
+    "penales": 0,
     "partidos_con_gol": 3
   },
   {
@@ -497,22 +525,8 @@
     "partidos_con_gol": 2
   },
   {
-    "team": "Gimnasia La Plata",
-    "player_name": "Agustín Auzmendi",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
     "team": "Tigre",
     "player_name": "Alan Barrionuevo",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
-    "team": "Boca Juniors",
-    "player_name": "Alan Velasco",
     "goles": 2,
     "penales": 0,
     "partidos_con_gol": 2
@@ -637,6 +651,13 @@
     "partidos_con_gol": 2
   },
   {
+    "team": "Barracas Central",
+    "player_name": "Gonzalo Maroni",
+    "goles": 2,
+    "penales": 0,
+    "partidos_con_gol": 2
+  },
+  {
     "team": "San Lorenzo",
     "player_name": "Gregorio Rodríguez",
     "goles": 2,
@@ -749,13 +770,6 @@
     "partidos_con_gol": 2
   },
   {
-    "team": "Newell's Old Boys",
-    "player_name": "Matías Cóccaro",
-    "goles": 2,
-    "penales": 1,
-    "partidos_con_gol": 2
-  },
-  {
     "team": "Independiente Rivadavia",
     "player_name": "Matías Fernández",
     "goles": 2,
@@ -833,13 +847,6 @@
     "partidos_con_gol": 2
   },
   {
-    "team": "Boca Juniors",
-    "player_name": "Santiago Ascacibar",
-    "goles": 2,
-    "penales": 0,
-    "partidos_con_gol": 2
-  },
-  {
     "team": "Banfield",
     "player_name": "Santiago López Garcia",
     "goles": 2,
@@ -912,6 +919,13 @@
   {
     "team": "Belgrano (Córdoba)",
     "player_name": "Adrián Sánchez",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "player_name": "Agustin Colazo",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1
@@ -1274,13 +1288,6 @@
     "partidos_con_gol": 1
   },
   {
-    "team": "Barracas Central",
-    "player_name": "Gonzalo Maroni",
-    "goles": 1,
-    "penales": 0,
-    "partidos_con_gol": 1
-  },
-  {
     "team": "Independiente Rivadavia",
     "player_name": "Gonzalo Rios",
     "goles": 1,
@@ -1540,6 +1547,13 @@
     "partidos_con_gol": 1
   },
   {
+    "team": "Newell's Old Boys",
+    "player_name": "Luca Regiardo",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
     "team": "Estudiantes de La Plata",
     "player_name": "Lucas Alario",
     "goles": 1,
@@ -1745,6 +1759,13 @@
   {
     "team": "Deportivo Riestra",
     "player_name": "Nicolás Benegas",
+    "goles": 1,
+    "penales": 0,
+    "partidos_con_gol": 1
+  },
+  {
+    "team": "Aldosivi",
+    "player_name": "Nicolás Gaitán",
     "goles": 1,
     "penales": 0,
     "partidos_con_gol": 1

@@ -3442,5 +3442,53 @@
     "season": "2026",
     "match_id": 401841475,
     "possession_share_proxy": 0.369
+  },
+  {
+    "team": "Aldosivi",
+    "season": "2026",
+    "match_id": 401841470,
+    "possession_share_proxy": 0.503
+  },
+  {
+    "team": "Gimnasia La Plata",
+    "season": "2026",
+    "match_id": 401841470,
+    "possession_share_proxy": 0.497
+  },
+  {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "match_id": 401841467,
+    "possession_share_proxy": 0.404
+  },
+  {
+    "team": "Barracas Central",
+    "season": "2026",
+    "match_id": 401841467,
+    "possession_share_proxy": 0.596
+  },
+  {
+    "team": "Newell's Old Boys",
+    "season": "2026",
+    "match_id": 401841473,
+    "possession_share_proxy": 0.402
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "match_id": 401841473,
+    "possession_share_proxy": 0.598
+  },
+  {
+    "team": "River Plate",
+    "season": "2026",
+    "match_id": 401841476,
+    "possession_share_proxy": 0.652
+  },
+  {
+    "team": "Rosario Central",
+    "season": "2026",
+    "match_id": 401841476,
+    "possession_share_proxy": 0.348
   }
 ]

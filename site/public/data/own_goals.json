@@ -61,6 +61,11 @@
   },
   {
     "equipo_beneficiado": "Rosario Central",
+    "player_name": "Nicolás Otamendi",
+    "goles_en_contra": 1
+  },
+  {
+    "equipo_beneficiado": "Rosario Central",
     "player_name": "Santiago López Garcia",
     "goles_en_contra": 1
   },

@@ -2,9 +2,9 @@
   {
     "team": "Aldosivi",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 13.3,
+    "posesion_promedio_proxy_percentil": 16.7,
     "precision_pases_promedio_percentil": 13.3,
-    "remates_promedio_percentil": 23.3,
+    "remates_promedio_percentil": 30.0,
     "remates_al_arco_promedio_percentil": 10.0
   },
   {
@@ -36,7 +36,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 6.7,
     "precision_pases_promedio_percentil": 10.0,
-    "remates_promedio_percentil": 11.7,
+    "remates_promedio_percentil": 10.0,
     "remates_al_arco_promedio_percentil": 30.0
   },
   {
@@ -52,13 +52,13 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 93.3,
     "precision_pases_promedio_percentil": 93.3,
-    "remates_promedio_percentil": 73.3,
+    "remates_promedio_percentil": 76.7,
     "remates_al_arco_promedio_percentil": 83.3
   },
   {
     "team": "Central Córdoba (Santiago del Estero)",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 16.7,
+    "posesion_promedio_proxy_percentil": 13.3,
     "precision_pases_promedio_percentil": 33.3,
     "remates_promedio_percentil": 3.3,
     "remates_al_arco_promedio_percentil": 6.7
@@ -67,8 +67,8 @@
     "team": "Defensa y Justicia",
     "season": "2026",
     "posesion_promedio_proxy_percentil": 70.0,
-    "precision_pases_promedio_percentil": 80.0,
-    "remates_promedio_percentil": 26.7,
+    "precision_pases_promedio_percentil": 83.3,
+    "remates_promedio_percentil": 23.3,
     "remates_al_arco_promedio_percentil": 56.7
   },
   {
@@ -76,14 +76,14 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 3.3,
     "precision_pases_promedio_percentil": 3.3,
-    "remates_promedio_percentil": 6.7,
+    "remates_promedio_percentil": 13.3,
     "remates_al_arco_promedio_percentil": 20.0
   },
   {
     "team": "Estudiantes de La Plata",
     "season": "2026",
     "posesion_promedio_proxy_percentil": 73.3,
-    "precision_pases_promedio_percentil": 83.3,
+    "precision_pases_promedio_percentil": 86.7,
     "remates_promedio_percentil": 83.3,
     "remates_al_arco_promedio_percentil": 86.7
   },
@@ -92,13 +92,13 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 33.3,
     "precision_pases_promedio_percentil": 20.0,
-    "remates_promedio_percentil": 30.0,
+    "remates_promedio_percentil": 26.7,
     "remates_al_arco_promedio_percentil": 3.3
   },
   {
     "team": "Gimnasia (Mendoza)",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 25.0,
+    "posesion_promedio_proxy_percentil": 23.3,
     "precision_pases_promedio_percentil": 36.7,
     "remates_promedio_percentil": 50.0,
     "remates_al_arco_promedio_percentil": 56.7
@@ -106,7 +106,7 @@
   {
     "team": "Gimnasia La Plata",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 25.0,
+    "posesion_promedio_proxy_percentil": 26.7,
     "precision_pases_promedio_percentil": 60.0,
     "remates_promedio_percentil": 33.3,
     "remates_al_arco_promedio_percentil": 43.3
@@ -156,7 +156,7 @@
     "season": "2026",
     "posesion_promedio_proxy_percentil": 20.0,
     "precision_pases_promedio_percentil": 30.0,
-    "remates_promedio_percentil": 11.7,
+    "remates_promedio_percentil": 6.7,
     "remates_al_arco_promedio_percentil": 13.3
   },
   {
@@ -170,7 +170,7 @@
   {
     "team": "Racing Club",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 86.7,
+    "posesion_promedio_proxy_percentil": 90.0,
     "precision_pases_promedio_percentil": 66.7,
     "remates_promedio_percentil": 46.7,
     "remates_al_arco_promedio_percentil": 23.3
@@ -186,9 +186,9 @@
   {
     "team": "Rosario Central",
     "season": "2026",
-    "posesion_promedio_proxy_percentil": 90.0,
-    "precision_pases_promedio_percentil": 86.7,
-    "remates_promedio_percentil": 76.7,
+    "posesion_promedio_proxy_percentil": 86.7,
+    "precision_pases_promedio_percentil": 80.0,
+    "remates_promedio_percentil": 73.3,
     "remates_al_arco_promedio_percentil": 80.0
   },
   {
