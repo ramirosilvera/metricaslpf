@@ -197,28 +197,28 @@
   {
     "team": "Independiente",
     "season": "2026",
-    "partidos": 19,
-    "posesion_promedio_proxy": 0.516,
-    "precision_pases_promedio": 73.8,
-    "remates_promedio": 12.737,
-    "remates_al_arco_promedio": 4.105,
-    "remates_al_arco_recibidos_promedio": 3.421,
+    "partidos": 20,
+    "posesion_promedio_proxy": 0.513,
+    "precision_pases_promedio": 73.845,
+    "remates_promedio": 12.65,
+    "remates_al_arco_promedio": 3.95,
+    "remates_al_arco_recibidos_promedio": 3.45,
     "goles_totales": 28,
-    "goles_recibidos_promedio": 1.211,
-    "faltas_promedio": 11.842
+    "goles_recibidos_promedio": 1.2,
+    "faltas_promedio": 11.9
   },
   {
     "team": "Independiente Rivadavia",
     "season": "2026",
-    "partidos": 19,
-    "posesion_promedio_proxy": 0.487,
-    "precision_pases_promedio": 73.511,
-    "remates_promedio": 14.579,
-    "remates_al_arco_promedio": 5.053,
-    "remates_al_arco_recibidos_promedio": 3.684,
-    "goles_totales": 32,
-    "goles_recibidos_promedio": 0.947,
-    "faltas_promedio": 11.737
+    "partidos": 20,
+    "posesion_promedio_proxy": 0.497,
+    "precision_pases_promedio": 73.99,
+    "remates_promedio": 14.8,
+    "remates_al_arco_promedio": 5.15,
+    "remates_al_arco_recibidos_promedio": 3.65,
+    "goles_totales": 33,
+    "goles_recibidos_promedio": 1.0,
+    "faltas_promedio": 11.5
   },
   {
     "team": "Instituto (Córdoba)",
@@ -262,15 +262,15 @@
   {
     "team": "Platense",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.513,
-    "precision_pases_promedio": 75.172,
-    "remates_promedio": 12.667,
-    "remates_al_arco_promedio": 3.833,
-    "remates_al_arco_recibidos_promedio": 4.111,
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.51,
+    "precision_pases_promedio": 75.316,
+    "remates_promedio": 13.211,
+    "remates_al_arco_promedio": 4.053,
+    "remates_al_arco_recibidos_promedio": 4.263,
     "goles_totales": 13,
-    "goles_recibidos_promedio": 1.056,
-    "faltas_promedio": 11.5
+    "goles_recibidos_promedio": 1.211,
+    "faltas_promedio": 11.632
   },
   {
     "team": "Racing Club",
@@ -327,28 +327,28 @@
   {
     "team": "Sarmiento (Junín)",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.481,
-    "precision_pases_promedio": 72.172,
-    "remates_promedio": 10.167,
-    "remates_al_arco_promedio": 3.611,
-    "remates_al_arco_recibidos_promedio": 5.611,
-    "goles_totales": 17,
-    "goles_recibidos_promedio": 1.444,
-    "faltas_promedio": 13.5
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.472,
+    "precision_pases_promedio": 71.442,
+    "remates_promedio": 10.105,
+    "remates_al_arco_promedio": 3.579,
+    "remates_al_arco_recibidos_promedio": 5.684,
+    "goles_totales": 19,
+    "goles_recibidos_promedio": 1.421,
+    "faltas_promedio": 13.632
   },
   {
     "team": "Talleres (Córdoba)",
     "season": "2026",
-    "partidos": 19,
+    "partidos": 20,
     "posesion_promedio_proxy": 0.539,
-    "precision_pases_promedio": 78.984,
-    "remates_promedio": 12.737,
-    "remates_al_arco_promedio": 4.158,
-    "remates_al_arco_recibidos_promedio": 3.737,
-    "goles_totales": 18,
-    "goles_recibidos_promedio": 0.947,
-    "faltas_promedio": 11.947
+    "precision_pases_promedio": 79.14,
+    "remates_promedio": 12.5,
+    "remates_al_arco_promedio": 4.3,
+    "remates_al_arco_recibidos_promedio": 3.95,
+    "goles_totales": 22,
+    "goles_recibidos_promedio": 0.9,
+    "faltas_promedio": 12.1
   },
   {
     "team": "Tigre",
@@ -379,14 +379,14 @@
   {
     "team": "Vélez Sarsfield",
     "season": "2026",
-    "partidos": 19,
+    "partidos": 20,
     "posesion_promedio_proxy": 0.542,
-    "precision_pases_promedio": 77.089,
-    "remates_promedio": 12.316,
-    "remates_al_arco_promedio": 4.263,
-    "remates_al_arco_recibidos_promedio": 4.526,
-    "goles_totales": 22,
-    "goles_recibidos_promedio": 0.737,
-    "faltas_promedio": 10.737
+    "precision_pases_promedio": 77.075,
+    "remates_promedio": 12.3,
+    "remates_al_arco_promedio": 4.25,
+    "remates_al_arco_recibidos_promedio": 4.35,
+    "goles_totales": 23,
+    "goles_recibidos_promedio": 0.7,
+    "faltas_promedio": 11.05
   }
 ]

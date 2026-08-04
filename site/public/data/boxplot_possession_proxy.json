@@ -3502,5 +3502,41 @@
     "season": "2026",
     "match_id": 401841472,
     "possession_share_proxy": 0.379
+  },
+  {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_id": 401841477,
+    "possession_share_proxy": 0.306
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_id": 401841477,
+    "possession_share_proxy": 0.694
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_id": 401841474,
+    "possession_share_proxy": 0.46
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_id": 401841474,
+    "possession_share_proxy": 0.54
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_id": 401841465,
+    "possession_share_proxy": 0.538
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "match_id": 401841465,
+    "possession_share_proxy": 0.462
   }
 ]

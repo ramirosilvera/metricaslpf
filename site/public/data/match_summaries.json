@@ -1,5 +1,127 @@
 [
   {
+    "match_id": 401841477,
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "home_team": "Sarmiento (Junín)",
+    "away_team": "Independiente Rivadavia",
+    "home_score": 2,
+    "away_score": 1,
+    "home": {
+      "posesion_pct": 30.6,
+      "remates": 9,
+      "remates_al_arco": 3,
+      "pases": 206,
+      "precision_pases_pct": 58.3,
+      "faltas": 16,
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 6
+    },
+    "away": {
+      "posesion_pct": 69.4,
+      "remates": 19,
+      "remates_al_arco": 7,
+      "pases": 449,
+      "precision_pases_pct": 83.1,
+      "faltas": 7,
+      "corners": 7,
+      "offsides": 2,
+      "atajadas": 2
+    },
+    "goleadores": [
+      {
+        "player": "Mauricio Martínez",
+        "team": "Sarmiento (Junín)",
+        "minute": "12'",
+        "penalty": false
+      },
+      {
+        "player": "Matías Fernández",
+        "team": "Independiente Rivadavia",
+        "minute": "31'",
+        "penalty": false
+      },
+      {
+        "player": "Julián Mavilla",
+        "team": "Sarmiento (Junín)",
+        "minute": "37'",
+        "penalty": false
+      }
+    ],
+    "goles_contra": [],
+    "destacado": {
+      "player": "Julián Mavilla",
+      "team": "Sarmiento (Junín)",
+      "note": "1 gol"
+    },
+    "insight": "Sarmiento (Junín) venció 2-1 a Independiente Rivadavia. Independiente Rivadavia manejó más la pelota (69.4% de posesión). Independiente Rivadavia remató más al arco rival (7 vs 3 remates al arco)."
+  },
+  {
+    "match_id": 401841474,
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "home_team": "Platense",
+    "away_team": "Talleres (Córdoba)",
+    "home_score": 0,
+    "away_score": 4,
+    "home": {
+      "posesion_pct": 46.0,
+      "remates": 23,
+      "remates_al_arco": 8,
+      "pases": 398,
+      "precision_pases_pct": 77.9,
+      "faltas": 14,
+      "corners": 3,
+      "offsides": 1,
+      "atajadas": 3
+    },
+    "away": {
+      "posesion_pct": 54.0,
+      "remates": 8,
+      "remates_al_arco": 7,
+      "pases": 476,
+      "precision_pases_pct": 82.1,
+      "faltas": 15,
+      "corners": 3,
+      "offsides": 4,
+      "atajadas": 8
+    },
+    "goleadores": [
+      {
+        "player": "Rick",
+        "team": "Talleres (Córdoba)",
+        "minute": "43'",
+        "penalty": false
+      },
+      {
+        "player": "Valentin Depietri",
+        "team": "Talleres (Córdoba)",
+        "minute": "69'",
+        "penalty": false
+      },
+      {
+        "player": "Rick",
+        "team": "Talleres (Córdoba)",
+        "minute": "74'",
+        "penalty": false
+      },
+      {
+        "player": "Franco Cristaldo",
+        "team": "Talleres (Córdoba)",
+        "minute": "77'",
+        "penalty": false
+      }
+    ],
+    "goles_contra": [],
+    "destacado": {
+      "player": "Rick",
+      "team": "Talleres (Córdoba)",
+      "note": "2 goles"
+    },
+    "insight": "Talleres (Córdoba) venció 4-0 a Platense. Talleres (Córdoba) manejó más la pelota (54.0% de posesión)."
+  },
+  {
     "match_id": 401841472,
     "match_date": "2026-08-03",
     "stage": "torneo-clausura",
@@ -44,6 +166,52 @@
       "note": "1 gol"
     },
     "insight": "Instituto (Córdoba) venció 1-0 a Lanús. Lanús manejó más la pelota (62.1% de posesión). Instituto (Córdoba) remató más al arco rival (7 vs 3 remates al arco)."
+  },
+  {
+    "match_id": 401841465,
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "home_team": "Vélez Sarsfield",
+    "away_team": "Independiente",
+    "home_score": 1,
+    "away_score": 0,
+    "home": {
+      "posesion_pct": 53.8,
+      "remates": 12,
+      "remates_al_arco": 4,
+      "pases": 440,
+      "precision_pases_pct": 76.8,
+      "faltas": 17,
+      "corners": 4,
+      "offsides": 2,
+      "atajadas": 2
+    },
+    "away": {
+      "posesion_pct": 46.2,
+      "remates": 11,
+      "remates_al_arco": 1,
+      "pases": 376,
+      "precision_pases_pct": 74.7,
+      "faltas": 13,
+      "corners": 4,
+      "offsides": 1,
+      "atajadas": 2
+    },
+    "goleadores": [
+      {
+        "player": "Thiago Aguirre",
+        "team": "Vélez Sarsfield",
+        "minute": "70'",
+        "penalty": false
+      }
+    ],
+    "goles_contra": [],
+    "destacado": {
+      "player": "Thiago Aguirre",
+      "team": "Vélez Sarsfield",
+      "note": "1 gol"
+    },
+    "insight": "Vélez Sarsfield venció 1-0 a Independiente. Vélez Sarsfield manejó más la pelota (53.8% de posesión). Vélez Sarsfield remató más al arco rival (4 vs 1 remates al arco)."
   },
   {
     "match_id": 401841476,

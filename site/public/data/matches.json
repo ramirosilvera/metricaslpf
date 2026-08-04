@@ -4096,8 +4096,8 @@
     "match_date": "2026-08-03",
     "home_team": "Sarmiento (Junín)",
     "away_team": "Independiente Rivadavia",
-    "home_score": null,
-    "away_score": null,
+    "home_score": 2,
+    "away_score": 1,
     "stadium": "Eva Perón",
     "referee": null
   },
@@ -4110,8 +4110,8 @@
     "match_date": "2026-08-03",
     "home_team": "Platense",
     "away_team": "Talleres (Córdoba)",
-    "home_score": null,
-    "away_score": null,
+    "home_score": 0,
+    "away_score": 4,
     "stadium": "Ciudad de Vicente López",
     "referee": null
   },
@@ -4124,8 +4124,8 @@
     "match_date": "2026-08-03",
     "home_team": "Vélez Sarsfield",
     "away_team": "Independiente",
-    "home_score": null,
-    "away_score": null,
+    "home_score": 1,
+    "away_score": 0,
     "stadium": "José Amalfitani",
     "referee": null
   },

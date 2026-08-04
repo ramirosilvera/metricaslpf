@@ -3,14 +3,14 @@
     "team": "Vélez Sarsfield",
     "season": "2026",
     "posicion": 1,
-    "puntos": 6,
-    "jugados": 2,
-    "ganados": 2,
+    "puntos": 9,
+    "jugados": 3,
+    "ganados": 3,
     "empatados": 0,
     "perdidos": 0,
-    "goles_favor": 4,
+    "goles_favor": 5,
     "goles_contra": 1,
-    "diferencia": 3,
+    "diferencia": 4,
     "forma": null
   },
   {
@@ -28,20 +28,6 @@
     "forma": null
   },
   {
-    "team": "Independiente",
-    "season": "2026",
-    "posicion": 2,
-    "puntos": 6,
-    "jugados": 2,
-    "ganados": 2,
-    "empatados": 0,
-    "perdidos": 0,
-    "goles_favor": 3,
-    "goles_contra": 0,
-    "diferencia": 3,
-    "forma": null
-  },
-  {
     "team": "Barracas Central",
     "season": "2026",
     "posicion": 2,
@@ -53,6 +39,20 @@
     "goles_favor": 3,
     "goles_contra": 0,
     "diferencia": 3,
+    "forma": null
+  },
+  {
+    "team": "Independiente",
+    "season": "2026",
+    "posicion": 2,
+    "puntos": 6,
+    "jugados": 3,
+    "ganados": 2,
+    "empatados": 0,
+    "perdidos": 1,
+    "goles_favor": 3,
+    "goles_contra": 1,
+    "diferencia": 2,
     "forma": null
   },
   {
@@ -126,21 +126,21 @@
     "forma": null
   },
   {
-    "team": "Independiente Rivadavia",
+    "team": "Banfield",
     "season": "2026",
     "posicion": 5,
     "puntos": 4,
-    "jugados": 2,
+    "jugados": 3,
     "ganados": 1,
     "empatados": 1,
-    "perdidos": 0,
-    "goles_favor": 2,
-    "goles_contra": 1,
-    "diferencia": 1,
+    "perdidos": 1,
+    "goles_favor": 3,
+    "goles_contra": 3,
+    "diferencia": 0,
     "forma": null
   },
   {
-    "team": "Banfield",
+    "team": "Independiente Rivadavia",
     "season": "2026",
     "posicion": 6,
     "puntos": 4,
@@ -168,6 +168,20 @@
     "forma": null
   },
   {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "posicion": 7,
+    "puntos": 3,
+    "jugados": 3,
+    "ganados": 1,
+    "empatados": 0,
+    "perdidos": 2,
+    "goles_favor": 5,
+    "goles_contra": 4,
+    "diferencia": 1,
+    "forma": null
+  },
+  {
     "team": "Rosario Central",
     "season": "2026",
     "posicion": 7,
@@ -179,34 +193,6 @@
     "goles_favor": 2,
     "goles_contra": 2,
     "diferencia": 0,
-    "forma": null
-  },
-  {
-    "team": "Deportivo Riestra",
-    "season": "2026",
-    "posicion": 7,
-    "puntos": 3,
-    "jugados": 3,
-    "ganados": 1,
-    "empatados": 0,
-    "perdidos": 2,
-    "goles_favor": 4,
-    "goles_contra": 3,
-    "diferencia": 1,
-    "forma": null
-  },
-  {
-    "team": "Estudiantes de La Plata",
-    "season": "2026",
-    "posicion": 8,
-    "puntos": 3,
-    "jugados": 2,
-    "ganados": 1,
-    "empatados": 0,
-    "perdidos": 1,
-    "goles_favor": 3,
-    "goles_contra": 2,
-    "diferencia": 1,
     "forma": null
   },
   {
@@ -224,6 +210,20 @@
     "forma": null
   },
   {
+    "team": "Deportivo Riestra",
+    "season": "2026",
+    "posicion": 8,
+    "puntos": 3,
+    "jugados": 3,
+    "ganados": 1,
+    "empatados": 0,
+    "perdidos": 2,
+    "goles_favor": 4,
+    "goles_contra": 3,
+    "diferencia": 1,
+    "forma": null
+  },
+  {
     "team": "Estudiantes de Río Cuarto",
     "season": "2026",
     "posicion": 9,
@@ -238,7 +238,7 @@
     "forma": null
   },
   {
-    "team": "Lanús",
+    "team": "Estudiantes de La Plata",
     "season": "2026",
     "posicion": 9,
     "puntos": 3,
@@ -246,13 +246,13 @@
     "ganados": 1,
     "empatados": 0,
     "perdidos": 1,
-    "goles_favor": 1,
-    "goles_contra": 1,
-    "diferencia": 0,
+    "goles_favor": 3,
+    "goles_contra": 2,
+    "diferencia": 1,
     "forma": null
   },
   {
-    "team": "San Lorenzo",
+    "team": "Lanús",
     "season": "2026",
     "posicion": 10,
     "puntos": 3,
@@ -294,17 +294,17 @@
     "forma": null
   },
   {
-    "team": "Platense",
+    "team": "San Lorenzo",
     "season": "2026",
     "posicion": 11,
-    "puntos": 1,
+    "puntos": 3,
     "jugados": 2,
-    "ganados": 0,
-    "empatados": 1,
+    "ganados": 1,
+    "empatados": 0,
     "perdidos": 1,
-    "goles_favor": 3,
-    "goles_contra": 4,
-    "diferencia": -1,
+    "goles_favor": 1,
+    "goles_contra": 1,
+    "diferencia": 0,
     "forma": null
   },
   {
@@ -336,17 +336,17 @@
     "forma": null
   },
   {
-    "team": "Aldosivi",
+    "team": "Sarmiento (Junín)",
     "season": "2026",
     "posicion": 13,
-    "puntos": 1,
+    "puntos": 3,
     "jugados": 3,
-    "ganados": 0,
-    "empatados": 1,
+    "ganados": 1,
+    "empatados": 0,
     "perdidos": 2,
-    "goles_favor": 2,
-    "goles_contra": 4,
-    "diferencia": -2,
+    "goles_favor": 6,
+    "goles_contra": 7,
+    "diferencia": -1,
     "forma": null
   },
   {
@@ -364,30 +364,30 @@
     "forma": null
   },
   {
-    "team": "Talleres (Córdoba)",
+    "team": "Platense",
     "season": "2026",
     "posicion": 14,
-    "puntos": 0,
-    "jugados": 2,
+    "puntos": 1,
+    "jugados": 3,
     "ganados": 0,
-    "empatados": 0,
+    "empatados": 1,
     "perdidos": 2,
-    "goles_favor": 1,
-    "goles_contra": 4,
-    "diferencia": -3,
+    "goles_favor": 3,
+    "goles_contra": 8,
+    "diferencia": -5,
     "forma": null
   },
   {
-    "team": "Sarmiento (Junín)",
+    "team": "Aldosivi",
     "season": "2026",
     "posicion": 14,
-    "puntos": 0,
-    "jugados": 2,
+    "puntos": 1,
+    "jugados": 3,
     "ganados": 0,
-    "empatados": 0,
+    "empatados": 1,
     "perdidos": 2,
-    "goles_favor": 4,
-    "goles_contra": 6,
+    "goles_favor": 2,
+    "goles_contra": 4,
     "diferencia": -2,
     "forma": null
   },

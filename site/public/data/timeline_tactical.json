@@ -2799,6 +2799,15 @@
     "shots_total": 12
   },
   {
+    "team": "Independiente",
+    "season": "2026",
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.462,
+    "pass_accuracy_pct": 74.7,
+    "shots_total": 11
+  },
+  {
     "team": "Independiente Rivadavia",
     "season": "2026",
     "match_date": "2026-01-24",
@@ -2968,6 +2977,15 @@
     "possession_share_proxy": 0.355,
     "pass_accuracy_pct": 72.1,
     "shots_total": 21
+  },
+  {
+    "team": "Independiente Rivadavia",
+    "season": "2026",
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.694,
+    "pass_accuracy_pct": 83.1,
+    "shots_total": 19
   },
   {
     "team": "Instituto (Córdoba)",
@@ -3643,6 +3661,15 @@
     "possession_share_proxy": 0.529,
     "pass_accuracy_pct": 82.3,
     "shots_total": 15
+  },
+  {
+    "team": "Platense",
+    "season": "2026",
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.46,
+    "pass_accuracy_pct": 77.9,
+    "shots_total": 23
   },
   {
     "team": "Racing Club",
@@ -4572,6 +4599,15 @@
     "shots_total": 13
   },
   {
+    "team": "Sarmiento (Junín)",
+    "season": "2026",
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.306,
+    "pass_accuracy_pct": 58.3,
+    "shots_total": 9
+  },
+  {
     "team": "Talleres (Córdoba)",
     "season": "2026",
     "match_date": "2026-01-24",
@@ -4741,6 +4777,15 @@
     "possession_share_proxy": 0.629,
     "pass_accuracy_pct": 86.2,
     "shots_total": 20
+  },
+  {
+    "team": "Talleres (Córdoba)",
+    "season": "2026",
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.54,
+    "pass_accuracy_pct": 82.1,
+    "shots_total": 8
   },
   {
     "team": "Tigre",
@@ -5254,5 +5299,14 @@
     "possession_share_proxy": 0.371,
     "pass_accuracy_pct": 72.8,
     "shots_total": 11
+  },
+  {
+    "team": "Vélez Sarsfield",
+    "season": "2026",
+    "match_date": "2026-08-03",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.538,
+    "pass_accuracy_pct": 76.8,
+    "shots_total": 12
   }
 ]
