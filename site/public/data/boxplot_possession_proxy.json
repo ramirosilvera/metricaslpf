@@ -3538,5 +3538,29 @@
     "season": "2026",
     "match_id": 401841465,
     "possession_share_proxy": 0.462
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_id": 401841468,
+    "possession_share_proxy": 0.376
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_id": 401841468,
+    "possession_share_proxy": 0.624
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_id": 401841471,
+    "possession_share_proxy": 0.648
+  },
+  {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_id": 401841471,
+    "possession_share_proxy": 0.352
   }
 ]

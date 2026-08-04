@@ -126,6 +126,13 @@
     "partidos_con_gol": 5
   },
   {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "player_name": "Michael Santos",
+    "goles": 5,
+    "penales": 1,
+    "partidos_con_gol": 5
+  },
+  {
     "team": "Boca Juniors",
     "player_name": "Miguel Merentiel",
     "goles": 5,
@@ -256,13 +263,6 @@
     "player_name": "Marcelo Estigarribia",
     "goles": 4,
     "penales": 2,
-    "partidos_con_gol": 4
-  },
-  {
-    "team": "Central Córdoba (Santiago del Estero)",
-    "player_name": "Michael Santos",
-    "goles": 4,
-    "penales": 1,
     "partidos_con_gol": 4
   },
   {

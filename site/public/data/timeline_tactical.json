@@ -531,6 +531,15 @@
     "shots_total": 8
   },
   {
+    "team": "Atlético Tucumán",
+    "season": "2026",
+    "match_date": "2026-08-04",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.352,
+    "pass_accuracy_pct": 74.9,
+    "shots_total": 16
+  },
+  {
     "team": "Banfield",
     "season": "2026",
     "match_date": "2026-01-22",
@@ -1402,6 +1411,15 @@
     "possession_share_proxy": 0.589,
     "pass_accuracy_pct": 81.3,
     "shots_total": 10
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "match_date": "2026-08-04",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.376,
+    "pass_accuracy_pct": 74.9,
+    "shots_total": 14
   },
   {
     "team": "Defensa y Justicia",
@@ -2626,6 +2644,15 @@
     "possession_share_proxy": 0.645,
     "pass_accuracy_pct": 81.5,
     "shots_total": 14
+  },
+  {
+    "team": "Huracán",
+    "season": "2026",
+    "match_date": "2026-08-04",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.648,
+    "pass_accuracy_pct": 85.7,
+    "shots_total": 16
   },
   {
     "team": "Independiente",
@@ -4435,6 +4462,15 @@
     "possession_share_proxy": 0.507,
     "pass_accuracy_pct": 81.8,
     "shots_total": 13
+  },
+  {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "match_date": "2026-08-04",
+    "stage": "torneo-clausura",
+    "possession_share_proxy": 0.624,
+    "pass_accuracy_pct": 80.0,
+    "shots_total": 15
   },
   {
     "team": "Sarmiento (Junín)",

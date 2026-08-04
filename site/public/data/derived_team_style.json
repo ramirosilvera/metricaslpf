@@ -8,7 +8,7 @@
   {
     "team": "Argentinos Juniors",
     "season": "2026",
-    "cluster_id": 2,
+    "cluster_id": 3,
     "cluster_label": "Posesión dominante"
   },
   {
@@ -38,7 +38,7 @@
   {
     "team": "Boca Juniors",
     "season": "2026",
-    "cluster_id": 2,
+    "cluster_id": 3,
     "cluster_label": "Posesión dominante"
   },
   {
@@ -56,13 +56,13 @@
   {
     "team": "Deportivo Riestra",
     "season": "2026",
-    "cluster_id": 3,
+    "cluster_id": 2,
     "cluster_label": "Bloque bajo / transición"
   },
   {
     "team": "Estudiantes de La Plata",
     "season": "2026",
-    "cluster_id": 2,
+    "cluster_id": 3,
     "cluster_label": "Posesión dominante"
   },
   {
@@ -98,7 +98,7 @@
   {
     "team": "Independiente Rivadavia",
     "season": "2026",
-    "cluster_id": 2,
+    "cluster_id": 3,
     "cluster_label": "Posesión dominante"
   },
   {
@@ -134,7 +134,7 @@
   {
     "team": "River Plate",
     "season": "2026",
-    "cluster_id": 2,
+    "cluster_id": 3,
     "cluster_label": "Posesión dominante"
   },
   {
@@ -170,7 +170,7 @@
   {
     "team": "Unión (Santa Fe)",
     "season": "2026",
-    "cluster_id": 2,
+    "cluster_id": 3,
     "cluster_label": "Posesión dominante"
   },
   {

@@ -28,15 +28,15 @@
   {
     "team": "Atlético Tucumán",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.459,
-    "precision_pases_promedio": 69.328,
-    "remates_promedio": 11.611,
-    "remates_al_arco_promedio": 3.333,
-    "remates_al_arco_recibidos_promedio": 3.278,
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.453,
+    "precision_pases_promedio": 69.621,
+    "remates_promedio": 11.842,
+    "remates_al_arco_promedio": 3.316,
+    "remates_al_arco_recibidos_promedio": 3.158,
     "goles_totales": 17,
-    "goles_recibidos_promedio": 1.111,
-    "faltas_promedio": 13.111
+    "goles_recibidos_promedio": 1.053,
+    "faltas_promedio": 13.053
   },
   {
     "team": "Banfield",
@@ -93,15 +93,15 @@
   {
     "team": "Central Córdoba (Santiago del Estero)",
     "season": "2026",
-    "partidos": 18,
-    "posesion_promedio_proxy": 0.43,
-    "precision_pases_promedio": 72.956,
-    "remates_promedio": 8.778,
-    "remates_al_arco_promedio": 2.5,
-    "remates_al_arco_recibidos_promedio": 5.222,
-    "goles_totales": 11,
-    "goles_recibidos_promedio": 1.333,
-    "faltas_promedio": 13.222
+    "partidos": 19,
+    "posesion_promedio_proxy": 0.427,
+    "precision_pases_promedio": 73.058,
+    "remates_promedio": 9.053,
+    "remates_al_arco_promedio": 2.737,
+    "remates_al_arco_recibidos_promedio": 5.053,
+    "goles_totales": 12,
+    "goles_recibidos_promedio": 1.263,
+    "faltas_promedio": 13.368
   },
   {
     "team": "Defensa y Justicia",
@@ -184,15 +184,15 @@
   {
     "team": "Huracán",
     "season": "2026",
-    "partidos": 20,
-    "posesion_promedio_proxy": 0.512,
-    "precision_pases_promedio": 73.68,
-    "remates_promedio": 11.4,
-    "remates_al_arco_promedio": 4.25,
-    "remates_al_arco_recibidos_promedio": 3.45,
+    "partidos": 21,
+    "posesion_promedio_proxy": 0.519,
+    "precision_pases_promedio": 74.252,
+    "remates_promedio": 11.619,
+    "remates_al_arco_promedio": 4.095,
+    "remates_al_arco_recibidos_promedio": 3.429,
     "goles_totales": 22,
-    "goles_recibidos_promedio": 0.9,
-    "faltas_promedio": 13.55
+    "goles_recibidos_promedio": 0.857,
+    "faltas_promedio": 13.095
   },
   {
     "team": "Independiente",
@@ -314,15 +314,15 @@
   {
     "team": "San Lorenzo",
     "season": "2026",
-    "partidos": 19,
-    "posesion_promedio_proxy": 0.489,
-    "precision_pases_promedio": 73.958,
-    "remates_promedio": 10.421,
-    "remates_al_arco_promedio": 3.737,
-    "remates_al_arco_recibidos_promedio": 5.0,
+    "partidos": 20,
+    "posesion_promedio_proxy": 0.495,
+    "precision_pases_promedio": 74.26,
+    "remates_promedio": 10.65,
+    "remates_al_arco_promedio": 3.65,
+    "remates_al_arco_recibidos_promedio": 5.1,
     "goles_totales": 17,
-    "goles_recibidos_promedio": 0.895,
-    "faltas_promedio": 12.947
+    "goles_recibidos_promedio": 0.9,
+    "faltas_promedio": 12.8
   },
   {
     "team": "Sarmiento (Junín)",

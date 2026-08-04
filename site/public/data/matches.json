@@ -4138,8 +4138,8 @@
     "match_date": "2026-08-04",
     "home_team": "Central Córdoba (Santiago del Estero)",
     "away_team": "San Lorenzo",
-    "home_score": null,
-    "away_score": null,
+    "home_score": 1,
+    "away_score": 0,
     "stadium": "Alfredo Terrera",
     "referee": null
   },
@@ -4152,8 +4152,8 @@
     "match_date": "2026-08-04",
     "home_team": "Huracán",
     "away_team": "Atlético Tucumán",
-    "home_score": null,
-    "away_score": null,
+    "home_score": 0,
+    "away_score": 0,
     "stadium": "Estadio Tomás Adolfo Ducó",
     "referee": null
   }

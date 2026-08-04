@@ -28,6 +28,20 @@
     "forma": null
   },
   {
+    "team": "Independiente",
+    "season": "2026",
+    "posicion": 2,
+    "puntos": 6,
+    "jugados": 3,
+    "ganados": 2,
+    "empatados": 0,
+    "perdidos": 1,
+    "goles_favor": 3,
+    "goles_contra": 1,
+    "diferencia": 2,
+    "forma": null
+  },
+  {
     "team": "Barracas Central",
     "season": "2026",
     "posicion": 2,
@@ -42,9 +56,9 @@
     "forma": null
   },
   {
-    "team": "Independiente",
+    "team": "Gimnasia (Mendoza)",
     "season": "2026",
-    "posicion": 2,
+    "posicion": 3,
     "puntos": 6,
     "jugados": 3,
     "ganados": 2,
@@ -70,27 +84,13 @@
     "forma": null
   },
   {
-    "team": "Gimnasia (Mendoza)",
-    "season": "2026",
-    "posicion": 3,
-    "puntos": 6,
-    "jugados": 3,
-    "ganados": 2,
-    "empatados": 0,
-    "perdidos": 1,
-    "goles_favor": 3,
-    "goles_contra": 1,
-    "diferencia": 2,
-    "forma": null
-  },
-  {
     "team": "Atlético Tucumán",
     "season": "2026",
     "posicion": 4,
-    "puntos": 4,
-    "jugados": 2,
+    "puntos": 5,
+    "jugados": 3,
     "ganados": 1,
-    "empatados": 1,
+    "empatados": 2,
     "perdidos": 0,
     "goles_favor": 2,
     "goles_contra": 0,
@@ -182,7 +182,7 @@
     "forma": null
   },
   {
-    "team": "Rosario Central",
+    "team": "Huracán",
     "season": "2026",
     "posicion": 7,
     "puntos": 4,
@@ -196,7 +196,7 @@
     "forma": null
   },
   {
-    "team": "Racing Club",
+    "team": "Rosario Central",
     "season": "2026",
     "posicion": 8,
     "puntos": 4,
@@ -204,9 +204,9 @@
     "ganados": 1,
     "empatados": 1,
     "perdidos": 1,
-    "goles_favor": 3,
-    "goles_contra": 4,
-    "diferencia": -1,
+    "goles_favor": 2,
+    "goles_contra": 2,
+    "diferencia": 0,
     "forma": null
   },
   {
@@ -224,7 +224,7 @@
     "forma": null
   },
   {
-    "team": "Estudiantes de Río Cuarto",
+    "team": "Racing Club",
     "season": "2026",
     "posicion": 9,
     "puntos": 4,
@@ -232,9 +232,9 @@
     "ganados": 1,
     "empatados": 1,
     "perdidos": 1,
-    "goles_favor": 1,
-    "goles_contra": 3,
-    "diferencia": -2,
+    "goles_favor": 3,
+    "goles_contra": 4,
+    "diferencia": -1,
     "forma": null
   },
   {
@@ -252,6 +252,20 @@
     "forma": null
   },
   {
+    "team": "Estudiantes de Río Cuarto",
+    "season": "2026",
+    "posicion": 10,
+    "puntos": 4,
+    "jugados": 3,
+    "ganados": 1,
+    "empatados": 1,
+    "perdidos": 1,
+    "goles_favor": 1,
+    "goles_contra": 3,
+    "diferencia": -2,
+    "forma": null
+  },
+  {
     "team": "Lanús",
     "season": "2026",
     "posicion": 10,
@@ -266,9 +280,23 @@
     "forma": null
   },
   {
+    "team": "San Lorenzo",
+    "season": "2026",
+    "posicion": 11,
+    "puntos": 3,
+    "jugados": 3,
+    "ganados": 1,
+    "empatados": 0,
+    "perdidos": 2,
+    "goles_favor": 1,
+    "goles_contra": 2,
+    "diferencia": -1,
+    "forma": null
+  },
+  {
     "team": "Tigre",
     "season": "2026",
-    "posicion": 10,
+    "posicion": 11,
     "puntos": 3,
     "jugados": 2,
     "ganados": 1,
@@ -282,34 +310,6 @@
   {
     "team": "Belgrano (Córdoba)",
     "season": "2026",
-    "posicion": 11,
-    "puntos": 3,
-    "jugados": 2,
-    "ganados": 1,
-    "empatados": 0,
-    "perdidos": 1,
-    "goles_favor": 2,
-    "goles_contra": 2,
-    "diferencia": 0,
-    "forma": null
-  },
-  {
-    "team": "San Lorenzo",
-    "season": "2026",
-    "posicion": 11,
-    "puntos": 3,
-    "jugados": 2,
-    "ganados": 1,
-    "empatados": 0,
-    "perdidos": 1,
-    "goles_favor": 1,
-    "goles_contra": 1,
-    "diferencia": 0,
-    "forma": null
-  },
-  {
-    "team": "Huracán",
-    "season": "2026",
     "posicion": 12,
     "puntos": 3,
     "jugados": 2,
@@ -319,12 +319,26 @@
     "goles_favor": 2,
     "goles_contra": 2,
     "diferencia": 0,
+    "forma": null
+  },
+  {
+    "team": "Central Córdoba (Santiago del Estero)",
+    "season": "2026",
+    "posicion": 12,
+    "puntos": 3,
+    "jugados": 3,
+    "ganados": 1,
+    "empatados": 0,
+    "perdidos": 2,
+    "goles_favor": 1,
+    "goles_contra": 3,
+    "diferencia": -2,
     "forma": null
   },
   {
     "team": "Unión (Santa Fe)",
     "season": "2026",
-    "posicion": 12,
+    "posicion": 13,
     "puntos": 1,
     "jugados": 2,
     "ganados": 0,
@@ -350,34 +364,6 @@
     "forma": null
   },
   {
-    "team": "Boca Juniors",
-    "season": "2026",
-    "posicion": 13,
-    "puntos": 1,
-    "jugados": 2,
-    "ganados": 0,
-    "empatados": 1,
-    "perdidos": 1,
-    "goles_favor": 2,
-    "goles_contra": 5,
-    "diferencia": -3,
-    "forma": null
-  },
-  {
-    "team": "Platense",
-    "season": "2026",
-    "posicion": 14,
-    "puntos": 1,
-    "jugados": 3,
-    "ganados": 0,
-    "empatados": 1,
-    "perdidos": 2,
-    "goles_favor": 3,
-    "goles_contra": 8,
-    "diferencia": -5,
-    "forma": null
-  },
-  {
     "team": "Aldosivi",
     "season": "2026",
     "posicion": 14,
@@ -389,6 +375,20 @@
     "goles_favor": 2,
     "goles_contra": 4,
     "diferencia": -2,
+    "forma": null
+  },
+  {
+    "team": "Boca Juniors",
+    "season": "2026",
+    "posicion": 14,
+    "puntos": 1,
+    "jugados": 2,
+    "ganados": 0,
+    "empatados": 1,
+    "perdidos": 1,
+    "goles_favor": 2,
+    "goles_contra": 5,
+    "diferencia": -3,
     "forma": null
   },
   {
@@ -406,17 +406,17 @@
     "forma": null
   },
   {
-    "team": "Central Córdoba (Santiago del Estero)",
+    "team": "Platense",
     "season": "2026",
     "posicion": 15,
-    "puntos": 0,
-    "jugados": 2,
+    "puntos": 1,
+    "jugados": 3,
     "ganados": 0,
-    "empatados": 0,
+    "empatados": 1,
     "perdidos": 2,
-    "goles_favor": 0,
-    "goles_contra": 3,
-    "diferencia": -3,
+    "goles_favor": 3,
+    "goles_contra": 8,
+    "diferencia": -5,
     "forma": null
   }
 ]

@@ -1,5 +1,86 @@
 [
   {
+    "match_id": 401841471,
+    "match_date": "2026-08-04",
+    "stage": "torneo-clausura",
+    "home_team": "Huracán",
+    "away_team": "Atlético Tucumán",
+    "home_score": 0,
+    "away_score": 0,
+    "home": {
+      "posesion_pct": 64.8,
+      "remates": 16,
+      "remates_al_arco": 1,
+      "pases": 551,
+      "precision_pases_pct": 85.7,
+      "faltas": 4,
+      "corners": 4,
+      "offsides": 0,
+      "atajadas": 3
+    },
+    "away": {
+      "posesion_pct": 35.2,
+      "remates": 16,
+      "remates_al_arco": 3,
+      "pases": 295,
+      "precision_pases_pct": 74.9,
+      "faltas": 12,
+      "corners": 6,
+      "offsides": 3,
+      "atajadas": 1
+    },
+    "goleadores": [],
+    "goles_contra": [],
+    "destacado": null,
+    "insight": "Huracán y Atlético Tucumán empataron 0-0. Huracán manejó más la pelota (64.8% de posesión). Atlético Tucumán remató más al arco rival (3 vs 1 remates al arco)."
+  },
+  {
+    "match_id": 401841468,
+    "match_date": "2026-08-04",
+    "stage": "torneo-clausura",
+    "home_team": "Central Córdoba (Santiago del Estero)",
+    "away_team": "San Lorenzo",
+    "home_score": 1,
+    "away_score": 0,
+    "home": {
+      "posesion_pct": 37.6,
+      "remates": 14,
+      "remates_al_arco": 7,
+      "pases": 291,
+      "precision_pases_pct": 74.9,
+      "faltas": 16,
+      "corners": 3,
+      "offsides": 3,
+      "atajadas": 1
+    },
+    "away": {
+      "posesion_pct": 62.4,
+      "remates": 15,
+      "remates_al_arco": 2,
+      "pases": 470,
+      "precision_pases_pct": 80.0,
+      "faltas": 10,
+      "corners": 5,
+      "offsides": 0,
+      "atajadas": 6
+    },
+    "goleadores": [
+      {
+        "player": "Michael Santos",
+        "team": "Central Córdoba (Santiago del Estero)",
+        "minute": "31'",
+        "penalty": false
+      }
+    ],
+    "goles_contra": [],
+    "destacado": {
+      "player": "Michael Santos",
+      "team": "Central Córdoba (Santiago del Estero)",
+      "note": "1 gol"
+    },
+    "insight": "Central Córdoba (Santiago del Estero) venció 1-0 a San Lorenzo. San Lorenzo manejó más la pelota (62.4% de posesión). Central Córdoba (Santiago del Estero) remató más al arco rival (7 vs 2 remates al arco)."
+  },
+  {
     "match_id": 401841477,
     "match_date": "2026-08-03",
     "stage": "torneo-clausura",
