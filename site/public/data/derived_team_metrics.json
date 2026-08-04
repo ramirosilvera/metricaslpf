@@ -1204,7 +1204,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 28.235294117647058,
-    "z_score": 1.91,
+    "z_score": 1.93,
     "percentile": 96.7
   },
   {
@@ -1212,7 +1212,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 25.612903225806452,
-    "z_score": 0.16,
+    "z_score": 0.17,
     "percentile": 60.0
   },
   {
@@ -1220,7 +1220,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 26.852941176470587,
-    "z_score": 0.99,
+    "z_score": 1.0,
     "percentile": 83.3
   },
   {
@@ -1228,7 +1228,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.214285714285715,
-    "z_score": -0.77,
+    "z_score": -0.76,
     "percentile": 30.0
   },
   {
@@ -1236,23 +1236,23 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 28.08823529411765,
-    "z_score": 1.82,
+    "z_score": 1.83,
     "percentile": 93.3
   },
   {
     "team": "Belgrano (Córdoba)",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 26.344827586206897,
-    "z_score": 0.65,
-    "percentile": 76.7
+    "value": 25.79310344827586,
+    "z_score": 0.29,
+    "percentile": 63.3
   },
   {
     "team": "Boca Juniors",
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.847826086956523,
-    "z_score": -0.35,
+    "z_score": -0.34,
     "percentile": 46.7
   },
   {
@@ -1260,15 +1260,15 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 25.307692307692307,
-    "z_score": -0.04,
+    "z_score": -0.03,
     "percentile": 56.7
   },
   {
     "team": "Defensa y Justicia",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 24.741935483870968,
-    "z_score": -0.42,
+    "value": 24.64516129032258,
+    "z_score": -0.48,
     "percentile": 36.7
   },
   {
@@ -1276,7 +1276,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 28.352941176470587,
-    "z_score": 1.99,
+    "z_score": 2.01,
     "percentile": 100.0
   },
   {
@@ -1291,8 +1291,8 @@
     "team": "Estudiantes de Río Cuarto",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 27.102564102564102,
-    "z_score": 1.16,
+    "value": 27.076923076923077,
+    "z_score": 1.15,
     "percentile": 90.0
   },
   {
@@ -1300,15 +1300,15 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 26.258064516129032,
-    "z_score": 0.59,
-    "percentile": 73.3
+    "z_score": 0.61,
+    "percentile": 76.7
   },
   {
     "team": "Gimnasia La Plata",
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.833333333333332,
-    "z_score": -0.36,
+    "z_score": -0.35,
     "percentile": 43.3
   },
   {
@@ -1316,15 +1316,15 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 26.966666666666665,
-    "z_score": 1.07,
+    "z_score": 1.08,
     "percentile": 86.7
   },
   {
     "team": "Independiente",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 24.866666666666667,
-    "z_score": -0.33,
+    "value": 25.0,
+    "z_score": -0.24,
     "percentile": 50.0
   },
   {
@@ -1339,16 +1339,16 @@
     "team": "Instituto (Córdoba)",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 25.90909090909091,
-    "z_score": 0.36,
-    "percentile": 63.3
+    "value": 26.12121212121212,
+    "z_score": 0.51,
+    "percentile": 70.0
   },
   {
     "team": "Lanús",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 23.18,
-    "z_score": -1.46,
+    "value": 23.24,
+    "z_score": -1.42,
     "percentile": 3.3
   },
   {
@@ -1356,7 +1356,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 25.29032258064516,
-    "z_score": -0.05,
+    "z_score": -0.04,
     "percentile": 53.3
   },
   {
@@ -1372,16 +1372,16 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 26.0,
-    "z_score": 0.42,
+    "z_score": 0.43,
     "percentile": 66.7
   },
   {
     "team": "River Plate",
     "season": "2026",
     "metric": "edad_promedio",
-    "value": 23.705882352941178,
-    "z_score": -1.11,
-    "percentile": 13.3
+    "value": 23.627450980392158,
+    "z_score": -1.16,
+    "percentile": 10.0
   },
   {
     "team": "Rosario Central",
@@ -1396,7 +1396,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 24.8,
-    "z_score": -0.38,
+    "z_score": -0.37,
     "percentile": 40.0
   },
   {
@@ -1404,7 +1404,7 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 26.647058823529413,
-    "z_score": 0.85,
+    "z_score": 0.87,
     "percentile": 80.0
   },
   {
@@ -1428,8 +1428,8 @@
     "season": "2026",
     "metric": "edad_promedio",
     "value": 26.178571428571427,
-    "z_score": 0.54,
-    "percentile": 70.0
+    "z_score": 0.55,
+    "percentile": 73.3
   },
   {
     "team": "Vélez Sarsfield",
@@ -1437,6 +1437,6 @@
     "metric": "edad_promedio",
     "value": 23.642857142857142,
     "z_score": -1.15,
-    "percentile": 10.0
+    "percentile": 13.3
   }
 ]
