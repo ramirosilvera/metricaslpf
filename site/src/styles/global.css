@@ -58,12 +58,21 @@
   --shadow-sm: 0 1px 2px rgba(11, 11, 11, 0.05);
   --shadow-md: 0 8px 24px -12px rgba(11, 11, 11, 0.18);
   --shadow-brand: 0 10px 30px -12px color-mix(in srgb, var(--brand) 45%, transparent);
+
+  /* controles nativos (scrollbar, <select>, checkbox) en variante clara --
+     ver el toggle de tema en Base.astro, que setea [data-theme] en <html>. */
+  color-scheme: light;
 }
 
+/* Modo oscuro "cancha de noche": superficies con tinte navy muy oscuro (no
+   gris neutro) para que la identidad celeste/azul se sostenga. Se aplica en
+   DOS casos, con las mismas variables, para soportar el toggle manual además
+   del modo automático del SO:
+     1) el SO pide oscuro Y la persona no forzó "claro" a mano
+     2) la persona forzó "oscuro" a mano (con independencia del SO)
+   ver Base.astro (mm26SetTheme) para el script que setea [data-theme]. */
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* Modo oscuro "cancha de noche": superficies con tinte navy muy oscuro
-       (no gris neutro) para que la identidad celeste/azul se sostenga. */
+  :root:not([data-theme="light"]) {
     --surface-1: #101a2e;
     --surface-2: #172441;
     --page-plane: #070c17;
@@ -104,7 +113,54 @@
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 12px 32px -14px rgba(0, 0, 0, 0.7);
     --shadow-brand: 0 10px 30px -12px color-mix(in srgb, var(--brand) 35%, transparent);
+
+    color-scheme: dark;
   }
+}
+
+:root[data-theme="dark"] {
+  --surface-1: #101a2e;
+  --surface-2: #172441;
+  --page-plane: #070c17;
+  --text-primary: #eef3fb;
+  --text-secondary: #b6c2d8;
+  --text-muted: #7c8aa3;
+  --gridline: #223353;
+  --baseline: #34456a;
+  --border: rgba(255, 255, 255, 0.1);
+
+  --brand: #7fc4f2;
+  --brand-strong: #bee3fa;
+  --brand-soft: rgba(127, 196, 242, 0.16);
+  --brand-contrast: #04122b;
+  --brand-deep: #2e7cb8;
+  --pitch-line: rgba(226, 240, 255, 0.32);
+  --accent: #ffd35c;
+  --accent-soft: rgba(255, 211, 92, 0.14);
+
+  --win: #2ee671;
+  --draw: #9aa5a0;
+  --loss: #ff5d5d;
+
+  --series-1: #3987e5;
+  --series-2: #199e70;
+  --series-3: #c98500;
+  --series-4: #2ee671;
+  --series-5: #9085e9;
+  --series-6: #e66767;
+  --series-7: #d55181;
+  --series-8: #d95926;
+
+  --status-good: #2ee671;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 32px -14px rgba(0, 0, 0, 0.7);
+  --shadow-brand: 0 10px 30px -12px color-mix(in srgb, var(--brand) 35%, transparent);
+
+  color-scheme: dark;
 }
 
 * {
@@ -218,7 +274,6 @@ a:hover {
 .site-header .wrap {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding-top: 0.85rem;
   padding-bottom: 0.85rem;
   /* en landscape con notch, respetar los insets laterales para que la marca y
@@ -299,6 +354,11 @@ a:hover {
 
 .nav-toggle-label {
   display: none;
+  /* en desktop nav-toggle-label queda display:none (ver arriba) y es .nav
+     quien hace de primer ítem "pegado a la derecha"; en mobile es al revés
+     (.nav pasa a position:absolute, ver media query) -- declarar el auto
+     margin en los dos no rompe nada porque el que no está en flujo lo ignora */
+  margin-left: auto;
   cursor: pointer;
   /* área táctil cómoda (44x44) para el botón hamburguesa */
   width: 44px;
@@ -327,6 +387,44 @@ a:hover {
   align-items: center;
   flex-shrink: 1;
   min-width: 0;
+  margin-left: auto;
+}
+
+/* botón de tema (Sistema/Claro/Oscuro) -- siempre visible, a la derecha de
+   todo (después de .nav en desktop, después de la hamburguesa en mobile).
+   El ícono y el aria-label los pone el script de Base.astro (mm26SetTheme). */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--text-primary);
+  background: var(--surface-2);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media (max-width: 780px) {
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 .nav a,
@@ -683,9 +781,13 @@ p {
    "cancha de noche" más profundo, que deja el texto blanco con buen contraste
    sin encandilar junto al fondo casi negro de la página. */
 @media (prefers-color-scheme: dark) {
-  .home-hub {
+  :root:not([data-theme="light"]) .home-hub {
     background: linear-gradient(158deg, #0e7d47 0%, #094f3c 96%);
   }
+}
+
+:root[data-theme="dark"] .home-hub {
+  background: linear-gradient(158deg, #0e7d47 0%, #094f3c 96%);
 }
 
 /* bandas verticales del corte de pasto + línea de mitad de cancha (la banda

@@ -103,8 +103,14 @@ export function useChartTokens(): ThemeTokens {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const update = () => setTokens(readTokens());
     mq.addEventListener("change", update);
+    // Canvas no re-lee custom properties solo: cuando el toggle manual de
+    // tema (Base.astro, mm26SetTheme) cambia [data-theme], hay que releer.
+    window.addEventListener("mm26:theme-change", update);
     update();
-    return () => mq.removeEventListener("change", update);
+    return () => {
+      mq.removeEventListener("change", update);
+      window.removeEventListener("mm26:theme-change", update);
+    };
   }, []);
 
   return tokens;
