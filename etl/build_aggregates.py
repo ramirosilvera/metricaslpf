@@ -61,12 +61,10 @@ def build():
     con = duckdb.connect()
     has_matches = (WAREHOUSE / "matches.parquet").exists()
     has_tactical = (WAREHOUSE / "team_match_stats_tactical.parquet").exists()
-    has_appearances = (WAREHOUSE / "player_match_appearances.parquet").exists()
     has_squads = (WAREHOUSE / "squads.parquet").exists()
     has_team_profile = (WAREHOUSE / "team_profile.parquet").exists()
     has_goal_events = (WAREHOUSE / "goal_events.parquet").exists()
     has_derived_team_metrics = (WAREHOUSE / "derived_team_metrics.parquet").exists()
-    has_derived_team_style = (WAREHOUSE / "derived_team_style.parquet").exists()
     has_derived_player_metrics = (WAREHOUSE / "derived_player_metrics.parquet").exists()
     has_player_season_stats = (WAREHOUSE / "player_season_stats.parquet").exists()
     has_standings = (WAREHOUSE / "standings.parquet").exists()
@@ -111,63 +109,11 @@ def build():
         )
         _write_json("team_season_summary.json", _records(team_season_summary))
 
-        # boxplot: distribución de posesión-proxy por team-season (un punto por partido)
-        boxplot_rows = merged[["team", "season", "match_id", "possession_share_proxy"]].dropna()
-        _write_json("boxplot_possession_proxy.json", _records(boxplot_rows))
-
         # serie temporal: evolución partido a partido dentro de cada torneo
         timeline = merged.sort_values(["team", "season", "match_date"])[
             ["team", "season", "match_date", "stage", "possession_share_proxy", "pass_accuracy_pct", "shots_total"]
         ]
         _write_json("timeline_tactical.json", _records(timeline))
-
-        # radar normalizado (percentil 0-100 dentro del propio dataset) por team-season
-        radar_metrics = ["posesion_promedio_proxy", "precision_pases_promedio", "remates_promedio", "remates_al_arco_promedio"]
-        radar_df = team_season_summary.copy()
-        for m in radar_metrics:
-            rank = radar_df[m].rank(pct=True) * 100
-            radar_df[f"{m}_percentil"] = rank.round(1)
-        _write_json(
-            "radar_team_season.json",
-            _records(radar_df[["team", "season"] + [f"{m}_percentil" for m in radar_metrics]]),
-        )
-
-    # "position" nunca fue parte de PlayerAppearancesSchema (venía como columna
-    # extra tolerada por strict=False cuando la fuente era StatsBomb); ESPN
-    # (fuente LPF) no la trae, y la tabla en sí viene en 0 filas para esta
-    # competición (ver docstring de fetch_espn_lpf.py). Sin datos reales que
-    # agregar, se escribe el mismo placeholder "pending" que ya usan el resto
-    # de las secciones sin fuente -- nunca se inventa un ranking vacío.
-    if has_appearances:
-        appearances = con.execute(
-            f"SELECT * FROM read_parquet('{WAREHOUSE / 'player_match_appearances.parquet'}')"
-        ).df()
-    if has_appearances and len(appearances) and "position" in appearances.columns:
-        # agrupar solo por jugador -- la posicion puede variar de partido a
-        # partido (ej. un central que juega de lateral un dia) y agruparla
-        # tambien duplicaba jugadores en el ranking
-        most_common_position = (
-            appearances.groupby(["team", "player_id"])["position"]
-            .agg(lambda s: s.dropna().iloc[0] if s.notna().any() else None)
-            .rename("position")
-        )
-        player_minutes = (
-            appearances.groupby(["team", "player_id", "player_name"])
-            .agg(partidos=("match_id", "count"), minutos_totales=("minutes_played", "sum"))
-            .join(most_common_position, on=["team", "player_id"])
-            .reset_index()
-            .sort_values("minutos_totales", ascending=False)
-        )
-        _write_json("player_minutes_ranking.json", _records(player_minutes))
-    else:
-        _write_json(
-            "player_minutes_ranking.json",
-            {
-                "status": "pending_first_scrape",
-                "note": "ESPN no publica estadística de partido por jugador para la Liga Profesional (boxscore.players vacío).",
-                "rows": [],
-            },
-        )
 
     # Estadística individual REAL de jugadores de LPF -- FotMob (ver docstring
     # de fetch_fotmob_lpf.py). Es lo único con rendimiento por jugador para
@@ -213,8 +159,7 @@ def build():
 
     # Físico de equipo y por jugador (distancia, sprints, velocidad punta,
     # percentiles por posición): NO existe para Métricas LPF, ver nota arriba
-    # de physical_match_stats.json. Se escribe el mismo placeholder honesto
-    # ("missing", no "pending") para las cuatro salidas que dependían de esto.
+    # de physical_match_stats.json.
     _PHYSICAL_MISSING = {
         "status": "missing",
         "note": (
@@ -222,128 +167,7 @@ def build():
         ),
         "rows": [],
     }
-    _write_json("team_physical_trend.json", _PHYSICAL_MISSING)
-    _write_json("team_physical_ranking.json", _PHYSICAL_MISSING)
-    _write_json("physical_player_ranking.json", _PHYSICAL_MISSING)
     _write_json("physical_player_match_stats.json", _PHYSICAL_MISSING)
-    _write_json("player_physical_by_position.json", _PHYSICAL_MISSING)
-
-    has_tactical_players = (WAREHOUSE / "tactical_player_match_stats.parquet").exists()
-    if has_tactical_players:
-        tactical_players = con.execute(
-            f"SELECT * FROM read_parquet('{WAREHOUSE / 'tactical_player_match_stats.parquet'}')"
-        ).df()
-        _write_json("tactical_player_match_stats.json", _records(tactical_players))
-
-        tactical_player_ranking = (
-            tactical_players.groupby(["team", "player_name"])
-            .agg(
-                partidos=("match_id", "nunique"),
-                pases_completados_totales=("passes_completed", "sum"),
-                precision_pases_promedio=("pass_completion_pct", "mean"),
-                progresiones_totales=("ball_progressions", "sum"),
-                tackles_ganados_totales=("tackles_won", "sum"),
-                intercepciones_totales=("interceptions", "sum"),
-                presiones_totales=("pressing_direct", "sum"),
-                recuperaciones_totales=("possession_regains", "sum"),
-                goles_totales=("goals", "sum"),
-            )
-            .reset_index()
-            .sort_values("pases_completados_totales", ascending=False)
-        )
-        _write_json("tactical_player_ranking.json", _records(tactical_player_ranking))
-
-        # --- Ranking TÁCTICO COLECTIVO del Mundial 2026 (las 48 selecciones) ---
-        # Agrega la táctica por jugador de FIFA Training Centre a nivel equipo:
-        # primero suma los 11 por partido, luego promedia entre los partidos
-        # cargados de cada selección, y finalmente calcula el percentil dentro
-        # de las 48. Es el equivalente TÁCTICO del ranking físico 2026, con el
-        # vocabulario propio de FIFA (progresiones, presión, recuperaciones...),
-        # distinto al de StatsBomb 2018/2022 -> no se mezclan en un mismo eje.
-        per_match = (
-            tactical_players.groupby(["team", "match_id"])
-            .agg(
-                remates=("attempts_at_goal", "sum"),
-                progresiones=("ball_progressions", "sum"),
-                quiebres=("line_breaks_completed", "sum"),
-                presiones=("pressing_direct", "sum"),
-                recuperaciones=("possession_regains", "sum"),
-                tackles=("tackles_won", "sum"),
-                intercepciones=("interceptions", "sum"),
-            )
-            .reset_index()
-        )
-        team_tac = (
-            per_match.groupby("team")
-            .agg(
-                partidos=("match_id", "nunique"),
-                remates_promedio=("remates", "mean"),
-                progresiones_promedio=("progresiones", "mean"),
-                quiebres_linea_promedio=("quiebres", "mean"),
-                presiones_promedio=("presiones", "mean"),
-                recuperaciones_promedio=("recuperaciones", "mean"),
-                tackles_promedio=("tackles", "mean"),
-                intercepciones_promedio=("intercepciones", "mean"),
-            )
-            .reset_index()
-        )
-        # Precisión de pase del equipo = pases completados / intentados SUMADOS
-        # sobre todos sus partidos (más robusto que promediar porcentajes).
-        prec = (
-            tactical_players.groupby("team")
-            .agg(_compl=("passes_completed", "sum"), _att=("passes_attempted", "sum"))
-            .reset_index()
-        )
-        prec["precision_pases_pct"] = (prec["_compl"] / prec["_att"] * 100).where(prec["_att"] > 0)
-        team_tac = team_tac.merge(prec[["team", "precision_pases_pct"]], on="team", how="left")
-
-        tac_metric_cols = [
-            "precision_pases_pct",
-            "remates_promedio",
-            "progresiones_promedio",
-            "quiebres_linea_promedio",
-            "presiones_promedio",
-            "recuperaciones_promedio",
-            "tackles_promedio",
-            "intercepciones_promedio",
-        ]
-        for c in tac_metric_cols:
-            team_tac[c] = team_tac[c].round(1)
-            team_tac[f"{c}_percentil"] = (team_tac[c].rank(pct=True) * 100).round(0)
-        team_tac = team_tac.sort_values("progresiones_promedio", ascending=False)
-        _write_json("team_tactical_ranking.json", _records(team_tac))
-
-        # --- Evolución TÁCTICA por partido del Mundial 2026 (timeline en curso) ---
-        # Un punto por partido de cada selección, en orden cronológico, para la
-        # "evolución durante el torneo" del comparador. Se reconstruye en cada
-        # corrida del pipeline, así se va actualizando a medida que entran partidos.
-        tl_matches = con.execute(
-            f"SELECT match_id, stage, match_date, home_team, away_team "
-            f"FROM read_parquet('{WAREHOUSE / 'matches.parquet'}') WHERE season = '2026'"
-        ).df()
-        tl_pm = (
-            tactical_players.groupby(["team", "match_id"])
-            .agg(
-                _compl=("passes_completed", "sum"),
-                _att=("passes_attempted", "sum"),
-                progresiones=("ball_progressions", "sum"),
-                presiones=("pressing_direct", "sum"),
-            )
-            .reset_index()
-        )
-        tl_pm["pass_accuracy_pct"] = (tl_pm["_compl"] / tl_pm["_att"] * 100).round(1).where(tl_pm["_att"] > 0)
-        tl = tl_pm.merge(tl_matches, on="match_id", how="inner")
-        tl["rival"] = tl.apply(lambda r: r["away_team"] if r["team"] == r["home_team"] else r["home_team"], axis=1)
-        tl = tl.sort_values(["team", "match_date", "match_id"])
-        _write_json(
-            "timeline_tactical_2026.json",
-            _records(tl[["team", "match_id", "match_date", "stage", "rival", "pass_accuracy_pct", "progresiones", "presiones"]]),
-        )
-    else:
-        _write_json("tactical_player_match_stats.json", {"status": "pending_first_scrape", "rows": []})
-        _write_json("tactical_player_ranking.json", {"status": "pending_first_scrape", "rows": []})
-        _write_json("team_tactical_ranking.json", {"status": "pending_first_scrape", "rows": []})
-        _write_json("timeline_tactical_2026.json", {"status": "pending_first_scrape", "rows": []})
 
     if has_squads:
         squads = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'squads.parquet'}')").df()
@@ -402,44 +226,8 @@ def build():
             ).df()
             goal_events = goal_events.merge(matches_for_goals, on="match_id", how="left")
         _write_json("goal_events.json", _records(goal_events.sort_values(["match_id", "minute", "minute_stoppage"])))
-
-        # ranking de goleadores -- los goles en contra NO suman al goleador
-        # (son gol del rival), pero se muestran aparte para no perder el dato.
-        scoring = goal_events[~goal_events["own_goal"]]
-        top_scorers = (
-            scoring.groupby(["team", "player_name"])
-            .agg(
-                goles=("player_name", "count"),
-                penales=("penalty", "sum"),
-                partidos_con_gol=("match_id", "nunique"),
-            )
-            .reset_index()
-            .sort_values(["goles", "player_name"], ascending=[False, True])
-        )
-        # ojo con la semantica de "team" acá: en goal_events es la selección
-        # BENEFICIADA en el marcador (ver GoalEventsSchema.team), no la del
-        # jugador -- se renombra a equipo_beneficiado para no sugerir que el
-        # jugador (rival) juega para ese equipo.
-        own_goals = (
-            goal_events[goal_events["own_goal"]]
-            .rename(columns={"team": "equipo_beneficiado"})
-            .groupby(["equipo_beneficiado", "player_name"])
-            .agg(goles_en_contra=("player_name", "count"))
-            .reset_index()
-        )
-        _write_json("goal_scorer_ranking.json", _records(top_scorers))
-        if len(own_goals):
-            _write_json("own_goals.json", _records(own_goals))
     else:
         _write_json("goal_events.json", {"status": "pending_first_scrape", "rows": []})
-        _write_json("goal_scorer_ranking.json", {"status": "pending_first_scrape", "rows": []})
-
-    # goals_vs_physical: dependía de datos físicos que no existen para LPF (ver
-    # nota de physical_match_stats.json más arriba). No hay un reemplazo real
-    # con lo que sí tenemos (remates/posesión no son "esfuerzo físico"), así
-    # que queda como placeholder honesto en vez de forzar una comparación que
-    # no tiene sentido con otra métrica.
-    _write_json("goals_vs_physical.json", dict(_PHYSICAL_MISSING))
 
     # --- Resumen por partido (vista "Partidos") -------------------------------
     # Una tarjeta por partido jugado, con lo que sí tenemos de ESPN: resultado,
@@ -532,18 +320,6 @@ def build():
     else:
         _write_json("match_summaries.json", {"status": "pending_first_scrape", "rows": []})
 
-    if has_derived_team_metrics:
-        derived_team = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_team_metrics.parquet'}')").df()
-        _write_json("derived_team_metrics.json", _records(derived_team))
-    else:
-        _write_json("derived_team_metrics.json", {"status": "pending_first_scrape", "rows": []})
-
-    if has_derived_team_style:
-        derived_style = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_team_style.parquet'}')").df()
-        _write_json("derived_team_style.json", _records(derived_style))
-    else:
-        _write_json("derived_team_style.json", {"status": "pending_first_scrape", "rows": []})
-
     if has_derived_player_metrics:
         derived_player = con.execute(f"SELECT * FROM read_parquet('{WAREHOUSE / 'derived_player_metrics.parquet'}')").df()
         _write_json("derived_player_metrics.json", _records(derived_player))
@@ -570,8 +346,6 @@ def build():
         if has_matches
         else None
     )
-    teams_with_tactical_players = int(tactical_players["team"].nunique()) if has_tactical_players else 0
-    matches_with_tactical_players = int(tactical_players["match_id"].nunique()) if has_tactical_players else 0
     teams_with_squads = int(squads["team"].nunique()) if has_squads else 0
     teams_with_profile = int(team_profile["team"].nunique()) if has_team_profile else 0
     teams_with_season_stats = int(player_season_stats["team"].nunique()) if has_player_season_stats else 0

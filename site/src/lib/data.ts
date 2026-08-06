@@ -211,20 +211,6 @@ export interface GoalEventRow {
   match_date: string;
 }
 
-export interface GoalScorerRankingRow {
-  team: string;
-  player_name: string;
-  goles: number;
-  penales: number;
-  partidos_con_gol: number;
-}
-
-export interface OwnGoalRow {
-  equipo_beneficiado: string;
-  player_name: string;
-  goles_en_contra: number;
-}
-
 export interface TeamProfileRow {
   team: string;
   fifa_code: string;

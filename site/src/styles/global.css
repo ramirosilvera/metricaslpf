@@ -2007,6 +2007,34 @@ button:focus-visible {
   font-style: italic;
 }
 
+/* ---------- goleadores: detalle colapsable + lista de goles en contra ---------- */
+
+.scorers-more {
+  margin-top: 1rem;
+}
+
+.scorers-more summary {
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--brand-strong);
+  padding: 0.5rem 0;
+}
+
+.scorers-more[open] summary {
+  margin-bottom: 0.5rem;
+}
+
+.own-goal-list {
+  margin: 0.6rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 /* ---------- resultado de partido (W/D/L) -- mismo lenguaje de color en toda la app ---------- */
 
 .result-badge {

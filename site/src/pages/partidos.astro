@@ -149,6 +149,9 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
         );
       })}
     </div>
+    <button type="button" class="btn btn-ghost match-load-more" id="match-load-more" hidden>
+      Ver más partidos
+    </button>
     </>
   )}
 
@@ -164,24 +167,46 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
     const raw = document.getElementById("matches-json")?.textContent || "[]";
     const byId = new Map(JSON.parse(raw).map((m: any) => [String(m.match_id), m]));
 
-    // Buscador: filtra las tarjetas por club / fase / fecha, sin recargar.
+    // Buscador + paginaci\u00f3n: las tarjetas ya vienen ordenadas de m\u00e1s reciente a
+    // m\u00e1s vieja (ver build_aggregates.py) -- por defecto se muestran las
+    // primeras PAGE_SIZE (el resto queda en el DOM pero oculto, "Ver m\u00e1s" las
+    // revela de a tandas) para no forzar un scroll de 280+ tarjetas apenas se
+    // entra a la p\u00e1gina. Buscar ignora la paginaci\u00f3n: una b\u00fasqueda recorre
+    // TODAS las tarjetas, no s\u00f3lo la tanda visible.
+    const PAGE_SIZE = 24;
     const input = document.getElementById("match-search") as HTMLInputElement | null;
     const cards = Array.from(document.querySelectorAll<HTMLElement>(".match-card"));
     const countEl = document.getElementById("match-count");
     const emptyEl = document.getElementById("match-empty");
+    const loadMoreEl = document.getElementById("match-load-more") as HTMLButtonElement | null;
     const total = cards.length;
+    let revealed = Math.min(PAGE_SIZE, total);
+
     function applyFilter() {
       const q = (input?.value || "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       let shown = 0;
-      for (const c of cards) {
-        const match = !q || (c.dataset.search || "").includes(q);
+      cards.forEach((c, i) => {
+        const match = q ? (c.dataset.search || "").includes(q) : i < revealed;
         c.hidden = !match;
         if (match) shown++;
-      }
-      if (countEl) countEl.textContent = q ? `${shown} de ${total} partidos` : `${total} partidos`;
+      });
+      if (countEl) countEl.textContent = `${shown} de ${total} partidos`;
       if (emptyEl) emptyEl.hidden = shown !== 0;
+      if (loadMoreEl) {
+        const remaining = total - revealed;
+        loadMoreEl.hidden = !!q || remaining <= 0;
+        loadMoreEl.textContent = `Ver m\u00e1s partidos (${remaining} restantes)`;
+      }
     }
     input?.addEventListener("input", applyFilter);
+    loadMoreEl?.addEventListener("click", () => {
+      revealed = Math.min(revealed + PAGE_SIZE, total);
+      applyFilter();
+    });
+    // Estado inicial: SSR deja las 297 tarjetas visibles (fallback sin JS,
+    // buscable por Ctrl+F) -- acá se aplica la paginación para quien sí tiene
+    // JS, igual que hace applyFilter() con cada tecla del buscador.
+    applyFilter();
     document.querySelectorAll<HTMLButtonElement>(".mc-share").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const m = byId.get(btn.getAttribute("data-mid") || "");
@@ -252,6 +277,15 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
      esta regla, más específica, lo tapa cuando el buscador oculta la tarjeta */
   .match-card[hidden] {
     display: none;
+  }
+  /* mismo problema que .match-card -- .btn fija display:inline-flex, así que
+     el [hidden] nativo del botón "Ver más" no alcanza durante una búsqueda */
+  .match-load-more[hidden] {
+    display: none;
+  }
+  .match-load-more {
+    margin: 1.5rem auto 0;
+    display: flex;
   }
   .mc-head {
     display: flex;

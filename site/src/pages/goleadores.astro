@@ -2,10 +2,8 @@
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import ConfidenceBadge from "../layouts/ConfidenceBadge.astro";
-import { loadJson, loadCrestMap, type GoalEventRow, type GoalScorerRankingRow, type OwnGoalRow } from "../lib/data";
-import { flagFor } from "../lib/flags";
-import ShareCardButton from "../islands/ShareCardButton";
-import TeamBadge from "../components/TeamBadge.astro";
+import { loadJson, loadCrestMap, type GoalEventRow } from "../lib/data";
+import GoalScorerRanking from "../islands/GoalScorerRanking";
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
@@ -13,40 +11,7 @@ function loadArray<T>(filename: string): T[] {
 }
 
 const crests = loadCrestMap();
-const scorers = loadArray<GoalScorerRankingRow>("goal_scorer_ranking.json");
-const ownGoals = loadArray<OwnGoalRow>("own_goals.json");
 const goalEvents = loadArray<GoalEventRow>("goal_events.json");
-
-// El JSON ya viene ordenado, pero se reordena de forma defensiva para que la
-// tabla nunca dependa del orden de serialización del scraper.
-const sorted = [...scorers].sort(
-  (a, b) => b.goles - a.goles || b.partidos_con_gol - a.partidos_con_gol || a.player_name.localeCompare(b.player_name),
-);
-
-// Posición estilo tabla de goleadores: los empatados comparten número (1, 2, 2, 4...).
-const posByGoals = new Map<number, number>();
-sorted.forEach((r, i) => {
-  if (!posByGoals.has(r.goles)) posByGoals.set(r.goles, i + 1);
-});
-
-const multi = sorted.filter((r) => r.goles >= 2);
-const single = sorted.filter((r) => r.goles < 2);
-
-const totalGoals = goalEvents.length;
-const penaltyGoals = goalEvents.filter((g) => g.penalty).length;
-const ownGoalCount = goalEvents.filter((g) => g.own_goal).length;
-
-const topScorer = sorted[0] ?? null;
-const topScorerStats = topScorer
-  ? [
-      { label: "Goles", value: String(topScorer.goles) },
-      { label: "Penales", value: String(topScorer.penales) },
-      { label: "Partidos con gol", value: String(topScorer.partidos_con_gol) },
-    ]
-  : [];
-const topScorerShareText = topScorer
-  ? `${topScorer.player_name} (${topScorer.team}) lidera la tabla de goleadores de la Liga Profesional con ${topScorer.goles} goles en ${topScorer.partidos_con_gol} partidos.`
-  : undefined;
 ---
 
 <Base title="Goleadores" description="Tabla de goleadores de la Liga Profesional Argentina: goles, penales y partidos con gol por jugador, con datos reales de ESPN.">
@@ -58,155 +23,11 @@ const topScorerShareText = topScorer
     en el total de goles; los goles en contra no suman a ningún goleador y se listan aparte.
   </p>
 
-  {topScorer && (
-    <div class="hero-actions" style="margin-bottom: 1.5rem;">
-      <ShareCardButton
-        client:only="react"
-        title={topScorer.player_name}
-        subtitle={`${flagFor(topScorer.team)} ${topScorer.team} · Goleador de la Liga Profesional`}
-        flag={flagFor(topScorer.team)}
-        stats={topScorerStats}
-        tagline="Máximo goleador del torneo"
-        shareText={topScorerShareText}
-        filenameBase={`${topScorer.player_name}-goleador`}
-      />
-    </div>
-  )}
-
-  <section class="section">
-    <div class="stat-tiles">
-      <div class="stat-tile">
-        <div class="value">{totalGoals}</div>
-        <div class="label">goles en la temporada</div>
-      </div>
-      <div class="stat-tile">
-        <div class="value">{scorers.length}</div>
-        <div class="label">goleadores distintos</div>
-      </div>
-      <div class="stat-tile">
-        <div class="value">{penaltyGoals}</div>
-        <div class="label">goles de penal</div>
-      </div>
-      <div class="stat-tile">
-        <div class="value">{ownGoalCount}</div>
-        <div class="label">goles en contra</div>
-      </div>
-    </div>
-  </section>
-
   <section class="section">
     <div class="section-head">
       <h2>Tabla de goleadores</h2>
       <ConfidenceBadge source="goal_events" label="Fuente: ESPN" />
     </div>
-    <div class="card">
-      <div class="table-scroll">
-        <table>
-          <caption>Jugadores con dos o más goles ({multi.length} de {scorers.length})</caption>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Jugador</th>
-              <th>Club</th>
-              <th>Goles</th>
-              <th>Penales</th>
-              <th>Partidos con gol</th>
-            </tr>
-          </thead>
-          <tbody>
-            {multi.map((r) => (
-              <tr>
-                <td class="match-score">{posByGoals.get(r.goles)}</td>
-                <td>{r.player_name}</td>
-                <td><TeamBadge team={r.team} crestUrl={crests[r.team]} class="team-flag" />{r.team}</td>
-                <td class="match-score">{r.goles}</td>
-                <td>{r.penales > 0 ? r.penales : "—"}</td>
-                <td>{r.partidos_con_gol}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {single.length > 0 && (
-        <details class="scorers-more">
-          <summary>Ver los {single.length} jugadores con un gol</summary>
-          <div class="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Jugador</th>
-                  <th>Club</th>
-                  <th>Goles</th>
-                  <th>Penales</th>
-                  <th>Partidos con gol</th>
-                </tr>
-              </thead>
-              <tbody>
-                {single.map((r) => (
-                  <tr>
-                    <td class="match-score">{posByGoals.get(r.goles)}</td>
-                    <td>{r.player_name}</td>
-                    <td><TeamBadge team={r.team} crestUrl={crests[r.team]} class="team-flag" />{r.team}</td>
-                    <td class="match-score">{r.goles}</td>
-                    <td>{r.penales > 0 ? r.penales : "—"}</td>
-                    <td>{r.partidos_con_gol}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </details>
-      )}
-    </div>
+    <GoalScorerRanking client:only="react" goalEvents={goalEvents} crests={crests} />
   </section>
-
-  {ownGoals.length > 0 && (
-    <section class="section">
-      <div class="callout warning">
-        <h3>Goles en contra ({ownGoals.length})</h3>
-        <p>
-          No suman en la tabla de goleadores — se acreditan al club beneficiado, no al jugador.
-        </p>
-        <ul class="own-goal-list">
-          {ownGoals.map((o) => (
-            <li>
-              {o.player_name}
-              {o.goles_en_contra > 1 ? ` (×${o.goles_en_contra})` : ""} — benefició a{" "}
-              <TeamBadge team={o.equipo_beneficiado} crestUrl={crests[o.equipo_beneficiado]} class="team-flag" />{o.equipo_beneficiado}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
 </Base>
-
-<style>
-  .scorers-more {
-    margin-top: 1rem;
-  }
-
-  .scorers-more summary {
-    cursor: pointer;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--brand-strong);
-    padding: 0.5rem 0;
-  }
-
-  .scorers-more[open] summary {
-    margin-bottom: 0.5rem;
-  }
-
-  .own-goal-list {
-    margin: 0.6rem 0 0;
-    padding-left: 1.2rem;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-</style>
