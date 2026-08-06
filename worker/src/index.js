@@ -446,6 +446,15 @@ export default {
           functionCalls.map(async (call) => ({
             functionResponse: {
               name: call.name,
+              // Gemini correlaciona cada functionResponse con su functionCall por
+              // "id" cuando el modelo pide más de una herramienta en la misma
+              // tanda (function calling en paralelo -- el system prompt lo invita
+              // explícitamente, "encadená más de una herramienta"). Si el modelo
+              // manda id y nosotros no lo devolvemos en la respuesta, algunas
+              // versiones del modelo rechazan la vuelta como INVALID_ARGUMENT.
+              // Sin id en el functionCall (modelos/tandas que no lo usan), esto
+              // no agrega el campo y no cambia nada.
+              ...(call.id ? { id: call.id } : {}),
               response: wrapFunctionResponse(await callSupabaseRpc(env, call.name, call.args)),
             },
           })),
