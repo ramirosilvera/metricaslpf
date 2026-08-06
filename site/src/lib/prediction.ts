@@ -19,19 +19,12 @@
 // este modelo, que sí tenía ambas.
 // =============================================================================
 
-import { makeIndexer, isLowerBetter, buildIndexers } from "./normalize";
-import { computeGlobalIndex } from "./globalIndex";
-import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "./playerMetrics";
-import { sampleTier } from "./playerSampleGate";
+import { computeTeamStrengths, type TeamStrength } from "./clubStrength";
 
 // Promedio de goles TOTALES por partido -- fallback si por algún motivo no
 // se puede derivar de team_season_summary.json (ver deriveAvgTotalGoals).
 // Valor real observado a esta fecha (297 partidos jugados de la LPF): 2.07.
 export const AVG_TOTAL_GOALS = 2.08;
-
-// Pesos de la Fuerza (suman 1). La jerarquía individual y el juego ofensivo
-// pesan más; el control de la pelota y lo defensivo completan el cuadro.
-const W = { ofensivo: 0.3, control: 0.2, defensivo: 0.25, individual: 0.25 };
 
 // Puntos de índice de diferencia ≈ 1 gol de ventaja esperada. Calibrado por
 // regresión lineal (gd ~ ΔFuerza) sobre los partidos ya jugados de la LPF --
@@ -48,19 +41,7 @@ const W = { ofensivo: 0.3, control: 0.2, defensivo: 0.25, individual: 0.25 };
 // más rápido de lo que los datos justifican.
 const DIFF_PER_GOAL = 29.5;
 
-const OFF_KEYS = ["remates_promedio", "remates_al_arco_promedio"];
-const CONTROL_KEYS = ["posesion_promedio_proxy", "precision_pases_promedio"];
-const DEF_KEYS = ["remates_al_arco_recibidos_promedio", "goles_recibidos_promedio"];
-
-export interface TeamStrength {
-  team: string;
-  ofensivo: number;
-  control: number;
-  defensivo: number;
-  individual: number;
-  fuerza: number;
-  topPlayer: string | null; // mejor jugador por índice global (para la narrativa)
-}
+export type { TeamStrength };
 
 export interface Prediction {
   pA: number; // prob. gana A (0..1)
@@ -73,12 +54,6 @@ export interface Prediction {
 }
 
 type Row = Record<string, unknown>;
-
-function avgIdx(indexers: Record<string, (v: number) => number>, row: Row | undefined, keys: string[]): number {
-  if (!row) return 0;
-  const vals = keys.map((k) => indexers[k]?.(Number(row[k]))).filter((v) => Number.isFinite(v)) as number[];
-  return vals.length ? vals.reduce((s, v) => s + v, 0) / vals.length : 0;
-}
 
 // Deriva el promedio de goles TOTALES por partido directo de los datos reales
 // de la temporada (team_season_summary.json ya trae goles y partidos por
@@ -109,103 +84,11 @@ export function buildPredictor(
   avgTotalGoalsOverride?: number,
 ) {
   const avgTotalGoals = avgTotalGoalsOverride ?? deriveAvgTotalGoals(teamRows);
-  // Indexadores por métrica de EQUIPO sobre los 30 clubes. Las métricas
-  // "conceded" (menos es mejor) se detectan vía isLowerBetter -- si no, un
-  // club que recibe más goles rankearía como mejor defensor.
-  const teamIndexers: Record<string, (v: number) => number> = {};
-  for (const k of [...OFF_KEYS, ...CONTROL_KEYS, ...DEF_KEYS]) {
-    teamIndexers[k] = makeIndexer(teamRows.map((r) => Number(r[k])).filter(Number.isFinite), isLowerBetter(k));
-  }
-
-  // Indexadores por métrica de JUGADOR sobre todos los medidos (para el índice global).
-  const { indexers: playerIndexers, metricsWithData } = buildIndexers(playerRows, PLAYER_RADAR_ORDER);
-
-  // Índice global (normalizado dentro de cada posición, ver globalIndex.ts)
-  // por jugador -> mejores 11 por equipo. Mismo gate de muestra mínima que el
-  // ranking de jugadores (ver playerSampleGate.ts): un jugador con pocos
-  // minutos no debería mover la "Fuerza" estimada de su equipo.
-  const byPlayer = new Map<
-    string,
-    {
-      team: string;
-      player: string;
-      position: string | null;
-      factors: { metric: string; idx: number }[];
-      matchesPlayed: number | null;
-      minsPlayed: number | null;
-    }
-  >();
-  for (const r of playerRows) {
-    if (!PLAYER_METRIC_LABELS[r.metric] || r.value == null) continue;
-    const key = `${r.team}|${r.player_name}`;
-    let e = byPlayer.get(key);
-    if (!e) {
-      e = {
-        team: r.team,
-        player: r.player_name,
-        position: positions[key] ?? null,
-        factors: [],
-        matchesPlayed: null,
-        minsPlayed: null,
-      };
-      byPlayer.set(key, e);
-    }
-    if (r.metric === "matches_played") e.matchesPlayed = r.value;
-    if (r.metric === "mins_played") e.minsPlayed = r.value;
-    e.factors.push({ metric: r.metric, idx: playerIndexers[r.metric](r.value) });
-  }
-  const globals = computeGlobalIndex(
-    [...byPlayer.entries()].map(([key, e]) => ({
-      key,
-      position: e.position,
-      factors: e.factors,
-      matchesPlayed: e.matchesPlayed,
-      minsPlayed: e.minsPlayed,
-    })),
-    playerIndexers,
-    metricsWithData,
-  );
-  const teamPlayers = new Map<string, { player: string; position: string | null; global: number }[]>();
-  for (const [key, e] of byPlayer) {
-    if (sampleTier(e.matchesPlayed, e.minsPlayed) !== "ranked") continue;
-    const g = globals.get(key);
-    if (g == null) continue;
-    (teamPlayers.get(e.team) ?? teamPlayers.set(e.team, []).get(e.team)!).push({
-      player: e.player,
-      position: e.position,
-      global: g,
-    });
-  }
-
-  const teamByName = new Map(teamRows.map((r) => [String(r.team), r]));
-
-  const strengths = new Map<string, TeamStrength>();
-  for (const team of teamByName.keys()) {
-    const t = teamByName.get(team);
-    const players = (teamPlayers.get(team) ?? []).sort((a, b) => b.global - a.global);
-    // Un 11 real tiene UN arquero. Sin este tope, el mejor 11 podía incluir
-    // dos o más (el GLOBAL ya no favorece sistemáticamente a los arqueros
-    // tras normalizar dentro de cada posición, pero seguía siendo posible
-    // que dos arqueros de un plantel entraran los dos entre los 11 mejores).
-    const bestGk = players.find((p) => p.position === "GK");
-    const outfield = players.filter((p) => p.position !== "GK");
-    const top11 = bestGk ? [bestGk, ...outfield.slice(0, 10)] : outfield.slice(0, 11);
-    const individual = top11.length ? Math.round(top11.reduce((s, x) => s + x.global, 0) / top11.length) : 50;
-
-    const ofensivo = avgIdx(teamIndexers, t, OFF_KEYS);
-    const control = avgIdx(teamIndexers, t, CONTROL_KEYS);
-    const defensivo = avgIdx(teamIndexers, t, DEF_KEYS);
-    const fuerza = Math.round(W.ofensivo * ofensivo + W.control * control + W.defensivo * defensivo + W.individual * individual);
-    strengths.set(team, {
-      team,
-      ofensivo: Math.round(ofensivo),
-      control: Math.round(control),
-      defensivo: Math.round(defensivo),
-      individual,
-      fuerza,
-      topPlayer: players[0]?.player ?? null,
-    });
-  }
+  // Fuerza de cada club -- MISMO cálculo que usa Comparar (RadarCompare.tsx)
+  // para su radar de equipo, ver clubStrength.ts. Antes este archivo tenía su
+  // propia copia de esta lógica (duplicada, con riesgo de divergir en
+  // silencio -- que es exactamente lo que terminó pasando).
+  const strengths = computeTeamStrengths(teamRows, playerRows, positions);
 
   function predict(A: TeamStrength, B: TeamStrength): Prediction {
     const mu = clamp((A.fuerza - B.fuerza) / DIFF_PER_GOAL, -2.5, 2.5);

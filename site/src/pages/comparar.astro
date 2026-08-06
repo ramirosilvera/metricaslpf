@@ -42,10 +42,14 @@ const playerPositions = buildPlayerPositions(playerMetrics, squadRows);
   <section class="section">
     <div class="section-head">
       <h2>Dos clubes</h2>
-      <p>Estadística de equipo por partido (posesión, precisión de pase, remates, remates al arco, faltas). El GLOBAL es el promedio del índice de cada factor.</p>
+      <p>
+        <strong>Fuerza</strong> de equipo (0–100, estilo EA SPORTS FC) en 4 categorías — ofensivo, control de pelota,
+        defensivo e individual — el mismo cálculo que usa <a href={`${import.meta.env.BASE_URL}prediccion/`}>Predicción</a>
+        para elegir favorito, para que nunca muestren números distintos para lo mismo.
+      </p>
     </div>
     <div class="card">
-      <RadarCompare client:only="react" summaryRows={summary} crests={crests} />
+      <RadarCompare client:only="react" summaryRows={summary} playerRows={playerMetrics} positions={playerPositions} crests={crests} />
     </div>
   </section>
 

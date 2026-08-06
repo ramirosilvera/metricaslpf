@@ -1,128 +1,105 @@
 import { useMemo, useState } from "react";
 import ShareableChart from "./ShareableChart";
-import type { TeamSeasonSummary } from "../lib/data";
+import type { TeamSeasonSummary, DerivedPlayerMetricRow } from "../lib/data";
 import { useChartTokens, useIsNarrow } from "../lib/theme";
 import TeamBadge from "./TeamBadge";
 import { generateVsBestInsights, type VsBestMetric } from "../lib/insights";
-import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { escapeHtml } from "../lib/flags";
+import { computeTeamStrengths, type TeamStrength } from "../lib/clubStrength";
 
-// Los ejes del radar NO son percentiles ni "% del mejor" (con eso los clubes
-// de arriba de tabla rendían casi lo mismo y todos los radares quedaban
-// iguales). Usamos un ÍNDICE de rendimiento estilo EA SPORTS FC: se estira el
-// rango real de la liga a una escala calibrada (40 = el más flojo del campo,
-// 100 = el mejor), así una diferencia real chica se VE en el gráfico. Los
-// valores oficiales se muestran igual en el tooltip.
-//
-// Única fuente de estadística de EQUIPO real para LPF: team_season_summary
-// (ESPN, por partido -- posesión-proxy, precisión de pase, remates, remates
-// al arco, faltas). No hay dato físico/GPS ni táctico por jugador (ESPN no
-// publica boxscore.players para esta liga) -- ver etl/fetch_espn_lpf.py.
+// Radar de EQUIPO -- 4 ejes (Ofensivo/Control/Defensivo/Individual) + Fuerza
+// GLOBAL, el MISMO cálculo que usa Predicción (ver clubStrength.ts) para que
+// nunca puedan mostrar números distintos para lo mismo. Antes este radar
+// mostraba 5 métricas crudas sueltas (posesión, precisión, remates, remates
+// al arco, faltas) sin combinar y sin la dimensión defensiva (lo que el
+// equipo RECIBE) ni la individual (calidad de los jugadores) -- las dos
+// cosas que sí movían el número de Predicción, invisibles acá. Esas métricas
+// crudas siguen disponibles más abajo, como detalle, no como ejes del radar.
 
-interface Metric {
-  /** Clave del valor OFICIAL en la fila. */
-  key: string;
-  name: string;
-  short: string;
-  /** Sufijo del valor oficial (ej. " km", "%"). */
-  suffix: string;
-  /** Factor para mostrar el valor oficial (ej. posesión 0–1 -> ×100 = %). */
-  factor?: number;
-  /** Etiqueta en minúscula para la lectura automática. */
-  insightLabel: string;
-}
+const STRENGTH_AXES: { key: "ofensivo" | "control" | "defensivo" | "individual"; name: string; short: string }[] = [
+  { key: "ofensivo", name: "Ofensivo", short: "Ofensivo" },
+  { key: "control", name: "Control (pelota)", short: "Control\n(pelota)" },
+  { key: "defensivo", name: "Defensivo", short: "Defensivo" },
+  { key: "individual", name: "Individual (mejores 11)", short: "Individual\n(mejores 11)" },
+];
 
-const LPF_METRICS: Metric[] = [
-  { key: "posesion_promedio_proxy", name: "Posesión", short: "Posesión", suffix: "%", factor: 100, insightLabel: "posesión" },
-  { key: "precision_pases_promedio", name: "Precisión de pase", short: "Precisión\nde pase", suffix: "%", insightLabel: "precisión de pase" },
-  { key: "remates_promedio", name: "Remates", short: "Remates", suffix: "", insightLabel: "remates" },
-  { key: "remates_al_arco_promedio", name: "Remates al arco", short: "Remates\nal arco", suffix: "", insightLabel: "remates al arco" },
-  { key: "faltas_promedio", name: "Faltas", short: "Faltas", suffix: "", insightLabel: "faltas cometidas" },
+const AXIS_DETAIL: Record<string, string> = {
+  ofensivo: "remates y remates al arco por partido",
+  control: "posesión y precisión de pase",
+  defensivo: "remates al arco y goles recibidos por partido (lo que le hizo el rival)",
+  individual: "índice GLOBAL promedio de los 11 mejores jugadores con muestra suficiente",
+};
+
+// Métricas crudas que NO integran la Fuerza (a propósito, ver clubStrength.ts)
+// pero siguen siendo dato real -- se muestran aparte, como detalle.
+const RAW_DETAIL: { key: keyof TeamSeasonSummary; label: string; suffix: string; factor?: number }[] = [
+  { key: "posesion_promedio_proxy", label: "Posesión", suffix: "%", factor: 100 },
+  { key: "precision_pases_promedio", label: "Precisión de pase", suffix: "%" },
+  { key: "remates_promedio", label: "Remates", suffix: "" },
+  { key: "remates_al_arco_promedio", label: "Remates al arco", suffix: "" },
+  { key: "remates_al_arco_recibidos_promedio", label: "Remates al arco recibidos", suffix: "" },
+  { key: "goles_recibidos_promedio", label: "Goles recibidos", suffix: "" },
+  { key: "faltas_promedio", label: "Faltas", suffix: "" },
 ];
 
 interface Props {
   summaryRows: TeamSeasonSummary[];
+  playerRows?: DerivedPlayerMetricRow[];
+  positions?: Record<string, string>;
   crests?: Record<string, string>;
 }
 
-export default function RadarCompare({ summaryRows, crests }: Props) {
+export default function RadarCompare({ summaryRows, playerRows = [], positions = {}, crests }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
-  const cfg = useMemo(() => {
-    return {
-      metrics: LPF_METRICS,
-      rows: summaryRows as unknown as Record<string, number | string>[],
-      labelOf: (r: Record<string, number | string>) => `${r.team} ${r.season}`,
-      defaultA: "Boca Juniors 2026",
-      defaultB: "River Plate 2026",
-      note: "Escala: índice de rendimiento (0–100) calibrado al rango de la liga — 100 = el mejor, ~40 = el más flojo del campo. Estira las diferencias reales para que se vean (estilo EA SPORTS FC). Estadística de equipo por partido (ESPN). El valor oficial está en el tooltip.",
-      subtitle: "Cabeza a cabeza · índice de rendimiento de equipo · Liga Profesional",
-    };
-  }, [summaryRows]);
+  const labelOf = (r: TeamSeasonSummary) => `${r.team} ${r.season}`;
+  const options = useMemo(() => summaryRows.map(labelOf), [summaryRows]);
 
-  const options = useMemo(() => cfg.rows.map(cfg.labelOf), [cfg]);
-
-  // Índice de rendimiento por métrica: estira el rango del torneo a 40-100 para
-  // que las diferencias entre selecciones se VEAN (no todas pegadas al borde).
-  const normalizers = useMemo(() => {
-    const map: Record<string, (v: number) => number> = {};
-    for (const m of cfg.metrics) {
-      const vals = cfg.rows.map((r) => Number(r[m.key])).filter((v) => Number.isFinite(v));
-      map[m.key] = makeIndexer(vals, isLowerBetter(m.key));
-    }
-    return map;
-  }, [cfg]);
+  const strengths = useMemo(
+    () => computeTeamStrengths(summaryRows as unknown as Record<string, unknown>[], playerRows, positions),
+    [summaryRows, playerRows, positions],
+  );
 
   const [aLabel, setALabel] = useState("");
   const [bLabel, setBLabel] = useState("");
 
-  const effectiveA = options.includes(aLabel) ? aLabel : options.includes(cfg.defaultA) ? cfg.defaultA : options[0];
-  const effectiveB = options.includes(bLabel) ? bLabel : options.includes(cfg.defaultB) ? cfg.defaultB : options[1] ?? options[0];
+  const defaultA = "Boca Juniors 2026";
+  const defaultB = "River Plate 2026";
+  const effectiveA = options.includes(aLabel) ? aLabel : options.includes(defaultA) ? defaultA : options[0];
+  const effectiveB = options.includes(bLabel) ? bLabel : options.includes(defaultB) ? defaultB : (options[1] ?? options[0]);
 
-  const a = cfg.rows.find((r) => cfg.labelOf(r) === effectiveA);
-  const b = cfg.rows.find((r) => cfg.labelOf(r) === effectiveB);
+  const rowA = summaryRows.find((r) => labelOf(r) === effectiveA);
+  const rowB = summaryRows.find((r) => labelOf(r) === effectiveB);
+  const strengthA = rowA ? strengths.get(String(rowA.team)) : undefined;
+  const strengthB = rowB ? strengths.get(String(rowB.team)) : undefined;
 
-  // Valores normalizados + oficiales de cada equipo, por métrica.
-  const data = useMemo(() => {
-    if (!a || !b) return null;
-    const build = (row: Record<string, number | string>) =>
-      cfg.metrics.map((m) => {
-        const raw = Number(row[m.key]);
-        const rawShown = Number.isFinite(raw) ? raw * (m.factor ?? 1) : NaN;
-        return { norm: normalizers[m.key](raw), raw: rawShown, suffix: m.suffix };
-      });
-    return { a: build(a), b: build(b) };
-  }, [a, b, cfg, normalizers]);
+  const nameA = String(rowA?.team ?? effectiveA);
+  const nameB = String(rowB?.team ?? effectiveB);
 
-  const nameA = String(a?.team ?? effectiveA);
-  const nameB = String(b?.team ?? effectiveB);
+  const num = (v: number, suffix: string) => (Number.isFinite(v) ? `${Math.round(v * 10) / 10}${suffix}` : "—");
 
   const option = useMemo(() => {
-    if (!data) return {};
+    if (!strengthA || !strengthB) return {};
     return {
       color: [tokens["--series-6"], tokens["--series-1"]],
       tooltip: {
-        confine: true, // el tooltip no se sale de la pantalla en móvil
+        confine: true,
         backgroundColor: tokens["--surface-1"],
         borderColor: tokens["--gridline"],
         textStyle: { color: tokens["--text-primary"] },
         formatter: (p: any) => {
           const isA = p.name === effectiveA || p.seriesIndex === 0;
-          const arr = isA ? data.a : data.b;
-          const rows = cfg.metrics
-            .map((m, i) => {
-              const d = arr[i];
-              const rawTxt = Number.isFinite(d.raw) ? `${Math.round(d.raw * 10) / 10}${m.suffix}` : "—";
-              return `${m.name.replace("\n", " ")}: índice <strong>${d.norm}</strong> · ${rawTxt}`;
-            })
-            .join("<br/>");
-          return `<strong>${escapeHtml(p.name)}</strong><br/>${rows}`;
+          const s = isA ? strengthA : strengthB;
+          const rows = STRENGTH_AXES.map((ax) => `${ax.name}: índice <strong>${s[ax.key]}</strong> · ${AXIS_DETAIL[ax.key]}`).join(
+            "<br/>",
+          );
+          return `<strong>${escapeHtml(p.name)}</strong> · Fuerza <strong>${s.fuerza}</strong><br/>${rows}`;
         },
       },
       legend: { bottom: 0, textStyle: { color: tokens["--text-secondary"] } },
       radar: {
-        indicator: cfg.metrics.map((m) => ({ name: narrow ? m.short : m.name, min: 0, max: 100 })),
+        indicator: STRENGTH_AXES.map((ax) => ({ name: narrow ? ax.short : ax.name, min: 0, max: 100 })),
         radius: narrow ? "56%" : "70%",
         axisName: { color: tokens["--text-secondary"], fontSize: narrow ? 10 : 11 },
         splitLine: { lineStyle: { color: tokens["--gridline"] } },
@@ -133,52 +110,58 @@ export default function RadarCompare({ summaryRows, crests }: Props) {
         {
           type: "radar",
           data: [
-            { name: effectiveA, value: data.a.map((d) => d.norm), areaStyle: { opacity: 0.15 }, lineStyle: { width: 2 } },
-            { name: effectiveB, value: data.b.map((d) => d.norm), areaStyle: { opacity: 0.15 }, lineStyle: { width: 2 } },
+            {
+              name: effectiveA,
+              value: STRENGTH_AXES.map((ax) => strengthA[ax.key]),
+              areaStyle: { opacity: 0.15 },
+              lineStyle: { width: 2 },
+            },
+            {
+              name: effectiveB,
+              value: STRENGTH_AXES.map((ax) => strengthB[ax.key]),
+              areaStyle: { opacity: 0.15 },
+              lineStyle: { width: 2 },
+            },
           ],
         },
       ],
     };
-  }, [data, cfg, tokens, narrow, effectiveA, effectiveB]);
+  }, [strengthA, strengthB, tokens, narrow, effectiveA, effectiveB]);
 
   const insights = useMemo(() => {
-    if (!data) return [];
-    const metrics: VsBestMetric[] = cfg.metrics.map((m, i) => ({
-      label: m.insightLabel,
-      aPct: data.a[i].norm,
-      bPct: data.b[i].norm,
-      aRaw: data.a[i].raw,
-      bRaw: data.b[i].raw,
-      suffix: m.suffix,
+    if (!strengthA || !strengthB) return [];
+    const metrics: VsBestMetric[] = STRENGTH_AXES.map((ax) => ({
+      label: ax.name.toLowerCase(),
+      aPct: strengthA[ax.key],
+      bPct: strengthB[ax.key],
+      aRaw: strengthA[ax.key],
+      bRaw: strengthB[ax.key],
+      suffix: "",
     }));
     return generateVsBestInsights(nameA, nameB, metrics);
-  }, [data, cfg, nameA, nameB]);
+  }, [strengthA, strengthB, nameA, nameB]);
 
-  // Desglose "carta EA FC": GLOBAL (promedio) + índice por factor de cada
-  // selección, con los mismos colores del radar (A=series-6, B=series-1).
   const ratings = useMemo(() => {
-    if (!data) return undefined;
+    if (!strengthA || !strengthB) return undefined;
     return {
       entities: [
-        { name: nameA, color: tokens["--series-6"] },
-        { name: nameB, color: tokens["--series-1"] },
+        { name: nameA, color: tokens["--series-6"], ovr: strengthA.fuerza },
+        { name: nameB, color: tokens["--series-1"], ovr: strengthB.fuerza },
       ],
-      factors: cfg.metrics.map((m, i) => ({
-        label: m.name.replace("\n", " "),
-        values: [data.a[i].norm, data.b[i].norm],
-      })),
+      factors: STRENGTH_AXES.map((ax) => ({ label: ax.name, values: [strengthA[ax.key], strengthB[ax.key]] })),
     };
-  }, [data, cfg, nameA, nameB, tokens]);
+  }, [strengthA, strengthB, nameA, nameB, tokens]);
 
-  const shareText = a && b ? `${nameA} vs ${nameB} · ${cfg.subtitle}` : undefined;
+  const subtitle = "Cabeza a cabeza · Fuerza de equipo (estilo EA SPORTS FC) · Liga Profesional";
+  const shareText = rowA && rowB ? `${nameA} vs ${nameB} · ${subtitle}` : undefined;
 
   const waLink = useMemo(() => {
-    if (!a || !b) return null;
+    if (!rowA || !rowB) return null;
     const url = typeof window !== "undefined" ? window.location.href : undefined;
     const lead = insights[0] ?? shareText ?? `${nameA} vs ${nameB}`;
     const message = `${nameA} vs ${nameB} · Liga Profesional — ${lead}${url ? ` Mirá el análisis completo: ${url}` : ""}`;
     return `https://wa.me/?text=${encodeURIComponent(message)}`;
-  }, [a, b, insights, shareText, nameA, nameB]);
+  }, [rowA, rowB, insights, shareText, nameA, nameB]);
 
   return (
     <div>
@@ -200,13 +183,13 @@ export default function RadarCompare({ summaryRows, crests }: Props) {
         </select>
       </div>
 
-      {a && b ? (
+      {strengthA && strengthB ? (
         <ShareableChart
           option={option}
           style={{ height: narrow ? 340 : 420 }}
           share={{
             title: `${nameA} vs ${nameB}`,
-            subtitle: cfg.subtitle,
+            subtitle,
             insight: insights[0],
             shareText,
             filenameBase: `${nameA}-vs-${nameB}`,
@@ -217,9 +200,41 @@ export default function RadarCompare({ summaryRows, crests }: Props) {
       ) : (
         <p>Elegí dos selecciones para comparar.</p>
       )}
-      <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{cfg.note}</p>
+      <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+        <strong>Fuerza</strong>: mismo índice que usa Predicción (0–100, calibrado a la liga) — 30% ofensivo, 20%
+        control de pelota, 25% defensivo, 25% individual (índice GLOBAL de los 11 mejores jugadores con muestra
+        suficiente del plantel). Estadística de equipo por partido: ESPN. El valor oficial de cada eje está en el
+        tooltip.
+      </p>
 
-      {a && b && insights.length > 0 && (
+      {rowA && rowB && (
+        <div className="table-scroll" style={{ marginTop: "0.75rem" }}>
+          <table>
+            <thead>
+              <tr>
+                <th>Detalle (no integra la Fuerza)</th>
+                <th>{nameA}</th>
+                <th>{nameB}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {RAW_DETAIL.map((d) => {
+                const va = Number((rowA as any)[d.key]) * (d.factor ?? 1);
+                const vb = Number((rowB as any)[d.key]) * (d.factor ?? 1);
+                return (
+                  <tr key={d.key as string}>
+                    <td>{d.label}</td>
+                    <td>{num(va, d.suffix)}</td>
+                    <td>{num(vb, d.suffix)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {strengthA && strengthB && insights.length > 0 && (
         <div className="insight-card">
           <div className="insight-head">
             <span className="insight-dot" />
@@ -232,18 +247,19 @@ export default function RadarCompare({ summaryRows, crests }: Props) {
           </ul>
           <p className="insight-note">
             Resumen generado en tu navegador a partir de los valores oficiales del dataset, expresados como índice de
-            rendimiento (0–100, calibrado al rango del torneo) (no es una respuesta de IA en vivo). ¿Querés profundizar? Preguntale al asistente.
+            rendimiento (0–100, calibrado al rango del torneo) (no es una respuesta de IA en vivo). ¿Querés
+            profundizar? Preguntale al asistente.
           </p>
         </div>
       )}
 
-      {a && b && (
+      {rowA && rowB && (
         <div className="share-block">
           <div className="share-label">
             <strong>Compartir este análisis</strong>
             <span>
-              <TeamBadge team={nameA} crests={crests} /> {nameA} vs {nameB}{" "}
-              <TeamBadge team={nameB} crests={crests} /> — la imagen del radar se comparte con el botón de arriba
+              <TeamBadge team={nameA} crests={crests} /> {nameA} vs {nameB} <TeamBadge team={nameB} crests={crests} />{" "}
+              — la imagen del radar se comparte con el botón de arriba
             </span>
           </div>
           <div className="share-actions">
