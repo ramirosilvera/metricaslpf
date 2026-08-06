@@ -87,6 +87,95 @@ const base = import.meta.env.BASE_URL;
   </section>
 
   <section class="section">
+    <h2>Categorías de rendimiento (estilo EA SPORTS FC)</h2>
+    <p>
+      Analizar jugador por jugador con 30+ factores sueltos no es ágil ni didáctico — la ficha de un jugador (en
+      <a href={`${base}analisis/`}>Analizar</a>) agrupa esos factores en <strong>5 "atributos" para jugadores de
+      campo</strong> (Ataque, Creación, Pase, Defensa, Valoración) o <strong>4 para arqueros</strong> (Atajadas,
+      Valla, Pies, Valoración), igual que las cartas de EA SPORTS FC. No es un sistema aparte del GLOBAL: el peso de
+      cada categoría en el GLOBAL de una posición es, literalmente, la suma de los pesos de sus factores en la tabla
+      de <code>POSITION_WEIGHTS</code> — agrupar en cajas no inventa un número nuevo, sólo lo organiza.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Categoría</th><th>Delantero</th><th>Mediocampista</th><th>Defensor</th><th>Factores (campo)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Ataque</td><td>45%</td><td>13%</td><td>1%</td><td>goles/90, xG/90, xG+xA/90, remates al arco/90, remates/90</td></tr>
+          <tr><td>Creación</td><td>26%</td><td>39%</td><td>8%</td><td>xA/90, xG+xA/90, ocasiones creadas/90, ocasiones claras creadas/90, asistencias/90</td></tr>
+          <tr><td>Pase</td><td>10%</td><td>14%</td><td>16%</td><td>volumen de pases precisos/90, pases largos precisos/90, gambetas exitosas/90</td></tr>
+          <tr><td>Defensa</td><td>9%</td><td>25%</td><td>65%</td><td>acciones defensivas/90, tackles/90, intercepciones/90, recuperaciones/90, despejes/90, bloqueos/90, recup. último tercio/90, faltas†, amarillas/90†</td></tr>
+          <tr><td>Valoración</td><td>10%</td><td>10%</td><td>10%</td><td>puntaje FotMob</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+      Para arqueros: <strong>Atajadas</strong> 55% (goles evitados/90, % de atajadas, atajadas/90), <strong>Valla</strong>
+      15% (vallas invictas por partido, goles recibidos/90†), <strong>Pies</strong> 10% (volumen de pases precisos/90),
+      <strong>Valoración</strong> 20% (puntaje FotMob). † = factor de <em>ajuste</em>: nunca activa la categoría por sí
+      solo (ver regla del núcleo, abajo) — sólo pesa si ya hay al menos un factor núcleo presente.
+    </p>
+    <p>
+      <strong>Regla del núcleo — se muestra con 1 factor, no hacen falta los 5.</strong> Alcanza con que el jugador
+      tenga <strong>al menos un factor "núcleo"</strong> cargado en una categoría para que esa categoría se muestre.
+      Si faltan otros, la barra <strong>se recalcula sobre lo que sí está presente</strong> (no se rellena con un
+      promedio inventado) y un indicador de <em>completitud</em> (ej. "3/5 factores") avisa cuánto de la categoría
+      es real. Dentro de la población calificada de FotMob (≥11 partidos), un factor ausente se imputa a 0 sólo si
+      es una lista que FotMob censura en 0 (goles, asistencias, tackles, etc. — la ausencia SÍ significa "no ocurrió
+      real"); todo lo demás (rating, atajadas, recuperaciones...) que falte se excluye del cálculo en vez de
+      fabricar un piso, con un tope de cobertura del 85% como única salvaguarda (si falta más de eso, no se emite
+      número).
+    </p>
+
+    <h3 style="margin-top:1.5rem;">Por debajo de 11 partidos: estimación con "minutos prestados"</h3>
+    <p>
+      FotMob sólo publica sus categorías nativas "cada 90'" (y buena parte de sus totales crudos de defensa/pase)
+      para jugadores con <strong>≥11 partidos</strong> — es el corte real de sus propios leaderboards, no una
+      elección de este proyecto. Por debajo de eso, mostrar sólo "sin datos" para el ~50% de los jugadores con
+      alguna métrica de FotMob (los que están debajo del corte) tira a la basura mucha información real (goles, xG,
+      asistencias sí se publican igual, sin ese piso). Ataque y Creación pueden estimarse con muestra chica porque
+      esos eventos SÍ están disponibles; Pase y Defensa casi nunca (FotMob no publica esos conteos en absoluto por
+      debajo de 11 partidos) — por eso un defensor con pocos partidos puede no tener ninguna categoría visible
+      todavía, y eso es honesto, no un hueco del sistema.
+    </p>
+    <p>
+      Cuando SÍ hay datos reales (≥45 minutos jugados), la tasa se deriva con un encogimiento
+      <strong> empírico-Bayes</strong> hacia la mediana de esa métrica en jugadores de la misma posición con muestra
+      sólida: es como si al jugador se le <strong>"prestaran" 450 minutos</strong> (~5 partidos) de referencia de su
+      posición, mezclados con sus minutos reales. A 45' jugados, el número es ~91% ese préstamo posicional y sólo 9%
+      su propio rendimiento (una racha de 2 goles en 45' no puede disparar el índice a 100); a 450' jugados es
+      50/50; recién a 900' (10 partidos) el jugador pesa 67% lo suyo. Es el mismo criterio que ya se usaba para
+      calibrar el GLOBAL (ver arriba), aplicado ahora también a las categorías: la ausencia acá es <em>exógena</em>
+      (FotMob no lo midió, no depende de si el jugador rindió bien o mal), así que estimar sobre eso no es lo mismo
+      que "premiar minutos jugados" — es la mejor estimación honesta con lo poco que hay, siempre marcada como
+      estimación, nunca mostrada como valor oficial.
+    </p>
+
+    <h3 style="margin-top:1.5rem;">Los 4 estados de confianza</h3>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Estado</th><th>Cuándo aparece</th><th>Qué significa el número</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Sólida</strong></td><td>≥11 partidos, ≥600', todos los factores núcleo presentes</td><td>Valor nativo de FotMob, sin ningún hueco ni estimación</td></tr>
+          <tr><td><strong>Muestra chica</strong></td><td>≥11 partidos, pero &lt;600' o falta algún factor no-núcleo</td><td>GLOBAL/categoría calculado con datos reales, pero no entra a rankings ni podios</td></tr>
+          <tr><td><strong>Estimado</strong></td><td>&lt;11 partidos, ≥45' jugados</td><td>Tasa derivada por encogimiento empírico-Bayes (ver arriba) — nunca aparece como valor oficial ni entra a ningún ranking</td></tr>
+          <tr><td><strong>Sin categoría</strong></td><td>&lt;45' jugados, o ningún factor núcleo disponible en esa categoría</td><td>La categoría simplemente no se muestra — preferible a un número fabricado</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+      Resultado: <strong>~90% de los jugadores con alguna métrica de FotMob</strong> tienen hoy al menos una categoría
+      visible, frente al ~42% que llegaba a la muestra "ranked" (≥11 partidos y ≥600') con el criterio de partidos
+      jugados de FotMob antes de este sistema. El estado de cada categoría queda marcado con total transparencia —
+      nunca se disfraza una estimación de dato oficial, y ningún jugador de muestra chica o estimada entra a un
+      ranking, podio o frase de "lidera con...".
+    </p>
+  </section>
+
+  <section class="section">
     <h2>Sesgos y variables de confusión</h2>
     <ol>
       <li><strong>Muestra de minutos desigual entre jugadores.</strong> Un titular con 1500 minutos y un suplente con 90 pueden aparecer en el mismo ranking; los totales de temporada premian a quien jugó más, no necesariamente a quien rindió mejor por minuto. Varias categorías de FotMob ya vienen "por 90", pero no todas (goles totales, tarjetas, minutos jugados no se normalizan).</li>
