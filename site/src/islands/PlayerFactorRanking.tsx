@@ -148,8 +148,11 @@ export default function PlayerFactorRanking({ rows, positions = {}, crests }: Pr
     const labels = ordered.map((r) => (effTeam === ALL ? `${r.player} · ${r.team}` : r.player));
     return {
       // margen derecho holgado: la etiqueta muestra valor + unidad (ej. "37.6 km/h")
-      // y con poco margen se recortaba en el borde del canvas.
-      grid: { left: 8, right: 88, top: 8, bottom: 8, containLabel: true },
+      // y con poco margen se recortaba en el borde del canvas. En mobile se
+      // reduce -- 88px le deja muy poco ancho al área del gráfico en una
+      // pantalla angosta, lo que apretaba los ticks del eje X entre sí hasta
+      // superponerse (dígitos ilegibles tipo "9630").
+      grid: { left: 8, right: narrow ? 52 : 88, top: 8, bottom: 8, containLabel: true },
       tooltip: {
         confine: true,
         trigger: "axis",
@@ -168,10 +171,13 @@ export default function PlayerFactorRanking({ rows, positions = {}, crests }: Pr
       xAxis: {
         type: "value",
         // Menos ticks en mobile -- si no, el eje termina con los números
-        // pegados unos a otros (ilegible en pantallas angostas).
+        // pegados unos a otros (ilegible en pantallas angostas). hideOverlap
+        // es la red de seguridad: si el rango de valores igual genera ticks
+        // muy juntos (ej. decimales), ECharts oculta los que se pisarían en
+        // vez de dejarlos superpuestos e ilegibles.
         splitNumber: narrow ? 4 : 5,
         splitLine: { lineStyle: { color: tokens["--gridline"] } },
-        axisLabel: { color: tokens["--text-secondary"], fontSize: narrow ? 10 : 12 },
+        axisLabel: { color: tokens["--text-secondary"], fontSize: narrow ? 10 : 12, hideOverlap: true },
       },
       yAxis: {
         type: "category",
