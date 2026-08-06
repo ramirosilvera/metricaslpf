@@ -107,13 +107,13 @@ export default function TeamSeasonRanking({ rows }: Props) {
         style={{ height: Math.max(360, sorted.length * (narrow ? 18 : 22)) }}
         share={{
           title: metric.label,
-          subtitle: "Ranking de equipo · 30 clubes · Liga Profesional",
+          subtitle: `Ranking de equipo · ${sorted.length} clubes · Liga Profesional`,
           filenameBase: `ranking-equipo-${metric.key as string}`,
         }}
       />
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
         Fuente: ESPN (estadística de equipo por partido), promediada sobre los partidos ya jugados de cada club.
-        Cobertura completa de los 30 clubes de la temporada en curso.
+        Cobertura: {sorted.length} de los 30 clubes de la temporada en curso con estadística cargada.
       </p>
     </div>
   );

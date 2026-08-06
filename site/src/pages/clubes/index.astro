@@ -3,7 +3,8 @@ import Base from "../../layouts/Base.astro";
 import DataStatusBanner from "../../layouts/DataStatusBanner.astro";
 import TeamSeasonRanking from "../../islands/TeamSeasonRanking";
 import ShareCardButton from "../../islands/ShareCardButton";
-import { loadJson, type StandingsRow, type TeamSeasonSummary } from "../../lib/data";
+import TeamBadge from "../../components/TeamBadge.astro";
+import { loadJson, loadCrestMap, type StandingsRow, type TeamSeasonSummary } from "../../lib/data";
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
@@ -14,6 +15,7 @@ const standings = loadArray<StandingsRow>("standings.json").sort(
   (a, b) => (a.posicion ?? 999) - (b.posicion ?? 999),
 );
 const summary = loadArray<TeamSeasonSummary>("team_season_summary.json");
+const crests = loadCrestMap();
 
 const nTeams = standings.length;
 const minJugados = standings.length ? Math.min(...standings.map((r) => r.jugados ?? 0)) : 0;
@@ -93,7 +95,7 @@ const leaderShareText = leader
               {standings.map((r) => (
                 <tr>
                   <td>{r.posicion}</td>
-                  <td>{r.team}</td>
+                  <td><TeamBadge team={r.team} crestUrl={crests[r.team]} class="team-flag" />{r.team}</td>
                   <td>{r.jugados}</td>
                   <td>{r.ganados}</td>
                   <td>{r.empatados}</td>

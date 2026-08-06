@@ -8,21 +8,29 @@ import duckdbWorkerMvp from "@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.
 import duckdbWasmEh from "@duckdb/duckdb-wasm/dist/duckdb-eh.wasm?url";
 import duckdbWorkerEh from "@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js?url";
 
+// Espejo COMPLETO del warehouse publicado (ver etl/build_aggregates.py::
+// _publish_parquet_for_explorer) -- listar acá sólo un subconjunto hacía que
+// el explorador escondiera la tabla más grande y más citada del sitio
+// (player_season_stats, 13.7k filas, la base de todo el rediseño de
+// categorías de jugador) mientras anunciaba dos tablas con 0 filas
+// (player_match_appearances, tactical_player_match_stats) como si tuvieran
+// datos. physical_match_stats / physical_player_match_stats no están acá a
+// propósito: NO existen para la Liga Profesional (no hay fuente gratuita de
+// datos físicos/GPS, ver metodología) -- ni siquiera se publican como
+// parquet vacío, así que no hay archivo que registrar.
 const PARQUET_TABLES: { table: string; file: string }[] = [
   { table: "matches", file: "matches.parquet" },
   { table: "team_match_stats_tactical", file: "team_match_stats_tactical.parquet" },
   { table: "player_match_appearances", file: "player_match_appearances.parquet" },
-  // physical_match_stats / physical_player_match_stats: NO existen para la
-  // Liga Profesional (no hay fuente gratuita de datos físicos/GPS, ver
-  // README) -- sacadas de esta lista a propósito. Estaban acá desde la
-  // versión Mundial 2026 del sitio (selecciones); dejarlas listadas hacía
-  // que el explorador sirviera datos reales pero de OTRA competencia en vez
-  // de directamente no tener la tabla.
   { table: "tactical_player_match_stats", file: "tactical_player_match_stats.parquet" },
   { table: "squads", file: "squads.parquet" },
   { table: "derived_team_metrics", file: "derived_team_metrics.parquet" },
   { table: "derived_team_style", file: "derived_team_style.parquet" },
   { table: "derived_player_metrics", file: "derived_player_metrics.parquet" },
+  { table: "player_season_stats", file: "player_season_stats.parquet" },
+  { table: "goal_events", file: "goal_events.parquet" },
+  { table: "standings", file: "standings.parquet" },
+  { table: "team_profile", file: "team_profile.parquet" },
 ];
 
 const DEFAULT_QUERY = `select team, season, count(*) as partidos,
@@ -40,7 +48,7 @@ export default function SqlExplorer() {
   const connRef = useRef<any>(null);
   const [status, setStatus] = useState<Status>("loading");
   const [error, setError] = useState<string | null>(null);
-  const [loadedTables, setLoadedTables] = useState<string[]>([]);
+  const [loadedTables, setLoadedTables] = useState<{ table: string; rows: number }[]>([]);
   const [query, setQuery] = useState(DEFAULT_QUERY);
   const [columns, setColumns] = useState<string[]>([]);
   const [result, setResult] = useState<any[]>([]);
@@ -77,7 +85,7 @@ export default function SqlExplorer() {
           );
         }
 
-        const loaded: string[] = [];
+        const loaded: { table: string; rows: number }[] = [];
         const loadErrors: string[] = [];
 
         for (const { table, file } of PARQUET_TABLES) {
@@ -88,7 +96,14 @@ export default function SqlExplorer() {
             if (buf.length === 0) continue;
             await db.registerFileBuffer(file, buf);
             await conn.query(`CREATE VIEW ${table} AS SELECT * FROM parquet_scan('${file}')`);
-            loaded.push(table);
+            // Un parquet válido con 0 filas igual pesa bytes (headers/footer del
+            // formato) -- el chequeo de arriba no lo detecta. Sin este conteo,
+            // una tabla vacía (ej. el boxscore por partido que ESPN nunca
+            // publica para esta liga) aparecía en "Tablas disponibles" exactamente
+            // igual que una con datos reales.
+            const countRes = await conn.query(`SELECT count(*) AS n FROM ${table}`);
+            const rows = Number(countRes.toArray()[0]?.toJSON()?.n ?? 0);
+            loaded.push({ table, rows });
           } catch (tableErr: any) {
             loadErrors.push(`${table}: ${tableErr?.message ?? tableErr}`);
           }
@@ -148,8 +163,23 @@ export default function SqlExplorer() {
   return (
     <div>
       <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
-        Tablas disponibles: {loadedTables.length ? loadedTables.join(", ") : "ninguna todavía"}. Corre 100% en tu
-        navegador, sin backend — DuckDB-WASM lee los Parquet publicados en este sitio.
+        Tablas disponibles:{" "}
+        {loadedTables.length ? (
+          loadedTables.map((t, i) => (
+            <span key={t.table}>
+              {i > 0 && ", "}
+              <code>{t.table}</code>{" "}
+              {t.rows > 0 ? (
+                `(${t.rows.toLocaleString("es-AR")} filas)`
+              ) : (
+                <span style={{ fontStyle: "italic" }}>(0 filas -- fuente sin ese dato para esta liga, ver /fuentes/)</span>
+              )}
+            </span>
+          ))
+        ) : (
+          "ninguna todavía"
+        )}
+        . Corre 100% en tu navegador, sin backend — DuckDB-WASM lee los Parquet publicados en este sitio.
       </p>
       <textarea
         className="sql-editor"

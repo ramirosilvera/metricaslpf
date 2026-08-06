@@ -26,9 +26,7 @@ import { sampleTier } from "./playerSampleGate";
 
 // Promedio de goles TOTALES por partido -- fallback si por algún motivo no
 // se puede derivar de team_season_summary.json (ver deriveAvgTotalGoals).
-// Ajustado al valor real observado en los 282 partidos jugados de la LPF
-// (2.08); el 2.6 anterior era el de Mundial 2026 (selecciones), heredado sin
-// recalibrar al pivotar el proyecto a la Liga Profesional.
+// Valor real observado a esta fecha (297 partidos jugados de la LPF): 2.07.
 export const AVG_TOTAL_GOALS = 2.08;
 
 // Pesos de la Fuerza (suman 1). La jerarquía individual y el juego ofensivo
@@ -36,15 +34,19 @@ export const AVG_TOTAL_GOALS = 2.08;
 const W = { ofensivo: 0.3, control: 0.2, defensivo: 0.25, individual: 0.25 };
 
 // Puntos de índice de diferencia ≈ 1 gol de ventaja esperada. Calibrado por
-// regresión lineal (gd ~ ΔFuerza) sobre los 282 partidos ya jugados de la
-// LPF: la pendiente real da ~26 puntos de Fuerza por gol de diferencia. El
-// valor anterior (7) hacía el modelo ~3.7x más confiado de lo que los datos
-// soportan -- con 7, un cruce entre dos equipos a 15 puntos de Fuerza (una
-// diferencia moderada en la tabla) ya saturaba en 87%/11%/2%, y la
-// probabilidad de empate promedio caía a la mitad de la real (18.8% vs
-// 29.4% observado). Recalibrar este único número es lo que más devuelve el
-// modelo a la realidad -- ver /metodologia/.
-const DIFF_PER_GOAL = 26;
+// regresión lineal (gd ~ ΔFuerza) sobre los partidos ya jugados de la LPF --
+// última recalibración: 297 partidos, pendiente real ≈29.5 (r=0.33). El
+// valor anterior (26) venía de la misma regresión sobre 282 partidos, de
+// antes del fix de renormalización del índice GLOBAL (num/covered en vez de
+// num/den, ver globalIndex.ts) -- ese fix cambió el GLOBAL de los jugadores
+// a los que les faltaba alguna métrica no censurada-en-cero (ej. rating),
+// que a su vez mueve la "Fuerza" individual de varios clubes lo suficiente
+// como para correr la pendiente real. Recalibrar este único número es lo
+// que más devuelve el modelo a la realidad -- ver /metodologia/. Sin
+// recalibrar quedaría ~13% más confiado de lo que la regresión sostiene
+// (29.5/26 ≈ 1.13): un cruce con 15 puntos de diferencia de Fuerza saturaría
+// más rápido de lo que los datos justifican.
+const DIFF_PER_GOAL = 29.5;
 
 const OFF_KEYS = ["remates_promedio", "remates_al_arco_promedio"];
 const CONTROL_KEYS = ["posesion_promedio_proxy", "precision_pases_promedio"];

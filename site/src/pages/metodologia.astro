@@ -1,6 +1,17 @@
 ---
 import Base from "../layouts/Base.astro";
+import { loadJson, type DerivedPlayerMetricRow } from "../lib/data";
 const base = import.meta.env.BASE_URL;
+
+// Conteo de jugadores en vivo, nunca hardcodeado -- sube semana a semana a
+// medida que la temporada avanza y FotMob suma jugadores con datos; un
+// número fijo en esta página quedaría desactualizado en la próxima corrida.
+function loadArray<T>(filename: string): T[] {
+  const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
+  return Array.isArray(raw) ? raw : [];
+}
+const playerMetricRows = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
+const playerCount = new Set(playerMetricRows.filter((r) => r.value != null).map((r) => `${r.team}|${r.player_name}`)).size;
 ---
 
 <Base title="Metodología" description="Qué mide cada fuente, qué no mide, y cómo leer los números de este proyecto.">
@@ -247,7 +258,7 @@ const base = import.meta.env.BASE_URL;
       <tbody>
         <tr><td>ESPN — tabla y estadística de partido</td><td>Resultados, tabla de posiciones, remates/posesión-proxy/pases/faltas/córners/offsides/atajadas por equipo y partido, goles con minuto</td><td>30/30 clubes, temporada en curso</td><td>API pública sin key, uso no documentado formalmente; no publica estadística individual por partido para esta liga</td></tr>
         <tr><td>ESPN — planteles</td><td>Nombre, posición, edad, fecha de nacimiento y dorsal por jugador</td><td>30/30 clubes</td><td>Sin valor de mercado, caps ni estadística individual</td></tr>
-        <tr><td>FotMob — rendimiento individual</td><td>Goles, asistencias, xG, xGOT, xA, remates, pases, tackles, intercepciones, atajadas, tarjetas y más (37 categorías)</td><td>898 jugadores de 30/30 clubes</td><td>Acumulado de TEMPORADA, no de partido; API pública sin key ni login, uso no documentado formalmente</td></tr>
+        <tr><td>FotMob — rendimiento individual</td><td>Goles, asistencias, xG, xGOT, xA, remates, pases, tackles, intercepciones, atajadas, tarjetas y más (37 categorías)</td><td>{playerCount} jugadores de 30/30 clubes</td><td>Acumulado de TEMPORADA, no de partido; API pública sin key ni login, uso no documentado formalmente</td></tr>
       </tbody>
     </table>
     </div>
