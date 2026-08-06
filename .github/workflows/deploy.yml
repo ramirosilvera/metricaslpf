@@ -1,5 +1,12 @@
 name: Deploy a GitHub Pages
 
+# Las Actions de abajo van fijadas a un SHA de commit (no a la tag flotante
+# @v4/@v5) -- varias corridas seguidas fallaron en "Set up job" con "Service
+# Unavailable" resolviendo la Action, un error de la infraestructura de
+# GitHub al traducir la tag a un commit (una llamada extra a su API que en
+# ese momento no respondía). Fijar el SHA se salta esa resolución. El
+# comentario al final de cada línea documenta a qué versión corresponde el
+# SHA -- actualizarlo a mano cuando se quiera subir de versión.
 on:
   push:
     # el repo no tiene "main" todavia -- deployar desde la rama que hoy es
@@ -20,9 +27,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
           cache: "npm"
@@ -43,9 +50,9 @@ jobs:
           PUBLIC_CHAT_API_URL: ${{ vars.PUBLIC_CHAT_API_URL }}
         run: npm run build
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: site/dist
 
@@ -57,6 +64,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
 
 # trigger workflow indexing

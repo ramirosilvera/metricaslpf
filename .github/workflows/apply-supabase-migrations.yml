@@ -23,7 +23,10 @@ jobs:
   migrate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # Fijada a SHA (no a la tag @v4) -- ver el comentario en deploy.yml,
+      # mismo motivo: la resolución de tag a commit de GitHub puede fallar
+      # con "Service Unavailable" en "Set up job".
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Verificar secret de conexión
         id: check

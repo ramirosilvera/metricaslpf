@@ -18,9 +18,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # Fijadas a SHA (no a la tag @v4) -- ver el comentario en deploy.yml,
+      # mismo motivo: la resolución de tag a commit de GitHub puede fallar
+      # con "Service Unavailable" en "Set up job".
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
           cache: "npm"
