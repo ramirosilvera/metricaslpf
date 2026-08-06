@@ -174,8 +174,16 @@ export function generateVsBestInsights(nameA: string, nameB: string, metrics: Vs
     const lp = Math.min(m.aPct, m.bPct);
     const hRaw = fmtRaw(aHigher ? m.aRaw : m.bRaw, m.suffix);
     const lRaw = fmtRaw(aHigher ? m.bRaw : m.aRaw, m.suffix);
+    // Cuando el valor "oficial" es el mismo índice (ej. los ejes de Fuerza de
+    // equipo, que combinan dos métricas crudas en un solo número y no tienen
+    // un "valor oficial" propio, ver RadarCompare.tsx), citarlo de nuevo no
+    // suma nada -- sólo repite "100 contra 78" después de ya haber dicho
+    // "índice 100 contra 78".
+    const rawAddsInfo = hRaw !== String(hp) || lRaw !== String(lp);
     insights.push(
-      `En ${m.label}, ${higher} saca ventaja (índice ${hp} contra ${lp}): ${hRaw} contra ${lRaw}.`,
+      rawAddsInfo
+        ? `En ${m.label}, ${higher} saca ventaja (índice ${hp} contra ${lp}): ${hRaw} contra ${lRaw}.`
+        : `En ${m.label}, ${higher} saca ventaja (índice ${hp} contra ${lp}).`,
     );
     if (insights.length >= 4) break;
   }
