@@ -4,7 +4,7 @@ import DataStatusBanner from "../layouts/DataStatusBanner.astro";
 import PlayerScoutCard, { type SquadInfo } from "../islands/PlayerScoutCard";
 import SquadDepthChart from "../islands/SquadDepthChart";
 import { loadJson, loadCrestMap, type DerivedPlayerMetricRow, type SquadPlayerRow } from "../lib/data";
-import { normName, TEAM_ALIAS_FOTMOB_TO_ESPN } from "../lib/playerPositions";
+import { normName, TEAM_ALIAS_FOTMOB_TO_ESPN, buildPlayerPositions } from "../lib/playerPositions";
 
 const base = import.meta.env.BASE_URL;
 const crests = loadCrestMap();
@@ -16,6 +16,12 @@ function loadArray<T>(filename: string): T[] {
 
 const playerMetrics = loadArray<DerivedPlayerMetricRow>("derived_player_metrics.json");
 const squadRows = loadArray<SquadPlayerRow>("squads.json");
+
+// Posición por jugador con la cascada completa (mismo criterio que
+// jugadores.astro/comparar.astro): recupera nombres compuestos y arqueros
+// por firma de datos que el cruce directo `squadInfo` de abajo no llega a
+// resolver -- es la base de las categorías estilo EA FC de la ficha.
+const positions = buildPlayerPositions(playerMetrics, squadRows);
 
 // Minutos jugados en la temporada (FotMob, metric="mins_played") por
 // jugador -- único dato real de "rodaje" disponible para LPF (ESPN no
@@ -91,7 +97,7 @@ for (const row of playerMetrics) {
       </p>
     </div>
     <div class="card">
-      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} crests={crests} />
+      <PlayerScoutCard client:only="react" rows={playerMetrics} squad={squadInfo} crests={crests} positions={positions} />
     </div>
   </section>
 </Base>

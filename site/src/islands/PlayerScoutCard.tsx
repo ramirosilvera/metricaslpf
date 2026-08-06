@@ -10,7 +10,32 @@ import { generatePlayerInsights, type PlayerMetricPoint } from "../lib/insights"
 import { buildIndexers } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS as METRIC_LABELS, PLAYER_RADAR_ORDER as RADAR_ORDER, INSIGHT_EXCLUDED_METRICS } from "../lib/playerMetrics";
 import { computeGlobalIndex } from "../lib/globalIndex";
-import { sampleTier } from "../lib/playerSampleGate";
+import { sampleTier, MIN_MATCHES_QUALIFIED } from "../lib/playerSampleGate";
+import {
+  buildCategoryContext,
+  computeCategoryScores,
+  isPosition,
+  CATEGORY_ORDER,
+  FALLBACK_CATEGORY_ORDER,
+  CATEGORY_LABELS,
+  PER90_TO_RAW,
+  type CategoryScore,
+} from "../lib/playerCategories";
+
+const CATEGORY_STATE_LABEL: Record<string, string> = {
+  solid: "muestra sólida",
+  small_sample: "muestra chica (con GLOBAL)",
+  partial: "estimado · muy pocos minutos",
+};
+
+const POS_LABEL: Record<string, string> = { GK: "Arquero", DF: "Defensor", MF: "Mediocampista", FW: "Delantero" };
+
+// Crudo hermano de una métrica-categoría, para no duplicarlo en "Aporte y
+// contexto" cuando ya se ve envuelto en una categoría (como tasa o ratio).
+function rawSiblingOf(metric: string): string | undefined {
+  if (metric === "clean_sheet_ratio") return "clean_sheet";
+  return PER90_TO_RAW[metric];
+}
 
 // Datos de plantel (squads.json) ya cruzados por nombre en build — la clave es
 // `${team}|${player_name}` con el nombre tal como aparece en las métricas.
@@ -37,9 +62,14 @@ interface Props {
   /** Partidos con datos FIFA por jugador, clave `${team}|${player_name}`. */
   matches?: Record<string, PlayerMatchLite[]>;
   crests?: Record<string, string>;
+  /** Posición GK/DF/MF/FW resuelta con la cascada completa (ver
+   *  playerPositions.ts::buildPlayerPositions) -- más cobertura que `squad`
+   *  a secas (recupera nombres compuestos y arqueros por firma de datos), es
+   *  la base de las categorías y del GLOBAL de esta ficha. */
+  positions?: Record<string, string>;
 }
 
-export default function PlayerScoutCard({ rows, squad, matches, crests }: Props) {
+export default function PlayerScoutCard({ rows, squad, matches, crests, positions = {} }: Props) {
   const tokens = useChartTokens();
   const narrow = useIsNarrow();
 
@@ -95,13 +125,13 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
     }
     const withPosition = [...byPlayer.entries()].map(([key, e]) => ({
       key,
-      position: squad?.[key]?.position ?? null,
+      position: positions[key] ?? squad?.[key]?.position ?? null,
       factors: e.factors,
       matchesPlayed: e.matchesPlayed,
       minsPlayed: e.minsPlayed,
     }));
     return computeGlobalIndex(withPosition, normalizers, metricsWithData);
-  }, [rows, normalizers, metricsWithData, squad]);
+  }, [rows, normalizers, metricsWithData, squad, positions]);
 
   // Se excluyen del radar/GLOBAL los totales crudos con variante _per_90 ya
   // disponible y los eventos censurados en 0 (ver INSIGHT_EXCLUDED_METRICS) --
@@ -110,6 +140,43 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
   const radarMetrics = RADAR_ORDER.filter(
     (m) => !INSIGHT_EXCLUDED_METRICS.has(m) && playerRows.some((r) => r.metric === m && r.value != null),
   );
+
+  // --- Categorías estilo EA SPORTS FC (ver playerCategories.ts) ------------
+  // Contexto calibrado UNA vez sobre todo el pool (indexadores + medianas
+  // posicionales para el encogimiento de muestra chica).
+  const categoryCtx = useMemo(() => buildCategoryContext(rows, positions), [rows, positions]);
+
+  const resolvedPosition = positions[`${team}|${currentPlayer}`] ?? squadInfo?.position ?? null;
+
+  const playerRawByMetric = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const r of playerRows) if (r.value != null) m.set(r.metric, r.value);
+    return m;
+  }, [playerRows]);
+
+  const categoryScores = useMemo<CategoryScore[]>(
+    () => computeCategoryScores(resolvedPosition, matchesPlayed, minsPlayed, playerRawByMetric, categoryCtx),
+    [resolvedPosition, matchesPlayed, minsPlayed, playerRawByMetric, categoryCtx],
+  );
+  const visibleCategories = categoryScores.filter((s) => s.state !== "none");
+
+  // Métricas ya mostradas ENVUELTAS en una categoría (como tasa o ratio) --
+  // no se repiten sueltas en "Aporte y contexto" más abajo.
+  const shownInCategories = useMemo(() => {
+    const set = new Set<string>();
+    for (const s of categoryScores) {
+      for (const f of s.factors) {
+        set.add(f.metric);
+        const sibling = rawSiblingOf(f.metric);
+        if (sibling) set.add(sibling);
+      }
+    }
+    return set;
+  }, [categoryScores]);
+
+  // computeGlobalIndex ya excluye internamente a quien tiene <11 partidos
+  // (ver globalIndex.ts) -- no hace falta repetir el gate acá.
+  const ovr = globalByKey.get(`${team}|${currentPlayer}`) ?? null;
 
   // Link "compartir por WhatsApp" con las métricas reales del jugador elegido.
   // Componente client:only, así que window está disponible; se guarda igual por prudencia.
@@ -187,12 +254,12 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
           // Mismo GLOBAL que el resto del sitio (ranking, comparador): ya viene
           // normalizado dentro de la posición, calculado sobre el perfil
           // COMPLETO del jugador (no sólo radarMetrics).
-          ovr: tier === "insufficient" ? null : (globalByKey.get(`${team}|${currentPlayer}`) ?? null),
+          ovr,
         },
       ],
       factors: perFactor.map((f) => ({ label: f.label, values: [f.idx] })),
     };
-  }, [radarMetrics, playerRows, currentPlayer, tokens, globalByKey, team, tier]);
+  }, [radarMetrics, playerRows, currentPlayer, tokens, ovr]);
 
   const option = useMemo(() => {
     if (radarMetrics.length < 3) return null;
@@ -304,6 +371,17 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
         </p>
       )}
 
+      {(matchesPlayed ?? 0) < MIN_MATCHES_QUALIFIED && visibleCategories.some((s) => s.state === "partial") && (
+        <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)", margin: "0 0 0.75rem" }}>
+          🔎 <strong>Estimación con pocos minutos</strong>: {currentPlayer} lleva {matchesPlayed ?? 0}{" "}
+          {(matchesPlayed ?? 0) === 1 ? "partido" : "partidos"} ({minsPlayed ?? 0}'). FotMob recién publica sus
+          categorías "cada 90'" desde los {MIN_MATCHES_QUALIFIED} partidos -- las barras de abajo son una{" "}
+          <strong>tasa estimada</strong>, encogida hacia la mediana de su posición (le "prestamos" ~5 partidos de
+          referencia para que un par de eventos sueltos no disparen el número), no un valor oficial de FotMob. No
+          entra a ningún ranking ni podio.
+        </p>
+      )}
+
       {playerMatches.length > 0 && (
         <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)", margin: "0 0 0.75rem" }}>
           📅 Métricas calculadas sobre {playerMatches.length}{" "}
@@ -319,22 +397,81 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
         </p>
       )}
 
-      {option ? (
-        <ShareableChart
-          option={option}
-          style={{ height: narrow ? 330 : 380 }}
-          share={{
-            title: currentPlayer,
-            subtitle: `${team} · ficha de rendimiento (índice) · Liga Profesional`,
-            insight: insights[0],
-            filenameBase: `scout-${team}-${currentPlayer}`,
-            ratings,
-          }}
-          shareLabel="🖼️ Compartir radar"
-        />
-      ) : (
+      {visibleCategories.length > 0 && (
+        <>
+          <div className="ovr-hero">
+            {ovr != null && (
+              <div className="ovr-badge">
+                <span className="num">{ovr}</span>
+                <span className="tag">GLOBAL</span>
+              </div>
+            )}
+            <span className="ovr-caption">
+              {resolvedPosition ? POS_LABEL[resolvedPosition] ?? resolvedPosition : "posición no resuelta"} · índice
+              de rendimiento por categoría (0–100, estilo EA SPORTS FC) — tocá una para ver el detalle.
+            </span>
+          </div>
+
+          <div className="attr-grid">
+            {visibleCategories.map((s) => (
+              <details className={`attr-card is-${s.state}`} key={s.key}>
+                <summary>
+                  <div className="attr-head">
+                    <span className="attr-label">{CATEGORY_LABELS[s.key]}</span>
+                    <span className="attr-num">{s.idx}</span>
+                  </div>
+                  <div className="attr-bar-track">
+                    <div className="attr-bar-fill" style={{ width: `${s.idx}%` }} />
+                  </div>
+                  {s.state !== "solid" && (
+                    <div className="attr-flag">
+                      {CATEGORY_STATE_LABEL[s.state]} · {s.factorsPresent}/{s.factorsTotal} factores
+                    </div>
+                  )}
+                </summary>
+                <div className="attr-factors">
+                  {s.factors.map((f) => (
+                    <div key={f.metric}>
+                      {METRIC_LABELS[f.metric]?.label ?? f.metric}: índice <strong>{f.idx}</strong> ·{" "}
+                      {Math.round(f.raw * 10) / 10}
+                      {METRIC_LABELS[f.metric]?.suffix ?? ""}
+                      {f.estimated ? <span className="estimated"> (estimado)</span> : null}
+                    </div>
+                  ))}
+                </div>
+              </details>
+            ))}
+          </div>
+        </>
+      )}
+
+      {option && (
+        <details style={{ marginTop: visibleCategories.length > 0 ? "0.25rem" : 0, marginBottom: "1rem" }}>
+          <summary style={{ cursor: "pointer", fontSize: "0.85rem", color: "var(--text-secondary)", fontWeight: 600 }}>
+            Ver radar completo de factores individuales ({radarMetrics.length})
+          </summary>
+          <div style={{ marginTop: "0.75rem" }}>
+            <ShareableChart
+              option={option}
+              style={{ height: narrow ? 330 : 380 }}
+              share={{
+                title: currentPlayer,
+                subtitle: `${team} · ficha de rendimiento (índice) · Liga Profesional`,
+                insight: insights[0],
+                filenameBase: `scout-${team}-${currentPlayer}`,
+                ratings,
+              }}
+              shareLabel="🖼️ Compartir radar"
+            />
+          </div>
+        </details>
+      )}
+
+      {!option && visibleCategories.length === 0 && (
         <p style={{ color: "var(--text-muted)" }}>
-          {currentPlayer ? `${currentPlayer} todavía no tiene suficientes métricas cargadas para el radar.` : "Elegí un jugador."}
+          {currentPlayer
+            ? `${currentPlayer} todavía no tiene suficientes métricas cargadas.`
+            : "Elegí un jugador."}
         </p>
       )}
 
@@ -356,7 +493,12 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
         </div>
       )}
 
-      <div className="stat-tiles" style={{ marginTop: "1rem" }}>
+      {visibleCategories.length > 0 && (
+        <p style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-secondary)", margin: "1rem 0 0.4rem" }}>
+          Aporte y contexto — lo que no entra en ninguna categoría de arriba
+        </p>
+      )}
+      <div className="stat-tiles" style={{ marginTop: visibleCategories.length > 0 ? 0 : "1rem" }}>
         {squadInfo?.caps != null && (
           <div className="stat-tile">
             <div className="value">{squadInfo.caps}</div>
@@ -376,7 +518,7 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
           </div>
         )}
         {playerRows
-          .filter((r) => METRIC_LABELS[r.metric])
+          .filter((r) => METRIC_LABELS[r.metric] && !shownInCategories.has(r.metric))
           .map((r) => (
             <div className="stat-tile" key={r.metric}>
               <div className="value">
@@ -422,11 +564,15 @@ export default function PlayerScoutCard({ rows, squad, matches, crests }: Props)
       )}
 
       <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-        El radar usa un índice de rendimiento (0–100) calibrado al rango de los jugadores medidos — 100 = el mejor del
-        dataset, ~40 = el más flojo (estira las diferencias para que se vean, estilo EA SPORTS FC); no es un ranking
-        completo de la liga. Combina las categorías de FotMob (agregado de TEMPORADA, no de partido) que el jugador
-        tenga cargadas. Los datos de plantel (dorsal, club, posición) vienen del roster de ESPN y se cruzan por
-        nombre — puede faltar en algunos jugadores.
+        Cada categoría agrupa los factores de FotMob de esa familia (0–100, 100 = el mejor del dataset) en vez de
+        mostrar 30+ ejes sueltos. Alcanza con <strong>1 factor cargado</strong> para verla — si faltan otros, la
+        barra se recalcula sobre lo que sí hay (no se rellena con un promedio inventado) y el estado lo avisa: sin
+        marca = muestra sólida, "muestra chica" = tiene GLOBAL pero pocos minutos, "estimado" = FotMob todavía no le
+        publica esa categoría (menos de {MIN_MATCHES_QUALIFIED} partidos) y la tasa se deriva de sus goles/asistencias
+        reales encogidos hacia la mediana de su posición. El <strong>GLOBAL</strong> combina las mismas categorías
+        ponderadas por posición, normalizado contra jugadores de esa misma posición (estilo EA SPORTS FC). Agregado
+        de TEMPORADA (no de partido). Los datos de plantel (dorsal, club, posición) vienen del roster de ESPN y se
+        cruzan por nombre — puede faltar en algunos jugadores.
       </p>
     </div>
   );

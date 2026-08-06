@@ -1879,6 +1879,134 @@ button:focus-visible {
   color: var(--text-muted);
 }
 
+/* ---------- carta de atributos estilo EA SPORTS FC (categorías de jugador) ---------- */
+
+.ovr-hero {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ovr-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: linear-gradient(160deg, var(--brand), var(--brand-strong));
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.ovr-badge .num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ovr-badge .tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+
+.ovr-hero .ovr-caption {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.attr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.attr-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  background: var(--surface-1);
+}
+
+.attr-card summary {
+  cursor: pointer;
+  list-style: none;
+}
+.attr-card summary::-webkit-details-marker {
+  display: none;
+}
+.attr-card summary::marker {
+  content: "";
+}
+
+.attr-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.attr-head .attr-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.attr-head .attr-num {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.attr-bar-track {
+  margin-top: 0.5rem;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--gridline);
+  overflow: hidden;
+}
+
+.attr-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-strong));
+}
+
+.attr-card.is-small_sample .attr-bar-fill,
+.attr-card.is-partial .attr-bar-fill {
+  background: linear-gradient(90deg, var(--status-warning), color-mix(in srgb, var(--status-warning) 70%, var(--brand-strong)));
+}
+
+.attr-flag {
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.attr-card.is-small_sample .attr-flag,
+.attr-card.is-partial .attr-flag {
+  color: color-mix(in srgb, var(--status-warning) 65%, var(--text-primary));
+}
+
+.attr-factors {
+  margin-top: 0.6rem;
+  padding-top: 0.55rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.attr-factors .estimated {
+  font-style: italic;
+}
+
 /* ---------- resultado de partido (W/D/L) -- mismo lenguaje de color en toda la app ---------- */
 
 .result-badge {

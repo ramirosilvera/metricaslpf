@@ -6,6 +6,7 @@ import { flagOrCrestHtml, escapeHtml } from "../lib/flags";
 import { makeIndexer, isLowerBetter } from "../lib/normalize";
 import { PLAYER_METRIC_LABELS, PLAYER_RADAR_ORDER } from "../lib/playerMetrics";
 import { sampleTier } from "../lib/playerSampleGate";
+import { CATEGORIES_BY_POSITION } from "../lib/playerCategories";
 
 // Ranking por FACTOR: elegí cualquiera de las 37 categorías de FotMob (goles,
 // xG, tackles, atajadas, etc.) y mirá qué jugador manda en ese factor — entre
@@ -17,6 +18,40 @@ import { sampleTier } from "../lib/playerSampleGate";
 const ALL = "__all__";
 const TOP_ALL = 25;
 const POS_LABEL: Record<string, string> = { GK: "Arquero", DF: "Defensor", MF: "Mediocampista", FW: "Delantero" };
+
+// El selector de 37 factores sueltos se agrupa en <optgroup> con la MISMA
+// partición que las categorías EA-FC del resto de la app (ver
+// playerCategories.ts) -- así "Ataque" acá es lo mismo que "Ataque" en la
+// ficha de jugador, no una segunda taxonomía inventada aparte. Las 3
+// categorías de arquero (Atajadas/Valla/Pies) se juntan en un solo grupo
+// "Portería" -- son pocos factores cada una, 3 optgroups de 2-3 ítems
+// estorban más de lo que ordenan. Lo que no pertenece a ninguna categoría
+// (totales crudos con variante ya cubierta, eventos rarísimos, minutos/
+// partidos jugados) cae en "Datos crudos y contexto", al final.
+type OptGroupKey = "ATA" | "CRE" | "PAS" | "DEF" | "VAL" | "GK" | "OTHER";
+const OPTGROUP_LABEL: Record<OptGroupKey, string> = {
+  ATA: "Ataque",
+  CRE: "Creación",
+  PAS: "Pase",
+  DEF: "Defensa",
+  VAL: "Valoración",
+  GK: "Portería",
+  OTHER: "Datos crudos y contexto",
+};
+const OPTGROUP_ORDER: OptGroupKey[] = ["ATA", "CRE", "PAS", "DEF", "VAL", "GK", "OTHER"];
+
+const METRIC_OPTGROUP: ReadonlyMap<string, OptGroupKey> = (() => {
+  const map = new Map<string, OptGroupKey>();
+  // FW/MF/DF comparten exactamente las mismas 5 categorías de campo (ver
+  // CATEGORIES_BY_POSITION) -- alcanza con recorrer una sola.
+  for (const [key, members] of Object.entries(CATEGORIES_BY_POSITION.FW)) {
+    for (const m of members) if (!map.has(m.metric)) map.set(m.metric, key as OptGroupKey);
+  }
+  for (const [, members] of Object.entries(CATEGORIES_BY_POSITION.GK)) {
+    for (const m of members) if (!map.has(m.metric)) map.set(m.metric, "GK");
+  }
+  return map;
+})();
 
 interface Props {
   rows: DerivedPlayerMetricRow[];
@@ -42,6 +77,15 @@ export default function PlayerFactorRanking({ rows, positions = {}, crests }: Pr
   const def = PLAYER_METRIC_LABELS[metric];
   const label = def.label.replace(" / partido", "");
   const suffix = def.suffix;
+
+  const groupedMetrics = useMemo(() => {
+    const buckets = new Map<OptGroupKey, string[]>(OPTGROUP_ORDER.map((g) => [g, []]));
+    for (const m of PLAYER_RADAR_ORDER) {
+      const g = METRIC_OPTGROUP.get(m) ?? "OTHER";
+      buckets.get(g)!.push(m);
+    }
+    return buckets;
+  }, []);
 
   // matches_played/mins_played por jugador -- gate de muestra mínima (mismo
   // criterio que el ranking de índice global, ver playerSampleGate.ts). Sin
@@ -167,11 +211,19 @@ export default function PlayerFactorRanking({ rows, positions = {}, crests }: Pr
     <div>
       <div className="controls-row" style={{ flexWrap: "wrap" }}>
         <select value={metric} onChange={(e) => setMetric(e.target.value)} aria-label="Factor">
-          {PLAYER_RADAR_ORDER.map((m) => (
-            <option key={m} value={m}>
-              {PLAYER_METRIC_LABELS[m].label.replace(" / partido", "")}
-            </option>
-          ))}
+          {OPTGROUP_ORDER.map((g) => {
+            const items = groupedMetrics.get(g) ?? [];
+            if (items.length === 0) return null;
+            return (
+              <optgroup key={g} label={OPTGROUP_LABEL[g]}>
+                {items.map((m) => (
+                  <option key={m} value={m}>
+                    {PLAYER_METRIC_LABELS[m].label.replace(" / partido", "")}
+                  </option>
+                ))}
+              </optgroup>
+            );
+          })}
         </select>
         <select value={effTeam} onChange={(e) => setTeam(e.target.value)} aria-label="Club">
           <option value={ALL}>⚽ Todos los clubes (top {TOP_ALL})</option>

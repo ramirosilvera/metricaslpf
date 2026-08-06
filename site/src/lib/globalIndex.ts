@@ -29,7 +29,7 @@
 // suelto como la vieja `positionWeightedGlobal`.
 
 import { makeIndexer } from "./normalize";
-import { sampleTier, type SampleTier } from "./playerSampleGate";
+import { sampleTier, MIN_MATCHES_QUALIFIED, type SampleTier } from "./playerSampleGate";
 
 export type Position = "GK" | "DF" | "MF" | "FW";
 const POSITIONS: Position[] = ["GK", "DF", "MF", "FW"];
@@ -112,7 +112,33 @@ export const POSITION_WEIGHTS: Record<Position, Record<string, number>> = {
 // tiene al menos un dato en TODO el dataset, no por jugador -- eso se imputa
 // a 0 más abajo) no se emite GLOBAL: significa que una fuente entera de datos
 // falta (ej. la categoría dejó de publicarse), no que el jugador no anotó.
+// Esta misma cobertura mínima es también el tope duro de cuánto puede faltar
+// de las métricas DESCONOCIDAS (ver CERO_IMPUTABLE) sin que se deje de emitir
+// GLOBAL -- ej. si a un jugador le falta `rating` (2/20 = 10% del peso en
+// campo, 4/20 = 20% en arqueros), el GLOBAL se recalcula sobre el resto; si
+// faltara más del 15%, no hay GLOBAL en vez de una cifra fabricada.
 const MIN_COVERAGE = 0.85;
+
+// Métricas cuya ausencia dentro de la población calificada (>=11 partidos)
+// significa CERO real -- listas de FotMob censuradas en 0 (arrancan en 1) o
+// cuyo mínimo observado en toda la liga es ~0 -- se imputan pasando 0 por el
+// indexador real de la métrica. Todo lo que NO está acá (rating, accurate_pass,
+// ball_recovery, saves, goals_conceded, _save_percentage, _goals_prevented...)
+// tiene un mínimo observado lejos de 0: su ausencia significa "no medido", así
+// que NUNCA se imputa -- se excluye del promedio (numerador Y denominador),
+// con el tope de MIN_COVERAGE arriba como única salvaguarda. Antes de este fix,
+// CUALQUIER métrica ausente (incluido rating) se imputaba a indexers(0) = piso
+// 40, como si el jugador hubiese rendido pésimo en algo que la fuente
+// simplemente no publicó -- afectaba a 38 jugadores calificados (9 "ranked").
+export const CERO_IMPUTABLE: ReadonlySet<string> = new Set([
+  "goals", "goal_assist", "total_att_assist", "big_chance_created", "yellow_card", "clean_sheet",
+  "total_tackle", "fouls", "won_contest", "expected_goals_per_90", "expected_assists_per_90",
+  "_expected_goals_and_expected_assists_per_90", "goals_per_90", "interception", "effective_clearance",
+  "outfielder_block", "poss_won_att_3rd", "ontarget_scoring_att", "total_scoring_att", "accurate_long_balls",
+  "defensive_contributions", "expected_goals", "expected_assists", "expected_goalsontarget",
+  "goal_assist_per_90", "big_chance_created_per_90", "total_att_assist_per_90", "yellow_card_per_90",
+  "clean_sheet_ratio",
+]);
 
 export function isFieldPosition(position?: string | null): boolean {
   return position === "DF" || position === "MF" || position === "FW";
@@ -140,19 +166,22 @@ function rawWeightedGlobal(
   const w = POSITION_WEIGHTS[position];
   const byMetric = new Map(factors.map((f) => [f.metric, f.idx]));
   let num = 0;
-  let den = 0;
-  let covered = 0;
+  let totalApplicable = 0; // peso de métricas con dato en TODO el dataset (gate de cobertura)
+  let covered = 0; // peso efectivamente cubierto para este jugador -- es el denominador real
   for (const [metric, wt] of Object.entries(w)) {
-    if (!metricsWithData.has(metric)) continue; // la métrica no existe en todo el dataset -- no cuenta ni en el denominador
-    den += wt;
-    const idx = byMetric.get(metric) ?? indexers[metric]?.(0);
+    if (!metricsWithData.has(metric)) continue; // la métrica no existe en todo el dataset -- no cuenta ni en el gate
+    totalApplicable += wt;
+    let idx = byMetric.get(metric);
+    if (idx == null && CERO_IMPUTABLE.has(metric)) idx = indexers[metric]?.(0);
+    // si sigue sin valor (métrica "desconocida" ausente, ej. rating), NO se
+    // imputa -- se excluye del promedio, no se fabrica un piso.
     if (idx != null) {
       num += idx * wt;
       covered += wt;
     }
   }
-  if (den === 0 || covered / den < MIN_COVERAGE) return null;
-  return num / den;
+  if (totalApplicable === 0 || covered / totalApplicable < MIN_COVERAGE) return null;
+  return num / covered;
 }
 
 export interface PlayerGlobalInput {
@@ -184,7 +213,15 @@ export function computeGlobalIndex(
   const byPosition: Record<Position, number[]> = { GK: [], DF: [], MF: [], FW: [] };
 
   for (const p of players) {
-    if (!isPosition(p.position)) {
+    // Por debajo de la población calificada de FotMob (<11 partidos) no hay
+    // GLOBAL, punto -- ninguna de las métricas "cada 90'" nativas de la tabla
+    // de pesos existe para estos jugadores, así que imputar CERO_IMPUTABLE
+    // (pensado para "esto no ocurrió DENTRO de la lista calificada") sería
+    // tratar "la fuente no mide esto para nadie con tan poca muestra" como
+    // "el jugador rindió cero" -- exactamente el tipo de imputación indebida
+    // que este archivo existe para evitar. Ver playerCategories.ts para el
+    // rendimiento visible de estos jugadores (categorías con muestra chica).
+    if (!isPosition(p.position) || (p.matchesPlayed ?? 0) < MIN_MATCHES_QUALIFIED) {
       raw.set(p.key, null);
       continue;
     }

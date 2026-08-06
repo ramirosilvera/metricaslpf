@@ -7,6 +7,10 @@ interface HasTeamName {
   team: string;
   player_name: string;
 }
+interface HasMetric {
+  metric: string;
+  value: number | null;
+}
 interface HasPosition extends HasTeamName {
   position: string | null;
 }
@@ -51,17 +55,36 @@ export function normName(name: string): string {
     .trim();
 }
 
+function nameTokens(name: string): string[] {
+  return normName(name).split(" ").filter(Boolean);
+}
+
+// Métricas que sólo existen para arqueros -- si un jugador las tiene, es
+// arquero, sin importar si el roster de ESPN lo tiene cargado o no. No es una
+// inferencia estadística: es una deducción directa de la propia fuente
+// (FotMob no publica atajadas para nadie que no sea arquero).
+const GK_SIGNATURE_METRICS = new Set(["saves", "_save_percentage", "goals_conceded", "_goals_prevented"]);
+
 /**
  * Mapa `${team}|${player_name de las métricas}` -> posición, cruzando por
- * nombre normalizado contra el plantel. Dos pasadas:
+ * nombre normalizado contra el plantel. En orden:
  *   1. team (con alias FotMob->ESPN) + nombre normalizado -- el match preciso.
- *   2. para quien no cruzó en (1): nombre normalizado solo, SI ese nombre es
- *      único en toda la liga (evita mezclar homónimos de distinto club, ej.
- *      los 3 "Palavecino" reales de esta temporada).
- * Quien no cruza en ninguna de las dos queda sin posición -- ya no cae a un
- * promedio plano (ver globalIndex.ts), directamente no recibe índice GLOBAL.
+ *   2. subconjunto de tokens dentro del MISMO club (≥2 tokens en común y un
+ *      único candidato) -- recupera nombres compuestos/abreviados distintos
+ *      entre fuentes (ej. "Cristian Alberto Tarragona" vs "Cristian Tarragona").
+ *   3. nombre normalizado solo, SI ese nombre es único en toda la liga (evita
+ *      mezclar homónimos de distinto club, ej. los 3 "Palavecino" reales).
+ *   4. firma de datos: si el jugador tiene alguna métrica exclusiva de
+ *      arquero (saves, _save_percentage, goals_conceded, _goals_prevented),
+ *      es arquero -- no hace falta cruzar con ESPN para saberlo.
+ * Quien no cruza en ninguna queda sin posición -- no cae a un promedio plano
+ * (ver globalIndex.ts), directamente no recibe índice GLOBAL de una cifra
+ * (pero sí puede mostrar categorías cross-posición, ver playerCategories.ts).
  */
-export function buildPlayerPositions(metricRows: HasTeamName[], squadRows: HasPosition[]): Record<string, string> {
+export function buildPlayerPositions<T extends HasTeamName & Partial<HasMetric>>(
+  metricRows: T[],
+  squadRows: HasPosition[],
+): Record<string, string> {
   const byTeamAndName = new Map(squadRows.map((r) => [`${r.team}|${normName(r.player_name)}`, normPosition(r.position)]));
 
   const byNameOnly = new Map<string, string | null | undefined>(); // undefined = ambiguo (>1 club)
@@ -75,6 +98,37 @@ export function buildPlayerPositions(metricRows: HasTeamName[], squadRows: HasPo
     }
   }
 
+  const squadsByClub = new Map<string, HasPosition[]>();
+  for (const r of squadRows) {
+    const list = squadsByClub.get(r.team);
+    if (list) list.push(r);
+    else squadsByClub.set(r.team, [r]);
+  }
+
+  function tokenSubsetMatch(club: string, playerTokens: string[]): string | null {
+    const candidates = squadsByClub.get(club);
+    if (!candidates) return null;
+    const positions = new Set<string>();
+    let nMatches = 0;
+    for (const c of candidates) {
+      const common = nameTokens(c.player_name).filter((t) => playerTokens.includes(t));
+      if (common.length >= 2) {
+        nMatches++;
+        const pos = normPosition(c.position);
+        if (pos) positions.add(pos);
+      }
+    }
+    return nMatches === 1 && positions.size === 1 ? [...positions][0] : null;
+  }
+
+  // Jugadores con métricas GK-exclusivas, para el paso 4 (firma de datos).
+  const gkByKey = new Set<string>();
+  for (const row of metricRows) {
+    if (row.metric && GK_SIGNATURE_METRICS.has(row.metric) && row.value != null) {
+      gkByKey.add(`${row.team}|${row.player_name}`);
+    }
+  }
+
   const out: Record<string, string> = {};
   for (const row of metricRows) {
     const key = `${row.team}|${row.player_name}`;
@@ -83,10 +137,12 @@ export function buildPlayerPositions(metricRows: HasTeamName[], squadRows: HasPo
     const aliasedTeam = TEAM_ALIAS_FOTMOB_TO_ESPN[row.team] ?? row.team;
 
     let pos = byTeamAndName.get(`${aliasedTeam}|${normed}`);
+    if (!pos) pos = tokenSubsetMatch(aliasedTeam, nameTokens(row.player_name)) ?? undefined;
     if (!pos) {
       const uniquePos = byNameOnly.get(normed);
       if (uniquePos) pos = uniquePos;
     }
+    if (!pos && gkByKey.has(key)) pos = "GK";
     if (pos) out[key] = pos;
   }
   return out;
