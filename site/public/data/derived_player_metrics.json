@@ -2536,16 +2536,16 @@
     "percentile": 94.4
   },
   {
-    "player_name": "Santiago Solari",
-    "team": "Racing Club",
+    "player_name": "Oscar Cortés",
+    "team": "Huracán",
     "metric": "goal_assist",
     "value": 4.0,
     "z_score": 1.96,
     "percentile": 94.4
   },
   {
-    "player_name": "Oscar Cortés",
-    "team": "Huracán",
+    "player_name": "Santiago Solari",
+    "team": "Racing Club",
     "metric": "goal_assist",
     "value": 4.0,
     "z_score": 1.96,
@@ -5280,6 +5280,14 @@
     "percentile": 70.0
   },
   {
+    "player_name": "Juan Bisanz",
+    "team": "Huracán",
+    "metric": "_goals_and_goal_assist",
+    "value": 3.0,
+    "z_score": 0.18,
+    "percentile": 70.0
+  },
+  {
     "player_name": "Renzo Tesuri",
     "team": "Atlético Tucumán",
     "metric": "_goals_and_goal_assist",
@@ -5338,14 +5346,6 @@
   {
     "player_name": "Franco Torres",
     "team": "Gimnasia La Plata",
-    "metric": "_goals_and_goal_assist",
-    "value": 3.0,
-    "z_score": 0.18,
-    "percentile": 70.0
-  },
-  {
-    "player_name": "Juan Bisanz",
-    "team": "Huracán",
     "metric": "_goals_and_goal_assist",
     "value": 3.0,
     "z_score": 0.18,
@@ -7764,7 +7764,7 @@
     "team": "Gimnasia La Plata",
     "metric": "rating",
     "value": 7.51,
-    "z_score": 2.0,
+    "z_score": 1.99,
     "percentile": 98.5
   },
   {
@@ -7941,7 +7941,7 @@
     "metric": "rating",
     "value": 7.35,
     "z_score": 1.46,
-    "percentile": 92.2
+    "percentile": 92.3
   },
   {
     "player_name": "Leandro González Pírez",
@@ -7949,15 +7949,7 @@
     "metric": "rating",
     "value": 7.35,
     "z_score": 1.46,
-    "percentile": 92.2
-  },
-  {
-    "player_name": "Orlando Gill",
-    "team": "San Lorenzo",
-    "metric": "rating",
-    "value": 7.35,
-    "z_score": 1.46,
-    "percentile": 92.2
+    "percentile": 92.3
   },
   {
     "player_name": "Marcos Acuña",
@@ -7965,7 +7957,7 @@
     "metric": "rating",
     "value": 7.35,
     "z_score": 1.46,
-    "percentile": 92.2
+    "percentile": 92.3
   },
   {
     "player_name": "Cristian Zabala",
@@ -7973,7 +7965,7 @@
     "metric": "rating",
     "value": 7.35,
     "z_score": 1.46,
-    "percentile": 92.2
+    "percentile": 92.3
   },
   {
     "player_name": "Federico Álvarez",
@@ -7981,7 +7973,7 @@
     "metric": "rating",
     "value": 7.35,
     "z_score": 1.46,
-    "percentile": 92.2
+    "percentile": 92.3
   },
   {
     "player_name": "Gabriel Ávalos",
@@ -7989,7 +7981,15 @@
     "metric": "rating",
     "value": 7.35,
     "z_score": 1.46,
-    "percentile": 92.2
+    "percentile": 92.3
+  },
+  {
+    "player_name": "Orlando Gill",
+    "team": "San Lorenzo",
+    "metric": "rating",
+    "value": 7.34,
+    "z_score": 1.43,
+    "percentile": 91.1
   },
   {
     "player_name": "Lautaro Blanco",
@@ -7997,7 +7997,7 @@
     "metric": "rating",
     "value": 7.34,
     "z_score": 1.43,
-    "percentile": 91.0
+    "percentile": 91.1
   },
   {
     "player_name": "Federico Fattori",
@@ -8005,7 +8005,7 @@
     "metric": "rating",
     "value": 7.34,
     "z_score": 1.43,
-    "percentile": 91.0
+    "percentile": 91.1
   },
   {
     "player_name": "Joaquín Laso",
@@ -8309,7 +8309,7 @@
     "metric": "rating",
     "value": 7.18,
     "z_score": 0.9,
-    "percentile": 81.1
+    "percentile": 81.0
   },
   {
     "player_name": "Fernando Román",
@@ -8317,7 +8317,15 @@
     "metric": "rating",
     "value": 7.18,
     "z_score": 0.9,
-    "percentile": 81.1
+    "percentile": 81.0
+  },
+  {
+    "player_name": "Danilo Arboleda",
+    "team": "San Lorenzo",
+    "metric": "rating",
+    "value": 7.18,
+    "z_score": 0.9,
+    "percentile": 81.0
   },
   {
     "player_name": "Matías Borgogno",
@@ -8325,7 +8333,7 @@
     "metric": "rating",
     "value": 7.17,
     "z_score": 0.87,
-    "percentile": 80.3
+    "percentile": 80.1
   },
   {
     "player_name": "Facundo Mansilla Zahir",
@@ -8333,7 +8341,7 @@
     "metric": "rating",
     "value": 7.17,
     "z_score": 0.87,
-    "percentile": 80.3
+    "percentile": 80.1
   },
   {
     "player_name": "Joaquín García",
@@ -8341,15 +8349,7 @@
     "metric": "rating",
     "value": 7.17,
     "z_score": 0.87,
-    "percentile": 80.3
-  },
-  {
-    "player_name": "Danilo Arboleda",
-    "team": "San Lorenzo",
-    "metric": "rating",
-    "value": 7.17,
-    "z_score": 0.87,
-    "percentile": 80.3
+    "percentile": 80.1
   },
   {
     "player_name": "Sasha Marcich",
@@ -8357,7 +8357,7 @@
     "metric": "rating",
     "value": 7.17,
     "z_score": 0.87,
-    "percentile": 80.3
+    "percentile": 80.1
   },
   {
     "player_name": "Kevin Lomónaco",
@@ -8400,16 +8400,16 @@
     "percentile": 78.7
   },
   {
-    "player_name": "Nicolás Tripichio",
-    "team": "San Lorenzo",
+    "player_name": "Lucas Carrizo",
+    "team": "Huracán",
     "metric": "rating",
     "value": 7.14,
     "z_score": 0.77,
     "percentile": 77.8
   },
   {
-    "player_name": "Lucas Carrizo",
-    "team": "Huracán",
+    "player_name": "Nicolás Tripichio",
+    "team": "San Lorenzo",
     "metric": "rating",
     "value": 7.14,
     "z_score": 0.77,
@@ -8437,7 +8437,15 @@
     "metric": "rating",
     "value": 7.13,
     "z_score": 0.73,
-    "percentile": 77.1
+    "percentile": 77.0
+  },
+  {
+    "player_name": "Lucas Blondel",
+    "team": "Huracán",
+    "metric": "rating",
+    "value": 7.13,
+    "z_score": 0.73,
+    "percentile": 77.0
   },
   {
     "player_name": "Alejandro Maciel",
@@ -8445,7 +8453,7 @@
     "metric": "rating",
     "value": 7.13,
     "z_score": 0.73,
-    "percentile": 77.1
+    "percentile": 77.0
   },
   {
     "player_name": "Enzo Martínez",
@@ -8453,15 +8461,7 @@
     "metric": "rating",
     "value": 7.12,
     "z_score": 0.7,
-    "percentile": 76.3
-  },
-  {
-    "player_name": "Lucas Blondel",
-    "team": "Huracán",
-    "metric": "rating",
-    "value": 7.12,
-    "z_score": 0.7,
-    "percentile": 76.3
+    "percentile": 76.2
   },
   {
     "player_name": "David Martínez",
@@ -8469,7 +8469,7 @@
     "metric": "rating",
     "value": 7.12,
     "z_score": 0.7,
-    "percentile": 76.3
+    "percentile": 76.2
   },
   {
     "player_name": "Pedro Silva Torrejón",
@@ -8477,7 +8477,7 @@
     "metric": "rating",
     "value": 7.12,
     "z_score": 0.7,
-    "percentile": 76.3
+    "percentile": 76.2
   },
   {
     "player_name": "Enzo Giménez",
@@ -8696,16 +8696,16 @@
     "percentile": 69.4
   },
   {
-    "player_name": "Javier Burrai",
-    "team": "Sarmiento",
+    "player_name": "Oscar Cortés",
+    "team": "Huracán",
     "metric": "rating",
     "value": 7.06,
     "z_score": 0.5,
     "percentile": 68.5
   },
   {
-    "player_name": "Oscar Cortés",
-    "team": "Huracán",
+    "player_name": "Javier Burrai",
+    "team": "Sarmiento",
     "metric": "rating",
     "value": 7.06,
     "z_score": 0.5,
@@ -9440,16 +9440,16 @@
     "percentile": 45.2
   },
   {
-    "player_name": "Emiliano Amor",
-    "team": "San Lorenzo",
+    "player_name": "Santiago Moyano",
+    "team": "Central Córdoba (Santiago del Estero)",
     "metric": "rating",
     "value": 6.88,
     "z_score": -0.1,
     "percentile": 45.2
   },
   {
-    "player_name": "Santiago Moyano",
-    "team": "Central Córdoba (Santiago del Estero)",
+    "player_name": "Emiliano Amor",
+    "team": "San Lorenzo",
     "metric": "rating",
     "value": 6.88,
     "z_score": -0.1,
@@ -10165,7 +10165,7 @@
     "metric": "rating",
     "value": 6.66,
     "z_score": -0.83,
-    "percentile": 22.0
+    "percentile": 22.2
   },
   {
     "player_name": "Thiago Santamaría",
@@ -10173,7 +10173,7 @@
     "metric": "rating",
     "value": 6.66,
     "z_score": -0.83,
-    "percentile": 22.0
+    "percentile": 22.2
   },
   {
     "player_name": "Edwuin Cetré",
@@ -10181,15 +10181,7 @@
     "metric": "rating",
     "value": 6.66,
     "z_score": -0.83,
-    "percentile": 22.0
-  },
-  {
-    "player_name": "Facundo Gulli",
-    "team": "San Lorenzo",
-    "metric": "rating",
-    "value": 6.66,
-    "z_score": -0.83,
-    "percentile": 22.0
+    "percentile": 22.2
   },
   {
     "player_name": "Mateo Pérez Curci",
@@ -10197,7 +10189,7 @@
     "metric": "rating",
     "value": 6.66,
     "z_score": -0.83,
-    "percentile": 22.0
+    "percentile": 22.2
   },
   {
     "player_name": "Santiago Salle",
@@ -10205,7 +10197,15 @@
     "metric": "rating",
     "value": 6.65,
     "z_score": -0.86,
-    "percentile": 21.3
+    "percentile": 21.4
+  },
+  {
+    "player_name": "Facundo Gulli",
+    "team": "San Lorenzo",
+    "metric": "rating",
+    "value": 6.65,
+    "z_score": -0.86,
+    "percentile": 21.4
   },
   {
     "player_name": "Nicolás Retamar",
@@ -18088,7 +18088,7 @@
     "percentile": 3.5
   },
   {
-    "player_name": "Alexis Canelo",
+    "player_name": "Pedro Canelo",
     "team": "Atlético Tucumán",
     "metric": "mins_played",
     "value": 10.0,
@@ -20203,8 +20203,8 @@
     "player_name": "Jordy Caicedo",
     "team": "Huracán",
     "metric": "expected_goals",
-    "value": 9.8,
-    "z_score": 6.49,
+    "value": 9.6,
+    "z_score": 6.35,
     "percentile": 100.0
   },
   {
@@ -20212,7 +20212,7 @@
     "team": "Sarmiento",
     "metric": "expected_goals",
     "value": 9.5,
-    "z_score": 6.27,
+    "z_score": 6.28,
     "percentile": 99.9
   },
   {
@@ -20244,7 +20244,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goals",
     "value": 7.0,
-    "z_score": 4.43,
+    "z_score": 4.44,
     "percentile": 99.3
   },
   {
@@ -20360,20 +20360,20 @@
     "percentile": 97.4
   },
   {
+    "player_name": "Rodrigo Auzmendi",
+    "team": "San Lorenzo",
+    "metric": "expected_goals",
+    "value": 4.9,
+    "z_score": 2.89,
+    "percentile": 97.3
+  },
+  {
     "player_name": "Florián Monzón",
     "team": "Vélez Sarsfield",
     "metric": "expected_goals",
     "value": 4.8,
     "z_score": 2.81,
-    "percentile": 97.2
-  },
-  {
-    "player_name": "Rodrigo Auzmendi",
-    "team": "San Lorenzo",
-    "metric": "expected_goals",
-    "value": 4.8,
-    "z_score": 2.81,
-    "percentile": 97.2
+    "percentile": 97.1
   },
   {
     "player_name": "Sebastián Driussi",
@@ -20392,14 +20392,6 @@
     "percentile": 96.9
   },
   {
-    "player_name": "Alexis Cuello",
-    "team": "San Lorenzo",
-    "metric": "expected_goals",
-    "value": 4.4,
-    "z_score": 2.52,
-    "percentile": 96.7
-  },
-  {
     "player_name": "Gonzalo Montiel",
     "team": "River Plate",
     "metric": "expected_goals",
@@ -20413,7 +20405,15 @@
     "metric": "expected_goals",
     "value": 4.3,
     "z_score": 2.45,
-    "percentile": 96.4
+    "percentile": 96.5
+  },
+  {
+    "player_name": "Alexis Cuello",
+    "team": "San Lorenzo",
+    "metric": "expected_goals",
+    "value": 4.3,
+    "z_score": 2.45,
+    "percentile": 96.5
   },
   {
     "player_name": "Agustín Auzmendi",
@@ -20421,7 +20421,7 @@
     "metric": "expected_goals",
     "value": 4.3,
     "z_score": 2.45,
-    "percentile": 96.4
+    "percentile": 96.5
   },
   {
     "player_name": "Alan Lescano",
@@ -20452,7 +20452,7 @@
     "team": "Independiente Rivadavia",
     "metric": "expected_goals",
     "value": 4.0,
-    "z_score": 2.22,
+    "z_score": 2.23,
     "percentile": 95.8
   },
   {
@@ -20565,7 +20565,7 @@
     "metric": "expected_goals",
     "value": 3.2,
     "z_score": 1.64,
-    "percentile": 93.5
+    "percentile": 93.4
   },
   {
     "player_name": "Aarón Molinas",
@@ -20573,7 +20573,7 @@
     "metric": "expected_goals",
     "value": 3.2,
     "z_score": 1.64,
-    "percentile": 93.5
+    "percentile": 93.4
   },
   {
     "player_name": "Marcelino Moreno",
@@ -20581,7 +20581,15 @@
     "metric": "expected_goals",
     "value": 3.2,
     "z_score": 1.64,
-    "percentile": 93.5
+    "percentile": 93.4
+  },
+  {
+    "player_name": "Juan Bisanz",
+    "team": "Huracán",
+    "metric": "expected_goals",
+    "value": 3.2,
+    "z_score": 1.64,
+    "percentile": 93.4
   },
   {
     "player_name": "Santiago Solari",
@@ -20589,7 +20597,7 @@
     "metric": "expected_goals",
     "value": 3.2,
     "z_score": 1.64,
-    "percentile": 93.5
+    "percentile": 93.4
   },
   {
     "player_name": "Eduardo Salvio",
@@ -20597,7 +20605,7 @@
     "metric": "expected_goals",
     "value": 3.2,
     "z_score": 1.64,
-    "percentile": 93.5
+    "percentile": 93.4
   },
   {
     "player_name": "Lucas Passerini",
@@ -20605,7 +20613,7 @@
     "metric": "expected_goals",
     "value": 3.2,
     "z_score": 1.64,
-    "percentile": 93.5
+    "percentile": 93.4
   },
   {
     "player_name": "Dilan Godoy",
@@ -20613,7 +20621,7 @@
     "metric": "expected_goals",
     "value": 3.2,
     "z_score": 1.64,
-    "percentile": 93.5
+    "percentile": 93.4
   },
   {
     "player_name": "Milton Giménez",
@@ -20621,7 +20629,7 @@
     "metric": "expected_goals",
     "value": 3.1,
     "z_score": 1.56,
-    "percentile": 92.8
+    "percentile": 92.7
   },
   {
     "player_name": "Santiago Gabriel Montiel",
@@ -20629,7 +20637,7 @@
     "metric": "expected_goals",
     "value": 3.1,
     "z_score": 1.56,
-    "percentile": 92.8
+    "percentile": 92.7
   },
   {
     "player_name": "Matías Tissera",
@@ -20637,7 +20645,7 @@
     "metric": "expected_goals",
     "value": 3.1,
     "z_score": 1.56,
-    "percentile": 92.8
+    "percentile": 92.7
   },
   {
     "player_name": "Lucas Zelarayán",
@@ -20645,7 +20653,7 @@
     "metric": "expected_goals",
     "value": 3.0,
     "z_score": 1.49,
-    "percentile": 92.4
+    "percentile": 92.3
   },
   {
     "player_name": "Rick",
@@ -20653,7 +20661,7 @@
     "metric": "expected_goals",
     "value": 3.0,
     "z_score": 1.49,
-    "percentile": 92.4
+    "percentile": 92.3
   },
   {
     "player_name": "Lucas Martínez Quarta",
@@ -20661,15 +20669,15 @@
     "metric": "expected_goals",
     "value": 3.0,
     "z_score": 1.49,
-    "percentile": 92.4
+    "percentile": 92.3
   },
   {
     "player_name": "Jaminton Campaz",
     "team": "Rosario Central",
     "metric": "expected_goals",
     "value": 2.9,
-    "z_score": 1.41,
-    "percentile": 92.1
+    "z_score": 1.42,
+    "percentile": 92.0
   },
   {
     "player_name": "Franco Torres",
@@ -20682,14 +20690,6 @@
   {
     "player_name": "Diego Valdés",
     "team": "Vélez Sarsfield",
-    "metric": "expected_goals",
-    "value": 2.8,
-    "z_score": 1.34,
-    "percentile": 91.8
-  },
-  {
-    "player_name": "Juan Bisanz",
-    "team": "Huracán",
     "metric": "expected_goals",
     "value": 2.8,
     "z_score": 1.34,
@@ -26140,32 +26140,32 @@
     "team": "Tigre",
     "metric": "expected_goals_per_90",
     "value": 0.48,
-    "z_score": 2.81,
-    "percentile": 98.4
+    "z_score": 2.8,
+    "percentile": 98.5
   },
   {
     "player_name": "Jordy Caicedo",
     "team": "Huracán",
     "metric": "expected_goals_per_90",
-    "value": 0.48,
-    "z_score": 2.81,
-    "percentile": 98.4
+    "value": 0.47,
+    "z_score": 2.72,
+    "percentile": 98.0
   },
   {
     "player_name": "Adrián Martínez",
     "team": "Racing Club",
     "metric": "expected_goals_per_90",
     "value": 0.47,
-    "z_score": 2.73,
-    "percentile": 97.9
+    "z_score": 2.72,
+    "percentile": 98.0
   },
   {
     "player_name": "Nicolás Guerra",
     "team": "Instituto",
     "metric": "expected_goals_per_90",
     "value": 0.47,
-    "z_score": 2.73,
-    "percentile": 97.9
+    "z_score": 2.72,
+    "percentile": 98.0
   },
   {
     "player_name": "Leandro Díaz",
@@ -26324,7 +26324,7 @@
     "team": "Lanús",
     "metric": "expected_goals_per_90",
     "value": 0.36,
-    "z_score": 1.86,
+    "z_score": 1.85,
     "percentile": 92.4
   },
   {
@@ -26332,7 +26332,7 @@
     "team": "Independiente",
     "metric": "expected_goals_per_90",
     "value": 0.36,
-    "z_score": 1.86,
+    "z_score": 1.85,
     "percentile": 92.4
   },
   {
@@ -26340,7 +26340,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goals_per_90",
     "value": 0.36,
-    "z_score": 1.86,
+    "z_score": 1.85,
     "percentile": 92.4
   },
   {
@@ -26348,7 +26348,7 @@
     "team": "Instituto",
     "metric": "expected_goals_per_90",
     "value": 0.36,
-    "z_score": 1.86,
+    "z_score": 1.85,
     "percentile": 92.4
   },
   {
@@ -26356,7 +26356,7 @@
     "team": "Vélez Sarsfield",
     "metric": "expected_goals_per_90",
     "value": 0.35,
-    "z_score": 1.78,
+    "z_score": 1.77,
     "percentile": 91.7
   },
   {
@@ -26364,7 +26364,7 @@
     "team": "Central Córdoba (Santiago del Estero)",
     "metric": "expected_goals_per_90",
     "value": 0.35,
-    "z_score": 1.78,
+    "z_score": 1.77,
     "percentile": 91.7
   },
   {
@@ -26376,12 +26376,20 @@
     "percentile": 91.3
   },
   {
+    "player_name": "Juan Bisanz",
+    "team": "Huracán",
+    "metric": "expected_goals_per_90",
+    "value": 0.33,
+    "z_score": 1.62,
+    "percentile": 91.1
+  },
+  {
     "player_name": "David Barbona",
     "team": "Defensa y Justicia",
     "metric": "expected_goals_per_90",
     "value": 0.32,
     "z_score": 1.54,
-    "percentile": 90.9
+    "percentile": 90.7
   },
   {
     "player_name": "Facundo Farías",
@@ -26389,7 +26397,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.32,
     "z_score": 1.54,
-    "percentile": 90.9
+    "percentile": 90.7
   },
   {
     "player_name": "Juan Quintero",
@@ -26397,7 +26405,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.31,
     "z_score": 1.46,
-    "percentile": 90.2
+    "percentile": 90.0
   },
   {
     "player_name": "Hernán López",
@@ -26405,7 +26413,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.31,
     "z_score": 1.46,
-    "percentile": 90.2
+    "percentile": 90.0
   },
   {
     "player_name": "Ignacio Russo",
@@ -26413,7 +26421,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.31,
     "z_score": 1.46,
-    "percentile": 90.2
+    "percentile": 90.0
   },
   {
     "player_name": "Lucas Passerini",
@@ -26421,7 +26429,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.31,
     "z_score": 1.46,
-    "percentile": 90.2
+    "percentile": 90.0
   },
   {
     "player_name": "Tiziano Perrotta",
@@ -26429,7 +26437,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.3,
     "z_score": 1.38,
-    "percentile": 89.1
+    "percentile": 88.8
   },
   {
     "player_name": "Antony Alonso",
@@ -26437,7 +26445,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.3,
     "z_score": 1.38,
-    "percentile": 89.1
+    "percentile": 88.8
   },
   {
     "player_name": "Diego Valdés",
@@ -26445,7 +26453,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.3,
     "z_score": 1.38,
-    "percentile": 89.1
+    "percentile": 88.8
   },
   {
     "player_name": "Nicolás Retamar",
@@ -26453,7 +26461,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.3,
     "z_score": 1.38,
-    "percentile": 89.1
+    "percentile": 88.8
   },
   {
     "player_name": "Misael Aguirre",
@@ -26461,7 +26469,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.3,
     "z_score": 1.38,
-    "percentile": 89.1
+    "percentile": 88.8
   },
   {
     "player_name": "Francisco González Metilli",
@@ -26469,7 +26477,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.29,
     "z_score": 1.3,
-    "percentile": 87.7
+    "percentile": 87.6
   },
   {
     "player_name": "Matías Cóccaro",
@@ -26477,7 +26485,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.29,
     "z_score": 1.3,
-    "percentile": 87.7
+    "percentile": 87.6
   },
   {
     "player_name": "Óscar Romero",
@@ -26485,7 +26493,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.29,
     "z_score": 1.3,
-    "percentile": 87.7
+    "percentile": 87.6
   },
   {
     "player_name": "Diego Churín",
@@ -26493,15 +26501,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.29,
     "z_score": 1.3,
-    "percentile": 87.7
-  },
-  {
-    "player_name": "Juan Bisanz",
-    "team": "Huracán",
-    "metric": "expected_goals_per_90",
-    "value": 0.29,
-    "z_score": 1.3,
-    "percentile": 87.7
+    "percentile": 87.6
   },
   {
     "player_name": "Jonathan Herrera",
@@ -26509,7 +26509,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.29,
     "z_score": 1.3,
-    "percentile": 87.7
+    "percentile": 87.6
   },
   {
     "player_name": "Yoshan Valois",
@@ -26612,7 +26612,7 @@
     "team": "Belgrano",
     "metric": "expected_goals_per_90",
     "value": 0.24,
-    "z_score": 0.91,
+    "z_score": 0.9,
     "percentile": 83.6
   },
   {
@@ -26620,7 +26620,7 @@
     "team": "Racing Club",
     "metric": "expected_goals_per_90",
     "value": 0.24,
-    "z_score": 0.91,
+    "z_score": 0.9,
     "percentile": 83.6
   },
   {
@@ -26628,7 +26628,7 @@
     "team": "Instituto",
     "metric": "expected_goals_per_90",
     "value": 0.24,
-    "z_score": 0.91,
+    "z_score": 0.9,
     "percentile": 83.6
   },
   {
@@ -26637,7 +26637,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.23,
     "z_score": 0.83,
-    "percentile": 82.4
+    "percentile": 82.5
   },
   {
     "player_name": "Gonzalo Maroni",
@@ -26645,7 +26645,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.23,
     "z_score": 0.83,
-    "percentile": 82.4
+    "percentile": 82.5
   },
   {
     "player_name": "Ángel Di Maria",
@@ -26653,7 +26653,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.23,
     "z_score": 0.83,
-    "percentile": 82.4
+    "percentile": 82.5
   },
   {
     "player_name": "Gregorio Rodríguez",
@@ -26661,15 +26661,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.23,
     "z_score": 0.83,
-    "percentile": 82.4
-  },
-  {
-    "player_name": "Alexis Cuello",
-    "team": "San Lorenzo",
-    "metric": "expected_goals_per_90",
-    "value": 0.23,
-    "z_score": 0.83,
-    "percentile": 82.4
+    "percentile": 82.5
   },
   {
     "player_name": "Nicolás Benegas",
@@ -26677,7 +26669,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.23,
     "z_score": 0.83,
-    "percentile": 82.4
+    "percentile": 82.5
   },
   {
     "player_name": "Luciano Herrera",
@@ -26685,7 +26677,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.23,
     "z_score": 0.83,
-    "percentile": 82.4
+    "percentile": 82.5
   },
   {
     "player_name": "Santiago Ascacíbar",
@@ -26693,7 +26685,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.22,
     "z_score": 0.75,
-    "percentile": 80.6
+    "percentile": 80.8
   },
   {
     "player_name": "Rick",
@@ -26701,7 +26693,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.22,
     "z_score": 0.75,
-    "percentile": 80.6
+    "percentile": 80.8
   },
   {
     "player_name": "Tomás Conechny",
@@ -26709,7 +26701,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.22,
     "z_score": 0.75,
-    "percentile": 80.6
+    "percentile": 80.8
   },
   {
     "player_name": "Fabricio Pérez",
@@ -26717,7 +26709,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.22,
     "z_score": 0.75,
-    "percentile": 80.6
+    "percentile": 80.8
   },
   {
     "player_name": "Matías Pellegrini",
@@ -26725,7 +26717,15 @@
     "metric": "expected_goals_per_90",
     "value": 0.22,
     "z_score": 0.75,
-    "percentile": 80.6
+    "percentile": 80.8
+  },
+  {
+    "player_name": "Alexis Cuello",
+    "team": "San Lorenzo",
+    "metric": "expected_goals_per_90",
+    "value": 0.22,
+    "z_score": 0.75,
+    "percentile": 80.8
   },
   {
     "player_name": "Gonzalo Montiel",
@@ -26733,7 +26733,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.22,
     "z_score": 0.75,
-    "percentile": 80.6
+    "percentile": 80.8
   },
   {
     "player_name": "Eduardo Salvio",
@@ -26741,7 +26741,7 @@
     "metric": "expected_goals_per_90",
     "value": 0.22,
     "z_score": 0.75,
-    "percentile": 80.6
+    "percentile": 80.8
   },
   {
     "player_name": "Juan Gutiérrez",
@@ -27300,7 +27300,7 @@
     "team": "Racing Club",
     "metric": "expected_goals_per_90",
     "value": 0.12,
-    "z_score": -0.04,
+    "z_score": -0.05,
     "percentile": 62.0
   },
   {
@@ -27308,7 +27308,7 @@
     "team": "Estudiantes de Río Cuarto",
     "metric": "expected_goals_per_90",
     "value": 0.12,
-    "z_score": -0.04,
+    "z_score": -0.05,
     "percentile": 62.0
   },
   {
@@ -27316,7 +27316,7 @@
     "team": "Atlético Tucumán",
     "metric": "expected_goals_per_90",
     "value": 0.12,
-    "z_score": -0.04,
+    "z_score": -0.05,
     "percentile": 62.0
   },
   {
@@ -27324,7 +27324,7 @@
     "team": "Lanús",
     "metric": "expected_goals_per_90",
     "value": 0.12,
-    "z_score": -0.04,
+    "z_score": -0.05,
     "percentile": 62.0
   },
   {
@@ -27332,7 +27332,7 @@
     "team": "Racing Club",
     "metric": "expected_goals_per_90",
     "value": 0.12,
-    "z_score": -0.04,
+    "z_score": -0.05,
     "percentile": 62.0
   },
   {
@@ -29316,15 +29316,15 @@
     "team": "Unión Santa Fe",
     "metric": "expected_goalsontarget",
     "value": 10.0,
-    "z_score": 5.61,
+    "z_score": 5.63,
     "percentile": 100.0
   },
   {
     "player_name": "Jordy Caicedo",
     "team": "Huracán",
     "metric": "expected_goalsontarget",
-    "value": 9.4,
-    "z_score": 5.23,
+    "value": 9.0,
+    "z_score": 4.99,
     "percentile": 99.8
   },
   {
@@ -29332,7 +29332,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goalsontarget",
     "value": 8.9,
-    "z_score": 4.91,
+    "z_score": 4.92,
     "percentile": 99.7
   },
   {
@@ -29340,7 +29340,7 @@
     "team": "Independiente",
     "metric": "expected_goalsontarget",
     "value": 8.7,
-    "z_score": 4.78,
+    "z_score": 4.8,
     "percentile": 99.5
   },
   {
@@ -29348,7 +29348,7 @@
     "team": "Sarmiento",
     "metric": "expected_goalsontarget",
     "value": 8.5,
-    "z_score": 4.65,
+    "z_score": 4.67,
     "percentile": 99.3
   },
   {
@@ -29356,7 +29356,7 @@
     "team": "Central Córdoba (Santiago del Estero)",
     "metric": "expected_goalsontarget",
     "value": 8.2,
-    "z_score": 4.46,
+    "z_score": 4.48,
     "percentile": 99.1
   },
   {
@@ -29364,7 +29364,7 @@
     "team": "Instituto",
     "metric": "expected_goalsontarget",
     "value": 7.7,
-    "z_score": 4.14,
+    "z_score": 4.16,
     "percentile": 99.0
   },
   {
@@ -29372,7 +29372,7 @@
     "team": "Belgrano",
     "metric": "expected_goalsontarget",
     "value": 7.1,
-    "z_score": 3.76,
+    "z_score": 3.77,
     "percentile": 98.8
   },
   {
@@ -29380,7 +29380,7 @@
     "team": "Atlético Tucumán",
     "metric": "expected_goalsontarget",
     "value": 6.9,
-    "z_score": 3.63,
+    "z_score": 3.64,
     "percentile": 98.5
   },
   {
@@ -29388,7 +29388,7 @@
     "team": "Vélez Sarsfield",
     "metric": "expected_goalsontarget",
     "value": 6.9,
-    "z_score": 3.63,
+    "z_score": 3.64,
     "percentile": 98.5
   },
   {
@@ -29396,7 +29396,7 @@
     "team": "Unión Santa Fe",
     "metric": "expected_goalsontarget",
     "value": 6.8,
-    "z_score": 3.57,
+    "z_score": 3.58,
     "percentile": 98.3
   },
   {
@@ -29404,7 +29404,7 @@
     "team": "Deportivo Riestra",
     "metric": "expected_goalsontarget",
     "value": 6.3,
-    "z_score": 3.25,
+    "z_score": 3.26,
     "percentile": 98.1
   },
   {
@@ -29420,7 +29420,7 @@
     "team": "Tigre",
     "metric": "expected_goalsontarget",
     "value": 6.1,
-    "z_score": 3.12,
+    "z_score": 3.13,
     "percentile": 97.7
   },
   {
@@ -29428,7 +29428,7 @@
     "team": "Independiente Rivadavia",
     "metric": "expected_goalsontarget",
     "value": 5.5,
-    "z_score": 2.74,
+    "z_score": 2.75,
     "percentile": 97.5
   },
   {
@@ -29436,7 +29436,7 @@
     "team": "Tigre",
     "metric": "expected_goalsontarget",
     "value": 5.5,
-    "z_score": 2.74,
+    "z_score": 2.75,
     "percentile": 97.5
   },
   {
@@ -29444,23 +29444,23 @@
     "team": "Boca Juniors",
     "metric": "expected_goalsontarget",
     "value": 5.4,
-    "z_score": 2.67,
-    "percentile": 97.1
-  },
-  {
-    "player_name": "Rodrigo Auzmendi",
-    "team": "San Lorenzo",
-    "metric": "expected_goalsontarget",
-    "value": 5.4,
-    "z_score": 2.67,
-    "percentile": 97.1
+    "z_score": 2.68,
+    "percentile": 97.2
   },
   {
     "player_name": "Agustín Módica",
     "team": "Gimnasia de Mendoza",
     "metric": "expected_goalsontarget",
     "value": 5.3,
-    "z_score": 2.61,
+    "z_score": 2.62,
+    "percentile": 96.9
+  },
+  {
+    "player_name": "Rodrigo Auzmendi",
+    "team": "San Lorenzo",
+    "metric": "expected_goalsontarget",
+    "value": 5.3,
+    "z_score": 2.62,
     "percentile": 96.9
   },
   {
@@ -29484,7 +29484,7 @@
     "team": "Argentinos Juniors",
     "metric": "expected_goalsontarget",
     "value": 5.1,
-    "z_score": 2.48,
+    "z_score": 2.49,
     "percentile": 96.3
   },
   {
@@ -29492,7 +29492,7 @@
     "team": "Argentinos Juniors",
     "metric": "expected_goalsontarget",
     "value": 5.0,
-    "z_score": 2.42,
+    "z_score": 2.43,
     "percentile": 96.2
   },
   {
@@ -29524,7 +29524,7 @@
     "team": "River Plate",
     "metric": "expected_goalsontarget",
     "value": 4.6,
-    "z_score": 2.16,
+    "z_score": 2.17,
     "percentile": 95.5
   },
   {
@@ -29532,7 +29532,7 @@
     "team": "Independiente",
     "metric": "expected_goalsontarget",
     "value": 4.5,
-    "z_score": 2.1,
+    "z_score": 2.11,
     "percentile": 95.2
   },
   {
@@ -29540,7 +29540,7 @@
     "team": "Defensa y Justicia",
     "metric": "expected_goalsontarget",
     "value": 4.5,
-    "z_score": 2.1,
+    "z_score": 2.11,
     "percentile": 95.2
   },
   {
@@ -29548,7 +29548,7 @@
     "team": "Rosario Central",
     "metric": "expected_goalsontarget",
     "value": 4.3,
-    "z_score": 1.97,
+    "z_score": 1.98,
     "percentile": 94.9
   },
   {
@@ -29588,7 +29588,7 @@
     "team": "Newell's Old Boys",
     "metric": "expected_goalsontarget",
     "value": 4.1,
-    "z_score": 1.84,
+    "z_score": 1.85,
     "percentile": 94.0
   },
   {
@@ -29596,7 +29596,7 @@
     "team": "Boca Juniors",
     "metric": "expected_goalsontarget",
     "value": 4.1,
-    "z_score": 1.84,
+    "z_score": 1.85,
     "percentile": 94.0
   },
   {
@@ -29604,7 +29604,7 @@
     "team": "Independiente Rivadavia",
     "metric": "expected_goalsontarget",
     "value": 4.0,
-    "z_score": 1.78,
+    "z_score": 1.79,
     "percentile": 93.5
   },
   {
@@ -29612,7 +29612,7 @@
     "team": "Talleres de Córdoba",
     "metric": "expected_goalsontarget",
     "value": 4.0,
-    "z_score": 1.78,
+    "z_score": 1.79,
     "percentile": 93.5
   },
   {
@@ -29620,7 +29620,7 @@
     "team": "River Plate",
     "metric": "expected_goalsontarget",
     "value": 4.0,
-    "z_score": 1.78,
+    "z_score": 1.79,
     "percentile": 93.5
   },
   {
@@ -29636,7 +29636,7 @@
     "team": "Banfield",
     "metric": "expected_goalsontarget",
     "value": 3.8,
-    "z_score": 1.65,
+    "z_score": 1.66,
     "percentile": 92.7
   },
   {
@@ -29644,7 +29644,7 @@
     "team": "Boca Juniors",
     "metric": "expected_goalsontarget",
     "value": 3.8,
-    "z_score": 1.65,
+    "z_score": 1.66,
     "percentile": 92.7
   },
   {
@@ -29652,7 +29652,7 @@
     "team": "Independiente Rivadavia",
     "metric": "expected_goalsontarget",
     "value": 3.8,
-    "z_score": 1.65,
+    "z_score": 1.66,
     "percentile": 92.7
   },
   {
@@ -29660,7 +29660,7 @@
     "team": "River Plate",
     "metric": "expected_goalsontarget",
     "value": 3.8,
-    "z_score": 1.65,
+    "z_score": 1.66,
     "percentile": 92.7
   },
   {
@@ -29668,7 +29668,7 @@
     "team": "Defensa y Justicia",
     "metric": "expected_goalsontarget",
     "value": 3.6,
-    "z_score": 1.52,
+    "z_score": 1.53,
     "percentile": 92.3
   },
   {
@@ -29676,7 +29676,7 @@
     "team": "River Plate",
     "metric": "expected_goalsontarget",
     "value": 3.5,
-    "z_score": 1.46,
+    "z_score": 1.47,
     "percentile": 92.0
   },
   {
@@ -29684,7 +29684,7 @@
     "team": "Newell's Old Boys",
     "metric": "expected_goalsontarget",
     "value": 3.5,
-    "z_score": 1.46,
+    "z_score": 1.47,
     "percentile": 92.0
   },
   {
@@ -29708,7 +29708,7 @@
     "team": "Independiente Rivadavia",
     "metric": "expected_goalsontarget",
     "value": 3.3,
-    "z_score": 1.33,
+    "z_score": 1.34,
     "percentile": 91.3
   },
   {
@@ -29716,7 +29716,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goalsontarget",
     "value": 3.3,
-    "z_score": 1.33,
+    "z_score": 1.34,
     "percentile": 91.3
   },
   {
@@ -29724,7 +29724,7 @@
     "team": "Instituto",
     "metric": "expected_goalsontarget",
     "value": 3.3,
-    "z_score": 1.33,
+    "z_score": 1.34,
     "percentile": 91.3
   },
   {
@@ -29788,48 +29788,40 @@
     "team": "Vélez Sarsfield",
     "metric": "expected_goalsontarget",
     "value": 3.0,
-    "z_score": 1.14,
-    "percentile": 89.2
+    "z_score": 1.15,
+    "percentile": 89.3
   },
   {
     "player_name": "Tiago Palacios",
     "team": "Estudiantes de La Plata",
     "metric": "expected_goalsontarget",
     "value": 3.0,
-    "z_score": 1.14,
-    "percentile": 89.2
-  },
-  {
-    "player_name": "Juan Bisanz",
-    "team": "Huracán",
-    "metric": "expected_goalsontarget",
-    "value": 3.0,
-    "z_score": 1.14,
-    "percentile": 89.2
+    "z_score": 1.15,
+    "percentile": 89.3
   },
   {
     "player_name": "Leandro Paredes",
     "team": "Boca Juniors",
     "metric": "expected_goalsontarget",
     "value": 3.0,
-    "z_score": 1.14,
-    "percentile": 89.2
+    "z_score": 1.15,
+    "percentile": 89.3
   },
   {
     "player_name": "Jonathan Herrera",
     "team": "Sarmiento",
     "metric": "expected_goalsontarget",
     "value": 3.0,
-    "z_score": 1.14,
-    "percentile": 89.2
+    "z_score": 1.15,
+    "percentile": 89.3
   },
   {
     "player_name": "Luciano Herrera",
     "team": "Newell's Old Boys",
     "metric": "expected_goalsontarget",
     "value": 3.0,
-    "z_score": 1.14,
-    "percentile": 89.2
+    "z_score": 1.15,
+    "percentile": 89.3
   },
   {
     "player_name": "Franco Torres",
@@ -29837,14 +29829,22 @@
     "metric": "expected_goalsontarget",
     "value": 2.9,
     "z_score": 1.08,
-    "percentile": 88.6
+    "percentile": 88.7
+  },
+  {
+    "player_name": "Juan Bisanz",
+    "team": "Huracán",
+    "metric": "expected_goalsontarget",
+    "value": 2.9,
+    "z_score": 1.08,
+    "percentile": 88.7
   },
   {
     "player_name": "Francisco González Metilli",
     "team": "Belgrano",
     "metric": "expected_goalsontarget",
     "value": 2.8,
-    "z_score": 1.01,
+    "z_score": 1.02,
     "percentile": 88.4
   },
   {
@@ -29852,7 +29852,7 @@
     "team": "Deportivo Riestra",
     "metric": "expected_goalsontarget",
     "value": 2.8,
-    "z_score": 1.01,
+    "z_score": 1.02,
     "percentile": 88.4
   },
   {
@@ -30004,7 +30004,7 @@
     "team": "Estudiantes de La Plata",
     "metric": "expected_goalsontarget",
     "value": 2.3,
-    "z_score": 0.69,
+    "z_score": 0.7,
     "percentile": 84.5
   },
   {
@@ -30012,7 +30012,7 @@
     "team": "Racing Club",
     "metric": "expected_goalsontarget",
     "value": 2.3,
-    "z_score": 0.69,
+    "z_score": 0.7,
     "percentile": 84.5
   },
   {
@@ -30020,7 +30020,7 @@
     "team": "Unión Santa Fe",
     "metric": "expected_goalsontarget",
     "value": 2.3,
-    "z_score": 0.69,
+    "z_score": 0.7,
     "percentile": 84.5
   },
   {
@@ -30028,7 +30028,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goalsontarget",
     "value": 2.3,
-    "z_score": 0.69,
+    "z_score": 0.7,
     "percentile": 84.5
   },
   {
@@ -30036,7 +30036,7 @@
     "team": "Unión Santa Fe",
     "metric": "expected_goalsontarget",
     "value": 2.3,
-    "z_score": 0.69,
+    "z_score": 0.7,
     "percentile": 84.5
   },
   {
@@ -30044,7 +30044,7 @@
     "team": "Platense",
     "metric": "expected_goalsontarget",
     "value": 2.3,
-    "z_score": 0.69,
+    "z_score": 0.7,
     "percentile": 84.5
   },
   {
@@ -30268,7 +30268,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goalsontarget",
     "value": 1.8,
-    "z_score": 0.37,
+    "z_score": 0.38,
     "percentile": 78.8
   },
   {
@@ -30276,7 +30276,7 @@
     "team": "Estudiantes de Río Cuarto",
     "metric": "expected_goalsontarget",
     "value": 1.8,
-    "z_score": 0.37,
+    "z_score": 0.38,
     "percentile": 78.8
   },
   {
@@ -30284,7 +30284,7 @@
     "team": "Belgrano",
     "metric": "expected_goalsontarget",
     "value": 1.8,
-    "z_score": 0.37,
+    "z_score": 0.38,
     "percentile": 78.8
   },
   {
@@ -30292,7 +30292,7 @@
     "team": "Vélez Sarsfield",
     "metric": "expected_goalsontarget",
     "value": 1.8,
-    "z_score": 0.37,
+    "z_score": 0.38,
     "percentile": 78.8
   },
   {
@@ -30300,7 +30300,7 @@
     "team": "Instituto",
     "metric": "expected_goalsontarget",
     "value": 1.8,
-    "z_score": 0.37,
+    "z_score": 0.38,
     "percentile": 78.8
   },
   {
@@ -30308,7 +30308,7 @@
     "team": "Vélez Sarsfield",
     "metric": "expected_goalsontarget",
     "value": 1.8,
-    "z_score": 0.37,
+    "z_score": 0.38,
     "percentile": 78.8
   },
   {
@@ -33428,7 +33428,7 @@
     "team": "Newell's Old Boys",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33436,7 +33436,7 @@
     "team": "San Lorenzo",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33444,7 +33444,7 @@
     "team": "Central Córdoba (Santiago del Estero)",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33452,7 +33452,7 @@
     "team": "Lanús",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33460,7 +33460,7 @@
     "team": "Lanús",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33468,7 +33468,7 @@
     "team": "Talleres de Córdoba",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33476,7 +33476,7 @@
     "team": "Aldosivi",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33484,7 +33484,7 @@
     "team": "Newell's Old Boys",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33492,7 +33492,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33500,7 +33500,7 @@
     "team": "Gimnasia de Mendoza",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33508,7 +33508,7 @@
     "team": "Defensa y Justicia",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33516,7 +33516,7 @@
     "team": "Aldosivi",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33524,7 +33524,7 @@
     "team": "Defensa y Justicia",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33532,7 +33532,7 @@
     "team": "Independiente Rivadavia",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33540,7 +33540,7 @@
     "team": "Unión Santa Fe",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33548,7 +33548,7 @@
     "team": "Rosario Central",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33556,7 +33556,7 @@
     "team": "Aldosivi",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33564,7 +33564,7 @@
     "team": "Unión Santa Fe",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33572,7 +33572,7 @@
     "team": "Rosario Central",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33580,7 +33580,7 @@
     "team": "San Lorenzo",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33588,7 +33588,7 @@
     "team": "Racing Club",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33596,7 +33596,7 @@
     "team": "Atlético Tucumán",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33604,7 +33604,7 @@
     "team": "Lanús",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33612,7 +33612,7 @@
     "team": "San Lorenzo",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33620,7 +33620,7 @@
     "team": "Platense",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33628,7 +33628,7 @@
     "team": "Atlético Tucumán",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33636,7 +33636,7 @@
     "team": "Estudiantes de Río Cuarto",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33644,7 +33644,7 @@
     "team": "Lanús",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33652,7 +33652,7 @@
     "team": "Talleres de Córdoba",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33660,7 +33660,7 @@
     "team": "Estudiantes de La Plata",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33668,7 +33668,7 @@
     "team": "Boca Juniors",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33676,7 +33676,7 @@
     "team": "Atlético Tucumán",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33684,7 +33684,7 @@
     "team": "Huracán",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33692,7 +33692,7 @@
     "team": "Independiente",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33700,7 +33700,7 @@
     "team": "Newell's Old Boys",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33708,7 +33708,7 @@
     "team": "Aldosivi",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33716,7 +33716,7 @@
     "team": "Independiente Rivadavia",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33724,7 +33724,7 @@
     "team": "Rosario Central",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33732,7 +33732,7 @@
     "team": "Newell's Old Boys",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33740,7 +33740,7 @@
     "team": "Boca Juniors",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33748,7 +33748,7 @@
     "team": "Newell's Old Boys",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33756,7 +33756,7 @@
     "team": "Independiente",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33764,7 +33764,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33772,7 +33772,7 @@
     "team": "San Lorenzo",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33780,7 +33780,7 @@
     "team": "Lanús",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33788,7 +33788,7 @@
     "team": "Gimnasia de Mendoza",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33796,7 +33796,7 @@
     "team": "Boca Juniors",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33804,7 +33804,7 @@
     "team": "Deportivo Riestra",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33812,7 +33812,7 @@
     "team": "River Plate",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33820,7 +33820,7 @@
     "team": "Defensa y Justicia",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33828,7 +33828,7 @@
     "team": "Gimnasia La Plata",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33836,7 +33836,7 @@
     "team": "Independiente Rivadavia",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33844,7 +33844,7 @@
     "team": "Independiente",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33852,7 +33852,7 @@
     "team": "Platense",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33860,7 +33860,7 @@
     "team": "Defensa y Justicia",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33868,7 +33868,7 @@
     "team": "Tigre",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33876,7 +33876,7 @@
     "team": "Boca Juniors",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -33884,7 +33884,7 @@
     "team": "Estudiantes de Río Cuarto",
     "metric": "expected_goalsontarget",
     "value": 0.0,
-    "z_score": -0.77,
+    "z_score": -0.78,
     "percentile": 5.2
   },
   {
@@ -40525,15 +40525,7 @@
     "metric": "accurate_pass",
     "value": 39.9,
     "z_score": 1.16,
-    "percentile": 86.5
-  },
-  {
-    "player_name": "Lucas Carrizo",
-    "team": "Huracán",
-    "metric": "accurate_pass",
-    "value": 39.9,
-    "z_score": 1.16,
-    "percentile": 86.5
+    "percentile": 86.6
   },
   {
     "player_name": "Jalil Elías",
@@ -40541,7 +40533,15 @@
     "metric": "accurate_pass",
     "value": 39.8,
     "z_score": 1.15,
-    "percentile": 86.1
+    "percentile": 86.3
+  },
+  {
+    "player_name": "Lucas Carrizo",
+    "team": "Huracán",
+    "metric": "accurate_pass",
+    "value": 39.8,
+    "z_score": 1.15,
+    "percentile": 86.3
   },
   {
     "player_name": "Ignacio Méndez",
@@ -40613,15 +40613,7 @@
     "metric": "accurate_pass",
     "value": 37.5,
     "z_score": 0.96,
-    "percentile": 83.9
-  },
-  {
-    "player_name": "Nicolás Tripichio",
-    "team": "San Lorenzo",
-    "metric": "accurate_pass",
-    "value": 37.5,
-    "z_score": 0.96,
-    "percentile": 83.9
+    "percentile": 84.1
   },
   {
     "player_name": "Mauro Pittón",
@@ -40629,7 +40621,15 @@
     "metric": "accurate_pass",
     "value": 37.4,
     "z_score": 0.95,
-    "percentile": 83.6
+    "percentile": 83.7
+  },
+  {
+    "player_name": "Nicolás Tripichio",
+    "team": "San Lorenzo",
+    "metric": "accurate_pass",
+    "value": 37.4,
+    "z_score": 0.95,
+    "percentile": 83.7
   },
   {
     "player_name": "Franco Watson",
@@ -40932,7 +40932,7 @@
     "team": "Vélez Sarsfield",
     "metric": "accurate_pass",
     "value": 33.0,
-    "z_score": 0.59,
+    "z_score": 0.58,
     "percentile": 74.8
   },
   {
@@ -41309,7 +41309,7 @@
     "metric": "accurate_pass",
     "value": 29.0,
     "z_score": 0.25,
-    "percentile": 63.9
+    "percentile": 63.7
   },
   {
     "player_name": "Luca Regiardo",
@@ -41317,7 +41317,15 @@
     "metric": "accurate_pass",
     "value": 29.0,
     "z_score": 0.25,
-    "percentile": 63.9
+    "percentile": 63.7
+  },
+  {
+    "player_name": "Rodrigo Fernández",
+    "team": "Huracán",
+    "metric": "accurate_pass",
+    "value": 29.0,
+    "z_score": 0.25,
+    "percentile": 63.7
   },
   {
     "player_name": "Ulises Ortegoza",
@@ -41325,7 +41333,7 @@
     "metric": "accurate_pass",
     "value": 28.9,
     "z_score": 0.24,
-    "percentile": 63.4
+    "percentile": 63.2
   },
   {
     "player_name": "Diego Mondino",
@@ -41333,7 +41341,7 @@
     "metric": "accurate_pass",
     "value": 28.9,
     "z_score": 0.24,
-    "percentile": 63.4
+    "percentile": 63.2
   },
   {
     "player_name": "Gustavo Abregú",
@@ -41341,7 +41349,15 @@
     "metric": "accurate_pass",
     "value": 28.7,
     "z_score": 0.23,
-    "percentile": 62.9
+    "percentile": 62.6
+  },
+  {
+    "player_name": "Facundo Gulli",
+    "team": "San Lorenzo",
+    "metric": "accurate_pass",
+    "value": 28.7,
+    "z_score": 0.23,
+    "percentile": 62.6
   },
   {
     "player_name": "Franco Zapiola",
@@ -41349,23 +41365,7 @@
     "metric": "accurate_pass",
     "value": 28.7,
     "z_score": 0.23,
-    "percentile": 62.9
-  },
-  {
-    "player_name": "Facundo Gulli",
-    "team": "San Lorenzo",
-    "metric": "accurate_pass",
-    "value": 28.6,
-    "z_score": 0.22,
     "percentile": 62.6
-  },
-  {
-    "player_name": "Rodrigo Fernández",
-    "team": "Huracán",
-    "metric": "accurate_pass",
-    "value": 28.5,
-    "z_score": 0.21,
-    "percentile": 62.4
   },
   {
     "player_name": "Jhohan Romaña",
@@ -41732,7 +41732,7 @@
     "team": "Instituto",
     "metric": "accurate_pass",
     "value": 24.7,
-    "z_score": -0.1,
+    "z_score": -0.11,
     "percentile": 51.7
   },
   {
@@ -42445,7 +42445,15 @@
     "metric": "accurate_pass",
     "value": 18.2,
     "z_score": -0.65,
-    "percentile": 31.2
+    "percentile": 31.1
+  },
+  {
+    "player_name": "Hernán Galindez",
+    "team": "Huracán",
+    "metric": "accurate_pass",
+    "value": 18.2,
+    "z_score": -0.65,
+    "percentile": 31.1
   },
   {
     "player_name": "Cristian Alberto Tarragona",
@@ -42453,15 +42461,7 @@
     "metric": "accurate_pass",
     "value": 18.1,
     "z_score": -0.65,
-    "percentile": 30.8
-  },
-  {
-    "player_name": "Hernán Galindez",
-    "team": "Huracán",
-    "metric": "accurate_pass",
-    "value": 18.1,
-    "z_score": -0.65,
-    "percentile": 30.8
+    "percentile": 30.7
   },
   {
     "player_name": "Joaquín Tobio Burgos",
@@ -42548,7 +42548,7 @@
     "team": "Estudiantes de La Plata",
     "metric": "accurate_pass",
     "value": 17.0,
-    "z_score": -0.74,
+    "z_score": -0.75,
     "percentile": 27.9
   },
   {
@@ -42556,7 +42556,7 @@
     "team": "Defensa y Justicia",
     "metric": "accurate_pass",
     "value": 17.0,
-    "z_score": -0.74,
+    "z_score": -0.75,
     "percentile": 27.9
   },
   {
@@ -42564,7 +42564,7 @@
     "team": "Sarmiento",
     "metric": "accurate_pass",
     "value": 17.0,
-    "z_score": -0.74,
+    "z_score": -0.75,
     "percentile": 27.9
   },
   {
@@ -43112,12 +43112,20 @@
     "percentile": 12.4
   },
   {
+    "player_name": "Juan Bisanz",
+    "team": "Huracán",
+    "metric": "accurate_pass",
+    "value": 13.0,
+    "z_score": -1.08,
+    "percentile": 11.4
+  },
+  {
     "player_name": "Tomás Molina",
     "team": "Argentinos Juniors",
     "metric": "accurate_pass",
     "value": 13.0,
     "z_score": -1.08,
-    "percentile": 11.5
+    "percentile": 11.4
   },
   {
     "player_name": "Maximiliano Gutiérrez",
@@ -43125,7 +43133,7 @@
     "metric": "accurate_pass",
     "value": 13.0,
     "z_score": -1.08,
-    "percentile": 11.5
+    "percentile": 11.4
   },
   {
     "player_name": "Alfio Oviedo",
@@ -43133,15 +43141,7 @@
     "metric": "accurate_pass",
     "value": 13.0,
     "z_score": -1.08,
-    "percentile": 11.5
-  },
-  {
-    "player_name": "Juan Bisanz",
-    "team": "Huracán",
-    "metric": "accurate_pass",
-    "value": 12.9,
-    "z_score": -1.09,
-    "percentile": 11.0
+    "percentile": 11.4
   },
   {
     "player_name": "Alexander Díaz",
@@ -43149,7 +43149,7 @@
     "metric": "accurate_pass",
     "value": 12.9,
     "z_score": -1.09,
-    "percentile": 11.0
+    "percentile": 10.9
   },
   {
     "player_name": "Santiago Salle",
@@ -43213,7 +43213,15 @@
     "metric": "accurate_pass",
     "value": 11.8,
     "z_score": -1.18,
-    "percentile": 9.0
+    "percentile": 8.9
+  },
+  {
+    "player_name": "Orlando Gill",
+    "team": "San Lorenzo",
+    "metric": "accurate_pass",
+    "value": 11.8,
+    "z_score": -1.18,
+    "percentile": 8.9
   },
   {
     "player_name": "Leandro Díaz",
@@ -43221,15 +43229,7 @@
     "metric": "accurate_pass",
     "value": 11.7,
     "z_score": -1.19,
-    "percentile": 8.7
-  },
-  {
-    "player_name": "Orlando Gill",
-    "team": "San Lorenzo",
-    "metric": "accurate_pass",
-    "value": 11.7,
-    "z_score": -1.19,
-    "percentile": 8.7
+    "percentile": 8.5
   },
   {
     "player_name": "Ignacio Russo",
@@ -52332,7 +52332,7 @@
     "team": "River Plate",
     "metric": "accurate_long_balls",
     "value": 10.7,
-    "z_score": 5.92,
+    "z_score": 5.93,
     "percentile": 100.0
   },
   {
@@ -53277,7 +53277,7 @@
     "metric": "accurate_long_balls",
     "value": 2.6,
     "z_score": 0.4,
-    "percentile": 69.6
+    "percentile": 69.8
   },
   {
     "player_name": "Danilo Arboleda",
@@ -53285,15 +53285,7 @@
     "metric": "accurate_long_balls",
     "value": 2.6,
     "z_score": 0.4,
-    "percentile": 69.6
-  },
-  {
-    "player_name": "Emiliano Amor",
-    "team": "San Lorenzo",
-    "metric": "accurate_long_balls",
-    "value": 2.6,
-    "z_score": 0.4,
-    "percentile": 69.6
+    "percentile": 69.8
   },
   {
     "player_name": "Lautaro Blanco",
@@ -53301,7 +53293,7 @@
     "metric": "accurate_long_balls",
     "value": 2.6,
     "z_score": 0.4,
-    "percentile": 69.6
+    "percentile": 69.8
   },
   {
     "player_name": "Leonard Costa",
@@ -53309,7 +53301,7 @@
     "metric": "accurate_long_balls",
     "value": 2.6,
     "z_score": 0.4,
-    "percentile": 69.6
+    "percentile": 69.8
   },
   {
     "player_name": "Santiago Núñez",
@@ -53317,7 +53309,7 @@
     "metric": "accurate_long_balls",
     "value": 2.6,
     "z_score": 0.4,
-    "percentile": 69.6
+    "percentile": 69.8
   },
   {
     "player_name": "Franco Saavedra",
@@ -53325,7 +53317,7 @@
     "metric": "accurate_long_balls",
     "value": 2.6,
     "z_score": 0.4,
-    "percentile": 69.6
+    "percentile": 69.8
   },
   {
     "player_name": "Federico Álvarez",
@@ -53333,7 +53325,7 @@
     "metric": "accurate_long_balls",
     "value": 2.6,
     "z_score": 0.4,
-    "percentile": 69.6
+    "percentile": 69.8
   },
   {
     "player_name": "Facundo Lencioni",
@@ -53341,7 +53333,7 @@
     "metric": "accurate_long_balls",
     "value": 2.5,
     "z_score": 0.33,
-    "percentile": 68.1
+    "percentile": 68.2
   },
   {
     "player_name": "Emmanuel Ojeda",
@@ -53349,7 +53341,7 @@
     "metric": "accurate_long_balls",
     "value": 2.5,
     "z_score": 0.33,
-    "percentile": 68.1
+    "percentile": 68.2
   },
   {
     "player_name": "Milton Delgado",
@@ -53357,7 +53349,15 @@
     "metric": "accurate_long_balls",
     "value": 2.5,
     "z_score": 0.33,
-    "percentile": 68.1
+    "percentile": 68.2
+  },
+  {
+    "player_name": "Emiliano Amor",
+    "team": "San Lorenzo",
+    "metric": "accurate_long_balls",
+    "value": 2.5,
+    "z_score": 0.33,
+    "percentile": 68.2
   },
   {
     "player_name": "Fernando Tobio",
@@ -53365,7 +53365,7 @@
     "metric": "accurate_long_balls",
     "value": 2.5,
     "z_score": 0.33,
-    "percentile": 68.1
+    "percentile": 68.2
   },
   {
     "player_name": "Tomás Adoryán",
@@ -54285,7 +54285,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Matías Zaracho",
@@ -54293,7 +54293,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Bautista Merlini",
@@ -54301,7 +54301,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Dylan Aquino",
@@ -54309,7 +54309,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Edwuin Cetré",
@@ -54317,7 +54317,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Juan Gauto",
@@ -54325,7 +54325,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Alex Luna",
@@ -54333,7 +54333,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Emiliano Viveros",
@@ -54341,7 +54341,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Santiago Ascacíbar",
@@ -54349,7 +54349,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Ramiro Carrera",
@@ -54357,7 +54357,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Santiago Gabriel Montiel",
@@ -54365,7 +54365,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Facundo Gulli",
@@ -54373,7 +54373,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Dardo Federico Miloc",
@@ -54381,7 +54381,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Fermín Antonini",
@@ -54389,7 +54389,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Enzo Giménez",
@@ -54397,7 +54397,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Juan Elordi",
@@ -54405,7 +54405,7 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
   },
   {
     "player_name": "Javier Dominguez",
@@ -54413,7 +54413,15 @@
     "metric": "accurate_long_balls",
     "value": 1.3,
     "z_score": -0.48,
-    "percentile": 37.0
+    "percentile": 36.9
+  },
+  {
+    "player_name": "Lucas Blondel",
+    "team": "Huracán",
+    "metric": "accurate_long_balls",
+    "value": 1.3,
+    "z_score": -0.48,
+    "percentile": 36.9
   },
   {
     "player_name": "Leandro Díaz",
@@ -54421,7 +54429,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Walter Bou",
@@ -54429,7 +54437,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Tomás Bottari",
@@ -54437,7 +54445,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Walter Núñez",
@@ -54445,7 +54453,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Mikel Amondarain",
@@ -54453,7 +54461,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Federico Navarro",
@@ -54461,7 +54469,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Lucas Souto",
@@ -54469,7 +54477,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Rafael Barrios",
@@ -54477,15 +54485,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
-  },
-  {
-    "player_name": "Lucas Blondel",
-    "team": "Huracán",
-    "metric": "accurate_long_balls",
-    "value": 1.2,
-    "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Rodrigo Insúa",
@@ -54493,7 +54493,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Lucas Nahuel Castro",
@@ -54501,7 +54501,7 @@
     "metric": "accurate_long_balls",
     "value": 1.2,
     "z_score": -0.55,
-    "percentile": 33.5
+    "percentile": 33.4
   },
   {
     "player_name": "Giovanni Baroni",
@@ -55572,7 +55572,7 @@
     "team": "Unión Santa Fe",
     "metric": "expected_assists",
     "value": 3.7,
-    "z_score": 4.16,
+    "z_score": 4.15,
     "percentile": 99.4
   },
   {
@@ -55580,7 +55580,7 @@
     "team": "Rosario Central",
     "metric": "expected_assists",
     "value": 3.7,
-    "z_score": 4.16,
+    "z_score": 4.15,
     "percentile": 99.4
   },
   {
@@ -55676,24 +55676,24 @@
     "team": "Vélez Sarsfield",
     "metric": "expected_assists",
     "value": 3.0,
-    "z_score": 3.24,
-    "percentile": 98.0
+    "z_score": 3.23,
+    "percentile": 97.9
+  },
+  {
+    "player_name": "Oscar Cortés",
+    "team": "Huracán",
+    "metric": "expected_assists",
+    "value": 3.0,
+    "z_score": 3.23,
+    "percentile": 97.9
   },
   {
     "player_name": "Santiago Solari",
     "team": "Racing Club",
     "metric": "expected_assists",
     "value": 3.0,
-    "z_score": 3.24,
-    "percentile": 98.0
-  },
-  {
-    "player_name": "Oscar Cortés",
-    "team": "Huracán",
-    "metric": "expected_assists",
-    "value": 2.9,
-    "z_score": 3.1,
-    "percentile": 97.8
+    "z_score": 3.23,
+    "percentile": 97.9
   },
   {
     "player_name": "Sebastián Prieto",
@@ -55701,7 +55701,7 @@
     "metric": "expected_assists",
     "value": 2.9,
     "z_score": 3.1,
-    "percentile": 97.8
+    "percentile": 97.7
   },
   {
     "player_name": "Alexis Cuello",
@@ -55820,7 +55820,7 @@
     "team": "Instituto",
     "metric": "expected_assists",
     "value": 2.3,
-    "z_score": 2.32,
+    "z_score": 2.31,
     "percentile": 95.8
   },
   {
@@ -55828,7 +55828,7 @@
     "team": "Sarmiento",
     "metric": "expected_assists",
     "value": 2.3,
-    "z_score": 2.32,
+    "z_score": 2.31,
     "percentile": 95.8
   },
   {
@@ -55836,7 +55836,7 @@
     "team": "Boca Juniors",
     "metric": "expected_assists",
     "value": 2.3,
-    "z_score": 2.32,
+    "z_score": 2.31,
     "percentile": 95.8
   },
   {
@@ -55844,7 +55844,7 @@
     "team": "Tigre",
     "metric": "expected_assists",
     "value": 2.3,
-    "z_score": 2.32,
+    "z_score": 2.31,
     "percentile": 95.8
   },
   {
@@ -55852,7 +55852,7 @@
     "team": "Lanús",
     "metric": "expected_assists",
     "value": 2.3,
-    "z_score": 2.32,
+    "z_score": 2.31,
     "percentile": 95.8
   },
   {
@@ -55860,7 +55860,7 @@
     "team": "River Plate",
     "metric": "expected_assists",
     "value": 2.3,
-    "z_score": 2.32,
+    "z_score": 2.31,
     "percentile": 95.8
   },
   {
@@ -55868,7 +55868,7 @@
     "team": "Deportivo Riestra",
     "metric": "expected_assists",
     "value": 2.3,
-    "z_score": 2.32,
+    "z_score": 2.31,
     "percentile": 95.8
   },
   {
@@ -58392,6 +58392,14 @@
     "percentile": 61.4
   },
   {
+    "player_name": "Juan Rattalino",
+    "team": "San Lorenzo",
+    "metric": "expected_assists",
+    "value": 0.4,
+    "z_score": -0.18,
+    "percentile": 61.4
+  },
+  {
     "player_name": "Juan Sforza",
     "team": "Talleres de Córdoba",
     "metric": "expected_assists",
@@ -58573,7 +58581,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Horacio Tijanovich",
@@ -58581,7 +58589,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Augusto Max",
@@ -58589,7 +58597,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Bruno Sepúlveda",
@@ -58597,7 +58605,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Damián Pizarro",
@@ -58605,7 +58613,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Emiliano Álvarez",
@@ -58613,7 +58621,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Jonatan Gómez",
@@ -58621,7 +58629,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Julián Ceballos",
@@ -58629,7 +58637,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Nicolás Demartini",
@@ -58637,7 +58645,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Nicolás Palavecino",
@@ -58645,7 +58653,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Pablo Magnín",
@@ -58653,7 +58661,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Ramiro Ruiz",
@@ -58661,7 +58669,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Román Riquelme",
@@ -58669,7 +58677,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Agustin Quiroga",
@@ -58677,7 +58685,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Alan Daian Laprida",
@@ -58685,7 +58693,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Alejo Osella",
@@ -58693,7 +58701,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Álvaro Ocampo",
@@ -58701,7 +58709,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Braian Romero",
@@ -58709,7 +58717,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Bruno Leyes",
@@ -58717,7 +58725,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Elías Verón",
@@ -58725,7 +58733,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Enzo Martínez",
@@ -58733,7 +58741,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Ezequiel Cerutti",
@@ -58741,7 +58749,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Facundo Miño",
@@ -58749,7 +58757,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Facundo Suárez",
@@ -58757,7 +58765,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Fernando Alarcón",
@@ -58765,7 +58773,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Francisco Álvarez",
@@ -58773,7 +58781,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Gaspar Duarte",
@@ -58781,7 +58789,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Gonzalo Lencina",
@@ -58789,7 +58797,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Ignacio Ramírez",
@@ -58797,7 +58805,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Iván Erquiaga",
@@ -58805,7 +58813,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Jano Gordon",
@@ -58813,7 +58821,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Javier Ferreira",
@@ -58821,7 +58829,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Jhonatan Candia",
@@ -58829,7 +58837,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "José Canale",
@@ -58837,15 +58845,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
-  },
-  {
-    "player_name": "Juan Rattalino",
-    "team": "San Lorenzo",
-    "metric": "expected_assists",
-    "value": 0.3,
-    "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Julián Mavilla",
@@ -58853,7 +58853,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Lautaro Giaccone",
@@ -58861,7 +58861,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Lautaro Villegas",
@@ -58869,7 +58869,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Leandro Fernández",
@@ -58877,7 +58877,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Luca Regiardo",
@@ -58885,7 +58885,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Lucas Menossi",
@@ -58893,7 +58893,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Manuel Brondo",
@@ -58901,7 +58901,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Marcelo Cabrera",
@@ -58909,7 +58909,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Marco Di Césare",
@@ -58917,7 +58917,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Martín Barrios",
@@ -58925,7 +58925,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Martín Río",
@@ -58933,7 +58933,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Mateo Cáceres",
@@ -58941,7 +58941,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Matías Cóccaro",
@@ -58949,7 +58949,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Matías Gallardo",
@@ -58957,7 +58957,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Matías García",
@@ -58965,7 +58965,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Matías Viña",
@@ -58973,7 +58973,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Misael Aguirre",
@@ -58981,7 +58981,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Rafael Barrios",
@@ -58989,7 +58989,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Rafael Borré",
@@ -58997,7 +58997,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Rodrigo Bogarín",
@@ -59005,7 +59005,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Rodrigo Márquez",
@@ -59013,7 +59013,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Santiago Lencina",
@@ -59021,7 +59021,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Santiago Sosa",
@@ -59029,7 +59029,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Saúl Salcedo",
@@ -59037,7 +59037,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Thaiel Peralta",
@@ -59045,7 +59045,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Valentino Simoni",
@@ -59053,7 +59053,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "Yair Arismendi",
@@ -59061,7 +59061,7 @@
     "metric": "expected_assists",
     "value": 0.3,
     "z_score": -0.31,
-    "percentile": 55.7
+    "percentile": 55.6
   },
   {
     "player_name": "David Romero",
@@ -66412,7 +66412,7 @@
     "team": "Instituto",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.76,
-    "z_score": 3.47,
+    "z_score": 3.46,
     "percentile": 99.8
   },
   {
@@ -66420,7 +66420,7 @@
     "team": "Boca Juniors",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.69,
-    "z_score": 3.04,
+    "z_score": 3.03,
     "percentile": 99.5
   },
   {
@@ -66629,15 +66629,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.51,
     "z_score": 1.93,
-    "percentile": 93.2
-  },
-  {
-    "player_name": "Jordy Caicedo",
-    "team": "Huracán",
-    "metric": "_expected_goals_and_expected_assists_per_90",
-    "value": 0.51,
-    "z_score": 1.93,
-    "percentile": 93.2
+    "percentile": 93.3
   },
   {
     "player_name": "Franco Torres",
@@ -66645,7 +66637,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.51,
     "z_score": 1.93,
-    "percentile": 93.2
+    "percentile": 93.3
   },
   {
     "player_name": "Marcelo Estigarribia",
@@ -66653,23 +66645,31 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.51,
     "z_score": 1.93,
-    "percentile": 93.2
+    "percentile": 93.3
   },
   {
     "player_name": "David Romero",
     "team": "Tigre",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.5,
-    "z_score": 1.87,
-    "percentile": 92.5
+    "z_score": 1.86,
+    "percentile": 92.6
+  },
+  {
+    "player_name": "Jordy Caicedo",
+    "team": "Huracán",
+    "metric": "_expected_goals_and_expected_assists_per_90",
+    "value": 0.5,
+    "z_score": 1.86,
+    "percentile": 92.6
   },
   {
     "player_name": "Agustín Auzmendi",
     "team": "Gimnasia La Plata",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.5,
-    "z_score": 1.87,
-    "percentile": 92.5
+    "z_score": 1.86,
+    "percentile": 92.6
   },
   {
     "player_name": "Gabriel Ávalos",
@@ -66677,7 +66677,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.49,
     "z_score": 1.8,
-    "percentile": 92.0
+    "percentile": 91.9
   },
   {
     "player_name": "Ignacio Ramírez",
@@ -66685,7 +66685,15 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.49,
     "z_score": 1.8,
-    "percentile": 92.0
+    "percentile": 91.9
+  },
+  {
+    "player_name": "Rodrigo Auzmendi",
+    "team": "San Lorenzo",
+    "metric": "_expected_goals_and_expected_assists_per_90",
+    "value": 0.49,
+    "z_score": 1.8,
+    "percentile": 91.9
   },
   {
     "player_name": "Marcelo Torres",
@@ -66693,15 +66701,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.48,
     "z_score": 1.74,
-    "percentile": 91.6
-  },
-  {
-    "player_name": "Rodrigo Auzmendi",
-    "team": "San Lorenzo",
-    "metric": "_expected_goals_and_expected_assists_per_90",
-    "value": 0.48,
-    "z_score": 1.74,
-    "percentile": 91.6
+    "percentile": 91.5
   },
   {
     "player_name": "Lucas Passerini",
@@ -66853,7 +66853,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.39,
     "z_score": 1.19,
-    "percentile": 86.6
+    "percentile": 86.5
   },
   {
     "player_name": "Tomás Molina",
@@ -66861,7 +66861,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.39,
     "z_score": 1.19,
-    "percentile": 86.6
+    "percentile": 86.5
   },
   {
     "player_name": "Facundo Jainikoski",
@@ -66869,7 +66869,15 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.39,
     "z_score": 1.19,
-    "percentile": 86.6
+    "percentile": 86.5
+  },
+  {
+    "player_name": "Juan Bisanz",
+    "team": "Huracán",
+    "metric": "_expected_goals_and_expected_assists_per_90",
+    "value": 0.39,
+    "z_score": 1.19,
+    "percentile": 86.5
   },
   {
     "player_name": "Bautista Merlini",
@@ -66877,7 +66885,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.39,
     "z_score": 1.19,
-    "percentile": 86.6
+    "percentile": 86.5
   },
   {
     "player_name": "Elías Cabrera",
@@ -66885,7 +66893,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.39,
     "z_score": 1.19,
-    "percentile": 86.6
+    "percentile": 86.5
   },
   {
     "player_name": "Florián Monzón",
@@ -66893,7 +66901,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.38,
     "z_score": 1.13,
-    "percentile": 85.3
+    "percentile": 85.2
   },
   {
     "player_name": "Matías Pellegrini",
@@ -66901,15 +66909,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.38,
     "z_score": 1.13,
-    "percentile": 85.3
-  },
-  {
-    "player_name": "Alexis Cuello",
-    "team": "San Lorenzo",
-    "metric": "_expected_goals_and_expected_assists_per_90",
-    "value": 0.38,
-    "z_score": 1.13,
-    "percentile": 85.3
+    "percentile": 85.2
   },
   {
     "player_name": "Lucas Zelarayán",
@@ -66917,7 +66917,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.38,
     "z_score": 1.13,
-    "percentile": 85.3
+    "percentile": 85.2
   },
   {
     "player_name": "Leandro Paredes",
@@ -66925,7 +66925,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.38,
     "z_score": 1.13,
-    "percentile": 85.3
+    "percentile": 85.2
   },
   {
     "player_name": "Matías Fonseca",
@@ -66933,15 +66933,23 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.38,
     "z_score": 1.13,
-    "percentile": 85.3
+    "percentile": 85.2
+  },
+  {
+    "player_name": "Alexis Cuello",
+    "team": "San Lorenzo",
+    "metric": "_expected_goals_and_expected_assists_per_90",
+    "value": 0.37,
+    "z_score": 1.06,
+    "percentile": 84.4
   },
   {
     "player_name": "David Zalazar",
     "team": "Banfield",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.37,
-    "z_score": 1.07,
-    "percentile": 84.5
+    "z_score": 1.06,
+    "percentile": 84.4
   },
   {
     "player_name": "Maximiliano Gutiérrez",
@@ -66949,7 +66957,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.36,
     "z_score": 1.0,
-    "percentile": 83.8
+    "percentile": 83.6
   },
   {
     "player_name": "Facundo Lencioni",
@@ -66957,7 +66965,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.36,
     "z_score": 1.0,
-    "percentile": 83.8
+    "percentile": 83.6
   },
   {
     "player_name": "Antony Alonso",
@@ -66965,7 +66973,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.36,
     "z_score": 1.0,
-    "percentile": 83.8
+    "percentile": 83.6
   },
   {
     "player_name": "Nicolás Benegas",
@@ -66973,7 +66981,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.36,
     "z_score": 1.0,
-    "percentile": 83.8
+    "percentile": 83.6
   },
   {
     "player_name": "Misael Aguirre",
@@ -66981,7 +66989,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.36,
     "z_score": 1.0,
-    "percentile": 83.8
+    "percentile": 83.6
   },
   {
     "player_name": "Yoshan Valois",
@@ -66989,7 +66997,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.35,
     "z_score": 0.94,
-    "percentile": 82.3
+    "percentile": 82.2
   },
   {
     "player_name": "Ignacio Russo",
@@ -66997,7 +67005,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.35,
     "z_score": 0.94,
-    "percentile": 82.3
+    "percentile": 82.2
   },
   {
     "player_name": "Julián Fernández",
@@ -67005,15 +67013,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.35,
     "z_score": 0.94,
-    "percentile": 82.3
-  },
-  {
-    "player_name": "Juan Bisanz",
-    "team": "Huracán",
-    "metric": "_expected_goals_and_expected_assists_per_90",
-    "value": 0.35,
-    "z_score": 0.94,
-    "percentile": 82.3
+    "percentile": 82.2
   },
   {
     "player_name": "Matías Zaracho",
@@ -67021,7 +67021,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.35,
     "z_score": 0.94,
-    "percentile": 82.3
+    "percentile": 82.2
   },
   {
     "player_name": "Walter Bou",
@@ -67029,7 +67029,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.35,
     "z_score": 0.94,
-    "percentile": 82.3
+    "percentile": 82.2
   },
   {
     "player_name": "Rubén Botta",
@@ -67037,7 +67037,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.35,
     "z_score": 0.94,
-    "percentile": 82.3
+    "percentile": 82.2
   },
   {
     "player_name": "Jonathan Herrera",
@@ -67045,7 +67045,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.35,
     "z_score": 0.94,
-    "percentile": 82.3
+    "percentile": 82.2
   },
   {
     "player_name": "Tomás Conechny",
@@ -67524,7 +67524,7 @@
     "team": "Unión Santa Fe",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.24,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 66.9
   },
   {
@@ -67532,7 +67532,7 @@
     "team": "Racing Club",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.24,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 66.9
   },
   {
@@ -67540,7 +67540,7 @@
     "team": "Gimnasia La Plata",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.24,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 66.9
   },
   {
@@ -67548,7 +67548,7 @@
     "team": "Belgrano",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.24,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 66.9
   },
   {
@@ -67556,7 +67556,7 @@
     "team": "Independiente Rivadavia",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.24,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 66.9
   },
   {
@@ -67564,7 +67564,7 @@
     "team": "Boca Juniors",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.24,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 66.9
   },
   {
@@ -67572,7 +67572,7 @@
     "team": "Atlético Tucumán",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.24,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 66.9
   },
   {
@@ -67580,7 +67580,7 @@
     "team": "Deportivo Riestra",
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.24,
-    "z_score": 0.27,
+    "z_score": 0.26,
     "percentile": 66.9
   },
   {
@@ -68357,7 +68357,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Gastón Ávila",
@@ -68365,7 +68365,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Jabes Saralegui",
@@ -68373,7 +68373,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Martín Garay",
@@ -68381,7 +68381,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Carlos Izquierdoz",
@@ -68389,7 +68389,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Ezequiel Muñoz",
@@ -68397,7 +68397,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Cristian Zabala",
@@ -68405,7 +68405,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Lautaro Vargas",
@@ -68413,7 +68413,15 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
+  },
+  {
+    "player_name": "Lucas Blondel",
+    "team": "Huracán",
+    "metric": "_expected_goals_and_expected_assists_per_90",
+    "value": 0.12,
+    "z_score": -0.47,
+    "percentile": 41.7
   },
   {
     "player_name": "Milton Delgado",
@@ -68421,7 +68429,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Santiago Salle",
@@ -68429,7 +68437,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Tomás Palacios",
@@ -68437,7 +68445,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Facundo Zabala",
@@ -68445,7 +68453,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Matías Vera",
@@ -68453,7 +68461,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Eros Mancuso",
@@ -68461,7 +68469,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Esteban Fernández",
@@ -68469,7 +68477,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Natanael Guzmán",
@@ -68477,7 +68485,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
+    "percentile": 41.7
   },
   {
     "player_name": "Nicolás Tripichio",
@@ -68485,15 +68493,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.12,
     "z_score": -0.47,
-    "percentile": 41.8
-  },
-  {
-    "player_name": "Lucas Blondel",
-    "team": "Huracán",
-    "metric": "_expected_goals_and_expected_assists_per_90",
-    "value": 0.11,
-    "z_score": -0.54,
-    "percentile": 39.0
+    "percentile": 41.7
   },
   {
     "player_name": "Nicolás Sansotre",
@@ -68501,7 +68501,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.11,
     "z_score": -0.54,
-    "percentile": 39.0
+    "percentile": 38.9
   },
   {
     "player_name": "Armando Méndez",
@@ -68509,7 +68509,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.11,
     "z_score": -0.54,
-    "percentile": 39.0
+    "percentile": 38.9
   },
   {
     "player_name": "Javier Dominguez",
@@ -68517,7 +68517,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.11,
     "z_score": -0.54,
-    "percentile": 39.0
+    "percentile": 38.9
   },
   {
     "player_name": "Rodrigo González",
@@ -68525,7 +68525,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.11,
     "z_score": -0.54,
-    "percentile": 39.0
+    "percentile": 38.9
   },
   {
     "player_name": "Rodrigo Herrera",
@@ -68533,7 +68533,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.11,
     "z_score": -0.54,
-    "percentile": 39.0
+    "percentile": 38.9
   },
   {
     "player_name": "Sebastián Medina",
@@ -68541,7 +68541,7 @@
     "metric": "_expected_goals_and_expected_assists_per_90",
     "value": 0.11,
     "z_score": -0.54,
-    "percentile": 39.0
+    "percentile": 38.9
   },
   {
     "player_name": "Ignacio Méndez",
@@ -71493,7 +71493,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Diego Sosa",
@@ -71501,7 +71501,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Lisandro López",
@@ -71509,7 +71509,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Alejo Veliz",
@@ -71517,7 +71517,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Federico Álvarez",
@@ -71525,7 +71525,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Ezequiel Ham",
@@ -71533,7 +71533,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Augusto Max",
@@ -71541,7 +71541,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Federico Navarro",
@@ -71549,7 +71549,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Rodrigo Auzmendi",
@@ -71557,7 +71557,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Jonathan Herrera",
@@ -71565,7 +71565,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Agustín Auzmendi",
@@ -71573,7 +71573,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Yoshan Valois",
@@ -71581,7 +71581,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Brahian Cuello",
@@ -71589,7 +71589,15 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
+  },
+  {
+    "player_name": "Rodrigo Fernández",
+    "team": "Huracán",
+    "metric": "won_contest",
+    "value": 0.6,
+    "z_score": -0.32,
+    "percentile": 46.4
   },
   {
     "player_name": "Elías Gómez",
@@ -71597,7 +71605,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Lucas Suárez",
@@ -71605,7 +71613,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Sebastián Driussi",
@@ -71613,7 +71621,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Ulises Ortegoza",
@@ -71621,7 +71629,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Enzo Giménez",
@@ -71629,7 +71637,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Iván Morales",
@@ -71637,7 +71645,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Jerónimo Gómez Mattar",
@@ -71645,7 +71653,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Norberto Briasco",
@@ -71653,7 +71661,7 @@
     "metric": "won_contest",
     "value": 0.6,
     "z_score": -0.32,
-    "percentile": 46.5
+    "percentile": 46.4
   },
   {
     "player_name": "Ronaldo Dejesús",
@@ -71661,7 +71669,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Leandro Paredes",
@@ -71669,7 +71677,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Bruno Zuculini",
@@ -71677,7 +71685,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Fausto Vera",
@@ -71685,7 +71693,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Claudio Baeza",
@@ -71693,7 +71701,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Alexis Soto",
@@ -71701,7 +71709,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Giuliano Cerato",
@@ -71709,7 +71717,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Matías Vera",
@@ -71717,7 +71725,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Nacho Pais",
@@ -71725,7 +71733,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Kevin Ortiz",
@@ -71733,7 +71741,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Mauro Méndez",
@@ -71741,7 +71749,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Ezequiel Piovi",
@@ -71749,7 +71757,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Leonardo Heredia",
@@ -71757,7 +71765,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Mauro Pittón",
@@ -71765,7 +71773,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Sebastián Medina",
@@ -71773,7 +71781,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Lucas Martínez Quarta",
@@ -71781,7 +71789,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Thiago Santamaría",
@@ -71789,7 +71797,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Ignacio Russo",
@@ -71797,7 +71805,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Ramiro Carrera",
@@ -71805,7 +71813,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Pedro Silva Torrejón",
@@ -71813,7 +71821,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Nicolás Fernández",
@@ -71821,7 +71829,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Lucas Souto",
@@ -71829,7 +71837,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Manuel García",
@@ -71837,7 +71845,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Leandro Lozano",
@@ -71845,15 +71853,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
-  },
-  {
-    "player_name": "Rodrigo Fernández",
-    "team": "Huracán",
-    "metric": "won_contest",
-    "value": 0.5,
-    "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Miguel Merentiel",
@@ -71861,7 +71861,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Michael Santos",
@@ -71869,7 +71869,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Elías Pereyra",
@@ -71877,7 +71877,7 @@
     "metric": "won_contest",
     "value": 0.5,
     "z_score": -0.48,
-    "percentile": 40.3
+    "percentile": 40.2
   },
   {
     "player_name": "Nazareno Colombo",
@@ -75979,8 +75979,8 @@
     "player_name": "Danilo Arboleda",
     "team": "San Lorenzo",
     "metric": "defensive_contributions",
-    "value": 14.6,
-    "z_score": 3.06,
+    "value": 14.7,
+    "z_score": 3.1,
     "percentile": 100.0
   },
   {
@@ -76020,7 +76020,7 @@
     "team": "Central Córdoba (Santiago del Estero)",
     "metric": "defensive_contributions",
     "value": 12.4,
-    "z_score": 2.37,
+    "z_score": 2.36,
     "percentile": 98.7
   },
   {
@@ -76028,7 +76028,7 @@
     "team": "Defensa y Justicia",
     "metric": "defensive_contributions",
     "value": 12.4,
-    "z_score": 2.37,
+    "z_score": 2.36,
     "percentile": 98.7
   },
   {
@@ -76412,7 +76412,7 @@
     "team": "Boca Juniors",
     "metric": "defensive_contributions",
     "value": 9.0,
-    "z_score": 1.29,
+    "z_score": 1.28,
     "percentile": 87.4
   },
   {
@@ -76420,7 +76420,7 @@
     "team": "Estudiantes de Río Cuarto",
     "metric": "defensive_contributions",
     "value": 9.0,
-    "z_score": 1.29,
+    "z_score": 1.28,
     "percentile": 87.4
   },
   {
@@ -76541,7 +76541,7 @@
     "metric": "defensive_contributions",
     "value": 8.1,
     "z_score": 1.0,
-    "percentile": 83.6
+    "percentile": 83.5
   },
   {
     "player_name": "Ignacio Ovando",
@@ -76549,7 +76549,7 @@
     "metric": "defensive_contributions",
     "value": 8.1,
     "z_score": 1.0,
-    "percentile": 83.6
+    "percentile": 83.5
   },
   {
     "player_name": "Alcides Benítez",
@@ -76557,7 +76557,15 @@
     "metric": "defensive_contributions",
     "value": 8.1,
     "z_score": 1.0,
-    "percentile": 83.6
+    "percentile": 83.5
+  },
+  {
+    "player_name": "Rodrigo Fernández",
+    "team": "Huracán",
+    "metric": "defensive_contributions",
+    "value": 8.1,
+    "z_score": 1.0,
+    "percentile": 83.5
   },
   {
     "player_name": "Sheyko Studer",
@@ -76565,7 +76573,7 @@
     "metric": "defensive_contributions",
     "value": 8.0,
     "z_score": 0.97,
-    "percentile": 82.8
+    "percentile": 82.7
   },
   {
     "player_name": "Ezequiel Cannavo",
@@ -76573,7 +76581,7 @@
     "metric": "defensive_contributions",
     "value": 8.0,
     "z_score": 0.97,
-    "percentile": 82.8
+    "percentile": 82.7
   },
   {
     "player_name": "Juan Cruz Randazzo",
@@ -76581,15 +76589,7 @@
     "metric": "defensive_contributions",
     "value": 8.0,
     "z_score": 0.97,
-    "percentile": 82.8
-  },
-  {
-    "player_name": "Rodrigo Fernández",
-    "team": "Huracán",
-    "metric": "defensive_contributions",
-    "value": 8.0,
-    "z_score": 0.97,
-    "percentile": 82.8
+    "percentile": 82.7
   },
   {
     "player_name": "Tomás Silva",
@@ -76741,7 +76741,7 @@
     "metric": "defensive_contributions",
     "value": 7.3,
     "z_score": 0.74,
-    "percentile": 77.6
+    "percentile": 77.7
   },
   {
     "player_name": "Kevin Lomónaco",
@@ -76749,7 +76749,7 @@
     "metric": "defensive_contributions",
     "value": 7.3,
     "z_score": 0.74,
-    "percentile": 77.6
+    "percentile": 77.7
   },
   {
     "player_name": "Augusto Max",
@@ -76757,15 +76757,7 @@
     "metric": "defensive_contributions",
     "value": 7.3,
     "z_score": 0.74,
-    "percentile": 77.6
-  },
-  {
-    "player_name": "Lucas Carrizo",
-    "team": "Huracán",
-    "metric": "defensive_contributions",
-    "value": 7.3,
-    "z_score": 0.74,
-    "percentile": 77.6
+    "percentile": 77.7
   },
   {
     "player_name": "Federico Navarro",
@@ -76773,15 +76765,15 @@
     "metric": "defensive_contributions",
     "value": 7.3,
     "z_score": 0.74,
-    "percentile": 77.6
+    "percentile": 77.7
   },
   {
-    "player_name": "Lucas Blondel",
+    "player_name": "Lucas Carrizo",
     "team": "Huracán",
     "metric": "defensive_contributions",
     "value": 7.2,
     "z_score": 0.71,
-    "percentile": 76.4
+    "percentile": 76.7
   },
   {
     "player_name": "Claudio Baeza",
@@ -76789,7 +76781,7 @@
     "metric": "defensive_contributions",
     "value": 7.2,
     "z_score": 0.71,
-    "percentile": 76.4
+    "percentile": 76.7
   },
   {
     "player_name": "Nacho Pais",
@@ -76797,7 +76789,7 @@
     "metric": "defensive_contributions",
     "value": 7.2,
     "z_score": 0.71,
-    "percentile": 76.4
+    "percentile": 76.7
   },
   {
     "player_name": "Valentín Moreno",
@@ -76805,7 +76797,7 @@
     "metric": "defensive_contributions",
     "value": 7.2,
     "z_score": 0.71,
-    "percentile": 76.4
+    "percentile": 76.7
   },
   {
     "player_name": "Javier Dominguez",
@@ -76813,7 +76805,15 @@
     "metric": "defensive_contributions",
     "value": 7.2,
     "z_score": 0.71,
-    "percentile": 76.4
+    "percentile": 76.7
+  },
+  {
+    "player_name": "Lucas Blondel",
+    "team": "Huracán",
+    "metric": "defensive_contributions",
+    "value": 7.1,
+    "z_score": 0.68,
+    "percentile": 76.0
   },
   {
     "player_name": "Lucas Robertone",
@@ -79196,7 +79196,7 @@
     "team": "Rosario Central",
     "metric": "defensive_contributions",
     "value": 1.1,
-    "z_score": -1.23,
+    "z_score": -1.22,
     "percentile": 7.0
   },
   {
@@ -79204,7 +79204,7 @@
     "team": "San Lorenzo",
     "metric": "defensive_contributions",
     "value": 1.1,
-    "z_score": -1.23,
+    "z_score": -1.22,
     "percentile": 7.0
   },
   {
@@ -79572,7 +79572,7 @@
     "team": "River Plate",
     "metric": "total_tackle",
     "value": 3.3,
-    "z_score": 1.9,
+    "z_score": 1.91,
     "percentile": 95.8
   },
   {
@@ -79580,7 +79580,7 @@
     "team": "Banfield",
     "metric": "total_tackle",
     "value": 3.3,
-    "z_score": 1.9,
+    "z_score": 1.91,
     "percentile": 95.8
   },
   {
@@ -79588,7 +79588,7 @@
     "team": "Atlético Tucumán",
     "metric": "total_tackle",
     "value": 3.3,
-    "z_score": 1.9,
+    "z_score": 1.91,
     "percentile": 95.8
   },
   {
@@ -79596,7 +79596,7 @@
     "team": "Estudiantes de La Plata",
     "metric": "total_tackle",
     "value": 3.3,
-    "z_score": 1.9,
+    "z_score": 1.91,
     "percentile": 95.8
   },
   {
@@ -80293,7 +80293,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Matías Galarza",
@@ -80301,7 +80301,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Cristian Paz",
@@ -80309,7 +80309,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Alejandro Maciel",
@@ -80317,7 +80317,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Tomás González",
@@ -80325,7 +80325,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Danilo Arboleda",
@@ -80333,7 +80333,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Joaquín García",
@@ -80341,7 +80341,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Franco Vázquez",
@@ -80349,7 +80349,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Leandro Paredes",
@@ -80357,7 +80357,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Dardo Federico Miloc",
@@ -80365,7 +80365,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Federico Álvarez",
@@ -80373,15 +80373,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
-  },
-  {
-    "player_name": "Lucas Carrizo",
-    "team": "Huracán",
-    "metric": "total_tackle",
-    "value": 2.1,
-    "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Marcos Acuña",
@@ -80389,7 +80381,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Ignacio Galván",
@@ -80397,7 +80389,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Jhon Córdoba",
@@ -80405,7 +80397,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Federico Gino",
@@ -80413,7 +80405,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Alexis Soto",
@@ -80421,7 +80413,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Gonzalo Martínez",
@@ -80429,7 +80421,7 @@
     "metric": "total_tackle",
     "value": 2.1,
     "z_score": 0.5,
-    "percentile": 72.5
+    "percentile": 72.7
   },
   {
     "player_name": "Enzo Giménez",
@@ -80437,7 +80429,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Fernando Alarcón",
@@ -80445,7 +80437,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Nicolás Barros Schelotto",
@@ -80453,7 +80445,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Gastón Benedetti",
@@ -80461,7 +80453,15 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
+  },
+  {
+    "player_name": "Lucas Carrizo",
+    "team": "Huracán",
+    "metric": "total_tackle",
+    "value": 2.0,
+    "z_score": 0.38,
+    "percentile": 68.9
   },
   {
     "player_name": "Facundo Samuel Guch",
@@ -80469,7 +80469,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Eric Meza",
@@ -80477,7 +80477,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "David Martínez",
@@ -80485,7 +80485,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Nicolás Capraro",
@@ -80493,7 +80493,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Thiago Santamaría",
@@ -80501,7 +80501,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Ramiro Hernandes",
@@ -80509,7 +80509,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Rubén Botta",
@@ -80517,7 +80517,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Alan Sosa",
@@ -80525,7 +80525,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Dylan Aquino",
@@ -80533,7 +80533,7 @@
     "metric": "total_tackle",
     "value": 2.0,
     "z_score": 0.38,
-    "percentile": 68.8
+    "percentile": 68.9
   },
   {
     "player_name": "Pedro Silva Torrejón",
@@ -85931,8 +85931,8 @@
     "player_name": "Danilo Arboleda",
     "team": "San Lorenzo",
     "metric": "effective_clearance",
-    "value": 10.3,
-    "z_score": 3.61,
+    "value": 10.4,
+    "z_score": 3.65,
     "percentile": 100.0
   },
   {
@@ -86536,20 +86536,12 @@
     "percentile": 82.5
   },
   {
-    "player_name": "Lucas Carrizo",
-    "team": "Huracán",
-    "metric": "effective_clearance",
-    "value": 4.1,
-    "z_score": 0.82,
-    "percentile": 82.1
-  },
-  {
     "player_name": "Luciano Paredes",
     "team": "Gimnasia de Mendoza",
     "metric": "effective_clearance",
     "value": 4.1,
     "z_score": 0.82,
-    "percentile": 82.1
+    "percentile": 82.2
   },
   {
     "player_name": "Lucas Martínez Quarta",
@@ -86557,7 +86549,7 @@
     "metric": "effective_clearance",
     "value": 4.0,
     "z_score": 0.77,
-    "percentile": 81.5
+    "percentile": 81.7
   },
   {
     "player_name": "Federico Álvarez",
@@ -86565,7 +86557,15 @@
     "metric": "effective_clearance",
     "value": 4.0,
     "z_score": 0.77,
-    "percentile": 81.5
+    "percentile": 81.7
+  },
+  {
+    "player_name": "Lucas Carrizo",
+    "team": "Huracán",
+    "metric": "effective_clearance",
+    "value": 4.0,
+    "z_score": 0.77,
+    "percentile": 81.7
   },
   {
     "player_name": "Nicolás Demartini",
@@ -86573,7 +86573,7 @@
     "metric": "effective_clearance",
     "value": 4.0,
     "z_score": 0.77,
-    "percentile": 81.5
+    "percentile": 81.7
   },
   {
     "player_name": "Kevin Lomónaco",
@@ -86589,7 +86589,15 @@
     "metric": "effective_clearance",
     "value": 3.8,
     "z_score": 0.68,
-    "percentile": 80.8
+    "percentile": 80.7
+  },
+  {
+    "player_name": "Rodrigo Fernández",
+    "team": "Huracán",
+    "metric": "effective_clearance",
+    "value": 3.8,
+    "z_score": 0.68,
+    "percentile": 80.7
   },
   {
     "player_name": "Tomás Ezequiel Guidara",
@@ -86597,7 +86605,7 @@
     "metric": "effective_clearance",
     "value": 3.7,
     "z_score": 0.64,
-    "percentile": 80.1
+    "percentile": 80.0
   },
   {
     "player_name": "Alejo Osella",
@@ -86605,7 +86613,7 @@
     "metric": "effective_clearance",
     "value": 3.7,
     "z_score": 0.64,
-    "percentile": 80.1
+    "percentile": 80.0
   },
   {
     "player_name": "Franco Pardo",
@@ -86613,15 +86621,7 @@
     "metric": "effective_clearance",
     "value": 3.7,
     "z_score": 0.64,
-    "percentile": 80.1
-  },
-  {
-    "player_name": "Rodrigo Fernández",
-    "team": "Huracán",
-    "metric": "effective_clearance",
-    "value": 3.7,
-    "z_score": 0.64,
-    "percentile": 80.1
+    "percentile": 80.0
   },
   {
     "player_name": "Valentín Moreno",
@@ -86629,7 +86629,7 @@
     "metric": "effective_clearance",
     "value": 3.7,
     "z_score": 0.64,
-    "percentile": 80.1
+    "percentile": 80.0
   },
   {
     "player_name": "Juan Elordi",
@@ -86741,7 +86741,7 @@
     "metric": "effective_clearance",
     "value": 3.0,
     "z_score": 0.32,
-    "percentile": 76.1
+    "percentile": 76.2
   },
   {
     "player_name": "Gabriel Neves",
@@ -86749,7 +86749,7 @@
     "metric": "effective_clearance",
     "value": 3.0,
     "z_score": 0.32,
-    "percentile": 76.1
+    "percentile": 76.2
   },
   {
     "player_name": "Armando Méndez",
@@ -86757,15 +86757,7 @@
     "metric": "effective_clearance",
     "value": 3.0,
     "z_score": 0.32,
-    "percentile": 76.1
-  },
-  {
-    "player_name": "Lucas Blondel",
-    "team": "Huracán",
-    "metric": "effective_clearance",
-    "value": 3.0,
-    "z_score": 0.32,
-    "percentile": 76.1
+    "percentile": 76.2
   },
   {
     "player_name": "César Ibáñez",
@@ -86773,7 +86765,7 @@
     "metric": "effective_clearance",
     "value": 2.9,
     "z_score": 0.28,
-    "percentile": 74.9
+    "percentile": 75.0
   },
   {
     "player_name": "Juan Saborido",
@@ -86781,7 +86773,7 @@
     "metric": "effective_clearance",
     "value": 2.9,
     "z_score": 0.28,
-    "percentile": 74.9
+    "percentile": 75.0
   },
   {
     "player_name": "Alcides Benítez",
@@ -86789,7 +86781,7 @@
     "metric": "effective_clearance",
     "value": 2.9,
     "z_score": 0.28,
-    "percentile": 74.9
+    "percentile": 75.0
   },
   {
     "player_name": "Ezequiel Cannavo",
@@ -86797,7 +86789,7 @@
     "metric": "effective_clearance",
     "value": 2.9,
     "z_score": 0.28,
-    "percentile": 74.9
+    "percentile": 75.0
   },
   {
     "player_name": "Leandro Lozano",
@@ -86805,7 +86797,15 @@
     "metric": "effective_clearance",
     "value": 2.9,
     "z_score": 0.28,
-    "percentile": 74.9
+    "percentile": 75.0
+  },
+  {
+    "player_name": "Lucas Blondel",
+    "team": "Huracán",
+    "metric": "effective_clearance",
+    "value": 2.9,
+    "z_score": 0.28,
+    "percentile": 75.0
   },
   {
     "player_name": "Maximiliano Amarfil",
@@ -86813,7 +86813,7 @@
     "metric": "effective_clearance",
     "value": 2.9,
     "z_score": 0.28,
-    "percentile": 74.9
+    "percentile": 75.0
   },
   {
     "player_name": "Pedro Silva Torrejón",
@@ -92220,7 +92220,7 @@
     "team": "Instituto",
     "metric": "ball_recovery",
     "value": 7.0,
-    "z_score": 1.24,
+    "z_score": 1.25,
     "percentile": 91.0
   },
   {
@@ -92228,7 +92228,7 @@
     "team": "Huracán",
     "metric": "ball_recovery",
     "value": 7.0,
-    "z_score": 1.24,
+    "z_score": 1.25,
     "percentile": 91.0
   },
   {
@@ -92236,7 +92236,7 @@
     "team": "Lanús",
     "metric": "ball_recovery",
     "value": 7.0,
-    "z_score": 1.24,
+    "z_score": 1.25,
     "percentile": 91.0
   },
   {
@@ -92285,15 +92285,7 @@
     "metric": "ball_recovery",
     "value": 6.8,
     "z_score": 1.14,
-    "percentile": 89.0
-  },
-  {
-    "player_name": "Nicolás Tripichio",
-    "team": "San Lorenzo",
-    "metric": "ball_recovery",
-    "value": 6.8,
-    "z_score": 1.14,
-    "percentile": 89.0
+    "percentile": 89.1
   },
   {
     "player_name": "Bruno Leyes",
@@ -92301,7 +92293,7 @@
     "metric": "ball_recovery",
     "value": 6.8,
     "z_score": 1.14,
-    "percentile": 89.0
+    "percentile": 89.1
   },
   {
     "player_name": "Matías Recalde",
@@ -92309,7 +92301,7 @@
     "metric": "ball_recovery",
     "value": 6.8,
     "z_score": 1.14,
-    "percentile": 89.0
+    "percentile": 89.1
   },
   {
     "player_name": "Cristian Zabala",
@@ -92317,7 +92309,15 @@
     "metric": "ball_recovery",
     "value": 6.7,
     "z_score": 1.09,
-    "percentile": 88.0
+    "percentile": 88.1
+  },
+  {
+    "player_name": "Nicolás Tripichio",
+    "team": "San Lorenzo",
+    "metric": "ball_recovery",
+    "value": 6.7,
+    "z_score": 1.09,
+    "percentile": 88.1
   },
   {
     "player_name": "Luca Regiardo",
@@ -92325,7 +92325,7 @@
     "metric": "ball_recovery",
     "value": 6.7,
     "z_score": 1.09,
-    "percentile": 88.0
+    "percentile": 88.1
   },
   {
     "player_name": "Jeronimo Russo",
@@ -92333,7 +92333,7 @@
     "metric": "ball_recovery",
     "value": 6.7,
     "z_score": 1.09,
-    "percentile": 88.0
+    "percentile": 88.1
   },
   {
     "player_name": "Bautista Merlini",
@@ -92341,7 +92341,7 @@
     "metric": "ball_recovery",
     "value": 6.7,
     "z_score": 1.09,
-    "percentile": 88.0
+    "percentile": 88.1
   },
   {
     "player_name": "Rodrigo Fernández",
@@ -92349,7 +92349,7 @@
     "metric": "ball_recovery",
     "value": 6.7,
     "z_score": 1.09,
-    "percentile": 88.0
+    "percentile": 88.1
   },
   {
     "player_name": "Ignacio Fernández",
@@ -93836,7 +93836,7 @@
     "team": "Independiente Rivadavia",
     "metric": "ball_recovery",
     "value": 4.2,
-    "z_score": -0.25,
+    "z_score": -0.24,
     "percentile": 43.9
   },
   {
@@ -93844,7 +93844,7 @@
     "team": "Atlético Tucumán",
     "metric": "ball_recovery",
     "value": 4.2,
-    "z_score": -0.25,
+    "z_score": -0.24,
     "percentile": 43.9
   },
   {
@@ -93852,7 +93852,7 @@
     "team": "San Lorenzo",
     "metric": "ball_recovery",
     "value": 4.2,
-    "z_score": -0.25,
+    "z_score": -0.24,
     "percentile": 43.9
   },
   {
@@ -93860,7 +93860,7 @@
     "team": "Aldosivi",
     "metric": "ball_recovery",
     "value": 4.2,
-    "z_score": -0.25,
+    "z_score": -0.24,
     "percentile": 43.9
   },
   {
@@ -93868,7 +93868,7 @@
     "team": "River Plate",
     "metric": "ball_recovery",
     "value": 4.2,
-    "z_score": -0.25,
+    "z_score": -0.24,
     "percentile": 43.9
   },
   {
@@ -93876,7 +93876,7 @@
     "team": "River Plate",
     "metric": "ball_recovery",
     "value": 4.2,
-    "z_score": -0.25,
+    "z_score": -0.24,
     "percentile": 43.9
   },
   {
@@ -93884,7 +93884,7 @@
     "team": "Aldosivi",
     "metric": "ball_recovery",
     "value": 4.2,
-    "z_score": -0.25,
+    "z_score": -0.24,
     "percentile": 43.9
   },
   {
@@ -94469,7 +94469,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Ezequiel Herrera",
@@ -94477,7 +94477,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Carlos Izquierdoz",
@@ -94485,7 +94485,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Emanuel Mammana",
@@ -94493,15 +94493,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
-  },
-  {
-    "player_name": "Emiliano Amor",
-    "team": "San Lorenzo",
-    "metric": "ball_recovery",
-    "value": 3.4,
-    "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Danilo Arboleda",
@@ -94509,7 +94501,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Santiago Gabriel Montiel",
@@ -94517,7 +94509,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Edwuin Cetré",
@@ -94525,7 +94517,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Gabriel Obredor",
@@ -94533,7 +94525,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Nicolás Benegas",
@@ -94541,7 +94533,7 @@
     "metric": "ball_recovery",
     "value": 3.4,
     "z_score": -0.67,
-    "percentile": 25.3
+    "percentile": 25.4
   },
   {
     "player_name": "Ignacio Ovando",
@@ -94549,7 +94541,7 @@
     "metric": "ball_recovery",
     "value": 3.3,
     "z_score": -0.72,
-    "percentile": 23.2
+    "percentile": 23.3
   },
   {
     "player_name": "Matías Abaldo",
@@ -94557,7 +94549,15 @@
     "metric": "ball_recovery",
     "value": 3.3,
     "z_score": -0.72,
-    "percentile": 23.2
+    "percentile": 23.3
+  },
+  {
+    "player_name": "Emiliano Amor",
+    "team": "San Lorenzo",
+    "metric": "ball_recovery",
+    "value": 3.3,
+    "z_score": -0.72,
+    "percentile": 23.3
   },
   {
     "player_name": "Lucas Souto",
@@ -94565,7 +94565,7 @@
     "metric": "ball_recovery",
     "value": 3.3,
     "z_score": -0.72,
-    "percentile": 23.2
+    "percentile": 23.3
   },
   {
     "player_name": "Santiago Fernández",
@@ -94573,7 +94573,7 @@
     "metric": "ball_recovery",
     "value": 3.3,
     "z_score": -0.72,
-    "percentile": 23.2
+    "percentile": 23.3
   },
   {
     "player_name": "Facundo Colidio",
@@ -94581,7 +94581,7 @@
     "metric": "ball_recovery",
     "value": 3.3,
     "z_score": -0.72,
-    "percentile": 23.2
+    "percentile": 23.3
   },
   {
     "player_name": "Emanuel Coronel",
@@ -94589,7 +94589,7 @@
     "metric": "ball_recovery",
     "value": 3.3,
     "z_score": -0.72,
-    "percentile": 23.2
+    "percentile": 23.3
   },
   {
     "player_name": "Jonathan Galván",
@@ -94597,7 +94597,7 @@
     "metric": "ball_recovery",
     "value": 3.3,
     "z_score": -0.72,
-    "percentile": 23.2
+    "percentile": 23.3
   },
   {
     "player_name": "Tomás Nasif",
@@ -94605,7 +94605,7 @@
     "metric": "ball_recovery",
     "value": 3.3,
     "z_score": -0.72,
-    "percentile": 23.2
+    "percentile": 23.3
   },
   {
     "player_name": "Antony Alonso",
@@ -96912,16 +96912,16 @@
     "percentile": 58.4
   },
   {
-    "player_name": "Nicolás Tripichio",
-    "team": "San Lorenzo",
+    "player_name": "Adrián Fernández",
+    "team": "Racing Club",
     "metric": "poss_won_att_3rd",
     "value": 0.4,
     "z_score": 0.07,
     "percentile": 58.4
   },
   {
-    "player_name": "Adrián Fernández",
-    "team": "Racing Club",
+    "player_name": "Nicolás Tripichio",
+    "team": "San Lorenzo",
     "metric": "poss_won_att_3rd",
     "value": 0.4,
     "z_score": 0.07,
@@ -99532,7 +99532,7 @@
     "team": "Belgrano",
     "metric": "_goals_prevented",
     "value": 7.5,
-    "z_score": 2.31,
+    "z_score": 2.34,
     "percentile": 100.0
   },
   {
@@ -99540,23 +99540,23 @@
     "team": "Barracas Central",
     "metric": "_goals_prevented",
     "value": 7.2,
-    "z_score": 2.19,
+    "z_score": 2.22,
     "percentile": 96.4
   },
   {
     "player_name": "Hernán Galindez",
     "team": "Huracán",
     "metric": "_goals_prevented",
-    "value": 4.7,
-    "z_score": 1.21,
+    "value": 4.6,
+    "z_score": 1.19,
     "percentile": 92.9
   },
   {
     "player_name": "Orlando Gill",
     "team": "San Lorenzo",
     "metric": "_goals_prevented",
-    "value": 4.5,
-    "z_score": 1.13,
+    "value": 4.0,
+    "z_score": 0.95,
     "percentile": 89.3
   },
   {
@@ -99564,7 +99564,7 @@
     "team": "Central Córdoba (Santiago del Estero)",
     "metric": "_goals_prevented",
     "value": 3.8,
-    "z_score": 0.85,
+    "z_score": 0.87,
     "percentile": 85.7
   },
   {
@@ -99572,7 +99572,7 @@
     "team": "Gimnasia de Mendoza",
     "metric": "_goals_prevented",
     "value": 3.2,
-    "z_score": 0.61,
+    "z_score": 0.63,
     "percentile": 82.1
   },
   {
@@ -99580,7 +99580,7 @@
     "team": "Deportivo Riestra",
     "metric": "_goals_prevented",
     "value": 3.1,
-    "z_score": 0.57,
+    "z_score": 0.59,
     "percentile": 78.6
   },
   {
@@ -99588,7 +99588,7 @@
     "team": "Defensa y Justicia",
     "metric": "_goals_prevented",
     "value": 2.8,
-    "z_score": 0.46,
+    "z_score": 0.47,
     "percentile": 73.2
   },
   {
@@ -99596,7 +99596,7 @@
     "team": "River Plate",
     "metric": "_goals_prevented",
     "value": 2.8,
-    "z_score": 0.46,
+    "z_score": 0.47,
     "percentile": 73.2
   },
   {
@@ -99604,7 +99604,7 @@
     "team": "Estudiantes de La Plata",
     "metric": "_goals_prevented",
     "value": 2.6,
-    "z_score": 0.38,
+    "z_score": 0.39,
     "percentile": 67.9
   },
   {
@@ -99612,7 +99612,7 @@
     "team": "Boca Juniors",
     "metric": "_goals_prevented",
     "value": 2.2,
-    "z_score": 0.22,
+    "z_score": 0.23,
     "percentile": 64.3
   },
   {
@@ -99620,7 +99620,7 @@
     "team": "Talleres de Córdoba",
     "metric": "_goals_prevented",
     "value": 2.1,
-    "z_score": 0.18,
+    "z_score": 0.19,
     "percentile": 60.7
   },
   {
@@ -99628,7 +99628,7 @@
     "team": "Independiente Rivadavia",
     "metric": "_goals_prevented",
     "value": 1.8,
-    "z_score": 0.06,
+    "z_score": 0.07,
     "percentile": 55.4
   },
   {
@@ -99636,7 +99636,7 @@
     "team": "Tigre",
     "metric": "_goals_prevented",
     "value": 1.8,
-    "z_score": 0.06,
+    "z_score": 0.07,
     "percentile": 55.4
   },
   {
@@ -99644,7 +99644,7 @@
     "team": "Defensa y Justicia",
     "metric": "_goals_prevented",
     "value": 1.2,
-    "z_score": -0.18,
+    "z_score": -0.17,
     "percentile": 50.0
   },
   {
@@ -99652,7 +99652,7 @@
     "team": "Rosario Central",
     "metric": "_goals_prevented",
     "value": 1.1,
-    "z_score": -0.22,
+    "z_score": -0.21,
     "percentile": 46.4
   },
   {
@@ -99660,7 +99660,7 @@
     "team": "Banfield",
     "metric": "_goals_prevented",
     "value": 1.0,
-    "z_score": -0.26,
+    "z_score": -0.25,
     "percentile": 41.1
   },
   {
@@ -99668,7 +99668,7 @@
     "team": "Gimnasia La Plata",
     "metric": "_goals_prevented",
     "value": 1.0,
-    "z_score": -0.26,
+    "z_score": -0.25,
     "percentile": 41.1
   },
   {
@@ -99724,7 +99724,7 @@
     "team": "Argentinos Juniors",
     "metric": "_goals_prevented",
     "value": -0.9,
-    "z_score": -1.0,
+    "z_score": -1.01,
     "percentile": 14.3
   },
   {
@@ -99732,7 +99732,7 @@
     "team": "Lanús",
     "metric": "_goals_prevented",
     "value": -1.3,
-    "z_score": -1.16,
+    "z_score": -1.17,
     "percentile": 10.7
   },
   {
@@ -99748,7 +99748,7 @@
     "team": "Unión Santa Fe",
     "metric": "_goals_prevented",
     "value": -3.9,
-    "z_score": -2.19,
+    "z_score": -2.2,
     "percentile": 3.6
   },
   {
@@ -127324,7 +127324,7 @@
     "team": "Boca Juniors",
     "metric": "_goals_prevented_per_90",
     "value": 0.185,
-    "z_score": 0.67,
+    "z_score": 0.68,
     "percentile": 78.6
   },
   {
@@ -127332,8 +127332,8 @@
     "team": "Central Córdoba (Santiago del Estero)",
     "metric": "_goals_prevented_per_90",
     "value": 0.23,
-    "z_score": 1.0,
-    "percentile": 89.3
+    "z_score": 1.02,
+    "percentile": 92.9
   },
   {
     "player_name": "Axel Werner",
@@ -127364,7 +127364,7 @@
     "team": "Gimnasia de Mendoza",
     "metric": "_goals_prevented_per_90",
     "value": 0.178,
-    "z_score": 0.62,
+    "z_score": 0.63,
     "percentile": 75.0
   },
   {
@@ -127380,7 +127380,7 @@
     "team": "Banfield",
     "metric": "_goals_prevented_per_90",
     "value": 0.05,
-    "z_score": -0.32,
+    "z_score": -0.31,
     "percentile": 39.3
   },
   {
@@ -127388,7 +127388,7 @@
     "team": "Tigre",
     "metric": "_goals_prevented_per_90",
     "value": 0.095,
-    "z_score": 0.01,
+    "z_score": 0.02,
     "percentile": 57.1
   },
   {
@@ -127396,7 +127396,7 @@
     "team": "Estudiantes de La Plata",
     "metric": "_goals_prevented_per_90",
     "value": 0.193,
-    "z_score": 0.73,
+    "z_score": 0.74,
     "percentile": 82.1
   },
   {
@@ -127404,23 +127404,23 @@
     "team": "Talleres de Córdoba",
     "metric": "_goals_prevented_per_90",
     "value": 0.124,
-    "z_score": 0.22,
+    "z_score": 0.23,
     "percentile": 64.3
   },
   {
     "player_name": "Hernán Galindez",
     "team": "Huracán",
     "metric": "_goals_prevented_per_90",
-    "value": 0.217,
-    "z_score": 0.9,
-    "percentile": 85.7
+    "value": 0.212,
+    "z_score": 0.88,
+    "percentile": 89.3
   },
   {
     "player_name": "Ignacio Arce",
     "team": "Deportivo Riestra",
     "metric": "_goals_prevented_per_90",
     "value": 0.155,
-    "z_score": 0.45,
+    "z_score": 0.46,
     "percentile": 71.4
   },
   {
@@ -127436,7 +127436,7 @@
     "team": "Rosario Central",
     "metric": "_goals_prevented_per_90",
     "value": 0.057,
-    "z_score": -0.27,
+    "z_score": -0.26,
     "percentile": 46.4
   },
   {
@@ -127460,7 +127460,7 @@
     "team": "Barracas Central",
     "metric": "_goals_prevented_per_90",
     "value": 0.484,
-    "z_score": 2.86,
+    "z_score": 2.89,
     "percentile": 100.0
   },
   {
@@ -127468,7 +127468,7 @@
     "team": "Defensa y Justicia",
     "metric": "_goals_prevented_per_90",
     "value": 0.14,
-    "z_score": 0.34,
+    "z_score": 0.35,
     "percentile": 67.9
   },
   {
@@ -127476,7 +127476,7 @@
     "team": "Unión Santa Fe",
     "metric": "_goals_prevented_per_90",
     "value": -0.177,
-    "z_score": -1.98,
+    "z_score": -1.99,
     "percentile": 3.6
   },
   {
@@ -127500,16 +127500,16 @@
     "team": "Independiente Rivadavia",
     "metric": "_goals_prevented_per_90",
     "value": 0.091,
-    "z_score": -0.02,
+    "z_score": -0.01,
     "percentile": 53.6
   },
   {
     "player_name": "Orlando Gill",
     "team": "San Lorenzo",
     "metric": "_goals_prevented_per_90",
-    "value": 0.237,
-    "z_score": 1.05,
-    "percentile": 92.9
+    "value": 0.21,
+    "z_score": 0.87,
+    "percentile": 85.7
   },
   {
     "player_name": "Rodrigo Rey",
@@ -127524,7 +127524,7 @@
     "team": "River Plate",
     "metric": "_goals_prevented_per_90",
     "value": 0.117,
-    "z_score": 0.17,
+    "z_score": 0.18,
     "percentile": 60.7
   },
   {
@@ -127532,7 +127532,7 @@
     "team": "Belgrano",
     "metric": "_goals_prevented_per_90",
     "value": 0.321,
-    "z_score": 1.67,
+    "z_score": 1.69,
     "percentile": 96.4
   },
   {
@@ -127990,14 +127990,6 @@
     "value": 11.0,
     "z_score": 0.07,
     "percentile": 51.8
-  },
-  {
-    "player_name": "Alexis Canelo",
-    "team": "Atlético Tucumán",
-    "metric": "matches_played",
-    "value": 1.0,
-    "z_score": -1.44,
-    "percentile": 5.0
   },
   {
     "player_name": "Alexis Castro",
@@ -133638,6 +133630,14 @@
     "value": 5.0,
     "z_score": -0.83,
     "percentile": 29.8
+  },
+  {
+    "player_name": "Pedro Canelo",
+    "team": "Atlético Tucumán",
+    "metric": "matches_played",
+    "value": 1.0,
+    "z_score": -1.44,
+    "percentile": 5.0
   },
   {
     "player_name": "Pedro Ramírez",
