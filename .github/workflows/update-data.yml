@@ -30,6 +30,33 @@ jobs:
         with:
           python-version: "3.11"
 
+      # ESPN empezó a devolver 403 "Access Denied" al scraper el 2026-08-04
+      # (ver el manejo de esto en etl/fetch_espn_lpf.py, _FETCH_ERRORS/
+      # _failed.json). Hipótesis con más sustento: sin caché entre corridas
+      # (data/raw/espn/cache/ está en .gitignore -- cada corrida de CI
+      # arranca de un checkout limpio), cada corrida repetía ~300 requests
+      # de resumen de partido YA conocidos (son inmutables una vez jugado el
+      # partido) además de los nuevos, 4 veces por día -- un patrón de
+      # volumen típico de lo que un WAF marca como abuso. Este cache
+      # persiste esos resúmenes entre corridas vía GitHub Actions (no se
+      # commitea al repo, sería mucho peso e irrelevante para el sitio) --
+      # de acá en más cada corrida solo pide lo que todavía no tiene.
+      # key único por run + restore-keys por prefijo: el patrón estándar
+      # para que el cache ACUMULE entre corridas (una key ya guardada es
+      # inmutable, no se puede pisar).
+      - name: Cache de resúmenes de partido ESPN (entre corridas)
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          # Solo *_summary.json (un partido YA JUGADO no cambia -- cachear
+          # para siempre es correcto). Los rosters (team_*_roster.json) se
+          # excluyen a propósito: un plantel SÍ cambia (altas/bajas), así
+          # que cachearlos para siempre los dejaría viejos en silencio --
+          # se siguen pidiendo frescos en cada corrida, igual que antes.
+          path: data/raw/espn/cache/*_summary.json
+          key: espn-summary-cache-${{ github.run_id }}
+          restore-keys: |
+            espn-summary-cache-
+
       - name: Instalar dependencias del pipeline
         run: pip install -r etl/requirements.txt
 

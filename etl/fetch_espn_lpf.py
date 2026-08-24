@@ -58,7 +58,9 @@ from __future__ import annotations
 import csv
 import json
 import os
+import random
 import sys
+import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -74,7 +76,38 @@ COMPETITION_NAME = "Liga Profesional"
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
-HEADERS = {"User-Agent": UA, "Accept": "application/json", "Accept-Language": "es-AR,es;q=0.9"}
+HEADERS = {
+    "User-Agent": UA,
+    "Accept": "application/json",
+    "Accept-Language": "es-AR,es;q=0.9",
+    # Referer real de un usuario navegando el sitio -- ESPN empezó a devolver
+    # 403 "Access Denied" a este scraper desde GitHub Actions el 2026-08-04
+    # (ver _FETCH_ERRORS/_failed.json). Hipótesis con más sustento tras
+    # revisarlo: ~340 requests por corrida x 4 corridas/día sin límite de
+    # velocidad ni caché entre corridas (data/raw/espn/cache/ está en
+    # .gitignore, así que en CI arranca frío siempre) es un patrón típico de
+    # lo que un WAF marca como abuso. No se puede confirmar en vivo desde
+    # este entorno (el proxy de la sandbox bloquea site.api.espn.com de
+    # plano) -- este Referer es una mejora barata y de bajo riesgo, no la
+    # mitigación principal (ver RATE_LIMIT_S / _get_with_retry / el caché
+    # persistente entre corridas en update-data.yml, que sí atacan la causa
+    # más probable).
+    "Referer": "https://www.espn.com/soccer/league/_/name/arg.1",
+}
+
+# Rate limiting + backoff: sin esto, una corrida completa hace ~340 requests
+# (8-10 de scoreboard + 1 por partido jugado + 30 de roster + standings +
+# lista de equipos) en ráfaga, sin pausa, 4 veces por día -- el patrón que
+# más probablemente generó el bloqueo. RATE_LIMIT_S es una pausa mínima
+# entre CUALQUIER request (éxito o error); MAX_RETRIES/BACKOFF_BASE_S son
+# para 429/5xx/timeouts (errores transitorios, tiene sentido reintentar). Un
+# 403 se reintenta como mucho una vez -- si es un bloqueo pegajoso por IP,
+# insistir en la misma corrida no lo destraba y solo suma requests contra un
+# origen que ya nos está bloqueando.
+RATE_LIMIT_S = float(os.environ.get("ESPN_RATE_LIMIT_S", "0.35"))
+MAX_RETRIES = 3
+BACKOFF_BASE_S = 1.5
+RETRYABLE_STATUS = {429, 500, 502, 503, 504}
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "data" / "raw" / "espn"
@@ -151,20 +184,58 @@ _FETCH_ERRORS: list[dict] = []
 
 
 def _get(url: str, params: dict | None = None) -> dict | None:
-    try:
-        r = requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT_S)
-    except Exception as e:  # noqa: BLE001
-        print(f"  ESPN error {url}: {type(e).__name__}: {e}", file=sys.stderr)
-        _FETCH_ERRORS.append({"url": url, "params": params, "error": f"{type(e).__name__}: {e}"})
-        return None
-    if r.status_code != 200:
-        print(f"  ESPN {url} -> HTTP {r.status_code}: {r.text[:200]}", file=sys.stderr)
-        _FETCH_ERRORS.append({"url": url, "params": params, "status": r.status_code, "body": r.text[:300]})
-        return None
-    try:
-        return r.json()
-    except ValueError:
-        return None
+    # Pausa mínima antes de CUALQUIER request (éxito o error de la anterior)
+    # -- ver el comentario en RATE_LIMIT_S. Jitter para no generar un patrón
+    # de intervalos perfectamente regulares.
+    time.sleep(RATE_LIMIT_S + random.uniform(0, RATE_LIMIT_S * 0.4))
+
+    attempt = 0
+    last_error: dict | None = None
+    r: requests.Response | None = None
+    while True:
+        attempt += 1
+        try:
+            r = requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT_S)
+        except Exception as e:  # noqa: BLE001
+            r = None
+            last_error = {"url": url, "params": params, "error": f"{type(e).__name__}: {e}"}
+            print(f"  ESPN error {url}: {type(e).__name__}: {e}", file=sys.stderr)
+        else:
+            if r.status_code == 200:
+                try:
+                    return r.json()
+                except ValueError:
+                    return None
+            last_error = {"url": url, "params": params, "status": r.status_code, "body": r.text[:300]}
+            print(f"  ESPN {url} -> HTTP {r.status_code}: {r.text[:200]}", file=sys.stderr)
+            # 403 (bloqueo, posiblemente pegajoso por IP/fingerprint): un
+            # reintento nomás, por si fue un blip transitorio -- machacar la
+            # misma request contra un origen que ya nos está rechazando no
+            # ayuda y puede empeorar la reputación. 429/5xx sí ameritan
+            # reintentar con backoff -- son las señales clásicas de "bajá el
+            # ritmo", no de bloqueo definitivo.
+            if r.status_code != 403 and r.status_code not in RETRYABLE_STATUS:
+                break
+            if r.status_code == 403 and attempt >= 2:
+                break
+
+        if attempt >= MAX_RETRIES:
+            break
+        backoff = BACKOFF_BASE_S * (2 ** (attempt - 1)) + random.uniform(0, 1)
+        # 429 puede traer Retry-After: si lo manda, es el propio servidor
+        # diciendo cuánto esperar -- respetarlo en vez del backoff calculado
+        # (con un techo para no colgar el job si pide algo desmedido).
+        retry_after = r.headers.get("Retry-After") if r is not None else None
+        if retry_after:
+            try:
+                backoff = max(backoff, min(float(retry_after), 30.0))
+            except ValueError:
+                pass
+        print(f"  ESPN reintento {attempt}/{MAX_RETRIES - 1} para {url} en {backoff:.1f}s", file=sys.stderr)
+        time.sleep(backoff)
+
+    _FETCH_ERRORS.append(last_error or {"url": url, "params": params, "error": "unknown"})
+    return None
 
 
 def _cache_path(event_id: str) -> Path:
@@ -654,10 +725,31 @@ def run() -> None:
     # summaries vaciaba team_stats/goal_events en silencio, el mismo bug que
     # se está arreglando en este archivo pero para estas dos tablas.
     pre_partial_errors = len(_FETCH_ERRORS)
+    # Circuit breaker: si ESPN está bloqueando, la mayoría de los ~300
+    # resúmenes ya están en cache (_get_summary_cached no pega a la red para
+    # esos) -- pero los partidos nuevos SÍ necesitan red, y machacar contra
+    # un origen que ya está rechazando todo (con reintentos+backoff cada
+    # uno) puede tardar minutos por nada. Si se acumulan fallos SEGUIDOS
+    # (se resetea con cualquier éxito, incluido un cache hit), se corta acá
+    # -- los partidos restantes quedan pendientes para la próxima corrida,
+    # no se pierden (had_partial_errors ya protege que no se pisen los CSV
+    # con datos parciales).
+    SUMMARY_CIRCUIT_BREAKER = 8
+    consecutive_summary_failures = 0
     for match_id, home_team, away_team, score_by_team in finished:
         summary = _get_summary_cached(match_id)
         if not summary:
+            consecutive_summary_failures += 1
+            if consecutive_summary_failures >= SUMMARY_CIRCUIT_BREAKER:
+                print(
+                    f"::warning title=ESPN summaries cortado::{consecutive_summary_failures} fallos seguidos "
+                    "pidiendo resumenes de partido -- se corta el loop para no seguir insistiendo contra un "
+                    "origen que ya esta bloqueando. Los partidos restantes quedan para una proxima corrida.",
+                    file=sys.stderr,
+                )
+                break
             continue
+        consecutive_summary_failures = 0
         team_stats_rows.extend(_parse_team_stats(summary, match_id, score_by_team))
         apps, tact = _parse_player_stats(summary, match_id, retrieved_at)
         appearances_rows.extend(apps)
