@@ -340,6 +340,26 @@ def build():
         except Exception:
             return None
 
+    # matches/team_match_stats/standings (a diferencia de goal_events/squads/
+    # team_profile) no traen su propia columna retrieved_at por fila -- ver
+    # fetch_espn_lpf.py, MATCHES_COLS/TEAM_STATS_COLS/STANDINGS_COLS. Sin esto
+    # su "as_of" en meta.json quedaba SIEMPRE en generated_at (la hora de esta
+    # corrida), aunque ESPN llevara semanas sin devolver nada nuevo -- el
+    # badge de confianza del sitio mostraba "actualizado hoy" para partidos y
+    # tabla mientras el resto de las fuentes sí mostraba honestamente la
+    # fecha vieja. fetch_espn_lpf.py deja un sidecar (_fetch_status.json) con
+    # la hora real del último fetch exitoso; se usa como as_of de estas dos
+    # fuentes en vez de generated_at.
+    def _espn_fetched_at() -> str | None:
+        path = ROOT / "data" / "raw" / "espn" / "_fetch_status.json"
+        try:
+            status = json.loads(path.read_text(encoding="utf-8"))
+            return status.get("fetched_at")
+        except Exception:
+            return None
+
+    espn_fetched_at = _espn_fetched_at()
+
     # 30 clubes participan de la Liga Profesional 2026 (fuente de verdad: matches.parquet)
     teams_season_total = (
         int(matches[matches["season"] == "2026"][["home_team", "away_team"]].stack().nunique())
@@ -439,7 +459,7 @@ def build():
                 ),
                 "method": "Remates, posesión-proxy, pases y precisión, faltas, córners, offsides y atajadas por equipo y partido.",
                 "confidence": "alta",
-                "as_of": generated_at,
+                "as_of": espn_fetched_at or generated_at,
                 "status": "ok" if has_tactical else "missing",
             },
             "physical_performance": {
@@ -491,7 +511,7 @@ def build():
                     "directamente comparable con las tablas por-partido del resto del proyecto."
                 ),
                 "confidence": "media",
-                "as_of": generated_at,
+                "as_of": (_max_ts(player_season_stats, "retrieved_at") or generated_at) if has_player_season_stats else generated_at,
                 "status": "ok" if has_player_season_stats else "pending_first_scrape",
             },
             "squad_ages": {
@@ -533,7 +553,7 @@ def build():
                 "coverage_pct": _pct(int(standings["team"].nunique()), teams_season_total) if has_standings else None,
                 "method": "Standings oficiales de ESPN para la Liga Profesional, tabla general.",
                 "confidence": "alta",
-                "as_of": generated_at,
+                "as_of": espn_fetched_at or generated_at,
                 "status": "ok" if has_standings else "pending_first_scrape",
             },
             "derived_metrics": {

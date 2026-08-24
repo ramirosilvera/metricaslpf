@@ -72,22 +72,51 @@ const fmtDate = (iso?: string) =>
 // verificada; complementaria/derivada van en tono neutro.
 const isOfficial = (c?: ConfidenceLevel) => c === "alta" || c === "media";
 
-const singleSrc = source ? (meta.sources as Record<string, SourceStatus>)[source] : null;
-const singleConf: ConfidenceLevel = singleSrc?.confidence ?? "media";
-const muted = source ? !isOfficial(singleConf) : false;
-const summaryLabel = source ? label ?? SUMMARY_BY_CONF[singleConf] : "Datos verificados";
-const showCheck = source ? isOfficial(singleConf) : true;
+// "✓ Datos verificados" no puede depender solo de la confianza declarada de
+// la fuente -- una fuente "alta" que no se actualiza hace semanas (ej. ESPN
+// bloqueado con 403, ver etl/fetch_espn_lpf.py) seguía mostrando el mismo
+// check verde que una recién actualizada, porque as_of nunca se comparaba
+// contra la fecha real. Acá se calcula en build time contra meta.generated_at
+// (la corrida que generó este mismo meta.json), no contra Date.now() del
+// navegador -- el sitio es estático, así que "ahora" para esta página es el
+// momento en que se publicó.
+const STALE_THRESHOLD_MS = 72 * 60 * 60 * 1000; // 72h -- el pipeline corre cada 6h
+const buildNow = Date.parse(meta.generated_at);
+const isStale = (s?: SourceStatus | null) => {
+  if (!s || !s.as_of || s.status !== "ok" || !isOfficial(s.confidence)) return false;
+  const t = Date.parse(s.as_of);
+  return Number.isFinite(t) && Number.isFinite(buildNow) && buildNow - t > STALE_THRESHOLD_MS;
+};
 
 const cv = meta.cross_verification;
 
 const aggSources = order
   .map((key) => ({ key, s: (meta.sources as Record<string, SourceStatus>)[key] }))
   .filter((c) => c.s);
+const staleSources = aggSources.filter(({ s }) => isStale(s));
+
+const singleSrc = source ? (meta.sources as Record<string, SourceStatus>)[source] : null;
+const singleConf: ConfidenceLevel = singleSrc?.confidence ?? "media";
+const singleStale = source ? isStale(singleSrc) : false;
+const muted = source ? !isOfficial(singleConf) : false;
+const summaryLabel = source
+  ? singleStale
+    ? "Desactualizado"
+    : (label ?? SUMMARY_BY_CONF[singleConf])
+  : staleSources.length > 0
+    ? "Puede haber datos desactualizados"
+    : "Datos verificados";
+const showCheck = source ? isOfficial(singleConf) && !singleStale : staleSources.length === 0;
+const stale = source ? singleStale : staleSources.length > 0;
 ---
 
-<details class={`confidence-badge${muted ? " is-muted" : ""}`}>
+<details class={`confidence-badge${muted ? " is-muted" : ""}${stale ? " is-stale" : ""}`}>
   <summary>
-    {showCheck && <span class="cb-check" aria-hidden="true">✓</span>}
+    {showCheck ? (
+      <span class="cb-check" aria-hidden="true">✓</span>
+    ) : (
+      <span class="cb-warn" aria-hidden="true">⚠</span>
+    )}
     <span>{summaryLabel}</span>
     <span class="cb-caret" aria-hidden="true">▾</span>
   </summary>
@@ -101,6 +130,11 @@ const aggSources = order
         <p class="cb-src-meta">Licencia: {singleSrc.license_short ?? singleSrc.license}</p>
       )}
       {singleSrc.as_of && <p class="cb-src-meta">Actualizado: {fmtDate(singleSrc.as_of)}</p>}
+      {singleStale && (
+        <p class="cb-stale-warning">
+          ⚠ Esta fuente lleva más de 3 días sin actualizarse -- puede no reflejar lo último. Ver detalle en /fuentes/.
+        </p>
+      )}
       <a class="cb-more" href={`${base}fuentes/`}>Ver registro completo de fuentes &rarr;</a>
     </div>
   ) : (
@@ -109,6 +143,12 @@ const aggSources = order
         Cada tabla se genera de fuentes con licencia y fecha trazables.
         Última actualización automática: <strong>{fmtDate(meta.generated_at)}</strong>.
       </p>
+      {staleSources.length > 0 && (
+        <p class="cb-stale-warning">
+          ⚠ {staleSources.map(({ key, s }) => `${LABELS[key as string] ?? key} (desde ${fmtDate(s.as_of)})`).join(", ")}{" "}
+          {staleSources.length === 1 ? "lleva" : "llevan"} más de 3 días sin actualizarse -- el resto de las fuentes sí está al día. Ver /fuentes/ para el detalle y la causa.
+        </p>
+      )}
       {cv && cv.matches_checked > 0 && (
         <p class="cb-cross">
           ✓ {cv.matches_matched}/{cv.matches_checked} partidos con goles consistentes con el marcador final
@@ -117,11 +157,12 @@ const aggSources = order
       )}
       <ul class="cb-sources">
         {aggSources.map(({ key, s }) => (
-          <li class="cb-source">
+          <li class={`cb-source${isStale(s) ? " is-stale" : ""}`}>
             <span><strong>{LABELS[key as string] ?? s.provider}</strong> · {CONF_LABEL[s.confidence ?? "media"].toLowerCase()}</span>
             <span class="cb-src-meta">
               {s.coverage_detail ?? s.coverage ?? ""}
               {s.as_of ? ` · ${fmtDate(s.as_of)}` : ""}
+              {isStale(s) ? " · ⚠ desactualizado" : ""}
             </span>
           </li>
         ))}

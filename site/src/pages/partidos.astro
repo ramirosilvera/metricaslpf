@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import DataStatusBanner from "../layouts/DataStatusBanner.astro";
-import { loadJson, loadCrestMap, type MatchSummary } from "../lib/data";
+import { loadJson, loadCrestMap, type MatchSummary, type Meta } from "../lib/data";
 import TeamBadge from "../components/TeamBadge.astro";
 
 const base = import.meta.env.BASE_URL;
@@ -12,6 +12,20 @@ function loadArray<T>(filename: string): T[] {
 }
 const matches = loadArray<MatchSummary>("match_summaries.json");
 const crests = loadCrestMap();
+
+// Las tarjetas ya vienen ordenadas de más reciente a más vieja (ver
+// build_aggregates.py), así que matches[0] es el último partido cargado. Si
+// pasaron muchos días sin que aparezca uno nuevo -- la Liga Profesional juega
+// más o menos una vez por semana -- probablemente no es que no hubo fecha,
+// es que la fuente (ESPN) dejó de responder y nadie lo notó (ver
+// etl/fetch_espn_lpf.py). El badge de confianza ya avisa esto por fuente;
+// acá se avisa en el lugar exacto donde se notaría un partido faltante.
+const meta = loadJson<Meta>("meta.json");
+const latestMatchDate = matches[0]?.match_date;
+const daysSinceLastMatch = latestMatchDate
+  ? Math.floor((Date.parse(meta.generated_at) - Date.parse(latestMatchDate)) / 86_400_000)
+  : null;
+const STALE_MATCHES_DAYS = 10;
 
 // Filas de comparación cara a cara: valor de cada equipo + su cuota del total
 // (barra), para leer en un vistazo quién dominó cada faceta. Se omite la fila si
@@ -67,6 +81,17 @@ const searchText = (m: MatchSummary) => norm(`${m.home_team} ${m.away_team} ${st
     la pelota y remató más, y una lectura automática — todo con datos reales de ESPN. <em>Nota: no mostramos xG
     (ninguna fuente libre lo publica para esta liga); usamos remates como proxy de peligro.</em>
   </p>
+
+  {daysSinceLastMatch !== null && daysSinceLastMatch >= STALE_MATCHES_DAYS && (
+    <div class="callout warning" style="margin-bottom: 1.5rem;">
+      <h3>Puede faltar el último partido</h3>
+      <p>
+        El partido más reciente cargado es del {latestMatchDate}, hace {daysSinceLastMatch} días. La Liga
+        Profesional juega aproximadamente una vez por semana, así que es probable que la fuente de datos (ESPN)
+        no esté respondiendo en este momento, no que no haya habido fecha. Ver el detalle en <a href={`${base}fuentes/`}>fuentes</a>.
+      </p>
+    </div>
+  )}
 
   {matches.length === 0 ? (
     <p class="card" style="color: var(--text-muted)">Todavía no hay partidos con datos cargados.</p>

@@ -49,6 +49,9 @@ Uso:
     # opcionales:
     #   LPF_SEASON_START=2026-01-01   (desde cuándo barrer el calendario)
     #   ESPN_CHUNK_DAYS=30            (tamaño de cada ventana de scoreboard)
+    #   ESPN_LOOKAHEAD_DAYS=45        (hasta cuántos días a futuro barrer, para
+    #                                  traer el próximo fixture aunque no se
+    #                                  haya jugado)
 """
 from __future__ import annotations
 
@@ -86,6 +89,15 @@ GOAL_EVENTS_CSV = OUT_DIR / "goal_events.csv"
 STANDINGS_CSV = OUT_DIR / "standings.csv"
 TEAM_PROFILE_CSV = OUT_DIR / "team_profile.csv"
 SQUADS_CSV = OUT_DIR / "squads.csv"
+
+# Rastro de la corrida, para que build_aggregates.py pueda mostrar un "as_of"
+# honesto de partidos/tabla (esas dos tablas no traen su propio campo
+# retrieved_at por fila, a diferencia de goal_events/squads/team_profile) y
+# para que un fallo real quede visible sin tener que leer el log completo de
+# GitHub Actions -- ver README del workflow update-data.yml, paso "Subir
+# reportes de scraping fallidos", que ya sabe subir data/raw/*/_failed.*.
+FETCH_STATUS_JSON = RAW_DIR / "_fetch_status.json"
+FAILED_JSON = RAW_DIR / "_failed.json"
 
 MATCHES_COLS = ["match_id", "competition", "season", "stage", "group", "match_date",
                 "home_team", "away_team", "home_score", "away_score", "stadium", "referee"]
@@ -130,14 +142,24 @@ _STAT_KEYS = {
 }
 
 
+# Errores HTTP/red reales durante la corrida (403, timeout, etc.) -- NO
+# incluye una respuesta 200 con "sin eventos en esta ventana", que es un
+# resultado válido, no un error. Sirve para distinguir "ESPN no tiene nada
+# nuevo" (silencio legítimo) de "ESPN nos está bloqueando" (falla real que
+# no debe pisar los CSV existentes en silencio -- ver run()).
+_FETCH_ERRORS: list[dict] = []
+
+
 def _get(url: str, params: dict | None = None) -> dict | None:
     try:
         r = requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT_S)
     except Exception as e:  # noqa: BLE001
         print(f"  ESPN error {url}: {type(e).__name__}: {e}", file=sys.stderr)
+        _FETCH_ERRORS.append({"url": url, "params": params, "error": f"{type(e).__name__}: {e}"})
         return None
     if r.status_code != 200:
         print(f"  ESPN {url} -> HTTP {r.status_code}: {r.text[:200]}", file=sys.stderr)
+        _FETCH_ERRORS.append({"url": url, "params": params, "status": r.status_code, "body": r.text[:300]})
         return None
     try:
         return r.json()
@@ -551,13 +573,60 @@ def run() -> None:
     except ValueError:
         season_start = date(today.year, 1, 1)
     chunk_days = int(os.environ.get("ESPN_CHUNK_DAYS", "30"))
+    # Barrer hasta "hoy" nada más significa que el próximo fixture programado
+    # (todavía sin jugar) nunca entra al sweep -- matches.json quedaría
+    # siempre sin el próximo partido de cada club. Se extiende la ventana
+    # ESPN_LOOKAHEAD_DAYS hacia adelante para traer también los fixtures ya
+    # confirmados aunque no se hayan jugado (home_score/away_score quedan
+    # None, ver _parse_match_row -- no se inventa resultado).
+    lookahead_days = int(os.environ.get("ESPN_LOOKAHEAD_DAYS", "45"))
+    season_end = today + timedelta(days=lookahead_days)
 
-    events = _sweep_scoreboard(season_start, today, chunk_days)
+    events = _sweep_scoreboard(season_start, season_end, chunk_days)
     if not events:
-        print("ESPN: no se obtuvieron eventos; se escriben CSV vacíos-válidos.", file=sys.stderr)
-        _write_all_empty()
+        if _FETCH_ERRORS:
+            # Fallo real (bloqueo/HTTP error/timeout), no "temporada sin
+            # partidos nuevos" -- NO pisar los CSV existentes (serían la
+            # única fuente para reconstruir el warehouse) y dejar un rastro
+            # que un humano pueda ver sin abrir el log completo de Actions.
+            # exit(1) hace que el job aparezca en rojo en vez de silencioso
+            # en verde (ver pipeline.py, que hoy corre con
+            # --allow-scrape-failures y por eso no aborta el resto del
+            # pipeline, pero SÍ debe quedar visible que esto pasó).
+            RAW_DIR.mkdir(parents=True, exist_ok=True)
+            FAILED_JSON.write_text(
+                json.dumps(
+                    {
+                        "source": SOURCE,
+                        "failed_at": retrieved_at,
+                        "reason": "scoreboard sweep sin eventos, con errores HTTP/red",
+                        "error_count": len(_FETCH_ERRORS),
+                        "errors": _FETCH_ERRORS[:20],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            print(
+                f"::error title=ESPN fetch fallo::{len(_FETCH_ERRORS)} requests de scoreboard "
+                f"fallaron (ver {FAILED_JSON}); se conservan los CSV/parquet existentes sin tocar.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        if not MATCHES_CSV.exists():
+            # Corrida inicial real sin datos previos (o sin errores HTTP de
+            # por medio): acá sí corresponde escribir CSV vacíos-válidos, no
+            # hay nada que preservar.
+            print("ESPN: no se obtuvieron eventos (sin errores HTTP); primera corrida, se escriben CSV vacíos-válidos.", file=sys.stderr)
+            _write_all_empty()
+            return
+        print("ESPN: no se obtuvieron eventos (sin errores HTTP, ej. fuera de temporada); se conservan los CSV existentes.", file=sys.stderr)
         return
-    print(f"ESPN: {len(events)} eventos de LPF entre {season_start} y {today}")
+    # Corrida exitosa: si había quedado un _failed.json de una corrida
+    # anterior, ya no aplica.
+    FAILED_JSON.unlink(missing_ok=True)
+    print(f"ESPN: {len(events)} eventos de LPF entre {season_start} y {season_end}")
 
     matches_rows: list[dict] = []
     finished: list[tuple[str, str, str, dict]] = []  # (id, home, away, score_by_team)
@@ -576,6 +645,15 @@ def run() -> None:
     tactical_rows: list[dict] = []
     goal_rows: list[dict] = []
 
+    # Igual que el scoreboard: /summary por partido, /standings y
+    # /teams/{id}/roster son requests independientes que pueden fallar aunque
+    # el scoreboard haya andado bien (ej. si ESPN empieza a bloquear a mitad
+    # de la corrida). Se mide ACÁ, antes del loop de summaries, para que un
+    # bloqueo ahí también cuente como error parcial -- si se medía después
+    # (como en una versión anterior de este fix), un 403 en TODOS los
+    # summaries vaciaba team_stats/goal_events en silencio, el mismo bug que
+    # se está arreglando en este archivo pero para estas dos tablas.
+    pre_partial_errors = len(_FETCH_ERRORS)
     for match_id, home_team, away_team, score_by_team in finished:
         summary = _get_summary_cached(match_id)
         if not summary:
@@ -588,20 +666,54 @@ def run() -> None:
 
     standings_rows, profile_rows = _parse_standings(season)
     squads_rows = _fetch_squads(retrieved_at)
+    had_partial_errors = len(_FETCH_ERRORS) > pre_partial_errors
 
     _write_csv(MATCHES_CSV, MATCHES_COLS, matches_rows)
-    _write_csv(TEAM_STATS_CSV, TEAM_STATS_COLS, team_stats_rows)
     _write_csv(APPEARANCES_CSV, APPEARANCES_COLS, appearances_rows)
     _write_csv(TACTICAL_CSV, TACTICAL_COLS, tactical_rows)
-    _write_csv(GOAL_EVENTS_CSV, GOAL_EVENTS_COLS, goal_rows)
-    _write_csv(STANDINGS_CSV, STANDINGS_COLS, standings_rows)
-    _write_csv(TEAM_PROFILE_CSV, TEAM_PROFILE_COLS, profile_rows)
-    _write_csv(SQUADS_CSV, SQUADS_COLS, squads_rows)
+    for csv_path, cols, rows, label in (
+        (TEAM_STATS_CSV, TEAM_STATS_COLS, team_stats_rows, "team_match_stats"),
+        (GOAL_EVENTS_CSV, GOAL_EVENTS_COLS, goal_rows, "goal_events"),
+        (STANDINGS_CSV, STANDINGS_COLS, standings_rows, "standings"),
+        (TEAM_PROFILE_CSV, TEAM_PROFILE_COLS, profile_rows, "team_profile"),
+        (SQUADS_CSV, SQUADS_COLS, squads_rows, "squads"),
+    ):
+        if rows or not had_partial_errors or not csv_path.exists():
+            _write_csv(csv_path, cols, rows)
+        else:
+            print(
+                f"::warning title=ESPN {label} fallo parcial::hubo errores HTTP consultando "
+                f"{label} y vino vacío; se conserva {csv_path} existente en vez de vaciarlo.",
+                file=sys.stderr,
+            )
+
+    FETCH_STATUS_JSON.write_text(
+        json.dumps(
+            {
+                "source": SOURCE,
+                "fetched_at": retrieved_at,
+                "ok": True,
+                "partial_errors": had_partial_errors,
+                "rows": {
+                    "matches": len(matches_rows),
+                    "team_match_stats": len(team_stats_rows),
+                    "goal_events": len(goal_rows),
+                    "standings": len(standings_rows),
+                    "team_profile": len(profile_rows),
+                    "squads": len(squads_rows),
+                },
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
 
     print(
         f"LPF {season} (ESPN): {len(matches_rows)} partidos ({len(finished)} jugados), "
         f"{len(team_stats_rows)} filas de stats de equipo, {len(goal_rows)} goles, "
         f"{len(standings_rows)} equipos en tabla, {len(squads_rows)} jugadores en planteles."
+        + (" (con errores parciales en standings/team_profile/squads, ver arriba)" if had_partial_errors else "")
     )
 
 

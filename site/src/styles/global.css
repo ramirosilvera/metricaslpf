@@ -1678,10 +1678,33 @@ p {
   border-color: color-mix(in srgb, var(--text-secondary) 22%, var(--border));
 }
 
-.confidence-badge .cb-check {
+/* Fuente oficial pero con as_of viejo (ver ConfidenceBadge.astro, isStale):
+   ámbar de advertencia, distinto del gris neutro de is-muted -- acá SÍ hay
+   algo para avisar, no es solo "esta fuente no aplica confianza alta". */
+.confidence-badge.is-stale > summary {
+  border-color: color-mix(in srgb, var(--status-warning) 35%, var(--border));
+  background: color-mix(in srgb, var(--status-warning) 12%, var(--surface-2));
+  color: color-mix(in srgb, var(--status-warning) 70%, var(--text-primary));
+}
+.confidence-badge.is-stale > summary:hover {
+  background: color-mix(in srgb, var(--status-warning) 20%, var(--surface-2));
+  border-color: color-mix(in srgb, var(--status-warning) 50%, var(--border));
+}
+
+.confidence-badge .cb-check,
+.confidence-badge .cb-warn {
   font-weight: 800;
   line-height: 1;
   font-size: 0.9em;
+}
+
+.confidence-panel .cb-stale-warning {
+  color: color-mix(in srgb, var(--status-warning) 75%, var(--text-primary));
+  font-weight: 600;
+}
+
+.confidence-panel .cb-source.is-stale .cb-src-meta {
+  color: color-mix(in srgb, var(--status-warning) 70%, var(--text-muted));
 }
 
 .confidence-badge .cb-caret {

@@ -87,12 +87,25 @@ def main():
         for script in scrapers:
             print(f"\n=== {script} ===")
             result = subprocess.run([sys.executable, str(ETL_DIR / script)], cwd=ETL_DIR)
-            if result.returncode != 0 and not args.allow_scrape_failures:
+            if result.returncode != 0:
+                if not args.allow_scrape_failures:
+                    print(
+                        f"'{script}' fallo -- corriendo el resto del pipeline igual con --allow-scrape-failures "
+                        "hubiera continuado. Revisar data/raw/*/_failed.* antes de reintentar."
+                    )
+                    sys.exit(result.returncode)
+                # --allow-scrape-failures deja seguir el pipeline (el resto de
+                # los datos se sigue publicando), pero el fallo NO puede
+                # quedar silencioso -- antes de este chequeo, un scraper roto
+                # (ej. la fuente bloqueando el scraping) hacía que el job de
+                # GitHub Actions terminara en verde sin ninguna señal, y así
+                # estuvo sin detectarse semanas (ver data/raw/*/_failed.json
+                # que el scraper que falla debería haber dejado).
                 print(
-                    f"'{script}' fallo -- corriendo el resto del pipeline igual con --allow-scrape-failures "
-                    "hubiera continuado. Revisar data/raw/*/_failed.* antes de reintentar."
+                    f"::error title=Scraper fallo::'{script}' termino con error (exit {result.returncode}) pero "
+                    "el pipeline continua por --allow-scrape-failures. Revisar data/raw/*/_failed.json antes de "
+                    "confiar en los datos de esa fuente."
                 )
-                sys.exit(result.returncode)
 
     run("build_warehouse.py")
     run("build_derived_metrics.py")

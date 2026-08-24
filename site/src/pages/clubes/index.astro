@@ -4,7 +4,7 @@ import DataStatusBanner from "../../layouts/DataStatusBanner.astro";
 import TeamSeasonRanking from "../../islands/TeamSeasonRanking";
 import ShareCardButton from "../../islands/ShareCardButton";
 import TeamBadge from "../../components/TeamBadge.astro";
-import { loadJson, loadCrestMap, type StandingsRow, type TeamSeasonSummary } from "../../lib/data";
+import { loadJson, loadCrestMap, type StandingsRow, type TeamSeasonSummary, type Meta } from "../../lib/data";
 
 function loadArray<T>(filename: string): T[] {
   const raw = loadJson<T[] | { status: string; rows: [] }>(filename);
@@ -16,6 +16,18 @@ const standings = loadArray<StandingsRow>("standings.json").sort(
 );
 const summary = loadArray<TeamSeasonSummary>("team_season_summary.json");
 const crests = loadCrestMap();
+
+// La tabla no trae una fecha por fila para comparar -- se usa el as_of real
+// de la fuente en meta.json (ver etl/build_aggregates.py, que ahora deriva
+// esto de la última corrida exitosa de ESPN, no de "ahora"). Si ESPN deja de
+// responder (ver etl/fetch_espn_lpf.py), la tabla se congela en silencio;
+// esto avisa en el lugar exacto donde se notaría, no solo en el badge genérico.
+const meta = loadJson<Meta>("meta.json");
+const standingsAsOf = meta.sources?.standings?.as_of;
+const daysSinceStandings = standingsAsOf
+  ? Math.floor((Date.parse(meta.generated_at) - Date.parse(standingsAsOf)) / 86_400_000)
+  : null;
+const STALE_STANDINGS_DAYS = 5;
 
 const nTeams = standings.length;
 const minJugados = standings.length ? Math.min(...standings.map((r) => r.jugados ?? 0)) : 0;
@@ -54,6 +66,17 @@ const leaderShareText = leader
         shareText={leaderShareText}
         filenameBase={`${leader.team}-puntero`}
       />
+    </div>
+  )}
+
+  {daysSinceStandings !== null && daysSinceStandings >= STALE_STANDINGS_DAYS && (
+    <div class="callout warning" style="margin-bottom: 1.5rem;">
+      <h3>La tabla puede estar desactualizada</h3>
+      <p>
+        La tabla de posiciones no se actualiza desde hace {daysSinceStandings} días (ESPN, la fuente, puede no estar
+        respondiendo). Es la última tabla real que se pudo cargar, no una tabla inventada -- ver el detalle en{" "}
+        <a href={`${import.meta.env.BASE_URL}fuentes/`}>fuentes</a>.
+      </p>
     </div>
   )}
 
