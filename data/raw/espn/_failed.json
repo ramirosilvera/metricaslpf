@@ -1,0 +1,88 @@
+{
+  "source": "espn",
+  "failed_at": "2026-08-24T21:16:03.149531+00:00",
+  "reason": "scoreboard sweep sin eventos, con errores HTTP/red",
+  "error_count": 10,
+  "errors": [
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260101-20260130"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;d200d8"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260131-20260301"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;cc00d8"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260302-20260331"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;cc00d8"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260401-20260430"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;d200d8"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260501-20260530"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;cc00d8"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260531-20260629"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;cc00d8"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260630-20260729"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;cc00d8"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260730-20260828"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;d200d8"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260829-20260927"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;6455d1"
+    },
+    {
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
+      "params": {
+        "dates": "20260928-20261008"
+      },
+      "status": 403,
+      "body": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;site&#46;api&#46;espn&#46;com&#47;apis&#47;site&#47;v2&#47;sports&#47;soccer&#47;arg&#46;1&#47;scoreboard&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;6455d1"
+    }
+  ]
+}
