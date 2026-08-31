@@ -31,8 +31,36 @@ body {
 body {
   max-width: 640px;
   margin: 0 auto;
-  padding: 0 1rem 4rem;
+  padding: 0 1rem calc(4.5rem + env(safe-area-inset-bottom));
   line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* font-size >= 16px en TODO campo de formulario: por debajo de eso, iOS
+   Safari hace zoom automático al enfocar el campo -- es el bug de "zoom en
+   la pantalla" reportado. El default del navegador es ~13.3px, muy por
+   debajo del umbral. min-height 44px cubre el tamaño mínimo táctil
+   recomendado (Apple HIG / Material). */
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+input,
+select,
+textarea {
+  min-height: 44px;
+}
+
+input[type="color"] {
+  width: 3.5rem;
+  height: 2.75rem;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
 }
 
 h1,
@@ -67,6 +95,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+  min-height: 44px;
   padding: 0.75rem 1.25rem;
   border-radius: 999px;
   border: none;
@@ -133,21 +162,78 @@ nav.tabbar {
   left: 0;
   right: 0;
   display: flex;
+  gap: 0.25rem;
   background: var(--surface);
   border-top: 1px solid var(--border);
-  padding: 0.5rem 0 env(safe-area-inset-bottom);
+  /* padding lateral fijo + el inset real del dispositivo (notch/cámara en
+     landscape, esquinas redondeadas) -- así ningún tab queda pegado al
+     borde físico de la pantalla. */
+  padding: 0.375rem calc(0.5rem + env(safe-area-inset-right)) calc(0.375rem + env(safe-area-inset-bottom))
+    calc(0.5rem + env(safe-area-inset-left));
 }
 nav.tabbar a {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* min-height 44px: tamaño táctil mínimo recomendado (Apple HIG/Material)
+     -- antes medía 31px de alto en un iPhone real. */
+  min-height: 44px;
+  border-radius: 10px;
   text-align: center;
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.75rem;
-  padding: 0.4rem 0;
 }
 nav.tabbar a.active {
   color: var(--accent-strong);
   font-weight: 600;
+  background: var(--accent-soft);
+}
+
+/* Sin margin-bottom acá: los formularios que usan .field-label ya tienen
+   gap propio (flex column) para el espacio entre campos -- sumar margin
+   duplicaba ese espacio (~28px en vez de 12px entre campos). */
+.field-label {
+  display: block;
+}
+.field-label > span {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.field {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+}
+.field:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Feedback táctil inmediato -- :hover no dispara de forma confiable en
+   mobile, así que sin esto no había ninguna señal visual de "tocaste el
+   botón" en touch. */
+.btn:active {
+  transform: scale(0.97);
+}
+nav.tabbar a:active {
+  background: var(--accent-soft);
+}
+
+/* details/summary usados para "tags opcionales" en el form de prenda --
+   sin esto, el área táctil real del summary era ~24px de alto, por debajo
+   del mínimo de 44px aplicado a todo el resto de los controles. Se
+   conserva el marcador nativo (▶) tal cual, solo se agranda el área
+   tocable con padding. */
+details > summary {
+  min-height: 44px;
+  padding: 0.6rem 0;
+  cursor: pointer;
 }
 
 .grid-prendas {

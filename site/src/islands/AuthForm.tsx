@@ -69,25 +69,27 @@ export default function AuthForm() {
           Crear cuenta
         </button>
       </div>
-      <label>
-        Email
+      <label className="field-label">
+        <span>Email</span>
         <input
+          className="field"
           type="email"
+          autoComplete="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ display: "block", width: "100%", padding: "0.6rem", marginTop: "0.25rem" }}
         />
       </label>
-      <label>
-        Contraseña
+      <label className="field-label">
+        <span>Contraseña</span>
         <input
+          className="field"
           type="password"
+          autoComplete={modo === "login" ? "current-password" : "new-password"}
           required
           minLength={6}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ display: "block", width: "100%", padding: "0.6rem", marginTop: "0.25rem" }}
         />
       </label>
       {error && <p style={{ color: "var(--danger)" }}>{error}</p>}

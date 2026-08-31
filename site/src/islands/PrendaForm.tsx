@@ -106,13 +106,9 @@ export default function PrendaForm() {
 
   return (
     <form onSubmit={onSubmit} className="card" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <label>
-        Categoría
-        <select
-          value={categoria}
-          onChange={(e) => setCategoria(e.target.value as Categoria)}
-          style={{ display: "block", width: "100%", padding: "0.6rem", marginTop: "0.25rem" }}
-        >
+      <label className="field-label">
+        <span>Categoría</span>
+        <select className="field" value={categoria} onChange={(e) => setCategoria(e.target.value as Categoria)}>
           {CATEGORIAS.map((c) => (
             <option key={c} value={c}>
               {c}
@@ -123,8 +119,8 @@ export default function PrendaForm() {
 
       <div>
         <p style={{ margin: "0 0 0.4rem" }}>Color</p>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <input type="color" value={colorHex} onChange={(e) => setColorHex(e.target.value)} />
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+          <input type="color" value={colorHex} onChange={(e) => setColorHex(e.target.value)} aria-label="Color de la prenda" />
           <button type="button" className="btn btn-secondary" onClick={() => fileRef.current?.click()}>
             📷 Foto
           </button>
@@ -168,13 +164,9 @@ function SelectOpcional<T extends string>({
   opciones: T[];
 }) {
   return (
-    <label>
-      {label}
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value as T | "")}
-        style={{ display: "block", width: "100%", padding: "0.5rem", marginTop: "0.2rem" }}
-      >
+    <label className="field-label">
+      <span>{label}</span>
+      <select className="field" value={value} onChange={(e) => onChange(e.target.value as T | "")}>
         <option value="">(sin especificar)</option>
         {opciones.map((o) => (
           <option key={o} value={o}>
