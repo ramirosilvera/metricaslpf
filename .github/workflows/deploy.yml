@@ -39,6 +39,26 @@ jobs:
         working-directory: site
         run: npm ci
 
+      # Chequeo explícito ANTES del build: si PUBLIC_SUPABASE_URL/ANON_KEY no
+      # resolvieron (typo en el nombre, cargadas como Secret en vez de
+      # Variable -- son dos pestañas distintas en Settings -> Secrets and
+      # variables -> Actions, y `${{ vars.X }}` SOLO lee la pestaña
+      # Variables --, o el nombre del repo no es el que tiene los secrets
+      # cargados), esto corta acá con un error explícito en vez de dejar
+      # que el sitio compile "bien" y falle en silencio recién en el
+      # navegador del usuario (exactamente lo que pasó: build en verde,
+      # deploy en verde, sitio mostrando "no configurado").
+      - name: Verificar variables de Supabase
+        run: |
+          faltan=""
+          [ -z "${{ vars.PUBLIC_SUPABASE_URL }}" ] && faltan="$faltan PUBLIC_SUPABASE_URL"
+          [ -z "${{ vars.PUBLIC_SUPABASE_ANON_KEY }}" ] && faltan="$faltan PUBLIC_SUPABASE_ANON_KEY"
+          if [ -n "$faltan" ]; then
+            echo "::error title=Faltan variables de Supabase::No resolvieron:$faltan -- Settings > Secrets and variables > Actions > pestaña VARIABLES (no Secrets) > New repository variable. Ver README.md."
+            exit 1
+          fi
+          echo "OK: ambas variables de Supabase resolvieron a un valor no vacío."
+
       - name: Build
         working-directory: site
         env:
@@ -46,9 +66,8 @@ jobs:
           # secrets): el anon key está diseñado para exponerse en el cliente
           # (la seguridad real la da RLS, no ocultar esta clave) y ambas
           # terminan igual en el JS que se sirve al navegador. Se setean en
-          # Settings -> Secrets and variables -> Actions -> Variables. Si no
-          # están seteadas, el sitio compila igual pero no puede hablar con
-          # Supabase (ver README.md y supabase/README.md).
+          # Settings -> Secrets and variables -> Actions -> pestaña
+          # VARIABLES (no Secrets). Ver README.md / supabase/README.md.
           PUBLIC_SUPABASE_URL: ${{ vars.PUBLIC_SUPABASE_URL }}
           PUBLIC_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_SUPABASE_ANON_KEY }}
         run: npm run build

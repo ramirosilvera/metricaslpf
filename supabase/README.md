@@ -9,6 +9,10 @@ que sea reproducible de cero y no viva solo en la base en vivo.
 - **`0006_armario_schema.sql`** — schema `armario`, tablas `prendas` /
   `outfits` / `outfit_prendas`, RLS por dueño (`auth.uid() = user_id`),
   índices, y la policy de Storage para el bucket `armario-fotos`.
+- **`0007_expose_armario_schema.sql`** — expone `armario` en la API de
+  PostgREST (`pgrst.db_schemas`). Sin esto, `supabase-js` devuelve error
+  aunque el schema/tablas/policies existan bien -- es justo lo que pasó en
+  este proyecto: quedó sin exponer hasta esta migración.
 
 Todos los statements son **idempotentes** (`create ... if not exists`,
 `drop policy if exists` + `create policy`): correrlos de nuevo es inofensivo.
@@ -20,17 +24,28 @@ proyecto de Supabase en vivo** — este repo ya no tiene el schema-as-code para
 administrarlas; si hay que borrarlas del lado de la base, es una acción manual
 en el dashboard de Supabase.
 
-## Pasos manuales pendientes (no automatizables por SQL/CI)
+## Estado (confirmado en el proyecto real `arzzwzuuoysqhgnaprha`)
 
-1. **Crear el bucket de Storage** `armario-fotos` (privado) desde el dashboard
-   de Supabase o la Storage API — no existe un `create bucket` en SQL puro.
-2. **Exponer el schema `armario`** en Project Settings → API → Exposed schemas
-   — sin esto, `supabase-js` no puede leerlo aunque el schema y las policies
-   existan.
-3. Si se reutiliza el mismo proyecto de Supabase que usaba Métricas LPF:
-   confirmar que la `SUPABASE_SERVICE_ROLE_KEY` cargada en secrets sigue
-   siendo válida y que las Redirect URLs de Auth (Project Settings → Auth →
-   URL Configuration) apuntan al dominio/base real de Matiz.
+- ✅ Bucket de Storage `armario-fotos` (privado) -- creado.
+- ✅ Schema `armario` expuesto en la API -- aplicado vía `0007_expose_armario_schema.sql`.
+- ⬜ Confirmar que las Redirect URLs de Auth (Project Settings → Auth → URL
+  Configuration) apuntan al dominio/base real de Matiz
+  (`https://ramirosilvera.github.io/metricaslpf/`) -- si el login funciona
+  desde el mismo dominio no hace falta tocar nada acá, pero si en algún
+  momento aparece un error de "redirect not allowed" al confirmar email o
+  hacer login, es este setting.
+
+## GitHub: variable vs. secret (fuente de un bug real que ya pasó acá)
+
+`site/.github/workflows/deploy.yml` lee `PUBLIC_SUPABASE_URL` y
+`PUBLIC_SUPABASE_ANON_KEY` con `${{ vars.X }}`, que **solo** lee la pestaña
+**Variables** de Settings → Secrets and variables → Actions -- es una pestaña
+distinta de **Secrets**, aunque viven en la misma página y es fácil
+confundirlas. Si se cargan como Secret, `vars.X` queda vacío, el build
+compila "bien" (sin error) pero el sitio queda sin poder hablar con
+Supabase -- exactamente lo que pasó la primera vez. El workflow ahora corta
+con un `::error::` explícito ANTES de compilar si esto vuelve a pasar, en vez
+de fallar en silencio.
 
 ## Cómo se aplican
 

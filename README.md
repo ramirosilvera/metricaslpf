@@ -55,9 +55,14 @@ PUBLIC_SUPABASE_ANON_KEY=...
 
 ## Estado del proyecto
 
-MVP en construcción. Ver `supabase/README.md` para los pasos manuales
-pendientes de configuración de Supabase (exponer el schema `armario`, crear
-el bucket de Storage).
+MVP funcional: Supabase configurado (schema `armario` expuesto, bucket de
+Storage creado), variables de GitHub Actions cargadas, deploy en verde. Ver
+`supabase/README.md` para el detalle de la config de Supabase y un apunte
+importante sobre variables vs. secrets de GitHub Actions.
+
+No wireado todavía: botón para guardar una combinación como "outfit" desde
+la pantalla de recomendaciones (el schema y el listado ya existen, falta la
+acción de guardar).
 
 ---
 
