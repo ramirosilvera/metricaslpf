@@ -1,29 +1,54 @@
 import { useState } from "react";
-import { supabase } from "../lib/supabase";
+import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
+import ConfigWarning from "./ConfigWarning";
 
 export default function AuthForm() {
   const [modo, setModo] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [estado, setEstado] = useState<"idle" | "cargando" | "error" | "ok">("idle");
+  const [estado, setEstado] = useState<"idle" | "cargando" | "error" | "ok" | "confirmar_email">("idle");
   const [error, setError] = useState("");
+
+  if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setEstado("cargando");
     setError("");
-    const { error: err } =
-      modo === "login"
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({ email, password });
-    if (err) {
+    try {
+      const { data, error: err } =
+        modo === "login"
+          ? await supabase.auth.signInWithPassword({ email, password })
+          : await supabase.auth.signUp({ email, password });
+      if (err) {
+        setEstado("error");
+        setError(err.message);
+        return;
+      }
+      if (modo === "signup" && !data.session) {
+        // El proyecto tiene "confirmar email" activado -- la cuenta se creó
+        // pero todavía no hay sesión. Avisar en vez de redirigir a un
+        // placard vacío que parece "no funcionó".
+        setEstado("confirmar_email");
+        return;
+      }
+      setEstado("ok");
+      const base = (import.meta.env.BASE_URL as string) || "/";
+      window.location.href = base;
+    } catch (e) {
       setEstado("error");
-      setError(err.message);
-      return;
+      setError(e instanceof Error ? e.message : "Error de conexión con Matiz.");
     }
-    setEstado("ok");
-    const base = (import.meta.env.BASE_URL as string) || "/";
-    window.location.href = base;
+  }
+
+  if (estado === "confirmar_email") {
+    return (
+      <div className="card empty-state">
+        <p>
+          Te mandamos un email a <strong>{email}</strong> para confirmar la cuenta. Confirmalo y volvé a entrar.
+        </p>
+      </div>
+    );
   }
 
   return (

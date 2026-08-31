@@ -3,7 +3,9 @@ import { createClient } from "@supabase/supabase-js";
 const url = import.meta.env.PUBLIC_SUPABASE_URL as string | undefined;
 const anonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
 
-if (!url || !anonKey) {
+export const SUPABASE_CONFIGURADO = Boolean(url && anonKey);
+
+if (!SUPABASE_CONFIGURADO) {
   // eslint-disable-next-line no-console
   console.warn(
     "Matiz: faltan PUBLIC_SUPABASE_URL / PUBLIC_SUPABASE_ANON_KEY -- ver README.md.",
@@ -13,6 +15,16 @@ if (!url || !anonKey) {
 // Todas las tablas de Matiz viven en el schema `armario` (no `public`) --
 // hay que exponerlo en Project Settings -> API -> Exposed schemas del lado
 // de Supabase (ver supabase/README.md), si no toda query devuelve error.
-export const supabase = createClient(url ?? "", anonKey ?? "", {
-  db: { schema: "armario" },
-});
+//
+// createClient() con URL vacía TIRA una excepción sincrónica ("supabaseUrl
+// is required") -- si eso pasa dentro de un island client:only, mata la
+// hidratación de ESE componente en silencio y no se ve nada (nada de
+// mensaje de error, solo la página en blanco). Por eso, si falta la config,
+// se usa una URL dummy válida (nunca se llega a usar porque cada island
+// chequea SUPABASE_CONFIGURADO antes de llamar a `supabase.*`) en vez de
+// dejar que el constructor explote.
+export const supabase = createClient(
+  SUPABASE_CONFIGURADO ? (url as string) : "https://supabase-no-configurado.invalid",
+  SUPABASE_CONFIGURADO ? (anonKey as string) : "no-configurado",
+  { db: { schema: "armario" } },
+);

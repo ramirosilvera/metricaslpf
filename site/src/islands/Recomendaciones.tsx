@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { CATEGORIAS_COMPLEMENTARIAS, type Prenda } from "../lib/types";
 import { recomendar } from "../lib/recommend";
+import ConfigWarning from "./ConfigWarning";
 
 const NIVEL_LABEL: Record<string, string> = {
   excelente: "Excelente",
@@ -13,23 +14,62 @@ export default function Recomendaciones() {
   const [placard, setPlacard] = useState<Prenda[] | null>(null);
   const [base, setBase] = useState<Prenda | null>(null);
   const [modo, setModo] = useState<"rapido" | "explicame">("rapido");
+  const [sinSesion, setSinSesion] = useState(false);
+  const [error, setError] = useState("");
   const base_url = (import.meta.env.BASE_URL as string) || "/";
 
-  const prendaId = useMemo(() => new URLSearchParams(window.location.search).get("prenda"), []);
+  const prendaId = useMemo(
+    () => (SUPABASE_CONFIGURADO ? new URLSearchParams(window.location.search).get("prenda") : null),
+    [],
+  );
 
   useEffect(() => {
+    if (!SUPABASE_CONFIGURADO) return;
     async function cargar() {
-      const { data: sessionData } = await supabase.auth.getSession();
-      if (!sessionData.session) return;
-      const { data: rows } = await supabase.from("prendas").select("*");
-      const todas = (rows as Prenda[] | null) ?? [];
-      setPlacard(todas);
-      setBase(todas.find((p) => p.id === prendaId) ?? null);
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (!sessionData.session) {
+          setSinSesion(true);
+          return;
+        }
+        const { data: rows, error: err } = await supabase.from("prendas").select("*");
+        if (err) {
+          setError(err.message);
+          return;
+        }
+        const todas = (rows as Prenda[] | null) ?? [];
+        setPlacard(todas);
+        setBase(todas.find((p) => p.id === prendaId) ?? null);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "Error de conexión con Matiz.");
+      }
     }
     cargar();
   }, [prendaId]);
 
-  if (placard === null) return <p>Cargando...</p>;
+  if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
+
+  if (sinSesion) {
+    return (
+      <div className="empty-state">
+        <p>Iniciá sesión para ver tus combinaciones.</p>
+        <a className="btn btn-primary" href={`${base_url}login/`}>
+          Entrar
+        </a>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="empty-state">
+        <p>No se pudieron cargar las combinaciones.</p>
+        <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{error}</p>
+      </div>
+    );
+  }
+
+  if (placard === null) return <p style={{ color: "var(--text-muted)" }}>Cargando...</p>;
 
   if (!base) {
     return (

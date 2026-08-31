@@ -1,28 +1,52 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import type { Prenda } from "../lib/types";
+import ConfigWarning from "./ConfigWarning";
 
 export default function Placard() {
   const [prendas, setPrendas] = useState<Prenda[] | null>(null);
-  const [sesion, setSesion] = useState<"cargando" | "sin_sesion" | "ok">("cargando");
+  const [sesion, setSesion] = useState<"cargando" | "sin_sesion" | "ok" | "error">("cargando");
+  const [error, setError] = useState("");
   const base = (import.meta.env.BASE_URL as string) || "/";
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({ data }) => {
-      if (!data.session) {
-        setSesion("sin_sesion");
-        return;
-      }
-      setSesion("ok");
-      const { data: rows } = await supabase
-        .from("prendas")
-        .select("*")
-        .order("created_at", { ascending: false });
-      setPrendas((rows as Prenda[] | null) ?? []);
-    });
+    if (!SUPABASE_CONFIGURADO) return;
+    supabase.auth
+      .getSession()
+      .then(async ({ data }) => {
+        if (!data.session) {
+          setSesion("sin_sesion");
+          return;
+        }
+        setSesion("ok");
+        const { data: rows, error: err } = await supabase
+          .from("prendas")
+          .select("*")
+          .order("created_at", { ascending: false });
+        if (err) {
+          setError(err.message);
+          return;
+        }
+        setPrendas((rows as Prenda[] | null) ?? []);
+      })
+      .catch((e: Error) => {
+        setSesion("error");
+        setError(e.message);
+      });
   }, []);
 
-  if (sesion === "cargando") return null;
+  if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
+
+  if (sesion === "cargando") return <p style={{ color: "var(--text-muted)" }}>Cargando tu placard...</p>;
+
+  if (sesion === "error") {
+    return (
+      <div className="empty-state">
+        <p>No se pudo conectar con Matiz.</p>
+        <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{error}</p>
+      </div>
+    );
+  }
 
   if (sesion === "sin_sesion") {
     return (
@@ -35,7 +59,16 @@ export default function Placard() {
     );
   }
 
-  if (prendas === null) return <p>Cargando tu placard...</p>;
+  if (error) {
+    return (
+      <div className="empty-state">
+        <p>No se pudo cargar tu placard.</p>
+        <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{error}</p>
+      </div>
+    );
+  }
+
+  if (prendas === null) return <p style={{ color: "var(--text-muted)" }}>Cargando tu placard...</p>;
 
   if (prendas.length === 0) {
     return (

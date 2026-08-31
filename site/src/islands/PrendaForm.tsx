@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
 import type { Categoria, Estacion, Estilo, Ocasion, Textura } from "../lib/types";
+import ConfigWarning from "./ConfigWarning";
 
 const CATEGORIAS: Categoria[] = [
   "pantalon",
@@ -32,13 +33,19 @@ export default function PrendaForm() {
   const [error, setError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
+  if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
+
   async function onFoto(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    const { color, blob } = await procesarFoto(file);
-    setColorHex(hslToHex(color.h, color.s, color.l));
-    setFotoBlob(blob);
-    setFotoPreview(URL.createObjectURL(blob));
+    try {
+      const { color, blob } = await procesarFoto(file);
+      setColorHex(hslToHex(color.h, color.s, color.l));
+      setFotoBlob(blob);
+      setFotoPreview(URL.createObjectURL(blob));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No se pudo procesar la foto. Probá con otra o elegí el color a mano.");
+    }
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -46,50 +53,55 @@ export default function PrendaForm() {
     setEstado("guardando");
     setError("");
 
-    const { data: sessionData } = await supabase.auth.getSession();
-    const userId = sessionData.session?.user.id;
-    if (!userId) {
-      setError("Iniciá sesión primero.");
-      setEstado("error");
-      return;
-    }
-
-    const hsl = hexToHsl(colorHex);
-    const { data: inserted, error: insertErr } = await supabase
-      .from("prendas")
-      .insert({
-        user_id: userId,
-        categoria,
-        color_hex: colorHex,
-        color_h: hsl.h,
-        color_s: hsl.s,
-        color_l: hsl.l,
-        textura: textura || null,
-        estilo: estilo || null,
-        ocasion: ocasion || null,
-        estacion: estacion || null,
-      })
-      .select()
-      .single();
-
-    if (insertErr || !inserted) {
-      setError(insertErr?.message ?? "No se pudo guardar la prenda.");
-      setEstado("error");
-      return;
-    }
-
-    if (fotoBlob) {
-      const path = `${userId}/${inserted.id}.webp`;
-      const { error: uploadErr } = await supabase.storage
-        .from("armario-fotos")
-        .upload(path, fotoBlob, { contentType: "image/webp", upsert: true });
-      if (!uploadErr) {
-        await supabase.from("prendas").update({ foto_path: path }).eq("id", inserted.id);
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const userId = sessionData.session?.user.id;
+      if (!userId) {
+        setError("Iniciá sesión primero.");
+        setEstado("error");
+        return;
       }
-    }
 
-    const base = (import.meta.env.BASE_URL as string) || "/";
-    window.location.href = `${base}combinar/?prenda=${inserted.id}`;
+      const hsl = hexToHsl(colorHex);
+      const { data: inserted, error: insertErr } = await supabase
+        .from("prendas")
+        .insert({
+          user_id: userId,
+          categoria,
+          color_hex: colorHex,
+          color_h: hsl.h,
+          color_s: hsl.s,
+          color_l: hsl.l,
+          textura: textura || null,
+          estilo: estilo || null,
+          ocasion: ocasion || null,
+          estacion: estacion || null,
+        })
+        .select()
+        .single();
+
+      if (insertErr || !inserted) {
+        setError(insertErr?.message ?? "No se pudo guardar la prenda.");
+        setEstado("error");
+        return;
+      }
+
+      if (fotoBlob) {
+        const path = `${userId}/${inserted.id}.webp`;
+        const { error: uploadErr } = await supabase.storage
+          .from("armario-fotos")
+          .upload(path, fotoBlob, { contentType: "image/webp", upsert: true });
+        if (!uploadErr) {
+          await supabase.from("prendas").update({ foto_path: path }).eq("id", inserted.id);
+        }
+      }
+
+      const base = (import.meta.env.BASE_URL as string) || "/";
+      window.location.href = `${base}combinar/?prenda=${inserted.id}`;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error de conexión con Matiz.");
+      setEstado("error");
+    }
   }
 
   return (
