@@ -69,4 +69,5 @@ acción de guardar).
 *Este repositorio reemplazó a "Métricas LPF" (estadísticas de la Liga
 Profesional Argentina) a pedido explícito del dueño del proyecto. No quedó
 tag de respaldo del contenido anterior — solo vive, si acaso, en el historial
-de commits de este mismo repo.*
+de commits de este mismo repo. Las tablas de esa era en Supabase
+(`metricas_mundial`) también se borraron por completo, a pedido explícito.*
