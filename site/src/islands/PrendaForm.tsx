@@ -2,8 +2,10 @@ import { useRef, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
+import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
 import type { Categoria, Estacion, Estilo, Ocasion, Textura } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
+import PrendaIcon from "./PrendaIcon";
 
 const CATEGORIAS: Categoria[] = [
   "pantalon",
@@ -31,9 +33,22 @@ export default function PrendaForm() {
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
   const [error, setError] = useState("");
+  const [presetActivoId, setPresetActivoId] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
+
+  function aplicarPreset(p: PresetPrenda) {
+    setPresetActivoId(p.id);
+    setCategoria(p.categoria);
+    setColorHex(p.colorHex);
+    setTextura(p.textura ?? "");
+    setEstilo(p.estilo ?? "");
+    setOcasion(p.ocasion ?? "");
+    setEstacion(p.estacion ?? "");
+    setFotoBlob(null);
+    setFotoPreview(null);
+  }
 
   async function onFoto(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -105,50 +120,94 @@ export default function PrendaForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="card" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <label className="field-label">
-        <span>Categoría</span>
-        <select className="field" value={categoria} onChange={(e) => setCategoria(e.target.value as Categoria)}>
-          {CATEGORIAS.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <div>
-        <p style={{ margin: "0 0 0.4rem" }}>Color</p>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <input type="color" value={colorHex} onChange={(e) => setColorHex(e.target.value)} aria-label="Color de la prenda" />
-          <button type="button" className="btn btn-secondary" onClick={() => fileRef.current?.click()}>
-            📷 Foto
-          </button>
-          <input ref={fileRef} type="file" accept="image/*" capture="environment" hidden onChange={onFoto} />
-          {fotoPreview && (
-            <img src={fotoPreview} alt="" style={{ width: 48, height: 48, borderRadius: 8, objectFit: "cover" }} />
-          )}
-        </div>
-        <p style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>
-          El color se extrae solo de la foto -- si no queda bien, ajustalo a mano con el selector.
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div className="card">
+        <p className="eyebrow" style={{ marginBottom: "0.25rem" }}>
+          Elegí de la librería
         </p>
+        <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.75rem" }}>
+          Tocá una para cargarla directo -- después la podés ajustar antes de guardar.
+        </p>
+        <div className="catalogo-grid">
+          {CATALOGO_PRENDAS.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              className={`catalogo-card${presetActivoId === p.id ? " activo" : ""}`}
+              onClick={() => aplicarPreset(p)}
+            >
+              <span className="catalogo-icon">
+                <PrendaIcon categoria={p.categoria} color={p.colorHex} />
+              </span>
+              <span className="catalogo-nombre">{p.nombre}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
-      <details>
-        <summary>Tags opcionales (textura, estilo, ocasión, estación)</summary>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginTop: "0.6rem" }}>
-          <SelectOpcional label="Textura" value={textura} onChange={setTextura} opciones={TEXTURAS} />
-          <SelectOpcional label="Estilo" value={estilo} onChange={setEstilo} opciones={ESTILOS} />
-          <SelectOpcional label="Ocasión" value={ocasion} onChange={setOcasion} opciones={OCASIONES} />
-          <SelectOpcional label="Estación" value={estacion} onChange={setEstacion} opciones={ESTACIONES} />
-        </div>
-      </details>
+      <form onSubmit={onSubmit} className="card" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <p className="eyebrow" style={{ margin: 0 }}>
+          {presetActivoId ? "Ajustá y guardá" : "O cargala manual"}
+        </p>
+        <label className="field-label">
+          <span>Categoría</span>
+          <select
+            className="field"
+            value={categoria}
+            onChange={(e) => {
+              setCategoria(e.target.value as Categoria);
+              setPresetActivoId(null);
+            }}
+          >
+            {CATEGORIAS.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </label>
 
-      {error && <p style={{ color: "var(--danger)" }}>{error}</p>}
-      <button type="submit" className="btn btn-primary" disabled={estado === "guardando"}>
-        {estado === "guardando" ? "Guardando..." : "Guardar y ver combinaciones"}
-      </button>
-    </form>
+        <div>
+          <p style={{ margin: "0 0 0.4rem" }}>Color</p>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+            <input
+              type="color"
+              value={colorHex}
+              onChange={(e) => {
+                setColorHex(e.target.value);
+                setPresetActivoId(null);
+              }}
+              aria-label="Color de la prenda"
+            />
+            <button type="button" className="btn btn-secondary" onClick={() => fileRef.current?.click()}>
+              📷 Foto
+            </button>
+            <input ref={fileRef} type="file" accept="image/*" capture="environment" hidden onChange={onFoto} />
+            {fotoPreview && (
+              <img src={fotoPreview} alt="" style={{ width: 48, height: 48, borderRadius: 8, objectFit: "cover" }} />
+            )}
+          </div>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>
+            El color se extrae solo de la foto -- si no queda bien, ajustalo a mano con el selector.
+          </p>
+        </div>
+
+        <details>
+          <summary>Tags opcionales (textura, estilo, ocasión, estación)</summary>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginTop: "0.6rem" }}>
+            <SelectOpcional label="Textura" value={textura} onChange={setTextura} opciones={TEXTURAS} />
+            <SelectOpcional label="Estilo" value={estilo} onChange={setEstilo} opciones={ESTILOS} />
+            <SelectOpcional label="Ocasión" value={ocasion} onChange={setOcasion} opciones={OCASIONES} />
+            <SelectOpcional label="Estación" value={estacion} onChange={setEstacion} opciones={ESTACIONES} />
+          </div>
+        </details>
+
+        {error && <p style={{ color: "var(--danger)" }}>{error}</p>}
+        <button type="submit" className="btn btn-primary" disabled={estado === "guardando"}>
+          {estado === "guardando" ? "Guardando..." : "Guardar y ver combinaciones"}
+        </button>
+      </form>
+    </div>
   );
 }
 
