@@ -2,30 +2,16 @@
 site/node_modules/
 site/dist/
 site/.astro/
-site/check_site.mjs
 
-# Python
+# Python (por si queda algún script suelto de mantenimiento)
 __pycache__/
 *.pyc
 .pytest_cache/
-
-# HTML crudo guardado por los scrapers para debug (puede ser pesado, no versionar)
-data/raw/fifa_training_centre/raw_*.html
-data/raw/transfermarkt/raw_*.html
-
-# Cache de PDFs del FIFA Training Centre. El skip incremental usa el CSV ya
-# commiteado (_processed), no los PDFs -- persistirlos solo infla el repo.
-data/raw/fifa_training_centre/pdfs/
 
 # editores / SO
 .DS_Store
 .vscode/
 *.log
 
-# Métricas LPF: cache de JSON crudos por fixture de API-Football (regenerable,
-# no se versiona para no inflar el repo). Los _processed sí se commitean.
-data/raw/api_football/cache/
-
-# Métricas LPF: cache de JSON crudos por fixture de ESPN (regenerable, no
-# se versiona para no inflar el repo). Los _processed sí se commitean.
-data/raw/espn/cache/
+# variables de entorno (Supabase URL/anon key para desarrollo local)
+site/.env

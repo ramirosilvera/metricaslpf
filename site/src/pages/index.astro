@@ -1,54 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
-
-// Home = centro de análisis, no portada. El usuario entra con una pregunta
-// ("¿qué querés analizar hoy?") y elige una acción, no una categoría. Todo el
-// contenido explicativo, snapshots y tablas viven ya en sus páginas propias;
-// acá no se duplican. La metodología queda a un click, discreta.
-const base = import.meta.env.BASE_URL;
-
-// Cada acción es un MODO distinto, diferenciado por cuántas cosas mirás a la
-// vez: Comparar = dos (duelo), Rankings = los 30 (tabla), Analizar = una (lupa).
-// La descripción corta deja claro qué hace cada una y evita que se pisen entre sí.
-const actions = [
-  { href: `${base}partidos/`, icon: "⚽", label: "Ver partidos", desc: "Resultado, goles y estadística de cada partido" },
-  { href: `${base}comparar/`, icon: "🆚", label: "Comparar dos", desc: "Dos clubes o jugadores cara a cara en un radar" },
-  { href: `${base}prediccion/`, icon: "🔮", label: "Predecir un partido", desc: "Probabilidades y escenarios por rendimiento" },
-  { href: `${base}clubes/`, icon: "📊", label: "Ver rankings", desc: "Los 30 clubes de la Liga Profesional, tabla y estadística" },
-  { href: `${base}jugadores/`, icon: "👟", label: "Rankear jugadores", desc: "Goles, xG, tackles y más, jugador por jugador" },
-  { href: `${base}analisis/`, icon: "🔎", label: "Analizar a fondo", desc: "La lupa en un partido o un jugador puntual" },
-];
-
-// Compartir el sitio por WhatsApp (funcionalidad conservada, ahora liviana y
-// genérica: sin depender de datos en vivo, no queda desactualizado).
-const pageUrl = new URL(Astro.url.pathname, "https://ramirosilvera.github.io").href;
-const shareMessage = `Métricas LPF: análisis de la Liga Profesional Argentina con datos reales y abiertos. Comparás clubes, jugadores y partidos vos mismo 🇦🇷⚽ ${pageUrl}`;
-const waLink = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+import Placard from "../islands/Placard";
 ---
 
-<Base
-  title="Inicio"
-  description="Centro de análisis de la Liga Profesional Argentina: compará clubes, jugadores y partidos con datos reales y abiertos."
->
-  <section class="home-hub">
-    <p class="eyebrow">Métricas LPF</p>
-    <h1 class="home-hub-title">¿Qué querés analizar hoy?</h1>
-
-    <div class="cta-grid">
-      {actions.map((a) => (
-        <a class="cta-card" href={a.href}>
-          <span class="cta-icon" aria-hidden="true">{a.icon}</span>
-          <span class="cta-label">{a.label}</span>
-          <span class="cta-desc">{a.desc}</span>
-          <span class="cta-arrow" aria-hidden="true">→</span>
-        </a>
-      ))}
-    </div>
-
-    <p class="home-hub-foot">
-      <a href={`${base}metodologia/`}>¿Cómo calculamos esto?</a>
-      <span class="home-hub-sep" aria-hidden="true">·</span>
-      <a href={waLink} target="_blank" rel="noreferrer">📲 Compartir</a>
-    </p>
-  </section>
+<Base title="Placard">
+  <p class="eyebrow">Matiz</p>
+  <h1>Tu placard</h1>
+  <p style="color: var(--text-muted); margin-top: -0.25rem;">
+    Elegí una prenda para ver con qué combina, y por qué.
+  </p>
+  <Placard client:only="react" />
 </Base>

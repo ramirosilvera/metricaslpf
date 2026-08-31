@@ -1,7 +1,7 @@
 {
-  "name": "Métricas LPF",
-  "short_name": "Métricas LPF",
-  "description": "Análisis abierto del rendimiento de los clubes de la Liga Profesional Argentina. 100% datos abiertos y metodología a la vista.",
+  "name": "Matiz",
+  "short_name": "Matiz",
+  "description": "Tu estilista que te explica por qué combina. Cargá lo que ya tenés y Matiz te arma la mejor combinación posible, con la razón.",
   "lang": "es",
   "dir": "ltr",
   "start_url": "/metricaslpf/",
@@ -9,9 +9,9 @@
   "id": "/metricaslpf/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#070c17",
-  "theme_color": "#4fa8de",
-  "categories": ["sports", "news", "education"],
+  "background_color": "#1c1512",
+  "theme_color": "#c8763f",
+  "categories": ["lifestyle", "shopping", "utilities"],
   "icons": [
     {
       "src": "/metricaslpf/icon-192.png",

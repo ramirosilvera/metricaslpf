@@ -1,0 +1,10 @@
+---
+import Base from "../layouts/Base.astro";
+import AuthForm from "../islands/AuthForm";
+---
+
+<Base title="Entrar">
+  <p class="eyebrow">Matiz</p>
+  <h1>Entrá a tu placard</h1>
+  <AuthForm client:only="react" />
+</Base>

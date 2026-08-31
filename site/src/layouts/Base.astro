@@ -1,306 +1,37 @@
 ---
 import "../styles/global.css";
-import ChatAssistant from "../islands/ChatAssistant";
 
 interface Props {
   title: string;
   description?: string;
-  /** Imagen Open Graph opcional (URL absoluta). Por defecto la tarjeta de marca. */
-  image?: string;
 }
 
-const { title, description = "Análisis abierto del rendimiento de los clubes de la Liga Profesional Argentina.", image } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const origin = "https://ramirosilvera.github.io";
-
-const fullTitle = `${title} · Métricas LPF`;
-// En build estático Astro.url ya refleja site + base (astro.config.mjs), así que
-// la URL canónica se arma contra el origin conocido de GitHub Pages.
-const canonicalUrl = new URL(Astro.url.pathname, origin).href;
-// Imagen social por defecto (tarjeta de marca 1200x630 en /public).
-const ogImage = image ?? new URL(`${base}og-image.png`, origin).href;
-
-// Navegación centrada en preguntas, no en categorías: 5 ítems primarios
-// (Inicio · Comparar · Rankings · Analizar · IA). "Rankings" agrupa las tres
-// páginas de ranking existentes; "Más" agrupa lo secundario (Explorador,
-// Metodología, Fuentes) sin quitarlo de la navegación. Ninguna URL cambia.
-const currentPath = Astro.url.pathname;
-function isActive(href: string) {
-  if (href === base) return currentPath === base || currentPath === `${base}index.html`;
-  return currentPath.startsWith(href);
-}
-
-const homeItem = { href: `${base}`, label: "Inicio" };
-const compararItem = { href: `${base}comparar/`, label: "Comparar" };
-const prediccionItem = { href: `${base}prediccion/`, label: "Predicción" };
-const partidosItem = { href: `${base}partidos/`, label: "Partidos" };
-const analizarItem = { href: `${base}analisis/`, label: "Analizar" };
-
-const rankingsItems = [
-  { href: `${base}clubes/`, label: "Clubes" },
-  { href: `${base}jugadores/`, label: "Jugadores" },
-  { href: `${base}goleadores/`, label: "Goleadores" },
-  { href: `${base}consistencia/`, label: "Consistencia" },
-];
-const secondaryItems = [
-  { href: `${base}explorador/`, label: "Laboratorio" },
-  { href: `${base}metodologia/`, label: "Metodología" },
-  { href: `${base}fuentes/`, label: "Fuentes" },
-];
-
-const rankingsActive = rankingsItems.some((i) => isActive(i.href));
-const secondaryActive = secondaryItems.some((i) => isActive(i.href));
+const { title, description = "Matiz — tu estilista que te explica por qué combina." } = Astro.props;
+const path = Astro.url.pathname;
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{title} · Métricas LPF</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · Matiz</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    <meta name="theme-color" content="#4fa8de" data-theme-color-meta />
-
-    <meta property="og:site_name" content="Métricas LPF" />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:locale" content="es_AR" />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Métricas LPF — análisis de la Liga Profesional Argentina con datos abiertos" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%234fa8de%22/><g stroke=%22white%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><circle cx=%2250%22 cy=%2252%22 r=%2230%22/><path d=%22M50 40 L62.4 48 L57.6 62.5 L42.4 62.5 L37.6 48 Z%22 fill=%22white%22 stroke=%22none%22/><path d=%22M50 40 V22 M62.4 48 L78.5 42.7 M57.6 62.5 L67.6 76.3 M42.4 62.5 L32.4 76.3 M37.6 48 L21.5 42.7%22/></g></svg>" />
-    <link rel="icon" type="image/png" sizes="32x32" href={`${base}favicon-32.png`} />
-    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
-    <link rel="manifest" href={`${base}manifest.webmanifest`} />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Métricas LPF" />
-    <script is:inline>
-      // Modo claro/oscuro con override manual. Corre síncrono en <head>, antes
-      // de pintar, para que la página nunca arranque en el tema equivocado y
-      // después "salte" (FOUC). Sin elección guardada, sigue prefers-color-scheme
-      // del SO (ver los bloques @media en global.css); con elección guardada,
-      // fuerza [data-theme] en <html>, que esos mismos bloques respetan.
-      // window.mm26SetTheme queda expuesto para que el botón (ver Base.astro,
-      // más abajo en <body>) lo reuse sin duplicar esta lógica.
-      (function () {
-        var KEY = "mm26-theme";
-        var COLORS = { light: "#4fa8de", dark: "#070c17" };
-        function getStored() {
-          try {
-            var v = localStorage.getItem(KEY);
-            return v === "light" || v === "dark" ? v : "system";
-          } catch (e) {
-            return "system";
-          }
-        }
-        function effectiveIsDark(mode) {
-          if (mode === "dark") return true;
-          if (mode === "light") return false;
-          return window.matchMedia("(prefers-color-scheme: dark)").matches;
-        }
-        window.mm26GetTheme = getStored;
-        window.mm26SetTheme = function (mode) {
-          if (mode === "dark" || mode === "light") {
-            document.documentElement.setAttribute("data-theme", mode);
-            try {
-              localStorage.setItem(KEY, mode);
-            } catch (e) {}
-          } else {
-            mode = "system";
-            document.documentElement.removeAttribute("data-theme");
-            try {
-              localStorage.removeItem(KEY);
-            } catch (e) {}
-          }
-          var meta = document.querySelector("[data-theme-color-meta]");
-          if (meta) meta.setAttribute("content", effectiveIsDark(mode) ? COLORS.dark : COLORS.light);
-          window.dispatchEvent(new CustomEvent("mm26:theme-change", { detail: { mode: mode } }));
-          return mode;
-        };
-        window.mm26SetTheme(getStored());
-      })();
-    </script>
+    <meta name="theme-color" content="#c8763f" />
+    <link rel="manifest" href={`${import.meta.env.BASE_URL}manifest.webmanifest`} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon-32.png`} />
+    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
   </head>
   <body>
-    <a class="skip-link" href="#contenido">Saltar al contenido</a>
-    <header class="site-header">
-      <div class="wrap">
-        <a class="brand" href={`${base}`}>
-          <span class="brand-mark" aria-hidden="true">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
-              <path d="M12 8.8 L15.04 11.01 L13.88 14.59 L10.12 14.59 L8.96 11.01 Z" fill="currentColor" />
-              <path
-                d="M12 8.8 V3 M15.04 11.01 L20.6 9.2 M13.88 14.59 L17.3 19.3 M10.12 14.59 L6.7 19.3 M8.96 11.01 L3.4 9.2"
-                stroke="currentColor"
-                stroke-width="1.4"
-                stroke-linecap="round"
-              />
-            </svg>
-          </span>
-          <span class="brand-text">
-            <strong>Métricas LPF</strong>
-            <span>Liga Profesional Argentina · 100% datos abiertos</span>
-          </span>
-        </a>
-
-        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Abrir menú de navegación" aria-controls="nav-principal" />
-        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 5H17M3 10H17M3 15H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-          </svg>
-        </label>
-
-        <nav class="nav" id="nav-principal" aria-label="Navegación principal">
-          <a href={homeItem.href} aria-current={isActive(homeItem.href) ? "page" : undefined}>{homeItem.label}</a>
-          <a href={compararItem.href} aria-current={isActive(compararItem.href) ? "page" : undefined}>{compararItem.label}</a>
-          <a href={prediccionItem.href} aria-current={isActive(prediccionItem.href) ? "page" : undefined}>{prediccionItem.label}</a>
-
-          <details class="nav-group">
-            <summary class={rankingsActive ? "is-active" : undefined} aria-current={rankingsActive ? "page" : undefined}>Rankings</summary>
-            <div class="nav-dropdown">
-              {rankingsItems.map((item) => (
-                <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
-              ))}
-            </div>
-          </details>
-
-          <a href={partidosItem.href} aria-current={isActive(partidosItem.href) ? "page" : undefined}>{partidosItem.label}</a>
-          <a href={analizarItem.href} aria-current={isActive(analizarItem.href) ? "page" : undefined}>{analizarItem.label}</a>
-
-          <button type="button" class="nav-ia" data-open-chat aria-haspopup="dialog">IA</button>
-
-          <details class="nav-group nav-group-more">
-            <summary class={secondaryActive ? "is-active" : undefined} aria-current={secondaryActive ? "page" : undefined}>Más</summary>
-            <div class="nav-dropdown">
-              {secondaryItems.map((item) => (
-                <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
-              ))}
-            </div>
-          </details>
-        </nav>
-
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar tema">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="10" cy="10" r="7.2" stroke="currentColor" stroke-width="1.5" />
-            <path d="M10 2.8a7.2 7.2 0 0 1 0 14.4z" fill="currentColor" />
-          </svg>
-        </button>
-      </div>
-    </header>
-    <main id="contenido">
-      <div class="wrap">
-        <slot />
-      </div>
-    </main>
-    <footer class="footer">
-      <div class="wrap">
-        <p>
-          Proyecto abierto, sin fines de lucro. Código y datos versionados en <a href="https://github.com/ramirosilvera/metricaslpf" target="_blank" rel="noreferrer">GitHub</a>.
-          Fuentes: ESPN (partidos, tabla y estadística táctica) y FotMob (rendimiento individual de temporada). Ver <a href={`${base}fuentes/`}>fuentes</a> y <a href={`${base}metodologia/`}>metodología</a> para
-          licencias, cobertura, limitaciones y sesgos conocidos.
-        </p>
-      </div>
-    </footer>
-    <ChatAssistant client:only="react" />
-    <script is:inline>
-      // El ítem "IA" del menú no navega: abre el asistente flotante (ChatAssistant).
-      // Delegamos el click y emitimos un CustomEvent global; el listener vive en
-      // ChatAssistant (lo agrega el agente dueño de esa isla). Si todavía no hay
-      // listener (o el chat no está configurado), el click es inofensivo.
-      document.addEventListener("click", (e) => {
-        const trigger = e.target instanceof Element ? e.target.closest("[data-open-chat]") : null;
-        if (!trigger) return;
-        e.preventDefault();
-        window.dispatchEvent(new CustomEvent("mm26:open-chat"));
-      });
-
-      // Mejora progresiva del menú móvil (el toggle base es CSS puro con
-      // checkbox, funciona sin JS). Acá sólo lo hacemos más robusto en el
-      // celular: cerrar al tocar un enlace, al tocar fuera y con Escape, y
-      // reflejar aria-expanded en la hamburguesa para lectores de pantalla.
-      (function () {
-        const toggle = document.getElementById("nav-toggle");
-        const label = document.querySelector(".nav-toggle-label");
-        const nav = document.getElementById("nav-principal");
-        if (!toggle || !nav || !label) return;
-        const sync = () => label.setAttribute("aria-expanded", toggle.checked ? "true" : "false");
-        const close = () => {
-          if (toggle.checked) {
-            toggle.checked = false;
-            sync();
-          }
-        };
-        toggle.addEventListener("change", sync);
-        sync();
-        // Al tocar un enlace del menú, cerralo (la navegación recarga igual, pero
-        // así se siente inmediato y no queda abierto si es un ancla interna).
-        nav.addEventListener("click", (e) => {
-          if (e.target instanceof Element && e.target.closest("a")) close();
-        });
-        // Tocar fuera del header cierra el menú.
-        document.addEventListener("click", (e) => {
-          if (!toggle.checked) return;
-          const header = e.target instanceof Element ? e.target.closest(".site-header") : null;
-          if (!header) close();
-        });
-        // Escape cierra y devuelve el foco a la hamburguesa.
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && toggle.checked) {
-            close();
-            label.focus();
-          }
-        });
-      })();
-
-      // Botón de tema: cicla Sistema -> Claro -> Oscuro -> Sistema. La lógica
-      // de aplicar el tema (setear [data-theme], color-scheme, localStorage,
-      // theme-color) vive en mm26SetTheme (script en <head>, corre primero
-      // para evitar el flash de tema equivocado); acá sólo se dibuja el ícono
-      // y se engancha el click.
-      (function () {
-        const btn = document.querySelector("[data-theme-toggle]");
-        if (!btn || !window.mm26SetTheme || !window.mm26GetTheme) return;
-        const ORDER = ["system", "light", "dark"];
-        const LABELS = { system: "Sistema", light: "Claro", dark: "Oscuro" };
-        const ICONS = {
-          system:
-            '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="10" cy="10" r="7.2" stroke="currentColor" stroke-width="1.5"/><path d="M10 2.8a7.2 7.2 0 0 1 0 14.4z" fill="currentColor"/></svg>',
-          light:
-            '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="10" cy="10" r="4.2" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.6v2.3M10 16.1v2.3M18.4 10h-2.3M3.9 10H1.6M15.7 4.3l-1.6 1.6M5.9 14.1l-1.6 1.6M15.7 15.7l-1.6-1.6M5.9 5.9 4.3 4.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
-          dark: '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17 11.2A7.2 7.2 0 1 1 8.8 3a5.6 5.6 0 0 0 8.2 8.2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
-        };
-        function render(mode) {
-          btn.innerHTML = ICONS[mode];
-          btn.dataset.mode = mode;
-          btn.setAttribute("aria-label", `Tema: ${LABELS[mode]}. Tocá para cambiar (Sistema → Claro → Oscuro).`);
-        }
-        let mode = window.mm26GetTheme();
-        render(mode);
-        btn.addEventListener("click", () => {
-          mode = ORDER[(ORDER.indexOf(mode) + 1) % ORDER.length];
-          window.mm26SetTheme(mode);
-          render(mode);
-        });
-      })();
-    </script>
-    <script is:inline define:vars={{ swUrl: `${base}sw.js`, swScope: base }}>
-      // Registro del service worker (PWA + app shell offline). Conservador: si
-      // falla, el sitio funciona igual. Ver comentarios en public/sw.js.
+    <slot />
+    <nav class="tabbar">
+      <a href={import.meta.env.BASE_URL} class={path === import.meta.env.BASE_URL ? "active" : ""}>Placard</a>
+      <a href={`${import.meta.env.BASE_URL}prenda/nueva/`} class={path.includes("/prenda/") ? "active" : ""}>+ Prenda</a>
+      <a href={`${import.meta.env.BASE_URL}outfits/`} class={path.includes("/outfits/") ? "active" : ""}>Outfits</a>
+    </nav>
+    <script>
       if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker.register(swUrl, { scope: swScope }).catch(() => {});
-        });
+        navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {});
       }
     </script>
   </body>

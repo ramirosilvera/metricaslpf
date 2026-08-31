@@ -1,0 +1,10 @@
+---
+import Base from "../layouts/Base.astro";
+import Recomendaciones from "../islands/Recomendaciones";
+---
+
+<Base title="Combinar">
+  <p class="eyebrow">Matiz</p>
+  <h1>Combinaciones</h1>
+  <Recomendaciones client:only="react" />
+</Base>

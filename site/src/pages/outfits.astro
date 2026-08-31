@@ -1,0 +1,10 @@
+---
+import Base from "../layouts/Base.astro";
+import Outfits from "../islands/Outfits";
+---
+
+<Base title="Outfits">
+  <p class="eyebrow">Matiz</p>
+  <h1>Tus outfits</h1>
+  <Outfits client:only="react" />
+</Base>
