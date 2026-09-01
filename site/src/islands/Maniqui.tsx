@@ -70,7 +70,7 @@ function agruparPorCapa(prendas: Prenda[]): {
 // texturas que se dibujan como un patrón repetido (trama de tela) vs. las
 // que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
 // null/una textura sin mapear acá (p.ej. sin cargar) no dibuja nada extra.
-const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_grueso", "lana", "algodon", "lino"];
+const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_grueso", "lana", "algodon", "lino", "acolchado"];
 const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso"];
 
 /** El <pattern> real por textura -- son ilustraciones esquemáticas a
@@ -119,6 +119,16 @@ function PatronTextura({ id, textura, tono }: { id: string; textura: Textura; to
             stroke={tono}
             strokeWidth="0.3"
           />
+        </pattern>
+      );
+    case "acolchado":
+      // costuras de campera de pluma (puffer) -- una cuadrícula grande de
+      // canales de relleno, no una trama de tela: por eso el trazo es más
+      // grueso y el espaciado mucho más ancho que cualquier textura tejida
+      // de acá arriba (denim/lana/algodón).
+      return (
+        <pattern id={id} width="16" height="11" patternUnits="userSpaceOnUse">
+          <path d="M0 0 H16 M0 0 V11" stroke={tono} strokeWidth="1" />
         </pattern>
       );
     default:

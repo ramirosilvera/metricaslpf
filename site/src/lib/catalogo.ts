@@ -30,10 +30,11 @@ export interface PresetPrenda {
  *   clima real de cada usuario (una remera blanca sirve en verano Y en
  *   entretiempo) -- forzar una estación acá haría más daño que bien.
  * - `textura` solo cuando el nombre de la prenda ya la implica sin
- *   ambigüedad (zapatos de cuero -> cuero_liso, jean -> denim). Las
- *   zapatillas y las camperas no-jean quedan sin textura a propósito: el
- *   material varía demasiado (cuero, lona, nylon...) para asumir uno sin
- *   inventar un dato que no es real.
+ *   ambigüedad (zapatos de cuero -> cuero_liso, jean -> denim, campera de
+ *   pluma -> acolchado). Las zapatillas y las camperas "genéricas" (negra,
+ *   verde militar) quedan sin textura a propósito: el material varía
+ *   demasiado (cuero, lona, nylon...) para asumir uno sin inventar un dato
+ *   que no es real.
  */
 export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // --- Remeras ---
@@ -79,6 +80,11 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "campera-negra", nombre: "Campera negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
   { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", textura: "denim", estilo: "casual", ocasion: "casual" },
   { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual" },
+  // pluma/puffer (tipo Uniqlo) -- colores reusados de otras categorías, ver
+  // criterio de "Accesorios" más abajo.
+  { id: "campera-pluma-negra", nombre: "Campera de pluma negra", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "casual", ocasion: "casual" },
+  { id: "campera-pluma-azul-marino", nombre: "Campera de pluma azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "acolchado", estilo: "casual", ocasion: "casual" },
+  { id: "campera-pluma-beige", nombre: "Campera de pluma beige", categoria: "campera", colorHex: "#D8C7A1", textura: "acolchado", estilo: "casual", ocasion: "casual" },
 
   // --- Accesorios ---
   // Reusa hex ya presentes en otras categorías (azul marino, bordo) a

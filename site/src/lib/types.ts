@@ -17,7 +17,8 @@ export type Textura =
   | "pana"
   | "corderoy"
   | "tejido_grueso"
-  | "denim";
+  | "denim"
+  | "acolchado";
 
 export type Estilo = "casual" | "formal" | "deportivo" | "urbano" | "clasico";
 export type Ocasion = "casual" | "laburo" | "formal";
