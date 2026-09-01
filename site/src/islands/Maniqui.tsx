@@ -780,40 +780,64 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
 
         {principal.piernas && <PiernasCuerpo prenda={principal.piernas} />}
         {principal.torso && <TorsoCuerpo prenda={principal.torso} />}
-        {cuelloSecundario && (
+        {cuelloSecundario && principal.torso && (
           // el cuello de la camisa de abajo, asomando por encima del
           // sweater/campera/buzo -- dibujado después de TorsoCuerpo a
           // propósito, para quedar por encima en el z-order. Mismas
           // coordenadas y forma que el cuello de camisa "principal" de
           // TorsoCuerpo (ver ese comentario para el porqué del rediseño).
-          // Antes usaba color_hex (el color plano de la camisa) en vez de
-          // un tono con sombra -- con una camisa clara (blanco roto, por
-          // ejemplo) el cuello casi no se distinguía del fondo neutro del
-          // cuerpo. Después pasó a sombraHsl, pero eso a su vez fallaba en
-          // el otro extremo: con una camisa oscura, restarle 10% de luz no
-          // alcanza para diferenciarlo del propio degradé de sombra de la
-          // tela (mismo bug que en el cuello "principal" de TorsoCuerpo).
-          // Ahora usa detalleHsl, que garantiza contraste real en los dos
-          // sentidos. */}
+          //
+          // Reporte real del usuario, con captura: "se ve la parte de
+          // atrás del cuello de la camisa... se debería ver el cuello del
+          // maniquí [o el escote de la prenda de arriba]". Tenía razón:
+          // esta pieza se dibujaba ENTERA (tira + las dos puntas, hasta
+          // y=58) encima de la prenda de arriba SIN IMPORTAR cuánto
+          // escote tiene esa prenda -- un sweater de cuello en V solo
+          // abre hasta y≈46 en el centro, así que la punta del cuello
+          // (y=58) quedaba sobresaliendo 12u por DEBAJO de esa V, como
+          // pegada encima de la tela en vez de asomando por un hueco
+          // real. Se agrega un clipPath con el escote real de cada
+          // prenda de arriba (el mismo dato que ya define su propio
+          // dibujo: la V del sweater, un cierre más alto y angosto para
+          // el buzo -- cuello redondo, cierra casi del todo -- y uno más
+          // ancho y bajo para la campera -- una campera de abrigo
+          // normalmente se usa más abierta que un sweater) -- así la
+          // pieza de abajo de la camisa nunca dibuja más de lo que ese
+          // escote real dejaría ver. */}
           <>
-            <path
-              d="M46 42 Q60 36 74 42 Q68 44 60 45 Q52 44 46 42 Z"
-              fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
-              stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
-              {...strokeProps}
-            />
-            <path
-              d="M46 42 L60 58 L54 42 Z"
-              fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
-              stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
-              {...strokeProps}
-            />
-            <path
-              d="M74 42 L60 58 L66 42 Z"
-              fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
-              stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
-              {...strokeProps}
-            />
+            <defs>
+              <clipPath id={`escote-${cuelloSecundario.id}`}>
+                {principal.torso.categoria === "sweater" && (
+                  <path d="M46 20 L74 20 L74 40 Q60 46 46 40 Z" />
+                )}
+                {principal.torso.categoria === "buzo" && (
+                  <path d="M46 20 L74 20 L74 39 Q60 43 46 39 Z" />
+                )}
+                {principal.torso.categoria === "campera" && (
+                  <path d="M40 20 L80 20 L80 52 Q60 58 40 52 Z" />
+                )}
+              </clipPath>
+            </defs>
+            <g clipPath={`url(#escote-${cuelloSecundario.id})`}>
+              <path
+                d="M46 42 Q60 36 74 42 Q68 44 60 45 Q52 44 46 42 Z"
+                fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                {...strokeProps}
+              />
+              <path
+                d="M46 42 L60 58 L54 42 Z"
+                fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                {...strokeProps}
+              />
+              <path
+                d="M74 42 L60 58 L66 42 Z"
+                fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                {...strokeProps}
+              />
+            </g>
           </>
         )}
         {principal.accesorio && <AccesorioCuerpo prenda={principal.accesorio} />}
