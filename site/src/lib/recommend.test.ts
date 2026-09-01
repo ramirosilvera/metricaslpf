@@ -6,6 +6,7 @@ import {
   diffPrendasEdicion,
   esNeutro,
   hueDist,
+  recomendar,
   scoreColor,
   tanda,
   tecnicaRescate,
@@ -89,6 +90,49 @@ describe("scoreColor", () => {
   it("saturación alta + valor casi idéntico, matices distintos -> se funden", () => {
     const r = scoreColor({ h: 0, s: 80, l: 50 }, { h: 100, s: 70, l: 54 });
     expect(r.nivel).toBe("con_cuidado");
+  });
+});
+
+describe("recomendar -- coordinación de cuero (cinturón/calzado)", () => {
+  it("caso real reportado: cinturón negro + zapato de cuero marrón NO es 'excelente' pese a que el negro es neutro en HSL", () => {
+    const cinturonNegro = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturonNegro.textura = "cuero_liso";
+    const zapatoMarron = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoMarron.textura = "cuero_liso";
+
+    const [resultado] = recomendar(cinturonNegro, [zapatoMarron], [cinturonNegro, zapatoMarron]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+    expect(resultado.score.explicacion).toContain("cuero");
+    expect(resultado.tecnicaRescate).toContain("mismo tono de cuero");
+  });
+
+  it("cinturón y zapato de cuero del MISMO tono sí combinan (ambos marrones, mismo hex real del catálogo)", () => {
+    const cinturonMarron = mkPrenda("accesorio", "#5C3A21", 25, 47, 25);
+    cinturonMarron.textura = "cuero_liso";
+    const zapatoMarron = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoMarron.textura = "cuero_liso";
+
+    const [resultado] = recomendar(cinturonMarron, [zapatoMarron], [cinturonMarron, zapatoMarron]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
+
+  it("cinturón y zapato negros (ambos cuero, ambos neutros) sí combinan", () => {
+    const cinturonNegro = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturonNegro.textura = "cuero_liso";
+    const zapatoNegro = mkPrenda("calzado", "#1C1210", 15, 30, 8);
+    zapatoNegro.textura = "cuero_liso";
+
+    const [resultado] = recomendar(cinturonNegro, [zapatoNegro], [cinturonNegro, zapatoNegro]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
+
+  it("la regla de cuero NO aplica si alguna de las dos prendas no es cuero_liso (p.ej. remera negra + zapato marrón sigue siendo 'excelente')", () => {
+    const remeraNegra = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    const zapatoMarron = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoMarron.textura = "cuero_liso";
+
+    const [resultado] = recomendar(remeraNegra, [zapatoMarron], [remeraNegra, zapatoMarron]);
+    expect(resultado.score.nivel).toBe("excelente");
   });
 });
 

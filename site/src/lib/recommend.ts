@@ -141,6 +141,28 @@ export function tecnicaRescate(
   return "Repetí uno de los dos colores en un accesorio (cinturón, medias, gorra) para que se lea intencional.";
 }
 
+const CATEGORIAS_CUERO: Categoria[] = ["calzado", "accesorio"];
+
+/** Cuero negro + cuero de otro color (marrón, tostado...) en cinturón o
+ *  calzado: por convención clásica de vestimenta el cuero se coordina
+ *  aparte del resto de la ropa -- cinturón a tono con el calzado, sea cual
+ *  sea el color -- a diferencia de una remera o un pantalón, donde el
+ *  negro sí es un neutro que combina con cualquier cosa. scoreColor no lo
+ *  puede saber por sí solo (solo ve HSL, no categoría ni material), así
+ *  que se corrige acá, con el Prenda completo disponible. Reportado por el
+ *  usuario con un caso real: la app recomendaba "excelente" para cinturón
+ *  negro + zapatos de cuero marrones -- negro es neutro en HSL (s=0), pero
+ *  en cuero esa regla general no aplica. */
+function esDescoordinacionDeCuero(base: Prenda, candidato: Prenda): boolean {
+  if (base.textura !== "cuero_liso" || candidato.textura !== "cuero_liso") return false;
+  if (!CATEGORIAS_CUERO.includes(base.categoria) || !CATEGORIAS_CUERO.includes(candidato.categoria)) return false;
+  // uno acromático (negro, típicamente) y el otro con un matiz real
+  // (marrón, tostado...) -- si ambos son acromáticos (negro con negro) o
+  // ambos tienen matiz (que en este catálogo siempre es el mismo marrón
+  // reusado entre cinturón y zapato), sí combinan.
+  return esNeutro(base.color_s, base.color_l) !== esNeutro(candidato.color_s, candidato.color_l);
+}
+
 /** Recomienda, sobre un placard completo, las mejores prendas para combinar con `base`. */
 export function recomendar(
   base: Prenda,
@@ -150,14 +172,26 @@ export function recomendar(
   return candidatas
     .filter((c) => c.id !== base.id)
     .map((c) => {
-      const score = scoreColor(
-        { h: base.color_h, s: base.color_s, l: base.color_l },
-        { h: c.color_h, s: c.color_s, l: c.color_l },
-      );
+      const cueroDescoordinado = esDescoordinacionDeCuero(base, c);
+      const score: ScoreColor = cueroDescoordinado
+        ? {
+            nivel: "con_cuidado",
+            explicacion:
+              "El cuero se coordina aparte del resto de la ropa: negro con negro, marrón con marrón. Acá el cinturón y el calzado son de cuero de tonos distintos -- no combina, aunque el negro sea neutro para todo lo demás.",
+          }
+        : scoreColor(
+            { h: base.color_h, s: base.color_s, l: base.color_l },
+            { h: c.color_h, s: c.color_s, l: c.color_l },
+          );
       return {
         prenda: c,
         score,
-        tecnicaRescate: score.nivel === "con_cuidado" ? tecnicaRescate(base, c, placard) : undefined,
+        tecnicaRescate:
+          score.nivel !== "con_cuidado"
+            ? undefined
+            : cueroDescoordinado
+              ? "Usá cinturón y calzado del mismo tono de cuero -- los dos marrones o los dos negros."
+              : tecnicaRescate(base, c, placard),
       };
     })
     .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
