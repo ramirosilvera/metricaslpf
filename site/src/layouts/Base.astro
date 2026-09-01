@@ -35,6 +35,10 @@ const path = Astro.url.pathname;
   </head>
   <body>
     <slot />
+    <div id="matiz-update-banner" class="update-banner" hidden>
+      <span>Hay una versión nueva de Matiz.</span>
+      <button type="button" onclick="location.reload()">Actualizar</button>
+    </div>
     <nav class="tabbar">
       <a
         href={import.meta.env.BASE_URL}
@@ -48,7 +52,37 @@ const path = Astro.url.pathname;
     </nav>
     <script>
       if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {});
+        // sw.js llama a skipWaiting()+clients.claim() sin pedir permiso, así
+        // que un service worker nuevo toma control de la pestaña ya abierta
+        // solo -- pero el HTML/JS que está en memoria en ESE momento sigue
+        // siendo el viejo hasta recargar. Es justo el bug reportado: una app
+        // ya abierta (o una PWA instalada que no se cerró del todo) se queda
+        // corriendo la versión de antes de un deploy y una feature nueva
+        // (como el botón de eliminar prenda) no aparece hasta refrescar.
+        // "controllerchange" avisa de eso; no se recarga sola para no
+        // interrumpir algo que el usuario esté completando (ej. el form de
+        // cargar una prenda).
+        const teniaControlador = Boolean(navigator.serviceWorker.controller);
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          if (!teniaControlador) return; // primera instalación, no una actualización real
+          const banner = document.getElementById("matiz-update-banner");
+          if (!banner) return;
+          banner.hidden = false;
+          // el body necesita el mismo espacio reservado arriba que el
+          // banner, si no tapa el título de la pantalla (ver .update-banner
+          // y body.tiene-aviso-actualizacion en global.css).
+          document.body.classList.add("tiene-aviso-actualizacion");
+        });
+        navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).then((reg) => {
+          // el chequeo automático del navegador no es predecible en todos
+          // los contextos (PWA standalone en background, etc.) -- forzar un
+          // chequeo cuando la pestaña vuelve a primer plano es lo que más
+          // ataca el escenario real: la app quedó abierta desde antes de un
+          // deploy y no se refrescó sola.
+          document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "visible") reg.update().catch(() => {});
+          });
+        }).catch(() => {});
       }
     </script>
   </body>

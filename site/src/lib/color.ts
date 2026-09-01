@@ -83,3 +83,43 @@ export function hslToHex(h: number, s: number, l: number): string {
   const { r, g, b } = hslToRgb(h, s, l);
   return rgbToHex(r, g, b);
 }
+
+/** Nombre de color en español, para no depender solo del color renderizado
+ *  del ícono -- con poco brillo de pantalla dos colores parecidos se leen
+ *  igual. Los umbrales de "neutro" (s<=15, l<=12, l>=88) son los mismos que
+ *  usa el algoritmo de combinación en recommend.ts (esNeutro), repetidos acá
+ *  a propósito para no crear una dependencia cruzada entre este archivo
+ *  (utilidades de color puras) y la lógica de recomendación -- si se tocan
+ *  ahí, hay que tocarlos acá también. */
+export function nombreColor(h: number, s: number, l: number): string {
+  if (l <= 12) return "Negro";
+  if (l >= 88) return s <= 15 ? "Blanco" : "Blanco roto";
+  if (s <= 15) {
+    if (l < 35) return "Gris oscuro";
+    if (l < 65) return "Gris";
+    return "Gris claro";
+  }
+
+  const matiz =
+    h < 15 || h >= 345
+      ? "Rojo"
+      : h < 45
+        ? "Naranja"
+        : h < 65
+          ? "Amarillo"
+          : h < 160
+            ? "Verde"
+            : h < 195
+              ? "Turquesa"
+              : h < 250
+                ? "Azul"
+                : h < 290
+                  ? "Violeta"
+                  : h < 330
+                    ? "Magenta"
+                    : "Rosa";
+
+  if (l < 30) return `${matiz} oscuro`;
+  if (l > 78) return `${matiz} claro`;
+  return matiz;
+}

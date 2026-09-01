@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
-import { hexToHsl } from "../lib/color";
+import { hexToHsl, nombreColor } from "../lib/color";
 import { CATEGORIAS_COMPLEMENTARIAS, type Categoria, type Prenda } from "../lib/types";
 import { recomendar } from "../lib/recommend";
 import ConfigWarning from "./ConfigWarning";
@@ -180,7 +180,9 @@ export default function Probar() {
               <PrendaIcon categoria={pruebaBase.categoria} color={pruebaBase.color_hex} />
             </span>
             <div style={{ flex: 1 }}>
-              <strong style={{ textTransform: "capitalize" }}>{pruebaBase.categoria}</strong>
+              <strong style={{ textTransform: "capitalize" }}>
+                {pruebaBase.categoria} · {nombreColor(pruebaBase.color_h, pruebaBase.color_s, pruebaBase.color_l)}
+              </strong>
               <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>
                 {veredicto ? veredicto.texto : "Así combina con lo que ya tenés"}
               </p>
@@ -214,6 +216,9 @@ export default function Probar() {
                           <PrendaIcon categoria={prenda.categoria} color={prenda.color_hex} />
                         </span>
                         <div style={{ flex: 1 }}>
+                          <span style={{ display: "block", fontSize: "0.8rem", textTransform: "capitalize", marginBottom: "0.2rem" }}>
+                            {prenda.categoria} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
+                          </span>
                           <span className={`nivel-badge nivel-${score.nivel}`}>
                             {NIVEL_LABEL[score.nivel]}
                             {score.tag === "combinacion_audaz" && " · audaz"}

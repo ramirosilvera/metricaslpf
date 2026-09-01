@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
+import { nombreColor } from "../lib/color";
 import { CATEGORIAS_COMPLEMENTARIAS, type Prenda } from "../lib/types";
 import { recomendar } from "../lib/recommend";
 import ConfigWarning from "./ConfigWarning";
@@ -199,7 +200,9 @@ export default function Recomendaciones() {
           <PrendaIcon categoria={base.categoria} color={base.color_hex} />
         </span>
         <div style={{ flex: 1 }}>
-          <strong style={{ textTransform: "capitalize", fontSize: "1.1rem" }}>{base.categoria}</strong>
+          <strong style={{ textTransform: "capitalize", fontSize: "1.1rem" }}>
+            {base.categoria} · {nombreColor(base.color_h, base.color_s, base.color_l)}
+          </strong>
           <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>
             Tocá las combinaciones que te gusten para armar un outfit.
           </p>
@@ -272,13 +275,16 @@ export default function Recomendaciones() {
                     onClick={() => toggleSeleccion(prenda.id)}
                     disabled={guardando}
                     aria-pressed={activo}
-                    aria-label={`${prenda.categoria} ${prenda.color_hex}, ${NIVEL_LABEL[score.nivel]}${activo ? ", seleccionada" : ""}`}
+                    aria-label={`${prenda.categoria} ${nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}, ${NIVEL_LABEL[score.nivel]}${activo ? ", seleccionada" : ""}`}
                     className={`card recomendacion-card${activo ? " seleccionada" : ""}`}
                   >
                     <span className="recomendacion-icon" aria-hidden="true">
                       <PrendaIcon categoria={prenda.categoria} color={prenda.color_hex} />
                     </span>
                     <div style={{ flex: 1, textAlign: "left" }}>
+                      <span style={{ display: "block", fontSize: "0.8rem", textTransform: "capitalize", marginBottom: "0.2rem" }}>
+                        {prenda.categoria} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
+                      </span>
                       <span className={`nivel-badge nivel-${score.nivel}`}>
                         {NIVEL_LABEL[score.nivel]}
                         {score.tag === "combinacion_audaz" && " · audaz"}

@@ -342,6 +342,57 @@ details > summary {
   opacity: 0.5;
 }
 
+/* Aviso de "hay una versión nueva" -- ver el script en Base.astro. Arriba
+   (no abajo, donde ya conviven .save-bar y nav.tabbar) para no superponerse
+   con esos otros elementos flotantes. */
+.update-banner {
+  position: fixed;
+  top: calc(0.75rem + max(env(safe-area-inset-top), 20px));
+  left: calc(1rem + env(safe-area-inset-left));
+  right: calc(1rem + env(safe-area-inset-right));
+  z-index: 60;
+  background: var(--text);
+  color: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-elevada);
+  padding: 0.75rem 0.75rem 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+/* CRÍTICO: sin esto el banner queda visible para TODOS desde la primera
+   carga. El CSS de autor (esta regla) le gana siempre al `[hidden]{display:
+   none}` de la hoja de estilos del navegador -- no es un empate de
+   especificidad, es el orden de origen de la cascada, así que hay que pisar
+   `display:flex` explícitamente cuando el atributo `hidden` está presente. */
+.update-banner[hidden] {
+  display: none;
+}
+/* Cuando el banner está visible, el body necesita el mismo espacio extra
+   reservado arriba -- si no, tapa el título de la pantalla (el mismo tipo de
+   bug que se corrigió hoy para la status bar, pero causado por este
+   elemento fijo nuevo en vez de por iOS). La clase la agrega el script de
+   Base.astro (no se usa :has() para no depender de soporte de navegador
+   para algo que se puede resolver con una clase simple). El alto real del
+   banner varía con el texto/tamaño de fuente del dispositivo, así que se
+   reserva de más (3.5rem) en vez de un número ajustado al pixel. */
+body.tiene-aviso-actualizacion {
+  padding-top: calc(1rem + max(env(safe-area-inset-top), 20px) + 3.5rem);
+}
+.update-banner button {
+  flex: none;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  min-height: 36px;
+}
+
 /* Confirmación de borrado -- reemplaza window.confirm() para no romper la
    estética propia de la app con el diálogo gris nativo del navegador. */
 .confirm-overlay {

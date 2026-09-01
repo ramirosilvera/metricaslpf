@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
+import { nombreColor } from "../lib/color";
 import type { Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
@@ -121,9 +122,14 @@ export default function Outfits() {
               </span>
             ))}
           </div>
-          <strong style={{ textTransform: "capitalize" }}>
-            {o.nombre ?? o.prendas.map((p) => p.categoria).join(" + ")}
-          </strong>
+          <div style={{ minWidth: 0 }}>
+            <strong style={{ textTransform: "capitalize" }}>
+              {o.nombre ?? o.prendas.map((p) => p.categoria).join(" + ")}
+            </strong>
+            <p style={{ margin: "0.2rem 0 0", fontSize: "0.8rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+              {o.prendas.map((p) => `${p.categoria} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ")}
+            </p>
+          </div>
         </div>
       ))}
     </div>
