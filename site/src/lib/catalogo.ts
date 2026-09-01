@@ -55,6 +55,11 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "remera-negra", nombre: "Remera negra", categoria: "remera", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "remera-gris", nombre: "Remera gris", categoria: "remera", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "remera-azul-marino", nombre: "Remera azul marino", categoria: "remera", colorHex: "#1F2A44", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  // mismo beige (#D8C7A1) que ya usan pantalon-beige/jogger-beige/campera-
+  // pluma-beige/bermuda-beige -- reusa el mismo tono en vez de inventar un
+  // beige levemente distinto, mismo criterio que ya documenta el archivo
+  // para mantener consistente la paleta entre categorías.
+  { id: "remera-beige", nombre: "Remera beige", categoria: "remera", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", ocasion: "casual" },
 
   // --- Remeras deportivas (agregadas en la ampliación del catálogo: el
   // estilo "deportivo" no tenía NINGUNA prenda cargada en todo el catálogo
@@ -72,6 +77,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "camisa-negra", nombre: "Camisa negra", categoria: "camisa", colorHex: "#232323", textura: "algodon", estilo: "urbano", ocasion: "laburo" },
   { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   { id: "camisa-cuadros", nombre: "Camisa a cuadros", categoria: "camisa", colorHex: "#4A5A3C", textura: "algodon", estilo: "urbano", ocasion: "casual" },
+  // mismo beige que el resto del catálogo (ver remera-beige) -- clasico/
+  // laburo, mismo registro que blanca/celeste/gris: una camisa beige es
+  // tan de oficina como esas, no informal como la de cuadros.
+  { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
 
   // --- Pantalones ---
   { id: "jean-azul", nombre: "Jean azul", categoria: "pantalon", colorHex: "#3B5998", textura: "denim", estilo: "casual", ocasion: "casual" },
