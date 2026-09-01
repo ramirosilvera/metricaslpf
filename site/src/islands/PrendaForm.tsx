@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
@@ -22,9 +22,22 @@ const ESTILOS: Estilo[] = ["casual", "formal", "deportivo", "urbano", "clasico"]
 const OCASIONES: Ocasion[] = ["casual", "laburo", "formal"];
 const ESTACIONES: Estacion[] = ["verano", "invierno", "entretiempo"];
 
+/** Prefill que deja la pantalla "Probar antes de comprar" al decidir cargar la prenda de verdad.
+ *  Solo LEE -- no muta sessionStorage acá (eso pasa en un useEffect, no en
+ *  fase de render, para no perder el valor con un render descartado). */
+function leerPrefillDePrueba(): { categoria: Categoria; colorHex: string } | null {
+  try {
+    const raw = sessionStorage.getItem("matiz_prueba_prefill");
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function PrendaForm() {
-  const [categoria, setCategoria] = useState<Categoria>("remera");
-  const [colorHex, setColorHex] = useState("#3366CC");
+  const prefill = useState(() => leerPrefillDePrueba())[0];
+  const [categoria, setCategoria] = useState<Categoria>(prefill?.categoria ?? "remera");
+  const [colorHex, setColorHex] = useState(prefill?.colorHex ?? "#3366CC");
   const [textura, setTextura] = useState<Textura | "">("");
   const [estilo, setEstilo] = useState<Estilo | "">("");
   const [ocasion, setOcasion] = useState<Ocasion | "">("");
@@ -35,6 +48,15 @@ export default function PrendaForm() {
   const [error, setError] = useState("");
   const [presetActivoId, setPresetActivoId] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!prefill) return;
+    try {
+      sessionStorage.removeItem("matiz_prueba_prefill");
+    } catch {
+      // no-op: si el storage está bloqueado, tampoco pudo haber escrito el prefill
+    }
+  }, [prefill]);
 
   if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
 
@@ -147,7 +169,7 @@ export default function PrendaForm() {
 
       <form onSubmit={onSubmit} className="card" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <p className="eyebrow" style={{ margin: 0 }}>
-          {presetActivoId ? "Ajustá y guardá" : "O cargala manual"}
+          {presetActivoId ? "Ajustá y guardá" : prefill ? "La que probaste antes de comprar" : "O cargala manual"}
         </p>
         <label className="field-label">
           <span>Categoría</span>

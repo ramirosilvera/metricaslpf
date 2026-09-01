@@ -117,6 +117,23 @@ describe("color hex <-> HSL roundtrip", () => {
     expect(hsl.l).toBe(100);
     expect(hsl.s).toBe(0);
   });
+
+  it("rgbToHsl nunca devuelve h=360 (violaría el CHECK color_h < 360 del schema)", () => {
+    // Rojos cuyo hue crudo redondea a 360 antes del %360 -- encontrados por
+    // la revisión de Consejo, no un caso de laboratorio: se disparan con
+    // fotos reales de remeras/prendas rojas.
+    const rojosLimite = [
+      [255, 0, 2],
+      [255, 0, 1],
+      [192, 0, 1],
+      [139, 0, 1],
+    ];
+    for (const [r, g, b] of rojosLimite) {
+      const hsl = rgbToHsl(r, g, b);
+      expect(hsl.h).toBeGreaterThanOrEqual(0);
+      expect(hsl.h).toBeLessThan(360);
+    }
+  });
 });
 
 function mkPrenda(

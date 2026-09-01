@@ -47,7 +47,10 @@ export function rgbToHsl(r: number, g: number, b: number): HSL {
   h *= 60;
   if (h < 0) h += 360;
 
-  return { h: Math.round(h), s: Math.round(s * 100), l: Math.round(l * 100) };
+  // % 360 tras el redondeo: Math.round(359.6) = 360, que viola el CHECK
+  // color_h < 360 del schema (0006_armario_schema.sql) -- se dispara con
+  // rojos reales (ej. #FF0002), no un caso de laboratorio.
+  return { h: Math.round(h) % 360, s: Math.round(s * 100), l: Math.round(l * 100) };
 }
 
 /** HSL (h: 0-360, s/l: 0-100) -> RGB (0-255). */

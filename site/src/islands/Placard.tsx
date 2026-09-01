@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import type { Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
+import PrendaIcon from "./PrendaIcon";
 
 export default function Placard() {
   const [prendas, setPrendas] = useState<Prenda[] | null>(null);
@@ -82,18 +83,27 @@ export default function Placard() {
   }
 
   return (
-    <div className="grid-prendas">
-      {prendas.map((p) => (
-        <a
-          key={p.id}
-          href={`${base}combinar/?prenda=${p.id}`}
-          className="card"
-          style={{ textDecoration: "none", color: "var(--text)", display: "flex", flexDirection: "column", gap: "0.4rem" }}
-        >
-          <span className="swatch" style={{ background: p.color_hex }} />
-          <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{p.categoria}</strong>
-        </a>
-      ))}
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <a href={`${base}probar/`} className="card probar-banner">
+        <span>👗</span>
+        <div>
+          <strong>¿Te vas a comprar algo?</strong>
+          <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)" }}>
+            Probá una prenda antes de comprarla, sin cargarla al placard.
+          </p>
+        </div>
+      </a>
+
+      <div className="grid-prendas">
+        {prendas.map((p) => (
+          <a key={p.id} href={`${base}combinar/?prenda=${p.id}`} className="card prenda-card">
+            <span className="prenda-card-icon">
+              <PrendaIcon categoria={p.categoria} color={p.color_hex} />
+            </span>
+            <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{p.categoria}</strong>
+          </a>
+        ))}
+      </div>
     </div>
   );
 }

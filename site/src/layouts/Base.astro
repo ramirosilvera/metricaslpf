@@ -25,8 +25,14 @@ const path = Astro.url.pathname;
   <body>
     <slot />
     <nav class="tabbar">
-      <a href={import.meta.env.BASE_URL} class={path === import.meta.env.BASE_URL ? "active" : ""}>Placard</a>
+      <a
+        href={import.meta.env.BASE_URL}
+        class={path === import.meta.env.BASE_URL || path.includes("/combinar/") ? "active" : ""}
+      >
+        Placard
+      </a>
       <a href={`${import.meta.env.BASE_URL}prenda/nueva/`} class={path.includes("/prenda/") ? "active" : ""}>+ Prenda</a>
+      <a href={`${import.meta.env.BASE_URL}probar/`} class={path.includes("/probar/") ? "active" : ""}>Probar</a>
       <a href={`${import.meta.env.BASE_URL}outfits/`} class={path.includes("/outfits/") ? "active" : ""}>Outfits</a>
     </nav>
     <script>

@@ -3,6 +3,7 @@ import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { CATEGORIAS_COMPLEMENTARIAS, type Prenda } from "../lib/types";
 import { recomendar } from "../lib/recommend";
 import ConfigWarning from "./ConfigWarning";
+import PrendaIcon from "./PrendaIcon";
 
 const NIVEL_LABEL: Record<string, string> = {
   excelente: "Excelente",
@@ -16,6 +17,10 @@ export default function Recomendaciones() {
   const [modo, setModo] = useState<"rapido" | "explicame">("rapido");
   const [sinSesion, setSinSesion] = useState(false);
   const [error, setError] = useState("");
+  const [errorGuardado, setErrorGuardado] = useState("");
+  const [seleccionadas, setSeleccionadas] = useState<Set<string>>(new Set());
+  const [guardando, setGuardando] = useState(false);
+  const [guardado, setGuardado] = useState(false);
   const base_url = (import.meta.env.BASE_URL as string) || "/";
 
   const prendaId = useMemo(
@@ -82,6 +87,48 @@ export default function Recomendaciones() {
     );
   }
 
+  function toggleSeleccion(id: string) {
+    if (guardando) return; // evita que una selección en vuelo se pierda o se desincronice del insert
+    setSeleccionadas((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+    setGuardado(false);
+    setErrorGuardado("");
+  }
+
+  async function guardarOutfit() {
+    if (!base || seleccionadas.size === 0) return;
+    setGuardando(true);
+    setErrorGuardado("");
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const userId = sessionData.session?.user.id;
+      if (!userId) throw new Error("Iniciá sesión de nuevo para guardar el outfit.");
+
+      const { data: outfit, error: outfitErr } = await supabase
+        .from("outfits")
+        .insert({ user_id: userId, nombre: null })
+        .select()
+        .single();
+      if (outfitErr || !outfit) throw new Error(outfitErr?.message ?? "No se pudo crear el outfit.");
+
+      const filas = [base.id, ...seleccionadas].map((prenda_id) => ({ outfit_id: outfit.id, prenda_id }));
+      const { error: joinErr } = await supabase.from("outfit_prendas").insert(filas);
+      if (joinErr) throw new Error(joinErr.message);
+
+      setGuardado(true);
+      setSeleccionadas(new Set());
+      setTimeout(() => setGuardado(false), 3500);
+    } catch (e) {
+      setErrorGuardado(e instanceof Error ? e.message : "No se pudo guardar el outfit.");
+    } finally {
+      setGuardando(false);
+    }
+  }
+
   const categoriasCandidatas = CATEGORIAS_COMPLEMENTARIAS[base.categoria];
   const candidatasPorCategoria = categoriasCandidatas
     .map((cat) => ({
@@ -106,62 +153,105 @@ export default function Recomendaciones() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-        <span className="swatch" style={{ background: base.color_hex }} />
+    <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", paddingBottom: seleccionadas.size > 0 || guardado ? "4.5rem" : 0 }}>
+      <div className="vestidor-hero">
+        <span className="vestidor-hero-icon">
+          <PrendaIcon categoria={base.categoria} color={base.color_hex} />
+        </span>
         <div>
-          <strong style={{ textTransform: "capitalize" }}>{base.categoria}</strong>
-          <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>Combinaciones para esta prenda</p>
+          <strong style={{ textTransform: "capitalize", fontSize: "1.1rem" }}>{base.categoria}</strong>
+          <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>
+            Tocá las combinaciones que te gusten para armar un outfit.
+          </p>
         </div>
-        <div style={{ marginLeft: "auto", display: "flex", gap: "0.4rem" }}>
-          <button
-            className={modo === "rapido" ? "btn btn-primary" : "btn btn-secondary"}
-            onClick={() => setModo("rapido")}
-            style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem" }}
-          >
-            Rápido
-          </button>
-          <button
-            className={modo === "explicame" ? "btn btn-primary" : "btn btn-secondary"}
-            onClick={() => setModo("explicame")}
-            style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem" }}
-          >
-            Explicame
-          </button>
-        </div>
+      </div>
+
+      <div style={{ display: "flex", gap: "0.4rem" }}>
+        <button
+          className={modo === "rapido" ? "btn btn-primary" : "btn btn-secondary"}
+          onClick={() => setModo("rapido")}
+          style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem" }}
+        >
+          Rápido
+        </button>
+        <button
+          className={modo === "explicame" ? "btn btn-primary" : "btn btn-secondary"}
+          onClick={() => setModo("explicame")}
+          style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem" }}
+        >
+          Explicame
+        </button>
       </div>
 
       {candidatasPorCategoria.map(({ categoria, prendas }) => {
         const recs = recomendar(base, prendas, placard);
-        const visibles = modo === "rapido" ? recs.slice(0, 1) : recs;
+        // En "Rápido" mostramos solo la mejor -- pero nunca escondemos una
+        // que el usuario ya seleccionó (si no, queda en el contador sin
+        // forma de verla ni de sacarla).
+        const visibles = modo === "rapido" ? recs.filter((r, i) => i === 0 || seleccionadas.has(r.prenda.id)) : recs;
         return (
           <section key={categoria}>
             <h3 style={{ textTransform: "capitalize", fontSize: "1rem" }}>{categoria}</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-              {visibles.map(({ prenda, score, tecnicaRescate }) => (
-                <div key={prenda.id} className="card" style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
-                  <span className="swatch" style={{ background: prenda.color_hex }} />
-                  <div style={{ flex: 1 }}>
-                    <span className={`nivel-badge nivel-${score.nivel}`}>
-                      {NIVEL_LABEL[score.nivel]}
-                      {score.tag === "combinacion_audaz" && " · audaz"}
-                      {score.tag === "tono_sobre_tono" && " · tono sobre tono"}
+              {visibles.map(({ prenda, score, tecnicaRescate }) => {
+                const activo = seleccionadas.has(prenda.id);
+                return (
+                  <button
+                    key={prenda.id}
+                    type="button"
+                    onClick={() => toggleSeleccion(prenda.id)}
+                    disabled={guardando}
+                    aria-pressed={activo}
+                    aria-label={`${prenda.categoria} ${prenda.color_hex}, ${NIVEL_LABEL[score.nivel]}${activo ? ", seleccionada" : ""}`}
+                    className={`card recomendacion-card${activo ? " seleccionada" : ""}`}
+                  >
+                    <span className="recomendacion-icon" aria-hidden="true">
+                      <PrendaIcon categoria={prenda.categoria} color={prenda.color_hex} />
                     </span>
-                    {modo === "explicame" && (
-                      <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem", color: "var(--text-muted)" }}>
-                        {score.explicacion}
-                      </p>
-                    )}
-                    {tecnicaRescate && (
-                      <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem" }}>💡 {tecnicaRescate}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
+                    <div style={{ flex: 1, textAlign: "left" }}>
+                      <span className={`nivel-badge nivel-${score.nivel}`}>
+                        {NIVEL_LABEL[score.nivel]}
+                        {score.tag === "combinacion_audaz" && " · audaz"}
+                        {score.tag === "tono_sobre_tono" && " · tono sobre tono"}
+                      </span>
+                      {modo === "explicame" && (
+                        <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+                          {score.explicacion}
+                        </p>
+                      )}
+                      {tecnicaRescate && (
+                        <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem" }}>💡 {tecnicaRescate}</p>
+                      )}
+                    </div>
+                    <span className="recomendacion-check" aria-hidden="true">
+                      {activo ? "✓" : "+"}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </section>
         );
       })}
+
+      {(seleccionadas.size > 0 || guardando || guardado || errorGuardado) && (
+        <div className="save-bar">
+          {guardado ? (
+            <span>✓ Outfit guardado — <a href={`${base_url}outfits/`}>verlo</a></span>
+          ) : errorGuardado ? (
+            <span style={{ color: "#ffb3ab" }}>{errorGuardado}</span>
+          ) : (
+            <span>
+              Tu {base.categoria} + {seleccionadas.size} más
+            </span>
+          )}
+          {!guardado && seleccionadas.size > 0 && (
+            <button className="btn btn-primary" onClick={guardarOutfit} disabled={guardando}>
+              {guardando ? "Guardando..." : "Guardar outfit"}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
