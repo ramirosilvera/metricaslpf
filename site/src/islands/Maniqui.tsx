@@ -345,7 +345,15 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
 }
 
 function PiesCuerpo({ prenda }: { prenda: Prenda }) {
-  const suela = sombraHsl(prenda.color_h, prenda.color_s, Math.max(2, prenda.color_l - 20));
+  // La zapatilla común (no de vestir) casi siempre tiene la suela de goma
+  // blanca/crema, sea cual sea el color de la parte de arriba -- una
+  // zapatilla negra o gris con suela blanca es más real que una suela negra
+  // sobre negro. El zapato de cuero (textura "cuero_liso" en el catálogo)
+  // es la excepción real: ahí la suela acompaña el tono del cuero.
+  const esCuero = prenda.textura === "cuero_liso";
+  const suela = esCuero
+    ? sombraHsl(prenda.color_h, prenda.color_s, Math.max(2, prenda.color_l - 20))
+    : sombraHsl(0, 0, 94);
   return (
     <Volumen
       prenda={prenda}

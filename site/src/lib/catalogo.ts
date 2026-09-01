@@ -71,8 +71,18 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#232323", textura: "lana", estilo: "clasico", ocasion: "laburo" },
 
   // --- Calzado ---
+  // Las zapatillas (a diferencia de los zapatos de cuero, unos renglones
+  // abajo) casi nunca son un solo color liso de punta a punta en la vida
+  // real -- lo más común es una base negra/gris/blanca con la suela en goma
+  // blanca. Esa suela blanca es un detalle del RENDER (Maniqui.tsx la
+  // dibuja así para toda zapatilla sin textura "cuero_liso", sea cual sea
+  // su color), no algo que dependa de agregar más colores acá -- por eso el
+  // catálogo sigue con colores lisos simples (son el color de la zapatilla
+  // en sí, no de la suela) más la variante gris, que faltaba y es tan común
+  // como la negra o la blanca.
   { id: "zapatillas-blancas", nombre: "Zapatillas blancas", categoria: "calzado", colorHex: "#F5F5F0", estilo: "urbano", ocasion: "casual" },
   { id: "zapatillas-negras", nombre: "Zapatillas negras", categoria: "calzado", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
+  { id: "zapatillas-grises", nombre: "Zapatillas grises", categoria: "calzado", colorHex: "#8C8C8C", estilo: "urbano", ocasion: "casual" },
   { id: "zapatos-cuero-negro", nombre: "Zapatos de cuero negros", categoria: "calzado", colorHex: "#1C1210", textura: "cuero_liso", estilo: "formal", ocasion: "laburo" },
   { id: "zapatos-cuero-marron", nombre: "Zapatos de cuero marrones", categoria: "calzado", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "formal", ocasion: "laburo" },
 
