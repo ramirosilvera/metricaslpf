@@ -231,31 +231,39 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
 
           {/* cuerpo del torso -- un poco más ancho que el maniquí de base
               (18-102 en los hombros) para que la tela "caiga por fuera" en
-              vez de coincidir exacto con el borde del cuerpo. */}
+              vez de coincidir exacto con el borde del cuerpo. El cuello es
+              una curva que BAJA hacia el centro (Q...60 44...) y SUBE cerca
+              de los hombros (y=40 a los costados) -- antes estaba al revés
+              (el centro más arriba que los hombros), lo que dejaba un hueco
+              enorme de "piel" del maniquí expuesta a los costados del
+              cuello, más ancho que cualquier cuello real (bug reportado por
+              el usuario comparando contra una foto real). */}
           <Forma
-            d="M14 46 Q12 62 20 76 Q26 100 32 118 L32 146 L88 146 L88 118 Q94 100 100 76 Q108 62 106 46 Q88 34 60 33 Q32 34 14 46 Z"
+            d="M14 46 Q12 62 20 76 Q26 100 32 118 L32 146 L88 146 L88 118 Q94 100 100 76 Q108 62 106 46 Q98 38 80 40 Q60 44 40 40 Q22 38 14 46 Z"
             fill={fill}
             stroke={stroke}
             patron={patron}
           />
 
           {/* detalle de cuello por categoría -- simple a propósito, esto es
-              una ilustración esquemática, no moda realista. */}
+              una ilustración esquemática, no moda realista. Reposicionado
+              en y=30-42 (antes 34-50) para asentarse justo sobre el nuevo
+              cuello, más angosto, en vez de flotar sobre el hueco viejo. */}
           {prenda.categoria === "camisa" && (
             <>
-              <path d="M48 34 L60 46 L52 44 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <path d="M72 34 L60 46 L68 44 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <line x1="60" y1="46" x2="60" y2="144" stroke={stroke} {...strokeProps} />
+              <path d="M46 32 L60 42 L52 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <path d="M74 32 L60 42 L68 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <line x1="60" y1="42" x2="60" y2="144" stroke={stroke} {...strokeProps} />
             </>
           )}
           {prenda.categoria === "sweater" && (
-            <path d="M44 34 Q60 44 76 34" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
+            <path d="M40 40 Q60 46 80 40" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
           )}
           {prenda.categoria === "campera" && (
             <>
-              <line x1="60" y1="36" x2="60" y2="144" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
-              <path d="M46 34 L60 50 L54 34 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <path d="M74 34 L60 50 L66 34 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <line x1="60" y1="42" x2="60" y2="144" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
+              <path d="M44 34 L60 48 L52 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <path d="M76 34 L60 48 L68 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
             </>
           )}
         </>
@@ -359,7 +367,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
         <ellipse cx="60" cy="20" rx="13" ry="15" fill={neutro} stroke={neutroStroke} />
         <path d="M50 33 L70 33 L68 46 L52 46 Z" fill={neutro} stroke={neutroStroke} />
         <path
-          d="M18 46 Q16 62 24 76 Q28 100 34 115 L34 140 L86 140 L86 115 Q92 100 96 76 Q104 62 102 46 Q88 34 60 32 Q32 34 18 46 Z"
+          d="M18 46 Q16 62 24 76 Q28 100 34 115 L34 140 L86 140 L86 115 Q92 100 96 76 Q104 62 102 46 Q94 38 78 42 Q60 46 42 42 Q26 38 18 46 Z"
           fill={neutro}
           stroke={neutroStroke}
         />
@@ -375,16 +383,18 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
         {cuelloSecundario && (
           // el cuello de la camisa de abajo, asomando por encima del
           // sweater/campera/buzo -- dibujado después de TorsoCuerpo a
-          // propósito, para quedar por encima en el z-order.
+          // propósito, para quedar por encima en el z-order. Mismas
+          // coordenadas que el cuello de camisa "principal" de arriba
+          // (y=32-42), reposicionadas junto con el resto del cuello.
           <>
             <path
-              d="M48 34 L60 46 L52 44 Z"
+              d="M46 32 L60 42 L52 38 Z"
               fill={cuelloSecundario.color_hex}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
             />
             <path
-              d="M72 34 L60 46 L68 44 Z"
+              d="M74 32 L60 42 L68 38 Z"
               fill={cuelloSecundario.color_hex}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
