@@ -379,16 +379,25 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
         <>
           {/* dos zapatos, no un bloque único -- cada uno con su propia
               suela (la franja oscura) porque eso, más que la forma, es lo
-              que lee como "zapatilla" y no "piedra". Reposicionados bajo
-              el tobillo de la 3ra pasada (ver PiernasCuerpo/TorsoCuerpo):
-              el tobillo del maniquí de base ahora cae en y=224 (antes 228,
-              consistente con piernas más largas), el resto de las
-              coordenadas se corrió el mismo delta (-4) para no cambiar el
-              tamaño/forma del zapato en sí, solo su posición. */}
-          <Forma d="M39 222 Q35 224 35 232 L36 237 Q37 240 42 240 L61 240 Q63 240 63 234 L62 222 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M35 237 H63 V242 Q63 244 61 244 L37 244 Q35 244 35 241 Z" fill={suela} stroke={stroke} {...strokeProps} />
-          <Forma d="M81 222 Q85 224 85 232 L84 237 Q83 240 78 240 L59 240 Q57 240 57 234 L58 222 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M85 237 H57 V242 Q57 244 59 244 L83 244 Q85 244 85 241 Z" fill={suela} stroke={stroke} {...strokeProps} />
+              que lee como "zapatilla" y no "piedra". Reducidos en la 5ta
+              pasada -- reporte real del usuario ("parecen dos macetas, no
+              dos pies"): al reescalar el ANCHO del cuerpo (4ta pasada) el
+              zapato se escaló desde el centro de TODO el cuerpo (x=60), no
+              desde su propio centro, así que se achicó mucho menos que la
+              pierna (sus puntos ya estaban cerca del centro) y terminó
+              mucho más ancho que el tobillo (28u de zapato contra ~10u de
+              tobillo) y superponiéndose con el del otro pie. Ahora se
+              escala cada zapato desde su propio centro (x=49 el izquierdo,
+              x=71 el derecho, los mismos centros que ya tiene la pierna) en
+              vez del centro del cuerpo, y también se achata la altura --
+              un zapato real visto de frente es bastante más chato que alto,
+              no un bloque cuadrado. Ancho nuevo 20u (antes 28u), alto 15u
+              (antes 22u) -- sin superposición entre los dos (2u de
+              separación en vez de solaparse). */}
+          <Forma d="M42 223 Q39 224 39 230 L40 233 Q41 236 44 236 L57 236 Q59 236 59 231 L58 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <path d="M39 233 H59 V237 Q59 238 57 238 L41 238 Q39 238 39 236 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          <Forma d="M78 223 Q81 224 81 230 L80 233 Q79 236 76 236 L63 236 Q61 236 61 231 L62 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <path d="M81 233 H61 V237 Q61 238 63 238 L79 238 Q81 238 81 236 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
     />
