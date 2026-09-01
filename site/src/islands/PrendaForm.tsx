@@ -60,6 +60,7 @@ export default function PrendaForm() {
   const [ocasion, setOcasion] = useState<Ocasion | "">(presetDePrefill?.ocasion ?? "");
   const [estacion, setEstacion] = useState<Estacion | "">(presetDePrefill?.estacion ?? "");
   const [suelaContraste, setSuelaContraste] = useState(presetDePrefill?.suelaContraste ?? false);
+  const [requiereCuello, setRequiereCuello] = useState(presetDePrefill?.requiereCuello ?? false);
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
@@ -87,6 +88,7 @@ export default function PrendaForm() {
     setOcasion(p.ocasion ?? "");
     setEstacion(p.estacion ?? "");
     setSuelaContraste(p.suelaContraste ?? false);
+    setRequiereCuello(p.requiereCuello ?? false);
     setFotoBlob(null);
     setFotoPreview(null);
   }
@@ -133,6 +135,7 @@ export default function PrendaForm() {
           ocasion: ocasion || null,
           estacion: estacion || null,
           suela_contraste: categoria === "calzado" ? suelaContraste : false,
+          requiere_cuello: categoria === "accesorio" ? requiereCuello : false,
         })
         .select()
         .single();
@@ -245,6 +248,12 @@ export default function PrendaForm() {
               <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <input type="checkbox" checked={suelaContraste} onChange={(e) => setSuelaContraste(e.target.checked)} />
                 <span>Suela blanca / de contraste (en vez de una zapatilla toda del mismo color)</span>
+              </label>
+            )}
+            {categoria === "accesorio" && (
+              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <input type="checkbox" checked={requiereCuello} onChange={(e) => setRequiereCuello(e.target.checked)} />
+                <span>Es una corbata (necesita una camisa con cuello debajo)</span>
               </label>
             )}
           </div>

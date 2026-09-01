@@ -49,6 +49,13 @@ export interface Prenda {
    *  puede perfectamente ser monocromático de verdad. Solo aplica visualmente
    *  a calzado (Maniqui.tsx la ignora para el resto de las categorías). */
   suela_contraste: boolean;
+  /** Detalle real de la prenda, mismo criterio que suela_contraste: una
+   *  corbata (hoy la única prenda del catálogo con esto en true) necesita
+   *  una camisa con cuello debajo -- combinarla con un buzo, remera o
+   *  sweater no es una cuestión de color, es que físicamente no hay dónde
+   *  apoyarla. Por defecto false: un cinturón o una bufanda no tienen esta
+   *  restricción. */
+  requiere_cuello: boolean;
   created_at: string;
   updated_at: string;
 }

@@ -1,5 +1,5 @@
 import type { Categoria, HSL, NivelCompatibilidad, Prenda } from "./types";
-import { CATALOGO_CON_HSL, type PresetPrenda } from "./catalogo";
+import { CATALOGO_CON_HSL, presetAPrendaSintetica, type PresetPrenda } from "./catalogo";
 
 // Umbrales calibrados en la revisión de Consejo (rondas 1-2). Nombrados y
 // ajustables sin tocar la lógica del árbol.
@@ -10,6 +10,25 @@ const VALUE_AUDAZ = 0.3;
 const VALUE_MONOCROMATICO = 0.15;
 const VALUE_FUNDIDO = 0.12;
 const SATURACION_BAJA = 45;
+// Piso agregado en la 2da ronda de revisión de Consejo, auditando la regla
+// 5 ("se funden") contra el catálogo real completo: SIN este piso, la
+// regla generaba el 95% de todos los con_cuidado del motor, y CADA UNO de
+// esos pares era una combinación real bien vista (marino+marrón,
+// marino+bordó, marrón+verde militar -- la paleta "tierra"/de sastrería
+// clásica), con saturación máxima 47 en el catálogo. El supuesto de la
+// regla ("mismo valor + matiz distinto = mancha") solo se sostiene cuando
+// AMBOS colores están bien saturados: ahí sí compiten por atención en pie
+// de igualdad (ninguno domina en luminosidad NI se apaga en saturación) y
+// se leen como caóticos en vez de intencionales -- que es distinto de la
+// regla 4 (audaz), que funciona porque el contraste de VALOR marca cuál es
+// la base y cuál el golpe de color. Dos tonos tierra opacos al mismo valor
+// no compiten así: ninguno grita, así que no chocan. 50 deja afuera el
+// máximo real del catálogo (47) y adentro los casos ya cubiertos por test
+// (60, 70). 55, no 50: mismo argumento que NEUTRO_L_MIN/MAX un poco más
+// abajo -- un margen más chico deja la misma prenda, fotografiada con otra
+// luz, cruzando el umbral y cambiando de veredicto (detectado en la 3ra
+// ronda de revisión). 55 deja 8 puntos de margen abajo (47) y 5 arriba (60).
+const SATURACION_ALTA_MINIMA = 55;
 // Banda de neutro ampliada (12/88, no 8/92): con un margen más chico, la
 // misma prenda fotografiada dos veces con luz distinta podía cruzar el
 // umbral y recibir veredictos opuestos entre una foto y otra.
@@ -78,11 +97,18 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
     };
   }
 
-  // 5. Se funden.
-  if (vd < VALUE_FUNDIDO && !baseNeutro && !candNeutro && hd > HUE_ANALOGO) {
+  // 5. Se funden -- solo si ambos están bien saturados (ver
+  // SATURACION_ALTA_MINIMA arriba para el motivo real, no es un capricho).
+  if (
+    vd < VALUE_FUNDIDO &&
+    !baseNeutro &&
+    !candNeutro &&
+    hd > HUE_ANALOGO &&
+    Math.min(base.s, candidato.s) >= SATURACION_ALTA_MINIMA
+  ) {
     return {
       nivel: "con_cuidado",
-      explicacion: "Estos dos se funden en una sola mancha a distancia.",
+      explicacion: "Dos colores bien saturados al mismo valor compiten en pie de igualdad: se leen caóticos, no intencionales.",
     };
   }
 
@@ -96,6 +122,14 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
   };
 }
 
+// Faltaban "denim" y "acolchado" acá -- el mapa se armó cuando el enum
+// Textura solo tenía 8 valores, y quedó desactualizado cuando se agregaron
+// esos dos (rondas de catálogo "jean"/"campera de pluma"). Consecuencia
+// real verificada: la técnica de rescate "separar por textura" nunca se
+// ofrecía para un jean, aunque sea el ejemplo más obvio de textura marcada
+// que tiene el catálogo. Ambas van a "texturado": el tejido cruzado del
+// denim y el acolchado de la campera de pluma se notan a simple vista,
+// igual que la lana o la pana.
 const FAMILIA_TEXTURA: Record<string, "liso" | "texturado"> = {
   algodon: "liso",
   seda: "liso",
@@ -105,6 +139,8 @@ const FAMILIA_TEXTURA: Record<string, "liso" | "texturado"> = {
   pana: "texturado",
   corderoy: "texturado",
   tejido_grueso: "texturado",
+  denim: "texturado",
+  acolchado: "texturado",
 };
 
 /**
@@ -143,24 +179,118 @@ export function tecnicaRescate(
 
 const CATEGORIAS_CUERO: Categoria[] = ["calzado", "accesorio"];
 
-/** Cuero negro + cuero de otro color (marrón, tostado...) en cinturón o
- *  calzado: por convención clásica de vestimenta el cuero se coordina
- *  aparte del resto de la ropa -- cinturón a tono con el calzado, sea cual
- *  sea el color -- a diferencia de una remera o un pantalón, donde el
+function prendaDeCuero(p: Prenda): boolean {
+  return p.textura === "cuero_liso" && CATEGORIAS_CUERO.includes(p.categoria);
+}
+
+/** true si la prenda es un pantalón de vestir/clásico -- chino, pantalón de
+ *  vestir -- no un jean ni un pantalón deportivo. Es la mitad "de abajo" de
+ *  la convención de coordinar el cuero: el cuero no solo se coordina
+ *  cinturón-con-zapato, también zapato/cinturón-con-pantalón, pero SOLO
+ *  cuando el pantalón en sí es de vestir -- un jean con zapatos de cuero
+ *  marrones es un combo "smart casual" real, no una descoordinación. */
+function esPantalonDeVestir(p: Prenda): boolean {
+  return p.categoria === "pantalon" && (p.estilo === "formal" || p.estilo === "clasico");
+}
+
+/** Cuero negro + cuero (o pantalón de vestir) de otro color (marrón,
+ *  tostado...): por convención clásica de vestimenta el cuero se coordina
+ *  aparte del resto de la ropa -- cinturón a tono con el calzado, y ambos a
+ *  tono con un pantalón de vestir -- a diferencia de una remera, donde el
  *  negro sí es un neutro que combina con cualquier cosa. scoreColor no lo
  *  puede saber por sí solo (solo ve HSL, no categoría ni material), así
- *  que se corrige acá, con el Prenda completo disponible. Reportado por el
- *  usuario con un caso real: la app recomendaba "excelente" para cinturón
- *  negro + zapatos de cuero marrones -- negro es neutro en HSL (s=0), pero
- *  en cuero esa regla general no aplica. */
+ *  que se corrige acá, con el Prenda completo disponible.
+ *
+ *  Cubre dos casos reales, verificados corriendo el motor contra el
+ *  catálogo:
+ *  - cuero + cuero: cinturón negro + zapatos de cuero marrones (reportado
+ *    por el usuario) -- daba "excelente" porque negro es neutro en HSL.
+ *  - cuero + pantalón de vestir: pantalón de vestir negro + zapatos/
+ *    cinturón de cuero marrones, y pantalón beige + zapatos/cinturón de
+ *    cuero negros -- mismo error, un escalón más arriba (encontrado en la
+ *    segunda ronda de revisión, no en el reporte original). */
+// 3ra ronda de revisión: la versión anterior de chocanEnAcromia usaba
+// esNeutro (cualquier acromático) de cada lado, y eso generaba falsos
+// positivos reales contra el pantalón -- un pantalón de vestir AZUL MARINO
+// (no neutro por esNeutro, pero se lee como neutro de sastrería) chocaba
+// con zapatos negros, y uno GRIS (sí neutro por esNeutro) chocaba con
+// zapatos marrones. Marino+negro y gris+marrón son de los combos más
+// estándar que existen -- el motor los estaba rechazando. La convención
+// real es más chica que "acromático vs no acromático": es específicamente
+// negro (de verdad oscuro) contra la familia tierra (marrón/tostado/
+// camel), en cualquier dirección. Gris y marino son neutros de sastrería
+// que van con las dos familias de cuero sin problema.
+function esNegroProfundo(p: Prenda): boolean {
+  return p.color_l <= NEUTRO_L_MIN;
+}
+function esTierraCalida(p: Prenda): boolean {
+  return p.color_s >= 20 && p.color_h >= 15 && p.color_h <= 60;
+}
+
 function esDescoordinacionDeCuero(base: Prenda, candidato: Prenda): boolean {
-  if (base.textura !== "cuero_liso" || candidato.textura !== "cuero_liso") return false;
-  if (!CATEGORIAS_CUERO.includes(base.categoria) || !CATEGORIAS_CUERO.includes(candidato.categoria)) return false;
-  // uno acromático (negro, típicamente) y el otro con un matiz real
-  // (marrón, tostado...) -- si ambos son acromáticos (negro con negro) o
-  // ambos tienen matiz (que en este catálogo siempre es el mismo marrón
-  // reusado entre cinturón y zapato), sí combinan.
-  return esNeutro(base.color_s, base.color_l) !== esNeutro(candidato.color_s, candidato.color_l);
+  const chocanEnAcromia = (a: Prenda, b: Prenda) =>
+    (esNegroProfundo(a) && esTierraCalida(b)) || (esTierraCalida(a) && esNegroProfundo(b));
+
+  if (prendaDeCuero(base) && prendaDeCuero(candidato)) {
+    return chocanEnAcromia(base, candidato);
+  }
+
+  const cuero = prendaDeCuero(base) ? base : prendaDeCuero(candidato) ? candidato : null;
+  const otro = cuero === base ? candidato : base;
+  if (cuero && esPantalonDeVestir(otro)) {
+    return chocanEnAcromia(cuero, otro);
+  }
+
+  return false;
+}
+
+// Formalidad relativa de estilo -- mayor es más formal. "urbano" y
+// "casual" quedan parejos a propósito: ninguno es más formal que el otro,
+// son archetypes distintos del mismo registro relajado, no una escala.
+const FORMALIDAD_ESTILO: Partial<Record<NonNullable<Prenda["estilo"]>, number>> = {
+  formal: 3,
+  clasico: 2,
+  urbano: 1,
+  casual: 1,
+  deportivo: 0,
+};
+
+/** El calzado no puede ser MENOS formal que el pantalón -- zapatillas con
+ *  un pantalón de vestir es la asimetría real (62 de los outfits que arma
+ *  armarOutfitsSugeridos hoy la tienen, verificado en la revisión de
+ *  Consejo). La regla es asimétrica a propósito: al revés (zapatos de
+ *  cuero con un jean) es un combo "smart casual" real y no se toca -- acá
+ *  el pie SUBE por encima del pantalón en formalidad, no baja. Solo se usa
+ *  cuando ambas prendas declaran `estilo` (si no, no hay con qué comparar,
+ *  y no se inventa un valor por defecto). */
+function calzadoMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean {
+  const pantalon = base.categoria === "pantalon" ? base : candidato.categoria === "pantalon" ? candidato : null;
+  const calzado = pantalon === base ? candidato : base;
+  if (!pantalon || calzado.categoria !== "calzado") return false;
+  if (!pantalon.estilo || !calzado.estilo) return false;
+  const rangoPantalon = FORMALIDAD_ESTILO[pantalon.estilo];
+  const rangoCalzado = FORMALIDAD_ESTILO[calzado.estilo];
+  if (rangoPantalon === undefined || rangoCalzado === undefined) return false;
+  return rangoCalzado < rangoPantalon;
+}
+
+// duplicado a propósito -- ver el comentario sobre CATEGORIAS_TORSO más
+// abajo (esa constante se declara después porque la usa armarOutfits*, que
+// vive más abajo en el archivo; acá hace falta antes).
+const CATEGORIAS_CON_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater", "campera"];
+
+/** Una corbata (u otro accesorio con `requiere_cuello`) necesita una camisa
+ *  con cuello debajo -- no es una cuestión de color, es que no hay dónde
+ *  apoyarla. Hallazgo de la 2da ronda de revisión de Consejo: el motor
+ *  recomendaba "excelente" para una corbata sobre un buzo o una remera,
+ *  porque scoreColor solo ve HSL y esas combinaciones suelen matchear en
+ *  color. No aplica contra pantalón/calzado (ahí el color de la corbata sí
+ *  importa como en cualquier otro accesorio) ni contra una camisa. */
+function esCorbataSinCuello(base: Prenda, candidato: Prenda): boolean {
+  const conCuello = base.requiere_cuello ? base : candidato.requiere_cuello ? candidato : null;
+  const otro = conCuello === base ? candidato : base;
+  if (!conCuello) return false;
+  return CATEGORIAS_CON_TORSO.includes(otro.categoria) && otro.categoria !== "camisa";
 }
 
 /** Recomienda, sobre un placard completo, las mejores prendas para combinar con `base`. */
@@ -173,16 +303,36 @@ export function recomendar(
     .filter((c) => c.id !== base.id)
     .map((c) => {
       const cueroDescoordinado = esDescoordinacionDeCuero(base, c);
-      const score: ScoreColor = cueroDescoordinado
+      const corbataSinCuello = !cueroDescoordinado && esCorbataSinCuello(base, c);
+      let score: ScoreColor = cueroDescoordinado
         ? {
             nivel: "con_cuidado",
             explicacion:
-              "El cuero se coordina aparte del resto de la ropa: negro con negro, marrón con marrón. Acá el cinturón y el calzado son de cuero de tonos distintos -- no combina, aunque el negro sea neutro para todo lo demás.",
+              "El cuero se coordina aparte del resto de la ropa: negro con negro, marrón con marrón. Acá se mezclan tonos de cuero distintos -- no combina, aunque el negro sea neutro para todo lo demás.",
           }
-        : scoreColor(
-            { h: base.color_h, s: base.color_s, l: base.color_l },
-            { h: c.color_h, s: c.color_s, l: c.color_l },
-          );
+        : corbataSinCuello
+          ? {
+              nivel: "con_cuidado",
+              explicacion: "Una corbata necesita una camisa con cuello debajo -- no hay dónde apoyarla sobre esto.",
+            }
+          : scoreColor(
+              { h: base.color_h, s: base.color_s, l: base.color_l },
+              { h: c.color_h, s: c.color_s, l: c.color_l },
+            );
+
+      // El color puede combinar perfecto y el conjunto igual desentonar --
+      // un pantalón de vestir con zapatillas es "excelente" en HSL (los dos
+      // suelen ser neutros) pero no en formalidad. No se toca si el color
+      // ya venía con problemas (con_cuidado): ese motivo pesa más y no hay
+      // técnica de rescate que arregle "cambiá de calzado a uno más
+      // formal" en el mismo sentido que las demás.
+      if (score.nivel === "excelente" && calzadoMenosFormalQuePantalon(base, c)) {
+        score = {
+          nivel: "muy_bueno",
+          explicacion: "El color combina, pero el calzado es más informal que el pantalón -- se nota el salto de registro.",
+        };
+      }
+
       return {
         prenda: c,
         score,
@@ -191,7 +341,9 @@ export function recomendar(
             ? undefined
             : cueroDescoordinado
               ? "Usá cinturón y calzado del mismo tono de cuero -- los dos marrones o los dos negros."
-              : tecnicaRescate(base, c, placard),
+              : corbataSinCuello
+                ? "Ponete una camisa con cuello debajo -- con buzo, remera, sweater o campera solos no hay dónde llevarla."
+                : tecnicaRescate(base, c, placard),
       };
     })
     .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
@@ -249,6 +401,20 @@ function mejorPropia(
   return mejor && mejor.score.nivel !== "con_cuidado" ? mejor : undefined;
 }
 
+/** true si dos prendas puntuales chocan (con_cuidado) entre sí. `mejorPropia`
+ *  y `candidatasPropias` solo comparan cada prenda contra el ANCLA (el
+ *  pantalón) -- nunca entre sí. Eso deja pasar outfits donde, por ejemplo,
+ *  el calzado y el accesorio combinan bien cada uno por separado con el
+ *  pantalón pero chocan entre sí (cuero descoordinado), o el torso elegido
+ *  y el accesorio (una corbata sobre un buzo). Hallazgo de la 3ra ronda de
+ *  revisión de Consejo: sin este chequeo, el mismo bug que motivó toda esta
+ *  ronda ("cinturón negro + zapato marrón") podía reaparecer armado
+ *  automáticamente por armarOutfitsSugeridos, según qué prenda ganara el
+ *  slot de calzado/accesorio por orden de inserción del placard. */
+function chocan(a: Prenda, b: Prenda, placard: Prenda[]): boolean {
+  return recomendar(a, [b], placard)[0]?.score.nivel === "con_cuidado";
+}
+
 /** Todas las candidatas propias que combinan al menos "muy_bueno" con el
  *  ancla, mejor primero -- a diferencia de `mejorPropia`, no se queda solo
  *  con la primera: es la base para ofrecer variantes ("otras opciones") en
@@ -294,7 +460,18 @@ export function armarOutfitsSugeridos(placard: Prenda[]): OutfitSugerido[] {
     );
 
     for (const torso of torsos) {
-      const prendas = [ancla, torso.prenda, calzado?.prenda, accesorio?.prenda].filter(
+      // calzado/accesorio se eligieron solo contra el pantalón -- acá se
+      // valida que además no choquen entre sí ni con ESTE torso puntual
+      // (cada variante de torso puede convivir distinto con el mismo
+      // calzado/accesorio). El accesorio es el que se cae si hay choque:
+      // es el único slot opcional de los tres, y sacarlo deja un outfit
+      // igual de válido en vez de uno con una combinación real mala.
+      const accesorioOk =
+        accesorio &&
+        !(calzado && chocan(accesorio.prenda, calzado.prenda, placard)) &&
+        !chocan(accesorio.prenda, torso.prenda, placard);
+
+      const prendas = [ancla, torso.prenda, calzado?.prenda, accesorioOk ? accesorio?.prenda : undefined].filter(
         (p): p is Prenda => p !== undefined,
       );
 
@@ -360,9 +537,20 @@ export function armarOutfitsParaComprar(
       const candidatosCatalogo = catalogo.filter((p) => p.categoria === categoriaSugerida);
       if (candidatosCatalogo.length === 0) continue;
 
-      const anclaHsl: HSL = { h: ancla.color_h, s: ancla.color_s, l: ancla.color_l };
+      // Vía recomendar() (no scoreColor crudo) para que las prendas
+      // sintéticas del catálogo pasen por las mismas reglas que cualquier
+      // prenda real -- cuero, corbata/cuello, formalidad calzado/pantalón.
+      // Antes de la 3ra ronda de revisión esto llamaba scoreColor()
+      // directo y las tres reglas nuevas quedaban completamente afuera acá
+      // (verificado: le sugería comprar zapatos de cuero negros para un
+      // pantalón chino beige, exactamente lo que recomendar() marca
+      // con_cuidado con ese pantalón).
       const sugeridosCandidatos = candidatosCatalogo
-        .map((preset) => ({ preset, score: scoreColor(anclaHsl, preset.hsl) }))
+        .map((preset) => {
+          const prendaSintetica = presetAPrendaSintetica(preset);
+          const [r] = recomendar(ancla, [prendaSintetica], placard);
+          return { preset, prendaSintetica, score: r.score };
+        })
         .filter((c) => c.score.nivel !== "con_cuidado")
         .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
       if (sugeridosCandidatos.length === 0) continue;
@@ -395,8 +583,17 @@ export function armarOutfitsParaComprar(
       const prendasPropias = [ancla, torsoPropio?.prenda, calzadoPropio?.prenda, accesorioPropio?.prenda].filter(
         (p): p is Prenda => p !== undefined,
       );
+      // el resto de prendasPropias, sin el ancla -- torsoPropio/calzadoPropio/
+      // accesorioPropio ya combinan con el pantalón (mejorPropia lo
+      // garantiza), pero nunca se validaron entre sí. La sugerida es la
+      // protagonista de esta idea puntual: si choca con algo que el
+      // usuario YA tiene puesto acá, no tiene sentido ofrecerle comprarla
+      // -- se descarta esa variante en vez de armar el outfit igual.
+      const propiasSinAncla = prendasPropias.filter((p) => p.id !== ancla.id);
 
       for (const candidato of sugeridosCandidatos) {
+        if (propiasSinAncla.some((p) => chocan(candidato.prendaSintetica, p, placard))) continue;
+
         resultados.push({
           id: `comprar-${ancla.id}-${candidato.preset.id}`,
           prendasPropias,
