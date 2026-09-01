@@ -1,4 +1,4 @@
-import { contornoHsl, luzHsl, sombraHsl } from "../lib/color";
+import { contornoHsl, detalleHsl, luzHsl, sombraHsl } from "../lib/color";
 import PrendaIcon from "./PrendaIcon";
 import type { Categoria, Prenda, Textura } from "../lib/types";
 
@@ -363,8 +363,8 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                   hombros (46/74 en vez de 49/71) para que no quede ningún
                   espacio vacío entre el cuello y el cuerpo. */}
               <path d="M46 38 Q60 26 74 38" fill="none" stroke={stroke} {...strokeProps} />
-              <path d="M46 38 L60 58 L54 30 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <path d="M74 38 L60 58 L66 30 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M46 38 L60 58 L54 30 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M74 38 L60 58 L66 30 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
               <line x1="60" y1="58" x2="60" y2="124" stroke={stroke} {...strokeProps} />
             </>
           )}
@@ -382,7 +382,7 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             // fotorrealista. También en buzo -- un hoodie real también
             // tiene puño acanalado en la cintura, no solo el sweater.
             <>
-              <rect x="41" y="119" width="38" height="7" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <rect x="41" y="119" width="38" height="7" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
               {[45, 51, 57, 63, 69, 75].map((x) => (
                 <line key={x} x1={x} y1="120" x2={x} y2="125" stroke={stroke} strokeWidth={0.6} />
               ))}
@@ -392,8 +392,8 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             <>
               <line x1="60" y1="60" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
               <path d="M46 40 Q60 28 74 40" fill="none" stroke={stroke} {...strokeProps} />
-              <path d="M46 40 L60 60 L54 32 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <path d="M74 40 L60 60 L66 32 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M46 40 L60 60 L54 32 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M74 40 L60 60 L66 32 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
             </>
           )}
         </>
@@ -426,7 +426,7 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
           {/* cinturilla */}
           <path
             d="M40 116 H80 V126 H40 Z"
-            fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+            fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
             stroke={stroke}
             {...strokeProps}
           />
@@ -664,19 +664,23 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
           // Antes usaba color_hex (el color plano de la camisa) en vez de
           // un tono con sombra -- con una camisa clara (blanco roto, por
           // ejemplo) el cuello casi no se distinguía del fondo neutro del
-          // cuerpo. Ahora usa sombraHsl, igual que el cuello "principal",
-          // para tener contraste garantizado sin importar el color real. */}
+          // cuerpo. Después pasó a sombraHsl, pero eso a su vez fallaba en
+          // el otro extremo: con una camisa oscura, restarle 10% de luz no
+          // alcanza para diferenciarlo del propio degradé de sombra de la
+          // tela (mismo bug que en el cuello "principal" de TorsoCuerpo).
+          // Ahora usa detalleHsl, que garantiza contraste real en los dos
+          // sentidos. */}
           <>
             <path d="M46 38 Q60 26 74 38" fill="none" stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)} {...strokeProps} />
             <path
               d="M46 38 L60 58 L54 30 Z"
-              fill={sombraHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+              fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
             />
             <path
               d="M74 38 L60 58 L66 30 Z"
-              fill={sombraHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+              fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
             />

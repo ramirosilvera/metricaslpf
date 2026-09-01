@@ -148,3 +148,19 @@ export function sombraHsl(h: number, s: number, l: number): string {
 export function luzHsl(h: number, s: number, l: number): string {
   return `hsl(${h} ${s}% ${Math.min(98, l + 7)}%)`;
 }
+
+/** Tono de "detalle" (cuello, dobladillo, cinturilla) con contraste
+ *  garantizado contra la prenda, sea cual sea su color real -- reporte
+ *  real del usuario en una prenda negra (Maniqui.tsx): sombraHsl sola no
+ *  alcanza para un color ya oscuro, porque restarle 10% de luz más lo deja
+ *  casi en el mismo tono que el propio degradé de sombra de la prenda
+ *  (que ya llega hasta l-10) -- el cuello se volvía casi invisible. Acá,
+ *  si la prenda es clara (l>=50) se oscurece bastante (como una sombra
+ *  marcada); si es oscura, se ACLARA en vez de oscurecer más -- mismo
+ *  criterio que un pliegue de tela real, que puede leerse por sombra o
+ *  por brillo según de qué lado cae la luz, pero elegido acá por
+ *  contraste garantizado, no por estética. */
+export function detalleHsl(h: number, s: number, l: number): string {
+  if (l >= 50) return `hsl(${h} ${s}% ${Math.max(4, l - 25)}%)`;
+  return `hsl(${h} ${Math.min(100, s + 10)}% ${Math.min(92, l + 22)}%)`;
+}
