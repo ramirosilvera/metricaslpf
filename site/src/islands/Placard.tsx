@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
-import type { Prenda } from "../lib/types";
+import { ESTILO_LABEL } from "../lib/recommend";
+import type { Estilo, Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
+
+const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
 
 export default function Placard() {
   const [prendas, setPrendas] = useState<Prenda[] | null>(null);
   const [sesion, setSesion] = useState<"cargando" | "sin_sesion" | "ok" | "error">("cargando");
   const [error, setError] = useState("");
+  const [filtroEstilo, setFiltroEstilo] = useState<Estilo | null>(null);
   const base = (import.meta.env.BASE_URL as string) || "/";
 
   useEffect(() => {
@@ -83,6 +87,8 @@ export default function Placard() {
     );
   }
 
+  const visibles = filtroEstilo ? prendas.filter((p) => p.estilo === filtroEstilo) : prendas;
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <a href={`${base}probar/`} className="card probar-banner">
@@ -95,25 +101,56 @@ export default function Placard() {
         </div>
       </a>
 
-      <div className="grid-prendas">
-        {prendas.map((p) => (
-          <a key={p.id} href={`${base}combinar/?prenda=${p.id}`} className="card prenda-card">
-            <span className="prenda-card-icon">
-              <PrendaIcon
-                categoria={p.categoria}
-                color={p.color_hex}
-                suelaContraste={p.suela_contraste}
-                posicionAccesorio={p.posicion_accesorio}
-                requiereCuello={p.requiere_cuello}
-              />
-            </span>
-            <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{p.categoria}</strong>
-            <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
-              {nombreColor(p.color_h, p.color_s, p.color_l)}
-            </span>
-          </a>
+      {/* Pedido explícito: que la diferenciación por estilo (oficina/
+          urbana/clásica/casual/deportiva) quede clara "en toda la app" --
+          el placard es la pantalla más visitada (el guardarropa completo)
+          y antes no tenía ni badge ni filtro. */}
+      <div className="filtro-chips" role="group" aria-label="Filtrar tu placard por estilo">
+        <button
+          type="button"
+          className={`chip${filtroEstilo === null ? " chip-activo" : ""}`}
+          onClick={() => setFiltroEstilo(null)}
+        >
+          Todos
+        </button>
+        {ESTILOS_FILTRO.map((e) => (
+          <button
+            key={e}
+            type="button"
+            className={`chip${filtroEstilo === e ? " chip-activo" : ""}`}
+            onClick={() => setFiltroEstilo((prev) => (prev === e ? null : e))}
+          >
+            {ESTILO_LABEL[e]}
+          </button>
         ))}
       </div>
+
+      {visibles.length === 0 ? (
+        <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+          No tenés prendas con estilo "{filtroEstilo && ESTILO_LABEL[filtroEstilo]}" todavía.
+        </p>
+      ) : (
+        <div className="grid-prendas">
+          {visibles.map((p) => (
+            <a key={p.id} href={`${base}combinar/?prenda=${p.id}`} className="card prenda-card">
+              <span className="prenda-card-icon">
+                <PrendaIcon
+                  categoria={p.categoria}
+                  color={p.color_hex}
+                  suelaContraste={p.suela_contraste}
+                  posicionAccesorio={p.posicion_accesorio}
+                  requiereCuello={p.requiere_cuello}
+                />
+              </span>
+              <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{p.categoria}</strong>
+              <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                {nombreColor(p.color_h, p.color_s, p.color_l)}
+              </span>
+              {p.estilo && <span className="registro-badge" style={{ marginTop: "0.3rem" }}>{ESTILO_LABEL[p.estilo]}</span>}
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
