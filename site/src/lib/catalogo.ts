@@ -64,6 +64,14 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-beige", nombre: "Pantalón chino beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  // joggers -- casual como el jean (no "clasico" como el chino: no van a
+  // la oficina), textura "algodon" sin ambigüedad porque el usuario la dio
+  // así directamente. Colores reusados del resto del catálogo (negro
+  // estándar, el mismo beige del chino, el gris de siempre) por la misma
+  // razón de consistencia de paleta que ya documenta el resto del archivo.
+  { id: "jogger-negro", nombre: "Jogger negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  { id: "jogger-beige", nombre: "Jogger beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  { id: "jogger-gris", nombre: "Jogger gris", categoria: "pantalon", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", ocasion: "casual" },
 
   // --- Buzos ---
   { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
