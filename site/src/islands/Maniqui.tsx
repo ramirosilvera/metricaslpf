@@ -323,8 +323,22 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               brazo -- ahora torso y brazo se encuentran en el mismo punto
               en vez de dejar un pequeño escalón, y la caída desde el cuello
               hacia el hombro es un poco más marcada. */}
+          {/* trapecio/cuello -- reporte real del usuario: "o tienen mucho
+              hombro o les falta trapecio... no es como si fuese una M el
+              torso". Tenía toda la razón: el contorno subía del hombro
+              hasta un pico (y=40) MÁS ARRIBA que la base del cuello
+              (y=46), volvía a bajar hasta y=44 en el centro, y subía a
+              otro pico (y=40) del otro lado antes de bajar al otro hombro
+              -- literalmente picohundido-pico, una M. Ese hundimiento
+              quedaba justo donde el trapecio real llena el hueco entre
+              hombro y cuello, así que se leía como "falta músculo ahí".
+              Reemplazado por una curva continua de un solo tramo por
+              lado: sube derecho desde el hombro hasta encontrarse con la
+              base del cuello (sin pasarse de largo) y un hundimiento
+              único y chico en el frente (el escote), no dos picos con un
+              valle en el medio. */}
           <Forma
-            d="M34 48 Q34 59 37 70 Q39 89 41 104 L41 126 L79 126 L79 104 Q81 89 83 70 Q86 59 86 48 Q82 38 72 40 Q60 44 48 40 Q38 38 34 48 Z"
+            d="M34 48 Q34 59 37 70 Q39 89 41 104 L41 126 L79 126 L79 104 Q81 89 83 70 Q86 59 86 48 Q78 42 64 46 Q60 48 56 46 Q42 42 34 48 Z"
             fill={fill}
             stroke={stroke}
             patron={patron}
@@ -589,8 +603,13 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
             tobillo=224, muñeca=120) no cambiaron -- ya estaban correctas. */}
         <ellipse cx="60" cy="20" rx="13" ry="15" fill={neutro} stroke={neutroStroke} />
         <path d="M55 33 L66 33 L64 46 L56 46 Z" fill={neutro} stroke={neutroStroke} />
+        {/* trapecio/cuello -- mismo rediseño y mismo motivo que en
+            TorsoCuerpo (ver ese comentario): el contorno viejo trazaba una
+            M (pico-valle-pico) en vez de una curva continua de hombro a
+            cuello, dejando un hundimiento justo donde debería estar el
+            trapecio. */}
         <path
-          d="M35 48 Q37 59 39 70 Q41 89 43 100 L43 120 L77 120 L77 100 Q79 89 81 70 Q83 59 85 48 Q80 38 71 42 Q60 46 49 42 Q40 38 35 48 Z"
+          d="M35 48 Q37 59 39 70 Q41 89 43 100 L43 120 L77 120 L77 100 Q79 89 81 70 Q83 59 85 48 Q77 42 64 46 Q60 48 56 46 Q43 42 35 48 Z"
           fill={neutro}
           stroke={neutroStroke}
         />
