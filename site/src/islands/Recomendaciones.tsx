@@ -197,7 +197,13 @@ export default function Recomendaciones() {
     <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", paddingBottom: seleccionadas.size > 0 || guardado ? "4.5rem" : 0 }}>
       <div className="vestidor-hero">
         <span className="vestidor-hero-icon">
-          <PrendaIcon categoria={base.categoria} color={base.color_hex} suelaContraste={base.suela_contraste} />
+          <PrendaIcon
+            categoria={base.categoria}
+            color={base.color_hex}
+            suelaContraste={base.suela_contraste}
+            posicionAccesorio={base.posicion_accesorio}
+            requiereCuello={base.requiere_cuello}
+          />
         </span>
         <div style={{ flex: 1 }}>
           <strong style={{ textTransform: "capitalize", fontSize: "1.1rem" }}>
@@ -279,7 +285,13 @@ export default function Recomendaciones() {
                     className={`card recomendacion-card${activo ? " seleccionada" : ""}`}
                   >
                     <span className="recomendacion-icon" aria-hidden="true">
-                      <PrendaIcon categoria={prenda.categoria} color={prenda.color_hex} suelaContraste={prenda.suela_contraste} />
+                      <PrendaIcon
+                        categoria={prenda.categoria}
+                        color={prenda.color_hex}
+                        suelaContraste={prenda.suela_contraste}
+                        posicionAccesorio={prenda.posicion_accesorio}
+                        requiereCuello={prenda.requiere_cuello}
+                      />
                     </span>
                     <div style={{ flex: 1, textAlign: "left" }}>
                       <span style={{ display: "block", fontSize: "0.8rem", textTransform: "capitalize", marginBottom: "0.2rem" }}>

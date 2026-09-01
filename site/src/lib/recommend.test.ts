@@ -702,6 +702,7 @@ function mkPrenda(
     foto_path: null,
     suela_contraste: false,
     requiere_cuello: false,
+    posicion_accesorio: "cintura",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };

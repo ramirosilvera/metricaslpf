@@ -14,6 +14,8 @@ export function PrendaShape({
   categoria,
   color,
   suelaContraste = false,
+  posicionAccesorio = "cintura",
+  requiereCuello = false,
 }: {
   categoria: Categoria;
   color: string;
@@ -23,6 +25,17 @@ export function PrendaShape({
    *  distinción, así que dos zapatillas negras -- con y sin suela de
    *  contraste -- se veían exactamente iguales en el selector. */
   suelaContraste?: boolean;
+  /** Ver Prenda.posicion_accesorio en types.ts. Solo afecta a "accesorio":
+   *  antes de esto, un cinturón, una corbata y una bufanda dibujaban
+   *  exactamente el mismo ícono (una tira con hebilla) porque el switch de
+   *  abajo solo distinguía por categoria, no por qué accesorio era en
+   *  realidad -- así lo reportó un usuario viendo el selector real. */
+  posicionAccesorio?: "cuello" | "cintura";
+  /** Ver Prenda.requiere_cuello en types.ts. Junto con posicionAccesorio
+   *  distingue una corbata (cuello + requiere_cuello) de una bufanda
+   *  (cuello, sin requiere_cuello) -- ambas van al cuello pero se ven, y se
+   *  usan, distinto. */
+  requiereCuello?: boolean;
 }) {
   const stroke = "rgba(0,0,0,0.15)";
   const soleClipId = useId();
@@ -102,13 +115,40 @@ export function PrendaShape({
         </>
       );
     case "accesorio":
-    default:
+    default: {
+      if (posicionAccesorio !== "cuello") {
+        // Cinturón: tira horizontal a la altura de la cintura, con hebilla.
+        // Forma original, sin cambios -- sigue siendo la única lectura
+        // correcta para un accesorio que se usa en la cintura.
+        return (
+          <>
+            <rect x="8" y="27" width="48" height="10" rx="2" fill={color} stroke={stroke} />
+            <rect x="26" y="24" width="12" height="16" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
+          </>
+        );
+      }
+      if (requiereCuello) {
+        // Corbata: nudo angosto arriba (a la altura del cuello) y una
+        // franja que se ensancha y termina en punta -- la silueta clásica
+        // de corbata, para no confundirla con la tira recta del cinturón.
+        return (
+          <>
+            <path d="M27 6 L37 6 L34 16 L30 16 Z" fill={color} stroke={stroke} />
+            <path d="M30 16 L34 16 L44 46 L32 58 L20 46 Z" fill={color} stroke={stroke} />
+          </>
+        );
+      }
+      // Bufanda: banda curva alrededor del cuello con dos puntas colgando
+      // de distinto largo (como se drapea una bufanda real) -- distinta de
+      // la punta única y angosta de la corbata.
       return (
         <>
-          <rect x="8" y="27" width="48" height="10" rx="2" fill={color} stroke={stroke} />
-          <rect x="26" y="24" width="12" height="16" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M20 10 Q32 2 44 10 Q40 16 32 16 Q24 16 20 10 Z" fill={color} stroke={stroke} />
+          <rect x="22" y="14" width="8" height="40" rx="3" fill={color} stroke={stroke} />
+          <rect x="34" y="14" width="8" height="30" rx="3" fill={color} stroke={stroke} />
         </>
       );
+    }
   }
 }
 
@@ -116,14 +156,24 @@ export default function PrendaIcon({
   categoria,
   color,
   suelaContraste,
+  posicionAccesorio,
+  requiereCuello,
 }: {
   categoria: Categoria;
   color: string;
   suelaContraste?: boolean;
+  posicionAccesorio?: "cuello" | "cintura";
+  requiereCuello?: boolean;
 }) {
   return (
     <svg viewBox="0 0 64 64" width="100%" height="100%">
-      <PrendaShape categoria={categoria} color={color} suelaContraste={suelaContraste} />
+      <PrendaShape
+        categoria={categoria}
+        color={color}
+        suelaContraste={suelaContraste}
+        posicionAccesorio={posicionAccesorio}
+        requiereCuello={requiereCuello}
+      />
     </svg>
   );
 }

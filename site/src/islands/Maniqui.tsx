@@ -380,13 +380,51 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
 }
 
 function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
+  // posicion_accesorio es un dato real de la prenda (ver types.ts), no una
+  // regla automática por categoria -- antes de esa columna, un cinturón,
+  // una corbata y una bufanda dibujaban el mismo bloque a la altura de la
+  // cintura, así lo reportó un usuario viendo el maniquí real.
+  if (prenda.posicion_accesorio !== "cuello") {
+    return (
+      <Volumen
+        prenda={prenda}
+        hijos={(fill, stroke, patron) => (
+          <>
+            <Forma d="M26 143 H94 V151 H26 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+            <rect x="52" y="140" width="16" height="14" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
+          </>
+        )}
+      />
+    );
+  }
+  if (prenda.requiere_cuello) {
+    // Corbata: nudo angosto a la altura del cuello y una franja que se
+    // ensancha bajando por el pecho hasta terminar en punta -- no una tira
+    // horizontal en la cintura, que es donde va un cinturón.
+    return (
+      <Volumen
+        prenda={prenda}
+        hijos={(fill, stroke, patron) => (
+          <>
+            <Forma d="M55 38 L65 38 L62 46 L58 46 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+            <Forma d="M58 46 L62 46 L70 95 L60 115 L50 95 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          </>
+        )}
+      />
+    );
+  }
+  // Bufanda: banda alrededor del cuello con dos puntas de distinto largo
+  // colgando sobre el pecho -- va al cuello igual que la corbata, pero no
+  // requiere_cuello (se usa sobre cualquier prenda de torso) y su forma es
+  // distinta (drapeada, no un nudo con una única punta angosta).
   return (
     <Volumen
       prenda={prenda}
       hijos={(fill, stroke, patron) => (
         <>
-          <Forma d="M26 143 H94 V151 H26 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <rect x="52" y="140" width="16" height="14" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
+          <Forma d="M40 40 Q60 28 80 40 Q72 50 60 50 Q48 50 40 40 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M46 46 H58 V106 Q52 110 46 106 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M64 46 H76 V92 Q70 96 64 92 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
         </>
       )}
     />
@@ -477,7 +515,13 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
         <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap", justifyContent: "center" }}>
           {extras.map((p) => (
             <span key={p.id} style={{ width: 28, height: 28 }} title={p.categoria}>
-              <PrendaIcon categoria={p.categoria} color={p.color_hex} suelaContraste={p.suela_contraste} />
+              <PrendaIcon
+                categoria={p.categoria}
+                color={p.color_hex}
+                suelaContraste={p.suela_contraste}
+                posicionAccesorio={p.posicion_accesorio}
+                requiereCuello={p.requiere_cuello}
+              />
             </span>
           ))}
         </div>

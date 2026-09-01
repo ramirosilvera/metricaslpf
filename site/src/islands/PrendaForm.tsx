@@ -61,6 +61,9 @@ export default function PrendaForm() {
   const [estacion, setEstacion] = useState<Estacion | "">(presetDePrefill?.estacion ?? "");
   const [suelaContraste, setSuelaContraste] = useState(presetDePrefill?.suelaContraste ?? false);
   const [requiereCuello, setRequiereCuello] = useState(presetDePrefill?.requiereCuello ?? false);
+  const [posicionAccesorio, setPosicionAccesorio] = useState<"cuello" | "cintura">(
+    presetDePrefill?.posicionAccesorio ?? "cintura",
+  );
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
@@ -89,6 +92,7 @@ export default function PrendaForm() {
     setEstacion(p.estacion ?? "");
     setSuelaContraste(p.suelaContraste ?? false);
     setRequiereCuello(p.requiereCuello ?? false);
+    setPosicionAccesorio(p.posicionAccesorio ?? "cintura");
     setFotoBlob(null);
     setFotoPreview(null);
   }
@@ -136,6 +140,7 @@ export default function PrendaForm() {
           estacion: estacion || null,
           suela_contraste: categoria === "calzado" ? suelaContraste : false,
           requiere_cuello: categoria === "accesorio" ? requiereCuello : false,
+          posicion_accesorio: categoria === "accesorio" ? posicionAccesorio : "cintura",
         })
         .select()
         .single();
@@ -182,7 +187,13 @@ export default function PrendaForm() {
               onClick={() => aplicarPreset(p)}
             >
               <span className="catalogo-icon">
-                <PrendaIcon categoria={p.categoria} color={p.colorHex} suelaContraste={p.suelaContraste} />
+                <PrendaIcon
+                  categoria={p.categoria}
+                  color={p.colorHex}
+                  suelaContraste={p.suelaContraste}
+                  posicionAccesorio={p.posicionAccesorio}
+                  requiereCuello={p.requiereCuello}
+                />
               </span>
               <span className="catalogo-nombre">{p.nombre}</span>
             </button>
@@ -251,10 +262,30 @@ export default function PrendaForm() {
               </label>
             )}
             {categoria === "accesorio" && (
-              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <input type="checkbox" checked={requiereCuello} onChange={(e) => setRequiereCuello(e.target.checked)} />
-                <span>Es una corbata (necesita una camisa con cuello debajo)</span>
-              </label>
+              <>
+                <label className="field-label">
+                  <span>Dónde se usa</span>
+                  <select
+                    className="field"
+                    value={posicionAccesorio}
+                    onChange={(e) => setPosicionAccesorio(e.target.value as "cuello" | "cintura")}
+                  >
+                    <option value="cintura">Cintura (cinturón)</option>
+                    <option value="cuello">Cuello (corbata, bufanda)</option>
+                  </select>
+                </label>
+                <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <input
+                    type="checkbox"
+                    checked={requiereCuello}
+                    onChange={(e) => {
+                      setRequiereCuello(e.target.checked);
+                      if (e.target.checked) setPosicionAccesorio("cuello");
+                    }}
+                  />
+                  <span>Es una corbata (necesita una camisa con cuello debajo)</span>
+                </label>
+              </>
             )}
           </div>
         </details>

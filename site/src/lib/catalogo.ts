@@ -16,6 +16,9 @@ export interface PresetPrenda {
   /** Ver Prenda.requiere_cuello en types.ts. Solo tiene sentido en
    *  accesorios tipo corbata; se omite (== false) en el resto. */
   requiereCuello?: boolean;
+  /** Ver Prenda.posicion_accesorio en types.ts. Solo tiene sentido en
+   *  categoria="accesorio"; se omite (== "cintura", cinturón) en el resto. */
+  posicionAccesorio?: "cuello" | "cintura";
 }
 
 /**
@@ -127,9 +130,9 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // ya cargadas, no con un azul ligeramente distinto).
   { id: "cinturon-negro", nombre: "Cinturón negro de cuero", categoria: "accesorio", colorHex: "#1A1A1A", textura: "cuero_liso", estilo: "clasico" },
   { id: "cinturon-marron", nombre: "Cinturón marrón de cuero", categoria: "accesorio", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "clasico" },
-  { id: "corbata-azul-marino", nombre: "Corbata azul marino", categoria: "accesorio", colorHex: "#1F2A44", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true },
-  { id: "corbata-bordo", nombre: "Corbata bordo", categoria: "accesorio", colorHex: "#6B2737", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true },
-  { id: "bufanda-gris", nombre: "Bufanda gris", categoria: "accesorio", colorHex: "#8C8C8C", textura: "lana", estilo: "casual", ocasion: "casual" },
+  { id: "corbata-azul-marino", nombre: "Corbata azul marino", categoria: "accesorio", colorHex: "#1F2A44", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
+  { id: "corbata-bordo", nombre: "Corbata bordo", categoria: "accesorio", colorHex: "#6B2737", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
+  { id: "bufanda-gris", nombre: "Bufanda gris", categoria: "accesorio", colorHex: "#8C8C8C", textura: "lana", estilo: "casual", ocasion: "casual", posicionAccesorio: "cuello" },
 ];
 
 /** Deriva h/s/l de cada preset una sola vez (no en cada render). */
@@ -162,6 +165,7 @@ export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number
     foto_path: null,
     suela_contraste: preset.suelaContraste ?? false,
     requiere_cuello: preset.requiereCuello ?? false,
+    posicion_accesorio: preset.posicionAccesorio ?? "cintura",
     created_at: "",
     updated_at: "",
   };

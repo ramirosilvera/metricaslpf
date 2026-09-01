@@ -56,6 +56,16 @@ export interface Prenda {
    *  apoyarla. Por defecto false: un cinturón o una bufanda no tienen esta
    *  restricción. */
   requiere_cuello: boolean;
+  /** Dónde se usa la prenda en el cuerpo -- solo tiene sentido en
+   *  categoria="accesorio" (el resto la ignora). Un cinturón va en la
+   *  cintura; una corbata o una bufanda van al cuello, aunque solo la
+   *  corbata requiere_cuello para combinar. Sin este dato, PrendaIcon y
+   *  Maniqui no tenían forma de saber si dibujar el accesorio como tira de
+   *  cintura o como algo que cuelga del cuello -- terminaban dibujando
+   *  cinturón, corbata y bufanda con el mismo ícono. Default 'cintura'
+   *  preserva el dibujo original (el único que existía antes de esta
+   *  columna). */
+  posicion_accesorio: "cuello" | "cintura";
   created_at: string;
   updated_at: string;
 }

@@ -101,6 +101,7 @@ export default function Probar() {
           foto_path: null,
           suela_contraste: false,
           requiere_cuello: false,
+          posicion_accesorio: "cintura",
           created_at: "",
           updated_at: "",
         }
@@ -147,7 +148,13 @@ export default function Probar() {
               onClick={() => elegirPreset(p)}
             >
               <span className="catalogo-icon">
-                <PrendaIcon categoria={p.categoria} color={p.colorHex} suelaContraste={p.suelaContraste} />
+                <PrendaIcon
+                  categoria={p.categoria}
+                  color={p.colorHex}
+                  suelaContraste={p.suelaContraste}
+                  posicionAccesorio={p.posicionAccesorio}
+                  requiereCuello={p.requiereCuello}
+                />
               </span>
               <span className="catalogo-nombre">{p.nombre}</span>
             </button>
@@ -179,7 +186,13 @@ export default function Probar() {
         <>
           <div className="vestidor-hero">
             <span className="vestidor-hero-icon">
-              <PrendaIcon categoria={pruebaBase.categoria} color={pruebaBase.color_hex} suelaContraste={pruebaBase.suela_contraste} />
+              <PrendaIcon
+                categoria={pruebaBase.categoria}
+                color={pruebaBase.color_hex}
+                suelaContraste={pruebaBase.suela_contraste}
+                posicionAccesorio={pruebaBase.posicion_accesorio}
+                requiereCuello={pruebaBase.requiere_cuello}
+              />
             </span>
             <div style={{ flex: 1 }}>
               <strong style={{ textTransform: "capitalize" }}>
@@ -215,7 +228,13 @@ export default function Probar() {
                     {recs.map(({ prenda, score, tecnicaRescate }) => (
                       <div key={prenda.id} className="card" style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
                         <span className="recomendacion-icon">
-                          <PrendaIcon categoria={prenda.categoria} color={prenda.color_hex} suelaContraste={prenda.suela_contraste} />
+                          <PrendaIcon
+                            categoria={prenda.categoria}
+                            color={prenda.color_hex}
+                            suelaContraste={prenda.suela_contraste}
+                            posicionAccesorio={prenda.posicion_accesorio}
+                            requiereCuello={prenda.requiere_cuello}
+                          />
                         </span>
                         <div style={{ flex: 1 }}>
                           <span style={{ display: "block", fontSize: "0.8rem", textTransform: "capitalize", marginBottom: "0.2rem" }}>
