@@ -256,15 +256,20 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             </>
           ) : (
             <>
+              {/* brazos más sueltos -- pedido explícito del usuario. El
+                  hombro (48-60) queda fijo como pivote natural; de ahí para
+                  abajo el brazo se angula hacia afuera del cuerpo en vez de
+                  caer en paralelo estricto al torso, como brazos relajados
+                  de verdad. */}
               <Forma
-                d="M34 48 Q29 51 29 60 L28 114 Q28 120 32 121 L37 121 Q40 120 39 114 L39 60 Q38 52 34 48 Z"
+                d="M34 48 Q29 51 29 60 L25 114 Q25 120 29 121 L34 121 Q37 120 36 114 L39 60 Q38 52 34 48 Z"
                 fill={fill}
                 stroke={stroke}
                 patron={patron}
                 sugerida={sugerida}
               />
               <Forma
-                d="M86 48 Q91 51 91 60 L92 114 Q92 120 88 121 L83 121 Q80 120 81 114 L81 60 Q82 52 86 48 Z"
+                d="M86 48 Q91 51 91 60 L95 114 Q95 120 91 121 L86 121 Q83 120 84 114 L81 60 Q82 52 86 48 Z"
                 fill={fill}
                 stroke={stroke}
                 patron={patron}
@@ -295,8 +300,16 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               seña de género) sin cambios -- solo la magnitud absoluta baja
               un poco más. Hombro nuevo ≈23% de la altura total, adentro
               del rango real (22-25%) en vez de por encima. */}
+          {/* postura -- pedido explícito del usuario ("hombros relajados"):
+              antes el hombro terminaba en una esquina a la misma altura
+              (y=46) que el punto más alto del cuello, sin ninguna caída --
+              se lee como hombros en tensión, levantados. Se baja la esquina
+              del hombro 2u (46->48), la misma altura donde ya arrancaba el
+              brazo -- ahora torso y brazo se encuentran en el mismo punto
+              en vez de dejar un pequeño escalón, y la caída desde el cuello
+              hacia el hombro es un poco más marcada. */}
           <Forma
-            d="M34 46 Q34 59 37 70 Q39 89 41 104 L41 126 L79 126 L79 104 Q81 89 83 70 Q86 59 86 46 Q82 38 72 40 Q60 44 48 40 Q38 38 34 46 Z"
+            d="M34 48 Q34 59 37 70 Q39 89 41 104 L41 126 L79 126 L79 104 Q81 89 83 70 Q86 59 86 48 Q82 38 72 40 Q60 44 48 40 Q38 38 34 48 Z"
             fill={fill}
             stroke={stroke}
             patron={patron}
@@ -309,9 +322,18 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               cuello, más angosto, en vez de flotar sobre el hueco viejo. */}
           {prenda.categoria === "camisa" && (
             <>
-              <path d="M52 32 L60 42 L56 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <path d="M68 32 L60 42 L64 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <line x1="60" y1="42" x2="60" y2="124" stroke={stroke} {...strokeProps} />
+              {/* cuello rediseñado -- reporte real del usuario ("todavía no
+                  se ve bien el cuello, es muy importante"): la forma
+                  anterior era una astilla angosta (4u de ancho) que apenas
+                  se distinguía, sobre todo en colores claros. Ahora es un
+                  triángulo con ancho real (49 a 56, ~7u) más una tira
+                  curva arriba que sugiere el cuello abrochado alrededor del
+                  cuello real -- la misma silueta que un cuello de camisa en
+                  un plano técnico de moda. */}
+              <path d="M49 30 Q60 27 71 30" fill="none" stroke={stroke} {...strokeProps} />
+              <path d="M49 30 L60 46 L56 34 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M71 30 L60 46 L64 34 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <line x1="60" y1="46" x2="60" y2="124" stroke={stroke} {...strokeProps} />
             </>
           )}
           {prenda.categoria === "sweater" && (
@@ -319,9 +341,10 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           )}
           {prenda.categoria === "campera" && (
             <>
-              <line x1="60" y1="42" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
-              <path d="M52 34 L60 48 L56 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <path d="M68 34 L60 48 L64 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <line x1="60" y1="46" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
+              <path d="M49 32 Q60 29 71 32" fill="none" stroke={stroke} {...strokeProps} />
+              <path d="M49 32 L60 48 L56 36 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M71 32 L60 48 L64 36 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
             </>
           )}
         </>
@@ -339,13 +362,18 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
           {/* dos piernas propias (más anchas que las del maniquí de base
               en 3-4u por lado) en vez de un solo bloque -- así no se ven
               tiritas del maniquí asomando a los costados ni en la
-              entrepierna. Ancho afinado en la 6ta pasada junto con todo el
-              resto del cuerpo (ver el comentario largo en TorsoCuerpo) --
-              mismo factor (0.85 adicional desde el centro) que hombros/
-              torso, pedido explícito del usuario ("las piernas también" se
-              ven anchas). Largo sin cambios. */}
-          <Forma d="M41 120 L43 185 Q43 203 46 224 L56 224 Q57 203 59 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <Forma d="M79 120 L77 185 Q77 203 74 224 L64 224 Q63 203 61 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+              entrepierna. Ancho afinado en la 6ta pasada (ver el comentario
+              largo en TorsoCuerpo). Postura -- pedido explícito del usuario
+              ("piernas un poco más abiertas"): la cadera (y=120, donde se
+              apoya el pantalón) queda fija, y de ahí para abajo cada pierna
+              entera (borde externo Y borde interno, mismo delta en los
+              dos -- el grosor de la pierna no cambia) se corre hacia
+              afuera progresivamente: -2u a la altura de la rodilla, -4u en
+              el tobillo. Antes las piernas bajaban casi en columna recta
+              (apenas 0.5u de diferencia entre cadera y tobillo), una
+              postura de firmes, no relajada. */}
+          <Forma d="M41 120 L41 185 Q40 203 42 224 L52 224 Q54 203 57 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M79 120 L79 185 Q80 203 78 224 L68 224 Q66 203 63 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           {/* cinturilla */}
           <path
             d="M40 116 H80 V126 H40 Z"
@@ -386,13 +414,14 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
               x=71 el derecho, los mismos centros que ya tiene la pierna) en
               vez del centro del cuerpo, y también se achata la altura --
               un zapato real visto de frente es bastante más chato que alto,
-              no un bloque cuadrado. Recentrado en la 6ta pasada (±1.5u,
-              simple traslación, sin cambiar tamaño) para seguir el tobillo
-              de la pierna afinada -- ver el comentario en PiernasCuerpo. */}
-          <Forma d="M44 223 Q40 224 40 230 L42 233 Q42 236 46 236 L58 236 Q60 236 60 231 L60 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M40 233 H60 V237 Q60 238 58 238 L42 238 Q40 238 40 236 Z" fill={suela} stroke={stroke} {...strokeProps} />
-          <Forma d="M76 223 Q80 224 80 230 L78 233 Q78 236 74 236 L62 236 Q60 236 60 231 L60 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M80 233 H60 V237 Q60 238 62 238 L78 238 Q80 238 80 236 Z" fill={suela} stroke={stroke} {...strokeProps} />
+              no un bloque cuadrado. Recentrado otra vez en esta pasada
+              (±4u, simple traslación, sin cambiar tamaño) para seguir el
+              tobillo de la pierna con la postura más abierta -- ver el
+              comentario en PiernasCuerpo. */}
+          <Forma d="M40 223 Q36 224 36 230 L38 233 Q38 236 42 236 L54 236 Q56 236 56 231 L56 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <path d="M36 233 H56 V237 Q56 238 54 238 L38 238 Q36 238 36 236 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          <Forma d="M80 223 Q84 224 84 230 L82 233 Q82 236 78 236 L66 236 Q64 236 64 231 L64 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <path d="M84 233 H64 V237 Q64 238 66 238 L82 238 Q84 238 84 236 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
     />
@@ -510,12 +539,12 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
         <ellipse cx="60" cy="20" rx="13" ry="15" fill={neutro} stroke={neutroStroke} />
         <path d="M55 33 L66 33 L64 46 L56 46 Z" fill={neutro} stroke={neutroStroke} />
         <path
-          d="M35 46 Q37 59 39 70 Q41 89 43 100 L43 120 L77 120 L77 100 Q79 89 81 70 Q83 59 85 46 Q80 38 71 42 Q60 46 49 42 Q40 38 35 46 Z"
+          d="M35 48 Q37 59 39 70 Q41 89 43 100 L43 120 L77 120 L77 100 Q79 89 81 70 Q83 59 85 48 Q80 38 71 42 Q60 46 49 42 Q40 38 35 48 Z"
           fill={neutro}
           stroke={neutroStroke}
         />
-        <path d="M35 48 Q31 49 31 57 L29 113 Q29 120 33 120 L36 120 Q38 120 37 113 L37 59 Q37 51 35 48 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M85 48 Q89 49 89 57 L91 113 Q91 120 87 120 L84 120 Q82 120 83 113 L83 59 Q83 51 85 48 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M35 48 Q31 49 31 57 L26 113 Q26 120 30 120 L33 120 Q35 120 34 113 L37 59 Q37 51 35 48 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M85 48 Q89 49 89 57 L94 113 Q94 120 90 120 L87 120 Q85 120 86 113 L83 59 Q83 51 85 48 Z" fill={neutro} stroke={neutroStroke} />
         {/* manos -- pedido explícito del usuario ("agregale las manos, eso
             le va a dar más armonía"), comparando contra una foto real de
             maniquí de exhibición donde la mano extiende el brazo hasta
@@ -536,12 +565,16 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
             por el orden de dibujo quedan debajo de cualquier manga (corta o
             larga) y asoman solas donde la manga termina, sin tener que
             duplicar la lógica de manga corta/larga. */}
-        <path d="M31 120 Q30 135 33 143 Q35 146 36 143 Q39 135 38 120 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M89 120 Q90 135 87 143 Q85 146 84 143 Q81 135 82 120 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M43 120 L44 179 Q45 197 46 224 L55 224 Q56 197 57 179 L59 120 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M77 120 L76 179 Q75 197 74 224 L65 224 Q64 197 63 179 L61 120 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M46 224 Q45 232 50 234 L55 234 Q56 232 55 224 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M74 224 Q75 232 70 234 L65 234 Q64 232 65 224 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M28 120 Q27 135 30 143 Q32 146 33 143 Q36 135 35 120 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M92 120 Q93 135 90 143 Q88 146 87 143 Q84 135 85 120 Z" fill={neutro} stroke={neutroStroke} />
+        {/* piernas un poco más abiertas -- pedido explícito del usuario.
+            Mismo criterio que en PiernasCuerpo: la cadera (y=120) fija, el
+            resto de la pierna (grosor sin cambios) corrido hacia afuera
+            progresivamente hasta -4u en el tobillo. */}
+        <path d="M43 120 L42 179 Q42 197 42 224 L51 224 Q53 197 55 179 L59 120 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M77 120 L78 179 Q78 197 78 224 L69 224 Q67 197 65 179 L61 120 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M42 224 Q41 232 46 234 L51 234 Q52 232 51 224 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M78 224 Q79 232 74 234 L69 234 Q68 232 69 224 Z" fill={neutro} stroke={neutroStroke} />
 
         {principal.piernas && <PiernasCuerpo prenda={principal.piernas} />}
         {principal.torso && <TorsoCuerpo prenda={principal.torso} />}
@@ -549,18 +582,24 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
           // el cuello de la camisa de abajo, asomando por encima del
           // sweater/campera/buzo -- dibujado después de TorsoCuerpo a
           // propósito, para quedar por encima en el z-order. Mismas
-          // coordenadas que el cuello de camisa "principal" de arriba
-          // (y=32-42), reposicionadas junto con el resto del cuello.
+          // coordenadas y forma que el cuello de camisa "principal" de
+          // TorsoCuerpo (ver ese comentario para el porqué del rediseño).
+          // Antes usaba color_hex (el color plano de la camisa) en vez de
+          // un tono con sombra -- con una camisa clara (blanco roto, por
+          // ejemplo) el cuello casi no se distinguía del fondo neutro del
+          // cuerpo. Ahora usa sombraHsl, igual que el cuello "principal",
+          // para tener contraste garantizado sin importar el color real. */}
           <>
+            <path d="M49 30 Q60 27 71 30" fill="none" stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)} {...strokeProps} />
             <path
-              d="M52 32 L60 42 L56 38 Z"
-              fill={cuelloSecundario.color_hex}
+              d="M49 30 L60 46 L56 34 Z"
+              fill={sombraHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
             />
             <path
-              d="M68 32 L60 42 L64 38 Z"
-              fill={cuelloSecundario.color_hex}
+              d="M71 30 L60 46 L64 34 Z"
+              fill={sombraHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
             />
