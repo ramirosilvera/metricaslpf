@@ -25,7 +25,19 @@ const PRIORIDAD_TORSO: Categoria[] = ["campera", "buzo", "sweater", "camisa", "r
 // manga corta (remera) vs. manga larga (el resto de las prendas de torso).
 const MANGA_CORTA: Categoria[] = ["remera"];
 
-function agruparPorCapa(prendas: Prenda[]): { principal: Partial<Record<Capa, Prenda>>; extras: Prenda[] } {
+// si una de estas queda de "más afuera" en el torso y hay una camisa debajo
+// en el mismo outfit, se dibuja el cuello de la camisa asomando por encima
+// -- así se ve puesta una camisa con sweater/campera/buzo arriba, no
+// escondida sin más como un chip suelto. La remera no entra: su escote es
+// una curva simple, no hay "cuello de camisa" real que tenga sentido tapar
+// y hacer asomar de la misma forma.
+const OUTER_CON_CUELLO_VISIBLE: Categoria[] = ["sweater", "buzo", "campera"];
+
+function agruparPorCapa(prendas: Prenda[]): {
+  principal: Partial<Record<Capa, Prenda>>;
+  cuelloSecundario?: Prenda;
+  extras: Prenda[];
+} {
   const porCapa: Record<Capa, Prenda[]> = { torso: [], piernas: [], pies: [], accesorio: [] };
   for (const p of prendas) porCapa[CAPA[p.categoria]].push(p);
 
@@ -33,12 +45,26 @@ function agruparPorCapa(prendas: Prenda[]): { principal: Partial<Record<Capa, Pr
 
   const principal: Partial<Record<Capa, Prenda>> = {};
   const extras: Prenda[] = [];
+  let cuelloSecundario: Prenda | undefined;
+
   (Object.keys(porCapa) as Capa[]).forEach((capa) => {
-    const [primera, ...resto] = porCapa[capa];
+    let [primera, ...resto] = porCapa[capa];
     if (primera) principal[capa] = primera;
+
+    if (capa === "torso" && primera && OUTER_CON_CUELLO_VISIBLE.includes(primera.categoria)) {
+      const idxCamisa = resto.findIndex((p) => p.categoria === "camisa");
+      if (idxCamisa !== -1) {
+        cuelloSecundario = resto[idxCamisa];
+        // se saca de "resto" (no de "extras" directamente): ya se muestra
+        // como cuello asomando, mostrarla TAMBIÉN como chip suelto abajo
+        // sería redundante.
+        resto = resto.filter((_, i) => i !== idxCamisa);
+      }
+    }
+
     extras.push(...resto);
   });
-  return { principal, extras };
+  return { principal, cuelloSecundario, extras };
 }
 
 /** Relleno con volumen simple: un degradé de dos paradas (mismo matiz, más
@@ -222,7 +248,7 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
  *  reconozca la categoría al instante, no parecer ropa real, así que no
  *  comparten path data con las formas de acá. */
 export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
-  const { principal, extras } = agruparPorCapa(prendas);
+  const { principal, cuelloSecundario, extras } = agruparPorCapa(prendas);
   const neutro = "var(--border)";
   const neutroStroke = "rgba(33,26,21,0.18)";
 
@@ -259,6 +285,25 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
 
         {principal.piernas && <PiernasCuerpo prenda={principal.piernas} />}
         {principal.torso && <TorsoCuerpo prenda={principal.torso} />}
+        {cuelloSecundario && (
+          // el cuello de la camisa de abajo, asomando por encima del
+          // sweater/campera/buzo -- dibujado después de TorsoCuerpo a
+          // propósito, para quedar por encima en el z-order.
+          <>
+            <path
+              d="M48 34 L60 46 L52 44 Z"
+              fill={cuelloSecundario.color_hex}
+              stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+              {...strokeProps}
+            />
+            <path
+              d="M72 34 L60 46 L68 44 Z"
+              fill={cuelloSecundario.color_hex}
+              stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+              {...strokeProps}
+            />
+          </>
+        )}
         {principal.accesorio && <AccesorioCuerpo prenda={principal.accesorio} />}
         {principal.pies && <PiesCuerpo prenda={principal.pies} />}
       </svg>
