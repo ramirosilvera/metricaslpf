@@ -1,4 +1,5 @@
-import type { HSL, NivelCompatibilidad, Prenda } from "./types";
+import type { Categoria, HSL, NivelCompatibilidad, Prenda } from "./types";
+import { CATALOGO_CON_HSL, type PresetPrenda } from "./catalogo";
 
 // Umbrales calibrados en la revisión de Consejo (rondas 1-2). Nombrados y
 // ajustables sin tocar la lógica del árbol.
@@ -164,4 +165,177 @@ export function recomendar(
 
 function nivelOrden(nivel: NivelCompatibilidad): number {
   return { excelente: 2, muy_bueno: 1, con_cuidado: 0 }[nivel];
+}
+
+// duplicado a propósito de CAPA en Maniqui.tsx -- esa es la agrupación
+// "de presentación" (cómo se dibuja); esta es la agrupación "de datos"
+// (qué categorías compiten por el mismo lugar del outfit). Mismo criterio
+// que color.ts ya documenta para NEUTRO_*: evitar una dependencia cruzada
+// entre capas por repetir 5 strings.
+const CATEGORIAS_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater", "campera"];
+const TODAS_LAS_CATEGORIAS: Categoria[] = [
+  "remera",
+  "camisa",
+  "buzo",
+  "sweater",
+  "campera",
+  "pantalon",
+  "calzado",
+  "accesorio",
+];
+
+export interface OutfitSugerido {
+  /** estable por composición: mismo set de prendas -> mismo id, para
+   *  deduplicar contra outfits ya guardados y para key en React. */
+  id: string;
+  prendas: Prenda[];
+}
+
+function mejorPropia(
+  ancla: Prenda,
+  candidatas: Prenda[],
+  placard: Prenda[],
+): { prenda: Prenda; score: ScoreColor } | undefined {
+  const [mejor] = recomendar(ancla, candidatas, placard);
+  return mejor && mejor.score.nivel !== "con_cuidado" ? mejor : undefined;
+}
+
+/** Arma outfits completos automáticamente a partir del placard real, sin
+ *  que el usuario elija nada -- un outfit por cada pantalón (es la
+ *  categoría que conecta con todas las demás en CATEGORIAS_COMPLEMENTARIAS,
+ *  el ancla natural), tomando para torso/calzado/accesorio la mejor prenda
+ *  que YA tiene si combina al menos "muy_bueno" -- nunca fuerza un "con
+ *  cuidado" a un outfit "recomendado". */
+export function armarOutfitsSugeridos(placard: Prenda[]): OutfitSugerido[] {
+  const pantalones = placard.filter((p) => p.categoria === "pantalon");
+  const resultados: OutfitSugerido[] = [];
+  const vistos = new Set<string>();
+
+  for (const ancla of pantalones) {
+    const torso = mejorPropia(
+      ancla,
+      placard.filter((p) => CATEGORIAS_TORSO.includes(p.categoria)),
+      placard,
+    );
+    const calzado = mejorPropia(
+      ancla,
+      placard.filter((p) => p.categoria === "calzado"),
+      placard,
+    );
+    const accesorio = mejorPropia(
+      ancla,
+      placard.filter((p) => p.categoria === "accesorio"),
+      placard,
+    );
+
+    // un pantalón + un accesorio solo no es un outfit -- hace falta torso.
+    if (!torso) continue;
+
+    const prendas = [ancla, torso.prenda, calzado?.prenda, accesorio?.prenda].filter(
+      (p): p is Prenda => p !== undefined,
+    );
+
+    const clave = [...prendas]
+      .map((p) => p.id)
+      .sort()
+      .join("-");
+    if (vistos.has(clave)) continue;
+    vistos.add(clave);
+
+    resultados.push({ id: clave, prendas });
+  }
+
+  return resultados;
+}
+
+export interface OutfitParaComprar {
+  id: string;
+  /** prendas reales del placard que forman parte del outfit. */
+  prendasPropias: Prenda[];
+  /** la prenda del catálogo que no tiene y se sugiere comprar -- con hsl
+   *  incluido (no solo PresetPrenda) para que quien la use después (p.ej.
+   *  presetAPrendaSintetica en catalogo.ts) no tenga que recalcularlo. */
+  sugerida: PresetPrenda & { hsl: HSL };
+  categoriaSugerida: Categoria;
+}
+
+/** Categorías del placard que hoy están en cero -- sin ninguna prenda ahí,
+ *  el usuario literalmente no puede armar nada que las use. */
+export function categoriasAusentes(placard: Prenda[]): Categoria[] {
+  const presentes = new Set(placard.map((p) => p.categoria));
+  return TODAS_LAS_CATEGORIAS.filter((c) => !presentes.has(c));
+}
+
+/** Para cada pantalón y cada categoría ausente del placard, busca en el
+ *  catálogo la prenda de esa categoría que mejor combina con ese pantalón
+ *  (mismo motor de color que el resto de la app, no una sugerencia
+ *  inventada) y arma el outfit resultante combinando esa prenda sugerida
+ *  con lo mejor que el usuario YA tiene para los demás lugares. Solo
+ *  devuelve la sugerencia si combina al menos "muy_bueno" -- no se ofrece
+ *  comprar algo que no va a combinar bien. */
+export function armarOutfitsParaComprar(
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): OutfitParaComprar[] {
+  const pantalones = placard.filter((p) => p.categoria === "pantalon");
+  const ausentes = categoriasAusentes(placard);
+  const resultados: OutfitParaComprar[] = [];
+
+  for (const ancla of pantalones) {
+    for (const categoriaSugerida of ausentes) {
+      if (categoriaSugerida === "pantalon") continue; // el ancla ya es un pantalón
+
+      const candidatosCatalogo = catalogo.filter((p) => p.categoria === categoriaSugerida);
+      if (candidatosCatalogo.length === 0) continue;
+
+      const anclaHsl: HSL = { h: ancla.color_h, s: ancla.color_s, l: ancla.color_l };
+      const [mejorSugerido] = candidatosCatalogo
+        .map((preset) => ({ preset, score: scoreColor(anclaHsl, preset.hsl) }))
+        .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
+      if (!mejorSugerido || mejorSugerido.score.nivel === "con_cuidado") continue;
+
+      // "ausente" es por categoría puntual, no por grupo -- si falta
+      // "campera" el usuario puede perfectamente tener una remera o un
+      // sweater que ya combinan bien. Para una sugerencia de torso se
+      // arma CON esa prenda propia de por medio (la campera sugerida se ve
+      // como una capa extra encima, no como reemplazo -- Maniqui ya sabe
+      // priorizar cuál mostrar como principal según PRIORIDAD_TORSO). Para
+      // calzado/accesorio no hay ambigüedad: si esa categoría está
+      // ausente, no hay nada propio con qué competir por ese lugar.
+      const torsoPropio = mejorPropia(
+        ancla,
+        placard.filter((p) => CATEGORIAS_TORSO.includes(p.categoria)),
+        placard,
+      );
+      const calzadoPropio =
+        categoriaSugerida === "calzado"
+          ? undefined
+          : mejorPropia(
+              ancla,
+              placard.filter((p) => p.categoria === "calzado"),
+              placard,
+            );
+      const accesorioPropio =
+        categoriaSugerida === "accesorio"
+          ? undefined
+          : mejorPropia(
+              ancla,
+              placard.filter((p) => p.categoria === "accesorio"),
+              placard,
+            );
+
+      const prendasPropias = [ancla, torsoPropio?.prenda, calzadoPropio?.prenda, accesorioPropio?.prenda].filter(
+        (p): p is Prenda => p !== undefined,
+      );
+
+      resultados.push({
+        id: `comprar-${ancla.id}-${mejorSugerido.preset.id}`,
+        prendasPropias,
+        sugerida: mejorSugerido.preset,
+        categoriaSugerida,
+      });
+    }
+  }
+
+  return resultados;
 }

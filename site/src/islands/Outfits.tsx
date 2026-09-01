@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
+import { CATALOGO_CON_HSL, presetAPrendaSintetica } from "../lib/catalogo";
+import { armarOutfitsParaComprar, armarOutfitsSugeridos, type OutfitParaComprar, type OutfitSugerido } from "../lib/recommend";
 import type { Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import Maniqui from "./Maniqui";
@@ -20,10 +22,18 @@ interface OutfitRow {
   outfit_prendas: { prenda_id: string; created_at: string; prendas: Prenda | null }[] | null;
 }
 
+function leyenda(prendas: Prenda[]): string {
+  return prendas.map((p) => `${p.categoria} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ");
+}
+
 export default function Outfits() {
   const [outfits, setOutfits] = useState<OutfitConPrendas[] | null>(null);
+  const [placard, setPlacard] = useState<Prenda[] | null>(null);
   const [sinSesion, setSinSesion] = useState(false);
   const [error, setError] = useState("");
+  const [guardadas, setGuardadas] = useState<Set<string>>(new Set());
+  const [guardando, setGuardando] = useState<string | null>(null);
+  const [errorGuardar, setErrorGuardar] = useState<Record<string, string>>({});
   const base = (import.meta.env.BASE_URL as string) || "/";
 
   useEffect(() => {
@@ -37,12 +47,16 @@ export default function Outfits() {
         }
         // Un solo select embebido en vez de un loop secuencial (antes: 1 + 2N
         // round-trips para N outfits) -- Supabase resuelve el join server-side.
-        const { data: outfitRows, error: err } = await supabase
-          .from("outfits")
-          .select("id, nombre, outfit_prendas(prenda_id, created_at, prendas(*))")
-          .order("created_at", { ascending: false });
-        if (err) {
-          setError(err.message);
+        const [{ data: outfitRows, error: errOutfits }, { data: prendaRows, error: errPrendas }] = await Promise.all([
+          supabase.from("outfits").select("id, nombre, outfit_prendas(prenda_id, created_at, prendas(*))").order("created_at", { ascending: false }),
+          supabase.from("prendas").select("*"),
+        ]);
+        if (errOutfits) {
+          setError(errOutfits.message);
+          return;
+        }
+        if (errPrendas) {
+          setError(errPrendas.message);
           return;
         }
         // supabase-js no puede inferir la cardinalidad del embed sin tipos
@@ -65,12 +79,76 @@ export default function Outfits() {
         // borra a nivel DB, esto es cinturón y tiradores para no mostrar una
         // card vacía si por lo que sea todavía no corrió.
         setOutfits(conPrendas.filter((o) => o.prendas.length > 0));
+        setPlacard((prendaRows as Prenda[] | null) ?? []);
       } catch (e) {
         setError(e instanceof Error ? e.message : "Error de conexión con Matiz.");
       }
     }
     cargar();
   }, []);
+
+  // sets de ids de prendas de cada outfit YA guardado -- para no sugerir
+  // como "recomendado" algo que el usuario ya guardó tal cual.
+  const clavesGuardadas = useMemo(
+    () => new Set((outfits ?? []).map((o) => o.prendas.map((p) => p.id).sort().join("-"))),
+    [outfits],
+  );
+
+  const sugeridos: OutfitSugerido[] = useMemo(() => {
+    if (!placard) return [];
+    return armarOutfitsSugeridos(placard).filter((s) => !clavesGuardadas.has(s.id));
+  }, [placard, clavesGuardadas]);
+
+  const paraComprar: OutfitParaComprar[] = useMemo(() => {
+    if (!placard) return [];
+    return armarOutfitsParaComprar(placard, CATALOGO_CON_HSL);
+  }, [placard]);
+
+  async function guardarSugerido(sugerido: OutfitSugerido) {
+    setGuardando(sugerido.id);
+    setErrorGuardar((prev) => ({ ...prev, [sugerido.id]: "" }));
+    let outfitCreado: { id: string } | null = null;
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const userId = sessionData.session?.user.id;
+      if (!userId) throw new Error("Iniciá sesión de nuevo para guardar el outfit.");
+
+      const { data: outfit, error: outfitErr } = await supabase
+        .from("outfits")
+        .insert({ user_id: userId, nombre: null })
+        .select()
+        .single();
+      if (outfitErr || !outfit) throw new Error(outfitErr?.message ?? "No se pudo crear el outfit.");
+      outfitCreado = outfit;
+
+      const filas = sugerido.prendas.map((p) => ({ outfit_id: outfit.id, prenda_id: p.id }));
+      const { error: joinErr } = await supabase.from("outfit_prendas").insert(filas);
+      if (joinErr) {
+        await supabase.from("outfits").delete().eq("id", outfit.id);
+        throw new Error(joinErr.message);
+      }
+
+      setGuardadas((prev) => new Set(prev).add(sugerido.id));
+      setOutfits((prev) => [{ id: outfit.id, nombre: null, prendas: sugerido.prendas }, ...(prev ?? [])]);
+    } catch (e) {
+      setErrorGuardar((prev) => ({ ...prev, [sugerido.id]: e instanceof Error ? e.message : "No se pudo guardar." }));
+    } finally {
+      setGuardando(null);
+    }
+  }
+
+  function cargarSugerencia(sugerida: OutfitParaComprar["sugerida"]) {
+    try {
+      sessionStorage.setItem(
+        "matiz_prueba_prefill",
+        JSON.stringify({ categoria: sugerida.categoria, colorHex: sugerida.colorHex, presetId: sugerida.id }),
+      );
+    } catch {
+      // Storage bloqueado -- se navega igual, el form de prenda nueva
+      // simplemente arranca en blanco en vez de precargado.
+    }
+    window.location.href = `${base}prenda/nueva/`;
+  }
 
   if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
 
@@ -94,15 +172,18 @@ export default function Outfits() {
     );
   }
 
-  if (outfits === null) return <p style={{ color: "var(--text-muted)" }}>Cargando...</p>;
+  if (outfits === null || placard === null) return <p style={{ color: "var(--text-muted)" }}>Cargando...</p>;
 
-  if (outfits.length === 0) {
+  const sinNada = outfits.length === 0 && sugeridos.length === 0 && paraComprar.length === 0;
+
+  if (sinNada) {
     return (
       <div className="empty-state">
         <p>Todavía no guardaste ningún outfit.</p>
         <p style={{ fontSize: "0.9rem" }}>
           Para guardar uno: elegí una prenda de tu placard, mirá sus combinaciones, tocá las que te gusten y usá el
-          botón <strong>"Guardar outfit"</strong> que aparece abajo.
+          botón <strong>"Guardar outfit"</strong> que aparece abajo. Cargá algún pantalón para que Matiz también te
+          arme sugerencias solo.
         </p>
         <a className="btn btn-primary" href={base}>
           Ir al placard
@@ -112,20 +193,100 @@ export default function Outfits() {
   }
 
   return (
-    <div className="grid-prendas outfits-grid">
-      {outfits.map((o) => (
-        <div key={o.id} className="card outfit-card">
-          <Maniqui prendas={o.prendas} />
-          <div style={{ minWidth: 0, textAlign: "center" }}>
-            <strong style={{ textTransform: "capitalize" }}>
-              {o.nombre ?? o.prendas.map((p) => p.categoria).join(" + ")}
-            </strong>
-            <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
-              {o.prendas.map((p) => `${p.categoria} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ")}
-            </p>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+      {outfits.length > 0 && (
+        <section>
+          <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>
+            Tus outfits guardados
+          </p>
+          <div className="grid-prendas outfits-grid">
+            {outfits.map((o) => (
+              <div key={o.id} className="card outfit-card">
+                <Maniqui prendas={o.prendas} />
+                <div style={{ minWidth: 0, textAlign: "center" }}>
+                  <strong style={{ textTransform: "capitalize" }}>
+                    {o.nombre ?? o.prendas.map((p) => p.categoria).join(" + ")}
+                  </strong>
+                  <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+                    {leyenda(o.prendas)}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      ))}
+        </section>
+      )}
+
+      {sugeridos.length > 0 && (
+        <section>
+          <p className="eyebrow" style={{ marginBottom: "0.25rem" }}>
+            Te recomendamos
+          </p>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
+            Armados solos con lo que ya tenés en tu placard.
+          </p>
+          <div className="grid-prendas outfits-grid">
+            {sugeridos.map((s) => {
+              const yaGuardado = guardadas.has(s.id);
+              return (
+                <div key={s.id} className="card outfit-card">
+                  <Maniqui prendas={s.prendas} />
+                  <div style={{ minWidth: 0, textAlign: "center" }}>
+                    <strong style={{ textTransform: "capitalize" }}>{s.prendas.map((p) => p.categoria).join(" + ")}</strong>
+                    <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+                      {leyenda(s.prendas)}
+                    </p>
+                  </div>
+                  {errorGuardar[s.id] && (
+                    <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>
+                  )}
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", width: "100%" }}
+                    onClick={() => guardarSugerido(s)}
+                    disabled={guardando === s.id || yaGuardado}
+                  >
+                    {yaGuardado ? "✓ Guardado" : guardando === s.id ? "Guardando..." : "Guardar outfit"}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {paraComprar.length > 0 && (
+        <section>
+          <p className="eyebrow" style={{ marginBottom: "0.25rem" }}>
+            Ideas para comprar
+          </p>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
+            Combinan con lo que ya tenés. La prenda con el contorno punteado es la que todavía no tenés.
+          </p>
+          <div className="grid-prendas outfits-grid">
+            {paraComprar.map((s) => (
+              <div key={s.id} className="card outfit-card">
+                <Maniqui prendas={[...s.prendasPropias, presetAPrendaSintetica(s.sugerida)]} />
+                <div style={{ minWidth: 0, textAlign: "center" }}>
+                  <strong style={{ textTransform: "capitalize" }}>{s.sugerida.nombre}</strong>
+                  <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+                    con {leyenda(s.prendasPropias)}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", width: "100%" }}
+                  onClick={() => cargarSugerencia(s.sugerida)}
+                >
+                  + Ya la compré, cargarla
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

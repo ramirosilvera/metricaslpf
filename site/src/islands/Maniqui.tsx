@@ -176,13 +176,44 @@ function Volumen({
 
 const strokeProps = { strokeWidth: 1, vectorEffect: "non-scaling-stroke" as const };
 
+/** Prendas sugeridas para comprar (armarOutfitsParaComprar en recommend.ts)
+ *  no son una fila real de Supabase -- se arman con presetAPrendaSintetica
+ *  en catalogo.ts, que les pone el id con este prefijo a propósito, para
+ *  poder detectarlas acá y dibujarlas distinto (contorno punteado) sin
+ *  tener que pasar un prop extra por cada componente Cuerpo. */
+function esSugerida(prenda: Prenda): boolean {
+  return prenda.id.startsWith("sugerida-");
+}
+
 /** Una forma "de tela": el relleno con volumen de siempre + (si corresponde)
  *  una segunda copia del mismo trazo con el patrón/brillo de textura
- *  encima, a opacidad reducida para no perder el color de fondo. */
-function Forma({ d, fill, stroke, patron }: { d: string; fill: string; stroke: string; patron?: string }) {
+ *  encima, a opacidad reducida para no perder el color de fondo. Si la
+ *  prenda es una sugerencia de compra (no la tiene todavía), el contorno
+ *  queda punteado -- la misma seña visual que un plano de sastrería usa
+ *  para "esto todavía no está", sin necesitar un badge de texto aparte. */
+function Forma({
+  d,
+  fill,
+  stroke,
+  patron,
+  sugerida,
+}: {
+  d: string;
+  fill: string;
+  stroke: string;
+  patron?: string;
+  sugerida?: boolean;
+}) {
   return (
     <>
-      <path d={d} fill={fill} stroke={stroke} {...strokeProps} />
+      <path
+        d={d}
+        fill={fill}
+        stroke={stroke}
+        {...strokeProps}
+        strokeDasharray={sugerida ? "2.5 2" : undefined}
+        strokeWidth={sugerida ? 1.5 : strokeProps.strokeWidth}
+      />
       {patron && <path d={d} fill={patron} opacity={0.55} />}
     </>
   );
@@ -190,6 +221,7 @@ function Forma({ d, fill, stroke, patron }: { d: string; fill: string; stroke: s
 
 function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   const mangaCorta = MANGA_CORTA.includes(prenda.categoria);
+  const sugerida = esSugerida(prenda);
   const cuelloD =
     prenda.categoria === "buzo"
       ? // capucha: una forma extra detrás del cuello
@@ -202,15 +234,15 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
       hijos={(fill, stroke, patron) => (
         <>
           {/* capucha del buzo, dibujada primero para que el cuerpo la tape parcialmente */}
-          {cuelloD && <Forma d={cuelloD} fill={fill} stroke={stroke} patron={patron} />}
+          {cuelloD && <Forma d={cuelloD} fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />}
 
           {/* mangas -- paths propios que arrancan en el hombro y siguen el
               brazo, para que no "floten" en el aire como cuando eran parte
               de un ícono cuadrado genérico. */}
           {mangaCorta ? (
             <>
-              <Forma d="M14 48 Q2 52 2 72 Q2 86 14 91 Q22 87 24 78 Q20 60 14 48 Z" fill={fill} stroke={stroke} patron={patron} />
-              <Forma d="M106 48 Q118 52 118 72 Q118 86 106 91 Q98 87 96 78 Q100 60 106 48 Z" fill={fill} stroke={stroke} patron={patron} />
+              <Forma d="M14 48 Q2 52 2 72 Q2 86 14 91 Q22 87 24 78 Q20 60 14 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
+              <Forma d="M106 48 Q118 52 118 72 Q118 86 106 91 Q98 87 96 78 Q100 60 106 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
             </>
           ) : (
             <>
@@ -219,12 +251,14 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                 fill={fill}
                 stroke={stroke}
                 patron={patron}
+                sugerida={sugerida}
               />
               <Forma
                 d="M106 48 Q116 52 117 66 L119 146 Q119 156 111 157 L101 157 Q97 156 98 146 L99 66 Q100 54 106 48 Z"
                 fill={fill}
                 stroke={stroke}
                 patron={patron}
+                sugerida={sugerida}
               />
             </>
           )}
@@ -245,6 +279,7 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             fill={fill}
             stroke={stroke}
             patron={patron}
+            sugerida={sugerida}
           />
 
           {/* detalle de cuello por categoría -- simple a propósito, esto es
@@ -284,8 +319,8 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
               en 3-4u por lado) en vez de un solo bloque -- así no se ven
               tiritas del maniquí asomando a los costados ni en la
               entrepierna. */}
-          <Forma d="M30 140 L33 195 Q34 210 38 228 L54 228 Q56 210 58 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} />
-          <Forma d="M90 140 L87 195 Q86 210 82 228 L66 228 Q64 210 62 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} />
+          <Forma d="M30 140 L33 195 Q34 210 38 228 L54 228 Q56 210 58 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M90 140 L87 195 Q86 210 82 228 L66 228 Q64 210 62 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           {/* cinturilla */}
           <path
             d="M28 136 H92 V146 H28 Z"
@@ -309,9 +344,9 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
           {/* dos zapatos, no un bloque único -- cada uno con su propia
               suela (la franja oscura) porque eso, más que la forma, es lo
               que lee como "zapatilla" y no "piedra". */}
-          <Forma d="M26 226 Q20 228 20 236 L22 241 Q24 244 32 244 L54 244 Q58 244 58 238 L56 226 Z" fill={fill} stroke={stroke} patron={patron} />
+          <Forma d="M26 226 Q20 228 20 236 L22 241 Q24 244 32 244 L54 244 Q58 244 58 238 L56 226 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           <path d="M20 241 H58 V246 Q58 248 55 248 L23 248 Q20 248 20 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
-          <Forma d="M94 226 Q100 228 100 236 L98 241 Q96 244 88 244 L66 244 Q62 244 62 238 L64 226 Z" fill={fill} stroke={stroke} patron={patron} />
+          <Forma d="M94 226 Q100 228 100 236 L98 241 Q96 244 88 244 L66 244 Q62 244 62 238 L64 226 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           <path d="M62 241 H100 V246 Q100 248 97 248 L65 248 Q62 248 62 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
@@ -325,7 +360,7 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
       prenda={prenda}
       hijos={(fill, stroke, patron) => (
         <>
-          <Forma d="M32 143 H88 V151 H32 Z" fill={fill} stroke={stroke} patron={patron} />
+          <Forma d="M32 143 H88 V151 H32 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           <rect x="52" y="140" width="16" height="14" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
         </>
       )}

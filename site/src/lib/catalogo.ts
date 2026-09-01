@@ -1,4 +1,4 @@
-import type { Categoria, Estacion, Estilo, Ocasion, Textura } from "./types";
+import type { Categoria, Estacion, Estilo, Ocasion, Prenda, Textura } from "./types";
 import { hexToHsl } from "./color";
 
 export interface PresetPrenda {
@@ -97,3 +97,30 @@ export const CATALOGO_CON_HSL = CATALOGO_PRENDAS.map((p) => ({
   ...p,
   hsl: hexToHsl(p.colorHex),
 }));
+
+/** Convierte un preset del catálogo en una Prenda sintética -- misma forma
+ *  que una fila real de Supabase, para poder pasarla a Maniqui/recomendar()
+ *  sin que les importe que no está guardada. Se usa para mostrar "esto es
+ *  lo que te sugerimos comprar" en Outfits (armarOutfitsParaComprar en
+ *  recommend.ts). El id lleva el prefijo "sugerida-" a propósito: es lo que
+ *  Outfits.tsx usa para marcar visualmente esa prenda como "no la tenés
+ *  todavía" en el maniquí, y para no intentar guardarla como si fuera una
+ *  prenda real del usuario. */
+export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number; s: number; l: number } }): Prenda {
+  return {
+    id: `sugerida-${preset.id}`,
+    user_id: "",
+    categoria: preset.categoria,
+    color_hex: preset.colorHex,
+    color_h: preset.hsl.h,
+    color_s: preset.hsl.s,
+    color_l: preset.hsl.l,
+    textura: preset.textura ?? null,
+    estilo: preset.estilo ?? null,
+    ocasion: preset.ocasion ?? null,
+    estacion: preset.estacion ?? null,
+    foto_path: null,
+    created_at: "",
+    updated_at: "",
+  };
+}

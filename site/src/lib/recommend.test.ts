@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { esNeutro, hueDist, scoreColor, tecnicaRescate, valueDist } from "./recommend";
+import {
+  armarOutfitsParaComprar,
+  armarOutfitsSugeridos,
+  categoriasAusentes,
+  esNeutro,
+  hueDist,
+  scoreColor,
+  tecnicaRescate,
+  valueDist,
+} from "./recommend";
 import { hexToHsl, hslToHex, rgbToHsl } from "./color";
-import type { Prenda } from "./types";
+import type { HSL, Prenda } from "./types";
+import type { PresetPrenda } from "./catalogo";
 
 describe("hueDist", () => {
   it("distancia circular correcta cruzando el 0°", () => {
@@ -133,6 +143,104 @@ describe("color hex <-> HSL roundtrip", () => {
       expect(hsl.h).toBeGreaterThanOrEqual(0);
       expect(hsl.h).toBeLessThan(360);
     }
+  });
+});
+
+describe("categoriasAusentes", () => {
+  it("devuelve las categorías sin ninguna prenda en el placard", () => {
+    const placard = [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), mkPrenda("remera", "#F5F5F0", 60, 5, 95)];
+    const ausentes = categoriasAusentes(placard);
+    expect(ausentes).toContain("camisa");
+    expect(ausentes).toContain("campera");
+    expect(ausentes).toContain("buzo");
+    expect(ausentes).toContain("sweater");
+    expect(ausentes).toContain("calzado");
+    expect(ausentes).toContain("accesorio");
+    expect(ausentes).not.toContain("pantalon");
+    expect(ausentes).not.toContain("remera");
+  });
+
+  it("placard vacío: todas las categorías están ausentes", () => {
+    expect(categoriasAusentes([])).toHaveLength(8);
+  });
+});
+
+describe("armarOutfitsSugeridos", () => {
+  it("arma un outfit por pantalón, tomando la mejor prenda propia por lugar", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), // negro, neutro
+      mkPrenda("remera", "#3366CC", 220, 60, 50), // combina excelente con un neutro
+      mkPrenda("calzado", "#5C3A21", 25, 50, 30),
+      mkPrenda("accesorio", "#C8763F", 25, 60, 45),
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(1);
+    expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(
+      ["accesorio", "calzado", "pantalon", "remera"].sort(),
+    );
+  });
+
+  it("sin pantalón en el placard, no arma nada (no hay ancla)", () => {
+    const placard = [mkPrenda("remera", "#3366CC", 220, 60, 50), mkPrenda("calzado", "#5C3A21", 25, 50, 30)];
+    expect(armarOutfitsSugeridos(placard)).toHaveLength(0);
+  });
+
+  it("sin ninguna prenda de torso que combine, no arma outfit para ese pantalón (nunca fuerza un 'con cuidado')", () => {
+    // rojo saturado vs verde saturado, misma luminosidad -- se funden (con_cuidado).
+    const placard = [mkPrenda("pantalon", "#CC3333", 0, 60, 50), mkPrenda("remera", "#33CC33", 120, 60, 52)];
+    expect(armarOutfitsSugeridos(placard)).toHaveLength(0);
+  });
+
+  it("calzado/accesorio son opcionales -- un outfit válido puede tener solo pantalón + torso", () => {
+    const placard = [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), mkPrenda("remera", "#3366CC", 220, 60, 50)];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(1);
+    expect(outfits[0].prendas).toHaveLength(2);
+  });
+});
+
+describe("armarOutfitsParaComprar", () => {
+  const catalogoDePrueba: (PresetPrenda & { hsl: HSL })[] = [
+    {
+      id: "campera-test-negra",
+      nombre: "Campera de prueba negra",
+      categoria: "campera",
+      colorHex: "#1A1A1A",
+      hsl: { h: 0, s: 0, l: 10 },
+    },
+  ];
+
+  it("sugiere comprar una prenda solo de una categoría ausente en el placard", () => {
+    // el placard ya tiene remera Y campera -- "campera" no está ausente,
+    // así que no debería aparecer ninguna sugerencia para esa categoría.
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10),
+      mkPrenda("remera", "#3366CC", 220, 60, 50),
+      mkPrenda("campera", "#232323", 0, 0, 15),
+    ];
+    const sugerencias = armarOutfitsParaComprar(placard, catalogoDePrueba);
+    expect(sugerencias.filter((s) => s.categoriaSugerida === "campera")).toHaveLength(0);
+  });
+
+  it("sugiere comprar cuando la categoría está ausente y combina bien con el pantalón", () => {
+    const placard = [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), mkPrenda("remera", "#3366CC", 220, 60, 50)];
+    const sugerencias = armarOutfitsParaComprar(placard, catalogoDePrueba);
+    expect(sugerencias).toHaveLength(1);
+    expect(sugerencias[0].categoriaSugerida).toBe("campera");
+    expect(sugerencias[0].sugerida.id).toBe("campera-test-negra");
+    // la remera propia sigue en el outfit -- la campera sugerida es una
+    // capa extra, no un reemplazo.
+    expect(sugerencias[0].prendasPropias.some((p) => p.categoria === "remera")).toBe(true);
+  });
+
+  it("no sugiere nada si la única opción del catálogo para esa categoría no combina bien", () => {
+    // rojo saturado (pantalón) vs verde saturado (campera del catálogo de
+    // prueba) -- se funden, no se sugiere.
+    const placard = [mkPrenda("pantalon", "#CC3333", 0, 60, 50)];
+    const catalogoQueNoCombina: (PresetPrenda & { hsl: HSL })[] = [
+      { id: "campera-verde", nombre: "Campera verde", categoria: "campera", colorHex: "#33CC33", hsl: { h: 120, s: 60, l: 52 } },
+    ];
+    expect(armarOutfitsParaComprar(placard, catalogoQueNoCombina)).toHaveLength(0);
   });
 });
 

@@ -22,10 +22,15 @@ const ESTILOS: Estilo[] = ["casual", "formal", "deportivo", "urbano", "clasico"]
 const OCASIONES: Ocasion[] = ["casual", "laburo", "formal"];
 const ESTACIONES: Estacion[] = ["verano", "invierno", "entretiempo"];
 
-/** Prefill que deja la pantalla "Probar antes de comprar" al decidir cargar la prenda de verdad.
+/** Prefill que dejan "Probar antes de comprar" y las sugerencias "para
+ *  comprar" de Outfits al decidir cargar la prenda de verdad. `presetId`
+ *  es opcional: cuando la sugerencia viene de un preset conocido del
+ *  catálogo (Outfits), se precarga textura/estilo/ocasión también, no solo
+ *  categoría+color -- si no está (el flujo viejo de "Probar", con un color
+ *  libre elegido a mano), esos campos quedan vacíos como siempre.
  *  Solo LEE -- no muta sessionStorage acá (eso pasa en un useEffect, no en
  *  fase de render, para no perder el valor con un render descartado). */
-function leerPrefillDePrueba(): { categoria: Categoria; colorHex: string } | null {
+function leerPrefillDePrueba(): { categoria: Categoria; colorHex: string; presetId?: string } | null {
   try {
     const raw = sessionStorage.getItem("matiz_prueba_prefill");
     return raw ? JSON.parse(raw) : null;
@@ -36,17 +41,18 @@ function leerPrefillDePrueba(): { categoria: Categoria; colorHex: string } | nul
 
 export default function PrendaForm() {
   const prefill = useState(() => leerPrefillDePrueba())[0];
-  const [categoria, setCategoria] = useState<Categoria>(prefill?.categoria ?? "remera");
-  const [colorHex, setColorHex] = useState(prefill?.colorHex ?? "#3366CC");
-  const [textura, setTextura] = useState<Textura | "">("");
-  const [estilo, setEstilo] = useState<Estilo | "">("");
-  const [ocasion, setOcasion] = useState<Ocasion | "">("");
-  const [estacion, setEstacion] = useState<Estacion | "">("");
+  const presetDePrefill = prefill?.presetId ? CATALOGO_PRENDAS.find((p) => p.id === prefill.presetId) : undefined;
+  const [categoria, setCategoria] = useState<Categoria>(presetDePrefill?.categoria ?? prefill?.categoria ?? "remera");
+  const [colorHex, setColorHex] = useState(presetDePrefill?.colorHex ?? prefill?.colorHex ?? "#3366CC");
+  const [textura, setTextura] = useState<Textura | "">(presetDePrefill?.textura ?? "");
+  const [estilo, setEstilo] = useState<Estilo | "">(presetDePrefill?.estilo ?? "");
+  const [ocasion, setOcasion] = useState<Ocasion | "">(presetDePrefill?.ocasion ?? "");
+  const [estacion, setEstacion] = useState<Estacion | "">(presetDePrefill?.estacion ?? "");
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
   const [error, setError] = useState("");
-  const [presetActivoId, setPresetActivoId] = useState<string | null>(null);
+  const [presetActivoId, setPresetActivoId] = useState<string | null>(presetDePrefill?.id ?? null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
