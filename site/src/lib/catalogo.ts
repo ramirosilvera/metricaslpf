@@ -10,6 +10,9 @@ export interface PresetPrenda {
   estilo?: Estilo;
   ocasion?: Ocasion;
   estacion?: Estacion;
+  /** Ver Prenda.suela_contraste en types.ts. Solo tiene sentido en calzado;
+   *  se omite (== false) en el resto de las categorías. */
+  suelaContraste?: boolean;
 }
 
 /**
@@ -71,18 +74,22 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#232323", textura: "lana", estilo: "clasico", ocasion: "laburo" },
 
   // --- Calzado ---
-  // Las zapatillas (a diferencia de los zapatos de cuero, unos renglones
-  // abajo) casi nunca son un solo color liso de punta a punta en la vida
-  // real -- lo más común es una base negra/gris/blanca con la suela en goma
-  // blanca. Esa suela blanca es un detalle del RENDER (Maniqui.tsx la
-  // dibuja así para toda zapatilla sin textura "cuero_liso", sea cual sea
-  // su color), no algo que dependa de agregar más colores acá -- por eso el
-  // catálogo sigue con colores lisos simples (son el color de la zapatilla
-  // en sí, no de la suela) más la variante gris, que faltaba y es tan común
-  // como la negra o la blanca.
+  // Las zapatillas negras y marrones aparecen dos veces a propósito -- una
+  // versión monocromática de verdad (suela a tono, tan real como la de
+  // suela blanca) y otra con la suela de goma en blanco/crema, que es el
+  // otro look real y común. Ninguna de las dos es "la correcta": conviven
+  // como dos prendas distintas (`suelaContraste`, ver types.ts) para que el
+  // catálogo no le imponga una sola variante a todas las zapatillas del
+  // mismo color -- eso fue justamente el error de una revisión anterior.
   { id: "zapatillas-blancas", nombre: "Zapatillas blancas", categoria: "calzado", colorHex: "#F5F5F0", estilo: "urbano", ocasion: "casual" },
   { id: "zapatillas-negras", nombre: "Zapatillas negras", categoria: "calzado", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
+  { id: "zapatillas-negras-suela-blanca", nombre: "Zapatillas negras (suela blanca)", categoria: "calzado", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual", suelaContraste: true },
   { id: "zapatillas-grises", nombre: "Zapatillas grises", categoria: "calzado", colorHex: "#8C8C8C", estilo: "urbano", ocasion: "casual" },
+  // marrón de gamuza/lona (mate), distinto del marrón de cuero lustroso de
+  // los zapatos de vestir un par de líneas más abajo -- son materiales que
+  // se ven distintos en la vida real, no el mismo color reusado sin razón.
+  { id: "zapatillas-marrones", nombre: "Zapatillas marrones", categoria: "calzado", colorHex: "#6F4E37", estilo: "urbano", ocasion: "casual" },
+  { id: "zapatillas-marrones-suela-blanca", nombre: "Zapatillas marrones (suela blanca)", categoria: "calzado", colorHex: "#6F4E37", estilo: "urbano", ocasion: "casual", suelaContraste: true },
   { id: "zapatos-cuero-negro", nombre: "Zapatos de cuero negros", categoria: "calzado", colorHex: "#1C1210", textura: "cuero_liso", estilo: "formal", ocasion: "laburo" },
   { id: "zapatos-cuero-marron", nombre: "Zapatos de cuero marrones", categoria: "calzado", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "formal", ocasion: "laburo" },
 
@@ -136,6 +143,7 @@ export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number
     ocasion: preset.ocasion ?? null,
     estacion: preset.estacion ?? null,
     foto_path: null,
+    suela_contraste: preset.suelaContraste ?? false,
     created_at: "",
     updated_at: "",
   };

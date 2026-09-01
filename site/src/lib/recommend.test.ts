@@ -315,6 +315,7 @@ function mkPrenda(
     ocasion: null,
     estacion: null,
     foto_path: null,
+    suela_contraste: false,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };

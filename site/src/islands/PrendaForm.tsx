@@ -59,6 +59,7 @@ export default function PrendaForm() {
   const [estilo, setEstilo] = useState<Estilo | "">(presetDePrefill?.estilo ?? "");
   const [ocasion, setOcasion] = useState<Ocasion | "">(presetDePrefill?.ocasion ?? "");
   const [estacion, setEstacion] = useState<Estacion | "">(presetDePrefill?.estacion ?? "");
+  const [suelaContraste, setSuelaContraste] = useState(presetDePrefill?.suelaContraste ?? false);
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
@@ -85,6 +86,7 @@ export default function PrendaForm() {
     setEstilo(p.estilo ?? "");
     setOcasion(p.ocasion ?? "");
     setEstacion(p.estacion ?? "");
+    setSuelaContraste(p.suelaContraste ?? false);
     setFotoBlob(null);
     setFotoPreview(null);
   }
@@ -130,6 +132,7 @@ export default function PrendaForm() {
           estilo: estilo || null,
           ocasion: ocasion || null,
           estacion: estacion || null,
+          suela_contraste: categoria === "calzado" ? suelaContraste : false,
         })
         .select()
         .single();
@@ -238,6 +241,12 @@ export default function PrendaForm() {
             <SelectOpcional label="Estilo" value={estilo} onChange={setEstilo} opciones={ESTILOS} />
             <SelectOpcional label="Ocasión" value={ocasion} onChange={setOcasion} opciones={OCASIONES} />
             <SelectOpcional label="Estación" value={estacion} onChange={setEstacion} opciones={ESTACIONES} />
+            {categoria === "calzado" && (
+              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <input type="checkbox" checked={suelaContraste} onChange={(e) => setSuelaContraste(e.target.checked)} />
+                <span>Suela blanca / de contraste (en vez de una zapatilla toda del mismo color)</span>
+              </label>
+            )}
           </div>
         </details>
 

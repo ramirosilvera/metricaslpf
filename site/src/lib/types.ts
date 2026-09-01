@@ -43,6 +43,12 @@ export interface Prenda {
   ocasion: Ocasion | null;
   estacion: Estacion | null;
   foto_path: string | null;
+  /** Detalle real de la prenda (no una regla automática por categoría): la
+   *  típica zapatilla con la suela de goma en blanco/crema en vez del color
+   *  de la zapatilla en sí. Por defecto false -- una zapatilla o zapato
+   *  puede perfectamente ser monocromático de verdad. Solo aplica visualmente
+   *  a calzado (Maniqui.tsx la ignora para el resto de las categorías). */
+  suela_contraste: boolean;
   created_at: string;
   updated_at: string;
 }

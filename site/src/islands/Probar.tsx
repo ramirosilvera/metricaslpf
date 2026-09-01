@@ -99,6 +99,7 @@ export default function Probar() {
           ocasion: null,
           estacion: null,
           foto_path: null,
+          suela_contraste: false,
           created_at: "",
           updated_at: "",
         }
