@@ -140,12 +140,21 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
   { id: "buzo-negro", nombre: "Buzo negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
   { id: "buzo-azul-marino", nombre: "Buzo azul marino", categoria: "buzo", colorHex: "#1F2A44", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  // mismo beige (#D8C7A1) que ya usan pantalon-beige/bermuda-beige/etc. --
+  // ver el comentario de remera-beige más arriba. estilo/ocasion/textura
+  // igual que el resto de los buzos (casual/casual/tejido_grueso): el
+  // color no cambia el registro de la prenda.
+  { id: "buzo-beige", nombre: "Buzo beige", categoria: "buzo", colorHex: "#D8C7A1", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
 
   // --- Sweaters (oficina/vestir) ---
   { id: "sweater-gris", nombre: "Sweater gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "lana", estilo: "clasico", ocasion: "laburo" },
   { id: "sweater-azul-marino", nombre: "Sweater azul marino", categoria: "sweater", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", ocasion: "laburo" },
   { id: "sweater-bordo", nombre: "Sweater bordo", categoria: "sweater", colorHex: "#6B2737", textura: "lana", estilo: "clasico", ocasion: "laburo" },
   { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#232323", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  // mismo beige que el resto del catálogo -- clasico/laburo, mismo
+  // registro que el resto de los sweaters (gris/marino/bordo/negro): un
+  // sweater beige es tan de oficina como esos.
+  { id: "sweater-beige", nombre: "Sweater beige", categoria: "sweater", colorHex: "#D8C7A1", textura: "lana", estilo: "clasico", ocasion: "laburo" },
 
   // --- Calzado ---
   // Las zapatillas negras y marrones aparecen dos veces a propósito -- una
