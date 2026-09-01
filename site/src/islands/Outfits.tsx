@@ -112,7 +112,7 @@ export default function Outfits() {
   }
 
   return (
-    <div className="grid-prendas">
+    <div className="grid-prendas outfits-grid">
       {outfits.map((o) => (
         <div key={o.id} className="card outfit-card">
           <Maniqui prendas={o.prendas} />

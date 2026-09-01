@@ -123,3 +123,28 @@ export function nombreColor(h: number, s: number, l: number): string {
   if (l > 78) return `${matiz} claro`;
   return matiz;
 }
+
+/** Contorno de una prenda derivado de su propio matiz (Maniqui.tsx), en vez
+ *  de un gris genérico -- un contorno negro al 15% es invisible sobre una
+ *  prenda oscura y casi invisible sobre una blanca; uno del mismo matiz,
+ *  más oscuro y algo más saturado, se ve en cualquier prenda. clamp(l, 4,
+ *  92) evita blanco puro (l=100 -18 -> 82, aceptable) y negro puro sin
+ *  contorno visible (l=0 -18 -> clampeado a 4, no a un negativo sin
+ *  sentido para hsl()). */
+export function contornoHsl(h: number, s: number, l: number): string {
+  const s2 = Math.min(100, s + 5);
+  const l2 = Math.max(4, Math.min(92, l) - 18);
+  return `hsl(${h} ${s2}% ${l2}%)`;
+}
+
+/** Tono más oscuro del mismo matiz, para el lado "sombra" de un degradé
+ *  simple de dos paradas que le da algo de volumen a una prenda de color
+ *  plano (Maniqui.tsx) sin necesitar texturas ni assets. */
+export function sombraHsl(h: number, s: number, l: number): string {
+  return `hsl(${h} ${s}% ${Math.max(2, l - 10)}%)`;
+}
+
+/** Tono más claro del mismo matiz, lado "luz" del degradé de sombraHsl. */
+export function luzHsl(h: number, s: number, l: number): string {
+  return `hsl(${h} ${s}% ${Math.min(98, l + 7)}%)`;
+}

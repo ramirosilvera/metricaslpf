@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { nombreColor } from "./color";
+import { contornoHsl, luzHsl, nombreColor, sombraHsl } from "./color";
 
 describe("nombreColor", () => {
   it("negro por luminosidad baja, sin importar el matiz", () => {
@@ -44,5 +44,29 @@ describe("nombreColor", () => {
   it("modificador oscuro/claro sobre el matiz, sin cruzar a neutro", () => {
     expect(nombreColor(220, 80, 20)).toBe("Azul oscuro");
     expect(nombreColor(220, 80, 80)).toBe("Azul claro");
+  });
+});
+
+describe("contornoHsl / sombraHsl / luzHsl", () => {
+  it("contornoHsl siempre queda más oscuro y algo más saturado que el color base", () => {
+    expect(contornoHsl(220, 60, 50)).toBe("hsl(220 65% 32%)");
+  });
+
+  it("contornoHsl no cruza a negativo con luminosidad baja (clamp a 4%)", () => {
+    expect(contornoHsl(0, 90, 10)).toBe("hsl(0 95% 4%)");
+  });
+
+  it("contornoHsl con blanco puro (l=100) sigue dando un contorno visible, no blanco", () => {
+    expect(contornoHsl(0, 0, 100)).toBe("hsl(0 5% 74%)");
+  });
+
+  it("sombraHsl y luzHsl mueven la luminosidad en direcciones opuestas sin tocar matiz/saturación", () => {
+    expect(sombraHsl(200, 70, 50)).toBe("hsl(200 70% 40%)");
+    expect(luzHsl(200, 70, 50)).toBe("hsl(200 70% 57%)");
+  });
+
+  it("sombraHsl no baja de 2% ni luzHsl sube de 98%", () => {
+    expect(sombraHsl(0, 0, 5)).toBe("hsl(0 0% 2%)");
+    expect(luzHsl(0, 0, 95)).toBe("hsl(0 0% 98%)");
   });
 });

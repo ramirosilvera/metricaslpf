@@ -1,4 +1,5 @@
-import PrendaIcon, { PrendaShape } from "./PrendaIcon";
+import { contornoHsl, luzHsl, sombraHsl } from "../lib/color";
+import PrendaIcon from "./PrendaIcon";
 import type { Categoria, Prenda } from "../lib/types";
 
 type Capa = "torso" | "piernas" | "pies" | "accesorio";
@@ -21,20 +22,8 @@ const CAPA: Record<Categoria, Capa> = {
 // se leería como "las dos puestas", se leería como "se rompió el dibujo".
 const PRIORIDAD_TORSO: Categoria[] = ["campera", "buzo", "sweater", "camisa", "remera"];
 
-// transform (translate + scale-x + scale-y) para reposicionar cada silueta
-// de 64x64 -- pensada en su tamaño/proporción propia de ícono cuadrado --
-// sobre las cuatro zonas del cuerpo del maniquí (viewBox 120x250). La
-// escala no es uniforme a propósito: un ícono de remera es casi cuadrado,
-// pero el torso de una persona es angosto y alto, así que hay que estirar
-// más en Y que en X para que cubra hombro-a-cintura sin quedar
-// gigantesco de ancho. Ajustado a ojo con capturas reales, no calculado
-// analíticamente: son ilustraciones, no un sistema de layout.
-const TRANSFORM: Record<Capa, string> = {
-  torso: "translate(1 8) scale(1.85 2)",
-  piernas: "translate(14 109) scale(1.43 1.83)",
-  pies: "translate(27 188) scale(1 0.85)",
-  accesorio: "translate(27 85) scale(1.04 1.25)",
-};
+// manga corta (remera) vs. manga larga (el resto de las prendas de torso).
+const MANGA_CORTA: Categoria[] = ["remera"];
 
 function agruparPorCapa(prendas: Prenda[]): { principal: Partial<Record<Capa, Prenda>>; extras: Prenda[] } {
   const porCapa: Record<Capa, Prenda[]> = { torso: [], piernas: [], pies: [], accesorio: [] };
@@ -52,10 +41,186 @@ function agruparPorCapa(prendas: Prenda[]): { principal: Partial<Record<Capa, Pr
   return { principal, extras };
 }
 
+/** Relleno con volumen simple: un degradé de dos paradas (mismo matiz, más
+ *  claro arriba-izquierda / más oscuro abajo-derecha) en vez de un color
+ *  plano -- el mayor salto de realismo por esfuerzo que hay: no agrega
+ *  geometría nueva, solo usa el h/s/l que cada prenda ya tiene guardado. El
+ *  id del <linearGradient> incluye el id de la prenda porque puede haber
+ *  varios Maniqui (uno por outfit) en la misma página -- un id de degradé
+ *  repetido pisaría el relleno de otra prenda. */
+function Volumen({ prenda, hijos }: { prenda: Prenda; hijos: (fill: string, stroke: string) => React.ReactNode }) {
+  const gradId = `grad-${prenda.id}`;
+  const { color_h: h, color_s: s, color_l: l } = prenda;
+  return (
+    <>
+      <defs>
+        <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={luzHsl(h, s, l)} />
+          <stop offset="100%" stopColor={sombraHsl(h, s, l)} />
+        </linearGradient>
+      </defs>
+      {hijos(`url(#${gradId})`, contornoHsl(h, s, l))}
+    </>
+  );
+}
+
+const strokeProps = { strokeWidth: 1, vectorEffect: "non-scaling-stroke" as const };
+
+function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
+  const mangaCorta = MANGA_CORTA.includes(prenda.categoria);
+  const cuelloD =
+    prenda.categoria === "buzo"
+      ? // capucha: una forma extra detrás del cuello
+        "M42 30 Q60 14 78 30 Q78 24 60 20 Q42 24 42 30 Z"
+      : null;
+
+  return (
+    <Volumen
+      prenda={prenda}
+      hijos={(fill, stroke) => (
+        <>
+          {/* capucha del buzo, dibujada primero para que el cuerpo la tape parcialmente */}
+          {cuelloD && <path d={cuelloD} fill={fill} stroke={stroke} {...strokeProps} />}
+
+          {/* mangas -- paths propios que arrancan en el hombro y siguen el
+              brazo, para que no "floten" en el aire como cuando eran parte
+              de un ícono cuadrado genérico. */}
+          {mangaCorta ? (
+            <>
+              <path d="M14 48 Q2 52 2 72 Q2 86 14 91 Q22 87 24 78 Q20 60 14 48 Z" fill={fill} stroke={stroke} {...strokeProps} />
+              <path d="M106 48 Q118 52 118 72 Q118 86 106 91 Q98 87 96 78 Q100 60 106 48 Z" fill={fill} stroke={stroke} {...strokeProps} />
+            </>
+          ) : (
+            <>
+              <path
+                d="M14 48 Q4 52 3 66 L1 146 Q1 156 9 157 L19 157 Q23 156 22 146 L21 66 Q20 54 14 48 Z"
+                fill={fill}
+                stroke={stroke}
+                {...strokeProps}
+              />
+              <path
+                d="M106 48 Q116 52 117 66 L119 146 Q119 156 111 157 L101 157 Q97 156 98 146 L99 66 Q100 54 106 48 Z"
+                fill={fill}
+                stroke={stroke}
+                {...strokeProps}
+              />
+            </>
+          )}
+
+          {/* cuerpo del torso -- un poco más ancho que el maniquí de base
+              (18-102 en los hombros) para que la tela "caiga por fuera" en
+              vez de coincidir exacto con el borde del cuerpo. */}
+          <path
+            d="M14 46 Q12 62 20 76 Q26 100 32 118 L32 146 L88 146 L88 118 Q94 100 100 76 Q108 62 106 46 Q88 34 60 33 Q32 34 14 46 Z"
+            fill={fill}
+            stroke={stroke}
+            {...strokeProps}
+          />
+
+          {/* detalle de cuello por categoría -- simple a propósito, esto es
+              una ilustración esquemática, no moda realista. */}
+          {prenda.categoria === "camisa" && (
+            <>
+              <path d="M48 34 L60 46 L52 44 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <path d="M72 34 L60 46 L68 44 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <line x1="60" y1="46" x2="60" y2="144" stroke={stroke} {...strokeProps} />
+            </>
+          )}
+          {prenda.categoria === "sweater" && (
+            <path d="M44 34 Q60 44 76 34" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
+          )}
+          {prenda.categoria === "campera" && (
+            <>
+              <line x1="60" y1="36" x2="60" y2="144" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
+              <path d="M46 34 L60 50 L54 34 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <path d="M74 34 L60 50 L66 34 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+            </>
+          )}
+        </>
+      )}
+    />
+  );
+}
+
+function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
+  return (
+    <Volumen
+      prenda={prenda}
+      hijos={(fill, stroke) => (
+        <>
+          {/* dos piernas propias (más anchas que las del maniquí de base
+              en 3-4u por lado) en vez de un solo bloque -- así no se ven
+              tiritas del maniquí asomando a los costados ni en la
+              entrepierna. */}
+          <path
+            d="M30 140 L33 195 Q34 210 38 228 L54 228 Q56 210 58 195 L60 140 Z"
+            fill={fill}
+            stroke={stroke}
+            {...strokeProps}
+          />
+          <path
+            d="M90 140 L87 195 Q86 210 82 228 L66 228 Q64 210 62 195 L60 140 Z"
+            fill={fill}
+            stroke={stroke}
+            {...strokeProps}
+          />
+          {/* cinturilla */}
+          <path
+            d="M28 136 H92 V146 H28 Z"
+            fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+            stroke={stroke}
+            {...strokeProps}
+          />
+        </>
+      )}
+    />
+  );
+}
+
+function PiesCuerpo({ prenda }: { prenda: Prenda }) {
+  const suela = sombraHsl(prenda.color_h, prenda.color_s, Math.max(2, prenda.color_l - 20));
+  return (
+    <Volumen
+      prenda={prenda}
+      hijos={(fill, stroke) => (
+        <>
+          {/* dos zapatos, no un bloque único -- cada uno con su propia
+              suela (la franja oscura) porque eso, más que la forma, es lo
+              que lee como "zapatilla" y no "piedra". */}
+          <path d="M26 226 Q20 228 20 236 L22 241 Q24 244 32 244 L54 244 Q58 244 58 238 L56 226 Z" fill={fill} stroke={stroke} {...strokeProps} />
+          <path d="M20 241 H58 V246 Q58 248 55 248 L23 248 Q20 248 20 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          <path d="M94 226 Q100 228 100 236 L98 241 Q96 244 88 244 L66 244 Q62 244 62 238 L64 226 Z" fill={fill} stroke={stroke} {...strokeProps} />
+          <path d="M62 241 H100 V246 Q100 248 97 248 L65 248 Q62 248 62 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
+        </>
+      )}
+    />
+  );
+}
+
+function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
+  return (
+    <Volumen
+      prenda={prenda}
+      hijos={(fill, stroke) => (
+        <>
+          <path d="M32 143 H88 V151 H32 Z" fill={fill} stroke={stroke} {...strokeProps} />
+          <rect x="52" y="140" width="16" height="14" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
+        </>
+      )}
+    />
+  );
+}
+
 /** Maniqui: representa un outfit como si estuviera puesto, no como una
- *  lista de íconos sueltos -- una silueta de maniquí neutra (sin cara, como
- *  un maniquí de sastrería real) con cada prenda posicionada en su lugar
- *  del cuerpo. */
+ *  lista de íconos sueltos -- una silueta de maniquí de sastrería (sin
+ *  cara, headless, con brazos y cintura marcada) con cada prenda dibujada
+ *  directamente en las coordenadas del cuerpo (torso con mangas propias,
+ *  dos piernas, dos zapatos con suela) en vez de un ícono cuadrado
+ *  reescalado. Los íconos de PrendaIcon.tsx siguen siendo la geometría
+ *  correcta para los usos "símbolo chico" (Placard, Combinaciones, Probar,
+ *  catálogo) -- a esos tamaños (~48-64px) el trabajo del dibujo es que se
+ *  reconozca la categoría al instante, no parecer ropa real, así que no
+ *  comparten path data con las formas de acá. */
 export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
   const { principal, extras } = agruparPorCapa(prendas);
   const neutro = "var(--border)";
@@ -65,42 +230,37 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
     // aria-hidden en todo el bloque visual: es una representación decorativa
     // del outfit, no información nueva -- el detalle real (categoría +
     // nombre de color de cada prenda) ya se anuncia con la leyenda de texto
-    // que Outfits.tsx renderiza debajo de este componente. Sin esto, un
-    // lector de pantalla intenta describir <path> sueltos sin ningún label.
+    // que Outfits.tsx renderiza debajo de este componente.
     <div aria-hidden="true" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-      <svg viewBox="0 0 120 250" width="100%" style={{ maxWidth: 160 }}>
-        {/* forma neutra del maniquí -- queda visible donde no hay prenda
-            cargada para esa zona (p.ej. un outfit sin calzado todavía
-            muestra los "pies" del maniquí, no un hueco vacío). */}
-        <ellipse cx="60" cy="16" rx="12" ry="14" fill={neutro} stroke={neutroStroke} />
+      <svg viewBox="0 0 120 260" width="100%" style={{ maxWidth: 180 }}>
+        {/* sombra de piso -- de lo más barato que hay para que la figura no
+            "flote". */}
+        <ellipse cx="60" cy="252" rx="32" ry="5" fill="rgba(33,26,21,0.1)" />
+
+        {/* maniquí de base -- queda visible donde no hay prenda cargada
+            para esa zona (p.ej. un outfit sin calzado todavía muestra los
+            "pies" del maniquí, no un hueco vacío). Hombros más anchos que
+            la cintura, con cintura marcada, y brazos como formas propias
+            (antes no existían: las mangas de las prendas terminaban en el
+            aire porque no había brazo debajo). */}
+        <ellipse cx="60" cy="20" rx="13" ry="15" fill={neutro} stroke={neutroStroke} />
+        <path d="M50 33 L70 33 L68 46 L52 46 Z" fill={neutro} stroke={neutroStroke} />
         <path
-          d="M32 26 Q60 34 88 26 L94 70 Q98 100 88 126 L32 126 Q22 100 26 70 Z"
+          d="M18 46 Q16 62 24 76 Q28 100 34 115 L34 140 L86 140 L86 115 Q92 100 96 76 Q104 62 102 46 Q88 34 60 32 Q32 34 18 46 Z"
           fill={neutro}
           stroke={neutroStroke}
         />
-        <path d="M44 126 L40 208 Q40 214 46 214 L58 214 L60 126 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M76 126 L80 208 Q80 214 74 214 L62 214 L60 126 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M18 48 Q10 50 9 62 L7 145 Q7 155 13 155 L19 155 Q22 155 21 145 L20 65 Q20 52 18 48 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M102 48 Q110 50 111 62 L113 145 Q113 155 107 155 L101 155 Q98 155 99 145 L100 65 Q100 52 102 48 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M34 140 L36 190 Q37 205 40 228 L52 228 Q54 205 56 190 L58 140 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M86 140 L84 190 Q83 205 80 228 L68 228 Q66 205 64 190 L62 140 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M38 228 Q36 236 44 238 L54 238 Q56 236 54 228 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M82 228 Q84 236 76 238 L66 238 Q64 236 66 228 Z" fill={neutro} stroke={neutroStroke} />
 
-        {principal.torso && (
-          <g transform={TRANSFORM.torso}>
-            <PrendaShape categoria={principal.torso.categoria} color={principal.torso.color_hex} />
-          </g>
-        )}
-        {principal.piernas && (
-          <g transform={TRANSFORM.piernas}>
-            <PrendaShape categoria={principal.piernas.categoria} color={principal.piernas.color_hex} />
-          </g>
-        )}
-        {principal.accesorio && (
-          <g transform={TRANSFORM.accesorio}>
-            <PrendaShape categoria={principal.accesorio.categoria} color={principal.accesorio.color_hex} />
-          </g>
-        )}
-        {principal.pies && (
-          <g transform={TRANSFORM.pies}>
-            <PrendaShape categoria={principal.pies.categoria} color={principal.pies.color_hex} />
-          </g>
-        )}
+        {principal.piernas && <PiernasCuerpo prenda={principal.piernas} />}
+        {principal.torso && <TorsoCuerpo prenda={principal.torso} />}
+        {principal.accesorio && <AccesorioCuerpo prenda={principal.accesorio} />}
+        {principal.pies && <PiesCuerpo prenda={principal.pies} />}
       </svg>
 
       {extras.length > 0 && (
