@@ -3,7 +3,7 @@ import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
 import type { Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
-import PrendaIcon from "./PrendaIcon";
+import Maniqui from "./Maniqui";
 
 interface OutfitConPrendas {
   id: string;
@@ -112,21 +112,15 @@ export default function Outfits() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+    <div className="grid-prendas">
       {outfits.map((o) => (
         <div key={o.id} className="card outfit-card">
-          <div className="outfit-card-prendas">
-            {o.prendas.map((p) => (
-              <span key={p.id} className="outfit-card-icon">
-                <PrendaIcon categoria={p.categoria} color={p.color_hex} />
-              </span>
-            ))}
-          </div>
-          <div style={{ minWidth: 0 }}>
+          <Maniqui prendas={o.prendas} />
+          <div style={{ minWidth: 0, textAlign: "center" }}>
             <strong style={{ textTransform: "capitalize" }}>
               {o.nombre ?? o.prendas.map((p) => p.categoria).join(" + ")}
             </strong>
-            <p style={{ margin: "0.2rem 0 0", fontSize: "0.8rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+            <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
               {o.prendas.map((p) => `${p.categoria} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ")}
             </p>
           </div>
