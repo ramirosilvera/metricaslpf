@@ -231,15 +231,17 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
 
           {/* cuerpo del torso -- un poco más ancho que el maniquí de base
               (18-102 en los hombros) para que la tela "caiga por fuera" en
-              vez de coincidir exacto con el borde del cuerpo. El cuello es
-              una curva que BAJA hacia el centro (Q...60 44...) y SUBE cerca
-              de los hombros (y=40 a los costados) -- antes estaba al revés
-              (el centro más arriba que los hombros), lo que dejaba un hueco
-              enorme de "piel" del maniquí expuesta a los costados del
-              cuello, más ancho que cualquier cuello real (bug reportado por
-              el usuario comparando contra una foto real). */}
+              vez de coincidir exacto con el borde del cuerpo. Los puntos de
+              control de las curvas de los costados (Q17 62.../Q103 62...)
+              quedan HACIA ADENTRO del ancho de hombros (14/106) para que el
+              torso se angoste de forma pareja hacia la cintura -- antes el
+              control point quedaba hacia AFUERA (Q12.../Q108...), lo que
+              inflaba el pecho más ancho que los propios hombros (reportado
+              por el usuario: "pecho desproporcionado"). El cuello baja hacia
+              el centro (Q...60 44...) y sube cerca de los hombros (y=40 a
+              los costados). */}
           <Forma
-            d="M14 46 Q12 62 20 76 Q26 100 32 118 L32 146 L88 146 L88 118 Q94 100 100 76 Q108 62 106 46 Q98 38 80 40 Q60 44 40 40 Q22 38 14 46 Z"
+            d="M14 46 Q17 62 22 76 Q27 100 32 118 L32 146 L88 146 L88 118 Q93 100 98 76 Q103 62 106 46 Q98 38 80 40 Q60 44 40 40 Q22 38 14 46 Z"
             fill={fill}
             stroke={stroke}
             patron={patron}
@@ -367,7 +369,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
         <ellipse cx="60" cy="20" rx="13" ry="15" fill={neutro} stroke={neutroStroke} />
         <path d="M50 33 L70 33 L68 46 L52 46 Z" fill={neutro} stroke={neutroStroke} />
         <path
-          d="M18 46 Q16 62 24 76 Q28 100 34 115 L34 140 L86 140 L86 115 Q92 100 96 76 Q104 62 102 46 Q94 38 78 42 Q60 46 42 42 Q26 38 18 46 Z"
+          d="M18 46 Q21 62 26 76 Q30 100 34 115 L34 140 L86 140 L86 115 Q90 100 94 76 Q99 62 102 46 Q94 38 78 42 Q60 46 42 42 Q26 38 18 46 Z"
           fill={neutro}
           stroke={neutroStroke}
         />
