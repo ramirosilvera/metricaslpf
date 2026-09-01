@@ -347,26 +347,67 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             sugerida={sugerida}
           />
 
+          {/* cierre de escote -- revisión como modista a pedido del usuario
+              ("revisa el cuello de todas las prendas"), comparando de
+              cerca contra el render real: el escote del cuerpo de arriba
+              (Q78 42 64 46 Q60 48...) queda bastante bajo/ancho -- pensado
+              para dejar lugar a las puntas del cuello camisero -- pero una
+              remera, un sweater o un buzo NO tienen esas puntas que tapen
+              ese hueco, así que se veía un tramo largo de "piel" del
+              maniquí entre la base del cuello y la tela, como un escote
+              pronunciado en vez de una remera a la base del cuello. Esta
+              pieza (mismo relleno que el cuerpo, sin destacarse como una
+              prenda aparte) sube el borde efectivo del escote hasta cerca
+              de y=38 en el centro -- 3-4u por debajo de la cabeza (que
+              termina en y=35), sin tocarla -- y se dibuja ANTES que el
+              cuello de camisa/campera de abajo para que esas dos
+              categorías (que sí tienen su propia pieza de cuello, opaca y
+              más grande) la tapen por completo sin cambiar nada de su
+              rediseño ya validado. */}
+          <path
+            d="M46 44 Q60 37 74 44 Q68 46 60 47 Q52 46 46 44 Z"
+            fill={fill}
+            stroke={stroke}
+            {...strokeProps}
+          />
+
           {/* detalle de cuello por categoría -- simple a propósito, esto es
               una ilustración esquemática, no moda realista. Reposicionado
               en y=30-42 (antes 34-50) para asentarse justo sobre el nuevo
               cuello, más angosto, en vez de flotar sobre el hueco viejo. */}
           {prenda.categoria === "camisa" && (
             <>
-              {/* cuello agrandado -- reporte real del usuario, comparando
-                  contra una foto real: en la referencia las puntas del
-                  cuello se apoyan SOBRE la tela de lo que tiene puesto
-                  encima (o sobre el propio pecho acá, sin capa arriba),
-                  tapando parte del pecho -- no quedan flotando en el hueco
-                  del escote con piel/cuerpo visible alrededor. La versión
-                  anterior (7u de ancho, terminaba en y=46) era chica y
-                  quedaba adentro del hueco. Ahora las puntas bajan mucho
-                  más (hasta y=58, sobre el pecho) y se abren más hacia los
-                  hombros (46/74 en vez de 49/71) para que no quede ningún
-                  espacio vacío entre el cuello y el cuerpo. */}
-              <path d="M46 38 Q60 26 74 38" fill="none" stroke={stroke} {...strokeProps} />
-              <path d="M46 38 L60 58 L54 30 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <path d="M74 38 L60 58 L66 30 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              {/* cuello rediseñado -- reporte real del usuario ("todavía no
+                  está bien logrado"), revisado como modista contra el
+                  render real: la versión anterior (puntas del cuello hasta
+                  y=30) se metía DENTRO de la cabeza -- la cara/cabeza
+                  termina en y=35 (elipse cy=20, ry=15), y una punta a y=30
+                  queda 5u más arriba, en plena zona de mentón/mandíbula, no
+                  sobre el pecho. Además las dos puntas, separadas y sin
+                  nada que las una por arriba, dejaban un triángulo de
+                  "piel" visible entre ellas -- un cuello de camisa
+                  abrochado no deja ver el cuello por el medio.
+                  Rediseño en dos piezas por lado, replicando la anatomía
+                  real de un cuello camisero:
+                  1) la TIRA (collar band) que rodea la base del cuello --
+                     una banda cerrada y rellena (antes era solo un trazo
+                     sin relleno) que sube apenas por encima de la línea de
+                     hombros (pico en y≈38-39, todavía 4u+ por debajo de la
+                     cabeza) y se cierra sobre sí misma, sin dejar hueco de
+                     piel visible.
+                  2) las PUNTAS (collar leaves), que ahora arrancan A LA
+                     MISMA altura que el borde inferior de la tira (y=42,
+                     no y=30) y caen sobre el pecho hasta el mismo punto de
+                     antes (y=58) -- un triángulo apoyado sobre la tela,
+                     ya no una flecha que sube hacia la pera. */}
+              <path
+                d="M46 42 Q60 36 74 42 Q68 44 60 45 Q52 44 46 42 Z"
+                fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                stroke={stroke}
+                {...strokeProps}
+              />
+              <path d="M46 42 L60 58 L54 42 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M74 42 L60 58 L66 42 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
               <line x1="60" y1="58" x2="60" y2="124" stroke={stroke} {...strokeProps} />
             </>
           )}
@@ -393,9 +434,17 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           {prenda.categoria === "campera" && (
             <>
               <line x1="60" y1="60" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
-              <path d="M46 40 Q60 28 74 40" fill="none" stroke={stroke} {...strokeProps} />
-              <path d="M46 40 L60 60 L54 32 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <path d="M74 40 L60 60 L66 32 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              {/* mismo rediseño de cuello camisero que en TorsoCuerpo/
+                  camisa (ver ese comentario largo para el porqué), 2u más
+                  abajo -- offset que ya traía este bloque de antes. */}
+              <path
+                d="M46 44 Q60 38 74 44 Q68 46 60 47 Q52 46 46 44 Z"
+                fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                stroke={stroke}
+                {...strokeProps}
+              />
+              <path d="M46 44 L60 60 L54 44 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M74 44 L60 60 L66 44 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
             </>
           )}
         </>
@@ -706,15 +755,20 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
           // Ahora usa detalleHsl, que garantiza contraste real en los dos
           // sentidos. */}
           <>
-            <path d="M46 38 Q60 26 74 38" fill="none" stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)} {...strokeProps} />
             <path
-              d="M46 38 L60 58 L54 30 Z"
+              d="M46 42 Q60 36 74 42 Q68 44 60 45 Q52 44 46 42 Z"
               fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
             />
             <path
-              d="M74 38 L60 58 L66 30 Z"
+              d="M46 42 L60 58 L54 42 Z"
+              fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+              stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+              {...strokeProps}
+            />
+            <path
+              d="M74 42 L60 58 L66 42 Z"
               fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
