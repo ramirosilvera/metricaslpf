@@ -236,8 +236,20 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   const sugerida = esSugerida(prenda);
   const cuelloD =
     prenda.categoria === "buzo"
-      ? // capucha: una forma extra detrás del cuello
-        "M50 30 Q60 14 70 30 Q70 24 60 20 Q50 24 50 30 Z"
+      ? // capucha -- revisada como modista con apoyo de referencias reales
+        // (búsqueda: fashion flat sketches de hoodie): el ancho de una
+        // capucha real ronda 1.5x el ancho de la cabeza, apoyada/abultada
+        // detrás y a los costados del cuello, no encima de la cara. La
+        // versión anterior (x50-70, 20u de ancho) era más angosta que la
+        // propia cabeza (rx=13, 26u) y su punto más alto (y=14) quedaba
+        // adentro de la elipse de la cabeza (cy=20, ry=15, hasta y=35) --
+        // en el render real se veía literalmente superpuesta con la
+        // pera/mandíbula, un problema del mismo tipo que el cuello de
+        // camisa ya corregido. Ahora 40u de ancho (x40-80, ≈1.5x cabeza) y
+        // el punto más alto en y=36, 1u por debajo del borde de la cabeza,
+        // para que se lea como tela abultada a los costados del cuello sin
+        // tocar la cara.
+        "M40 44 Q60 36 80 44 Q70 46 60 47 Q50 46 40 44 Z"
       : null;
 
   return (
@@ -245,8 +257,21 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
       prenda={prenda}
       hijos={(fill, stroke, patron) => (
         <>
-          {/* capucha del buzo, dibujada primero para que el cuerpo la tape parcialmente */}
-          {cuelloD && <Forma d={cuelloD} fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />}
+          {/* capucha del buzo, dibujada primero para que el cuerpo la tape
+              parcialmente. Usa luzHsl (tono plano) en vez de `fill` (el
+              degradé compartido) a propósito -- ver el comentario largo
+              en "cierre de escote" más abajo sobre por qué el degradé de
+              Volumen no se puede reusar tal cual en una pieza chica y
+              separada del cuerpo principal. */}
+          {cuelloD && (
+            <Forma
+              d={cuelloD}
+              fill={luzHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+              stroke={stroke}
+              patron={patron}
+              sugerida={sugerida}
+            />
+          )}
 
           {/* mangas -- paths propios que arrancan en el hombro y siguen el
               brazo, para que no "floten" en el aire como cuando eran parte
@@ -356,17 +381,33 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               ese hueco, así que se veía un tramo largo de "piel" del
               maniquí entre la base del cuello y la tela, como un escote
               pronunciado en vez de una remera a la base del cuello. Esta
-              pieza (mismo relleno que el cuerpo, sin destacarse como una
-              prenda aparte) sube el borde efectivo del escote hasta cerca
-              de y=38 en el centro -- 3-4u por debajo de la cabeza (que
-              termina en y=35), sin tocarla -- y se dibuja ANTES que el
-              cuello de camisa/campera de abajo para que esas dos
-              categorías (que sí tienen su propia pieza de cuello, opaca y
-              más grande) la tapen por completo sin cambiar nada de su
-              rediseño ya validado. */}
+              pieza sube el borde efectivo del escote hasta cerca de y=38
+              en el centro -- 3-4u por debajo de la cabeza (que termina en
+              y=35), sin tocarla -- y se dibuja ANTES que el cuello de
+              camisa/campera de abajo para que esas dos categorías (que sí
+              tienen su propia pieza de cuello, opaca y más grande) la
+              tapen por completo sin cambiar nada de su rediseño ya
+              validado.
+              Usa luzHsl (tono plano) en vez de `fill` (el degradé
+              compartido de Volumen) a propósito -- hallazgo real de esta
+              misma revisión: el <linearGradient> de Volumen no fija
+              gradientUnits, así que por defecto usa objectBoundingBox --
+              cada <path> que lo referencia normaliza el degradé a SU
+              PROPIA caja (0%=su propia esquina superior, 100%=su propia
+              esquina inferior), no a una caja compartida con el cuerpo
+              principal. En una pieza chica como esta (mucho más angosta
+              que el torso completo) eso significa arrancar en luzHsl
+              puro y terminar en sombraHsl puro en un tramo de apenas 10u
+              -- un parche claramente más CLARO que el cuerpo de abajo en
+              el mismo punto, no "más tela del mismo paño" como se buscaba.
+              Confirmado en un render real: se veía un remiendo gris claro
+              flotando sobre una remera oscura. luzHsl liso es la
+              aproximación correcta acá -- esta pieza cae cerca del borde
+              SUPERIOR de la caja del cuerpo principal, que es justo donde
+              el degradé del cuerpo ya está más cerca de luzHsl. */}
           <path
             d="M46 44 Q60 37 74 44 Q68 46 60 47 Q52 46 46 44 Z"
-            fill={fill}
+            fill={luzHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
             stroke={stroke}
             {...strokeProps}
           />
