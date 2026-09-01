@@ -58,7 +58,12 @@ export default function Outfits() {
             prendas: filas.map((f) => f.prendas).filter((p): p is Prenda => p !== null),
           };
         });
-        setOutfits(conPrendas);
+        // guarda de UI: un outfit puede quedar sin prendas si se borran (la
+        // cascada de outfit_prendas vacía el array, pero el registro de
+        // outfits en sí sobrevive) -- el trigger de la migración 0011 los
+        // borra a nivel DB, esto es cinturón y tiradores para no mostrar una
+        // card vacía si por lo que sea todavía no corrió.
+        setOutfits(conPrendas.filter((o) => o.prendas.length > 0));
       } catch (e) {
         setError(e instanceof Error ? e.message : "Error de conexión con Matiz.");
       }

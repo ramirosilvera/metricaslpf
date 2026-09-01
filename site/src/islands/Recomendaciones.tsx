@@ -21,6 +21,9 @@ export default function Recomendaciones() {
   const [seleccionadas, setSeleccionadas] = useState<Set<string>>(new Set());
   const [guardando, setGuardando] = useState(false);
   const [guardado, setGuardado] = useState(false);
+  const [eliminando, setEliminando] = useState(false);
+  const [errorEliminar, setErrorEliminar] = useState("");
+  const [confirmandoBorrado, setConfirmandoBorrado] = useState(false);
   const base_url = (import.meta.env.BASE_URL as string) || "/";
 
   const prendaId = useMemo(
@@ -117,7 +120,13 @@ export default function Recomendaciones() {
 
       const filas = [base.id, ...seleccionadas].map((prenda_id) => ({ outfit_id: outfit.id, prenda_id }));
       const { error: joinErr } = await supabase.from("outfit_prendas").insert(filas);
-      if (joinErr) throw new Error(joinErr.message);
+      if (joinErr) {
+        // el outfit ya se creó pero la unión con las prendas falló (p.ej. si
+        // justo en el medio se borró una prenda seleccionada) -- se
+        // deshace, así no queda un outfit vacío e inaccesible en la cuenta.
+        await supabase.from("outfits").delete().eq("id", outfit.id);
+        throw new Error(joinErr.message);
+      }
 
       setGuardado(true);
       setSeleccionadas(new Set());
@@ -126,6 +135,37 @@ export default function Recomendaciones() {
       setErrorGuardado(e instanceof Error ? e.message : "No se pudo guardar el outfit.");
     } finally {
       setGuardando(false);
+    }
+  }
+
+  async function eliminarPrenda() {
+    if (!base) return;
+    setConfirmandoBorrado(false);
+    setEliminando(true);
+    setErrorEliminar("");
+    try {
+      // se borra la fila primero: es el registro autoritativo. Si se
+      // borrara la foto antes y el delete de la fila fallara después,
+      // quedaría una prenda viva con la foto ya destruida -- irrecuperable.
+      // Al revés, en el peor caso queda un archivo huérfano en un bucket
+      // privado (barrible después). .select("id") además deja ver si la
+      // fila realmente existía y era nuestra (RLS filtra en silencio, sin
+      // error, si no lo era -- p.ej. un doble tap).
+      const { data: borradas, error: delErr } = await supabase
+        .from("prendas")
+        .delete()
+        .eq("id", base.id)
+        .select("id");
+      if (delErr) throw new Error(delErr.message);
+      if (borradas && borradas.length > 0 && base.foto_path) {
+        await supabase.storage.from("armario-fotos").remove([base.foto_path]);
+      }
+      // replace, no href: que la URL de una prenda ya borrada no quede en
+      // el historial (evita reaparecer vía bfcache al volver atrás).
+      window.location.replace(base_url);
+    } catch (e) {
+      setErrorEliminar(e instanceof Error ? e.message : "No se pudo eliminar la prenda.");
+      setEliminando(false);
     }
   }
 
@@ -158,13 +198,43 @@ export default function Recomendaciones() {
         <span className="vestidor-hero-icon">
           <PrendaIcon categoria={base.categoria} color={base.color_hex} />
         </span>
-        <div>
+        <div style={{ flex: 1 }}>
           <strong style={{ textTransform: "capitalize", fontSize: "1.1rem" }}>{base.categoria}</strong>
           <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>
             Tocá las combinaciones que te gusten para armar un outfit.
           </p>
         </div>
+        <button
+          type="button"
+          onClick={() => setConfirmandoBorrado(true)}
+          disabled={eliminando || guardando}
+          aria-label="Eliminar esta prenda del placard"
+          title="Eliminar esta prenda del placard"
+          className="btn-icon-danger"
+        >
+          {eliminando ? "…" : "🗑"}
+        </button>
       </div>
+      {errorEliminar && <p style={{ color: "var(--danger)", fontSize: "0.85rem", margin: 0 }}>{errorEliminar}</p>}
+
+      {confirmandoBorrado && (
+        <div className="confirm-overlay" onClick={() => setConfirmandoBorrado(false)}>
+          <div className="confirm-dialog" role="alertdialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+            <p>
+              ¿Eliminar esta prenda del placard? También va a desaparecer de los outfits guardados que la incluyan.
+              No se puede deshacer.
+            </p>
+            <div className="confirm-dialog-actions">
+              <button type="button" className="btn btn-secondary" onClick={() => setConfirmandoBorrado(false)}>
+                Cancelar
+              </button>
+              <button type="button" className="btn btn-danger" onClick={eliminarPrenda}>
+                Eliminar prenda
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div style={{ display: "flex", gap: "0.4rem" }}>
         <button
@@ -246,7 +316,7 @@ export default function Recomendaciones() {
             </span>
           )}
           {!guardado && seleccionadas.size > 0 && (
-            <button className="btn btn-primary" onClick={guardarOutfit} disabled={guardando}>
+            <button className="btn btn-primary" onClick={guardarOutfit} disabled={guardando || eliminando}>
               {guardando ? "Guardando..." : "Guardar outfit"}
             </button>
           )}
