@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
-import { CATEGORIAS_COMPLEMENTARIAS, type Prenda } from "../lib/types";
-import { recomendar } from "../lib/recommend";
+import { CATEGORIAS_COMPLEMENTARIAS, type Estilo, type Prenda } from "../lib/types";
+import { ESTILO_LABEL, recomendar } from "../lib/recommend";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
 
@@ -12,10 +12,13 @@ const NIVEL_LABEL: Record<string, string> = {
   con_cuidado: "Con cuidado",
 };
 
+const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
+
 export default function Recomendaciones() {
   const [placard, setPlacard] = useState<Prenda[] | null>(null);
   const [base, setBase] = useState<Prenda | null>(null);
   const [modo, setModo] = useState<"rapido" | "explicame">("rapido");
+  const [filtroEstilo, setFiltroEstilo] = useState<Estilo | null>(null);
   const [sinSesion, setSinSesion] = useState(false);
   const [error, setError] = useState("");
   const [errorGuardado, setErrorGuardado] = useState("");
@@ -262,12 +265,46 @@ export default function Recomendaciones() {
         </button>
       </div>
 
+      {/* Pedido explícito: que el estilo (oficina/urbana/clásica/casual/
+          deportiva) quede diferenciado también acá, no solo en el
+          catálogo. Filtra por el estilo cargado en cada prenda candidata --
+          si la mayoría no tiene estilo cargado, el filtro simplemente no
+          encuentra nada para esa sección en vez de inventar un valor. */}
+      <div className="filtro-chips" role="group" aria-label="Filtrar recomendaciones por estilo">
+        <button
+          type="button"
+          className={`chip${filtroEstilo === null ? " chip-activo" : ""}`}
+          onClick={() => setFiltroEstilo(null)}
+        >
+          Todos los estilos
+        </button>
+        {ESTILOS_FILTRO.map((e) => (
+          <button
+            key={e}
+            type="button"
+            className={`chip${filtroEstilo === e ? " chip-activo" : ""}`}
+            onClick={() => setFiltroEstilo((prev) => (prev === e ? null : e))}
+          >
+            {ESTILO_LABEL[e]}
+          </button>
+        ))}
+      </div>
+
+      {filtroEstilo &&
+        candidatasPorCategoria.every(({ prendas }) => !prendas.some((p) => p.estilo === filtroEstilo)) && (
+          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: 0 }}>
+            No tenés nada con estilo "{ESTILO_LABEL[filtroEstilo]}" para combinar con esta prenda todavía.
+          </p>
+        )}
+
       {candidatasPorCategoria.map(({ categoria, prendas }) => {
-        const recs = recomendar(base, prendas, placard);
+        const candidatas = filtroEstilo ? prendas.filter((p) => p.estilo === filtroEstilo) : prendas;
+        const recs = recomendar(base, candidatas, placard);
         // En "Rápido" mostramos solo la mejor -- pero nunca escondemos una
         // que el usuario ya seleccionó (si no, queda en el contador sin
         // forma de verla ni de sacarla).
         const visibles = modo === "rapido" ? recs.filter((r, i) => i === 0 || seleccionadas.has(r.prenda.id)) : recs;
+        if (visibles.length === 0) return null;
         return (
           <section key={categoria}>
             <h3 style={{ textTransform: "capitalize", fontSize: "1rem" }}>{categoria}</h3>
@@ -302,6 +339,11 @@ export default function Recomendaciones() {
                         {score.tag === "combinacion_audaz" && " · audaz"}
                         {score.tag === "tono_sobre_tono" && " · tono sobre tono"}
                       </span>
+                      {prenda.estilo && (
+                        <span className="registro-badge" style={{ marginLeft: "0.35rem" }}>
+                          {ESTILO_LABEL[prenda.estilo]}
+                        </span>
+                      )}
                       {modo === "explicame" && (
                         <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem", color: "var(--text-muted)" }}>
                           {score.explicacion}

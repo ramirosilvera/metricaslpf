@@ -292,7 +292,7 @@ function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean 
   return rangoOtra < rangoPantalon;
 }
 
-const ESTILO_LABEL: Record<Estilo, string> = {
+export const ESTILO_LABEL: Record<Estilo, string> = {
   formal: "Formal",
   clasico: "Clásico",
   urbano: "Urbano",

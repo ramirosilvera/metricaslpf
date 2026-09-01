@@ -26,8 +26,10 @@ export interface PresetPrenda {
  * vez de configurar categoría+color+tags a mano cada vez. Curado a
  * propósito, no generado -- criterios:
  *
- * - Cubre tanto casual como ropa de oficina (pedido explícito), en las 8
- *   categorías que soporta el placard.
+ * - Cubre casual, ropa de oficina, urbana, clásica y deportiva (pedido
+ *   explícito -- el catálogo original no tenía NINGUNA prenda con estilo
+ *   "deportivo"), en las 8 categorías que soporta el placard. Ver
+ *   CatalogoPicker.tsx para cómo se agrupa/filtra esto en la UI.
  * - Colores reales y de uso común, no una paleta arcoíris -- para cada
  *   prenda, los 2-4 colores que de verdad se usan más (ej. camisa: blanca/
  *   celeste/negra, no "camisa violeta").
@@ -52,6 +54,14 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "remera-gris", nombre: "Remera gris", categoria: "remera", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "remera-azul-marino", nombre: "Remera azul marino", categoria: "remera", colorHex: "#1F2A44", textura: "algodon", estilo: "casual", ocasion: "casual" },
 
+  // --- Remeras deportivas (agregadas en la ampliación del catálogo: el
+  // estilo "deportivo" no tenía NINGUNA prenda cargada en todo el catálogo
+  // hasta acá, un vacío real, no una omisión menor). Sin textura a
+  // propósito -- una remera técnica dry-fit es sintética, y ninguna Textura
+  // del enum (algodón/lino/lana/etc.) describe eso sin inventar un dato. */
+  { id: "remera-deportiva-negra", nombre: "Remera deportiva negra", categoria: "remera", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
+  { id: "remera-deportiva-gris", nombre: "Remera deportiva gris", categoria: "remera", colorHex: "#8C8C8C", estilo: "deportivo", ocasion: "casual" },
+
   // --- Camisas (oficina) ---
   { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#FAFAF7", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
@@ -59,6 +69,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // "urban professional" que clásica, a diferencia de blanca/celeste/gris.
   { id: "camisa-negra", nombre: "Camisa negra", categoria: "camisa", colorHex: "#232323", textura: "algodon", estilo: "urbano", ocasion: "laburo" },
   { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  { id: "camisa-cuadros", nombre: "Camisa a cuadros", categoria: "camisa", colorHex: "#4A5A3C", textura: "algodon", estilo: "urbano", ocasion: "casual" },
 
   // --- Pantalones ---
   { id: "jean-azul", nombre: "Jean azul", categoria: "pantalon", colorHex: "#3B5998", textura: "denim", estilo: "casual", ocasion: "casual" },
@@ -75,6 +86,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "jogger-negro", nombre: "Jogger negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "jogger-beige", nombre: "Jogger beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "jogger-gris", nombre: "Jogger gris", categoria: "pantalon", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  // pantalón deportivo (entrenamiento) -- distinto del jogger de arriba:
+  // mismo corte ancho, pero tela técnica sintética, no algodón, por eso sin
+  // textura (mismo criterio que la remera deportiva de arriba).
+  { id: "pantalon-deportivo-negro", nombre: "Pantalón deportivo negro", categoria: "pantalon", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
 
   // --- Buzos ---
   { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
@@ -112,6 +127,11 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "zapatillas-marrones-suela-blanca", nombre: "Zapatillas marrones (suela blanca)", categoria: "calzado", colorHex: "#6F4E37", estilo: "urbano", ocasion: "casual", suelaContraste: true },
   { id: "zapatos-cuero-negro", nombre: "Zapatos de cuero negros", categoria: "calzado", colorHex: "#1C1210", textura: "cuero_liso", estilo: "formal", ocasion: "laburo" },
   { id: "zapatos-cuero-marron", nombre: "Zapatos de cuero marrones", categoria: "calzado", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "formal", ocasion: "laburo" },
+  // zapatillas de running -- distintas de las "zapatillas" urbanas de
+  // arriba (mismo criterio de siempre: el estilo importa más que el color
+  // acá, es la sección que estaba vacía en el catálogo).
+  { id: "zapatillas-running-blancas", nombre: "Zapatillas running blancas", categoria: "calzado", colorHex: "#F5F5F0", estilo: "deportivo", ocasion: "casual" },
+  { id: "zapatillas-running-negras", nombre: "Zapatillas running negras", categoria: "calzado", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
 
   // --- Camperas ---
   { id: "campera-negra", nombre: "Campera negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
@@ -122,6 +142,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "campera-pluma-negra", nombre: "Campera de pluma negra", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "casual", ocasion: "casual" },
   { id: "campera-pluma-azul-marino", nombre: "Campera de pluma azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "acolchado", estilo: "casual", ocasion: "casual" },
   { id: "campera-pluma-beige", nombre: "Campera de pluma beige", categoria: "campera", colorHex: "#D8C7A1", textura: "acolchado", estilo: "casual", ocasion: "casual" },
+  // rompeviento -- deportivo, distinto de la campera de jean/pluma de
+  // arriba (esas son casual/urbano, no para entrenar).
+  { id: "campera-rompeviento-negra", nombre: "Campera rompeviento negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
+  { id: "campera-rompeviento-azul", nombre: "Campera rompeviento azul", categoria: "campera", colorHex: "#3366CC", estilo: "deportivo", ocasion: "casual" },
 
   // --- Accesorios ---
   // Reusa hex ya presentes en otras categorías (azul marino, bordo) a

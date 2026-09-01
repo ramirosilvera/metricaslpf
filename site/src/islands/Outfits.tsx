@@ -7,12 +7,13 @@ import {
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
   diffPrendasEdicion,
+  ESTILO_LABEL,
   registroOutfit,
   tanda,
   type OutfitParaComprar,
   type OutfitSugerido,
 } from "../lib/recommend";
-import type { Prenda } from "../lib/types";
+import type { Estilo, Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import Maniqui from "./Maniqui";
 
@@ -64,6 +65,8 @@ function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
  *  agregando tarjetas nuevas. */
 const VISIBLES_POR_SECCION = 2;
 
+const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
+
 export default function Outfits() {
   const [outfits, setOutfits] = useState<OutfitConPrendas[] | null>(null);
   const [placard, setPlacard] = useState<Prenda[] | null>(null);
@@ -77,6 +80,7 @@ export default function Outfits() {
   const [confirmandoBorradoId, setConfirmandoBorradoId] = useState<string | null>(null);
   const [eliminandoId, setEliminandoId] = useState<string | null>(null);
   const [errorEliminar, setErrorEliminar] = useState<Record<string, string>>({});
+  const [filtroEstilo, setFiltroEstilo] = useState<Estilo | null>(null);
   const [editando, setEditando] = useState<OutfitConPrendas | null>(null);
   const [nombreEdicion, setNombreEdicion] = useState("");
   const [prendasEdicion, setPrendasEdicion] = useState<Set<string>>(new Set());
@@ -140,6 +144,16 @@ export default function Outfits() {
   const clavesGuardadas = useMemo(
     () => new Set((outfits ?? []).map((o) => o.prendas.map((p) => p.id).sort().join("-"))),
     [outfits],
+  );
+
+  // Pedido explícito: diferenciar/filtrar por estilo también en los
+  // outfits guardados, no solo en el catálogo. registroOutfit ya calcula
+  // el registro del outfit (a partir del estilo del pantalón) para
+  // RegistroBadge -- se reusa acá para filtrar en vez de duplicar la
+  // lógica de "cuál es el estilo de este outfit".
+  const outfitsFiltrados = useMemo(
+    () => (filtroEstilo ? (outfits ?? []).filter((o) => registroOutfit(o.prendas) === ESTILO_LABEL[filtroEstilo]) : (outfits ?? [])),
+    [outfits, filtroEstilo],
   );
 
   const poolSugeridos: OutfitSugerido[] = useMemo(() => {
@@ -330,8 +344,32 @@ export default function Outfits() {
           <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>
             Tus outfits guardados
           </p>
+          <div className="filtro-chips" role="group" aria-label="Filtrar outfits guardados por estilo">
+            <button
+              type="button"
+              className={`chip${filtroEstilo === null ? " chip-activo" : ""}`}
+              onClick={() => setFiltroEstilo(null)}
+            >
+              Todos
+            </button>
+            {ESTILOS_FILTRO.map((e) => (
+              <button
+                key={e}
+                type="button"
+                className={`chip${filtroEstilo === e ? " chip-activo" : ""}`}
+                onClick={() => setFiltroEstilo((prev) => (prev === e ? null : e))}
+              >
+                {ESTILO_LABEL[e]}
+              </button>
+            ))}
+          </div>
+          {outfitsFiltrados.length === 0 ? (
+            <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+              No tenés outfits guardados con estilo "{filtroEstilo && ESTILO_LABEL[filtroEstilo]}" todavía.
+            </p>
+          ) : (
           <div className="grid-prendas outfits-grid">
-            {outfits.map((o) => (
+            {outfitsFiltrados.map((o) => (
               <div key={o.id} className="card outfit-card">
                 <Maniqui prendas={o.prendas} />
                 <div style={{ minWidth: 0, textAlign: "center" }}>
@@ -369,6 +407,7 @@ export default function Outfits() {
               </div>
             ))}
           </div>
+          )}
         </section>
       )}
 

@@ -4,8 +4,8 @@ import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
 import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
 import type { Categoria, Estacion, Estilo, Ocasion, Textura } from "../lib/types";
+import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
-import PrendaIcon from "./PrendaIcon";
 
 const CATEGORIAS: Categoria[] = [
   "pantalon",
@@ -178,27 +178,7 @@ export default function PrendaForm() {
         <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.75rem" }}>
           Tocá una para cargarla directo -- después la podés ajustar antes de guardar.
         </p>
-        <div className="catalogo-grid">
-          {CATALOGO_PRENDAS.map((p) => (
-            <button
-              key={p.id}
-              type="button"
-              className={`catalogo-card${presetActivoId === p.id ? " activo" : ""}`}
-              onClick={() => aplicarPreset(p)}
-            >
-              <span className="catalogo-icon">
-                <PrendaIcon
-                  categoria={p.categoria}
-                  color={p.colorHex}
-                  suelaContraste={p.suelaContraste}
-                  posicionAccesorio={p.posicionAccesorio}
-                  requiereCuello={p.requiereCuello}
-                />
-              </span>
-              <span className="catalogo-nombre">{p.nombre}</span>
-            </button>
-          ))}
-        </div>
+        <CatalogoPicker activo={(p) => presetActivoId === p.id} onElegir={aplicarPreset} />
       </div>
 
       <form onSubmit={onSubmit} className="card" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>

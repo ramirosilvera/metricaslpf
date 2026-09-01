@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
-import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
+import type { PresetPrenda } from "../lib/catalogo";
 import { hexToHsl, nombreColor } from "../lib/color";
 import { CATEGORIAS_COMPLEMENTARIAS, type Categoria, type Prenda } from "../lib/types";
-import { recomendar } from "../lib/recommend";
+import { ESTILO_LABEL, recomendar } from "../lib/recommend";
+import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
 
@@ -139,27 +140,11 @@ export default function Probar() {
           Elegí categoría y color de lo que estás pensando comprar. No se guarda en tu placard hasta que vos quieras.
         </p>
 
-        <div className="catalogo-grid" style={{ maxHeight: 220 }}>
-          {CATALOGO_PRENDAS.map((p) => (
-            <button
-              key={p.id}
-              type="button"
-              className={`catalogo-card${categoria === p.categoria && colorHex === p.colorHex ? " activo" : ""}`}
-              onClick={() => elegirPreset(p)}
-            >
-              <span className="catalogo-icon">
-                <PrendaIcon
-                  categoria={p.categoria}
-                  color={p.colorHex}
-                  suelaContraste={p.suelaContraste}
-                  posicionAccesorio={p.posicionAccesorio}
-                  requiereCuello={p.requiereCuello}
-                />
-              </span>
-              <span className="catalogo-nombre">{p.nombre}</span>
-            </button>
-          ))}
-        </div>
+        <CatalogoPicker
+          activo={(p) => categoria === p.categoria && colorHex === p.colorHex}
+          onElegir={elegirPreset}
+          maxHeight={220}
+        />
 
         <p style={{ margin: "0.75rem 0 0.4rem", fontSize: "0.85rem" }}>O elegí un color propio:</p>
         <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
@@ -245,6 +230,11 @@ export default function Probar() {
                             {score.tag === "combinacion_audaz" && " · audaz"}
                             {score.tag === "tono_sobre_tono" && " · tono sobre tono"}
                           </span>
+                          {prenda.estilo && (
+                            <span className="registro-badge" style={{ marginLeft: "0.35rem" }}>
+                              {ESTILO_LABEL[prenda.estilo]}
+                            </span>
+                          )}
                           <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem", color: "var(--text-muted)" }}>
                             {score.explicacion}
                           </p>
