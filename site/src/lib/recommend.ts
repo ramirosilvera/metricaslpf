@@ -375,3 +375,23 @@ export function armarOutfitsParaComprar(
 
   return resultados;
 }
+
+/** Diff entre las prendas actuales de un outfit guardado y las que el
+ *  usuario dejó tildadas al editarlo -- qué hay que agregar y qué hay que
+ *  sacar en la base. Función pura a propósito: quien la llama (Outfits.tsx)
+ *  debe hacer el INSERT de `aAgregar` ANTES del DELETE de `aQuitar`, nunca
+ *  al revés. Motivo real, no defensivo: si el usuario reemplaza TODAS las
+ *  prendas del outfit por otras completamente distintas, `aQuitar` termina
+ *  siendo igual a `actuales` -- borrar primero dejaría outfit_prendas en
+ *  cero para ese outfit, y el trigger de la migración 0011 borra la fila de
+ *  `outfits` apenas se queda sin prendas. El insert posterior fallaría por
+ *  FK inexistente. Insertando primero, siempre queda al menos una fila viva. */
+export function diffPrendasEdicion(
+  actuales: Set<string>,
+  deseadas: Set<string>,
+): { aAgregar: string[]; aQuitar: string[] } {
+  return {
+    aAgregar: [...deseadas].filter((id) => !actuales.has(id)),
+    aQuitar: [...actuales].filter((id) => !deseadas.has(id)),
+  };
+}

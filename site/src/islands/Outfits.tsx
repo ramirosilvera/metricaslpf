@@ -5,6 +5,7 @@ import { CATALOGO_CON_HSL, presetAPrendaSintetica } from "../lib/catalogo";
 import {
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
+  diffPrendasEdicion,
   tanda,
   type OutfitParaComprar,
   type OutfitSugerido,
@@ -50,6 +51,14 @@ export default function Outfits() {
   const [errorGuardar, setErrorGuardar] = useState<Record<string, string>>({});
   const [offsetSugeridos, setOffsetSugeridos] = useState(0);
   const [offsetParaComprar, setOffsetParaComprar] = useState(0);
+  const [confirmandoBorradoId, setConfirmandoBorradoId] = useState<string | null>(null);
+  const [eliminandoId, setEliminandoId] = useState<string | null>(null);
+  const [errorEliminar, setErrorEliminar] = useState<Record<string, string>>({});
+  const [editando, setEditando] = useState<OutfitConPrendas | null>(null);
+  const [nombreEdicion, setNombreEdicion] = useState("");
+  const [prendasEdicion, setPrendasEdicion] = useState<Set<string>>(new Set());
+  const [guardandoEdicion, setGuardandoEdicion] = useState(false);
+  const [errorEdicion, setErrorEdicion] = useState("");
   const base = (import.meta.env.BASE_URL as string) || "/";
 
   useEffect(() => {
@@ -175,6 +184,80 @@ export default function Outfits() {
     window.location.href = `${base}prenda/nueva/`;
   }
 
+  async function eliminarOutfit(id: string) {
+    setConfirmandoBorradoId(null);
+    setEliminandoId(id);
+    setErrorEliminar((prev) => ({ ...prev, [id]: "" }));
+    try {
+      const { error: err } = await supabase.from("outfits").delete().eq("id", id);
+      if (err) throw new Error(err.message);
+      setOutfits((prev) => (prev ?? []).filter((o) => o.id !== id));
+    } catch (e) {
+      setErrorEliminar((prev) => ({ ...prev, [id]: e instanceof Error ? e.message : "No se pudo eliminar el outfit." }));
+    } finally {
+      setEliminandoId(null);
+    }
+  }
+
+  function abrirEdicion(outfit: OutfitConPrendas) {
+    setEditando(outfit);
+    setNombreEdicion(outfit.nombre ?? "");
+    setPrendasEdicion(new Set(outfit.prendas.map((p) => p.id)));
+    setErrorEdicion("");
+  }
+
+  function togglePrendaEdicion(id: string) {
+    setPrendasEdicion((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  async function guardarEdicion() {
+    if (!editando || prendasEdicion.size === 0) return;
+    setGuardandoEdicion(true);
+    setErrorEdicion("");
+    try {
+      const actuales = new Set(editando.prendas.map((p) => p.id));
+      const { aAgregar, aQuitar } = diffPrendasEdicion(actuales, prendasEdicion);
+      const nombreNuevo = nombreEdicion.trim() || null;
+
+      // Orden agregar-antes-que-quitar: ver el comentario de
+      // diffPrendasEdicion en recommend.ts para el motivo real (no es
+      // estético) -- el trigger de la migración 0011 borra el outfit entero
+      // si outfit_prendas queda en cero para él en algún punto intermedio.
+      if (aAgregar.length > 0) {
+        const filas = aAgregar.map((prenda_id) => ({ outfit_id: editando.id, prenda_id }));
+        const { error: err } = await supabase.from("outfit_prendas").insert(filas);
+        if (err) throw new Error(err.message);
+      }
+      if (aQuitar.length > 0) {
+        const { error: err } = await supabase
+          .from("outfit_prendas")
+          .delete()
+          .eq("outfit_id", editando.id)
+          .in("prenda_id", aQuitar);
+        if (err) throw new Error(err.message);
+      }
+      if (nombreNuevo !== editando.nombre) {
+        const { error: err } = await supabase.from("outfits").update({ nombre: nombreNuevo }).eq("id", editando.id);
+        if (err) throw new Error(err.message);
+      }
+
+      const prendasFinal = (placard ?? []).filter((p) => prendasEdicion.has(p.id));
+      setOutfits((prev) =>
+        (prev ?? []).map((o) => (o.id === editando.id ? { ...o, nombre: nombreNuevo, prendas: prendasFinal } : o)),
+      );
+      setEditando(null);
+    } catch (e) {
+      setErrorEdicion(e instanceof Error ? e.message : "No se pudieron guardar los cambios.");
+    } finally {
+      setGuardandoEdicion(false);
+    }
+  }
+
   if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
 
   if (sinSesion) {
@@ -235,6 +318,29 @@ export default function Outfits() {
                   <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
                     {leyenda(o.prendas)}
                   </p>
+                </div>
+                {errorEliminar[o.id] && (
+                  <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorEliminar[o.id]}</p>
+                )}
+                <div style={{ display: "flex", gap: "0.4rem", width: "100%" }}>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    style={{ fontSize: "0.8rem", padding: "0.4rem 0.6rem", flex: 1 }}
+                    onClick={() => abrirEdicion(o)}
+                    disabled={eliminandoId === o.id}
+                  >
+                    ✏️ Editar
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    style={{ fontSize: "0.8rem", padding: "0.4rem 0.6rem", flex: 1 }}
+                    onClick={() => setConfirmandoBorradoId(o.id)}
+                    disabled={eliminandoId === o.id}
+                  >
+                    {eliminandoId === o.id ? "…" : "🗑️ Eliminar"}
+                  </button>
                 </div>
               </div>
             ))}
@@ -331,6 +437,86 @@ export default function Outfits() {
             </button>
           )}
         </section>
+      )}
+
+      {confirmandoBorradoId && (
+        <div className="confirm-overlay" onClick={() => setConfirmandoBorradoId(null)}>
+          <div className="confirm-dialog" role="alertdialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+            <p>¿Eliminar este outfit? Las prendas siguen en tu placard -- solo se borra la combinación guardada. No se puede deshacer.</p>
+            <div className="confirm-dialog-actions">
+              <button type="button" className="btn btn-secondary" onClick={() => setConfirmandoBorradoId(null)}>
+                Cancelar
+              </button>
+              <button type="button" className="btn btn-danger" onClick={() => eliminarOutfit(confirmandoBorradoId)}>
+                Eliminar outfit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {editando && (
+        <div className="confirm-overlay" onClick={() => !guardandoEdicion && setEditando(null)}>
+          <div
+            className="confirm-dialog"
+            role="dialog"
+            aria-modal="true"
+            style={{ maxHeight: "80vh", overflowY: "auto", textAlign: "left" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <strong>Editar outfit</strong>
+            <label className="field-label">
+              <span>Nombre (opcional)</span>
+              <input
+                className="field"
+                type="text"
+                value={nombreEdicion}
+                onChange={(e) => setNombreEdicion(e.target.value)}
+                placeholder={editando.prendas.map((p) => p.categoria).join(" + ")}
+              />
+            </label>
+            <div>
+              <p style={{ margin: "0 0 0.5rem", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+                Prendas del outfit -- tildá o destildá para agregar o sacar.
+              </p>
+              {Array.from(new Set((placard ?? []).map((p) => p.categoria))).map((categoria) => {
+                const prendasCategoria = (placard ?? []).filter((p) => p.categoria === categoria);
+                return (
+                  <div key={categoria} style={{ marginBottom: "0.7rem" }}>
+                    <p style={{ margin: "0 0 0.3rem", fontSize: "0.8rem", textTransform: "capitalize", fontWeight: 600 }}>
+                      {categoria}
+                    </p>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                      {prendasCategoria.map((p) => (
+                        <label key={p.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.85rem" }}>
+                          <input type="checkbox" checked={prendasEdicion.has(p.id)} onChange={() => togglePrendaEdicion(p.id)} />
+                          <span style={{ textTransform: "capitalize" }}>{nombreColor(p.color_h, p.color_s, p.color_l)}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {prendasEdicion.size === 0 && (
+              <p style={{ color: "var(--danger)", fontSize: "0.8rem", margin: 0 }}>Un outfit necesita al menos una prenda.</p>
+            )}
+            {errorEdicion && <p style={{ color: "var(--danger)", fontSize: "0.8rem", margin: 0 }}>{errorEdicion}</p>}
+            <div className="confirm-dialog-actions">
+              <button type="button" className="btn btn-secondary" onClick={() => setEditando(null)} disabled={guardandoEdicion}>
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={guardarEdicion}
+                disabled={guardandoEdicion || prendasEdicion.size === 0}
+              >
+                {guardandoEdicion ? "Guardando..." : "Guardar cambios"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

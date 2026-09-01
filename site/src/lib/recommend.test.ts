@@ -3,6 +3,7 @@ import {
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
   categoriasAusentes,
+  diffPrendasEdicion,
   esNeutro,
   hueDist,
   scoreColor,
@@ -292,6 +293,34 @@ describe("tanda", () => {
 
   it("offset mayor al tamaño del pool (p.ej. el pool se achicó tras guardar un outfit) no rompe -- sigue dando la vuelta", () => {
     expect(tanda([1, 2, 3], 10, 2)).toEqual([2, 3]);
+  });
+});
+
+describe("diffPrendasEdicion", () => {
+  it("sin cambios -> nada para agregar ni quitar", () => {
+    const actuales = new Set(["a", "b"]);
+    expect(diffPrendasEdicion(actuales, new Set(["a", "b"]))).toEqual({ aAgregar: [], aQuitar: [] });
+  });
+
+  it("solo agrega una prenda nueva, conserva las que ya estaban", () => {
+    const actuales = new Set(["a", "b"]);
+    const r = diffPrendasEdicion(actuales, new Set(["a", "b", "c"]));
+    expect(r.aAgregar).toEqual(["c"]);
+    expect(r.aQuitar).toEqual([]);
+  });
+
+  it("solo saca una prenda, conserva el resto", () => {
+    const actuales = new Set(["a", "b"]);
+    const r = diffPrendasEdicion(actuales, new Set(["a"]));
+    expect(r.aAgregar).toEqual([]);
+    expect(r.aQuitar).toEqual(["b"]);
+  });
+
+  it("reemplaza TODAS las prendas por otras completamente distintas -- el caso que obliga a insertar antes de borrar (ver comentario en recommend.ts)", () => {
+    const actuales = new Set(["a", "b"]);
+    const r = diffPrendasEdicion(actuales, new Set(["c", "d"]));
+    expect(r.aAgregar.sort()).toEqual(["c", "d"]);
+    expect(r.aQuitar.sort()).toEqual(["a", "b"]);
   });
 });
 
