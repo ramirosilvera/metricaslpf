@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
-import { CATEGORIAS_COMPLEMENTARIAS, type Estilo, type Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, CATEGORIAS_COMPLEMENTARIAS, type Estilo, type Prenda } from "../lib/types";
 import { ESTILO_LABEL, recomendar } from "../lib/recommend";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
@@ -186,8 +186,8 @@ export default function Recomendaciones() {
     return (
       <div className="empty-state">
         <p>
-          Todavía no tenés nada para combinar con tu {base.categoria}. Cargá una prenda de categoría{" "}
-          <strong>{faltante}</strong> para ver las primeras combinaciones.
+          Todavía no tenés nada para combinar con tu {CATEGORIA_LABEL[base.categoria]}. Cargá una prenda de categoría{" "}
+          <strong>{CATEGORIA_LABEL[faltante]}</strong> para ver las primeras combinaciones.
         </p>
         <a className="btn btn-primary" href={`${base_url}prenda/nueva/`}>
           + Cargar prenda
@@ -210,7 +210,7 @@ export default function Recomendaciones() {
         </span>
         <div style={{ flex: 1 }}>
           <strong style={{ textTransform: "capitalize", fontSize: "1.1rem" }}>
-            {base.categoria} · {nombreColor(base.color_h, base.color_s, base.color_l)}
+            {CATEGORIA_LABEL[base.categoria]} · {nombreColor(base.color_h, base.color_s, base.color_l)}
           </strong>
           <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>
             Tocá las combinaciones que te gusten para armar un outfit.
@@ -307,7 +307,7 @@ export default function Recomendaciones() {
         if (visibles.length === 0) return null;
         return (
           <section key={categoria}>
-            <h3 style={{ textTransform: "capitalize", fontSize: "1rem" }}>{categoria}</h3>
+            <h3 style={{ textTransform: "capitalize", fontSize: "1rem" }}>{CATEGORIA_LABEL[categoria]}</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
               {visibles.map(({ prenda, score, tecnicaRescate }) => {
                 const activo = seleccionadas.has(prenda.id);
@@ -318,7 +318,7 @@ export default function Recomendaciones() {
                     onClick={() => toggleSeleccion(prenda.id)}
                     disabled={guardando}
                     aria-pressed={activo}
-                    aria-label={`${prenda.categoria} ${nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}, ${NIVEL_LABEL[score.nivel]}${activo ? ", seleccionada" : ""}`}
+                    aria-label={`${CATEGORIA_LABEL[prenda.categoria]} ${nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}, ${NIVEL_LABEL[score.nivel]}${activo ? ", seleccionada" : ""}`}
                     className={`card recomendacion-card${activo ? " seleccionada" : ""}`}
                   >
                     <span className="recomendacion-icon" aria-hidden="true">
@@ -332,7 +332,7 @@ export default function Recomendaciones() {
                     </span>
                     <div style={{ flex: 1, textAlign: "left" }}>
                       <span style={{ display: "block", fontSize: "0.8rem", textTransform: "capitalize", marginBottom: "0.2rem" }}>
-                        {prenda.categoria} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
+                        {CATEGORIA_LABEL[prenda.categoria]} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
                       </span>
                       <span className={`nivel-badge nivel-${score.nivel}`}>
                         {NIVEL_LABEL[score.nivel]}
@@ -372,7 +372,7 @@ export default function Recomendaciones() {
             <span style={{ color: "#ffb3ab" }}>{errorGuardado}</span>
           ) : (
             <span>
-              Tu {base.categoria} + {seleccionadas.size} más
+              Tu {CATEGORIA_LABEL[base.categoria]} + {seleccionadas.size} más
             </span>
           )}
           {!guardado && seleccionadas.size > 0 && (

@@ -28,8 +28,10 @@ export interface PresetPrenda {
  *
  * - Cubre casual, ropa de oficina, urbana, clásica y deportiva (pedido
  *   explícito -- el catálogo original no tenía NINGUNA prenda con estilo
- *   "deportivo"), en las 8 categorías que soporta el placard. Ver
- *   CatalogoPicker.tsx para cómo se agrupa/filtra esto en la UI.
+ *   "deportivo"), en las 10 categorías que soporta el placard (incluye
+ *   bermuda y short_deportivo, agregadas después junto con pantalon como
+ *   las tres categorías de "piernas"). Ver CatalogoPicker.tsx para cómo se
+ *   agrupa/filtra esto en la UI.
  * - Colores reales y de uso común, no una paleta arcoíris -- para cada
  *   prenda, los 2-4 colores que de verdad se usan más (ej. camisa: blanca/
  *   celeste/negra, no "camisa violeta").
@@ -90,6 +92,33 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // mismo corte ancho, pero tela técnica sintética, no algodón, por eso sin
   // textura (mismo criterio que la remera deportiva de arriba).
   { id: "pantalon-deportivo-negro", nombre: "Pantalón deportivo negro", categoria: "pantalon", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
+
+  // --- Bermudas (chino/algodón, hasta la rodilla) --- agregadas a pedido
+  // explícito del usuario: el catálogo no tenía ninguna prenda de piernas
+  // más corta que un pantalón largo. Mismo criterio de textura/estilo que
+  // el pantalón chino de arriba -- de hecho es la misma prenda en versión
+  // corta, así que reusa su mismo estilo ("clasico") y textura
+  // ("algodon"). El beige/caqui es a propósito el color más asociado a
+  // "bermuda" en el uso real, no una elección arbitraria.
+  { id: "bermuda-beige", nombre: "Bermuda beige", categoria: "bermuda", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "casual" },
+  { id: "bermuda-azul-marino", nombre: "Bermuda azul marino", categoria: "bermuda", colorHex: "#1F2A44", textura: "algodon", estilo: "clasico", ocasion: "casual" },
+  // variante denim -- tan real como el jean largo de arriba, mismo criterio
+  // de textura/estilo ("casual", no "clasico": un jean corto lee más
+  // informal que un chino corto, igual que el jean largo vs. el pantalón
+  // de vestir).
+  { id: "bermuda-jean", nombre: "Bermuda de jean", categoria: "bermuda", colorHex: "#3B5998", textura: "denim", estilo: "casual", ocasion: "casual" },
+  { id: "bermuda-gris", nombre: "Bermuda gris", categoria: "bermuda", colorHex: "#8C8C8C", textura: "algodon", estilo: "clasico", ocasion: "casual" },
+
+  // --- Shorts deportivos (tela técnica, hasta medio muslo) --- distintos
+  // de la bermuda de arriba, no una variante del mismo dibujo: son mucho
+  // más cortos (Maniqui.tsx los dibuja hasta la mitad del muslo, la
+  // bermuda hasta la rodilla) y de tela sintética, no chino/denim -- mismo
+  // motivo por el que la remera y el pantalón deportivos de arriba tampoco
+  // llevan textura (ninguna Textura del enum describe una tela técnica sin
+  // inventar un dato que la prenda real no tiene).
+  { id: "short-deportivo-negro", nombre: "Short deportivo negro", categoria: "short_deportivo", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
+  { id: "short-deportivo-gris", nombre: "Short deportivo gris", categoria: "short_deportivo", colorHex: "#8C8C8C", estilo: "deportivo", ocasion: "casual" },
+  { id: "short-deportivo-azul", nombre: "Short deportivo azul", categoria: "short_deportivo", colorHex: "#3366CC", estilo: "deportivo", ocasion: "casual" },
 
   // --- Buzos ---
   { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },

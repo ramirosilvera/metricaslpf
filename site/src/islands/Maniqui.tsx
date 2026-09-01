@@ -1,6 +1,6 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl } from "../lib/color";
 import PrendaIcon from "./PrendaIcon";
-import type { Categoria, Prenda, Textura } from "../lib/types";
+import { CATEGORIA_LABEL, type Categoria, type Prenda, type Textura } from "../lib/types";
 
 type Capa = "torso" | "piernas" | "pies" | "accesorio";
 
@@ -11,6 +11,8 @@ const CAPA: Record<Categoria, Capa> = {
   sweater: "torso",
   campera: "torso",
   pantalon: "piernas",
+  bermuda: "piernas",
+  short_deportivo: "piernas",
   calzado: "pies",
   accesorio: "accesorio",
 };
@@ -402,7 +404,40 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   );
 }
 
+// Largo de pierna por categoría -- pedido explícito del usuario ("agregá
+// bermudas y shorts deportivos... revisá la anatomía"). El maniquí de base
+// (más abajo en este archivo) documenta la rodilla en y≈179 (verificado por
+// búsqueda: 75% de la altura total, canon clásico); un bermuda real termina
+// a la rodilla o apenas arriba (no más abajo, si no ya es un pantalón
+// pescador/capri), así que el hem queda en y=175, un poco arriba de esa
+// referencia. Un short deportivo termina bastante más arriba, a mitad de
+// muslo -- entre la cadera (120) y la rodilla (179) hay 59u de muslo; medio
+// muslo cae en y≈150, así que se usa ese valor. pantalon (y null/undefined,
+// para cualquier categoría de piernas futura sin mapear) sigue llegando
+// hasta el tobillo (y=224) como siempre.
+const HEM_PIERNAS: Partial<Record<Categoria, number>> = {
+  bermuda: 175,
+  short_deportivo: 150,
+};
+
 function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
+  const hem = HEM_PIERNAS[prenda.categoria];
+  // pantalon (hem === undefined): la silueta completa de siempre, con la
+  // rodilla/pantorrilla curvándose hacia afuera cerca del tobillo. bermuda/
+  // short_deportivo: una columna recta desde la cadera hasta el hem (en ese
+  // tramo alto de la pierna el pantalón tampoco tapera -- el afinado hacia
+  // el tobillo solo empieza en y=185, más abajo que cualquier hem de short),
+  // con las esquinas del ruedo redondeadas en vez de un corte en ángulo
+  // recto, mismo criterio que la punta curva de la manga corta (ver
+  // TorsoCuerpo) en vez de un final abrupto. La pierna desnuda del maniquí
+  // de base, dibujada ANTES que esta capa, sigue de largo por debajo del
+  // hem -- mismo mecanismo que ya expone el antebrazo con manga corta.
+  const izquierda = hem
+    ? `M41 120 L41 ${hem - 3} Q41 ${hem} 44 ${hem} L57 ${hem} Q60 ${hem} 60 ${hem - 3} L60 120 Z`
+    : "M41 120 L41 185 Q40 203 42 224 L52 224 Q54 203 57 185 L60 120 Z";
+  const derecha = hem
+    ? `M79 120 L79 ${hem - 3} Q79 ${hem} 76 ${hem} L63 ${hem} Q60 ${hem} 60 ${hem - 3} L60 120 Z`
+    : "M79 120 L79 185 Q80 203 78 224 L68 224 Q66 203 63 185 L60 120 Z";
   return (
     <Volumen
       prenda={prenda}
@@ -421,8 +456,8 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
               el tobillo. Antes las piernas bajaban casi en columna recta
               (apenas 0.5u de diferencia entre cadera y tobillo), una
               postura de firmes, no relajada. */}
-          <Forma d="M41 120 L41 185 Q40 203 42 224 L52 224 Q54 203 57 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <Forma d="M79 120 L79 185 Q80 203 78 224 L68 224 Q66 203 63 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d={izquierda} fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d={derecha} fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           {/* cinturilla */}
           <path
             d="M40 116 H80 V126 H40 Z"
@@ -693,7 +728,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
       {extras.length > 0 && (
         <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap", justifyContent: "center" }}>
           {extras.map((p) => (
-            <span key={p.id} style={{ width: 28, height: 28 }} title={p.categoria}>
+            <span key={p.id} style={{ width: 28, height: 28 }} title={CATEGORIA_LABEL[p.categoria]}>
               <PrendaIcon
                 categoria={p.categoria}
                 color={p.color_hex}

@@ -206,6 +206,26 @@ describe("recomendar -- coordinación de cuero (cinturón/calzado)", () => {
     const [resultado] = recomendar(jeanNegro, [zapatoMarron], [jeanNegro, zapatoMarron]);
     expect(resultado.score.nivel).toBe("excelente");
   });
+
+  it("la coordinación de cuero también aplica con un bermuda clasico (no solo con un pantalón largo): negro + tierra choca igual", () => {
+    const bermudaNegroClasico = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermudaNegroClasico.estilo = "clasico";
+    const zapatoMarron = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoMarron.textura = "cuero_liso";
+
+    const [resultado] = recomendar(bermudaNegroClasico, [zapatoMarron], [bermudaNegroClasico, zapatoMarron]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+
+  it("un short deportivo (sin estilo de vestir) NO dispara la coordinación de cuero -- nunca es 'de vestir'", () => {
+    const shortNegro = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    shortNegro.estilo = "deportivo";
+    const zapatoMarron = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoMarron.textura = "cuero_liso";
+
+    const [resultado] = recomendar(shortNegro, [zapatoMarron], [shortNegro, zapatoMarron]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
 });
 
 describe("recomendar -- formalidad calzado o torso vs pantalón", () => {
@@ -320,6 +340,34 @@ describe("registroOutfit / advertenciasDeRegistro", () => {
     const camisa = mkPrenda("camisa", "#FAFAF7", 0, 0, 98);
     camisa.estilo = "clasico";
     expect(advertenciasDeRegistro([pantalonVestir, camisa])).toEqual([]);
+  });
+
+  // Agregado al ampliar el catálogo con bermuda/short_deportivo: la lógica
+  // de registro/formalidad de acá arriba se generalizó de "pantalon" a
+  // CATEGORIAS_PIERNAS (recommend.ts) -- estos casos verifican que un
+  // outfit sin ningún pantalón largo, pero con un bermuda o un short
+  // deportivo, no quede sin registro ni sin avisos de formalidad, como
+  // pasaba antes de la generalización.
+  it("sin pantalón largo pero con un bermuda con estilo, el bermuda ancla el registro", () => {
+    const bermudaClasico = mkPrenda("bermuda", "#D8C7A1", 40, 30, 70);
+    bermudaClasico.estilo = "clasico";
+    const camisa = mkPrenda("camisa", "#FAFAF7", 0, 0, 98);
+    expect(registroOutfit([bermudaClasico, camisa])).toBe("Clásico");
+  });
+
+  it("un short deportivo también ancla el registro cuando no hay pantalón ni bermuda", () => {
+    const shortDeportivo = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    shortDeportivo.estilo = "deportivo";
+    expect(registroOutfit([shortDeportivo])).toBe("Deportivo");
+  });
+
+  it("avisa cuándo una prenda desentona en formalidad con un bermuda (no solo con un pantalón), con el nombre correcto en el mensaje", () => {
+    const bermudaClasico = mkPrenda("bermuda", "#D8C7A1", 40, 30, 70);
+    bermudaClasico.estilo = "clasico";
+    const buzo = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+    buzo.estilo = "casual";
+    const avisos = advertenciasDeRegistro([bermudaClasico, buzo]);
+    expect(avisos).toEqual(["buzo más informal que el bermuda"]);
   });
 });
 
@@ -461,7 +509,10 @@ describe("categoriasAusentes", () => {
   });
 
   it("placard vacío: todas las categorías están ausentes", () => {
-    expect(categoriasAusentes([])).toHaveLength(8);
+    // 10, no 8 -- bermuda y short_deportivo se sumaron a TODAS_LAS_CATEGORIAS
+    // junto con pantalon, remera, camisa, buzo, sweater, campera, calzado y
+    // accesorio.
+    expect(categoriasAusentes([])).toHaveLength(10);
   });
 });
 
@@ -542,6 +593,16 @@ describe("armarOutfitsSugeridos", () => {
     expect(outfits).toHaveLength(3);
     const torsos = outfits.map((o) => o.prendas.find((p) => p.categoria !== "pantalon")?.categoria).sort();
     expect(torsos).toEqual(["camisa", "remera", "sweater"]);
+  });
+
+  it("con un bermuda pero sin ningún pantalón largo en el placard, el bermuda ancla el outfit igual (CATEGORIAS_PIERNAS, no solo 'pantalon')", () => {
+    const placard = [
+      mkPrenda("bermuda", "#1A1A1A", 0, 0, 10), // negro, neutro
+      mkPrenda("remera", "#3366CC", 220, 60, 50),
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(1);
+    expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["bermuda", "remera"].sort());
   });
 });
 
@@ -626,6 +687,24 @@ describe("armarOutfitsParaComprar", () => {
       { id: "zapato-negro-test", nombre: "Zapato de cuero negro", categoria: "calzado", colorHex: "#1C1210", textura: "cuero_liso", hsl: { h: 10, s: 27, l: 9 } },
     ];
     expect(armarOutfitsParaComprar(placard, catalogoDeCalzado)).toHaveLength(0);
+  });
+
+  it("nunca sugiere comprar otra prenda de piernas (pantalon/bermuda/short_deportivo compiten por el mismo lugar del outfit)", () => {
+    // ancla en un bermuda; el catálogo de prueba tiene entradas de pantalon
+    // Y de short_deportivo (categorías que categoriasAusentes ahora
+    // reporta como ausentes, ya que el placard no tiene ninguna) -- ninguna
+    // de las dos debería aparecer como sugerencia de compra.
+    const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    const placard = [bermuda];
+    const catalogoConOtrasPiernas: (PresetPrenda & { hsl: HSL })[] = [
+      { id: "pantalon-test", nombre: "Pantalón de prueba", categoria: "pantalon", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+      { id: "short-test", nombre: "Short de prueba", categoria: "short_deportivo", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+      { id: "campera-test", nombre: "Campera de prueba", categoria: "campera", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+    ];
+    const sugerencias = armarOutfitsParaComprar(placard, catalogoConOtrasPiernas);
+    expect(sugerencias.some((s) => s.categoriaSugerida === "pantalon")).toBe(false);
+    expect(sugerencias.some((s) => s.categoriaSugerida === "short_deportivo")).toBe(false);
+    expect(sugerencias.some((s) => s.categoriaSugerida === "campera")).toBe(true);
   });
 });
 

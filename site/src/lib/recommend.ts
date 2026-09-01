@@ -1,4 +1,4 @@
-import type { Categoria, Estilo, HSL, NivelCompatibilidad, Prenda } from "./types";
+import { CATEGORIA_LABEL, type Categoria, type Estilo, type HSL, type NivelCompatibilidad, type Prenda } from "./types";
 import { CATALOGO_CON_HSL, presetAPrendaSintetica, type PresetPrenda } from "./catalogo";
 
 // Umbrales calibrados en la revisión de Consejo (rondas 1-2). Nombrados y
@@ -177,20 +177,43 @@ export function tecnicaRescate(
   return "Repetí uno de los dos colores en un accesorio (cinturón, medias, gorra) para que se lea intencional.";
 }
 
+// pantalon, bermuda y short_deportivo son las tres categorías "de piernas"
+// del placard (ver el mismo criterio en Maniqui.tsx/CAPA y en
+// CATEGORIAS_COMPLEMENTARIAS de types.ts) -- todo lo que en este archivo
+// usaba literalmente "pantalon" como el ancla del outfit (formalidad,
+// registro, armado automático de combinaciones) se generaliza a esta lista,
+// para que un placard con un bermuda o un short deportivo pero SIN ningún
+// pantalón largo no quede invisible para el motor de recomendación: antes
+// de este cambio, agregar un bermuda al placard lo dejaba disponible para
+// combinar manualmente (Probar/Combinar, que ya andan por
+// CATEGORIAS_COMPLEMENTARIAS) pero totalmente ausente de "outfits
+// sugeridos", "para comprar" y el badge de registro -- una prenda cargada
+// que el resto de la app trata como si no existiera, justo la clase de
+// funcionalidad a medias que hay que evitar.
+const CATEGORIAS_PIERNAS: Categoria[] = ["pantalon", "bermuda", "short_deportivo"];
+
 const CATEGORIAS_CUERO: Categoria[] = ["calzado", "accesorio"];
 
 function prendaDeCuero(p: Prenda): boolean {
   return p.textura === "cuero_liso" && CATEGORIAS_CUERO.includes(p.categoria);
 }
 
-/** true si la prenda es un pantalón de vestir/clásico -- chino, pantalón de
- *  vestir -- no un jean ni un pantalón deportivo. Es la mitad "de abajo" de
- *  la convención de coordinar el cuero: el cuero no solo se coordina
- *  cinturón-con-zapato, también zapato/cinturón-con-pantalón, pero SOLO
- *  cuando el pantalón en sí es de vestir -- un jean con zapatos de cuero
- *  marrones es un combo "smart casual" real, no una descoordinación. */
+/** true si la prenda es una prenda de piernas de vestir/clásica -- chino,
+ *  pantalón de vestir, o un bermuda del mismo registro -- no un jean, un
+ *  jogger ni un short deportivo. Es la mitad "de abajo" de la convención de
+ *  coordinar el cuero: el cuero no solo se coordina cinturón-con-zapato,
+ *  también zapato/cinturón-con-pantalón (o bermuda), pero SOLO cuando la
+ *  prenda en sí es de vestir -- un jean (o un bermuda de jean) con zapatos
+ *  de cuero marrones es un combo "smart casual" real, no una
+ *  descoordinación. Generalizada de "pantalon" a CATEGORIAS_PIERNAS: un
+ *  bermuda de chino clasico (ver catalogo.ts) es tan "de vestir" como el
+ *  pantalón chino del que sale -- no hay motivo real para tratarlos
+ *  distinto acá. short_deportivo nunca entra por esta puerta en la
+ *  práctica: ninguna entrada del catálogo le carga estilo "formal" ni
+ *  "clasico" (siempre "deportivo"), pero el chequeo de estilo abajo lo
+ *  filtraría igual aunque algún día se cargara mal. */
 function esPantalonDeVestir(p: Prenda): boolean {
-  return p.categoria === "pantalon" && (p.estilo === "formal" || p.estilo === "clasico");
+  return CATEGORIAS_PIERNAS.includes(p.categoria) && (p.estilo === "formal" || p.estilo === "clasico");
 }
 
 /** Cuero negro + cuero (o pantalón de vestir) de otro color (marrón,
@@ -266,22 +289,30 @@ const FORMALIDAD_ESTILO: Partial<Record<NonNullable<Prenda["estilo"]>, number>> 
 // vive más abajo en el archivo; acá hace falta antes).
 const CATEGORIAS_CON_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater", "campera"];
 
-/** El calzado O el torso no pueden ser MENOS formales que el pantalón --
- *  zapatillas con un pantalón de vestir, o un buzo (hoodie casual) con un
- *  pantalón de vestir, son la misma asimetría real. Reportado dos veces
- *  con ejemplos concretos en la revisión de Consejo: primero calzado
- *  (zapatillas + pantalón de vestir), después el usuario mismo señaló el
- *  caso de torso (pantalón de vestir + buzo + camisa, una combinación que
- *  le sonó rara -- y con razón: "sweater" (de vestir) y "buzo" (hoodie
- *  casual) son categorías DISTINTAS en el catálogo, con estilo distinto, y
- *  el motor no las diferenciaba). La regla es asimétrica a propósito: al
- *  revés (zapatos de cuero o un sweater de vestir con un jean) es un combo
- *  "smart casual" real y no se toca -- acá lo que sube por encima del
- *  pantalón en formalidad no baja el nivel, solo lo que se queda por
- *  debajo. Solo se usa cuando ambas prendas declaran `estilo` (si no, no
- *  hay con qué comparar, y no se inventa un valor por defecto). */
+/** El calzado O el torso no pueden ser MENOS formales que la prenda de
+ *  piernas (pantalón, bermuda o short deportivo) -- zapatillas con un
+ *  pantalón de vestir, o un buzo (hoodie casual) con un pantalón de vestir,
+ *  son la misma asimetría real. Reportado dos veces con ejemplos concretos
+ *  en la revisión de Consejo: primero calzado (zapatillas + pantalón de
+ *  vestir), después el usuario mismo señaló el caso de torso (pantalón de
+ *  vestir + buzo + camisa, una combinación que le sonó rara -- y con
+ *  razón: "sweater" (de vestir) y "buzo" (hoodie casual) son categorías
+ *  DISTINTAS en el catálogo, con estilo distinto, y el motor no las
+ *  diferenciaba). La regla es asimétrica a propósito: al revés (zapatos de
+ *  cuero o un sweater de vestir con un jean) es un combo "smart casual"
+ *  real y no se toca -- acá lo que sube por encima de la prenda de piernas
+ *  en formalidad no baja el nivel, solo lo que se queda por debajo. Solo
+ *  se usa cuando ambas prendas declaran `estilo` (si no, no hay con qué
+ *  comparar, y no se inventa un valor por defecto). El nombre de la
+ *  función sigue diciendo "Pantalon" (no se renombra en esta pasada, para
+ *  no ensuciar el diff con un rename masivo) pero desde acá se aplica por
+ *  igual a las tres categorías de CATEGORIAS_PIERNAS. */
 function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean {
-  const pantalon = base.categoria === "pantalon" ? base : candidato.categoria === "pantalon" ? candidato : null;
+  const pantalon = CATEGORIAS_PIERNAS.includes(base.categoria)
+    ? base
+    : CATEGORIAS_PIERNAS.includes(candidato.categoria)
+      ? candidato
+      : null;
   const otra = pantalon === base ? candidato : base;
   if (!pantalon) return false;
   if (otra.categoria !== "calzado" && !CATEGORIAS_CON_TORSO.includes(otra.categoria)) return false;
@@ -302,31 +333,35 @@ export const ESTILO_LABEL: Record<Estilo, string> = {
 
 /** Pedido explícito del usuario: que la app diga a qué registro (laboral,
  *  casual, urbano, clásico...) corresponde un outfit, no solo que evite
- *  combinaciones raras en silencio. Usa el `estilo` del pantalón como
+ *  combinaciones raras en silencio. Usa el `estilo` de la prenda de piernas
+ *  (pantalón, bermuda o short deportivo -- CATEGORIAS_PIERNAS) como
  *  referencia del outfit completo -- es el ancla de todas las reglas de
  *  formalidad de acá arriba, así que ya es "la" prenda que define el
  *  registro en el resto del motor; no es un dato inventado nuevo, es el
- *  mismo que ya se usa para decidir si el resto combina. Sin pantalón en
- *  el outfit, o sin `estilo` cargado en él, no hay de dónde sacarlo -- no
- *  se inventa un valor por defecto. */
+ *  mismo que ya se usa para decidir si el resto combina. Sin ninguna
+ *  prenda de piernas en el outfit, o sin `estilo` cargado en ella, no hay
+ *  de dónde sacarlo -- no se inventa un valor por defecto. */
 export function registroOutfit(prendas: Prenda[]): string | null {
-  const pantalon = prendas.find((p) => p.categoria === "pantalon");
+  const pantalon = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   return pantalon?.estilo ? ESTILO_LABEL[pantalon.estilo] : null;
 }
 
 /** Mensajes puntuales de por qué una prenda del outfit desentona en
- *  registro con el pantalón (no en color -- eso ya lo cubre `recomendar`),
- *  para mostrar junto al outfit en vez de dejar la democión a muy_bueno
- *  escondida adentro del `explicacion` de un par que la UI de outfits
- *  armados no siempre muestra. */
+ *  registro con la prenda de piernas (no en color -- eso ya lo cubre
+ *  `recomendar`), para mostrar junto al outfit en vez de dejar la
+ *  democión a muy_bueno escondida adentro del `explicacion` de un par que
+ *  la UI de outfits armados no siempre muestra. */
 export function advertenciasDeRegistro(prendas: Prenda[]): string[] {
-  const pantalon = prendas.find((p) => p.categoria === "pantalon");
+  const pantalon = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   if (!pantalon) return [];
   const avisos: string[] = [];
   for (const p of prendas) {
     if (p.id === pantalon.id) continue;
     if (prendaMenosFormalQuePantalon(pantalon, p)) {
-      avisos.push(`${p.categoria} más informal que el pantalón`);
+      // "el" concuerda con las tres categorías de CATEGORIAS_PIERNAS (el
+      // pantalón, el bermuda, el short deportivo) -- no hace falta variar
+      // el artículo por categoría.
+      avisos.push(`${CATEGORIA_LABEL[p.categoria]} más informal que el ${CATEGORIA_LABEL[pantalon.categoria]}`);
     }
   }
   return avisos;
@@ -420,6 +455,8 @@ const TODAS_LAS_CATEGORIAS: Categoria[] = [
   "sweater",
   "campera",
   "pantalon",
+  "bermuda",
+  "short_deportivo",
   "calzado",
   "accesorio",
 ];
@@ -482,17 +519,18 @@ function candidatasPropias(
 }
 
 /** Arma outfits completos automáticamente a partir del placard real, sin
- *  que el usuario elija nada -- un outfit por cada pantalón (es la
- *  categoría que conecta con todas las demás en CATEGORIAS_COMPLEMENTARIAS,
- *  el ancla natural) y por cada torso propio que combine al menos
- *  "muy_bueno" con ese pantalón -- nunca fuerza un "con cuidado". Varía el
- *  torso (no calzado/accesorio) porque es la prenda que más define la
- *  identidad visual de un outfit en el maniquí; esto es lo que le da al
- *  usuario "otras opciones" para ir rotando en vez de una sola combinación
- *  fija por pantalón. Devuelve el pool completo, mejor primero por ancla --
- *  la UI decide cuántas mostrar de una vez. */
+ *  que el usuario elija nada -- un outfit por cada prenda de piernas
+ *  (pantalón, bermuda o short deportivo -- CATEGORIAS_PIERNAS, la categoría
+ *  que conecta con todas las demás en CATEGORIAS_COMPLEMENTARIAS, el ancla
+ *  natural) y por cada torso propio que combine al menos "muy_bueno" con
+ *  esa ancla -- nunca fuerza un "con cuidado". Varía el torso (no calzado/
+ *  accesorio) porque es la prenda que más define la identidad visual de un
+ *  outfit en el maniquí; esto es lo que le da al usuario "otras opciones"
+ *  para ir rotando en vez de una sola combinación fija por ancla. Devuelve
+ *  el pool completo, mejor primero por ancla -- la UI decide cuántas
+ *  mostrar de una vez. */
 export function armarOutfitsSugeridos(placard: Prenda[]): OutfitSugerido[] {
-  const pantalones = placard.filter((p) => p.categoria === "pantalon");
+  const pantalones = placard.filter((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   const resultados: OutfitSugerido[] = [];
   const vistos = new Set<string>();
 
@@ -561,19 +599,20 @@ export function categoriasAusentes(placard: Prenda[]): Categoria[] {
   return TODAS_LAS_CATEGORIAS.filter((c) => !presentes.has(c));
 }
 
-/** Para cada pantalón y cada categoría ausente del placard, busca en el
- *  catálogo TODAS las prendas de esa categoría que combinan al menos
- *  "muy_bueno" con ese pantalón (mismo motor de color que el resto de la
- *  app, no una sugerencia inventada) -- una variante por cada una, mejor
- *  primero -- y arma el outfit resultante combinando cada prenda sugerida
- *  con lo mejor que el usuario YA tiene para los demás lugares. No se
- *  ofrece comprar algo que no va a combinar bien. Devuelve el pool
- *  completo; la UI decide cuántas mostrar de una vez. */
+/** Para cada prenda de piernas (pantalón, bermuda o short deportivo) y cada
+ *  categoría ausente del placard, busca en el catálogo TODAS las prendas de
+ *  esa categoría que combinan al menos "muy_bueno" con esa ancla (mismo
+ *  motor de color que el resto de la app, no una sugerencia inventada) --
+ *  una variante por cada una, mejor primero -- y arma el outfit resultante
+ *  combinando cada prenda sugerida con lo mejor que el usuario YA tiene
+ *  para los demás lugares. No se ofrece comprar algo que no va a combinar
+ *  bien. Devuelve el pool completo; la UI decide cuántas mostrar de una
+ *  vez. */
 export function armarOutfitsParaComprar(
   placard: Prenda[],
   catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
 ): OutfitParaComprar[] {
-  const pantalones = placard.filter((p) => p.categoria === "pantalon");
+  const pantalones = placard.filter((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   const ausentes = categoriasAusentes(placard);
   const resultados: OutfitParaComprar[] = [];
 
@@ -586,7 +625,15 @@ export function armarOutfitsParaComprar(
     );
 
     for (const categoriaSugerida of ausentes) {
-      if (categoriaSugerida === "pantalon") continue; // el ancla ya es un pantalón
+      // el ancla ya es una prenda de piernas -- nunca tiene sentido
+      // sugerir comprar OTRA (un pantalón y un bermuda compiten por el
+      // mismo lugar del outfit, no se usan los dos a la vez). Antes solo
+      // se saltaba "pantalon" -- con bermuda/short_deportivo agregados a
+      // TODAS_LAS_CATEGORIAS, sin este chequeo generalizado el motor
+      // llegaba a sugerir "comprá un short deportivo" para completar un
+      // outfit ya anclado en un pantalón de vestir, una sugerencia sin
+      // sentido real.
+      if (CATEGORIAS_PIERNAS.includes(categoriaSugerida)) continue;
 
       const candidatosCatalogo = catalogo.filter((p) => p.categoria === categoriaSugerida);
       if (candidatosCatalogo.length === 0) continue;

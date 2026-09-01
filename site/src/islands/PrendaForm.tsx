@@ -3,12 +3,14 @@ import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
 import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
-import type { Categoria, Estacion, Estilo, Ocasion, Textura } from "../lib/types";
+import { CATEGORIA_LABEL, type Categoria, type Estacion, type Estilo, type Ocasion, type Textura } from "../lib/types";
 import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
 
 const CATEGORIAS: Categoria[] = [
   "pantalon",
+  "bermuda",
+  "short_deportivo",
   "remera",
   "buzo",
   "sweater",
@@ -197,7 +199,7 @@ export default function PrendaForm() {
           >
             {CATEGORIAS.map((c) => (
               <option key={c} value={c}>
-                {c}
+                {CATEGORIA_LABEL[c]}
               </option>
             ))}
           </select>

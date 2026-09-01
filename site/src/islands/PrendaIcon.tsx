@@ -84,6 +84,17 @@ export function PrendaShape({
       );
     case "pantalon":
       return <path d="M18 6 H46 L44 58 H34 L32 24 L30 58 H20 Z" fill={color} stroke={stroke} />;
+    case "bermuda":
+      // mismo path que "pantalon" hasta la cadera (18-46 arriba, entrepierna
+      // en 32,24) pero cortado a la altura de la rodilla (y=44 en vez de
+      // y=58) en vez de llegar al tobillo -- ver Maniqui.tsx para el mismo
+      // criterio aplicado a la silueta grande del maniquí.
+      return <path d="M18 6 H46 L44 44 H34 L32 24 L30 44 H20 Z" fill={color} stroke={stroke} />;
+    case "short_deportivo":
+      // mismo criterio que "bermuda" pero más corto (y=34, medio muslo en
+      // vez de rodilla) -- el short deportivo real termina bastante más
+      // arriba que un bermuda de vestir/casual.
+      return <path d="M18 6 H46 L44 34 H34 L32 24 L30 34 H20 Z" fill={color} stroke={stroke} />;
     case "calzado": {
       const d = "M8 44 Q8 36 18 34 L34 30 Q40 24 48 26 L52 34 Q58 36 58 44 Q58 50 52 50 L12 50 Q8 50 8 44 Z";
       if (!suelaContraste) {

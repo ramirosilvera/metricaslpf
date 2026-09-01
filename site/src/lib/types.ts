@@ -1,5 +1,7 @@
 export type Categoria =
   | "pantalon"
+  | "bermuda"
+  | "short_deportivo"
   | "remera"
   | "buzo"
   | "sweater"
@@ -70,6 +72,28 @@ export interface Prenda {
   updated_at: string;
 }
 
+/** Texto visible por categoría -- la UI mostraba `p.categoria` crudo con
+ *  text-transform:capitalize en varios lugares (Placard, Outfits, Probar,
+ *  Recomendaciones), algo que funcionaba solo de casualidad porque todas
+ *  las categorías eran una sola palabra sin guion bajo. short_deportivo
+ *  rompe ese supuesto -- capitalize no saca el "_", así que se vería
+ *  literalmente "Short_deportivo" en tarjetas y leyendas reales. El resto
+ *  de las categorías quedan con el mismo string crudo que ya tenían (para
+ *  no cambiar nada de lo que ya se veía bien) -- el único valor que cambia
+ *  de verdad es short_deportivo, reemplazando el guion bajo por un espacio. */
+export const CATEGORIA_LABEL: Record<Categoria, string> = {
+  pantalon: "pantalon",
+  bermuda: "bermuda",
+  short_deportivo: "short deportivo",
+  remera: "remera",
+  buzo: "buzo",
+  sweater: "sweater",
+  camisa: "camisa",
+  calzado: "calzado",
+  campera: "campera",
+  accesorio: "accesorio",
+};
+
 export type NivelCompatibilidad = "excelente" | "muy_bueno" | "con_cuidado";
 
 export interface Recomendacion {
@@ -80,14 +104,22 @@ export interface Recomendacion {
   tecnicaRescate?: string;
 }
 
-/** Categorías que se sugieren como complemento de cada categoría base. */
+/** Categorías que se sugieren como complemento de cada categoría base.
+ *  bermuda/short_deportivo son, como pantalon, prendas "de piernas" -- se
+ *  agregan con la misma lista de complementos que pantalon (en su propia
+ *  entrada) y se suman a la lista de todas las categorías de torso/calzado/
+ *  accesorio que ya incluían a pantalon, para no dejarlas fuera de la
+ *  pantalla "Combinar" ni de "Probar antes de comprar" (las dos pantallas
+ *  que arman sus candidatas a partir de este mapa). */
 export const CATEGORIAS_COMPLEMENTARIAS: Record<Categoria, Categoria[]> = {
   pantalon: ["remera", "buzo", "sweater", "camisa", "campera", "calzado", "accesorio"],
-  remera: ["pantalon", "campera", "calzado", "accesorio"],
-  buzo: ["pantalon", "calzado", "accesorio"],
-  sweater: ["pantalon", "calzado", "accesorio"],
-  camisa: ["pantalon", "campera", "calzado", "accesorio"],
-  calzado: ["pantalon", "remera", "buzo", "sweater", "camisa", "campera"],
-  campera: ["pantalon", "remera", "camisa", "calzado", "accesorio"],
-  accesorio: ["pantalon", "remera", "buzo", "sweater", "camisa", "campera", "calzado"],
+  bermuda: ["remera", "buzo", "sweater", "camisa", "campera", "calzado", "accesorio"],
+  short_deportivo: ["remera", "buzo", "sweater", "camisa", "campera", "calzado", "accesorio"],
+  remera: ["pantalon", "bermuda", "short_deportivo", "campera", "calzado", "accesorio"],
+  buzo: ["pantalon", "bermuda", "short_deportivo", "calzado", "accesorio"],
+  sweater: ["pantalon", "bermuda", "short_deportivo", "calzado", "accesorio"],
+  camisa: ["pantalon", "bermuda", "short_deportivo", "campera", "calzado", "accesorio"],
+  calzado: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera"],
+  campera: ["pantalon", "bermuda", "short_deportivo", "remera", "camisa", "calzado", "accesorio"],
+  accesorio: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera", "calzado"],
 };

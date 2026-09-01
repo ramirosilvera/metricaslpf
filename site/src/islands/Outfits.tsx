@@ -13,7 +13,7 @@ import {
   type OutfitParaComprar,
   type OutfitSugerido,
 } from "../lib/recommend";
-import type { Estilo, Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, type Estilo, type Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import Maniqui from "./Maniqui";
 
@@ -33,7 +33,7 @@ interface OutfitRow {
 }
 
 function leyenda(prendas: Prenda[]): string {
-  return prendas.map((p) => `${p.categoria} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ");
+  return prendas.map((p) => `${CATEGORIA_LABEL[p.categoria]} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ");
 }
 
 /** Pedido explícito del usuario: que la app diga a qué registro (Formal,
@@ -374,7 +374,7 @@ export default function Outfits() {
                 <Maniqui prendas={o.prendas} />
                 <div style={{ minWidth: 0, textAlign: "center" }}>
                   <strong style={{ textTransform: "capitalize" }}>
-                    {o.nombre ?? o.prendas.map((p) => p.categoria).join(" + ")}
+                    {o.nombre ?? o.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}
                   </strong>
                   <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
                     {leyenda(o.prendas)}
@@ -426,7 +426,7 @@ export default function Outfits() {
                 <div key={s.id} className="card outfit-card">
                   <Maniqui prendas={s.prendas} />
                   <div style={{ minWidth: 0, textAlign: "center" }}>
-                    <strong style={{ textTransform: "capitalize" }}>{s.prendas.map((p) => p.categoria).join(" + ")}</strong>
+                    <strong style={{ textTransform: "capitalize" }}>{s.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}</strong>
                     <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
                       {leyenda(s.prendas)}
                     </p>
@@ -540,7 +540,7 @@ export default function Outfits() {
                 type="text"
                 value={nombreEdicion}
                 onChange={(e) => setNombreEdicion(e.target.value)}
-                placeholder={editando.prendas.map((p) => p.categoria).join(" + ")}
+                placeholder={editando.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}
               />
             </label>
             <div>
@@ -552,7 +552,7 @@ export default function Outfits() {
                 return (
                   <div key={categoria} style={{ marginBottom: "0.7rem" }}>
                     <p style={{ margin: "0 0 0.3rem", fontSize: "0.8rem", textTransform: "capitalize", fontWeight: 600 }}>
-                      {categoria}
+                      {CATEGORIA_LABEL[categoria]}
                     </p>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
                       {prendasCategoria.map((p) => (

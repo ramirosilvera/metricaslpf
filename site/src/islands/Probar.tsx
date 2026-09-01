@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import type { PresetPrenda } from "../lib/catalogo";
 import { hexToHsl, nombreColor } from "../lib/color";
-import { CATEGORIAS_COMPLEMENTARIAS, type Categoria, type Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, CATEGORIAS_COMPLEMENTARIAS, type Categoria, type Prenda } from "../lib/types";
 import { ESTILO_LABEL, recomendar } from "../lib/recommend";
 import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
@@ -14,7 +14,18 @@ const NIVEL_LABEL: Record<string, string> = {
   con_cuidado: "Con cuidado",
 };
 
-const CATEGORIAS: Categoria[] = ["pantalon", "remera", "buzo", "sweater", "camisa", "calzado", "campera", "accesorio"];
+const CATEGORIAS: Categoria[] = [
+  "pantalon",
+  "bermuda",
+  "short_deportivo",
+  "remera",
+  "buzo",
+  "sweater",
+  "camisa",
+  "calzado",
+  "campera",
+  "accesorio",
+];
 
 export default function Probar() {
   const [placard, setPlacard] = useState<Prenda[] | null>(null);
@@ -156,7 +167,7 @@ export default function Probar() {
               style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", textTransform: "capitalize" }}
               onClick={() => setCategoria(c)}
             >
-              {c}
+              {CATEGORIA_LABEL[c]}
             </button>
           ))}
         </div>
@@ -181,7 +192,7 @@ export default function Probar() {
             </span>
             <div style={{ flex: 1 }}>
               <strong style={{ textTransform: "capitalize" }}>
-                {pruebaBase.categoria} · {nombreColor(pruebaBase.color_h, pruebaBase.color_s, pruebaBase.color_l)}
+                {CATEGORIA_LABEL[pruebaBase.categoria]} · {nombreColor(pruebaBase.color_h, pruebaBase.color_s, pruebaBase.color_l)}
               </strong>
               <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>
                 {veredicto ? veredicto.texto : "Así combina con lo que ya tenés"}
@@ -208,7 +219,7 @@ export default function Probar() {
               const recs = recomendar(pruebaBase, prendas, placard);
               return (
                 <section key={cat}>
-                  <h3 style={{ textTransform: "capitalize", fontSize: "1rem" }}>{cat}</h3>
+                  <h3 style={{ textTransform: "capitalize", fontSize: "1rem" }}>{CATEGORIA_LABEL[cat]}</h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                     {recs.map(({ prenda, score, tecnicaRescate }) => (
                       <div key={prenda.id} className="card" style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
@@ -223,7 +234,7 @@ export default function Probar() {
                         </span>
                         <div style={{ flex: 1 }}>
                           <span style={{ display: "block", fontSize: "0.8rem", textTransform: "capitalize", marginBottom: "0.2rem" }}>
-                            {prenda.categoria} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
+                            {CATEGORIA_LABEL[prenda.categoria]} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
                           </span>
                           <span className={`nivel-badge nivel-${score.nivel}`}>
                             {NIVEL_LABEL[score.nivel]}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
 import { ESTILO_LABEL } from "../lib/recommend";
-import type { Estilo, Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, type Estilo, type Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
 
@@ -142,7 +142,7 @@ export default function Placard() {
                   requiereCuello={p.requiere_cuello}
                 />
               </span>
-              <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{p.categoria}</strong>
+              <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{CATEGORIA_LABEL[p.categoria]}</strong>
               <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
                 {nombreColor(p.color_h, p.color_s, p.color_l)}
               </span>
