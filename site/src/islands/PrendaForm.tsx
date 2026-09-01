@@ -179,7 +179,7 @@ export default function PrendaForm() {
               onClick={() => aplicarPreset(p)}
             >
               <span className="catalogo-icon">
-                <PrendaIcon categoria={p.categoria} color={p.colorHex} />
+                <PrendaIcon categoria={p.categoria} color={p.colorHex} suelaContraste={p.suelaContraste} />
               </span>
               <span className="catalogo-nombre">{p.nombre}</span>
             </button>

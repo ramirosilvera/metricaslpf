@@ -462,7 +462,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
         <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap", justifyContent: "center" }}>
           {extras.map((p) => (
             <span key={p.id} style={{ width: 28, height: 28 }} title={p.categoria}>
-              <PrendaIcon categoria={p.categoria} color={p.color_hex} />
+              <PrendaIcon categoria={p.categoria} color={p.color_hex} suelaContraste={p.suela_contraste} />
             </span>
           ))}
         </div>

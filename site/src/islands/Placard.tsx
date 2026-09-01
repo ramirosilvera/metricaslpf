@@ -99,7 +99,7 @@ export default function Placard() {
         {prendas.map((p) => (
           <a key={p.id} href={`${base}combinar/?prenda=${p.id}`} className="card prenda-card">
             <span className="prenda-card-icon">
-              <PrendaIcon categoria={p.categoria} color={p.color_hex} />
+              <PrendaIcon categoria={p.categoria} color={p.color_hex} suelaContraste={p.suela_contraste} />
             </span>
             <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{p.categoria}</strong>
             <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>

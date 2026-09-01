@@ -1,3 +1,4 @@
+import { useId } from "react";
 import type { Categoria } from "../lib/types";
 
 /**
@@ -9,8 +10,22 @@ import type { Categoria } from "../lib/types";
  * Formas simplificadas a propósito (no son ilustraciones de moda, son
  * siluetas reconocibles a primera vista).
  */
-export function PrendaShape({ categoria, color }: { categoria: Categoria; color: string }) {
+export function PrendaShape({
+  categoria,
+  color,
+  suelaContraste = false,
+}: {
+  categoria: Categoria;
+  color: string;
+  /** Ver Prenda.suela_contraste en types.ts. Solo afecta a "calzado" --
+   *  Maniqui.tsx ya dibuja la suela blanca en el maniquí grande, pero este
+   *  ícono chico (catálogo, placard) usaba SIEMPRE el mismo path sin
+   *  distinción, así que dos zapatillas negras -- con y sin suela de
+   *  contraste -- se veían exactamente iguales en el selector. */
+  suelaContraste?: boolean;
+}) {
   const stroke = "rgba(0,0,0,0.15)";
+  const soleClipId = useId();
 
   switch (categoria) {
     case "remera":
@@ -56,14 +71,25 @@ export function PrendaShape({ categoria, color }: { categoria: Categoria; color:
       );
     case "pantalon":
       return <path d="M18 6 H46 L44 58 H34 L32 24 L30 58 H20 Z" fill={color} stroke={stroke} />;
-    case "calzado":
+    case "calzado": {
+      const d = "M8 44 Q8 36 18 34 L34 30 Q40 24 48 26 L52 34 Q58 36 58 44 Q58 50 52 50 L12 50 Q8 50 8 44 Z";
+      if (!suelaContraste) {
+        return <path d={d} fill={color} stroke={stroke} />;
+      }
+      // Suela de contraste: se recorta el mismo silueta con un clip
+      // rectangular en la franja inferior -- así el borde de la suela
+      // sigue exactamente el contorno real del zapato (que no es recto),
+      // sin tener que dibujar a mano una segunda curva aproximada.
       return (
-        <path
-          d="M8 44 Q8 36 18 34 L34 30 Q40 24 48 26 L52 34 Q58 36 58 44 Q58 50 52 50 L12 50 Q8 50 8 44 Z"
-          fill={color}
-          stroke={stroke}
-        />
+        <>
+          <path d={d} fill={color} stroke={stroke} />
+          <clipPath id={soleClipId}>
+            <rect x="0" y="45" width="64" height="6" />
+          </clipPath>
+          <path d={d} fill="#F2F0EA" clipPath={`url(#${soleClipId})`} />
+        </>
       );
+    }
     case "campera":
       return (
         <>
@@ -86,10 +112,18 @@ export function PrendaShape({ categoria, color }: { categoria: Categoria; color:
   }
 }
 
-export default function PrendaIcon({ categoria, color }: { categoria: Categoria; color: string }) {
+export default function PrendaIcon({
+  categoria,
+  color,
+  suelaContraste,
+}: {
+  categoria: Categoria;
+  color: string;
+  suelaContraste?: boolean;
+}) {
   return (
     <svg viewBox="0 0 64 64" width="100%" height="100%">
-      <PrendaShape categoria={categoria} color={color} />
+      <PrendaShape categoria={categoria} color={color} suelaContraste={suelaContraste} />
     </svg>
   );
 }
