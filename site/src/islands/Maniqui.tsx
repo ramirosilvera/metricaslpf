@@ -251,8 +251,19 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               de un ícono cuadrado genérico. */}
           {mangaCorta ? (
             <>
-              <Forma d="M34 48 Q27 51 27 64 Q27 74 34 77 Q38 74 39 68 Q37 56 34 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
-              <Forma d="M86 48 Q93 51 93 64 Q93 74 86 77 Q82 74 81 68 Q83 56 86 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
+              {/* continuidad hombro-brazo -- pedido explícito del usuario
+                  ("que no esté esa división, más continuo como un cuerpo
+                  humano"). La curva del torso sale del hombro casi vertical
+                  (control a solo 2-3u al costado); la manga arrancaba con
+                  un tirón casi horizontal (control a 7u al costado) desde
+                  el mismo punto -- ese cambio brusco de dirección en un
+                  punto compartido es lo que se lee como un corte/costura,
+                  no una curva de hombro real. Se achica el tirón inicial
+                  (7u -> 2u) para que la dirección de salida se parezca más
+                  a la del torso -- el hombro dobla gradualmente hacia el
+                  brazo en vez de quebrar en ángulo. */}
+              <Forma d="M34 48 Q32 51 30 64 Q27 74 34 77 Q38 74 39 68 Q37 56 34 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
+              <Forma d="M86 48 Q88 51 90 64 Q93 74 86 77 Q82 74 81 68 Q83 56 86 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
             </>
           ) : (
             <>
@@ -261,15 +272,19 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                   abajo el brazo se angula hacia afuera del cuerpo en vez de
                   caer en paralelo estricto al torso, como brazos relajados
                   de verdad. */}
+              {/* misma continuidad hombro-brazo que en la manga corta (ver
+                  ese comentario) -- tirón inicial reducido para que la
+                  curva no quiebre en ángulo justo donde se junta con el
+                  torso. */}
               <Forma
-                d="M34 48 Q29 51 29 60 L25 114 Q25 120 29 121 L34 121 Q37 120 36 114 L39 60 Q38 52 34 48 Z"
+                d="M34 48 Q32 51 31 60 L25 114 Q25 120 29 121 L34 121 Q37 120 36 114 L39 60 Q38 52 34 48 Z"
                 fill={fill}
                 stroke={stroke}
                 patron={patron}
                 sugerida={sugerida}
               />
               <Forma
-                d="M86 48 Q91 51 91 60 L95 114 Q95 120 91 121 L86 121 Q83 120 84 114 L81 60 Q82 52 86 48 Z"
+                d="M86 48 Q88 51 89 60 L95 114 Q95 120 91 121 L86 121 Q83 120 84 114 L81 60 Q82 52 86 48 Z"
                 fill={fill}
                 stroke={stroke}
                 patron={patron}
@@ -579,8 +594,15 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
           fill={neutro}
           stroke={neutroStroke}
         />
-        <path d="M35 48 Q31 49 31 57 L26 113 Q26 120 30 120 L33 120 Q35 120 34 113 L37 59 Q37 51 35 48 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M85 48 Q89 49 89 57 L94 113 Q94 120 90 120 L87 120 Q85 120 86 113 L83 59 Q83 51 85 48 Z" fill={neutro} stroke={neutroStroke} />
+        {/* continuidad hombro-brazo -- pedido explícito del usuario ("que
+            no esté esa división, más continuo como un cuerpo humano"). Ver
+            el comentario largo en TorsoCuerpo (manga corta): el tirón
+            inicial de la curva se achica (era casi horizontal, ahora sale
+            en una dirección más parecida a la del torso) para que el
+            hombro doble gradualmente hacia el brazo en vez de quebrar en
+            ángulo justo donde se juntan. */}
+        <path d="M35 48 Q33 51 32 58 L26 113 Q26 120 30 120 L33 120 Q35 120 34 113 L37 59 Q37 51 35 48 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M85 48 Q87 51 88 58 L94 113 Q94 120 90 120 L87 120 Q85 120 86 113 L83 59 Q83 51 85 48 Z" fill={neutro} stroke={neutroStroke} />
         {/* manos -- pedido explícito del usuario ("agregale las manos, eso
             le va a dar más armonía"), comparando contra una foto real de
             maniquí de exhibición donde la mano extiende el brazo hasta
