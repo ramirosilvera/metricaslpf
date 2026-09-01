@@ -88,6 +88,12 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "zapatillas-negras", nombre: "Zapatillas negras", categoria: "calzado", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
   { id: "zapatillas-negras-suela-blanca", nombre: "Zapatillas negras (suela blanca)", categoria: "calzado", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual", suelaContraste: true },
   { id: "zapatillas-grises", nombre: "Zapatillas grises", categoria: "calzado", colorHex: "#8C8C8C", estilo: "urbano", ocasion: "casual" },
+  // sin textura a propósito, mismo criterio que las demás -- una etiqueta
+  // real de composición de zapatilla ("capellada 85% sintético / 15%
+  // cuero, forro 100% textil sintético") no es "cuero" para nada del
+  // motor: la mayoría es sintético, y ninguna Textura del enum describe
+  // "sintético" sin inventar un dato que la prenda real no tiene.
+  { id: "zapatillas-azul-marino", nombre: "Zapatillas azul marino", categoria: "calzado", colorHex: "#1F2A44", estilo: "urbano", ocasion: "casual" },
   // marrón de gamuza/lona (mate), distinto del marrón de cuero lustroso de
   // los zapatos de vestir un par de líneas más abajo -- son materiales que
   // se ven distintos en la vida real, no el mismo color reusado sin razón.
