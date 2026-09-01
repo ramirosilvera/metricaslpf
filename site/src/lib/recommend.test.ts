@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  advertenciasDeRegistro,
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
   categoriasAusentes,
@@ -7,6 +8,7 @@ import {
   esNeutro,
   hueDist,
   recomendar,
+  registroOutfit,
   scoreColor,
   tanda,
   tecnicaRescate,
@@ -206,7 +208,7 @@ describe("recomendar -- coordinación de cuero (cinturón/calzado)", () => {
   });
 });
 
-describe("recomendar -- formalidad calzado/pantalón", () => {
+describe("recomendar -- formalidad calzado o torso vs pantalón", () => {
   it("pantalón de vestir + zapatillas: el color combina pero baja de excelente a muy_bueno (el calzado es menos formal)", () => {
     const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     pantalonVestir.estilo = "formal";
@@ -246,6 +248,78 @@ describe("recomendar -- formalidad calzado/pantalón", () => {
 
     const [resultado] = recomendar(pantalonSinEstilo, [zapatillas], [pantalonSinEstilo, zapatillas]);
     expect(resultado.score.nivel).toBe("excelente");
+  });
+
+  it("4ta ronda -- caso reportado por el usuario: pantalón de vestir + buzo (hoodie casual) también baja a muy_bueno, no solo calzado", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const buzo = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+    buzo.estilo = "casual";
+
+    const [resultado] = recomendar(pantalonVestir, [buzo], [pantalonVestir, buzo]);
+    expect(resultado.score.nivel).toBe("muy_bueno");
+    expect(resultado.score.explicacion).toContain("informal");
+  });
+
+  it("un SWEATER de vestir (no un buzo/hoodie) con un pantalón de vestir NO se degrada -- son categorías distintas con formalidad distinta", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const sweater = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweater.estilo = "clasico";
+
+    const [resultado] = recomendar(pantalonVestir, [sweater], [pantalonVestir, sweater]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
+
+  it("jean (casual) + campera urbana NO se degrada -- ambos en el mismo registro relajado", () => {
+    const jean = mkPrenda("pantalon", "#3B5998", 220, 44, 41);
+    jean.estilo = "casual";
+    const campera = mkPrenda("campera", "#1A1A1A", 0, 0, 10);
+    campera.estilo = "urbano";
+
+    const [resultado] = recomendar(jean, [campera], [jean, campera]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
+});
+
+describe("registroOutfit / advertenciasDeRegistro", () => {
+  it("toma el estilo del pantalón como registro del outfit completo", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const camisa = mkPrenda("camisa", "#FAFAF7", 0, 0, 98);
+    expect(registroOutfit([pantalonVestir, camisa])).toBe("Formal");
+  });
+
+  it("sin pantalón en el outfit, no hay registro (no se inventa)", () => {
+    const remera = mkPrenda("remera", "#3366CC", 220, 60, 50);
+    expect(registroOutfit([remera])).toBeNull();
+  });
+
+  it("sin estilo cargado en el pantalón, no hay registro", () => {
+    const pantalonSinEstilo = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    expect(registroOutfit([pantalonSinEstilo])).toBeNull();
+  });
+
+  it("avisa cuándo una prenda del outfit es más informal que el pantalón", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const buzo = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+    buzo.estilo = "casual";
+    const zapatillas = mkPrenda("calzado", "#F5F5F0", 0, 0, 95);
+    zapatillas.estilo = "urbano";
+
+    const avisos = advertenciasDeRegistro([pantalonVestir, buzo, zapatillas]);
+    expect(avisos).toHaveLength(2);
+    expect(avisos.some((a) => a.includes("buzo"))).toBe(true);
+    expect(avisos.some((a) => a.includes("calzado"))).toBe(true);
+  });
+
+  it("sin ninguna prenda más informal, no hay avisos", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const camisa = mkPrenda("camisa", "#FAFAF7", 0, 0, 98);
+    camisa.estilo = "clasico";
+    expect(advertenciasDeRegistro([pantalonVestir, camisa])).toEqual([]);
   });
 });
 

@@ -166,6 +166,21 @@ a {
   color: var(--warn);
 }
 
+/* Etiqueta de "registro" (Formal/Clásico/Urbano/Casual/Deportivo) en las
+   cards de Outfits -- mismo look que .nivel-muy_bueno (informativo, no
+   bueno/malo) a propósito: no es un veredicto de color, es un dato. */
+.registro-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent-strong);
+  text-transform: none;
+}
+
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;

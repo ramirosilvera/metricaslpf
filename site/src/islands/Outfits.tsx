@@ -3,9 +3,11 @@ import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
 import { CATALOGO_CON_HSL, presetAPrendaSintetica } from "../lib/catalogo";
 import {
+  advertenciasDeRegistro,
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
   diffPrendasEdicion,
+  registroOutfit,
   tanda,
   type OutfitParaComprar,
   type OutfitSugerido,
@@ -31,6 +33,27 @@ interface OutfitRow {
 
 function leyenda(prendas: Prenda[]): string {
   return prendas.map((p) => `${p.categoria} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ");
+}
+
+/** Pedido explícito del usuario: que la app diga a qué registro (Formal,
+ *  Clásico, Urbano, Casual...) corresponde el outfit, no solo que evite
+ *  combinaciones raras en silencio. Sin pantalón con `estilo` cargado en
+ *  el outfit no hay de dónde sacar el registro -- no se muestra nada en
+ *  vez de inventar un valor. */
+function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
+  const registro = registroOutfit(prendas);
+  if (!registro) return null;
+  const avisos = advertenciasDeRegistro(prendas);
+  return (
+    <div style={{ margin: "0.3rem 0 0" }}>
+      <span className="registro-badge">{registro}</span>
+      {avisos.length > 0 && (
+        <p style={{ margin: "0.3rem 0 0", fontSize: "0.7rem", color: "var(--text-muted)" }}>
+          ⚠ {avisos.join(", ")} -- combina en color, pero se nota el salto de registro.
+        </p>
+      )}
+    </div>
+  );
 }
 
 /** Cuántas tarjetas se muestran a la vez en "Te recomendamos" / "Ideas para
@@ -318,6 +341,7 @@ export default function Outfits() {
                   <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
                     {leyenda(o.prendas)}
                   </p>
+                  <RegistroBadge prendas={o.prendas} />
                 </div>
                 {errorEliminar[o.id] && (
                   <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorEliminar[o.id]}</p>
@@ -367,6 +391,7 @@ export default function Outfits() {
                     <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
                       {leyenda(s.prendas)}
                     </p>
+                    <RegistroBadge prendas={s.prendas} />
                   </div>
                   {errorGuardar[s.id] && (
                     <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>
@@ -406,14 +431,17 @@ export default function Outfits() {
             Combinan con lo que ya tenés. La prenda con el contorno punteado es la que todavía no tenés.
           </p>
           <div className="grid-prendas outfits-grid">
-            {paraComprar.map((s) => (
+            {paraComprar.map((s) => {
+              const prendasOutfit = [...s.prendasPropias, presetAPrendaSintetica(s.sugerida)];
+              return (
               <div key={s.id} className="card outfit-card">
-                <Maniqui prendas={[...s.prendasPropias, presetAPrendaSintetica(s.sugerida)]} />
+                <Maniqui prendas={prendasOutfit} />
                 <div style={{ minWidth: 0, textAlign: "center" }}>
                   <strong style={{ textTransform: "capitalize" }}>{s.sugerida.nombre}</strong>
                   <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
                     con {leyenda(s.prendasPropias)}
                   </p>
+                  <RegistroBadge prendas={prendasOutfit} />
                 </div>
                 <button
                   type="button"
@@ -424,7 +452,8 @@ export default function Outfits() {
                   + Ya la compré, cargarla
                 </button>
               </div>
-            ))}
+              );
+            })}
           </div>
           {poolParaComprar.length > VISIBLES_POR_SECCION && (
             <button

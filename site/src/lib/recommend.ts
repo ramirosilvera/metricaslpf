@@ -1,4 +1,4 @@
-import type { Categoria, HSL, NivelCompatibilidad, Prenda } from "./types";
+import type { Categoria, Estilo, HSL, NivelCompatibilidad, Prenda } from "./types";
 import { CATALOGO_CON_HSL, presetAPrendaSintetica, type PresetPrenda } from "./catalogo";
 
 // Umbrales calibrados en la revisión de Consejo (rondas 1-2). Nombrados y
@@ -244,40 +244,93 @@ function esDescoordinacionDeCuero(base: Prenda, candidato: Prenda): boolean {
   return false;
 }
 
-// Formalidad relativa de estilo -- mayor es más formal. "urbano" y
-// "casual" quedan parejos a propósito: ninguno es más formal que el otro,
-// son archetypes distintos del mismo registro relajado, no una escala.
+// Formalidad relativa de estilo -- mayor es más formal, agrupada en 3
+// escalones, no 5. "formal" y "clasico" quedan parejos a propósito: un
+// pantalón de vestir con una camisa blanca (formal + clasico) es la
+// combinación de vestir más estándar que existe, no una donde la camisa
+// "le queda abajo" al pantalón -- bug real encontrado escribiendo los
+// tests de esta misma regla (un sweater "clasico" con un pantalón
+// "formal" se degradaba a muy_bueno, y así también la camisa). Mismo
+// criterio para "urbano"/"casual": son archetypes distintos del mismo
+// registro relajado, ninguno es más formal que el otro.
 const FORMALIDAD_ESTILO: Partial<Record<NonNullable<Prenda["estilo"]>, number>> = {
-  formal: 3,
+  formal: 2,
   clasico: 2,
   urbano: 1,
   casual: 1,
   deportivo: 0,
 };
 
-/** El calzado no puede ser MENOS formal que el pantalón -- zapatillas con
- *  un pantalón de vestir es la asimetría real (62 de los outfits que arma
- *  armarOutfitsSugeridos hoy la tienen, verificado en la revisión de
- *  Consejo). La regla es asimétrica a propósito: al revés (zapatos de
- *  cuero con un jean) es un combo "smart casual" real y no se toca -- acá
- *  el pie SUBE por encima del pantalón en formalidad, no baja. Solo se usa
- *  cuando ambas prendas declaran `estilo` (si no, no hay con qué comparar,
- *  y no se inventa un valor por defecto). */
-function calzadoMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean {
-  const pantalon = base.categoria === "pantalon" ? base : candidato.categoria === "pantalon" ? candidato : null;
-  const calzado = pantalon === base ? candidato : base;
-  if (!pantalon || calzado.categoria !== "calzado") return false;
-  if (!pantalon.estilo || !calzado.estilo) return false;
-  const rangoPantalon = FORMALIDAD_ESTILO[pantalon.estilo];
-  const rangoCalzado = FORMALIDAD_ESTILO[calzado.estilo];
-  if (rangoPantalon === undefined || rangoCalzado === undefined) return false;
-  return rangoCalzado < rangoPantalon;
-}
-
 // duplicado a propósito -- ver el comentario sobre CATEGORIAS_TORSO más
 // abajo (esa constante se declara después porque la usa armarOutfits*, que
 // vive más abajo en el archivo; acá hace falta antes).
 const CATEGORIAS_CON_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater", "campera"];
+
+/** El calzado O el torso no pueden ser MENOS formales que el pantalón --
+ *  zapatillas con un pantalón de vestir, o un buzo (hoodie casual) con un
+ *  pantalón de vestir, son la misma asimetría real. Reportado dos veces
+ *  con ejemplos concretos en la revisión de Consejo: primero calzado
+ *  (zapatillas + pantalón de vestir), después el usuario mismo señaló el
+ *  caso de torso (pantalón de vestir + buzo + camisa, una combinación que
+ *  le sonó rara -- y con razón: "sweater" (de vestir) y "buzo" (hoodie
+ *  casual) son categorías DISTINTAS en el catálogo, con estilo distinto, y
+ *  el motor no las diferenciaba). La regla es asimétrica a propósito: al
+ *  revés (zapatos de cuero o un sweater de vestir con un jean) es un combo
+ *  "smart casual" real y no se toca -- acá lo que sube por encima del
+ *  pantalón en formalidad no baja el nivel, solo lo que se queda por
+ *  debajo. Solo se usa cuando ambas prendas declaran `estilo` (si no, no
+ *  hay con qué comparar, y no se inventa un valor por defecto). */
+function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean {
+  const pantalon = base.categoria === "pantalon" ? base : candidato.categoria === "pantalon" ? candidato : null;
+  const otra = pantalon === base ? candidato : base;
+  if (!pantalon) return false;
+  if (otra.categoria !== "calzado" && !CATEGORIAS_CON_TORSO.includes(otra.categoria)) return false;
+  if (!pantalon.estilo || !otra.estilo) return false;
+  const rangoPantalon = FORMALIDAD_ESTILO[pantalon.estilo];
+  const rangoOtra = FORMALIDAD_ESTILO[otra.estilo];
+  if (rangoPantalon === undefined || rangoOtra === undefined) return false;
+  return rangoOtra < rangoPantalon;
+}
+
+const ESTILO_LABEL: Record<Estilo, string> = {
+  formal: "Formal",
+  clasico: "Clásico",
+  urbano: "Urbano",
+  casual: "Casual",
+  deportivo: "Deportivo",
+};
+
+/** Pedido explícito del usuario: que la app diga a qué registro (laboral,
+ *  casual, urbano, clásico...) corresponde un outfit, no solo que evite
+ *  combinaciones raras en silencio. Usa el `estilo` del pantalón como
+ *  referencia del outfit completo -- es el ancla de todas las reglas de
+ *  formalidad de acá arriba, así que ya es "la" prenda que define el
+ *  registro en el resto del motor; no es un dato inventado nuevo, es el
+ *  mismo que ya se usa para decidir si el resto combina. Sin pantalón en
+ *  el outfit, o sin `estilo` cargado en él, no hay de dónde sacarlo -- no
+ *  se inventa un valor por defecto. */
+export function registroOutfit(prendas: Prenda[]): string | null {
+  const pantalon = prendas.find((p) => p.categoria === "pantalon");
+  return pantalon?.estilo ? ESTILO_LABEL[pantalon.estilo] : null;
+}
+
+/** Mensajes puntuales de por qué una prenda del outfit desentona en
+ *  registro con el pantalón (no en color -- eso ya lo cubre `recomendar`),
+ *  para mostrar junto al outfit en vez de dejar la democión a muy_bueno
+ *  escondida adentro del `explicacion` de un par que la UI de outfits
+ *  armados no siempre muestra. */
+export function advertenciasDeRegistro(prendas: Prenda[]): string[] {
+  const pantalon = prendas.find((p) => p.categoria === "pantalon");
+  if (!pantalon) return [];
+  const avisos: string[] = [];
+  for (const p of prendas) {
+    if (p.id === pantalon.id) continue;
+    if (prendaMenosFormalQuePantalon(pantalon, p)) {
+      avisos.push(`${p.categoria} más informal que el pantalón`);
+    }
+  }
+  return avisos;
+}
 
 /** Una corbata (u otro accesorio con `requiere_cuello`) necesita una camisa
  *  con cuello debajo -- no es una cuestión de color, es que no hay dónde
@@ -321,15 +374,16 @@ export function recomendar(
             );
 
       // El color puede combinar perfecto y el conjunto igual desentonar --
-      // un pantalón de vestir con zapatillas es "excelente" en HSL (los dos
-      // suelen ser neutros) pero no en formalidad. No se toca si el color
-      // ya venía con problemas (con_cuidado): ese motivo pesa más y no hay
-      // técnica de rescate que arregle "cambiá de calzado a uno más
-      // formal" en el mismo sentido que las demás.
-      if (score.nivel === "excelente" && calzadoMenosFormalQuePantalon(base, c)) {
+      // un pantalón de vestir con zapatillas (o un buzo casual) es
+      // "excelente" en HSL (los dos suelen ser neutros) pero no en
+      // formalidad. No se toca si el color ya venía con problemas
+      // (con_cuidado): ese motivo pesa más y no hay técnica de rescate que
+      // arregle "cambiá esto por algo más formal" en el mismo sentido que
+      // las demás.
+      if (score.nivel === "excelente" && prendaMenosFormalQuePantalon(base, c)) {
         score = {
           nivel: "muy_bueno",
-          explicacion: "El color combina, pero el calzado es más informal que el pantalón -- se nota el salto de registro.",
+          explicacion: `El color combina, pero ${c.categoria === "calzado" ? "el calzado" : "esta prenda"} es más informal que el pantalón -- se nota el salto de registro.`,
         };
       }
 
