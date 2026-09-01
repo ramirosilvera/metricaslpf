@@ -32,7 +32,17 @@ body {
 body {
   max-width: 640px;
   margin: 0 auto;
-  padding: 0 1rem calc(4.5rem + env(safe-area-inset-bottom));
+  /* viewport-fit=cover + display:standalone (manifest) hacen que el
+     contenido dibuje debajo de la status bar de iOS en la PWA instalada --
+     sin este padding-top, el header queda tapado por la hora/batería (bug
+     reportado con captura real). env() da 0 en navegador normal, así que
+     no afecta el layout fuera de standalone.
+     max(env(...), 20px): en iPhones SIN notch (SE, etc) env(safe-area-inset-top)
+     da 0 aunque la status bar mide igual ~20pt -- el max() cubre ese caso.
+     Insets en left/right: cubren el notch/Dynamic Island en landscape (iOS no
+     bloquea la rotación de una web app aunque el manifest pida portrait). */
+  padding: calc(1rem + max(env(safe-area-inset-top), 20px)) calc(1rem + env(safe-area-inset-right))
+    calc(4.5rem + env(safe-area-inset-bottom)) calc(1rem + env(safe-area-inset-left));
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
 }
@@ -349,8 +359,8 @@ details > summary {
 /* Barra flotante para guardar el outfit que se está armando. */
 .save-bar {
   position: fixed;
-  left: 1rem;
-  right: 1rem;
+  left: calc(1rem + env(safe-area-inset-left));
+  right: calc(1rem + env(safe-area-inset-right));
   bottom: calc(4.75rem + env(safe-area-inset-bottom));
   z-index: 20;
   display: flex;

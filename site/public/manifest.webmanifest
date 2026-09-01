@@ -9,7 +9,7 @@
   "id": "/metricaslpf/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#1c1512",
+  "background_color": "#fbf7f2",
   "theme_color": "#c8763f",
   "categories": ["lifestyle", "shopping", "utilities"],
   "icons": [

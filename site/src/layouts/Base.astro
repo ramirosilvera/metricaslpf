@@ -18,6 +18,17 @@ const path = Astro.url.pathname;
     <title>{title} · Matiz</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#c8763f" />
+    <!-- iOS 16.4+ ya honra display:standalone del manifest -- estos tags son
+         compatibilidad para versiones previas y para fijar explícitamente el
+         estilo de status bar. "default" (no black-translucent): con
+         black-translucent la status bar dibuja sus glifos (hora, batería,
+         señal) SIEMPRE en blanco, y la paleta de esta app es clara y sin modo
+         oscuro (--bg: #fbf7f2) -- quedarían ilegibles. Con "default" iOS
+         reserva la barra como opaca y empuja el contenido debajo solo. -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Matiz" />
     <link rel="manifest" href={`${import.meta.env.BASE_URL}manifest.webmanifest`} />
     <link rel="icon" href={`${import.meta.env.BASE_URL}favicon-32.png`} />
     <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
