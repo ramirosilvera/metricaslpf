@@ -2,7 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
 import { CATALOGO_CON_HSL, presetAPrendaSintetica } from "../lib/catalogo";
-import { armarOutfitsParaComprar, armarOutfitsSugeridos, type OutfitParaComprar, type OutfitSugerido } from "../lib/recommend";
+import {
+  armarOutfitsParaComprar,
+  armarOutfitsSugeridos,
+  tanda,
+  type OutfitParaComprar,
+  type OutfitSugerido,
+} from "../lib/recommend";
 import type { Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import Maniqui from "./Maniqui";
@@ -26,6 +32,14 @@ function leyenda(prendas: Prenda[]): string {
   return prendas.map((p) => `${p.categoria} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ");
 }
 
+/** Cuántas tarjetas se muestran a la vez en "Te recomendamos" / "Ideas para
+ *  comprar" -- fijo a propósito: el pool real (armarOutfitsSugeridos /
+ *  armarOutfitsParaComprar) puede tener muchas más variantes, pero mostrarlas
+ *  todas satura la pantalla. El botón "otras opciones" rota por el pool
+ *  (ver `tanda` en recommend.ts) en tandas de este tamaño, en vez de ir
+ *  agregando tarjetas nuevas. */
+const VISIBLES_POR_SECCION = 2;
+
 export default function Outfits() {
   const [outfits, setOutfits] = useState<OutfitConPrendas[] | null>(null);
   const [placard, setPlacard] = useState<Prenda[] | null>(null);
@@ -34,6 +48,8 @@ export default function Outfits() {
   const [guardadas, setGuardadas] = useState<Set<string>>(new Set());
   const [guardando, setGuardando] = useState<string | null>(null);
   const [errorGuardar, setErrorGuardar] = useState<Record<string, string>>({});
+  const [offsetSugeridos, setOffsetSugeridos] = useState(0);
+  const [offsetParaComprar, setOffsetParaComprar] = useState(0);
   const base = (import.meta.env.BASE_URL as string) || "/";
 
   useEffect(() => {
@@ -94,15 +110,24 @@ export default function Outfits() {
     [outfits],
   );
 
-  const sugeridos: OutfitSugerido[] = useMemo(() => {
+  const poolSugeridos: OutfitSugerido[] = useMemo(() => {
     if (!placard) return [];
     return armarOutfitsSugeridos(placard).filter((s) => !clavesGuardadas.has(s.id));
   }, [placard, clavesGuardadas]);
 
-  const paraComprar: OutfitParaComprar[] = useMemo(() => {
+  const poolParaComprar: OutfitParaComprar[] = useMemo(() => {
     if (!placard) return [];
     return armarOutfitsParaComprar(placard, CATALOGO_CON_HSL);
   }, [placard]);
+
+  const sugeridos = useMemo(
+    () => tanda(poolSugeridos, offsetSugeridos, VISIBLES_POR_SECCION),
+    [poolSugeridos, offsetSugeridos],
+  );
+  const paraComprar = useMemo(
+    () => tanda(poolParaComprar, offsetParaComprar, VISIBLES_POR_SECCION),
+    [poolParaComprar, offsetParaComprar],
+  );
 
   async function guardarSugerido(sugerido: OutfitSugerido) {
     setGuardando(sugerido.id);
@@ -253,6 +278,16 @@ export default function Outfits() {
               );
             })}
           </div>
+          {poolSugeridos.length > VISIBLES_POR_SECCION && (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", marginTop: "0.6rem" }}
+              onClick={() => setOffsetSugeridos((prev) => prev + VISIBLES_POR_SECCION)}
+            >
+              🔄 Ver otras opciones
+            </button>
+          )}
         </section>
       )}
 
@@ -285,6 +320,16 @@ export default function Outfits() {
               </div>
             ))}
           </div>
+          {poolParaComprar.length > VISIBLES_POR_SECCION && (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", marginTop: "0.6rem" }}
+              onClick={() => setOffsetParaComprar((prev) => prev + VISIBLES_POR_SECCION)}
+            >
+              🔄 Ver otras opciones
+            </button>
+          )}
         </section>
       )}
     </div>

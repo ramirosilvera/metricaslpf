@@ -6,6 +6,7 @@ import {
   esNeutro,
   hueDist,
   scoreColor,
+  tanda,
   tecnicaRescate,
   valueDist,
 } from "./recommend";
@@ -197,6 +198,19 @@ describe("armarOutfitsSugeridos", () => {
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas).toHaveLength(2);
   });
+
+  it("con varios torsos propios que combinan, arma una variante por cada uno (pool para 'otras opciones')", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), // negro, neutro -- combina con cualquier torso
+      mkPrenda("remera", "#3366CC", 220, 60, 50),
+      mkPrenda("camisa", "#F5F5F0", 0, 5, 95),
+      mkPrenda("sweater", "#6B2737", 350, 55, 35),
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(3);
+    const torsos = outfits.map((o) => o.prendas.find((p) => p.categoria !== "pantalon")?.categoria).sort();
+    expect(torsos).toEqual(["camisa", "remera", "sweater"]);
+  });
 });
 
 describe("armarOutfitsParaComprar", () => {
@@ -241,6 +255,43 @@ describe("armarOutfitsParaComprar", () => {
       { id: "campera-verde", nombre: "Campera verde", categoria: "campera", colorHex: "#33CC33", hsl: { h: 120, s: 60, l: 52 } },
     ];
     expect(armarOutfitsParaComprar(placard, catalogoQueNoCombina)).toHaveLength(0);
+  });
+
+  it("con varias prendas del catálogo que combinan, arma una variante por cada una (pool para 'otras opciones')", () => {
+    const placard = [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)]; // negro, neutro -- combina con cualquiera
+    const catalogoConVarias: (PresetPrenda & { hsl: HSL })[] = [
+      { id: "campera-pluma-negra", nombre: "Campera de pluma negra", categoria: "campera", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+      { id: "campera-pluma-azul", nombre: "Campera de pluma azul marino", categoria: "campera", colorHex: "#1F2A44", hsl: { h: 224, s: 38, l: 20 } },
+      { id: "campera-pluma-beige", nombre: "Campera de pluma beige", categoria: "campera", colorHex: "#D8C7A1", hsl: { h: 39, s: 40, l: 76 } },
+    ];
+    const sugerencias = armarOutfitsParaComprar(placard, catalogoConVarias);
+    expect(sugerencias).toHaveLength(3);
+    expect(sugerencias.map((s) => s.sugerida.id).sort()).toEqual(
+      ["campera-pluma-azul", "campera-pluma-beige", "campera-pluma-negra"].sort(),
+    );
+  });
+});
+
+describe("tanda", () => {
+  it("pool vacío -> tanda vacía", () => {
+    expect(tanda([1, 2, 3], 0, 0)).toEqual([]);
+    expect(tanda([], 0, 2)).toEqual([]);
+  });
+
+  it("pool más chico que la cantidad pedida -> se muestra entero, sin repetir", () => {
+    expect(tanda(["a", "b"], 0, 5)).toEqual(["a", "b"]);
+  });
+
+  it("offset dentro de rango -> tanda consecutiva desde ahí", () => {
+    expect(tanda([1, 2, 3, 4, 5], 1, 2)).toEqual([2, 3]);
+  });
+
+  it("da la vuelta al pasarse del final (para que 'otras opciones' nunca se quede sin nada)", () => {
+    expect(tanda([1, 2, 3, 4, 5], 4, 2)).toEqual([5, 1]);
+  });
+
+  it("offset mayor al tamaño del pool (p.ej. el pool se achicó tras guardar un outfit) no rompe -- sigue dando la vuelta", () => {
+    expect(tanda([1, 2, 3], 10, 2)).toEqual([2, 3]);
   });
 });
 
