@@ -51,7 +51,12 @@ export interface PresetPrenda {
  */
 export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // --- Remeras ---
-  { id: "remera-blanca", nombre: "Remera blanca", categoria: "remera", colorHex: "#F5F5F0", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  // #F5F5F5 (gris/blanco neutro, s=0) en vez de #F5F5F0 -- pedido explícito
+  // del usuario: el tono anterior tenía una saturación de 20% (matiz
+  // amarillento apenas perceptible), suficiente para que nombreColor()
+  // (color.ts) lo clasificara como "Blanco roto" en vez de "Blanco" (el
+  // umbral es s<=15). Mismo criterio para camisa-blanca más abajo.
+  { id: "remera-blanca", nombre: "Remera blanca", categoria: "remera", colorHex: "#F5F5F5", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "remera-negra", nombre: "Remera negra", categoria: "remera", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "remera-gris", nombre: "Remera gris", categoria: "remera", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "remera-azul-marino", nombre: "Remera azul marino", categoria: "remera", colorHex: "#1F2A44", textura: "algodon", estilo: "casual", ocasion: "casual" },
@@ -70,7 +75,9 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "remera-deportiva-gris", nombre: "Remera deportiva gris", categoria: "remera", colorHex: "#8C8C8C", estilo: "deportivo", ocasion: "casual" },
 
   // --- Camisas (oficina) ---
-  { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#FAFAF7", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  // #F5F5F5 -- ver el comentario de remera-blanca más arriba. #FAFAF7
+  // (s=23) también clasificaba como "Blanco roto" en vez de "Blanco".
+  { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#F5F5F5", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   // "urbano" a propósito, no un descuido: una camisa negra lee más
   // "urban professional" que clásica, a diferencia de blanca/celeste/gris.
