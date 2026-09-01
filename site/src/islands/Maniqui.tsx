@@ -1,6 +1,6 @@
 import { contornoHsl, luzHsl, sombraHsl } from "../lib/color";
 import PrendaIcon from "./PrendaIcon";
-import type { Categoria, Prenda } from "../lib/types";
+import type { Categoria, Prenda, Textura } from "../lib/types";
 
 type Capa = "torso" | "piernas" | "pies" | "accesorio";
 
@@ -67,16 +67,91 @@ function agruparPorCapa(prendas: Prenda[]): {
   return { principal, cuelloSecundario, extras };
 }
 
+// texturas que se dibujan como un patrón repetido (trama de tela) vs. las
+// que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
+// null/una textura sin mapear acá (p.ej. sin cargar) no dibuja nada extra.
+const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_grueso", "lana", "algodon", "lino"];
+const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso"];
+
+/** El <pattern> real por textura -- son ilustraciones esquemáticas a
+ *  propósito (líneas/formas simples que se repiten), no una textura
+ *  fotorrealista: tienen que seguir leyéndose limpias encima de una prenda
+ *  de ~80x100px. */
+function PatronTextura({ id, textura, tono }: { id: string; textura: Textura; tono: string }) {
+  switch (textura) {
+    case "denim":
+      // trama diagonal (sarga) -- la seña visual más asociada al jean.
+      return (
+        <pattern id={id} width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="3" stroke={tono} strokeWidth="0.6" />
+        </pattern>
+      );
+    case "pana":
+    case "corderoy":
+      // corderoy es sinónimo de pana en el enum del schema -- mismo patrón.
+      return (
+        <pattern id={id} width="2.6" height="4" patternUnits="userSpaceOnUse">
+          <line x1="0.6" y1="0" x2="0.6" y2="4" stroke={tono} strokeWidth="0.9" />
+        </pattern>
+      );
+    case "tejido_grueso":
+      // punto grueso/trenzado -- rombos más grandes que el de lana.
+      return (
+        <pattern id={id} width="9" height="9" patternUnits="userSpaceOnUse">
+          <path d="M0 4.5 L4.5 0 L9 4.5 L4.5 9 Z" fill="none" stroke={tono} strokeWidth="0.9" />
+        </pattern>
+      );
+    case "lana":
+      // punto fino -- una "v" de tejido repetida, más chica que el grueso.
+      return (
+        <pattern id={id} width="4" height="4" patternUnits="userSpaceOnUse">
+          <path d="M0 4 L2 0 L4 4" fill="none" stroke={tono} strokeWidth="0.5" />
+        </pattern>
+      );
+    case "algodon":
+    case "lino":
+      // trama plana simple -- lino con la cuadrícula más grande (fibra más
+      // gruesa/irregular que el algodón).
+      return (
+        <pattern id={id} width={textura === "lino" ? 4.5 : 3} height={textura === "lino" ? 4.5 : 3} patternUnits="userSpaceOnUse">
+          <path
+            d={`M0 0 H${textura === "lino" ? 4.5 : 3} M0 0 V${textura === "lino" ? 4.5 : 3}`}
+            stroke={tono}
+            strokeWidth="0.3"
+          />
+        </pattern>
+      );
+    default:
+      return null;
+  }
+}
+
 /** Relleno con volumen simple: un degradé de dos paradas (mismo matiz, más
  *  claro arriba-izquierda / más oscuro abajo-derecha) en vez de un color
  *  plano -- el mayor salto de realismo por esfuerzo que hay: no agrega
- *  geometría nueva, solo usa el h/s/l que cada prenda ya tiene guardado. El
- *  id del <linearGradient> incluye el id de la prenda porque puede haber
- *  varios Maniqui (uno por outfit) en la misma página -- un id de degradé
- *  repetido pisaría el relleno de otra prenda. */
-function Volumen({ prenda, hijos }: { prenda: Prenda; hijos: (fill: string, stroke: string) => React.ReactNode }) {
+ *  geometría nueva, solo usa el h/s/l que cada prenda ya tiene guardado.
+ *  Además, si la prenda tiene `textura` cargada, se suma un patrón de tela
+ *  (denim/pana/lana/tejido_grueso/algodón/lino) o un brillo diagonal (seda/
+ *  cuero_liso) por encima del degradé -- el pedido explícito del usuario de
+ *  "textura y detalles adecuados a cada prenda". Los ids de <linearGradient>
+ *  y <pattern> incluyen el id de la prenda porque puede haber varios
+ *  Maniqui (uno por outfit) en la misma página -- un id repetido pisaría el
+ *  relleno de otra prenda. */
+function Volumen({
+  prenda,
+  hijos,
+}: {
+  prenda: Prenda;
+  hijos: (fill: string, stroke: string, patron: string | undefined) => React.ReactNode;
+}) {
   const gradId = `grad-${prenda.id}`;
-  const { color_h: h, color_s: s, color_l: l } = prenda;
+  const patId = `pat-${prenda.id}`;
+  const brilloId = `brillo-${prenda.id}`;
+  const { color_h: h, color_s: s, color_l: l, textura } = prenda;
+  const conPatron = textura && TEXTURA_PATRON.includes(textura);
+  const conBrillo = textura && TEXTURA_BRILLO.includes(textura);
+  const patron = conPatron ? `url(#${patId})` : conBrillo ? `url(#${brilloId})` : undefined;
+
   return (
     <>
       <defs>
@@ -84,13 +159,34 @@ function Volumen({ prenda, hijos }: { prenda: Prenda; hijos: (fill: string, stro
           <stop offset="0%" stopColor={luzHsl(h, s, l)} />
           <stop offset="100%" stopColor={sombraHsl(h, s, l)} />
         </linearGradient>
+        {conPatron && textura && <PatronTextura id={patId} textura={textura} tono={contornoHsl(h, s, l)} />}
+        {conBrillo && (
+          <linearGradient id={brilloId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="35%" stopColor="white" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="white" stopOpacity="0" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+        )}
       </defs>
-      {hijos(`url(#${gradId})`, contornoHsl(h, s, l))}
+      {hijos(`url(#${gradId})`, contornoHsl(h, s, l), patron)}
     </>
   );
 }
 
 const strokeProps = { strokeWidth: 1, vectorEffect: "non-scaling-stroke" as const };
+
+/** Una forma "de tela": el relleno con volumen de siempre + (si corresponde)
+ *  una segunda copia del mismo trazo con el patrón/brillo de textura
+ *  encima, a opacidad reducida para no perder el color de fondo. */
+function Forma({ d, fill, stroke, patron }: { d: string; fill: string; stroke: string; patron?: string }) {
+  return (
+    <>
+      <path d={d} fill={fill} stroke={stroke} {...strokeProps} />
+      {patron && <path d={d} fill={patron} opacity={0.55} />}
+    </>
+  );
+}
 
 function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   const mangaCorta = MANGA_CORTA.includes(prenda.categoria);
@@ -103,32 +199,32 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   return (
     <Volumen
       prenda={prenda}
-      hijos={(fill, stroke) => (
+      hijos={(fill, stroke, patron) => (
         <>
           {/* capucha del buzo, dibujada primero para que el cuerpo la tape parcialmente */}
-          {cuelloD && <path d={cuelloD} fill={fill} stroke={stroke} {...strokeProps} />}
+          {cuelloD && <Forma d={cuelloD} fill={fill} stroke={stroke} patron={patron} />}
 
           {/* mangas -- paths propios que arrancan en el hombro y siguen el
               brazo, para que no "floten" en el aire como cuando eran parte
               de un ícono cuadrado genérico. */}
           {mangaCorta ? (
             <>
-              <path d="M14 48 Q2 52 2 72 Q2 86 14 91 Q22 87 24 78 Q20 60 14 48 Z" fill={fill} stroke={stroke} {...strokeProps} />
-              <path d="M106 48 Q118 52 118 72 Q118 86 106 91 Q98 87 96 78 Q100 60 106 48 Z" fill={fill} stroke={stroke} {...strokeProps} />
+              <Forma d="M14 48 Q2 52 2 72 Q2 86 14 91 Q22 87 24 78 Q20 60 14 48 Z" fill={fill} stroke={stroke} patron={patron} />
+              <Forma d="M106 48 Q118 52 118 72 Q118 86 106 91 Q98 87 96 78 Q100 60 106 48 Z" fill={fill} stroke={stroke} patron={patron} />
             </>
           ) : (
             <>
-              <path
+              <Forma
                 d="M14 48 Q4 52 3 66 L1 146 Q1 156 9 157 L19 157 Q23 156 22 146 L21 66 Q20 54 14 48 Z"
                 fill={fill}
                 stroke={stroke}
-                {...strokeProps}
+                patron={patron}
               />
-              <path
+              <Forma
                 d="M106 48 Q116 52 117 66 L119 146 Q119 156 111 157 L101 157 Q97 156 98 146 L99 66 Q100 54 106 48 Z"
                 fill={fill}
                 stroke={stroke}
-                {...strokeProps}
+                patron={patron}
               />
             </>
           )}
@@ -136,11 +232,11 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           {/* cuerpo del torso -- un poco más ancho que el maniquí de base
               (18-102 en los hombros) para que la tela "caiga por fuera" en
               vez de coincidir exacto con el borde del cuerpo. */}
-          <path
+          <Forma
             d="M14 46 Q12 62 20 76 Q26 100 32 118 L32 146 L88 146 L88 118 Q94 100 100 76 Q108 62 106 46 Q88 34 60 33 Q32 34 14 46 Z"
             fill={fill}
             stroke={stroke}
-            {...strokeProps}
+            patron={patron}
           />
 
           {/* detalle de cuello por categoría -- simple a propósito, esto es
@@ -172,24 +268,14 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
   return (
     <Volumen
       prenda={prenda}
-      hijos={(fill, stroke) => (
+      hijos={(fill, stroke, patron) => (
         <>
           {/* dos piernas propias (más anchas que las del maniquí de base
               en 3-4u por lado) en vez de un solo bloque -- así no se ven
               tiritas del maniquí asomando a los costados ni en la
               entrepierna. */}
-          <path
-            d="M30 140 L33 195 Q34 210 38 228 L54 228 Q56 210 58 195 L60 140 Z"
-            fill={fill}
-            stroke={stroke}
-            {...strokeProps}
-          />
-          <path
-            d="M90 140 L87 195 Q86 210 82 228 L66 228 Q64 210 62 195 L60 140 Z"
-            fill={fill}
-            stroke={stroke}
-            {...strokeProps}
-          />
+          <Forma d="M30 140 L33 195 Q34 210 38 228 L54 228 Q56 210 58 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} />
+          <Forma d="M90 140 L87 195 Q86 210 82 228 L66 228 Q64 210 62 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} />
           {/* cinturilla */}
           <path
             d="M28 136 H92 V146 H28 Z"
@@ -208,14 +294,14 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
   return (
     <Volumen
       prenda={prenda}
-      hijos={(fill, stroke) => (
+      hijos={(fill, stroke, patron) => (
         <>
           {/* dos zapatos, no un bloque único -- cada uno con su propia
               suela (la franja oscura) porque eso, más que la forma, es lo
               que lee como "zapatilla" y no "piedra". */}
-          <path d="M26 226 Q20 228 20 236 L22 241 Q24 244 32 244 L54 244 Q58 244 58 238 L56 226 Z" fill={fill} stroke={stroke} {...strokeProps} />
+          <Forma d="M26 226 Q20 228 20 236 L22 241 Q24 244 32 244 L54 244 Q58 244 58 238 L56 226 Z" fill={fill} stroke={stroke} patron={patron} />
           <path d="M20 241 H58 V246 Q58 248 55 248 L23 248 Q20 248 20 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
-          <path d="M94 226 Q100 228 100 236 L98 241 Q96 244 88 244 L66 244 Q62 244 62 238 L64 226 Z" fill={fill} stroke={stroke} {...strokeProps} />
+          <Forma d="M94 226 Q100 228 100 236 L98 241 Q96 244 88 244 L66 244 Q62 244 62 238 L64 226 Z" fill={fill} stroke={stroke} patron={patron} />
           <path d="M62 241 H100 V246 Q100 248 97 248 L65 248 Q62 248 62 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
@@ -227,9 +313,9 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
   return (
     <Volumen
       prenda={prenda}
-      hijos={(fill, stroke) => (
+      hijos={(fill, stroke, patron) => (
         <>
-          <path d="M32 143 H88 V151 H32 Z" fill={fill} stroke={stroke} {...strokeProps} />
+          <Forma d="M32 143 H88 V151 H32 Z" fill={fill} stroke={stroke} patron={patron} />
           <rect x="52" y="140" width="16" height="14" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
         </>
       )}
@@ -241,12 +327,13 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
  *  lista de íconos sueltos -- una silueta de maniquí de sastrería (sin
  *  cara, headless, con brazos y cintura marcada) con cada prenda dibujada
  *  directamente en las coordenadas del cuerpo (torso con mangas propias,
- *  dos piernas, dos zapatos con suela) en vez de un ícono cuadrado
- *  reescalado. Los íconos de PrendaIcon.tsx siguen siendo la geometría
- *  correcta para los usos "símbolo chico" (Placard, Combinaciones, Probar,
- *  catálogo) -- a esos tamaños (~48-64px) el trabajo del dibujo es que se
- *  reconozca la categoría al instante, no parecer ropa real, así que no
- *  comparten path data con las formas de acá. */
+ *  dos piernas, dos zapatos con suela, patrón de tela o brillo según la
+ *  textura real de cada prenda) en vez de un ícono cuadrado reescalado.
+ *  Los íconos de PrendaIcon.tsx siguen siendo la geometría correcta para
+ *  los usos "símbolo chico" (Placard, Combinaciones, Probar, catálogo) --
+ *  a esos tamaños (~48-64px) el trabajo del dibujo es que se reconozca la
+ *  categoría al instante, no parecer ropa real, así que no comparten path
+ *  data con las formas de acá. */
 export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
   const { principal, cuelloSecundario, extras } = agruparPorCapa(prendas);
   const neutro = "var(--border)";

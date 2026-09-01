@@ -30,9 +30,10 @@ export interface PresetPrenda {
  *   clima real de cada usuario (una remera blanca sirve en verano Y en
  *   entretiempo) -- forzar una estación acá haría más daño que bien.
  * - `textura` solo cuando el nombre de la prenda ya la implica sin
- *   ambigüedad (zapatos de cuero -> cuero_liso). Denim/jean no está en el
- *   enum de texturas del schema (algodón/seda/cuero/lino/lana/pana/
- *   corderoy/tejido grueso) -- no se fuerza un valor falso, queda vacío.
+ *   ambigüedad (zapatos de cuero -> cuero_liso, jean -> denim). Las
+ *   zapatillas y las camperas no-jean quedan sin textura a propósito: el
+ *   material varía demasiado (cuero, lona, nylon...) para asumir uno sin
+ *   inventar un dato que no es real.
  */
 export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // --- Remeras ---
@@ -50,8 +51,8 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
 
   // --- Pantalones ---
-  { id: "jean-azul", nombre: "Jean azul", categoria: "pantalon", colorHex: "#3B5998", estilo: "casual", ocasion: "casual" },
-  { id: "jean-negro", nombre: "Jean negro", categoria: "pantalon", colorHex: "#232323", estilo: "casual", ocasion: "casual" },
+  { id: "jean-azul", nombre: "Jean azul", categoria: "pantalon", colorHex: "#3B5998", textura: "denim", estilo: "casual", ocasion: "casual" },
+  { id: "jean-negro", nombre: "Jean negro", categoria: "pantalon", colorHex: "#232323", textura: "denim", estilo: "casual", ocasion: "casual" },
   { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo" },
@@ -76,7 +77,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
 
   // --- Camperas ---
   { id: "campera-negra", nombre: "Campera negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
-  { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", estilo: "casual", ocasion: "casual" },
+  { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", textura: "denim", estilo: "casual", ocasion: "casual" },
   { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual" },
 
   // --- Accesorios ---

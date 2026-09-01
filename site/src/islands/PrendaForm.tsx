@@ -17,7 +17,7 @@ const CATEGORIAS: Categoria[] = [
   "campera",
   "accesorio",
 ];
-const TEXTURAS: Textura[] = ["algodon", "seda", "cuero_liso", "lino", "lana", "pana", "corderoy", "tejido_grueso"];
+const TEXTURAS: Textura[] = ["algodon", "seda", "cuero_liso", "lino", "lana", "pana", "corderoy", "tejido_grueso", "denim"];
 const ESTILOS: Estilo[] = ["casual", "formal", "deportivo", "urbano", "clasico"];
 const OCASIONES: Ocasion[] = ["casual", "laburo", "formal"];
 const ESTACIONES: Estacion[] = ["verano", "invierno", "entretiempo"];
