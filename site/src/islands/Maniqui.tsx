@@ -235,7 +235,7 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   const cuelloD =
     prenda.categoria === "buzo"
       ? // capucha: una forma extra detrás del cuello
-        "M42 30 Q60 14 78 30 Q78 24 60 20 Q42 24 42 30 Z"
+        "M48 30 Q60 14 72 30 Q72 24 60 20 Q48 24 48 30 Z"
       : null;
 
   return (
@@ -251,20 +251,20 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               de un ícono cuadrado genérico. */}
           {mangaCorta ? (
             <>
-              <Forma d="M12 48 Q0 51 0 64 Q0 74 12 77 Q20 74 22 68 Q18 56 12 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
-              <Forma d="M108 48 Q120 51 120 64 Q120 74 108 77 Q100 74 98 68 Q102 56 108 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
+              <Forma d="M29 48 Q21 51 21 64 Q21 74 29 77 Q34 74 35 68 Q33 56 29 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
+              <Forma d="M91 48 Q99 51 99 64 Q99 74 91 77 Q86 74 85 68 Q87 56 91 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
             </>
           ) : (
             <>
               <Forma
-                d="M12 48 Q4 51 3 60 L1 114 Q1 120 9 121 L19 121 Q23 120 22 114 L21 60 Q20 52 12 48 Z"
+                d="M29 48 Q24 51 23 60 L22 114 Q22 120 27 121 L33 121 Q36 120 35 114 L35 60 Q34 52 29 48 Z"
                 fill={fill}
                 stroke={stroke}
                 patron={patron}
                 sugerida={sugerida}
               />
               <Forma
-                d="M108 48 Q116 51 117 60 L119 114 Q119 120 111 121 L101 121 Q97 120 98 114 L99 60 Q100 52 108 48 Z"
+                d="M91 48 Q96 51 97 60 L98 114 Q98 120 93 121 L87 121 Q84 120 85 114 L85 60 Q86 52 91 48 Z"
                 fill={fill}
                 stroke={stroke}
                 patron={patron}
@@ -274,33 +274,33 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           )}
 
           {/* cuerpo del torso -- un poco más ancho que el maniquí de base
-              (12-108 en los hombros) para que la tela "caiga por fuera" en
-              vez de coincidir exacto con el borde del cuerpo. Alto
-              recalculado con proporciones reales (3ra pasada, pedido
-              explícito del usuario de revisar contra anatomía real): las dos
-              pasadas anteriores solo ajustaban el ANCHO (hombro/cintura) y
-              dejaban el LARGO del torso sin verificar contra ninguna regla
-              real -- la entrepierna terminaba al 58% de la altura total en
-              vez del 50% exacto que marca tanto el canon clásico de
-              sastrería como datos antropométricos reales verificados
-              (altura de hombro ≈82% de la estatura, guía de antropometría
-              del Departamento de Defensa de EE.UU.), y la muñeca (extremo
-              de manga) quedaba muy por debajo de la altura de la
-              entrepierna en vez de a la misma altura -- "la muñeca del
-              brazo colgando cae al nivel del hueso púbico" es la regla
-              clásica de dibujo anatómico, confirmada por búsqueda antes de
-              aplicarla (ver comentario del maniquí de base). Resultado:
-              torso ~19u más largo y brazos más largos de lo real, la
-              combinación típica que hace leer una figura como
-              desproporcionada aunque el ancho esté bien. El torso ahora
-              termina en y=126 (hombro=46, largo=80, la entrepierna del
-              maniquí de base cae en y=120 = exactamente 50% de la altura
-              total, ver comentario en el maniquí de base más abajo). El
-              ancho (12-108 hombros, 26-94 cadera) NO cambió -- ese ajuste ya
-              estaba resuelto en la pasada anterior y no es lo que el
-              usuario reportó esta vez. */}
+              para que la tela "caiga por fuera" en vez de coincidir exacto
+              con el borde del cuerpo. ANCHO recalculado en la 4ta pasada
+              (el usuario insistió: "no parece el cuerpo de un hombre real",
+              pidiendo medidas estandarizadas reales) -- las pasadas
+              anteriores solo habían tocado la relación hombro/cintura
+              (ancho relativo) y el largo (alto de torso, hombro a
+              entrepierna), pero nunca el ancho ABSOLUTO: el hombro medía
+              96u sobre una altura total de ~229u, un 42% -- casi el doble
+              del 22-23% real (ancho de hombro/biacromial en adultos
+              varones, verificado por búsqueda) y muy por encima de la
+              convención de ilustración de figura ("hombro ≈2-2.5 cabezas",
+              también verificada). El síntoma visible: con el largo ya
+              corregido en la pasada anterior (torso más corto, ver más
+              abajo) pero el ancho intacto, el torso quedó MÁS ANCHO QUE
+              ALTO (96 ancho / 80 alto) -- un torso real es ~20-35% más alto
+              que ancho, no al revés. Se escalan TODAS las coordenadas X del
+              cuerpo (torso/brazos/piernas/pies/accesorios) un 65% respecto
+              al centro (x=60) -- 27% de la altura total en el hombro,
+              todavía con algo de margen sobre el 22-23% real puro para que
+              la prenda se siga leyendo a los ~180px que usa la app, pero
+              muy por debajo del 42% anterior. La relación hombro/cintura
+              (71%, ya validada en la pasada anterior como la principal seña
+              de género en una silueta sin cara) se mantiene igual porque el
+              escalado es uniforme -- no se volvió a tocar esa proporción,
+              solo la magnitud absoluta. */}
           <Forma
-            d="M12 46 Q14 59 18 70 Q22 89 26 104 L26 126 L94 126 L94 104 Q98 89 102 70 Q106 59 108 46 Q100 38 81 40 Q60 44 39 40 Q20 38 12 46 Z"
+            d="M29 46 Q30 59 33 70 Q35 89 38 104 L38 126 L82 126 L82 104 Q85 89 87 70 Q90 59 91 46 Q86 38 74 40 Q60 44 46 40 Q34 38 29 46 Z"
             fill={fill}
             stroke={stroke}
             patron={patron}
@@ -313,19 +313,19 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               cuello, más angosto, en vez de flotar sobre el hueco viejo. */}
           {prenda.categoria === "camisa" && (
             <>
-              <path d="M46 32 L60 42 L52 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <path d="M74 32 L60 42 L68 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <path d="M51 32 L60 42 L55 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <path d="M69 32 L60 42 L65 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
               <line x1="60" y1="42" x2="60" y2="124" stroke={stroke} {...strokeProps} />
             </>
           )}
           {prenda.categoria === "sweater" && (
-            <path d="M39 40 Q60 46 81 40" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
+            <path d="M46 40 Q60 46 74 40" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
           )}
           {prenda.categoria === "campera" && (
             <>
               <line x1="60" y1="42" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
-              <path d="M44 34 L60 48 L52 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <path d="M76 34 L60 48 L68 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <path d="M50 34 L60 48 L55 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <path d="M70 34 L60 48 L65 38 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
             </>
           )}
         </>
@@ -343,17 +343,17 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
           {/* dos piernas propias (más anchas que las del maniquí de base
               en 3-4u por lado) en vez de un solo bloque -- así no se ven
               tiritas del maniquí asomando a los costados ni en la
-              entrepierna. Ancho sin cambios (ver TorsoCuerpo). Largo
-              recalculado en la 3ra pasada -- ver el comentario largo en
-              TorsoCuerpo: la cadera ahora arranca en y=120 (antes 140,
-              donde caía al 58% de la altura total en vez del 50% real) y
-              las piernas se alargan para compensar, como corresponde a un
-              torso más corto y piernas más largas en la proporción real. */}
-          <Forma d="M26 120 L29 185 Q30 203 35 224 L53 224 Q55 203 58 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <Forma d="M94 120 L91 185 Q90 203 85 224 L67 224 Q65 203 62 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+              entrepierna. Ancho reescalado en la 4ta pasada junto con todo
+              el resto del cuerpo (ver el comentario largo en TorsoCuerpo) --
+              mismo factor (65% desde el centro) que hombros/torso, para que
+              las piernas se sigan viendo conectadas al nuevo torso más
+              angosto en vez de sobresalir más anchas que la cadera. Largo
+              sin cambios (ver comentario en el maniquí de base). */}
+          <Forma d="M38 120 L40 185 Q40 203 44 224 L55 224 Q57 203 59 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M82 120 L80 185 Q80 203 76 224 L65 224 Q63 203 61 185 L60 120 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           {/* cinturilla */}
           <path
-            d="M24 116 H96 V126 H24 Z"
+            d="M37 116 H83 V126 H37 Z"
             fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
             stroke={stroke}
             {...strokeProps}
@@ -385,10 +385,10 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
               consistente con piernas más largas), el resto de las
               coordenadas se corrió el mismo delta (-4) para no cambiar el
               tamaño/forma del zapato en sí, solo su posición. */}
-          <Forma d="M27 222 Q21 224 21 232 L23 237 Q25 240 33 240 L61 240 Q65 240 65 234 L63 222 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M21 237 H65 V242 Q65 244 62 244 L24 244 Q21 244 21 241 Z" fill={suela} stroke={stroke} {...strokeProps} />
-          <Forma d="M93 222 Q99 224 99 232 L97 237 Q95 240 87 240 L59 240 Q55 240 55 234 L57 222 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M99 237 H55 V242 Q55 244 58 244 L96 244 Q99 244 99 241 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          <Forma d="M39 222 Q35 224 35 232 L36 237 Q37 240 42 240 L61 240 Q63 240 63 234 L62 222 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <path d="M35 237 H63 V242 Q63 244 61 244 L37 244 Q35 244 35 241 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          <Forma d="M81 222 Q85 224 85 232 L84 237 Q83 240 78 240 L59 240 Q57 240 57 234 L58 222 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <path d="M85 237 H57 V242 Q57 244 59 244 L83 244 Q85 244 85 241 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
     />
@@ -406,8 +406,8 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
         prenda={prenda}
         hijos={(fill, stroke, patron) => (
           <>
-            <Forma d="M26 123 H94 V131 H26 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-            <rect x="52" y="120" width="16" height="14" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
+            <Forma d="M38 123 H82 V131 H38 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+            <rect x="55" y="120" width="10" height="14" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
           </>
         )}
       />
@@ -422,8 +422,8 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
         prenda={prenda}
         hijos={(fill, stroke, patron) => (
           <>
-            <Forma d="M55 38 L65 38 L62 46 L58 46 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-            <Forma d="M58 46 L62 46 L70 85 L60 100 L50 85 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+            <Forma d="M57 38 L63 38 L61 46 L59 46 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+            <Forma d="M59 46 L61 46 L66 85 L60 100 L54 85 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           </>
         )}
       />
@@ -438,9 +438,9 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
       prenda={prenda}
       hijos={(fill, stroke, patron) => (
         <>
-          <Forma d="M40 40 Q60 28 80 40 Q72 50 60 50 Q48 50 40 40 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <Forma d="M46 46 H58 V93 Q52 96 46 93 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <Forma d="M64 46 H76 V82 Q70 85 64 82 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M47 40 Q60 28 73 40 Q68 50 60 50 Q52 50 47 40 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M51 46 H59 V93 Q55 96 51 93 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M63 46 H70 V82 Q66 85 63 82 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
         </>
       )}
     />
@@ -480,47 +480,57 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
             pasada -- las dos pasadas anteriores (ver historial de commits)
             solo habían corregido el ANCHO hombro/cintura para que el
             maniquí se leyera como cuerpo de hombre; el usuario reportó
-            después que las dimensiones "no cerraban" en general, y
-            efectivamente el LARGO nunca se había verificado contra ninguna
-            regla anatómica real. Auditado contra dos fuentes independientes
-            que se validan entre sí, ambas verificadas por búsqueda antes de
-            aplicarlas (no de memoria):
+            después que las dimensiones "no cerraban" en general. La 3ra
+            pasada corrigió el LARGO (entrepierna al 50%, ver más abajo)
+            pero no tocó el ANCHO -- el usuario volvió a insistir ("no
+            parece el cuerpo de un hombre real") y pidió medidas
+            estandarizadas reales. Auditado contra tres fuentes
+            independientes que se validan entre sí, todas verificadas por
+            búsqueda antes de aplicarlas (no de memoria):
               - Canon clásico de proporción de figura (Loomis/Bridgman, el
                 mismo que usa la ilustración de sastrería): la entrepierna
                 cae exactamente al 50% de la altura de pie a cabeza, la
-                rodilla al 75% (a un cuarto de altura del piso), y "la
-                muñeca del brazo colgando cae al nivel del hueso púbico" --
-                es decir, misma altura que la entrepierna.
+                rodilla al 75% (a un cuarto de altura del piso), "la muñeca
+                del brazo colgando cae al nivel del hueso púbico", y el
+                ancho de hombros ronda 2-2.5 cabezas de ancho.
               - Datos antropométricos reales de adulto varón (guía de
                 antropometría del Departamento de Defensa de EE.UU.):
-                altura de hombro (desde el piso) ≈82% de la estatura total
-                -- confirma de forma independiente que el hombro está bien
-                ubicado, sin depender solo del canon clásico.
-            El maniquí anterior tenía la entrepierna al 58% (torso ~19u más
-            largo de lo real) y la muñeca muy por debajo del nivel de la
-            entrepierna (brazo demasiado largo) -- la combinación de torso
-            largo + brazos largos es justamente lo que hace que una figura
-            lea como desproporcionada aunque el ancho de hombros esté bien.
-            Nuevas referencias (cabeza a piso, y=5 a y=234): hombro=46 (sin
-            cambios, 82.5% desde el piso, consistente con el dato real),
-            cadera/entrepierna=120 (50.7% de 229 -- antes 140, 57.9%),
-            rodilla≈179 (a un cuarto del piso), tobillo=224, muñeca=120 (al
-            mismo nivel que la entrepierna, como marca la regla clásica).
-            Ancho de hombros/cintura sin cambios -- ese ajuste ya estaba
-            resuelto. */}
+                altura de hombro (desde el piso) ≈82% de la estatura total.
+              - Medidas reales de maniquí de sastrería/exhibición (buscadas
+                a pedido explícito del usuario): un maniquí de talle
+                masculino estándar (73", ~185cm) tiene el pecho bastante más
+                ancho que la cintura, pero como % de la ALTURA el ancho de
+                hombros real (biacromial) es ≈22-25% -- muy por debajo del
+                42% que tenía este maniquí (96u sobre ~229u de altura). Con
+                el largo del torso ya corregido en la pasada anterior pero
+                el ancho intacto, el torso había quedado MÁS ANCHO QUE ALTO
+                (96 ancho / 80 alto) -- al revés de un torso real, que es
+                20-35% más alto que ancho.
+            4ta pasada: se escalan todas las coordenadas X del cuerpo
+            (hombros/torso/brazos/piernas/pies/accesorios) un 65% respecto
+            al centro (x=60) -- hombro nuevo ≈27% de la altura, todavía con
+            algo de margen sobre el 22-25% real puro para que la prenda se
+            siga leyendo a los ~180px que usa la app en pantalla chica, pero
+            muy por debajo del 42% anterior. La relación hombro/cintura
+            (71%, ya validada como la principal seña de género en una
+            silueta sin cara) no se tocó -- el escalado es uniforme, así que
+            esa proporción relativa queda igual, solo cambia la magnitud
+            absoluta. Las referencias verticales (hombro=46, cadera=120 al
+            50% de la altura, rodilla≈179, tobillo=224, muñeca=120) tampoco
+            cambiaron -- ya estaban correctas. */}
         <ellipse cx="60" cy="20" rx="13" ry="15" fill={neutro} stroke={neutroStroke} />
-        <path d="M50 33 L70 33 L68 46 L52 46 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M54 33 L67 33 L65 46 L55 46 Z" fill={neutro} stroke={neutroStroke} />
         <path
-          d="M16 46 Q18 59 22 70 Q26 89 29 100 L29 120 L91 120 L91 100 Q94 89 98 70 Q102 59 104 46 Q96 38 80 42 Q60 46 40 42 Q24 38 16 46 Z"
+          d="M31 46 Q33 59 35 70 Q38 89 40 100 L40 120 L80 120 L80 100 Q82 89 85 70 Q87 59 89 46 Q83 38 73 42 Q60 46 47 42 Q37 38 31 46 Z"
           fill={neutro}
           stroke={neutroStroke}
         />
-        <path d="M16 48 Q8 49 7 57 L5 113 Q5 120 11 120 L17 120 Q20 120 19 113 L18 59 Q18 51 16 48 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M104 48 Q112 49 113 57 L115 113 Q115 120 109 120 L103 120 Q100 120 101 113 L102 59 Q102 51 104 48 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M29 120 L31 179 Q32 197 36 224 L51 224 Q53 197 55 179 L58 120 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M91 120 L89 179 Q88 197 84 224 L69 224 Q67 197 65 179 L62 120 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M35 224 Q33 232 41 234 L51 234 Q53 232 51 224 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M85 224 Q87 232 79 234 L69 234 Q67 232 69 224 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M31 48 Q26 49 26 57 L24 113 Q24 120 28 120 L32 120 Q34 120 33 113 L33 59 Q33 51 31 48 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M89 48 Q94 49 94 57 L96 113 Q96 120 92 120 L88 120 Q86 120 87 113 L87 59 Q87 51 89 48 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M40 120 L41 179 Q42 197 44 224 L54 224 Q55 197 57 179 L59 120 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M80 120 L79 179 Q78 197 76 224 L66 224 Q65 197 63 179 L61 120 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M44 224 Q42 232 48 234 L54 234 Q55 232 54 224 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M76 224 Q78 232 72 234 L66 234 Q65 232 66 224 Z" fill={neutro} stroke={neutroStroke} />
 
         {principal.piernas && <PiernasCuerpo prenda={principal.piernas} />}
         {principal.torso && <TorsoCuerpo prenda={principal.torso} />}
@@ -532,13 +542,13 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
           // (y=32-42), reposicionadas junto con el resto del cuello.
           <>
             <path
-              d="M46 32 L60 42 L52 38 Z"
+              d="M51 32 L60 42 L55 38 Z"
               fill={cuelloSecundario.color_hex}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
             />
             <path
-              d="M74 32 L60 42 L68 38 Z"
+              d="M69 32 L60 42 L65 38 Z"
               fill={cuelloSecundario.color_hex}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
