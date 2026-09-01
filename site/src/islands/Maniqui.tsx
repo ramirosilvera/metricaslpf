@@ -276,20 +276,21 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           {/* cuerpo del torso -- un poco más ancho que el maniquí de base
               (12-108 en los hombros) para que la tela "caiga por fuera" en
               vez de coincidir exacto con el borde del cuerpo. Proporciones
-              recalculadas para un IMC ≈27.7 (170cm/80kg, "sobrepeso" según
-              la clasificación de la OMS, pedido explícito del usuario) --
-              los hombros son mayormente estructura ósea y casi no cambian
-              con el peso (solo +2 respecto a la versión anterior), pero la
-              cintura sí, y bastante: pasa de angostarse un 62% respecto al
-              hombro a solo un 87% -- un torso mucho más recto, sin la V de
-              un cuerpo atlético, que es como se ve realmente un IMC en ese
-              rango (la grasa se concentra en el tronco antes que en otras
-              zonas -- patrón "androide", el más común en hombres). El cuello
-              baja hacia el centro (Q...60 44...) y sube cerca de los
-              hombros, sin cambios respecto a la versión anterior -- esa
-              curva no depende del ancho del torso. */}
+              de IMC ≈27.7 (170cm/80kg, "sobrepeso" según la OMS) corregidas
+              en una 2da pasada: la primera versión angostaba la cintura a
+              un 83% del ancho de hombros (96 vs 80) -- reportado por el
+              usuario como que ya no se leía como cuerpo de hombre. Con la
+              silueta headless de este maniquí (sin cara, sin otra seña de
+              género), la relación hombro/cintura ES la principal señal
+              visual que queda, y un torso casi recto la borra. Se angosta
+              más la cintura (68, un 71% del hombro) sin tocar el ancho de
+              hombros -- sigue siendo mucho más recto que el original
+              atlético (que angostaba a un 62%, casi una V), pero ahora con
+              un hombro claramente más ancho que la cintura. El cuello baja
+              hacia el centro (Q...60 44...) y sube cerca de los hombros,
+              sin cambios -- esa curva no depende del ancho del torso. */}
           <Forma
-            d="M12 46 Q13 62 15 76 Q18 100 20 118 L20 146 L100 146 L100 118 Q102 100 105 76 Q107 62 108 46 Q100 38 81 40 Q60 44 39 40 Q20 38 12 46 Z"
+            d="M12 46 Q14 62 18 76 Q22 100 26 118 L26 146 L94 146 L94 118 Q98 100 102 76 Q106 62 108 46 Q100 38 81 40 Q60 44 39 40 Q20 38 12 46 Z"
             fill={fill}
             stroke={stroke}
             patron={patron}
@@ -333,15 +334,14 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
               en 3-4u por lado) en vez de un solo bloque -- así no se ven
               tiritas del maniquí asomando a los costados ni en la
               entrepierna. Ancho recalculado junto con el torso (ver
-              TorsoCuerpo) para el IMC ≈27.7 del pedido -- muslos más
-              anchos, escalados de forma pareja desde el tobillo hasta la
-              cintura (mismo criterio de sastrería que ya usaba esta curva,
-              solo que ahora arranca de una cintura más ancha). */}
-          <Forma d="M18 140 L22 195 Q24 210 29 228 L52 228 Q54 210 57 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <Forma d="M102 140 L98 195 Q96 210 91 228 L68 228 Q66 210 63 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+              TorsoCuerpo) -- 2da pasada de IMC ≈27.7, cintura menos recta
+              que la primera versión para que el cuerpo se siga leyendo
+              como de hombre (ver comentario en TorsoCuerpo). */}
+          <Forma d="M26 140 L29 195 Q30 210 35 228 L53 228 Q55 210 58 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M94 140 L91 195 Q90 210 85 228 L67 228 Q65 210 62 195 L60 140 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           {/* cinturilla */}
           <path
-            d="M16 136 H104 V146 H16 Z"
+            d="M24 136 H96 V146 H24 Z"
             fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
             stroke={stroke}
             {...strokeProps}
@@ -367,13 +367,12 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
         <>
           {/* dos zapatos, no un bloque único -- cada uno con su propia
               suela (la franja oscura) porque eso, más que la forma, es lo
-              que lee como "zapatilla" y no "piedra". Ensanchados 3u por
-              lado junto con el tobillo (ver PiernasCuerpo/el maniquí de
-              base) para el IMC del pedido. */}
-          <Forma d="M23 226 Q17 228 17 236 L19 241 Q21 244 29 244 L57 244 Q61 244 61 238 L59 226 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M17 241 H61 V246 Q61 248 58 248 L20 248 Q17 248 17 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
-          <Forma d="M97 226 Q103 228 103 236 L101 241 Q99 244 91 244 L63 244 Q59 244 59 238 L61 226 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M103 241 H59 V246 Q59 248 62 248 L100 248 Q103 248 103 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
+              que lee como "zapatilla" y no "piedra". Reposicionados bajo
+              el tobillo de la 2da pasada de IMC (ver PiernasCuerpo). */}
+          <Forma d="M27 226 Q21 228 21 236 L23 241 Q25 244 33 244 L61 244 Q65 244 65 238 L63 226 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <path d="M21 241 H65 V246 Q65 248 62 248 L24 248 Q21 248 21 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          <Forma d="M93 226 Q99 228 99 236 L97 241 Q95 244 87 244 L59 244 Q55 244 55 238 L57 226 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <path d="M99 241 H55 V246 Q55 248 58 248 L96 248 Q99 248 99 245 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
     />
@@ -386,7 +385,7 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
       prenda={prenda}
       hijos={(fill, stroke, patron) => (
         <>
-          <Forma d="M20 143 H100 V151 H20 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <Forma d="M26 143 H94 V151 H26 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           <rect x="52" y="140" width="16" height="14" rx="2" fill="none" stroke={stroke} strokeWidth="2" />
         </>
       )}
@@ -423,26 +422,29 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
 
         {/* maniquí de base -- queda visible donde no hay prenda cargada
             para esa zona (p.ej. un outfit sin calzado todavía muestra los
-            "pies" del maniquí, no un hueco vacío). Proporciones recalculadas
-            para IMC ≈27.7 (170cm/80kg, pedido explícito del usuario) --
-            mismo criterio que TorsoCuerpo/PiernasCuerpo más abajo: hombros
-            casi sin cambios (estructura ósea), cintura bastante más ancha
-            (72% del ancho de hombros en vez de 62%, torso mucho más recto).
-            Brazos como formas propias (antes no existían: las mangas de las
-            prendas terminaban en el aire porque no había brazo debajo). */}
+            "pies" del maniquí, no un hueco vacío). Proporciones de IMC
+            ≈27.7 (170cm/80kg), 2da pasada -- ver el comentario largo sobre
+            esto en TorsoCuerpo: la primera pasada angostaba la cintura muy
+            poco respecto al hombro (83%) y el maniquí dejó de leerse como
+            cuerpo de hombre (reportado por el usuario) -- en una silueta
+            sin cara, la relación hombro/cintura es la principal seña de
+            género que queda. Cintura más angosta ahora (71% del hombro),
+            hombros sin cambios. Brazos como formas propias (antes no
+            existían: las mangas de las prendas terminaban en el aire
+            porque no había brazo debajo). */}
         <ellipse cx="60" cy="20" rx="13" ry="15" fill={neutro} stroke={neutroStroke} />
         <path d="M50 33 L70 33 L68 46 L52 46 Z" fill={neutro} stroke={neutroStroke} />
         <path
-          d="M16 46 Q17 62 19 76 Q21 100 22 115 L22 140 L98 140 L98 115 Q99 100 101 76 Q103 62 104 46 Q96 38 80 42 Q60 46 40 42 Q24 38 16 46 Z"
+          d="M16 46 Q18 62 22 76 Q26 100 29 115 L29 140 L91 140 L91 115 Q94 100 98 76 Q102 62 104 46 Q96 38 80 42 Q60 46 40 42 Q24 38 16 46 Z"
           fill={neutro}
           stroke={neutroStroke}
         />
         <path d="M16 48 Q8 50 7 62 L5 145 Q5 155 11 155 L17 155 Q20 155 19 145 L18 65 Q18 52 16 48 Z" fill={neutro} stroke={neutroStroke} />
         <path d="M104 48 Q112 50 113 62 L115 145 Q115 155 109 155 L103 155 Q100 155 101 145 L102 65 Q102 52 104 48 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M22 140 L25 190 Q26 205 30 228 L48 228 Q51 205 54 190 L57 140 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M98 140 L95 190 Q94 205 90 228 L72 228 Q69 205 66 190 L63 140 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M31 228 Q29 236 37 238 L47 238 Q49 236 47 228 Z" fill={neutro} stroke={neutroStroke} />
-        <path d="M89 228 Q91 236 83 238 L73 238 Q71 236 73 228 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M29 140 L31 190 Q32 205 36 228 L51 228 Q53 205 55 190 L58 140 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M91 140 L89 190 Q88 205 84 228 L69 228 Q67 205 65 190 L62 140 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M35 228 Q33 236 41 238 L51 238 Q53 236 51 228 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M85 228 Q87 236 79 238 L69 238 Q67 236 69 228 Z" fill={neutro} stroke={neutroStroke} />
 
         {principal.piernas && <PiernasCuerpo prenda={principal.piernas} />}
         {principal.torso && <TorsoCuerpo prenda={principal.torso} />}
