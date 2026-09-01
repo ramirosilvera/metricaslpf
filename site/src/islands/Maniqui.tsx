@@ -322,29 +322,49 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               cuello, más angosto, en vez de flotar sobre el hueco viejo. */}
           {prenda.categoria === "camisa" && (
             <>
-              {/* cuello rediseñado -- reporte real del usuario ("todavía no
-                  se ve bien el cuello, es muy importante"): la forma
-                  anterior era una astilla angosta (4u de ancho) que apenas
-                  se distinguía, sobre todo en colores claros. Ahora es un
-                  triángulo con ancho real (49 a 56, ~7u) más una tira
-                  curva arriba que sugiere el cuello abrochado alrededor del
-                  cuello real -- la misma silueta que un cuello de camisa en
-                  un plano técnico de moda. */}
-              <path d="M49 30 Q60 27 71 30" fill="none" stroke={stroke} {...strokeProps} />
-              <path d="M49 30 L60 46 L56 34 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <path d="M71 30 L60 46 L64 34 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <line x1="60" y1="46" x2="60" y2="124" stroke={stroke} {...strokeProps} />
+              {/* cuello agrandado -- reporte real del usuario, comparando
+                  contra una foto real: en la referencia las puntas del
+                  cuello se apoyan SOBRE la tela de lo que tiene puesto
+                  encima (o sobre el propio pecho acá, sin capa arriba),
+                  tapando parte del pecho -- no quedan flotando en el hueco
+                  del escote con piel/cuerpo visible alrededor. La versión
+                  anterior (7u de ancho, terminaba en y=46) era chica y
+                  quedaba adentro del hueco. Ahora las puntas bajan mucho
+                  más (hasta y=58, sobre el pecho) y se abren más hacia los
+                  hombros (46/74 en vez de 49/71) para que no quede ningún
+                  espacio vacío entre el cuello y el cuerpo. */}
+              <path d="M46 38 Q60 26 74 38" fill="none" stroke={stroke} {...strokeProps} />
+              <path d="M46 38 L60 58 L54 30 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M74 38 L60 58 L66 30 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <line x1="60" y1="58" x2="60" y2="124" stroke={stroke} {...strokeProps} />
             </>
           )}
           {prenda.categoria === "sweater" && (
             <path d="M48 40 Q60 46 72 40" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
           )}
+          {(prenda.categoria === "sweater" || prenda.categoria === "buzo") && (
+            // dobladillo acanalado -- pedido explícito del usuario ("fijate
+            // el dobladillo"), comparando contra una foto real donde se ve
+            // claramente la banda tejida más densa en el borde inferior del
+            // sweater. Antes el torso terminaba en un corte recto sin
+            // ningún detalle ahí. Franja con tono de sombra + líneas
+            // verticales cortas simulando el canalé -- mismo criterio
+            // esquemático que el resto de la ilustración, no una textura
+            // fotorrealista. También en buzo -- un hoodie real también
+            // tiene puño acanalado en la cintura, no solo el sweater.
+            <>
+              <rect x="41" y="119" width="38" height="7" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              {[45, 51, 57, 63, 69, 75].map((x) => (
+                <line key={x} x1={x} y1="120" x2={x} y2="125" stroke={stroke} strokeWidth={0.6} />
+              ))}
+            </>
+          )}
           {prenda.categoria === "campera" && (
             <>
-              <line x1="60" y1="46" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
-              <path d="M49 32 Q60 29 71 32" fill="none" stroke={stroke} {...strokeProps} />
-              <path d="M49 32 L60 48 L56 36 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <path d="M71 32 L60 48 L64 36 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <line x1="60" y1="60" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
+              <path d="M46 40 Q60 28 74 40" fill="none" stroke={stroke} {...strokeProps} />
+              <path d="M46 40 L60 60 L54 32 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M74 40 L60 60 L66 32 Z" fill={sombraHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
             </>
           )}
         </>
@@ -414,14 +434,30 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
               x=71 el derecho, los mismos centros que ya tiene la pierna) en
               vez del centro del cuerpo, y también se achata la altura --
               un zapato real visto de frente es bastante más chato que alto,
-              no un bloque cuadrado. Recentrado otra vez en esta pasada
-              (±4u, simple traslación, sin cambiar tamaño) para seguir el
-              tobillo de la pierna con la postura más abierta -- ver el
-              comentario en PiernasCuerpo. */}
-          <Forma d="M40 223 Q36 224 36 230 L38 233 Q38 236 42 236 L54 236 Q56 236 56 231 L56 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M36 233 H56 V237 Q56 238 54 238 L38 238 Q36 238 36 236 Z" fill={suela} stroke={stroke} {...strokeProps} />
-          <Forma d="M80 223 Q84 224 84 230 L82 233 Q82 236 78 236 L66 236 Q64 236 64 231 L64 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <path d="M84 233 H64 V237 Q64 238 66 238 L82 238 Q84 238 84 236 Z" fill={suela} stroke={stroke} {...strokeProps} />
+              no un bloque cuadrado. Recentrado en esta pasada (±4u, simple
+              traslación) para seguir el tobillo con la postura más abierta.
+              Forma redibujada de nuevo -- reporte real del usuario ("parece
+              un ladrillo"): la puntera terminaba en una línea recta (el
+              borde inferior del zapato era un simple L horizontal), y esa
+              línea recta es justo lo que se lee como "bloque". Ahora la
+              puntera es una curva continua (dos Q en vez de esquinas rectas
+              + línea recta), más parecida a la silueta redondeada de una
+              zapatilla real. Se agregan cordones (zigzag simple, sin
+              detalle de ojales -- esto sigue siendo una ilustración
+              esquemática, no un dibujo técnico de calzado) para que se lea
+              "zapatilla" de un vistazo, tal como pidió el usuario. */}
+          <Forma d="M40 223 Q36 224 36 231 Q36 238 46 239 Q56 238 56 231 Q56 224 52 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          {/* cordones -- 2 líneas cortas cruzando el empeine. Un zigzag de
+              un solo trazo (probado antes) se leía como una flecha o un
+              tilde, no como cordones -- líneas paralelas simples son menos
+              ambiguas a este tamaño. */}
+          <line x1="41" y1="226" x2="51" y2="226" stroke={stroke} strokeWidth={0.6} />
+          <line x1="41" y1="229" x2="51" y2="229" stroke={stroke} strokeWidth={0.6} />
+          <path d="M36 234 H56 V240 Q56 242 53 242 L39 242 Q36 242 36 240 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          <Forma d="M80 223 Q84 224 84 231 Q84 238 74 239 Q64 238 64 231 Q64 224 68 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          <line x1="79" y1="226" x2="69" y2="226" stroke={stroke} strokeWidth={0.6} />
+          <line x1="79" y1="229" x2="69" y2="229" stroke={stroke} strokeWidth={0.6} />
+          <path d="M84 234 H64 V240 Q64 242 67 242 L81 242 Q84 242 84 240 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
     />
@@ -590,15 +626,15 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
           // cuerpo. Ahora usa sombraHsl, igual que el cuello "principal",
           // para tener contraste garantizado sin importar el color real. */}
           <>
-            <path d="M49 30 Q60 27 71 30" fill="none" stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)} {...strokeProps} />
+            <path d="M46 38 Q60 26 74 38" fill="none" stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)} {...strokeProps} />
             <path
-              d="M49 30 L60 46 L56 34 Z"
+              d="M46 38 L60 58 L54 30 Z"
               fill={sombraHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
             />
             <path
-              d="M71 30 L60 46 L64 34 Z"
+              d="M74 38 L60 58 L66 30 Z"
               fill={sombraHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
               {...strokeProps}
