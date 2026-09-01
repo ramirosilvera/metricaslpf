@@ -516,6 +516,28 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
         />
         <path d="M35 48 Q31 49 31 57 L29 113 Q29 120 33 120 L36 120 Q38 120 37 113 L37 59 Q37 51 35 48 Z" fill={neutro} stroke={neutroStroke} />
         <path d="M85 48 Q89 49 89 57 L91 113 Q91 120 87 120 L84 120 Q82 120 83 113 L83 59 Q83 51 85 48 Z" fill={neutro} stroke={neutroStroke} />
+        {/* manos -- pedido explícito del usuario ("agregale las manos, eso
+            le va a dar más armonía"), comparando contra una foto real de
+            maniquí de exhibición donde la mano extiende el brazo hasta
+            cerca del muslo. Antes el brazo terminaba en un corte limpio
+            sin remate en la muñeca (y=120, al nivel del cinturón -- ya
+            correcto según la regla clásica verificada en una pasada
+            anterior), y ese corte abrupto es lo que hacía leer el brazo
+            como "corto" aunque la posición vertical de la muñeca ya fuera
+            anatómicamente correcta: un brazo delgado y estilizado sin nada
+            que lo remate en la punta pierde peso visual. Forma simple y
+            redondeada, sin dedos -- mismo criterio de "manos simplificadas"
+            que ya documenta el croquis de moda (ver comentario más abajo).
+            Largo ≈11% de la altura total (dato antropométrico real de largo
+            de mano), llevando la punta cerca del tercio superior del muslo,
+            sin llegar a la mitad exacta -- functiona como remate visual,
+            no como un objeto nuevo que compita con el brazo. Dibujadas acá
+            (maniquí de base, color neutro) y no en TorsoCuerpo a propósito:
+            por el orden de dibujo quedan debajo de cualquier manga (corta o
+            larga) y asoman solas donde la manga termina, sin tener que
+            duplicar la lógica de manga corta/larga. */}
+        <path d="M31 120 Q30 135 33 143 Q35 146 36 143 Q39 135 38 120 Z" fill={neutro} stroke={neutroStroke} />
+        <path d="M89 120 Q90 135 87 143 Q85 146 84 143 Q81 135 82 120 Z" fill={neutro} stroke={neutroStroke} />
         <path d="M43 120 L44 179 Q45 197 46 224 L55 224 Q56 197 57 179 L59 120 Z" fill={neutro} stroke={neutroStroke} />
         <path d="M77 120 L76 179 Q75 197 74 224 L65 224 Q64 197 63 179 L61 120 Z" fill={neutro} stroke={neutroStroke} />
         <path d="M46 224 Q45 232 50 234 L55 234 Q56 232 55 224 Z" fill={neutro} stroke={neutroStroke} />
