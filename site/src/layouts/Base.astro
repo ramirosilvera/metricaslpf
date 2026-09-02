@@ -68,6 +68,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
       <a href={`${import.meta.env.BASE_URL}prenda/nueva/`} class={path.includes("/prenda/") ? "active" : ""}>+ Prenda</a>
       <a href={`${import.meta.env.BASE_URL}probar/`} class={path.includes("/probar/") ? "active" : ""}>Probar</a>
       <a href={`${import.meta.env.BASE_URL}outfits/`} class={path.includes("/outfits/") ? "active" : ""}>Outfits</a>
+      <a href={`${import.meta.env.BASE_URL}estadisticas/`} class={path.includes("/estadisticas/") ? "active" : ""}>Estadísticas</a>
     </nav>
     <script>
       if ("serviceWorker" in navigator) {
