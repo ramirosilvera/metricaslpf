@@ -4,8 +4,9 @@ import { CATEGORIA_LABEL, type Categoria, type Estilo, type Prenda } from "./typ
 
 /** Mismo orden que CATEGORIA_LABEL en types.ts -- se deriva de sus claves en
  *  vez de repetir el array a mano para no poder desincronizarse si se agrega
- *  una categoría nueva ahí y no acá. */
-const TODAS_LAS_CATEGORIAS = Object.keys(CATEGORIA_LABEL) as Categoria[];
+ *  una categoría nueva ahí y no acá. Exportada: Placard.tsx la reusa para
+ *  agrupar el placard en secciones en ese mismo orden fijo. */
+export const TODAS_LAS_CATEGORIAS = Object.keys(CATEGORIA_LABEL) as Categoria[];
 
 /** pantalon/bermuda/short_deportivo son, para el motor de recomendación
  *  (recommend.ts, CATEGORIAS_PIERNAS), el "ancla" de un outfit: sin ninguna
@@ -155,4 +156,17 @@ export function analizarPlacard(placard: Prenda[]): AnalisisPlacard {
   }
 
   return { totalPrendas, variedadColores, fortalezas, oportunidades };
+}
+
+/** Buscador libre del placard (Placard.tsx): compara contra los mismos
+ *  textos que ya se ven en cada card (categoría, color, estilo) -- nunca
+ *  contra datos crudos que el usuario no tiene forma de escribir (hex,
+ *  h/s/l). Substring, sin distinguir mayúsculas/acentos de más ni nada
+ *  raro: "azul" matchea "Azul oscuro". Query vacía o solo espacios ->
+ *  matchea todo (comportamiento de "sin filtro", no de "sin resultados"). */
+export function coincideBusqueda(p: Prenda, query: string): boolean {
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+  const textos = [CATEGORIA_LABEL[p.categoria], nombreColor(p.color_h, p.color_s, p.color_l), p.estilo ? ESTILO_LABEL[p.estilo] : ""];
+  return textos.some((t) => t.toLowerCase().includes(q));
 }

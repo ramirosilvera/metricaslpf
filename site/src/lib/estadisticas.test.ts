@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { analizarPlacard, contarPorCategoria, contarPorColor, contarPorEstilo } from "./estadisticas";
+import { analizarPlacard, coincideBusqueda, contarPorCategoria, contarPorColor, contarPorEstilo } from "./estadisticas";
 import type { Prenda } from "./types";
 
 function mkPrenda(
@@ -133,5 +133,33 @@ describe("analizarPlacard", () => {
     const r = analizarPlacard(placard);
     expect(r.variedadColores).toBe(1);
     expect(r.oportunidades.some((o) => o.includes("Poca variedad"))).toBe(true);
+  });
+});
+
+describe("coincideBusqueda", () => {
+  it("query vacía o solo espacios -> matchea todo", () => {
+    const p = mkPrenda("pantalon", "#111111", 0, 0, 15, "formal");
+    expect(coincideBusqueda(p, "")).toBe(true);
+    expect(coincideBusqueda(p, "   ")).toBe(true);
+  });
+
+  it("matchea por categoría", () => {
+    const p = mkPrenda("pantalon", "#111111", 0, 0, 15, "formal");
+    expect(coincideBusqueda(p, "pantalon")).toBe(true);
+    expect(coincideBusqueda(p, "Pantalon")).toBe(true);
+    expect(coincideBusqueda(p, "remera")).toBe(false);
+  });
+
+  it("matchea por color (substring, sin importar mayúsculas)", () => {
+    const p = mkPrenda("remera", "#000000", 0, 0, 5);
+    expect(coincideBusqueda(p, "negro")).toBe(true);
+    expect(coincideBusqueda(p, "NEGRO")).toBe(true);
+  });
+
+  it("matchea por estilo, y no matchea si la prenda no tiene estilo cargado", () => {
+    const conEstilo = mkPrenda("camisa", "#FFFFFF", 0, 0, 95, "formal");
+    const sinEstilo = mkPrenda("camisa", "#FFFFFF", 0, 0, 95, null);
+    expect(coincideBusqueda(conEstilo, "formal")).toBe(true);
+    expect(coincideBusqueda(sinEstilo, "formal")).toBe(false);
   });
 });
