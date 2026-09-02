@@ -42,9 +42,17 @@ export interface PresetPrenda {
  *   prenda (una camisa de oficina es "laburo" sin duda; un buzo, sea cual
  *   sea su color, es casual sin ambigüedad real -- por eso las 3 entradas
  *   de buzo sí llevan ocasion:"casual").
- * - `estacion` se deja SIEMPRE vacía: es la dimensión más dependiente del
- *   clima real de cada usuario (una remera blanca sirve en verano Y en
- *   entretiempo) -- forzar una estación acá haría más daño que bien.
+ * - `estacion` se deja vacía en la mayoría de las categorías: es la
+ *   dimensión más dependiente del clima real de cada usuario (una remera
+ *   blanca sirve en verano Y en entretiempo) -- forzar una estación ahí
+ *   haría más daño que bien. EXCEPCIÓN, pedido explícito del usuario: los
+ *   abrigos (buzo/sweater/campera) sí se tagean -- a diferencia de una
+ *   remera, el nivel de abrigo real de la prenda determina sin ambigüedad
+ *   si es de entretiempo o de invierno (un buzo de algodón no protege
+ *   igual que una campera de pluma, sea cual sea el clima del usuario).
+ *   Acolchado (pluma) y paño grueso -> invierno; el resto de los abrigos
+ *   (lana fina, tejido grueso liviano, denim, nylon sin relleno) ->
+ *   entretiempo -- ninguno queda sin tagear.
  * - `textura` solo cuando el nombre de la prenda ya la implica sin
  *   ambigüedad (zapatos de cuero -> cuero_liso, jean -> denim, campera de
  *   pluma -> acolchado, prenda con estilo "deportivo" -> poliester, pedido
@@ -182,40 +190,48 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "short-deportivo-azul", nombre: "Short deportivo azul", categoria: "short_deportivo", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
 
   // --- Buzos ---
-  { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
-  { id: "buzo-negro", nombre: "Buzo negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
-  { id: "buzo-azul-marino", nombre: "Buzo azul marino", categoria: "buzo", colorHex: "#1F2A44", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  // estacion "entretiempo" en los 6 -- un buzo de tejido grueso liviano es
+  // la capa que se usa solo (otoño/primavera) o debajo de una campera de
+  // pluma en pleno invierno, pero nunca ES la protección de invierno por
+  // sí solo (ver el criterio de abrigos al principio del archivo).
+  { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
+  { id: "buzo-negro", nombre: "Buzo negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
+  { id: "buzo-azul-marino", nombre: "Buzo azul marino", categoria: "buzo", colorHex: "#1F2A44", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
   // mismo celeste que camisa-celeste (#B7D2EC) -- ver el criterio de
   // paleta consistente que ya documenta el archivo. "buzo" en esta app ya
   // ES un hoodie: TorsoCuerpo (Maniqui.tsx) le dibuja capucha a CUALQUIER
   // prenda categoria="buzo" sin excepción, así que no hace falta una
   // categoría nueva para "tipo hoodie" -- ya es lo que esta categoría
   // siempre fue.
-  { id: "buzo-celeste", nombre: "Buzo celeste", categoria: "buzo", colorHex: "#B7D2EC", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  { id: "buzo-celeste", nombre: "Buzo celeste", categoria: "buzo", colorHex: "#B7D2EC", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
   // mismo beige (#D8C7A1) que ya usan pantalon-beige/bermuda-beige/etc. --
   // ver el comentario de remera-beige más arriba. estilo/ocasion/textura
   // igual que el resto de los buzos (casual/casual/tejido_grueso): el
   // color no cambia el registro de la prenda.
-  { id: "buzo-beige", nombre: "Buzo beige", categoria: "buzo", colorHex: "#D8C7A1", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  { id: "buzo-beige", nombre: "Buzo beige", categoria: "buzo", colorHex: "#D8C7A1", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
   // verde botella -- color de tendencia confirmado por búsqueda web para
   // la temporada actual ("lo llevamos en camel, verde botella o negro").
   // Matiz bien distinto del verde militar/oliva (h=140, un verde bosque/
   // botella real) y del verde deportivo del pantalón (h=127 pero mucho más
   // desaturado) -- no una variante redundante.
-  { id: "buzo-verde", nombre: "Buzo verde botella", categoria: "buzo", colorHex: "#1E5631", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  { id: "buzo-verde", nombre: "Buzo verde botella", categoria: "buzo", colorHex: "#1E5631", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
 
   // --- Sweaters (oficina/vestir) ---
-  { id: "sweater-gris", nombre: "Sweater gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "lana", estilo: "clasico", ocasion: "laburo" },
-  { id: "sweater-azul-marino", nombre: "Sweater azul marino", categoria: "sweater", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", ocasion: "laburo" },
-  { id: "sweater-bordo", nombre: "Sweater bordo", categoria: "sweater", colorHex: "#6B2737", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  // estacion "entretiempo" en los 6 -- lana fina de pullover, la capa que
+  // se lleva sola en otoño/primavera o debajo del tapado/campera de pluma
+  // en pleno invierno (mismo criterio que los buzos de arriba: ninguno de
+  // los dos ES la protección de invierno por sí solo).
+  { id: "sweater-gris", nombre: "Sweater gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "entretiempo" },
+  { id: "sweater-azul-marino", nombre: "Sweater azul marino", categoria: "sweater", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "entretiempo" },
+  { id: "sweater-bordo", nombre: "Sweater bordo", categoria: "sweater", colorHex: "#6B2737", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "entretiempo" },
   // colorHex #1A1A1A -- ver el comentario de camisa-negra más arriba: el
   // reporte real del usuario que motivó esta corrección era justo este
   // sweater ("tengo un suéter negro que dice gris oscuro").
-  { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "entretiempo" },
   // mismo beige que el resto del catálogo -- clasico/laburo, mismo
   // registro que el resto de los sweaters (gris/marino/bordo/negro): un
   // sweater beige es tan de oficina como esos.
-  { id: "sweater-beige", nombre: "Sweater beige", categoria: "sweater", colorHex: "#D8C7A1", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  { id: "sweater-beige", nombre: "Sweater beige", categoria: "sweater", colorHex: "#D8C7A1", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "entretiempo" },
   // mostaza -- color evergreen de sweater de oficina/entretiempo, tan
   // estándar como bordó/azul marino/gris de acá arriba. Este hex real
   // (h=40, s=62, l=47) fue justamente el que encontró el bug de
@@ -234,6 +250,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
     estilo: "clasico",
     estilosSecundarios: ["casual"],
     ocasion: "laburo",
+    estacion: "entretiempo",
   },
 
   // --- Calzado ---
@@ -268,9 +285,12 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "zapatillas-running-negras", nombre: "Zapatillas running negras", categoria: "calzado", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
 
   // --- Camperas ---
-  { id: "campera-negra", nombre: "Campera negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
-  { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", textura: "denim", estilo: "casual", ocasion: "casual" },
-  { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual" },
+  // "entretiempo" en negra/jean/verde militar/piloto -- ninguna lleva
+  // relleno (bomber/utility/denim/nylon liviano sin forro): cortan viento
+  // pero no abrigan como una pluma o un paño de invierno real.
+  { id: "campera-negra", nombre: "Campera negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
+  { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", textura: "denim", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
+  { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
   // piloto -- no es un rompeviento deportivo (más abajo) ni una campera de
   // vestir: es la campera de lluvia liviana/impermeable de uso diario
   // (nylon/microfibra), verificado por búsqueda web. Sin textura a
@@ -281,35 +301,54 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // la calle, no para entrenar (mismo criterio que campera-negra, no
   // camisa-negra) -- por eso tampoco entra en el "poliéster por defecto"
   // que sí aplica a las prendas con estilo "deportivo".
-  { id: "campera-piloto-negra", nombre: "Campera piloto negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
+  { id: "campera-piloto-negra", nombre: "Campera piloto negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
   // sweater con cierre -- de punto/lana, no un buzo ni un sweater sin
   // cierre (esos ya están en sus propias categorías): es una prenda de
   // punto que se usa COMO campera, así que va en categoria="campera" con
   // textura "lana" (verificado por búsqueda web: "campera de lana con
   // cierre"), mismo estilo/ocasion que el resto de los sweaters de vestir
   // (clasico/laburo) -- es la misma idea de prenda, solo con cierre en vez
-  // de cuello redondo/pullover.
-  { id: "campera-sweater-azul-marino", nombre: "Campera sweater azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  // de cuello redondo/pullover. Lana fina de punto, no paño grueso -> mismo
+  // criterio "entretiempo" que los sweaters de arriba, no invierno.
+  { id: "campera-sweater-azul-marino", nombre: "Campera sweater azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "entretiempo" },
   // pluma/puffer (tipo Uniqlo, ajustada al cuerpo) -- colores reusados de
-  // otras categorías, ver criterio de "Accesorios" más abajo.
-  { id: "campera-pluma-negra", nombre: "Campera de pluma negra", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "casual", ocasion: "casual" },
-  { id: "campera-pluma-azul-marino", nombre: "Campera de pluma azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "acolchado", estilo: "casual", ocasion: "casual" },
-  { id: "campera-pluma-beige", nombre: "Campera de pluma beige", categoria: "campera", colorHex: "#D8C7A1", textura: "acolchado", estilo: "casual", ocasion: "casual" },
+  // otras categorías, ver criterio de "Accesorios" más abajo. "invierno":
+  // acolchado/relleno real, es la protección real contra el frío, a
+  // diferencia de todas las camperas de arriba (ver el criterio de abrigos
+  // al principio del archivo).
+  { id: "campera-pluma-negra", nombre: "Campera de pluma negra", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "invierno" },
+  { id: "campera-pluma-azul-marino", nombre: "Campera de pluma azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "invierno" },
+  { id: "campera-pluma-beige", nombre: "Campera de pluma beige", categoria: "campera", colorHex: "#D8C7A1", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "invierno" },
   // pluma oversize (tipo campera retro estilo Nuptse: mucho más grande y
   // abrigada que la de arriba, silueta voluminosa en vez de ajustada al
   // cuerpo) -- pedido explícito del usuario, distinguiéndola de la
   // Uniqlo-type de arriba. La diferencia real es de silueta/volumen, no de
-  // material (misma tela acolchada/pluma) ni de clima -- el catálogo no
-  // fuerza `estacion` (ver el criterio general al principio del archivo),
-  // así que se distingue por nombre, mismo patrón que ya usa
-  // "(suela blanca)" en las zapatillas. "urbano" en vez de "casual": el
-  // volumen exagerado es un statement de calle, no una campera básica.
-  { id: "campera-pluma-negra-oversize", nombre: "Campera de pluma negra (oversize)", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "urbano", ocasion: "casual" },
+  // material (misma tela acolchada/pluma) -- por eso también es "invierno",
+  // igual que las tres de arriba -- y se distingue por nombre, mismo patrón
+  // que ya usa "(suela blanca)" en las zapatillas. "urbano" en vez de
+  // "casual": el volumen exagerado es un statement de calle, no una
+  // campera básica.
+  { id: "campera-pluma-negra-oversize", nombre: "Campera de pluma negra (oversize)", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "urbano", ocasion: "casual", estacion: "invierno" },
   // rompeviento -- deportivo, distinto de la campera de jean/pluma de
   // arriba (esas son casual/urbano, no para entrenar). Poliéster por
   // defecto, mismo criterio que el resto de las prendas "deportivo".
-  { id: "campera-rompeviento-negra", nombre: "Campera rompeviento negra", categoria: "campera", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
-  { id: "campera-rompeviento-azul", nombre: "Campera rompeviento azul", categoria: "campera", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  // "entretiempo": corta viento/llovizna pero no tiene relleno térmico --
+  // no protege del frío real de invierno.
+  { id: "campera-rompeviento-negra", nombre: "Campera rompeviento negra", categoria: "campera", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+  { id: "campera-rompeviento-azul", nombre: "Campera rompeviento azul", categoria: "campera", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+  // tapado/sobretodo de paño -- pedido explícito del usuario ("agregá
+  // prendas si es necesario" al diferenciar abrigos de invierno):
+  // revisando el catálogo, TODAS las prendas de invierno real (acolchado)
+  // eran casual/urbano -- un look clásico/formal de invierno no tenía
+  // ninguna campera propia, solo le quedaba combinar con una pluma
+  // deportiva-casual, algo que no pasa en la vida real (un tapado de paño
+  // es la prenda de abrigo estándar sobre un traje o pantalón de vestir,
+  // no una campera de pluma). Gris carbón -- combina con el pantalón/
+  // sweater gris ya existentes y no repite el negro/azul marino que ya
+  // domina el resto de camperas clásicas. Textura "lana": el paño de
+  // tapado es lana tejida apretada, la aproximación más cercana que tiene
+  // el enum sin inventar una textura "paño" que no existe.
+  { id: "tapado-pano-gris", nombre: "Tapado de paño gris", categoria: "campera", colorHex: "#4A4A4A", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "invierno" },
 
   // --- Accesorios ---
   // Reusa hex ya presentes en otras categorías (azul marino, bordo) a
