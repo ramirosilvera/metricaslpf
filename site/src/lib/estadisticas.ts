@@ -1,5 +1,5 @@
 import { nombreColor } from "./color";
-import { categoriasAusentes, ESTILO_LABEL } from "./recommend";
+import { categoriasAusentes, ESTILO_LABEL, estilosDe } from "./recommend";
 import { CATEGORIA_LABEL, type Categoria, type Estilo, type Prenda } from "./types";
 
 /** Mismo orden que CATEGORIA_LABEL en types.ts -- se deriva de sus claves en
@@ -44,14 +44,16 @@ export interface ConteoEstilo {
   cantidad: number;
 }
 
-/** Cantidad de prendas por estilo, los 5 estilos incluidos. Una prenda sin
- *  `estilo` cargado (null) no cuenta para ninguno -- no se le inventa un
- *  valor por defecto, igual que el resto de la app (ver registroOutfit en
- *  recommend.ts). */
+/** Cantidad de prendas por estilo, los 5 estilos incluidos. Una prenda
+ *  cuenta para TODOS sus estilos (principal + secundarios vía estilosDe) --
+ *  una prenda versátil (ej. sweater mostaza clásico+casual) suma en los dos
+ *  registros, no solo el principal. Sin ningún estilo cargado no cuenta
+ *  para ninguno -- no se le inventa un valor por defecto, igual que el
+ *  resto de la app (ver registroOutfit en recommend.ts). */
 export function contarPorEstilo(placard: Prenda[]): ConteoEstilo[] {
   const conteos = new Map<Estilo, number>(ESTILOS.map((e) => [e, 0]));
   for (const p of placard) {
-    if (p.estilo) conteos.set(p.estilo, (conteos.get(p.estilo) ?? 0) + 1);
+    for (const estilo of estilosDe(p)) conteos.set(estilo, (conteos.get(estilo) ?? 0) + 1);
   }
   return ESTILOS.map((estilo) => ({
     estilo,
@@ -159,14 +161,16 @@ export function analizarPlacard(placard: Prenda[]): AnalisisPlacard {
 }
 
 /** Buscador libre del placard (Placard.tsx): compara contra los mismos
- *  textos que ya se ven en cada card (categoría, color, estilo) -- nunca
+ *  textos que ya se ven en cada card (categoría, color, estilo/s) -- nunca
  *  contra datos crudos que el usuario no tiene forma de escribir (hex,
- *  h/s/l). Substring, sin distinguir mayúsculas/acentos de más ni nada
- *  raro: "azul" matchea "Azul oscuro". Query vacía o solo espacios ->
- *  matchea todo (comportamiento de "sin filtro", no de "sin resultados"). */
+ *  h/s/l). Incluye estilos secundarios (estilosDe): buscar "casual" también
+ *  encuentra una prenda clásica con casual como secundario. Substring, sin
+ *  distinguir mayúsculas/acentos de más ni nada raro: "azul" matchea "Azul
+ *  oscuro". Query vacía o solo espacios -> matchea todo (comportamiento de
+ *  "sin filtro", no de "sin resultados"). */
 export function coincideBusqueda(p: Prenda, query: string): boolean {
   const q = query.trim().toLowerCase();
   if (!q) return true;
-  const textos = [CATEGORIA_LABEL[p.categoria], nombreColor(p.color_h, p.color_s, p.color_l), p.estilo ? ESTILO_LABEL[p.estilo] : ""];
+  const textos = [CATEGORIA_LABEL[p.categoria], nombreColor(p.color_h, p.color_s, p.color_l), ...estilosDe(p).map((e) => ESTILO_LABEL[e])];
   return textos.some((t) => t.toLowerCase().includes(q));
 }

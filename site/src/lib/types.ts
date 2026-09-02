@@ -43,6 +43,16 @@ export interface Prenda {
   color_l: number;
   textura: Textura | null;
   estilo: Estilo | null;
+  /** Estilos ADICIONALES en los que esta prenda también funciona, más allá
+   *  del `estilo` principal -- pedido explícito del usuario: "algunas
+   *  prendas pueden funcionar para más de un estilo" (ej. un sweater
+   *  mostaza tan válido para oficina/clásico como para un fin de semana
+   *  casual). `estilo` sigue siendo el único que define el registro del
+   *  outfit completo (ver registroOutfit en recommend.ts, sin cambios) --
+   *  esto solo amplía CONTRA qué otras prendas combina sin choque de
+   *  registro. Vacío por defecto: no se inventa versatilidad que el
+   *  usuario no cargó. */
+  estilos_secundarios: Estilo[];
   ocasion: Ocasion | null;
   estacion: Estacion | null;
   foto_path: string | null;

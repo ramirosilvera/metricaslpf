@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
-import { ESTILO_LABEL } from "../lib/recommend";
+import { ESTILO_LABEL, estilosDe } from "../lib/recommend";
 import { coincideBusqueda, contarPorColor, TODAS_LAS_CATEGORIAS } from "../lib/estadisticas";
 import { CATEGORIA_LABEL, type Estilo, type Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
@@ -28,7 +28,7 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
   const visibles = useMemo(
     () =>
       prendas.filter((p) => {
-        if (filtroEstilo && p.estilo !== filtroEstilo) return false;
+        if (filtroEstilo && !estilosDe(p).includes(filtroEstilo)) return false;
         if (filtroColor && nombreColor(p.color_h, p.color_s, p.color_l) !== filtroColor) return false;
         return coincideBusqueda(p, busqueda);
       }),

@@ -6,7 +6,9 @@ import {
   categoriasAusentes,
   diffPrendasEdicion,
   esNeutro,
+  estilosDe,
   hueDist,
+  outfitSirveParaEstilo,
   recomendar,
   registroOutfit,
   scoreColor,
@@ -374,6 +376,109 @@ describe("recomendar -- deportivo no combina con formal/clasico (ni siquiera acc
 
     const [resultado] = recomendar(short, [cinturon], [short, cinturon]);
     expect(resultado.tecnicaRescate).toContain("No hay técnica de rescate");
+  });
+});
+
+describe("estilosDe", () => {
+  it("sin secundarios, es solo el principal", () => {
+    const p = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    p.estilo = "clasico";
+    expect(estilosDe(p)).toEqual(["clasico"]);
+  });
+
+  it("combina principal + secundarios", () => {
+    const p = mkPrenda("sweater", "#C3922E", 40, 62, 47);
+    p.estilo = "clasico";
+    p.estilos_secundarios = ["casual"];
+    expect(estilosDe(p).sort()).toEqual(["casual", "clasico"]);
+  });
+
+  it("sin estilo principal, son solo los secundarios", () => {
+    const p = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    p.estilos_secundarios = ["urbano"];
+    expect(estilosDe(p)).toEqual(["urbano"]);
+  });
+
+  it("sin nada cargado, lista vacía", () => {
+    const p = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    expect(estilosDe(p)).toEqual([]);
+  });
+
+  it("no duplica si el principal está repetido en los secundarios", () => {
+    const p = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    p.estilo = "clasico";
+    p.estilos_secundarios = ["clasico", "casual"];
+    expect(estilosDe(p).sort()).toEqual(["casual", "clasico"]);
+  });
+});
+
+describe("multi-estilo -- escape hatch del choque deportivo y de la formalidad", () => {
+  it("una prenda clasico+casual (secundario) YA NO choca con deportivo, a diferencia de una puramente clasico", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const sweaterVersatile = mkPrenda("sweater", "#C3922E", 40, 62, 47);
+    sweaterVersatile.estilo = "clasico";
+    sweaterVersatile.estilos_secundarios = ["casual"];
+
+    const [resultado] = recomendar(short, [sweaterVersatile], [short, sweaterVersatile]);
+    expect(resultado.score.nivel).not.toBe("con_cuidado");
+  });
+
+  it("control: la misma prenda SIN el secundario casual sigue chocando contra deportivo", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const sweaterPuroClasico = mkPrenda("sweater", "#C3922E", 40, 62, 47);
+    sweaterPuroClasico.estilo = "clasico";
+
+    const [resultado] = recomendar(short, [sweaterPuroClasico], [short, sweaterPuroClasico]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+
+  it("un secundario que alcanza la formalidad del pantalón evita la degradación por informalidad", () => {
+    // Mismo color exacto en las dos prendas -> scoreColor da "excelente"
+    // seguro, así cualquier degradación posterior solo puede venir de
+    // prendaMenosFormalQuePantalon.
+    const pantalonCasual = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonCasual.estilo = "casual";
+    // remera con estilo principal "deportivo" (rango 0, menos formal que el
+    // pantalón casual, rango 1) pero con "urbano" (rango 1) como secundario
+    // -- el mejor de sus estilos alcanza al pantalón, no debería degradar.
+    const remeraConSecundarioUrbano = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    remeraConSecundarioUrbano.estilo = "deportivo";
+    remeraConSecundarioUrbano.estilos_secundarios = ["urbano"];
+
+    const [resultado] = recomendar(pantalonCasual, [remeraConSecundarioUrbano], [pantalonCasual, remeraConSecundarioUrbano]);
+    expect(resultado.score.nivel).toBe("excelente");
+
+    // control: sin el secundario, sí degrada.
+    const remeraSoloDeportiva = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    remeraSoloDeportiva.estilo = "deportivo";
+    const [resultadoControl] = recomendar(pantalonCasual, [remeraSoloDeportiva], [pantalonCasual, remeraSoloDeportiva]);
+    expect(resultadoControl.score.nivel).toBe("muy_bueno");
+    expect(resultadoControl.score.explicacion).toContain("más informal");
+  });
+});
+
+describe("outfitSirveParaEstilo", () => {
+  it("matchea por el estilo principal del pantalón", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "formal";
+    expect(outfitSirveParaEstilo([pantalon], "formal")).toBe(true);
+    expect(outfitSirveParaEstilo([pantalon], "casual")).toBe(false);
+  });
+
+  it("matchea también por un estilo secundario del pantalón", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    pantalon.estilos_secundarios = ["casual"];
+    expect(outfitSirveParaEstilo([pantalon], "casual")).toBe(true);
+    expect(outfitSirveParaEstilo([pantalon], "clasico")).toBe(true);
+  });
+
+  it("sin ninguna prenda de piernas en el outfit, no matchea nada", () => {
+    const remera = mkPrenda("remera", "#3366CC", 220, 60, 50);
+    remera.estilo = "casual";
+    expect(outfitSirveParaEstilo([remera], "casual")).toBe(false);
   });
 });
 
@@ -862,6 +967,7 @@ function mkPrenda(
     color_l: l,
     textura: null,
     estilo: null,
+    estilos_secundarios: [],
     ocasion: null,
     estacion: null,
     foto_path: null,

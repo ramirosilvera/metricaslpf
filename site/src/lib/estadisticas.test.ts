@@ -9,6 +9,7 @@ function mkPrenda(
   s: number,
   l: number,
   estilo: Prenda["estilo"] = null,
+  estilosSecundarios: Prenda["estilos_secundarios"] = [],
 ): Prenda {
   return {
     id: `${hex}-${categoria}-${Math.random()}`,
@@ -20,6 +21,7 @@ function mkPrenda(
     color_l: l,
     textura: null,
     estilo,
+    estilos_secundarios: estilosSecundarios,
     ocasion: null,
     estacion: null,
     foto_path: null,
@@ -65,6 +67,13 @@ describe("contarPorEstilo", () => {
     ];
     const r = contarPorEstilo(placard);
     expect(r[0]).toMatchObject({ estilo: "formal", cantidad: 2 });
+    expect(r.find((e) => e.estilo === "casual")).toMatchObject({ cantidad: 1 });
+  });
+
+  it("una prenda con estilo secundario cuenta para los dos registros, no solo el principal", () => {
+    const placard = [mkPrenda("sweater", "#C3922E", 40, 62, 47, "clasico", ["casual"])];
+    const r = contarPorEstilo(placard);
+    expect(r.find((e) => e.estilo === "clasico")).toMatchObject({ cantidad: 1 });
     expect(r.find((e) => e.estilo === "casual")).toMatchObject({ cantidad: 1 });
   });
 });
@@ -161,5 +170,11 @@ describe("coincideBusqueda", () => {
     const sinEstilo = mkPrenda("camisa", "#FFFFFF", 0, 0, 95, null);
     expect(coincideBusqueda(conEstilo, "formal")).toBe(true);
     expect(coincideBusqueda(sinEstilo, "formal")).toBe(false);
+  });
+
+  it("matchea también por un estilo secundario, no solo el principal", () => {
+    const p = mkPrenda("sweater", "#C3922E", 40, 62, 47, "clasico", ["casual"]);
+    expect(coincideBusqueda(p, "casual")).toBe(true);
+    expect(coincideBusqueda(p, "clásico")).toBe(true);
   });
 });

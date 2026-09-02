@@ -108,6 +108,7 @@ export default function Probar() {
           color_l: hsl.l,
           textura: null,
           estilo: null,
+          estilos_secundarios: [],
           ocasion: null,
           estacion: null,
           foto_path: null,

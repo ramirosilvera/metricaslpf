@@ -216,9 +216,16 @@ function prendaDeCuero(p: Prenda): boolean {
  *  distinto acá. short_deportivo nunca entra por esta puerta en la
  *  práctica: ninguna entrada del catálogo le carga estilo "formal" ni
  *  "clasico" (siempre "deportivo"), pero el chequeo de estilo abajo lo
- *  filtraría igual aunque algún día se cargara mal. */
+ *  filtraría igual aunque algún día se cargara mal.
+ *
+ *  Multi-estilo: alcanza con que formal/clasico sea CUALQUIERA de los
+ *  estilos declarados (principal o secundario, vía estilosDe) -- si un
+ *  pantalón es "clasico" además de "casual", sigue siendo lo bastante de
+ *  vestir como para que aplique la convención del cuero. */
 function esPantalonDeVestir(p: Prenda): boolean {
-  return CATEGORIAS_PIERNAS.includes(p.categoria) && (p.estilo === "formal" || p.estilo === "clasico");
+  if (!CATEGORIAS_PIERNAS.includes(p.categoria)) return false;
+  const estilos = estilosDe(p);
+  return estilos.includes("formal") || estilos.includes("clasico");
 }
 
 /** Cuero negro + cuero (o pantalón de vestir) de otro color (marrón,
@@ -272,6 +279,21 @@ function esDescoordinacionDeCuero(base: Prenda, candidato: Prenda): boolean {
   return false;
 }
 
+/** Todos los estilos en los que una prenda funciona: el principal
+ *  (`estilo`) más los adicionales (`estilos_secundarios`) -- pedido
+ *  explícito del usuario: "algunas prendas pueden funcionar para más de un
+ *  estilo" (ej. un sweater mostaza tan válido para oficina/clásico como
+ *  para casual). `registroOutfit` (más abajo) sigue usando solo el
+ *  principal para el badge del outfit completo -- este helper es para las
+ *  reglas de COMPATIBILIDAD (¿esta prenda choca con esa otra?), donde
+ *  cualquiera de sus registros declarados cuenta. Nunca duplica si el
+ *  principal está repetido en los secundarios (no debería pasar por UI,
+ *  pero no hay que confiar en eso acá). */
+export function estilosDe(p: Prenda): Estilo[] {
+  const todos = p.estilo ? [p.estilo, ...p.estilos_secundarios] : p.estilos_secundarios;
+  return [...new Set(todos)];
+}
+
 // Formalidad relativa de estilo -- mayor es más formal, agrupada en 3
 // escalones, no 5. "formal" y "clasico" quedan parejos a propósito: un
 // pantalón de vestir con una camisa blanca (formal + clasico) es la
@@ -307,11 +329,20 @@ const CATEGORIAS_CON_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater"
  *  cuero o un sweater de vestir con un jean) es un combo "smart casual"
  *  real y no se toca -- acá lo que sube por encima de la prenda de piernas
  *  en formalidad no baja el nivel, solo lo que se queda por debajo. Solo
- *  se usa cuando ambas prendas declaran `estilo` (si no, no hay con qué
+ *  se usa cuando el pantalón declara `estilo` y la otra prenda declara al
+ *  menos un estilo -- propio o secundario -- (si no, no hay con qué
  *  comparar, y no se inventa un valor por defecto). El nombre de la
  *  función sigue diciendo "Pantalon" (no se renombra en esta pasada, para
  *  no ensuciar el diff con un rename masivo) pero desde acá se aplica por
- *  igual a las tres categorías de CATEGORIAS_PIERNAS. */
+ *  igual a las tres categorías de CATEGORIAS_PIERNAS.
+ *
+ *  Multi-estilo: el pantalón ancla la comparación con su estilo PRINCIPAL
+ *  únicamente (es el que define el registro del outfit completo, igual que
+ *  registroOutfit) -- pero la otra prenda se evalúa por el MEJOR (más
+ *  formal) de TODOS sus estilos declarados, principal o secundario. Un
+ *  sweater tageado "clasico" + "casual" no se degrada contra un pantalón
+ *  "casual": tiene un estilo (el secundario) que alcanza esa formalidad,
+ *  aunque su estilo principal sea otro. */
 function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean {
   const pantalon = CATEGORIAS_PIERNAS.includes(base.categoria)
     ? base
@@ -321,11 +352,14 @@ function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean 
   const otra = pantalon === base ? candidato : base;
   if (!pantalon) return false;
   if (otra.categoria !== "calzado" && !CATEGORIAS_CON_TORSO.includes(otra.categoria)) return false;
-  if (!pantalon.estilo || !otra.estilo) return false;
+  if (!pantalon.estilo) return false;
+  const rangosOtra = estilosDe(otra)
+    .map((e) => FORMALIDAD_ESTILO[e])
+    .filter((r): r is number => r !== undefined);
+  if (rangosOtra.length === 0) return false;
   const rangoPantalon = FORMALIDAD_ESTILO[pantalon.estilo];
-  const rangoOtra = FORMALIDAD_ESTILO[otra.estilo];
-  if (rangoPantalon === undefined || rangoOtra === undefined) return false;
-  return rangoOtra < rangoPantalon;
+  if (rangoPantalon === undefined) return false;
+  return Math.max(...rangosOtra) < rangoPantalon;
 }
 
 /** El registro "deportivo" no es solo "el escalón más informal" de la
@@ -349,10 +383,23 @@ function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean 
  *  ancla) y sin excepción de categoría (aplica también a accesorio). Solo
  *  choca contra "formal"/"clasico" -- "urbano" sigue siendo válido con
  *  deportivo (zapatillas urbanas, campera urbana con jogger: combinación
- *  real de calle, no un error). */
+ *  real de calle, no un error).
+ *
+ *  Multi-estilo: usa TODOS los estilos declarados de cada prenda (principal
+ *  + secundarios, vía estilosDe). "Es deportivo" alcanza con que uno de sus
+ *  estilos sea "deportivo" -- si además tiene otro, sigue siendo deportivo
+ *  para este chequeo. "Es de vestir" es más estricto a propósito: solo si
+ *  TODOS sus estilos son formal/clasico (ninguno casual/urbano/deportivo).
+ *  Así, un sweater tageado "clasico" + "casual" ya NO choca con deportivo
+ *  -- tiene un registro casual real declarado, que alcanza como "escape" --
+ *  mientras que un sweater puramente "clasico" (sin ningún otro estilo)
+ *  sigue chocando como antes. */
 function chocaRegistroDeportivo(a: Prenda, b: Prenda): boolean {
-  const esDeportivo = (p: Prenda) => p.estilo === "deportivo";
-  const esDeVestir = (p: Prenda) => p.estilo === "formal" || p.estilo === "clasico";
+  const esDeportivo = (p: Prenda) => estilosDe(p).includes("deportivo");
+  const esDeVestir = (p: Prenda) => {
+    const estilos = estilosDe(p);
+    return estilos.length > 0 && estilos.every((e) => e === "formal" || e === "clasico");
+  };
   return (esDeportivo(a) && esDeVestir(b)) || (esDeportivo(b) && esDeVestir(a));
 }
 
@@ -377,6 +424,20 @@ export const ESTILO_LABEL: Record<Estilo, string> = {
 export function registroOutfit(prendas: Prenda[]): string | null {
   const pantalon = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   return pantalon?.estilo ? ESTILO_LABEL[pantalon.estilo] : null;
+}
+
+/** true si el outfit sirve para la ocasión pedida -- usado por "Vestite
+ *  hoy" (Outfits.tsx) para filtrar, tanto los outfits armados solos como
+ *  los ya guardados. A diferencia de registroOutfit (que etiqueta el
+ *  outfit con el estilo PRINCIPAL del pantalón, para el badge), acá se
+ *  chequean TODOS los estilos declarados del pantalón (principal +
+ *  secundarios, vía estilosDe): un pantalón "clasico" con "casual" como
+ *  estilo secundario aparece tanto si el usuario elige Clásico como
+ *  Casual, no solo el principal. */
+export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolean {
+  const pantalon = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
+  if (!pantalon) return false;
+  return estilosDe(pantalon).includes(estilo);
 }
 
 /** Mensajes puntuales de por qué una prenda del outfit desentona en

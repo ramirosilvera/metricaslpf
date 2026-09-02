@@ -8,6 +8,9 @@ export interface PresetPrenda {
   colorHex: string;
   textura?: Textura;
   estilo?: Estilo;
+  /** Ver Prenda.estilos_secundarios en types.ts. Se omite (== []) salvo en
+   *  las pocas prendas donde de verdad funcionan en más de un registro. */
+  estilosSecundarios?: Estilo[];
   ocasion?: Ocasion;
   estacion?: Estacion;
   /** Ver Prenda.suela_contraste en types.ts. Solo tiene sentido en calzado;
@@ -198,7 +201,21 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // estándar como bordó/azul marino/gris de acá arriba. Este hex real
   // (h=40, s=62, l=47) fue justamente el que encontró el bug de
   // nombreColor() clasificándolo como "Naranja" -- ver color.ts.
-  { id: "sweater-mostaza", nombre: "Sweater mostaza", categoria: "sweater", colorHex: "#C3922E", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  // Estilo secundario "casual" a propósito -- el mismo sweater mostaza que
+  // se usa con pantalón de vestir para la oficina funciona igual de bien
+  // sobre un jean para un finde (ejemplo real que dio el usuario al pedir
+  // soporte multi-estilo). "clasico" sigue siendo el principal: define el
+  // registro del outfit cuando esta prenda es el ancla.
+  {
+    id: "sweater-mostaza",
+    nombre: "Sweater mostaza",
+    categoria: "sweater",
+    colorHex: "#C3922E",
+    textura: "lana",
+    estilo: "clasico",
+    estilosSecundarios: ["casual"],
+    ocasion: "laburo",
+  },
 
   // --- Calzado ---
   // Las zapatillas negras y marrones aparecen dos veces a propósito -- una
@@ -320,6 +337,7 @@ export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number
     color_l: preset.hsl.l,
     textura: preset.textura ?? null,
     estilo: preset.estilo ?? null,
+    estilos_secundarios: preset.estilosSecundarios ?? [],
     ocasion: preset.ocasion ?? null,
     estacion: preset.estacion ?? null,
     foto_path: null,

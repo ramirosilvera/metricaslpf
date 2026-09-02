@@ -3,6 +3,7 @@ import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
 import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
+import { ESTILO_LABEL } from "../lib/recommend";
 import { CATEGORIA_LABEL, type Categoria, type Estacion, type Estilo, type Ocasion, type Textura } from "../lib/types";
 import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
@@ -59,6 +60,7 @@ export default function PrendaForm() {
   const [colorHex, setColorHex] = useState(presetDePrefill?.colorHex ?? prefill?.colorHex ?? "#3366CC");
   const [textura, setTextura] = useState<Textura | "">(presetDePrefill?.textura ?? "");
   const [estilo, setEstilo] = useState<Estilo | "">(presetDePrefill?.estilo ?? "");
+  const [estilosSecundarios, setEstilosSecundarios] = useState<Estilo[]>(presetDePrefill?.estilosSecundarios ?? []);
   const [ocasion, setOcasion] = useState<Ocasion | "">(presetDePrefill?.ocasion ?? "");
   const [estacion, setEstacion] = useState<Estacion | "">(presetDePrefill?.estacion ?? "");
   const [suelaContraste, setSuelaContraste] = useState(presetDePrefill?.suelaContraste ?? false);
@@ -90,6 +92,7 @@ export default function PrendaForm() {
     setColorHex(p.colorHex);
     setTextura(p.textura ?? "");
     setEstilo(p.estilo ?? "");
+    setEstilosSecundarios(p.estilosSecundarios ?? []);
     setOcasion(p.ocasion ?? "");
     setEstacion(p.estacion ?? "");
     setSuelaContraste(p.suelaContraste ?? false);
@@ -138,6 +141,7 @@ export default function PrendaForm() {
           color_l: hsl.l,
           textura: textura || null,
           estilo: estilo || null,
+          estilos_secundarios: estilosSecundarios,
           ocasion: ocasion || null,
           estacion: estacion || null,
           suela_contraste: categoria === "calzado" ? suelaContraste : false,
@@ -234,7 +238,34 @@ export default function PrendaForm() {
           <summary>Tags opcionales (textura, estilo, ocasión, estación)</summary>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginTop: "0.6rem" }}>
             <SelectOpcional label="Textura" value={textura} onChange={setTextura} opciones={TEXTURAS} />
-            <SelectOpcional label="Estilo" value={estilo} onChange={setEstilo} opciones={ESTILOS} />
+            <SelectOpcional
+              label="Estilo"
+              value={estilo}
+              onChange={(v) => {
+                setEstilo(v);
+                setEstilosSecundarios((prev) => prev.filter((x) => x !== v));
+              }}
+              opciones={ESTILOS}
+            />
+            <div>
+              <span style={{ display: "block", marginBottom: "0.3rem" }}>
+                También funciona para (opcional, además del estilo principal)
+              </span>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
+                {ESTILOS.filter((e) => e !== estilo).map((e) => (
+                  <label key={e} style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                    <input
+                      type="checkbox"
+                      checked={estilosSecundarios.includes(e)}
+                      onChange={(ev) =>
+                        setEstilosSecundarios((prev) => (ev.target.checked ? [...prev, e] : prev.filter((x) => x !== e)))
+                      }
+                    />
+                    <span>{ESTILO_LABEL[e]}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
             <SelectOpcional label="Ocasión" value={ocasion} onChange={setOcasion} opciones={OCASIONES} />
             <SelectOpcional label="Estación" value={estacion} onChange={setEstacion} opciones={ESTACIONES} />
             {categoria === "calzado" && (

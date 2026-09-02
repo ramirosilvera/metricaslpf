@@ -9,6 +9,7 @@ import {
   armarOutfitsSugeridos,
   diffPrendasEdicion,
   ESTILO_LABEL,
+  outfitSirveParaEstilo,
   registroOutfit,
   tanda,
   type OutfitParaComprar,
@@ -122,12 +123,13 @@ export function Contenido({
   );
 
   // Pedido explícito: diferenciar/filtrar por estilo también en los
-  // outfits guardados, no solo en el catálogo. registroOutfit ya calcula
-  // el registro del outfit (a partir del estilo del pantalón) para
-  // RegistroBadge -- se reusa acá para filtrar en vez de duplicar la
-  // lógica de "cuál es el estilo de este outfit".
+  // outfits guardados, no solo en el catálogo. outfitSirveParaEstilo (no
+  // registroOutfit, que solo da el estilo PRINCIPAL para el badge) chequea
+  // todos los estilos del pantalón -- un pantalón "clasico" con "casual"
+  // como estilo secundario aparece en los dos filtros, no solo el
+  // principal.
   const outfitsFiltrados = useMemo(
-    () => (filtroEstilo ? outfits.filter((o) => registroOutfit(o.prendas) === ESTILO_LABEL[filtroEstilo]) : outfits),
+    () => (filtroEstilo ? outfits.filter((o) => outfitSirveParaEstilo(o.prendas, filtroEstilo)) : outfits),
     [outfits, filtroEstilo],
   );
 
@@ -149,7 +151,7 @@ export function Contenido({
   const poolSugeridosPorEstilo = useMemo(() => {
     if (estiloSugerido === null) return [];
     if (estiloSugerido === "todos") return poolSugeridos;
-    return poolSugeridos.filter((s) => registroOutfit(s.prendas) === ESTILO_LABEL[estiloSugerido]);
+    return poolSugeridos.filter((s) => outfitSirveParaEstilo(s.prendas, estiloSugerido));
   }, [poolSugeridos, estiloSugerido]);
 
   function elegirEstiloSugerido(valor: Estilo | "todos") {
