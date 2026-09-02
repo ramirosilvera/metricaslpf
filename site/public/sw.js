@@ -1,5 +1,5 @@
 /*
- * Service worker mínimo de Matiz.
+ * Service worker mínimo de Mi ropa.
  *
  * Objetivo: hacer la app instalable (PWA) y dar un "app shell" offline, sin
  * arriesgar los datos del usuario (placard, auth, fotos), que viven en
@@ -12,7 +12,7 @@
  *    cualquier request a Supabase (API REST, Auth, Storage) y cualquier
  *    origen cruzado.
  */
-const CACHE = "matiz-shell-v1";
+const CACHE = "miropa-shell-v1";
 
 const STATIC_ASSET = /\.(css|js|mjs|png|svg|ico|webp|jpg|jpeg|woff2?)(\?|$)/i;
 
@@ -43,7 +43,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE).then((c) => c.put(request, res.clone()));
           return res;
         })
-        .catch(() => caches.match(request).then((r) => r || caches.match("/metricaslpf/"))),
+        .catch(() => caches.match(request).then((r) => r || caches.match("/miropa/"))),
     );
     return;
   }

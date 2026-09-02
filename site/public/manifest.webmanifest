@@ -4,9 +4,9 @@
   "description": "Tu estilista que te explica por qué combina. Cargá lo que ya tenés y Mi ropa te arma la mejor combinación posible, con la razón.",
   "lang": "es",
   "dir": "ltr",
-  "start_url": "/metricaslpf/",
-  "scope": "/metricaslpf/",
-  "id": "/metricaslpf/",
+  "start_url": "/miropa/",
+  "scope": "/miropa/",
+  "id": "/miropa/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#fbf7f2",
@@ -14,19 +14,19 @@
   "categories": ["lifestyle", "shopping", "utilities"],
   "icons": [
     {
-      "src": "/metricaslpf/icon-192.png",
+      "src": "/miropa/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/metricaslpf/icon-512.png",
+      "src": "/miropa/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/metricaslpf/icon-maskable-512.png",
+      "src": "/miropa/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

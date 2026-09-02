@@ -45,7 +45,7 @@ Los detalles completos del árbol de reglas están en
 ```bash
 cd site
 npm install
-npm run dev       # http://localhost:4321/metricaslpf/
+npm run dev       # http://localhost:4321/miropa/
 npm test          # tests del motor de recomendación (vitest)
 npm run build     # build de producción a site/dist/
 ```

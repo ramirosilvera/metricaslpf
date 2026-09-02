@@ -11,7 +11,7 @@ const path = Astro.url.pathname;
 // new URL(path, Astro.site), no concatenación de strings -- Astro.site ya
 // viene con "/" final (normalizado por Astro), así que sumarlo a mano con
 // BASE_URL (que también arranca con "/") daba una barra doble
-// ("https://.../metricaslpf/og-image.png" -> ".io//metricaslpf/..."),
+// ("https://.../miropa/og-image.png" -> ".io//miropa/..."),
 // confirmado mirando el HTML generado por el build.
 const ogImage = new URL(`${import.meta.env.BASE_URL}og-image.png`, Astro.site).toString();
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();

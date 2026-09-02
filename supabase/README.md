@@ -35,7 +35,7 @@ repo ni en Supabase.
 - ✅ Schema `metricas_mundial` borrado por completo -- aplicado vía `0008_drop_metricas_mundial.sql`.
 - ⬜ Confirmar que las Redirect URLs de Auth (Project Settings → Auth → URL
   Configuration) apuntan al dominio/base real de Mi ropa
-  (`https://ramirosilvera.github.io/metricaslpf/`) -- si el login funciona
+  (`https://ramirosilvera.github.io/miropa/`) -- si el login funciona
   desde el mismo dominio no hace falta tocar nada acá, pero si en algún
   momento aparece un error de "redirect not allowed" al confirmar email o
   hacer login, es este setting.
