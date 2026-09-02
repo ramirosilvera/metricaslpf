@@ -8,11 +8,11 @@ export const SUPABASE_CONFIGURADO = Boolean(url && anonKey);
 if (!SUPABASE_CONFIGURADO) {
   // eslint-disable-next-line no-console
   console.warn(
-    "Matiz: faltan PUBLIC_SUPABASE_URL / PUBLIC_SUPABASE_ANON_KEY -- ver README.md.",
+    "Mi ropa: faltan PUBLIC_SUPABASE_URL / PUBLIC_SUPABASE_ANON_KEY -- ver README.md.",
   );
 }
 
-// Todas las tablas de Matiz viven en el schema `armario` (no `public`) --
+// Todas las tablas de Mi ropa viven en el schema `armario` (no `public`) --
 // hay que exponerlo en Project Settings -> API -> Exposed schemas del lado
 // de Supabase (ver supabase/README.md), si no toda query devuelve error.
 //

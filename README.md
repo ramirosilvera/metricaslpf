@@ -1,11 +1,15 @@
-# Matiz
+# Mi ropa
 
 **Tu estilista que te explica por qué combina.**
 
-Matiz es un asistente de vestimenta: cargás una prenda que ya tenés (foto o
+*(este repositorio se llamaba "Matiz"; el nombre de la app cambió a "Mi
+ropa" a pedido explícito del dueño del proyecto -- ver el historial de
+commits para el detalle del rebrand.)*
+
+Mi ropa es un asistente de vestimenta: cargás una prenda que ya tenés (foto o
 color) y te devuelve las mejores combinaciones posibles para completar el
 outfit — explicando *por qué* funcionan, no solo mostrando el resultado. Si
-querés arriesgar una combinación poco convencional, Matiz te muestra cómo
+querés arriesgar una combinación poco convencional, Mi ropa te muestra cómo
 "rescatarla" en vez de simplemente desaconsejarla.
 
 No es un buscador que filtra. Es un estilista que enseña.
@@ -15,12 +19,12 @@ No es un buscador que filtra. Es un estilista que enseña.
 El motor de recomendación compara colores en espacio HSL (matiz, saturación,
 luminosidad) contra un árbol de reglas determinístico — sin machine learning:
 
-- **Matiz cercano + saturación baja** → combinación segura.
+- **Matiz (hue) cercano + saturación baja** → combinación segura.
 - **Mismo matiz repetido (tono sobre tono)** → combinación seguísima.
 - **Matiz opuesto con buen contraste de luminosidad** → combinación audaz,
   pero funciona.
 - **Dos colores no neutros con luminosidad casi idéntica** → se "funden" en
-  una mancha — Matiz avisa y sugiere una técnica de rescate concreta (puente
+  una mancha — la app avisa y sugiere una técnica de rescate concreta (puente
   neutro, repetir el color en un accesorio, o separar por textura).
 
 Los detalles completos del árbol de reglas están en
@@ -55,14 +59,12 @@ PUBLIC_SUPABASE_ANON_KEY=...
 
 ## Estado del proyecto
 
-MVP funcional: Supabase configurado (schema `armario` expuesto, bucket de
-Storage creado), variables de GitHub Actions cargadas, deploy en verde. Ver
-`supabase/README.md` para el detalle de la config de Supabase y un apunte
-importante sobre variables vs. secrets de GitHub Actions.
-
-No wireado todavía: botón para guardar una combinación como "outfit" desde
-la pantalla de recomendaciones (el schema y el listado ya existen, falta la
-acción de guardar).
+Funcional en producción: Supabase configurado (schema `armario` expuesto,
+bucket de Storage creado), variables de GitHub Actions cargadas, deploy en
+verde, guardado y edición de outfits ya wireados de punta a punta. Ver
+`supabase/README.md` para el detalle de la config de Supabase -- incluye un
+apunte importante sobre variables vs. secrets de GitHub Actions, y sobre el
+secret que falta para que las migraciones se apliquen solas en cada push.
 
 ---
 

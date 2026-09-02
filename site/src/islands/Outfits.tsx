@@ -133,7 +133,7 @@ export default function Outfits() {
         setOutfits(conPrendas.filter((o) => o.prendas.length > 0));
         setPlacard((prendaRows as Prenda[] | null) ?? []);
       } catch (e) {
-        setError(e instanceof Error ? e.message : "Error de conexión con Matiz.");
+        setError(e instanceof Error ? e.message : "Error de conexión con Mi ropa.");
       }
     }
     cargar();
@@ -211,7 +211,7 @@ export default function Outfits() {
   function cargarSugerencia(sugerida: OutfitParaComprar["sugerida"]) {
     try {
       sessionStorage.setItem(
-        "matiz_prueba_prefill",
+        "mi_ropa_prueba_prefill",
         JSON.stringify({ categoria: sugerida.categoria, colorHex: sugerida.colorHex, presetId: sugerida.id }),
       );
     } catch {
@@ -327,7 +327,7 @@ export default function Outfits() {
         <p>Todavía no guardaste ningún outfit.</p>
         <p style={{ fontSize: "0.9rem" }}>
           Para guardar uno: elegí una prenda de tu placard, mirá sus combinaciones, tocá las que te gusten y usá el
-          botón <strong>"Guardar outfit"</strong> que aparece abajo. Cargá algún pantalón para que Matiz también te
+          botón <strong>"Guardar outfit"</strong> que aparece abajo. Cargá algún pantalón para que Mi ropa también te
           arme sugerencias solo.
         </p>
         <a className="btn btn-primary" href={base}>

@@ -45,7 +45,7 @@ const ESTACIONES: Estacion[] = ["verano", "invierno", "entretiempo"];
  *  fase de render, para no perder el valor con un render descartado). */
 function leerPrefillDePrueba(): { categoria: Categoria; colorHex: string; presetId?: string } | null {
   try {
-    const raw = sessionStorage.getItem("matiz_prueba_prefill");
+    const raw = sessionStorage.getItem("mi_ropa_prueba_prefill");
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
@@ -76,7 +76,7 @@ export default function PrendaForm() {
   useEffect(() => {
     if (!prefill) return;
     try {
-      sessionStorage.removeItem("matiz_prueba_prefill");
+      sessionStorage.removeItem("mi_ropa_prueba_prefill");
     } catch {
       // no-op: si el storage está bloqueado, tampoco pudo haber escrito el prefill
     }
@@ -166,7 +166,7 @@ export default function PrendaForm() {
       const base = (import.meta.env.BASE_URL as string) || "/";
       window.location.href = `${base}combinar/?prenda=${inserted.id}`;
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error de conexión con Matiz.");
+      setError(err instanceof Error ? err.message : "Error de conexión con Mi ropa.");
       setEstado("error");
     }
   }

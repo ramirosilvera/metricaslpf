@@ -48,7 +48,7 @@ export default function Placard() {
   if (sesion === "error") {
     return (
       <div className="empty-state">
-        <p>No se pudo conectar con Matiz.</p>
+        <p>No se pudo conectar con Mi ropa.</p>
         <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{error}</p>
       </div>
     );

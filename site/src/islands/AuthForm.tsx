@@ -37,7 +37,7 @@ export default function AuthForm() {
       window.location.href = base;
     } catch (e) {
       setEstado("error");
-      setError(e instanceof Error ? e.message : "Error de conexión con Matiz.");
+      setError(e instanceof Error ? e.message : "Error de conexión con Mi ropa.");
     }
   }
 

@@ -53,7 +53,7 @@ export default function Recomendaciones() {
         setPlacard(todas);
         setBase(todas.find((p) => p.id === prendaId) ?? null);
       } catch (e) {
-        setError(e instanceof Error ? e.message : "Error de conexión con Matiz.");
+        setError(e instanceof Error ? e.message : "Error de conexión con Mi ropa.");
       }
     }
     cargar();

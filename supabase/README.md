@@ -1,8 +1,9 @@
 # Supabase — schema como código
 
-El proyecto Supabase (schema `armario`) es la base de Matiz: usuarios, placard
-personal y outfits guardados. Este directorio versiona **todo** su esquema para
-que sea reproducible de cero y no viva solo en la base en vivo.
+El proyecto Supabase (schema `armario`) es la base de Mi ropa (antes
+"Matiz"): usuarios, placard personal y outfits guardados. Este directorio
+versiona **todo** su esquema para que sea reproducible de cero y no viva
+solo en la base en vivo.
 
 ## Archivos (`migrations/`, se aplican en orden alfabético)
 
@@ -33,7 +34,7 @@ repo ni en Supabase.
 - ✅ Schema `armario` expuesto en la API -- aplicado vía `0007_expose_armario_schema.sql`.
 - ✅ Schema `metricas_mundial` borrado por completo -- aplicado vía `0008_drop_metricas_mundial.sql`.
 - ⬜ Confirmar que las Redirect URLs de Auth (Project Settings → Auth → URL
-  Configuration) apuntan al dominio/base real de Matiz
+  Configuration) apuntan al dominio/base real de Mi ropa
   (`https://ramirosilvera.github.io/metricaslpf/`) -- si el login funciona
   desde el mismo dominio no hace falta tocar nada acá, pero si en algún
   momento aparece un error de "redirect not allowed" al confirmar email o
@@ -56,7 +57,14 @@ de fallar en silencio.
 Automático por CI: `.github/workflows/apply-supabase-migrations.yml` corre en
 cada push que toca `supabase/migrations/**`. Necesita el secret
 **`SUPABASE_DB_URL`** (Project Settings → Database → Connection string → URI,
-con la contraseña). Sin ese secret el workflow se saltea con un aviso.
+con la contraseña). Sin ese secret el workflow se saltea con un aviso -- y
+**hoy ese es el estado real**: confirmado revisando el historial completo del
+workflow (todas sus corridas desde que existe) que el paso de aplicar
+migraciones queda en `skipped` siempre, porque el secret nunca se cargó en
+este repo. Las migraciones 0006 a 0017 llegaron igual al proyecto real
+porque se aplicaron a mano vía el MCP de Supabase durante sesiones de Claude
+Code -- cualquier migración nueva necesita el mismo paso manual hasta que se
+cargue el secret.
 
 Manual (si hiciera falta):
 
@@ -68,5 +76,5 @@ psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f supabase/migrations/0006_armario_s
 
 Este archivo crea **estructura**, no datos. Las filas las crea cada usuario
 desde la app (`site/src/lib/supabase.ts`, corriendo en el browser con RLS).
-No hay pipeline de ETL para Matiz — no hace falta, cada usuario carga su
+No hay pipeline de ETL para Mi ropa — no hace falta, cada usuario carga su
 propio placard.

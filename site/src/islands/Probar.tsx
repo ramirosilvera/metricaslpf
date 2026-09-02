@@ -70,7 +70,7 @@ export default function Probar() {
   if (error) {
     return (
       <div className="empty-state">
-        <p>No se pudo conectar con Matiz.</p>
+        <p>No se pudo conectar con Mi ropa.</p>
         <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{error}</p>
       </div>
     );
@@ -86,7 +86,7 @@ export default function Probar() {
   function cargarAlPlacard() {
     if (!categoria) return;
     try {
-      sessionStorage.setItem("matiz_prueba_prefill", JSON.stringify({ categoria, colorHex }));
+      sessionStorage.setItem("mi_ropa_prueba_prefill", JSON.stringify({ categoria, colorHex }));
     } catch {
       // Storage bloqueado (webview, modo privado estricto, etc.) -- se
       // navega igual, solo que sin precarga; nunca dejar el botón
