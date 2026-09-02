@@ -1,5 +1,6 @@
 import { CATEGORIA_LABEL, type Categoria, type Estilo, type HSL, type NivelCompatibilidad, type Prenda } from "./types";
 import { CATALOGO_CON_HSL, presetAPrendaSintetica, type PresetPrenda } from "./catalogo";
+import { nombreColor } from "./color";
 
 // Umbrales calibrados en la revisión de Consejo (rondas 1-2). Nombrados y
 // ajustables sin tocar la lógica del árbol.
@@ -833,6 +834,113 @@ export function armarOutfitsParaComprar(
   }
 
   return resultados;
+}
+
+export interface SugerenciaVariedad {
+  mensaje: string;
+  /** con hsl incluido, mismo motivo que OutfitParaComprar.sugerida -- se
+   *  pasa directo a presetAPrendaSintetica/cargarSugerencia sin recalcular. */
+  sugerida: PresetPrenda & { hsl: HSL };
+}
+
+// Colores neutros, en orden de prioridad para tapar un hueco de variedad --
+// van primero porque son los que más combinaciones habilitan (un básico
+// blanco/negro/gris combina con más cosas que un color puntual), mismo
+// criterio de versatilidad que ya prioriza el catálogo real.
+const NEUTROS_PRIORIDAD_COMPRA = ["Blanco", "Negro", "Gris", "Azul marino", "Beige"];
+
+/** Mejor prenda del catálogo para tapar un hueco puntual: de esa categoría,
+ *  de ese estilo (por estilosDe -- cuenta un estilo secundario), que
+ *  combine con el ancla real del usuario (mismo motor de recomendar() que
+ *  armarOutfitsParaComprar, nunca una sugerencia que choque), priorizando
+ *  primero un color que el usuario TODAVÍA NO tiene en ese registro y
+ *  dentro de eso los neutros más versátiles primero. */
+function mejorCandidatoDelCatalogo(
+  ancla: Prenda,
+  categoria: Categoria,
+  estilo: Estilo,
+  coloresActuales: Set<string>,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[],
+): (PresetPrenda & { hsl: HSL }) | undefined {
+  const candidatos = catalogo
+    .filter((preset) => preset.categoria === categoria && estilosDe(presetAPrendaSintetica(preset)).includes(estilo))
+    .map((preset) => {
+      const sintetica = presetAPrendaSintetica(preset);
+      const [r] = recomendar(ancla, [sintetica], placard);
+      const nombreColorPreset = nombreColor(sintetica.color_h, sintetica.color_s, sintetica.color_l);
+      return { preset, score: r.score, colorNuevo: !coloresActuales.has(nombreColorPreset), nombreColorPreset };
+    })
+    .filter((c) => c.score.nivel !== "con_cuidado")
+    .sort((a, b) => {
+      if (a.colorNuevo !== b.colorNuevo) return a.colorNuevo ? -1 : 1;
+      const rango = (nombre: string) => {
+        const i = NEUTROS_PRIORIDAD_COMPRA.indexOf(nombre);
+        return i === -1 ? NEUTROS_PRIORIDAD_COMPRA.length : i;
+      };
+      const diferenciaRango = rango(a.nombreColorPreset) - rango(b.nombreColorPreset);
+      if (diferenciaRango !== 0) return diferenciaRango;
+      return nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel);
+    });
+  return candidatos[0]?.preset;
+}
+
+/** Para el estilo elegido en "Vestite hoy", detecta si el placard tiene
+ *  poca variedad -- de TIPO de prenda (torso: remera/camisa/buzo/sweater/
+ *  campera) o de COLOR -- y devuelve UNA sugerencia concreta del catálogo
+ *  para taparlo. Pedido explícito del usuario, con su propio ejemplo: "en
+ *  deportivo tenés poca variedad de remeras, te recomiendo incorporar una
+ *  remera blanca". Prioriza el hueco de tipo de prenda sobre el de color
+ *  (más concreto y accionable, mismo orden del ejemplo del usuario) y
+ *  devuelve como mucho UNA sugerencia por estilo -- un tip claro, no una
+ *  pared de advertencias. `null` si no hay ningún hueco real, o no hay
+ *  pantalón de este estilo para validar contra qué combina (sin ancla no
+ *  hay con qué comparar, y no se inventa una sugerencia sin validar). */
+export function sugerenciaDeVariedad(
+  estilo: Estilo,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): SugerenciaVariedad | null {
+  const prendasEstilo = placard.filter((p) => estilosDe(p).includes(estilo));
+  const ancla = prendasEstilo.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
+  if (!ancla) return null;
+
+  const coloresActuales = new Set(prendasEstilo.map((p) => nombreColor(p.color_h, p.color_s, p.color_l)));
+  const torsos = prendasEstilo.filter((p) => CATEGORIAS_TORSO.includes(p.categoria));
+
+  // Hueco de tipo de prenda: 0 o 1 sola prenda de torso para este registro
+  // -- sin variedad real para rotar. Con una sola, se apunta a esa MISMA
+  // categoría (sumar una segunda remera, no cambiar de categoría): es el
+  // hueco más literal y accionable, igual que el ejemplo del usuario.
+  if (torsos.length <= 1) {
+    const categorias = torsos.length === 1 ? [torsos[0].categoria] : CATEGORIAS_TORSO;
+    for (const categoria of categorias) {
+      const sugerida = mejorCandidatoDelCatalogo(ancla, categoria, estilo, coloresActuales, placard, catalogo);
+      if (!sugerida) continue;
+      const nombreCat = CATEGORIA_LABEL[categoria].toLowerCase();
+      const mensaje =
+        torsos.length === 0
+          ? `Para ${ESTILO_LABEL[estilo]} todavía no tenés ninguna prenda de tipo ${nombreCat} -- te serviría sumar una, como esta: "${sugerida.nombre}".`
+          : `Para ${ESTILO_LABEL[estilo]} tenés una sola prenda de tipo ${nombreCat} -- te serviría sumar otra, como esta: "${sugerida.nombre}".`;
+      return { mensaje, sugerida };
+    }
+  }
+
+  // Hueco de color: 3+ prendas de este registro pero casi siempre el mismo
+  // color (mismo umbral que analizarPlacard en estadisticas.ts:
+  // MAX_COLORES_VARIEDAD_BAJA=2).
+  if (prendasEstilo.length >= 3 && coloresActuales.size <= 2) {
+    for (const categoria of CATEGORIAS_TORSO) {
+      const sugerida = mejorCandidatoDelCatalogo(ancla, categoria, estilo, coloresActuales, placard, catalogo);
+      if (!sugerida) continue;
+      return {
+        mensaje: `Tus prendas ${ESTILO_LABEL[estilo]} repiten casi siempre el mismo color -- te serviría sumar una "${sugerida.nombre}".`,
+        sugerida,
+      };
+    }
+  }
+
+  return null;
 }
 
 /** Diff entre las prendas actuales de un outfit guardado y las que el

@@ -13,6 +13,7 @@ import {
   registroOutfit,
   scoreColor,
   separarPorAbrigo,
+  sugerenciaDeVariedad,
   tanda,
   tecnicaRescate,
   valueDist,
@@ -924,6 +925,78 @@ describe("armarOutfitsParaComprar", () => {
     expect(sugerencias.some((s) => s.categoriaSugerida === "pantalon")).toBe(false);
     expect(sugerencias.some((s) => s.categoriaSugerida === "short_deportivo")).toBe(false);
     expect(sugerencias.some((s) => s.categoriaSugerida === "campera")).toBe(true);
+  });
+});
+
+describe("sugerenciaDeVariedad", () => {
+  function mkPrendaEstilo(categoria: Prenda["categoria"], hex: string, h: number, s: number, l: number, estilo: Prenda["estilo"]): Prenda {
+    const p = mkPrenda(categoria, hex, h, s, l);
+    p.estilo = estilo;
+    return p;
+  }
+
+  const catalogoDeportivo: (PresetPrenda & { hsl: HSL })[] = [
+    { id: "remera-dep-blanca", nombre: "Remera deportiva blanca", categoria: "remera", colorHex: "#FFFFFF", estilo: "deportivo", hsl: { h: 0, s: 0, l: 100 } },
+    { id: "remera-dep-negra", nombre: "Remera deportiva negra", categoria: "remera", colorHex: "#1A1A1A", estilo: "deportivo", hsl: { h: 0, s: 0, l: 10 } },
+    { id: "buzo-dep-gris", nombre: "Buzo deportivo gris", categoria: "buzo", colorHex: "#8C8C8C", estilo: "deportivo", hsl: { h: 0, s: 0, l: 55 } },
+    // otro estilo -- no debería aparecer nunca como sugerencia "deportivo".
+    { id: "remera-clasica-celeste", nombre: "Remera clásica celeste", categoria: "remera", colorHex: "#B7D2EC", estilo: "clasico", hsl: { h: 209, s: 58, l: 82 } },
+  ];
+
+  it("sin pantalón de ese estilo en el placard, no hay ancla -> null", () => {
+    const remeraSola = mkPrendaEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
+    expect(sugerenciaDeVariedad("deportivo", [remeraSola], catalogoDeportivo)).toBeNull();
+  });
+
+  it("0 prendas de torso en ese estilo -> sugiere la primera categoría de torso que combine, mensaje de 'ninguna'", () => {
+    const pantalon = mkPrendaEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+    const r = sugerenciaDeVariedad("deportivo", [pantalon], catalogoDeportivo);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.categoria).toBe("remera");
+    expect(r!.mensaje).toContain("ninguna prenda");
+  });
+
+  it("1 sola prenda de torso -> sugiere otra de la MISMA categoría, priorizando un color que todavía no tiene", () => {
+    const pantalon = mkPrendaEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+    const remeraNegra = mkPrendaEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
+    const r = sugerenciaDeVariedad("deportivo", [pantalon, remeraNegra], catalogoDeportivo);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.id).toBe("remera-dep-blanca"); // no la negra -- ya tiene ese color
+    expect(r!.sugerida.categoria).toBe("remera"); // misma categoría, no buzo
+    expect(r!.mensaje).toContain("una sola prenda");
+  });
+
+  it("2+ prendas de torso ya variadas en tipo -- no hueco de tipo, pasa a chequear color", () => {
+    const pantalon = mkPrendaEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+    const remera = mkPrendaEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
+    const buzo = mkPrendaEstilo("buzo", "#1A1A1A", 0, 0, 10, "deportivo");
+    // 3 prendas deportivas, las 3 negras -- mismo color casi siempre.
+    const r = sugerenciaDeVariedad("deportivo", [pantalon, remera, buzo], catalogoDeportivo);
+    expect(r).not.toBeNull();
+    expect(r!.mensaje).toContain("repiten casi siempre el mismo color");
+    expect(r!.sugerida.id).not.toBe("remera-dep-negra"); // no repetir el color que ya sobra
+  });
+
+  it("variedad suficiente de tipo y color -> null, sin sugerencia", () => {
+    const pantalon = mkPrendaEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+    const remeraBlanca = mkPrendaEstilo("remera", "#FFFFFF", 0, 0, 100, "deportivo");
+    const buzoGris = mkPrendaEstilo("buzo", "#8C8C8C", 0, 0, 55, "deportivo");
+    expect(sugerenciaDeVariedad("deportivo", [pantalon, remeraBlanca, buzoGris], catalogoDeportivo)).toBeNull();
+  });
+
+  it("nunca sugiere una prenda de otro estilo, aunque combine mejor en color", () => {
+    const pantalon = mkPrendaEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+    const r = sugerenciaDeVariedad("deportivo", [pantalon], catalogoDeportivo);
+    expect(r!.sugerida.id).not.toBe("remera-clasica-celeste");
+  });
+
+  it("prioriza el hueco de TIPO de prenda sobre el de color cuando los dos aplican", () => {
+    // 1 sola prenda de torso Y además del mismo color que el resto -- el
+    // mensaje tiene que ser de "poca variedad" de tipo, no de color.
+    const pantalon = mkPrendaEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+    const remeraNegra = mkPrendaEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
+    const r = sugerenciaDeVariedad("deportivo", [pantalon, remeraNegra], catalogoDeportivo);
+    expect(r!.mensaje).not.toContain("color");
   });
 });
 

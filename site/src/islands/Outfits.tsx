@@ -12,6 +12,7 @@ import {
   outfitSirveParaEstilo,
   registroOutfit,
   separarPorAbrigo,
+  sugerenciaDeVariedad,
   tanda,
   type OutfitParaComprar,
   type OutfitSugerido,
@@ -219,6 +220,20 @@ export function Contenido({
   const opcionConAbrigo = tanda(gruposSugeridos.conAbrigo, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
   const opcionSinAbrigo = tanda(gruposSugeridos.sinAbrigo, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
   const hayMasOpciones = gruposSugeridos.conAbrigo.length > 1 || gruposSugeridos.sinAbrigo.length > 1;
+
+  // Pedido explícito del usuario: en el estilo elegido hoy, avisar si hay
+  // poca variedad (de tipo de prenda o de color) con una sugerencia
+  // concreta del catálogo -- ver sugerenciaDeVariedad en recommend.ts. Solo
+  // tiene sentido con un estilo puntual elegido (no con "todos", que junta
+  // todos los registros -- ahí "poca variedad" no significa nada
+  // accionable) y solo cuando hay opciones para mostrar (si el pool ya
+  // está vacío, el mensaje de "no armamos ningún look" de más abajo ya
+  // cubre ese caso).
+  const sugerenciaVariedad = useMemo(() => {
+    if (!estiloSugerido || estiloSugerido === "todos" || poolSugeridosPorEstilo.length === 0) return null;
+    return sugerenciaDeVariedad(estiloSugerido, placard);
+  }, [estiloSugerido, poolSugeridosPorEstilo, placard]);
+
   const paraComprar = useMemo(
     () => tanda(poolParaComprar, offsetParaComprar, VISIBLES_POR_SECCION),
     [poolParaComprar, offsetParaComprar],
@@ -476,6 +491,20 @@ export function Contenido({
               >
                 🔄 Otras opciones
               </button>
+            )}
+            {sugerenciaVariedad && (
+              <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
+                <span style={{ fontSize: "1.2rem" }}>💡</span>
+                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>{sugerenciaVariedad.mensaje}</p>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
+                  onClick={() => cargarSugerencia(sugerenciaVariedad.sugerida)}
+                >
+                  + Cargar
+                </button>
+              </div>
             )}
           </>
         )}
