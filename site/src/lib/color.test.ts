@@ -69,6 +69,36 @@ describe("nombreColor", () => {
     expect(nombreColor(180, 80, 20)).toBe("Turquesa oscuro"); // oscuro, pero matiz fuera de rango
     expect(nombreColor(220, 10, 20)).toBe("Gris oscuro"); // oscuro y en rango, pero desaturado -- es gris, no azul marino
   });
+
+  it("celeste, no azul claro -- pedido explícito del usuario (camisa/buzo celeste real del catálogo)", () => {
+    expect(nombreColor(209, 58, 82)).toBe("Celeste");
+  });
+
+  it("celeste no se dispara fuera de su rango de matiz o luminosidad", () => {
+    expect(nombreColor(216, 99, 61)).toBe("Azul"); // mismo matiz, pero no lo bastante claro -- buzo azul real del placard
+    expect(nombreColor(260, 60, 82)).toBe("Violeta claro"); // igual de claro, pero matiz fuera de rango
+  });
+
+  it("bordó, no rojo oscuro -- pedido explícito del usuario (sweater/corbata bordó real del catálogo)", () => {
+    expect(nombreColor(346, 47, 29)).toBe("Bordó");
+  });
+
+  it("bordó no se dispara si es claro (eso es rosa, no bordó)", () => {
+    expect(nombreColor(335, 47, 60)).toBe("Rosa");
+  });
+
+  it("verde militar, no verde genérico -- pedido explícito del usuario (campera-verde-militar real del catálogo)", () => {
+    expect(nombreColor(69, 22, 31)).toBe("Verde militar");
+    expect(nombreColor(92, 20, 29)).toBe("Verde militar oscuro"); // camisa a cuadros
+  });
+
+  it("un verde vívido en el mismo rango de matiz sigue siendo Verde, no militar (buzo verde real del placard)", () => {
+    expect(nombreColor(92, 57, 60)).toBe("Verde");
+  });
+
+  it("verde militar no se dispara fuera de su rango de matiz (verde bosque real del catálogo)", () => {
+    expect(nombreColor(127, 27, 25)).toBe("Verde oscuro"); // pantalón deportivo verde oscuro
+  });
 });
 
 describe("contornoHsl / sombraHsl / luzHsl", () => {

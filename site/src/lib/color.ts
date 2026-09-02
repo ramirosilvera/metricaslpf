@@ -112,6 +112,48 @@ const AZUL_MARINO_HUE_MIN = 210;
 const AZUL_MARINO_HUE_MAX = 230;
 const AZUL_MARINO_L_MAX = 30;
 
+// Celeste -- pedido explícito del usuario: "ampliá el catálogo de colores
+// según los usos y costumbres". En español rioplatense un azul claro de
+// indumentaria (camisa/buzo celeste) prácticamente nunca se llama "azul
+// claro" -- "celeste" es la palabra de uso real (hasta la bandera argentina
+// es "celeste y blanco", nunca "azul claro y blanco"; confirmado además por
+// búsqueda web). Rango acotado al celeste real del catálogo (h=209, s=58,
+// l=82: camisa-celeste/buzo-celeste) -- mismo motivo que azul marino: sin
+// esto, la propia prenda se llama "celeste" pero el badge de color decía
+// "Azul claro". l>=65 (no solo >78 como el "claro" genérico) porque un
+// celeste medio, no solo el más pálido, ya se llama "celeste" en el uso
+// real.
+const CELESTE_HUE_MIN = 195;
+const CELESTE_HUE_MAX = 230;
+const CELESTE_L_MIN = 65;
+
+// Verde militar -- mismo motivo: "campera-verde-militar" ya usa ese nombre
+// en el catálogo, pero el badge decía simplemente "Verde". Lo que distingue
+// un verde militar/oliva de un verde común es la saturación (igual criterio
+// que marrón/beige vs. naranja): es un verde apagado/terroso, no vívido.
+// Rango de matiz acotado a los dos casos reales del catálogo (h=69 campera-
+// verde-militar, h=92 camisa-cuadros -- ambos amarillo-verdosos, no un
+// verde bosque/pasto como pantalon-deportivo-verde-oscuro en h=127, fuera
+// de este rango a propósito). Saturación tope calibrada contra el máximo
+// real de estos dos casos (s=22) con margen amplio hasta el verde vívido
+// real más cercano que existe hoy (el buzo verde del placard, s=57) --
+// mismo criterio de "margen de sobra sin arriesgar falsos positivos" que
+// ya documenta SATURACION_NARANJA_REAL.
+const VERDE_MILITAR_HUE_MIN = 55;
+const VERDE_MILITAR_HUE_MAX = 95;
+const SATURACION_VERDE_MILITAR = 40;
+
+// Bordó -- mismo motivo: "sweater-bordo"/"corbata-bordo" ya usan ese nombre
+// en el catálogo, pero el badge decía "Rojo oscuro". Un bordó/vino/granate
+// es un rojo oscuro con matiz corrido hacia el magenta (h cerca de 345-360,
+// no un rojo puro cerca de h=0) -- la franja de matiz que en el resto de la
+// función cae en la cola de "Rosa" (h<345) o el arranque de "Rojo" (h>=345),
+// pero solo cuando además es oscuro: un rosa/rojo claro en ese mismo rango
+// de matiz no es bordó, es rosa. Calibrado contra el bordó real del
+// catálogo (h=346, l=29).
+const BORDO_HUE_MIN = 330;
+const BORDO_L_MAX = 35;
+
 /** Nombre de color en español, para no depender solo del color renderizado
  *  del ícono -- con poco brillo de pantalla dos colores parecidos se leen
  *  igual. Los umbrales de "neutro" (s<=15, l<=12, l>=88) son los mismos que
@@ -133,8 +175,22 @@ export function nombreColor(h: number, s: number, l: number): string {
     return l < 30 ? "Marrón oscuro" : "Marrón";
   }
 
+  if (h >= VERDE_MILITAR_HUE_MIN && h < VERDE_MILITAR_HUE_MAX && s < SATURACION_VERDE_MILITAR) {
+    if (l < 30) return "Verde militar oscuro";
+    if (l > 78) return "Verde militar claro";
+    return "Verde militar";
+  }
+
+  if (h >= BORDO_HUE_MIN && l < BORDO_L_MAX) {
+    return "Bordó";
+  }
+
   if (h >= AZUL_MARINO_HUE_MIN && h < AZUL_MARINO_HUE_MAX && l < AZUL_MARINO_L_MAX) {
     return "Azul marino";
+  }
+
+  if (h >= CELESTE_HUE_MIN && h < CELESTE_HUE_MAX && l >= CELESTE_L_MIN) {
+    return "Celeste";
   }
 
   const matiz =
