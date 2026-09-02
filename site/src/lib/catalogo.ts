@@ -102,7 +102,13 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   // "urbano" a propósito, no un descuido: una camisa negra lee más
   // "urban professional" que clásica, a diferencia de blanca/celeste/gris.
-  { id: "camisa-negra", nombre: "Camisa negra", categoria: "camisa", colorHex: "#232323", textura: "algodon", estilo: "urbano", ocasion: "laburo" },
+  // colorHex #1A1A1A -- mismo negro que las otras 16+ prendas "negro/negra"
+  // del catálogo (remera-negra, buzo-negro, campera-negra, etc.). Antes
+  // usaba #232323 (l=14), un dato inconsistente sin ninguna razón
+  // documentada: nombreColor() lo leía "Gris oscuro" en vez de "Negro" --
+  // exactamente el bug que reportó el usuario ("una cosa es un gris
+  // oscuro y otra un negro").
+  { id: "camisa-negra", nombre: "Camisa negra", categoria: "camisa", colorHex: "#1A1A1A", textura: "algodon", estilo: "urbano", ocasion: "laburo" },
   { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   { id: "camisa-cuadros", nombre: "Camisa a cuadros", categoria: "camisa", colorHex: "#4A5A3C", textura: "algodon", estilo: "urbano", ocasion: "casual" },
   // mismo beige que el resto del catálogo (ver remera-beige) -- clasico/
@@ -112,7 +118,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
 
   // --- Pantalones ---
   { id: "jean-azul", nombre: "Jean azul", categoria: "pantalon", colorHex: "#3B5998", textura: "denim", estilo: "casual", ocasion: "casual" },
-  { id: "jean-negro", nombre: "Jean negro", categoria: "pantalon", colorHex: "#232323", textura: "denim", estilo: "casual", ocasion: "casual" },
+  // colorHex #1A1A1A -- ver el comentario de camisa-negra más arriba:
+  // mismo negro estándar del catálogo, corrigiendo el mismo #232323
+  // inconsistente que hacía que nombreColor() leyera "Gris oscuro".
+  { id: "jean-negro", nombre: "Jean negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "denim", estilo: "casual", ocasion: "casual" },
   { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo" },
@@ -192,7 +201,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "sweater-gris", nombre: "Sweater gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "lana", estilo: "clasico", ocasion: "laburo" },
   { id: "sweater-azul-marino", nombre: "Sweater azul marino", categoria: "sweater", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", ocasion: "laburo" },
   { id: "sweater-bordo", nombre: "Sweater bordo", categoria: "sweater", colorHex: "#6B2737", textura: "lana", estilo: "clasico", ocasion: "laburo" },
-  { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#232323", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  // colorHex #1A1A1A -- ver el comentario de camisa-negra más arriba: el
+  // reporte real del usuario que motivó esta corrección era justo este
+  // sweater ("tengo un suéter negro que dice gris oscuro").
+  { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "lana", estilo: "clasico", ocasion: "laburo" },
   // mismo beige que el resto del catálogo -- clasico/laburo, mismo
   // registro que el resto de los sweaters (gris/marino/bordo/negro): un
   // sweater beige es tan de oficina como esos.

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { contornoHsl, detalleHsl, luzHsl, nombreColor, sombraHsl } from "./color";
+import { CATALOGO_PRENDAS } from "./catalogo";
+import { contornoHsl, detalleHsl, hexToHsl, luzHsl, nombreColor, sombraHsl } from "./color";
 
 describe("nombreColor", () => {
   it("negro por luminosidad baja, sin importar el matiz", () => {
@@ -116,6 +117,27 @@ describe("nombreColor", () => {
   it("mostaza no se dispara fuera de su rango (terroso -> marrón/beige; vívido -> naranja/amarillo)", () => {
     expect(nombreColor(40, 47, 47)).toBe("Marrón"); // menos saturado -- es marrón, no mostaza
     expect(nombreColor(30, 80, 50)).toBe("Naranja"); // matiz fuera de rango (test ya existente, sigue firme)
+  });
+});
+
+describe("nombreColor -- consistencia con el catálogo real", () => {
+  // Reporte real del usuario: un sweater negro del catálogo (colorHex
+  // #232323, l=14) se leía "Gris oscuro" mientras que TODAS las demás
+  // prendas "negro/negra" del catálogo (16+, colorHex #1A1A1A, l=10) se
+  // leían "Negro" -- una inconsistencia de DATOS (un hex ligeramente más
+  // claro sin ninguna razón documentada), no de la lógica de nombreColor
+  // (el umbral l<=12 es correcto: #232323 es un gris carbón perceptible,
+  // apenas por encima). El fix real fue estandarizar esas 3 prendas al
+  // mismo #1A1A1A que ya usa el resto -- este test asegura que ninguna
+  // prenda "negro/negra" del catálogo vuelva a quedar en un hex
+  // inconsistente que la lea como otra cosa.
+  it("toda prenda cuyo nombre dice 'negro'/'negra' clasifica como Negro, no Gris oscuro", () => {
+    const negras = CATALOGO_PRENDAS.filter((p) => /negr[oa]/i.test(p.nombre));
+    expect(negras.length).toBeGreaterThan(0);
+    for (const p of negras) {
+      const hsl = hexToHsl(p.colorHex);
+      expect(nombreColor(hsl.h, hsl.s, hsl.l), `${p.id} (${p.colorHex})`).toBe("Negro");
+    }
   });
 });
 
