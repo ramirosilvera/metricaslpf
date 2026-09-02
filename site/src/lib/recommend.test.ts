@@ -12,6 +12,7 @@ import {
   recomendar,
   registroOutfit,
   scoreColor,
+  separarPorAbrigo,
   tanda,
   tecnicaRescate,
   valueDist,
@@ -794,6 +795,33 @@ describe("armarOutfitsSugeridos", () => {
     const outfits = armarOutfitsSugeridos(placard);
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["bermuda", "remera"].sort());
+  });
+});
+
+describe("separarPorAbrigo", () => {
+  it("clasifica buzo/sweater/campera como 'con abrigo' y remera/camisa como 'sin abrigo'", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const conBuzo = { id: "a", prendas: [pantalon, mkPrenda("buzo", "#1A1A1A", 0, 0, 10)] };
+    const conSweater = { id: "b", prendas: [pantalon, mkPrenda("sweater", "#1A1A1A", 0, 0, 10)] };
+    const conCampera = { id: "c", prendas: [pantalon, mkPrenda("campera", "#1A1A1A", 0, 0, 10)] };
+    const conRemera = { id: "d", prendas: [pantalon, mkPrenda("remera", "#1A1A1A", 0, 0, 10)] };
+    const conCamisa = { id: "e", prendas: [pantalon, mkPrenda("camisa", "#1A1A1A", 0, 0, 10)] };
+
+    const { conAbrigo, sinAbrigo } = separarPorAbrigo([conBuzo, conSweater, conCampera, conRemera, conCamisa]);
+    expect(conAbrigo.map((s) => s.id).sort()).toEqual(["a", "b", "c"]);
+    expect(sinAbrigo.map((s) => s.id).sort()).toEqual(["d", "e"]);
+  });
+
+  it("pool vacío -> los dos grupos vacíos", () => {
+    expect(separarPorAbrigo([])).toEqual({ conAbrigo: [], sinAbrigo: [] });
+  });
+
+  it("un outfit sin ningún torso (solo pantalón + calzado) cae en 'sin abrigo', no se pierde", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const soloCalzado = { id: "f", prendas: [pantalon, mkPrenda("calzado", "#1A1A1A", 0, 0, 10)] };
+    const { conAbrigo, sinAbrigo } = separarPorAbrigo([soloCalzado]);
+    expect(conAbrigo).toHaveLength(0);
+    expect(sinAbrigo.map((s) => s.id)).toEqual(["f"]);
   });
 });
 

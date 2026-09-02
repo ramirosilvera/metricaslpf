@@ -684,6 +684,30 @@ export function armarOutfitsSugeridos(placard: Prenda[]): OutfitSugerido[] {
   return resultados;
 }
 
+// Prendas de torso que hacen de "abrigo" (capa extra sobre una remera o
+// camisa) -- subconjunto de CATEGORIAS_TORSO. remera/camisa quedan afuera a
+// propósito: son la capa base, no un abrigo.
+const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
+
+/** Separa el pool de "Vestite hoy" en dos grupos según si el torso del
+ *  outfit es una prenda de abrigo (buzo/sweater/campera) o no (remera/
+ *  camisa) -- pedido explícito del usuario: en vez de rotar entre variantes
+ *  que a veces coinciden en la misma capa, quiere ver siempre las dos
+ *  alternativas reales del día (una para cuando hace frío, otra para
+ *  cuando no). Cada outfit de armarOutfitsSugeridos tiene exactamente un
+ *  torso (así arma el pool, un candidato de CATEGORIAS_TORSO por
+ *  variante), así que la clasificación es binaria y exhaustiva -- no hay
+ *  un tercer caso ni una prenda que cuente para los dos grupos. */
+export function separarPorAbrigo(pool: OutfitSugerido[]): { conAbrigo: OutfitSugerido[]; sinAbrigo: OutfitSugerido[] } {
+  const conAbrigo: OutfitSugerido[] = [];
+  const sinAbrigo: OutfitSugerido[] = [];
+  for (const s of pool) {
+    const tieneAbrigo = s.prendas.some((p) => CATEGORIAS_ABRIGO.includes(p.categoria));
+    (tieneAbrigo ? conAbrigo : sinAbrigo).push(s);
+  }
+  return { conAbrigo, sinAbrigo };
+}
+
 export interface OutfitParaComprar {
   id: string;
   /** prendas reales del placard que forman parte del outfit. */

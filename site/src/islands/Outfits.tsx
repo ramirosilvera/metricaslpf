@@ -11,6 +11,7 @@ import {
   ESTILO_LABEL,
   outfitSirveParaEstilo,
   registroOutfit,
+  separarPorAbrigo,
   tanda,
   type OutfitParaComprar,
   type OutfitSugerido,
@@ -59,6 +60,55 @@ function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
   );
 }
 
+/** Una tarjeta de "Vestite hoy" -- extraída para no duplicar el markup
+ *  entre el grupo "con abrigo" y el grupo "sin abrigo" (ver
+ *  separarPorAbrigo en recommend.ts). `etiquetaGrupo` es el rótulo fijo
+ *  ("Con abrigo" / "Sin abrigo"), no el registro (Formal/Casual/...) que
+ *  ya muestra RegistroBadge -- son dos datos distintos y se muestran los
+ *  dos. */
+function TarjetaSugerido({
+  s,
+  etiquetaGrupo,
+  guardadas,
+  guardando,
+  errorGuardar,
+  onGuardar,
+}: {
+  s: OutfitSugerido;
+  etiquetaGrupo: string;
+  guardadas: Set<string>;
+  guardando: string | null;
+  errorGuardar: Record<string, string>;
+  onGuardar: (s: OutfitSugerido) => void;
+}) {
+  const yaGuardado = guardadas.has(s.id);
+  return (
+    <div className="card outfit-card">
+      <p className="eyebrow" style={{ margin: "0 0 0.3rem", textAlign: "center" }}>
+        {etiquetaGrupo}
+      </p>
+      <Maniqui prendas={s.prendas} />
+      <div style={{ minWidth: 0, textAlign: "center" }}>
+        <strong style={{ textTransform: "capitalize" }}>{s.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}</strong>
+        <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+          {leyenda(s.prendas)}
+        </p>
+        <RegistroBadge prendas={s.prendas} />
+      </div>
+      {errorGuardar[s.id] && <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>}
+      <button
+        type="button"
+        className="btn btn-secondary"
+        style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", width: "100%" }}
+        onClick={() => onGuardar(s)}
+        disabled={guardando === s.id || yaGuardado}
+      >
+        {yaGuardado ? "✓ Guardado" : guardando === s.id ? "Guardando..." : "Guardar outfit"}
+      </button>
+    </div>
+  );
+}
+
 /** Cuántas tarjetas se muestran a la vez en "Ideas para comprar" -- fijo a
  *  propósito: el pool real (armarOutfitsParaComprar) puede tener muchas más
  *  variantes, pero mostrarlas todas satura la pantalla. El botón "otras
@@ -66,10 +116,11 @@ function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
  *  este tamaño, en vez de ir agregando tarjetas nuevas. */
 const VISIBLES_POR_SECCION = 2;
 
-/** Pedido explícito del usuario: "que me dé 3 opciones" al elegir una
- *  ocasión en "Vestite hoy" -- constante propia (no VISIBLES_POR_SECCION)
- *  porque es un número distinto, no una coincidencia. */
-const VISIBLES_SUGERIDOS = 3;
+/** Pedido explícito del usuario: no rotar entre variantes que a veces
+ *  coinciden en la misma capa -- siempre 2 opciones fijas al elegir una
+ *  ocasión en "Vestite hoy", una con abrigo (buzo/sweater/campera) y otra
+ *  sin abrigo (remera/camisa). Ver separarPorAbrigo en recommend.ts. */
+const OPCIONES_POR_GRUPO = 1;
 
 const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
 
@@ -159,10 +210,15 @@ export function Contenido({
     setOffsetSugeridos(0);
   }
 
-  const sugeridos = useMemo(
-    () => tanda(poolSugeridosPorEstilo, offsetSugeridos, VISIBLES_SUGERIDOS),
-    [poolSugeridosPorEstilo, offsetSugeridos],
-  );
+  // Dos grupos fijos, no una tanda rotativa de N variantes -- ver
+  // separarPorAbrigo. Mismo offsetSugeridos para los dos: "otras opciones"
+  // rota cada grupo por separado (tanda aplica el módulo contra el largo
+  // de CADA pool), pero un solo botón/click alcanza para refrescar los dos
+  // a la vez, igual que antes.
+  const gruposSugeridos = useMemo(() => separarPorAbrigo(poolSugeridosPorEstilo), [poolSugeridosPorEstilo]);
+  const opcionConAbrigo = tanda(gruposSugeridos.conAbrigo, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
+  const opcionSinAbrigo = tanda(gruposSugeridos.sinAbrigo, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
+  const hayMasOpciones = gruposSugeridos.conAbrigo.length > 1 || gruposSugeridos.sinAbrigo.length > 1;
   const paraComprar = useMemo(
     () => tanda(poolParaComprar, offsetParaComprar, VISIBLES_POR_SECCION),
     [poolParaComprar, offsetParaComprar],
@@ -344,8 +400,8 @@ export function Contenido({
           Vestite hoy
         </p>
         <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
-          Elegí para qué ocasión te querés vestir y te armamos {VISIBLES_SUGERIDOS} opciones con lo que ya tenés --
-          nunca se quedan fijas, "otras opciones" siempre te da combinaciones distintas.
+          Elegí para qué ocasión te querés vestir y te armamos 2 opciones con lo que ya tenés: una con abrigo (buzo,
+          sweater o campera) y otra sin abrigo -- "otras opciones" te da otra combinación distinta en cada una.
         </p>
         <div className="filtro-chips" role="group" aria-label="Elegí la ocasión de hoy">
           <button
@@ -380,40 +436,43 @@ export function Contenido({
         ) : (
           <>
             <div className="grid-prendas outfits-grid">
-              {sugeridos.map((s) => {
-                const yaGuardado = guardadas.has(s.id);
-                return (
-                  <div key={s.id} className="card outfit-card">
-                    <Maniqui prendas={s.prendas} />
-                    <div style={{ minWidth: 0, textAlign: "center" }}>
-                      <strong style={{ textTransform: "capitalize" }}>{s.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}</strong>
-                      <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
-                        {leyenda(s.prendas)}
-                      </p>
-                      <RegistroBadge prendas={s.prendas} />
-                    </div>
-                    {errorGuardar[s.id] && (
-                      <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>
-                    )}
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", width: "100%" }}
-                      onClick={() => guardarSugerido(s)}
-                      disabled={guardando === s.id || yaGuardado}
-                    >
-                      {yaGuardado ? "✓ Guardado" : guardando === s.id ? "Guardando..." : "Guardar outfit"}
-                    </button>
-                  </div>
-                );
-              })}
+              {opcionConAbrigo ? (
+                <TarjetaSugerido
+                  s={opcionConAbrigo}
+                  etiquetaGrupo="Con abrigo"
+                  guardadas={guardadas}
+                  guardando={guardando}
+                  errorGuardar={errorGuardar}
+                  onGuardar={guardarSugerido}
+                />
+              ) : (
+                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+                  Todavía no armamos una opción con abrigo (buzo, sweater o campera) para esta ocasión con lo que
+                  tenés cargado.
+                </p>
+              )}
+              {opcionSinAbrigo ? (
+                <TarjetaSugerido
+                  s={opcionSinAbrigo}
+                  etiquetaGrupo="Sin abrigo"
+                  guardadas={guardadas}
+                  guardando={guardando}
+                  errorGuardar={errorGuardar}
+                  onGuardar={guardarSugerido}
+                />
+              ) : (
+                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+                  Todavía no armamos una opción sin abrigo (remera o camisa) para esta ocasión con lo que tenés
+                  cargado.
+                </p>
+              )}
             </div>
-            {poolSugeridosPorEstilo.length > VISIBLES_SUGERIDOS && (
+            {hayMasOpciones && (
               <button
                 type="button"
                 className="btn btn-secondary"
                 style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", marginTop: "0.6rem" }}
-                onClick={() => setOffsetSugeridos((prev) => prev + VISIBLES_SUGERIDOS)}
+                onClick={() => setOffsetSugeridos((prev) => prev + 1)}
               >
                 🔄 Otras opciones
               </button>
