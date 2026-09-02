@@ -70,7 +70,7 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <a href={`${base}probar/`} className="card probar-banner">
-        <span>👗</span>
+        <span>👕</span>
         <div>
           <strong>¿Te vas a comprar algo?</strong>
           <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)" }}>
