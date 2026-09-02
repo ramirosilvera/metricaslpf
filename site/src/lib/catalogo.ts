@@ -204,11 +204,37 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "campera-negra", nombre: "Campera negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
   { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", textura: "denim", estilo: "casual", ocasion: "casual" },
   { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual" },
-  // pluma/puffer (tipo Uniqlo) -- colores reusados de otras categorías, ver
-  // criterio de "Accesorios" más abajo.
+  // piloto -- no es un rompeviento deportivo (más abajo) ni una campera de
+  // vestir: es la campera de lluvia liviana/impermeable de uso diario
+  // (nylon/microfibra), verificado por búsqueda web -- por eso mismo
+  // criterio de textura que zapatillas/rompeviento: ninguna Textura del
+  // enum describe "nylon impermeable" sin inventar un dato que la prenda
+  // real no tiene. "urbano", no "deportivo": se usa a diario en la calle,
+  // no para entrenar (mismo criterio que campera-negra, no camisa-negra).
+  { id: "campera-piloto-negra", nombre: "Campera piloto negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
+  // sweater con cierre -- de punto/lana, no un buzo ni un sweater sin
+  // cierre (esos ya están en sus propias categorías): es una prenda de
+  // punto que se usa COMO campera, así que va en categoria="campera" con
+  // textura "lana" (verificado por búsqueda web: "campera de lana con
+  // cierre"), mismo estilo/ocasion que el resto de los sweaters de vestir
+  // (clasico/laburo) -- es la misma idea de prenda, solo con cierre en vez
+  // de cuello redondo/pullover.
+  { id: "campera-sweater-azul-marino", nombre: "Campera sweater azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  // pluma/puffer (tipo Uniqlo, ajustada al cuerpo) -- colores reusados de
+  // otras categorías, ver criterio de "Accesorios" más abajo.
   { id: "campera-pluma-negra", nombre: "Campera de pluma negra", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "casual", ocasion: "casual" },
   { id: "campera-pluma-azul-marino", nombre: "Campera de pluma azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "acolchado", estilo: "casual", ocasion: "casual" },
   { id: "campera-pluma-beige", nombre: "Campera de pluma beige", categoria: "campera", colorHex: "#D8C7A1", textura: "acolchado", estilo: "casual", ocasion: "casual" },
+  // pluma oversize (tipo campera retro estilo Nuptse: mucho más grande y
+  // abrigada que la de arriba, silueta voluminosa en vez de ajustada al
+  // cuerpo) -- pedido explícito del usuario, distinguiéndola de la
+  // Uniqlo-type de arriba. La diferencia real es de silueta/volumen, no de
+  // material (misma tela acolchada/pluma) ni de clima -- el catálogo no
+  // fuerza `estacion` (ver el criterio general al principio del archivo),
+  // así que se distingue por nombre, mismo patrón que ya usa
+  // "(suela blanca)" en las zapatillas. "urbano" en vez de "casual": el
+  // volumen exagerado es un statement de calle, no una campera básica.
+  { id: "campera-pluma-negra-oversize", nombre: "Campera de pluma negra (oversize)", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "urbano", ocasion: "casual" },
   // rompeviento -- deportivo, distinto de la campera de jean/pluma de
   // arriba (esas son casual/urbano, no para entrenar).
   { id: "campera-rompeviento-negra", nombre: "Campera rompeviento negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
