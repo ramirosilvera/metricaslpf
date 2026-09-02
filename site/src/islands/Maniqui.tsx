@@ -73,7 +73,10 @@ function agruparPorCapa(prendas: Prenda[]): {
 // que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
 // null/una textura sin mapear acá (p.ej. sin cargar) no dibuja nada extra.
 const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_grueso", "lana", "algodon", "lino", "acolchado"];
-const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso"];
+// poliéster (ropa deportiva técnica) suma el mismo brillo diagonal que
+// seda/cuero_liso -- es tela lisa, sin trama visible, con un leve brillo
+// sintético real (más notorio que en algodón/lino), no un patrón tejido.
+const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso", "poliester"];
 
 /** El <pattern> real por textura -- son ilustraciones esquemáticas a
  *  propósito (líneas/formas simples que se repiten), no una textura

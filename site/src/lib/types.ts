@@ -20,7 +20,8 @@ export type Textura =
   | "corderoy"
   | "tejido_grueso"
   | "denim"
-  | "acolchado";
+  | "acolchado"
+  | "poliester";
 
 export type Estilo = "casual" | "formal" | "deportivo" | "urbano" | "clasico";
 export type Ocasion = "casual" | "laburo" | "formal";

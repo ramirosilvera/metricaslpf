@@ -459,6 +459,17 @@ describe("tecnicaRescate", () => {
     const t = tecnicaRescate(base, candidato, [base, candidato]);
     expect(t).toContain("accesorio");
   });
+
+  it("poliéster cuenta como 'liso' -- separa por textura contra lana (texturado), pero no contra algodón (liso también)", () => {
+    const remeraDeportiva = { ...base, textura: "poliester" as const };
+    const sweater = { ...candidato, textura: "lana" as const };
+    const conLana = tecnicaRescate(remeraDeportiva, sweater, [remeraDeportiva, sweater]);
+    expect(conLana).toContain("textura");
+
+    const remera = { ...candidato, textura: "algodon" as const };
+    const conAlgodon = tecnicaRescate(remeraDeportiva, remera, [remeraDeportiva, remera]);
+    expect(conAlgodon).not.toContain("textura");
+  });
 });
 
 describe("color hex <-> HSL roundtrip", () => {

@@ -44,10 +44,13 @@ export interface PresetPrenda {
  *   entretiempo) -- forzar una estación acá haría más daño que bien.
  * - `textura` solo cuando el nombre de la prenda ya la implica sin
  *   ambigüedad (zapatos de cuero -> cuero_liso, jean -> denim, campera de
- *   pluma -> acolchado). Las zapatillas y las camperas "genéricas" (negra,
- *   verde militar) quedan sin textura a propósito: el material varía
- *   demasiado (cuero, lona, nylon...) para asumir uno sin inventar un dato
- *   que no es real.
+ *   pluma -> acolchado, prenda con estilo "deportivo" -> poliester, pedido
+ *   explícito del usuario). Las zapatillas y las camperas "genéricas"
+ *   (negra, verde militar) quedan sin textura a propósito: el material
+ *   varía demasiado (cuero, lona, nylon...) para asumir uno sin inventar un
+ *   dato que no es real -- el calzado deportivo tampoco lleva "poliester"
+ *   por el mismo motivo (suela de goma, entresuela de espuma: la prenda
+ *   real no es "de tela").
  */
 export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // --- Remeras ---
@@ -68,11 +71,15 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
 
   // --- Remeras deportivas (agregadas en la ampliación del catálogo: el
   // estilo "deportivo" no tenía NINGUNA prenda cargada en todo el catálogo
-  // hasta acá, un vacío real, no una omisión menor). Sin textura a
-  // propósito -- una remera técnica dry-fit es sintética, y ninguna Textura
-  // del enum (algodón/lino/lana/etc.) describe eso sin inventar un dato. */
-  { id: "remera-deportiva-negra", nombre: "Remera deportiva negra", categoria: "remera", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
-  { id: "remera-deportiva-gris", nombre: "Remera deportiva gris", categoria: "remera", colorHex: "#8C8C8C", estilo: "deportivo", ocasion: "casual" },
+  // hasta acá, un vacío real, no una omisión menor). Pedido explícito del
+  // usuario: textura "poliester" por defecto en toda prenda deportiva --
+  // antes quedaban sin textura porque el enum no tenía un valor para tela
+  // técnica sintética; ahora sí (mismo criterio para pantalón/short/campera
+  // rompeviento deportivos más abajo). Zapatillas running quedan afuera a
+  // propósito: son calzado, no una prenda de tela -- "poliéster" describiría
+  // mal una zapatilla real (suela de goma, entresuela de espuma).
+  { id: "remera-deportiva-negra", nombre: "Remera deportiva negra", categoria: "remera", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  { id: "remera-deportiva-gris", nombre: "Remera deportiva gris", categoria: "remera", colorHex: "#8C8C8C", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
 
   // --- Camisas (oficina) ---
   // #F5F5F5 -- ver el comentario de remera-blanca más arriba. #FAFAF7
@@ -111,9 +118,9 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "jogger-beige", nombre: "Jogger beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "jogger-gris", nombre: "Jogger gris", categoria: "pantalon", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", ocasion: "casual" },
   // pantalón deportivo (entrenamiento) -- distinto del jogger de arriba:
-  // mismo corte ancho, pero tela técnica sintética, no algodón, por eso sin
-  // textura (mismo criterio que la remera deportiva de arriba).
-  { id: "pantalon-deportivo-negro", nombre: "Pantalón deportivo negro", categoria: "pantalon", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
+  // mismo corte ancho, pero tela técnica sintética (poliéster), no algodón
+  // (mismo criterio que la remera deportiva de arriba).
+  { id: "pantalon-deportivo-negro", nombre: "Pantalón deportivo negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
 
   // --- Bermudas (chino/algodón, hasta la rodilla) --- agregadas a pedido
   // explícito del usuario: el catálogo no tenía ninguna prenda de piernas
@@ -134,13 +141,11 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // --- Shorts deportivos (tela técnica, hasta medio muslo) --- distintos
   // de la bermuda de arriba, no una variante del mismo dibujo: son mucho
   // más cortos (Maniqui.tsx los dibuja hasta la mitad del muslo, la
-  // bermuda hasta la rodilla) y de tela sintética, no chino/denim -- mismo
-  // motivo por el que la remera y el pantalón deportivos de arriba tampoco
-  // llevan textura (ninguna Textura del enum describe una tela técnica sin
-  // inventar un dato que la prenda real no tiene).
-  { id: "short-deportivo-negro", nombre: "Short deportivo negro", categoria: "short_deportivo", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
-  { id: "short-deportivo-gris", nombre: "Short deportivo gris", categoria: "short_deportivo", colorHex: "#8C8C8C", estilo: "deportivo", ocasion: "casual" },
-  { id: "short-deportivo-azul", nombre: "Short deportivo azul", categoria: "short_deportivo", colorHex: "#3366CC", estilo: "deportivo", ocasion: "casual" },
+  // bermuda hasta la rodilla) y de tela sintética (poliéster), no chino/
+  // denim -- mismo criterio que la remera y el pantalón deportivos de arriba.
+  { id: "short-deportivo-negro", nombre: "Short deportivo negro", categoria: "short_deportivo", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  { id: "short-deportivo-gris", nombre: "Short deportivo gris", categoria: "short_deportivo", colorHex: "#8C8C8C", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  { id: "short-deportivo-azul", nombre: "Short deportivo azul", categoria: "short_deportivo", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
 
   // --- Buzos ---
   { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
@@ -206,11 +211,14 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual" },
   // piloto -- no es un rompeviento deportivo (más abajo) ni una campera de
   // vestir: es la campera de lluvia liviana/impermeable de uso diario
-  // (nylon/microfibra), verificado por búsqueda web -- por eso mismo
-  // criterio de textura que zapatillas/rompeviento: ninguna Textura del
-  // enum describe "nylon impermeable" sin inventar un dato que la prenda
-  // real no tiene. "urbano", no "deportivo": se usa a diario en la calle,
-  // no para entrenar (mismo criterio que campera-negra, no camisa-negra).
+  // (nylon/microfibra), verificado por búsqueda web. Sin textura a
+  // propósito: es nylon/microfibra impermeable, no la misma tela técnica de
+  // punto/poliéster que sí lleva el rompeviento de acá abajo -- ninguna
+  // Textura del enum describe "nylon impermeable" sin inventar un dato que
+  // la prenda real no tiene. "urbano", no "deportivo": se usa a diario en
+  // la calle, no para entrenar (mismo criterio que campera-negra, no
+  // camisa-negra) -- por eso tampoco entra en el "poliéster por defecto"
+  // que sí aplica a las prendas con estilo "deportivo".
   { id: "campera-piloto-negra", nombre: "Campera piloto negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
   // sweater con cierre -- de punto/lana, no un buzo ni un sweater sin
   // cierre (esos ya están en sus propias categorías): es una prenda de
@@ -236,9 +244,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // volumen exagerado es un statement de calle, no una campera básica.
   { id: "campera-pluma-negra-oversize", nombre: "Campera de pluma negra (oversize)", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "urbano", ocasion: "casual" },
   // rompeviento -- deportivo, distinto de la campera de jean/pluma de
-  // arriba (esas son casual/urbano, no para entrenar).
-  { id: "campera-rompeviento-negra", nombre: "Campera rompeviento negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
-  { id: "campera-rompeviento-azul", nombre: "Campera rompeviento azul", categoria: "campera", colorHex: "#3366CC", estilo: "deportivo", ocasion: "casual" },
+  // arriba (esas son casual/urbano, no para entrenar). Poliéster por
+  // defecto, mismo criterio que el resto de las prendas "deportivo".
+  { id: "campera-rompeviento-negra", nombre: "Campera rompeviento negra", categoria: "campera", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  { id: "campera-rompeviento-azul", nombre: "Campera rompeviento azul", categoria: "campera", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
 
   // --- Accesorios ---
   // Reusa hex ya presentes en otras categorías (azul marino, bordo) a

@@ -135,6 +135,11 @@ const FAMILIA_TEXTURA: Record<string, "liso" | "texturado"> = {
   seda: "liso",
   cuero_liso: "liso",
   lino: "liso",
+  // tela técnica de ropa deportiva -- plana/lisa (no tejida en trama
+  // visible como la lana o el tejido grueso), con el mismo leve brillo
+  // sintético que la seda o el cuero liso (ver TEXTURA_BRILLO en
+  // Maniqui.tsx): por eso "liso", no "texturado".
+  poliester: "liso",
   lana: "texturado",
   pana: "texturado",
   corderoy: "texturado",
