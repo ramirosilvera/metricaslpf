@@ -1,4 +1,4 @@
-import { CATEGORIA_LABEL, type Categoria, type Estilo, type HSL, type NivelCompatibilidad, type Prenda } from "./types";
+import { CATEGORIA_LABEL, type Categoria, type Estacion, type Estilo, type HSL, type NivelCompatibilidad, type Prenda } from "./types";
 import { CATALOGO_CON_HSL, presetAPrendaSintetica, type PresetPrenda } from "./catalogo";
 import { nombreColor } from "./color";
 
@@ -626,6 +626,40 @@ function candidatasPropias(
   return recomendar(ancla, candidatas, placard).filter((r) => r.score.nivel !== "con_cuidado");
 }
 
+/** Estación real de hoy según el mes -- hemisferio sur (el catálogo y el
+ *  placard son de Argentina): verano dic/ene/feb, invierno jun/jul/ago,
+ *  entretiempo el resto (el tipo Estacion no separa otoño de primavera, así
+ *  que ambos cuadran ahí). Recibe la fecha como parámetro, con
+ *  `new Date()` de default, para que el resto del motor sea testeable de
+ *  forma determinística en vez de depender de una llamada oculta al reloj. */
+export function estacionActual(hoy: Date = new Date()): Estacion {
+  const mes = hoy.getMonth(); // 0-11
+  if (mes === 11 || mes === 0 || mes === 1) return "verano";
+  if (mes >= 5 && mes <= 7) return "invierno";
+  return "entretiempo";
+}
+
+/** Prioriza, dentro de un pool de torsos ya ordenado por color
+ *  (candidatasPropias), las prendas cuya `estacion` coincide con la de hoy
+ *  por sobre las que no. Motivada por el trabajo de diferenciar abrigos de
+ *  entretiempo/invierno: antes de esto, "con abrigo" en Vestite hoy
+ *  mostraba por defecto la prenda que mejor combinaba en COLOR con el
+ *  pantalón, sin mirar si era, por ejemplo, un sweater de lana de invierno
+ *  o uno de viscosa de entretiempo -- verificado contra el placard real del
+ *  usuario: en "clásico" hay 4 sweaters de entretiempo y 1 de invierno
+ *  compitiendo por el mismo lugar, y en "urbano" 2 buzos de entretiempo
+ *  contra 1 campera de invierno, así que la estación SÍ podía cambiar cuál
+ *  se mostraba primero. Sort estable (estable en toda la especificación JS
+ *  desde ES2019): dentro del mismo rango de estación, se mantiene el orden
+ *  por color que ya traía el pool. Una prenda sin `estacion` cargada
+ *  (remera, camisa -- ver el comentario de catalogo.ts: solo buzo/sweater/
+ *  campera se tagean) cae en el rango neutro, ni antes ni después por este
+ *  criterio -- no cambia su orden actual. */
+function ordenarPorEstacion<T extends { prenda: Prenda }>(items: T[], hoy: Estacion): T[] {
+  const rango = (p: Prenda) => (!p.estacion ? 1 : p.estacion === hoy ? 0 : 2);
+  return [...items].sort((a, b) => rango(a.prenda) - rango(b.prenda));
+}
+
 /** Arma outfits completos automáticamente a partir del placard real, sin
  *  que el usuario elija nada -- un outfit por cada prenda de piernas
  *  (pantalón, bermuda o short deportivo -- CATEGORIAS_PIERNAS, la categoría
@@ -635,9 +669,11 @@ function candidatasPropias(
  *  accesorio) porque es la prenda que más define la identidad visual de un
  *  outfit en el maniquí; esto es lo que le da al usuario "otras opciones"
  *  para ir rotando en vez de una sola combinación fija por ancla. Devuelve
- *  el pool completo, mejor primero por ancla -- la UI decide cuántas
- *  mostrar de una vez. */
-export function armarOutfitsSugeridos(placard: Prenda[]): OutfitSugerido[] {
+ *  el pool completo, mejor primero por ancla y, entre opciones parejas en
+ *  color, con la estación de hoy primero (ver ordenarPorEstacion) -- la UI
+ *  decide cuántas mostrar de una vez. */
+export function armarOutfitsSugeridos(placard: Prenda[], hoy: Date = new Date()): OutfitSugerido[] {
+  const estacionHoy = estacionActual(hoy);
   const pantalones = placard.filter((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   const resultados: OutfitSugerido[] = [];
   const vistos = new Set<string>();
@@ -667,7 +703,7 @@ export function armarOutfitsSugeridos(placard: Prenda[]): OutfitSugerido[] {
     const candidatosTorso = placard.filter(
       (p) => CATEGORIAS_TORSO.includes(p.categoria) && (!esAnclaDeportiva || estilosDe(p).includes("deportivo")),
     );
-    const torsos = candidatasPropias(ancla, candidatosTorso, placard);
+    const torsos = ordenarPorEstacion(candidatasPropias(ancla, candidatosTorso, placard), estacionHoy);
     const calzado = mejorPropia(
       ancla,
       placard.filter((p) => p.categoria === "calzado"),

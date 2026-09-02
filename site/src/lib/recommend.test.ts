@@ -6,6 +6,7 @@ import {
   categoriasAusentes,
   diffPrendasEdicion,
   esNeutro,
+  estacionActual,
   estilosDe,
   hueDist,
   outfitSirveParaEstilo,
@@ -710,6 +711,27 @@ describe("categoriasAusentes", () => {
   });
 });
 
+describe("estacionActual", () => {
+  it("diciembre, enero, febrero -> verano", () => {
+    expect(estacionActual(new Date(2026, 11, 15))).toBe("verano");
+    expect(estacionActual(new Date(2026, 0, 15))).toBe("verano");
+    expect(estacionActual(new Date(2026, 1, 15))).toBe("verano");
+  });
+
+  it("junio, julio, agosto -> invierno", () => {
+    expect(estacionActual(new Date(2026, 5, 15))).toBe("invierno");
+    expect(estacionActual(new Date(2026, 6, 15))).toBe("invierno");
+    expect(estacionActual(new Date(2026, 7, 15))).toBe("invierno");
+  });
+
+  it("marzo-mayo y septiembre-noviembre -> entretiempo (el tipo no separa otoño de primavera)", () => {
+    expect(estacionActual(new Date(2026, 2, 15))).toBe("entretiempo");
+    expect(estacionActual(new Date(2026, 4, 15))).toBe("entretiempo");
+    expect(estacionActual(new Date(2026, 8, 15))).toBe("entretiempo");
+    expect(estacionActual(new Date(2026, 10, 15))).toBe("entretiempo");
+  });
+});
+
 describe("armarOutfitsSugeridos", () => {
   it("arma un outfit por pantalón, tomando la mejor prenda propia por lugar", () => {
     const placard = [
@@ -787,6 +809,29 @@ describe("armarOutfitsSugeridos", () => {
     expect(outfits).toHaveLength(3);
     const torsos = outfits.map((o) => o.prendas.find((p) => p.categoria !== "pantalon")?.categoria).sort();
     expect(torsos).toEqual(["camisa", "remera", "sweater"]);
+  });
+
+  it("entre dos abrigos que combinan igual de bien por color, prioriza el de la estación de hoy (caso real: 4 sweaters de entretiempo + 1 de invierno del mismo usuario, mismo pantalón)", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10); // negro, neutro -- combina excelente con cualquiera de los dos
+    const sweaterEntretiempo = mkPrenda("sweater", "#787281", 250, 6, 47);
+    sweaterEntretiempo.estacion = "entretiempo";
+    const sweaterInvierno = mkPrenda("sweater", "#0F0F0F", 0, 0, 6);
+    sweaterInvierno.estacion = "invierno";
+    const placard = [pantalon, sweaterEntretiempo, sweaterInvierno];
+
+    const enInvierno = armarOutfitsSugeridos(placard, new Date(2026, 6, 15)); // julio
+    expect(enInvierno[0].prendas.find((p) => p.categoria === "sweater")).toBe(sweaterInvierno);
+
+    const enEntretiempo = armarOutfitsSugeridos(placard, new Date(2026, 8, 15)); // septiembre
+    expect(enEntretiempo[0].prendas.find((p) => p.categoria === "sweater")).toBe(sweaterEntretiempo);
+  });
+
+  it("una prenda sin estación cargada (remera/camisa) no se ve afectada por el orden de estación -- mantiene el orden por color", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const remera = mkPrenda("remera", "#3366CC", 220, 60, 50); // sin estacion (null)
+    const camisa = mkPrenda("camisa", "#F5F5F0", 0, 5, 95); // sin estacion (null)
+    const outfits = armarOutfitsSugeridos([pantalon, remera, camisa], new Date(2026, 6, 15));
+    expect(outfits).toHaveLength(2);
   });
 
   it("con un bermuda pero sin ningún pantalón largo en el placard, el bermuda ancla el outfit igual (CATEGORIAS_PIERNAS, no solo 'pantalon')", () => {
