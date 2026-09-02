@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
 import { CATALOGO_CON_HSL, presetAPrendaSintetica } from "../lib/catalogo";
+import { compartirOImagen, generarImagenOutfit } from "../lib/compartir";
 import {
   advertenciasDeRegistro,
   armarOutfitsParaComprar,
@@ -86,7 +87,12 @@ export default function Outfits() {
   const [prendasEdicion, setPrendasEdicion] = useState<Set<string>>(new Set());
   const [guardandoEdicion, setGuardandoEdicion] = useState(false);
   const [errorEdicion, setErrorEdicion] = useState("");
+  const [compartiendoId, setCompartiendoId] = useState<string | null>(null);
+  const [errorCompartir, setErrorCompartir] = useState<Record<string, string>>({});
   const base = (import.meta.env.BASE_URL as string) || "/";
+  // un <div> por outfit guardado, para poder tomar su <svg> ya renderizado
+  // (el maniquí) al momento de compartir -- ver compartirOutfit() más abajo.
+  const maniquiRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     if (!SUPABASE_CONFIGURADO) return;
@@ -243,6 +249,35 @@ export default function Outfits() {
     setErrorEdicion("");
   }
 
+  /** Pedido explícito del usuario: compartir un outfit guardado como
+   *  imagen, "visual, claro, que se entienda qué se está compartiendo",
+   *  por WhatsApp. Arma el PNG a partir del maniquí YA renderizado en la
+   *  tarjeta (mismo mecanismo que procesarFoto() ya usa para fotos, ver
+   *  compartir.ts) y del mismo texto que la tarjeta ya le muestra al
+   *  usuario (título + leyenda + registro) -- lo que se comparte coincide
+   *  con lo que se ve en la app, no es un resumen aparte. */
+  async function compartirOutfit(o: OutfitConPrendas) {
+    const contenedor = maniquiRefs.current[o.id];
+    const svg = contenedor?.querySelector("svg");
+    if (!svg) return;
+
+    setCompartiendoId(o.id);
+    setErrorCompartir((prev) => ({ ...prev, [o.id]: "" }));
+    try {
+      const titulo = o.nombre ?? o.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ");
+      const blob = await generarImagenOutfit(svg, {
+        titulo,
+        leyenda: leyenda(o.prendas),
+        registro: registroOutfit(o.prendas),
+      });
+      await compartirOImagen(blob, `mi-ropa-${o.id}.png`, titulo);
+    } catch (e) {
+      setErrorCompartir((prev) => ({ ...prev, [o.id]: e instanceof Error ? e.message : "No se pudo generar la imagen." }));
+    } finally {
+      setCompartiendoId(null);
+    }
+  }
+
   function togglePrendaEdicion(id: string) {
     setPrendasEdicion((prev) => {
       const next = new Set(prev);
@@ -371,7 +406,9 @@ export default function Outfits() {
           <div className="grid-prendas outfits-grid">
             {outfitsFiltrados.map((o) => (
               <div key={o.id} className="card outfit-card">
-                <Maniqui prendas={o.prendas} />
+                <div ref={(el) => { maniquiRefs.current[o.id] = el; }}>
+                  <Maniqui prendas={o.prendas} />
+                </div>
                 <div style={{ minWidth: 0, textAlign: "center" }}>
                   <strong style={{ textTransform: "capitalize" }}>
                     {o.nombre ?? o.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}
@@ -384,6 +421,18 @@ export default function Outfits() {
                 {errorEliminar[o.id] && (
                   <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorEliminar[o.id]}</p>
                 )}
+                {errorCompartir[o.id] && (
+                  <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorCompartir[o.id]}</p>
+                )}
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.6rem", width: "100%" }}
+                  onClick={() => compartirOutfit(o)}
+                  disabled={compartiendoId === o.id}
+                >
+                  {compartiendoId === o.id ? "Armando la imagen…" : "📤 Compartir"}
+                </button>
                 <div style={{ display: "flex", gap: "0.4rem", width: "100%" }}>
                   <button
                     type="button"
