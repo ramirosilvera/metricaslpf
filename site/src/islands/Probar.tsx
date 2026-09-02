@@ -186,6 +186,7 @@ export default function Probar() {
               <PrendaIcon
                 categoria={pruebaBase.categoria}
                 color={pruebaBase.color_hex}
+                textura={pruebaBase.textura ?? undefined}
                 suelaContraste={pruebaBase.suela_contraste}
                 posicionAccesorio={pruebaBase.posicion_accesorio}
                 requiereCuello={pruebaBase.requiere_cuello}
@@ -228,6 +229,7 @@ export default function Probar() {
                           <PrendaIcon
                             categoria={prenda.categoria}
                             color={prenda.color_hex}
+                            textura={prenda.textura ?? undefined}
                             suelaContraste={prenda.suela_contraste}
                             posicionAccesorio={prenda.posicion_accesorio}
                             requiereCuello={prenda.requiere_cuello}

@@ -1,6 +1,6 @@
-import { contornoHsl, detalleHsl, luzHsl, sombraHsl } from "../lib/color";
-import PrendaIcon from "./PrendaIcon";
-import { CATEGORIA_LABEL, type Categoria, type Prenda, type Textura } from "../lib/types";
+import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
+import PrendaIcon, { PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
+import { CATEGORIA_LABEL, type Categoria, type Prenda } from "../lib/types";
 
 type Capa = "torso" | "piernas" | "pies" | "accesorio";
 
@@ -69,81 +69,6 @@ function agruparPorCapa(prendas: Prenda[]): {
   return { principal, cuelloSecundario, extras };
 }
 
-// texturas que se dibujan como un patrón repetido (trama de tela) vs. las
-// que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
-// null/una textura sin mapear acá (p.ej. sin cargar) no dibuja nada extra.
-const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_grueso", "lana", "algodon", "lino", "acolchado"];
-// poliéster (ropa deportiva técnica) suma el mismo brillo diagonal que
-// seda/cuero_liso -- es tela lisa, sin trama visible, con un leve brillo
-// sintético real (más notorio que en algodón/lino), no un patrón tejido.
-// viscosa -- mismo criterio: fibra de caída lisa y suave, con el brillo
-// sutil característico de la viscosa/rayón real (parecido al de la seda),
-// no una trama tejida como la lana.
-const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso", "poliester", "viscosa"];
-
-/** El <pattern> real por textura -- son ilustraciones esquemáticas a
- *  propósito (líneas/formas simples que se repiten), no una textura
- *  fotorrealista: tienen que seguir leyéndose limpias encima de una prenda
- *  de ~80x100px. */
-function PatronTextura({ id, textura, tono }: { id: string; textura: Textura; tono: string }) {
-  switch (textura) {
-    case "denim":
-      // trama diagonal (sarga) -- la seña visual más asociada al jean.
-      return (
-        <pattern id={id} width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="3" stroke={tono} strokeWidth="0.6" />
-        </pattern>
-      );
-    case "pana":
-    case "corderoy":
-      // corderoy es sinónimo de pana en el enum del schema -- mismo patrón.
-      return (
-        <pattern id={id} width="2.6" height="4" patternUnits="userSpaceOnUse">
-          <line x1="0.6" y1="0" x2="0.6" y2="4" stroke={tono} strokeWidth="0.9" />
-        </pattern>
-      );
-    case "tejido_grueso":
-      // punto grueso/trenzado -- rombos más grandes que el de lana.
-      return (
-        <pattern id={id} width="9" height="9" patternUnits="userSpaceOnUse">
-          <path d="M0 4.5 L4.5 0 L9 4.5 L4.5 9 Z" fill="none" stroke={tono} strokeWidth="0.9" />
-        </pattern>
-      );
-    case "lana":
-      // punto fino -- una "v" de tejido repetida, más chica que el grueso.
-      return (
-        <pattern id={id} width="4" height="4" patternUnits="userSpaceOnUse">
-          <path d="M0 4 L2 0 L4 4" fill="none" stroke={tono} strokeWidth="0.5" />
-        </pattern>
-      );
-    case "algodon":
-    case "lino":
-      // trama plana simple -- lino con la cuadrícula más grande (fibra más
-      // gruesa/irregular que el algodón).
-      return (
-        <pattern id={id} width={textura === "lino" ? 4.5 : 3} height={textura === "lino" ? 4.5 : 3} patternUnits="userSpaceOnUse">
-          <path
-            d={`M0 0 H${textura === "lino" ? 4.5 : 3} M0 0 V${textura === "lino" ? 4.5 : 3}`}
-            stroke={tono}
-            strokeWidth="0.3"
-          />
-        </pattern>
-      );
-    case "acolchado":
-      // costuras de campera de pluma (puffer) -- una cuadrícula grande de
-      // canales de relleno, no una trama de tela: por eso el trazo es más
-      // grueso y el espaciado mucho más ancho que cualquier textura tejida
-      // de acá arriba (denim/lana/algodón).
-      return (
-        <pattern id={id} width="16" height="11" patternUnits="userSpaceOnUse">
-          <path d="M0 0 H16 M0 0 V11" stroke={tono} strokeWidth="1" />
-        </pattern>
-      );
-    default:
-      return null;
-  }
-}
-
 /** Relleno con volumen simple: un degradé de dos paradas (mismo matiz, más
  *  claro arriba-izquierda / más oscuro abajo-derecha) en vez de un color
  *  plano -- el mayor salto de realismo por esfuerzo que hay: no agrega
@@ -177,7 +102,17 @@ function Volumen({
           <stop offset="0%" stopColor={luzHsl(h, s, l)} />
           <stop offset="100%" stopColor={sombraHsl(h, s, l)} />
         </linearGradient>
-        {conPatron && textura && <PatronTextura id={patId} textura={textura} tono={contornoHsl(h, s, l)} />}
+        {/* tonoTexturaHsl, no contornoHsl -- ver el comentario largo en
+            color.ts: sobre una prenda ya oscura (ej. sweater negro),
+            contornoHsl siempre resta luz y choca contra el piso (4%), así
+            que el patrón se funde con el propio degradé de sombra en vez
+            de leerse como trama. Hallazgo real de esta revisión ("modista
+            e ingeniero textil", pedido explícito del usuario) al agregar
+            el mismo patrón al ícono chico (PrendaIcon.tsx, sin degradé):
+            ahí era 100% invisible; acá el degradé disimulaba PARTE del
+            problema (se veía en el lado luzHsl, no en el lado sombraHsl),
+            pero seguía siendo el mismo defecto real. */}
+        {conPatron && textura && <PatronTextura id={patId} textura={textura} tono={tonoTexturaHsl(h, s, l)} />}
         {conBrillo && (
           <linearGradient id={brilloId} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="white" stopOpacity="0" />
@@ -686,7 +621,10 @@ function AccesorioCuerpo({ prenda }: { prenda: Prenda }) {
  *  los usos "símbolo chico" (Placard, Combinaciones, Probar, catálogo) --
  *  a esos tamaños (~48-64px) el trabajo del dibujo es que se reconozca la
  *  categoría al instante, no parecer ropa real, así que no comparten path
- *  data con las formas de acá. */
+ *  data con las formas de acá. El patrón/brillo de textura SÍ es
+ *  compartido (PatronTextura, TEXTURA_PATRON/TEXTURA_BRILLO, importados de
+ *  PrendaIcon.tsx) -- misma fibra, misma seña visual, sea cual sea el
+ *  tamaño del dibujo. */
 export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
   const { principal, cuelloSecundario, extras } = agruparPorCapa(prendas);
   const neutro = "var(--border)";
@@ -857,6 +795,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
               <PrendaIcon
                 categoria={p.categoria}
                 color={p.color_hex}
+                textura={p.textura ?? undefined}
                 suelaContraste={p.suela_contraste}
                 posicionAccesorio={p.posicion_accesorio}
                 requiereCuello={p.requiere_cuello}

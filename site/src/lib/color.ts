@@ -279,6 +279,30 @@ export function contornoHsl(h: number, s: number, l: number): string {
   return `hsl(${h} ${s2}% ${l2}%)`;
 }
 
+/** Tono del PATRÓN de textura (la trama/brillo que dibuja PatronTextura en
+ *  PrendaIcon.tsx/Maniqui.tsx) -- no es lo mismo que contornoHsl. Revisado
+ *  como ingeniero textil, pedido explícito del usuario ("revisá los
+ *  íconos... que coincidan con la prenda"): sobre una prenda YA oscura
+ *  (ej. un sweater de lana negro), contornoHsl resta 18 de luminosidad y
+ *  choca contra el piso (4%) -- el patrón queda prácticamente del mismo
+ *  tono que el relleno y se vuelve invisible (confirmado renderizando el
+ *  ícono real: el patrón de punto se veía perfecto sobre gris, pero
+ *  desaparecía por completo sobre negro). El contorno de la silueta
+ *  disimula esto porque igual se recorta contra el fondo de la tarjeta,
+ *  pero un patrón interno no tiene ese borde exterior para apoyarse. Mismo
+ *  criterio que ya resolvió el problema gemelo en detalleHsl (el cuello de
+ *  una prenda negra): en vez de oscurecer más sobre una base ya oscura,
+ *  hay que ACLARAR -- el mismo principio que un pliegue de tela real, que
+ *  se puede leer por sombra o por brillo según de qué lado cae la luz, acá
+ *  elegido por contraste garantizado. Umbral en l<25 (no 50 como
+ *  detalleHsl): el patrón es un detalle mucho más fino que un cuello, así
+ *  que necesita menos margen para seguir siendo legible por debajo. */
+export function tonoTexturaHsl(h: number, s: number, l: number): string {
+  const s2 = Math.min(100, s + 5);
+  if (l < 25) return `hsl(${h} ${s2}% ${Math.min(85, l + 20)}%)`;
+  return `hsl(${h} ${s2}% ${Math.max(4, l - 18)}%)`;
+}
+
 /** Tono más oscuro del mismo matiz, para el lado "sombra" de un degradé
  *  simple de dos paradas que le da algo de volumen a una prenda de color
  *  plano (Maniqui.tsx) sin necesitar texturas ni assets. */

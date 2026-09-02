@@ -72,6 +72,7 @@ export default function CatalogoPicker({
           <PrendaIcon
             categoria={p.categoria}
             color={p.colorHex}
+            textura={p.textura}
             suelaContraste={p.suelaContraste}
             posicionAccesorio={p.posicionAccesorio}
             requiereCuello={p.requiereCuello}

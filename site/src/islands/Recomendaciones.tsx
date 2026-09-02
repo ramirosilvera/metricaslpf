@@ -203,6 +203,7 @@ export default function Recomendaciones() {
           <PrendaIcon
             categoria={base.categoria}
             color={base.color_hex}
+            textura={base.textura ?? undefined}
             suelaContraste={base.suela_contraste}
             posicionAccesorio={base.posicion_accesorio}
             requiereCuello={base.requiere_cuello}
@@ -325,6 +326,7 @@ export default function Recomendaciones() {
                       <PrendaIcon
                         categoria={prenda.categoria}
                         color={prenda.color_hex}
+                        textura={prenda.textura ?? undefined}
                         suelaContraste={prenda.suela_contraste}
                         posicionAccesorio={prenda.posicion_accesorio}
                         requiereCuello={prenda.requiere_cuello}

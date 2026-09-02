@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CATALOGO_PRENDAS } from "./catalogo";
-import { contornoHsl, detalleHsl, hexToHsl, luzHsl, nombreColor, sombraHsl } from "./color";
+import { contornoHsl, detalleHsl, hexToHsl, luzHsl, nombreColor, sombraHsl, tonoTexturaHsl } from "./color";
 
 describe("nombreColor", () => {
   it("negro por luminosidad baja, sin importar el matiz", () => {
@@ -162,6 +162,29 @@ describe("contornoHsl / sombraHsl / luzHsl", () => {
   it("sombraHsl no baja de 2% ni luzHsl sube de 98%", () => {
     expect(sombraHsl(0, 0, 5)).toBe("hsl(0 0% 2%)");
     expect(luzHsl(0, 0, 95)).toBe("hsl(0 0% 98%)");
+  });
+});
+
+describe("tonoTexturaHsl", () => {
+  // Reporte real de esta misma revisión ("modista e ingeniero textil"):
+  // renderizando el ícono real, el patrón de textura (lana) se veía
+  // perfecto sobre un sweater gris pero desaparecía por completo sobre uno
+  // negro -- contornoHsl siempre resta luz, así que sobre una base ya
+  // oscura choca contra el piso (4%) y el patrón se funde con el relleno.
+  it("sobre una prenda oscura (l<25), ACLARA en vez de oscurecer más -- mismo criterio que detalleHsl para el cuello de una prenda negra", () => {
+    const tono = tonoTexturaHsl(0, 0, 16); // sweater negro real, #2A2A2A
+    expect(tono).toBe("hsl(0 5% 36%)");
+    expect(36).toBeGreaterThan(16); // más claro que la base -- contraste garantizado
+  });
+
+  it("sobre una prenda clara/media (l>=25), sigue oscureciendo como contornoHsl -- no cambia un comportamiento que ya funcionaba", () => {
+    expect(tonoTexturaHsl(200, 60, 50)).toBe(contornoHsl(200, 60, 50));
+    expect(tonoTexturaHsl(0, 0, 55)).toBe(contornoHsl(0, 0, 55));
+  });
+
+  it("no cruza los límites 4%/85% en los extremos", () => {
+    expect(tonoTexturaHsl(0, 0, 0)).toBe("hsl(0 5% 20%)");
+    expect(tonoTexturaHsl(0, 0, 100)).toBe("hsl(0 5% 82%)");
   });
 });
 
