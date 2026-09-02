@@ -302,6 +302,81 @@ describe("recomendar -- formalidad calzado o torso vs pantalón", () => {
   });
 });
 
+describe("recomendar -- deportivo no combina con formal/clasico (ni siquiera accesorio)", () => {
+  it("reporte real del usuario: short deportivo + cinturón de cuero clásico -- con_cuidado, no excelente", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const cinturon = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturon.estilo = "clasico";
+    cinturon.textura = "cuero_liso";
+
+    const [resultado] = recomendar(short, [cinturon], [short, cinturon]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+    expect(resultado.score.explicacion).toContain("deportiv");
+  });
+
+  it("reporte real del usuario: pantalón deportivo + sweater clásico -- con_cuidado, no excelente ni muy_bueno", () => {
+    const pantalon = mkPrenda("pantalon", "#2F5233", 127, 27, 25);
+    pantalon.estilo = "deportivo";
+    const sweater = mkPrenda("sweater", "#1F2A44", 222, 37, 19);
+    sweater.estilo = "clasico";
+
+    const [resultado] = recomendar(pantalon, [sweater], [pantalon, sweater]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+
+  it("también choca contra 'formal', no solo 'clasico'", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+
+    const [resultado] = recomendar(short, [pantalonVestir], [short, pantalonVestir]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+
+  it("no depende del orden -- recomendar(cinturón, [deportivo]) da lo mismo que al revés", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const cinturon = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturon.estilo = "clasico";
+
+    const [aB] = recomendar(short, [cinturon], [short, cinturon]);
+    const [bA] = recomendar(cinturon, [short], [short, cinturon]);
+    expect(aB.score.nivel).toBe("con_cuidado");
+    expect(bA.score.nivel).toBe("con_cuidado");
+  });
+
+  it("deportivo + urbano SÍ combina -- zapatillas urbanas con jogger es una combinación real de calle", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const zapatillasUrbanas = mkPrenda("calzado", "#1F2A44", 222, 37, 19);
+    zapatillasUrbanas.estilo = "urbano";
+
+    const [resultado] = recomendar(short, [zapatillasUrbanas], [short, zapatillasUrbanas]);
+    expect(resultado.score.nivel).not.toBe("con_cuidado");
+  });
+
+  it("sin estilo declarado en la otra prenda, no se inventa un choque", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const sweaterSinEstilo = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+
+    const [resultado] = recomendar(short, [sweaterSinEstilo], [short, sweaterSinEstilo]);
+    expect(resultado.score.nivel).not.toBe("con_cuidado");
+  });
+
+  it("da una técnica de rescate específica, no la genérica de 'repetí un color'", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const cinturon = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturon.estilo = "clasico";
+
+    const [resultado] = recomendar(short, [cinturon], [short, cinturon]);
+    expect(resultado.tecnicaRescate).toContain("No hay técnica de rescate");
+  });
+});
+
 describe("registroOutfit / advertenciasDeRegistro", () => {
   it("toma el estilo del pantalón como registro del outfit completo", () => {
     const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);

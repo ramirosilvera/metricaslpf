@@ -328,6 +328,34 @@ function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean 
   return rangoOtra < rangoPantalon;
 }
 
+/** El registro "deportivo" no es solo "el escalón más informal" de la
+ *  escala de FORMALIDAD_ESTILO -- es funcionalmente distinto (tela técnica,
+ *  corte pensado para moverse), y no se puede "elevar" con una prenda de
+ *  vestir de la misma forma que un jean sube con un blazer o zapatos de
+ *  cuero (esa es justo la excepción "smart casual" que prendaMenosFormal-
+ *  QuePantalon deja pasar a propósito). Reportado por el usuario con un
+ *  ejemplo concreto y grave: el motor sugería un short deportivo con
+ *  cinturón de cuero y, en otros casos, con sweater de lana -- ninguna de
+ *  las dos existe en indumentaria real. Dos motivos por los que
+ *  prendaMenosFormalQuePantalon no lo atrapaba:
+ *  1. Es asimétrica a propósito (sube-sí-baja-no) -- un sweater "clasico"
+ *     (rango 2) nunca cuenta como "menos formal" que un pantalón
+ *     "deportivo" (rango 0), así que la regla lo deja pasar como si fuera
+ *     una elevación válida.
+ *  2. Excluye accesorio explícitamente (`otra.categoria !== "calzado" &&
+ *     !CATEGORIAS_CON_TORSO.includes(...)`) -- un cinturón nunca pasa por
+ *     ese chequeo en absoluto, chocara o no.
+ *  Esta función es la contraparte: simétrica (no importa qué lado es el
+ *  ancla) y sin excepción de categoría (aplica también a accesorio). Solo
+ *  choca contra "formal"/"clasico" -- "urbano" sigue siendo válido con
+ *  deportivo (zapatillas urbanas, campera urbana con jogger: combinación
+ *  real de calle, no un error). */
+function chocaRegistroDeportivo(a: Prenda, b: Prenda): boolean {
+  const esDeportivo = (p: Prenda) => p.estilo === "deportivo";
+  const esDeVestir = (p: Prenda) => p.estilo === "formal" || p.estilo === "clasico";
+  return (esDeportivo(a) && esDeVestir(b)) || (esDeportivo(b) && esDeVestir(a));
+}
+
 export const ESTILO_LABEL: Record<Estilo, string> = {
   formal: "Formal",
   clasico: "Clásico",
@@ -397,6 +425,7 @@ export function recomendar(
     .map((c) => {
       const cueroDescoordinado = esDescoordinacionDeCuero(base, c);
       const corbataSinCuello = !cueroDescoordinado && esCorbataSinCuello(base, c);
+      const registroDeportivoChoca = !cueroDescoordinado && !corbataSinCuello && chocaRegistroDeportivo(base, c);
       let score: ScoreColor = cueroDescoordinado
         ? {
             nivel: "con_cuidado",
@@ -408,10 +437,16 @@ export function recomendar(
               nivel: "con_cuidado",
               explicacion: "Una corbata necesita una camisa con cuello debajo -- no hay dónde apoyarla sobre esto.",
             }
-          : scoreColor(
-              { h: base.color_h, s: base.color_s, l: base.color_l },
-              { h: c.color_h, s: c.color_s, l: c.color_l },
-            );
+          : registroDeportivoChoca
+            ? {
+                nivel: "con_cuidado",
+                explicacion:
+                  "Ropa deportiva y una prenda de vestir no combinan por más que el color coincida: son registros funcionalmente distintos, no hay forma de \"elevar\" un look deportivo con algo formal/clásico.",
+              }
+            : scoreColor(
+                { h: base.color_h, s: base.color_s, l: base.color_l },
+                { h: c.color_h, s: c.color_s, l: c.color_l },
+              );
 
       // El color puede combinar perfecto y el conjunto igual desentonar --
       // un pantalón de vestir con zapatillas (o un buzo casual) es
@@ -437,7 +472,9 @@ export function recomendar(
               ? "Usá cinturón y calzado del mismo tono de cuero -- los dos marrones o los dos negros."
               : corbataSinCuello
                 ? "Ponete una camisa con cuello debajo -- con buzo, remera, sweater o campera solos no hay dónde llevarla."
-                : tecnicaRescate(base, c, placard),
+                : registroDeportivoChoca
+                  ? "No hay técnica de rescate acá -- cambiá una de las dos: una prenda deportiva o urbana, o dejá esta para otro look."
+                  : tecnicaRescate(base, c, placard),
       };
     })
     .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
