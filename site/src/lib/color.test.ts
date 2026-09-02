@@ -99,6 +99,24 @@ describe("nombreColor", () => {
   it("verde militar no se dispara fuera de su rango de matiz (verde bosque real del catálogo)", () => {
     expect(nombreColor(127, 27, 25)).toBe("Verde oscuro"); // pantalón deportivo verde oscuro
   });
+
+  it("rosa claro con h>=345 no cae en Rojo -- encontrado agregando una remera rosa real (antes daba 'Rojo')", () => {
+    expect(nombreColor(346, 53, 77)).toBe("Rosa");
+    expect(nombreColor(5, 50, 70)).toBe("Rosa"); // mismo caso del lado h<15
+  });
+
+  it("rosa por luminosidad no se dispara si no es lo bastante claro (eso es Rojo/Bordó)", () => {
+    expect(nombreColor(346, 53, 50)).toBe("Rojo");
+  });
+
+  it("mostaza, no naranja -- encontrado agregando un sweater mostaza real al catálogo (antes daba 'Naranja')", () => {
+    expect(nombreColor(40, 62, 47)).toBe("Mostaza");
+  });
+
+  it("mostaza no se dispara fuera de su rango (terroso -> marrón/beige; vívido -> naranja/amarillo)", () => {
+    expect(nombreColor(40, 47, 47)).toBe("Marrón"); // menos saturado -- es marrón, no mostaza
+    expect(nombreColor(30, 80, 50)).toBe("Naranja"); // matiz fuera de rango (test ya existente, sigue firme)
+  });
 });
 
 describe("contornoHsl / sombraHsl / luzHsl", () => {

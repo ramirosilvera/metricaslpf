@@ -68,6 +68,17 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // beige levemente distinto, mismo criterio que ya documenta el archivo
   // para mantener consistente la paleta entre categorías.
   { id: "remera-beige", nombre: "Remera beige", categoria: "remera", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  // rojo y rosa -- pedido explícito del usuario: "más variedad de colores
+  // según usos y costumbres de la moda". El catálogo no tenía NINGÚN rojo
+  // ni rosa en ninguna categoría, un vacío real (el rojo cereza es color de
+  // acento confirmado por búsqueda web para la temporada actual; rosa es
+  // básico habitual en remeras unisex). Al cargar estos dos hex reales se
+  // encontraron y corrigieron dos casos más de nombreColor() mal
+  // clasificado (ver color.ts/color.test.ts): un rosa pastel con h>=345
+  // caía en "Rojo", y un mostaza (ver sweater-mostaza más abajo) caía en
+  // "Naranja".
+  { id: "remera-roja", nombre: "Remera roja", categoria: "remera", colorHex: "#B93A32", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  { id: "remera-rosa", nombre: "Remera rosa", categoria: "remera", colorHex: "#E4A6B4", textura: "algodon", estilo: "casual", ocasion: "casual" },
 
   // --- Remeras deportivas (agregadas en la ampliación del catálogo: el
   // estilo "deportivo" no tenía NINGUNA prenda cargada en todo el catálogo
@@ -167,6 +178,12 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // igual que el resto de los buzos (casual/casual/tejido_grueso): el
   // color no cambia el registro de la prenda.
   { id: "buzo-beige", nombre: "Buzo beige", categoria: "buzo", colorHex: "#D8C7A1", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  // verde botella -- color de tendencia confirmado por búsqueda web para
+  // la temporada actual ("lo llevamos en camel, verde botella o negro").
+  // Matiz bien distinto del verde militar/oliva (h=140, un verde bosque/
+  // botella real) y del verde deportivo del pantalón (h=127 pero mucho más
+  // desaturado) -- no una variante redundante.
+  { id: "buzo-verde", nombre: "Buzo verde botella", categoria: "buzo", colorHex: "#1E5631", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
 
   // --- Sweaters (oficina/vestir) ---
   { id: "sweater-gris", nombre: "Sweater gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "lana", estilo: "clasico", ocasion: "laburo" },
@@ -177,6 +194,11 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // registro que el resto de los sweaters (gris/marino/bordo/negro): un
   // sweater beige es tan de oficina como esos.
   { id: "sweater-beige", nombre: "Sweater beige", categoria: "sweater", colorHex: "#D8C7A1", textura: "lana", estilo: "clasico", ocasion: "laburo" },
+  // mostaza -- color evergreen de sweater de oficina/entretiempo, tan
+  // estándar como bordó/azul marino/gris de acá arriba. Este hex real
+  // (h=40, s=62, l=47) fue justamente el que encontró el bug de
+  // nombreColor() clasificándolo como "Naranja" -- ver color.ts.
+  { id: "sweater-mostaza", nombre: "Sweater mostaza", categoria: "sweater", colorHex: "#C3922E", textura: "lana", estilo: "clasico", ocasion: "laburo" },
 
   // --- Calzado ---
   // Las zapatillas negras y marrones aparecen dos veces a propósito -- una
@@ -262,7 +284,15 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "cinturon-marron", nombre: "Cinturón marrón de cuero", categoria: "accesorio", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "clasico" },
   { id: "corbata-azul-marino", nombre: "Corbata azul marino", categoria: "accesorio", colorHex: "#1F2A44", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
   { id: "corbata-bordo", nombre: "Corbata bordo", categoria: "accesorio", colorHex: "#6B2737", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
+  // roja -- la corbata de vestir más clásica que existe ("power tie"), un
+  // vacío real en un catálogo que hasta ahora solo tenía azul marino/bordó.
+  { id: "corbata-roja", nombre: "Corbata roja", categoria: "accesorio", colorHex: "#A6332B", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
   { id: "bufanda-gris", nombre: "Bufanda gris", categoria: "accesorio", colorHex: "#8C8C8C", textura: "lana", estilo: "casual", ocasion: "casual", posicionAccesorio: "cuello" },
+  // roja -- mismo hex que remera-roja de arriba, mismo criterio de paleta
+  // consistente que ya documenta el archivo (una bufanda roja combina con
+  // la remera roja ya cargada, no con un rojo ligeramente distinto). Color
+  // de acento típico de bufanda de invierno.
+  { id: "bufanda-roja", nombre: "Bufanda roja", categoria: "accesorio", colorHex: "#B93A32", textura: "lana", estilo: "casual", ocasion: "casual", posicionAccesorio: "cuello" },
 ];
 
 /** Deriva h/s/l de cada preset una sola vez (no en cada render). */

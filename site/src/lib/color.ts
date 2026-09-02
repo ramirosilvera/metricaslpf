@@ -154,6 +154,40 @@ const SATURACION_VERDE_MILITAR = 40;
 const BORDO_HUE_MIN = 330;
 const BORDO_L_MAX = 35;
 
+// Rosa por luminosidad -- encontrado agregando una remera rosa pastel real
+// al catálogo (h=346, l=77): el bucket de "Rojo" (h>=345) la clasificaba
+// mal, porque a diferencia de bordó (mismo rango de matiz, pero oscuro) acá
+// el problema es en el otro extremo -- CLARO. En moda, "rosa" no es tanto
+// un matiz aparte como una versión clara del rojo/magenta: por eso el
+// criterio es solo luminosidad, no saturación (a diferencia de marrón/
+// beige/mostaza/verde militar, que se distinguen por estar apagados). El
+// rango de matiz cubre tanto el final de "Rojo" (h>=345) como el de "Rosa"
+// (h<345, ya cubierto por el bucket genérico de más abajo, pero repetido
+// acá para no dejar un salto raro justo en el límite h=345): sin esto, un
+// rosa pastel con h apenas por debajo de 345 ya se leía bien, pero el mismo
+// rosa con h apenas por encima caía en "Rojo" -- una inconsistencia según
+// de qué lado del límite cayera el matiz exacto de la prenda.
+const ROSA_L_MIN = 65;
+
+// Mostaza -- mismo motivo que verde militar: un mostaza real de sweater/
+// buzo (h=40, s=62, l=47) caía en "Naranja", porque ese matiz está en la
+// misma franja que marrón/beige (15-49) pero con más saturación que el
+// techo de esos dos (60) -- ver SATURACION_NARANJA_REAL. La franja de
+// matiz se extiende un poco más allá (hasta 55) para cubrir un mostaza que
+// tire más a amarillo. El piso de saturación (35) separa un mostaza real
+// de un caqui/verde oliva desaturado en la misma zona de matiz; el techo
+// (75) separa un mostaza real (apagado, textil) de un amarillo-naranja
+// vívido de verdad. Para matiz <50 esta franja de saturación en la
+// práctica arranca en 60 (el techo de marrón/beige, que se evalúa antes),
+// no en 35 -- el piso de 35 solo importa en la franja 50-55, donde marrón/
+// beige ya no compite.
+const MOSTAZA_HUE_MIN = 35;
+const MOSTAZA_HUE_MAX = 55;
+const MOSTAZA_S_MIN = 35;
+const MOSTAZA_S_MAX = 75;
+const MOSTAZA_L_MIN = 30;
+const MOSTAZA_L_MAX = 65;
+
 /** Nombre de color en español, para no depender solo del color renderizado
  *  del ícono -- con poco brillo de pantalla dos colores parecidos se leen
  *  igual. Los umbrales de "neutro" (s<=15, l<=12, l>=88) son los mismos que
@@ -175,6 +209,17 @@ export function nombreColor(h: number, s: number, l: number): string {
     return l < 30 ? "Marrón oscuro" : "Marrón";
   }
 
+  if (
+    h >= MOSTAZA_HUE_MIN &&
+    h < MOSTAZA_HUE_MAX &&
+    s >= MOSTAZA_S_MIN &&
+    s < MOSTAZA_S_MAX &&
+    l >= MOSTAZA_L_MIN &&
+    l < MOSTAZA_L_MAX
+  ) {
+    return "Mostaza";
+  }
+
   if (h >= VERDE_MILITAR_HUE_MIN && h < VERDE_MILITAR_HUE_MAX && s < SATURACION_VERDE_MILITAR) {
     if (l < 30) return "Verde militar oscuro";
     if (l > 78) return "Verde militar claro";
@@ -183,6 +228,10 @@ export function nombreColor(h: number, s: number, l: number): string {
 
   if (h >= BORDO_HUE_MIN && l < BORDO_L_MAX) {
     return "Bordó";
+  }
+
+  if ((h >= BORDO_HUE_MIN || h < 15) && l >= ROSA_L_MIN) {
+    return "Rosa";
   }
 
   if (h >= AZUL_MARINO_HUE_MIN && h < AZUL_MARINO_HUE_MAX && l < AZUL_MARINO_L_MAX) {
