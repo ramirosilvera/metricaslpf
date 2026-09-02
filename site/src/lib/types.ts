@@ -105,6 +105,16 @@ export const CATEGORIA_LABEL: Record<Categoria, string> = {
   accesorio: "accesorio",
 };
 
+/** Texto visible por estación, mismo criterio que ESTILO_LABEL en
+ *  recommend.ts (capitalizado, no el valor crudo del enum) -- pedido
+ *  explícito del usuario: un filtro real de "mostrame solo mis abrigos de
+ *  invierno" en Placard. */
+export const ESTACION_LABEL: Record<Estacion, string> = {
+  verano: "Verano",
+  invierno: "Invierno",
+  entretiempo: "Entretiempo",
+};
+
 export type NivelCompatibilidad = "excelente" | "muy_bueno" | "con_cuidado";
 
 export interface Recomendacion {

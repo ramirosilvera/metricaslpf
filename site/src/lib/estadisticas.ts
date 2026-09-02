@@ -1,6 +1,6 @@
 import { nombreColor } from "./color";
 import { categoriasAusentes, ESTILO_LABEL, estilosDe } from "./recommend";
-import { CATEGORIA_LABEL, type Categoria, type Estilo, type Prenda } from "./types";
+import { CATEGORIA_LABEL, ESTACION_LABEL, type Categoria, type Estacion, type Estilo, type Prenda } from "./types";
 
 /** Mismo orden que CATEGORIA_LABEL en types.ts -- se deriva de sus claves en
  *  vez de repetir el array a mano para no poder desincronizarse si se agrega
@@ -17,6 +17,7 @@ export const TODAS_LAS_CATEGORIAS = Object.keys(CATEGORIA_LABEL) as Categoria[];
 const CATEGORIAS_PIERNAS: Categoria[] = ["pantalon", "bermuda", "short_deportivo"];
 
 const ESTILOS: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
+const ESTACIONES: Estacion[] = ["verano", "entretiempo", "invierno"];
 
 export interface ConteoCategoria {
   categoria: Categoria;
@@ -83,6 +84,33 @@ export function contarPorColor(placard: Prenda[]): ConteoColor[] {
     else grupos.set(nombre, { nombre, cantidad: 1, hex: p.color_hex });
   }
   return [...grupos.values()].sort((a, b) => b.cantidad - a.cantidad);
+}
+
+export interface ConteoEstacion {
+  estacion: Estacion;
+  label: string;
+  cantidad: number;
+}
+
+/** Cantidad de prendas por estación cargada -- pedido explícito del
+ *  usuario: un filtro real de "mostrame solo mis abrigos de invierno" en
+ *  Placard. Sin `estacion` cargada no cuenta para ninguna (no se inventa
+ *  un valor por defecto), mismo criterio que contarPorEstilo. A diferencia
+ *  de estilo, acá no hay "estilosDe" -- una prenda tiene UNA sola estación
+ *  o ninguna, no varias. Orden fijo (verano -> entretiempo -> invierno, el
+ *  ciclo real del año), no por cantidad: son solo 3 valores, un orden
+ *  estable se lee mejor que uno que se reordena cada vez que cambia el
+ *  placard. */
+export function contarPorEstacion(placard: Prenda[]): ConteoEstacion[] {
+  const conteos = new Map<Estacion, number>(ESTACIONES.map((e) => [e, 0]));
+  for (const p of placard) {
+    if (p.estacion) conteos.set(p.estacion, (conteos.get(p.estacion) ?? 0) + 1);
+  }
+  return ESTACIONES.map((estacion) => ({
+    estacion,
+    label: ESTACION_LABEL[estacion],
+    cantidad: conteos.get(estacion) ?? 0,
+  }));
 }
 
 export interface AnalisisPlacard {
@@ -161,16 +189,21 @@ export function analizarPlacard(placard: Prenda[]): AnalisisPlacard {
 }
 
 /** Buscador libre del placard (Placard.tsx): compara contra los mismos
- *  textos que ya se ven en cada card (categoría, color, estilo/s) -- nunca
- *  contra datos crudos que el usuario no tiene forma de escribir (hex,
- *  h/s/l). Incluye estilos secundarios (estilosDe): buscar "casual" también
- *  encuentra una prenda clásica con casual como secundario. Substring, sin
- *  distinguir mayúsculas/acentos de más ni nada raro: "azul" matchea "Azul
- *  oscuro". Query vacía o solo espacios -> matchea todo (comportamiento de
- *  "sin filtro", no de "sin resultados"). */
+ *  textos que ya se ven en cada card (categoría, color, estilo/s,
+ *  estación) -- nunca contra datos crudos que el usuario no tiene forma de
+ *  escribir (hex, h/s/l). Incluye estilos secundarios (estilosDe): buscar
+ *  "casual" también encuentra una prenda clásica con casual como
+ *  secundario. Substring, sin distinguir mayúsculas/acentos de más ni nada
+ *  raro: "azul" matchea "Azul oscuro". Query vacía o solo espacios ->
+ *  matchea todo (comportamiento de "sin filtro", no de "sin resultados"). */
 export function coincideBusqueda(p: Prenda, query: string): boolean {
   const q = query.trim().toLowerCase();
   if (!q) return true;
-  const textos = [CATEGORIA_LABEL[p.categoria], nombreColor(p.color_h, p.color_s, p.color_l), ...estilosDe(p).map((e) => ESTILO_LABEL[e])];
+  const textos = [
+    CATEGORIA_LABEL[p.categoria],
+    nombreColor(p.color_h, p.color_s, p.color_l),
+    ...estilosDe(p).map((e) => ESTILO_LABEL[e]),
+    p.estacion ? ESTACION_LABEL[p.estacion] : "",
+  ];
   return textos.some((t) => t.toLowerCase().includes(q));
 }

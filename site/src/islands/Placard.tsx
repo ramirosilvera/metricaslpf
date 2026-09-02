@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
 import { ESTILO_LABEL, estilosDe } from "../lib/recommend";
-import { coincideBusqueda, contarPorColor, TODAS_LAS_CATEGORIAS } from "../lib/estadisticas";
-import { CATEGORIA_LABEL, type Estilo, type Prenda } from "../lib/types";
+import { coincideBusqueda, contarPorColor, contarPorEstacion, TODAS_LAS_CATEGORIAS } from "../lib/estadisticas";
+import { CATEGORIA_LABEL, ESTACION_LABEL, type Estacion, type Estilo, type Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
 
@@ -17,6 +17,7 @@ const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "depo
 export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }) {
   const [filtroEstilo, setFiltroEstilo] = useState<Estilo | null>(null);
   const [filtroColor, setFiltroColor] = useState<string | null>(null);
+  const [filtroEstacion, setFiltroEstacion] = useState<Estacion | null>(null);
   const [busqueda, setBusqueda] = useState("");
 
   // Colores disponibles para filtrar: siempre los del placard COMPLETO (sin
@@ -25,14 +26,25 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
   // mientras el usuario está tocando otro filtro.
   const coloresDisponibles = useMemo(() => contarPorColor(prendas), [prendas]);
 
+  // Pedido explícito del usuario: filtro real de "mostrame solo mis
+  // abrigos de invierno". `estacion` solo está cargada hoy en buzo/
+  // sweater/campera (el resto de las categorías la deja sin cargar a
+  // propósito, ver catalogo.ts) -- filtrar por estación de hecho ya
+  // funciona como "mostrame solo mis abrigos de esa estación" sin
+  // necesitar un filtro de categoría aparte. Solo se muestran los chips
+  // con al menos 1 prenda (mismo criterio que los colores): no tiene
+  // sentido ofrecer un chip que siempre da "sin resultados".
+  const estacionesDisponibles = useMemo(() => contarPorEstacion(prendas).filter((e) => e.cantidad > 0), [prendas]);
+
   const visibles = useMemo(
     () =>
       prendas.filter((p) => {
         if (filtroEstilo && !estilosDe(p).includes(filtroEstilo)) return false;
         if (filtroColor && nombreColor(p.color_h, p.color_s, p.color_l) !== filtroColor) return false;
+        if (filtroEstacion && p.estacion !== filtroEstacion) return false;
         return coincideBusqueda(p, busqueda);
       }),
-    [prendas, filtroEstilo, filtroColor, busqueda],
+    [prendas, filtroEstilo, filtroColor, filtroEstacion, busqueda],
   );
 
   // Secciones por categoría, en el mismo orden fijo que el resto de la app
@@ -48,11 +60,12 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
     [visibles],
   );
 
-  const hayFiltrosActivos = filtroEstilo !== null || filtroColor !== null || busqueda.trim() !== "";
+  const hayFiltrosActivos = filtroEstilo !== null || filtroColor !== null || filtroEstacion !== null || busqueda.trim() !== "";
 
   function limpiarFiltros() {
     setFiltroEstilo(null);
     setFiltroColor(null);
+    setFiltroEstacion(null);
     setBusqueda("");
   }
 
@@ -136,6 +149,32 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
         </div>
       )}
 
+      {/* Solo aparece si hay al menos una prenda con estación cargada --
+          hoy eso es buzo/sweater/campera (ver catalogo.ts): filtrar por
+          estación ya funciona como "mostrame solo mis abrigos de esa
+          estación" sin un filtro de categoría aparte. */}
+      {estacionesDisponibles.length > 0 && (
+        <div className="filtro-chips" role="group" aria-label="Filtrar tu placard por estación" style={{ marginTop: "-0.35rem" }}>
+          <button
+            type="button"
+            className={`chip${filtroEstacion === null ? " chip-activo" : ""}`}
+            onClick={() => setFiltroEstacion(null)}
+          >
+            Todas las estaciones
+          </button>
+          {estacionesDisponibles.map((e) => (
+            <button
+              key={e.estacion}
+              type="button"
+              className={`chip${filtroEstacion === e.estacion ? " chip-activo" : ""}`}
+              onClick={() => setFiltroEstacion((prev) => (prev === e.estacion ? null : e.estacion))}
+            >
+              {e.label} ({e.cantidad})
+            </button>
+          ))}
+        </div>
+      )}
+
       {secciones.length === 0 ? (
         <div className="empty-state">
           <p>No encontramos prendas con estos filtros.</p>
@@ -168,7 +207,12 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
                     <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
                       {nombreColor(p.color_h, p.color_s, p.color_l)}
                     </span>
-                    {p.estilo && <span className="registro-badge" style={{ marginTop: "0.3rem" }}>{ESTILO_LABEL[p.estilo]}</span>}
+                    {(p.estilo || p.estacion) && (
+                      <span style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginTop: "0.3rem" }}>
+                        {p.estilo && <span className="registro-badge">{ESTILO_LABEL[p.estilo]}</span>}
+                        {p.estacion && <span className="registro-badge">{ESTACION_LABEL[p.estacion]}</span>}
+                      </span>
+                    )}
                   </a>
                 ))}
               </div>

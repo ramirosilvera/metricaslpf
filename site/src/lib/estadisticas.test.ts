@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { analizarPlacard, coincideBusqueda, contarPorCategoria, contarPorColor, contarPorEstilo } from "./estadisticas";
+import { analizarPlacard, coincideBusqueda, contarPorCategoria, contarPorColor, contarPorEstacion, contarPorEstilo } from "./estadisticas";
 import type { Prenda } from "./types";
 
 function mkPrenda(
@@ -10,6 +10,7 @@ function mkPrenda(
   l: number,
   estilo: Prenda["estilo"] = null,
   estilosSecundarios: Prenda["estilos_secundarios"] = [],
+  estacion: Prenda["estacion"] = null,
 ): Prenda {
   return {
     id: `${hex}-${categoria}-${Math.random()}`,
@@ -23,7 +24,7 @@ function mkPrenda(
     estilo,
     estilos_secundarios: estilosSecundarios,
     ocasion: null,
-    estacion: null,
+    estacion,
     foto_path: null,
     suela_contraste: false,
     requiere_cuello: false,
@@ -75,6 +76,32 @@ describe("contarPorEstilo", () => {
     const r = contarPorEstilo(placard);
     expect(r.find((e) => e.estilo === "clasico")).toMatchObject({ cantidad: 1 });
     expect(r.find((e) => e.estilo === "casual")).toMatchObject({ cantidad: 1 });
+  });
+});
+
+describe("contarPorEstacion", () => {
+  it("incluye las 3 estaciones siempre, prenda sin estación cargada no cuenta para ninguna", () => {
+    const r = contarPorEstacion([mkPrenda("sweater", "#1A1A1A", 0, 0, 10, "clasico")]);
+    expect(r).toHaveLength(3);
+    expect(r.every((e) => e.cantidad === 0)).toBe(true);
+  });
+
+  it("cuenta por estación", () => {
+    const placard = [
+      mkPrenda("buzo", "#8C8C8C", 0, 0, 55, "casual", [], "entretiempo"),
+      mkPrenda("sweater", "#1A1A1A", 0, 0, 10, "clasico", [], "entretiempo"),
+      mkPrenda("campera", "#1A1A1A", 0, 0, 10, "casual", [], "invierno"),
+    ];
+    const r = contarPorEstacion(placard);
+    expect(r.find((e) => e.estacion === "entretiempo")).toMatchObject({ cantidad: 2 });
+    expect(r.find((e) => e.estacion === "invierno")).toMatchObject({ cantidad: 1 });
+    expect(r.find((e) => e.estacion === "verano")).toMatchObject({ cantidad: 0 });
+  });
+
+  it("orden fijo verano -> entretiempo -> invierno, no por cantidad", () => {
+    const placard = [mkPrenda("campera", "#1A1A1A", 0, 0, 10, "casual", [], "invierno")];
+    const r = contarPorEstacion(placard);
+    expect(r.map((e) => e.estacion)).toEqual(["verano", "entretiempo", "invierno"]);
   });
 });
 
@@ -176,5 +203,12 @@ describe("coincideBusqueda", () => {
     const p = mkPrenda("sweater", "#C3922E", 40, 62, 47, "clasico", ["casual"]);
     expect(coincideBusqueda(p, "casual")).toBe(true);
     expect(coincideBusqueda(p, "clásico")).toBe(true);
+  });
+
+  it("matchea por estación, y no matchea si la prenda no tiene estación cargada", () => {
+    const conEstacion = mkPrenda("campera", "#1A1A1A", 0, 0, 10, "casual", [], "invierno");
+    const sinEstacion = mkPrenda("campera", "#1A1A1A", 0, 0, 10, "casual");
+    expect(coincideBusqueda(conEstacion, "invierno")).toBe(true);
+    expect(coincideBusqueda(sinEstacion, "invierno")).toBe(false);
   });
 });
