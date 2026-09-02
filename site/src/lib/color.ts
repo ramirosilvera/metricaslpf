@@ -84,6 +84,34 @@ export function hslToHex(h: number, s: number, l: number): string {
   return rgbToHex(r, g, b);
 }
 
+// Pedido explícito del usuario: marrón y beige son colores centrales en
+// indumentaria (cuero, gabardina, chino, sweater) y NO son "naranja" en el
+// uso real de la moda, aunque compartan la misma familia de matiz (rojo-
+// anaranjado a amarillo-anaranjado, h 15-49 -- el mismo rango que ya usaba
+// "Naranja"). Lo que distingue un naranja de verdad de un marrón/beige es
+// la SATURACIÓN, no el matiz: un naranja de indumentaria real (una campera
+// de seguridad, un buzo naranja liso) es vívido; marrón y beige son, por
+// definición, colores TERROSOS -- se obtienen mezclando ese mismo matiz con
+// negro/gris, así que nunca llegan a esa saturación. Auditado contra el
+// catálogo completo + el placard real del usuario (ver conversación): hoy,
+// sin excepción, todo color en este rango de matiz es marrón o beige real
+// (cuero, chino, sweater) -- ninguno es un naranja de verdad -- y el máximo
+// de saturación real encontrado fue 47. 60 deja margen de sobra sin
+// arriesgar clasificar un naranja vívido como marrón (test explícito: h=30
+// s=80 sigue siendo "Naranja").
+const SATURACION_NARANJA_REAL = 60;
+
+// Azul marino -- mismo motivo: es el color más común de la ropa de vestir
+// (pantalón/sweater/campera "azul marino" del catálogo) pero nombreColor()
+// le ponía "Azul oscuro", una inconsistencia real con el nombre que la
+// propia prenda ya usa. Rango acotado al azul oscuro Y saturado real que
+// existe en catálogo+placard (h=222, s=37, l=19): un azul intenso, no
+// cualquier azul oscuro -- uno muy desaturado ya cae en el bucket de gris
+// más arriba, así que no hay solapamiento.
+const AZUL_MARINO_HUE_MIN = 210;
+const AZUL_MARINO_HUE_MAX = 230;
+const AZUL_MARINO_L_MAX = 30;
+
 /** Nombre de color en español, para no depender solo del color renderizado
  *  del ícono -- con poco brillo de pantalla dos colores parecidos se leen
  *  igual. Los umbrales de "neutro" (s<=15, l<=12, l>=88) son los mismos que
@@ -98,6 +126,15 @@ export function nombreColor(h: number, s: number, l: number): string {
     if (l < 35) return "Gris oscuro";
     if (l < 65) return "Gris";
     return "Gris claro";
+  }
+
+  if (h >= 15 && h < 50 && s < SATURACION_NARANJA_REAL) {
+    if (l >= 65) return "Beige";
+    return l < 30 ? "Marrón oscuro" : "Marrón";
+  }
+
+  if (h >= AZUL_MARINO_HUE_MIN && h < AZUL_MARINO_HUE_MAX && l < AZUL_MARINO_L_MAX) {
+    return "Azul marino";
   }
 
   const matiz =

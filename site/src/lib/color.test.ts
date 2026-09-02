@@ -42,8 +42,32 @@ describe("nombreColor", () => {
   });
 
   it("modificador oscuro/claro sobre el matiz, sin cruzar a neutro", () => {
-    expect(nombreColor(220, 80, 20)).toBe("Azul oscuro");
-    expect(nombreColor(220, 80, 80)).toBe("Azul claro");
+    // h=245 (no 220): fuera del rango de "Azul marino" (210-230), para
+    // probar el modificador oscuro/claro genérico sin pisar ese caso
+    // especial -- ver el test dedicado más abajo.
+    expect(nombreColor(245, 80, 20)).toBe("Azul oscuro");
+    expect(nombreColor(245, 80, 80)).toBe("Azul claro");
+  });
+
+  it("marrón y beige, no naranja -- pedido explícito del usuario (cuero, chino, sweater reales del catálogo)", () => {
+    expect(nombreColor(25, 47, 25)).toBe("Marrón oscuro"); // cinturón/zapatos de cuero marrón
+    expect(nombreColor(25, 34, 33)).toBe("Marrón"); // zapatillas marrones
+    expect(nombreColor(41, 41, 74)).toBe("Beige"); // pantalón/sweater/remera beige del catálogo
+  });
+
+  it("un naranja de verdad (alta saturación) en el mismo rango de matiz sigue siendo Naranja", () => {
+    expect(nombreColor(30, 80, 50)).toBe("Naranja");
+    expect(nombreColor(25, 65, 25)).toBe("Naranja oscuro");
+  });
+
+  it("azul marino: azul oscuro Y saturado en el rango real del catálogo (h=222, pantalón/sweater/campera 'azul marino')", () => {
+    expect(nombreColor(222, 37, 19)).toBe("Azul marino");
+  });
+
+  it("azul marino no se dispara fuera de su rango de matiz o luminosidad", () => {
+    expect(nombreColor(220, 60, 50)).toBe("Azul"); // mismo matiz, pero claro -- jean/rompeviento
+    expect(nombreColor(180, 80, 20)).toBe("Turquesa oscuro"); // oscuro, pero matiz fuera de rango
+    expect(nombreColor(220, 10, 20)).toBe("Gris oscuro"); // oscuro y en rango, pero desaturado -- es gris, no azul marino
   });
 });
 
