@@ -20,6 +20,10 @@ const CATEGORIAS: Categoria[] = [
   "campera",
   "accesorio",
 ];
+// "poliester" y "viscosa" faltaban acá -- se podían cargar vía catálogo
+// (preset) pero no a mano: un hueco real encontrado al agregar "viscosa"
+// para diferenciar sweaters de entretiempo/invierno (pedido explícito del
+// usuario, revisión textil de esta ronda).
 const TEXTURAS: Textura[] = [
   "algodon",
   "seda",
@@ -31,6 +35,8 @@ const TEXTURAS: Textura[] = [
   "tejido_grueso",
   "denim",
   "acolchado",
+  "poliester",
+  "viscosa",
 ];
 const ESTILOS: Estilo[] = ["casual", "formal", "deportivo", "urbano", "clasico"];
 const OCASIONES: Ocasion[] = ["casual", "laburo", "formal"];

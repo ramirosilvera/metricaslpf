@@ -141,6 +141,10 @@ const FAMILIA_TEXTURA: Record<string, "liso" | "texturado"> = {
   // sintético que la seda o el cuero liso (ver TEXTURA_BRILLO en
   // Maniqui.tsx): por eso "liso", no "texturado".
   poliester: "liso",
+  // fibra de caída lisa y suave (el sweater liviano de entretiempo, ver
+  // catalogo.ts) -- sin la trama tejida marcada de la lana, mismo brillo
+  // sutil que seda/poliéster (ver TEXTURA_BRILLO en Maniqui.tsx).
+  viscosa: "liso",
   lana: "texturado",
   pana: "texturado",
   corderoy: "texturado",

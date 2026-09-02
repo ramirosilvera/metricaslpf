@@ -76,7 +76,10 @@ const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_grueso",
 // poliéster (ropa deportiva técnica) suma el mismo brillo diagonal que
 // seda/cuero_liso -- es tela lisa, sin trama visible, con un leve brillo
 // sintético real (más notorio que en algodón/lino), no un patrón tejido.
-const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso", "poliester"];
+// viscosa -- mismo criterio: fibra de caída lisa y suave, con el brillo
+// sutil característico de la viscosa/rayón real (parecido al de la seda),
+// no una trama tejida como la lana.
+const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso", "poliester", "viscosa"];
 
 /** El <pattern> real por textura -- son ilustraciones esquemáticas a
  *  propósito (líneas/formas simples que se repiten), no una textura

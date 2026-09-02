@@ -20,11 +20,33 @@ describe("catálogo -- abrigos siempre tageados por estación", () => {
     expect(sinEstacion.map((p) => p.id)).toEqual([]);
   });
 
-  it("toda prenda de textura acolchada es invierno -- es la protección real contra el frío", () => {
+  // Revisado como ingeniero textil, pedido explícito del usuario: la
+  // textura GENÉRICA no alcanza para decidir la estación -- importa el
+  // peso/relleno real de cada prenda puntual, no la familia de tela. Una
+  // campera acolchada tipo Uniqlo (relleno fino) es de entretiempo real;
+  // solo la oversize (mucho más relleno/volumen) es de invierno de
+  // verdad -- las dos son "acolchado", pero no la misma estación.
+  it("acolchado NO es siempre invierno -- coexisten variantes de entretiempo (relleno fino) e invierno (oversize) real", () => {
     const acolchados = CATALOGO_PRENDAS.filter((p) => p.textura === "acolchado");
     expect(acolchados.length).toBeGreaterThan(0);
-    for (const p of acolchados) {
+    expect(acolchados.some((p) => p.estacion === "entretiempo")).toBe(true);
+    expect(acolchados.some((p) => p.estacion === "invierno")).toBe(true);
+  });
+
+  // Mismo criterio, del otro lado: "lana" no es siempre entretiempo -- un
+  // sweater de lana gruesa es la prenda de punto de invierno por
+  // excelencia. La versión liviana de entretiempo es de fibra distinta
+  // (viscosa/poliéster), no la misma lana con otro nombre.
+  it("lana no es siempre entretiempo -- un sweater de lana es invierno real, la versión liviana usa otra fibra", () => {
+    const deLana = CATALOGO_PRENDAS.filter((p) => p.textura === "lana" && p.categoria === "sweater");
+    expect(deLana.length).toBeGreaterThan(0);
+    for (const p of deLana) {
       expect(p.estacion, p.id).toBe("invierno");
+    }
+    const livianos = CATALOGO_PRENDAS.filter((p) => p.categoria === "sweater" && p.textura !== "lana");
+    expect(livianos.length).toBeGreaterThan(0);
+    for (const p of livianos) {
+      expect(p.estacion, p.id).toBe("entretiempo");
     }
   });
 
