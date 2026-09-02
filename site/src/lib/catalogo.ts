@@ -121,6 +121,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // mismo corte ancho, pero tela técnica sintética (poliéster), no algodón
   // (mismo criterio que la remera deportiva de arriba).
   { id: "pantalon-deportivo-negro", nombre: "Pantalón deportivo negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  // verde oscuro real (no el verde militar/oliva de campera-verde-militar
+  // más abajo, que es otro tono): un verde bosque/botella, el típico de un
+  // pantalón de entrenamiento, no un verde caqui desaturado.
+  { id: "pantalon-deportivo-verde-oscuro", nombre: "Pantalón deportivo verde oscuro", categoria: "pantalon", colorHex: "#2F5233", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
 
   // --- Bermudas (chino/algodón, hasta la rodilla) --- agregadas a pedido
   // explícito del usuario: el catálogo no tenía ninguna prenda de piernas

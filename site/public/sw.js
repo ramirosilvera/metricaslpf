@@ -12,7 +12,12 @@
  *    cualquier request a Supabase (API REST, Auth, Storage) y cualquier
  *    origen cruzado.
  */
-const CACHE = "miropa-shell-v1";
+// v2: antes de este fix, una respuesta 404/5xx transitoria (ej. justo
+// después de un deploy, mientras GitHub Pages propaga los archivos nuevos)
+// podía quedar cacheada para siempre. Subir la versión fuerza a `activate`
+// (más abajo) a borrar cualquier caché vieja -- incluida una que ya tenga
+// un error de ese tipo pegado -- en vez de dejarlo ahí indefinidamente.
+const CACHE = "miropa-shell-v2";
 
 const STATIC_ASSET = /\.(css|js|mjs|png|svg|ico|webp|jpg|jpeg|woff2?)(\?|$)/i;
 
@@ -40,7 +45,13 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(request)
         .then((res) => {
-          caches.open(CACHE).then((c) => c.put(request, res.clone()));
+          // Solo se cachea una respuesta 2xx real -- un 404/5xx transitorio
+          // (ej. justo después de un deploy, mientras GitHub Pages todavía
+          // está propagando los archivos nuevos a su CDN) no debe quedar
+          // guardado como "el shell offline": eso lo dejaría sirviendo ese
+          // error para siempre, incluso una vez que el archivo real ya está
+          // disponible en la red.
+          if (res.ok) caches.open(CACHE).then((c) => c.put(request, res.clone()));
           return res;
         })
         .catch(() => caches.match(request).then((r) => r || caches.match("/miropa/"))),
@@ -53,7 +64,12 @@ self.addEventListener("fetch", (event) => {
       caches.match(request).then((cached) => {
         const network = fetch(request)
           .then((res) => {
-            caches.open(CACHE).then((c) => c.put(request, res.clone()));
+            // mismo criterio que arriba: nunca cachear un 404/5xx. Un JS/CSS
+            // con nombre hasheado que 404ea en el momento exacto de un
+            // deploy (propagación de CDN) no debe quedar pegado en caché --
+            // la próxima carga tiene que poder volver a pedirlo a la red en
+            // vez de repetir el mismo error para siempre.
+            if (res.ok) caches.open(CACHE).then((c) => c.put(request, res.clone()));
             return res;
           })
           .catch(() => cached);
