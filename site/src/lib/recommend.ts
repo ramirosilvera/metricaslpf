@@ -639,21 +639,43 @@ export function armarOutfitsSugeridos(placard: Prenda[]): OutfitSugerido[] {
   const vistos = new Set<string>();
 
   for (const ancla of pantalones) {
-    const torsos = candidatasPropias(
-      ancla,
-      placard.filter((p) => CATEGORIAS_TORSO.includes(p.categoria)),
-      placard,
+    // Reporte real del usuario: un pantalón deportivo terminaba armado con
+    // un buzo puramente casual (sin "deportivo" en sus estilos) y hasta
+    // con un cinturón de cuero -- ninguna de las dos existe en un look
+    // deportivo real. prendaMenosFormalQuePantalon nunca lo atrapa: el
+    // deportivo es el escalón MÁS bajo de FORMALIDAD_ESTILO, así que nada
+    // cuenta ahí como "menos formal" que él, y cualquier prenda de un
+    // registro más alto (casual/urbano/clasico/formal) se toma como una
+    // "elevación" válida -- la misma lógica que sí es correcta para un
+    // jean con zapatos de cuero, pero no para un jogger. A diferencia de
+    // chocaRegistroDeportivo (que solo bloquea lo puramente formal/
+    // clasico), acá hace falta lo contrario: una lista blanca, no una
+    // negra. Cuando el ancla es deportiva (estilosDe, no solo el
+    // principal): el TORSO tiene que ser genuinamente deportivo -- no
+    // alcanza con "no chocar". El calzado NO se restringe: zapatillas
+    // urbanas con jogger siguen siendo una combinación real de calle (ver
+    // el test de chocaRegistroDeportivo). El ACCESORIO se excluye
+    // directamente: un cinturón no tiene función real con un jogger o un
+    // short deportivo (sin pretinas de tela para pasarlo), sea cual sea
+    // su estilo declarado.
+    const esAnclaDeportiva = estilosDe(ancla).includes("deportivo");
+
+    const candidatosTorso = placard.filter(
+      (p) => CATEGORIAS_TORSO.includes(p.categoria) && (!esAnclaDeportiva || estilosDe(p).includes("deportivo")),
     );
+    const torsos = candidatasPropias(ancla, candidatosTorso, placard);
     const calzado = mejorPropia(
       ancla,
       placard.filter((p) => p.categoria === "calzado"),
       placard,
     );
-    const accesorio = mejorPropia(
-      ancla,
-      placard.filter((p) => p.categoria === "accesorio"),
-      placard,
-    );
+    const accesorio = esAnclaDeportiva
+      ? undefined
+      : mejorPropia(
+          ancla,
+          placard.filter((p) => p.categoria === "accesorio"),
+          placard,
+        );
 
     for (const torso of torsos) {
       // calzado/accesorio se eligieron solo contra el pantalón -- acá se
@@ -745,10 +767,18 @@ export function armarOutfitsParaComprar(
   const resultados: OutfitParaComprar[] = [];
 
   for (const ancla of pantalones) {
+    // Mismo criterio que armarOutfitsSugeridos (ver su comentario extenso):
+    // un ancla deportiva solo combina de verdad con torso genuinamente
+    // deportivo y nunca con un accesorio -- sin esto, "Ideas para comprar"
+    // repetía el mismo error real reportado por el usuario (sugería una
+    // campera o un accesorio comunes para completar un look deportivo, en
+    // vez de restringirse a lo que un look deportivo real usa).
+    const esAnclaDeportiva = estilosDe(ancla).includes("deportivo");
+
     // no depende de categoriaSugerida -- se calcula una sola vez por ancla.
     const torsoPropio = mejorPropia(
       ancla,
-      placard.filter((p) => CATEGORIAS_TORSO.includes(p.categoria)),
+      placard.filter((p) => CATEGORIAS_TORSO.includes(p.categoria) && (!esAnclaDeportiva || estilosDe(p).includes("deportivo"))),
       placard,
     );
 
@@ -763,7 +793,16 @@ export function armarOutfitsParaComprar(
       // sentido real.
       if (CATEGORIAS_PIERNAS.includes(categoriaSugerida)) continue;
 
-      const candidatosCatalogo = catalogo.filter((p) => p.categoria === categoriaSugerida);
+      // un cinturón no tiene función real con un jogger o un short
+      // deportivo -- nunca se sugiere comprar un accesorio para un ancla
+      // deportiva, sea cual sea el color.
+      if (categoriaSugerida === "accesorio" && esAnclaDeportiva) continue;
+
+      const candidatosCatalogo = catalogo.filter(
+        (p) =>
+          p.categoria === categoriaSugerida &&
+          (!esAnclaDeportiva || !CATEGORIAS_TORSO.includes(categoriaSugerida) || estilosDe(presetAPrendaSintetica(p)).includes("deportivo")),
+      );
       if (candidatosCatalogo.length === 0) continue;
 
       // Vía recomendar() (no scoreColor crudo) para que las prendas
@@ -801,7 +840,7 @@ export function armarOutfitsParaComprar(
               placard,
             );
       const accesorioPropio =
-        categoriaSugerida === "accesorio"
+        categoriaSugerida === "accesorio" || esAnclaDeportiva
           ? undefined
           : mejorPropia(
               ancla,
@@ -941,6 +980,82 @@ export function sugerenciaDeVariedad(
   }
 
   return null;
+}
+
+export interface SugerenciaAncla {
+  mensaje: string;
+  sugerida: PresetPrenda & { hsl: HSL };
+}
+
+/** Mejor prenda de piernas (pantalón/bermuda/short) del catálogo, de ese
+ *  estilo, para servir de ancla -- validada contra el torso propio del
+ *  usuario si ya tiene alguno de ese registro (mismo motor de recomendar()
+ *  que el resto del catálogo de sugerencias); si no tiene ningún torso de
+ *  ese estilo tampoco, no hay con qué validar color, así que se elige el
+ *  candidato más neutro/versátil (mismo criterio que mejorCandidatoDelCatalogo). */
+function mejorAnclaDelCatalogo(
+  estilo: Estilo,
+  torsosPropios: Prenda[],
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[],
+): (PresetPrenda & { hsl: HSL }) | undefined {
+  const candidatos = catalogo.filter(
+    (preset) => CATEGORIAS_PIERNAS.includes(preset.categoria) && estilosDe(presetAPrendaSintetica(preset)).includes(estilo),
+  );
+  if (candidatos.length === 0) return undefined;
+
+  if (torsosPropios.length === 0) {
+    return [...candidatos].sort((a, b) => {
+      const rango = (p: PresetPrenda & { hsl: HSL }) => {
+        const i = NEUTROS_PRIORIDAD_COMPRA.indexOf(nombreColor(p.hsl.h, p.hsl.s, p.hsl.l));
+        return i === -1 ? NEUTROS_PRIORIDAD_COMPRA.length : i;
+      };
+      return rango(a) - rango(b);
+    })[0];
+  }
+
+  const evaluados = candidatos
+    .map((preset) => {
+      const sintetica = presetAPrendaSintetica(preset);
+      const [mejor] = recomendar(sintetica, torsosPropios, placard).sort(
+        (a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel),
+      );
+      return { preset, score: mejor?.score };
+    })
+    .filter((c): c is { preset: PresetPrenda & { hsl: HSL }; score: ScoreColor } => c.score !== undefined && c.score.nivel !== "con_cuidado")
+    .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
+  return evaluados[0]?.preset;
+}
+
+/** Cuando "Vestite hoy" no arma NINGÚN outfit para el estilo elegido, la
+ *  razón casi siempre es que falta la prenda ANCLA: sin un pantalón,
+ *  bermuda o short de ese registro, armarOutfitsSugeridos no tiene de
+ *  dónde partir, aunque el usuario tenga de sobra sweaters, camisas o
+ *  calzado de ese mismo estilo (caso real reportado: 5 sweaters y 2
+ *  camisas "clásico", pero ningún pantalón clásico -- 0 outfits clásicos
+ *  posibles). Pedido explícito del usuario: en ese caso, sugerir
+ *  concretamente qué comprar para poder armar un look, no solo avisar que
+ *  no hay nada. `null` si SÍ hay ancla de ese estilo (el problema es otro,
+ *  no este) o si el catálogo no tiene ningún pantalón/bermuda/short de ese
+ *  estilo que combine. */
+export function sugerenciaDeAncla(
+  estilo: Estilo,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): SugerenciaAncla | null {
+  const yaHayAncla = placard.some((p) => CATEGORIAS_PIERNAS.includes(p.categoria) && estilosDe(p).includes(estilo));
+  if (yaHayAncla) return null;
+
+  const torsosPropios = placard.filter((p) => CATEGORIAS_TORSO.includes(p.categoria) && estilosDe(p).includes(estilo));
+  const sugerida = mejorAnclaDelCatalogo(estilo, torsosPropios, placard, catalogo);
+  if (!sugerida) return null;
+
+  const mensaje =
+    torsosPropios.length > 0
+      ? `Para armar un look ${ESTILO_LABEL[estilo]} te falta la prenda ancla: no tenés ningún pantalón, bermuda o short de ese registro (si tenés prendas de arriba de ese estilo, pero sin esto no arma ningún outfit). Te serviría sumar "${sugerida.nombre}" -- combina con lo que ya tenés.`
+      : `Todavía no tenés ninguna prenda de estilo ${ESTILO_LABEL[estilo]} para armar un look completo. Arrancá sumando "${sugerida.nombre}".`;
+
+  return { mensaje, sugerida };
 }
 
 /** Diff entre las prendas actuales de un outfit guardado y las que el

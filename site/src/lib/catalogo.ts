@@ -121,7 +121,12 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // colorHex #1A1A1A -- ver el comentario de camisa-negra más arriba:
   // mismo negro estándar del catálogo, corrigiendo el mismo #232323
   // inconsistente que hacía que nombreColor() leyera "Gris oscuro".
-  { id: "jean-negro", nombre: "Jean negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "denim", estilo: "casual", ocasion: "casual" },
+  // estilo secundario "urbano" -- un jean negro es tan de calle/streetwear
+  // (con campera y zapatillas urbanas) como de casual de todos los días;
+  // sin esto el catálogo no tenía NINGÚN pantalón/jean/jogger "urbano" y
+  // "Vestite hoy" nunca podía sugerir una prenda ancla para ese registro
+  // (reporte real del usuario: la sección Urbano no armaba nada).
+  { id: "jean-negro", nombre: "Jean negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "denim", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
   { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo" },
@@ -137,7 +142,9 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // así directamente. Colores reusados del resto del catálogo (negro
   // estándar, el mismo beige del chino, el gris de siempre) por la misma
   // razón de consistencia de paleta que ya documenta el resto del archivo.
-  { id: "jogger-negro", nombre: "Jogger negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  // mismo criterio que jean-negro de arriba -- un jogger negro es una
+  // pieza urbana/streetwear tan estándar como casual.
+  { id: "jogger-negro", nombre: "Jogger negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
   { id: "jogger-beige", nombre: "Jogger beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "jogger-gris", nombre: "Jogger gris", categoria: "pantalon", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", ocasion: "casual" },
   // pantalón deportivo (entrenamiento) -- distinto del jogger de arriba:

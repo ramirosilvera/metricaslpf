@@ -12,6 +12,7 @@ import {
   outfitSirveParaEstilo,
   registroOutfit,
   separarPorAbrigo,
+  sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
   type OutfitParaComprar,
@@ -234,6 +235,17 @@ export function Contenido({
     return sugerenciaDeVariedad(estiloSugerido, placard);
   }, [estiloSugerido, poolSugeridosPorEstilo, placard]);
 
+  // Pedido explícito del usuario: cuando el pool queda vacío para el
+  // estilo elegido, la razón casi siempre es que falta la prenda ANCLA
+  // (sin pantalón/bermuda/short de ese registro no arma nada, aunque haya
+  // de sobra sweaters, camisas o calzado de ese mismo estilo) -- avisarlo
+  // con una sugerencia concreta de qué comprar, en vez de solo decir "no
+  // armamos nada". Ver sugerenciaDeAncla en recommend.ts.
+  const sugerenciaAncla = useMemo(() => {
+    if (!estiloSugerido || estiloSugerido === "todos" || poolSugeridosPorEstilo.length > 0) return null;
+    return sugerenciaDeAncla(estiloSugerido, placard);
+  }, [estiloSugerido, poolSugeridosPorEstilo, placard]);
+
   const paraComprar = useMemo(
     () => tanda(poolParaComprar, offsetParaComprar, VISIBLES_POR_SECCION),
     [poolParaComprar, offsetParaComprar],
@@ -443,11 +455,27 @@ export function Contenido({
             Elegí una ocasión de arriba para ver tus opciones.
           </p>
         ) : poolSugeridosPorEstilo.length === 0 ? (
-          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
-            {estiloSugerido === "todos"
-              ? "Todavía no armamos ninguna combinación con lo que tenés cargado -- cargá algún pantalón, bermuda o short: es la prenda ancla que arma el resto del outfit."
-              : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado. Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}
-          </p>
+          <>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+              {estiloSugerido === "todos"
+                ? "Todavía no armamos ninguna combinación con lo que tenés cargado -- cargá algún pantalón, bermuda o short: es la prenda ancla que arma el resto del outfit."
+                : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado.${sugerenciaAncla ? "" : ` Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}`}
+            </p>
+            {sugerenciaAncla && (
+              <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
+                <span style={{ fontSize: "1.2rem" }}>💡</span>
+                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>{sugerenciaAncla.mensaje}</p>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
+                  onClick={() => cargarSugerencia(sugerenciaAncla.sugerida)}
+                >
+                  + Cargar
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <>
             <div className="grid-prendas outfits-grid">

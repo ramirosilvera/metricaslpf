@@ -13,6 +13,7 @@ import {
   registroOutfit,
   scoreColor,
   separarPorAbrigo,
+  sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
   tecnicaRescate,
@@ -797,6 +798,71 @@ describe("armarOutfitsSugeridos", () => {
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["bermuda", "remera"].sort());
   });
+
+  describe("ancla deportiva -- solo prendas genuinamente deportivas, nunca accesorio", () => {
+    // Reporte real del usuario: un pantalón deportivo terminaba armado con
+    // un buzo puramente casual y hasta con un cinturón de cuero. Ninguna
+    // de las dos existe en un look deportivo real -- ver el comentario en
+    // recommend.ts sobre por qué prendaMenosFormalQuePantalon no lo
+    // atrapaba (deportivo es el escalón más bajo, nada cuenta como "menos
+    // formal" que él).
+    function mkConEstilo(categoria: Prenda["categoria"], hex: string, h: number, s: number, l: number, estilo: Prenda["estilo"]): Prenda {
+      const p = mkPrenda(categoria, hex, h, s, l);
+      p.estilo = estilo;
+      return p;
+    }
+
+    it("nunca incluye un accesorio, aunque combine bien en color y esté tageado clasico+casual (como el cinturón real reportado)", () => {
+      const pantalonDeportivo = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+      const remeraDeportiva = mkConEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
+      const cinturon = mkConEstilo("accesorio", "#1A1A1A", 0, 0, 10, "clasico");
+      cinturon.estilos_secundarios = ["casual"]; // el mismo escape hatch multi-estilo que reabrió el bug
+      cinturon.textura = "cuero_liso";
+
+      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, cinturon]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("accesorio");
+    });
+
+    it("no arma un outfit con un torso que no es genuinamente deportivo (buzo casual, aunque combine en color)", () => {
+      const pantalonDeportivo = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+      const buzoCasual = mkConEstilo("buzo", "#1A1A1A", 0, 0, 10, "casual");
+      buzoCasual.estilos_secundarios = ["urbano"];
+
+      const outfits = armarOutfitsSugeridos([pantalonDeportivo, buzoCasual]);
+      expect(outfits).toHaveLength(0);
+    });
+
+    it("sí arma el outfit con una remera genuinamente deportiva", () => {
+      const pantalonDeportivo = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+      const remeraDeportiva = mkConEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
+      const buzoCasual = mkConEstilo("buzo", "#1A1A1A", 0, 0, 10, "casual");
+
+      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, buzoCasual]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
+    });
+
+    it("el calzado urbano NO se restringe -- zapatillas urbanas con jogger siguen siendo válidas (sin cambios de comportamiento acá)", () => {
+      const pantalonDeportivo = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+      const remeraDeportiva = mkConEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
+      const zapatillasUrbanas = mkConEstilo("calzado", "#1A1A1A", 0, 0, 10, "urbano");
+
+      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, zapatillasUrbanas]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["calzado", "pantalon", "remera"].sort());
+    });
+
+    it("un ancla NO deportiva (casual) sigue permitiendo torso casual y accesorio, sin cambios", () => {
+      const pantalonCasual = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "casual");
+      const buzoCasual = mkConEstilo("buzo", "#1A1A1A", 0, 0, 10, "casual");
+      const cinturon = mkConEstilo("accesorio", "#1A1A1A", 0, 0, 10, "clasico");
+
+      const outfits = armarOutfitsSugeridos([pantalonCasual, buzoCasual, cinturon]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["accesorio", "buzo", "pantalon"].sort());
+    });
+  });
 });
 
 describe("separarPorAbrigo", () => {
@@ -926,6 +992,53 @@ describe("armarOutfitsParaComprar", () => {
     expect(sugerencias.some((s) => s.categoriaSugerida === "short_deportivo")).toBe(false);
     expect(sugerencias.some((s) => s.categoriaSugerida === "campera")).toBe(true);
   });
+
+  describe("ancla deportiva -- mismo criterio que armarOutfitsSugeridos", () => {
+    function mkConEstilo(categoria: Prenda["categoria"], hex: string, h: number, s: number, l: number, estilo: Prenda["estilo"]): Prenda {
+      const p = mkPrenda(categoria, hex, h, s, l);
+      p.estilo = estilo;
+      return p;
+    }
+
+    it("nunca sugiere comprar un accesorio para un ancla deportiva", () => {
+      const pantalonDeportivo = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+      const catalogoConAccesorio: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "cinturon-test", nombre: "Cinturón de prueba", categoria: "accesorio", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const sugerencias = armarOutfitsParaComprar([pantalonDeportivo], catalogoConAccesorio);
+      expect(sugerencias).toHaveLength(0);
+    });
+
+    it("para una categoría de torso ausente, solo sugiere prendas genuinamente deportivas del catálogo", () => {
+      const pantalonDeportivo = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+      const catalogoDeCamperas: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "campera-casual", nombre: "Campera casual", categoria: "campera", colorHex: "#1A1A1A", estilo: "casual", hsl: { h: 0, s: 0, l: 10 } },
+        { id: "campera-deportiva", nombre: "Campera deportiva", categoria: "campera", colorHex: "#1A1A1A", estilo: "deportivo", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const sugerencias = armarOutfitsParaComprar([pantalonDeportivo], catalogoDeCamperas);
+      expect(sugerencias.map((s) => s.sugerida.id)).toEqual(["campera-deportiva"]);
+    });
+
+    it("el torso propio combinado con la sugerencia también se restringe a deportivo (no arrastra un buzo casual)", () => {
+      const pantalonDeportivo = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+      const buzoCasual = mkConEstilo("buzo", "#1A1A1A", 0, 0, 10, "casual");
+      const catalogoDeCalzado: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "zapatilla-deportiva", nombre: "Zapatilla deportiva", categoria: "calzado", colorHex: "#1A1A1A", estilo: "deportivo", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const sugerencias = armarOutfitsParaComprar([pantalonDeportivo, buzoCasual], catalogoDeCalzado);
+      expect(sugerencias).toHaveLength(1);
+      expect(sugerencias[0].prendasPropias.some((p) => p.categoria === "buzo")).toBe(false);
+    });
+
+    it("un ancla NO deportiva sigue sugiriendo accesorio y cualquier torso que combine, sin cambios", () => {
+      const pantalonCasual = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "casual");
+      const catalogoConAccesorio: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "cinturon-test", nombre: "Cinturón de prueba", categoria: "accesorio", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const sugerencias = armarOutfitsParaComprar([pantalonCasual], catalogoConAccesorio);
+      expect(sugerencias).toHaveLength(1);
+    });
+  });
 });
 
 describe("sugerenciaDeVariedad", () => {
@@ -997,6 +1110,50 @@ describe("sugerenciaDeVariedad", () => {
     const remeraNegra = mkPrendaEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
     const r = sugerenciaDeVariedad("deportivo", [pantalon, remeraNegra], catalogoDeportivo);
     expect(r!.mensaje).not.toContain("color");
+  });
+});
+
+describe("sugerenciaDeAncla", () => {
+  const catalogoClasico: (PresetPrenda & { hsl: HSL })[] = [
+    { id: "pantalon-clasico-negro", nombre: "Pantalón clásico negro", categoria: "pantalon", colorHex: "#1A1A1A", estilo: "clasico", hsl: { h: 0, s: 0, l: 10 } },
+    { id: "pantalon-clasico-beige", nombre: "Pantalón clásico beige", categoria: "pantalon", colorHex: "#D8C7A1", estilo: "clasico", hsl: { h: 41, s: 41, l: 74 } },
+    // otro estilo -- no debería aparecer nunca como sugerencia "clasico".
+    { id: "pantalon-deportivo", nombre: "Pantalón deportivo", categoria: "pantalon", colorHex: "#1A1A1A", estilo: "deportivo", hsl: { h: 0, s: 0, l: 10 } },
+  ];
+
+  function mkConEstilo(categoria: Prenda["categoria"], hex: string, h: number, s: number, l: number, estilo: Prenda["estilo"]): Prenda {
+    const p = mkPrenda(categoria, hex, h, s, l);
+    p.estilo = estilo;
+    return p;
+  }
+
+  it("con un pantalón de ese estilo ya en el placard, no hay problema de ancla -> null", () => {
+    const pantalonClasico = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "clasico");
+    expect(sugerenciaDeAncla("clasico", [pantalonClasico], catalogoClasico)).toBeNull();
+  });
+
+  it("caso real reportado: sweaters y camisas 'clásico' de sobra, pero NINGÚN pantalón clásico -> sugiere uno que combine, con el mensaje de 'prenda ancla'", () => {
+    const sweaterNegro = mkConEstilo("sweater", "#1A1A1A", 0, 0, 10, "clasico");
+    const pantalonFormal = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "formal"); // no cuenta como ancla clásica
+    const r = sugerenciaDeAncla("clasico", [sweaterNegro, pantalonFormal], catalogoClasico);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.categoria).toBe("pantalon");
+    expect(r!.sugerida.id).not.toBe("pantalon-deportivo"); // nunca de otro estilo
+    expect(r!.mensaje).toContain("prenda ancla");
+  });
+
+  it("sin ancla y tampoco ninguna prenda de torso de ese estilo -> igual sugiere, con mensaje distinto ('todavía no tenés ninguna')", () => {
+    const r = sugerenciaDeAncla("clasico", [], catalogoClasico);
+    expect(r).not.toBeNull();
+    expect(r!.mensaje).toContain("Todavía no tenés ninguna");
+    expect(r!.mensaje).not.toContain("prenda ancla");
+  });
+
+  it("el catálogo sin ningún pantalón/bermuda/short de ese estilo -> null (no hay nada real para sugerir)", () => {
+    const catalogoSinPiernas: (PresetPrenda & { hsl: HSL })[] = [
+      { id: "sweater-clasico", nombre: "Sweater clásico", categoria: "sweater", colorHex: "#1A1A1A", estilo: "clasico", hsl: { h: 0, s: 0, l: 10 } },
+    ];
+    expect(sugerenciaDeAncla("clasico", [], catalogoSinPiernas)).toBeNull();
   });
 });
 
