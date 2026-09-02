@@ -146,6 +146,13 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
   { id: "buzo-negro", nombre: "Buzo negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
   { id: "buzo-azul-marino", nombre: "Buzo azul marino", categoria: "buzo", colorHex: "#1F2A44", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  // mismo celeste que camisa-celeste (#B7D2EC) -- ver el criterio de
+  // paleta consistente que ya documenta el archivo. "buzo" en esta app ya
+  // ES un hoodie: TorsoCuerpo (Maniqui.tsx) le dibuja capucha a CUALQUIER
+  // prenda categoria="buzo" sin excepción, así que no hace falta una
+  // categoría nueva para "tipo hoodie" -- ya es lo que esta categoría
+  // siempre fue.
+  { id: "buzo-celeste", nombre: "Buzo celeste", categoria: "buzo", colorHex: "#B7D2EC", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
   // mismo beige (#D8C7A1) que ya usan pantalon-beige/bermuda-beige/etc. --
   // ver el comentario de remera-beige más arriba. estilo/ocasion/textura
   // igual que el resto de los buzos (casual/casual/tejido_grueso): el
