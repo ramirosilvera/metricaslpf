@@ -95,6 +95,12 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo" },
+  // distinto de pantalon-beige de acá abajo (el chino, algodón/clasico) --
+  // mismo beige del resto del catálogo, pero de vestir: lana/formal, igual
+  // criterio que negro/gris/azul marino de arriba. No es una entrada
+  // duplicada -- un chino y un pantalón de vestir son prendas distintas
+  // aunque compartan color.
+  { id: "pantalon-vestir-beige", nombre: "Pantalón de vestir beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-beige", nombre: "Pantalón chino beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   // joggers -- casual como el jean (no "clasico" como el chino: no van a
   // la oficina), textura "algodon" sin ambigüedad porque el usuario la dio
