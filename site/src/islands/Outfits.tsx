@@ -58,21 +58,37 @@ function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
   );
 }
 
-/** Cuántas tarjetas se muestran a la vez en "Te recomendamos" / "Ideas para
- *  comprar" -- fijo a propósito: el pool real (armarOutfitsSugeridos /
- *  armarOutfitsParaComprar) puede tener muchas más variantes, pero mostrarlas
- *  todas satura la pantalla. El botón "otras opciones" rota por el pool
- *  (ver `tanda` en recommend.ts) en tandas de este tamaño, en vez de ir
- *  agregando tarjetas nuevas. */
+/** Cuántas tarjetas se muestran a la vez en "Ideas para comprar" -- fijo a
+ *  propósito: el pool real (armarOutfitsParaComprar) puede tener muchas más
+ *  variantes, pero mostrarlas todas satura la pantalla. El botón "otras
+ *  opciones" rota por el pool (ver `tanda` en recommend.ts) en tandas de
+ *  este tamaño, en vez de ir agregando tarjetas nuevas. */
 const VISIBLES_POR_SECCION = 2;
+
+/** Pedido explícito del usuario: "que me dé 3 opciones" al elegir una
+ *  ocasión en "Vestite hoy" -- constante propia (no VISIBLES_POR_SECCION)
+ *  porque es un número distinto, no una coincidencia. */
+const VISIBLES_SUGERIDOS = 3;
 
 const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
 
-export default function Outfits() {
-  const [outfits, setOutfits] = useState<OutfitConPrendas[] | null>(null);
-  const [placard, setPlacard] = useState<Prenda[] | null>(null);
-  const [sinSesion, setSinSesion] = useState(false);
-  const [error, setError] = useState("");
+/** Parte interactiva de la pantalla de Outfits -- separada del fetch a
+ *  Supabase (igual que Contenido en Placard.tsx) para poder montarla y
+ *  probarla con datos de prueba reales, sin necesitar una sesión real. El
+ *  default export de abajo es el único que sabe de Supabase para la carga
+ *  inicial; esto recibe `outfitsIniciales`/`placard` ya cargados y
+ *  mantiene su propia copia de `outfits` porque guardar/editar/eliminar
+ *  mutan la lista localmente sin recargar todo. */
+export function Contenido({
+  outfitsIniciales,
+  placard,
+  base,
+}: {
+  outfitsIniciales: OutfitConPrendas[];
+  placard: Prenda[];
+  base: string;
+}) {
+  const [outfits, setOutfits] = useState<OutfitConPrendas[]>(outfitsIniciales);
   const [guardadas, setGuardadas] = useState<Set<string>>(new Set());
   const [guardando, setGuardando] = useState<string | null>(null);
   const [errorGuardar, setErrorGuardar] = useState<Record<string, string>>({});
@@ -82,6 +98,11 @@ export default function Outfits() {
   const [eliminandoId, setEliminandoId] = useState<string | null>(null);
   const [errorEliminar, setErrorEliminar] = useState<Record<string, string>>({});
   const [filtroEstilo, setFiltroEstilo] = useState<Estilo | null>(null);
+  // Pedido explícito del usuario: "entro a la sección y le digo hoy me
+  // necesito vestir formal" -- null significa "todavía no eligió", nunca un
+  // estilo por defecto (ver elegirEstiloSugerido más abajo: no se muestra
+  // NINGUNA sugerencia hasta que el usuario elija una ocasión a propósito).
+  const [estiloSugerido, setEstiloSugerido] = useState<Estilo | "todos" | null>(null);
   const [editando, setEditando] = useState<OutfitConPrendas | null>(null);
   const [nombreEdicion, setNombreEdicion] = useState("");
   const [prendasEdicion, setPrendasEdicion] = useState<Set<string>>(new Set());
@@ -89,66 +110,14 @@ export default function Outfits() {
   const [errorEdicion, setErrorEdicion] = useState("");
   const [compartiendoId, setCompartiendoId] = useState<string | null>(null);
   const [errorCompartir, setErrorCompartir] = useState<Record<string, string>>({});
-  const base = (import.meta.env.BASE_URL as string) || "/";
   // un <div> por outfit guardado, para poder tomar su <svg> ya renderizado
   // (el maniquí) al momento de compartir -- ver compartirOutfit() más abajo.
   const maniquiRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  useEffect(() => {
-    if (!SUPABASE_CONFIGURADO) return;
-    async function cargar() {
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        if (!sessionData.session) {
-          setSinSesion(true);
-          return;
-        }
-        // Un solo select embebido en vez de un loop secuencial (antes: 1 + 2N
-        // round-trips para N outfits) -- Supabase resuelve el join server-side.
-        const [{ data: outfitRows, error: errOutfits }, { data: prendaRows, error: errPrendas }] = await Promise.all([
-          supabase.from("outfits").select("id, nombre, outfit_prendas(prenda_id, created_at, prendas(*))").order("created_at", { ascending: false }),
-          supabase.from("prendas").select("*"),
-        ]);
-        if (errOutfits) {
-          setError(errOutfits.message);
-          return;
-        }
-        if (errPrendas) {
-          setError(errPrendas.message);
-          return;
-        }
-        // supabase-js no puede inferir la cardinalidad del embed sin tipos
-        // generados de la DB y lo tipa como any[]; se castea vía unknown
-        // porque la forma real (a-uno) la conocemos por el schema (FK
-        // outfit_prendas.prenda_id -> prendas.id).
-        const conPrendas: OutfitConPrendas[] = ((outfitRows as unknown as OutfitRow[] | null) ?? []).map((o) => {
-          // orden estable por el created_at de la fila de unión, no el
-          // orden de retorno del join (no garantizado por Postgres).
-          const filas = [...(o.outfit_prendas ?? [])].sort((a, b) => a.created_at.localeCompare(b.created_at));
-          return {
-            id: o.id,
-            nombre: o.nombre,
-            prendas: filas.map((f) => f.prendas).filter((p): p is Prenda => p !== null),
-          };
-        });
-        // guarda de UI: un outfit puede quedar sin prendas si se borran (la
-        // cascada de outfit_prendas vacía el array, pero el registro de
-        // outfits en sí sobrevive) -- el trigger de la migración 0011 los
-        // borra a nivel DB, esto es cinturón y tiradores para no mostrar una
-        // card vacía si por lo que sea todavía no corrió.
-        setOutfits(conPrendas.filter((o) => o.prendas.length > 0));
-        setPlacard((prendaRows as Prenda[] | null) ?? []);
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Error de conexión con Mi ropa.");
-      }
-    }
-    cargar();
-  }, []);
-
   // sets de ids de prendas de cada outfit YA guardado -- para no sugerir
   // como "recomendado" algo que el usuario ya guardó tal cual.
   const clavesGuardadas = useMemo(
-    () => new Set((outfits ?? []).map((o) => o.prendas.map((p) => p.id).sort().join("-"))),
+    () => new Set(outfits.map((o) => o.prendas.map((p) => p.id).sort().join("-"))),
     [outfits],
   );
 
@@ -158,23 +127,39 @@ export default function Outfits() {
   // RegistroBadge -- se reusa acá para filtrar en vez de duplicar la
   // lógica de "cuál es el estilo de este outfit".
   const outfitsFiltrados = useMemo(
-    () => (filtroEstilo ? (outfits ?? []).filter((o) => registroOutfit(o.prendas) === ESTILO_LABEL[filtroEstilo]) : (outfits ?? [])),
+    () => (filtroEstilo ? outfits.filter((o) => registroOutfit(o.prendas) === ESTILO_LABEL[filtroEstilo]) : outfits),
     [outfits, filtroEstilo],
   );
 
-  const poolSugeridos: OutfitSugerido[] = useMemo(() => {
-    if (!placard) return [];
-    return armarOutfitsSugeridos(placard).filter((s) => !clavesGuardadas.has(s.id));
-  }, [placard, clavesGuardadas]);
+  const poolSugeridos: OutfitSugerido[] = useMemo(
+    () => armarOutfitsSugeridos(placard).filter((s) => !clavesGuardadas.has(s.id)),
+    [placard, clavesGuardadas],
+  );
 
-  const poolParaComprar: OutfitParaComprar[] = useMemo(() => {
-    if (!placard) return [];
-    return armarOutfitsParaComprar(placard, CATALOGO_CON_HSL);
-  }, [placard]);
+  const poolParaComprar: OutfitParaComprar[] = useMemo(
+    () => armarOutfitsParaComprar(placard, CATALOGO_CON_HSL),
+    [placard],
+  );
+
+  // Pool de "Vestite hoy" acotado a la ocasión elegida -- null (nada
+  // elegido todavía) da un pool vacío a propósito, para no mostrar ninguna
+  // tarjeta hasta que el usuario elija. "todos" es una elección explícita
+  // más (no un valor por defecto silencioso): el usuario la tocó a
+  // propósito, igual que cualquier otro chip.
+  const poolSugeridosPorEstilo = useMemo(() => {
+    if (estiloSugerido === null) return [];
+    if (estiloSugerido === "todos") return poolSugeridos;
+    return poolSugeridos.filter((s) => registroOutfit(s.prendas) === ESTILO_LABEL[estiloSugerido]);
+  }, [poolSugeridos, estiloSugerido]);
+
+  function elegirEstiloSugerido(valor: Estilo | "todos") {
+    setEstiloSugerido((prev) => (prev === valor ? null : valor));
+    setOffsetSugeridos(0);
+  }
 
   const sugeridos = useMemo(
-    () => tanda(poolSugeridos, offsetSugeridos, VISIBLES_POR_SECCION),
-    [poolSugeridos, offsetSugeridos],
+    () => tanda(poolSugeridosPorEstilo, offsetSugeridos, VISIBLES_SUGERIDOS),
+    [poolSugeridosPorEstilo, offsetSugeridos],
   );
   const paraComprar = useMemo(
     () => tanda(poolParaComprar, offsetParaComprar, VISIBLES_POR_SECCION),
@@ -184,7 +169,6 @@ export default function Outfits() {
   async function guardarSugerido(sugerido: OutfitSugerido) {
     setGuardando(sugerido.id);
     setErrorGuardar((prev) => ({ ...prev, [sugerido.id]: "" }));
-    let outfitCreado: { id: string } | null = null;
     try {
       const { data: sessionData } = await supabase.auth.getSession();
       const userId = sessionData.session?.user.id;
@@ -196,7 +180,6 @@ export default function Outfits() {
         .select()
         .single();
       if (outfitErr || !outfit) throw new Error(outfitErr?.message ?? "No se pudo crear el outfit.");
-      outfitCreado = outfit;
 
       const filas = sugerido.prendas.map((p) => ({ outfit_id: outfit.id, prenda_id: p.id }));
       const { error: joinErr } = await supabase.from("outfit_prendas").insert(filas);
@@ -206,7 +189,7 @@ export default function Outfits() {
       }
 
       setGuardadas((prev) => new Set(prev).add(sugerido.id));
-      setOutfits((prev) => [{ id: outfit.id, nombre: null, prendas: sugerido.prendas }, ...(prev ?? [])]);
+      setOutfits((prev) => [{ id: outfit.id, nombre: null, prendas: sugerido.prendas }, ...prev]);
     } catch (e) {
       setErrorGuardar((prev) => ({ ...prev, [sugerido.id]: e instanceof Error ? e.message : "No se pudo guardar." }));
     } finally {
@@ -234,7 +217,7 @@ export default function Outfits() {
     try {
       const { error: err } = await supabase.from("outfits").delete().eq("id", id);
       if (err) throw new Error(err.message);
-      setOutfits((prev) => (prev ?? []).filter((o) => o.id !== id));
+      setOutfits((prev) => prev.filter((o) => o.id !== id));
     } catch (e) {
       setErrorEliminar((prev) => ({ ...prev, [id]: e instanceof Error ? e.message : "No se pudo eliminar el outfit." }));
     } finally {
@@ -318,9 +301,9 @@ export default function Outfits() {
         if (err) throw new Error(err.message);
       }
 
-      const prendasFinal = (placard ?? []).filter((p) => prendasEdicion.has(p.id));
+      const prendasFinal = placard.filter((p) => prendasEdicion.has(p.id));
       setOutfits((prev) =>
-        (prev ?? []).map((o) => (o.id === editando.id ? { ...o, nombre: nombreNuevo, prendas: prendasFinal } : o)),
+        prev.map((o) => (o.id === editando.id ? { ...o, nombre: nombreNuevo, prendas: prendasFinal } : o)),
       );
       setEditando(null);
     } catch (e) {
@@ -330,31 +313,11 @@ export default function Outfits() {
     }
   }
 
-  if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
-
-  if (sinSesion) {
-    return (
-      <div className="empty-state">
-        <p>Iniciá sesión para ver tus outfits guardados.</p>
-        <a className="btn btn-primary" href={`${base}login/`}>
-          Entrar
-        </a>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="empty-state">
-        <p>No se pudieron cargar tus outfits.</p>
-        <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{error}</p>
-      </div>
-    );
-  }
-
-  if (outfits === null || placard === null) return <p style={{ color: "var(--text-muted)" }}>Cargando...</p>;
-
-  const sinNada = outfits.length === 0 && sugeridos.length === 0 && paraComprar.length === 0;
+  // Los pools completos (no las tandas visibles, que dependen de qué
+  // ocasión esté elegida ahora) -- si no, elegir una ocasión sin
+  // combinaciones dejaría este chequeo en falso positivo y escondería los
+  // outfits guardados o "ideas para comprar" que sí existen.
+  const sinNada = outfits.length === 0 && poolSugeridos.length === 0 && poolParaComprar.length === 0;
 
   if (sinNada) {
     return (
@@ -374,6 +337,89 @@ export default function Outfits() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+      <section>
+        <p className="eyebrow" style={{ marginBottom: "0.25rem" }}>
+          Vestite hoy
+        </p>
+        <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
+          Elegí para qué ocasión te querés vestir y te armamos {VISIBLES_SUGERIDOS} opciones con lo que ya tenés --
+          nunca se quedan fijas, "otras opciones" siempre te da combinaciones distintas.
+        </p>
+        <div className="filtro-chips" role="group" aria-label="Elegí la ocasión de hoy">
+          <button
+            type="button"
+            className={`chip${estiloSugerido === "todos" ? " chip-activo" : ""}`}
+            onClick={() => elegirEstiloSugerido("todos")}
+          >
+            Todos
+          </button>
+          {ESTILOS_FILTRO.map((e) => (
+            <button
+              key={e}
+              type="button"
+              className={`chip${estiloSugerido === e ? " chip-activo" : ""}`}
+              onClick={() => elegirEstiloSugerido(e)}
+            >
+              {ESTILO_LABEL[e]}
+            </button>
+          ))}
+        </div>
+
+        {estiloSugerido === null ? (
+          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+            Elegí una ocasión de arriba para ver tus opciones.
+          </p>
+        ) : poolSugeridosPorEstilo.length === 0 ? (
+          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+            {estiloSugerido === "todos"
+              ? "Todavía no armamos ninguna combinación con lo que tenés cargado -- cargá algún pantalón, bermuda o short: es la prenda ancla que arma el resto del outfit."
+              : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado. Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}
+          </p>
+        ) : (
+          <>
+            <div className="grid-prendas outfits-grid">
+              {sugeridos.map((s) => {
+                const yaGuardado = guardadas.has(s.id);
+                return (
+                  <div key={s.id} className="card outfit-card">
+                    <Maniqui prendas={s.prendas} />
+                    <div style={{ minWidth: 0, textAlign: "center" }}>
+                      <strong style={{ textTransform: "capitalize" }}>{s.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}</strong>
+                      <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+                        {leyenda(s.prendas)}
+                      </p>
+                      <RegistroBadge prendas={s.prendas} />
+                    </div>
+                    {errorGuardar[s.id] && (
+                      <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>
+                    )}
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", width: "100%" }}
+                      onClick={() => guardarSugerido(s)}
+                      disabled={guardando === s.id || yaGuardado}
+                    >
+                      {yaGuardado ? "✓ Guardado" : guardando === s.id ? "Guardando..." : "Guardar outfit"}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+            {poolSugeridosPorEstilo.length > VISIBLES_SUGERIDOS && (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", marginTop: "0.6rem" }}
+                onClick={() => setOffsetSugeridos((prev) => prev + VISIBLES_SUGERIDOS)}
+              >
+                🔄 Otras opciones
+              </button>
+            )}
+          </>
+        )}
+      </section>
+
       {outfits.length > 0 && (
         <section>
           <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>
@@ -456,56 +502,6 @@ export default function Outfits() {
               </div>
             ))}
           </div>
-          )}
-        </section>
-      )}
-
-      {sugeridos.length > 0 && (
-        <section>
-          <p className="eyebrow" style={{ marginBottom: "0.25rem" }}>
-            Te recomendamos
-          </p>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
-            Armados solos con lo que ya tenés en tu placard.
-          </p>
-          <div className="grid-prendas outfits-grid">
-            {sugeridos.map((s) => {
-              const yaGuardado = guardadas.has(s.id);
-              return (
-                <div key={s.id} className="card outfit-card">
-                  <Maniqui prendas={s.prendas} />
-                  <div style={{ minWidth: 0, textAlign: "center" }}>
-                    <strong style={{ textTransform: "capitalize" }}>{s.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}</strong>
-                    <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
-                      {leyenda(s.prendas)}
-                    </p>
-                    <RegistroBadge prendas={s.prendas} />
-                  </div>
-                  {errorGuardar[s.id] && (
-                    <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>
-                  )}
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", width: "100%" }}
-                    onClick={() => guardarSugerido(s)}
-                    disabled={guardando === s.id || yaGuardado}
-                  >
-                    {yaGuardado ? "✓ Guardado" : guardando === s.id ? "Guardando..." : "Guardar outfit"}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-          {poolSugeridos.length > VISIBLES_POR_SECCION && (
-            <button
-              type="button"
-              className="btn btn-secondary"
-              style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", marginTop: "0.6rem" }}
-              onClick={() => setOffsetSugeridos((prev) => prev + VISIBLES_POR_SECCION)}
-            >
-              🔄 Ver otras opciones
-            </button>
           )}
         </section>
       )}
@@ -596,8 +592,8 @@ export default function Outfits() {
               <p style={{ margin: "0 0 0.5rem", fontSize: "0.85rem", color: "var(--text-muted)" }}>
                 Prendas del outfit -- tildá o destildá para agregar o sacar.
               </p>
-              {Array.from(new Set((placard ?? []).map((p) => p.categoria))).map((categoria) => {
-                const prendasCategoria = (placard ?? []).filter((p) => p.categoria === categoria);
+              {Array.from(new Set(placard.map((p) => p.categoria))).map((categoria) => {
+                const prendasCategoria = placard.filter((p) => p.categoria === categoria);
                 return (
                   <div key={categoria} style={{ marginBottom: "0.7rem" }}>
                     <p style={{ margin: "0 0 0.3rem", fontSize: "0.8rem", textTransform: "capitalize", fontWeight: 600 }}>
@@ -637,4 +633,89 @@ export default function Outfits() {
       )}
     </div>
   );
+}
+
+export default function Outfits() {
+  const [outfits, setOutfits] = useState<OutfitConPrendas[] | null>(null);
+  const [placard, setPlacard] = useState<Prenda[] | null>(null);
+  const [sinSesion, setSinSesion] = useState(false);
+  const [error, setError] = useState("");
+  const base = (import.meta.env.BASE_URL as string) || "/";
+
+  useEffect(() => {
+    if (!SUPABASE_CONFIGURADO) return;
+    async function cargar() {
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (!sessionData.session) {
+          setSinSesion(true);
+          return;
+        }
+        // Un solo select embebido en vez de un loop secuencial (antes: 1 + 2N
+        // round-trips para N outfits) -- Supabase resuelve el join server-side.
+        const [{ data: outfitRows, error: errOutfits }, { data: prendaRows, error: errPrendas }] = await Promise.all([
+          supabase.from("outfits").select("id, nombre, outfit_prendas(prenda_id, created_at, prendas(*))").order("created_at", { ascending: false }),
+          supabase.from("prendas").select("*"),
+        ]);
+        if (errOutfits) {
+          setError(errOutfits.message);
+          return;
+        }
+        if (errPrendas) {
+          setError(errPrendas.message);
+          return;
+        }
+        // supabase-js no puede inferir la cardinalidad del embed sin tipos
+        // generados de la DB y lo tipa como any[]; se castea vía unknown
+        // porque la forma real (a-uno) la conocemos por el schema (FK
+        // outfit_prendas.prenda_id -> prendas.id).
+        const conPrendas: OutfitConPrendas[] = ((outfitRows as unknown as OutfitRow[] | null) ?? []).map((o) => {
+          // orden estable por el created_at de la fila de unión, no el
+          // orden de retorno del join (no garantizado por Postgres).
+          const filas = [...(o.outfit_prendas ?? [])].sort((a, b) => a.created_at.localeCompare(b.created_at));
+          return {
+            id: o.id,
+            nombre: o.nombre,
+            prendas: filas.map((f) => f.prendas).filter((p): p is Prenda => p !== null),
+          };
+        });
+        // guarda de UI: un outfit puede quedar sin prendas si se borran (la
+        // cascada de outfit_prendas vacía el array, pero el registro de
+        // outfits en sí sobrevive) -- el trigger de la migración 0011 los
+        // borra a nivel DB, esto es cinturón y tiradores para no mostrar una
+        // card vacía si por lo que sea todavía no corrió.
+        setOutfits(conPrendas.filter((o) => o.prendas.length > 0));
+        setPlacard((prendaRows as Prenda[] | null) ?? []);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "Error de conexión con Mi ropa.");
+      }
+    }
+    cargar();
+  }, []);
+
+  if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
+
+  if (sinSesion) {
+    return (
+      <div className="empty-state">
+        <p>Iniciá sesión para ver tus outfits guardados.</p>
+        <a className="btn btn-primary" href={`${base}login/`}>
+          Entrar
+        </a>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="empty-state">
+        <p>No se pudieron cargar tus outfits.</p>
+        <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{error}</p>
+      </div>
+    );
+  }
+
+  if (outfits === null || placard === null) return <p style={{ color: "var(--text-muted)" }}>Cargando...</p>;
+
+  return <Contenido outfitsIniciales={outfits} placard={placard} base={base} />;
 }
