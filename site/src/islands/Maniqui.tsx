@@ -474,6 +474,31 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                   campera con cierre. */}
               <circle cx="60" cy="84" r="1.6" fill={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
               <circle cx="60" cy="92" r="1.6" fill={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              {/* ruedo del saco -- reporte real del usuario con captura:
+                  "no parece un traje", se leía como un jumpsuit/mameluco de
+                  una sola pieza. Causa real: el cuerpo del torso (Forma de
+                  más arriba, compartido por remera/camisa/buzo/sweater/
+                  campera/saco) llega hasta y=126, el mismo punto donde
+                  arranca el pantalón -- para las demás categorías eso no se
+                  nota porque son de otro color que el pantalón, pero un
+                  saco de traje real combina EN EL MISMO género/color que su
+                  pantalón, así que sin un límite dibujado, la tela se lee
+                  continua de los hombros a los tobillos. Un saco real
+                  además termina bastante más arriba que la cadera (a media
+                  altura del pantalón de vestir, no a la altura del
+                  cinturón) -- se agrega esa línea de ruedo, curva hacia
+                  abajo en el centro (así cae el frente de un saco
+                  desabrochado), en contornoHsl (tono sólido, no el trazo
+                  fijo semitransparente) para que se note incluso sobre un
+                  color oscuro como el azul marino -- mismo motivo que ya
+                  documenta el ícono chico (PrendaIcon.tsx) para
+                  tonoPatron. */}
+              <path
+                d="M36 88 Q60 100 84 88"
+                fill="none"
+                stroke={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                strokeWidth={1.4}
+              />
             </>
           )}
         </>
