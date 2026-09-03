@@ -151,15 +151,22 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
 
   // --- Pantalones ---
-  { id: "jean-azul", nombre: "Jean azul", categoria: "pantalon", colorHex: "#3B5998", textura: "denim", estilo: "casual", ocasion: "casual" },
+  // estilo secundario "urbano" en TODO jean, sea cual sea el color -- pedido
+  // explícito del usuario, reportando que su jean AZUL real (el corte/tela
+  // más estándar que existe) no aparecía en la sección Urbano de "Vestite
+  // hoy". Corrección real de esta ronda: la ronda anterior que agregó
+  // "urbano" solo lo cargó en jean-negro/jogger-negro, razonando "un jean
+  // NEGRO es tan de calle como de casual" -- pero lo que hace a un jean
+  // urbano/streetwear no es el color, es la PRENDA (denim de corte casual,
+  // el pantalón más estándar del streetwear real, con zapatillas y campera
+  // urbana) -- un jean azul con esa misma combinación es igual de urbano
+  // que uno negro, si no más (es el jean más común de lejos). Mismo
+  // criterio aplicado ahora de forma consistente a los joggers y a la
+  // bermuda de jean de más abajo.
+  { id: "jean-azul", nombre: "Jean azul", categoria: "pantalon", colorHex: "#3B5998", textura: "denim", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
   // colorHex #1A1A1A -- ver el comentario de camisa-negra más arriba:
   // mismo negro estándar del catálogo, corrigiendo el mismo #232323
   // inconsistente que hacía que nombreColor() leyera "Gris oscuro".
-  // estilo secundario "urbano" -- un jean negro es tan de calle/streetwear
-  // (con campera y zapatillas urbanas) como de casual de todos los días;
-  // sin esto el catálogo no tenía NINGÚN pantalón/jean/jogger "urbano" y
-  // "Vestite hoy" nunca podía sugerir una prenda ancla para ese registro
-  // (reporte real del usuario: la sección Urbano no armaba nada).
   { id: "jean-negro", nombre: "Jean negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "denim", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
   { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo" },
   { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo" },
@@ -176,11 +183,12 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // así directamente. Colores reusados del resto del catálogo (negro
   // estándar, el mismo beige del chino, el gris de siempre) por la misma
   // razón de consistencia de paleta que ya documenta el resto del archivo.
-  // mismo criterio que jean-negro de arriba -- un jogger negro es una
-  // pieza urbana/streetwear tan estándar como casual.
+  // estilo secundario "urbano" en los 3 -- mismo criterio que el jean de
+  // arriba: es el jogger como PRENDA lo que lee urbano/streetwear, no un
+  // color puntual (corrección de esta ronda: antes solo lo tenía el negro).
   { id: "jogger-negro", nombre: "Jogger negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
-  { id: "jogger-beige", nombre: "Jogger beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", ocasion: "casual" },
-  { id: "jogger-gris", nombre: "Jogger gris", categoria: "pantalon", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  { id: "jogger-beige", nombre: "Jogger beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
+  { id: "jogger-gris", nombre: "Jogger gris", categoria: "pantalon", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
   // pantalón deportivo (entrenamiento) -- distinto del jogger de arriba:
   // mismo corte ancho, pero tela técnica sintética (poliéster), no algodón
   // (mismo criterio que la remera deportiva de arriba).
@@ -202,8 +210,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // variante denim -- tan real como el jean largo de arriba, mismo criterio
   // de textura/estilo ("casual", no "clasico": un jean corto lee más
   // informal que un chino corto, igual que el jean largo vs. el pantalón
-  // de vestir).
-  { id: "bermuda-jean", nombre: "Bermuda de jean", categoria: "bermuda", colorHex: "#3B5998", textura: "denim", estilo: "casual", ocasion: "casual" },
+  // de vestir) y mismo secundario "urbano" que el resto de la familia
+  // denim/jogger de esta ronda -- una bermuda de jean con zapatillas
+  // urbanas es tan de calle como el jean largo.
+  { id: "bermuda-jean", nombre: "Bermuda de jean", categoria: "bermuda", colorHex: "#3B5998", textura: "denim", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
   { id: "bermuda-gris", nombre: "Bermuda gris", categoria: "bermuda", colorHex: "#8C8C8C", textura: "algodon", estilo: "clasico", ocasion: "casual" },
 
   // --- Shorts deportivos (tela técnica, hasta medio muslo) --- distintos

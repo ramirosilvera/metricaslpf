@@ -18,7 +18,7 @@ import {
   type OutfitParaComprar,
   type OutfitSugerido,
 } from "../lib/recommend";
-import { CATEGORIA_LABEL, type Estilo, type Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, descripcionPrenda, type Estilo, type Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import Maniqui from "./Maniqui";
 
@@ -38,7 +38,7 @@ interface OutfitRow {
 }
 
 function leyenda(prendas: Prenda[]): string {
-  return prendas.map((p) => `${CATEGORIA_LABEL[p.categoria]} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ");
+  return prendas.map((p) => `${descripcionPrenda(p)} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ");
 }
 
 /** Pedido explícito del usuario: que la app diga a qué registro (Formal,
@@ -91,8 +91,8 @@ function TarjetaSugerido({
       </p>
       <Maniqui prendas={s.prendas} />
       <div style={{ minWidth: 0, textAlign: "center" }}>
-        <strong style={{ textTransform: "capitalize" }}>{s.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}</strong>
-        <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+        <strong>{s.prendas.map((p) => descripcionPrenda(p)).join(" + ")}</strong>
+        <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)" }}>
           {leyenda(s.prendas)}
         </p>
         <RegistroBadge prendas={s.prendas} />
@@ -332,7 +332,7 @@ export function Contenido({
     setCompartiendoId(o.id);
     setErrorCompartir((prev) => ({ ...prev, [o.id]: "" }));
     try {
-      const titulo = o.nombre ?? o.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ");
+      const titulo = o.nombre ?? o.prendas.map((p) => descripcionPrenda(p)).join(" + ");
       const blob = await generarImagenOutfit(svg, {
         titulo,
         leyenda: leyenda(o.prendas),
@@ -574,10 +574,10 @@ export function Contenido({
                   <Maniqui prendas={o.prendas} />
                 </div>
                 <div style={{ minWidth: 0, textAlign: "center" }}>
-                  <strong style={{ textTransform: "capitalize" }}>
-                    {o.nombre ?? o.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}
+                  <strong style={o.nombre ? { textTransform: "capitalize" } : undefined}>
+                    {o.nombre ?? o.prendas.map((p) => descripcionPrenda(p)).join(" + ")}
                   </strong>
-                  <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+                  <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)" }}>
                     {leyenda(o.prendas)}
                   </p>
                   <RegistroBadge prendas={o.prendas} />
@@ -639,8 +639,8 @@ export function Contenido({
               <div key={s.id} className="card outfit-card">
                 <Maniqui prendas={prendasOutfit} />
                 <div style={{ minWidth: 0, textAlign: "center" }}>
-                  <strong style={{ textTransform: "capitalize" }}>{s.sugerida.nombre}</strong>
-                  <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>
+                  <strong>{s.sugerida.nombre}</strong>
+                  <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)" }}>
                     con {leyenda(s.prendasPropias)}
                   </p>
                   <RegistroBadge prendas={prendasOutfit} />
@@ -703,7 +703,7 @@ export function Contenido({
                 type="text"
                 value={nombreEdicion}
                 onChange={(e) => setNombreEdicion(e.target.value)}
-                placeholder={editando.prendas.map((p) => CATEGORIA_LABEL[p.categoria]).join(" + ")}
+                placeholder={editando.prendas.map((p) => descripcionPrenda(p)).join(" + ")}
               />
             </label>
             <div>

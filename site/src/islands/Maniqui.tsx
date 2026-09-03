@@ -1,6 +1,6 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
 import PrendaIcon, { PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
-import { CATEGORIA_LABEL, type Categoria, type Prenda } from "../lib/types";
+import { descripcionPrenda, type Categoria, type Prenda } from "../lib/types";
 
 type Capa = "torso" | "piernas" | "pies" | "accesorio";
 
@@ -796,7 +796,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
       {extras.length > 0 && (
         <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap", justifyContent: "center" }}>
           {extras.map((p) => (
-            <span key={p.id} style={{ width: 28, height: 28 }} title={CATEGORIA_LABEL[p.categoria]}>
+            <span key={p.id} style={{ width: 28, height: 28 }} title={descripcionPrenda(p)}>
               <PrendaIcon
                 categoria={p.categoria}
                 color={p.color_hex}

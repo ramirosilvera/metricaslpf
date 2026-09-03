@@ -95,3 +95,31 @@ describe("catálogo -- buzo: peso por textura y capucha, nunca por estación", (
     expect(buzos.some((p) => p.conCapucha !== false)).toBe(true);
   });
 });
+
+describe("catálogo -- jean/jogger son urbano sin importar el color", () => {
+  // Pedido explícito del usuario, con un caso real: cargó "Jean azul" desde
+  // el catálogo y "Vestite hoy" no lo reconocía como Urbano. Causa real: una
+  // ronda anterior había agregado el secundario "urbano" solo a jean-negro/
+  // jogger-negro, razonando sobre el color en vez de la prenda -- lo que
+  // hace urbano/streetwear a un jean o un jogger es el corte/tela (denim o
+  // jogger de algodón), no un color puntual. Esta prueba fija esa regla
+  // para que no se repita con un color nuevo del catálogo.
+  const esUrbano = (p: (typeof CATALOGO_PRENDAS)[number]) =>
+    p.estilo === "urbano" || (p.estilosSecundarios ?? []).includes("urbano");
+
+  it("todo jean (pantalón o bermuda, textura denim) es urbano sin importar el color", () => {
+    const jeans = CATALOGO_PRENDAS.filter(
+      (p) => (p.categoria === "pantalon" || p.categoria === "bermuda") && p.textura === "denim",
+    );
+    expect(jeans.length).toBeGreaterThan(1); // más de un color, si no la regla no dice nada real
+    expect(jeans.every(esUrbano)).toBe(true);
+  });
+
+  it("todo jogger (pantalón, algodón + casual) es urbano sin importar el color", () => {
+    const joggers = CATALOGO_PRENDAS.filter(
+      (p) => p.categoria === "pantalon" && p.textura === "algodon" && p.estilo === "casual",
+    );
+    expect(joggers.length).toBeGreaterThan(1);
+    expect(joggers.every(esUrbano)).toBe(true);
+  });
+});

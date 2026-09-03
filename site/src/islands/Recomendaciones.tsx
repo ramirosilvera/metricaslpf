@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
-import { CATEGORIA_LABEL, CATEGORIAS_COMPLEMENTARIAS, type Estilo, type Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, CATEGORIAS_COMPLEMENTARIAS, descripcionPrenda, type Estilo, type Prenda } from "../lib/types";
 import { ESTILO_LABEL, recomendar } from "../lib/recommend";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
@@ -211,8 +211,8 @@ export default function Recomendaciones() {
           />
         </span>
         <div style={{ flex: 1 }}>
-          <strong style={{ textTransform: "capitalize", fontSize: "1.1rem" }}>
-            {CATEGORIA_LABEL[base.categoria]} · {nombreColor(base.color_h, base.color_s, base.color_l)}
+          <strong style={{ fontSize: "1.1rem" }}>
+            {descripcionPrenda(base)} · {nombreColor(base.color_h, base.color_s, base.color_l)}
           </strong>
           <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>
             Tocá las combinaciones que te gusten para armar un outfit.
@@ -320,7 +320,7 @@ export default function Recomendaciones() {
                     onClick={() => toggleSeleccion(prenda.id)}
                     disabled={guardando}
                     aria-pressed={activo}
-                    aria-label={`${CATEGORIA_LABEL[prenda.categoria]} ${nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}, ${NIVEL_LABEL[score.nivel]}${activo ? ", seleccionada" : ""}`}
+                    aria-label={`${descripcionPrenda(prenda)} ${nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}, ${NIVEL_LABEL[score.nivel]}${activo ? ", seleccionada" : ""}`}
                     className={`card recomendacion-card${activo ? " seleccionada" : ""}`}
                   >
                     <span className="recomendacion-icon" aria-hidden="true">
@@ -335,8 +335,8 @@ export default function Recomendaciones() {
                       />
                     </span>
                     <div style={{ flex: 1, textAlign: "left" }}>
-                      <span style={{ display: "block", fontSize: "0.8rem", textTransform: "capitalize", marginBottom: "0.2rem" }}>
-                        {CATEGORIA_LABEL[prenda.categoria]} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
+                      <span style={{ display: "block", fontSize: "0.8rem", marginBottom: "0.2rem" }}>
+                        {descripcionPrenda(prenda)} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
                       </span>
                       <span className={`nivel-badge nivel-${score.nivel}`}>
                         {NIVEL_LABEL[score.nivel]}

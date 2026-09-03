@@ -3,7 +3,7 @@ import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
 import { ESTILO_LABEL, estilosDe } from "../lib/recommend";
 import { coincideBusqueda, contarPorColor, contarPorEstacion, TODAS_LAS_CATEGORIAS } from "../lib/estadisticas";
-import { CATEGORIA_LABEL, ESTACION_LABEL, type Estacion, type Estilo, type Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, descripcionPrenda, ESTACION_LABEL, type Estacion, type Estilo, type Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
 
@@ -205,7 +205,7 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
                         conCapucha={p.con_capucha}
                       />
                     </span>
-                    <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{CATEGORIA_LABEL[p.categoria]}</strong>
+                    <strong style={{ fontSize: "0.85rem" }}>{descripcionPrenda(p)}</strong>
                     <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
                       {nombreColor(p.color_h, p.color_s, p.color_l)}
                     </span>

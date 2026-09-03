@@ -121,6 +121,39 @@ export const CATEGORIA_LABEL: Record<Categoria, string> = {
   accesorio: "accesorio",
 };
 
+/** Etiqueta más específica que CATEGORIA_LABEL para una prenda puntual --
+ *  pedido explícito del usuario: "estaría bueno que las prendas den más
+ *  información y al menos aclare pantalón de Jean" (reportando que un jean
+ *  cargado en el placard se veía, en toda la app, solo como "pantalon"
+ *  genérico). Deriva el nombre de categoria+textura(+estilo/con_capucha) ya
+ *  cargados -- no un campo nuevo a mano: así nunca queda desactualizado
+ *  respecto de la prenda real, y una prenda agregada por foto (sin pasar
+ *  por el catálogo) también se beneficia en cuanto tenga textura cargada.
+ *  Solo cubre combinaciones donde categoria+textura(+lo que haga falta)
+ *  identifican la prenda SIN AMBIGÜEDAD contra el resto del catálogo real
+ *  (ej. campera+lana se deja afuera a propósito: puede ser un tapado de
+ *  paño o una campera-sweater, dos prendas reales distintas con la misma
+ *  textura -- no hay forma de saber cuál sin inventar). Cuando no hay un
+ *  patrón inequívoco, cae en CATEGORIA_LABEL capitalizado, el mismo texto
+ *  genérico que ya se mostraba. */
+export function descripcionPrenda(p: Prenda): string {
+  if ((p.categoria === "pantalon" || p.categoria === "bermuda") && p.textura) {
+    const esPantalon = p.categoria === "pantalon";
+    if (p.textura === "denim") return esPantalon ? "Jean" : "Bermuda de jean";
+    if (p.textura === "lana") return esPantalon ? "Pantalón de vestir" : "Bermuda de vestir";
+    if (p.textura === "poliester") return esPantalon ? "Pantalón deportivo" : "Bermuda deportiva";
+    if (p.textura === "algodon" && esPantalon) return p.estilo === "clasico" ? "Pantalón chino" : "Jogger";
+  }
+  if (p.categoria === "buzo") return p.con_capucha ? "Buzo con capucha" : "Buzo sin capucha";
+  if (p.categoria === "sweater" && p.textura && p.textura !== "lana") return "Sweater liviano";
+  if (p.categoria === "campera") {
+    if (p.textura === "denim") return "Campera de jean";
+    if (p.textura === "acolchado") return "Campera de pluma";
+  }
+  const generico = CATEGORIA_LABEL[p.categoria];
+  return generico.charAt(0).toUpperCase() + generico.slice(1);
+}
+
 /** Texto visible por estación, mismo criterio que ESTILO_LABEL en
  *  recommend.ts (capitalizado, no el valor crudo del enum) -- pedido
  *  explícito del usuario: un filtro real de "mostrame solo mis abrigos de

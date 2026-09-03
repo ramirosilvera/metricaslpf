@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import type { PresetPrenda } from "../lib/catalogo";
 import { hexToHsl, nombreColor } from "../lib/color";
-import { CATEGORIA_LABEL, CATEGORIAS_COMPLEMENTARIAS, type Categoria, type Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, CATEGORIAS_COMPLEMENTARIAS, descripcionPrenda, type Categoria, type Prenda } from "../lib/types";
 import { ESTILO_LABEL, recomendar } from "../lib/recommend";
 import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
@@ -195,8 +195,8 @@ export default function Probar() {
               />
             </span>
             <div style={{ flex: 1 }}>
-              <strong style={{ textTransform: "capitalize" }}>
-                {CATEGORIA_LABEL[pruebaBase.categoria]} · {nombreColor(pruebaBase.color_h, pruebaBase.color_s, pruebaBase.color_l)}
+              <strong>
+                {descripcionPrenda(pruebaBase)} · {nombreColor(pruebaBase.color_h, pruebaBase.color_s, pruebaBase.color_l)}
               </strong>
               <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.85rem" }}>
                 {veredicto ? veredicto.texto : "Así combina con lo que ya tenés"}
@@ -239,8 +239,8 @@ export default function Probar() {
                           />
                         </span>
                         <div style={{ flex: 1 }}>
-                          <span style={{ display: "block", fontSize: "0.8rem", textTransform: "capitalize", marginBottom: "0.2rem" }}>
-                            {CATEGORIA_LABEL[prenda.categoria]} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
+                          <span style={{ display: "block", fontSize: "0.8rem", marginBottom: "0.2rem" }}>
+                            {descripcionPrenda(prenda)} · {nombreColor(prenda.color_h, prenda.color_s, prenda.color_l)}
                           </span>
                           <span className={`nivel-badge nivel-${score.nivel}`}>
                             {NIVEL_LABEL[score.nivel]}
