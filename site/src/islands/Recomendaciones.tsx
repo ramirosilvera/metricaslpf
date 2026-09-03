@@ -207,6 +207,7 @@ export default function Recomendaciones() {
             suelaContraste={base.suela_contraste}
             posicionAccesorio={base.posicion_accesorio}
             requiereCuello={base.requiere_cuello}
+            conCapucha={base.con_capucha}
           />
         </span>
         <div style={{ flex: 1 }}>
@@ -330,6 +331,7 @@ export default function Recomendaciones() {
                         suelaContraste={prenda.suela_contraste}
                         posicionAccesorio={prenda.posicion_accesorio}
                         requiereCuello={prenda.requiere_cuello}
+                        conCapucha={prenda.con_capucha}
                       />
                     </span>
                     <div style={{ flex: 1, textAlign: "left" }}>

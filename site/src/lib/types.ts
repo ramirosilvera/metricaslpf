@@ -19,6 +19,7 @@ export type Textura =
   | "pana"
   | "corderoy"
   | "tejido_grueso"
+  | "frisado"
   | "denim"
   | "acolchado"
   | "poliester"
@@ -80,6 +81,20 @@ export interface Prenda {
    *  preserva el dibujo original (el único que existía antes de esta
    *  columna). */
   posicion_accesorio: "cuello" | "cintura";
+  /** Detalle real de la prenda, solo tiene sentido en categoria="buzo" (el
+   *  resto la ignora) -- pedido explícito del usuario, revisado como
+   *  modista/ingeniero textil: no todos los buzos son hoodie. Antes de esta
+   *  columna, TorsoCuerpo (Maniqui.tsx) le dibujaba capucha a CUALQUIER
+   *  buzo sin excepción -- un buzo crewneck real (sin capucha) se mostraba
+   *  con una que no tiene. Default true: preserva el dibujo de todos los
+   *  buzos ya cargados (el catálogo hasta ahora era 100% hoodie), y solo
+   *  las prendas puntuales sin capucha (verificadas contra el placard real)
+   *  pasan a false explícitamente. El peso/grosor de la tela (liviano vs.
+   *  pesado/frisado) es un dato de TEXTURA (ver Textura arriba, valor
+   *  "frisado"), no de estación -- pedido explícito del usuario: "tampoco
+   *  los llamaría de invierno o de entretiempo" a diferencia de sweater/
+   *  campera, que sí se tagean por estación (ver catalogo.ts). */
+  con_capucha: boolean;
   created_at: string;
   updated_at: string;
 }

@@ -12,7 +12,7 @@ import type { Categoria, Textura } from "../lib/types";
 // copias, agregar una textura nueva (como "viscosa") corría el riesgo real
 // de actualizar una sola y desincronizar cómo se ve la MISMA prenda en el
 // catálogo/placard contra cómo se ve en "Vestite hoy".
-export const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_grueso", "lana", "algodon", "lino", "acolchado"];
+export const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_grueso", "frisado", "lana", "algodon", "lino", "acolchado"];
 // poliéster (ropa deportiva técnica) suma el mismo brillo diagonal que
 // seda/cuero_liso -- es tela lisa, sin trama visible, con un leve brillo
 // sintético real (más notorio que en algodón/lino), no un patrón tejido.
@@ -54,6 +54,16 @@ export function PatronTextura({ id, textura, tono }: { id: string; textura: Text
       return (
         <pattern id={id} width="4" height="4" patternUnits="userSpaceOnUse">
           <path d="M0 4 L2 0 L4 4" fill="none" stroke={tono} strokeWidth="0.5" />
+        </pattern>
+      );
+    case "frisado":
+      // afelpado/cepillado (interior de fleece de un buzo pesado) -- pelusa
+      // suelta, no una trama geométrica cerrada como el rombo de
+      // tejido_grueso: rayitas cortas sueltas con punta redondeada, para
+      // leerse más "peludo"/blando que un punto tejido.
+      return (
+        <pattern id={id} width="6" height="6" patternUnits="userSpaceOnUse">
+          <path d="M1 1 L1 3 M3 0.3 L3 2.6 M5 1.6 L5 4" stroke={tono} strokeWidth="0.6" strokeLinecap="round" />
         </pattern>
       );
     case "algodon":
@@ -154,6 +164,7 @@ export function PrendaShape({
   suelaContraste = false,
   posicionAccesorio = "cintura",
   requiereCuello = false,
+  conCapucha = true,
 }: {
   categoria: Categoria;
   color: string;
@@ -184,6 +195,14 @@ export function PrendaShape({
    *  (cuello, sin requiere_cuello) -- ambas van al cuello pero se ven, y se
    *  usan, distinto. */
   requiereCuello?: boolean;
+  /** Ver Prenda.con_capucha en types.ts. Solo afecta a "buzo": antes se
+   *  dibujaba la misma silueta con pico de capucha para CUALQUIER buzo --
+   *  pedido explícito del usuario, revisado como modista/ingeniero textil:
+   *  un buzo crewneck real (sin capucha) tiene el hombro más bajo/plano y
+   *  un escote redondo, no el pico alto de la capucha apoyada atrás del
+   *  cuello. Default true: preserva el ícono de todos los buzos ya
+   *  cargados (100% hoodie hasta esta revisión). */
+  conCapucha?: boolean;
 }) {
   const stroke = "rgba(0,0,0,0.15)";
   const soleClipId = useId();
@@ -230,10 +249,20 @@ export function PrendaShape({
       );
       break;
     case "buzo":
-      forma = (
+      forma = conCapucha ? (
         <>
           <FormaConTextura d="M20 10 Q32 2 44 10 L56 18 L49 28 L44 24 L44 58 L20 58 L20 24 L15 28 L8 18 Z" fill={color} stroke={stroke} patron={patron} />
           <path d="M26 10 Q32 16 38 10" fill="none" stroke={stroke} />
+        </>
+      ) : (
+        // crewneck -- mismo cuerpo/mangas que el hoodie de arriba, pero sin
+        // el pico alto de la capucha (Q32 2 -> Q32 8, mucho más bajo) y con
+        // un escote redondo en vez del arco que sugiere la abertura de la
+        // capucha (más curvo que la V recta del sweater: un crewneck cierra
+        // en punto, no en V).
+        <>
+          <FormaConTextura d="M20 12 Q32 7 44 12 L56 18 L49 28 L44 24 L44 58 L20 58 L20 24 L15 28 L8 18 Z" fill={color} stroke={stroke} patron={patron} />
+          <path d="M25 10 Q32 15 39 10" fill="none" stroke={stroke} />
         </>
       );
       break;
@@ -346,6 +375,7 @@ export default function PrendaIcon({
   suelaContraste,
   posicionAccesorio,
   requiereCuello,
+  conCapucha,
 }: {
   categoria: Categoria;
   color: string;
@@ -353,6 +383,7 @@ export default function PrendaIcon({
   suelaContraste?: boolean;
   posicionAccesorio?: "cuello" | "cintura";
   requiereCuello?: boolean;
+  conCapucha?: boolean;
 }) {
   return (
     <svg viewBox="0 0 64 64" width="100%" height="100%">
@@ -363,6 +394,7 @@ export default function PrendaIcon({
         suelaContraste={suelaContraste}
         posicionAccesorio={posicionAccesorio}
         requiereCuello={requiereCuello}
+        conCapucha={conCapucha}
       />
     </svg>
   );

@@ -2,19 +2,22 @@ import { describe, expect, it } from "vitest";
 import { CATALOGO_PRENDAS } from "./catalogo";
 import type { Categoria } from "./types";
 
-// buzo/sweater/campera -- mismo criterio que CATEGORIAS_ABRIGO en
-// recommend.ts (duplicado a propósito acá, mismo motivo que ya documenta
-// el resto del archivo: no crear una dependencia cruzada por 3 strings).
-const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
+// sweater/campera -- las dos categorías de abrigo que SÍ se tagean por
+// estación (ver el criterio al principio de catalogo.ts). buzo quedó
+// afuera a partir de la revisión de esta ronda -- ver el describe de más
+// abajo. Mismo criterio que CATEGORIAS_ABRIGO en recommend.ts (duplicado a
+// propósito acá, mismo motivo que ya documenta el resto del archivo: no
+// crear una dependencia cruzada por 3 strings).
+const CATEGORIAS_ABRIGO_CON_ESTACION: Categoria[] = ["sweater", "campera"];
 
-describe("catálogo -- abrigos siempre tageados por estación", () => {
+describe("catálogo -- sweater/campera siempre tageados por estación", () => {
   // Pedido explícito del usuario: diferenciar los abrigos de entretiempo
   // de los de invierno. A diferencia del resto del catálogo (donde
   // `estacion` se deja vacía a propósito por ser ambigua -- ver el
-  // criterio al principio de catalogo.ts), un abrigo SIEMPRE tiene un
-  // nivel de abrigo real y no debería quedar sin tagear.
-  it("ningún buzo/sweater/campera queda sin `estacion`", () => {
-    const abrigos = CATALOGO_PRENDAS.filter((p) => CATEGORIAS_ABRIGO.includes(p.categoria));
+  // criterio al principio de catalogo.ts), un sweater o una campera SIEMPRE
+  // tienen un nivel de abrigo real y no deberían quedar sin tagear.
+  it("ningún sweater/campera queda sin `estacion`", () => {
+    const abrigos = CATALOGO_PRENDAS.filter((p) => CATEGORIAS_ABRIGO_CON_ESTACION.includes(p.categoria));
     expect(abrigos.length).toBeGreaterThan(0);
     const sinEstacion = abrigos.filter((p) => !p.estacion);
     expect(sinEstacion.map((p) => p.id)).toEqual([]);
@@ -57,8 +60,38 @@ describe("catálogo -- abrigos siempre tageados por estación", () => {
     expect(inviernoClasico.length).toBeGreaterThan(0);
   });
 
-  it("las demás categorías (no abrigo) siguen sin forzar `estacion`, a propósito", () => {
-    const noAbrigos = CATALOGO_PRENDAS.filter((p) => !CATEGORIAS_ABRIGO.includes(p.categoria));
+  it("las demás categorías (no sweater/campera, incluye buzo) siguen sin forzar `estacion`, a propósito", () => {
+    const noAbrigos = CATALOGO_PRENDAS.filter((p) => !CATEGORIAS_ABRIGO_CON_ESTACION.includes(p.categoria));
     expect(noAbrigos.some((p) => !p.estacion)).toBe(true);
+  });
+});
+
+describe("catálogo -- buzo: peso por textura y capucha, nunca por estación", () => {
+  // Corrección explícita de esta ronda, revisado como modista/ingeniero
+  // textil: "los buzos tmb algunos son livianos y otros más pesados... pero
+  // tampoco los llamaría de invierno o de entretiempo" -- a diferencia de
+  // sweater/campera de arriba, ningún buzo del catálogo debería llevar
+  // `estacion`.
+  it("ningún buzo del catálogo lleva `estacion`", () => {
+    const buzos = CATALOGO_PRENDAS.filter((p) => p.categoria === "buzo");
+    expect(buzos.length).toBeGreaterThan(0);
+    expect(buzos.every((p) => !p.estacion)).toBe(true);
+  });
+
+  // El peso real (liviano vs. pesado/frisado) se resuelve con textura, no
+  // con estacion -- coexisten las dos variantes en el catálogo.
+  it("coexisten buzos livianos (tejido_grueso) y pesados (frisado)", () => {
+    const buzos = CATALOGO_PRENDAS.filter((p) => p.categoria === "buzo");
+    expect(buzos.some((p) => p.textura === "tejido_grueso")).toBe(true);
+    expect(buzos.some((p) => p.textura === "frisado")).toBe(true);
+  });
+
+  // con_capucha (hoodie vs. crewneck) es un dato de corte, ortogonal al
+  // peso de la tela -- reportado con dos prendas reales del placard del
+  // usuario mostrando capucha cuando en realidad son crewneck.
+  it("hay al menos un buzo crewneck (sin capucha) además de los hoodie por defecto", () => {
+    const buzos = CATALOGO_PRENDAS.filter((p) => p.categoria === "buzo");
+    expect(buzos.some((p) => p.conCapucha === false)).toBe(true);
+    expect(buzos.some((p) => p.conCapucha !== false)).toBe(true);
   });
 });

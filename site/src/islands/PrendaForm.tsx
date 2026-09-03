@@ -33,6 +33,7 @@ const TEXTURAS: Textura[] = [
   "pana",
   "corderoy",
   "tejido_grueso",
+  "frisado",
   "denim",
   "acolchado",
   "poliester",
@@ -74,6 +75,7 @@ export default function PrendaForm() {
   const [posicionAccesorio, setPosicionAccesorio] = useState<"cuello" | "cintura">(
     presetDePrefill?.posicionAccesorio ?? "cintura",
   );
+  const [conCapucha, setConCapucha] = useState(presetDePrefill?.conCapucha ?? true);
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
@@ -104,6 +106,7 @@ export default function PrendaForm() {
     setSuelaContraste(p.suelaContraste ?? false);
     setRequiereCuello(p.requiereCuello ?? false);
     setPosicionAccesorio(p.posicionAccesorio ?? "cintura");
+    setConCapucha(p.conCapucha ?? true);
     setFotoBlob(null);
     setFotoPreview(null);
   }
@@ -153,6 +156,7 @@ export default function PrendaForm() {
           suela_contraste: categoria === "calzado" ? suelaContraste : false,
           requiere_cuello: categoria === "accesorio" ? requiereCuello : false,
           posicion_accesorio: categoria === "accesorio" ? posicionAccesorio : "cintura",
+          con_capucha: categoria === "buzo" ? conCapucha : true,
         })
         .select()
         .single();
@@ -278,6 +282,12 @@ export default function PrendaForm() {
               <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <input type="checkbox" checked={suelaContraste} onChange={(e) => setSuelaContraste(e.target.checked)} />
                 <span>Suela blanca / de contraste (en vez de una zapatilla toda del mismo color)</span>
+              </label>
+            )}
+            {categoria === "buzo" && (
+              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <input type="checkbox" checked={conCapucha} onChange={(e) => setConCapucha(e.target.checked)} />
+                <span>Con capucha (destildá si es crewneck, sin capucha)</span>
               </label>
             )}
             {categoria === "accesorio" && (

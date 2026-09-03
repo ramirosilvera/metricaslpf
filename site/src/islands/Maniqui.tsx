@@ -176,7 +176,12 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   const mangaCorta = MANGA_CORTA.includes(prenda.categoria);
   const sugerida = esSugerida(prenda);
   const cuelloD =
-    prenda.categoria === "buzo"
+    // + con_capucha -- pedido explícito del usuario, revisado como modista/
+    // ingeniero textil: no todos los buzos son hoodie. Antes se dibujaba
+    // esta pieza para CUALQUIER buzo sin excepción; un buzo crewneck real
+    // (con_capucha=false, verificado contra el placard del usuario) no la
+    // lleva.
+    prenda.categoria === "buzo" && prenda.con_capucha
       ? // capucha -- revisada como modista con apoyo de referencias reales
         // (búsqueda: fashion flat sketches de hoodie): el ancho de una
         // capucha real ronda 1.5x el ancho de la cabeza, apoyada/abultada
@@ -799,6 +804,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                 suelaContraste={p.suela_contraste}
                 posicionAccesorio={p.posicion_accesorio}
                 requiereCuello={p.requiere_cuello}
+                conCapucha={p.con_capucha}
               />
             </span>
           ))}

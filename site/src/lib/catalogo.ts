@@ -22,6 +22,10 @@ export interface PresetPrenda {
   /** Ver Prenda.posicion_accesorio en types.ts. Solo tiene sentido en
    *  categoria="accesorio"; se omite (== "cintura", cinturón) en el resto. */
   posicionAccesorio?: "cuello" | "cintura";
+  /** Ver Prenda.con_capucha en types.ts. Solo tiene sentido en
+   *  categoria="buzo"; se omite (== true, hoodie) salvo en los crewneck
+   *  puntuales sin capucha. */
+  conCapucha?: boolean;
 }
 
 /**
@@ -45,21 +49,36 @@ export interface PresetPrenda {
  * - `estacion` se deja vacía en la mayoría de las categorías: es la
  *   dimensión más dependiente del clima real de cada usuario (una remera
  *   blanca sirve en verano Y en entretiempo) -- forzar una estación ahí
- *   haría más daño que bien. EXCEPCIÓN, pedido explícito del usuario: los
- *   abrigos (buzo/sweater/campera) sí se tagean -- a diferencia de una
- *   remera, el nivel de abrigo real de la prenda determina sin ambigüedad
- *   si es de entretiempo o de invierno. Revisado como ingeniero textil,
- *   pedido explícito del usuario: la textura GENÉRICA de la categoría no
- *   alcanza, importa la FIBRA/el peso real de cada prenda puntual --
- *   "acolchado" no es siempre invierno (una campera de pluma tipo Uniqlo,
- *   ajustada al cuerpo y de relleno fino, es una prenda de entretiempo real
- *   -- la protección de invierno de verdad es la de volumen/relleno mucho
- *   mayor, tipo Nuptse) y "lana" no es siempre entretiempo (un sweater de
- *   lana gruesa es LA prenda de punto de invierno por excelencia; lo que sí
- *   es de entretiempo es un sweater más liviano -- viscosa, poliéster,
- *   algodón fino). Por eso cada entrada de abrigo de acá abajo tiene su
- *   propio comentario justificando la estación por peso/fibra real, no una
- *   regla ciega por textura -- ninguna queda sin tagear.
+ *   haría más daño que bien. EXCEPCIÓN, pedido explícito del usuario:
+ *   sweater y campera sí se tagean -- a diferencia de una remera, el nivel
+ *   de abrigo real de la prenda determina sin ambigüedad si es de
+ *   entretiempo o de invierno. Revisado como ingeniero textil, pedido
+ *   explícito del usuario: la textura GENÉRICA de la categoría no alcanza,
+ *   importa la FIBRA/el peso real de cada prenda puntual -- "acolchado" no
+ *   es siempre invierno (una campera de pluma tipo Uniqlo, ajustada al
+ *   cuerpo y de relleno fino, es una prenda de entretiempo real -- la
+ *   protección de invierno de verdad es la de volumen/relleno mucho mayor,
+ *   tipo Nuptse) y "lana" no es siempre entretiempo (un sweater de lana
+ *   gruesa es LA prenda de punto de invierno por excelencia; lo que sí es
+ *   de entretiempo es un sweater más liviano -- viscosa, poliéster, algodón
+ *   fino). Por eso cada entrada de abrigo de acá abajo tiene su propio
+ *   comentario justificando la estación por peso/fibra real, no una regla
+ *   ciega por textura -- ninguna queda sin tagear.
+ *   buzo QUEDA AFUERA de esta excepción a partir de esta revisión --
+ *   pedido explícito del usuario, revisado como modista/ingeniero textil:
+ *   "los buzos tmb algunos son livianos y otros más pesados... pero
+ *   tampoco los llamaría de invierno o de entretiempo". A diferencia de un
+ *   sweater de lana (fibra distinta = función térmica distinta) o una
+ *   campera (volumen/relleno distinto), el peso real que separa un buzo
+ *   más pesado (afelpado grueso, "frisado") de uno liviano (jersey/French
+ *   terry, "tejido_grueso") es una diferencia de TEXTURA -- el mismo tipo
+ *   de dato que ya distingue pana de corderoy -- no una diferencia de uso
+ *   estacional que el usuario reconozca como tal. Un buzo, a diferencia de
+ *   un sweater de lana o una campera de pluma, se usa indistintamente casi
+ *   todo el año en la práctica real de este usuario. `con_capucha` (ver
+ *   types.ts) es la tercera dimensión nueva de esta revisión, ortogonal a
+ *   las otras dos: si el buzo es hoodie o crewneck, un dato de corte/
+ *   diseño, no de tela ni de estación.
  * - `textura` solo cuando el nombre de la prenda ya la implica sin
  *   ambigüedad (zapatos de cuero -> cuero_liso, jean -> denim, campera de
  *   pluma -> acolchado, prenda con estilo "deportivo" -> poliester, pedido
@@ -197,42 +216,52 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "short-deportivo-azul", nombre: "Short deportivo azul", categoria: "short_deportivo", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
 
   // --- Buzos ---
-  // estacion "entretiempo" en los 6 -- un buzo de tejido grueso liviano es
-  // la capa que se usa solo (otoño/primavera) o debajo de una campera de
-  // pluma en pleno invierno, pero nunca ES la protección de invierno por
-  // sí solo (ver el criterio de abrigos al principio del archivo).
-  { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
-  { id: "buzo-negro", nombre: "Buzo negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
-  { id: "buzo-azul-marino", nombre: "Buzo azul marino", categoria: "buzo", colorHex: "#1F2A44", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
+  // Sin estacion en ninguna entrada de acá abajo -- corrección de esta
+  // ronda, pedido explícito del usuario ("los buzos tmb algunos son
+  // livianos y otros más pesados... pero tampoco los llamaría de invierno o
+  // de entretiempo"): a diferencia de sweater/campera, ver el criterio
+  // completo al principio del archivo. `con_capucha` default true (hoodie)
+  // en los 6 de acá abajo -- son la variante hoodie del catálogo, la única
+  // que existía hasta esta revisión.
+  { id: "buzo-gris", nombre: "Buzo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  { id: "buzo-negro", nombre: "Buzo negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  { id: "buzo-azul-marino", nombre: "Buzo azul marino", categoria: "buzo", colorHex: "#1F2A44", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
   // mismo celeste que camisa-celeste (#B7D2EC) -- ver el criterio de
-  // paleta consistente que ya documenta el archivo. "buzo" en esta app ya
-  // ES un hoodie: TorsoCuerpo (Maniqui.tsx) le dibuja capucha a CUALQUIER
-  // prenda categoria="buzo" sin excepción, así que no hace falta una
-  // categoría nueva para "tipo hoodie" -- ya es lo que esta categoría
-  // siempre fue.
-  { id: "buzo-celeste", nombre: "Buzo celeste", categoria: "buzo", colorHex: "#B7D2EC", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
+  // paleta consistente que ya documenta el archivo.
+  { id: "buzo-celeste", nombre: "Buzo celeste", categoria: "buzo", colorHex: "#B7D2EC", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
   // mismo beige (#D8C7A1) que ya usan pantalon-beige/bermuda-beige/etc. --
   // ver el comentario de remera-beige más arriba. estilo/ocasion/textura
   // igual que el resto de los buzos (casual/casual/tejido_grueso): el
   // color no cambia el registro de la prenda.
-  { id: "buzo-beige", nombre: "Buzo beige", categoria: "buzo", colorHex: "#D8C7A1", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
+  { id: "buzo-beige", nombre: "Buzo beige", categoria: "buzo", colorHex: "#D8C7A1", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
   // verde botella -- color de tendencia confirmado por búsqueda web para
   // la temporada actual ("lo llevamos en camel, verde botella o negro").
   // Matiz bien distinto del verde militar/oliva (h=140, un verde bosque/
   // botella real) y del verde deportivo del pantalón (h=127 pero mucho más
   // desaturado) -- no una variante redundante.
-  { id: "buzo-verde", nombre: "Buzo verde botella", categoria: "buzo", colorHex: "#1E5631", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
-  // frisado -- pedido explícito del usuario ("hay buzos... que son de
-  // entretiempo y otras de invierno"): un buzo frisado (interior de
-  // felpa/fleece cepillada, más grueso y aislante que el jersey liso de
-  // los 6 de arriba) sí es una prenda de invierno real, no solo una capa
-  // de entretiempo. Misma textura "tejido_grueso" que el resto -- el
-  // frisado sigue siendo un tejido grueso de punto, la diferencia real es
-  // de gramaje/aislación, no de familia de tela (por eso no hace falta un
-  // valor de textura nuevo acá, a diferencia de "viscosa" en sweaters,
-  // donde sí cambia la fibra).
-  { id: "buzo-frisado-negro", nombre: "Buzo frisado negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "invierno" },
-  { id: "buzo-frisado-gris", nombre: "Buzo frisado gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", estacion: "invierno" },
+  { id: "buzo-verde", nombre: "Buzo verde botella", categoria: "buzo", colorHex: "#1E5631", textura: "tejido_grueso", estilo: "casual", ocasion: "casual" },
+  // frisado -- pedido explícito del usuario ("hay buzos... que son
+  // livianos y otros más pesados"): un buzo frisado (interior de felpa/
+  // fleece cepillada, más grueso y aislante que el jersey/French terry
+  // "tejido_grueso" de los 6 de arriba) es un textil real y puntualmente
+  // distinto -- por eso, a partir de esta revisión, tiene su propio valor
+  // de Textura ("frisado", ver types.ts) en vez de compartir
+  // "tejido_grueso" con una estacion distinta como diferenciador (así se
+  // tageaba antes: era el gramaje/aislación real de la TELA, no del uso
+  // estacional -- corregido en esta misma ronda). Siguen siendo hoodie
+  // (con_capucha default true): el peso de la tela y el corte del cuello
+  // son datos independientes.
+  { id: "buzo-frisado-negro", nombre: "Buzo frisado negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "frisado", estilo: "casual", ocasion: "casual" },
+  { id: "buzo-frisado-gris", nombre: "Buzo frisado gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "frisado", estilo: "casual", ocasion: "casual" },
+  // crewneck (sin capucha) -- pedido explícito del usuario, con dos
+  // ejemplos reales de su propio placard: un buzo gris frisado/pesado y un
+  // buzo verde tejido_grueso/liviano, los dos sin capucha. Estas dos
+  // entradas cubren los dos perfiles textiles reales (pesado y liviano) en
+  // versión crewneck -- no se duplican los 6 colores hoodie de arriba, dos
+  // alcanza para que el motor de "comprar" tenga de dónde sugerir un
+  // crewneck de cada peso.
+  { id: "buzo-crewneck-gris", nombre: "Buzo crewneck gris (sin capucha)", categoria: "buzo", colorHex: "#8C8C8C", textura: "frisado", estilo: "casual", ocasion: "casual", conCapucha: false },
+  { id: "buzo-crewneck-azul-marino", nombre: "Buzo crewneck azul marino (sin capucha)", categoria: "buzo", colorHex: "#1F2A44", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", conCapucha: false },
 
   // --- Sweaters (oficina/vestir) ---
   // estacion "invierno" en los 6 de lana -- corrección de una ronda
@@ -438,6 +467,7 @@ export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number
     suela_contraste: preset.suelaContraste ?? false,
     requiere_cuello: preset.requiereCuello ?? false,
     posicion_accesorio: preset.posicionAccesorio ?? "cintura",
+    con_capucha: preset.conCapucha ?? true,
     created_at: "",
     updated_at: "",
   };

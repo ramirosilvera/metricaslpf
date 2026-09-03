@@ -115,6 +115,7 @@ export default function Probar() {
           suela_contraste: false,
           requiere_cuello: false,
           posicion_accesorio: "cintura",
+          con_capucha: true,
           created_at: "",
           updated_at: "",
         }
@@ -190,6 +191,7 @@ export default function Probar() {
                 suelaContraste={pruebaBase.suela_contraste}
                 posicionAccesorio={pruebaBase.posicion_accesorio}
                 requiereCuello={pruebaBase.requiere_cuello}
+                conCapucha={pruebaBase.con_capucha}
               />
             </span>
             <div style={{ flex: 1 }}>
@@ -233,6 +235,7 @@ export default function Probar() {
                             suelaContraste={prenda.suela_contraste}
                             posicionAccesorio={prenda.posicion_accesorio}
                             requiereCuello={prenda.requiere_cuello}
+                            conCapucha={prenda.con_capucha}
                           />
                         </span>
                         <div style={{ flex: 1 }}>

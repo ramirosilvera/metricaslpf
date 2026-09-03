@@ -149,6 +149,13 @@ const FAMILIA_TEXTURA: Record<string, "liso" | "texturado"> = {
   pana: "texturado",
   corderoy: "texturado",
   tejido_grueso: "texturado",
+  // afelpado/cepillado -- misma familia visual y táctil que tejido_grueso
+  // (trama de punto marcada, no lisa), agregado junto con el valor nuevo de
+  // Textura para diferenciar buzos livianos de pesados (pedido explícito
+  // del usuario, revisado como ingeniero textil -- ver el comentario largo
+  // en catalogo.ts sobre por qué esto es un dato de textura y no de
+  // estación).
+  frisado: "texturado",
   denim: "texturado",
   acolchado: "texturado",
 };

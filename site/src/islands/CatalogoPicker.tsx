@@ -76,6 +76,7 @@ export default function CatalogoPicker({
             suelaContraste={p.suelaContraste}
             posicionAccesorio={p.posicionAccesorio}
             requiereCuello={p.requiereCuello}
+            conCapucha={p.conCapucha}
           />
         </span>
         <span className="catalogo-nombre">{p.nombre}</span>

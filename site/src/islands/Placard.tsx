@@ -202,6 +202,7 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
                         suelaContraste={p.suela_contraste}
                         posicionAccesorio={p.posicion_accesorio}
                         requiereCuello={p.requiere_cuello}
+                        conCapucha={p.con_capucha}
                       />
                     </span>
                     <strong style={{ fontSize: "0.85rem", textTransform: "capitalize" }}>{CATEGORIA_LABEL[p.categoria]}</strong>

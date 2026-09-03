@@ -1277,6 +1277,7 @@ function mkPrenda(
     suela_contraste: false,
     requiere_cuello: false,
     posicion_accesorio: "cintura",
+    con_capucha: true,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };
