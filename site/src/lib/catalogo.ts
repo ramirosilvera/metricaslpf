@@ -347,6 +347,18 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // crewneck de cada peso.
   { id: "buzo-crewneck-gris", nombre: "Buzo crewneck gris (sin capucha)", categoria: "buzo", colorHex: "#8C8C8C", textura: "frisado", estilo: "casual", ocasion: "casual", conCapucha: false },
   { id: "buzo-crewneck-azul-marino", nombre: "Buzo crewneck azul marino (sin capucha)", categoria: "buzo", colorHex: "#1F2A44", textura: "tejido_grueso", estilo: "casual", ocasion: "casual", conCapucha: false },
+  // buzo oversize -- auditoría de sastrería (Consejo, ronda de revisión
+  // visual del maniquí), pedido explícito del usuario ("revisa en el
+  // maniquí cómo quedan las prendas ajustada, regular u holgada... si no
+  // hay prendas en el catálogo agrégalas"). Hueco real encontrado: el
+  // catálogo tenía calce "holgado" en camperas de pluma, pero ningún buzo
+  // ni sweater ni remera -- el hoodie oversize es EL básico "holgado" más
+  // usado en indumentaria de calle real, y sin esta entrada no había cómo
+  // ver el efecto del calce en un torso de punto (solo en camperas
+  // acolchadas). "urbano" (no "casual") por el mismo motivo que ya
+  // documenta campera-pluma-negra-oversize: el volumen exagerado es un
+  // statement de calle, no un básico neutro.
+  { id: "buzo-negro-oversize", nombre: "Buzo negro (oversize)", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "urbano", ocasion: "casual", calce: "holgado" },
 
   // --- Sweaters (oficina/vestir) ---
   // estacion "invierno" en los 6 de lana -- corrección de una ronda

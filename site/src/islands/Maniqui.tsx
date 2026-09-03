@@ -1,6 +1,44 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
 import PrendaIcon, { PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
-import { descripcionPrenda, type Categoria, type CorteCalzado, type Prenda } from "../lib/types";
+import { descripcionPrenda, type Calce, type Categoria, type CorteCalzado, type Prenda } from "../lib/types";
+
+/** Escala horizontal de la silueta según Calce (ver types.ts) -- auditoría
+ *  de sastrería (Consejo, ronda de revisión visual del maniquí), pedido
+ *  explícito del usuario: "revisa en el maniquí cómo quedan las prendas
+ *  ajustada, regular u holgada". Hallazgo real: el dato `calce` se agregó
+ *  al motor de recomendación en la ronda anterior, pero el maniquí nunca lo
+ *  leía -- una prenda ajustada, regular y holgada se dibujaban IDÉNTICAS,
+ *  así que el dato no tenía ningún efecto visual, aunque sí lo tuviera en
+ *  las recomendaciones.
+ *
+ *  Técnica: mismo mecanismo que ya usa este archivo para el afinado general
+ *  del cuerpo (ver el comentario largo de la "6ta pasada" en TorsoCuerpo,
+ *  más abajo) -- un `scale` horizontal aplicado con `transform`, centrado
+ *  en x=60 (el eje vertical del cuerpo en las 120 unidades del viewBox), en
+ *  vez de redibujar a mano cada curva Bézier ya calibrada para tres anchos
+ *  distintos. Escalar SOLO en X (no en Y) ensancha o angosta la silueta sin
+ *  estirar el largo -- ropa más ancha, no más alta.
+ *
+ *  Dos tablas, no una: el rango de "se lee como holgado/ajustado" es
+ *  distinto en torso y en piernas -- un pantalón wide-leg necesita mucho
+ *  más ensanche relativo que un torso oversize para leerse como tal (la
+ *  pierna es una columna angosta contra el largo del cuerpo; el torso ya es
+ *  la parte más ancha). Magnitudes verificadas por ejecución (Playwright,
+ *  screenshot real) contra el maniquí base para que la prenda "ajustada"
+ *  nunca quede más angosta que el brazo/pierna neutro que tiene debajo (se
+ *  vería el maniquí asomando por los bordes en vez de una prenda ceñida). */
+const ESCALA_TORSO: Record<Calce, number> = { ajustado: 0.88, regular: 1, holgado: 1.22 };
+const ESCALA_PIERNAS: Record<Calce, number> = { ajustado: 0.8, regular: 1, holgado: 1.3 };
+
+/** `transform` que escala en X centrado en x=60, o `undefined` para
+ *  calce="regular" -- evitar el <g transform="..."> de más cuando no hace
+ *  ninguna falta (no cambia el render, pero mantiene el DOM/SVG resultante
+ *  limpio para el caso, hoy mayoritario, de prendas sin este dato cargado). */
+function escalaSilueta(escalas: Record<Calce, number>, calce: Calce): string | undefined {
+  const sx = escalas[calce];
+  if (sx === 1) return undefined;
+  return `translate(60,0) scale(${sx},1) translate(-60,0)`;
+}
 
 type Capa = "torso" | "piernas" | "pies" | "accesorio";
 
@@ -228,6 +266,12 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             </defs>
           )}
 
+          {/* calce (ajustado/regular/holgado) -- ver escalaSilueta arriba
+              del archivo. Envuelve TODO el resto del torso (capucha, mangas,
+              cuerpo, cierre de escote, detalle de cuello por categoría) para
+              que la prenda entera se lea más ceñida o más suelta como una
+              sola pieza de tela, no partes desincronizadas. */}
+          <g transform={escalaSilueta(ESCALA_TORSO, prenda.calce)}>
           {/* capucha del buzo, dibujada primero para que el cuerpo la tape
               parcialmente. Usa luzHsl (tono plano) en vez de `fill` (el
               degradé compartido) a propósito -- ver el comentario largo
@@ -531,6 +575,7 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               />
             </>
           )}
+          </g>
         </>
       )}
     />
@@ -576,6 +621,10 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
       prenda={prenda}
       hijos={(fill, stroke, patron) => (
         <>
+          {/* calce (ajustado/regular/holgado) -- ver escalaSilueta arriba
+              del archivo y el mismo mecanismo en TorsoCuerpo. Envuelve las
+              dos piernas Y la cinturilla como una sola pieza de tela. */}
+          <g transform={escalaSilueta(ESCALA_PIERNAS, prenda.calce)}>
           {/* dos piernas propias (más anchas que las del maniquí de base
               en 3-4u por lado) en vez de un solo bloque -- así no se ven
               tiritas del maniquí asomando a los costados ni en la
@@ -598,6 +647,7 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
             stroke={stroke}
             {...strokeProps}
           />
+          </g>
         </>
       )}
     />
