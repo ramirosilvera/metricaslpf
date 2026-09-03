@@ -1013,7 +1013,7 @@ export function sugerenciaDeVariedad(
   }
 
   // Hueco de color: 3+ prendas de este registro pero casi siempre el mismo
-  // color (mismo umbral que analizarPlacard en estadisticas.ts:
+  // color (mismo umbral que analizarFoda en estadisticas.ts:
   // MAX_COLORES_VARIEDAD_BAJA=2).
   if (prendasEstilo.length >= 3 && coloresActuales.size <= 2) {
     for (const categoria of CATEGORIAS_TORSO) {

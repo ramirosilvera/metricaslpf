@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { nombreColor } from "../lib/color";
 import {
-  analizarPlacard,
+  analizarFoda,
   contarPorCategoria,
   contarPorColor,
   contarPorEstacion,
   contarPorEstilo,
+  type AnalisisFoda,
   type ConteoCategoria,
   type ConteoColor,
   type ConteoEstacion,
@@ -15,16 +16,30 @@ import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import type { Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 
-/** Fila de gráfico de barras horizontal, un solo hue (--accent, magnitud
- *  secuencial) -- no lleva leyenda porque es una única serie (color-formula.md:
- *  "a single series needs no legend box"). Valor en la punta de la barra. */
-export function BarraMagnitud({ label, cantidad, max }: { label: string; cantidad: number; max: number }) {
+/** Fila de gráfico de barras horizontal. `color` es opcional -- sin él,
+ *  un solo hue fijo (--accent, magnitud secuencial, sin leyenda: "a single
+ *  series needs no legend box"). Con él (GraficoFoda, más abajo), cada
+ *  fila es una categoría distinta (identidad, no magnitud) -- ahí el color
+ *  SIEMPRE va acompañado del label de texto que ya trae el componente, así
+ *  que la identidad nunca depende solo del color. Valor en la punta de la
+ *  barra en los dos casos. */
+export function BarraMagnitud({
+  label,
+  cantidad,
+  max,
+  color,
+}: {
+  label: string;
+  cantidad: number;
+  max: number;
+  color?: string;
+}) {
   const pct = max > 0 ? (cantidad / max) * 100 : 0;
   return (
     <div className="barra-fila">
       <span className="barra-label">{label}</span>
       <div className="barra-pista">
-        <div className="barra-relleno" style={{ width: `${pct}%` }} />
+        <div className="barra-relleno" style={{ width: `${pct}%`, ...(color ? { background: color } : {}) }} />
       </div>
       <span className="barra-valor">{cantidad}</span>
     </div>
@@ -69,6 +84,113 @@ export function GraficoEstaciones({ datos }: { datos: ConteoEstacion[] }) {
       {datos.map((d) => (
         <BarraMagnitud key={d.estacion} label={d.label} cantidad={d.cantidad} max={max} />
       ))}
+    </div>
+  );
+}
+
+type CuadranteFoda = "fortalezas" | "debilidades" | "oportunidades" | "amenazas";
+
+// Colores dedicados de la matriz FODA (--foda-*, definidos en global.css),
+// distintos de los --ok/--warn/--danger que ya usa el resto de la app para
+// severidad de estado -- acá son identidad categórica (4 cuadrantes fijos,
+// nunca reordenados), no una escala de gravedad. Paleta validada con el
+// script de la skill de dataviz (validate_palette.js): las 4 pasan piso de
+// lightness/croma, separación CVD y contraste contra el fondo -- el par
+// oportunidades/debilidades queda en la banda 6-8 de ΔE para daltonismo
+// (legal solo con encoding secundario), por eso cada barra y cada celda de
+// la tabla SIEMPRE llevan el nombre del cuadrante como texto al lado del
+// color, nunca color solo.
+const FODA_LABEL: Record<CuadranteFoda, string> = {
+  fortalezas: "Fortalezas",
+  debilidades: "Debilidades",
+  oportunidades: "Oportunidades",
+  amenazas: "Amenazas",
+};
+const FODA_COLOR: Record<CuadranteFoda, string> = {
+  fortalezas: "var(--foda-fortalezas)",
+  debilidades: "var(--foda-debilidades)",
+  oportunidades: "var(--foda-oportunidades)",
+  amenazas: "var(--foda-amenazas)",
+};
+// Orden fijo, no por cantidad -- mismo criterio que GraficoEstaciones: es
+// la matriz FODA estándar (positivo antes que negativo, interno antes que
+// externo), un orden que se lee siempre igual pesa más que ordenar por
+// magnitud acá.
+const ORDEN_FODA: CuadranteFoda[] = ["fortalezas", "debilidades", "oportunidades", "amenazas"];
+
+/** El "gráfico" de la matriz FODA -- un vistazo rápido de cuántos hallazgos
+ *  hay en cada cuadrante, mismo componente de barra que el resto de la
+ *  página (BarraMagnitud), coloreado por cuadrante. La lectura detallada
+ *  (el texto de cada hallazgo) vive en TablaFoda, más abajo -- este gráfico
+ *  es el resumen ejecutivo, no un reemplazo de la tabla. */
+export function GraficoFoda({ analisis }: { analisis: AnalisisFoda }) {
+  const datos = ORDEN_FODA.map((cuadrante) => ({ cuadrante, cantidad: analisis[cuadrante].length }));
+  const max = Math.max(1, ...datos.map((d) => d.cantidad));
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+      {datos.map((d) => (
+        <BarraMagnitud
+          key={d.cuadrante}
+          label={FODA_LABEL[d.cuadrante]}
+          cantidad={d.cantidad}
+          max={max}
+          color={FODA_COLOR[d.cuadrante]}
+        />
+      ))}
+    </div>
+  );
+}
+
+function CeldaFoda({ cuadrante, items }: { cuadrante: CuadranteFoda; items: string[] }) {
+  const color = FODA_COLOR[cuadrante];
+  return (
+    <td className="foda-celda" style={{ borderLeft: `4px solid ${color}`, background: `color-mix(in srgb, ${color} 8%, var(--surface))` }}>
+      <strong style={{ display: "block", marginBottom: "0.5rem", color }}>{FODA_LABEL[cuadrante]}</strong>
+      {items.length === 0 ? (
+        <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)" }}>Sin hallazgos en esta categoría por ahora.</p>
+      ) : (
+        <ul style={{ margin: 0, paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          {items.map((item, i) => (
+            <li key={i} style={{ fontSize: "0.85rem" }}>
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+    </td>
+  );
+}
+
+/** La "tabla" de la matriz FODA -- formato ejecutivo clásico: filas
+ *  interno/externo, columnas positivo/negativo, cruzando en los 4
+ *  cuadrantes de la metodología (fortalezas = interno+positivo,
+ *  debilidades = interno+negativo, oportunidades = externo+positivo,
+ *  amenazas = externo+negativo). Ver analizarFoda en estadisticas.ts para
+ *  qué alimenta cada cuadrante. */
+export function TablaFoda({ analisis }: { analisis: AnalisisFoda }) {
+  return (
+    <div style={{ overflowX: "auto" }}>
+      <table className="foda-tabla">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Positivo</th>
+            <th>Negativo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Interno</th>
+            <CeldaFoda cuadrante="fortalezas" items={analisis.fortalezas} />
+            <CeldaFoda cuadrante="debilidades" items={analisis.debilidades} />
+          </tr>
+          <tr>
+            <th>Externo</th>
+            <CeldaFoda cuadrante="oportunidades" items={analisis.oportunidades} />
+            <CeldaFoda cuadrante="amenazas" items={analisis.amenazas} />
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -118,7 +240,7 @@ export default function Estadisticas() {
   const porEstilo = useMemo(() => contarPorEstilo(placard ?? []), [placard]);
   const porEstacion = useMemo(() => contarPorEstacion(placard ?? []), [placard]);
   const porColor = useMemo(() => contarPorColor(placard ?? []), [placard]);
-  const analisis = useMemo(() => analizarPlacard(placard ?? []), [placard]);
+  const analisis = useMemo(() => analizarFoda(placard ?? []), [placard]);
 
   if (!SUPABASE_CONFIGURADO) return <ConfigWarning />;
 
@@ -197,23 +319,21 @@ export default function Estadisticas() {
         </div>
       </section>
 
-      {(analisis.fortalezas.length > 0 || analisis.oportunidades.length > 0) && (
-        <section>
-          <h2 style={{ fontSize: "1.05rem", margin: "0 0 0.75rem" }}>Fortalezas y oportunidades de mejora</h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-            {analisis.fortalezas.map((f, i) => (
-              <p key={`f-${i}`} className="callout-ok" style={{ margin: 0 }}>
-                ✓ {f}
-              </p>
-            ))}
-            {analisis.oportunidades.map((o, i) => (
-              <p key={`o-${i}`} className="callout-warn" style={{ margin: 0 }}>
-                ⚠ {o}
-              </p>
-            ))}
-          </div>
-        </section>
-      )}
+      <section>
+        <h2 style={{ fontSize: "1.05rem", margin: "0 0 0.25rem" }}>Diagnóstico FODA</h2>
+        <p style={{ margin: "0 0 0.75rem", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+          Resumen ejecutivo: {analisis.fortalezas.length} fortaleza{analisis.fortalezas.length === 1 ? "" : "s"} y{" "}
+          {analisis.debilidades.length} debilidad{analisis.debilidades.length === 1 ? "" : "es"} internas -- {analisis.oportunidades.length}{" "}
+          oportunidad{analisis.oportunidades.length === 1 ? "" : "es"} y {analisis.amenazas.length} amenaza
+          {analisis.amenazas.length === 1 ? "" : "s"} del catálogo/entorno.
+        </p>
+        <div className="card" style={{ marginBottom: "0.75rem" }}>
+          <GraficoFoda analisis={analisis} />
+        </div>
+        <div className="card">
+          <TablaFoda analisis={analisis} />
+        </div>
+      </section>
     </div>
   );
 }

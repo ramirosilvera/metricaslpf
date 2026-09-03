@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { analizarPlacard, coincideBusqueda, contarPorCategoria, contarPorColor, contarPorEstacion, contarPorEstilo } from "./estadisticas";
+import { analizarFoda, coincideBusqueda, contarPorCategoria, contarPorColor, contarPorEstacion, contarPorEstilo } from "./estadisticas";
 import type { Prenda } from "./types";
 
 function mkPrenda(
@@ -119,23 +119,25 @@ describe("contarPorColor", () => {
   });
 });
 
-describe("analizarPlacard", () => {
-  it("placard vacío -> solo una oportunidad, sin fortalezas", () => {
-    const r = analizarPlacard([]);
+describe("analizarFoda", () => {
+  it("placard vacío -> solo una debilidad, sin fortalezas/oportunidades/amenazas", () => {
+    const r = analizarFoda([]);
     expect(r.totalPrendas).toBe(0);
     expect(r.fortalezas).toHaveLength(0);
-    expect(r.oportunidades.length).toBeGreaterThan(0);
+    expect(r.debilidades.length).toBeGreaterThan(0);
+    expect(r.oportunidades).toHaveLength(0);
+    expect(r.amenazas).toHaveLength(0);
   });
 
-  it("sin ninguna prenda de piernas -> oportunidad específica de ancla", () => {
-    const r = analizarPlacard([mkPrenda("remera", "#FFFFFF", 0, 0, 90, "casual")]);
-    expect(r.oportunidades.some((o) => o.includes("ancla"))).toBe(true);
+  it("sin ninguna prenda de piernas -> debilidad específica de ancla (interno, no externo)", () => {
+    const r = analizarFoda([mkPrenda("remera", "#FFFFFF", 0, 0, 90, "casual")]);
+    expect(r.debilidades.some((d) => d.includes("ancla"))).toBe(true);
   });
 
   it("con bermuda cargado no pide pantalón por separado (comparten el mismo lugar del outfit)", () => {
-    const r = analizarPlacard([mkPrenda("bermuda", "#111111", 0, 0, 15, "casual")]);
-    expect(r.oportunidades.some((o) => o.includes("pantalón, bermuda o short"))).toBe(false);
-    const categoriasFaltantes = r.oportunidades.find((o) => o.startsWith("Categorías sin ninguna prenda"));
+    const r = analizarFoda([mkPrenda("bermuda", "#111111", 0, 0, 15, "casual")]);
+    expect(r.debilidades.some((d) => d.includes("pantalón, bermuda o short"))).toBe(false);
+    const categoriasFaltantes = r.debilidades.find((d) => d.startsWith("Categorías sin ninguna prenda"));
     expect(categoriasFaltantes ?? "").not.toContain("pantalon");
   });
 
@@ -145,7 +147,7 @@ describe("analizarPlacard", () => {
       mkPrenda("camisa", "#FFFFFF", 0, 0, 95, "formal"),
       mkPrenda("calzado", "#3B2A1E", 25, 40, 20, "formal"),
     ];
-    const r = analizarPlacard(placard);
+    const r = analizarFoda(placard);
     expect(r.fortalezas.some((f) => f.includes("Formal"))).toBe(true);
   });
 
@@ -156,20 +158,72 @@ describe("analizarPlacard", () => {
       mkPrenda("camisa", "#FF0000", 0, 80, 50),
       mkPrenda("buzo", "#0000FF", 220, 80, 50),
     ];
-    const r = analizarPlacard(placard);
+    const r = analizarFoda(placard);
     expect(r.variedadColores).toBe(4);
     expect(r.fortalezas.some((f) => f.includes("variedad de colores"))).toBe(true);
   });
 
-  it("1-2 colores con 3+ prendas -> oportunidad de poca variedad", () => {
+  it("1-2 colores con 3+ prendas -> debilidad de poca variedad (interno, no oportunidad)", () => {
     const placard = [
       mkPrenda("pantalon", "#000000", 0, 0, 5),
       mkPrenda("remera", "#010101", 0, 0, 6),
       mkPrenda("buzo", "#020202", 0, 0, 4),
     ];
-    const r = analizarPlacard(placard);
+    const r = analizarFoda(placard);
     expect(r.variedadColores).toBe(1);
-    expect(r.oportunidades.some((o) => o.includes("Poca variedad"))).toBe(true);
+    expect(r.debilidades.some((d) => d.includes("Poca variedad"))).toBe(true);
+  });
+
+  it("estilo sin ancla pero con catálogo que combina -> oportunidad concreta (externo, sugerencia de compra)", () => {
+    // clásico sin ningún pantalón/bermuda/short -- sugerenciaDeAncla real
+    // (mismo motor que "Vestite hoy") tiene que encontrar algo del
+    // catálogo para sugerir.
+    const r = analizarFoda([mkPrenda("camisa", "#FFFFFF", 0, 0, 95, "clasico")]);
+    expect(r.oportunidades.length).toBeGreaterThan(0);
+  });
+
+  it("un solo pantalón de un estilo -> amenaza de ancla única", () => {
+    const r = analizarFoda([
+      mkPrenda("pantalon", "#111111", 0, 0, 15, "formal"),
+      mkPrenda("camisa", "#FFFFFF", 0, 0, 95, "formal"),
+    ]);
+    expect(r.amenazas.some((a) => a.includes("una sola prenda de piernas") && a.includes("Formal"))).toBe(true);
+  });
+
+  it("dos pantalones del mismo estilo -> sin amenaza de ancla única para ese estilo", () => {
+    const r = analizarFoda([
+      mkPrenda("pantalon", "#111111", 0, 0, 15, "formal"),
+      mkPrenda("pantalon", "#222222", 0, 0, 20, "formal"),
+    ]);
+    expect(r.amenazas.some((a) => a.includes("Formal") && a.includes("una sola prenda"))).toBe(false);
+  });
+
+  it("hay abrigos pero ninguno de invierno -> amenaza real (motivada por el trabajo de entretiempo/invierno)", () => {
+    const entretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55, "clasico", [], "entretiempo");
+    const r = analizarFoda([entretiempo]);
+    expect(r.amenazas.some((a) => a.includes("invierno"))).toBe(true);
+  });
+
+  it("hay un abrigo de invierno cargado -> sin esa amenaza", () => {
+    const invierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10, "clasico", [], "invierno");
+    const r = analizarFoda([invierno]);
+    expect(r.amenazas.some((a) => a.includes("invierno"))).toBe(false);
+  });
+
+  it("sin ningún abrigo cargado, no duplica la amenaza (ya la cubre la debilidad de categoría ausente)", () => {
+    const r = analizarFoda([mkPrenda("remera", "#FFFFFF", 0, 0, 90, "casual")]);
+    expect(r.amenazas.some((a) => a.includes("invierno"))).toBe(false);
+  });
+
+  it("un color concentra la mitad o más del placard (4+) -> amenaza de concentración", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10),
+      mkPrenda("remera", "#1A1A1A", 0, 0, 10),
+      mkPrenda("buzo", "#1A1A1A", 0, 0, 10),
+      mkPrenda("camisa", "#FFFFFF", 0, 0, 95),
+    ];
+    const r = analizarFoda(placard);
+    expect(r.amenazas.some((a) => a.includes("concentra"))).toBe(true);
   });
 });
 

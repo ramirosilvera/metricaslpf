@@ -10,6 +10,20 @@
   --ok: #4c7a4f;
   --warn: #b8892e;
   --danger: #b4453a;
+  /* Paleta dedicada de la matriz FODA (Estadísticas) -- identidad
+     categórica de 4 cuadrantes fijos, no una escala de severidad como
+     --ok/--warn/--danger de arriba (por eso no se reusan tal cual: la
+     skill de dataviz marca "status colors... never reused for series 4").
+     Validada con validate_palette.js: --foda-fortalezas más saturado que
+     --ok (que solo por sí solo no pasa el piso de croma como color
+     categórico) y --foda-oportunidades es un azul nuevo, sin el cual el
+     naranja de --accent quedaba a ΔE 6.0 de --warn (indistinguible incluso
+     con visión de color normal). --foda-debilidades/--foda-amenazas
+     reusan --warn/--danger sin cambios: ya pasaban. */
+  --foda-fortalezas: #3d7a42;
+  --foda-debilidades: #b8892e;
+  --foda-oportunidades: #1a6ba8;
+  --foda-amenazas: #b4453a;
   --radius: 14px;
   --shadow: 0 2px 10px rgba(33, 26, 21, 0.06);
   --shadow-elevada: 0 8px 24px rgba(33, 26, 21, 0.1);
@@ -558,29 +572,44 @@ body.tiene-aviso-actualizacion {
   margin: 0 auto;
 }
 
-.callout-ok {
-  background: color-mix(in srgb, var(--ok) 12%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--ok) 30%, transparent);
-  color: var(--ok);
-  border-radius: 10px;
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
+/* Matriz FODA de Estadísticas (TablaFoda en Estadisticas.tsx) -- formato
+   ejecutivo clásico: filas interno/externo, columnas positivo/negativo. Un
+   <table> real (no una grilla de cards) a propósito -- el usuario pidió
+   "una tabla", y además es semánticamente correcto para datos que de
+   verdad se leen por fila+columna. Sin min-width fijo a propósito
+   (verificado renderizando la página real, viewport angosto tipo celular):
+   con un ancho mínimo forzado, el texto de cada hallazgo quedaba
+   recortado en vez de scrollear -- el overflow-x del contenedor (ver
+   TablaFoda) queda como red de seguridad para un caso extremo, no como el
+   comportamiento esperado en el uso normal. */
+.foda-tabla {
+  width: 100%;
+  border-collapse: collapse;
 }
-.callout-ok a {
-  color: var(--ok);
+.foda-tabla th,
+.foda-tabla td {
+  border: 1px solid var(--border);
+  padding: 0.9rem;
+  text-align: left;
+  vertical-align: top;
+}
+.foda-tabla thead th {
+  background: var(--bg);
+  font-size: 0.75rem;
   font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
-
-/* Misma estructura que .callout-ok, en --warn -- para las "oportunidades de
-   mejora" de Estadísticas: no es un error, es información para decidir la
-   próxima compra. */
-.callout-warn {
-  background: color-mix(in srgb, var(--warn) 12%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent);
-  color: var(--warn);
-  border-radius: 10px;
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
+.foda-tabla tbody th {
+  background: var(--bg);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.foda-celda {
+  width: 50%;
 }
 
 /* Estadísticas: KPI row de stat tiles (total de prendas, variedad de

@@ -1,5 +1,5 @@
 import { nombreColor } from "./color";
-import { categoriasAusentes, ESTILO_LABEL, estilosDe } from "./recommend";
+import { categoriasAusentes, ESTILO_LABEL, estilosDe, sugerenciaDeAncla, sugerenciaDeVariedad } from "./recommend";
 import { CATEGORIA_LABEL, descripcionPrenda, ESTACION_LABEL, type Categoria, type Estacion, type Estilo, type Prenda } from "./types";
 
 /** Mismo orden que CATEGORIA_LABEL en types.ts -- se deriva de sus claves en
@@ -15,6 +15,14 @@ export const TODAS_LAS_CATEGORIAS = Object.keys(CATEGORIA_LABEL) as Categoria[];
  *  no crear una dependencia cruzada por 3 strings): recommend.ts no la
  *  exporta. */
 const CATEGORIAS_PIERNAS: Categoria[] = ["pantalon", "bermuda", "short_deportivo"];
+
+/** sweater/campera son, a partir de la revisión que diferenció abrigos de
+ *  entretiempo/invierno, las únicas dos categorías que se tagean por
+ *  `estacion` sin ambigüedad (ver el criterio largo en catalogo.ts) --
+ *  buzo queda afuera a propósito (pedido explícito del usuario: "tampoco
+ *  los llamaría de invierno o de entretiempo"). Duplicado acá, mismo
+ *  motivo que CATEGORIAS_PIERNAS arriba: recommend.ts no la exporta. */
+const CATEGORIAS_ABRIGO_CON_ESTACION: Categoria[] = ["sweater", "campera"];
 
 const ESTILOS: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
 const ESTACIONES: Estacion[] = ["verano", "entretiempo", "invierno"];
@@ -113,15 +121,27 @@ export function contarPorEstacion(placard: Prenda[]): ConteoEstacion[] {
   }));
 }
 
-export interface AnalisisPlacard {
+export interface AnalisisFoda {
   totalPrendas: number;
   variedadColores: number;
+  /** Interno + positivo: lo que ya funciona bien. */
   fortalezas: string[];
+  /** Interno + negativo: huecos propios del placard (mismo contenido que
+   *  antes vivía bajo "oportunidades de mejora" -- ver el comentario de
+   *  analizarFoda más abajo sobre por qué ese nombre estaba mal puesto en
+   *  términos de la metodología FODA real). */
+  debilidades: string[];
+  /** Externo + positivo: qué ofrece el catálogo (el "mercado" de esta app)
+   *  para cerrar un hueco concreto -- a diferencia de debilidades (un
+   *  diagnóstico), esto es siempre una acción puntual y comprable. */
   oportunidades: string[];
+  /** Externo + negativo: riesgos de estructura, no solo huecos -- qué pasa
+   *  si una prenda puntual deja de estar disponible, o si cambia el clima. */
+  amenazas: string[];
 }
 
 // Umbrales del análisis: no salen de una fórmula, son un piso razonable
-// para no marcar como "fortaleza" o "oportunidad" algo que en un placard
+// para no marcar como "fortaleza" o "debilidad" algo que en un placard
 // recién arrancado (2-3 prendas) todavía no dice nada. 3 prendas en un
 // estilo ya alcanza para armar más de una combinación real; 4 colores
 // distintos es lo mínimo para no repetir combinación de color en cada
@@ -129,26 +149,50 @@ export interface AnalisisPlacard {
 const MIN_PRENDAS_FORTALEZA_ESTILO = 3;
 const MIN_COLORES_VARIEDAD_BUENA = 4;
 const MAX_COLORES_VARIEDAD_BAJA = 2;
+// Concentración de color: a partir de qué participación un solo color
+// "domina" el placard lo suficiente como para ser un riesgo real (perder o
+// ensuciar esa prenda puntual golpea desproporcionado). Con menos de 4
+// prendas en total no dice nada -- mismo piso de "muestra chica" que el
+// resto del análisis.
+const MIN_PRENDAS_PARA_CONCENTRACION = 4;
+const UMBRAL_CONCENTRACION_COLOR = 0.5;
 
-/** Lectura "de gerente" del placard: no solo cuenta, dice qué está fuerte y
- *  dónde conviene invertir la próxima compra -- reusando el mismo motor que
- *  ya usa el resto de la app (categoriasAusentes) en vez de inventar un
- *  criterio nuevo de qué categoría "falta". */
-export function analizarPlacard(placard: Prenda[]): AnalisisPlacard {
+/** Lectura "de MBA" del placard vía la matriz FODA/SWOT clásica -- pedido
+ *  explícito del usuario, reemplazando el "fortalezas y oportunidades de
+ *  mejora" anterior. Esa versión anterior, con la mejor intención, mezclaba
+ *  dos ejes distintos de la metodología real bajo un solo nombre
+ *  ("oportunidades" ahí eran en realidad huecos INTERNOS del placard, no
+ *  oportunidades del entorno) -- acá se separan en los 4 cuadrantes
+ *  correctos: interno/externo cruzado con positivo/negativo.
+ *
+ *  - Fortalezas y Debilidades reusan exactamente el mismo análisis interno
+ *    que ya existía (categoriasAusentes, conteo por estilo/color) -- ver el
+ *    comentario de cada bloque.
+ *  - Oportunidades es nuevo: reusa el mismo motor de sugerencias que ya usa
+ *    "Vestite hoy" (sugerenciaDeAncla/sugerenciaDeVariedad en
+ *    recommend.ts) -- el catálogo real hace de "mercado externo" del que
+ *    surge la oportunidad concreta, nunca una sugerencia inventada acá.
+ *  - Amenazas es nuevo: riesgos de estructura (un registro que depende de
+ *    una sola prenda ancla, sin abrigo de invierno cargado, un color que
+ *    concentra la mitad del placard) -- directamente motivado por el
+ *    trabajo reciente de diferenciar abrigos de entretiempo/invierno. */
+export function analizarFoda(placard: Prenda[]): AnalisisFoda {
   const totalPrendas = placard.length;
   const porColor = contarPorColor(placard);
   const variedadColores = porColor.length;
   const fortalezas: string[] = [];
+  const debilidades: string[] = [];
   const oportunidades: string[] = [];
+  const amenazas: string[] = [];
 
   if (totalPrendas === 0) {
-    oportunidades.push("Todavía no cargaste ninguna prenda -- empezá por tu placard para ver indicadores reales.");
-    return { totalPrendas, variedadColores, fortalezas, oportunidades };
+    debilidades.push("Todavía no cargaste ninguna prenda -- empezá por tu placard para ver indicadores reales.");
+    return { totalPrendas, variedadColores, fortalezas, debilidades, oportunidades, amenazas };
   }
 
   const piernas = placard.filter((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   if (piernas.length === 0) {
-    oportunidades.push(
+    debilidades.push(
       "No tenés ningún pantalón, bermuda o short cargado: es la prenda ancla del armado automático de outfits, sin una no hay sugerencias.",
     );
   } else {
@@ -164,7 +208,7 @@ export function analizarPlacard(placard: Prenda[]): AnalisisPlacard {
   const ausentes = categoriasAusentes(placard).filter((c) => !CATEGORIAS_PIERNAS.includes(c));
   if (ausentes.length > 0) {
     const lista = ausentes.map((c) => CATEGORIA_LABEL[c]).join(", ");
-    oportunidades.push(`Categorías sin ninguna prenda todavía: ${lista}.`);
+    debilidades.push(`Categorías sin ninguna prenda todavía: ${lista}.`);
   }
 
   const porEstilo = contarPorEstilo(placard);
@@ -176,16 +220,57 @@ export function analizarPlacard(placard: Prenda[]): AnalisisPlacard {
   const sinCarga = ESTILOS.filter((estilo) => !conCarga.some((e) => e.estilo === estilo));
   if (sinCarga.length > 0 && sinCarga.length < ESTILOS.length) {
     const lista = sinCarga.map((e) => ESTILO_LABEL[e]).join(", ");
-    oportunidades.push(`Sin ninguna prenda de estilo ${lista}: no podés armar outfits para ese registro todavía.`);
+    debilidades.push(`Sin ninguna prenda de estilo ${lista}: no podés armar outfits para ese registro todavía.`);
   }
 
   if (variedadColores >= MIN_COLORES_VARIEDAD_BUENA) {
     fortalezas.push(`Buena variedad de colores: ${variedadColores} tonos distintos en el placard.`);
   } else if (totalPrendas >= 3 && variedadColores <= MAX_COLORES_VARIEDAD_BAJA) {
-    oportunidades.push(`Poca variedad de colores (solo ${variedadColores}): limita cuántas combinaciones distintas podés armar.`);
+    debilidades.push(`Poca variedad de colores (solo ${variedadColores}): limita cuántas combinaciones distintas podés armar.`);
   }
 
-  return { totalPrendas, variedadColores, fortalezas, oportunidades };
+  // Oportunidades: por cada estilo, lo que el catálogo (CATALOGO_CON_HSL,
+  // default de las dos funciones) ofrece para cerrar un hueco real de
+  // ancla o de variedad -- nunca los dos a la vez para el mismo estilo:
+  // sugerenciaDeAncla ya devuelve null si el estilo SÍ tiene ancla, así que
+  // no compiten por el mismo hueco.
+  for (const estilo of ESTILOS) {
+    const deAncla = sugerenciaDeAncla(estilo, placard);
+    if (deAncla) oportunidades.push(deAncla.mensaje);
+    const deVariedad = sugerenciaDeVariedad(estilo, placard);
+    if (deVariedad) oportunidades.push(deVariedad.mensaje);
+  }
+
+  // Amenazas -- 3 riesgos de estructura, no de contenido:
+  // 1. Ancla única: un registro que hoy arma outfits pero depende de UNA
+  //    sola prenda de piernas se cae entero si esa prenda no está
+  //    disponible (lavado, rota, de viaje).
+  for (const estilo of ESTILOS) {
+    const piernasEstilo = piernas.filter((p) => estilosDe(p).includes(estilo));
+    if (piernasEstilo.length === 1) {
+      amenazas.push(`El registro ${ESTILO_LABEL[estilo]} depende de una sola prenda de piernas: sin ella no hay outfits de ese estilo.`);
+    }
+  }
+  // 2. Sin abrigo de invierno real cargado -- directamente motivado por la
+  //    diferenciación de esta ronda: sweater/campera son las dos
+  //    categorías que sí llevan estacion, así que si el placard tiene
+  //    abrigos pero NINGUNO tageado "invierno", no hay con qué responder
+  //    cuando baje la temperatura de verdad (solo se avisa si hay al menos
+  //    un abrigo cargado -- sin ninguno, ya lo cubre "Categorías sin
+  //    ninguna prenda" arriba, no hace falta duplicar el aviso).
+  const abrigos = placard.filter((p) => CATEGORIAS_ABRIGO_CON_ESTACION.includes(p.categoria));
+  if (abrigos.length > 0 && !abrigos.some((p) => p.estacion === "invierno")) {
+    amenazas.push("No tenés ningún sweater o campera tageado como de invierno: vas a quedar corto cuando baje la temperatura de verdad.");
+  }
+  // 3. Concentración de color: un solo color explica la mitad o más del
+  //    placard -- perder o ensuciar esa prenda puntual golpea
+  //    desproporcionado.
+  if (totalPrendas >= MIN_PRENDAS_PARA_CONCENTRACION && porColor[0] && porColor[0].cantidad / totalPrendas >= UMBRAL_CONCENTRACION_COLOR) {
+    const pct = Math.round((porColor[0].cantidad / totalPrendas) * 100);
+    amenazas.push(`${porColor[0].nombre} concentra ${porColor[0].cantidad} de tus ${totalPrendas} prendas (${pct}%): mucha dependencia de un solo color.`);
+  }
+
+  return { totalPrendas, variedadColores, fortalezas, debilidades, oportunidades, amenazas };
 }
 
 /** Buscador libre del placard (Placard.tsx): compara contra los mismos
