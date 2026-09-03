@@ -1166,6 +1166,48 @@ describe("armarOutfitsSugeridos", () => {
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["buzo", "short_deportivo"].sort());
     });
 
+    // Segunda opinión de sastrería (Consejo, ronda siguiente), caso
+    // reportado y verificado por ejecución: exigir "deportivo" tageado a
+    // CUALQUIER torso (incluida una remera de algodón lisa, sin ningún
+    // estilo cargado) dejaba a "Vestite hoy" sin armar NINGÚN outfit para
+    // el placard más común que existe -- short deportivo + remera blanca +
+    // zapatillas running. El calzado ya no se restringía (ver el test de
+    // arriba); ahora la remera tampoco.
+    it("short deportivo + remera blanca SIN estilo declarado + zapatillas running -> SÍ arma un outfit (antes daba 0)", () => {
+      const shortDeportivo = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      shortDeportivo.estilo = "deportivo";
+      const remeraBlanca = mkPrenda("remera", "#F5F5F5", 0, 0, 96);
+      const zapatillasRunning = mkPrenda("calzado", "#F5F5F5", 0, 0, 96);
+      zapatillasRunning.estilo = "deportivo";
+      zapatillasRunning.corte_calzado = "zapatilla_running";
+
+      const outfits = armarOutfitsSugeridos([shortDeportivo, remeraBlanca, zapatillasRunning]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["calzado", "remera", "short_deportivo"].sort());
+    });
+
+    it("short deportivo + remera de VESTIR (formal/clasico declarado) sigue sin combinar -- la excepción no abre la puerta a cualquier remera", () => {
+      const shortDeportivo = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      shortDeportivo.estilo = "deportivo";
+      const remeraDeVestir = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      remeraDeVestir.estilo = "clasico";
+
+      // única candidata a torso: si chocaRegistroDeportivo la bloquea bien
+      // (como corresponde, es de vestir), no queda ningún torso disponible
+      // y el resultado es 0 outfits -- no "1 outfit sin remera".
+      const outfits = armarOutfitsSugeridos([shortDeportivo, remeraDeVestir]);
+      expect(outfits).toHaveLength(0);
+    });
+
+    it("short deportivo + BUZO sin estilo declarado (no remera) sigue sin combinar -- la excepción es solo para remera", () => {
+      const shortDeportivo = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      shortDeportivo.estilo = "deportivo";
+      const buzoSinEstilo = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+
+      const outfits = armarOutfitsSugeridos([shortDeportivo, buzoSinEstilo]);
+      expect(outfits).toHaveLength(0);
+    });
+
     it("clima='verano' excluye TODO abrigo, incluso con un pantalón largo (no es solo una regla de bermuda/short)", () => {
       const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
       const sweater = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
@@ -1674,6 +1716,19 @@ describe("armarOutfitsParaComprar", () => {
       ];
       const sugerencias = armarOutfitsParaComprar([pantalonDeportivo], catalogoDeCamperas);
       expect(sugerencias.map((s) => s.sugerida.id)).toEqual(["campera-deportiva"]);
+    });
+
+    // Segunda opinión de sastrería (Consejo, ronda siguiente): a diferencia
+    // de campera (arriba), una remera lisa SÍ se sugiere para comprar con
+    // un ancla deportiva aunque el preset no declare "deportivo" -- es la
+    // prenda base del athleisure real, no una capa que necesite el tag.
+    it("para categoría 'remera' ausente, sugiere también una remera SIN estilo deportivo declarado (excepción real, a diferencia de campera)", () => {
+      const pantalonDeportivo = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "deportivo");
+      const catalogoDeRemeras: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "remera-casual", nombre: "Remera casual", categoria: "remera", colorHex: "#1A1A1A", estilo: "casual", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const sugerencias = armarOutfitsParaComprar([pantalonDeportivo], catalogoDeRemeras);
+      expect(sugerencias.map((s) => s.sugerida.id)).toEqual(["remera-casual"]);
     });
 
     it("el torso propio combinado con la sugerencia también se restringe a deportivo (no arrastra un buzo casual)", () => {

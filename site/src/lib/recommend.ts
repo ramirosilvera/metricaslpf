@@ -1070,7 +1070,19 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
 
     const candidatosTorso = placard.filter((p) => {
       if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
-      if (esAnclaDeportiva && !estilosDe(p).includes("deportivo")) return false;
+      // remera exceptuada de la lista blanca deportiva: hallazgo del
+      // revisor de sastrería (2da opinión), verificado por ejecución --
+      // exigir "deportivo" tageado a CUALQUIER torso (incluida una remera
+      // de algodón lisa sin ningún estilo cargado) dejaba a "Vestite hoy"
+      // sin armar NINGÚN outfit para un placard con exactamente short
+      // deportivo + remera blanca + zapatillas running, el combo más común
+      // que existe. Una remera de vestir real sigue bloqueada igual que
+      // antes -- no por acá, sino más abajo en candidatasPropias/
+      // recomendar(), vía chocaRegistroDeportivo (que sí blinda contra una
+      // remera tageada formal/clasico). buzo/sweater/campera/saco siguen
+      // exigiendo el tag explícito: son capas más gruesas, no la prenda
+      // base del athleisure real.
+      if (esAnclaDeportiva && p.categoria !== "remera" && !estilosDe(p).includes("deportivo")) return false;
       if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
       if (excluirOficina && esDeOficina(p)) return false;
       if (excluirSaco && p.categoria === "saco") return false;
@@ -1224,7 +1236,9 @@ export function armarOutfitsParaComprar(
       ancla,
       placard.filter((p) => {
         if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
-        if (esAnclaDeportiva && !estilosDe(p).includes("deportivo")) return false;
+        // remera exceptuada -- mismo motivo y mismo criterio que
+        // armarOutfitsSugeridos (ver su comentario extenso).
+        if (esAnclaDeportiva && p.categoria !== "remera" && !estilosDe(p).includes("deportivo")) return false;
         if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
         if (excluirOficina && esDeOficina(p)) return false;
         if (excluirSaco && p.categoria === "saco") return false;
@@ -1260,7 +1274,15 @@ export function armarOutfitsParaComprar(
       const candidatosCatalogo = catalogo.filter(
         (p) =>
           p.categoria === categoriaSugerida &&
-          (!esAnclaDeportiva || !CATEGORIAS_TORSO.includes(categoriaSugerida) || estilosDe(presetAPrendaSintetica(p)).includes("deportivo")) &&
+          // remera exceptuada -- mismo motivo y mismo criterio que
+          // armarOutfitsSugeridos/torsoPropio de arriba: no tiene sentido
+          // exigir "deportivo" tageado para sugerir COMPRAR una remera
+          // lisa (la prenda base del athleisure real) con un ancla
+          // deportiva.
+          (!esAnclaDeportiva ||
+            !CATEGORIAS_TORSO.includes(categoriaSugerida) ||
+            categoriaSugerida === "remera" ||
+            estilosDe(presetAPrendaSintetica(p)).includes("deportivo")) &&
           // no sugerir COMPRAR una prenda "de oficina" (ocasion laburo/
           // formal) para un bermuda/short -- ver esDeOficina.
           !(excluirOficina && (p.ocasion === "laburo" || p.ocasion === "formal")),
