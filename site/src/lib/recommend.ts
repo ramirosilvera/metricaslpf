@@ -900,12 +900,14 @@ function nivelOrden(nivel: NivelCompatibilidad): number {
 }
 
 export interface PuntajeOutfit {
-  /** 1-10, redondeado. Promedio de PUNTOS_POR_NIVEL sobre TODOS los pares
-   *  de prendas del outfit (no solo contra el ancla) -- el mismo conjunto
-   *  de comparaciones que ya arma/valida armarOutfitsSugeridos (torso-
-   *  ancla, calzado-ancla, accesorio-ancla, calzado-torso, accesorio-
-   *  torso, accesorio-calzado), reusado acá en vez de inventar una escala
-   *  aparte. */
+  /** 1-10. Promedio de PUNTOS_POR_NIVEL sobre TODOS los pares de prendas
+   *  del outfit (no solo contra el ancla) -- el mismo conjunto de
+   *  comparaciones que ya arma/valida armarOutfitsSugeridos (torso-ancla,
+   *  calzado-ancla, accesorio-ancla, calzado-torso, accesorio-torso,
+   *  accesorio-calzado), reusado acá en vez de inventar una escala aparte.
+   *  10 es exclusivo de "todos los pares excelente" -- el redondeo nunca
+   *  sube a 10 con un par por debajo, aunque el promedio dé 9.5+ (ver el
+   *  comentario en el cuerpo de la función). */
   puntaje: number;
   /** Motivo ejecutivo, 1-2 oraciones: por qué no es (o si es) un 10. No
    *  repite el registro (Formal/Casual/...) -- eso ya lo muestra
@@ -936,8 +938,20 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
     return { puntaje: 10, explicacion: "Una sola prenda: no hay con qué chocar." };
   }
 
+  // Auditoría de Consejo (lógica/motor, verificado por ejecución sobre el
+  // catálogo real -- ver el hallazgo completo en el historial de la
+  // sesión): con 4 prendas (6 pares) un solo par muy_bueno entre cinco
+  // excelente promedia 9.5 ((5*10+7)/6) y Math.round sube a 10 -- un
+  // outfit de 4 prendas con un salto de registro real (ej. pantalón de
+  // vestir + zapatillas urbanas) mostraba el badge "10/10" al lado de una
+  // explicación citando el defecto, una contradicción directa (confirmado
+  // con el catálogo real: 180 de los outfits que arma armarOutfitsSugeridos
+  // caían en este caso). `todosExcelentes` se calcula ANTES que el puntaje
+  // y lo topea en 9 -- un 10/10 pasa a significar, siempre, "ningún par
+  // por debajo de excelente", nunca "el redondeo dio justo".
+  const todosExcelentes = pares.every((p) => p.score.nivel === "excelente");
   const promedio = pares.reduce((acc, p) => acc + PUNTOS_POR_NIVEL[p.score.nivel], 0) / pares.length;
-  const puntaje = Math.max(1, Math.min(10, Math.round(promedio)));
+  const puntaje = todosExcelentes ? 10 : Math.max(1, Math.min(9, Math.round(promedio)));
 
   // el par que más pesa en contra -- el de nivel más bajo (con_cuidado
   // antes que muy_bueno); a igualdad de nivel, el primero en orden de
@@ -946,16 +960,6 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
   const peor = [...pares].sort((x, y) => nivelOrden(x.score.nivel) - nivelOrden(y.score.nivel))[0];
   const tieneToneSobreTono = pares.some((p) => p.score.tag === "tono_sobre_tono");
   const tieneAudaz = pares.some((p) => p.score.tag === "combinacion_audaz");
-
-  // "sin nada que ajustar" solo si TODOS los pares son excelente de
-  // verdad -- no alcanza con que el puntaje REDONDEADO sea alto: un outfit
-  // de 3 prendas con un solo par muy_bueno ya redondea a 9 ((10+7+10)/3=9),
-  // y ahí sí hay un motivo real y puntual que citar (verificado por
-  // ejecución: sin este chequeo, un pantalón de vestir + zapatillas
-  // urbanas -- un salto de registro real -- daba "combinación segura, sin
-  // nada que ajustar" en vez de avisar el salto). Mirar los pares en sí,
-  // no el puntaje ya redondeado.
-  const todosExcelentes = pares.every((p) => p.score.nivel === "excelente");
 
   let explicacion: string;
   if (peor.score.nivel === "con_cuidado") {
@@ -1596,6 +1600,86 @@ export function armarOutfitsParaComprar(
   resultados.sort((a, b) => b.puntaje - a.puntaje);
 
   return resultados;
+}
+
+/** Reemplazos: a diferencia de armarOutfitsParaComprar (que solo mira
+ *  categorías AUSENTES del placard), recorre las categorías que un outfit
+ *  YA armado usa y busca si el catálogo tiene algo mejor para ESE lugar --
+ *  el caso real del pedido original del usuario: "la mejor valoración de
+ *  tu outfit urbano es un seis de diez [por el calzado], te recomiendo
+ *  comprar esto para subir a nueve". Ese calzado YA está puesto (no
+ *  ausente), así que armarOutfitsParaComprar nunca podía sugerirlo --
+ *  hallazgo de la auditoría de Consejo sobre el sistema de puntaje,
+ *  verificado por ejecución con un placard real (pantalón de vestir +
+ *  camisa + SOLO zapatillas urbanas de calzado: el mejor outfit posible
+ *  quedaba en muy_bueno para siempre, sin ninguna sugerencia de compra,
+ *  porque "calzado" nunca contaba como ausente). No toca el ancla
+ *  (pantalón/bermuda/short): cambiarla redefine candidatos de torso/
+ *  calzado/accesorio enteros, un caso distinto que ya cubre "Vestite hoy"
+ *  probando cada ancla del placard por separado. */
+export function mejorasDeReemplazo(
+  outfit: OutfitSugerido,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): OutfitParaComprar[] {
+  const ancla = outfit.prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
+  if (!ancla) return [];
+  const resultados: OutfitParaComprar[] = [];
+
+  for (const actual of outfit.prendas) {
+    if (actual.id === ancla.id) continue;
+    const restantes = outfit.prendas.filter((p) => p.id !== actual.id);
+    const otrasPrendas = restantes.filter((p) => p.id !== ancla.id);
+    const candidatos = catalogo.filter((p) => p.categoria === actual.categoria);
+
+    for (const preset of candidatos) {
+      const prendaSintetica = presetAPrendaSintetica(preset);
+      const [r] = recomendar(ancla, [prendaSintetica], placard);
+      if (!r || r.score.nivel === "con_cuidado") continue;
+      if (otrasPrendas.some((p) => chocan(prendaSintetica, p, placard))) continue;
+
+      const prendasResultado = [...restantes, prendaSintetica];
+      const { puntaje, explicacion } = puntuarOutfit(prendasResultado);
+      if (puntaje <= outfit.puntaje) continue;
+
+      resultados.push({
+        id: `reemplazo-${actual.id}-${preset.id}`,
+        prendasPropias: restantes,
+        sugerida: preset,
+        categoriaSugerida: actual.categoria,
+        puntaje,
+        explicacionPuntaje: explicacion,
+      });
+    }
+  }
+
+  resultados.sort((a, b) => b.puntaje - a.puntaje);
+  return resultados;
+}
+
+/** Pedido explícito del usuario: "cuando la mejor valoración disponible
+ *  sea baja, recomendame comprar para subirla" -- independiente de POR QUÉ
+ *  es baja. Junta las dos fuentes reales de "comprar esto sube la nota"
+ *  (mejorasDeReemplazo, para lo que ya está puesto pero no es lo mejor
+ *  posible; armarOutfitsParaComprar, para lo que falta directamente) y
+ *  devuelve la mejor compra real -- la de más puntaje entre las que de
+ *  verdad superan la nota actual. Antes esta señal vivía pegada a
+ *  sugerenciaDeVariedad (un hueco de TIPO o de COLOR), que no dispara
+ *  nunca para el caso más común en la práctica: variedad de torso y color
+ *  ya están bien, pero el calzado o el accesorio puestos hoy son los que
+ *  frenan la nota (verificado por ejecución, ver el comentario de
+ *  mejorasDeReemplazo). */
+export function mejorCompraParaSubirNota(
+  estilo: Estilo,
+  base: OutfitSugerido,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): OutfitParaComprar | undefined {
+  const reemplazos = mejorasDeReemplazo(base, placard, catalogo);
+  const ausentes = armarOutfitsParaComprar(placard, catalogo).filter(
+    (c) => c.puntaje > base.puntaje && outfitSirveParaEstilo(c.prendasPropias, estilo),
+  );
+  return [...reemplazos, ...ausentes].sort((a, b) => b.puntaje - a.puntaje)[0];
 }
 
 export interface SugerenciaVariedad {

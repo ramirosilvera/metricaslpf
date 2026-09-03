@@ -10,6 +10,7 @@ import {
   diffPrendasEdicion,
   estacionActual,
   ESTILO_LABEL,
+  mejorCompraParaSubirNota,
   outfitSirveParaEstilo,
   puntuarOutfit,
   registroOutfit,
@@ -311,29 +312,54 @@ export function Contenido({
 
   // Pedido explícito del usuario: "che, mirá, la mejor valoración de tu
   // outfit urbano es de seis de diez, te recomiendo comprar estas prendas
-  // para subir tu valoración a nueve puntos" -- conecta el puntaje nuevo
-  // con la sugerencia de compra que YA existía (sugerenciaVariedad), en vez
-  // de armar un mecanismo aparte. Toma el mejor outfit que se está
-  // mostrando ahora mismo (con abrigo o sin abrigo, el que tenga más
-  // puntaje de los dos), reemplaza la prenda de la categoría sugerida por
-  // la sugerida (sintética, mismo mecanismo que "Ideas para comprar") y
-  // recalcula -- si de verdad sube el puntaje, se muestra el "antes/
-  // después"; si no sube (la sugerencia es de una categoría que ese outfit
-  // puntual ni siquiera usa, por señalar un hueco de variedad y no de
-  // choque), no se inventa una mejora que no es real.
-  const mejoraDePuntaje = useMemo(() => {
-    if (!sugerenciaVariedad) return null;
+  // para subir tu valoración a nueve puntos" -- independiente de POR QUÉ
+  // la nota no es más alta. Auditoría de Consejo sobre el sistema de
+  // puntaje: la primera versión de esto solo probaba la sugerencia de
+  // sugerenciaVariedad (un hueco de TIPO o de COLOR) -- verificado por
+  // ejecución que el caso más común en la práctica nunca pasaba por ahí:
+  // variedad y color ya están bien, pero el calzado o el accesorio que el
+  // usuario YA tiene puesto hoy son los que frenan la nota, y
+  // sugerenciaVariedad no mira eso (mejorCompraParaSubirNota sí, vía
+  // mejorasDeReemplazo -- ver su comentario largo en recommend.ts). Toma
+  // el mejor outfit que se está mostrando ahora (con abrigo o sin abrigo,
+  // el que tenga más puntaje de los dos) como base de la comparación.
+  const mejorCompra = useMemo(() => {
+    if (!estiloSugerido || estiloSugerido === "todos") return null;
     const base = [opcionConAbrigo, opcionSinAbrigo]
       .filter((o): o is OutfitSugerido => o !== undefined)
       .sort((a, b) => b.puntaje - a.puntaje)[0];
     if (!base) return null;
-    const categoriaSugerida = sugerenciaVariedad.sugerida.categoria;
-    const sugeridaSintetica = presetAPrendaSintetica(sugerenciaVariedad.sugerida);
-    const prendasConSugerencia = [...base.prendas.filter((p) => p.categoria !== categoriaSugerida), sugeridaSintetica];
-    const conSugerencia = puntuarOutfit(prendasConSugerencia).puntaje;
-    if (conSugerencia <= base.puntaje) return null;
-    return { actual: base.puntaje, conSugerencia };
-  }, [sugerenciaVariedad, opcionConAbrigo, opcionSinAbrigo]);
+    const compra = mejorCompraParaSubirNota(estiloSugerido, base, placard, CATALOGO_CON_HSL);
+    return compra ? { compra, actual: base.puntaje } : null;
+  }, [estiloSugerido, opcionConAbrigo, opcionSinAbrigo, placard]);
+
+  // Unifica las dos fuentes de "sumá esto" en UNA sola tarjeta -- mostrar
+  // dos a la vez (una por variedad, otra por puntaje) sería ruido si
+  // apuntan a la misma prenda, y confuso si apuntan a prendas distintas.
+  // mejorCompra manda cuando existe (sube la nota de verdad, la señal más
+  // fuerte); si además coincide con lo que ya sugería sugerenciaVariedad,
+  // se reusa su texto (explica el motivo puntual, no solo "sumá esto").
+  // Sin mejorCompra pero con sugerenciaVariedad, se muestra esa igual --
+  // sin el marco de puntaje, porque ahí no hay una mejora de nota
+  // comprobada que mostrar.
+  const tarjetaSugerencia = useMemo(() => {
+    if (mejorCompra) {
+      const mismaSugerencia = sugerenciaVariedad?.sugerida.id === mejorCompra.compra.sugerida.id;
+      const nombreCat = CATEGORIA_LABEL[mejorCompra.compra.categoriaSugerida].toLowerCase();
+      return {
+        mensaje: mismaSugerencia
+          ? sugerenciaVariedad!.mensaje
+          : `Sumá "${mejorCompra.compra.sugerida.nombre}" (${nombreCat}) a tu outfit de ${ESTILO_LABEL[estiloSugerido as Estilo]}.`,
+        sugerida: mejorCompra.compra.sugerida,
+        actual: mejorCompra.actual,
+        conSugerencia: mejorCompra.compra.puntaje,
+      };
+    }
+    if (sugerenciaVariedad) {
+      return { mensaje: sugerenciaVariedad.mensaje, sugerida: sugerenciaVariedad.sugerida, actual: undefined, conSugerencia: undefined };
+    }
+    return null;
+  }, [mejorCompra, sugerenciaVariedad, estiloSugerido]);
 
   // Pedido explícito del usuario: cuando el pool queda vacío para el
   // estilo elegido, la razón casi siempre es que falta la prenda ANCLA
@@ -667,25 +693,25 @@ export function Contenido({
                 🔄 Otras opciones
               </button>
             )}
-            {sugerenciaVariedad && (
+            {tarjetaSugerencia && (
               <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
                 <span style={{ fontSize: "1.2rem" }}>💡</span>
                 <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>
-                  {mejoraDePuntaje && mejoraDePuntaje.actual < 9 && (
+                  {tarjetaSugerencia.actual !== undefined && (
                     <>
-                      Tu mejor outfit hoy es un <strong>{mejoraDePuntaje.actual}/10</strong>.{" "}
+                      Tu mejor outfit hoy es un <strong>{tarjetaSugerencia.actual}/10</strong>.{" "}
                     </>
                   )}
-                  {sugerenciaVariedad.mensaje}
-                  {mejoraDePuntaje && mejoraDePuntaje.actual < 9 && (
-                    <> Subiría a <strong>{mejoraDePuntaje.conSugerencia}/10</strong>.</>
+                  {tarjetaSugerencia.mensaje}
+                  {tarjetaSugerencia.conSugerencia !== undefined && (
+                    <> Subiría a <strong>{tarjetaSugerencia.conSugerencia}/10</strong>.</>
                   )}
                 </p>
                 <button
                   type="button"
                   className="btn btn-secondary"
                   style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
-                  onClick={() => cargarSugerencia(sugerenciaVariedad.sugerida)}
+                  onClick={() => cargarSugerencia(tarjetaSugerencia.sugerida)}
                 >
                   + Cargar
                 </button>
