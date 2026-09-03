@@ -443,18 +443,19 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             </>
           )}
           {prenda.categoria === "saco" && (
-            // saco -- pedido explícito del usuario ("un traje azul
-            // marino"), revisado como modista: a diferencia de campera
-            // (cierre de cremallera recto + cuello camisero simple), un
-            // saco de traje real se define por las SOLAPAS -- dos piezas
-            // triangulares que se abren en V desde la base del cuello
-            // hasta bien abajo del pecho, dejando ver la camisa (y
-            // corbata) de abajo -- y un cierre de 1-2 botones, no una
-            // línea de cremallera. Misma tira de cuello (M46 42...) que
-            // camisa/campera para que las tres prendas se apoyen sobre el
-            // mismo punto del cuerpo, pero la solapa se abre mucho más
-            // (hasta y=80, contra y=58-60 de camisa/campera) porque un
-            // saco se usa abierto, no abrochado hasta arriba.
+            // saco -- 2da revisión, pedido explícito del usuario con foto
+            // de referencia real (traje gris de dos botones, solapa con
+            // muesca, largo hasta la cadera). Corrección de proporción
+            // sobre la 1ra pasada: un saco de vestir real llega hasta
+            // donde caería la mano con el brazo relajado -- en este
+            // maniquí, el puño de la manga larga termina en y≈114-121 (ver
+            // el path del brazo más arriba), así que el ruedo real del
+            // saco tiene que acercarse a esa altura, no quedar a mitad de
+            // torso como en la 1ra pasada (que dejaba 25-30u de tela sin
+            // diferenciar antes del cinturón, todavía leyéndose como
+            // mameluco). Ahora el ruedo llega a y≈116, pegado al cinturón
+            // (y=123) -- la misma referencia anatómica que ya usan los
+            // brazos, no un número inventado.
             <>
               <path
                 d="M46 42 Q60 36 74 42 Q68 44 60 45 Q52 44 46 42 Z"
@@ -462,39 +463,51 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                 stroke={stroke}
                 {...strokeProps}
               />
-              {/* solapa izquierda: arranca en el mismo punto que la punta
-                  de cuello de camisa/campera (46,42), se abre hacia el
-                  hombro (36,62) -- el ancho real de una solapa -- y baja en
-                  diagonal hasta el cierre de botón sobre el pecho
-                  (58,80). */}
-              <path d="M46 42 L36 62 L58 80 L60 46 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <path d="M74 42 L84 62 L62 80 L60 46 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              {/* dos botones sobre la línea de cierre, no una cremallera --
-                  la seña visual que distingue un saco abrochado de una
-                  campera con cierre. */}
-              <circle cx="60" cy="84" r="1.6" fill={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              <circle cx="60" cy="92" r="1.6" fill={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              {/* ruedo del saco -- reporte real del usuario con captura:
-                  "no parece un traje", se leía como un jumpsuit/mameluco de
-                  una sola pieza. Causa real: el cuerpo del torso (Forma de
-                  más arriba, compartido por remera/camisa/buzo/sweater/
-                  campera/saco) llega hasta y=126, el mismo punto donde
-                  arranca el pantalón -- para las demás categorías eso no se
-                  nota porque son de otro color que el pantalón, pero un
-                  saco de traje real combina EN EL MISMO género/color que su
-                  pantalón, así que sin un límite dibujado, la tela se lee
-                  continua de los hombros a los tobillos. Un saco real
-                  además termina bastante más arriba que la cadera (a media
-                  altura del pantalón de vestir, no a la altura del
-                  cinturón) -- se agrega esa línea de ruedo, curva hacia
-                  abajo en el centro (así cae el frente de un saco
-                  desabrochado), en contornoHsl (tono sólido, no el trazo
-                  fijo semitransparente) para que se note incluso sobre un
-                  color oscuro como el azul marino -- mismo motivo que ya
-                  documenta el ícono chico (PrendaIcon.tsx) para
-                  tonoPatron. */}
+              {/* solapa izquierda -- 3ra revisión: la versión anterior (4
+                  puntos con un quiebre de muesca en 24,66) resultaba, al
+                  conectar ese punto directo con el cierre de botón (54,98),
+                  en una solapa mucho más ANCHA de lo previsto -- verificado
+                  renderizando el maniquí real: las dos solapas juntas
+                  formaban un rombo que tapaba casi todo el pecho, sin dejar
+                  hueco real para que asome la camisa. Geometría más
+                  conservadora ahora: del cuello (46,42) sale hacia el
+                  hombro (36,60) -- el borde exterior, sin pasarse del punto
+                  de hombro real (el brazo arranca en x≈34-38 en este mismo
+                  maniquí) -- y de ahí baja derecho hasta el cierre de botón
+                  (52,96), cerrando contra el centro (60,46). El borde
+                  interior (60,46)->(52,96) queda pegado al centro casi todo
+                  el trayecto, dejando un hueco real y angosto para la
+                  camisa (ver el path del pecho de camisa, más abajo en este
+                  archivo, que replica exactamente este mismo borde). */}
+              <path d="M46 42 L36 60 L52 96 L60 46 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M74 42 L84 60 L68 96 L60 46 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              {/* dos botones sobre la línea de cierre, más abajo que la 1ra
+                  pasada (acompañando el largo nuevo) -- la seña visual que
+                  distingue un saco abrochado de una campera con
+                  cremallera. */}
+              <circle cx="60" cy="98" r="1.6" fill={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <circle cx="60" cy="107" r="1.6" fill={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              {/* bolsillos de solapa (flap pockets) a la altura de la
+                  cadera -- pedido explícito de la foto de referencia, el
+                  detalle que más lee "esto es tailoring" además de la
+                  solapa. Solo el contorno (sin relleno propio): un bolsillo
+                  de solapa real es la misma tela del saco, se nota por la
+                  costura/pestaña, no por un cambio de color. */}
+              <rect x="38" y="102" width="11" height="5" rx="1" fill="none" stroke={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={1} />
+              <rect x="71" y="102" width="11" height="5" rx="1" fill="none" stroke={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={1} />
+              {/* ruedo del saco -- reporte real del usuario: sin este
+                  límite dibujado, y siendo saco y pantalón del mismo
+                  color/género (como cualquier traje real), la tela se leía
+                  continua de los hombros a los tobillos, un mameluco en
+                  vez de un traje de dos piezas. En contornoHsl (tono
+                  sólido, no el trazo fijo semitransparente) para que se
+                  note incluso sobre un color oscuro como el azul marino --
+                  mismo motivo que ya documenta el ícono chico
+                  (PrendaIcon.tsx) para tonoPatron. Ahora a y≈116 (ver el
+                  comentario de arriba sobre la referencia anatómica del
+                  puño), no a mitad de torso. */}
               <path
-                d="M36 88 Q60 100 84 88"
+                d="M32 106 Q60 120 88 106"
                 fill="none"
                 stroke={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
                 strokeWidth={1.4}
@@ -835,13 +848,40 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                 {principal.torso.categoria === "saco" && (
                   // el escote más ancho/bajo de los cuatro -- un saco se usa
                   // abierto, con las solapas mostrando la camisa (y corbata)
-                  // hasta bien abajo del pecho (ver el path de la solapa en
-                  // TorsoCuerpo, que abre hasta y=80).
-                  <path d="M38 20 L82 20 L82 62 Q60 70 38 62 Z" />
+                  // hasta el cierre de botón (ver el path de la solapa en
+                  // TorsoCuerpo, que ahora converge en y=98 -- 2da revisión
+                  // con foto de referencia real, saco más largo que la 1ra
+                  // pasada).
+                  <path d="M38 20 L82 20 L82 100 Q60 108 38 100 Z" />
                 )}
               </clipPath>
             </defs>
             <g clipPath={`url(#escote-${cuelloSecundario.id})`}>
+              {/* pecho de la camisa -- reporte real del usuario ("revisa
+                  también como se ve la camisa"): antes de esta pieza, acá
+                  abajo solo se dibujaba el CUELLO (tira + puntas, hasta
+                  y=58) -- el resto de la abertura, hasta donde cierra la
+                  solapa, no tenía ningún relleno propio y mostraba la tela
+                  del torso de ARRIBA (el saco) de fondo, no la camisa.
+                  Primer intento con un rectángulo ancho (48-72) -- verificado
+                  renderizando el maniquí real: se salía por fuera de las
+                  solapas, tapándolas en vez de asomar entre ellas. Segundo
+                  intento, un triángulo angosto -- pero las solapas de
+                  TorsoCuerpo también se redibujaron más angostas en esa
+                  misma revisión, así que este path tiene que seguir el
+                  borde interior REAL de la solapa actual: (60,46) donde se
+                  tocan arriba, abriéndose hasta (52,96)/(68,96) en el
+                  cierre de botón -- las mismas coordenadas que usan las dos
+                  solapas en TorsoCuerpo (ver ese comentario), no una
+                  aproximación aparte que pueda desincronizarse. */}
+              {principal.torso.categoria === "saco" && (
+                <path
+                  d="M60 46 L52 96 L68 96 Z"
+                  fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                  stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                  {...strokeProps}
+                />
+              )}
               <path
                 d="M46 42 Q60 36 74 42 Q68 44 60 45 Q52 44 46 42 Z"
                 fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
