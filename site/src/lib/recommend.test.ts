@@ -49,11 +49,29 @@ describe("esNeutro", () => {
   it("gris por saturación baja", () => {
     expect(esNeutro(10, 50)).toBe(true);
   });
-  it("casi negro por luminosidad baja", () => {
+  it("casi negro por luminosidad baja, SIN tope de saturación (un oscuro saturado también es neutro)", () => {
+    // A propósito s=80 (alto): debajo de NEUTRO_L_MIN la discriminación de
+    // matiz colapsa (marino, verde botella y negro se leen todos como
+    // "oscuro"), así que cualquier oscuro funciona como neutro sin importar
+    // su saturación -- a diferencia del extremo claro (ver el test de
+    // abajo), donde SÍ hay un tope. Los dos extremos no son simétricos.
     expect(esNeutro(80, 10)).toBe(true);
   });
-  it("casi blanco por luminosidad alta", () => {
-    expect(esNeutro(80, 90)).toBe(true);
+  it("casi blanco por luminosidad alta Y saturación baja", () => {
+    // s=20 (no 80): un blanco roto real, no un pastel vívido.
+    expect(esNeutro(20, 90)).toBe(true);
+  });
+  it("un PASTEL SATURADO de luminosidad alta NO es neutro -- auditoría de color/textiles (Consejo, ronda siguiente)", () => {
+    // Antes de este fix, esNeutro(80, 90) daba true: un rosa pastel s=80 es
+    // inconfundiblemente rosa (no blanco), y dos tintes pastel bien
+    // distintos a esa misma luminosidad (rosa + menta, por ejemplo)
+    // compiten sin ninguna jerarquía de valor -- el motor los declaraba
+    // "excelente" ("el neutro no compite con nada") cuando en realidad
+    // ninguno de los dos es neutro de verdad. Verificado contra el catálogo
+    // real: la prenda más clara y saturada que existe (#F5F5F0, zapatillas/
+    // running/lona blancas) tiene s=20, muy por debajo del nuevo tope
+    // (NEUTRO_S_MAX_CLARO=40) -- ningún veredicto del catálogo curado cambia.
+    expect(esNeutro(80, 90)).toBe(false);
   });
   it("color saturado de luminosidad media no es neutro", () => {
     expect(esNeutro(80, 50)).toBe(false);
@@ -116,7 +134,11 @@ describe("scoreColor", () => {
 
   // Auditoría de color/textiles (Consejo, ronda siguiente): un esquema
   // monocromático funciona POR la variación de valor, no a pesar de ella.
-  describe("3b -- degradé monocromático (mismo matiz, luminosidades separadas)", () => {
+  // Regla 1b -- corre ANTES de la 2 (no después, como en su primera
+  // versión): al migrar la regla 2 de `s` a croma, empezó a absorber estos
+  // mismos pares (croma bajo + matiz cercano) antes de que llegaran acá,
+  // dando "excelente" pero con el mensaje genérico en vez del de degradé.
+  describe("1b -- degradé monocromático (mismo matiz, luminosidades separadas)", () => {
     it("marino oscuro + celeste claro (mismo matiz, vd bien separado) -> excelente, tag tono sobre tono", () => {
       // valores reales del catálogo: pantalón de vestir azul marino
       // (h222 s37 l19) + camisa celeste (h209 s58 l82).
@@ -130,12 +152,13 @@ describe("scoreColor", () => {
       expect(r.nivel).toBe("excelente");
     });
 
-    it("mismo matiz saturado con vd en la franja muerta (por encima de la 3 plana, por debajo de la 3b) -> NO excelente por ninguna de las dos", () => {
-      // s=70 en las dos puntas: por encima de SATURACION_BAJA (45), así la
-      // regla 2 (análogo + saturación baja) tampoco puede explicar el
-      // resultado. vd=0.19: por encima de VALUE_MONOCROMATICO (0.15, la
-      // regla 3 plana) y por debajo de VALUE_DEGRADE_MIN (0.25, la 3b) --
-      // aísla específicamente esa franja intermedia.
+    it("mismo matiz saturado con vd en la franja muerta (por encima de la 3 plana, por debajo de la 1b) -> NO excelente por ninguna de las dos", () => {
+      // s=70 en las dos puntas: croma(70,74)=36.4 y croma(70,55)=63, por
+      // encima de CROMA_ACENTO (40), así la regla 2 (análogo + croma
+      // apagado) tampoco puede explicar el resultado. vd=0.19: por encima
+      // de VALUE_MONOCROMATICO (0.15, la regla 3 plana) y por debajo de
+      // VALUE_DEGRADE_MIN (0.25, la 1b) -- aísla específicamente esa franja
+      // intermedia.
       const r = scoreColor({ h: 41, s: 70, l: 74 }, { h: 41, s: 70, l: 55 });
       expect(r.nivel).not.toBe("excelente");
     });
@@ -327,6 +350,52 @@ describe("recomendar -- coordinación de cuero (cinturón/calzado)", () => {
 
     const [resultado] = recomendar(zapatoNegroReal, [cinturonEspresso], [zapatoNegroReal, cinturonEspresso]);
     expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+
+  // Auditoría de color/textiles (Consejo, ronda siguiente): tercera familia
+  // real de cuero de vestir -- burdeos/oxblood/cordovan, junto a negro y
+  // marrón. Antes no encajaba en ninguna familia y volvía a colarse por el
+  // mismo agujero que motivó toda la regla (negro=neutro en HSL).
+  describe("coordinación de cuero -- tercera familia (burdeos/oxblood/cordovan)", () => {
+    it("cinturón negro + zapato de cuero BURDEOS -> con_cuidado, mismo criterio que negro+marrón", () => {
+      const cinturonNegro = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+      cinturonNegro.textura = "cuero_liso";
+      const zapatoBurdeos = mkPrenda("calzado", "#6B2737", 346, 47, 29); // burdeos real (mismo hex que corbata-bordo/sweater-bordo)
+      zapatoBurdeos.textura = "cuero_liso";
+
+      const [resultado] = recomendar(cinturonNegro, [zapatoBurdeos], [cinturonNegro, zapatoBurdeos]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+
+    it("cinturón MARRÓN + zapato de cuero burdeos SÍ combinan -- dos tierras/vino no chocan entre sí", () => {
+      const cinturonMarron = mkPrenda("accesorio", "#5C3A21", 25, 47, 25);
+      cinturonMarron.textura = "cuero_liso";
+      const zapatoBurdeos = mkPrenda("calzado", "#6B2737", 346, 47, 29);
+      zapatoBurdeos.textura = "cuero_liso";
+
+      const [resultado] = recomendar(cinturonMarron, [zapatoBurdeos], [cinturonMarron, zapatoBurdeos]);
+      expect(resultado.score.nivel).not.toBe("con_cuidado");
+    });
+
+    it("dos cueros burdeos del mismo tono SÍ combinan", () => {
+      const cinturonBurdeos = mkPrenda("accesorio", "#6B2737", 346, 47, 29);
+      cinturonBurdeos.textura = "cuero_liso";
+      const zapatoBurdeos = mkPrenda("calzado", "#6B2737", 346, 47, 29);
+      zapatoBurdeos.textura = "cuero_liso";
+
+      const [resultado] = recomendar(cinturonBurdeos, [zapatoBurdeos], [cinturonBurdeos, zapatoBurdeos]);
+      expect(resultado.score.nivel).not.toBe("con_cuidado");
+    });
+
+    it("el negro de cuero real del catálogo (#1C1210) sigue siendo esNegroProfundo, no se confunde con burdeos", () => {
+      const cinturonNegroReal = mkPrenda("accesorio", "#1C1210", 10, 27, 9);
+      cinturonNegroReal.textura = "cuero_liso";
+      const zapatoBurdeos = mkPrenda("calzado", "#6B2737", 346, 47, 29);
+      zapatoBurdeos.textura = "cuero_liso";
+
+      const [resultado] = recomendar(cinturonNegroReal, [zapatoBurdeos], [cinturonNegroReal, zapatoBurdeos]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
   });
 
   // Segunda opinión de sastrería (Consejo, ronda siguiente), verificada por

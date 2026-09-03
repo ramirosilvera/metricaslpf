@@ -10,32 +10,33 @@ const HUE_COMPLEMENTARIO = 0.78; // ~140° (no 0.72/130°, que cae en zona triá
 const VALUE_AUDAZ = 0.3;
 const VALUE_MONOCROMATICO = 0.15;
 const VALUE_FUNDIDO = 0.12;
-// Piso de separación de valor para el degradé monocromático real (regla 3b
+// Piso de separación de valor para el degradé monocromático real (regla 1b
 // de scoreColor) -- auditoría de color/textiles (Consejo, ronda siguiente).
 // Entre VALUE_MONOCROMATICO (0.15) y este piso no hay ninguna regla propia:
 // cae en el catch-all de la regla 6 ("Matices relacionados"), que sigue
 // siendo un veredicto razonable para esa franja intermedia (ni plano del
 // todo ni degradé marcado).
 const VALUE_DEGRADE_MIN = 0.25;
-const SATURACION_BAJA = 45;
-// Piso agregado en la 2da ronda de revisión de Consejo, auditando la regla
-// 5 ("se funden") contra el catálogo real completo: SIN este piso, la
-// regla generaba el 95% de todos los con_cuidado del motor, y CADA UNO de
-// esos pares era una combinación real bien vista (marino+marrón,
-// marino+bordó, marrón+verde militar -- la paleta "tierra"/de sastrería
-// clásica), con saturación máxima 47 en el catálogo. El supuesto de la
-// regla ("mismo valor + matiz distinto = mancha") solo se sostiene cuando
-// AMBOS colores están bien saturados: ahí sí compiten por atención en pie
-// de igualdad (ninguno domina en luminosidad NI se apaga en saturación) y
-// se leen como caóticos en vez de intencionales -- que es distinto de la
-// regla 4 (audaz), que funciona porque el contraste de VALOR marca cuál es
-// la base y cuál el golpe de color. Dos tonos tierra opacos al mismo valor
-// no compiten así: ninguno grita, así que no chocan. 50 deja afuera el
-// máximo real del catálogo (47) y adentro los casos ya cubiertos por test
-// (60, 70). 55, no 50: mismo argumento que NEUTRO_L_MIN/MAX un poco más
-// abajo -- un margen más chico deja la misma prenda, fotografiada con otra
-// luz, cruzando el umbral y cambiando de veredicto (detectado en la 3ra
-// ronda de revisión). 55 deja 8 puntos de margen abajo (47) y 5 arriba (60).
+// Piso de saturación (no croma -- ver el comentario largo en la regla 5 de
+// scoreColor sobre por qué) agregado en la 2da ronda de revisión de
+// Consejo, auditando la regla 5 ("se funden") contra el catálogo real
+// completo: SIN este piso, la regla generaba el 95% de todos los
+// con_cuidado del motor, y CADA UNO de esos pares era una combinación real
+// bien vista (marino+marrón, marino+bordó, marrón+verde militar -- la
+// paleta "tierra"/de sastrería clásica), con saturación máxima 47 en el
+// catálogo. El supuesto de la regla ("mismo valor + matiz distinto =
+// mancha") solo se sostiene cuando AMBOS colores están bien saturados: ahí
+// sí compiten por atención en pie de igualdad (ninguno domina en
+// luminosidad NI se apaga en saturación) y se leen como caóticos en vez de
+// intencionales -- que es distinto de la regla 4 (audaz), que funciona
+// porque el contraste de VALOR marca cuál es la base y cuál el golpe de
+// color. Dos tonos tierra opacos al mismo valor no compiten así: ninguno
+// grita, así que no chocan. 50 deja afuera el máximo real del catálogo (47)
+// y adentro los casos ya cubiertos por test (60, 70). 55, no 50: mismo
+// argumento que NEUTRO_L_MIN/MAX un poco más abajo -- un margen más chico
+// deja la misma prenda, fotografiada con otra luz, cruzando el umbral y
+// cambiando de veredicto (detectado en la 3ra ronda de revisión). 55 deja 8
+// puntos de margen abajo (47) y 5 arriba (60).
 const SATURACION_ALTA_MINIMA = 55;
 // Banda de neutro ampliada (12/88, no 8/92): con un margen más chico, la
 // misma prenda fotografiada dos veces con luz distinta podía cruzar el
@@ -43,6 +44,20 @@ const SATURACION_ALTA_MINIMA = 55;
 const NEUTRO_L_MIN = 12;
 const NEUTRO_L_MAX = 88;
 const NEUTRO_S_MAX = 15;
+// Tope de saturación en el extremo CLARO -- auditoría de color/textiles
+// (Consejo, ronda siguiente), verificada corriendo el catálogo completo
+// (máximo real 20 entre las prendas con l>=NEUTRO_L_MAX, así que no cambia
+// ningún veredicto del catálogo curado). No es una simetría rota respecto
+// del extremo oscuro (NEUTRO_L_MIN, sin tope de saturación): los dos
+// extremos no son perceptualmente simétricos. Debajo de l=12 la
+// discriminación de matiz colapsa (marino, verde botella y negro se leen
+// todos como "oscuro"), así que cualquier oscuro funciona como neutro sin
+// importar su saturación. Arriba de l=88 el matiz sigue siendo perfectamente
+// legible -- un rosa pastel saturado es inconfundiblemente rosa, no un
+// blanco -- así que sin este tope, dos tintes pastel bien distintos (rosa +
+// menta, por ejemplo) daban "excelente" por ser ambos "neutros", cuando en
+// realidad son dos colores compitiendo sin ninguna jerarquía de valor.
+const NEUTRO_S_MAX_CLARO = 40;
 
 export function hueDist(h0: number, h1: number): number {
   const diff = Math.abs(h0 - h1);
@@ -54,7 +69,7 @@ export function valueDist(l0: number, l1: number): number {
 }
 
 export function esNeutro(s: number, l: number): boolean {
-  return s <= NEUTRO_S_MAX || l <= NEUTRO_L_MIN || l >= NEUTRO_L_MAX;
+  return s <= NEUTRO_S_MAX || l <= NEUTRO_L_MIN || (l >= NEUTRO_L_MAX && s <= NEUTRO_S_MAX_CLARO);
 }
 
 /** Croma HSL real (0-100): a diferencia de `s`, no está normalizado por `l`
@@ -64,14 +79,22 @@ export function esNeutro(s: number, l: number): boolean {
  *  corriendo el catálogo completo: es esta magnitud, no `s`, la que separa
  *  la paleta base textil (croma <= 30: bordó, rosa, marrón, verde botella,
  *  beige, celeste, marino, oliva) de los acentos reales (croma >= 48:
- *  mostaza, rojo, azul deportivo) -- usada en las reglas 4 y 4b de acá
- *  abajo, no reemplaza a `s` en el resto del archivo (esa migración más
- *  amplia queda para una pasada aparte, con sus propios tests). */
+ *  mostaza, rojo, azul deportivo) -- usada en las reglas 2, 4 y 4b de acá
+ *  abajo (reemplazó a SATURACION_BAJA de la regla 2). La regla 5 sigue con
+ *  `s` cruda a propósito -- ver su comentario, es un caso distinto: el
+ *  croma castiga con fuerza a los colores oscuros (a l=20, ni s=100% llega
+ *  a un croma de 40), así que reusar el mismo umbral casi anulaba esa regla
+ *  para cualquier par oscuro saturado (detectado escribiendo el test de
+ *  esta migración, no por inspección). Verificado por ejecución completa
+ *  del catálogo real: 0 veredictos cambian en las reglas 2/4/4b. */
 function croma(c: HSL): number {
   return c.s * (1 - Math.abs((2 * c.l) / 100 - 1));
 }
-// Umbral recalibrado contra el catálogo real (ver `croma` arriba): la
-// paleta base vive en croma <= 30, los acentos reales arrancan en ~48.
+// Umbral para las tres reglas (2, 4, 4b) que distinguen "paleta apagada/
+// base" de "acento/color que compite" -- recalibrado contra el catálogo
+// real (ver
+// `croma` arriba): la paleta base vive en croma <= 30, los acentos reales
+// arrancan en ~48.
 const CROMA_ACENTO = 40;
 
 export interface ScoreColor {
@@ -95,8 +118,28 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
     };
   }
 
-  // 2. Análogo + saturación baja.
-  if (hd <= HUE_ANALOGO && Math.max(base.s, candidato.s) <= SATURACION_BAJA) {
+  // 1b. Mismo matiz con luminosidades bien separadas: el degradé
+  // monocromático real (marino + celeste, camel + chocolate). Auditoría de
+  // color/textiles (Consejo, ronda siguiente): en teoría del color un
+  // esquema monocromático funciona POR la variación de valor, no a pesar de
+  // ella. Sin gate de croma a propósito: acá no hay dos matices compitiendo,
+  // así que la intensidad de color no cambia el veredicto. Va ANTES de la
+  // regla 2 (no después, como en su primera versión): al migrar la regla 2
+  // de `s` a croma, empezó a absorber estos mismos pares (croma bajo +
+  // matiz cercano) antes de que llegaran acá, devolviendo "excelente" pero
+  // con el mensaje genérico en vez del de degradé -- mismo nivel, peor
+  // mensaje. Puesta primero, esta regla se queda con el caso más específico
+  // (vd grande) y la 2 solo ve lo que le queda (vd chico).
+  if (hd <= HUE_ANALOGO && vd >= VALUE_DEGRADE_MIN) {
+    return {
+      nivel: "excelente",
+      tag: "tono_sobre_tono",
+      explicacion: "Mismo matiz en dos luminosidades bien distintas: el degradé tono sobre tono clásico.",
+    };
+  }
+
+  // 2. Análogo + croma apagado (no `s` crudo -- ver `croma` más arriba).
+  if (hd <= HUE_ANALOGO && Math.max(croma(base), croma(candidato)) <= CROMA_ACENTO) {
     return {
       nivel: "excelente",
       explicacion: "Matices cercanos y tonos suaves: combinación segura.",
@@ -109,24 +152,6 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
       nivel: "excelente",
       tag: "tono_sobre_tono",
       explicacion: "Es básicamente el mismo color repetido: combinación seguísima.",
-    };
-  }
-
-  // 3b. Mismo matiz con luminosidades bien separadas: el degradé
-  // monocromático real (marino + celeste, camel + chocolate). Auditoría de
-  // color/textiles (Consejo, ronda siguiente): en teoría del color un
-  // esquema monocromático funciona POR la variación de valor, no a pesar de
-  // ella -- la regla 3 de arriba solo premiaba la versión plana (mismo
-  // matiz Y mismo valor), que es la de riesgo real (dos prendas del mismo
-  // tono, misma luminosidad, pero de fibra distinta se leen como un intento
-  // fallido de matchear). Sin gate de croma a propósito: acá no hay dos
-  // matices compitiendo, así que la intensidad de color no cambia el
-  // veredicto. Disjunta de la regla 5 (`hd > HUE_ANALOGO` ahí).
-  if (hd <= HUE_ANALOGO && vd >= VALUE_DEGRADE_MIN) {
-    return {
-      nivel: "excelente",
-      tag: "tono_sobre_tono",
-      explicacion: "Mismo matiz en dos luminosidades bien distintas: el degradé tono sobre tono clásico.",
     };
   }
 
@@ -166,8 +191,20 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
     };
   }
 
-  // 5. Se funden -- solo si ambos están bien saturados (ver
+  // 5. Se funden -- solo si ambos están bien saturados de verdad (ver
   // SATURACION_ALTA_MINIMA arriba para el motivo real, no es un capricho).
+  // A propósito NO usa `croma` (a diferencia de las reglas 2/4/4b, ver
+  // CROMA_ACENTO): la fórmula de croma castiga con fuerza a los colores
+  // OSCUROS (a l=20, ni s=100% llega a un croma de 40) -- reusar el mismo
+  // umbral acá casi anulaba la regla para cualquier par oscuro saturado,
+  // sin importar cuánto compitieran de verdad (detectado escribiendo el
+  // test de esta migración: un rojo oscuro s90 l20 + un azul oscuro s60
+  // l24, ambos claramente saturados y compitiendo, dejaban de chocar). El
+  // croma SÍ es la métrica correcta para separar "acento" de "paleta base"
+  // en las reglas 2/4/4b, pensadas para pares de cualquier luminosidad
+  // comparados contra un umbral fijo -- pero acá, con `vd` ya forzado casi
+  // a cero, la saturación cruda sigue siendo el proxy más fiel de cuánto
+  // "grita" cada color.
   if (
     vd < VALUE_FUNDIDO &&
     !baseNeutro &&
@@ -382,10 +419,33 @@ function esTierraCalida(p: Prenda): boolean {
 function esNegroProfundo(p: Prenda): boolean {
   return p.color_l <= NEUTRO_L_MIN && !esTierraCalida(p);
 }
+/** Tercera familia real de cuero de vestir -- burdeos/oxblood/cordovan.
+ *  Auditoría de color/textiles (Consejo, ronda siguiente): no es un color
+ *  exótico, es un básico de zapatería/marroquinería clásica (junto con
+ *  negro y marrón), y hasta ahora no encajaba en ninguna de las otras dos
+ *  familias -- no en esTierraCalida (su matiz está del otro lado del 0, no
+ *  en la franja 15-60 de marrón/tostado/camel) ni en esNegroProfundo (no
+ *  es oscuro de verdad, l>NEUTRO_L_MIN). Un cuero burdeos caía entonces sin
+ *  clasificar y volvía a colarse por el mismo agujero que motivó toda esta
+ *  regla: contra un cinturón negro, "el negro es neutro" en HSL y daba
+ *  "excelente" -- exactamente el bug original, reaparecido en la familia
+ *  que no se modeló. No está en el catálogo hoy (0 impacto real todavía),
+ *  pero el calzado es la categoría que más se carga por foto. l acotado a
+ *  (NEUTRO_L_MIN, 40]: dejar afuera el negro de cuero real del catálogo
+ *  (#1C1210, h10 l9, que ya cae en esNegroProfundo) y no confundirse con un
+ *  burdeos casi claro (que ya no se lee como cuero oscuro). h en
+ *  [325,360]∪[0,8]: la franja real de rojo-violáceo/vino, disjunta a
+ *  propósito de los 15-60 de esTierraCalida -- un burdeos y un marrón NO
+ *  chocan entre sí (es una coordinación real y aceptada, mismo criterio que
+ *  ya vale para dos tierras cualquiera). */
+function esBurdeosDeCuero(p: Prenda): boolean {
+  return p.color_s >= 20 && p.color_l > NEUTRO_L_MIN && p.color_l <= 40 && (p.color_h >= 325 || p.color_h <= 8);
+}
 
 function esDescoordinacionDeCuero(base: Prenda, candidato: Prenda): boolean {
+  const esDeColor = (p: Prenda) => esTierraCalida(p) || esBurdeosDeCuero(p);
   const chocanEnAcromia = (a: Prenda, b: Prenda) =>
-    (esNegroProfundo(a) && esTierraCalida(b)) || (esTierraCalida(a) && esNegroProfundo(b));
+    (esNegroProfundo(a) && esDeColor(b)) || (esDeColor(a) && esNegroProfundo(b));
 
   if (prendaDeCuero(base) && prendaDeCuero(candidato)) {
     return chocanEnAcromia(base, candidato);
