@@ -232,6 +232,31 @@ describe("recomendar -- coordinación de cuero (cinturón/calzado)", () => {
     const [resultado] = recomendar(shortNegro, [zapatoMarron], [shortNegro, zapatoMarron]);
     expect(resultado.score.nivel).toBe("excelente");
   });
+
+  // Auditoría de Consejo (revisor de QA, verificado por ejecución): un
+  // cuero marrón oscuro y saturado ("espresso", h=30 s=40 l=10) cumplía a
+  // la vez esNegroProfundo (l<=12) y esTierraCalida (s>=20, h 15-60) --
+  // dos prendas de ese mismo tono exacto se marcaban con_cuidado entre
+  // sí, justo lo contrario de lo que esta regla existe para aprobar.
+  it("cinturón y zapato de cuero MARRÓN OSCURO/espresso, del mismo tono exacto, sí combinan (no se confunden con 'negro')", () => {
+    const cinturonEspresso = mkPrenda("accesorio", "#3D2B1A", 30, 40, 10);
+    cinturonEspresso.textura = "cuero_liso";
+    const zapatoEspresso = mkPrenda("calzado", "#3D2B1A", 30, 40, 10);
+    zapatoEspresso.textura = "cuero_liso";
+
+    const [resultado] = recomendar(cinturonEspresso, [zapatoEspresso], [cinturonEspresso, zapatoEspresso]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
+
+  it("cuero espresso oscuro (marrón, no negro) SIGUE chocando contra un negro de cuero real -- el fix no lo vuelve todo permisivo", () => {
+    const zapatoNegroReal = mkPrenda("calzado", "#1C1210", 10, 27, 9); // negro de cuero real del catálogo
+    zapatoNegroReal.textura = "cuero_liso";
+    const cinturonEspresso = mkPrenda("accesorio", "#3D2B1A", 30, 40, 10);
+    cinturonEspresso.textura = "cuero_liso";
+
+    const [resultado] = recomendar(zapatoNegroReal, [cinturonEspresso], [zapatoNegroReal, cinturonEspresso]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
 });
 
 describe("recomendar -- formalidad calzado o torso vs pantalón", () => {
@@ -794,6 +819,37 @@ describe("armarOutfitsSugeridos", () => {
     expect(categorias).not.toContain("accesorio");
   });
 
+  // Auditoría de Consejo (revisor de QA, verificado por ejecución): antes
+  // de este fix, accesorioOk cruzaba accesorio vs. calzado y accesorio
+  // vs. torso, pero calzado vs. torso nunca se cruzaban entre sí -- un
+  // outfit podía armarse con calzado y torso que chocan directamente
+  // entre ellos, aunque cada uno por separado combinara con el pantalón.
+  // Mismo par de colores que ya prueba el choque accesorio-vs-torso más
+  // arriba (celeste/azul saturado vs. naranja quemado saturado, misma
+  // luminosidad -- compiten en pie de igualdad, regla 5), pero acá en
+  // calzado en vez de accesorio.
+  it("calzado que choca con el torso elegido se cae del outfit, en vez de armar una combinación real mala", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10),
+      mkPrenda("remera", "#3366CC", 220, 60, 50),
+      mkPrenda("calzado", "#C8763F", 25, 60, 45),
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(1);
+    expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
+  });
+
+  it("calzado que combina bien con torso Y pantalón se mantiene en el outfit, sin cambios", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10),
+      mkPrenda("remera", "#3366CC", 220, 60, 50),
+      mkPrenda("calzado", "#5C3A21", 25, 47, 25),
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(1);
+    expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["calzado", "pantalon", "remera"].sort());
+  });
+
   it("sin pantalón en el placard, no arma nada (no hay ancla)", () => {
     const placard = [mkPrenda("remera", "#3366CC", 220, 60, 50), mkPrenda("calzado", "#5C3A21", 25, 50, 30)];
     expect(armarOutfitsSugeridos(placard)).toHaveLength(0);
@@ -1064,6 +1120,31 @@ describe("armarOutfitsSugeridos", () => {
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["camisa", "pantalon"].sort());
     });
   });
+
+  // Auditoría de Consejo (revisor de sastrería): saco queda afuera de
+  // CATEGORIAS_ABRIGO a propósito (formalidad, no temperatura), y por
+  // eso solo esDeOficina (basada en `ocasion`) podía frenarlo contra un
+  // bermuda/short -- un saco sin `ocasion` cargada (dato ausente/mal
+  // cargado, no el caso hoy en el catálogo real) pasaba sin fricción.
+  // Se excluye por categoría directamente, sin depender de otro campo.
+  describe("saco nunca combina con bermuda/short, por categoría, incluso si le falta la ocasion", () => {
+    it("bermuda + saco SIN ocasion cargada -> igual se excluye", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10); // ocasion: null por defecto en mkPrenda
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([bermuda, saco, remera]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("saco");
+    });
+
+    it("un pantalón largo sigue combinando con un saco, sin cambios", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([pantalon, saco]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "saco"].sort());
+    });
+  });
 });
 
 describe("separarPorAbrigo", () => {
@@ -1174,6 +1255,27 @@ describe("armarOutfitsParaComprar", () => {
       { id: "zapato-negro-test", nombre: "Zapato de cuero negro", categoria: "calzado", colorHex: "#1C1210", textura: "cuero_liso", hsl: { h: 10, s: 27, l: 9 } },
     ];
     expect(armarOutfitsParaComprar(placard, catalogoDeCalzado)).toHaveLength(0);
+  });
+
+  // Auditoría de Consejo (revisor de QA, verificado por ejecución):
+  // torsoPropio/calzadoPropio/accesorioPropio se elegían cada uno SOLO
+  // contra el pantalón, sin cruzarse entre sí -- el bug insignia de esta
+  // sesión ("cinturón negro + zapato marrón", los dos "excelente" contra
+  // un pantalón neutro pero chocan entre sí) podía reaparecer mostrado
+  // como "esto ya lo tenés" dentro de una idea de compra.
+  it("torsoPropio/calzadoPropio/accesorioPropio también se cruzan entre sí -- el cinturón que choca con el zapato no se arrastra a la sugerencia", () => {
+    const pantalonNegro = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const zapatoNegro = mkPrenda("calzado", "#1C1210", 10, 27, 9);
+    zapatoNegro.textura = "cuero_liso";
+    const cinturonMarron = mkPrenda("accesorio", "#5C3A21", 25, 47, 25);
+    cinturonMarron.textura = "cuero_liso";
+    const placard = [pantalonNegro, zapatoNegro, cinturonMarron];
+    const catalogoConRemera: (PresetPrenda & { hsl: HSL })[] = [
+      { id: "remera-test", nombre: "Remera de prueba", categoria: "remera", colorHex: "#3366CC", hsl: { h: 220, s: 60, l: 50 } },
+    ];
+    const [sugerencia] = armarOutfitsParaComprar(placard, catalogoConRemera);
+    expect(sugerencia.prendasPropias.some((p) => p.categoria === "calzado")).toBe(true);
+    expect(sugerencia.prendasPropias.some((p) => p.categoria === "accesorio")).toBe(false);
   });
 
   it("nunca sugiere comprar otra prenda de piernas (pantalon/bermuda/short_deportivo compiten por el mismo lugar del outfit)", () => {
@@ -1473,6 +1575,17 @@ describe("tanda", () => {
 
   it("offset mayor al tamaño del pool (p.ej. el pool se achicó tras guardar un outfit) no rompe -- sigue dando la vuelta", () => {
     expect(tanda([1, 2, 3], 10, 2)).toEqual([2, 3]);
+  });
+
+  // Auditoría de Consejo (revisor de QA, verificado por ejecución): el %
+  // de JS no normaliza negativos -- pool[(offset+i) % pool.length] con
+  // offset negativo daba pool[-1], es decir `undefined`, en vez de dar la
+  // vuelta hacia atrás. Ningún llamador real pasa un offset negativo hoy,
+  // pero tanda() es pública y no tiene ninguna guarda -- esto es
+  // robustez, no un bug disparado hoy en la UI.
+  it("offset negativo no rompe -- da la vuelta hacia atrás en vez de devolver undefined", () => {
+    expect(tanda([1, 2, 3, 4, 5], -1, 3)).toEqual([5, 1, 2]);
+    expect(tanda([1, 2, 3, 4, 5], -7, 3)).toEqual([4, 5, 1]);
   });
 });
 

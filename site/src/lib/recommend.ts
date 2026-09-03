@@ -267,11 +267,34 @@ function esPantalonDeVestir(p: Prenda): boolean {
 // negro (de verdad oscuro) contra la familia tierra (marrón/tostado/
 // camel), en cualquier dirección. Gris y marino son neutros de sastrería
 // que van con las dos familias de cuero sin problema.
-function esNegroProfundo(p: Prenda): boolean {
-  return p.color_l <= NEUTRO_L_MIN;
-}
+// Auditoría de Consejo (revisor de QA, verificado por ejecución): sin el
+// `&& !esTierraCalida(p)` de acá abajo, esNegroProfundo (l<=12) y
+// esTierraCalida (s>=20, h 15-60) se solapan -- un cuero marrón oscuro
+// real y saturado ("espresso", ej. h=30 s=40 l=10) cumple las DOS
+// definiciones a la vez. chocanEnAcromia(a, b) con a=b ese mismo color
+// entonces daba true (esNegroProfundo(a) && esTierraCalida(b), ambas
+// ciertas sobre el mismo objeto), así que dos prendas de cuero espresso
+// EXACTAMENTE DEL MISMO TONO se marcaban con_cuidado -- exactamente el
+// caso que esta regla existe para aprobar, no para rechazar.
+// Primer intento de fix: agregar un piso de saturación fijo (`s < 20`) a
+// esNegroProfundo -- ROTO, verificado con vitest: el negro de cuero real
+// que ya usa el catálogo (#1C1210 -> h=10 s=27 l=9, un negro con un
+// dejo cálido, común en cuero teñido de verdad) tiene s=27, así que ese
+// corte fijo lo sacaba de "negro profundo" sin meterlo en "tierra
+// cálida" (su h=10 igual queda fuera del rango 15-60) -- quedaba sin
+// clasificar en ninguna familia y dejaba de chocar contra el beige de
+// vestir, rompiendo un test ya existente y bien fundado. La saturación
+// sola no alcanza para distinguir "negro" de "marrón oscuro": lo que
+// definía a esTierraCalida ya es la franja exacta de matiz+saturación
+// que hace "marrón", así que basta con excluirla explícitamente en vez
+// de inventar un segundo piso de saturación aparte -- un negro con
+// cualquier matiz fuera de esa franja (o con matiz adentro pero
+// insuficiente saturación) sigue siendo "negro profundo" real.
 function esTierraCalida(p: Prenda): boolean {
   return p.color_s >= 20 && p.color_h >= 15 && p.color_h <= 60;
+}
+function esNegroProfundo(p: Prenda): boolean {
+  return p.color_l <= NEUTRO_L_MIN && !esTierraCalida(p);
 }
 
 function esDescoordinacionDeCuero(base: Prenda, candidato: Prenda): boolean {
@@ -592,7 +615,14 @@ export function tanda<T>(pool: T[], offset: number, cantidad: number): T[] {
   if (pool.length === 0) return [];
   const vista: T[] = [];
   for (let i = 0; i < Math.min(cantidad, pool.length); i++) {
-    vista.push(pool[(offset + i) % pool.length]);
+    // Auditoría de Consejo (QA): el % de JS no normaliza negativos --
+    // offset negativo daba pool[-1] === undefined en vez de dar la vuelta
+    // hacia atrás. Ningún llamador actual pasa un offset negativo (todos
+    // arrancan en 0 y solo incrementan), pero tanda() es pública y está
+    // tipada para aceptar cualquier number -- el +pool.length de más
+    // adelante asegura un resto siempre no negativo sea cual sea el signo
+    // de offset.
+    vista.push(pool[(((offset + i) % pool.length) + pool.length) % pool.length]);
   }
   return vista;
 }
@@ -788,12 +818,26 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
     // a diferencia de excluirAbrigo, no depende de esAnclaDeportiva: ni
     // siquiera un short deportivo combina con zapatos de vestir.
     const excluirOficina = esAnclaVeraniega;
+    // Auditoría de Consejo (QA): saco queda afuera de CATEGORIAS_ABRIGO a
+    // propósito (es formalidad, no temperatura -- ver ese comentario), y
+    // CATEGORIAS_COMPLEMENTARIAS en types.ts ya excluye bermuda/short de
+    // la lista de saco en la pantalla manual "Combinar" -- pero el motor
+    // automático nunca consultaba esa lista, solo CATEGORIAS_TORSO (que sí
+    // incluye "saco"). En la práctica el único saco del catálogo hoy tiene
+    // ocasion="laburo" (así que esDeOficina ya lo frena), pero eso
+    // depende de un dato que podría faltar o cargarse mal -- un saco NUNCA
+    // combina con las piernas al aire, sea cual sea su ocasion real, así
+    // que se excluye por categoría directamente, sin depender de otro
+    // campo. No se agrega a CATEGORIAS_ABRIGO (rompería la separación
+    // con/sin abrigo real de "Vestite hoy", que es sobre temperatura).
+    const excluirSaco = esAnclaVeraniega;
 
     const candidatosTorso = placard.filter((p) => {
       if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
       if (esAnclaDeportiva && !estilosDe(p).includes("deportivo")) return false;
       if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
       if (excluirOficina && esDeOficina(p)) return false;
+      if (excluirSaco && p.categoria === "saco") return false;
       return true;
     });
     const torsos = ordenarPorEstacion(candidatasPropias(ancla, candidatosTorso, placard), clima);
@@ -814,17 +858,29 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
       // calzado/accesorio se eligieron solo contra el pantalón -- acá se
       // valida que además no choquen entre sí ni con ESTE torso puntual
       // (cada variante de torso puede convivir distinto con el mismo
-      // calzado/accesorio). El accesorio es el que se cae si hay choque:
-      // es el único slot opcional de los tres, y sacarlo deja un outfit
-      // igual de válido en vez de uno con una combinación real mala.
+      // calzado/accesorio). Auditoría de Consejo (QA, verificado por
+      // ejecución): esto SOLO validaba accesorio vs. calzado y accesorio
+      // vs. torso -- calzado vs. torso nunca se cruzaban entre sí (ej. un
+      // pantalón neutro admite tanto un calzado naranja saturado como una
+      // remera azul saturada, cada uno "excelente" por separado, pero esos
+      // dos colores se funden entre sí -- se armaba el outfit igual). El
+      // accesorio sigue siendo el que se cae primero si choca (es el único
+      // slot puramente opcional); ahora el calzado también se puede caer
+      // si choca con ESTE torso puntual, dejando un outfit sin calzado en
+      // vez de uno con una combinación real mala -- calzado/accesorio ya
+      // son opcionales, esto no cambia esa regla, solo la aplica bien.
+      const calzadoOk = calzado && !chocan(calzado.prenda, torso.prenda, placard);
       const accesorioOk =
         accesorio &&
-        !(calzado && chocan(accesorio.prenda, calzado.prenda, placard)) &&
+        !(calzadoOk && calzado && chocan(accesorio.prenda, calzado.prenda, placard)) &&
         !chocan(accesorio.prenda, torso.prenda, placard);
 
-      const prendas = [ancla, torso.prenda, calzado?.prenda, accesorioOk ? accesorio?.prenda : undefined].filter(
-        (p): p is Prenda => p !== undefined,
-      );
+      const prendas = [
+        ancla,
+        torso.prenda,
+        calzadoOk ? calzado?.prenda : undefined,
+        accesorioOk ? accesorio?.prenda : undefined,
+      ].filter((p): p is Prenda => p !== undefined);
 
       const clave = [...prendas]
         .map((p) => p.id)
@@ -914,6 +970,10 @@ export function armarOutfitsParaComprar(
     // ver esDeOficina más arriba: un bermuda/short (deportivo o no) nunca
     // combina con una prenda "de oficina" real (ocasion laburo/formal).
     const excluirOficina = esAnclaVeraniega;
+    // ver el comentario largo de armarOutfitsSugeridos: saco nunca combina
+    // con las piernas al aire, por categoría, sin depender de que su
+    // ocasion esté bien cargada.
+    const excluirSaco = esAnclaVeraniega;
 
     // no depende de categoriaSugerida -- se calcula una sola vez por ancla.
     const torsoPropio = mejorPropia(
@@ -923,6 +983,7 @@ export function armarOutfitsParaComprar(
         if (esAnclaDeportiva && !estilosDe(p).includes("deportivo")) return false;
         if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
         if (excluirOficina && esDeOficina(p)) return false;
+        if (excluirSaco && p.categoria === "saco") return false;
         return true;
       }),
       placard,
@@ -949,6 +1010,8 @@ export function armarOutfitsParaComprar(
       // calle" -- sería la misma combinación sin sentido real, solo que
       // todavía no comprada.
       if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(categoriaSugerida)) continue;
+      // ídem saco: nunca combina con las piernas al aire, por categoría.
+      if (excluirSaco && categoriaSugerida === "saco") continue;
 
       const candidatosCatalogo = catalogo.filter(
         (p) =>
@@ -1003,15 +1066,32 @@ export function armarOutfitsParaComprar(
               placard,
             );
 
-      const prendasPropias = [ancla, torsoPropio?.prenda, calzadoPropio?.prenda, accesorioPropio?.prenda].filter(
-        (p): p is Prenda => p !== undefined,
-      );
-      // el resto de prendasPropias, sin el ancla -- torsoPropio/calzadoPropio/
-      // accesorioPropio ya combinan con el pantalón (mejorPropia lo
-      // garantiza), pero nunca se validaron entre sí. La sugerida es la
-      // protagonista de esta idea puntual: si choca con algo que el
-      // usuario YA tiene puesto acá, no tiene sentido ofrecerle comprarla
-      // -- se descarta esa variante en vez de armar el outfit igual.
+      // Auditoría de Consejo (QA, verificado por ejecución): torsoPropio/
+      // calzadoPropio/accesorioPropio se elegían cada uno SOLO contra el
+      // pantalón (mejorPropia), sin cruzarse entre sí -- el mismo bug
+      // insignia de esta sesión ("cinturón negro + zapato marrón", los dos
+      // "excelente" contra un pantalón neutro pero chocan entre sí) podía
+      // reaparecer acá adentro, mostrado como "esto ya lo tenés" en una
+      // idea de compra. Mismo criterio que armarOutfitsSugeridos: el
+      // accesorio es el primero en caerse (único slot puramente opcional),
+      // después el calzado si choca con el torso propio.
+      const calzadoPropioOk = calzadoPropio && !(torsoPropio && chocan(calzadoPropio.prenda, torsoPropio.prenda, placard));
+      const accesorioPropioOk =
+        accesorioPropio &&
+        !(torsoPropio && chocan(accesorioPropio.prenda, torsoPropio.prenda, placard)) &&
+        !(calzadoPropioOk && calzadoPropio && chocan(accesorioPropio.prenda, calzadoPropio.prenda, placard));
+
+      const prendasPropias = [
+        ancla,
+        torsoPropio?.prenda,
+        calzadoPropioOk ? calzadoPropio?.prenda : undefined,
+        accesorioPropioOk ? accesorioPropio?.prenda : undefined,
+      ].filter((p): p is Prenda => p !== undefined);
+      // el resto de prendasPropias, sin el ancla -- ya validadas entre sí
+      // arriba. La sugerida es la protagonista de esta idea puntual: si
+      // choca con algo que el usuario YA tiene puesto acá, no tiene
+      // sentido ofrecerle comprarla -- se descarta esa variante en vez de
+      // armar el outfit igual.
       const propiasSinAncla = prendasPropias.filter((p) => p.id !== ancla.id);
 
       for (const candidato of sugeridosCandidatos) {
