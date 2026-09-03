@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { detalleHsl, hexToHsl, tonoTexturaHsl } from "../lib/color";
-import type { Categoria, Patron, Textura } from "../lib/types";
+import type { Categoria, CorteCalzado, Patron, Textura } from "../lib/types";
 
 // texturas que se dibujan como un patrón repetido (trama de tela) vs. las
 // que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
@@ -206,6 +206,7 @@ export function PrendaShape({
   conCapucha = true,
   patron: estampado = "liso",
   color2,
+  corteCalzado = "zapatilla_urbana",
 }: {
   categoria: Categoria;
   color: string;
@@ -251,6 +252,10 @@ export function PrendaShape({
    *  (la raya/el cuadro sobre `color`, que sigue siendo el fondo). Sin
    *  esto, un `patron` distinto de "liso" no dibuja nada: no hay con qué. */
   color2?: string | null;
+  /** Ver CorteCalzado en types.ts. Solo afecta a "calzado" -- default
+   *  "zapatilla_urbana" preserva el ícono de todo el catálogo anterior a
+   *  esta columna (100% zapatillas urbanas hasta esta revisión). */
+  corteCalzado?: CorteCalzado;
 }) {
   const stroke = "rgba(0,0,0,0.15)";
   const soleClipId = useId();
@@ -359,25 +364,92 @@ export function PrendaShape({
       break;
     case "calzado": {
       const d = "M8 44 Q8 36 18 34 L34 30 Q40 24 48 26 L52 34 Q58 36 58 44 Q58 50 52 50 L12 50 Q8 50 8 44 Z";
-      if (!suelaContraste) {
-        forma = <FormaConTextura d={d} fill={color} stroke={stroke} patron={patron} />;
-      } else {
-        // Suela de contraste: se recorta el mismo silueta con un clip
-        // rectangular en la franja inferior -- así el borde de la suela
-        // sigue exactamente el contorno real del zapato (que no es recto),
-        // sin tener que dibujar a mano una segunda curva aproximada. La
-        // suela (goma/EVA) no lleva el patrón de textura de la capellada
-        // -- es otro material, no la misma tela.
-        forma = (
-          <>
-            <FormaConTextura d={d} fill={color} stroke={stroke} patron={patron} />
-            <clipPath id={soleClipId}>
-              <rect x="0" y="45" width="64" height="6" />
-            </clipPath>
-            <path d={d} fill="#F2F0EA" clipPath={`url(#${soleClipId})`} />
-          </>
-        );
+      const base = <FormaConTextura d={d} fill={color} stroke={stroke} patron={patron} />;
+      // Suela de contraste: se recorta el mismo silueta con un clip
+      // rectangular en la franja inferior -- así el borde de la suela sigue
+      // exactamente el contorno real del zapato (que no es recto), sin
+      // tener que dibujar a mano una segunda curva aproximada. La suela
+      // (goma/EVA) no lleva el patrón de textura de la capellada -- es otro
+      // material, no la misma tela. Ortogonal al corte: cualquier corte
+      // puede llevar o no suela de contraste (un dato real de la prenda,
+      // ver types.ts), no solo la zapatilla urbana.
+      const suela = suelaContraste && (
+        <>
+          <clipPath id={soleClipId}>
+            <rect x="0" y="45" width="64" height="6" />
+          </clipPath>
+          <path d={d} fill="#F2F0EA" clipPath={`url(#${soleClipId})`} />
+        </>
+      );
+      // Decoración real por corte -- ver CorteCalzado en types.ts para el
+      // porqué de cada una (revisado como modista/ingeniero textil, pedido
+      // explícito del usuario: "las costuras, cortes y decoración más
+      // usadas según usos y costumbres"). tonoDetalle (lightness-aware,
+      // igual criterio que el resto de la app -- ver color.ts) en vez de
+      // un tono fijo semitransparente: un detalle sobre una zapatilla
+      // negra necesita más luz, no menos, para leerse -- mismo hallazgo ya
+      // confirmado con el cuello de la camisa y las solapas del saco.
+      const tonoDetalle = detalleHsl(tonoH, tonoS, tonoL);
+      let decoracion: React.ReactNode = null;
+      switch (corteCalzado) {
+        case "zapatilla_running":
+          // silueta técnica: panel diagonal ancho (relleno, no una línea
+          // fina) representando el panel de malla/refuerzo lateral -- SIN
+          // las 3 rayas de la urbana (esas son un diseño de calle, no de
+          // zapatilla técnica de entrenamiento).
+          decoracion = <path d="M13 43 L21 47 L41 31 L33 28 Z" fill={tonoDetalle} stroke={stroke} />;
+          break;
+        case "zapato_vestir":
+          // puntera con costura curva (cap-toe) + broguing: una fila de
+          // perforaciones chicas siguiendo la costura -- el detalle
+          // clásico de un oxford/derby real.
+          decoracion = (
+            <>
+              <path d="M33 31 Q41 25 49 29" fill="none" stroke={tonoDetalle} strokeWidth={1.1} />
+              {[36, 40, 44, 48].map((x, i) => (
+                <circle key={x} cx={x} cy={29.5 - i * 0.5} r={0.8} fill={tonoDetalle} />
+              ))}
+            </>
+          );
+          break;
+        case "mocasin":
+          // tira/correa cruzando el empeine (penny loafer) -- SIN cordones
+          // (la ausencia es el dato real más definitorio de un mocasín, ver
+          // types.ts: este corte no dibuja cordones en ningún lado).
+          decoracion = <rect x="19" y="32" width="18" height="5" rx="2" fill={tonoDetalle} stroke={stroke} />;
+          break;
+        case "zapatilla_lona":
+          // puntera de goma (blanco/crema, sin importar el color de la
+          // lona -- es otro material, igual criterio que la suela de
+          // contraste) + costura lateral marcada, el detalle real de una
+          // zapatilla de lona tipo Converse/Vans.
+          decoracion = (
+            <>
+              <path d="M39 25 Q47 24 52 34 Q54 38 50 39 Q43 33 37 30 Z" fill="#F2F0EA" stroke={stroke} />
+              <line x1="9" y1="41" x2="57" y2="41" stroke={stroke} strokeWidth={0.6} />
+            </>
+          );
+          break;
+        case "zapatilla_urbana":
+        default:
+          // 3 rayas laterales -- la referencia real más citada de
+          // "zapatilla urbana" de calle (pedido explícito del usuario).
+          decoracion = (
+            <>
+              <line x1="22" y1="42" x2="28" y2="33" stroke={tonoDetalle} strokeWidth={2.4} strokeLinecap="round" />
+              <line x1="27" y1="40" x2="33" y2="31" stroke={tonoDetalle} strokeWidth={2.4} strokeLinecap="round" />
+              <line x1="32" y1="38" x2="38" y2="29" stroke={tonoDetalle} strokeWidth={2.4} strokeLinecap="round" />
+            </>
+          );
+          break;
       }
+      forma = (
+        <>
+          {base}
+          {suela}
+          {decoracion}
+        </>
+      );
       break;
     }
     case "campera":
@@ -470,6 +542,7 @@ export default function PrendaIcon({
   conCapucha,
   patron,
   color2,
+  corteCalzado,
 }: {
   categoria: Categoria;
   color: string;
@@ -480,6 +553,7 @@ export default function PrendaIcon({
   conCapucha?: boolean;
   patron?: Patron;
   color2?: string | null;
+  corteCalzado?: CorteCalzado;
 }) {
   return (
     <svg viewBox="0 0 64 64" width="100%" height="100%">
@@ -493,6 +567,7 @@ export default function PrendaIcon({
         conCapucha={conCapucha}
         patron={patron}
         color2={color2}
+        corteCalzado={corteCalzado}
       />
     </svg>
   );

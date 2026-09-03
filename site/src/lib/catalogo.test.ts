@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CATALOGO_PRENDAS } from "./catalogo";
-import type { Categoria } from "./types";
+import type { Categoria, CorteCalzado, Estilo } from "./types";
 
 // sweater/campera -- las dos categorías de abrigo que SÍ se tagean por
 // estación (ver el criterio al principio de catalogo.ts). buzo quedó
@@ -175,5 +175,57 @@ describe("catálogo -- camisas a rayas (pedido explícito del usuario: 'blanca y
     expect(cuadros).toBeDefined();
     expect(cuadros?.patron).toBe("cuadros");
     expect(cuadros?.colorHex2).toBeDefined();
+  });
+});
+
+describe("catálogo -- calzado con corte real por registro (pedido explícito del usuario: 'dale más detalles a las zapatillas... revisa todos los estilos... las costuras, cortes y decoración más usadas')", () => {
+  const calzado = CATALOGO_PRENDAS.filter((p) => p.categoria === "calzado");
+
+  // Antes de esta ronda el catálogo cubría 3 de los 5 registros (urbano/
+  // formal/deportivo) -- clasico y casual no tenían NINGÚN calzado propio.
+  it("cubre los 5 registros (Estilo), no solo urbano/formal/deportivo", () => {
+    const estilos: Estilo[] = ["urbano", "formal", "deportivo", "clasico", "casual"];
+    for (const estilo of estilos) {
+      expect(calzado.some((p) => p.estilo === estilo), estilo).toBe(true);
+    }
+  });
+
+  // Invariante de datos: todo calzado del catálogo declara su corte real de
+  // forma explícita (no depende del default silencioso) -- evita que una
+  // entrada nueva se cuele sin revisar qué corte le corresponde de verdad.
+  it("todo calzado declara corteCalzado explícitamente", () => {
+    expect(calzado.length).toBeGreaterThan(0);
+    for (const p of calzado) {
+      expect(p.corteCalzado, p.id).toBeDefined();
+    }
+  });
+
+  // Mapeo real por registro -- revisado como modista: 3 rayas (Samba/
+  // Superstar) es un diseño de calle/lifestyle, no de zapatilla técnica de
+  // entrenamiento, por eso urbano != deportivo acá (ver el comentario largo
+  // de CorteCalzado en types.ts).
+  it("cada registro usa el arquetipo real que le corresponde", () => {
+    const mapeo: Record<string, CorteCalzado> = {
+      urbano: "zapatilla_urbana",
+      deportivo: "zapatilla_running",
+      formal: "zapato_vestir",
+      clasico: "mocasin",
+      casual: "zapatilla_lona",
+    };
+    for (const [estilo, corte] of Object.entries(mapeo)) {
+      const deEseEstilo = calzado.filter((p) => p.estilo === estilo);
+      expect(deEseEstilo.length, estilo).toBeGreaterThan(0);
+      expect(deEseEstilo.every((p) => p.corteCalzado === corte), estilo).toBe(true);
+    }
+  });
+
+  it("hay mocasines (clasico) y zapatillas de lona (casual) en cuero/lona real, no reusando la textura de otro material", () => {
+    const mocasines = calzado.filter((p) => p.corteCalzado === "mocasin");
+    expect(mocasines.length).toBeGreaterThan(0);
+    expect(mocasines.every((p) => p.textura === "cuero_liso")).toBe(true);
+
+    const lona = calzado.filter((p) => p.corteCalzado === "zapatilla_lona");
+    expect(lona.length).toBeGreaterThan(0);
+    expect(lona.every((p) => p.textura !== "cuero_liso")).toBe(true);
   });
 });

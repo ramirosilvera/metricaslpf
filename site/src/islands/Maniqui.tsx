@@ -1,6 +1,6 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
 import PrendaIcon, { PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
-import { descripcionPrenda, type Categoria, type Prenda } from "../lib/types";
+import { descripcionPrenda, type Categoria, type CorteCalzado, type Prenda } from "../lib/types";
 
 type Capa = "torso" | "piernas" | "pies" | "accesorio";
 
@@ -604,6 +604,82 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
   );
 }
 
+/** Decoración real por corte de calzado -- ver CorteCalzado en types.ts
+ *  para el porqué de cada una (revisado como modista/ingeniero textil,
+ *  pedido explícito del usuario: "las costuras, cortes y decoración más
+ *  usadas según usos y costumbres"). Definida una sola vez para el pie
+ *  izquierdo (mirror=false) y espejada con `mx` para el derecho en vez de
+ *  duplicar coordenadas a mano -- los dos zapatos ya son simétricos
+ *  alrededor de x=60 (36-56 el izquierdo, 64-84 el derecho, ver el
+ *  comentario largo de PiesCuerpo más abajo), así que mx(x) = 120-x los
+ *  espeja exactos. */
+function DecoracionCalzado({
+  corte,
+  tono,
+  stroke,
+  mirror,
+}: {
+  corte: CorteCalzado;
+  tono: string;
+  stroke: string;
+  mirror: boolean;
+}) {
+  const mx = (x: number) => (mirror ? 120 - x : x);
+  switch (corte) {
+    case "zapatilla_running":
+      // silueta técnica: panel diagonal ancho (relleno), SIN las 3 rayas
+      // de la urbana -- ver el comentario largo en types.ts.
+      return (
+        <path
+          d={`M${mx(39)} 233 L${mx(43)} 236 L${mx(52)} 225 L${mx(47)} 223.5 Z`}
+          fill={tono}
+          stroke={stroke}
+          strokeWidth={0.5}
+        />
+      );
+    case "zapato_vestir":
+      // cap-toe: costura curva + perforado (broguing) cerca de la puntera.
+      return (
+        <>
+          <path d={`M${mx(50)} 224 Q${mx(55)} 227 ${mx(55)} 231`} fill="none" stroke={tono} strokeWidth={0.5} />
+          {[225.5, 227.5, 229.5].map((y) => (
+            <circle key={y} cx={mx(53.3)} cy={y} r={0.4} fill={tono} />
+          ))}
+        </>
+      );
+    case "mocasin":
+      // tira/correa cruzando el empeine (penny loafer) -- sin cordones,
+      // ver más abajo dónde se omiten las 2 líneas de cordón para este
+      // corte.
+      return <rect x={mirror ? 64 : 48} y="227" width="8" height="3.2" rx="1" fill={tono} stroke={stroke} strokeWidth={0.4} />;
+    case "zapatilla_lona":
+      // puntera de goma (tono fijo blanco/crema, otro material -- mismo
+      // criterio que la suela de contraste) + costura lateral marcada.
+      return (
+        <>
+          <path
+            d={`M${mx(51)} 223.5 Q${mx(55.5)} 224 ${mx(56)} 231 Q${mx(56)} 234 ${mx(53)} 234 Q${mx(50)} 230 ${mx(48)} 226 Z`}
+            fill="#F2F0EA"
+            stroke={stroke}
+            strokeWidth={0.4}
+          />
+          <line x1={mx(37)} y1="233" x2={mx(55)} y2="233" stroke={stroke} strokeWidth={0.4} />
+        </>
+      );
+    case "zapatilla_urbana":
+    default:
+      // 3 rayas laterales -- la referencia real más citada de "zapatilla
+      // urbana" de calle (pedido explícito del usuario).
+      return (
+        <>
+          <line x1={mx(42)} y1="233" x2={mx(45)} y2="224" stroke={tono} strokeWidth={1.1} strokeLinecap="round" />
+          <line x1={mx(45.5)} y1="232.5" x2={mx(48.5)} y2="224" stroke={tono} strokeWidth={1.1} strokeLinecap="round" />
+          <line x1={mx(49)} y1="231.5" x2={mx(51.5)} y2="224.5" stroke={tono} strokeWidth={1.1} strokeLinecap="round" />
+        </>
+      );
+  }
+}
+
 function PiesCuerpo({ prenda }: { prenda: Prenda }) {
   // suela_contraste es un dato real de la prenda (ver types.ts), no una
   // regla automática por categoría -- una zapatilla negra puede ser
@@ -612,6 +688,17 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
   const suela = prenda.suela_contraste
     ? sombraHsl(0, 0, 94)
     : sombraHsl(prenda.color_h, prenda.color_s, Math.max(2, prenda.color_l - 20));
+  // tonoDetalle (lightness-aware, igual criterio que el resto de la app --
+  // ver color.ts) para la decoración por corte -- un tono fijo
+  // semitransparente se funde con una zapatilla oscura, mismo hallazgo ya
+  // confirmado varias veces en este archivo (cuello de camisa, solapas).
+  const tonoDetalle = detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l);
+  // mocasin no lleva cordones -- la ausencia es el dato real más
+  // definitorio de un mocasín (ver CorteCalzado en types.ts), a diferencia
+  // del resto de los cortes, que sí los llevan (incluido el zapato de
+  // vestir, con cordones más discretos en la vida real pero cordones al
+  // fin).
+  const conCordones = prenda.corte_calzado !== "mocasin";
   return (
     <Volumen
       prenda={prenda}
@@ -647,13 +734,24 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
           {/* cordones -- 2 líneas cortas cruzando el empeine. Un zigzag de
               un solo trazo (probado antes) se leía como una flecha o un
               tilde, no como cordones -- líneas paralelas simples son menos
-              ambiguas a este tamaño. */}
-          <line x1="41" y1="226" x2="51" y2="226" stroke={stroke} strokeWidth={0.6} />
-          <line x1="41" y1="229" x2="51" y2="229" stroke={stroke} strokeWidth={0.6} />
+              ambiguas a este tamaño. Omitidos en el mocasín (conCordones,
+              ver más arriba). */}
+          {conCordones && (
+            <>
+              <line x1="41" y1="226" x2="51" y2="226" stroke={stroke} strokeWidth={0.6} />
+              <line x1="41" y1="229" x2="51" y2="229" stroke={stroke} strokeWidth={0.6} />
+            </>
+          )}
+          <DecoracionCalzado corte={prenda.corte_calzado} tono={tonoDetalle} stroke={stroke} mirror={false} />
           <path d="M36 234 H56 V240 Q56 242 53 242 L39 242 Q36 242 36 240 Z" fill={suela} stroke={stroke} {...strokeProps} />
           <Forma d="M80 223 Q84 224 84 231 Q84 238 74 239 Q64 238 64 231 Q64 224 68 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
-          <line x1="79" y1="226" x2="69" y2="226" stroke={stroke} strokeWidth={0.6} />
-          <line x1="79" y1="229" x2="69" y2="229" stroke={stroke} strokeWidth={0.6} />
+          {conCordones && (
+            <>
+              <line x1="79" y1="226" x2="69" y2="226" stroke={stroke} strokeWidth={0.6} />
+              <line x1="79" y1="229" x2="69" y2="229" stroke={stroke} strokeWidth={0.6} />
+            </>
+          )}
+          <DecoracionCalzado corte={prenda.corte_calzado} tono={tonoDetalle} stroke={stroke} mirror={true} />
           <path d="M84 234 H64 V240 Q64 242 67 242 L81 242 Q84 242 84 240 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
@@ -955,6 +1053,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                 conCapucha={p.con_capucha}
                 patron={p.patron}
                 color2={p.color2_hex}
+                corteCalzado={p.corte_calzado}
               />
             </span>
           ))}

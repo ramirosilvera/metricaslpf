@@ -1,4 +1,4 @@
-import type { Categoria, Estacion, Estilo, Ocasion, Patron, Prenda, Textura } from "./types";
+import type { Categoria, CorteCalzado, Estacion, Estilo, Ocasion, Patron, Prenda, Textura } from "./types";
 import { hexToHsl } from "./color";
 
 export interface PresetPrenda {
@@ -33,6 +33,9 @@ export interface PresetPrenda {
    *  obligatorio en la práctica cuando `patron` no es "liso", si no no hay
    *  con qué dibujar el estampado real. */
   colorHex2?: string;
+  /** Ver CorteCalzado en types.ts. Solo tiene sentido en categoria="calzado";
+   *  se omite (== "zapatilla_urbana") en el resto de las categorías. */
+  corteCalzado?: CorteCalzado;
 }
 
 /**
@@ -379,35 +382,207 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "sweater-liviano-negro", nombre: "Sweater liviano negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "viscosa", estilo: "clasico", estilosSecundarios: ["casual"], ocasion: "laburo", estacion: "entretiempo" },
 
   // --- Calzado ---
-  // Las zapatillas negras y marrones aparecen dos veces a propósito -- una
+  // Revisado como modista/ingeniero textil, pedido explícito del usuario:
+  // "dale más detalles a las zapatillas... revisa todos los estilos...
+  // las costuras, cortes y decoración más usadas según usos y costumbres".
+  // Antes el catálogo cubría 3 de los 5 registros (urbano/formal/
+  // deportivo) con una sola silueta genérica de zapatilla -- ver
+  // CorteCalzado en types.ts para el porqué de cada arquetipo real. Las
+  // zapatillas negras y marrones aparecen dos veces a propósito -- una
   // versión monocromática de verdad (suela a tono, tan real como la de
   // suela blanca) y otra con la suela de goma en blanco/crema, que es el
   // otro look real y común. Ninguna de las dos es "la correcta": conviven
   // como dos prendas distintas (`suelaContraste`, ver types.ts) para que el
   // catálogo no le imponga una sola variante a todas las zapatillas del
   // mismo color -- eso fue justamente el error de una revisión anterior.
-  { id: "zapatillas-blancas", nombre: "Zapatillas blancas", categoria: "calzado", colorHex: "#F5F5F0", estilo: "urbano", ocasion: "casual" },
-  { id: "zapatillas-negras", nombre: "Zapatillas negras", categoria: "calzado", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual" },
-  { id: "zapatillas-negras-suela-blanca", nombre: "Zapatillas negras (suela blanca)", categoria: "calzado", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual", suelaContraste: true },
-  { id: "zapatillas-grises", nombre: "Zapatillas grises", categoria: "calzado", colorHex: "#8C8C8C", estilo: "urbano", ocasion: "casual" },
+  {
+    id: "zapatillas-blancas",
+    nombre: "Zapatillas blancas (3 rayas)",
+    categoria: "calzado",
+    colorHex: "#F5F5F0",
+    estilo: "urbano",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_urbana",
+  },
+  {
+    id: "zapatillas-negras",
+    nombre: "Zapatillas negras (3 rayas)",
+    categoria: "calzado",
+    colorHex: "#1A1A1A",
+    estilo: "urbano",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_urbana",
+  },
+  {
+    id: "zapatillas-negras-suela-blanca",
+    nombre: "Zapatillas negras, suela blanca (3 rayas)",
+    categoria: "calzado",
+    colorHex: "#1A1A1A",
+    estilo: "urbano",
+    ocasion: "casual",
+    suelaContraste: true,
+    corteCalzado: "zapatilla_urbana",
+  },
+  {
+    id: "zapatillas-grises",
+    nombre: "Zapatillas grises (3 rayas)",
+    categoria: "calzado",
+    colorHex: "#8C8C8C",
+    estilo: "urbano",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_urbana",
+  },
   // sin textura a propósito, mismo criterio que las demás -- una etiqueta
   // real de composición de zapatilla ("capellada 85% sintético / 15%
   // cuero, forro 100% textil sintético") no es "cuero" para nada del
   // motor: la mayoría es sintético, y ninguna Textura del enum describe
   // "sintético" sin inventar un dato que la prenda real no tiene.
-  { id: "zapatillas-azul-marino", nombre: "Zapatillas azul marino", categoria: "calzado", colorHex: "#1F2A44", estilo: "urbano", ocasion: "casual" },
+  {
+    id: "zapatillas-azul-marino",
+    nombre: "Zapatillas azul marino (3 rayas)",
+    categoria: "calzado",
+    colorHex: "#1F2A44",
+    estilo: "urbano",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_urbana",
+  },
   // marrón de gamuza/lona (mate), distinto del marrón de cuero lustroso de
   // los zapatos de vestir un par de líneas más abajo -- son materiales que
   // se ven distintos en la vida real, no el mismo color reusado sin razón.
-  { id: "zapatillas-marrones", nombre: "Zapatillas marrones", categoria: "calzado", colorHex: "#6F4E37", estilo: "urbano", ocasion: "casual" },
-  { id: "zapatillas-marrones-suela-blanca", nombre: "Zapatillas marrones (suela blanca)", categoria: "calzado", colorHex: "#6F4E37", estilo: "urbano", ocasion: "casual", suelaContraste: true },
-  { id: "zapatos-cuero-negro", nombre: "Zapatos de cuero negros", categoria: "calzado", colorHex: "#1C1210", textura: "cuero_liso", estilo: "formal", ocasion: "laburo" },
-  { id: "zapatos-cuero-marron", nombre: "Zapatos de cuero marrones", categoria: "calzado", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "formal", ocasion: "laburo" },
-  // zapatillas de running -- distintas de las "zapatillas" urbanas de
-  // arriba (mismo criterio de siempre: el estilo importa más que el color
-  // acá, es la sección que estaba vacía en el catálogo).
-  { id: "zapatillas-running-blancas", nombre: "Zapatillas running blancas", categoria: "calzado", colorHex: "#F5F5F0", estilo: "deportivo", ocasion: "casual" },
-  { id: "zapatillas-running-negras", nombre: "Zapatillas running negras", categoria: "calzado", colorHex: "#1A1A1A", estilo: "deportivo", ocasion: "casual" },
+  {
+    id: "zapatillas-marrones",
+    nombre: "Zapatillas marrones (3 rayas)",
+    categoria: "calzado",
+    colorHex: "#6F4E37",
+    estilo: "urbano",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_urbana",
+  },
+  {
+    id: "zapatillas-marrones-suela-blanca",
+    nombre: "Zapatillas marrones, suela blanca (3 rayas)",
+    categoria: "calzado",
+    colorHex: "#6F4E37",
+    estilo: "urbano",
+    ocasion: "casual",
+    suelaContraste: true,
+    corteCalzado: "zapatilla_urbana",
+  },
+  {
+    id: "zapatos-cuero-negro",
+    nombre: "Zapatos de vestir negros",
+    categoria: "calzado",
+    colorHex: "#1C1210",
+    textura: "cuero_liso",
+    estilo: "formal",
+    ocasion: "laburo",
+    corteCalzado: "zapato_vestir",
+  },
+  {
+    id: "zapatos-cuero-marron",
+    nombre: "Zapatos de vestir marrones",
+    categoria: "calzado",
+    colorHex: "#5C3A21",
+    textura: "cuero_liso",
+    estilo: "formal",
+    ocasion: "laburo",
+    corteCalzado: "zapato_vestir",
+  },
+  // zapatillas de running -- silueta técnica (suela alta + panel de malla),
+  // deliberadamente SIN las 3 rayas de las urbanas de arriba: esas son un
+  // diseño de calle/lifestyle, no de zapatilla técnica de entrenamiento
+  // (distinción real entre "deportiva de calle" y "deportiva técnica" --
+  // ver el comentario largo de CorteCalzado en types.ts).
+  {
+    id: "zapatillas-running-blancas",
+    nombre: "Zapatillas running blancas",
+    categoria: "calzado",
+    colorHex: "#F5F5F0",
+    estilo: "deportivo",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_running",
+  },
+  {
+    id: "zapatillas-running-negras",
+    nombre: "Zapatillas running negras",
+    categoria: "calzado",
+    colorHex: "#1A1A1A",
+    estilo: "deportivo",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_running",
+  },
+  {
+    id: "zapatillas-running-grises",
+    nombre: "Zapatillas running grises",
+    categoria: "calzado",
+    colorHex: "#8C8C8C",
+    estilo: "deportivo",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_running",
+  },
+  // mocasines -- registro clásico, hueco real del catálogo (antes clasico
+  // no tenía NINGÚN calzado propio). Sin cordones, con la tira/correa
+  // cruzando el empeine (penny loafer) -- el detalle real más definitorio
+  // de un mocasín, ver CorteCalzado en types.ts. Mismos 2 colores de cuero
+  // ya establecidos para zapatos de vestir (negro/marrón): son la paleta
+  // real de cuero de vestir, no una nueva inventada. ocasion "casual", no
+  // "laburo" -- un mocasín es smart-casual real (funciona de fin de semana
+  // también), a diferencia del zapato de vestir con cordones de arriba.
+  {
+    id: "mocasines-negros",
+    nombre: "Mocasines negros",
+    categoria: "calzado",
+    colorHex: "#1C1210",
+    textura: "cuero_liso",
+    estilo: "clasico",
+    estilosSecundarios: ["casual"],
+    ocasion: "casual",
+    corteCalzado: "mocasin",
+  },
+  {
+    id: "mocasines-marrones",
+    nombre: "Mocasines marrones",
+    categoria: "calzado",
+    colorHex: "#5C3A21",
+    textura: "cuero_liso",
+    estilo: "clasico",
+    estilosSecundarios: ["casual"],
+    ocasion: "casual",
+    corteCalzado: "mocasin",
+  },
+  // zapatillas de lona -- registro casual, el otro hueco real del catálogo.
+  // Los 3 colores clásicos de una zapatilla de lona real (blanco/negro/
+  // azul marino), sin textura "cuero_liso" (es lona/textil, no cuero) --
+  // mismo criterio que las urbanas de arriba. Puntera de goma + costura
+  // lateral son el detalle real, ver CorteCalzado en types.ts.
+  {
+    id: "zapatillas-lona-blancas",
+    nombre: "Zapatillas de lona blancas",
+    categoria: "calzado",
+    colorHex: "#F5F5F0",
+    estilo: "casual",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_lona",
+  },
+  {
+    id: "zapatillas-lona-negras",
+    nombre: "Zapatillas de lona negras",
+    categoria: "calzado",
+    colorHex: "#1A1A1A",
+    estilo: "casual",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_lona",
+  },
+  {
+    id: "zapatillas-lona-azul-marino",
+    nombre: "Zapatillas de lona azul marino",
+    categoria: "calzado",
+    colorHex: "#1F2A44",
+    estilo: "casual",
+    estilosSecundarios: ["urbano", "clasico"],
+    ocasion: "casual",
+    corteCalzado: "zapatilla_lona",
+  },
 
   // --- Camperas ---
   // "entretiempo" en negra/jean/verde militar/piloto -- ninguna lleva
@@ -567,6 +742,7 @@ export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number
     color2_h: hsl2?.h ?? null,
     color2_s: hsl2?.s ?? null,
     color2_l: hsl2?.l ?? null,
+    corte_calzado: preset.corteCalzado ?? "zapatilla_urbana",
     created_at: "",
     updated_at: "",
   };

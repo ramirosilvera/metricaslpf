@@ -41,6 +41,38 @@ export type Estacion = "verano" | "invierno" | "entretiempo";
  *  99% del catálogo hasta ahora). */
 export type Patron = "liso" | "rayas" | "cuadros";
 
+/** Corte/decoración real del calzado -- pedido explícito del usuario:
+ *  "dale más detalles a las zapatillas... las deportivas que tienen 3
+ *  rayas, o las urbanas tmb... revisa todos los estilos... las costuras,
+ *  cortes y decoración más usadas según usos y costumbres". Antes,
+ *  "calzado" era una sola silueta genérica de zapatilla con cordones,
+ *  distinguida solo por `suela_contraste` -- sin diferencia real entre un
+ *  mocasín, un zapato de vestir y una zapatilla deportiva más allá del
+ *  color. Revisado como modista/ingeniero textil: cada valor acá es el
+ *  arquetipo real más asociado a un registro (Estilo) de la app, cubriendo
+ *  los 5 (antes el catálogo solo tenía urbano/formal/deportivo, sin nada
+ *  para clasico/casual):
+ *  - "zapatilla_urbana" (urbano): la zapatilla de calle de 3 rayas
+ *    laterales -- el diseño "lifestyle" de calle real (tipo Samba/
+ *    Superstar/Gazelle), la referencia más citada de "zapatilla urbana"
+ *    real, no una zapatilla técnica de running.
+ *  - "zapatilla_running" (deportivo): silueta técnica -- suela más alta/
+ *    gruesa y un panel diagonal de "malla" (mesh), SIN las 3 rayas (esas
+ *    son un diseño de calle, no de zapatilla técnica de entrenamiento --
+ *    distinción real entre "deportiva de calle" y "deportiva técnica").
+ *  - "zapato_vestir" (formal): con cordones + puntera con costura curva y
+ *    perforado (broguing/cap-toe), el detalle clásico de un zapato de
+ *    vestir/oxford real.
+ *  - "mocasin" (clasico): SIN cordones (la ausencia es el dato real más
+ *    definitorio) + tira/correa cruzando el empeine (penny loafer).
+ *  - "zapatilla_lona" (casual): puntera de goma de un tono distinto al
+ *    cuerpo (blanco/crema, sin importar el color de la lona) + costura
+ *    lateral marcada -- el detalle real de una zapatilla de lona tipo
+ *    Converse/Vans, suela chata (no la suela alta de la running).
+ *  Default "zapatilla_urbana": preserva el dibujo de todo el catálogo
+ *  anterior (100% zapatillas urbanas hasta esta revisión). */
+export type CorteCalzado = "zapatilla_urbana" | "zapatilla_running" | "zapato_vestir" | "mocasin" | "zapatilla_lona";
+
 export interface HSL {
   h: number; // 0-360
   s: number; // 0-100
@@ -117,6 +149,9 @@ export interface Prenda {
   color2_h: number | null;
   color2_s: number | null;
   color2_l: number | null;
+  /** Ver CorteCalzado arriba. Solo aplica visualmente a categoria="calzado"
+   *  (el resto la ignora, mismo criterio que con_capucha/suela_contraste). */
+  corte_calzado: CorteCalzado;
   created_at: string;
   updated_at: string;
 }
@@ -176,6 +211,13 @@ export function descripcionPrenda(p: Prenda): string {
   if (p.categoria === "camisa") {
     if (p.patron === "rayas") return "Camisa a rayas";
     if (p.patron === "cuadros") return "Camisa a cuadros";
+  }
+  if (p.categoria === "calzado") {
+    if (p.corte_calzado === "zapatilla_running") return "Zapatillas running";
+    if (p.corte_calzado === "zapato_vestir") return "Zapatos de vestir";
+    if (p.corte_calzado === "mocasin") return "Mocasines";
+    if (p.corte_calzado === "zapatilla_lona") return "Zapatillas de lona";
+    return "Zapatillas urbanas";
   }
   const generico = CATEGORIA_LABEL[p.categoria];
   return generico.charAt(0).toUpperCase() + generico.slice(1);

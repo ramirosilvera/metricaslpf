@@ -26,6 +26,7 @@ function mkPrenda(categoria: Prenda["categoria"], overrides: Partial<Prenda> = {
     color2_h: null,
     color2_s: null,
     color2_l: null,
+    corte_calzado: "zapatilla_urbana",
     created_at: "",
     updated_at: "",
     ...overrides,
@@ -89,5 +90,16 @@ describe("descripcionPrenda", () => {
     expect(descripcionPrenda(mkPrenda("camisa", { patron: "liso" }))).toBe("Camisa");
     expect(descripcionPrenda(mkPrenda("camisa", { patron: "rayas" }))).toBe("Camisa a rayas");
     expect(descripcionPrenda(mkPrenda("camisa", { patron: "cuadros" }))).toBe("Camisa a cuadros");
+  });
+
+  // corte_calzado -- pedido explícito del usuario: "dale más detalles a
+  // las zapatillas... revisa todos los estilos". Antes "calzado" siempre
+  // caía en el genérico "Calzado" sin importar el corte real.
+  it("calzado distingue por corte_calzado, uno por cada registro real", () => {
+    expect(descripcionPrenda(mkPrenda("calzado", { corte_calzado: "zapatilla_urbana" }))).toBe("Zapatillas urbanas");
+    expect(descripcionPrenda(mkPrenda("calzado", { corte_calzado: "zapatilla_running" }))).toBe("Zapatillas running");
+    expect(descripcionPrenda(mkPrenda("calzado", { corte_calzado: "zapato_vestir" }))).toBe("Zapatos de vestir");
+    expect(descripcionPrenda(mkPrenda("calzado", { corte_calzado: "mocasin" }))).toBe("Mocasines");
+    expect(descripcionPrenda(mkPrenda("calzado", { corte_calzado: "zapatilla_lona" }))).toBe("Zapatillas de lona");
   });
 });

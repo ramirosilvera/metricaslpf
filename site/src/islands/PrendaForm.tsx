@@ -4,7 +4,7 @@ import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
 import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
 import { ESTILO_LABEL } from "../lib/recommend";
-import { CATEGORIA_LABEL, type Categoria, type Estacion, type Estilo, type Ocasion, type Patron, type Textura } from "../lib/types";
+import { CATEGORIA_LABEL, type Categoria, type CorteCalzado, type Estacion, type Estilo, type Ocasion, type Patron, type Textura } from "../lib/types";
 import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
 
@@ -85,6 +85,14 @@ export default function PrendaForm() {
   // -- se perdía el color2/patron en el insert de abajo.
   const [patron, setPatron] = useState<Patron>(presetDePrefill?.patron ?? "liso");
   const [color2Hex, setColor2Hex] = useState<string | undefined>(presetDePrefill?.colorHex2);
+  // corte_calzado -- mismo criterio que patron/color2 arriba: solo se
+  // carga eligiendo un preset del catálogo, no hay UI manual para elegir
+  // el corte (fuera del alcance de este pedido: "dale más detalles a las
+  // zapatillas"). Sin este estado, un mocasín o una zapatilla de lona
+  // elegida acá se guardaba como zapatilla urbana (el default), perdiendo
+  // el corte real -- mismo bug de "gap silencioso" ya encontrado y
+  // corregido para patron/color2 en la ronda anterior.
+  const [corteCalzado, setCorteCalzado] = useState<CorteCalzado>(presetDePrefill?.corteCalzado ?? "zapatilla_urbana");
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
@@ -118,6 +126,7 @@ export default function PrendaForm() {
     setConCapucha(p.conCapucha ?? true);
     setPatron(p.patron ?? "liso");
     setColor2Hex(p.colorHex2);
+    setCorteCalzado(p.corteCalzado ?? "zapatilla_urbana");
     setFotoBlob(null);
     setFotoPreview(null);
   }
@@ -174,6 +183,7 @@ export default function PrendaForm() {
           color2_h: hsl2?.h ?? null,
           color2_s: hsl2?.s ?? null,
           color2_l: hsl2?.l ?? null,
+          corte_calzado: categoria === "calzado" ? corteCalzado : "zapatilla_urbana",
         })
         .select()
         .single();
