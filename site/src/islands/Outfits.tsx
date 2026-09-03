@@ -8,6 +8,7 @@ import {
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
   diffPrendasEdicion,
+  estacionActual,
   ESTILO_LABEL,
   outfitSirveParaEstilo,
   registroOutfit,
@@ -435,11 +436,25 @@ export function Contenido({
     }
   }
 
-  // Los pools completos (no las tandas visibles, que dependen de qué
-  // ocasión esté elegida ahora) -- si no, elegir una ocasión sin
-  // combinaciones dejaría este chequeo en falso positivo y escondería los
-  // outfits guardados o "ideas para comprar" que sí existen.
-  const sinNada = outfits.length === 0 && poolSugeridos.length === 0 && poolParaComprar.length === 0;
+  // Bug real reportado por el usuario, con captura: la pantalla entera se
+  // reemplazaba por "Todavía no guardaste ningún outfit... cargá algún
+  // pantalón", pidiéndole GUARDAR un outfit a mano, aunque su placard real
+  // ya tenía de sobra para que "Vestite hoy" arme sugerencias solo. Causa:
+  // este chequeo usaba `poolSugeridos`, que desde la ronda del clima
+  // arranca vacío hasta que el usuario responde ocasión Y clima (ver más
+  // arriba) -- en una visita recién entrada a la pantalla, esas dos
+  // preguntas todavía no se respondieron, así que `poolSugeridos` daba
+  // `[]` SIEMPRE, sin importar cuántas prendas hubiera cargadas. Si además
+  // el placard ya cubre todas las categorías (nada que sugerir comprar,
+  // poolParaComprar también en cero) y todavía no guardó ningún outfit a
+  // mano, las tres condiciones daban vacío a la vez -- exactamente el caso
+  // real reportado. `hayAlgoQueSugerir` recalcula el pool SIN depender de
+  // esas dos respuestas (con la estación real de hoy, solo para esta
+  // pregunta de "¿hay algo que mostrar en esta pantalla?") -- Vestite hoy
+  // sigue pidiendo la respuesta real para RENDERIZAR sus tarjetas, pero
+  // ya no hace falta responderla para que la pantalla deje de verse vacía.
+  const hayAlgoQueSugerir = useMemo(() => armarOutfitsSugeridos(placard, estacionActual()).length > 0, [placard]);
+  const sinNada = outfits.length === 0 && !hayAlgoQueSugerir && poolParaComprar.length === 0;
 
   if (sinNada) {
     return (
