@@ -674,6 +674,19 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // no protege del frío real de invierno.
   { id: "campera-rompeviento-negra", nombre: "Campera rompeviento negra", categoria: "campera", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
   { id: "campera-rompeviento-azul", nombre: "Campera rompeviento azul", categoria: "campera", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+  // pedido explícito del usuario: campera deportiva de entretiempo, roja y
+  // azul marino -- mismo modelo rompeviento de arriba (deportivo,
+  // poliéster, entretiempo), solo suma color. "roja" reusa el hex de
+  // remera-roja/bufanda-roja (#B93A32), no un rojo nuevo. "azul marino"
+  // reusa #1F2A44 -- el mismo criterio documentado en Accesorios más abajo
+  // (consistencia cross-categoría: esta campera combina con el resto de
+  // las prendas azul marino ya cargadas, no con un azul ligeramente
+  // distinto) -- y es DISTINTO a propósito del "azul" de la línea de
+  // arriba (#3366CC, un azul eléctrico/cobalto ya reservado para
+  // deportivo, ver short-deportivo-azul): "azul marino" es la navy oscura
+  // y desaturada de siempre, no una tercera variante de celeste.
+  { id: "campera-rompeviento-roja", nombre: "Campera rompeviento roja", categoria: "campera", colorHex: "#B93A32", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+  { id: "campera-rompeviento-azul-marino", nombre: "Campera rompeviento azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
   // tapado/sobretodo de paño -- pedido explícito del usuario ("agregá
   // prendas si es necesario" al diferenciar abrigos de invierno):
   // revisando el catálogo, TODAS las prendas de invierno real (acolchado)
