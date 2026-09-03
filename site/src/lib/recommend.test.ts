@@ -229,8 +229,18 @@ describe("recomendar -- coordinación de cuero (cinturón/calzado)", () => {
     const zapatoMarron = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
     zapatoMarron.textura = "cuero_liso";
 
+    // Auditoría de sastrería (Consejo, ronda siguiente): sigue sin ser
+    // esDescoordinacionDeCuero (verificado por el mensaje) -- pero ahora
+    // termina en con_cuidado igual, por una razón distinta y más de fondo:
+    // un zapato de cuero es, en sí mismo, categóricamente ajeno a un short
+    // deportivo (ver chocaRegistroDeportivo). Antes de ese fix, esta
+    // combinación real ("zapatos de vestir marrones con un short de
+    // entrenamiento") pasaba como "excelente" sin que ninguna regla la
+    // frenara -- este test documentaba solo la ausencia de UN falso
+    // positivo (el de cuero) sin notar que quedaba otro (el de registro).
     const [resultado] = recomendar(shortNegro, [zapatoMarron], [shortNegro, zapatoMarron]);
-    expect(resultado.score.nivel).toBe("excelente");
+    expect(resultado.score.nivel).toBe("con_cuidado");
+    expect(resultado.score.explicacion).not.toContain("cuero se coordina aparte");
   });
 
   // Auditoría de Consejo (revisor de QA, verificado por ejecución): un
@@ -405,6 +415,30 @@ describe("recomendar -- deportivo no combina con formal/clasico (ni siquiera acc
 
     const [resultado] = recomendar(short, [cinturon], [short, cinturon]);
     expect(resultado.tecnicaRescate).toContain("No hay técnica de rescate");
+  });
+
+  it("mocasines/zapatos de vestir (cuero_liso) chocan con un short/jogger deportivo aunque tengan un estilo secundario casual", () => {
+    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    short.estilo = "deportivo";
+    const mocasines = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    mocasines.textura = "cuero_liso";
+    mocasines.estilo = "clasico";
+    mocasines.estilos_secundarios = ["casual"];
+
+    const [resultado] = recomendar(short, [mocasines], [short, mocasines]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+
+  it("el mismo mocasín NO choca contra un jean/pantalón casual (solo se restringe contra un ancla deportiva)", () => {
+    const jean = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    jean.estilo = "casual";
+    const mocasines = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    mocasines.textura = "cuero_liso";
+    mocasines.estilo = "clasico";
+    mocasines.estilos_secundarios = ["casual"];
+
+    const [resultado] = recomendar(jean, [mocasines], [jean, mocasines]);
+    expect(resultado.score.nivel).not.toBe("con_cuidado");
   });
 });
 
@@ -1118,6 +1152,57 @@ describe("armarOutfitsSugeridos", () => {
       const outfits = armarOutfitsSugeridos([pantalon, camisaOficina]);
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["camisa", "pantalon"].sort());
+    });
+  });
+
+  // Auditoría de sastrería (Consejo, ronda siguiente), verificada por
+  // ejecución directa: esDeOficina de arriba solo se aplicaba como
+  // pre-filtro de candidatas DENTRO de armarOutfitsSugeridos/
+  // armarOutfitsParaComprar -- recomendar(), la función que llaman DIRECTO
+  // las pantallas manuales "Combinar" y "Recomendaciones", nunca la
+  // chequeaba. Un bermuda + una camisa de oficina, o un bermuda + zapatos
+  // de vestir, daban "excelente" ahí -- la misma combinación que "Vestite
+  // hoy" ya rechazaba para ese mismo placard.
+  describe("ocasion -- recomendar() (Combinar/Recomendaciones, no solo el armado automático) también rechaza oficina + piernas al aire", () => {
+    it("bermuda + camisa ocasion=laburo vía recomendar() directo -> con_cuidado, no excelente", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const camisaOficina = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      camisaOficina.estilo = "clasico";
+      camisaOficina.ocasion = "laburo";
+
+      const [resultado] = recomendar(bermuda, [camisaOficina], [bermuda, camisaOficina]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+
+    it("bermuda azul marino (no dispara la regla de cuero) + zapato de vestir negro vía recomendar() directo -> con_cuidado igual, por oficina", () => {
+      const bermudaAzulMarino = mkPrenda("bermuda", "#1F2A44", 222, 37, 19);
+      const zapatoVestir = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+      zapatoVestir.textura = "cuero_liso";
+      zapatoVestir.ocasion = "laburo";
+
+      const [resultado] = recomendar(bermudaAzulMarino, [zapatoVestir], [bermudaAzulMarino, zapatoVestir]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+
+    it("un short deportivo + camisa de oficina también choca vía recomendar() directo (sin excepción por ser deportivo)", () => {
+      const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      short.estilo = "deportivo";
+      const camisaOficina = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      camisaOficina.estilo = "clasico";
+      camisaOficina.ocasion = "laburo";
+
+      const [resultado] = recomendar(short, [camisaOficina], [short, camisaOficina]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+
+    it("un pantalón largo con la misma camisa de oficina sigue combinando sin problema vía recomendar() directo", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const camisaOficina = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      camisaOficina.estilo = "clasico";
+      camisaOficina.ocasion = "laburo";
+
+      const [resultado] = recomendar(pantalon, [camisaOficina], [pantalon, camisaOficina]);
+      expect(resultado.score.nivel).not.toBe("con_cuidado");
     });
   });
 

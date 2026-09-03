@@ -436,6 +436,21 @@ function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean 
 function chocaRegistroDeportivo(a: Prenda, b: Prenda): boolean {
   const esDeportivo = (p: Prenda) => estilosDe(p).includes("deportivo");
   const esDeVestir = (p: Prenda) => {
+    // Un zapato de vestir o un mocasín (cuero_liso) es cuero de suela dura,
+    // categóricamente ajeno a un look deportivo, sea cual sea su estilo
+    // declarado -- a diferencia de "chocan por color", acá no hay excepción
+    // real posible. Auditoría de sastrería (Consejo, ronda siguiente):
+    // mocasines-negras/marrones tienen estilo "clasico" + secundario
+    // "casual" (a propósito, para combinar con jean/chino sin choque) --
+    // pero ese mismo secundario "casual" rompía `estilos.every(formal/
+    // clasico)` de acá abajo y dejaba pasar mocasín + short/jogger
+    // deportivo sin ningún choque (armarOutfitsSugeridos no restringe
+    // calzado contra un ancla deportiva a propósito, para que una
+    // zapatilla urbana sí combine -- ver el comentario ahí -- pero eso
+    // también dejaba pasar el cuero de vestir por la misma puerta).
+    // Verificado: sin este caso, un short deportivo negro + mocasines
+    // negros terminaba "excelente" (ambos neutros en HSL).
+    if (p.categoria === "calzado" && p.textura === "cuero_liso") return true;
     const estilos = estilosDe(p);
     return estilos.length > 0 && estilos.every((e) => e === "formal" || e === "clasico");
   };
@@ -514,6 +529,35 @@ function esCorbataSinCuello(base: Prenda, candidato: Prenda): boolean {
   return CATEGORIAS_CON_TORSO.includes(otro.categoria) && otro.categoria !== "camisa";
 }
 
+/** Un bermuda/short "de calle" (no deportivo) no combina con una prenda "de
+ *  oficina" real (`ocasion` laburo o formal) -- ver esDeOficina más abajo
+ *  (definida después en el archivo porque también la usa armarOutfits*, que
+ *  vive más abajo; acá hace falta antes, mismo criterio que ya explica el
+ *  duplicado de CATEGORIAS_CON_TORSO/CATEGORIAS_TORSO). Auditoría de
+ *  sastrería (Consejo, ronda siguiente), verificada por ejecución directa:
+ *  esDeOficina hasta esta ronda SOLO se aplicaba como pre-filtro de
+ *  candidatas dentro de armarOutfitsSugeridos/armarOutfitsParaComprar (el
+ *  armado automático de "Vestite hoy"/"Ideas para comprar") -- pero
+ *  `recomendar()`, la función que llaman directo las pantallas MANUALES
+ *  "Combinar" y "Recomendaciones" (Recomendaciones.tsx), nunca la
+ *  chequeaba. Resultado real: un bermuda + una camisa de oficina, o un
+ *  bermuda + zapatos de vestir, daban "excelente"/"muy_bueno" en Combinar,
+ *  la misma combinación que "Vestite hoy" ya rechaza para ese mismo
+ *  placard -- una inconsistencia entre las dos pantallas, no solo un hueco
+ *  aislado. Simétrica (no importa qué lado es la base) y sin excepción de
+ *  deportivo: ni siquiera un short deportivo combina con ropa de oficina
+ *  real, mismo criterio que ya rige en armarOutfits* (ver esDeOficina). */
+function esDescoordinacionDeOficina(base: Prenda, candidato: Prenda): boolean {
+  const veraniega = CATEGORIAS_PIERNAS_VERANIEGAS.includes(base.categoria)
+    ? base
+    : CATEGORIAS_PIERNAS_VERANIEGAS.includes(candidato.categoria)
+      ? candidato
+      : null;
+  if (!veraniega) return false;
+  const otra = veraniega === base ? candidato : base;
+  return esDeOficina(otra);
+}
+
 /** Recomienda, sobre un placard completo, las mejores prendas para combinar con `base`. */
 export function recomendar(
   base: Prenda,
@@ -526,6 +570,8 @@ export function recomendar(
       const cueroDescoordinado = esDescoordinacionDeCuero(base, c);
       const corbataSinCuello = !cueroDescoordinado && esCorbataSinCuello(base, c);
       const registroDeportivoChoca = !cueroDescoordinado && !corbataSinCuello && chocaRegistroDeportivo(base, c);
+      const oficinaDescoordinada =
+        !cueroDescoordinado && !corbataSinCuello && !registroDeportivoChoca && esDescoordinacionDeOficina(base, c);
       let score: ScoreColor = cueroDescoordinado
         ? {
             nivel: "con_cuidado",
@@ -543,10 +589,16 @@ export function recomendar(
                 explicacion:
                   "Ropa deportiva y una prenda de vestir no combinan por más que el color coincida: son registros funcionalmente distintos, no hay forma de \"elevar\" un look deportivo con algo formal/clásico.",
               }
-            : scoreColor(
-                { h: base.color_h, s: base.color_s, l: base.color_l },
-                { h: c.color_h, s: c.color_s, l: c.color_l },
-              );
+            : oficinaDescoordinada
+              ? {
+                  nivel: "con_cuidado",
+                  explicacion:
+                    "Con las piernas al aire no va ropa de oficina, por más que el color coincida -- ni con un bermuda ni con un short deportivo.",
+                }
+              : scoreColor(
+                  { h: base.color_h, s: base.color_s, l: base.color_l },
+                  { h: c.color_h, s: c.color_s, l: c.color_l },
+                );
 
       // El color puede combinar perfecto y el conjunto igual desentonar --
       // un pantalón de vestir con zapatillas (o un buzo casual) es
@@ -574,7 +626,9 @@ export function recomendar(
                 ? "Ponete una camisa con cuello debajo -- con buzo, remera, sweater o campera solos no hay dónde llevarla."
                 : registroDeportivoChoca
                   ? "No hay técnica de rescate acá -- cambiá una de las dos: una prenda deportiva o urbana, o dejá esta para otro look."
-                  : tecnicaRescate(base, c, placard),
+                  : oficinaDescoordinada
+                    ? "No hay técnica de rescate acá -- cambiá el bermuda/short por un pantalón largo, o dejá la ropa de oficina para otro look."
+                    : tecnicaRescate(base, c, placard),
       };
     })
     .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
