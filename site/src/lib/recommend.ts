@@ -694,6 +694,25 @@ const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
  *  uso de esta lista más abajo, junto a esAnclaDeportiva. */
 const CATEGORIAS_PIERNAS_VERANIEGAS: Categoria[] = ["bermuda", "short_deportivo"];
 
+/** true si la prenda es de registro "de oficina" real (`ocasion` laburo o
+ *  formal) -- pedido explícito del usuario, con el mismo ejemplo repetido
+ *  dos rondas seguidas ("bermuda con camisa"): revisando el catálogo real
+ *  se encontró la causa exacta -- `ocasion` (casual/laburo/formal) está
+ *  cargado en cada prenda desde el principio de la app, pero NUNCA se
+ *  usaba en ninguna regla de recomendar()/armarOutfits* hasta esta ronda.
+ *  Por eso "camisa blanca" (estilo clasico, ocasion LABURO -- una camisa
+ *  de vestir de oficina real) combinaba sin fricción con un bermuda: por
+ *  `estilo`, clasico(2) no es "menos formal" que el bermuda clasico(2)
+ *  (rangos iguales, ver prendaMenosFormalQuePantalon), así que esa regla
+ *  nunca lo atrapaba -- hacía falta esta dimensión distinta (ocasión de
+ *  uso real, no registro de estilo) para la que sí existe una respuesta
+ *  inequívoca: nadie usa una camisa de oficina, un zapato de vestir o una
+ *  corbata con las piernas al aire, sea cual sea su `estilo`. Ver el uso
+ *  más abajo, junto a CATEGORIAS_PIERNAS_VERANIEGAS. */
+function esDeOficina(p: Prenda): boolean {
+  return p.ocasion === "laburo" || p.ocasion === "formal";
+}
+
 /** Arma outfits completos automáticamente a partir del placard real, sin
  *  que el usuario elija nada -- un outfit por cada prenda de piernas
  *  (pantalón, bermuda o short deportivo -- CATEGORIAS_PIERNAS, la categoría
@@ -764,24 +783,30 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
     // clima="verano" ningún ancla (ni pantalón) combina con un abrigo.
     const esAnclaVeraniega = CATEGORIAS_PIERNAS_VERANIEGAS.includes(ancla.categoria);
     const excluirAbrigo = clima === "verano" || (esAnclaVeraniega && !esAnclaDeportiva);
+    // ver esDeOficina más arriba: un bermuda/short (deportivo o no) nunca
+    // combina con una prenda "de oficina" real (ocasion laburo/formal) --
+    // a diferencia de excluirAbrigo, no depende de esAnclaDeportiva: ni
+    // siquiera un short deportivo combina con zapatos de vestir.
+    const excluirOficina = esAnclaVeraniega;
 
     const candidatosTorso = placard.filter((p) => {
       if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
       if (esAnclaDeportiva && !estilosDe(p).includes("deportivo")) return false;
       if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
+      if (excluirOficina && esDeOficina(p)) return false;
       return true;
     });
     const torsos = ordenarPorEstacion(candidatasPropias(ancla, candidatosTorso, placard), clima);
     const calzado = mejorPropia(
       ancla,
-      placard.filter((p) => p.categoria === "calzado"),
+      placard.filter((p) => p.categoria === "calzado" && !(excluirOficina && esDeOficina(p))),
       placard,
     );
     const accesorio = esAnclaDeportiva
       ? undefined
       : mejorPropia(
           ancla,
-          placard.filter((p) => p.categoria === "accesorio"),
+          placard.filter((p) => p.categoria === "accesorio" && !(excluirOficina && esDeOficina(p))),
           placard,
         );
 
@@ -886,6 +911,9 @@ export function armarOutfitsParaComprar(
     // armarOutfitsSugeridos, que sí depende de una respuesta explícita).
     const esAnclaVeraniega = CATEGORIAS_PIERNAS_VERANIEGAS.includes(ancla.categoria);
     const excluirAbrigo = esAnclaVeraniega && !esAnclaDeportiva;
+    // ver esDeOficina más arriba: un bermuda/short (deportivo o no) nunca
+    // combina con una prenda "de oficina" real (ocasion laburo/formal).
+    const excluirOficina = esAnclaVeraniega;
 
     // no depende de categoriaSugerida -- se calcula una sola vez por ancla.
     const torsoPropio = mejorPropia(
@@ -894,6 +922,7 @@ export function armarOutfitsParaComprar(
         if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
         if (esAnclaDeportiva && !estilosDe(p).includes("deportivo")) return false;
         if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
+        if (excluirOficina && esDeOficina(p)) return false;
         return true;
       }),
       placard,
@@ -924,7 +953,10 @@ export function armarOutfitsParaComprar(
       const candidatosCatalogo = catalogo.filter(
         (p) =>
           p.categoria === categoriaSugerida &&
-          (!esAnclaDeportiva || !CATEGORIAS_TORSO.includes(categoriaSugerida) || estilosDe(presetAPrendaSintetica(p)).includes("deportivo")),
+          (!esAnclaDeportiva || !CATEGORIAS_TORSO.includes(categoriaSugerida) || estilosDe(presetAPrendaSintetica(p)).includes("deportivo")) &&
+          // no sugerir COMPRAR una prenda "de oficina" (ocasion laburo/
+          // formal) para un bermuda/short -- ver esDeOficina.
+          !(excluirOficina && (p.ocasion === "laburo" || p.ocasion === "formal")),
       );
       if (candidatosCatalogo.length === 0) continue;
 
@@ -959,7 +991,7 @@ export function armarOutfitsParaComprar(
           ? undefined
           : mejorPropia(
               ancla,
-              placard.filter((p) => p.categoria === "calzado"),
+              placard.filter((p) => p.categoria === "calzado" && !(excluirOficina && esDeOficina(p))),
               placard,
             );
       const accesorioPropio =
@@ -967,7 +999,7 @@ export function armarOutfitsParaComprar(
           ? undefined
           : mejorPropia(
               ancla,
-              placard.filter((p) => p.categoria === "accesorio"),
+              placard.filter((p) => p.categoria === "accesorio" && !(excluirOficina && esDeOficina(p))),
               placard,
             );
 

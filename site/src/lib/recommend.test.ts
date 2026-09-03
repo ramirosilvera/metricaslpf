@@ -996,6 +996,74 @@ describe("armarOutfitsSugeridos", () => {
       expect(outfits).toHaveLength(1);
     });
   });
+
+  // Pedido explícito del usuario, repetido dos rondas seguidas ("bermuda
+  // con camisa"): la causa real, encontrada revisando el catálogo, es que
+  // `ocasion` (casual/laburo/formal) estaba cargada en cada prenda desde
+  // el principio pero nunca se usaba en ninguna regla -- así que una
+  // camisa de vestir de oficina (estilo clasico, ocasion LABURO) combinaba
+  // con un bermuda sin ninguna fricción real. Ver esDeOficina en
+  // recommend.ts.
+  describe("ocasion -- ninguna prenda 'de oficina' (laburo/formal) combina con un bermuda/short", () => {
+    it("bermuda + camisa ocasion=laburo (mismo estilo, mismo color) -> NUNCA arma ese outfit", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const camisaOficina = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      camisaOficina.estilo = "clasico";
+      camisaOficina.ocasion = "laburo";
+      expect(armarOutfitsSugeridos([bermuda, camisaOficina])).toHaveLength(0);
+    });
+
+    it("bermuda + camisa ocasion=casual (resort/fin de semana) -> SÍ combina, mismo estilo que antes", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const camisaCasual = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      camisaCasual.estilo = "urbano";
+      camisaCasual.ocasion = "casual";
+      const outfits = armarOutfitsSugeridos([bermuda, camisaCasual]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["bermuda", "camisa"].sort());
+    });
+
+    it("bermuda + zapatos de vestir ocasion=laburo (calzado) -> nunca se elige ese calzado", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      const zapatoVestir = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+      zapatoVestir.ocasion = "laburo";
+      const outfits = armarOutfitsSugeridos([bermuda, remera, zapatoVestir]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("calzado");
+    });
+
+    it("bermuda + accesorio ocasion=laburo (sin requiere_cuello -- esto prueba la regla nueva, no la de corbata/cuello) -> nunca se elige", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      const accesorioOficina = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+      accesorioOficina.ocasion = "laburo";
+      const outfits = armarOutfitsSugeridos([bermuda, remera, accesorioOficina]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("accesorio");
+    });
+
+    it("un short deportivo (tageado deportivo) tampoco combina con zapatos de vestir ocasion=laburo", () => {
+      const shortDeportivo = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      shortDeportivo.estilo = "deportivo";
+      const remeraDeportiva = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      remeraDeportiva.estilo = "deportivo";
+      const zapatoVestir = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+      zapatoVestir.ocasion = "laburo";
+      const outfits = armarOutfitsSugeridos([shortDeportivo, remeraDeportiva, zapatoVestir]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("calzado");
+    });
+
+    it("un pantalón largo sigue combinando con una camisa de oficina, sin cambios", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const camisaOficina = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      camisaOficina.ocasion = "laburo";
+      const outfits = armarOutfitsSugeridos([pantalon, camisaOficina]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["camisa", "pantalon"].sort());
+    });
+  });
 });
 
 describe("separarPorAbrigo", () => {
@@ -1225,6 +1293,46 @@ describe("armarOutfitsParaComprar", () => {
       ];
       const [sugerencia] = armarOutfitsParaComprar([pantalon, sweater], catalogoConCalzado);
       expect(sugerencia.prendasPropias.some((p) => p.categoria === "sweater")).toBe(true);
+    });
+  });
+
+  // Pedido explícito del usuario, repetido dos rondas seguidas ("bermuda
+  // con camisa") -- ver esDeOficina en recommend.ts y el describe análogo
+  // en armarOutfitsSugeridos para el porqué completo.
+  describe("ocasion -- ninguna prenda 'de oficina' (laburo/formal) se sugiere ni se elige propia para un bermuda/short", () => {
+    it("torsoPropio nunca elige una camisa de oficina (ocasion=laburo) propia para un bermuda", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const camisaOficina = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      camisaOficina.ocasion = "laburo";
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      const catalogoConCalzado: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "calzado-test", nombre: "Calzado de prueba", categoria: "calzado", colorHex: "#3B2A1E", hsl: { h: 25, s: 30, l: 20 } },
+      ];
+      const [sugerencia] = armarOutfitsParaComprar([bermuda, camisaOficina, remera], catalogoConCalzado);
+      expect(sugerencia.prendasPropias.some((p) => p.categoria === "camisa")).toBe(false);
+      expect(sugerencia.prendasPropias.some((p) => p.categoria === "remera")).toBe(true);
+    });
+
+    it("nunca sugiere COMPRAR zapatos de vestir (ocasion=laburo) para completar un bermuda", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const catalogoConCalzado: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "zapato-vestir-test", nombre: "Zapato de vestir de prueba", categoria: "calzado", colorHex: "#1A1A1A", ocasion: "laburo", hsl: { h: 0, s: 0, l: 10 } },
+        { id: "zapatilla-test", nombre: "Zapatilla de prueba", categoria: "calzado", colorHex: "#1A1A1A", ocasion: "casual", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const sugerencias = armarOutfitsParaComprar([bermuda], catalogoConCalzado);
+      expect(sugerencias.some((s) => s.sugerida.id === "zapato-vestir-test")).toBe(false);
+      expect(sugerencias.some((s) => s.sugerida.id === "zapatilla-test")).toBe(true);
+    });
+
+    it("calzadoPropio/accesorioPropio de oficina tampoco se arrastran al armar una sugerencia de otra categoría", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const zapatoOficina = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+      zapatoOficina.ocasion = "laburo";
+      const catalogoConRemera: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "remera-test", nombre: "Remera de prueba", categoria: "remera", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const [sugerencia] = armarOutfitsParaComprar([bermuda, zapatoOficina], catalogoConRemera);
+      expect(sugerencia.prendasPropias.some((p) => p.categoria === "calzado")).toBe(false);
     });
   });
 });
