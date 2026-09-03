@@ -1,5 +1,5 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
-import PrendaIcon, { PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
+import PrendaIcon, { PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
 import { descripcionPrenda, type Categoria, type Prenda } from "../lib/types";
 
 type Capa = "torso" | "piernas" | "pies" | "accesorio";
@@ -183,6 +183,17 @@ function Forma({
 function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   const mangaCorta = MANGA_CORTA.includes(prenda.categoria);
   const sugerida = esSugerida(prenda);
+  // estampado (rayas/cuadros) -- mismo mecanismo que en PrendaIcon.tsx (ver
+  // el comentario largo de PatronEstampado ahí): reemplaza el relleno del
+  // cuerpo principal por completo, no se combina con conPatron/conBrillo de
+  // Volumen (una camisa a rayas se lee por sus rayas, no por una trama
+  // semitransparente de textura encima). Solo aplica al torso principal de
+  // una camisa -- las otras categorías no tienen patron/color2 cargados hoy.
+  const estampadoId = `estampado-${prenda.id}`;
+  const conEstampado =
+    prenda.categoria === "camisa" &&
+    (prenda.patron === "rayas" || prenda.patron === "cuadros") &&
+    !!prenda.color2_hex;
   const cuelloD =
     // + con_capucha -- pedido explícito del usuario, revisado como modista/
     // ingeniero textil: no todos los buzos son hoodie. Antes se dibujaba
@@ -211,6 +222,12 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
       prenda={prenda}
       hijos={(fill, stroke, patron) => (
         <>
+          {conEstampado && prenda.color2_hex && (prenda.patron === "rayas" || prenda.patron === "cuadros") && (
+            <defs>
+              <PatronEstampado id={estampadoId} patron={prenda.patron} colorBase={prenda.color_hex} color2={prenda.color2_hex} />
+            </defs>
+          )}
+
           {/* capucha del buzo, dibujada primero para que el cuerpo la tape
               parcialmente. Usa luzHsl (tono plano) en vez de `fill` (el
               degradé compartido) a propósito -- ver el comentario largo
@@ -320,9 +337,9 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               valle en el medio. */}
           <Forma
             d="M34 48 Q34 59 37 70 Q39 89 41 104 L41 126 L79 126 L79 104 Q81 89 83 70 Q86 59 86 48 Q78 42 64 46 Q60 48 56 46 Q42 42 34 48 Z"
-            fill={fill}
+            fill={conEstampado ? `url(#${estampadoId})` : fill}
             stroke={stroke}
-            patron={patron}
+            patron={conEstampado ? undefined : patron}
             sugerida={sugerida}
           />
 
@@ -835,6 +852,19 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
           // escote real dejaría ver. */}
           <>
             <defs>
+              {/* mismo mecanismo de estampado que en TorsoCuerpo (ver ese
+                  comentario) para el pecho de la camisa que asoma bajo el
+                  saco -- sin esto, una camisa a rayas puesta bajo un saco se
+                  veía plana (luzHsl liso) en la única parte del cuerpo
+                  donde el estampado real seguiría siendo visible. */}
+              {cuelloSecundario.patron !== "liso" && cuelloSecundario.color2_hex && (
+                <PatronEstampado
+                  id={`estampado-cuello-${cuelloSecundario.id}`}
+                  patron={cuelloSecundario.patron}
+                  colorBase={cuelloSecundario.color_hex}
+                  color2={cuelloSecundario.color2_hex}
+                />
+              )}
               <clipPath id={`escote-${cuelloSecundario.id}`}>
                 {principal.torso.categoria === "sweater" && (
                   <path d="M46 20 L74 20 L74 40 Q60 46 46 40 Z" />
@@ -877,7 +907,11 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
               {principal.torso.categoria === "saco" && (
                 <path
                   d="M60 46 L52 96 L68 96 Z"
-                  fill={detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
+                  fill={
+                    cuelloSecundario.patron !== "liso" && cuelloSecundario.color2_hex
+                      ? `url(#estampado-cuello-${cuelloSecundario.id})`
+                      : detalleHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)
+                  }
                   stroke={contornoHsl(cuelloSecundario.color_h, cuelloSecundario.color_s, cuelloSecundario.color_l)}
                   {...strokeProps}
                 />
@@ -919,6 +953,8 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                 posicionAccesorio={p.posicion_accesorio}
                 requiereCuello={p.requiere_cuello}
                 conCapucha={p.con_capucha}
+                patron={p.patron}
+                color2={p.color2_hex}
               />
             </span>
           ))}

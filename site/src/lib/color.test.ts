@@ -135,8 +135,14 @@ describe("nombreColor -- consistencia con el catálogo real", () => {
     const negras = CATALOGO_PRENDAS.filter((p) => /negr[oa]/i.test(p.nombre));
     expect(negras.length).toBeGreaterThan(0);
     for (const p of negras) {
-      const hsl = hexToHsl(p.colorHex);
-      expect(nombreColor(hsl.h, hsl.s, hsl.l), `${p.id} (${p.colorHex})`).toBe("Negro");
+      // en una prenda con estampado (rayas/cuadros), el color que nombra el
+      // nombre es el de la trama (colorHex2), no el de fondo -- "camisa a
+      // rayas negras" es una camisa BLANCA con raya negra, no una camisa
+      // negra. Sin este caso especial, camisa-rayas-negra (fondo #F5F5F5)
+      // rompía este test aunque su dato esté bien cargado.
+      const hexColorNombrado = p.colorHex2 ?? p.colorHex;
+      const hsl = hexToHsl(hexColorNombrado);
+      expect(nombreColor(hsl.h, hsl.s, hsl.l), `${p.id} (${hexColorNombrado})`).toBe("Negro");
     }
   });
 });

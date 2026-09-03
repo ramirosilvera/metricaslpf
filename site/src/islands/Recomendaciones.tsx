@@ -208,6 +208,8 @@ export default function Recomendaciones() {
             posicionAccesorio={base.posicion_accesorio}
             requiereCuello={base.requiere_cuello}
             conCapucha={base.con_capucha}
+            patron={base.patron}
+            color2={base.color2_hex}
           />
         </span>
         <div style={{ flex: 1 }}>
@@ -332,6 +334,8 @@ export default function Recomendaciones() {
                         posicionAccesorio={prenda.posicion_accesorio}
                         requiereCuello={prenda.requiere_cuello}
                         conCapucha={prenda.con_capucha}
+                        patron={prenda.patron}
+                        color2={prenda.color2_hex}
                       />
                     </span>
                     <div style={{ flex: 1, textAlign: "left" }}>

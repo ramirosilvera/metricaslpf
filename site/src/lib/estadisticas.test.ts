@@ -30,6 +30,11 @@ function mkPrenda(
     requiere_cuello: false,
     posicion_accesorio: "cintura",
     con_capucha: true,
+    patron: "liso",
+    color2_hex: null,
+    color2_h: null,
+    color2_s: null,
+    color2_l: null,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };

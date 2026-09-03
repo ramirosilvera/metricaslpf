@@ -141,3 +141,39 @@ describe("catálogo -- saco (categoría nueva, pedido explícito del usuario: 'u
     expect(corbataAzul).toBeDefined();
   });
 });
+
+describe("catálogo -- camisas a rayas (pedido explícito del usuario: 'blanca y celestes y de otros colores', inspirado en usos y costumbres/moda real de oficina)", () => {
+  const camisasConPatron = CATALOGO_PRENDAS.filter((p) => p.categoria === "camisa" && p.patron && p.patron !== "liso");
+
+  // Invariante de datos: un patron "rayas"/"cuadros" sin colorHex2 se
+  // renderiza silenciosamente como color liso (mismo tipo de bug de "gap
+  // silencioso" que ya se dio con otras categorías en esta sesión) -- este
+  // test evita que se repita.
+  it("toda camisa con patron rayas/cuadros tiene su segundo color cargado", () => {
+    expect(camisasConPatron.length).toBeGreaterThan(0);
+    for (const p of camisasConPatron) {
+      expect(p.colorHex2, p.id).toBeDefined();
+    }
+  });
+
+  it("hay camisas a rayas de fondo blanco (el clásico de oficina: celeste, azul marino, rosa) y de otros colores/registros", () => {
+    const rayadasBlancas = camisasConPatron.filter((p) => p.patron === "rayas" && p.colorHex === "#F5F5F5");
+    expect(rayadasBlancas.length).toBeGreaterThanOrEqual(3);
+    // al menos una rayada NO blanca de base (Bengal invertida: fondo celeste,
+    // raya blanca) -- registro más informal/versátil, no solo la de oficina.
+    expect(camisasConPatron.some((p) => p.patron === "rayas" && p.colorHex !== "#F5F5F5")).toBe(true);
+  });
+
+  it("las rayadas de oficina (fondo blanco) son estilo clásico/laburo; hay al menos una urbana/casual también", () => {
+    const rayadasBlancas = camisasConPatron.filter((p) => p.patron === "rayas" && p.colorHex === "#F5F5F5");
+    expect(rayadasBlancas.every((p) => p.estilo === "clasico" || p.estilo === "urbano")).toBe(true);
+    expect(camisasConPatron.some((p) => p.estilo === "urbano")).toBe(true);
+  });
+
+  it("camisa-cuadros tiene patron cuadros con su segundo color cargado (antes prometía un cuadro que nunca se dibujaba)", () => {
+    const cuadros = CATALOGO_PRENDAS.find((p) => p.id === "camisa-cuadros");
+    expect(cuadros).toBeDefined();
+    expect(cuadros?.patron).toBe("cuadros");
+    expect(cuadros?.colorHex2).toBeDefined();
+  });
+});

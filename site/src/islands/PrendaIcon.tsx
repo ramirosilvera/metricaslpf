@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { detalleHsl, hexToHsl, tonoTexturaHsl } from "../lib/color";
-import type { Categoria, Textura } from "../lib/types";
+import type { Categoria, Patron, Textura } from "../lib/types";
 
 // texturas que se dibujan como un patrón repetido (trama de tela) vs. las
 // que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
@@ -94,6 +94,45 @@ export function PatronTextura({ id, textura, tono }: { id: string; textura: Text
   }
 }
 
+/** El <pattern> real de un ESTAMPADO (rayas/cuadros) -- distinto de
+ *  PatronTextura de arriba en un punto clave: acá el patrón lleva DOS
+ *  colores reales (color de fondo + color del estampado), a opacidad
+ *  completa, y se usa como el relleno PRINCIPAL de la forma (no una capa
+ *  semitransparente encima de un color plano) -- una camisa a rayas
+ *  celeste sobre blanco es blanco Y celeste, no "blanco con un tinte
+ *  celeste". Pedido explícito del usuario: "camisas ralladas... inspírate
+ *  en usos y costumbres, moda". Rayas verticales (paralelas a los
+ *  botones) -- así se raya una camisa de vestir real; horizontal es un
+ *  patrón "Breton"/marinero, otra prenda que esta app no tiene. Cuadros:
+ *  grilla simple horizontal+vertical, un tattersall/cuadro básico. */
+export function PatronEstampado({
+  id,
+  patron,
+  colorBase,
+  color2,
+}: {
+  id: string;
+  patron: Extract<Patron, "rayas" | "cuadros">;
+  colorBase: string;
+  color2: string;
+}) {
+  if (patron === "rayas") {
+    return (
+      <pattern id={id} width="5" height="5" patternUnits="userSpaceOnUse">
+        <rect width="5" height="5" fill={colorBase} />
+        <rect x="0" width="1.6" height="5" fill={color2} />
+      </pattern>
+    );
+  }
+  return (
+    <pattern id={id} width="9" height="9" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" fill={colorBase} />
+      <rect x="0" width="1.4" height="9" fill={color2} />
+      <rect y="0" width="9" height="1.4" fill={color2} />
+    </pattern>
+  );
+}
+
 /** Una forma "de tela": el color plano de siempre + (si corresponde) una
  *  segunda copia del mismo trazo con el patrón/brillo de textura encima, a
  *  opacidad reducida para no perder el color de fondo -- mismo mecanismo
@@ -165,6 +204,8 @@ export function PrendaShape({
   posicionAccesorio = "cintura",
   requiereCuello = false,
   conCapucha = true,
+  patron: estampado = "liso",
+  color2,
 }: {
   categoria: Categoria;
   color: string;
@@ -203,11 +244,19 @@ export function PrendaShape({
    *  cuello. Default true: preserva el ícono de todos los buzos ya
    *  cargados (100% hoodie hasta esta revisión). */
   conCapucha?: boolean;
+  /** Ver Prenda.patron en types.ts. Solo "rayas"/"cuadros" dibujan algo --
+   *  "liso" (default) es el 99% del catálogo, sin cambios de siempre. */
+  patron?: Patron;
+  /** Ver Prenda.color2_hex en types.ts -- el segundo color del estampado
+   *  (la raya/el cuadro sobre `color`, que sigue siendo el fondo). Sin
+   *  esto, un `patron` distinto de "liso" no dibuja nada: no hay con qué. */
+  color2?: string | null;
 }) {
   const stroke = "rgba(0,0,0,0.15)";
   const soleClipId = useId();
   const patId = useId();
   const brilloId = useId();
+  const estampadoId = useId();
 
   const conPatron = textura && TEXTURA_PATRON.includes(textura);
   const conBrillo = textura && TEXTURA_BRILLO.includes(textura);
@@ -218,9 +267,16 @@ export function PrendaShape({
   // relleno y el patrón queda invisible, confirmado renderizando el ícono
   // real.
   const { h: tonoH, s: tonoS, l: tonoL } = hexToHsl(color);
+  // estampado (rayas/cuadros) -- reemplaza el relleno plano por completo
+  // cuando está cargado, no se combina con conPatron/conBrillo de textura:
+  // una camisa a rayas se lee por sus rayas, no por una trama de tela
+  // semitransparente encima de ellas (ver PatronEstampado más arriba para
+  // el porqué de por qué es un mecanismo distinto al de textura).
+  const conEstampado = (estampado === "rayas" || estampado === "cuadros") && !!color2;
+  const estampadoUrl = conEstampado ? `url(#${estampadoId})` : undefined;
   const tonoPatron = tonoTexturaHsl(tonoH, tonoS, tonoL);
 
-  const defs = (conPatron || conBrillo) && (
+  const defs = (conPatron || conBrillo || conEstampado) && (
     <defs>
       {conPatron && textura && <PatronTextura id={patId} textura={textura} tono={tonoPatron} />}
       {conBrillo && (
@@ -230,6 +286,9 @@ export function PrendaShape({
           <stop offset="50%" stopColor="white" stopOpacity="0" />
           <stop offset="100%" stopColor="white" stopOpacity="0" />
         </linearGradient>
+      )}
+      {conEstampado && color2 && (estampado === "rayas" || estampado === "cuadros") && (
+        <PatronEstampado id={estampadoId} patron={estampado} colorBase={color} color2={color2} />
       )}
     </defs>
   );
@@ -241,9 +300,17 @@ export function PrendaShape({
       forma = <FormaConTextura d="M22 8 L32 14 L42 8 L54 16 L47 26 L42 22 L42 56 L22 56 L22 22 L17 26 L10 16 Z" fill={color} stroke={stroke} patron={patron} />;
       break;
     case "camisa":
+      // con estampado: el fill ES el patrón de rayas/cuadros (dos colores
+      // reales), sin la capa de textura semitransparente encima (ver el
+      // comentario largo de conEstampado más arriba).
       forma = (
         <>
-          <FormaConTextura d="M24 6 L32 12 L40 6 L52 14 L46 24 L41 20 L41 56 L23 56 L23 20 L18 24 L12 14 Z" fill={color} stroke={stroke} patron={patron} />
+          <FormaConTextura
+            d="M24 6 L32 12 L40 6 L52 14 L46 24 L41 20 L41 56 L23 56 L23 20 L18 24 L12 14 Z"
+            fill={conEstampado ? estampadoUrl! : color}
+            stroke={stroke}
+            patron={conEstampado ? undefined : patron}
+          />
           <line x1="32" y1="14" x2="32" y2="56" stroke={stroke} />
         </>
       );
@@ -401,6 +468,8 @@ export default function PrendaIcon({
   posicionAccesorio,
   requiereCuello,
   conCapucha,
+  patron,
+  color2,
 }: {
   categoria: Categoria;
   color: string;
@@ -409,6 +478,8 @@ export default function PrendaIcon({
   posicionAccesorio?: "cuello" | "cintura";
   requiereCuello?: boolean;
   conCapucha?: boolean;
+  patron?: Patron;
+  color2?: string | null;
 }) {
   return (
     <svg viewBox="0 0 64 64" width="100%" height="100%">
@@ -420,6 +491,8 @@ export default function PrendaIcon({
         posicionAccesorio={posicionAccesorio}
         requiereCuello={requiereCuello}
         conCapucha={conCapucha}
+        patron={patron}
+        color2={color2}
       />
     </svg>
   );

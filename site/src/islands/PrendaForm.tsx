@@ -4,7 +4,7 @@ import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
 import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
 import { ESTILO_LABEL } from "../lib/recommend";
-import { CATEGORIA_LABEL, type Categoria, type Estacion, type Estilo, type Ocasion, type Textura } from "../lib/types";
+import { CATEGORIA_LABEL, type Categoria, type Estacion, type Estilo, type Ocasion, type Patron, type Textura } from "../lib/types";
 import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
 
@@ -77,6 +77,14 @@ export default function PrendaForm() {
     presetDePrefill?.posicionAccesorio ?? "cintura",
   );
   const [conCapucha, setConCapucha] = useState(presetDePrefill?.conCapucha ?? true);
+  // patron/color2 (camisas a rayas/cuadros) -- solo se cargan eligiendo un
+  // preset del catálogo, no hay UI manual para armar un estampado propio
+  // (requeriría elegir 2 colores + tipo de trama, fuera del alcance de este
+  // pedido: "incorpora al catálogo camisas rayadas"). Sin este estado, un
+  // preset a rayas elegido acá se guardaba en el placard como si fuera liso
+  // -- se perdía el color2/patron en el insert de abajo.
+  const [patron, setPatron] = useState<Patron>(presetDePrefill?.patron ?? "liso");
+  const [color2Hex, setColor2Hex] = useState<string | undefined>(presetDePrefill?.colorHex2);
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
@@ -108,6 +116,8 @@ export default function PrendaForm() {
     setRequiereCuello(p.requiereCuello ?? false);
     setPosicionAccesorio(p.posicionAccesorio ?? "cintura");
     setConCapucha(p.conCapucha ?? true);
+    setPatron(p.patron ?? "liso");
+    setColor2Hex(p.colorHex2);
     setFotoBlob(null);
     setFotoPreview(null);
   }
@@ -140,6 +150,7 @@ export default function PrendaForm() {
       }
 
       const hsl = hexToHsl(colorHex);
+      const hsl2 = categoria === "camisa" && color2Hex ? hexToHsl(color2Hex) : null;
       const { data: inserted, error: insertErr } = await supabase
         .from("prendas")
         .insert({
@@ -158,6 +169,11 @@ export default function PrendaForm() {
           requiere_cuello: categoria === "accesorio" ? requiereCuello : false,
           posicion_accesorio: categoria === "accesorio" ? posicionAccesorio : "cintura",
           con_capucha: categoria === "buzo" ? conCapucha : true,
+          patron: categoria === "camisa" ? patron : "liso",
+          color2_hex: categoria === "camisa" ? (color2Hex ?? null) : null,
+          color2_h: hsl2?.h ?? null,
+          color2_s: hsl2?.s ?? null,
+          color2_l: hsl2?.l ?? null,
         })
         .select()
         .single();

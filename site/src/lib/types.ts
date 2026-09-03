@@ -30,6 +30,17 @@ export type Estilo = "casual" | "formal" | "deportivo" | "urbano" | "clasico";
 export type Ocasion = "casual" | "laburo" | "formal";
 export type Estacion = "verano" | "invierno" | "entretiempo";
 
+/** Estampado de la prenda -- estrictamente estampado/print (rayas, cuadros),
+ *  NO es lo mismo que Textura (que es fibra/tejido: algodón, lino, lana...).
+ *  Una camisa de algodón puede ser lisa, a rayas o a cuadros -- son datos
+ *  independientes. Pedido explícito del usuario: "camisas ralladas...
+ *  inspírate en usos y costumbres, moda". "cuadros" se agrega en la misma
+ *  pasada porque ya existía una prenda en el catálogo (camisa-cuadros)
+ *  nombrada "a cuadros" sin ningún estampado real dibujado -- el nombre
+ *  prometía algo que el ícono/maniquí nunca mostraban. Default "liso" (el
+ *  99% del catálogo hasta ahora). */
+export type Patron = "liso" | "rayas" | "cuadros";
+
 export interface HSL {
   h: number; // 0-360
   s: number; // 0-100
@@ -96,6 +107,16 @@ export interface Prenda {
    *  los llamaría de invierno o de entretiempo" a diferencia de sweater/
    *  campera, que sí se tagean por estación (ver catalogo.ts). */
   con_capucha: boolean;
+  /** Estampado real de la prenda (ver Patron arriba) -- default "liso".
+   *  Cuando no es "liso", `color2_*` es el segundo color del estampado
+   *  (el color de las rayas/los cuadros sobre `color_hex`, que sigue
+   *  siendo el color de fondo/base) -- sin él no hay con qué dibujar el
+   *  patrón real, solo el nombre. */
+  patron: Patron;
+  color2_hex: string | null;
+  color2_h: number | null;
+  color2_s: number | null;
+  color2_l: number | null;
   created_at: string;
   updated_at: string;
 }
@@ -151,6 +172,10 @@ export function descripcionPrenda(p: Prenda): string {
   if (p.categoria === "campera") {
     if (p.textura === "denim") return "Campera de jean";
     if (p.textura === "acolchado") return "Campera de pluma";
+  }
+  if (p.categoria === "camisa") {
+    if (p.patron === "rayas") return "Camisa a rayas";
+    if (p.patron === "cuadros") return "Camisa a cuadros";
   }
   const generico = CATEGORIA_LABEL[p.categoria];
   return generico.charAt(0).toUpperCase() + generico.slice(1);

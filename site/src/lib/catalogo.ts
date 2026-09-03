@@ -1,4 +1,4 @@
-import type { Categoria, Estacion, Estilo, Ocasion, Prenda, Textura } from "./types";
+import type { Categoria, Estacion, Estilo, Ocasion, Patron, Prenda, Textura } from "./types";
 import { hexToHsl } from "./color";
 
 export interface PresetPrenda {
@@ -26,6 +26,13 @@ export interface PresetPrenda {
    *  categoria="buzo"; se omite (== true, hoodie) salvo en los crewneck
    *  puntuales sin capucha. */
   conCapucha?: boolean;
+  /** Ver Prenda.patron en types.ts. Se omite (== "liso") en casi todo el
+   *  catálogo -- solo las camisas a rayas/cuadros lo declaran. */
+  patron?: Patron;
+  /** Segundo color del estampado (ver Prenda.color2_* en types.ts) --
+   *  obligatorio en la práctica cuando `patron` no es "liso", si no no hay
+   *  con qué dibujar el estampado real. */
+  colorHex2?: string;
 }
 
 /**
@@ -146,11 +153,55 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // oscuro y otra un negro").
   { id: "camisa-negra", nombre: "Camisa negra", categoria: "camisa", colorHex: "#1A1A1A", textura: "algodon", estilo: "urbano", ocasion: "laburo" },
   { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
-  { id: "camisa-cuadros", nombre: "Camisa a cuadros", categoria: "camisa", colorHex: "#4A5A3C", textura: "algodon", estilo: "urbano", ocasion: "casual" },
+  // patron "cuadros" + colorHex2 -- corrección real de esta ronda: esta
+  // entrada ya existía nombrada "a cuadros" pero se dibujaba como una
+  // camisa lisa de un solo color, sin ningún cuadro real (el modelo de
+  // datos no tenía forma de guardar un segundo color hasta esta revisión).
+  // Línea del cuadro en el mismo beige de siempre (#D8C7A1) -- un
+  // tattersall real sobre verde oliva suele llevar la línea en un tono
+  // cálido/crema, no en otro verde (eso se leería como un solo color
+  // fundido, no como un cuadro).
+  { id: "camisa-cuadros", nombre: "Camisa a cuadros", categoria: "camisa", colorHex: "#4A5A3C", colorHex2: "#D8C7A1", patron: "cuadros", textura: "algodon", estilo: "urbano", ocasion: "casual" },
   // mismo beige que el resto del catálogo (ver remera-beige) -- clasico/
   // laburo, mismo registro que blanca/celeste/gris: una camisa beige es
   // tan de oficina como esas, no informal como la de cuadros.
   { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+
+  // --- Camisas a rayas -- pedido explícito del usuario: "camisas
+  // ralladas, blanca y celestes y de otros colores tmb, inspírate en usos
+  // y costumbres, moda". Curadas por real convención de vestimenta, del
+  // registro más clásico al más urbano -- no una paleta arcoíris, mismo
+  // criterio que el resto del archivo. Todas patron:"rayas", con
+  // colorHex2 (la raya) real -- sin esto no habría estampado que dibujar,
+  // solo el nombre.
+  //
+  // celeste sobre blanco -- LA camisa a rayas de oficina por excelencia
+  // en Argentina y en el mundo (raya fina celeste sobre fondo blanco,
+  // "Bengal stripe" clásico). Mismos hex que camisa-blanca/camisa-celeste
+  // ya usan, por consistencia de paleta cross-prenda.
+  { id: "camisa-rayas-celeste", nombre: "Camisa a rayas celeste", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#B7D2EC", patron: "rayas", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  // azul marino sobre blanco -- el "pinstripe" clásico de oficina/
+  // vestir, un escalón más formal que la celeste de arriba (se banca sin
+  // problema una corbata y un traje). Mismo azul marino que ya usan
+  // pantalon-vestir-azul/saco-azul-marino/corbata-azul-marino.
+  { id: "camisa-rayas-azul-marino", nombre: "Camisa a rayas azul marino", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#1F2A44", patron: "rayas", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  // rosa sobre blanco -- el color "no neutro" más estándar de oficina
+  // desde hace años (estilo francés/business casual), tan de laburo como
+  // la celeste, no un capricho de color. Mismo rosa que remera-rosa.
+  { id: "camisa-rayas-rosa", nombre: "Camisa a rayas rosa", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#E4A6B4", patron: "rayas", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  // Bengal invertida -- fondo celeste con raya blanca, no blanco con raya
+  // celeste (la de arriba): mismo par de colores, pero la base más
+  // saturada la hace un poco menos "de escritorio estricto" y más
+  // versátil para un finde -- estilo secundario "casual" a propósito,
+  // mismo criterio multi-estilo que ya usa sweater-mostaza (ejemplo real
+  // del usuario: la misma prenda funciona en dos registros).
+  { id: "camisa-rayas-celeste-base", nombre: "Camisa celeste a rayas blancas", categoria: "camisa", colorHex: "#B7D2EC", colorHex2: "#F5F5F5", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["casual"], ocasion: "laburo" },
+  // negro sobre blanco, estilo urbano -- una rayada bien de calle
+  // (contraste alto, sin color de oficina de por medio), no una variante
+  // más de la misma camisa de laburo. Mismo criterio que camisa-negra
+  // (también urbano): la lectura de "urban professional" viene del
+  // contraste del color, no de la fibra.
+  { id: "camisa-rayas-negra", nombre: "Camisa a rayas negras", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#1A1A1A", patron: "rayas", textura: "algodon", estilo: "urbano", ocasion: "casual" },
 
   // --- Pantalones ---
   // estilo secundario "urbano" en TODO jean, sea cual sea el color -- pedido
@@ -470,10 +521,13 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "bufanda-roja", nombre: "Bufanda roja", categoria: "accesorio", colorHex: "#B93A32", textura: "lana", estilo: "casual", ocasion: "casual", posicionAccesorio: "cuello" },
 ];
 
-/** Deriva h/s/l de cada preset una sola vez (no en cada render). */
+/** Deriva h/s/l de cada preset una sola vez (no en cada render). hsl2 solo
+ *  cuando el preset declara colorHex2 (estampado real) -- undefined si no,
+ *  no se inventa un segundo color para una prenda lisa. */
 export const CATALOGO_CON_HSL = CATALOGO_PRENDAS.map((p) => ({
   ...p,
   hsl: hexToHsl(p.colorHex),
+  hsl2: p.colorHex2 ? hexToHsl(p.colorHex2) : undefined,
 }));
 
 /** Convierte un preset del catálogo en una Prenda sintética -- misma forma
@@ -485,6 +539,11 @@ export const CATALOGO_CON_HSL = CATALOGO_PRENDAS.map((p) => ({
  *  todavía" en el maniquí, y para no intentar guardarla como si fuera una
  *  prenda real del usuario. */
 export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number; s: number; l: number } }): Prenda {
+  // hsl2 se recalcula acá (no se exige en el tipo del parámetro) para no
+  // tener que tocar la firma en los ~26 lugares que ya la usan sin
+  // estampado -- mismo hexToHsl que ya usa CATALOGO_CON_HSL para el color
+  // principal.
+  const hsl2 = preset.colorHex2 ? hexToHsl(preset.colorHex2) : null;
   return {
     id: `sugerida-${preset.id}`,
     user_id: "",
@@ -503,6 +562,11 @@ export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number
     requiere_cuello: preset.requiereCuello ?? false,
     posicion_accesorio: preset.posicionAccesorio ?? "cintura",
     con_capucha: preset.conCapucha ?? true,
+    patron: preset.patron ?? "liso",
+    color2_hex: preset.colorHex2 ?? null,
+    color2_h: hsl2?.h ?? null,
+    color2_s: hsl2?.s ?? null,
+    color2_l: hsl2?.l ?? null,
     created_at: "",
     updated_at: "",
   };

@@ -77,6 +77,8 @@ export default function CatalogoPicker({
             posicionAccesorio={p.posicionAccesorio}
             requiereCuello={p.requiereCuello}
             conCapucha={p.conCapucha}
+            patron={p.patron}
+            color2={p.colorHex2}
           />
         </span>
         <span className="catalogo-nombre">{p.nombre}</span>

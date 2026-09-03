@@ -117,6 +117,11 @@ export default function Probar() {
           requiere_cuello: false,
           posicion_accesorio: "cintura",
           con_capucha: true,
+          patron: "liso",
+          color2_hex: null,
+          color2_h: null,
+          color2_s: null,
+          color2_l: null,
           created_at: "",
           updated_at: "",
         }
@@ -193,6 +198,8 @@ export default function Probar() {
                 posicionAccesorio={pruebaBase.posicion_accesorio}
                 requiereCuello={pruebaBase.requiere_cuello}
                 conCapucha={pruebaBase.con_capucha}
+                patron={pruebaBase.patron}
+                color2={pruebaBase.color2_hex}
               />
             </span>
             <div style={{ flex: 1 }}>
@@ -237,6 +244,8 @@ export default function Probar() {
                             posicionAccesorio={prenda.posicion_accesorio}
                             requiereCuello={prenda.requiere_cuello}
                             conCapucha={prenda.con_capucha}
+                            patron={prenda.patron}
+                            color2={prenda.color2_hex}
                           />
                         </span>
                         <div style={{ flex: 1 }}>

@@ -21,6 +21,11 @@ function mkPrenda(categoria: Prenda["categoria"], overrides: Partial<Prenda> = {
     requiere_cuello: false,
     posicion_accesorio: "cintura",
     con_capucha: true,
+    patron: "liso",
+    color2_hex: null,
+    color2_h: null,
+    color2_s: null,
+    color2_l: null,
     created_at: "",
     updated_at: "",
     ...overrides,
@@ -76,5 +81,13 @@ describe("descripcionPrenda", () => {
   // como sí la hay en campera/buzo) -- cae en el genérico capitalizado.
   it("saco cae en el genérico capitalizado, sin branch específico", () => {
     expect(descripcionPrenda(mkPrenda("saco", { textura: "lana" }))).toBe("Saco");
+  });
+
+  // patron (rayas/cuadros) -- pedido explícito del usuario: "incorpora al
+  // catálogo camisas ralladas". Camisa lisa sigue cayendo en el genérico.
+  it("camisa distingue por patrón: liso, rayas y cuadros", () => {
+    expect(descripcionPrenda(mkPrenda("camisa", { patron: "liso" }))).toBe("Camisa");
+    expect(descripcionPrenda(mkPrenda("camisa", { patron: "rayas" }))).toBe("Camisa a rayas");
+    expect(descripcionPrenda(mkPrenda("camisa", { patron: "cuadros" }))).toBe("Camisa a cuadros");
   });
 });

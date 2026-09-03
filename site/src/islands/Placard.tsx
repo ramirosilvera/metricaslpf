@@ -203,6 +203,8 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
                         posicionAccesorio={p.posicion_accesorio}
                         requiereCuello={p.requiere_cuello}
                         conCapucha={p.con_capucha}
+                        patron={p.patron}
+                        color2={p.color2_hex}
                       />
                     </span>
                     <strong style={{ fontSize: "0.85rem" }}>{descripcionPrenda(p)}</strong>
