@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { descripcionPrenda } from "./types";
-import type { Prenda } from "./types";
+import { CATEGORIAS_COMPLEMENTARIAS, descripcionPrenda } from "./types";
+import type { Categoria, Prenda } from "./types";
 
 function mkPrenda(categoria: Prenda["categoria"], overrides: Partial<Prenda> = {}): Prenda {
   return {
@@ -101,5 +101,33 @@ describe("descripcionPrenda", () => {
     expect(descripcionPrenda(mkPrenda("calzado", { corte_calzado: "zapato_vestir" }))).toBe("Zapatos de vestir");
     expect(descripcionPrenda(mkPrenda("calzado", { corte_calzado: "mocasin" }))).toBe("Mocasines");
     expect(descripcionPrenda(mkPrenda("calzado", { corte_calzado: "zapatilla_lona" }))).toBe("Zapatillas de lona");
+  });
+});
+
+describe("CATEGORIAS_COMPLEMENTARIAS", () => {
+  it("el mapa es simétrico: si A lista a B, B lista a A", () => {
+    const categorias = Object.keys(CATEGORIAS_COMPLEMENTARIAS) as Categoria[];
+    for (const a of categorias) {
+      for (const b of CATEGORIAS_COMPLEMENTARIAS[a]) {
+        expect(CATEGORIAS_COMPLEMENTARIAS[b], `${a} lista a ${b}, pero ${b} no lista a ${a}`).toContain(a);
+      }
+    }
+  });
+
+  // Segunda opinión de sastrería (Consejo, ronda siguiente): blazer +
+  // remera lisa (smart casual) y sweater sobre camisa (o bajo un saco,
+  // capa de sastrería clásica de invierno) no estaban en el mapa -- el
+  // mismo argumento que excluye saco+buzo ("dos capas de afuera") no
+  // aplica acá.
+  it("saco combina con remera y con sweater; camisa combina con sweater", () => {
+    expect(CATEGORIAS_COMPLEMENTARIAS.saco).toContain("remera");
+    expect(CATEGORIAS_COMPLEMENTARIAS.saco).toContain("sweater");
+    expect(CATEGORIAS_COMPLEMENTARIAS.camisa).toContain("sweater");
+  });
+
+  it("saco sigue sin combinar con buzo (sí es una segunda capa de afuera real) ni con bermuda/short_deportivo", () => {
+    expect(CATEGORIAS_COMPLEMENTARIAS.saco).not.toContain("buzo");
+    expect(CATEGORIAS_COMPLEMENTARIAS.saco).not.toContain("bermuda");
+    expect(CATEGORIAS_COMPLEMENTARIAS.saco).not.toContain("short_deportivo");
   });
 });

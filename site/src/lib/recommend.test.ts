@@ -113,6 +113,67 @@ describe("scoreColor", () => {
     const r = scoreColor({ h: 0, s: 80, l: 50 }, { h: 100, s: 70, l: 54 });
     expect(r.nivel).toBe("con_cuidado");
   });
+
+  // Auditoría de color/textiles (Consejo, ronda siguiente): un esquema
+  // monocromático funciona POR la variación de valor, no a pesar de ella.
+  describe("3b -- degradé monocromático (mismo matiz, luminosidades separadas)", () => {
+    it("marino oscuro + celeste claro (mismo matiz, vd bien separado) -> excelente, tag tono sobre tono", () => {
+      // valores reales del catálogo: pantalón de vestir azul marino
+      // (h222 s37 l19) + camisa celeste (h209 s58 l82).
+      const r = scoreColor({ h: 222, s: 37, l: 19 }, { h: 209, s: 58, l: 82 });
+      expect(r.nivel).toBe("excelente");
+      expect(r.tag).toBe("tono_sobre_tono");
+    });
+
+    it("camel + chocolate (mismo matiz tierra, vd separado) -> excelente", () => {
+      const r = scoreColor({ h: 41, s: 41, l: 74 }, { h: 25, s: 47, l: 25 });
+      expect(r.nivel).toBe("excelente");
+    });
+
+    it("mismo matiz saturado con vd en la franja muerta (por encima de la 3 plana, por debajo de la 3b) -> NO excelente por ninguna de las dos", () => {
+      // s=70 en las dos puntas: por encima de SATURACION_BAJA (45), así la
+      // regla 2 (análogo + saturación baja) tampoco puede explicar el
+      // resultado. vd=0.19: por encima de VALUE_MONOCROMATICO (0.15, la
+      // regla 3 plana) y por debajo de VALUE_DEGRADE_MIN (0.25, la 3b) --
+      // aísla específicamente esa franja intermedia.
+      const r = scoreColor({ h: 41, s: 70, l: 74 }, { h: 41, s: 70, l: 55 });
+      expect(r.nivel).not.toBe("excelente");
+    });
+  });
+
+  // Auditoría de color/textiles (Consejo, ronda siguiente): lo que hace
+  // "audaz" a un complementario es el croma, no el ángulo de matiz -- camel
+  // + marino es la base de la paleta clásica, no un statement.
+  describe("4 -- complementarios apagados (croma bajo) son excelente, no audaz", () => {
+    it("beige + azul marino (complementarios reales del catálogo, croma bajo) -> excelente, sin tag audaz", () => {
+      const r = scoreColor({ h: 41, s: 41, l: 74 }, { h: 222, s: 37, l: 19 });
+      expect(r.nivel).toBe("excelente");
+      expect(r.tag).toBeUndefined();
+    });
+
+    it("mostaza + celeste (complementarios de croma alto, control) sigue siendo audaz", () => {
+      const r = scoreColor({ h: 40, s: 62, l: 47 }, { h: 209, s: 58, l: 82 });
+      expect(r.nivel).toBe("muy_bueno");
+      expect(r.tag).toBe("combinacion_audaz");
+    });
+  });
+
+  // Auditoría de color/textiles (Consejo, ronda siguiente): la franja
+  // "complementarios intensos SIN separación de valor" no tenía regla
+  // propia y cae en el catch-all "combinación prolija" -- es al revés de lo
+  // que dice la teoría (el contraste de valor es lo que hace legible al
+  // complementario, no lo que lo vuelve arriesgado).
+  describe("4b -- complementarios de croma alto sin separación de valor -> con_cuidado", () => {
+    it("rojo y verde intensos, casi la misma luminosidad -> con_cuidado (se pelean)", () => {
+      const r = scoreColor({ h: 5, s: 60, l: 45 }, { h: 145, s: 60, l: 45 });
+      expect(r.nivel).toBe("con_cuidado");
+    });
+
+    it("el mismo par con un verde apagado (croma bajo) NO choca -- se comporta como un oscuro de base", () => {
+      const r = scoreColor({ h: 5, s: 60, l: 45 }, { h: 130, s: 22, l: 31 }); // verde botella real del catálogo
+      expect(r.nivel).not.toBe("con_cuidado");
+    });
+  });
 });
 
 describe("recomendar -- coordinación de cuero (cinturón/calzado)", () => {
@@ -267,6 +328,42 @@ describe("recomendar -- coordinación de cuero (cinturón/calzado)", () => {
     const [resultado] = recomendar(zapatoNegroReal, [cinturonEspresso], [zapatoNegroReal, cinturonEspresso]);
     expect(resultado.score.nivel).toBe("con_cuidado");
   });
+
+  // Segunda opinión de sastrería (Consejo, ronda siguiente), verificada por
+  // ejecución directa: un zapato de vestir/mocasín cargado a mano (por
+  // foto, SIN textura="cuero_liso" tildada -- el formulario no la marca
+  // por defecto) apagaba la coordinación de cuero entera. corte_calzado
+  // ahora cuenta como señal de cuero por sí solo, sin necesitar la textura.
+  it("zapato de vestir cargado a mano (corte_calzado, SIN textura cuero_liso) sigue disparando la coordinación de cuero", () => {
+    const cinturonNegro = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturonNegro.textura = "cuero_liso";
+    const zapatoVestirSinTextura = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoVestirSinTextura.corte_calzado = "zapato_vestir";
+    // textura deliberadamente SIN setear (queda null, el default de mkPrenda).
+
+    const [resultado] = recomendar(cinturonNegro, [zapatoVestirSinTextura], [cinturonNegro, zapatoVestirSinTextura]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+
+  it("mocasín cargado a mano (corte_calzado, SIN textura cuero_liso) también dispara la coordinación de cuero", () => {
+    const cinturonNegro = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturonNegro.textura = "cuero_liso";
+    const mocasinSinTextura = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    mocasinSinTextura.corte_calzado = "mocasin";
+
+    const [resultado] = recomendar(cinturonNegro, [mocasinSinTextura], [cinturonNegro, mocasinSinTextura]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+
+  it("una zapatilla urbana (corte_calzado por defecto) NO dispara la coordinación de cuero, sin importar el color", () => {
+    const cinturonNegro = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturonNegro.textura = "cuero_liso";
+    const zapatillaUrbana = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    // corte_calzado por defecto es "zapatilla_urbana" (ver mkPrenda).
+
+    const [resultado] = recomendar(cinturonNegro, [zapatillaUrbana], [cinturonNegro, zapatillaUrbana]);
+    expect(resultado.score.nivel).not.toBe("con_cuidado");
+  });
 });
 
 describe("recomendar -- formalidad calzado o torso vs pantalón", () => {
@@ -399,11 +496,18 @@ describe("recomendar -- deportivo no combina con formal/clasico (ni siquiera acc
   });
 
   it("sin estilo declarado en la otra prenda, no se inventa un choque", () => {
-    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
-    short.estilo = "deportivo";
+    // pantalón (no short/bermuda) a propósito -- esAbrigoConPiernasAlAire
+    // (auditoría de sastrería siguiente) también bloquea sweater/buzo/
+    // campera/saco contra un short/bermuda deportivo, sin importar el
+    // estilo de la otra prenda (es un choque de género/clima, no de
+    // formalidad). Este test aísla específicamente chocaRegistroDeportivo,
+    // así que usa un pantalón deportivo (jogger), que no dispara esa otra
+    // regla -- mismo patrón que el test de la línea 359.
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "deportivo";
     const sweaterSinEstilo = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
 
-    const [resultado] = recomendar(short, [sweaterSinEstilo], [short, sweaterSinEstilo]);
+    const [resultado] = recomendar(pantalon, [sweaterSinEstilo], [pantalon, sweaterSinEstilo]);
     expect(resultado.score.nivel).not.toBe("con_cuidado");
   });
 
@@ -477,13 +581,19 @@ describe("estilosDe", () => {
 
 describe("multi-estilo -- escape hatch del choque deportivo y de la formalidad", () => {
   it("una prenda clasico+casual (secundario) YA NO choca con deportivo, a diferencia de una puramente clasico", () => {
-    const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
-    short.estilo = "deportivo";
+    // pantalón (no short/bermuda) por el mismo motivo que el test de
+    // chocaRegistroDeportivo de arriba -- aísla la regla de formalidad de
+    // la regla de género/clima (esAbrigoConPiernasAlAire), que sí seguiría
+    // bloqueando un sweater contra un short/bermuda sin importar su
+    // secundario casual (no es una cuestión de registro, es que un sweater
+    // no va con las piernas al aire).
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "deportivo";
     const sweaterVersatile = mkPrenda("sweater", "#C3922E", 40, 62, 47);
     sweaterVersatile.estilo = "clasico";
     sweaterVersatile.estilos_secundarios = ["casual"];
 
-    const [resultado] = recomendar(short, [sweaterVersatile], [short, sweaterVersatile]);
+    const [resultado] = recomendar(pantalon, [sweaterVersatile], [pantalon, sweaterVersatile]);
     expect(resultado.score.nivel).not.toBe("con_cuidado");
   });
 
@@ -1065,6 +1175,43 @@ describe("armarOutfitsSugeridos", () => {
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
     });
 
+    // Hallazgo del revisor de color/textiles, verificado por ejecución: un
+    // saco es paño de lana (aislación térmica real, mismo criterio que ya
+    // excluye buzo/sweater/campera con calor) -- pero clima="verano" solo
+    // excluía CATEGORIAS_ABRIGO, y saco queda afuera de esa lista a
+    // propósito (es formalidad, no temperatura). Antes de este fix, un
+    // pantalón largo + saco pasaba igual con clima="verano".
+    it("clima='verano' también excluye el saco, incluso con un pantalón largo", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      saco.estilo = "clasico";
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([pantalon, saco, remera], "verano");
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
+    });
+
+    it("clima='verano' excluye una bufanda de lana del accesorio elegido, incluso con un pantalón largo", () => {
+      const pantalon = mkPrenda("pantalon", "#8C8C8C", 0, 0, 55);
+      const remera = mkPrenda("remera", "#8C8C8C", 0, 0, 55);
+      const bufandaLana = mkPrenda("accesorio", "#8C8C8C", 0, 0, 55);
+      bufandaLana.textura = "lana";
+      bufandaLana.posicion_accesorio = "cuello";
+      const outfits = armarOutfitsSugeridos([pantalon, remera, bufandaLana], "verano");
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("accesorio");
+    });
+
+    it("clima='invierno' o 'entretiempo' sigue permitiendo saco y bufanda de lana con un pantalón largo", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      saco.estilo = "clasico";
+      const outfitsInvierno = armarOutfitsSugeridos([pantalon, saco], "invierno");
+      const outfitsEntretiempo = armarOutfitsSugeridos([pantalon, saco], "entretiempo");
+      expect(outfitsInvierno).toHaveLength(1);
+      expect(outfitsEntretiempo).toHaveLength(1);
+    });
+
     it("clima='invierno' -- un bermuda/short no ancla ningún outfit, sea cual sea el torso", () => {
       const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
       const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
@@ -1202,6 +1349,125 @@ describe("armarOutfitsSugeridos", () => {
       camisaOficina.ocasion = "laburo";
 
       const [resultado] = recomendar(pantalon, [camisaOficina], [pantalon, camisaOficina]);
+      expect(resultado.score.nivel).not.toBe("con_cuidado");
+    });
+  });
+
+  // Segunda opinión de sastrería (Consejo, ronda siguiente): esDeOficina es
+  // demasiado grueso para el calzado -- un mocasín cargado con
+  // ocasion="laburo" (donde mucha gente los usa de verdad) quedaba
+  // bloqueado con un bermuda igual que un zapato de vestir, cuando el
+  // mocasín sin medias es EL zapato de verano de ese registro.
+  describe("ocasion -- el mocasín (corte_calzado) es la excepción real al ban de oficina con piernas al aire", () => {
+    it("bermuda + mocasín con ocasion=laburo -> SÍ combina (no bloqueado como un zapato de vestir)", () => {
+      const bermuda = mkPrenda("bermuda", "#8C8C8C", 0, 0, 55);
+      const mocasin = mkPrenda("calzado", "#8C8C8C", 0, 0, 55);
+      mocasin.corte_calzado = "mocasin";
+      mocasin.ocasion = "laburo";
+
+      const [resultado] = recomendar(bermuda, [mocasin], [bermuda, mocasin]);
+      expect(resultado.score.nivel).not.toBe("con_cuidado");
+    });
+
+    it("bermuda + zapato de vestir con ocasion=laburo sigue bloqueado (control, sin cambios)", () => {
+      const bermuda = mkPrenda("bermuda", "#8C8C8C", 0, 0, 55);
+      const zapatoVestir = mkPrenda("calzado", "#8C8C8C", 0, 0, 55);
+      zapatoVestir.corte_calzado = "zapato_vestir";
+      zapatoVestir.ocasion = "laburo";
+
+      const [resultado] = recomendar(bermuda, [zapatoVestir], [bermuda, zapatoVestir]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+  });
+
+  // Segunda opinión de sastrería (Consejo, ronda siguiente), verificada por
+  // ejecución directa contra el catálogo real: el mismo agujero de arriba
+  // (esDeOficina solo como pre-filtro del armado automático) también existía
+  // para abrigo -- un buzo/sweater/campera/saco con las piernas al aire
+  // pasaba "excelente"/"muy_bueno" en Combinar/Recomendaciones, la misma
+  // combinación real que "Vestite hoy" ya rechazaba para el mismo placard.
+  describe("abrigo -- recomendar() también rechaza un abrigo con las piernas al aire (no solo el armado automático)", () => {
+    it("bermuda beige + buzo beige (reporte real del usuario, con buzo en vez de sweater) -> con_cuidado, no muy_bueno", () => {
+      const bermuda = mkPrenda("bermuda", "#D8C7A1", 40, 30, 75);
+      const buzo = mkPrenda("buzo", "#D8C7A1", 40, 30, 75);
+      buzo.estilo = "urbano";
+
+      const [resultado] = recomendar(bermuda, [buzo], [bermuda, buzo]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+
+    it("short deportivo + campera urbana (no deportiva) -> con_cuidado", () => {
+      const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      short.estilo = "deportivo";
+      const campera = mkPrenda("campera", "#1A1A1A", 0, 0, 10);
+      campera.estilo = "urbano";
+
+      const [resultado] = recomendar(short, [campera], [short, campera]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+
+    it("short deportivo + buzo TAMBIÉN deportivo (athleisure real) -> sigue combinando, no se bloquea", () => {
+      const short = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      short.estilo = "deportivo";
+      const buzoDeportivo = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+      buzoDeportivo.estilo = "deportivo";
+
+      const [resultado] = recomendar(short, [buzoDeportivo], [short, buzoDeportivo]);
+      expect(resultado.score.nivel).not.toBe("con_cuidado");
+    });
+
+    it("bermuda + saco (nunca combina con piernas al aire, sin depender de ocasion) -> con_cuidado", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      saco.estilo = "clasico";
+
+      const [resultado] = recomendar(bermuda, [saco], [bermuda, saco]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+
+    it("un pantalón largo con el mismo buzo sigue combinando sin problema", () => {
+      const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 75);
+      const buzo = mkPrenda("buzo", "#D8C7A1", 40, 30, 75);
+      buzo.estilo = "urbano";
+
+      const [resultado] = recomendar(pantalon, [buzo], [pantalon, buzo]);
+      expect(resultado.score.nivel).not.toBe("con_cuidado");
+    });
+
+    // Hallazgo del revisor de color/textiles, verificado contra el
+    // catálogo real: una bufanda de lana (categoria="accesorio",
+    // posicion_accesorio="cuello") es tan abrigo como un sweater, pero
+    // ninguna regla la miraba -- se colaba en outfits de bermuda/short.
+    it("bermuda + bufanda de lana (accesorio, posicion=cuello) -> con_cuidado, mismo criterio que un sweater", () => {
+      const bermuda = mkPrenda("bermuda", "#8C8C8C", 0, 0, 55);
+      const bufandaLana = mkPrenda("accesorio", "#8C8C8C", 0, 0, 55);
+      bufandaLana.textura = "lana";
+      bufandaLana.posicion_accesorio = "cuello";
+      bufandaLana.estilo = "casual";
+
+      const [resultado] = recomendar(bermuda, [bufandaLana], [bermuda, bufandaLana]);
+      expect(resultado.score.nivel).toBe("con_cuidado");
+    });
+
+    it("un cinturón de cuero (cintura, no lana) sigue combinando con bermuda sin problema", () => {
+      const bermuda = mkPrenda("bermuda", "#8C8C8C", 0, 0, 55);
+      const cinturon = mkPrenda("accesorio", "#8C8C8C", 0, 0, 55);
+      cinturon.textura = "cuero_liso";
+      cinturon.posicion_accesorio = "cintura";
+      cinturon.estilo = "casual";
+
+      const [resultado] = recomendar(bermuda, [cinturon], [bermuda, cinturon]);
+      expect(resultado.score.nivel).not.toBe("con_cuidado");
+    });
+
+    it("una bufanda de lana sigue combinando sin problema con un pantalón largo", () => {
+      const pantalon = mkPrenda("pantalon", "#8C8C8C", 0, 0, 55);
+      const bufandaLana = mkPrenda("accesorio", "#8C8C8C", 0, 0, 55);
+      bufandaLana.textura = "lana";
+      bufandaLana.posicion_accesorio = "cuello";
+      bufandaLana.estilo = "casual";
+
+      const [resultado] = recomendar(pantalon, [bufandaLana], [pantalon, bufandaLana]);
       expect(resultado.score.nivel).not.toBe("con_cuidado");
     });
   });

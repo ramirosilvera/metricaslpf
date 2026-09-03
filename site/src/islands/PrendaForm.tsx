@@ -85,13 +85,17 @@ export default function PrendaForm() {
   // -- se perdía el color2/patron en el insert de abajo.
   const [patron, setPatron] = useState<Patron>(presetDePrefill?.patron ?? "liso");
   const [color2Hex, setColor2Hex] = useState<string | undefined>(presetDePrefill?.colorHex2);
-  // corte_calzado -- mismo criterio que patron/color2 arriba: solo se
-  // carga eligiendo un preset del catálogo, no hay UI manual para elegir
-  // el corte (fuera del alcance de este pedido: "dale más detalles a las
-  // zapatillas"). Sin este estado, un mocasín o una zapatilla de lona
-  // elegida acá se guardaba como zapatilla urbana (el default), perdiendo
-  // el corte real -- mismo bug de "gap silencioso" ya encontrado y
-  // corregido para patron/color2 en la ronda anterior.
+  // corte_calzado -- select manual agregado en la auditoría de sastrería
+  // (Consejo, ronda siguiente): hasta esta ronda solo se cargaba eligiendo
+  // un preset del catálogo (no había <select> en el bloque
+  // categoria==="calzado" de más abajo, a diferencia de posicion_accesorio/
+  // con_capucha, que sí lo tienen). Hallazgo real, verificado por
+  // ejecución: TODO calzado cargado a mano (por foto, sin pasar por el
+  // catálogo) quedaba "zapatilla_urbana" (el default) para siempre --
+  // recommend.ts ahora lee corte_calzado como señal de cuero (ver
+  // calzadoDeCuero), así que sin este select, un zapato de vestir o un
+  // mocasín cargado por foto apagaba la coordinación de cuero entera (daba
+  // "excelente" con un cinturón que claramente no combina).
   const [corteCalzado, setCorteCalzado] = useState<CorteCalzado>(presetDePrefill?.corteCalzado ?? "zapatilla_urbana");
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
@@ -306,10 +310,26 @@ export default function PrendaForm() {
             <SelectOpcional label="Ocasión" value={ocasion} onChange={setOcasion} opciones={OCASIONES} />
             <SelectOpcional label="Estación" value={estacion} onChange={setEstacion} opciones={ESTACIONES} />
             {categoria === "calzado" && (
-              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <input type="checkbox" checked={suelaContraste} onChange={(e) => setSuelaContraste(e.target.checked)} />
-                <span>Suela blanca / de contraste (en vez de una zapatilla toda del mismo color)</span>
-              </label>
+              <>
+                <label className="field-label">
+                  <span>Corte del calzado</span>
+                  <select
+                    className="field"
+                    value={corteCalzado}
+                    onChange={(e) => setCorteCalzado(e.target.value as CorteCalzado)}
+                  >
+                    <option value="zapatilla_urbana">Zapatilla urbana (3 rayas, de calle)</option>
+                    <option value="zapatilla_running">Zapatilla running (técnica, deportiva)</option>
+                    <option value="zapato_vestir">Zapato de vestir (con cordones)</option>
+                    <option value="mocasin">Mocasín (sin cordones)</option>
+                    <option value="zapatilla_lona">Zapatilla de lona</option>
+                  </select>
+                </label>
+                <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <input type="checkbox" checked={suelaContraste} onChange={(e) => setSuelaContraste(e.target.checked)} />
+                  <span>Suela blanca / de contraste (en vez de una zapatilla toda del mismo color)</span>
+                </label>
+              </>
             )}
             {categoria === "buzo" && (
               <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>

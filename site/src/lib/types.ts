@@ -256,23 +256,39 @@ export interface Recomendacion {
  *  deportivo/remera -- una campera urbana con un jean o hasta con un short
  *  deportivo es un combo real de calle), un saco de traje NUNCA combina con
  *  ropa deportiva/de entrecasa real -- por eso su propia entrada, y las
- *  entradas donde aparece, son más angostas que las de campera: solo
- *  pantalón (de vestir), camisa, calzado y accesorio. No aparece en
- *  bermuda/short_deportivo/remera/buzo/sweater (mismo criterio que ya
- *  excluye a campera de buzo/sweater: no se combinan dos capas de afuera
- *  del torso a la vez) ni dentro de la propia entrada de campera (son
- *  capas mutuamente excluyentes, un saco de traje no se usa arriba ni
- *  abajo de una campera). */
+ *  entradas donde aparece, son más angostas que las de campera: no aparece
+ *  en bermuda/short_deportivo (ropa deportiva/de entrecasa real) ni dentro
+ *  de la propia entrada de campera (son capas mutuamente excluyentes, un
+ *  saco de traje no se usa arriba ni abajo de una campera).
+ *
+ *  saco+remera / saco+sweater / camisa+sweater -- segunda opinión de
+ *  sastrería (Consejo, ronda siguiente): la primera pasada excluía estos
+ *  tres pares con el mismo argumento que excluye saco+buzo ("no se
+ *  combinan dos capas de afuera del torso a la vez"), pero ese argumento no
+ *  aplica acá -- blazer + remera lisa es el smart casual más difundido que
+ *  hay (no dos capas de afuera, una remera es la capa base), y sweater
+ *  sobre camisa (o bajo un saco) es la capa de sastrería clásica de
+ *  invierno, la capa de oficina estándar. El resto del motor (formalidad,
+ *  cuero, corbata/cuello, registro deportivo) ya filtra los casos malos que
+ *  esto habilita -- p.ej. saco + remera deportiva sigue chocando por
+ *  chocaRegistroDeportivo. buzo se queda afuera de saco (un hoodie sí es
+ *  una segunda capa de afuera real, a diferencia de remera/sweater). */
 export const CATEGORIAS_COMPLEMENTARIAS: Record<Categoria, Categoria[]> = {
   pantalon: ["remera", "buzo", "sweater", "camisa", "campera", "saco", "calzado", "accesorio"],
   bermuda: ["remera", "buzo", "sweater", "camisa", "campera", "calzado", "accesorio"],
   short_deportivo: ["remera", "buzo", "sweater", "camisa", "campera", "calzado", "accesorio"],
-  remera: ["pantalon", "bermuda", "short_deportivo", "campera", "calzado", "accesorio"],
+  remera: ["pantalon", "bermuda", "short_deportivo", "campera", "saco", "calzado", "accesorio"],
   buzo: ["pantalon", "bermuda", "short_deportivo", "calzado", "accesorio"],
-  sweater: ["pantalon", "bermuda", "short_deportivo", "calzado", "accesorio"],
-  camisa: ["pantalon", "bermuda", "short_deportivo", "campera", "saco", "calzado", "accesorio"],
-  calzado: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera", "saco"],
+  sweater: ["pantalon", "bermuda", "short_deportivo", "camisa", "saco", "calzado", "accesorio"],
+  camisa: ["pantalon", "bermuda", "short_deportivo", "sweater", "campera", "saco", "calzado", "accesorio"],
+  // "accesorio" agregado -- segunda opinión de sastrería (Consejo, ronda
+  // siguiente): faltaba, a pesar de que `accesorio` sí lista a `calzado`
+  // (asimetría real, no a propósito). Es justo el par cinturón/zapato que
+  // motivó toda la regla de coordinación de cuero (esDescoordinacionDeCuero
+  // más arriba en recommend.ts) -- sin esto, "Combinar" nunca ofrecía
+  // comparar un calzado directo contra un accesorio.
+  calzado: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera", "saco", "accesorio"],
   campera: ["pantalon", "bermuda", "short_deportivo", "remera", "camisa", "calzado", "accesorio"],
   accesorio: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera", "saco", "calzado"],
-  saco: ["pantalon", "camisa", "calzado", "accesorio"],
+  saco: ["pantalon", "remera", "sweater", "camisa", "calzado", "accesorio"],
 };

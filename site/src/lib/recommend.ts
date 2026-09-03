@@ -1,4 +1,4 @@
-import { CATEGORIA_LABEL, type Categoria, type Estacion, type Estilo, type HSL, type NivelCompatibilidad, type Prenda } from "./types";
+import { CATEGORIA_LABEL, type Categoria, type CorteCalzado, type Estacion, type Estilo, type HSL, type NivelCompatibilidad, type Prenda } from "./types";
 import { CATALOGO_CON_HSL, presetAPrendaSintetica, type PresetPrenda } from "./catalogo";
 import { nombreColor } from "./color";
 
@@ -10,6 +10,13 @@ const HUE_COMPLEMENTARIO = 0.78; // ~140° (no 0.72/130°, que cae en zona triá
 const VALUE_AUDAZ = 0.3;
 const VALUE_MONOCROMATICO = 0.15;
 const VALUE_FUNDIDO = 0.12;
+// Piso de separación de valor para el degradé monocromático real (regla 3b
+// de scoreColor) -- auditoría de color/textiles (Consejo, ronda siguiente).
+// Entre VALUE_MONOCROMATICO (0.15) y este piso no hay ninguna regla propia:
+// cae en el catch-all de la regla 6 ("Matices relacionados"), que sigue
+// siendo un veredicto razonable para esa franja intermedia (ni plano del
+// todo ni degradé marcado).
+const VALUE_DEGRADE_MIN = 0.25;
 const SATURACION_BAJA = 45;
 // Piso agregado en la 2da ronda de revisión de Consejo, auditando la regla
 // 5 ("se funden") contra el catálogo real completo: SIN este piso, la
@@ -50,6 +57,23 @@ export function esNeutro(s: number, l: number): boolean {
   return s <= NEUTRO_S_MAX || l <= NEUTRO_L_MIN || l >= NEUTRO_L_MAX;
 }
 
+/** Croma HSL real (0-100): a diferencia de `s`, no está normalizado por `l`
+ *  -- un celeste pastel (s=58 l=82) y un mostaza (s=62 l=47) tienen `s`
+ *  parecido pero intensidad percibida MUY distinta (croma 21 vs 58).
+ *  Auditoría de color/textiles (Consejo, ronda siguiente), verificada
+ *  corriendo el catálogo completo: es esta magnitud, no `s`, la que separa
+ *  la paleta base textil (croma <= 30: bordó, rosa, marrón, verde botella,
+ *  beige, celeste, marino, oliva) de los acentos reales (croma >= 48:
+ *  mostaza, rojo, azul deportivo) -- usada en las reglas 4 y 4b de acá
+ *  abajo, no reemplaza a `s` en el resto del archivo (esa migración más
+ *  amplia queda para una pasada aparte, con sus propios tests). */
+function croma(c: HSL): number {
+  return c.s * (1 - Math.abs((2 * c.l) / 100 - 1));
+}
+// Umbral recalibrado contra el catálogo real (ver `croma` arriba): la
+// paleta base vive en croma <= 30, los acentos reales arrancan en ~48.
+const CROMA_ACENTO = 40;
+
 export interface ScoreColor {
   nivel: NivelCompatibilidad;
   tag?: "tono_sobre_tono" | "combinacion_audaz";
@@ -79,7 +103,7 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
     };
   }
 
-  // 3. Monocromático / tono sobre tono.
+  // 3. Monocromático / tono sobre tono (plano: mismo valor).
   if (hd <= HUE_MONOCROMATICO && vd <= VALUE_MONOCROMATICO) {
     return {
       nivel: "excelente",
@@ -88,13 +112,57 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
     };
   }
 
-  // 4. Complementario audaz.
+  // 3b. Mismo matiz con luminosidades bien separadas: el degradé
+  // monocromático real (marino + celeste, camel + chocolate). Auditoría de
+  // color/textiles (Consejo, ronda siguiente): en teoría del color un
+  // esquema monocromático funciona POR la variación de valor, no a pesar de
+  // ella -- la regla 3 de arriba solo premiaba la versión plana (mismo
+  // matiz Y mismo valor), que es la de riesgo real (dos prendas del mismo
+  // tono, misma luminosidad, pero de fibra distinta se leen como un intento
+  // fallido de matchear). Sin gate de croma a propósito: acá no hay dos
+  // matices compitiendo, así que la intensidad de color no cambia el
+  // veredicto. Disjunta de la regla 5 (`hd > HUE_ANALOGO` ahí).
+  if (hd <= HUE_ANALOGO && vd >= VALUE_DEGRADE_MIN) {
+    return {
+      nivel: "excelente",
+      tag: "tono_sobre_tono",
+      explicacion: "Mismo matiz en dos luminosidades bien distintas: el degradé tono sobre tono clásico.",
+    };
+  }
+
+  // 4. Complementarios.
   if (hd >= HUE_COMPLEMENTARIO && vd >= VALUE_AUDAZ) {
+    // Complementarios APAGADOS con buen contraste de luminosidad: no es un
+    // statement, es la base de la paleta de sastrería clásica (camel +
+    // marino, celeste + marrón). Auditoría de color/textiles (Consejo,
+    // ronda siguiente), verificada corriendo el catálogo completo (155
+    // pares con tag "audaz", 126 de ellos con croma bajo): lo que hace
+    // "audaz" a un complementario es su croma, no el ángulo de matiz -- el
+    // matiz del beige (h=41) es formalmente complementario del azul marino,
+    // pero los dos están tan rebajados que no compiten como statement.
+    if (Math.max(croma(base), croma(candidato)) < CROMA_ACENTO) {
+      return {
+        nivel: "excelente",
+        explicacion: "Complementarios apagados con buen contraste de luminosidad: la base de la paleta clásica.",
+      };
+    }
     return {
       nivel: "muy_bueno",
       tag: "combinacion_audaz",
       explicacion:
         "Colores opuestos en el círculo cromático con buen contraste de luminosidad: funciona, pero se nota.",
+    };
+  }
+
+  // 4b. Complementarios de croma alto SIN separación de luminosidad: el
+  // contraste simultáneo real (el borde "vibra", ninguno de los dos manda).
+  // Es la contracara de la regla 4: ahí el contraste de valor es lo que
+  // hace que el par funcione: sin él, dos complementarios intensos no
+  // pueden caer en el catch-all "combinación prolija" de la regla 6.
+  if (hd >= HUE_COMPLEMENTARIO && vd < VALUE_AUDAZ && Math.min(croma(base), croma(candidato)) >= CROMA_ACENTO) {
+    return {
+      nivel: "con_cuidado",
+      explicacion: "Colores opuestos, los dos intensos y casi con la misma luminosidad: se pelean en vez de contrastar.",
     };
   }
 
@@ -211,8 +279,26 @@ const CATEGORIAS_PIERNAS: Categoria[] = ["pantalon", "bermuda", "short_deportivo
 
 const CATEGORIAS_CUERO: Categoria[] = ["calzado", "accesorio"];
 
+// Segunda opinión de sastrería (Consejo, ronda siguiente): `corte_calzado`
+// existía en el modelo de datos hace varias rondas (zapatilla_urbana/
+// running/zapato_vestir/mocasin/zapatilla_lona) pero el motor nunca lo
+// leía -- toda la sastrería del calzado (coordinación de cuero, choque
+// contra un ancla deportiva) dependía por completo de `textura ===
+// "cuero_liso"`, un campo opcional que el formulario manual no completa
+// por defecto. Verificado por ejecución: un zapato de vestir o un mocasín
+// cargado por foto (sin abrir "Tags opcionales" y elegir "cuero_liso" a
+// mano) apagaba la coordinación de cuero entera -- daba "excelente" con un
+// cinturón de otro tono, el mismo bug insignia de esta app. Ahora
+// `corte_calzado` cuenta por sí solo: un zapato_vestir o un mocasín SON
+// cuero de vestir por definición (es el dato que el usuario sí reconoce
+// sin ambigüedad al cargar la prenda -- "¿es un mocasín o una
+// zapatilla?"), sin necesitar que además haya tildado la textura.
+const CORTES_DE_VESTIR: CorteCalzado[] = ["zapato_vestir", "mocasin"];
+
 function prendaDeCuero(p: Prenda): boolean {
-  return p.textura === "cuero_liso" && CATEGORIAS_CUERO.includes(p.categoria);
+  if (!CATEGORIAS_CUERO.includes(p.categoria)) return false;
+  if (p.textura === "cuero_liso") return true;
+  return p.categoria === "calzado" && CORTES_DE_VESTIR.includes(p.corte_calzado);
 }
 
 /** true si la prenda es una prenda de piernas de vestir/clásica -- chino,
@@ -449,8 +535,12 @@ function chocaRegistroDeportivo(a: Prenda, b: Prenda): boolean {
     // zapatilla urbana sí combine -- ver el comentario ahí -- pero eso
     // también dejaba pasar el cuero de vestir por la misma puerta).
     // Verificado: sin este caso, un short deportivo negro + mocasines
-    // negros terminaba "excelente" (ambos neutros en HSL).
-    if (p.categoria === "calzado" && p.textura === "cuero_liso") return true;
+    // negros terminaba "excelente" (ambos neutros en HSL). Vía
+    // prendaDeCuero (no el textura crudo): esa función ahora también
+    // reconoce corte_calzado="zapato_vestir"/"mocasin" sin necesitar
+    // textura="cuero_liso" cargada a mano -- mismo motivo, ver su
+    // comentario más arriba.
+    if (prendaDeCuero(p)) return true;
     const estilos = estilosDe(p);
     return estilos.length > 0 && estilos.every((e) => e === "formal" || e === "clasico");
   };
@@ -558,6 +648,63 @@ function esDescoordinacionDeOficina(base: Prenda, candidato: Prenda): boolean {
   return esDeOficina(otra);
 }
 
+/** Mismo agujero que esDescoordinacionDeOficina de arriba, mismo motivo:
+ *  `excluirAbrigo`/`excluirSaco` (ver armarOutfitsSugeridos más abajo) solo
+ *  se aplicaban como pre-filtro dentro del armado automático -- nunca
+ *  dentro de `recomendar()`. Segunda opinión de sastrería (Consejo, ronda
+ *  siguiente), verificada por ejecución directa contra el catálogo real:
+ *  18-20 de 30 abrigos del catálogo (buzo/sweater/campera) pasaban como
+ *  combinables con un bermuda/short en Combinar/Recomendaciones, muchos en
+ *  "excelente" -- exactamente el reporte original del usuario ("bermuda con
+ *  sweater, ambos beige"), que hoy solo se salva de casualidad cuando el
+ *  torso en cuestión es un sweater (todos ocasion="laburo" en el catálogo,
+ *  atrapados por esDescoordinacionDeOficina) pero no con un buzo o una
+ *  campera equivalente. Incluye saco por el mismo motivo que excluirSaco:
+ *  nunca combina con las piernas al aire, por categoría, sin depender de
+ *  otro campo -- hoy tampoco estaba cubierto dentro de recomendar() (un
+ *  saco formal no es "menos formal" que ningún bermuda, así que
+ *  prendaMenosFormalQuePantalon nunca lo atrapaba).
+ *
+ *  Excepción deportiva: exige que las DOS prendas sean deportivas, no solo
+ *  la de piernas -- un short genuinamente deportivo SÍ combina con un
+ *  abrigo también deportivo (hoodie + short de entrenamiento es real), pero
+ *  no con un abrigo urbano/casual/de vestir (una campera urbana, aunque no
+ *  sea "de vestir", tampoco es un hoodie deportivo). A diferencia de
+ *  `excluirAbrigo` en armarOutfits* (que solo mira la ancla, porque ahí hay
+ *  un filtro aparte -- `esAnclaDeportiva && !estilosDe(p).includes
+ *  ("deportivo")` -- que ya saca cualquier torso no deportivo del pool),
+ *  `recomendar()` no tiene ese filtro previo: sin este chequeo de las dos
+ *  puntas, un short deportivo + campera urbana pasaba "excelente" por el
+ *  mismo agujero que esta función corrige, solo que con un falso negativo
+ *  nuevo si la excepción se armaba mirando un solo lado (verificado
+ *  escribiendo el test y viéndolo fallar antes de este ajuste).
+ *
+ *  Bufanda de lana: hallazgo del revisor de color/textiles, verificado por
+ *  ejecución contra el catálogo real (`bufanda-gris`/`bufanda-roja`,
+ *  textura "lana", posicion_accesorio "cuello") -- es una prenda de abrigo
+ *  tanto como un sweater, pero vive en categoria="accesorio", que ni
+ *  CATEGORIAS_ABRIGO ni el chequeo de arriba miran. Sin esto, una bufanda
+ *  de lana se colaba en outfits de bermuda/short (y hasta ganaba
+ *  `mejorPropia` contra cualquier cinturón por ser gris/neutra) -- el mismo
+ *  error de registro ya corregido para buzo/sweater/campera, reaparecido
+ *  por la puerta de los accesorios. */
+function esAbrigoDeCuello(p: Prenda): boolean {
+  return p.categoria === "accesorio" && p.posicion_accesorio === "cuello" && p.textura === "lana";
+}
+
+function esAbrigoConPiernasAlAire(base: Prenda, candidato: Prenda): boolean {
+  const veraniega = CATEGORIAS_PIERNAS_VERANIEGAS.includes(base.categoria)
+    ? base
+    : CATEGORIAS_PIERNAS_VERANIEGAS.includes(candidato.categoria)
+      ? candidato
+      : null;
+  if (!veraniega) return false;
+  const otra = veraniega === base ? candidato : base;
+  if (!CATEGORIAS_ABRIGO.includes(otra.categoria) && otra.categoria !== "saco" && !esAbrigoDeCuello(otra)) return false;
+  if (estilosDe(veraniega).includes("deportivo") && estilosDe(otra).includes("deportivo")) return false;
+  return true;
+}
+
 /** Recomienda, sobre un placard completo, las mejores prendas para combinar con `base`. */
 export function recomendar(
   base: Prenda,
@@ -572,6 +719,12 @@ export function recomendar(
       const registroDeportivoChoca = !cueroDescoordinado && !corbataSinCuello && chocaRegistroDeportivo(base, c);
       const oficinaDescoordinada =
         !cueroDescoordinado && !corbataSinCuello && !registroDeportivoChoca && esDescoordinacionDeOficina(base, c);
+      const abrigoConPiernasAlAire =
+        !cueroDescoordinado &&
+        !corbataSinCuello &&
+        !registroDeportivoChoca &&
+        !oficinaDescoordinada &&
+        esAbrigoConPiernasAlAire(base, c);
       let score: ScoreColor = cueroDescoordinado
         ? {
             nivel: "con_cuidado",
@@ -595,10 +748,16 @@ export function recomendar(
                   explicacion:
                     "Con las piernas al aire no va ropa de oficina, por más que el color coincida -- ni con un bermuda ni con un short deportivo.",
                 }
-              : scoreColor(
-                  { h: base.color_h, s: base.color_s, l: base.color_l },
-                  { h: c.color_h, s: c.color_s, l: c.color_l },
-                );
+              : abrigoConPiernasAlAire
+                ? {
+                    nivel: "con_cuidado",
+                    explicacion:
+                      "Un abrigo (buzo, sweater, campera, saco o una bufanda de lana) no combina con las piernas al aire, por más que el color coincida -- salvo que el look sea genuinamente deportivo de punta a punta.",
+                  }
+                : scoreColor(
+                    { h: base.color_h, s: base.color_s, l: base.color_l },
+                    { h: c.color_h, s: c.color_s, l: c.color_l },
+                  );
 
       // El color puede combinar perfecto y el conjunto igual desentonar --
       // un pantalón de vestir con zapatillas (o un buzo casual) es
@@ -628,7 +787,9 @@ export function recomendar(
                   ? "No hay técnica de rescate acá -- cambiá una de las dos: una prenda deportiva o urbana, o dejá esta para otro look."
                   : oficinaDescoordinada
                     ? "No hay técnica de rescate acá -- cambiá el bermuda/short por un pantalón largo, o dejá la ropa de oficina para otro look."
-                    : tecnicaRescate(base, c, placard),
+                    : abrigoConPiernasAlAire
+                      ? "No hay técnica de rescate acá -- cambiá el bermuda/short por un pantalón largo, o dejá el abrigo para otro look."
+                      : tecnicaRescate(base, c, placard),
       };
     })
     .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
@@ -792,8 +953,23 @@ const CATEGORIAS_PIERNAS_VERANIEGAS: Categoria[] = ["bermuda", "short_deportivo"
  *  uso real, no registro de estilo) para la que sí existe una respuesta
  *  inequívoca: nadie usa una camisa de oficina, un zapato de vestir o una
  *  corbata con las piernas al aire, sea cual sea su `estilo`. Ver el uso
- *  más abajo, junto a CATEGORIAS_PIERNAS_VERANIEGAS. */
+ *  más abajo, junto a CATEGORIAS_PIERNAS_VERANIEGAS.
+ *
+ *  Excepción del mocasín: segunda opinión de sastrería (Consejo, ronda
+ *  siguiente). Un ban por `ocasion` es demasiado grueso para el calzado --
+ *  el mocasín/náutico sin medias es EL zapato de verano con bermuda, el
+ *  look que un asesor de imagen recomienda, no el que desaconseja. Hoy
+ *  zafa de casualidad porque el catálogo carga los mocasines con
+ *  ocasion="casual" -- pero cualquier mocasín cargado por foto con
+ *  ocasion="laburo" (donde mucha gente los usa de verdad) quedaría
+ *  bloqueado igual que un zapato de vestir. `ocasion` describe DÓNDE usa
+ *  el usuario la prenda; el arquetipo real del calzado lo describe
+ *  `corte_calzado` (ver types.ts) -- acá se lo usa como señal de primera
+ *  clase por primera vez en el motor. zapato_vestir SIGUE bloqueado (no
+ *  está en la excepción): un zapato de vestir con cordones nunca es un
+ *  calzado de verano informal, a diferencia del mocasín. */
 function esDeOficina(p: Prenda): boolean {
+  if (p.categoria === "calzado" && p.corte_calzado === "mocasin") return false;
   return p.ocasion === "laburo" || p.ocasion === "formal";
 }
 
@@ -884,7 +1060,13 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
     // que se excluye por categoría directamente, sin depender de otro
     // campo. No se agrega a CATEGORIAS_ABRIGO (rompería la separación
     // con/sin abrigo real de "Vestite hoy", que es sobre temperatura).
-    const excluirSaco = esAnclaVeraniega;
+    // Extendido a clima="verano": hallazgo del revisor de color/textiles,
+    // verificado por ejecución -- un saco es paño de lana (aislación
+    // térmica real, el mismo criterio que ya excluye buzo/sweater/campera
+    // con calor), y antes de esto solo se excluía por ancla veraniega
+    // (bermuda/short), nunca por clima -- un pantalón largo + saco de lana
+    // pasaba igual con clima="verano".
+    const excluirSaco = esAnclaVeraniega || clima === "verano";
 
     const candidatosTorso = placard.filter((p) => {
       if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
@@ -904,7 +1086,15 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
       ? undefined
       : mejorPropia(
           ancla,
-          placard.filter((p) => p.categoria === "accesorio" && !(excluirOficina && esDeOficina(p))),
+          // esAbrigoDeCuello: hallazgo del revisor de color/textiles,
+          // verificado por ejecución -- una bufanda de lana es tan abrigo
+          // como un sweater, pero vive en categoria="accesorio", que
+          // excluirAbrigo (arriba, pensado para CATEGORIAS_ABRIGO) nunca
+          // miraba. Sin esto, "Vestite hoy" podía sugerir una bufanda de
+          // lana con clima="verano" o con una ancla veraniega.
+          placard.filter(
+            (p) => p.categoria === "accesorio" && !(excluirOficina && esDeOficina(p)) && !(excluirAbrigo && esAbrigoDeCuello(p)),
+          ),
           placard,
         );
 
@@ -1116,7 +1306,16 @@ export function armarOutfitsParaComprar(
           ? undefined
           : mejorPropia(
               ancla,
-              placard.filter((p) => p.categoria === "accesorio" && !(excluirOficina && esDeOficina(p))),
+              // esAbrigoDeCuello: mismo criterio que armarOutfitsSugeridos
+              // -- una bufanda de lana es abrigo tanto como un sweater,
+              // pero vivía fuera del alcance de excluirAbrigo (pensado para
+              // CATEGORIAS_ABRIGO). Sin esto, "Ideas para comprar" podía
+              // mostrar como "esto ya lo tenés" una bufanda de lana propia
+              // junto a un bermuda/short.
+              placard.filter(
+                (p) =>
+                  p.categoria === "accesorio" && !(excluirOficina && esDeOficina(p)) && !(excluirAbrigo && esAbrigoDeCuello(p)),
+              ),
               placard,
             );
 
