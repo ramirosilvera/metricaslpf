@@ -843,10 +843,10 @@ describe("armarOutfitsSugeridos", () => {
     sweaterInvierno.estacion = "invierno";
     const placard = [pantalon, sweaterEntretiempo, sweaterInvierno];
 
-    const enInvierno = armarOutfitsSugeridos(placard, new Date(2026, 6, 15)); // julio
+    const enInvierno = armarOutfitsSugeridos(placard, "invierno");
     expect(enInvierno[0].prendas.find((p) => p.categoria === "sweater")).toBe(sweaterInvierno);
 
-    const enEntretiempo = armarOutfitsSugeridos(placard, new Date(2026, 8, 15)); // septiembre
+    const enEntretiempo = armarOutfitsSugeridos(placard, "entretiempo");
     expect(enEntretiempo[0].prendas.find((p) => p.categoria === "sweater")).toBe(sweaterEntretiempo);
   });
 
@@ -854,7 +854,7 @@ describe("armarOutfitsSugeridos", () => {
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     const remera = mkPrenda("remera", "#3366CC", 220, 60, 50); // sin estacion (null)
     const camisa = mkPrenda("camisa", "#F5F5F0", 0, 5, 95); // sin estacion (null)
-    const outfits = armarOutfitsSugeridos([pantalon, remera, camisa], new Date(2026, 6, 15));
+    const outfits = armarOutfitsSugeridos([pantalon, remera, camisa], "invierno");
     expect(outfits).toHaveLength(2);
   });
 
@@ -930,6 +930,70 @@ describe("armarOutfitsSugeridos", () => {
       const outfits = armarOutfitsSugeridos([pantalonCasual, buzoCasual, cinturon]);
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["accesorio", "buzo", "pantalon"].sort());
+    });
+  });
+
+  // Pedido explícito del usuario, con captura real: "Bermuda con sweater
+  // ambos de color beige?" -- el color combinaba perfecto (los dos beige),
+  // el problema real es que nadie se pone un sweater con las piernas al
+  // aire salvo que el look sea genuinamente deportivo. Ver el comentario
+  // largo de armarOutfitsSugeridos (reglas 1 y 2) para el porqué de cada
+  // caso de abajo.
+  describe("clima -- bermuda/short 'de calle' nunca combina con abrigo; clima filtra de verdad, no solo ordena", () => {
+    it("bermuda no deportivo + sweater (mismo color, combinan perfecto) -> NUNCA se arma ese outfit", () => {
+      const bermuda = mkPrenda("bermuda", "#D8C7A1", 40, 25, 75); // beige
+      const sweater = mkPrenda("sweater", "#D8C7A1", 40, 25, 75); // mismo beige exacto
+      const outfits = armarOutfitsSugeridos([bermuda, sweater]);
+      expect(outfits).toHaveLength(0);
+    });
+
+    it("bermuda no deportivo + sweater + remera -> arma el outfit con la remera, nunca con el sweater", () => {
+      const bermuda = mkPrenda("bermuda", "#D8C7A1", 40, 25, 75);
+      const sweater = mkPrenda("sweater", "#D8C7A1", 40, 25, 75);
+      const remera = mkPrenda("remera", "#D8C7A1", 40, 25, 75);
+      const outfits = armarOutfitsSugeridos([bermuda, sweater, remera]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["bermuda", "remera"].sort());
+    });
+
+    it("short deportivo + buzo, los dos tageados deportivo -> SÍ se arma (athleisure real, no bloqueado por la regla nueva)", () => {
+      const shortDeportivo = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      shortDeportivo.estilo = "deportivo";
+      const buzoDeportivo = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+      buzoDeportivo.estilo = "deportivo";
+      const outfits = armarOutfitsSugeridos([shortDeportivo, buzoDeportivo]);
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["buzo", "short_deportivo"].sort());
+    });
+
+    it("clima='verano' excluye TODO abrigo, incluso con un pantalón largo (no es solo una regla de bermuda/short)", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const sweater = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([pantalon, sweater, remera], "verano");
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
+    });
+
+    it("clima='invierno' -- un bermuda/short no ancla ningún outfit, sea cual sea el torso", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      expect(armarOutfitsSugeridos([bermuda, remera], "invierno")).toHaveLength(0);
+    });
+
+    it("clima='invierno' no afecta a un pantalón largo -- sigue combinando con abrigo y con remera", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const sweater = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([pantalon, sweater, remera], "invierno");
+      expect(outfits).toHaveLength(2);
+    });
+
+    it("sin `clima` explícito, usa la estación real de hoy por default (mismo comportamiento que antes de esta ronda)", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const remera = mkPrenda("remera", "#3366CC", 220, 60, 50);
+      const outfits = armarOutfitsSugeridos([pantalon, remera]);
+      expect(outfits).toHaveLength(1);
     });
   });
 });
@@ -1048,18 +1112,21 @@ describe("armarOutfitsParaComprar", () => {
     // ancla en un bermuda; el catálogo de prueba tiene entradas de pantalon
     // Y de short_deportivo (categorías que categoriasAusentes ahora
     // reporta como ausentes, ya que el placard no tiene ninguna) -- ninguna
-    // de las dos debería aparecer como sugerencia de compra.
+    // de las dos debería aparecer como sugerencia de compra. "camisa" (no
+    // "campera": un bermuda no deportivo no combina con ningún abrigo,
+    // ver el describe de más abajo) confirma que SÍ sigue sugiriendo un
+    // torso real que no compite por el mismo lugar.
     const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
     const placard = [bermuda];
     const catalogoConOtrasPiernas: (PresetPrenda & { hsl: HSL })[] = [
       { id: "pantalon-test", nombre: "Pantalón de prueba", categoria: "pantalon", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
       { id: "short-test", nombre: "Short de prueba", categoria: "short_deportivo", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
-      { id: "campera-test", nombre: "Campera de prueba", categoria: "campera", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+      { id: "camisa-test", nombre: "Camisa de prueba", categoria: "camisa", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
     ];
     const sugerencias = armarOutfitsParaComprar(placard, catalogoConOtrasPiernas);
     expect(sugerencias.some((s) => s.categoriaSugerida === "pantalon")).toBe(false);
     expect(sugerencias.some((s) => s.categoriaSugerida === "short_deportivo")).toBe(false);
-    expect(sugerencias.some((s) => s.categoriaSugerida === "campera")).toBe(true);
+    expect(sugerencias.some((s) => s.categoriaSugerida === "camisa")).toBe(true);
   });
 
   describe("ancla deportiva -- mismo criterio que armarOutfitsSugeridos", () => {
@@ -1106,6 +1173,58 @@ describe("armarOutfitsParaComprar", () => {
       ];
       const sugerencias = armarOutfitsParaComprar([pantalonCasual], catalogoConAccesorio);
       expect(sugerencias).toHaveLength(1);
+    });
+  });
+
+  // Mismo bug reportado por el usuario que en armarOutfitsSugeridos
+  // ("bermuda con sweater, ambos beige") -- "Ideas para comprar" usa
+  // torsoPropio para armar el resto del outfit alrededor de la prenda
+  // sugerida, así que sin este fix ofrecía "comprá una remera" para sumar
+  // a un outfit que YA tenía bermuda + sweater de fondo.
+  describe("bermuda/short 'de calle' nunca combina con abrigo (ni como torsoPropio ni como sugerencia de compra)", () => {
+    it("torsoPropio nunca elige un sweater/buzo/campera propio para un bermuda no deportivo", () => {
+      const bermuda = mkPrenda("bermuda", "#D8C7A1", 40, 25, 75);
+      const sweater = mkPrenda("sweater", "#D8C7A1", 40, 25, 75); // mismo color, combinaría perfecto
+      const remera = mkPrenda("remera", "#D8C7A1", 40, 25, 75);
+      const catalogoConCalzado: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "calzado-test", nombre: "Calzado de prueba", categoria: "calzado", colorHex: "#3B2A1E", hsl: { h: 25, s: 30, l: 20 } },
+      ];
+      const [sugerencia] = armarOutfitsParaComprar([bermuda, sweater, remera], catalogoConCalzado);
+      expect(sugerencia.prendasPropias.some((p) => p.categoria === "sweater")).toBe(false);
+      expect(sugerencia.prendasPropias.some((p) => p.categoria === "remera")).toBe(true);
+    });
+
+    it("nunca sugiere COMPRAR un abrigo para completar un bermuda no deportivo", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const catalogoConAbrigo: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "campera-test", nombre: "Campera de prueba", categoria: "campera", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+        { id: "camisa-test", nombre: "Camisa de prueba", categoria: "camisa", colorHex: "#1A1A1A", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const sugerencias = armarOutfitsParaComprar([bermuda], catalogoConAbrigo);
+      expect(sugerencias.some((s) => s.categoriaSugerida === "campera")).toBe(false);
+      expect(sugerencias.some((s) => s.categoriaSugerida === "camisa")).toBe(true);
+    });
+
+    it("short deportivo + buzo, los dos deportivos -> sigue combinando (athleisure real, sin cambios)", () => {
+      const shortDeportivo = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+      shortDeportivo.estilo = "deportivo";
+      const buzoDeportivo = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+      buzoDeportivo.estilo = "deportivo";
+      const catalogoConCalzadoDeportivo: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "zapatilla-deportiva", nombre: "Zapatilla deportiva", categoria: "calzado", colorHex: "#1A1A1A", estilo: "deportivo", hsl: { h: 0, s: 0, l: 10 } },
+      ];
+      const [sugerencia] = armarOutfitsParaComprar([shortDeportivo, buzoDeportivo], catalogoConCalzadoDeportivo);
+      expect(sugerencia.prendasPropias.some((p) => p.categoria === "buzo")).toBe(true);
+    });
+
+    it("un pantalón largo (no veraniego) sigue combinando con abrigo, sin cambios", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const sweater = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      const catalogoConCalzado: (PresetPrenda & { hsl: HSL })[] = [
+        { id: "calzado-test", nombre: "Calzado de prueba", categoria: "calzado", colorHex: "#3B2A1E", hsl: { h: 25, s: 30, l: 20 } },
+      ];
+      const [sugerencia] = armarOutfitsParaComprar([pantalon, sweater], catalogoConCalzado);
+      expect(sugerencia.prendasPropias.some((p) => p.categoria === "sweater")).toBe(true);
     });
   });
 });

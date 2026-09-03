@@ -18,7 +18,7 @@ import {
   type OutfitParaComprar,
   type OutfitSugerido,
 } from "../lib/recommend";
-import { CATEGORIA_LABEL, descripcionPrenda, type Estilo, type Prenda } from "../lib/types";
+import { CATEGORIA_LABEL, descripcionPrenda, type Estacion, type Estilo, type Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
 import Maniqui from "./Maniqui";
 
@@ -126,6 +126,22 @@ const OPCIONES_POR_GRUPO = 1;
 
 const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
 
+// Pedido explícito del usuario, con captura real ("bermuda con sweater,
+// ambos beige"): antes "Vestite hoy" solo usaba la fecha REAL de hoy para
+// ORDENAR (nunca para filtrar) qué abrigo mostrar primero -- un bermuda
+// podía terminar armado con un sweater igual, porque ninguna regla los
+// bloqueaba entre sí. Ahora el clima es una pregunta explícita (no la
+// fecha del calendario) que además FILTRA de verdad -- ver el comentario
+// largo de armarOutfitsSugeridos en recommend.ts. "Frío/Calor" en vez de
+// "Invierno/Verano" a propósito: es la pregunta que haría cualquier
+// persona real ("¿hace frío hoy?"), no el nombre técnico de la estación.
+const CLIMA_LABEL: Record<Estacion, string> = {
+  invierno: "Frío",
+  entretiempo: "Entretiempo",
+  verano: "Calor",
+};
+const CLIMAS_FILTRO: Estacion[] = ["invierno", "entretiempo", "verano"];
+
 /** Parte interactiva de la pantalla de Outfits -- separada del fetch a
  *  Supabase (igual que Contenido en Placard.tsx) para poder montarla y
  *  probarla con datos de prueba reales, sin necesitar una sesión real. El
@@ -157,6 +173,12 @@ export function Contenido({
   // estilo por defecto (ver elegirEstiloSugerido más abajo: no se muestra
   // NINGUNA sugerencia hasta que el usuario elija una ocasión a propósito).
   const [estiloSugerido, setEstiloSugerido] = useState<Estilo | "todos" | null>(null);
+  // Pedido explícito del usuario: "quiero que en cada sección me
+  // preguntes si hace frío, entretiempo o calor" -- mismo criterio de
+  // "sin default silencioso" que estiloSugerido arriba: null hasta que el
+  // usuario responda a propósito, ver poolSugeridos más abajo (con
+  // cualquiera de los dos en null, el pool queda vacío).
+  const [climaSugerido, setClimaSugerido] = useState<Estacion | null>(null);
   const [editando, setEditando] = useState<OutfitConPrendas | null>(null);
   const [nombreEdicion, setNombreEdicion] = useState("");
   const [prendasEdicion, setPrendasEdicion] = useState<Set<string>>(new Set());
@@ -186,10 +208,15 @@ export function Contenido({
     [outfits, filtroEstilo],
   );
 
-  const poolSugeridos: OutfitSugerido[] = useMemo(
-    () => armarOutfitsSugeridos(placard).filter((s) => !clavesGuardadas.has(s.id)),
-    [placard, clavesGuardadas],
-  );
+  // climaSugerido en null -> pool vacío a propósito, mismo criterio que
+  // estiloSugerido más abajo: no se arma NADA hasta que el usuario
+  // responda las dos preguntas (ocasión + clima). armarOutfitsSugeridos ya
+  // filtra de verdad según el clima elegido (no solo ordena) -- ver el
+  // comentario largo en recommend.ts.
+  const poolSugeridos: OutfitSugerido[] = useMemo(() => {
+    if (climaSugerido === null) return [];
+    return armarOutfitsSugeridos(placard, climaSugerido).filter((s) => !clavesGuardadas.has(s.id));
+  }, [placard, clavesGuardadas, climaSugerido]);
 
   const poolParaComprar: OutfitParaComprar[] = useMemo(
     () => armarOutfitsParaComprar(placard, CATALOGO_CON_HSL),
@@ -209,6 +236,11 @@ export function Contenido({
 
   function elegirEstiloSugerido(valor: Estilo | "todos") {
     setEstiloSugerido((prev) => (prev === valor ? null : valor));
+    setOffsetSugeridos(0);
+  }
+
+  function elegirClimaSugerido(valor: Estacion) {
+    setClimaSugerido((prev) => (prev === valor ? null : valor));
     setOffsetSugeridos(0);
   }
 
@@ -242,9 +274,14 @@ export function Contenido({
   // con una sugerencia concreta de qué comprar, en vez de solo decir "no
   // armamos nada". Ver sugerenciaDeAncla en recommend.ts.
   const sugerenciaAncla = useMemo(() => {
-    if (!estiloSugerido || estiloSugerido === "todos" || poolSugeridosPorEstilo.length > 0) return null;
+    // climaSugerido === null: el pool está vacío porque todavía no
+    // respondió esa pregunta, no porque falte una prenda ancla -- sin este
+    // chequeo, la sugerencia de compra aparecía ANTES de que el usuario
+    // llegara a elegir el clima, lo cual no tiene sentido (más abajo se
+    // muestra el mensaje de "elegí el clima", no este).
+    if (!estiloSugerido || estiloSugerido === "todos" || climaSugerido === null || poolSugeridosPorEstilo.length > 0) return null;
     return sugerenciaDeAncla(estiloSugerido, placard);
-  }, [estiloSugerido, poolSugeridosPorEstilo, placard]);
+  }, [estiloSugerido, climaSugerido, poolSugeridosPorEstilo, placard]);
 
   const paraComprar = useMemo(
     () => tanda(poolParaComprar, offsetParaComprar, VISIBLES_POR_SECCION),
@@ -427,8 +464,9 @@ export function Contenido({
           Vestite hoy
         </p>
         <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
-          Elegí para qué ocasión te querés vestir y te armamos 2 opciones con lo que ya tenés: una con abrigo (buzo,
-          sweater o campera) y otra sin abrigo -- "otras opciones" te da otra combinación distinta en cada una.
+          Elegí para qué ocasión te querés vestir y si hace frío, entretiempo o calor, y te armamos 2 opciones con lo
+          que ya tenés: una con abrigo (buzo, sweater o campera) y otra sin abrigo -- "otras opciones" te da otra
+          combinación distinta en cada una.
         </p>
         <div className="filtro-chips" role="group" aria-label="Elegí la ocasión de hoy">
           <button
@@ -450,9 +488,36 @@ export function Contenido({
           ))}
         </div>
 
+        {/* Pedido explícito del usuario: "quiero que en cada sección me
+            preguntes si hace frío, entretiempo o calor" -- solo aparece
+            después de elegir la ocasión (mismo criterio de "una pregunta a
+            la vez" que ya usa esta sección), y filtra de verdad qué
+            combinaciones tienen sentido real (ver armarOutfitsSugeridos en
+            recommend.ts): un bermuda no arma nada con frío, y ni un
+            pantalón largo combina con abrigo si elegís "Calor". */}
+        {estiloSugerido !== null && (
+          <div className="filtro-chips" role="group" aria-label="¿Hace frío, entretiempo o calor?" style={{ marginTop: "-0.35rem" }}>
+            {CLIMAS_FILTRO.map((c) => (
+              <button
+                key={c}
+                type="button"
+                className={`chip${climaSugerido === c ? " chip-activo" : ""}`}
+                onClick={() => elegirClimaSugerido(c)}
+              >
+                {CLIMA_LABEL[c]}
+              </button>
+            ))}
+          </div>
+        )}
+
         {estiloSugerido === null ? (
           <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
             Elegí una ocasión de arriba para ver tus opciones.
+          </p>
+        ) : climaSugerido === null ? (
+          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+            ¿Hace frío, entretiempo o calor? Elegí arriba para armar opciones que de verdad tengan sentido con el
+            clima de hoy.
           </p>
         ) : poolSugeridosPorEstilo.length === 0 ? (
           <>

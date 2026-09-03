@@ -673,6 +673,27 @@ function ordenarPorEstacion<T extends { prenda: Prenda }>(items: T[], hoy: Estac
   return [...items].sort((a, b) => rango(a.prenda) - rango(b.prenda));
 }
 
+// Prendas de torso que hacen de "abrigo" (capa extra sobre una remera o
+// camisa) -- subconjunto de CATEGORIAS_TORSO. remera/camisa quedan afuera a
+// propósito: son la capa base, no un abrigo. saco (agregado a pedido del
+// usuario, "un traje azul marino") también queda afuera a propósito: es
+// una capa de FORMALIDAD, no de temperatura -- un saco de traje no se
+// elige por "cuando hace frío", así que agruparlo acá lo pondría en el
+// mismo bucket binario que un buzo de invierno sin que la distinción
+// tenga sentido real. Cae en "sin abrigo" junto con remera/camisa por
+// descarte (no encaja del todo en ninguno de los dos baldes, pero es la
+// aproximación menos incorrecta del modelo binario actual).
+const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
+
+/** bermuda/short_deportivo -- las dos categorías de piernas que exponen las
+ *  piernas, a diferencia de pantalon. Revisado como modista, reporte real
+ *  del usuario ("bermuda con sweater, ambos beige"): el problema no era el
+ *  color (combinaban perfecto) -- es que nadie se pone un sweater/buzo/
+ *  campera con las piernas al aire salvo que el look sea genuinamente
+ *  deportivo (un hoodie con un short de entrenamiento sí es real). Ver el
+ *  uso de esta lista más abajo, junto a esAnclaDeportiva. */
+const CATEGORIAS_PIERNAS_VERANIEGAS: Categoria[] = ["bermuda", "short_deportivo"];
+
 /** Arma outfits completos automáticamente a partir del placard real, sin
  *  que el usuario elija nada -- un outfit por cada prenda de piernas
  *  (pantalón, bermuda o short deportivo -- CATEGORIAS_PIERNAS, la categoría
@@ -683,11 +704,37 @@ function ordenarPorEstacion<T extends { prenda: Prenda }>(items: T[], hoy: Estac
  *  outfit en el maniquí; esto es lo que le da al usuario "otras opciones"
  *  para ir rotando en vez de una sola combinación fija por ancla. Devuelve
  *  el pool completo, mejor primero por ancla y, entre opciones parejas en
- *  color, con la estación de hoy primero (ver ordenarPorEstacion) -- la UI
- *  decide cuántas mostrar de una vez. */
-export function armarOutfitsSugeridos(placard: Prenda[], hoy: Date = new Date()): OutfitSugerido[] {
-  const estacionHoy = estacionActual(hoy);
-  const pantalones = placard.filter((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
+ *  color, con `clima` primero (ver ordenarPorEstacion) -- la UI decide
+ *  cuántas mostrar de una vez.
+ *
+ *  `clima` -- pedido explícito del usuario: "quiero que en cada sección me
+ *  preguntes si hace frío, entretiempo o calor". Antes la única noción de
+ *  estación era la fecha REAL de hoy (estacionActual), usada solo para
+ *  ORDENAR (nunca para filtrar) -- así un sweater de invierno y uno de
+ *  entretiempo podían convivir en el mismo pool sin distinción real más
+ *  que el orden. Ahora `clima` es la respuesta explícita del usuario (no
+ *  la fecha del calendario) y filtra de verdad, con 2 reglas de vestuario
+ *  real, revisadas como modista:
+ *  1. Un bermuda/short "de calle" (no deportivo) NUNCA combina con un
+ *     torso de abrigo (buzo/sweater/campera) -- sin importar el clima
+ *     elegido, esto no es una cuestión de temperatura sino de que esa
+ *     combinación no existe en el vestir real. El caso deportivo (short
+ *     de entrenamiento + hoodie) sigue funcionando: ya está cubierto por
+ *     el filtro `esAnclaDeportiva` de abajo, que exige un torso
+ *     genuinamente deportivo -- esta regla nueva solo aplica cuando la
+ *     ancla NO es deportiva.
+ *  2. clima="verano": ningún abrigo combina con NADA, ni siquiera con un
+ *     pantalón largo -- con calor de verdad no se usa buzo/sweater/
+ *     campera. clima="invierno": un bermuda/short directamente no ancla
+ *     ningún outfit -- con frío de verdad no se usan las piernas al aire,
+ *     sea cual sea el torso. clima="entretiempo" no agrega ninguna
+ *     restricción extra sobre la regla 1. */
+export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estacionActual()): OutfitSugerido[] {
+  const pantalones = placard
+    .filter((p) => CATEGORIAS_PIERNAS.includes(p.categoria))
+    // con frío real, un bermuda/short no ancla ningún outfit -- ver el
+    // comentario largo de arriba, regla 2.
+    .filter((p) => clima !== "invierno" || !CATEGORIAS_PIERNAS_VERANIEGAS.includes(p.categoria));
   const resultados: OutfitSugerido[] = [];
   const vistos = new Set<string>();
 
@@ -712,11 +759,19 @@ export function armarOutfitsSugeridos(placard: Prenda[], hoy: Date = new Date())
     // short deportivo (sin pretinas de tela para pasarlo), sea cual sea
     // su estilo declarado.
     const esAnclaDeportiva = estilosDe(ancla).includes("deportivo");
+    // ver el comentario largo de armarOutfitsSugeridos (reglas 1 y 2):
+    // bermuda/short "de calle" nunca combina con un torso de abrigo, y con
+    // clima="verano" ningún ancla (ni pantalón) combina con un abrigo.
+    const esAnclaVeraniega = CATEGORIAS_PIERNAS_VERANIEGAS.includes(ancla.categoria);
+    const excluirAbrigo = clima === "verano" || (esAnclaVeraniega && !esAnclaDeportiva);
 
-    const candidatosTorso = placard.filter(
-      (p) => CATEGORIAS_TORSO.includes(p.categoria) && (!esAnclaDeportiva || estilosDe(p).includes("deportivo")),
-    );
-    const torsos = ordenarPorEstacion(candidatasPropias(ancla, candidatosTorso, placard), estacionHoy);
+    const candidatosTorso = placard.filter((p) => {
+      if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
+      if (esAnclaDeportiva && !estilosDe(p).includes("deportivo")) return false;
+      if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
+      return true;
+    });
+    const torsos = ordenarPorEstacion(candidatasPropias(ancla, candidatosTorso, placard), clima);
     const calzado = mejorPropia(
       ancla,
       placard.filter((p) => p.categoria === "calzado"),
@@ -759,18 +814,6 @@ export function armarOutfitsSugeridos(placard: Prenda[], hoy: Date = new Date())
 
   return resultados;
 }
-
-// Prendas de torso que hacen de "abrigo" (capa extra sobre una remera o
-// camisa) -- subconjunto de CATEGORIAS_TORSO. remera/camisa quedan afuera a
-// propósito: son la capa base, no un abrigo. saco (agregado a pedido del
-// usuario, "un traje azul marino") también queda afuera a propósito: es
-// una capa de FORMALIDAD, no de temperatura -- un saco de traje no se
-// elige por "cuando hace frío", así que agruparlo acá lo pondría en el
-// mismo bucket binario que un buzo de invierno sin que la distinción
-// tenga sentido real. Cae en "sin abrigo" junto con remera/camisa por
-// descarte (no encaja del todo en ninguno de los dos baldes, pero es la
-// aproximación menos incorrecta del modelo binario actual).
-const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
 
 /** Separa el pool de "Vestite hoy" en dos grupos según si el torso del
  *  outfit es una prenda de abrigo (buzo/sweater/campera) o no (remera/
@@ -834,11 +877,25 @@ export function armarOutfitsParaComprar(
     // campera o un accesorio comunes para completar un look deportivo, en
     // vez de restringirse a lo que un look deportivo real usa).
     const esAnclaDeportiva = estilosDe(ancla).includes("deportivo");
+    // mismo criterio que armarOutfitsSugeridos (ver su comentario extenso,
+    // reporte real del usuario: "bermuda con sweater, ambos beige"): un
+    // bermuda/short "de calle" (no deportivo) no combina con un torso de
+    // abrigo, sea cual sea el color. Acá no hay pregunta de clima -- esta
+    // pantalla no depende del clima de hoy, así que la regla queda siempre
+    // activa (a diferencia de la regla extra de clima="verano" en
+    // armarOutfitsSugeridos, que sí depende de una respuesta explícita).
+    const esAnclaVeraniega = CATEGORIAS_PIERNAS_VERANIEGAS.includes(ancla.categoria);
+    const excluirAbrigo = esAnclaVeraniega && !esAnclaDeportiva;
 
     // no depende de categoriaSugerida -- se calcula una sola vez por ancla.
     const torsoPropio = mejorPropia(
       ancla,
-      placard.filter((p) => CATEGORIAS_TORSO.includes(p.categoria) && (!esAnclaDeportiva || estilosDe(p).includes("deportivo"))),
+      placard.filter((p) => {
+        if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
+        if (esAnclaDeportiva && !estilosDe(p).includes("deportivo")) return false;
+        if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
+        return true;
+      }),
       placard,
     );
 
@@ -857,6 +914,12 @@ export function armarOutfitsParaComprar(
       // deportivo -- nunca se sugiere comprar un accesorio para un ancla
       // deportiva, sea cual sea el color.
       if (categoriaSugerida === "accesorio" && esAnclaDeportiva) continue;
+
+      // mismo criterio que torsoPropio más arriba: no sugerir COMPRAR un
+      // abrigo (buzo/sweater/campera) para completar un bermuda/short "de
+      // calle" -- sería la misma combinación sin sentido real, solo que
+      // todavía no comprada.
+      if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(categoriaSugerida)) continue;
 
       const candidatosCatalogo = catalogo.filter(
         (p) =>
