@@ -8,7 +8,8 @@ export type Categoria =
   | "camisa"
   | "calzado"
   | "campera"
-  | "accesorio";
+  | "accesorio"
+  | "saco";
 
 export type Textura =
   | "algodon"
@@ -119,6 +120,7 @@ export const CATEGORIA_LABEL: Record<Categoria, string> = {
   calzado: "calzado",
   campera: "campera",
   accesorio: "accesorio",
+  saco: "saco",
 };
 
 /** Etiqueta más específica que CATEGORIA_LABEL para una prenda puntual --
@@ -180,16 +182,30 @@ export interface Recomendacion {
  *  entrada) y se suman a la lista de todas las categorías de torso/calzado/
  *  accesorio que ya incluían a pantalon, para no dejarlas fuera de la
  *  pantalla "Combinar" ni de "Probar antes de comprar" (las dos pantallas
- *  que arman sus candidatas a partir de este mapa). */
+ *  que arman sus candidatas a partir de este mapa).
+ *
+ *  saco -- pedido explícito del usuario ("un traje azul marino"), revisado
+ *  como modista: a diferencia de campera (que sí combina con bermuda/short_
+ *  deportivo/remera -- una campera urbana con un jean o hasta con un short
+ *  deportivo es un combo real de calle), un saco de traje NUNCA combina con
+ *  ropa deportiva/de entrecasa real -- por eso su propia entrada, y las
+ *  entradas donde aparece, son más angostas que las de campera: solo
+ *  pantalón (de vestir), camisa, calzado y accesorio. No aparece en
+ *  bermuda/short_deportivo/remera/buzo/sweater (mismo criterio que ya
+ *  excluye a campera de buzo/sweater: no se combinan dos capas de afuera
+ *  del torso a la vez) ni dentro de la propia entrada de campera (son
+ *  capas mutuamente excluyentes, un saco de traje no se usa arriba ni
+ *  abajo de una campera). */
 export const CATEGORIAS_COMPLEMENTARIAS: Record<Categoria, Categoria[]> = {
-  pantalon: ["remera", "buzo", "sweater", "camisa", "campera", "calzado", "accesorio"],
+  pantalon: ["remera", "buzo", "sweater", "camisa", "campera", "saco", "calzado", "accesorio"],
   bermuda: ["remera", "buzo", "sweater", "camisa", "campera", "calzado", "accesorio"],
   short_deportivo: ["remera", "buzo", "sweater", "camisa", "campera", "calzado", "accesorio"],
   remera: ["pantalon", "bermuda", "short_deportivo", "campera", "calzado", "accesorio"],
   buzo: ["pantalon", "bermuda", "short_deportivo", "calzado", "accesorio"],
   sweater: ["pantalon", "bermuda", "short_deportivo", "calzado", "accesorio"],
-  camisa: ["pantalon", "bermuda", "short_deportivo", "campera", "calzado", "accesorio"],
-  calzado: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera"],
+  camisa: ["pantalon", "bermuda", "short_deportivo", "campera", "saco", "calzado", "accesorio"],
+  calzado: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera", "saco"],
   campera: ["pantalon", "bermuda", "short_deportivo", "remera", "camisa", "calzado", "accesorio"],
-  accesorio: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera", "calzado"],
+  accesorio: ["pantalon", "bermuda", "short_deportivo", "remera", "buzo", "sweater", "camisa", "campera", "saco", "calzado"],
+  saco: ["pantalon", "camisa", "calzado", "accesorio"],
 };

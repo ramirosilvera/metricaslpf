@@ -10,6 +10,7 @@ const CAPA: Record<Categoria, Capa> = {
   buzo: "torso",
   sweater: "torso",
   campera: "torso",
+  saco: "torso",
   pantalon: "piernas",
   bermuda: "piernas",
   short_deportivo: "piernas",
@@ -22,7 +23,12 @@ const CAPA: Record<Categoria, Capa> = {
 // resto como chips debajo -- una campera puesta ya tapa casi toda la remera
 // que tiene debajo, así que mostrar ambas superpuestas al mismo tamaño no
 // se leería como "las dos puestas", se leería como "se rompió el dibujo".
-const PRIORIDAD_TORSO: Categoria[] = ["campera", "buzo", "sweater", "camisa", "remera"];
+// saco (agregado a pedido del usuario, "un traje azul marino") va primero:
+// en la práctica nunca convive con campera/buzo/sweater en el mismo outfit
+// (CATEGORIAS_COMPLEMENTARIAS en types.ts ya los excluye entre sí), pero
+// si alguna vez coincidieran, el saco -- la capa más formal -- es la que
+// tiene sentido mostrar puesta.
+const PRIORIDAD_TORSO: Categoria[] = ["saco", "campera", "buzo", "sweater", "camisa", "remera"];
 
 // manga corta (remera) vs. manga larga (el resto de las prendas de torso).
 const MANGA_CORTA: Categoria[] = ["remera"];
@@ -32,8 +38,10 @@ const MANGA_CORTA: Categoria[] = ["remera"];
 // -- así se ve puesta una camisa con sweater/campera/buzo arriba, no
 // escondida sin más como un chip suelto. La remera no entra: su escote es
 // una curva simple, no hay "cuello de camisa" real que tenga sentido tapar
-// y hacer asomar de la misma forma.
-const OUTER_CON_CUELLO_VISIBLE: Categoria[] = ["sweater", "buzo", "campera"];
+// y hacer asomar de la misma forma. saco entra por el mismo motivo que
+// campera -- un traje siempre se usa sobre una camisa, y las solapas
+// abiertas dejan ver la camisa (y la corbata, si hay) debajo.
+const OUTER_CON_CUELLO_VISIBLE: Categoria[] = ["sweater", "buzo", "campera", "saco"];
 
 function agruparPorCapa(prendas: Prenda[]): {
   principal: Partial<Record<Capa, Prenda>>;
@@ -434,6 +442,40 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               <path d="M74 44 L60 60 L66 44 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
             </>
           )}
+          {prenda.categoria === "saco" && (
+            // saco -- pedido explícito del usuario ("un traje azul
+            // marino"), revisado como modista: a diferencia de campera
+            // (cierre de cremallera recto + cuello camisero simple), un
+            // saco de traje real se define por las SOLAPAS -- dos piezas
+            // triangulares que se abren en V desde la base del cuello
+            // hasta bien abajo del pecho, dejando ver la camisa (y
+            // corbata) de abajo -- y un cierre de 1-2 botones, no una
+            // línea de cremallera. Misma tira de cuello (M46 42...) que
+            // camisa/campera para que las tres prendas se apoyen sobre el
+            // mismo punto del cuerpo, pero la solapa se abre mucho más
+            // (hasta y=80, contra y=58-60 de camisa/campera) porque un
+            // saco se usa abierto, no abrochado hasta arriba.
+            <>
+              <path
+                d="M46 42 Q60 36 74 42 Q68 44 60 45 Q52 44 46 42 Z"
+                fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                stroke={stroke}
+                {...strokeProps}
+              />
+              {/* solapa izquierda: arranca en el mismo punto que la punta
+                  de cuello de camisa/campera (46,42), se abre hacia el
+                  hombro (36,62) -- el ancho real de una solapa -- y baja en
+                  diagonal hasta el cierre de botón sobre el pecho
+                  (58,80). */}
+              <path d="M46 42 L36 62 L58 80 L60 46 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              <path d="M74 42 L84 62 L62 80 L60 46 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              {/* dos botones sobre la línea de cierre, no una cremallera --
+                  la seña visual que distingue un saco abrochado de una
+                  campera con cierre. */}
+              <circle cx="60" cy="84" r="1.6" fill={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              <circle cx="60" cy="92" r="1.6" fill={contornoHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+            </>
+          )}
         </>
       )}
     />
@@ -764,6 +806,13 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                 )}
                 {principal.torso.categoria === "campera" && (
                   <path d="M40 20 L80 20 L80 52 Q60 58 40 52 Z" />
+                )}
+                {principal.torso.categoria === "saco" && (
+                  // el escote más ancho/bajo de los cuatro -- un saco se usa
+                  // abierto, con las solapas mostrando la camisa (y corbata)
+                  // hasta bien abajo del pecho (ver el path de la solapa en
+                  // TorsoCuerpo, que abre hasta y=80).
+                  <path d="M38 20 L82 20 L82 62 Q60 70 38 62 Z" />
                 )}
               </clipPath>
             </defs>

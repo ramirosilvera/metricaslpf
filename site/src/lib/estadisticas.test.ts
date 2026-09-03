@@ -36,9 +36,9 @@ function mkPrenda(
 }
 
 describe("contarPorCategoria", () => {
-  it("placard vacío -> las 10 categorías en cero", () => {
+  it("placard vacío -> las 11 categorías en cero", () => {
     const r = contarPorCategoria([]);
-    expect(r).toHaveLength(10);
+    expect(r).toHaveLength(11);
     expect(r.every((c) => c.cantidad === 0)).toBe(true);
   });
 

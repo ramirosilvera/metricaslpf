@@ -35,10 +35,12 @@ export interface PresetPrenda {
  *
  * - Cubre casual, ropa de oficina, urbana, clásica y deportiva (pedido
  *   explícito -- el catálogo original no tenía NINGUNA prenda con estilo
- *   "deportivo"), en las 10 categorías que soporta el placard (incluye
+ *   "deportivo"), en las 11 categorías que soporta el placard (incluye
  *   bermuda y short_deportivo, agregadas después junto con pantalon como
- *   las tres categorías de "piernas"). Ver CatalogoPicker.tsx para cómo se
- *   agrupa/filtra esto en la UI.
+ *   las tres categorías de "piernas", y saco -- agregada después, pedido
+ *   explícito del usuario, "un traje azul marino": un saco de traje no es
+ *   una campera, es su propia categoría de torso). Ver CatalogoPicker.tsx
+ *   para cómo se agrupa/filtra esto en la UI.
  * - Colores reales y de uso común, no una paleta arcoíris -- para cada
  *   prenda, los 2-4 colores que de verdad se usan más (ej. camisa: blanca/
  *   celeste/negra, no "camisa violeta").
@@ -424,6 +426,29 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // tapado es lana tejida apretada, la aproximación más cercana que tiene
   // el enum sin inventar una textura "paño" que no existe.
   { id: "tapado-pano-gris", nombre: "Tapado de paño gris", categoria: "campera", colorHex: "#4A4A4A", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "invierno" },
+
+  // --- Sacos ---
+  // Categoría nueva -- pedido explícito del usuario ("quiero que agregues
+  // al catálogo... un traje azul marino"). Revisado como modista: un
+  // traje son DOS prendas por separado (saco + pantalón de vestir), no una
+  // sola -- el pantalón de vestir ya existe en el catálogo hace rato
+  // (pantalon-vestir-azul y compañía, más arriba); lo que faltaba era el
+  // saco en sí. No es una "campera" -- una campera es ropa de calle/
+  // abrigo (cierre de cremallera, cuello camisero simple, ver Maniqui.tsx),
+  // un saco de traje es tailoring (solapas, botones, se usa abierto sobre
+  // camisa y corbata) -- por eso su propia categoría, no una campera con
+  // otro color. Azul marino (#1F2A44), el mismo hex que ya usan pantalon-
+  // vestir-azul/sweater-azul-marino/corbata-azul-marino/zapatillas-azul-
+  // marino -- consistencia de paleta cross-categoría, mismo criterio que
+  // ya documenta el resto del archivo. Textura "lana": el paño de traje es
+  // lana tejida, la aproximación más cercana que tiene el enum (mismo
+  // criterio que tapado-pano-gris de acá arriba). Sin `estacion`: a
+  // diferencia de sweater/campera, un traje no se elige por temperatura --
+  // se usa para una ocasión formal sea la época del año que sea (mismo
+  // criterio que se aplicó a buzo en la revisión anterior, por el mismo
+  // motivo real: no es una dimensión que determine sin ambigüedad si es de
+  // entretiempo o invierno).
+  { id: "saco-azul-marino", nombre: "Saco azul marino", categoria: "saco", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo" },
 
   // --- Accesorios ---
   // Reusa hex ya presentes en otras categorías (azul marino, bordo) a

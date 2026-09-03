@@ -325,8 +325,12 @@ const FORMALIDAD_ESTILO: Partial<Record<NonNullable<Prenda["estilo"]>, number>> 
 
 // duplicado a propósito -- ver el comentario sobre CATEGORIAS_TORSO más
 // abajo (esa constante se declara después porque la usa armarOutfits*, que
-// vive más abajo en el archivo; acá hace falta antes).
-const CATEGORIAS_CON_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater", "campera"];
+// vive más abajo en el archivo; acá hace falta antes). "saco" agregado a
+// pedido explícito del usuario ("un traje azul marino") -- es una prenda
+// de torso tanto como campera/sweater/buzo, así que entra por la misma
+// puerta a todas las reglas de formalidad/registro de acá abajo (cuero,
+// corbata sin cuello, formalidad vs. pantalón).
+const CATEGORIAS_CON_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater", "campera", "saco"];
 
 /** El calzado O el torso no pueden ser MENOS formales que la prenda de
  *  piernas (pantalón, bermuda o short deportivo) -- zapatillas con un
@@ -561,14 +565,16 @@ function nivelOrden(nivel: NivelCompatibilidad): number {
 // "de presentación" (cómo se dibuja); esta es la agrupación "de datos"
 // (qué categorías compiten por el mismo lugar del outfit). Mismo criterio
 // que color.ts ya documenta para NEUTRO_*: evitar una dependencia cruzada
-// entre capas por repetir 5 strings.
-const CATEGORIAS_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater", "campera"];
+// entre capas por repetir 5 strings. "saco" agregado a pedido explícito
+// del usuario -- ver el comentario de CATEGORIAS_CON_TORSO más arriba.
+const CATEGORIAS_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater", "campera", "saco"];
 const TODAS_LAS_CATEGORIAS: Categoria[] = [
   "remera",
   "camisa",
   "buzo",
   "sweater",
   "campera",
+  "saco",
   "pantalon",
   "bermuda",
   "short_deportivo",
@@ -756,12 +762,19 @@ export function armarOutfitsSugeridos(placard: Prenda[], hoy: Date = new Date())
 
 // Prendas de torso que hacen de "abrigo" (capa extra sobre una remera o
 // camisa) -- subconjunto de CATEGORIAS_TORSO. remera/camisa quedan afuera a
-// propósito: son la capa base, no un abrigo.
+// propósito: son la capa base, no un abrigo. saco (agregado a pedido del
+// usuario, "un traje azul marino") también queda afuera a propósito: es
+// una capa de FORMALIDAD, no de temperatura -- un saco de traje no se
+// elige por "cuando hace frío", así que agruparlo acá lo pondría en el
+// mismo bucket binario que un buzo de invierno sin que la distinción
+// tenga sentido real. Cae en "sin abrigo" junto con remera/camisa por
+// descarte (no encaja del todo en ninguno de los dos baldes, pero es la
+// aproximación menos incorrecta del modelo binario actual).
 const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
 
 /** Separa el pool de "Vestite hoy" en dos grupos según si el torso del
  *  outfit es una prenda de abrigo (buzo/sweater/campera) o no (remera/
- *  camisa) -- pedido explícito del usuario: en vez de rotar entre variantes
+ *  camisa/saco) -- pedido explícito del usuario: en vez de rotar entre variantes
  *  que a veces coinciden en la misma capa, quiere ver siempre las dos
  *  alternativas reales del día (una para cuando hace frío, otra para
  *  cuando no). Cada outfit de armarOutfitsSugeridos tiene exactamente un

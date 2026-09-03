@@ -18,6 +18,7 @@ const CATEGORIAS: Categoria[] = [
   "camisa",
   "calzado",
   "campera",
+  "saco",
   "accesorio",
 ];
 // "poliester" y "viscosa" faltaban acá -- se podían cargar vía catálogo

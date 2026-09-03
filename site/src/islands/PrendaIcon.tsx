@@ -321,6 +321,29 @@ export function PrendaShape({
         </>
       );
       break;
+    case "saco":
+      // mismo cuerpo de "chaqueta con cuello" que campera (misma silueta
+      // base de saco/campera), pero sin la línea de cremallera recta --
+      // en su lugar, dos líneas diagonales desde el cuello que se abren
+      // hacia el pecho, la seña esquemática de una solapa abierta (ver el
+      // path completo de la solapa en Maniqui.tsx/TorsoCuerpo, mucho más
+      // grande en el maniquí; acá alcanza con la V para diferenciarlo del
+      // cierre recto de campera a esta escala chica). Trazo en tonoPatron
+      // (no el `stroke` fijo semitransparente que usa el resto de los
+      // detalles de esta categoría) -- verificado renderizando el ícono
+      // real sobre azul marino oscuro: rgba(0,0,0,0.15) se perdía casi
+      // por completo contra un color de base oscuro, el mismo problema de
+      // contraste que ya motivó tonoTexturaHsl más arriba para los
+      // patrones de textura. Acá se reusa esa misma función (ya calculada
+      // como tonoPatron) para una línea de detalle, no un patrón.
+      forma = (
+        <>
+          <FormaConTextura d="M24 6 L32 12 L40 6 L54 16 L47 27 L42 22 L42 58 L22 58 L22 22 L17 27 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
+          <line x1="32" y1="12" x2="24" y2="32" stroke={tonoPatron} strokeWidth={1.2} />
+          <line x1="32" y1="12" x2="40" y2="32" stroke={tonoPatron} strokeWidth={1.2} />
+        </>
+      );
+      break;
     case "accesorio":
     default: {
       if (posicionAccesorio !== "cuello") {

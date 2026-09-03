@@ -123,3 +123,21 @@ describe("catálogo -- jean/jogger son urbano sin importar el color", () => {
     expect(joggers.every(esUrbano)).toBe(true);
   });
 });
+
+describe("catálogo -- saco (categoría nueva, pedido explícito del usuario: 'un traje azul marino')", () => {
+  it("hay al menos un saco, formal, sin estacion (mismo criterio que buzo: no es una prenda que se elija por temperatura)", () => {
+    const sacos = CATALOGO_PRENDAS.filter((p) => p.categoria === "saco");
+    expect(sacos.length).toBeGreaterThan(0);
+    for (const s of sacos) {
+      expect(s.estilo, s.id).toBe("formal");
+      expect(s.estacion, s.id).toBeUndefined();
+    }
+  });
+
+  it("el pantalón de vestir azul marino y la corbata azul marino ya existían -- el traje completo combina sin agregar nada más al catálogo", () => {
+    const pantalonVestirAzul = CATALOGO_PRENDAS.find((p) => p.categoria === "pantalon" && p.textura === "lana" && p.colorHex === "#1F2A44");
+    const corbataAzul = CATALOGO_PRENDAS.find((p) => p.categoria === "accesorio" && p.requiereCuello && p.colorHex === "#1F2A44");
+    expect(pantalonVestirAzul).toBeDefined();
+    expect(corbataAzul).toBeDefined();
+  });
+});

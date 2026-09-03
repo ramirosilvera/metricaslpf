@@ -613,6 +613,19 @@ describe("recomendar -- corbata necesita cuello", () => {
     const [resultado] = recomendar(cinturon, [buzo], [cinturon, buzo]);
     expect(resultado.score.nivel).toBe("excelente");
   });
+
+  // saco -- categoría nueva, pedido explícito del usuario ("un traje azul
+  // marino"). Mismo criterio que buzo/sweater/campera: un saco por sí solo
+  // no tiene cuello real, una corbata necesita la camisa de abajo.
+  it("corbata + saco (sin camisa) NO es 'excelente' -- mismo criterio que corbata + buzo", () => {
+    const corbata = mkPrenda("accesorio", "#1F2A44", 222, 37, 19);
+    corbata.requiere_cuello = true;
+    const saco = mkPrenda("saco", "#1F2A44", 222, 37, 19);
+
+    const [resultado] = recomendar(corbata, [saco], [corbata, saco]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+    expect(resultado.tecnicaRescate).toContain("camisa");
+  });
 });
 
 describe("tecnicaRescate", () => {
@@ -699,15 +712,16 @@ describe("categoriasAusentes", () => {
     expect(ausentes).toContain("sweater");
     expect(ausentes).toContain("calzado");
     expect(ausentes).toContain("accesorio");
+    expect(ausentes).toContain("saco");
     expect(ausentes).not.toContain("pantalon");
     expect(ausentes).not.toContain("remera");
   });
 
   it("placard vacío: todas las categorías están ausentes", () => {
-    // 10, no 8 -- bermuda y short_deportivo se sumaron a TODAS_LAS_CATEGORIAS
-    // junto con pantalon, remera, camisa, buzo, sweater, campera, calzado y
-    // accesorio.
-    expect(categoriasAusentes([])).toHaveLength(10);
+    // 11 -- bermuda y short_deportivo (junto con pantalon, remera, camisa,
+    // buzo, sweater, campera, calzado y accesorio) más saco, agregada
+    // después a pedido explícito del usuario ("un traje azul marino").
+    expect(categoriasAusentes([])).toHaveLength(11);
   });
 });
 
@@ -809,6 +823,16 @@ describe("armarOutfitsSugeridos", () => {
     expect(outfits).toHaveLength(3);
     const torsos = outfits.map((o) => o.prendas.find((p) => p.categoria !== "pantalon")?.categoria).sort();
     expect(torsos).toEqual(["camisa", "remera", "sweater"]);
+  });
+
+  it("saco es una prenda de torso válida como cualquier otra (categoría nueva, pedido explícito del usuario: 'un traje azul marino')", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), // negro, neutro
+      mkPrenda("saco", "#1F2A44", 222, 39, 21),
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(1);
+    expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "saco"].sort());
   });
 
   it("entre dos abrigos que combinan igual de bien por color, prioriza el de la estación de hoy (caso real: 4 sweaters de entretiempo + 1 de invierno del mismo usuario, mismo pantalón)", () => {

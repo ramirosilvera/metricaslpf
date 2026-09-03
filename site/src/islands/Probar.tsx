@@ -24,6 +24,7 @@ const CATEGORIAS: Categoria[] = [
   "camisa",
   "calzado",
   "campera",
+  "saco",
   "accesorio",
 ];
 

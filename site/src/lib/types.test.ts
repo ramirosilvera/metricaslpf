@@ -70,4 +70,11 @@ describe("descripcionPrenda", () => {
     expect(descripcionPrenda(mkPrenda("remera"))).toBe("Remera");
     expect(descripcionPrenda(mkPrenda("short_deportivo"))).toBe("Short deportivo");
   });
+
+  // saco -- categoría nueva, pedido explícito del usuario ("un traje azul
+  // marino"). Sin branch específico (no hay ambigüedad real que resolver
+  // como sí la hay en campera/buzo) -- cae en el genérico capitalizado.
+  it("saco cae en el genérico capitalizado, sin branch específico", () => {
+    expect(descripcionPrenda(mkPrenda("saco", { textura: "lana" }))).toBe("Saco");
+  });
 });
