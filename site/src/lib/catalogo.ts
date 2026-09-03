@@ -1,4 +1,4 @@
-import type { Categoria, CorteCalzado, Estacion, Estilo, Ocasion, Patron, Prenda, Textura } from "./types";
+import type { Calce, Categoria, CorteCalzado, Estacion, Estilo, Ocasion, Patron, Prenda, Textura } from "./types";
 import { hexToHsl } from "./color";
 
 export interface PresetPrenda {
@@ -36,6 +36,11 @@ export interface PresetPrenda {
   /** Ver CorteCalzado en types.ts. Solo tiene sentido en categoria="calzado";
    *  se omite (== "zapatilla_urbana") en el resto de las categorías. */
   corteCalzado?: CorteCalzado;
+  /** Ver Calce en types.ts. Se omite (== "regular") en la mayoría del
+   *  catálogo -- solo se declara en las prendas donde el volumen real es
+   *  claramente distinto de un corte estándar (jogger/short deportivo
+   *  holgados, camisa de vestir/blazer ajustados). */
+  calce?: Calce;
 }
 
 /**
@@ -144,8 +149,13 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // --- Camisas (oficina) ---
   // #F5F5F5 -- ver el comentario de remera-blanca más arriba. #FAFAF7
   // (s=23) también clasificaba como "Blanco roto" en vez de "Blanco".
-  { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#F5F5F5", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
-  { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  // calce "ajustado" en las camisas de vestir clásicas (blanca/celeste/
+  // gris/beige, no camisa-negra ni camisa-cuadros, más urbanas/casual) --
+  // auditoría de sastrería (Consejo, ronda de auditoría del motor): una
+  // camisa de oficina real se usa metida adentro, silueta entallada, la
+  // contraparte de volumen contenido de un pantalón de vestir/saco.
+  { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#F5F5F5", textura: "algodon", estilo: "clasico", ocasion: "laburo", calce: "ajustado" },
+  { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", ocasion: "laburo", calce: "ajustado" },
   // "urbano" a propósito, no un descuido: una camisa negra lee más
   // "urban professional" que clásica, a diferencia de blanca/celeste/gris.
   // colorHex #1A1A1A -- mismo negro que las otras 16+ prendas "negro/negra"
@@ -155,7 +165,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // exactamente el bug que reportó el usuario ("una cosa es un gris
   // oscuro y otra un negro").
   { id: "camisa-negra", nombre: "Camisa negra", categoria: "camisa", colorHex: "#1A1A1A", textura: "algodon", estilo: "urbano", ocasion: "laburo" },
-  { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", ocasion: "laburo", calce: "ajustado" },
   // patron "cuadros" + colorHex2 -- corrección real de esta ronda: esta
   // entrada ya existía nombrada "a cuadros" pero se dibujaba como una
   // camisa lisa de un solo color, sin ningún cuadro real (el modelo de
@@ -168,7 +178,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // mismo beige que el resto del catálogo (ver remera-beige) -- clasico/
   // laburo, mismo registro que blanca/celeste/gris: una camisa beige es
   // tan de oficina como esas, no informal como la de cuadros.
-  { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo", calce: "ajustado" },
 
   // --- Camisas a rayas -- pedido explícito del usuario: "camisas
   // ralladas, blanca y celestes y de otros colores tmb, inspírate en usos
@@ -224,15 +234,19 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // mismo negro estándar del catálogo, corrigiendo el mismo #232323
   // inconsistente que hacía que nombreColor() leyera "Gris oscuro".
   { id: "jean-negro", nombre: "Jean negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "denim", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
-  { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo" },
-  { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo" },
-  { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo" },
+  // calce "ajustado" en los 4 -- auditoría de sastrería (Consejo, ronda de
+  // auditoría del motor): un pantalón de vestir real es de corte recto/
+  // entallado, no ancho, la contraparte de volumen contenido que hace que
+  // un saco/blazer (también "ajustado" más abajo) funcione en proporción.
+  { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
+  { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
+  { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
   // distinto de pantalon-beige de acá abajo (el chino, algodón/clasico) --
   // mismo beige del resto del catálogo, pero de vestir: lana/formal, igual
   // criterio que negro/gris/azul marino de arriba. No es una entrada
   // duplicada -- un chino y un pantalón de vestir son prendas distintas
   // aunque compartan color.
-  { id: "pantalon-vestir-beige", nombre: "Pantalón de vestir beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "lana", estilo: "formal", ocasion: "laburo" },
+  { id: "pantalon-vestir-beige", nombre: "Pantalón de vestir beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
   { id: "pantalon-beige", nombre: "Pantalón chino beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   // joggers -- casual como el jean (no "clasico" como el chino: no van a
   // la oficina), textura "algodon" sin ambigüedad porque el usuario la dio
@@ -242,17 +256,21 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // estilo secundario "urbano" en los 3 -- mismo criterio que el jean de
   // arriba: es el jogger como PRENDA lo que lee urbano/streetwear, no un
   // color puntual (corrección de esta ronda: antes solo lo tenía el negro).
-  { id: "jogger-negro", nombre: "Jogger negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
-  { id: "jogger-beige", nombre: "Jogger beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
-  { id: "jogger-gris", nombre: "Jogger gris", categoria: "pantalon", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual" },
+  // calce "holgado" en los 3 -- auditoría de sastrería (Consejo, ronda de
+  // auditoría del motor): el corte ancho es el rasgo que define al jogger
+  // como prenda (ver el comentario de arriba), no un dato aparte.
+  { id: "jogger-negro", nombre: "Jogger negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual", calce: "holgado" },
+  { id: "jogger-beige", nombre: "Jogger beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual", calce: "holgado" },
+  { id: "jogger-gris", nombre: "Jogger gris", categoria: "pantalon", colorHex: "#8C8C8C", textura: "algodon", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual", calce: "holgado" },
   // pantalón deportivo (entrenamiento) -- distinto del jogger de arriba:
   // mismo corte ancho, pero tela técnica sintética (poliéster), no algodón
-  // (mismo criterio que la remera deportiva de arriba).
-  { id: "pantalon-deportivo-negro", nombre: "Pantalón deportivo negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  // (mismo criterio que la remera deportiva de arriba). calce "holgado"
+  // mismo motivo que el jogger.
+  { id: "pantalon-deportivo-negro", nombre: "Pantalón deportivo negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual", calce: "holgado" },
   // verde oscuro real (no el verde militar/oliva de campera-verde-militar
   // más abajo, que es otro tono): un verde bosque/botella, el típico de un
   // pantalón de entrenamiento, no un verde caqui desaturado.
-  { id: "pantalon-deportivo-verde-oscuro", nombre: "Pantalón deportivo verde oscuro", categoria: "pantalon", colorHex: "#2F5233", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  { id: "pantalon-deportivo-verde-oscuro", nombre: "Pantalón deportivo verde oscuro", categoria: "pantalon", colorHex: "#2F5233", textura: "poliester", estilo: "deportivo", ocasion: "casual", calce: "holgado" },
 
   // --- Bermudas (chino/algodón, hasta la rodilla) --- agregadas a pedido
   // explícito del usuario: el catálogo no tenía ninguna prenda de piernas
@@ -277,9 +295,10 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // más cortos (Maniqui.tsx los dibuja hasta la mitad del muslo, la
   // bermuda hasta la rodilla) y de tela sintética (poliéster), no chino/
   // denim -- mismo criterio que la remera y el pantalón deportivos de arriba.
-  { id: "short-deportivo-negro", nombre: "Short deportivo negro", categoria: "short_deportivo", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
-  { id: "short-deportivo-gris", nombre: "Short deportivo gris", categoria: "short_deportivo", colorHex: "#8C8C8C", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
-  { id: "short-deportivo-azul", nombre: "Short deportivo azul", categoria: "short_deportivo", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual" },
+  // calce "holgado" en los 3, mismo motivo que jogger/pantalón deportivo.
+  { id: "short-deportivo-negro", nombre: "Short deportivo negro", categoria: "short_deportivo", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual", calce: "holgado" },
+  { id: "short-deportivo-gris", nombre: "Short deportivo gris", categoria: "short_deportivo", colorHex: "#8C8C8C", textura: "poliester", estilo: "deportivo", ocasion: "casual", calce: "holgado" },
+  { id: "short-deportivo-azul", nombre: "Short deportivo azul", categoria: "short_deportivo", colorHex: "#3366CC", textura: "poliester", estilo: "deportivo", ocasion: "casual", calce: "holgado" },
 
   // --- Buzos ---
   // Sin estacion en ninguna entrada de acá abajo -- corrección de esta
@@ -619,9 +638,13 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // vendida para entretiempo/viaje, no la protección real de un invierno
   // crudo. La de invierno de verdad es la oversize de acá abajo, con mucho
   // más volumen/relleno.
-  { id: "campera-pluma-negra", nombre: "Campera de pluma negra", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
-  { id: "campera-pluma-azul-marino", nombre: "Campera de pluma azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
-  { id: "campera-pluma-beige", nombre: "Campera de pluma beige", categoria: "campera", colorHex: "#D8C7A1", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
+  // calce "ajustado" en las 3 -- son la "Uniqlo-type" que ya menciona el
+  // comentario de más abajo, en contraste directo con la oversize: relleno
+  // fino, silueta pegada al cuerpo, no voluminosa (auditoría de sastrería,
+  // Consejo, ronda de auditoría del motor).
+  { id: "campera-pluma-negra", nombre: "Campera de pluma negra", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "entretiempo", calce: "ajustado" },
+  { id: "campera-pluma-azul-marino", nombre: "Campera de pluma azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "entretiempo", calce: "ajustado" },
+  { id: "campera-pluma-beige", nombre: "Campera de pluma beige", categoria: "campera", colorHex: "#D8C7A1", textura: "acolchado", estilo: "casual", ocasion: "casual", estacion: "entretiempo", calce: "ajustado" },
   // pluma oversize (tipo campera retro estilo Nuptse: mucho más grande y
   // abrigada que la de arriba, silueta voluminosa en vez de ajustada al
   // cuerpo) -- pedido explícito del usuario, distinguiéndola de la
@@ -631,7 +654,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // nombre, mismo patrón que ya usa "(suela blanca)" en las zapatillas.
   // "urbano" en vez de "casual": el volumen exagerado es un statement de
   // calle, no una campera básica.
-  { id: "campera-pluma-negra-oversize", nombre: "Campera de pluma negra (oversize)", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "urbano", ocasion: "casual", estacion: "invierno" },
+  { id: "campera-pluma-negra-oversize", nombre: "Campera de pluma negra (oversize)", categoria: "campera", colorHex: "#1A1A1A", textura: "acolchado", estilo: "urbano", ocasion: "casual", estacion: "invierno", calce: "holgado" },
   // rompeviento -- deportivo, distinto de la campera de jean/pluma de
   // arriba (esas son casual/urbano, no para entrenar). Poliéster por
   // defecto, mismo criterio que el resto de las prendas "deportivo".
@@ -674,7 +697,9 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // criterio que se aplicó a buzo en la revisión anterior, por el mismo
   // motivo real: no es una dimensión que determine sin ambigüedad si es de
   // entretiempo o invierno).
-  { id: "saco-azul-marino", nombre: "Saco azul marino", categoria: "saco", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo" },
+  // calce "ajustado" -- un saco/blazer de sastrería real es entallado, no
+  // ancho (auditoría de sastrería, Consejo, ronda de auditoría del motor).
+  { id: "saco-azul-marino", nombre: "Saco azul marino", categoria: "saco", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
 
   // --- Accesorios ---
   // Reusa hex ya presentes en otras categorías (azul marino, bordo) a
@@ -743,6 +768,7 @@ export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number
     color2_s: hsl2?.s ?? null,
     color2_l: hsl2?.l ?? null,
     corte_calzado: preset.corteCalzado ?? "zapatilla_urbana",
+    calce: preset.calce ?? "regular",
     created_at: "",
     updated_at: "",
   };

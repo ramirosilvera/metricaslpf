@@ -36,6 +36,7 @@ function mkPrenda(
     color2_s: null,
     color2_l: null,
     corte_calzado: "zapatilla_urbana",
+    calce: "regular",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };

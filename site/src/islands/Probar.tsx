@@ -123,6 +123,7 @@ export default function Probar() {
           color2_s: null,
           color2_l: null,
           corte_calzado: "zapatilla_urbana",
+          calce: "regular",
           created_at: "",
           updated_at: "",
         }

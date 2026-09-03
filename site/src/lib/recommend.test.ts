@@ -701,6 +701,63 @@ describe("multi-estilo -- escape hatch del choque deportivo y de la formalidad",
   });
 });
 
+// Auditoría de sastrería (Consejo, ronda de auditoría del motor): tercer
+// eje real de un conjunto (después de color y registro), el único que no
+// tenía ningún dato. Mismo patrón que la degradación de formalidad: nunca
+// bloquea, solo baja "excelente" a "muy_bueno".
+describe("recomendar -- volumen (calce): dos prendas holgadas pierden silueta", () => {
+  it("jogger holgado + campera holgada (mismo color, excelente seguro) -> se degrada a muy_bueno con sugerencia de volumen", () => {
+    const jogger = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    jogger.calce = "holgado";
+    const campera = mkPrenda("campera", "#1A1A1A", 0, 0, 10);
+    campera.calce = "holgado";
+
+    const [resultado] = recomendar(jogger, [campera], [jogger, campera]);
+    expect(resultado.score.nivel).toBe("muy_bueno");
+    expect(resultado.score.explicacion).toContain("holgadas");
+  });
+
+  it("jogger holgado + campera REGULAR (calce por defecto) -> sigue excelente, no se inventa un choque por falta de dato", () => {
+    const jogger = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    jogger.calce = "holgado";
+    const campera = mkPrenda("campera", "#1A1A1A", 0, 0, 10);
+    // calce por defecto: "regular" (ver mkPrenda).
+
+    const [resultado] = recomendar(jogger, [campera], [jogger, campera]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
+
+  it("pantalón AJUSTADO + camisa ajustada (mismo color) -> sigue excelente -- la regla es solo para dos holgadas, no para dos ajustadas", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.calce = "ajustado";
+    const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+    camisa.calce = "ajustado";
+
+    const [resultado] = recomendar(pantalon, [camisa], [pantalon, camisa]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
+
+  it("no aplica entre calzado/accesorio -- dos prendas holgadas en categorías sin calce real no degradan", () => {
+    const jogger = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    jogger.calce = "holgado";
+    const zapatilla = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    zapatilla.calce = "holgado"; // dato sin sentido real en calzado, pero no debería importar
+
+    const [resultado] = recomendar(jogger, [zapatilla], [jogger, zapatilla]);
+    expect(resultado.score.nivel).toBe("excelente");
+  });
+
+  it("no pisa un con_cuidado ya existente (color roto sigue con_cuidado, no se toca por volumen)", () => {
+    const jogger = mkPrenda("pantalon", "#B93A32", 0, 60, 45); // rojo intenso
+    jogger.calce = "holgado";
+    const campera = mkPrenda("campera", "#2E8B57", 150, 60, 45); // verde intenso, hd~0.83 vd=0 -> 4b con_cuidado
+    campera.calce = "holgado";
+
+    const [resultado] = recomendar(jogger, [campera], [jogger, campera]);
+    expect(resultado.score.nivel).toBe("con_cuidado");
+  });
+});
+
 describe("outfitSirveParaEstilo", () => {
   it("matchea por el estilo principal del pantalón", () => {
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
@@ -2123,6 +2180,7 @@ function mkPrenda(
     color2_s: null,
     color2_l: null,
     corte_calzado: "zapatilla_urbana",
+    calce: "regular",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };

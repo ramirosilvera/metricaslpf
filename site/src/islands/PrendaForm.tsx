@@ -4,7 +4,7 @@ import { hexToHsl, hslToHex } from "../lib/color";
 import { procesarFoto } from "../lib/photo";
 import { CATALOGO_PRENDAS, type PresetPrenda } from "../lib/catalogo";
 import { ESTILO_LABEL } from "../lib/recommend";
-import { CATEGORIA_LABEL, type Categoria, type CorteCalzado, type Estacion, type Estilo, type Ocasion, type Patron, type Textura } from "../lib/types";
+import { CATEGORIA_LABEL, type Calce, type Categoria, type CorteCalzado, type Estacion, type Estilo, type Ocasion, type Patron, type Textura } from "../lib/types";
 import CatalogoPicker from "./CatalogoPicker";
 import ConfigWarning from "./ConfigWarning";
 
@@ -43,6 +43,20 @@ const TEXTURAS: Textura[] = [
 const ESTILOS: Estilo[] = ["casual", "formal", "deportivo", "urbano", "clasico"];
 const OCASIONES: Ocasion[] = ["casual", "laburo", "formal"];
 const ESTACIONES: Estacion[] = ["verano", "invierno", "entretiempo"];
+const CALCES: Calce[] = ["ajustado", "regular", "holgado"];
+// Ver Calce en types.ts: calzado/accesorio quedan afuera a propósito -- no
+// tienen un calce real que compita en volumen contra el resto del outfit.
+const CATEGORIAS_CON_CALCE: Categoria[] = [
+  "pantalon",
+  "bermuda",
+  "short_deportivo",
+  "remera",
+  "buzo",
+  "sweater",
+  "camisa",
+  "campera",
+  "saco",
+];
 
 /** Prefill que dejan "Probar antes de comprar" y las sugerencias "para
  *  comprar" de Outfits al decidir cargar la prenda de verdad. `presetId`
@@ -97,6 +111,11 @@ export default function PrendaForm() {
   // mocasín cargado por foto apagaba la coordinación de cuero entera (daba
   // "excelente" con un cinturón que claramente no combina).
   const [corteCalzado, setCorteCalzado] = useState<CorteCalzado>(presetDePrefill?.corteCalzado ?? "zapatilla_urbana");
+  // calce -- auditoría de sastrería (Consejo, ronda de auditoría del
+  // motor): tercer eje real de un conjunto (después de color y registro),
+  // el único que no tenía ningún dato. Ver Calce en types.ts y
+  // chocanEnVolumen en recommend.ts.
+  const [calce, setCalce] = useState<Calce>(presetDePrefill?.calce ?? "regular");
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
@@ -188,6 +207,7 @@ export default function PrendaForm() {
           color2_s: hsl2?.s ?? null,
           color2_l: hsl2?.l ?? null,
           corte_calzado: categoria === "calzado" ? corteCalzado : "zapatilla_urbana",
+          calce: CATEGORIAS_CON_CALCE.includes(categoria) ? calce : "regular",
         })
         .select()
         .single();
@@ -309,6 +329,16 @@ export default function PrendaForm() {
             </div>
             <SelectOpcional label="Ocasión" value={ocasion} onChange={setOcasion} opciones={OCASIONES} />
             <SelectOpcional label="Estación" value={estacion} onChange={setEstacion} opciones={ESTACIONES} />
+            {CATEGORIAS_CON_CALCE.includes(categoria) && (
+              <label className="field-label">
+                <span>Calce</span>
+                <select className="field" value={calce} onChange={(e) => setCalce(e.target.value as Calce)}>
+                  <option value="ajustado">Ajustado</option>
+                  <option value="regular">Regular</option>
+                  <option value="holgado">Holgado</option>
+                </select>
+              </label>
+            )}
             {categoria === "calzado" && (
               <>
                 <label className="field-label">

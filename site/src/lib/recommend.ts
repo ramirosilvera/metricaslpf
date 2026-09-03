@@ -547,6 +547,35 @@ function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean 
   return Math.max(...rangosOtra) < rangoPantalon;
 }
 
+/** Volumen/proporción: tercer eje real de un conjunto (después de color y
+ *  registro/formalidad), auditoría de sastrería (Consejo, ronda de
+ *  auditoría del motor) -- el único que hasta esta ronda no tenía ningún
+ *  dato (ver Calce en types.ts). Volumen arriba pide volumen contenido
+ *  abajo (y al revés); acumular volumen en las dos puntas (campera oversize
+ *  + jogger holgado + zapatilla voluminosa) es el error de proporción más
+ *  común de un placard urbano real. A diferencia del registro o el cuero,
+ *  esto NO es un choque -- es una cuestión de GRADO, así que solo degrada
+ *  "excelente" a "muy_bueno" (ver su uso en recomendar(), mismo patrón que
+ *  prendaMenosFormalQuePantalon un poco más arriba), nunca bloquea la
+ *  combinación ni la saca del pool de armarOutfits*. Solo entre piernas y
+ *  torso (CATEGORIAS_PIERNAS/CATEGORIAS_CON_TORSO) -- calzado y accesorio
+ *  no tienen un calce real que compita en volumen (mismo criterio que ya
+ *  explica Calce en types.ts). "regular" (el default de toda prenda sin
+ *  este dato cargado a mano) nunca dispara la regla: hace falta que las DOS
+ *  declaren "holgado" de verdad -- no se inventa un choque por falta de
+ *  dato, mismo criterio que el resto de las reglas de esta familia. */
+function chocanEnVolumen(base: Prenda, candidato: Prenda): boolean {
+  const pierna = CATEGORIAS_PIERNAS.includes(base.categoria)
+    ? base
+    : CATEGORIAS_PIERNAS.includes(candidato.categoria)
+      ? candidato
+      : null;
+  if (!pierna) return false;
+  const torso = pierna === base ? candidato : base;
+  if (!CATEGORIAS_CON_TORSO.includes(torso.categoria)) return false;
+  return pierna.calce === "holgado" && torso.calce === "holgado";
+}
+
 /** El registro "deportivo" no es solo "el escalón más informal" de la
  *  escala de FORMALIDAD_ESTILO -- es funcionalmente distinto (tela técnica,
  *  corte pensado para moverse), y no se puede "elevar" con una prenda de
@@ -830,6 +859,17 @@ export function recomendar(
         score = {
           nivel: "muy_bueno",
           explicacion: `El color combina, pero ${c.categoria === "calzado" ? "el calzado" : "esta prenda"} es más informal que el pantalón -- se nota el salto de registro.`,
+        };
+      }
+
+      // Mismo patrón que la degradación de formalidad de arriba -- el
+      // volumen no es un choque, es una cuestión de grado, así que solo
+      // baja "excelente" a "muy_bueno" con una sugerencia concreta, nunca
+      // bloquea. Ver chocanEnVolumen y Calce en types.ts.
+      if (score.nivel === "excelente" && chocanEnVolumen(base, c)) {
+        score = {
+          nivel: "muy_bueno",
+          explicacion: "El color combina, pero las dos prendas son holgadas: el conjunto pierde silueta -- probá una de las dos más ajustada.",
         };
       }
 

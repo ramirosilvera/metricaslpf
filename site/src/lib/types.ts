@@ -73,6 +73,26 @@ export type Patron = "liso" | "rayas" | "cuadros";
  *  anterior (100% zapatillas urbanas hasta esta revisión). */
 export type CorteCalzado = "zapatilla_urbana" | "zapatilla_running" | "zapato_vestir" | "mocasin" | "zapatilla_lona";
 
+/** Calce/silueta real de la prenda -- auditoría de sastrería (Consejo,
+ *  ronda de auditoría del motor): tercer eje de un conjunto, después del
+ *  color y del registro/formalidad, y el único que el motor no tenía forma
+ *  de ver. Volumen arriba pide volumen contenido abajo (y al revés) --
+ *  acumular volumen en las dos puntas (una campera oversize + un jogger
+ *  holgado + una zapatilla voluminosa) es el error de proporción más común
+ *  de un placard urbano real; todo ajustado arriba y abajo, al revés, lee
+ *  rígido. No es un choque -- a diferencia del registro o el cuero, es una
+ *  cuestión de GRADO, así que el motor solo la usa para degradar
+ *  "excelente" a "muy_bueno" con una sugerencia, nunca para bloquear una
+ *  combinación (ver chocanEnVolumen en recommend.ts). Solo tiene sentido en
+ *  categorías de piernas y torso (pantalon/bermuda/short_deportivo/remera/
+ *  buzo/sweater/camisa/campera/saco) -- calzado y accesorio no tienen un
+ *  calce real que compita en volumen contra el resto del outfit, así que el
+ *  motor las ignora para esta regla en particular (mismo criterio que
+ *  con_capucha, que solo aplica a buzo). Default "regular": preserva el
+ *  comportamiento de todo el catálogo/placard ya cargado -- nadie pierde
+ *  una recomendación por no tener este dato. */
+export type Calce = "ajustado" | "regular" | "holgado";
+
 export interface HSL {
   h: number; // 0-360
   s: number; // 0-100
@@ -152,6 +172,10 @@ export interface Prenda {
   /** Ver CorteCalzado arriba. Solo aplica visualmente a categoria="calzado"
    *  (el resto la ignora, mismo criterio que con_capucha/suela_contraste). */
   corte_calzado: CorteCalzado;
+  /** Ver Calce arriba. A diferencia de corte_calzado/con_capucha (que son
+   *  solo dibujo), calce SÍ entra en una regla real del motor
+   *  (chocanEnVolumen en recommend.ts) -- no es puramente visual. */
+  calce: Calce;
   created_at: string;
   updated_at: string;
 }
