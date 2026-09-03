@@ -10,6 +10,7 @@ import {
   estilosDe,
   hueDist,
   outfitSirveParaEstilo,
+  puntuarOutfit,
   recomendar,
   registroOutfit,
   scoreColor,
@@ -1056,6 +1057,38 @@ describe("armarOutfitsSugeridos", () => {
     );
   });
 
+  it("cada outfit devuelto trae puntaje/explicacionPuntaje, y el pool queda ordenado de mayor a menor puntaje", () => {
+    const placard = [
+      // dos anclas -- una que arma un outfit perfecto (mismo color exacto
+      // en todo) y otra que arma uno con un salto de registro real (calzado
+      // urbano contra un pantalón de vestir), para que haya variación de
+      // puntaje real que ordenar.
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10),
+      mkPrenda("remera", "#1A1A1A", 0, 0, 10),
+    ];
+    const pantalonVestir = mkPrenda("pantalon", "#8C8C8C", 0, 0, 55);
+    pantalonVestir.estilo = "formal";
+    const zapatillasUrbanas = mkPrenda("calzado", "#8C8C8C", 0, 0, 55);
+    zapatillasUrbanas.estilo = "urbano";
+    placard.push(pantalonVestir, zapatillasUrbanas);
+
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits.length).toBeGreaterThan(1);
+    for (const o of outfits) {
+      expect(typeof o.puntaje).toBe("number");
+      expect(o.puntaje).toBeGreaterThanOrEqual(1);
+      expect(o.puntaje).toBeLessThanOrEqual(10);
+      expect(typeof o.explicacionPuntaje).toBe("string");
+    }
+    // orden descendente, no ascendente ni al azar.
+    for (let i = 1; i < outfits.length; i++) {
+      expect(outfits[i - 1].puntaje).toBeGreaterThanOrEqual(outfits[i].puntaje);
+    }
+    // el mejor puntaje (el primero) tiene que ser el del outfit perfecto,
+    // no el que tiene el salto de registro.
+    expect(outfits[0].puntaje).toBe(10);
+  });
+
   it("3ra ronda -- si el accesorio elegido choca con el torso (aunque cada uno por separado combine con el pantalón), se cae del outfit en vez de armar una combinación real mala", () => {
     // celeste/azul saturado (remera) + naranja quemado saturado (accesorio),
     // misma luminosidad -- compiten en pie de igualdad (regla 5). Cada uno
@@ -1669,11 +1702,12 @@ describe("armarOutfitsSugeridos", () => {
 describe("separarPorAbrigo", () => {
   it("clasifica buzo/sweater/campera como 'con abrigo' y remera/camisa como 'sin abrigo'", () => {
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
-    const conBuzo = { id: "a", prendas: [pantalon, mkPrenda("buzo", "#1A1A1A", 0, 0, 10)] };
-    const conSweater = { id: "b", prendas: [pantalon, mkPrenda("sweater", "#1A1A1A", 0, 0, 10)] };
-    const conCampera = { id: "c", prendas: [pantalon, mkPrenda("campera", "#1A1A1A", 0, 0, 10)] };
-    const conRemera = { id: "d", prendas: [pantalon, mkPrenda("remera", "#1A1A1A", 0, 0, 10)] };
-    const conCamisa = { id: "e", prendas: [pantalon, mkPrenda("camisa", "#1A1A1A", 0, 0, 10)] };
+    const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
+    const conBuzo = { id: "a", prendas: [pantalon, mkPrenda("buzo", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const conSweater = { id: "b", prendas: [pantalon, mkPrenda("sweater", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const conCampera = { id: "c", prendas: [pantalon, mkPrenda("campera", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const conRemera = { id: "d", prendas: [pantalon, mkPrenda("remera", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const conCamisa = { id: "e", prendas: [pantalon, mkPrenda("camisa", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
 
     const { conAbrigo, sinAbrigo } = separarPorAbrigo([conBuzo, conSweater, conCampera, conRemera, conCamisa]);
     expect(conAbrigo.map((s) => s.id).sort()).toEqual(["a", "b", "c"]);
@@ -1686,7 +1720,7 @@ describe("separarPorAbrigo", () => {
 
   it("un outfit sin ningún torso (solo pantalón + calzado) cae en 'sin abrigo', no se pierde", () => {
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
-    const soloCalzado = { id: "f", prendas: [pantalon, mkPrenda("calzado", "#1A1A1A", 0, 0, 10)] };
+    const soloCalzado = { id: "f", prendas: [pantalon, mkPrenda("calzado", "#1A1A1A", 0, 0, 10)], puntaje: 10, explicacionPuntaje: "" };
     const { conAbrigo, sinAbrigo } = separarPorAbrigo([soloCalzado]);
     expect(conAbrigo).toHaveLength(0);
     expect(sinAbrigo.map((s) => s.id)).toEqual(["f"]);
@@ -2084,6 +2118,72 @@ describe("sugerenciaDeAncla", () => {
       { id: "sweater-clasico", nombre: "Sweater clásico", categoria: "sweater", colorHex: "#1A1A1A", estilo: "clasico", hsl: { h: 0, s: 0, l: 10 } },
     ];
     expect(sugerenciaDeAncla("clasico", [], catalogoSinPiernas)).toBeNull();
+  });
+});
+
+// Pedido explícito del usuario: "quiero un sistema de valoración por
+// puntos... este outfit es un nueve de diez por esto y por esto". No es una
+// escala nueva -- reusa scoreColor/recomendar() sobre TODOS los pares del
+// outfit, expresado en una nota de 1 a 10.
+describe("puntuarOutfit", () => {
+  it("una sola prenda -> 10, no hay con qué chocar", () => {
+    const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    expect(puntuarOutfit([remera])).toEqual({ puntaje: 10, explicacion: "Una sola prenda: no hay con qué chocar." });
+  });
+
+  it("outfit vacío -> 10 por default (mismo caso límite que una sola prenda)", () => {
+    expect(puntuarOutfit([]).puntaje).toBe(10);
+  });
+
+  it("dos prendas neutras, mismo color exacto -> 10, combinación segura", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    const r = puntuarOutfit([pantalon, remera]);
+    expect(r.puntaje).toBe(10);
+    expect(r.explicacion).toContain("Combinación segura");
+  });
+
+  it("una prenda más informal que el pantalón (muy_bueno, no con_cuidado) -> puntaje intermedio con el motivo real citado", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    zapatillas.estilo = "urbano";
+    const r = puntuarOutfit([pantalonVestir, zapatillas]);
+    expect(r.puntaje).toBe(7); // un solo par, muy_bueno -> PUNTOS_POR_NIVEL.muy_bueno
+    expect(r.explicacion).toContain("más informal que el pantalón");
+  });
+
+  it("un par con_cuidado de verdad (cuero descoordinado) -> puntaje bajo, cita el motivo real de cuero", () => {
+    const cinturonNegro = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+    cinturonNegro.textura = "cuero_liso";
+    const zapatoMarron = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoMarron.textura = "cuero_liso";
+    const r = puntuarOutfit([cinturonNegro, zapatoMarron]);
+    expect(r.puntaje).toBe(3); // un solo par, con_cuidado -> PUNTOS_POR_NIVEL.con_cuidado
+    expect(r.explicacion).toContain("cuero se coordina aparte");
+  });
+
+  it("promedia sobre TODOS los pares, no solo contra la primera prenda", () => {
+    // pantalón + remera (mismo color, excelente) + calzado más informal que
+    // el pantalón (muy_bueno) -- promedio (10+10+7)/3 = 9 (pantalón-remera,
+    // pantalón-calzado, remera-calzado; remera-calzado también excelente
+    // por ser el mismo color exacto).
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    zapatillas.estilo = "urbano";
+    const r = puntuarOutfit([pantalonVestir, remera, zapatillas]);
+    expect(r.puntaje).toBe(9);
+  });
+
+  it("puntaje siempre entre 1 y 10 (clamp), redondeado", () => {
+    const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const r = puntuarOutfit([remera, pantalon]);
+    expect(r.puntaje).toBeGreaterThanOrEqual(1);
+    expect(r.puntaje).toBeLessThanOrEqual(10);
+    expect(Number.isInteger(r.puntaje)).toBe(true);
   });
 });
 

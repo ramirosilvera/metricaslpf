@@ -899,6 +899,90 @@ function nivelOrden(nivel: NivelCompatibilidad): number {
   return { excelente: 2, muy_bueno: 1, con_cuidado: 0 }[nivel];
 }
 
+export interface PuntajeOutfit {
+  /** 1-10, redondeado. Promedio de PUNTOS_POR_NIVEL sobre TODOS los pares
+   *  de prendas del outfit (no solo contra el ancla) -- el mismo conjunto
+   *  de comparaciones que ya arma/valida armarOutfitsSugeridos (torso-
+   *  ancla, calzado-ancla, accesorio-ancla, calzado-torso, accesorio-
+   *  torso, accesorio-calzado), reusado acá en vez de inventar una escala
+   *  aparte. */
+  puntaje: number;
+  /** Motivo ejecutivo, 1-2 oraciones: por qué no es (o si es) un 10. No
+   *  repite el registro (Formal/Casual/...) -- eso ya lo muestra
+   *  RegistroBadge en Outfits.tsx aparte; esto se concentra en color. */
+  explicacion: string;
+}
+
+const PUNTOS_POR_NIVEL: Record<NivelCompatibilidad, number> = { excelente: 10, muy_bueno: 7, con_cuidado: 3 };
+
+/** Pedido explícito del usuario: "quiero un sistema de valoración por
+ *  puntos... este outfit es un nueve de diez por esto y por esto". No es
+ *  una escala nueva ni un modelo aparte -- es el mismo scoreColor/
+ *  recomendar() de siempre, agregado sobre TODOS los pares del outfit y
+ *  expresado en una nota de 1 a 10 en vez de en tres niveles con nombre.
+ *  Un outfit de una sola prenda (o vacío) no tiene ningún par que evaluar
+ *  -- 10 por default, no hay con qué chocar. */
+export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
+  const pares: Array<{ a: Prenda; b: Prenda; score: ScoreColor }> = [];
+  for (let i = 0; i < prendas.length; i++) {
+    for (let j = i + 1; j < prendas.length; j++) {
+      const a = prendas[i];
+      const b = prendas[j];
+      const [r] = recomendar(a, [b], [a, b]);
+      pares.push({ a, b, score: r.score });
+    }
+  }
+  if (pares.length === 0) {
+    return { puntaje: 10, explicacion: "Una sola prenda: no hay con qué chocar." };
+  }
+
+  const promedio = pares.reduce((acc, p) => acc + PUNTOS_POR_NIVEL[p.score.nivel], 0) / pares.length;
+  const puntaje = Math.max(1, Math.min(10, Math.round(promedio)));
+
+  // el par que más pesa en contra -- el de nivel más bajo (con_cuidado
+  // antes que muy_bueno); a igualdad de nivel, el primero en orden de
+  // evaluación alcanza (no hay un criterio de desempate más fino que
+  // valga la pena, el objetivo es UNA razón concreta, no todas).
+  const peor = [...pares].sort((x, y) => nivelOrden(x.score.nivel) - nivelOrden(y.score.nivel))[0];
+  const tieneToneSobreTono = pares.some((p) => p.score.tag === "tono_sobre_tono");
+  const tieneAudaz = pares.some((p) => p.score.tag === "combinacion_audaz");
+
+  // "sin nada que ajustar" solo si TODOS los pares son excelente de
+  // verdad -- no alcanza con que el puntaje REDONDEADO sea alto: un outfit
+  // de 3 prendas con un solo par muy_bueno ya redondea a 9 ((10+7+10)/3=9),
+  // y ahí sí hay un motivo real y puntual que citar (verificado por
+  // ejecución: sin este chequeo, un pantalón de vestir + zapatillas
+  // urbanas -- un salto de registro real -- daba "combinación segura, sin
+  // nada que ajustar" en vez de avisar el salto). Mirar los pares en sí,
+  // no el puntaje ya redondeado.
+  const todosExcelentes = pares.every((p) => p.score.nivel === "excelente");
+
+  let explicacion: string;
+  if (peor.score.nivel === "con_cuidado") {
+    // no debería pasar en un outfit armado por armarOutfitsSugeridos (esos
+    // pares ya se filtran antes de llegar acá) -- pero puntuarOutfit
+    // también se usa sobre outfits YA GUARDADOS por el usuario a mano
+    // (Combinar/Probar no bloquean nada, solo avisan), así que si de
+    // verdad hay un con_cuidado, es la razón real y se cita tal cual.
+    explicacion = peor.score.explicacion;
+  } else if (todosExcelentes) {
+    explicacion = tieneToneSobreTono
+      ? "Combinación segura: tono sobre tono en la base del outfit."
+      : "Combinación segura en color, sin nada que ajustar.";
+  } else {
+    // al menos un par en muy_bueno: cita el motivo real y puntual (ya es
+    // un texto ejecutivo, generado por scoreColor/recomendar -- "el color
+    // combina, pero...", "funciona, pero se nota"), sin inventar una
+    // redacción aparte.
+    explicacion = peor.score.explicacion;
+    if (tieneAudaz && peor.score.tag !== "combinacion_audaz") {
+      explicacion += " Además tiene un toque audaz en otra parte del outfit.";
+    }
+  }
+
+  return { puntaje, explicacion };
+}
+
 // duplicado a propósito de CAPA en Maniqui.tsx -- esa es la agrupación
 // "de presentación" (cómo se dibuja); esta es la agrupación "de datos"
 // (qué categorías compiten por el mismo lugar del outfit). Mismo criterio
@@ -947,6 +1031,10 @@ export interface OutfitSugerido {
    *  deduplicar contra outfits ya guardados y para key en React. */
   id: string;
   prendas: Prenda[];
+  /** ver puntuarOutfit -- calculado una sola vez acá, no en la UI, para que
+   *  Outfits.tsx no tenga que reimportar la lógica de puntaje por outfit. */
+  puntaje: number;
+  explicacionPuntaje: string;
 }
 
 function mejorPropia(
@@ -1245,9 +1333,23 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
       if (vistos.has(clave)) continue;
       vistos.add(clave);
 
-      resultados.push({ id: clave, prendas });
+      const { puntaje, explicacion } = puntuarOutfit(prendas);
+      resultados.push({ id: clave, prendas, puntaje, explicacionPuntaje: explicacion });
     }
   }
+
+  // Pedido explícito del usuario: "que en lo posible las opciones... sean
+  // de las valoraciones más altas". El pool venía ordenado por ancla (orden
+  // de inserción del placard) y, dentro de cada ancla, por color/estación
+  // -- un orden razonable pero no el mismo que "mejor puntaje primero"
+  // cuando hay varias anclas en juego. Se reordena acá, una sola vez, en
+  // vez de en cada lugar que consume el pool (Outfits.tsx ya arma "otras
+  // opciones" rotando con `tanda()` sobre este mismo array -- con el pool
+  // ordenado por puntaje, la PRIMERA opción que ve el usuario en cada
+  // grupo con/sin abrigo es siempre la de mejor nota, y "otras opciones"
+  // va de mejor a peor, no al azar). Sort estable (spec desde ES2019): a
+  // igual puntaje, se conserva el orden anterior (ancla, después color).
+  resultados.sort((a, b) => b.puntaje - a.puntaje);
 
   return resultados;
 }
@@ -1280,6 +1382,11 @@ export interface OutfitParaComprar {
    *  presetAPrendaSintetica en catalogo.ts) no tenga que recalcularlo. */
   sugerida: PresetPrenda & { hsl: HSL };
   categoriaSugerida: Categoria;
+  /** ver puntuarOutfit -- del outfit COMPLETO (prendasPropias + sugerida),
+   *  para que "Ideas para comprar" pueda decir a qué nota sube el look, no
+   *  solo que "combina". */
+  puntaje: number;
+  explicacionPuntaje: string;
 }
 
 /** Categorías del placard que hoy están en cero -- sin ninguna prenda ahí,
@@ -1472,15 +1579,21 @@ export function armarOutfitsParaComprar(
       for (const candidato of sugeridosCandidatos) {
         if (propiasSinAncla.some((p) => chocan(candidato.prendaSintetica, p, placard))) continue;
 
+        const { puntaje, explicacion } = puntuarOutfit([...prendasPropias, candidato.prendaSintetica]);
         resultados.push({
           id: `comprar-${ancla.id}-${candidato.preset.id}`,
           prendasPropias,
           sugerida: candidato.preset,
           categoriaSugerida,
+          puntaje,
+          explicacionPuntaje: explicacion,
         });
       }
     }
   }
+
+  // mismo criterio que armarOutfitsSugeridos: mejor puntaje primero.
+  resultados.sort((a, b) => b.puntaje - a.puntaje);
 
   return resultados;
 }

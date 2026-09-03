@@ -11,6 +11,7 @@ import {
   estacionActual,
   ESTILO_LABEL,
   outfitSirveParaEstilo,
+  puntuarOutfit,
   registroOutfit,
   separarPorAbrigo,
   sugerenciaDeAncla,
@@ -40,6 +41,45 @@ interface OutfitRow {
 
 function leyenda(prendas: Prenda[]): string {
   return prendas.map((p) => `${descripcionPrenda(p)} ${nombreColor(p.color_h, p.color_s, p.color_l)}`).join(" + ");
+}
+
+/** Pedido explícito del usuario: "quiero un sistema de valoración por
+ *  puntos... este outfit es un nueve de diez por esto y por esto". Reusa
+ *  las mismas clases `.nivel-*` que ya pintan Recomendaciones.tsx/
+ *  Probar.tsx (verde/naranja/amarillo) -- mismo vocabulario visual de
+ *  "qué tan bien combina" en toda la app, no una paleta nueva para esta
+ *  sola pantalla. 9-10 -> excelente, 7-8 -> muy_bueno, <=6 -> con_cuidado
+ *  (los mismos cortes que ya usa PUNTOS_POR_NIVEL en recommend.ts para
+ *  construir el promedio, así que un outfit "todo excelente" siempre cae
+ *  en verde y uno con un solo muy_bueno de por medio, en naranja). */
+function nivelDePuntaje(puntaje: number): "excelente" | "muy_bueno" | "con_cuidado" {
+  if (puntaje >= 9) return "excelente";
+  if (puntaje >= 7) return "muy_bueno";
+  return "con_cuidado";
+}
+
+function PuntajeBadge({
+  prendas,
+  precomputado,
+}: {
+  prendas: Prenda[];
+  /** OutfitSugerido/OutfitParaComprar ya traen puntaje/explicacionPuntaje
+   *  calculados en recommend.ts (el mismo valor que ordena el pool) -- se
+   *  pasan acá en vez de recalcular con puntuarOutfit(prendas) para no
+   *  arriesgar que la UI muestre un número distinto del que decidió el
+   *  orden. Solo se recalcula acá (prop `prendas`) para los outfits YA
+   *  GUARDADOS, que no pasan por armarOutfitsSugeridos y por lo tanto
+   *  nunca tuvieron un puntaje calculado de entrada. */
+  precomputado?: { puntaje: number; explicacion: string };
+}) {
+  const calculado = useMemo(() => (precomputado ? null : puntuarOutfit(prendas)), [precomputado, prendas]);
+  const { puntaje, explicacion } = precomputado ?? calculado!;
+  return (
+    <div style={{ margin: "0.3rem 0 0" }}>
+      <span className={`nivel-badge nivel-${nivelDePuntaje(puntaje)}`}>{puntaje}/10</span>
+      <p style={{ margin: "0.3rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)" }}>{explicacion}</p>
+    </div>
+  );
 }
 
 /** Pedido explícito del usuario: que la app diga a qué registro (Formal,
@@ -96,6 +136,7 @@ function TarjetaSugerido({
         <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)" }}>
           {leyenda(s.prendas)}
         </p>
+        <PuntajeBadge prendas={s.prendas} precomputado={{ puntaje: s.puntaje, explicacion: s.explicacionPuntaje }} />
         <RegistroBadge prendas={s.prendas} />
       </div>
       {errorGuardar[s.id] && <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>}
@@ -267,6 +308,32 @@ export function Contenido({
     if (!estiloSugerido || estiloSugerido === "todos" || poolSugeridosPorEstilo.length === 0) return null;
     return sugerenciaDeVariedad(estiloSugerido, placard);
   }, [estiloSugerido, poolSugeridosPorEstilo, placard]);
+
+  // Pedido explícito del usuario: "che, mirá, la mejor valoración de tu
+  // outfit urbano es de seis de diez, te recomiendo comprar estas prendas
+  // para subir tu valoración a nueve puntos" -- conecta el puntaje nuevo
+  // con la sugerencia de compra que YA existía (sugerenciaVariedad), en vez
+  // de armar un mecanismo aparte. Toma el mejor outfit que se está
+  // mostrando ahora mismo (con abrigo o sin abrigo, el que tenga más
+  // puntaje de los dos), reemplaza la prenda de la categoría sugerida por
+  // la sugerida (sintética, mismo mecanismo que "Ideas para comprar") y
+  // recalcula -- si de verdad sube el puntaje, se muestra el "antes/
+  // después"; si no sube (la sugerencia es de una categoría que ese outfit
+  // puntual ni siquiera usa, por señalar un hueco de variedad y no de
+  // choque), no se inventa una mejora que no es real.
+  const mejoraDePuntaje = useMemo(() => {
+    if (!sugerenciaVariedad) return null;
+    const base = [opcionConAbrigo, opcionSinAbrigo]
+      .filter((o): o is OutfitSugerido => o !== undefined)
+      .sort((a, b) => b.puntaje - a.puntaje)[0];
+    if (!base) return null;
+    const categoriaSugerida = sugerenciaVariedad.sugerida.categoria;
+    const sugeridaSintetica = presetAPrendaSintetica(sugerenciaVariedad.sugerida);
+    const prendasConSugerencia = [...base.prendas.filter((p) => p.categoria !== categoriaSugerida), sugeridaSintetica];
+    const conSugerencia = puntuarOutfit(prendasConSugerencia).puntaje;
+    if (conSugerencia <= base.puntaje) return null;
+    return { actual: base.puntaje, conSugerencia };
+  }, [sugerenciaVariedad, opcionConAbrigo, opcionSinAbrigo]);
 
   // Pedido explícito del usuario: cuando el pool queda vacío para el
   // estilo elegido, la razón casi siempre es que falta la prenda ANCLA
@@ -603,7 +670,17 @@ export function Contenido({
             {sugerenciaVariedad && (
               <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
                 <span style={{ fontSize: "1.2rem" }}>💡</span>
-                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>{sugerenciaVariedad.mensaje}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>
+                  {mejoraDePuntaje && mejoraDePuntaje.actual < 9 && (
+                    <>
+                      Tu mejor outfit hoy es un <strong>{mejoraDePuntaje.actual}/10</strong>.{" "}
+                    </>
+                  )}
+                  {sugerenciaVariedad.mensaje}
+                  {mejoraDePuntaje && mejoraDePuntaje.actual < 9 && (
+                    <> Subiría a <strong>{mejoraDePuntaje.conSugerencia}/10</strong>.</>
+                  )}
+                </p>
                 <button
                   type="button"
                   className="btn btn-secondary"
@@ -660,6 +737,7 @@ export function Contenido({
                   <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)" }}>
                     {leyenda(o.prendas)}
                   </p>
+                  <PuntajeBadge prendas={o.prendas} />
                   <RegistroBadge prendas={o.prendas} />
                 </div>
                 {errorEliminar[o.id] && (
@@ -723,6 +801,7 @@ export function Contenido({
                   <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)" }}>
                     con {leyenda(s.prendasPropias)}
                   </p>
+                  <PuntajeBadge prendas={prendasOutfit} precomputado={{ puntaje: s.puntaje, explicacion: s.explicacionPuntaje }} />
                   <RegistroBadge prendas={prendasOutfit} />
                 </div>
                 <button
