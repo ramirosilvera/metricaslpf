@@ -11,6 +11,7 @@ import {
   type ConteoColor,
   type ConteoEstacion,
   type ConteoEstilo,
+  type EstrategiaFoda,
 } from "../lib/estadisticas";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import type { Prenda } from "../lib/types";
@@ -195,6 +196,77 @@ export function TablaFoda({ analisis }: { analisis: AnalisisFoda }) {
   );
 }
 
+const NIVEL_SALUD_LABEL: Record<AnalisisFoda["nivelSalud"], string> = {
+  solido: "Sólido",
+  con_huecos: "Con huecos",
+  fragil: "Frágil",
+};
+
+/** Encabezado ejecutivo del diagnóstico: la síntesis de una línea + un
+ *  badge de severidad, pedido explícito del usuario ("informe resumido,
+ *  visual y ejecutivo... actuá como gerente con una maestría") -- antes la
+ *  sección arrancaba directo por un párrafo con 4 conteos crudos, sin
+ *  ningún veredicto. nivelSalud reusa --ok/--warn/--danger (severidad real
+ *  de la app), no la paleta --foda-* (identidad categórica de los 4
+ *  cuadrantes) -- ver el comentario largo en global.css sobre por qué esas
+ *  dos paletas no se mezclan. */
+export function VeredictoFoda({ analisis }: { analisis: AnalisisFoda }) {
+  return (
+    <div className="foda-veredicto">
+      <span className={`foda-salud-badge foda-salud-${analisis.nivelSalud}`}>{NIVEL_SALUD_LABEL[analisis.nivelSalud]}</span>
+      <p style={{ margin: 0, fontSize: "0.9rem" }}>{analisis.veredicto}</p>
+    </div>
+  );
+}
+
+// Color de cada estrategia TOWS: el cuadrante cuya urgencia dispara esa
+// acción, no un color nuevo -- reusa exactamente la paleta --foda-* ya
+// validada (GraficoFoda/TablaFoda). FO explota una fortaleza (verde), DO
+// se apoya en una oportunidad (azul), FA y DA responden a un riesgo
+// (amenaza/debilidad) así que llevan esos dos colores -- distintos entre
+// sí para que un vistazo rápido no los confunda.
+const ESTRATEGIA_COLOR: Record<EstrategiaFoda["tipo"], string> = {
+  FO: "var(--foda-fortalezas)",
+  DO: "var(--foda-oportunidades)",
+  FA: "var(--foda-amenazas)",
+  DA: "var(--foda-debilidades)",
+};
+
+/** Estrategias cruzadas -- matriz TOWS (Weihrich), el paso estándar
+ *  "después" de un FODA/SWOT clásico en cualquier curso de estrategia:
+ *  en vez de dejar los 4 cuadrantes como 4 listas sueltas, los cruza en
+ *  hasta 4 acciones concretas. Esta es la mejora real de CONTENIDO del
+ *  diagnóstico (pedido explícito del usuario) -- ver el comentario largo
+ *  de estrategiasTows en estadisticas.ts para el porqué de cada cruce. */
+export function EstrategiasFoda({ estrategias }: { estrategias: EstrategiaFoda[] }) {
+  if (estrategias.length === 0) {
+    return (
+      <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)" }}>
+        Todavía no hay suficientes hallazgos cruzados para una estrategia concreta.
+      </p>
+    );
+  }
+  return (
+    <div className="foda-estrategias">
+      {estrategias.map((e) => {
+        const color = ESTRATEGIA_COLOR[e.tipo];
+        return (
+          <div
+            key={e.tipo}
+            className="foda-estrategia"
+            style={{ borderLeft: `4px solid ${color}`, background: `color-mix(in srgb, ${color} 8%, var(--surface))` }}
+          >
+            <strong style={{ color }}>
+              {e.titulo} · {e.tipo}
+            </strong>
+            {e.texto}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function ChipsColores({ datos }: { datos: ConteoColor[] }) {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
@@ -320,19 +392,28 @@ export default function Estadisticas() {
       </section>
 
       <section>
-        <h2 style={{ fontSize: "1.05rem", margin: "0 0 0.25rem" }}>Diagnóstico FODA</h2>
-        <p style={{ margin: "0 0 0.75rem", fontSize: "0.85rem", color: "var(--text-muted)" }}>
-          Resumen ejecutivo: {analisis.fortalezas.length} fortaleza{analisis.fortalezas.length === 1 ? "" : "s"} y{" "}
-          {analisis.debilidades.length} debilidad{analisis.debilidades.length === 1 ? "" : "es"} internas -- {analisis.oportunidades.length}{" "}
-          oportunidad{analisis.oportunidades.length === 1 ? "" : "es"} y {analisis.amenazas.length} amenaza
-          {analisis.amenazas.length === 1 ? "" : "s"} del catálogo/entorno.
-        </p>
+        <h2 style={{ fontSize: "1.05rem", margin: "0 0 0.75rem" }}>Diagnóstico FODA</h2>
+
+        <div style={{ marginBottom: "0.75rem" }}>
+          <VeredictoFoda analisis={analisis} />
+        </div>
+
         <div className="card" style={{ marginBottom: "0.75rem" }}>
-          <GraficoFoda analisis={analisis} />
+          <p className="eyebrow" style={{ marginBottom: "0.6rem" }}>
+            Plan de acción (matriz TOWS)
+          </p>
+          <EstrategiasFoda estrategias={analisis.estrategias} />
         </div>
-        <div className="card">
-          <TablaFoda analisis={analisis} />
-        </div>
+
+        <details>
+          <summary style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>Ver la matriz FODA completa</summary>
+          <div className="card" style={{ marginTop: "0.6rem", marginBottom: "0.75rem" }}>
+            <GraficoFoda analisis={analisis} />
+          </div>
+          <div className="card">
+            <TablaFoda analisis={analisis} />
+          </div>
+        </details>
       </section>
     </div>
   );

@@ -138,6 +138,34 @@ export interface AnalisisFoda {
   /** Externo + negativo: riesgos de estructura, no solo huecos -- qué pasa
    *  si una prenda puntual deja de estar disponible, o si cambia el clima. */
   amenazas: string[];
+  /** Lectura general de salud del placard -- severidad real (sólido/con
+   *  huecos/frágil), no un cuadrante más. Ver diagnosticoGeneral más abajo
+   *  para los umbrales. */
+  nivelSalud: NivelSaludFoda;
+  /** Síntesis de una línea, la frase con la que un gerente abriría el
+   *  informe -- pedido explícito del usuario ("informe resumido, visual y
+   *  ejecutivo"). Deriva de nivelSalud, nunca al revés. */
+  veredicto: string;
+  /** Estrategias cruzadas -- matriz TOWS (Weihrich), el paso estándar
+   *  "después" de un FODA/SWOT clásico: en vez de solo listar los 4
+   *  cuadrantes por separado, los cruza en 4 acciones concretas. Ver el
+   *  comentario largo en analizarFoda más abajo. 0 a 4 elementos -- solo se
+   *  genera un cruce cuando los dos cuadrantes que lo alimentan tienen
+   *  contenido real. */
+  estrategias: EstrategiaFoda[];
+}
+
+export type NivelSaludFoda = "solido" | "con_huecos" | "fragil";
+
+export interface EstrategiaFoda {
+  /** Los 4 cuadrantes cruzados de la matriz TOWS: FO (fortalezas+
+   *  oportunidades), DO (debilidades+oportunidades), FA (fortalezas+
+   *  amenazas), DA (debilidades+amenazas). */
+  tipo: "FO" | "DO" | "FA" | "DA";
+  /** Nombre de la acción TOWS estándar para ese cruce (Explotar/Reforzar/
+   *  Proteger/Prioridad). */
+  titulo: string;
+  texto: string;
 }
 
 // Umbrales del análisis: no salen de una fórmula, son un piso razonable
@@ -156,6 +184,115 @@ const MAX_COLORES_VARIEDAD_BAJA = 2;
 // resto del análisis.
 const MIN_PRENDAS_PARA_CONCENTRACION = 4;
 const UMBRAL_CONCENTRACION_COLOR = 0.5;
+// Umbral de "frágil": no hace falta que debilidades y amenazas empaten en
+// cantidad con las fortalezas para que el placard esté en problemas -- 3
+// debilidades internas o 2 amenazas de estructura ya alcanzan para que el
+// diagnóstico deje de ser "con huecos puntuales" y pase a "resolvé esto
+// antes de seguir sumando variedad". Mismo criterio de piso razonable (no
+// una fórmula) que el resto de los umbrales de este archivo.
+const UMBRAL_FRAGIL_DEBILIDADES = 3;
+const UMBRAL_FRAGIL_AMENAZAS = 2;
+// Largo máximo de un ítem citado dentro de una estrategia TOWS -- las
+// frases de fortalezas/debilidades/oportunidades/amenazas ya son oraciones
+// completas (pensadas para leerse solas en su propio cuadrante); citarlas
+// enteras dentro de otra oración las vuelve ilegibles. Se corta en el
+// último espacio antes del límite, nunca a mitad de palabra.
+const MAX_LARGO_CITA_ESTRATEGIA = 70;
+
+function contarSustantivo(n: number, singular: string, plural: string): string {
+  return `${n} ${n === 1 ? singular : plural}`;
+}
+
+function resumir(texto: string, maxLen = MAX_LARGO_CITA_ESTRATEGIA): string {
+  if (texto.length <= maxLen) return texto;
+  const corte = texto.lastIndexOf(" ", maxLen);
+  return `${texto.slice(0, corte > 0 ? corte : maxLen).trimEnd()}…`;
+}
+
+/** Cruces de la matriz TOWS (Weihrich) -- el paso estándar "después" de un
+ *  FODA/SWOT clásico en cualquier curso de estrategia de MBA: en vez de
+ *  dejar los 4 cuadrantes como 4 listas separadas, los cruza de a pares
+ *  (interno x externo) en una acción concreta:
+ *  - FO "Explotar": la fortaleza más fuerte + la oportunidad más fuerte --
+ *    el movimiento de mayor impacto y menor esfuerzo.
+ *  - DO "Reforzar": la oportunidad más fuerte usada para tapar la
+ *    debilidad más urgente.
+ *  - FA "Proteger": la fortaleza más fuerte usada como colchón contra la
+ *    amenaza más urgente (amortigua, no la elimina).
+ *  - DA "Prioridad": debilidad + amenaza más urgentes juntas -- el combo
+ *    más frágil del placard, lo primero a resolver.
+ *  Cada cruce usa el PRIMER ítem real de cada cuadrante (el que
+ *  analizarFoda ya empuja primero, en su propio orden de prioridad -- ver
+ *  ese comentario) resumido con `resumir`, nunca un texto inventado acá.
+ *  Sin contenido real en los dos cuadrantes que alimentan un cruce, ese
+ *  cruce no se genera -- 4 cruces es el techo, no un piso forzado. */
+function estrategiasTows(fortalezas: string[], debilidades: string[], oportunidades: string[], amenazas: string[]): EstrategiaFoda[] {
+  const estrategias: EstrategiaFoda[] = [];
+  if (fortalezas.length > 0 && oportunidades.length > 0) {
+    estrategias.push({
+      tipo: "FO",
+      titulo: "Explotar",
+      texto: `Tu fortaleza más clara -- "${resumir(fortalezas[0])}" -- combina directo con "${resumir(oportunidades[0])}": el movimiento de mayor impacto y menor esfuerzo ahora mismo.`,
+    });
+  }
+  if (debilidades.length > 0 && oportunidades.length > 0) {
+    estrategias.push({
+      tipo: "DO",
+      titulo: "Reforzar",
+      texto: `"${resumir(oportunidades[0])}" es el camino más directo para cerrar "${resumir(debilidades[0])}".`,
+    });
+  }
+  if (fortalezas.length > 0 && amenazas.length > 0) {
+    estrategias.push({
+      tipo: "FA",
+      titulo: "Proteger",
+      texto: `"${resumir(fortalezas[0])}" amortigua el riesgo de "${resumir(amenazas[0])}", pero no lo elimina -- vale la pena resolverlo antes de que se note.`,
+    });
+  }
+  if (debilidades.length > 0 && amenazas.length > 0) {
+    estrategias.push({
+      tipo: "DA",
+      titulo: "Prioridad",
+      texto: `El combo más frágil: "${resumir(debilidades[0])}" + "${resumir(amenazas[0])}". Resolvé esto antes que el resto del placard.`,
+    });
+  }
+  return estrategias;
+}
+
+/** Veredicto de una línea + nivel de salud -- la síntesis con la que un
+ *  gerente abriría el informe, en vez de arrancar directo por la lista de
+ *  hallazgos. "Sólido" exige CERO debilidades y CERO amenazas (no alcanza
+ *  con tener más fortalezas que problemas); "frágil" dispara apenas se
+ *  cruza cualquiera de los dos pisos de UMBRAL_FRAGIL_* -- de ahí para
+ *  abajo, "con huecos puntuales" es el estado intermedio por default. */
+function diagnosticoGeneral(
+  fortalezas: string[],
+  debilidades: string[],
+  amenazas: string[],
+  totalPrendas: number,
+): { nivelSalud: NivelSaludFoda; veredicto: string } {
+  if (totalPrendas === 0) {
+    return { nivelSalud: "con_huecos", veredicto: "Sin prendas cargadas todavía: no hay diagnóstico posible." };
+  }
+  if (debilidades.length === 0 && amenazas.length === 0) {
+    return {
+      nivelSalud: "solido",
+      veredicto: `Placard sólido: ${contarSustantivo(fortalezas.length, "fortaleza identificada", "fortalezas identificadas")}, sin debilidades ni amenazas de estructura pendientes.`,
+    };
+  }
+  if (debilidades.length >= UMBRAL_FRAGIL_DEBILIDADES || amenazas.length >= UMBRAL_FRAGIL_AMENAZAS) {
+    return {
+      nivelSalud: "fragil",
+      veredicto: `Placard frágil: ${contarSustantivo(debilidades.length, "debilidad", "debilidades")} y ${contarSustantivo(amenazas.length, "amenaza", "amenazas")}, sin fortalezas suficientes para compensarlas -- conviene resolver estructura antes de sumar variedad nueva.`,
+    };
+  }
+  const fraseDebilidad =
+    debilidades.length === 1 ? "una debilidad interna que vale la pena cerrar" : `${debilidades.length} debilidades internas que valen la pena cerrar`;
+  return {
+    nivelSalud: "con_huecos",
+    veredicto: `Placard funcional, con huecos puntuales: tenés ${fraseDebilidad}.`,
+  };
+}
 
 /** Lectura "de MBA" del placard vía la matriz FODA/SWOT clásica -- pedido
  *  explícito del usuario, reemplazando el "fortalezas y oportunidades de
@@ -187,7 +324,8 @@ export function analizarFoda(placard: Prenda[]): AnalisisFoda {
 
   if (totalPrendas === 0) {
     debilidades.push("Todavía no cargaste ninguna prenda -- empezá por tu placard para ver indicadores reales.");
-    return { totalPrendas, variedadColores, fortalezas, debilidades, oportunidades, amenazas };
+    const { nivelSalud, veredicto } = diagnosticoGeneral(fortalezas, debilidades, amenazas, totalPrendas);
+    return { totalPrendas, variedadColores, fortalezas, debilidades, oportunidades, amenazas, nivelSalud, veredicto, estrategias: [] };
   }
 
   const piernas = placard.filter((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
@@ -270,7 +408,9 @@ export function analizarFoda(placard: Prenda[]): AnalisisFoda {
     amenazas.push(`${porColor[0].nombre} concentra ${porColor[0].cantidad} de tus ${totalPrendas} prendas (${pct}%): mucha dependencia de un solo color.`);
   }
 
-  return { totalPrendas, variedadColores, fortalezas, debilidades, oportunidades, amenazas };
+  const estrategias = estrategiasTows(fortalezas, debilidades, oportunidades, amenazas);
+  const { nivelSalud, veredicto } = diagnosticoGeneral(fortalezas, debilidades, amenazas, totalPrendas);
+  return { totalPrendas, variedadColores, fortalezas, debilidades, oportunidades, amenazas, nivelSalud, veredicto, estrategias };
 }
 
 /** Buscador libre del placard (Placard.tsx): compara contra los mismos

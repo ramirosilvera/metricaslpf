@@ -232,6 +232,120 @@ describe("analizarFoda", () => {
   });
 });
 
+// Pedido explícito del usuario: "mejora el diagnóstico FODA... actuá como
+// gerente con una maestría... informe resumido, visual y ejecutivo" --
+// veredicto/nivelSalud (la síntesis de una línea) y estrategias (la matriz
+// TOWS cruzada) son la mejora real de contenido de esta ronda.
+describe("analizarFoda -- veredicto y nivelSalud", () => {
+  it("placard vacío -> con_huecos, con un veredicto que avisa que no hay diagnóstico posible", () => {
+    const r = analizarFoda([]);
+    expect(r.nivelSalud).toBe("con_huecos");
+    expect(r.veredicto.toLowerCase()).toContain("no hay diagnóstico posible");
+    expect(r.estrategias).toHaveLength(0);
+  });
+
+  it("0 debilidades y 0 amenazas -> sólido, sin importar cuántas fortalezas haya", () => {
+    // placard deliberadamente completo: las 11 categorías presentes (así
+    // categoriasAusentes queda vacío), ninguna prenda con estilo cargado
+    // (así "sin ninguna prenda de estilo X" no dispara -- ver el comentario
+    // de analizarFoda: esa debilidad exige sinCarga.length < ESTILOS.length,
+    // y con CERO prendas tageadas por estilo, sinCarga === ESTILOS.length),
+    // 11 colores distintos (evita tanto "poca variedad" como "concentración
+    // de color") y el sweater tageado "invierno" (evita esa amenaza).
+    const categorias: Prenda["categoria"][] = [
+      "pantalon",
+      "bermuda",
+      "short_deportivo",
+      "remera",
+      "buzo",
+      "sweater",
+      "camisa",
+      "calzado",
+      "campera",
+      "saco",
+      "accesorio",
+    ];
+    const placard = categorias.map((categoria, i) =>
+      mkPrenda(categoria, `#${(i + 1).toString(16).padStart(6, "0")}`, i * 30, 40, 10 + i * 5, null, [], categoria === "sweater" ? "invierno" : null),
+    );
+    const r = analizarFoda(placard);
+    expect(r.debilidades).toHaveLength(0);
+    expect(r.amenazas).toHaveLength(0);
+    expect(r.nivelSalud).toBe("solido");
+    expect(r.veredicto.toLowerCase()).toContain("sólido");
+  });
+
+  it("3+ debilidades -> frágil (mismo placard que ya prueba 'sin ninguna prenda de piernas', con estilo casual)", () => {
+    const r = analizarFoda([mkPrenda("remera", "#FFFFFF", 0, 0, 90, "casual")]);
+    expect(r.debilidades.length).toBeGreaterThanOrEqual(3);
+    expect(r.nivelSalud).toBe("fragil");
+    expect(r.veredicto.toLowerCase()).toContain("frágil");
+  });
+
+  it("con huecos puntuales pero por debajo del piso de frágil -> con_huecos (mismo placard que ya prueba el caso de bermuda)", () => {
+    const r = analizarFoda([mkPrenda("bermuda", "#111111", 0, 0, 15, "casual")]);
+    expect(r.debilidades.length).toBeGreaterThan(0);
+    expect(r.debilidades.length).toBeLessThan(3);
+    expect(r.amenazas.length).toBeLessThan(2);
+    expect(r.nivelSalud).toBe("con_huecos");
+  });
+});
+
+describe("analizarFoda -- estrategias cruzadas (matriz TOWS)", () => {
+  it("sin fortalezas/oportunidades/amenazas (placard vacío) -> sin ninguna estrategia cruzada", () => {
+    expect(analizarFoda([]).estrategias).toHaveLength(0);
+  });
+
+  it("con contenido real en los 4 cuadrantes -> los 4 cruces (FO/DO/FA/DA), cada uno con su título TOWS", () => {
+    // 3 pantalones formales del mismo color (fortaleza de piernas +
+    // fortaleza de estilo formal) + 1 camisa clásica de otro color (para
+    // que el color domine >=50% del placard -- amenaza de concentración).
+    // Estilos urbano/casual/deportivo sin ancla -> oportunidades reales vía
+    // sugerenciaDeAncla. Solo remera/buzo/etc. ausentes -> debilidad de
+    // categorías + de variedad de color (2 colores en 4 prendas).
+    const placard = [
+      mkPrenda("pantalon", "#111111", 0, 0, 15, "formal"),
+      mkPrenda("pantalon", "#111111", 0, 0, 15, "formal"),
+      mkPrenda("pantalon", "#111111", 0, 0, 15, "formal"),
+      mkPrenda("camisa", "#FFFFFF", 0, 0, 95, "clasico"),
+    ];
+    const r = analizarFoda(placard);
+    expect(r.fortalezas.length).toBeGreaterThan(0);
+    expect(r.debilidades.length).toBeGreaterThan(0);
+    expect(r.oportunidades.length).toBeGreaterThan(0);
+    expect(r.amenazas.length).toBeGreaterThan(0);
+
+    expect(r.estrategias).toHaveLength(4);
+    const porTipo = Object.fromEntries(r.estrategias.map((e) => [e.tipo, e]));
+    expect(porTipo.FO.titulo).toBe("Explotar");
+    expect(porTipo.DO.titulo).toBe("Reforzar");
+    expect(porTipo.FA.titulo).toBe("Proteger");
+    expect(porTipo.DA.titulo).toBe("Prioridad");
+    for (const e of r.estrategias) expect(e.texto.length).toBeGreaterThan(0);
+
+    // la debilidad de "categorías ausentes" de este placard es larga (7
+    // categorías listadas) -- prueba real de que resumir() trunca en vez de
+    // citar la oración entera dentro de la estrategia DO.
+    expect(r.debilidades[0].length).toBeGreaterThan(70);
+    expect(porTipo.DO.texto).toContain("…");
+  });
+
+  it("un solo cuadrante externo vacío (sin amenazas) -> FO/DO presentes, FA/DA ausentes", () => {
+    const placard = [
+      mkPrenda("pantalon", "#111111", 0, 0, 15, "formal"),
+      mkPrenda("pantalon", "#222222", 0, 0, 20, "formal"),
+      mkPrenda("pantalon", "#333333", 0, 0, 25, "formal"),
+    ];
+    const r = analizarFoda(placard);
+    expect(r.amenazas).toHaveLength(0);
+    const tipos = r.estrategias.map((e) => e.tipo);
+    expect(tipos).toContain("FO");
+    expect(tipos).toContain("DO");
+    expect(tipos).not.toContain("FA");
+    expect(tipos).not.toContain("DA");
+  });
+});
+
 describe("coincideBusqueda", () => {
   it("query vacía o solo espacios -> matchea todo", () => {
     const p = mkPrenda("pantalon", "#111111", 0, 0, 15, "formal");

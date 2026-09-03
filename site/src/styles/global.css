@@ -612,6 +612,66 @@ body.tiene-aviso-actualizacion {
   width: 50%;
 }
 
+/* Diagnóstico FODA -- encabezado ejecutivo (veredicto + salud general) y
+   estrategias cruzadas (matriz TOWS), agregado a pedido explícito del
+   usuario ("mejorá el diagnóstico FODA... actuá como gerente con una
+   maestría... informe resumido, visual y ejecutivo"). nivelSalud es una
+   escala de severidad real (sólido/con huecos/frágil) -- por eso reusa
+   --ok/--warn/--danger, la misma regla que ya documenta la paleta --foda-*
+   de arriba: identidad categórica (los 4 cuadrantes fijos) usa su propia
+   paleta dedicada, severidad usa la escala general de la app. */
+.foda-veredicto {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.foda-salud-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex: none;
+}
+.foda-salud-solido {
+  background: color-mix(in srgb, var(--ok) 15%, transparent);
+  color: var(--ok);
+}
+.foda-salud-con_huecos {
+  background: color-mix(in srgb, var(--warn) 20%, transparent);
+  color: var(--warn);
+}
+.foda-salud-fragil {
+  background: color-mix(in srgb, var(--danger) 15%, transparent);
+  color: var(--danger);
+}
+
+.foda-estrategias {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.foda-estrategia {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.foda-estrategia strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 /* Estadísticas: KPI row de stat tiles (total de prendas, variedad de
    colores). Número grande en texto normal (proporcional, no tabular --
    ver marks-and-anatomy.md: tabular-nums es para columnas alineadas, no
