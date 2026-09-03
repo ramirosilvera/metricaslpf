@@ -1,6 +1,6 @@
 import { nombreColor } from "./color";
 import { categoriasAusentes, ESTILO_LABEL, estilosDe } from "./recommend";
-import { CATEGORIA_LABEL, ESTACION_LABEL, type Categoria, type Estacion, type Estilo, type Prenda } from "./types";
+import { CATEGORIA_LABEL, descripcionPrenda, ESTACION_LABEL, type Categoria, type Estacion, type Estilo, type Prenda } from "./types";
 
 /** Mismo orden que CATEGORIA_LABEL en types.ts -- se deriva de sus claves en
  *  vez de repetir el array a mano para no poder desincronizarse si se agrega
@@ -189,17 +189,24 @@ export function analizarPlacard(placard: Prenda[]): AnalisisPlacard {
 }
 
 /** Buscador libre del placard (Placard.tsx): compara contra los mismos
- *  textos que ya se ven en cada card (categoría, color, estilo/s,
- *  estación) -- nunca contra datos crudos que el usuario no tiene forma de
- *  escribir (hex, h/s/l). Incluye estilos secundarios (estilosDe): buscar
- *  "casual" también encuentra una prenda clásica con casual como
- *  secundario. Substring, sin distinguir mayúsculas/acentos de más ni nada
- *  raro: "azul" matchea "Azul oscuro". Query vacía o solo espacios ->
- *  matchea todo (comportamiento de "sin filtro", no de "sin resultados"). */
+ *  textos que ya se ven en cada card (nombre específico, categoría genérica,
+ *  color, estilo/s, estación) -- nunca contra datos crudos que el usuario
+ *  no tiene forma de escribir (hex, h/s/l). Incluye estilos secundarios
+ *  (estilosDe): buscar "casual" también encuentra una prenda clásica con
+ *  casual como secundario. Incluye tanto descripcionPrenda ("Jean",
+ *  "Jogger", "Pantalón chino"...) como CATEGORIA_LABEL crudo ("pantalon") --
+ *  pedido explícito del usuario al reportar el bug de "Jean azul": las
+ *  cards ahora muestran el nombre específico, así que buscar "jean" tiene
+ *  que encontrarlo igual que buscar "pantalon" (alguien puede seguir
+ *  pensando en la categoría genérica). Substring, sin distinguir mayúsculas/
+ *  acentos de más ni nada raro: "azul" matchea "Azul oscuro". Query vacía o
+ *  solo espacios -> matchea todo (comportamiento de "sin filtro", no de
+ *  "sin resultados"). */
 export function coincideBusqueda(p: Prenda, query: string): boolean {
   const q = query.trim().toLowerCase();
   if (!q) return true;
   const textos = [
+    descripcionPrenda(p),
     CATEGORIA_LABEL[p.categoria],
     nombreColor(p.color_h, p.color_s, p.color_l),
     ...estilosDe(p).map((e) => ESTILO_LABEL[e]),

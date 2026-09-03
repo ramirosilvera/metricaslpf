@@ -212,4 +212,14 @@ describe("coincideBusqueda", () => {
     expect(coincideBusqueda(conEstacion, "invierno")).toBe(true);
     expect(coincideBusqueda(sinEstacion, "invierno")).toBe(false);
   });
+
+  // Pedido explícito del usuario, mismo reporte que motivó descripcionPrenda
+  // en types.ts: las cards ahora muestran "Jean" en vez de "pantalon" --
+  // buscar "jean" tiene que encontrarlo, no solo "pantalon".
+  it("matchea por el nombre específico (descripcionPrenda), no solo por la categoría genérica", () => {
+    const jean = mkPrenda("pantalon", "#3B5998", 220, 40, 40, "casual");
+    jean.textura = "denim";
+    expect(coincideBusqueda(jean, "jean")).toBe(true);
+    expect(coincideBusqueda(jean, "pantalon")).toBe(true);
+  });
 });

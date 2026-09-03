@@ -4,9 +4,11 @@ import {
   analizarPlacard,
   contarPorCategoria,
   contarPorColor,
+  contarPorEstacion,
   contarPorEstilo,
   type ConteoCategoria,
   type ConteoColor,
+  type ConteoEstacion,
   type ConteoEstilo,
 } from "../lib/estadisticas";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
@@ -46,6 +48,26 @@ export function GraficoEstilos({ datos }: { datos: ConteoEstilo[] }) {
     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
       {datos.map((d) => (
         <BarraMagnitud key={d.estilo} label={d.label} cantidad={d.cantidad} max={max} />
+      ))}
+    </div>
+  );
+}
+
+/** Mismo componente que GraficoEstilos de arriba (misma forma de dato:
+ *  label+cantidad), separado nomás porque la key es `estacion`, no
+ *  `estilo` -- pedido explícito del usuario, revisando si la sección de
+ *  Estadísticas necesitaba ajuste después de diferenciar los abrigos de
+ *  entretiempo/invierno: contarPorEstacion ya existía (lo usa el filtro de
+ *  Placard) pero nunca se había conectado acá. Solo cuenta prendas con
+ *  `estacion` cargada -- un buzo (que a partir de esta ronda nunca la
+ *  lleva, ver recommend.ts) no aparece en ningún conteo de acá, mismo
+ *  criterio que ya documenta contarPorEstacion. */
+export function GraficoEstaciones({ datos }: { datos: ConteoEstacion[] }) {
+  const max = Math.max(1, ...datos.map((d) => d.cantidad));
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+      {datos.map((d) => (
+        <BarraMagnitud key={d.estacion} label={d.label} cantidad={d.cantidad} max={max} />
       ))}
     </div>
   );
@@ -94,6 +116,7 @@ export default function Estadisticas() {
 
   const porCategoria = useMemo(() => contarPorCategoria(placard ?? []), [placard]);
   const porEstilo = useMemo(() => contarPorEstilo(placard ?? []), [placard]);
+  const porEstacion = useMemo(() => contarPorEstacion(placard ?? []), [placard]);
   const porColor = useMemo(() => contarPorColor(placard ?? []), [placard]);
   const analisis = useMemo(() => analizarPlacard(placard ?? []), [placard]);
 
@@ -157,6 +180,13 @@ export default function Estadisticas() {
         <h2 style={{ fontSize: "1.05rem", margin: "0 0 0.75rem" }}>Prendas por estilo</h2>
         <div className="card">
           <GraficoEstilos datos={porEstilo} />
+        </div>
+      </section>
+
+      <section>
+        <h2 style={{ fontSize: "1.05rem", margin: "0 0 0.75rem" }}>Prendas por estación</h2>
+        <div className="card">
+          <GraficoEstaciones datos={porEstacion} />
         </div>
       </section>
 
