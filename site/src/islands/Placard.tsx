@@ -18,6 +18,7 @@ export function Contenido({
   prendas,
   base,
   onToggleNecesitaCambio,
+  onEditarEstilos,
 }: {
   prendas: Prenda[];
   base: string;
@@ -29,11 +30,21 @@ export function Contenido({
    *  Opcional: el snapshot de datos de prueba (ver el comentario de
    *  Contenido) puede montarse sin esta prop, sin botón de toggle. */
   onToggleNecesitaCambio?: (p: Prenda) => void;
+  /** Pedido explícito del usuario: "quiero que se puedan visualizar y
+   *  editar los estilos de las prendas de mi placard" -- mismo criterio
+   *  que onToggleNecesitaCambio: no hay pantalla de "editar prenda", así
+   *  que la edición vive inline en la tarjeta (ver EditorEstilos). Opcional
+   *  por el mismo motivo (datos de prueba sin Supabase). */
+  onEditarEstilos?: (p: Prenda, cambios: { estilo: Estilo | null; estilos_secundarios: Estilo[] }) => void;
 }) {
   const [filtroEstilo, setFiltroEstilo] = useState<Estilo | null>(null);
   const [filtroColor, setFiltroColor] = useState<string | null>(null);
   const [filtroEstacion, setFiltroEstacion] = useState<Estacion | null>(null);
   const [busqueda, setBusqueda] = useState("");
+  // id de la prenda cuyo editor de estilos está abierto -- uno a la vez
+  // (mismo criterio que confirmandoBorradoId en Outfits.tsx), para no tener
+  // varios formularios de edición abiertos compitiendo por atención.
+  const [editandoEstiloId, setEditandoEstiloId] = useState<string | null>(null);
 
   // Colores disponibles para filtrar: siempre los del placard COMPLETO (sin
   // aplicar todavía el resto de filtros/búsqueda), igual que ESTILOS_FILTRO
@@ -208,56 +219,170 @@ export function Contenido({
               </p>
               <div className="grid-prendas">
                 {prendasSeccion.map((p) => (
-                  <a key={p.id} href={`${base}combinar/?prenda=${p.id}`} className="card prenda-card">
-                    <span className="prenda-card-icon">
-                      <PrendaIcon
-                        categoria={p.categoria}
-                        color={p.color_hex}
-                        textura={p.textura ?? undefined}
-                        estacion={p.estacion}
-                        suelaContraste={p.suela_contraste}
-                        posicionAccesorio={p.posicion_accesorio}
-                        requiereCuello={p.requiere_cuello}
-                        conCapucha={p.con_capucha}
-                        patron={p.patron}
-                        color2={p.color2_hex}
-                        corteCalzado={p.corte_calzado}
-                      />
-                    </span>
-                    <strong style={{ fontSize: "0.85rem" }}>{descripcionPrenda(p)}</strong>
-                    <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
-                      {nombreColor(p.color_h, p.color_s, p.color_l)}
-                    </span>
-                    {(p.estilo || p.estacion) && (
-                      <span style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginTop: "0.3rem" }}>
+                  // Reporte real del usuario ("visualizar y editar los
+                  // estilos"): agregar un editor con <select>+checkboxes
+                  // exigía separar la tarjeta (antes un <a> único, todo
+                  // clickeable) en un link de navegación + controles
+                  // propios -- meter un <select> dentro de un <a> es frágil
+                  // en mobile (foco/scroll raros al abrir el desplegable),
+                  // a diferencia de un solo botón con preventDefault (lo
+                  // que sí alcanzaba para necesita-cambio). Ver
+                  // .prenda-card/.prenda-card-link en global.css.
+                  <div key={p.id} className="card prenda-card">
+                    <a href={`${base}combinar/?prenda=${p.id}`} className="prenda-card-link">
+                      <span className="prenda-card-icon">
+                        <PrendaIcon
+                          categoria={p.categoria}
+                          color={p.color_hex}
+                          textura={p.textura ?? undefined}
+                          estacion={p.estacion}
+                          suelaContraste={p.suela_contraste}
+                          posicionAccesorio={p.posicion_accesorio}
+                          requiereCuello={p.requiere_cuello}
+                          conCapucha={p.con_capucha}
+                          patron={p.patron}
+                          color2={p.color2_hex}
+                          corteCalzado={p.corte_calzado}
+                        />
+                      </span>
+                      <strong style={{ fontSize: "0.85rem" }}>{descripcionPrenda(p)}</strong>
+                      <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                        {nombreColor(p.color_h, p.color_s, p.color_l)}
+                      </span>
+                    </a>
+                    {(p.estilo || p.estilos_secundarios.length > 0 || p.estacion) && (
+                      <span style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0.3rem" }}>
                         {p.estilo && <span className="registro-badge">{ESTILO_LABEL[p.estilo]}</span>}
+                        {/* Reporte real: estilos_secundarios se guardaba desde
+                            PrendaForm ("también funciona para") pero no se
+                            mostraba en NINGÚN lado de la app -- acá es donde
+                            el usuario de verdad puede verlo. Estilo punteado/
+                            muted (ver .registro-badge-secundario) para que se
+                            note la diferencia con el estilo principal. */}
+                        {p.estilos_secundarios.map((e) => (
+                          <span key={e} className="registro-badge registro-badge-secundario">
+                            + {ESTILO_LABEL[e]}
+                          </span>
+                        ))}
                         {p.estacion && <span className="registro-badge">{ESTACION_LABEL[p.estacion]}</span>}
                       </span>
                     )}
+                    {onEditarEstilos &&
+                      (editandoEstiloId === p.id ? (
+                        <EditorEstilos
+                          p={p}
+                          onGuardar={(cambios) => {
+                            onEditarEstilos(p, cambios);
+                            setEditandoEstiloId(null);
+                          }}
+                          onCancelar={() => setEditandoEstiloId(null)}
+                        />
+                      ) : (
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          style={{ fontSize: "0.7rem", padding: "0.25rem 0.6rem" }}
+                          onClick={() => setEditandoEstiloId(p.id)}
+                        >
+                          ✏️ Editar estilos
+                        </button>
+                      ))}
                     {onToggleNecesitaCambio && (
                       <button
                         type="button"
                         className={`necesita-cambio-toggle${p.necesita_cambio ? " activo" : ""}`}
-                        style={{ marginTop: "0.3rem" }}
-                        onClick={(e) => {
-                          // la tarjeta entera es un <a> (navega a Combinar) --
-                          // sin esto, tocar el toggle también dispararía la
-                          // navegación.
-                          e.preventDefault();
-                          e.stopPropagation();
-                          onToggleNecesitaCambio(p);
-                        }}
+                        onClick={() => onToggleNecesitaCambio(p)}
                       >
                         {p.necesita_cambio ? "🔧 Necesita cambio" : "Marcar que necesita cambio"}
                       </button>
                     )}
-                  </a>
+                  </div>
                 ))}
               </div>
             </section>
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+/** Editor inline de estilo/estilos_secundarios de UNA prenda -- pedido
+ *  explícito del usuario: "quiero que se puedan visualizar y editar los
+ *  estilos de las prendas de mi placard". Mismo par de campos y mismo
+ *  criterio que PrendaForm (elegir el principal saca automáticamente ese
+ *  valor de "también funciona para"), reimplementado acá en vez de
+ *  reusarse porque PrendaForm no exporta sus piezas internas (SelectOpcional
+ *  no está exportado) y el flujo es de guardar-de-una (no hay paso de
+ *  "cargar foto"/preset). */
+function EditorEstilos({
+  p,
+  onGuardar,
+  onCancelar,
+}: {
+  p: Prenda;
+  onGuardar: (cambios: { estilo: Estilo | null; estilos_secundarios: Estilo[] }) => void;
+  onCancelar: () => void;
+}) {
+  const [estilo, setEstilo] = useState<Estilo | "">(p.estilo ?? "");
+  const [secundarios, setSecundarios] = useState<Estilo[]>(p.estilos_secundarios);
+
+  return (
+    <div style={{ width: "100%", textAlign: "left", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+      <label className="field-label" style={{ fontSize: "0.75rem" }}>
+        <span>Estilo principal</span>
+        <select
+          className="field"
+          value={estilo}
+          onChange={(e) => {
+            const v = e.target.value as Estilo | "";
+            setEstilo(v);
+            setSecundarios((prev) => prev.filter((x) => x !== v));
+          }}
+        >
+          <option value="">(sin especificar)</option>
+          {ESTILOS_FILTRO.map((e) => (
+            <option key={e} value={e}>
+              {ESTILO_LABEL[e]}
+            </option>
+          ))}
+        </select>
+      </label>
+      <div>
+        <span style={{ display: "block", fontSize: "0.75rem", marginBottom: "0.3rem" }}>También funciona para</span>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+          {ESTILOS_FILTRO.filter((e) => e !== estilo).map((e) => (
+            <label key={e} style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.75rem" }}>
+              <input
+                type="checkbox"
+                checked={secundarios.includes(e)}
+                onChange={(ev) =>
+                  setSecundarios((prev) => (ev.target.checked ? [...prev, e] : prev.filter((x) => x !== e)))
+                }
+              />
+              <span>{ESTILO_LABEL[e]}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: "0.4rem" }}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          style={{ fontSize: "0.75rem", padding: "0.35rem 0.6rem", flex: 1 }}
+          onClick={() => onGuardar({ estilo: estilo || null, estilos_secundarios: secundarios })}
+        >
+          Guardar
+        </button>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          style={{ fontSize: "0.75rem", padding: "0.35rem 0.6rem", flex: 1 }}
+          onClick={onCancelar}
+        >
+          Cancelar
+        </button>
+      </div>
     </div>
   );
 }
@@ -339,5 +464,17 @@ export default function Placard() {
     await supabase.from("prendas").update({ necesita_cambio: nuevoValor }).eq("id", p.id);
   }
 
-  return <Contenido prendas={prendas} base={base} onToggleNecesitaCambio={toggleNecesitaCambio} />;
+  async function editarEstilos(p: Prenda, cambios: { estilo: Estilo | null; estilos_secundarios: Estilo[] }) {
+    setPrendas((prev) => prev?.map((x) => (x.id === p.id ? { ...x, ...cambios } : x)) ?? prev);
+    await supabase.from("prendas").update(cambios).eq("id", p.id);
+  }
+
+  return (
+    <Contenido
+      prendas={prendas}
+      base={base}
+      onToggleNecesitaCambio={toggleNecesitaCambio}
+      onEditarEstilos={editarEstilos}
+    />
+  );
 }

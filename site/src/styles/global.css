@@ -780,18 +780,44 @@ body.tiene-aviso-actualizacion {
 }
 
 /* Cards de prenda en el grid del placard. */
+/* .prenda-card pasó de ser el <a> clickeable entero a ser un <div>
+   contenedor -- reporte real del usuario ("visualizar y editar los
+   estilos"): el editor inline de estilos necesita un <select> y
+   checkboxes, y meter eso dentro de un <a> es frágil (foco/scroll raros
+   en mobile al abrir un desplegable dentro de un link). El link de
+   navegación real a Combinar ahora es .prenda-card-link, un hijo más
+   dentro de este mismo contenedor en columna -- todo lo demás (badges,
+   toggle de necesita-cambio, editor de estilos) es un hijo hermano, no
+   anidado dentro del link. */
 .prenda-card {
-  text-decoration: none;
   color: var(--text);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   text-align: center;
-  transition: box-shadow 0.15s, transform 0.1s;
 }
-.prenda-card:active {
+.prenda-card-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.1s;
+}
+.prenda-card-link:active {
   transform: scale(0.98);
+}
+/* Badge de un estilo SECUNDARIO ("también funciona para") -- a propósito
+   más discreto que .registro-badge (punteado/sin relleno, texto muted):
+   es información real pero no el registro principal del outfit, mismo
+   criterio visual que .necesita-cambio-toggle sin marcar. */
+.registro-badge-secundario {
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--text-muted);
 }
 /* Toggle de "necesita cambio" en cada tarjeta del placard -- estado
    apagado (aún no marcada) discreto y con borde punteado, para no
