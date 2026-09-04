@@ -8,13 +8,13 @@ import {
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
   diffPrendasEdicion,
+  elegirContraste,
   estacionActual,
   ESTILO_LABEL,
   mejorCompraParaSubirNota,
   outfitSirveParaEstilo,
   puntuarOutfit,
   registroOutfit,
-  separarPorContraste,
   sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
@@ -105,9 +105,9 @@ function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
 }
 
 /** Una tarjeta de "Vestite hoy" -- extraída para no duplicar el markup
- *  entre el grupo "oscura" y el grupo "clara" (ver separarPorContraste en
- *  recommend.ts). `etiquetaGrupo` es el rótulo fijo ("Tonos oscuros" /
- *  "Tonos claros"), no el registro (Formal/Casual/...) que ya muestra
+ *  entre la opción principal y la de contraste (ver elegirContraste en
+ *  recommend.ts). `etiquetaGrupo` es el rótulo fijo ("Mejor opción" /
+ *  "Otra combinación"), no el registro (Formal/Casual/...) que ya muestra
  *  RegistroBadge -- son dos datos distintos y se muestran los dos. */
 function TarjetaSugerido({
   s,
@@ -162,10 +162,10 @@ const VISIBLES_POR_SECCION = 2;
 
 /** Pedido explícito del usuario: no rotar entre variantes que a veces
  *  coinciden en la misma capa -- siempre 2 opciones fijas al elegir una
- *  ocasión en "Vestite hoy", una de tonos oscuros y otra de tonos claros
- *  (contraste real entre las dos, no dos variantes parecidas). Ver
- *  separarPorContraste en recommend.ts. */
-const OPCIONES_POR_GRUPO = 1;
+ *  ocasión en "Vestite hoy": la principal (mejor puntaje) y la que más
+ *  contrasta en color contra ella (matiz, luminosidad y saturación --
+ *  no dos variantes parecidas). Ver elegirContraste en recommend.ts. */
+const OPCIONES_A_LA_VEZ = 1;
 
 const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
 
@@ -287,15 +287,18 @@ export function Contenido({
     setOffsetSugeridos(0);
   }
 
-  // Dos grupos fijos, no una tanda rotativa de N variantes -- ver
-  // separarPorContraste. Mismo offsetSugeridos para los dos: "otras
-  // opciones" rota cada grupo por separado (tanda aplica el módulo contra
-  // el largo de CADA pool), pero un solo botón/click alcanza para
-  // refrescar los dos a la vez, igual que antes.
-  const gruposSugeridos = useMemo(() => separarPorContraste(poolSugeridosPorEstilo), [poolSugeridosPorEstilo]);
-  const opcionOscura = tanda(gruposSugeridos.oscura, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
-  const opcionClara = tanda(gruposSugeridos.clara, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
-  const hayMasOpciones = gruposSugeridos.oscura.length > 1 || gruposSugeridos.clara.length > 1;
+  // "otras opciones" rota CUÁL outfit del pool (ya ordenado por puntaje)
+  // hace de principal -- tanda() con offsetSugeridos, mismo mecanismo de
+  // siempre. La segunda tarjeta se recalcula cada vez a partir de esa
+  // principal (elegirContraste busca, en TODO el pool, la que más
+  // contrasta en color contra ella), así que sigue habiendo contraste real
+  // sea cual sea la principal que esté rotando en ese momento.
+  const opcionPrincipal = tanda(poolSugeridosPorEstilo, offsetSugeridos, OPCIONES_A_LA_VEZ)[0];
+  const opcionContraste = useMemo(
+    () => (opcionPrincipal ? elegirContraste(opcionPrincipal, poolSugeridosPorEstilo) : undefined),
+    [opcionPrincipal, poolSugeridosPorEstilo],
+  );
+  const hayMasOpciones = poolSugeridosPorEstilo.length > 1;
 
   // Pedido explícito del usuario: en el estilo elegido hoy, avisar si hay
   // poca variedad (de tipo de prenda o de color) con una sugerencia
@@ -321,17 +324,17 @@ export function Contenido({
   // usuario YA tiene puesto hoy son los que frenan la nota, y
   // sugerenciaVariedad no mira eso (mejorCompraParaSubirNota sí, vía
   // mejorasDeReemplazo -- ver su comentario largo en recommend.ts). Toma
-  // el mejor outfit que se está mostrando ahora (oscuro o claro, el que
-  // tenga más puntaje de los dos) como base de la comparación.
+  // el mejor outfit que se está mostrando ahora (principal o contraste, el
+  // que tenga más puntaje de los dos) como base de la comparación.
   const mejorCompra = useMemo(() => {
     if (!estiloSugerido || estiloSugerido === "todos") return null;
-    const base = [opcionOscura, opcionClara]
+    const base = [opcionPrincipal, opcionContraste]
       .filter((o): o is OutfitSugerido => o !== undefined)
       .sort((a, b) => b.puntaje - a.puntaje)[0];
     if (!base) return null;
     const compra = mejorCompraParaSubirNota(estiloSugerido, base, placard, CATALOGO_CON_HSL);
     return compra ? { compra, actual: base.puntaje } : null;
-  }, [estiloSugerido, opcionOscura, opcionClara, placard]);
+  }, [estiloSugerido, opcionPrincipal, opcionContraste, placard]);
 
   // Unifica las dos fuentes de "sumá esto" en UNA sola tarjeta -- mostrar
   // dos a la vez (una por variedad, otra por puntaje) sería ruido si
@@ -572,9 +575,9 @@ export function Contenido({
           Vestite hoy
         </p>
         <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
-          Elegí para qué ocasión te querés vestir y si hace frío, entretiempo o calor, y te armamos 2 opciones de
-          contraste con lo que ya tenés: una de tonos oscuros y otra de tonos claros -- "otras opciones" te da otra
-          combinación distinta en cada una.
+          Elegí para qué ocasión te querés vestir y si hace frío, entretiempo o calor, y te armamos tu mejor opción
+          con lo que ya tenés más otra combinación que contrasta de verdad en color -- distinto pantalón, calzado o
+          torso, no solo una variante parecida -- "otras opciones" te da otro par distinto.
         </p>
         <div className="filtro-chips" role="group" aria-label="Elegí la ocasión de hoy">
           <button
@@ -652,10 +655,10 @@ export function Contenido({
         ) : (
           <>
             <div className="grid-prendas outfits-grid">
-              {opcionOscura ? (
+              {opcionPrincipal ? (
                 <TarjetaSugerido
-                  s={opcionOscura}
-                  etiquetaGrupo="Tonos oscuros"
+                  s={opcionPrincipal}
+                  etiquetaGrupo="Mejor opción"
                   guardadas={guardadas}
                   guardando={guardando}
                   errorGuardar={errorGuardar}
@@ -663,13 +666,13 @@ export function Contenido({
                 />
               ) : (
                 <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                  Todavía no armamos una opción de tonos oscuros para esta ocasión con lo que tenés cargado.
+                  Todavía no armamos ningún look para esta ocasión con lo que tenés cargado.
                 </p>
               )}
-              {opcionClara ? (
+              {opcionContraste ? (
                 <TarjetaSugerido
-                  s={opcionClara}
-                  etiquetaGrupo="Tonos claros"
+                  s={opcionContraste}
+                  etiquetaGrupo="Otra combinación"
                   guardadas={guardadas}
                   guardando={guardando}
                   errorGuardar={errorGuardar}
@@ -677,7 +680,8 @@ export function Contenido({
                 />
               ) : (
                 <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                  Todavía no armamos una opción de tonos claros para esta ocasión con lo que tenés cargado.
+                  Todavía no armamos una segunda opción con contraste real de color para esta ocasión con lo que
+                  tenés cargado.
                 </p>
               )}
             </div>

@@ -1358,51 +1358,82 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
   return resultados;
 }
 
-/** Separa el pool de "Vestite hoy" (ya ordenado por puntaje, ver
- *  armarOutfitsSugeridos) en dos grupos de CONTRASTE tonal -- pedido
- *  explícito del usuario: "cambiá las dos opciones con abrigo y sin
- *  abrigo, porque eso ya está considerado con el clima frío/calor/
- *  entretiempo [la pregunta que ya se responde antes de llegar a este
- *  pool]. Ahora quiero que las 2 opciones sean de contraste -- un
- *  pantalón oscuro y otro claro, unas zapatillas oscuras y unas blancas".
- *  Reemplaza separarPorAbrigo: mostrar el mismo eje (abrigo/no abrigo)
- *  otra vez en las dos tarjetas de "Vestite hoy" era redundante con la
- *  pregunta de clima. Clasifica por luminosidad PROMEDIO del outfit
- *  COMPLETO (todas sus prendas, no solo el pantalón) -- así las dos
- *  opciones que se muestran contrastan de verdad a simple vista (pantalón
- *  Y calzado Y torso tienden al mismo lado), no una sola prenda suelta.
- *  Umbral fijo en 50 (mitad exacta de la escala HSL, 0=negro, 100=blanco),
- *  no relativo a la mediana del pool de hoy: un corte relativo separaría
- *  "el más oscuro de los claros" del "el más claro de los oscuros" y los
- *  llamaría contraste sin serlo de verdad si el placard entero cae de un
- *  mismo lado.
- *
- *  Dentro de cada grupo, a igual puntaje (frecuente: con un placard rico
- *  hay muchos outfits en 10/10, ver puntuarOutfit) se desempata por
- *  CONTRASTE -- el más oscuro de los oscuros, el más claro de los claros
- *  -- en vez de quedarse con el primero en orden de inserción. Verificado
- *  por ejecución contra el catálogo real: sin este desempate, dos outfits
- *  de igual puntaje podían diferir en una sola prenda y caer uno apenas
- *  por debajo de 50 y el otro apenas por encima (ej. promedio 39 vs
- *  50.25) -- técnicamente "oscura" y "clara", pero casi indistinguibles a
- *  simple vista, exactamente lo que el pedido del usuario buscaba evitar.
- *  El puntaje sigue siendo el criterio principal (nunca se sacrifica
- *  calidad de outfit por contraste) -- el desempate solo entra en juego
- *  entre opciones ya igual de buenas. */
-export function separarPorContraste(pool: OutfitSugerido[]): { oscura: OutfitSugerido[]; clara: OutfitSugerido[] } {
-  const conPromedio = pool.map((s) => ({
-    s,
-    promedioL: s.prendas.reduce((acc, p) => acc + p.color_l, 0) / s.prendas.length,
-  }));
-  const oscura = conPromedio
-    .filter((x) => x.promedioL < 50)
-    .sort((a, b) => b.s.puntaje - a.s.puntaje || a.promedioL - b.promedioL)
-    .map((x) => x.s);
-  const clara = conPromedio
-    .filter((x) => x.promedioL >= 50)
-    .sort((a, b) => b.s.puntaje - a.s.puntaje || b.promedioL - a.promedioL)
-    .map((x) => x.s);
-  return { oscura, clara };
+/** Distancia de color entre dos prendas del MISMO rol (dos pantalones, dos
+ *  pares de calzado...) -- pedido explícito del usuario, corrigiendo la
+ *  primera versión de este mecanismo: "no me refería a un outfit todo con
+ *  prendas oscuras y otro todo con prendas claras... la teoría del color
+ *  habla de matiz, luminosidad y saturación, quiero que esa variedad se
+ *  refleje". Sección los tres ejes (mismos que ya usa scoreColor: hueDist,
+ *  valueDist, y saturación cruda) sin ponderar ninguno por encima de los
+ *  otros -- no hay evidencia para inventar una jerarquía entre ellos.
+ *  Revisado como colorista: el matiz NO cuenta cuando alguna de las dos
+ *  prendas es neutra (esNeutro) -- un gris o un negro no tienen un matiz
+ *  real del que "alejarse", comparar hueDist contra un h arbitrario
+ *  guardado para una prenda acromática mediría una diferencia que no
+ *  existe a simple vista (mismo criterio que ya usa scoreColor para
+ *  neutros en todo el resto del motor). Luminosidad y saturación sí
+ *  siempre cuentan: son ejes reales de cualquier color, neutro o no. */
+function distanciaDeColor(a: Prenda, b: Prenda): number {
+  const distMatiz = esNeutro(a.color_s, a.color_l) || esNeutro(b.color_s, b.color_l) ? 0 : hueDist(a.color_h, b.color_h);
+  const distLuminosidad = valueDist(a.color_l, b.color_l);
+  const distSaturacion = Math.abs(a.color_s - b.color_s) / 100;
+  return distMatiz + distLuminosidad + distSaturacion;
+}
+
+/** Distancia de color entre dos outfits COMPLETOS -- suma distanciaDeColor
+ *  categoría por categoría (el pantalón de uno contra el pantalón del
+ *  otro, el calzado contra el calzado, etc.), nunca entre categorías
+ *  distintas (comparar un pantalón contra un calzado no dice nada de
+ *  contraste real). Una categoría que solo tiene UNO de los dos outfits
+ *  (ej. uno con accesorio, el otro sin) no suma nada -- no hay con qué
+ *  comparar esa categoría puntual, no es lo mismo que "mismo color". */
+function distanciaEntreOutfits(x: OutfitSugerido, y: OutfitSugerido): number {
+  const rol = (o: OutfitSugerido, pred: (p: Prenda) => boolean) => o.prendas.find(pred);
+  const roles: Array<(p: Prenda) => boolean> = [
+    (p) => CATEGORIAS_PIERNAS.includes(p.categoria),
+    (p) => CATEGORIAS_TORSO.includes(p.categoria),
+    (p) => p.categoria === "calzado",
+    (p) => p.categoria === "accesorio",
+  ];
+  let total = 0;
+  for (const pred of roles) {
+    const pa = rol(x, pred);
+    const pb = rol(y, pred);
+    if (pa && pb) total += distanciaDeColor(pa, pb);
+  }
+  return total;
+}
+
+/** Elige, para acompañar a `principal` (la mejor opción de "Vestite hoy",
+ *  ya elegida por puntaje), la SEGUNDA opción del pool que más contrasta
+ *  en color contra ella -- pedido explícito del usuario: "no me refería a
+ *  un outfit todo oscuro y otro todo claro... sino que entre las dos
+ *  opciones se usen colores distintos -- si en una usaste pantalón
+ *  oscuro, en la otra pantalón claro. La teoría del color habla de
+ *  matiz, luminosidad y saturación, quiero que esa variedad se refleje,
+ *  más allá del botón de buscar más opciones" (es decir: el contraste
+ *  tiene que estar en las dos tarjetas que se ven de entrada, no solo
+ *  disponible clickeando "otras opciones"). Reemplaza separarPorContraste
+ *  (que agrupaba por luminosidad PROMEDIO del outfit entero -- el enfoque
+ *  que el usuario aclaró que no era lo que pedía). Recorre TODO el pool
+ *  (no solo los mejores puntuados): cada outfit del pool ya pasó el
+ *  filtro de calidad de armarOutfitsSugeridos (nunca un par con_cuidado,
+ *  ver puntuarOutfit -- el piso real es "muy_bueno" en todos los pares),
+ *  así que maximizar contraste no tiene el riesgo de elegir una
+ *  combinación mala -- a igual distancia de color, gana el de mayor
+ *  puntaje. */
+export function elegirContraste(principal: OutfitSugerido, pool: OutfitSugerido[]): OutfitSugerido | undefined {
+  let mejor: OutfitSugerido | undefined;
+  let mejorDistancia = -1;
+  for (const candidato of pool) {
+    if (candidato.id === principal.id) continue;
+    const distancia = distanciaEntreOutfits(principal, candidato);
+    if (distancia > mejorDistancia || (distancia === mejorDistancia && mejor && candidato.puntaje > mejor.puntaje)) {
+      mejor = candidato;
+      mejorDistancia = distancia;
+    }
+  }
+  return mejor;
 }
 
 export interface OutfitParaComprar {

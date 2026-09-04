@@ -5,6 +5,7 @@ import {
   armarOutfitsSugeridos,
   categoriasAusentes,
   diffPrendasEdicion,
+  elegirContraste,
   esNeutro,
   estacionActual,
   estilosDe,
@@ -16,7 +17,6 @@ import {
   recomendar,
   registroOutfit,
   scoreColor,
-  separarPorContraste,
   sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
@@ -1701,75 +1701,76 @@ describe("armarOutfitsSugeridos", () => {
   });
 });
 
-describe("separarPorContraste", () => {
-  it("clasifica por luminosidad PROMEDIO del outfit completo, no de una sola prenda", () => {
-    const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
-    // pantalón negro (l=10) + zapatillas negras (l=12) -> promedio 11, oscura.
-    const oscuro = {
+describe("elegirContraste", () => {
+  const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
+
+  it("elige, entre varios candidatos, el que más contrasta en luminosidad contra el pantalón de la principal", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const parecido = { id: "a", prendas: [mkPrenda("pantalon", "#262626", 0, 0, 15)], ...puntajeDePrueba };
+    const contrastante = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], ...puntajeDePrueba };
+    const elegido = elegirContraste(principal, [parecido, contrastante]);
+    expect(elegido?.id).toBe("b");
+  });
+
+  it("también contrasta por MATIZ, no solo luminosidad/saturación -- mismo h/s/l salvo el matiz", () => {
+    // mismo pantalón en las tres (no debería influir, se cancela en la resta).
+    const pantalonComun = mkPrenda("pantalon", "#808080", 0, 30, 50);
+    const principal = { id: "p", prendas: [pantalonComun, mkPrenda("remera", "#B93A32", 0, 80, 50)], ...puntajeDePrueba };
+    const matizCercano = { id: "a", prendas: [pantalonComun, mkPrenda("remera", "#B93A32", 10, 80, 50)], ...puntajeDePrueba };
+    const matizOpuesto = { id: "b", prendas: [pantalonComun, mkPrenda("remera", "#B93A32", 180, 80, 50)], ...puntajeDePrueba };
+    const elegido = elegirContraste(principal, [matizCercano, matizOpuesto]);
+    expect(elegido?.id).toBe("b");
+  });
+
+  it("también contrasta por SATURACIÓN -- mismo matiz/luminosidad, distinta saturación", () => {
+    const pantalonComun = mkPrenda("pantalon", "#808080", 0, 30, 50);
+    const principal = { id: "p", prendas: [pantalonComun, mkPrenda("remera", "#B93A32", 0, 90, 50)], ...puntajeDePrueba };
+    const satCercana = { id: "a", prendas: [pantalonComun, mkPrenda("remera", "#B93A32", 0, 85, 50)], ...puntajeDePrueba };
+    const satOpuesta = { id: "b", prendas: [pantalonComun, mkPrenda("remera", "#B93A32", 0, 10, 50)], ...puntajeDePrueba };
+    const elegido = elegirContraste(principal, [satCercana, satOpuesta]);
+    expect(elegido?.id).toBe("b");
+  });
+
+  it("revisado como colorista: el matiz NO cuenta entre dos prendas neutras (s=0) -- un gris no tiene matiz real del que alejarse", () => {
+    // el h guardado (200 vs 0) es irrelevante en una prenda acromática -- si
+    // el matiz contara igual, esta candidata (h muy distinto) ganaría por
+    // sobre la que en los hechos contrasta más en luminosidad.
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#808080", 0, 0, 50)], ...puntajeDePrueba };
+    const soloMatizDistintoPeroNeutro = { id: "a", prendas: [mkPrenda("pantalon", "#808080", 200, 0, 50)], ...puntajeDePrueba };
+    const luminosidadDistinta = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], ...puntajeDePrueba };
+    const elegido = elegirContraste(principal, [soloMatizDistintoPeroNeutro, luminosidadDistinta]);
+    expect(elegido?.id).toBe("b");
+  });
+
+  it("solo compara categorías presentes en AMBOS outfits -- una prenda extra en el candidato no infla la distancia", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    // mismo pantalón que la principal + un accesorio muy saturado que la principal ni tiene -- no debería sumar nada.
+    const conAccesorioExtra = {
       id: "a",
-      prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), mkPrenda("calzado", "#1A1A1A", 0, 0, 12)],
+      prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), mkPrenda("accesorio", "#FF0000", 0, 100, 50)],
       ...puntajeDePrueba,
     };
-    // pantalón beige (l=80) + zapatillas blancas (l=95) -> promedio 87.5, clara.
-    const claro = {
-      id: "b",
-      prendas: [mkPrenda("pantalon", "#D8C7A1", 39, 33, 80), mkPrenda("calzado", "#FFFFFF", 0, 0, 95)],
-      ...puntajeDePrueba,
-    };
-    const { oscura, clara } = separarPorContraste([oscuro, claro]);
-    expect(oscura.map((s) => s.id)).toEqual(["a"]);
-    expect(clara.map((s) => s.id)).toEqual(["b"]);
+    const conPantalonDistinto = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 95)], ...puntajeDePrueba };
+    const elegido = elegirContraste(principal, [conAccesorioExtra, conPantalonDistinto]);
+    expect(elegido?.id).toBe("b");
   });
 
-  it("promedia TODAS las prendas -- un outfit mixto cae del lado que gana el promedio, no de la prenda más extrema", () => {
-    const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
-    // pantalón oscuro (l=10) + remera clara (l=90) + calzado oscuro (l=20) -> promedio 40, oscura.
-    const mixtoHaciaOscuro = {
-      id: "c",
-      prendas: [
-        mkPrenda("pantalon", "#1A1A1A", 0, 0, 10),
-        mkPrenda("remera", "#F5F5F5", 0, 0, 90),
-        mkPrenda("calzado", "#1A1A1A", 0, 0, 20),
-      ],
-      ...puntajeDePrueba,
-    };
-    const { oscura, clara } = separarPorContraste([mixtoHaciaOscuro]);
-    expect(oscura.map((s) => s.id)).toEqual(["c"]);
-    expect(clara).toHaveLength(0);
+  it("a igual distancia de color, desempata por mayor puntaje", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const mismoColorMenosPuntaje = { id: "a", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 7, explicacionPuntaje: "" };
+    const mismoColorMasPuntaje = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 10, explicacionPuntaje: "" };
+    const elegido = elegirContraste(principal, [mismoColorMenosPuntaje, mismoColorMasPuntaje]);
+    expect(elegido?.id).toBe("b");
   });
 
-  it("el umbral es fijo en 50 (mitad de la escala HSL), no relativo a la mediana del pool", () => {
-    const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
-    // l=49 -> oscura (justo debajo del umbral); l=50 -> clara (el umbral cae del lado claro).
-    const justoDebajo = { id: "d", prendas: [mkPrenda("pantalon", "#7A7A7A", 0, 0, 49)], ...puntajeDePrueba };
-    const justoEnElUmbral = { id: "e", prendas: [mkPrenda("pantalon", "#808080", 0, 0, 50)], ...puntajeDePrueba };
-    const { oscura, clara } = separarPorContraste([justoDebajo, justoEnElUmbral]);
-    expect(oscura.map((s) => s.id)).toEqual(["d"]);
-    expect(clara.map((s) => s.id)).toEqual(["e"]);
+  it("nunca elige a la principal misma, aunque esté en el pool", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    expect(elegirContraste(principal, [principal])).toBeUndefined();
   });
 
-  it("pool vacío -> los dos grupos vacíos", () => {
-    expect(separarPorContraste([])).toEqual({ oscura: [], clara: [] });
-  });
-
-  it("a igual puntaje, desempata por contraste real -- el más oscuro de los oscuros, el más claro de los claros", () => {
-    const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
-    // dos oscuras, mismo puntaje: la de promedio 39 es más oscura que la de promedio 48.
-    const oscuraSuave = { id: "a", prendas: [mkPrenda("pantalon", "#7A7A7A", 0, 0, 48)], ...puntajeDePrueba };
-    const oscuraFuerte = { id: "b", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 15)], ...puntajeDePrueba };
-    // dos claras, mismo puntaje: la de promedio 90 es más clara que la de promedio 52.
-    const claraSuave = { id: "c", prendas: [mkPrenda("pantalon", "#808080", 0, 0, 52)], ...puntajeDePrueba };
-    const claraFuerte = { id: "d", prendas: [mkPrenda("pantalon", "#FFFFFF", 0, 0, 90)], ...puntajeDePrueba };
-    const { oscura, clara } = separarPorContraste([oscuraSuave, oscuraFuerte, claraSuave, claraFuerte]);
-    expect(oscura[0].id).toBe("b"); // la más oscura (promedio 15) primero, no la primera del pool.
-    expect(clara[0].id).toBe("d"); // la más clara (promedio 90) primero.
-  });
-
-  it("el puntaje sigue siendo el criterio principal -- una oscura de menor puntaje nunca gana a una de mayor puntaje aunque sea menos oscura", () => {
-    const oscuraMejorPuntaje = { id: "e", prendas: [mkPrenda("pantalon", "#7A7A7A", 0, 0, 45)], puntaje: 10, explicacionPuntaje: "" };
-    const oscuraPeorPuntajeMasOscura = { id: "f", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 5)], puntaje: 7, explicacionPuntaje: "" };
-    const { oscura } = separarPorContraste([oscuraPeorPuntajeMasOscura, oscuraMejorPuntaje]);
-    expect(oscura[0].id).toBe("e");
+  it("pool sin candidatos (vacío) -> undefined", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    expect(elegirContraste(principal, [])).toBeUndefined();
   });
 });
 
