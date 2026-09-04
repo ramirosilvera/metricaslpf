@@ -180,6 +180,28 @@ a {
   color: var(--warn);
 }
 
+/* Estrellas (puntaje/2, pasos de 0.5) dentro de .nivel-badge y de la
+   tarjeta de sugerencia de compra -- dos capas de "★★★★★" superpuestas:
+   el fondo en gris (todas apagadas) y el relleno recortado por ancho en
+   % (color heredado del badge vía currentColor), truco estándar de
+   rating con soporte nativo de medio punto sin necesitar un glifo de
+   media estrella. */
+.estrellas {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+}
+.estrellas-fondo {
+  color: var(--border);
+}
+.estrellas-relleno {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: currentColor;
+}
+
 /* Etiqueta de "registro" (Formal/Clásico/Urbano/Casual/Deportivo) en las
    cards de Outfits -- mismo look que .nivel-muy_bueno (informativo, no
    bueno/malo) a propósito: no es un veredicto de color, es un dato. */

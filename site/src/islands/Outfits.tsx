@@ -51,14 +51,45 @@ function leyenda(prendas: Prenda[]): string {
  *  las mismas clases `.nivel-*` que ya pintan Recomendaciones.tsx/
  *  Probar.tsx (verde/naranja/amarillo) -- mismo vocabulario visual de
  *  "qué tan bien combina" en toda la app, no una paleta nueva para esta
- *  sola pantalla. 9-10 -> excelente, 7-8 -> muy_bueno, <=6 -> con_cuidado
- *  (los mismos cortes que ya usa PUNTOS_POR_NIVEL en recommend.ts para
- *  construir el promedio, así que un outfit "todo excelente" siempre cae
- *  en verde y uno con un solo muy_bueno de por medio, en naranja). */
+ *  sola pantalla. Con el tope de puntuarOutfit en 8 (ver recommend.ts), el
+ *  9 quedó matemáticamente inalcanzable -- en la práctica esto ya solo
+ *  distingue 10 (excelente) de todo lo demás, así que el corte >=9 sigue
+ *  siendo correcto aunque el "9" nunca ocurra. */
 function nivelDePuntaje(puntaje: number): "excelente" | "muy_bueno" | "con_cuidado" {
   if (puntaje >= 9) return "excelente";
   if (puntaje >= 7) return "muy_bueno";
   return "con_cuidado";
+}
+
+/** Consejo (rol Datos/Estadística): puntuarOutfit promedia sobre solo 3
+ *  niveles por par (10/6/3), así que aunque el número interno vaya de 1 a
+ *  10, en la práctica el placard real del usuario nunca generó más de 4
+ *  valores distintos (6, 7, 8, 10) -- una escala de "10 puntos" es
+ *  precisión falsa. Consejo (rol UX): un número exacto invita a discutir
+ *  el número ("¿por qué 8 y no 9?"), mientras que las estrellas se leen
+ *  como una señal cualitativa. Por eso esto es SOLO una capa de
+ *  presentación: el motor sigue puntuando 1-10 puertas adentro (ordena el
+ *  pool, decide "otras opciones", decide qué conviene comprar) sin ningún
+ *  cambio; acá se traduce a 5 estrellas con pasos de 0.5 (puntaje/2), que
+ *  es una conversión lineal sin pérdida ya que puntuarOutfit solo emite
+ *  enteros. */
+function estrellasDePuntaje(puntaje: number): number {
+  return puntaje / 2;
+}
+
+function Estrellas({ puntaje }: { puntaje: number }) {
+  const valor = estrellasDePuntaje(puntaje);
+  const porcentaje = (valor / 5) * 100;
+  return (
+    <span className="estrellas" title={`${valor} de 5 estrellas`} aria-label={`${valor} de 5 estrellas`}>
+      <span className="estrellas-fondo" aria-hidden="true">
+        ★★★★★
+      </span>
+      <span className="estrellas-relleno" aria-hidden="true" style={{ width: `${porcentaje}%` }}>
+        ★★★★★
+      </span>
+    </span>
+  );
 }
 
 function PuntajeBadge({
@@ -79,7 +110,9 @@ function PuntajeBadge({
   const { puntaje, explicacion } = precomputado ?? calculado!;
   return (
     <div style={{ margin: "0.3rem 0 0" }}>
-      <span className={`nivel-badge nivel-${nivelDePuntaje(puntaje)}`}>{puntaje}/10</span>
+      <span className={`nivel-badge nivel-${nivelDePuntaje(puntaje)}`}>
+        <Estrellas puntaje={puntaje} />
+      </span>
       <p style={{ margin: "0.3rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)" }}>{explicacion}</p>
     </div>
   );
@@ -757,12 +790,15 @@ export function Contenido({
                 <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>
                   {tarjetaSugerencia.actual !== undefined && (
                     <>
-                      Tu mejor outfit hoy es un <strong>{tarjetaSugerencia.actual}/10</strong>.{" "}
+                      Tu mejor outfit hoy tiene <Estrellas puntaje={tarjetaSugerencia.actual} />.{" "}
                     </>
                   )}
                   {tarjetaSugerencia.mensaje}
                   {tarjetaSugerencia.conSugerencia !== undefined && (
-                    <> Subiría a <strong>{tarjetaSugerencia.conSugerencia}/10</strong>.</>
+                    <>
+                      {" "}
+                      Subiría a <Estrellas puntaje={tarjetaSugerencia.conSugerencia} />.
+                    </>
                   )}
                 </p>
                 <button
