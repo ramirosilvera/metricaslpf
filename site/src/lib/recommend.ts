@@ -2150,6 +2150,108 @@ export function mejorCompraParaSubirNota(
   return [...reemplazos, ...ausentes].sort((a, b) => b.puntaje - a.puntaje)[0];
 }
 
+export interface ComboParaExcelencia {
+  id: string;
+  /** prendas reales del placard que se mantienen (incluye el ancla). */
+  prendasPropias: Prenda[];
+  /** 1 o 2 prendas del catálogo a comprar para llegar a un outfit de 5
+   *  estrellas (puntaje 10) de verdad. */
+  sugeridas: (PresetPrenda & { hsl: HSL })[];
+  puntaje: 10;
+  explicacionPuntaje: string;
+}
+
+/** Pedido explícito del usuario: "cuando en algún estilo no me arroje un
+ *  outfit de cinco estrellas, me debés hacer recomendaciones de compra
+ *  para... lograr un outfit de cinco estrellas" -- a diferencia de
+ *  mejorCompraParaSubirNota (que devuelve la MEJOR compra disponible, sea
+ *  cual sea la nota a la que llegue), esto exige puntaje === 10 de verdad
+ *  o no devuelve nada -- ninguna promesa a medias.
+ *
+ *  Auditoría de Consejo, verificado con el placard real del usuario en
+ *  "formal": mejorCompraParaSubirNota (1 sola prenda a la vez) devolvía
+ *  undefined para las 6 combinaciones formales disponibles (puntaje 8 cada
+ *  una) -- no por falta de catálogo, sino porque el par que frena la nota
+ *  (cuero marrón, calzado Y accesorio, contra el ancla/saco azul marino)
+ *  involucra DOS categorías a la vez: cambiar solo el calzado a negro deja
+ *  el accesorio marrón sin coordinar (y viceversa), así que ninguna compra
+ *  de una sola prenda alcanza un 10 real -- hacen falta las dos juntas.
+ *  Confirmado por ejecución: comprando zapato de vestir negro + cinturón
+ *  negro (ambos ya existen en el catálogo) el mismo outfit sube a 10.
+ *
+ *  Por eso: primero se prueba si mejorCompraParaSubirNota YA llega a 10
+ *  (compra de una sola prenda, el caso más barato); si no, se prueba
+ *  reemplazar DOS categorías del outfit a la vez con el catálogo completo
+ *  -- acotado a pares de categorías que el outfit YA usa (no a categorías
+ *  ausentes: agregar 2 prendas nuevas de una es un salto mucho más grande,
+ *  y el caso real encontrado siempre fue "coordinar lo que ya está", no
+ *  "comprar de cero"). El catálogo es chico (calzado ~17, accesorio ~7,
+ *  camisa ~10, saco 1), así que un doble loop acotado a las categorías del
+ *  outfit (típicamente 3-4) es liviano -- miles de combinaciones, no
+ *  millones. Devuelve la primera combinación válida que llega a un 10
+ *  real y estricto (outfitEsCoherenteParaEstilo, la misma vara que decide
+ *  qué se MUESTRA en Vestite hoy), no necesariamente "la más barata" entre
+ *  varias -- cualquiera que llegue a 10 sirve igual de bien. */
+export function comboParaExcelencia(
+  estilo: Estilo,
+  base: OutfitSugerido,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): ComboParaExcelencia | undefined {
+  const unaSola = mejorCompraParaSubirNota(estilo, base, placard, catalogo);
+  if (unaSola && unaSola.puntaje === 10) {
+    return {
+      id: unaSola.id,
+      prendasPropias: unaSola.prendasPropias,
+      sugeridas: [unaSola.sugerida],
+      puntaje: 10,
+      explicacionPuntaje: unaSola.explicacionPuntaje,
+    };
+  }
+
+  const ancla = base.prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
+  if (!ancla) return undefined;
+  const otras = base.prendas.filter((p) => p.id !== ancla.id);
+
+  for (let i = 0; i < otras.length; i++) {
+    for (let j = i + 1; j < otras.length; j++) {
+      const restantes = base.prendas.filter((p) => p.id !== otras[i].id && p.id !== otras[j].id);
+      const candidatosA = catalogo.filter((p) => p.categoria === otras[i].categoria);
+      const candidatosB = catalogo.filter((p) => p.categoria === otras[j].categoria);
+
+      for (const presetA of candidatosA) {
+        const prendaA = presetAPrendaSintetica(presetA);
+        const [rA] = recomendar(ancla, [prendaA], placard);
+        if (!rA || rA.score.nivel === "con_cuidado") continue;
+        if (restantes.some((p) => chocan(prendaA, p, placard))) continue;
+
+        for (const presetB of candidatosB) {
+          const prendaB = presetAPrendaSintetica(presetB);
+          const [rB] = recomendar(ancla, [prendaB], placard);
+          if (!rB || rB.score.nivel === "con_cuidado") continue;
+          if (restantes.some((p) => chocan(prendaB, p, placard))) continue;
+          if (chocan(prendaA, prendaB, placard)) continue;
+
+          const outfitCompleto = [...restantes, prendaA, prendaB];
+          if (!outfitEsCoherenteParaEstilo(outfitCompleto, estilo)) continue;
+          const { puntaje, explicacion } = puntuarOutfit(outfitCompleto);
+          if (puntaje !== 10) continue;
+
+          return {
+            id: `combo-${ancla.id}-${presetA.id}-${presetB.id}`,
+            prendasPropias: restantes,
+            sugeridas: [presetA, presetB],
+            puntaje: 10,
+            explicacionPuntaje: explicacion,
+          };
+        }
+      }
+    }
+  }
+
+  return undefined;
+}
+
 export interface SugerenciaVariedad {
   mensaje: string;
   /** con hsl incluido, mismo motivo que OutfitParaComprar.sugerida -- se

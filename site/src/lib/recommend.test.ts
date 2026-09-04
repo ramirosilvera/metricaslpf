@@ -5,6 +5,7 @@ import {
   armarOutfitsSugeridos,
   candidatosDeContraste,
   categoriasAusentes,
+  comboParaExcelencia,
   contarColoresProtagonistas,
   diffPrendasEdicion,
   elegirContraste,
@@ -2930,6 +2931,66 @@ describe("mejorCompraParaSubirNota", () => {
     const compra = mejorCompraParaSubirNota("formal", base, placard);
     expect(compra).toBeDefined();
     expect(compra!.categoriaSugerida).toBe("saco");
+  });
+});
+
+// Placard real y chico (mismos ids que el catálogo real) donde NINGUNA
+// compra de una sola prenda alcanza un 10 -- hallazgo de la auditoría de
+// Consejo sobre el placard REAL del usuario: saco y pantalón azul marino
+// "excelente"/"muy_bueno" contra calzado Y accesorio de cuero marrón (los
+// dos del MISMO marrón entre sí, por eso "excelente" uno con el otro, pero
+// "muy_bueno" cada uno contra el azul marino) -- cambiar solo el calzado a
+// negro deja el accesorio marrón sin coordinar (y viceversa), así que
+// hacen falta las dos prendas juntas. Confirmado por ejecución contra el
+// placard real de producción antes de escribir este test sintético.
+const placardFormalMarronSinCoordinar: Prenda[] = [
+  "pantalon-vestir-azul",
+  "saco-azul-marino",
+  "camisa-celeste",
+  "zapatos-cuero-marron",
+  "cinturon-marron",
+].map((id) => presetAPrendaSintetica(catalogoPorId[id]));
+
+describe("comboParaExcelencia", () => {
+  it("caso real: cuero marrón (calzado + accesorio) sin coordinar con el azul marino -- ninguna compra de UNA prenda llega a 10, pero la pareja sí", () => {
+    const placard = placardFormalMarronSinCoordinar;
+    const base = armarOutfitsSugeridos(placard, "entretiempo")
+      .filter((s) => outfitEsCoherenteParaEstilo(s.prendas, "formal"))
+      .sort((a, b) => b.puntaje - a.puntaje)[0];
+    expect(base.puntaje).toBe(8);
+    // confirma la premisa del test: con esta base, ni un solo swap alcanza.
+    expect(mejorCompraParaSubirNota("formal", base, placard)).toBeUndefined();
+
+    const combo = comboParaExcelencia("formal", base, placard);
+    expect(combo).toBeDefined();
+    expect(combo!.puntaje).toBe(10);
+    expect(combo!.sugeridas.map((s) => s.id).sort()).toEqual(["cinturon-negro", "zapatos-cuero-negro"]);
+  });
+
+  it("cuando UNA sola prenda ya alcanza el 10 (mejorCompraParaSubirNota), la reusa en vez de buscar una pareja", () => {
+    const placard = placardFormalSinZapatosDeVestir;
+    const base = armarOutfitsSugeridos(placard, "entretiempo")
+      .filter((s) => outfitSirveParaEstilo(s.prendas, "formal"))
+      .sort((a, b) => b.puntaje - a.puntaje)[0];
+    const combo = comboParaExcelencia("formal", base, placard);
+    expect(combo).toBeDefined();
+    expect(combo!.puntaje).toBe(10);
+    expect(combo!.sugeridas).toHaveLength(1);
+    expect(combo!.sugeridas[0].id).toBe("zapatos-cuero-negro");
+  });
+
+  it("ni una prenda ni una pareja alcanzan (catálogo vacío) -> undefined, sin inventar una mejora que no existe", () => {
+    const placard = placardFormalMarronSinCoordinar;
+    const base = armarOutfitsSugeridos(placard, "entretiempo")
+      .filter((s) => outfitEsCoherenteParaEstilo(s.prendas, "formal"))
+      .sort((a, b) => b.puntaje - a.puntaje)[0];
+    expect(comboParaExcelencia("formal", base, placard, [])).toBeUndefined();
+  });
+
+  it("outfit sin ancla (piernas) -> undefined", () => {
+    const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    const outfit = { id: "x", prendas: [remera], puntaje: 5, explicacionPuntaje: "" };
+    expect(comboParaExcelencia("formal", outfit, [remera])).toBeUndefined();
   });
 });
 

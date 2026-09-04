@@ -8,6 +8,7 @@ import {
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
   candidatosDeContraste,
+  comboParaExcelencia,
   diffPrendasEdicion,
   estacionActual,
   ESTILO_LABEL,
@@ -448,16 +449,44 @@ export function Contenido({
     return compra ? { compra, actual: base.puntaje } : null;
   }, [estiloSugerido, poolSugeridosPorEstilo, placard]);
 
-  // Unifica las dos fuentes de "sumá esto" en UNA sola tarjeta -- mostrar
-  // dos a la vez (una por variedad, otra por puntaje) sería ruido si
-  // apuntan a la misma prenda, y confuso si apuntan a prendas distintas.
-  // mejorCompra manda cuando existe (sube la nota de verdad, la señal más
-  // fuerte); si además coincide con lo que ya sugería sugerenciaVariedad,
-  // se reusa su texto (explica el motivo puntual, no solo "sumá esto").
-  // Sin mejorCompra pero con sugerenciaVariedad, se muestra esa igual --
-  // sin el marco de puntaje, porque ahí no hay una mejora de nota
-  // comprobada que mostrar.
+  // Pedido explícito del usuario: "cuando en algún estilo no me arroje un
+  // resultado, un outfit con cinco estrellas, me debés hacer
+  // recomendaciones de compra para... lograr un outfit de cinco estrellas
+  // [con lo que ya tengo]... hacelo especialmente con formal, pero con
+  // todos los estilos... debe figurar en la sección de outfit". Solo se
+  // calcula cuando de verdad hace falta (!opcionPrincipal -- sin ninguna
+  // opción de 5 estrellas para mostrar): comboParaExcelencia prueba pares
+  // de categorías contra el catálogo completo, más caro que mejorCompra,
+  // así que no tiene sentido correrlo si ya hay un 10 real armado.
+  const comboExcelencia = useMemo(() => {
+    if (!estiloSugerido || estiloSugerido === "todos" || climaSugerido === null || opcionPrincipal) return null;
+    const base = poolSugeridosPorEstilo[0];
+    if (!base) return null;
+    return comboParaExcelencia(estiloSugerido, base, placard, CATALOGO_CON_HSL) ?? null;
+  }, [estiloSugerido, climaSugerido, opcionPrincipal, poolSugeridosPorEstilo, placard]);
+
+  // Unifica las fuentes de "sumá esto" en UNA sola tarjeta -- mostrar varias
+  // a la vez sería ruido si apuntan a la misma prenda, y confuso si apuntan
+  // a prendas distintas. comboExcelencia manda cuando existe (es la única
+  // que garantiza de verdad llegar a 5 estrellas, no solo "mejorar");
+  // mejorCompra es la señal de respaldo (mejora real pero no
+  // necesariamente a 5 estrellas, o comboExcelencia no encontró nada ni
+  // con 2 prendas); si además coincide con lo que ya sugería
+  // sugerenciaVariedad, se reusa su texto (explica el motivo puntual, no
+  // solo "sumá esto"). Sin ninguna de las dos pero con sugerenciaVariedad,
+  // se muestra esa igual -- sin el marco de puntaje, porque ahí no hay una
+  // mejora de nota comprobada que mostrar.
   const tarjetaSugerencia = useMemo(() => {
+    if (comboExcelencia) {
+      const descripciones = comboExcelencia.sugeridas.map((s) => `"${s.nombre}" (${CATEGORIA_LABEL[s.categoria].toLowerCase()})`);
+      const listado = descripciones.length === 1 ? descripciones[0] : `${descripciones[0]} y ${descripciones[1]}`;
+      return {
+        mensaje: `Comprá ${listado} para llegar a un outfit de 5 estrellas en ${ESTILO_LABEL[estiloSugerido as Estilo]}.`,
+        sugeridas: comboExcelencia.sugeridas,
+        actual: undefined,
+        conSugerencia: 10,
+      };
+    }
     if (mejorCompra) {
       const mismaSugerencia = sugerenciaVariedad?.sugerida.id === mejorCompra.compra.sugerida.id;
       const nombreCat = CATEGORIA_LABEL[mejorCompra.compra.categoriaSugerida].toLowerCase();
@@ -465,16 +494,16 @@ export function Contenido({
         mensaje: mismaSugerencia
           ? sugerenciaVariedad!.mensaje
           : `Sumá "${mejorCompra.compra.sugerida.nombre}" (${nombreCat}) a tu outfit de ${ESTILO_LABEL[estiloSugerido as Estilo]}.`,
-        sugerida: mejorCompra.compra.sugerida,
+        sugeridas: [mejorCompra.compra.sugerida],
         actual: mejorCompra.actual,
         conSugerencia: mejorCompra.compra.puntaje,
       };
     }
     if (sugerenciaVariedad) {
-      return { mensaje: sugerenciaVariedad.mensaje, sugerida: sugerenciaVariedad.sugerida, actual: undefined, conSugerencia: undefined };
+      return { mensaje: sugerenciaVariedad.mensaje, sugeridas: [sugerenciaVariedad.sugerida], actual: undefined, conSugerencia: undefined };
     }
     return null;
-  }, [mejorCompra, sugerenciaVariedad, estiloSugerido]);
+  }, [comboExcelencia, mejorCompra, sugerenciaVariedad, estiloSugerido]);
 
   // Pedido explícito del usuario: cuando el pool queda vacío para el
   // estilo elegido, la razón casi siempre es que falta la prenda ANCLA
@@ -810,7 +839,7 @@ export function Contenido({
               </button>
             )}
             {tarjetaSugerencia && (
-              <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
+              <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center", flexWrap: "wrap" }}>
                 <span style={{ fontSize: "1.2rem" }}>💡</span>
                 <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>
                   {tarjetaSugerencia.actual !== undefined && (
@@ -826,14 +855,24 @@ export function Contenido({
                     </>
                   )}
                 </p>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
-                  onClick={() => cargarSugerencia(tarjetaSugerencia.sugerida)}
-                >
-                  + Cargar
-                </button>
+                {/* comboExcelencia puede sugerir 2 prendas a la vez (ver su
+                    comentario en recommend.ts) -- un botón por prenda, cada
+                    uno navega a "prenda nueva" precargado con ESA prenda
+                    puntual (cargarSugerencia ya soporta cualquier preset del
+                    catálogo, sin cambios). */}
+                <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
+                  {tarjetaSugerencia.sugeridas.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      className="btn btn-secondary"
+                      style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
+                      onClick={() => cargarSugerencia(s)}
+                    >
+                      + Cargar {CATEGORIA_LABEL[s.categoria].toLowerCase()}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </>
