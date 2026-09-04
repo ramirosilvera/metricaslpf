@@ -1358,23 +1358,51 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
   return resultados;
 }
 
-/** Separa el pool de "Vestite hoy" en dos grupos según si el torso del
- *  outfit es una prenda de abrigo (buzo/sweater/campera) o no (remera/
- *  camisa/saco) -- pedido explícito del usuario: en vez de rotar entre variantes
- *  que a veces coinciden en la misma capa, quiere ver siempre las dos
- *  alternativas reales del día (una para cuando hace frío, otra para
- *  cuando no). Cada outfit de armarOutfitsSugeridos tiene exactamente un
- *  torso (así arma el pool, un candidato de CATEGORIAS_TORSO por
- *  variante), así que la clasificación es binaria y exhaustiva -- no hay
- *  un tercer caso ni una prenda que cuente para los dos grupos. */
-export function separarPorAbrigo(pool: OutfitSugerido[]): { conAbrigo: OutfitSugerido[]; sinAbrigo: OutfitSugerido[] } {
-  const conAbrigo: OutfitSugerido[] = [];
-  const sinAbrigo: OutfitSugerido[] = [];
-  for (const s of pool) {
-    const tieneAbrigo = s.prendas.some((p) => CATEGORIAS_ABRIGO.includes(p.categoria));
-    (tieneAbrigo ? conAbrigo : sinAbrigo).push(s);
-  }
-  return { conAbrigo, sinAbrigo };
+/** Separa el pool de "Vestite hoy" (ya ordenado por puntaje, ver
+ *  armarOutfitsSugeridos) en dos grupos de CONTRASTE tonal -- pedido
+ *  explícito del usuario: "cambiá las dos opciones con abrigo y sin
+ *  abrigo, porque eso ya está considerado con el clima frío/calor/
+ *  entretiempo [la pregunta que ya se responde antes de llegar a este
+ *  pool]. Ahora quiero que las 2 opciones sean de contraste -- un
+ *  pantalón oscuro y otro claro, unas zapatillas oscuras y unas blancas".
+ *  Reemplaza separarPorAbrigo: mostrar el mismo eje (abrigo/no abrigo)
+ *  otra vez en las dos tarjetas de "Vestite hoy" era redundante con la
+ *  pregunta de clima. Clasifica por luminosidad PROMEDIO del outfit
+ *  COMPLETO (todas sus prendas, no solo el pantalón) -- así las dos
+ *  opciones que se muestran contrastan de verdad a simple vista (pantalón
+ *  Y calzado Y torso tienden al mismo lado), no una sola prenda suelta.
+ *  Umbral fijo en 50 (mitad exacta de la escala HSL, 0=negro, 100=blanco),
+ *  no relativo a la mediana del pool de hoy: un corte relativo separaría
+ *  "el más oscuro de los claros" del "el más claro de los oscuros" y los
+ *  llamaría contraste sin serlo de verdad si el placard entero cae de un
+ *  mismo lado.
+ *
+ *  Dentro de cada grupo, a igual puntaje (frecuente: con un placard rico
+ *  hay muchos outfits en 10/10, ver puntuarOutfit) se desempata por
+ *  CONTRASTE -- el más oscuro de los oscuros, el más claro de los claros
+ *  -- en vez de quedarse con el primero en orden de inserción. Verificado
+ *  por ejecución contra el catálogo real: sin este desempate, dos outfits
+ *  de igual puntaje podían diferir en una sola prenda y caer uno apenas
+ *  por debajo de 50 y el otro apenas por encima (ej. promedio 39 vs
+ *  50.25) -- técnicamente "oscura" y "clara", pero casi indistinguibles a
+ *  simple vista, exactamente lo que el pedido del usuario buscaba evitar.
+ *  El puntaje sigue siendo el criterio principal (nunca se sacrifica
+ *  calidad de outfit por contraste) -- el desempate solo entra en juego
+ *  entre opciones ya igual de buenas. */
+export function separarPorContraste(pool: OutfitSugerido[]): { oscura: OutfitSugerido[]; clara: OutfitSugerido[] } {
+  const conPromedio = pool.map((s) => ({
+    s,
+    promedioL: s.prendas.reduce((acc, p) => acc + p.color_l, 0) / s.prendas.length,
+  }));
+  const oscura = conPromedio
+    .filter((x) => x.promedioL < 50)
+    .sort((a, b) => b.s.puntaje - a.s.puntaje || a.promedioL - b.promedioL)
+    .map((x) => x.s);
+  const clara = conPromedio
+    .filter((x) => x.promedioL >= 50)
+    .sort((a, b) => b.s.puntaje - a.s.puntaje || b.promedioL - a.promedioL)
+    .map((x) => x.s);
+  return { oscura, clara };
 }
 
 export interface OutfitParaComprar {

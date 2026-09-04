@@ -14,7 +14,7 @@ import {
   outfitSirveParaEstilo,
   puntuarOutfit,
   registroOutfit,
-  separarPorAbrigo,
+  separarPorContraste,
   sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
@@ -105,11 +105,10 @@ function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
 }
 
 /** Una tarjeta de "Vestite hoy" -- extraída para no duplicar el markup
- *  entre el grupo "con abrigo" y el grupo "sin abrigo" (ver
- *  separarPorAbrigo en recommend.ts). `etiquetaGrupo` es el rótulo fijo
- *  ("Con abrigo" / "Sin abrigo"), no el registro (Formal/Casual/...) que
- *  ya muestra RegistroBadge -- son dos datos distintos y se muestran los
- *  dos. */
+ *  entre el grupo "oscura" y el grupo "clara" (ver separarPorContraste en
+ *  recommend.ts). `etiquetaGrupo` es el rótulo fijo ("Tonos oscuros" /
+ *  "Tonos claros"), no el registro (Formal/Casual/...) que ya muestra
+ *  RegistroBadge -- son dos datos distintos y se muestran los dos. */
 function TarjetaSugerido({
   s,
   etiquetaGrupo,
@@ -163,8 +162,9 @@ const VISIBLES_POR_SECCION = 2;
 
 /** Pedido explícito del usuario: no rotar entre variantes que a veces
  *  coinciden en la misma capa -- siempre 2 opciones fijas al elegir una
- *  ocasión en "Vestite hoy", una con abrigo (buzo/sweater/campera) y otra
- *  sin abrigo (remera/camisa). Ver separarPorAbrigo en recommend.ts. */
+ *  ocasión en "Vestite hoy", una de tonos oscuros y otra de tonos claros
+ *  (contraste real entre las dos, no dos variantes parecidas). Ver
+ *  separarPorContraste en recommend.ts. */
 const OPCIONES_POR_GRUPO = 1;
 
 const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
@@ -288,14 +288,14 @@ export function Contenido({
   }
 
   // Dos grupos fijos, no una tanda rotativa de N variantes -- ver
-  // separarPorAbrigo. Mismo offsetSugeridos para los dos: "otras opciones"
-  // rota cada grupo por separado (tanda aplica el módulo contra el largo
-  // de CADA pool), pero un solo botón/click alcanza para refrescar los dos
-  // a la vez, igual que antes.
-  const gruposSugeridos = useMemo(() => separarPorAbrigo(poolSugeridosPorEstilo), [poolSugeridosPorEstilo]);
-  const opcionConAbrigo = tanda(gruposSugeridos.conAbrigo, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
-  const opcionSinAbrigo = tanda(gruposSugeridos.sinAbrigo, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
-  const hayMasOpciones = gruposSugeridos.conAbrigo.length > 1 || gruposSugeridos.sinAbrigo.length > 1;
+  // separarPorContraste. Mismo offsetSugeridos para los dos: "otras
+  // opciones" rota cada grupo por separado (tanda aplica el módulo contra
+  // el largo de CADA pool), pero un solo botón/click alcanza para
+  // refrescar los dos a la vez, igual que antes.
+  const gruposSugeridos = useMemo(() => separarPorContraste(poolSugeridosPorEstilo), [poolSugeridosPorEstilo]);
+  const opcionOscura = tanda(gruposSugeridos.oscura, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
+  const opcionClara = tanda(gruposSugeridos.clara, offsetSugeridos, OPCIONES_POR_GRUPO)[0];
+  const hayMasOpciones = gruposSugeridos.oscura.length > 1 || gruposSugeridos.clara.length > 1;
 
   // Pedido explícito del usuario: en el estilo elegido hoy, avisar si hay
   // poca variedad (de tipo de prenda o de color) con una sugerencia
@@ -321,17 +321,17 @@ export function Contenido({
   // usuario YA tiene puesto hoy son los que frenan la nota, y
   // sugerenciaVariedad no mira eso (mejorCompraParaSubirNota sí, vía
   // mejorasDeReemplazo -- ver su comentario largo en recommend.ts). Toma
-  // el mejor outfit que se está mostrando ahora (con abrigo o sin abrigo,
-  // el que tenga más puntaje de los dos) como base de la comparación.
+  // el mejor outfit que se está mostrando ahora (oscuro o claro, el que
+  // tenga más puntaje de los dos) como base de la comparación.
   const mejorCompra = useMemo(() => {
     if (!estiloSugerido || estiloSugerido === "todos") return null;
-    const base = [opcionConAbrigo, opcionSinAbrigo]
+    const base = [opcionOscura, opcionClara]
       .filter((o): o is OutfitSugerido => o !== undefined)
       .sort((a, b) => b.puntaje - a.puntaje)[0];
     if (!base) return null;
     const compra = mejorCompraParaSubirNota(estiloSugerido, base, placard, CATALOGO_CON_HSL);
     return compra ? { compra, actual: base.puntaje } : null;
-  }, [estiloSugerido, opcionConAbrigo, opcionSinAbrigo, placard]);
+  }, [estiloSugerido, opcionOscura, opcionClara, placard]);
 
   // Unifica las dos fuentes de "sumá esto" en UNA sola tarjeta -- mostrar
   // dos a la vez (una por variedad, otra por puntaje) sería ruido si
@@ -572,8 +572,8 @@ export function Contenido({
           Vestite hoy
         </p>
         <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
-          Elegí para qué ocasión te querés vestir y si hace frío, entretiempo o calor, y te armamos 2 opciones con lo
-          que ya tenés: una con abrigo (buzo, sweater o campera) y otra sin abrigo -- "otras opciones" te da otra
+          Elegí para qué ocasión te querés vestir y si hace frío, entretiempo o calor, y te armamos 2 opciones de
+          contraste con lo que ya tenés: una de tonos oscuros y otra de tonos claros -- "otras opciones" te da otra
           combinación distinta en cada una.
         </p>
         <div className="filtro-chips" role="group" aria-label="Elegí la ocasión de hoy">
@@ -652,10 +652,10 @@ export function Contenido({
         ) : (
           <>
             <div className="grid-prendas outfits-grid">
-              {opcionConAbrigo ? (
+              {opcionOscura ? (
                 <TarjetaSugerido
-                  s={opcionConAbrigo}
-                  etiquetaGrupo="Con abrigo"
+                  s={opcionOscura}
+                  etiquetaGrupo="Tonos oscuros"
                   guardadas={guardadas}
                   guardando={guardando}
                   errorGuardar={errorGuardar}
@@ -663,14 +663,13 @@ export function Contenido({
                 />
               ) : (
                 <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                  Todavía no armamos una opción con abrigo (buzo, sweater o campera) para esta ocasión con lo que
-                  tenés cargado.
+                  Todavía no armamos una opción de tonos oscuros para esta ocasión con lo que tenés cargado.
                 </p>
               )}
-              {opcionSinAbrigo ? (
+              {opcionClara ? (
                 <TarjetaSugerido
-                  s={opcionSinAbrigo}
-                  etiquetaGrupo="Sin abrigo"
+                  s={opcionClara}
+                  etiquetaGrupo="Tonos claros"
                   guardadas={guardadas}
                   guardando={guardando}
                   errorGuardar={errorGuardar}
@@ -678,8 +677,7 @@ export function Contenido({
                 />
               ) : (
                 <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                  Todavía no armamos una opción sin abrigo (remera o camisa) para esta ocasión con lo que tenés
-                  cargado.
+                  Todavía no armamos una opción de tonos claros para esta ocasión con lo que tenés cargado.
                 </p>
               )}
             </div>
