@@ -19,6 +19,7 @@ import {
   puntuarOutfit,
   registroOutfit,
   semillaDelDia,
+  sugerenciaDeAbrigoEntretiempo,
   sugerenciaDeAbrigoInvierno,
   sugerenciaDeAncla,
   sugerenciaDeSacoDeVerano,
@@ -559,20 +560,31 @@ export function Contenido({
     return placard.some((p) => p.categoria === "pantalon" && estilosDe(p).includes(estiloSugerido));
   }, [estiloSugerido, placard]);
 
-  // Pedido explícito del usuario, ronda siguiente: "en el clima frío,
-  // siempre las opciones tienen que ser con abrigo, sí o sí, y con un
-  // abrigo de invierno. En caso de que no tenga un abrigo de invierno, no
-  // tenés que poner ninguna opción y le tenés que recomendar una compra."
-  // armarOutfitsSugeridos ya bloquea las opciones que no cumplan (ver
-  // esAbrigoDeInvierno en recommend.ts) -- esto es la sugerencia de compra
-  // cuando el pool queda vacío por esa razón puntual. Solo se calcula
-  // cuando hayPantalonDeEsteEstilo es true (si no hay ni un pantalón real
-  // de este registro, ESE es el problema de fondo, no el abrigo -- ver el
+  // Pedido explícito del usuario, en dos rondas: primero "en el clima
+  // frío, siempre las opciones tienen que ser con abrigo, sí o sí, y con
+  // un abrigo de invierno. En caso de que no tenga un abrigo de invierno,
+  // no tenés que poner ninguna opción y le tenés que recomendar una
+  // compra." -- después generalizado a los tres climas: "en entretiempo,
+  // un abrigo de entretiempo, en calor, sin abrigo, y en frío, un abrigo
+  // de invierno". armarOutfitsSugeridos ya bloquea las opciones que no
+  // cumplan (ver esAbrigoDeClima en recommend.ts) -- esto es la sugerencia
+  // de compra cuando el pool queda vacío por esa razón puntual, para
+  // cualquiera de los dos climas que exigen abrigo. Solo se calcula cuando
+  // hayPantalonDeEsteEstilo es true (si no hay ni un pantalón real de este
+  // registro, ESE es el problema de fondo, no el abrigo -- ver el
   // comentario de arriba).
   const sugerenciaAbrigo = useMemo(() => {
-    if (!estiloSugerido || estiloSugerido === "todos" || climaSugerido !== "invierno" || poolSugeridosPorEstilo.length > 0 || !hayPantalonDeEsteEstilo)
+    if (
+      !estiloSugerido ||
+      estiloSugerido === "todos" ||
+      (climaSugerido !== "invierno" && climaSugerido !== "entretiempo") ||
+      poolSugeridosPorEstilo.length > 0 ||
+      !hayPantalonDeEsteEstilo
+    )
       return null;
-    return sugerenciaDeAbrigoInvierno(estiloSugerido, placard);
+    return climaSugerido === "invierno"
+      ? sugerenciaDeAbrigoInvierno(estiloSugerido, placard)
+      : sugerenciaDeAbrigoEntretiempo(estiloSugerido, placard);
   }, [estiloSugerido, climaSugerido, poolSugeridosPorEstilo, hayPantalonDeEsteEstilo, placard]);
 
   // Pedido explícito del usuario, reporte real: "el estilo formal no me
@@ -858,8 +870,8 @@ export function Contenido({
                 ? "Todavía no armamos ninguna combinación con lo que tenés cargado -- cargá algún pantalón, bermuda o short: es la prenda ancla que arma el resto del outfit."
                 : formalImposibleConCalor
                   ? `Un saco de lana no se usa con calor real -- "Formal" no tiene sentido con esta temperatura con el que tenés cargado.${sugerenciaSaco ? "" : ' Probá "Frío" o "Entretiempo", o cargá un saco de lino/algodón (el saco de verano real).'}`
-                  : climaSugerido === "invierno" && hayPantalonDeEsteEstilo
-                    ? `Con frío de verdad, "Vestite hoy" solo arma looks ${ESTILO_LABEL[estiloSugerido]} con un abrigo real de invierno puesto -- no alcanza con una remera o camisa sola, ni con un abrigo de entretiempo.${sugerenciaAbrigo ? "" : " Por ahora no encontramos en el catálogo un abrigo de invierno de este registro para sugerirte -- fijate si tenés uno cargado sin marcar la estación."}`
+                  : (climaSugerido === "invierno" || climaSugerido === "entretiempo") && hayPantalonDeEsteEstilo
+                    ? `Con ${climaSugerido === "invierno" ? "frío de verdad" : "clima templado"}, "Vestite hoy" solo arma looks ${ESTILO_LABEL[estiloSugerido]} con un abrigo real de ${climaSugerido} puesto -- no alcanza con una remera o camisa sola, ni con un abrigo de otra estación.${sugerenciaAbrigo ? "" : ` Por ahora no encontramos en el catálogo un abrigo de ${climaSugerido} de este registro para sugerirte -- fijate si tenés uno cargado sin marcar la estación.`}`
                     : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado.${sugerenciaAncla ? "" : ` Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}`}
             </p>
             {(sugerenciaAncla || sugerenciaAbrigo || sugerenciaSaco) && (

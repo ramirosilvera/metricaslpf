@@ -22,6 +22,7 @@ import {
   registroOutfit,
   scoreColor,
   semillaDelDia,
+  sugerenciaDeAbrigoEntretiempo,
   sugerenciaDeAbrigoInvierno,
   sugerenciaDeAncla,
   sugerenciaDeSacoDeVerano,
@@ -769,6 +770,45 @@ describe("multi-estilo -- escape hatch del choque deportivo y de la formalidad",
     expect(resultadoControl.score.nivel).toBe("muy_bueno");
     expect(resultadoControl.score.explicacion).toContain("más informal");
   });
+
+  // Consejo, ronda siguiente -- reporte real del usuario: "en el estilo de
+  // oficina no está mostrando combinaciones con remera y yo tagué remeras
+  // como de uso de oficina, eso lo debería considerar". Causa real: el
+  // techo de TECHO_FORMALIDAD_POR_CATEGORIA topeaba a CUALQUIER remera en
+  // rango 1, sin excepción -- así que contra un pantalón "oficina" (rango
+  // 2) siempre degradaba a "más informal", sin importar el tag. Ver el
+  // ajuste puntual en rangoDeFormalidad.
+  it("una remera tageada 'oficina' YA NO degrada contra un pantalón de oficina -- el techo de formalidad respeta ese tag puntual", () => {
+    const pantalonOficina = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonOficina.estilo = "oficina";
+    const remeraOficina = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    remeraOficina.estilo = "casual";
+    remeraOficina.estilos_secundarios = ["oficina"];
+
+    const [resultado] = recomendar(pantalonOficina, [remeraOficina], [pantalonOficina, remeraOficina]);
+    expect(resultado.score.nivel).toBe("excelente");
+
+    // control: la misma remera SIN el tag "oficina" sigue degradando --
+    // el techo de 1 sigue protegiendo contra una remera básica sin ese
+    // dato, no se le regala formalidad a cualquiera.
+    const remeraSinOficina = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    remeraSinOficina.estilo = "casual";
+    const [resultadoControl] = recomendar(pantalonOficina, [remeraSinOficina], [pantalonOficina, remeraSinOficina]);
+    expect(resultadoControl.score.nivel).toBe("muy_bueno");
+    expect(resultadoControl.score.explicacion).toContain("más informal");
+  });
+
+  // "Formal" no se abre por esta puerta -- exige saco por categoría
+  // (outfitSirveParaEstilo) y camisasParaSaco solo admite camisa como capa
+  // base, nunca remera, sin relación con este techo.
+  it("el techo de la remera 'oficina' no habilita nada en 'formal' -- sigue exigiendo saco, chequeo aparte", () => {
+    const pantalonFormal = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonFormal.estilo = "formal";
+    const remeraOficina = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    remeraOficina.estilo = "casual";
+    remeraOficina.estilos_secundarios = ["oficina"];
+    expect(outfitSirveParaEstilo([pantalonFormal, remeraOficina], "formal")).toBe(false);
+  });
 });
 
 // Auditoría de sastrería (Consejo, ronda de auditoría del motor): tercer
@@ -1467,7 +1507,7 @@ describe("armarOutfitsSugeridos", () => {
       mkPrenda("calzado", "#5C3A21", 25, 50, 30),
       mkPrenda("accesorio", "#8C8C8C", 0, 0, 55), // gris neutro -- combina con cualquier cosa, sin ambigüedad
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(
       ["accesorio", "calzado", "pantalon", "remera"].sort(),
@@ -1489,7 +1529,7 @@ describe("armarOutfitsSugeridos", () => {
     zapatillasUrbanas.estilo = "urbano";
     placard.push(pantalonVestir, zapatillasUrbanas);
 
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits.length).toBeGreaterThan(1);
     for (const o of outfits) {
       expect(typeof o.puntaje).toBe("number");
@@ -1516,7 +1556,7 @@ describe("armarOutfitsSugeridos", () => {
       mkPrenda("remera", "#3366CC", 220, 60, 50),
       mkPrenda("accesorio", "#C8763F", 25, 60, 45),
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
   });
@@ -1530,7 +1570,7 @@ describe("armarOutfitsSugeridos", () => {
     cinturonMarron.textura = "cuero_liso";
     const placard = [jeanNegro, remeraBlanca, zapatoNegro, cinturonMarron];
 
-    const [outfit] = armarOutfitsSugeridos(placard);
+    const [outfit] = armarOutfitsSugeridos(placard, "verano");
     const categorias = outfit.prendas.map((p) => p.categoria);
     // el calzado se elige siempre (nunca choca con el jean por sí solo);
     // el accesorio, si choca con el calzado elegido, se cae del outfit --
@@ -1554,7 +1594,7 @@ describe("armarOutfitsSugeridos", () => {
       mkPrenda("remera", "#3366CC", 220, 60, 50),
       mkPrenda("calzado", "#C8763F", 25, 60, 45),
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
   });
@@ -1565,40 +1605,48 @@ describe("armarOutfitsSugeridos", () => {
       mkPrenda("remera", "#3366CC", 220, 60, 50),
       mkPrenda("calzado", "#5C3A21", 25, 47, 25),
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["calzado", "pantalon", "remera"].sort());
   });
 
   it("sin pantalón en el placard, no arma nada (no hay ancla)", () => {
     const placard = [mkPrenda("remera", "#3366CC", 220, 60, 50), mkPrenda("calzado", "#5C3A21", 25, 50, 30)];
-    expect(armarOutfitsSugeridos(placard)).toHaveLength(0);
+    expect(armarOutfitsSugeridos(placard, "verano")).toHaveLength(0);
   });
 
   it("sin ninguna prenda de torso que combine, no arma outfit para ese pantalón (nunca fuerza un 'con cuidado')", () => {
     // rojo saturado vs verde saturado, misma luminosidad -- se funden (con_cuidado).
     const placard = [mkPrenda("pantalon", "#CC3333", 0, 60, 50), mkPrenda("remera", "#33CC33", 120, 60, 52)];
-    expect(armarOutfitsSugeridos(placard)).toHaveLength(0);
+    expect(armarOutfitsSugeridos(placard, "verano")).toHaveLength(0);
   });
 
   it("calzado/accesorio son opcionales -- un outfit válido puede tener solo pantalón + torso", () => {
     const placard = [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), mkPrenda("remera", "#3366CC", 220, 60, 50)];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas).toHaveLength(2);
   });
 
   it("con varios torsos propios que combinan, arma una variante por cada uno (pool para 'otras opciones')", () => {
-    const placard = [
-      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), // negro, neutro -- combina con cualquier torso
-      mkPrenda("remera", "#3366CC", 220, 60, 50),
-      mkPrenda("camisa", "#F5F5F0", 0, 5, 95),
-      mkPrenda("sweater", "#6B2737", 350, 55, 35),
-    ];
-    const outfits = armarOutfitsSugeridos(placard);
+    // clima="entretiempo" con 3 abrigos tageados esa estación -- desde que
+    // el clima exige abrigo real (ver esAbrigoDeClima), remera/camisa/
+    // sweater sin tag ya no compiten entre sí para un mismo clima (un
+    // sweater sin `estacion` no es válido en entretiempo, y un sweater SÍ
+    // lo es nunca lo es en verano) -- este test pasa a probar el mismo
+    // mecanismo (varias candidatas de torso, una variante por cada una)
+    // con 3 abrigos reales de la MISMA estación.
+    const buzo = mkPrenda("buzo", "#3366CC", 220, 60, 50);
+    buzo.estacion = "entretiempo";
+    const sweater = mkPrenda("sweater", "#6B2737", 350, 55, 35);
+    sweater.estacion = "entretiempo";
+    const campera = mkPrenda("campera", "#F5F5F0", 0, 5, 95);
+    campera.estacion = "entretiempo";
+    const placard = [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), buzo, sweater, campera];
+    const outfits = armarOutfitsSugeridos(placard, "entretiempo");
     expect(outfits).toHaveLength(3);
     const torsos = outfits.map((o) => o.prendas.find((p) => p.categoria !== "pantalon")?.categoria).sort();
-    expect(torsos).toEqual(["camisa", "remera", "sweater"]);
+    expect(torsos).toEqual(["buzo", "campera", "sweater"]);
   });
 
   // Consejo, auditoría integral -- pedido explícito del usuario: "el motor
@@ -1618,7 +1666,7 @@ describe("armarOutfitsSugeridos", () => {
       mkPrenda("calzado", "#5C3A21", 25, 50, 30), // marrón
       mkPrenda("calzado", "#F5F5F0", 0, 5, 95), // blanco
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits).toHaveLength(2);
     const calzados = outfits.map((o) => o.prendas.find((p) => p.categoria === "calzado")?.color_hex).sort();
     expect(calzados).toEqual(["#5C3A21", "#F5F5F0"]);
@@ -1635,7 +1683,7 @@ describe("armarOutfitsSugeridos", () => {
       mkPrenda("accesorio", "#5C3A21", 25, 50, 30),
       mkPrenda("accesorio", "#8C8C8C", 0, 0, 55),
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits).toHaveLength(2);
     const accesorios = outfits.map((o) => o.prendas.find((p) => p.categoria === "accesorio")?.color_hex).sort();
     expect(accesorios).toEqual(["#5C3A21", "#8C8C8C"]);
@@ -1649,19 +1697,23 @@ describe("armarOutfitsSugeridos", () => {
       mkPrenda("calzado", "#5C3A21", 25, 50, 30),
       mkPrenda("calzado", "#F5F5F0", 0, 5, 95),
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     // 2 torsos x 2 calzados = 4 combinaciones (ninguna choca entre sí --
     // pantalón neutro, todo combina).
     expect(outfits).toHaveLength(4);
   });
 
   it("saco es una prenda de torso válida como cualquier otra (categoría nueva, pedido explícito del usuario: 'un traje azul marino') -- exige una camisa propia debajo, ver el describe dedicado más abajo ('formal exige camisa debajo del saco')", () => {
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    // textura "lino" -- con clima="verano" un saco de lana queda excluido
+    // (ver esSacoLivianoDeVerano), este test no es sobre esa regla puntual.
+    saco.textura = "lino";
     const placard = [
       mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), // negro, neutro
-      mkPrenda("saco", "#1F2A44", 222, 39, 21),
+      saco,
       mkPrenda("camisa", "#FAFAF7", 0, 0, 98),
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     // 2 outfits reales: la camisa sola (torso normal, sin saco) y el
     // saco CON la camisa debajo (ver el describe dedicado más abajo) --
     // ya no "pantalón + saco" solos.
@@ -1678,8 +1730,9 @@ describe("armarOutfitsSugeridos", () => {
     it("saco sin ninguna camisa propia en el placard -> no arma ningún outfit con saco", () => {
       const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
       const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+      saco.textura = "lino"; // clima="verano" exige saco liviano, ver esSacoLivianoDeVerano
       const remera = mkPrenda("remera", "#3366CC", 220, 60, 50); // torso alternativo -- sin camisa
-      const outfits = armarOutfitsSugeridos([pantalon, saco, remera]);
+      const outfits = armarOutfitsSugeridos([pantalon, saco, remera], "verano");
       // arma el outfit con la remera (torso normal, sin capa base) pero
       // ninguno con el saco -- nunca "pantalón + saco" solos.
       expect(outfits).toHaveLength(1);
@@ -1689,8 +1742,9 @@ describe("armarOutfitsSugeridos", () => {
     it("saco + camisa que combina -> arma el outfit con las DOS prendas de torso a la vez (saco y camisa juntos, no una en lugar de la otra)", () => {
       const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
       const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      saco.textura = "lino";
       const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
-      const outfits = armarOutfitsSugeridos([pantalon, saco, camisa]);
+      const outfits = armarOutfitsSugeridos([pantalon, saco, camisa], "verano");
       // 2 outfits: la camisa sola (torso normal) y el saco CON la camisa
       // debajo -- el punto de este test es el segundo.
       expect(outfits).toHaveLength(2);
@@ -1743,16 +1797,16 @@ describe("armarOutfitsSugeridos", () => {
   });
 
   it("una prenda sin estación cargada (remera/camisa) no se ve afectada por el orden de estación -- mantiene el orden por color", () => {
-    // clima="entretiempo" a propósito -- este test es sobre ordenarPorEstacion
-    // (el rango neutro de una prenda sin `estacion`), no sobre la exigencia de
-    // abrigo real de invierno (ver esAbrigoDeInvierno): con clima="invierno"
-    // ni remera ni camisa alcanzan nunca como torso, sea cual sea su
-    // `estacion`, así que ese caso se prueba aparte (ver el describe de
-    // clima más abajo).
+    // clima="verano" a propósito -- este test es sobre ordenarPorEstacion
+    // (el rango neutro de una prenda sin `estacion`), no sobre la exigencia
+    // de abrigo real (ver esAbrigoDeClima): con clima="invierno" o
+    // "entretiempo" ni remera ni camisa alcanzan nunca como torso -- ninguna
+    // de las dos es CATEGORIAS_ABRIGO, así que ese caso se prueba aparte
+    // (ver el describe de clima más abajo).
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     const remera = mkPrenda("remera", "#3366CC", 220, 60, 50); // sin estacion (null)
     const camisa = mkPrenda("camisa", "#F5F5F0", 0, 5, 95); // sin estacion (null)
-    const outfits = armarOutfitsSugeridos([pantalon, remera, camisa], "entretiempo");
+    const outfits = armarOutfitsSugeridos([pantalon, remera, camisa], "verano");
     expect(outfits).toHaveLength(2);
   });
 
@@ -1761,7 +1815,7 @@ describe("armarOutfitsSugeridos", () => {
       mkPrenda("bermuda", "#1A1A1A", 0, 0, 10), // negro, neutro
       mkPrenda("remera", "#3366CC", 220, 60, 50),
     ];
-    const outfits = armarOutfitsSugeridos(placard);
+    const outfits = armarOutfitsSugeridos(placard, "verano");
     expect(outfits).toHaveLength(1);
     expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["bermuda", "remera"].sort());
   });
@@ -1786,7 +1840,7 @@ describe("armarOutfitsSugeridos", () => {
       cinturon.estilos_secundarios = ["casual"]; // el mismo escape hatch multi-estilo que reabrió el bug
       cinturon.textura = "cuero_liso";
 
-      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, cinturon]);
+      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, cinturon], "verano");
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("accesorio");
     });
@@ -1805,7 +1859,7 @@ describe("armarOutfitsSugeridos", () => {
       const remeraDeportiva = mkConEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
       const buzoCasual = mkConEstilo("buzo", "#1A1A1A", 0, 0, 10, "casual");
 
-      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, buzoCasual]);
+      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, buzoCasual], "verano");
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
     });
@@ -1815,7 +1869,7 @@ describe("armarOutfitsSugeridos", () => {
       const remeraDeportiva = mkConEstilo("remera", "#1A1A1A", 0, 0, 10, "deportivo");
       const zapatillasUrbanas = mkConEstilo("calzado", "#1A1A1A", 0, 0, 10, "urbano");
 
-      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, zapatillasUrbanas]);
+      const outfits = armarOutfitsSugeridos([pantalonDeportivo, remeraDeportiva, zapatillasUrbanas], "verano");
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["calzado", "pantalon", "remera"].sort());
     });
@@ -1823,9 +1877,10 @@ describe("armarOutfitsSugeridos", () => {
     it("un ancla NO deportiva (casual) sigue permitiendo torso casual y accesorio, sin cambios", () => {
       const pantalonCasual = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "casual");
       const buzoCasual = mkConEstilo("buzo", "#1A1A1A", 0, 0, 10, "casual");
+      buzoCasual.estacion = "entretiempo"; // clima="entretiempo" exige abrigo real, ver esAbrigoDeClima
       const cinturon = mkConEstilo("accesorio", "#1A1A1A", 0, 0, 10, "clasico");
 
-      const outfits = armarOutfitsSugeridos([pantalonCasual, buzoCasual, cinturon]);
+      const outfits = armarOutfitsSugeridos([pantalonCasual, buzoCasual, cinturon], "entretiempo");
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["accesorio", "buzo", "pantalon"].sort());
     });
@@ -1859,7 +1914,8 @@ describe("armarOutfitsSugeridos", () => {
       shortDeportivo.estilo = "deportivo";
       const buzoDeportivo = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
       buzoDeportivo.estilo = "deportivo";
-      const outfits = armarOutfitsSugeridos([shortDeportivo, buzoDeportivo]);
+      buzoDeportivo.estacion = "entretiempo"; // ancla deportiva -- clima="entretiempo" exige abrigo real
+      const outfits = armarOutfitsSugeridos([shortDeportivo, buzoDeportivo], "entretiempo");
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["buzo", "short_deportivo"].sort());
     });
@@ -1879,7 +1935,7 @@ describe("armarOutfitsSugeridos", () => {
       zapatillasRunning.estilo = "deportivo";
       zapatillasRunning.corte_calzado = "zapatilla_running";
 
-      const outfits = armarOutfitsSugeridos([shortDeportivo, remeraBlanca, zapatillasRunning]);
+      const outfits = armarOutfitsSugeridos([shortDeportivo, remeraBlanca, zapatillasRunning], "verano");
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["calzado", "remera", "short_deportivo"].sort());
     });
@@ -2012,11 +2068,69 @@ describe("armarOutfitsSugeridos", () => {
       expect(outfits.some((o) => o.prendas.some((p) => p.categoria === "saco"))).toBe(true);
     });
 
-    it("sin `clima` explícito, usa la estación real de hoy por default (mismo comportamiento que antes de esta ronda)", () => {
+    // Consejo, ronda siguiente -- pedido explícito del usuario: "repasemos
+    // el tema del clima... en entretiempo, un abrigo de entretiempo, en
+    // calor, sin abrigo, y en frío, un abrigo de invierno". Generaliza el
+    // pedido anterior (solo invierno) a los tres climas por igual --
+    // mismo patrón exacto que el test de invierno de arriba, para
+    // entretiempo.
+    it("clima='entretiempo' exige un abrigo REAL de entretiempo en el torso -- ni una remera sola ni un sweater de invierno/sin estación alcanzan", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const sweaterSinEstacion = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      expect(armarOutfitsSugeridos([pantalon, sweaterSinEstacion, remera], "entretiempo")).toHaveLength(0);
+
+      const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      sweaterInvierno.estacion = "invierno";
+      expect(armarOutfitsSugeridos([pantalon, sweaterInvierno, remera], "entretiempo")).toHaveLength(0);
+
+      const sweaterEntretiempo = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      sweaterEntretiempo.estacion = "entretiempo";
+      const outfits = armarOutfitsSugeridos([pantalon, sweaterEntretiempo, remera], "entretiempo");
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria)).toContain("sweater");
+      expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("remera");
+    });
+
+    it("clima='entretiempo' -- un saco sigue sirviendo de abrigo para 'formal' aunque no tenga `estacion` cargada", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      saco.estilo = "formal";
+      const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([pantalon, saco, camisa], "entretiempo");
+      expect(outfits.some((o) => o.prendas.some((p) => p.categoria === "saco"))).toBe(true);
+    });
+
+    // Hallazgo real al generalizar la regla de invierno a entretiempo
+    // (verificado por ejecución -- 31 tests existentes rompieron antes de
+    // este ajuste): un bermuda/short "de calle" SÍ ancla con clima=
+    // "entretiempo" (a diferencia de invierno, donde queda excluido antes
+    // de llegar acá) -- y sigue sin combinar con NINGÚN abrigo, ni siquiera
+    // uno de entretiempo real, porque las piernas al aire nunca lo admiten
+    // (ver excluirAbrigo). Sin el `&& !excluirAbrigo` de climaConAbrigoExigido,
+    // esto quedaba sin ningún torso posible siempre (candidatosTorso ya sin
+    // abrigo por excluirAbrigo, y encima exigiéndolo).
+    it("clima='entretiempo' -- un bermuda sigue armando con remera (piernas al aire, nunca exige abrigo aunque el clima sí lo exija para un pantalón)", () => {
+      const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+      const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([bermuda, remera], "entretiempo");
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["bermuda", "remera"].sort());
+    });
+
+    // No hardcodea un resultado esperado (length concreta): desde que el
+    // clima exige/excluye abrigo de verdad (ver esAbrigoDeClima), ese
+    // número cambia según la estación real del día en que corre el test --
+    // en cambio, compara el default contra pasar `estacionActual()` a
+    // mano, que sí tiene que dar EXACTAMENTE lo mismo sea cual sea el mes.
+    it("sin `clima` explícito, usa la estación real de hoy por default", () => {
       const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
       const remera = mkPrenda("remera", "#3366CC", 220, 60, 50);
-      const outfits = armarOutfitsSugeridos([pantalon, remera]);
-      expect(outfits).toHaveLength(1);
+      const camisa = mkPrenda("camisa", "#F5F5F0", 0, 5, 95);
+      const placard = [pantalon, remera, camisa];
+      const conDefault = armarOutfitsSugeridos(placard);
+      const conClimaExplicito = armarOutfitsSugeridos(placard, estacionActual());
+      expect(conDefault.map((o) => o.id).sort()).toEqual(conClimaExplicito.map((o) => o.id).sort());
     });
   });
 
@@ -2073,7 +2187,7 @@ describe("armarOutfitsSugeridos", () => {
       remeraDeportiva.estilo = "deportivo";
       const zapatoVestir = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
       zapatoVestir.ocasion = "laburo";
-      const outfits = armarOutfitsSugeridos([shortDeportivo, remeraDeportiva, zapatoVestir]);
+      const outfits = armarOutfitsSugeridos([shortDeportivo, remeraDeportiva, zapatoVestir], "verano");
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("calzado");
     });
@@ -2082,7 +2196,7 @@ describe("armarOutfitsSugeridos", () => {
       const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
       const camisaOficina = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
       camisaOficina.ocasion = "laburo";
-      const outfits = armarOutfitsSugeridos([pantalon, camisaOficina]);
+      const outfits = armarOutfitsSugeridos([pantalon, camisaOficina], "verano");
       expect(outfits).toHaveLength(1);
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["camisa", "pantalon"].sort());
     });
@@ -2943,6 +3057,81 @@ describe("sugerenciaDeAbrigoInvierno", () => {
     sweaterInvierno.estilo = "clasico";
     sweaterInvierno.estacion = "invierno";
     expect(sugerenciaDeAbrigoInvierno("clasico", [bermuda, sweaterInvierno], catalogoAbrigos)).toBeNull();
+  });
+});
+
+// Consejo, ronda siguiente -- pedido explícito del usuario, generalizando el
+// pedido de invierno a los tres climas: "en entretiempo, un abrigo de
+// entretiempo". Mismos casos que sugerenciaDeAbrigoInvierno, otra estación.
+describe("sugerenciaDeAbrigoEntretiempo", () => {
+  const catalogoAbrigos: (PresetPrenda & { hsl: HSL })[] = [
+    {
+      id: "sweater-clasico-entretiempo",
+      nombre: "Sweater clásico liviano (entretiempo)",
+      categoria: "sweater",
+      colorHex: "#8C8C8C",
+      estilo: "clasico",
+      estacion: "entretiempo",
+      hsl: { h: 0, s: 0, l: 55 },
+    },
+    // mismo estilo, pero de invierno -- nunca debería sugerirse acá.
+    {
+      id: "sweater-clasico-invierno",
+      nombre: "Sweater clásico de lana (invierno)",
+      categoria: "sweater",
+      colorHex: "#1A1A1A",
+      estilo: "clasico",
+      estacion: "invierno",
+      hsl: { h: 0, s: 0, l: 10 },
+    },
+  ];
+
+  it("sin ancla (pantalón) de ese estilo en el placard -> null (sugerenciaDeAncla ya cubre ese caso, con prioridad)", () => {
+    expect(sugerenciaDeAbrigoEntretiempo("clasico", [], catalogoAbrigos)).toBeNull();
+  });
+
+  it("el placard YA tiene un abrigo de entretiempo real para ese estilo -> null, nada que comprar", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const sweaterEntretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55);
+    sweaterEntretiempo.estilo = "clasico";
+    sweaterEntretiempo.estacion = "entretiempo";
+    expect(sugerenciaDeAbrigoEntretiempo("clasico", [pantalon, sweaterEntretiempo], catalogoAbrigos)).toBeNull();
+  });
+
+  it("hay ancla pero ningún abrigo de entretiempo real (sweater de invierno, o sin estacion) -> sugiere el candidato de entretiempo del catálogo", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    const r = sugerenciaDeAbrigoEntretiempo("clasico", [pantalon, sweaterInvierno], catalogoAbrigos);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.id).toBe("sweater-clasico-entretiempo");
+    expect(r!.mensaje).toContain("Clásico");
+  });
+
+  it("un saco cuenta siempre como abrigo de 'formal', aunque no tenga `estacion` cargada -- null, nada que comprar", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "formal";
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    saco.estilo = "formal";
+    expect(sugerenciaDeAbrigoEntretiempo("formal", [pantalon, saco], [])).toBeNull();
+  });
+
+  it("el catálogo no tiene ningún abrigo de entretiempo de ese estilo -> null, no inventa una sugerencia que no existe", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "urbano";
+    expect(sugerenciaDeAbrigoEntretiempo("urbano", [pantalon], catalogoAbrigos)).toBeNull();
+  });
+
+  it("solo bermudas de ese estilo (sin ningún pantalón) -> null, aunque el placard ya tenga un abrigo de entretiempo real -- un bermuda no lo necesita, no es un pantalón real", () => {
+    const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermuda.estilo = "clasico";
+    const sweaterEntretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55);
+    sweaterEntretiempo.estilo = "clasico";
+    sweaterEntretiempo.estacion = "entretiempo";
+    expect(sugerenciaDeAbrigoEntretiempo("clasico", [bermuda, sweaterEntretiempo], catalogoAbrigos)).toBeNull();
   });
 });
 
