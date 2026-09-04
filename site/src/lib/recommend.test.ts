@@ -14,6 +14,7 @@ import {
   estacionActual,
   estilosDe,
   hueDist,
+  intercalarPorTorso,
   mejorCompraParaSubirNota,
   mejorasDeReemplazo,
   outfitEsCoherenteParaEstilo,
@@ -32,6 +33,7 @@ import {
   tanda,
   tecnicaRescate,
   valueDist,
+  type OutfitSugerido,
 } from "./recommend";
 import { hexToHsl, hslToHex, rgbToHsl } from "./color";
 import type { HSL, Prenda } from "./types";
@@ -2515,6 +2517,75 @@ describe("elegirContraste", () => {
 // cardo salvo que el primer candidato dejara de existir. candidatosDeContraste
 // devuelve la lista RANKEADA completa para que offsetSugeridos pueda indexar
 // distintas posiciones y de verdad cambie lo que se ve en pantalla.
+// Consejo, ronda siguiente -- bug real reportado por el usuario, con
+// captura: "en urbano, en entretiempo, solo me está ofreciendo campera de
+// pluma blanca y el piloto, pero también debería ofrecer los buzos que
+// están tageados urbano y entretiempo". Diagnosticado por ejecución: los
+// buzos SÍ estaban en el pool -- el problema es que armarOutfitsSugeridos
+// arma docenas de combos consecutivos con el MISMO torso antes de pasar al
+// siguiente, y "otras opciones" solo avanza de a uno sobre ese orden.
+describe("intercalarPorTorso", () => {
+  const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
+
+  function conTorso(id: string, torsoId: string): OutfitSugerido {
+    const torso = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+    torso.id = torsoId;
+    return { id, prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), torso], ...puntajeDePrueba };
+  }
+
+  it("caso real: 7 combos del mismo torso seguidos de 1 de otro -- el otro pasa a la posición 1, no a la 7", () => {
+    const pool = [
+      conTorso("a1", "torso-A"),
+      conTorso("a2", "torso-A"),
+      conTorso("a3", "torso-A"),
+      conTorso("a4", "torso-A"),
+      conTorso("a5", "torso-A"),
+      conTorso("a6", "torso-A"),
+      conTorso("a7", "torso-A"),
+      conTorso("b1", "torso-B"),
+    ];
+    const resultado = intercalarPorTorso(pool);
+    expect(resultado[0].id).toBe("a1");
+    expect(resultado[1].id).toBe("b1"); // antes hacían falta 7 clicks para llegar acá
+  });
+
+  it("3 torsos con distinta cantidad de combos cada uno -- ronda completa antes de repetir ningún torso", () => {
+    const pool = [
+      conTorso("a1", "torso-A"),
+      conTorso("a2", "torso-A"),
+      conTorso("a3", "torso-A"),
+      conTorso("b1", "torso-B"),
+      conTorso("c1", "torso-C"),
+      conTorso("c2", "torso-C"),
+    ];
+    const resultado = intercalarPorTorso(pool);
+    // primeros 3 -- uno de cada torso, en el orden en que aparecieron.
+    const primerosTorsos = resultado.slice(0, 3).map((s) => s.prendas.find((p) => p.categoria === "buzo")!.id);
+    expect(new Set(primerosTorsos).size).toBe(3);
+    expect(primerosTorsos).toEqual(["torso-A", "torso-B", "torso-C"]);
+  });
+
+  it("nunca pierde ni duplica ningún combo -- mismo set, solo cambia el orden", () => {
+    const pool = [conTorso("a1", "torso-A"), conTorso("a2", "torso-A"), conTorso("b1", "torso-B")];
+    const resultado = intercalarPorTorso(pool);
+    expect(resultado).toHaveLength(pool.length);
+    expect(new Set(resultado.map((s) => s.id))).toEqual(new Set(pool.map((s) => s.id)));
+  });
+
+  it("pool vacío -> lista vacía", () => {
+    expect(intercalarPorTorso([])).toEqual([]);
+  });
+
+  it("outfits sin ningún torso (solo pantalón/calzado) cuentan como un único grupo propio, no rompen nada", () => {
+    const sinTorso1 = { id: "s1", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const sinTorso2 = { id: "s2", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const conUnTorso = conTorso("c1", "torso-A");
+    const resultado = intercalarPorTorso([sinTorso1, sinTorso2, conUnTorso]);
+    expect(resultado).toHaveLength(3);
+    expect(new Set(resultado.map((s) => s.id))).toEqual(new Set(["s1", "s2", "c1"]));
+  });
+});
+
 describe("candidatosDeContraste", () => {
   const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
 

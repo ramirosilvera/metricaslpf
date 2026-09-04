@@ -2056,6 +2056,50 @@ function distanciaEntreOutfits(x: OutfitSugerido, y: OutfitSugerido): number {
   return total;
 }
 
+/** Bug real reportado por el usuario: "en el estilo urbano, en entretiempo,
+ *  solo me está ofreciendo campera de pluma blanca y el piloto -- pero
+ *  también debería poder ofrecer los buzos que están tageados urbano y de
+ *  entretiempo". Diagnosticado por ejecución contra el placard real: los
+ *  buzos SÍ estaban ahí (5 combos "excelentes" distintos, 21 combos cada
+ *  uno) -- el motor los arma bien. El problema real es de ORDEN:
+ *  armarOutfitsSugeridos arma los combos ancla por ancla y, DENTRO de cada
+ *  ancla, torso por torso -- así que docenas de combos consecutivos
+ *  comparten el MISMO torso (varían solo en calzado/accesorio) antes de
+ *  pasar al siguiente. "Otras opciones" (offsetSugeridos) avanza de a UNO
+ *  sobre ese pool con tanda() -- así que hacían falta 8, 15 o más clicks
+ *  para escapar del bloque de una sola campera y llegar a un buzo,
+ *  aunque los dos estuvieran igual de "tageados" y a igual puntaje.
+ *
+ *  Esta función reordena el pool ANTES de navegarlo (round-robin por
+ *  torso: primero un combo de CADA torso distinto, después el segundo de
+ *  cada uno, y así) -- nunca cambia CUÁLES combos están, ni sus puntajes,
+ *  solo el ORDEN en el que "otras opciones" los va mostrando. Es seguro
+ *  llamarla sobre poolCoherentePorEstilo (todos empatados en el mismo
+ *  puntaje ahí, ver esExcelente en Outfits.tsx) porque ni semillaDelDia
+ *  (solo cuenta cuántos empatan en el puntaje más alto) ni
+ *  candidatosDeContraste (recalcula su propio orden por distancia de
+ *  color, no depende del orden de entrada) se ven afectadas por este
+ *  reordenamiento -- solo cambia CUÁL combo aparece en cada offset de
+ *  "otras opciones", nunca el resultado de esas otras dos funciones. */
+export function intercalarPorTorso(pool: OutfitSugerido[]): OutfitSugerido[] {
+  const grupos = new Map<string, OutfitSugerido[]>();
+  for (const outfit of pool) {
+    const torso = outfit.prendas.find((p) => CATEGORIAS_TORSO.includes(p.categoria));
+    const clave = torso ? torso.id : "sin-torso";
+    const lista = grupos.get(clave);
+    if (lista) lista.push(outfit);
+    else grupos.set(clave, [outfit]);
+  }
+  const listas = [...grupos.values()];
+  const resultado: OutfitSugerido[] = [];
+  for (let i = 0; resultado.length < pool.length; i++) {
+    for (const lista of listas) {
+      if (i < lista.length) resultado.push(lista[i]);
+    }
+  }
+  return resultado;
+}
+
 /** Candidatos para acompañar a `principal` (la mejor opción de "Vestite
  *  hoy", ya elegida por puntaje), de MÁS a MENOS contraste en color --
  *  pedido explícito del usuario: "no me refería a un outfit todo oscuro y

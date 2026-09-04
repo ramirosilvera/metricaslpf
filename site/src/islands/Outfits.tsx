@@ -14,6 +14,7 @@ import {
   estacionActual,
   estilosDe,
   ESTILO_LABEL,
+  intercalarPorTorso,
   mejorCompraParaSubirNota,
   outfitEsCoherenteParaEstilo,
   outfitSirveParaEstilo,
@@ -399,11 +400,21 @@ export function Contenido({
   // sobre el pool LAXO y sigue sugiriendo qué comprar para llegar a un 10
   // real. No se tocó poolSugeridosPorEstilo (laxo) a propósito: sigue
   // siendo la base de mejorCompra/sugerenciaVariedad/sugerenciaAncla.
+  //
+  // Bug real reportado por el usuario: "en urbano, en entretiempo, solo me
+  // ofrece campera de pluma blanca y el piloto" -- los buzos tageados
+  // urbano+entretiempo SÍ estaban en este pool (verificado por ejecución),
+  // pero armarOutfitsSugeridos arma docenas de combos consecutivos con el
+  // MISMO torso antes de pasar al siguiente, así que "otras opciones"
+  // (que solo avanza de a uno) tardaba muchísimos clicks en escapar de un
+  // solo torso. intercalarPorTorso reordena el pool -- nunca cambia CUÁLES
+  // combos están, ver su comentario en recommend.ts -- para que cada click
+  // de "otras opciones" muestre un torso distinto de entrada.
   const poolCoherentePorEstilo = useMemo(() => {
     if (estiloSugerido === null) return [];
     if (estiloSugerido === "todos")
-      return poolSugeridos.filter((s) => advertenciasDeRegistro(s.prendas).length === 0 && esExcelente(s));
-    return poolSugeridos.filter((s) => outfitEsCoherenteParaEstilo(s.prendas, estiloSugerido) && esExcelente(s));
+      return intercalarPorTorso(poolSugeridos.filter((s) => advertenciasDeRegistro(s.prendas).length === 0 && esExcelente(s)));
+    return intercalarPorTorso(poolSugeridos.filter((s) => outfitEsCoherenteParaEstilo(s.prendas, estiloSugerido) && esExcelente(s)));
   }, [poolSugeridos, estiloSugerido]);
 
   function elegirEstiloSugerido(valor: Estilo | "todos") {
