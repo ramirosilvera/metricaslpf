@@ -787,8 +787,8 @@ body.tiene-aviso-actualizacion {
    en mobile al abrir un desplegable dentro de un link). El link de
    navegación real a Combinar ahora es .prenda-card-link, un hijo más
    dentro de este mismo contenedor en columna -- todo lo demás (badges,
-   toggle de necesita-cambio, editor de estilos) es un hijo hermano, no
-   anidado dentro del link. */
+   botón "⚙️ Editar" y su panel) es un hijo hermano, no anidado dentro del
+   link. */
 .prenda-card {
   color: var(--text);
   display: flex;
@@ -812,34 +812,19 @@ body.tiene-aviso-actualizacion {
 }
 /* Badge de un estilo SECUNDARIO ("también funciona para") -- a propósito
    más discreto que .registro-badge (punteado/sin relleno, texto muted):
-   es información real pero no el registro principal del outfit, mismo
-   criterio visual que .necesita-cambio-toggle sin marcar. */
+   es información real pero no el registro principal del outfit. */
 .registro-badge-secundario {
   background: transparent;
   border: 1px dashed var(--border);
   color: var(--text-muted);
 }
-/* Toggle de "necesita cambio" en cada tarjeta del placard -- estado
-   apagado (aún no marcada) discreto y con borde punteado, para no
-   competir visualmente con los badges de estilo/estación reales; estado
-   prendido usa --warn (mismo tono que .nivel-con_cuidado/.nivel-muy_bueno
-   -- "avisá, no bloquees", no un error). */
-.necesita-cambio-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.68rem;
-  font-weight: 600;
-  font-family: inherit;
-  border: 1px dashed var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-}
-.necesita-cambio-toggle.activo {
-  border: 1px solid transparent;
+/* Badge de solo-lectura de "necesita cambio" en la tarjeta del placard --
+   pedido explícito del usuario: "agrupalo detrás de un solo botón que
+   despliegue las dos cosas juntas" (edición unificada en EditorPrenda,
+   ver Placard.tsx) -- el estado sigue visible en la tarjeta cerrada sin
+   tener que abrir el editor, mismo tono --warn que .nivel-con_cuidado/
+   .nivel-muy_bueno ("avisá, no bloquees", no un error). */
+.registro-badge-alerta {
   background: color-mix(in srgb, var(--warn) 20%, transparent);
   color: var(--warn);
 }

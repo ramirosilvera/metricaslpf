@@ -14,37 +14,42 @@ const ESTILOS_FILTRO: Estilo[] = ["formal", "oficina", "clasico", "urbano", "cas
  *  probar visualmente con datos de prueba reales, sin necesitar una
  *  sesión real. El default export de abajo es el único que sabe de
  *  Supabase; esto solo recibe `prendas` ya cargadas. */
+/** Lo que se puede editar inline desde una tarjeta del placard -- estilo/
+ *  estilos_secundarios (pedido: "visualizar y editar los estilos") y
+ *  necesita_cambio (pedido de la ronda anterior), unificados en un solo
+ *  botón "⚙️ Editar" y un solo guardado (pedido explícito del usuario:
+ *  "agrupalos detrás de un solo botón que despliegue las dos cosas
+ *  juntas" -- antes eran dos controles separados y siempre visibles en la
+ *  tarjeta, compitiendo por atención). */
+export interface CambiosPrenda {
+  estilo: Estilo | null;
+  estilos_secundarios: Estilo[];
+  necesita_cambio: boolean;
+}
+
 export function Contenido({
   prendas,
   base,
-  onToggleNecesitaCambio,
-  onEditarEstilos,
+  onGuardarEdicion,
 }: {
   prendas: Prenda[];
   base: string;
-  /** Pedido explícito del usuario: "que se pueda agregar la opción de que
-   *  una prenda necesita cambio". No existe ninguna pantalla de "editar
-   *  prenda" en la app (PrendaForm solo crea) -- para que esto sirva de
-   *  verdad con el placard que el usuario YA tiene cargado (no solo con
-   *  prendas nuevas), el toggle vive acá mismo, directo sobre la tarjeta.
-   *  Opcional: el snapshot de datos de prueba (ver el comentario de
-   *  Contenido) puede montarse sin esta prop, sin botón de toggle. */
-  onToggleNecesitaCambio?: (p: Prenda) => void;
-  /** Pedido explícito del usuario: "quiero que se puedan visualizar y
-   *  editar los estilos de las prendas de mi placard" -- mismo criterio
-   *  que onToggleNecesitaCambio: no hay pantalla de "editar prenda", así
-   *  que la edición vive inline en la tarjeta (ver EditorEstilos). Opcional
-   *  por el mismo motivo (datos de prueba sin Supabase). */
-  onEditarEstilos?: (p: Prenda, cambios: { estilo: Estilo | null; estilos_secundarios: Estilo[] }) => void;
+  /** No existe ninguna pantalla de "editar prenda" en la app (PrendaForm
+   *  solo crea) -- para que esto sirva de verdad con el placard que el
+   *  usuario YA tiene cargado (no solo con prendas nuevas), la edición
+   *  vive inline en la tarjeta (ver EditorPrenda). Opcional: el snapshot
+   *  de datos de prueba (ver el comentario de Contenido) puede montarse
+   *  sin esta prop, sin botón de edición. */
+  onGuardarEdicion?: (p: Prenda, cambios: CambiosPrenda) => void;
 }) {
   const [filtroEstilo, setFiltroEstilo] = useState<Estilo | null>(null);
   const [filtroColor, setFiltroColor] = useState<string | null>(null);
   const [filtroEstacion, setFiltroEstacion] = useState<Estacion | null>(null);
   const [busqueda, setBusqueda] = useState("");
-  // id de la prenda cuyo editor de estilos está abierto -- uno a la vez
-  // (mismo criterio que confirmandoBorradoId en Outfits.tsx), para no tener
+  // id de la prenda cuyo editor está abierto -- uno a la vez (mismo
+  // criterio que confirmandoBorradoId en Outfits.tsx), para no tener
   // varios formularios de edición abiertos compitiendo por atención.
-  const [editandoEstiloId, setEditandoEstiloId] = useState<string | null>(null);
+  const [editandoId, setEditandoId] = useState<string | null>(null);
 
   // Colores disponibles para filtrar: siempre los del placard COMPLETO (sin
   // aplicar todavía el resto de filtros/búsqueda), igual que ESTILOS_FILTRO
@@ -250,7 +255,7 @@ export function Contenido({
                         {nombreColor(p.color_h, p.color_s, p.color_l)}
                       </span>
                     </a>
-                    {(p.estilo || p.estilos_secundarios.length > 0 || p.estacion) && (
+                    {(p.estilo || p.estilos_secundarios.length > 0 || p.estacion || p.necesita_cambio) && (
                       <span style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0.3rem" }}>
                         {p.estilo && <span className="registro-badge">{ESTILO_LABEL[p.estilo]}</span>}
                         {/* Reporte real: estilos_secundarios se guardaba desde
@@ -265,37 +270,33 @@ export function Contenido({
                           </span>
                         ))}
                         {p.estacion && <span className="registro-badge">{ESTACION_LABEL[p.estacion]}</span>}
+                        {/* necesita_cambio ahora se edita adentro del panel
+                            "⚙️ Editar" de más abajo -- pero el estado sigue
+                            visible acá SIN abrir nada, como un badge más
+                            (mismo color --warn que ya usaba el toggle). */}
+                        {p.necesita_cambio && <span className="registro-badge registro-badge-alerta">🔧 Necesita cambio</span>}
                       </span>
                     )}
-                    {onEditarEstilos &&
-                      (editandoEstiloId === p.id ? (
-                        <EditorEstilos
+                    {onGuardarEdicion &&
+                      (editandoId === p.id ? (
+                        <EditorPrenda
                           p={p}
                           onGuardar={(cambios) => {
-                            onEditarEstilos(p, cambios);
-                            setEditandoEstiloId(null);
+                            onGuardarEdicion(p, cambios);
+                            setEditandoId(null);
                           }}
-                          onCancelar={() => setEditandoEstiloId(null)}
+                          onCancelar={() => setEditandoId(null)}
                         />
                       ) : (
                         <button
                           type="button"
                           className="btn btn-secondary"
                           style={{ fontSize: "0.7rem", padding: "0.25rem 0.6rem" }}
-                          onClick={() => setEditandoEstiloId(p.id)}
+                          onClick={() => setEditandoId(p.id)}
                         >
-                          ✏️ Editar estilos
+                          ⚙️ Editar
                         </button>
                       ))}
-                    {onToggleNecesitaCambio && (
-                      <button
-                        type="button"
-                        className={`necesita-cambio-toggle${p.necesita_cambio ? " activo" : ""}`}
-                        onClick={() => onToggleNecesitaCambio(p)}
-                      >
-                        {p.necesita_cambio ? "🔧 Necesita cambio" : "Marcar que necesita cambio"}
-                      </button>
-                    )}
                   </div>
                 ))}
               </div>
@@ -307,25 +308,28 @@ export function Contenido({
   );
 }
 
-/** Editor inline de estilo/estilos_secundarios de UNA prenda -- pedido
- *  explícito del usuario: "quiero que se puedan visualizar y editar los
- *  estilos de las prendas de mi placard". Mismo par de campos y mismo
- *  criterio que PrendaForm (elegir el principal saca automáticamente ese
- *  valor de "también funciona para"), reimplementado acá en vez de
- *  reusarse porque PrendaForm no exporta sus piezas internas (SelectOpcional
- *  no está exportado) y el flujo es de guardar-de-una (no hay paso de
- *  "cargar foto"/preset). */
-function EditorEstilos({
+/** Editor inline de UNA prenda -- pedido explícito del usuario: "visualizar
+ *  y editar los estilos" (ronda anterior) + "agrupalo detrás de un solo
+ *  botón que despliegue las dos cosas juntas" (esta ronda: antes
+ *  necesita_cambio tenía su propio toggle siempre visible, separado del
+ *  editor de estilos). Un solo panel, un solo Guardar -- estilo/
+ *  estilos_secundarios con el mismo criterio que PrendaForm (elegir el
+ *  principal saca automáticamente ese valor de "también funciona para"),
+ *  reimplementado acá en vez de reusarse porque PrendaForm no exporta sus
+ *  piezas internas (SelectOpcional no está exportado) y el flujo es de
+ *  guardar-de-una (no hay paso de "cargar foto"/preset). */
+function EditorPrenda({
   p,
   onGuardar,
   onCancelar,
 }: {
   p: Prenda;
-  onGuardar: (cambios: { estilo: Estilo | null; estilos_secundarios: Estilo[] }) => void;
+  onGuardar: (cambios: CambiosPrenda) => void;
   onCancelar: () => void;
 }) {
   const [estilo, setEstilo] = useState<Estilo | "">(p.estilo ?? "");
   const [secundarios, setSecundarios] = useState<Estilo[]>(p.estilos_secundarios);
+  const [necesitaCambio, setNecesitaCambio] = useState(p.necesita_cambio);
 
   return (
     <div style={{ width: "100%", textAlign: "left", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -365,12 +369,18 @@ function EditorEstilos({
           ))}
         </div>
       </div>
+      <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.75rem" }}>
+        <input type="checkbox" checked={necesitaCambio} onChange={(e) => setNecesitaCambio(e.target.checked)} />
+        <span>Necesita cambio pronto (usable por ahora, pero avisa en los outfits)</span>
+      </label>
       <div style={{ display: "flex", gap: "0.4rem" }}>
         <button
           type="button"
           className="btn btn-primary"
           style={{ fontSize: "0.75rem", padding: "0.35rem 0.6rem", flex: 1 }}
-          onClick={() => onGuardar({ estilo: estilo || null, estilos_secundarios: secundarios })}
+          onClick={() =>
+            onGuardar({ estilo: estilo || null, estilos_secundarios: secundarios, necesita_cambio: necesitaCambio })
+          }
         >
           Guardar
         </button>
@@ -455,26 +465,16 @@ export default function Placard() {
   if (prendas === null) return <p style={{ color: "var(--text-muted)" }}>Cargando tu placard...</p>;
 
   // Optimista: actualiza el estado local antes de esperar la respuesta de
-  // Supabase -- el peor caso (el update falla) es que el toggle vuelva a
+  // Supabase -- el peor caso (el update falla) es que la tarjeta vuelva a
   // su valor anterior en el próximo refresco de la pantalla, no distinto
-  // de cualquier otro fallo de red silencioso de esta pantalla.
-  async function toggleNecesitaCambio(p: Prenda) {
-    const nuevoValor = !p.necesita_cambio;
-    setPrendas((prev) => prev?.map((x) => (x.id === p.id ? { ...x, necesita_cambio: nuevoValor } : x)) ?? prev);
-    await supabase.from("prendas").update({ necesita_cambio: nuevoValor }).eq("id", p.id);
-  }
-
-  async function editarEstilos(p: Prenda, cambios: { estilo: Estilo | null; estilos_secundarios: Estilo[] }) {
+  // de cualquier otro fallo de red silencioso de esta pantalla. Un solo
+  // guardado para estilo/estilos_secundarios/necesita_cambio -- pedido
+  // explícito del usuario: "agrupalo detrás de un solo botón" (antes eran
+  // dos handlers separados, toggleNecesitaCambio y editarEstilos).
+  async function guardarEdicion(p: Prenda, cambios: CambiosPrenda) {
     setPrendas((prev) => prev?.map((x) => (x.id === p.id ? { ...x, ...cambios } : x)) ?? prev);
     await supabase.from("prendas").update(cambios).eq("id", p.id);
   }
 
-  return (
-    <Contenido
-      prendas={prendas}
-      base={base}
-      onToggleNecesitaCambio={toggleNecesitaCambio}
-      onEditarEstilos={editarEstilos}
-    />
-  );
+  return <Contenido prendas={prendas} base={base} onGuardarEdicion={guardarEdicion} />;
 }
