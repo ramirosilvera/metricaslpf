@@ -39,6 +39,7 @@ const TEXTURAS: Textura[] = [
   "acolchado",
   "poliester",
   "viscosa",
+  "impermeable",
 ];
 const ESTILOS: Estilo[] = ["casual", "formal", "deportivo", "urbano", "clasico"];
 const OCASIONES: Ocasion[] = ["casual", "laburo", "formal"];

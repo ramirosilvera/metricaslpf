@@ -551,12 +551,37 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                 // cerca del cuello del maniquí) -- y SIN las dos solapas
                 // triangulares: un cuello funnel no se abre, se mantiene
                 // cerrado sobre sí mismo.
-                <path
-                  d="M52 44 Q60 34 68 44 Q64 47 60 48 Q56 47 52 44 Z"
-                  fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
-                  stroke={stroke}
-                  {...strokeProps}
-                />
+                <>
+                  <path
+                    d="M52 44 Q60 34 68 44 Q64 47 60 48 Q56 47 52 44 Z"
+                    fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                    stroke={stroke}
+                    {...strokeProps}
+                  />
+                  {prenda.textura === "impermeable" && (
+                    // tapeta que cubre el cierre -- pedido explícito del
+                    // usuario ("la campera piloto en realidad es una
+                    // campera impermeable"), revisado como ingeniero
+                    // textil: un impermeable real tapa el cierre con una
+                    // solapa angosta para que no entre agua -- un
+                    // rompeviento deportivo (poliéster, mismo cuello funnel
+                    // de arriba) no la lleva, así que es lo único que
+                    // distingue a las dos prendas técnicas entre sí (mismo
+                    // criterio que PrendaIcon.tsx, ver ese comentario).
+                    // Offset a un lado del cierre, no centrada, como se ve
+                    // una tapeta real.
+                    <rect
+                      x="62"
+                      y="50"
+                      width="7"
+                      height="66"
+                      rx="1.5"
+                      fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                      stroke={stroke}
+                      {...strokeProps}
+                    />
+                  )}
+                </>
               ) : (
                 <>
                   {/* mismo rediseño de cuello camisero que en TorsoCuerpo/

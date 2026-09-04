@@ -22,22 +22,31 @@ export function esCamperaDePunto(categoria: Categoria, textura: Textura | null |
   return categoria === "campera" && textura === "lana" && estacion !== "invierno";
 }
 
-/** Rompeviento -- campera técnica deportiva (categoria="campera",
- *  textura="poliester", ver "campera-rompeviento-*" en catalogo.ts).
- *  Pedido explícito del usuario: revisar la campera deportiva como sastre
- *  y modista. La silueta genérica de campera (cuello camisero abierto en
- *  dos solapas hacia el pecho, mismo trazo que una campera de tela/jean)
- *  es exactamente lo opuesto de cómo se usa un rompeviento real: cierra
- *  hasta el cuello con un cuello alto (funnel/stand collar), no se lleva
- *  abierto sobre el pecho -- es viento/lluvia lo que corta, y un cuello
- *  abierto no cumple esa función. "poliester" alcanza solo (a diferencia
- *  de esCamperaDePunto): es la ÚNICA textura entre las camperas del
+/** Campera técnica -- rompeviento deportivo (categoria="campera",
+ *  textura="poliester", ver "campera-rompeviento-*" en catalogo.ts) O
+ *  campera impermeable (textura="impermeable", ver "campera-piloto-negra"
+ *  -- pedido explícito del usuario: "la campera piloto en realidad es una
+ *  campera impermeable"). Pedido explícito del usuario, revisado como
+ *  sastre/modista/ingeniero textil: la silueta genérica de campera (cuello
+ *  camisero abierto en dos solapas hacia el pecho, mismo trazo que una
+ *  campera de tela/jean) es exactamente lo opuesto de cómo se usan estas
+ *  dos prendas reales: las dos cierran hasta el cuello con un cuello alto
+ *  (funnel/stand collar), no se llevan abiertas sobre el pecho -- es
+ *  viento/lluvia lo que cortan, un cuello abierto no cumple esa función.
+ *  Deportivo vs. impermeable comparten esta misma silueta de base a
+ *  propósito (las dos son "campera técnica que cierra", la distinción real
+ *  entre entrenar y lluvia no cambia el cuello) -- lo que sí las separa es
+ *  la tapeta que cubre el cierre (solo en impermeable, ver el comentario
+ *  de esa rama en el switch de campera más abajo: un impermeable real
+ *  tapa el cierre para que no entre agua, un rompeviento deportivo no).
+ *  "poliester"/"impermeable" alcanzan solos (a diferencia de
+ *  esCamperaDePunto): son las ÚNICAS texturas entre las camperas del
  *  catálogo hoy, verificado contra catalogo.ts completo -- ninguna otra
- *  campera (de tela, de punto, acolchada) usa poliéster. Exportada, mismo
- *  motivo que esCamperaDePunto: ícono chico y maniquí grande comparten
+ *  campera (de tela, de punto, acolchada) las usa. Exportada, mismo motivo
+ *  que esCamperaDePunto: ícono chico y maniquí grande comparten
  *  EXACTAMENTE el mismo criterio. */
 export function esCamperaTecnica(categoria: Categoria, textura: Textura | null | undefined): boolean {
-  return categoria === "campera" && textura === "poliester";
+  return categoria === "campera" && (textura === "poliester" || textura === "impermeable");
 }
 
 // texturas que se dibujan como un patrón repetido (trama de tela) vs. las
@@ -56,8 +65,13 @@ export const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_g
 // sintético real (más notorio que en algodón/lino), no un patrón tejido.
 // viscosa -- mismo criterio: fibra de caída lisa y suave, con el brillo
 // sutil característico de la viscosa/rayón real (parecido al de la seda),
-// no una trama tejida como la lana.
-export const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso", "poliester", "viscosa"];
+// no una trama tejida como la lana. impermeable -- mismo criterio que
+// poliéster pero más marcado: un nylon/microfibra con tratamiento
+// impermeable es LISO Y BRILLOSO de verdad (el agua resbala, no se
+// absorbe como en una tela porosa), el más cercano a este grupo de los
+// tres -- pedido explícito del usuario ("la campera piloto en realidad es
+// una campera impermeable"), revisado como ingeniero textil.
+export const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso", "poliester", "viscosa", "impermeable"];
 
 /** El <pattern> real por textura -- son ilustraciones esquemáticas a
  *  propósito (líneas/formas simples que se repiten), no una textura
@@ -529,6 +543,19 @@ export function PrendaShape({
         <>
           <FormaConTextura d="M28 6 L32 8 L36 6 L54 16 L47 27 L42 22 L42 58 L22 58 L22 22 L17 27 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
           <line x1="32" y1="8" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
+          {textura === "impermeable" && (
+            // tapeta que cubre el cierre -- pedido explícito del usuario
+            // ("la campera piloto en realidad es una campera
+            // impermeable"), revisado como ingeniero textil: un
+            // impermeable real tapa el cierre con una solapa angosta para
+            // que no entre agua por ahí -- un rompeviento deportivo
+            // (poliéster, mismo cuello funnel de acá arriba) no la lleva,
+            // así que es lo único que distingue a las dos prendas técnicas
+            // entre sí a esta escala (comparten cuello y silueta a
+            // propósito, ver esCamperaTecnica). Offset a un lado del
+            // cierre (no centrada), como se ve una tapeta real.
+            <rect x="33" y="14" width="5" height="40" rx="1" fill={detalleHsl(tonoH, tonoS, tonoL)} stroke={stroke} strokeWidth={0.5} />
+          )}
         </>
       ) : (
         <>

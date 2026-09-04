@@ -24,7 +24,8 @@ export type Textura =
   | "denim"
   | "acolchado"
   | "poliester"
-  | "viscosa";
+  | "viscosa"
+  | "impermeable";
 
 export type Estilo = "casual" | "formal" | "deportivo" | "urbano" | "clasico";
 export type Ocasion = "casual" | "laburo" | "formal";
@@ -231,6 +232,14 @@ export function descripcionPrenda(p: Prenda): string {
   if (p.categoria === "campera") {
     if (p.textura === "denim") return "Campera de jean";
     if (p.textura === "acolchado") return "Campera de pluma";
+    // poliester/impermeable agregados junto con "campera-piloto-negra"
+    // (pedido explícito del usuario: "la campera piloto en realidad es una
+    // campera impermeable") -- a diferencia de campera+lana, acá SÍ
+    // identifican la prenda sin ambigüedad: hoy "poliester" es exclusivo
+    // del rompeviento deportivo e "impermeable" del piloto, verificado
+    // contra el resto del catálogo (ver esCamperaTecnica en PrendaIcon.tsx).
+    if (p.textura === "poliester") return "Campera rompeviento";
+    if (p.textura === "impermeable") return "Campera impermeable";
   }
   if (p.categoria === "camisa") {
     if (p.patron === "rayas") return "Camisa a rayas";

@@ -624,15 +624,23 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
   // piloto -- no es un rompeviento deportivo (más abajo) ni una campera de
   // vestir: es la campera de lluvia liviana/impermeable de uso diario
-  // (nylon/microfibra), verificado por búsqueda web. Sin textura a
-  // propósito: es nylon/microfibra impermeable, no la misma tela técnica de
-  // punto/poliéster que sí lleva el rompeviento de acá abajo -- ninguna
-  // Textura del enum describe "nylon impermeable" sin inventar un dato que
-  // la prenda real no tiene. "urbano", no "deportivo": se usa a diario en
-  // la calle, no para entrenar (mismo criterio que campera-negra, no
-  // camisa-negra) -- por eso tampoco entra en el "poliéster por defecto"
-  // que sí aplica a las prendas con estilo "deportivo".
-  { id: "campera-piloto-negra", nombre: "Campera piloto negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
+  // (nylon/microfibra), verificado por búsqueda web. Pedido explícito del
+  // usuario, revisado como sastre/ingeniero textil: "la campera piloto en
+  // realidad es una campera impermeable" -- hasta esta revisión se dejaba
+  // sin textura (ninguna del enum describía "nylon impermeable" sin
+  // inventar un dato falso), lo que la volvía indistinguible de
+  // campera-negra en los hechos (mismo estilo/ocasión, ningún otro campo
+  // las separaba). Se agrega "impermeable" como textura real (migración
+  // 0024), mismo criterio que denim/acolchado/poliéster/viscosa/frisado:
+  // dibuja un patrón/brillo real en el ícono y el maniquí (ver
+  // TEXTURA_BRILLO en PrendaIcon.tsx -- una tela técnica tratada brilla
+  // más que el algodón/lana, mismo criterio que ya vale para poliéster/
+  // seda/cuero_liso), y además distingue esta prenda de una campera de
+  // tela lisa. "urbano", no "deportivo": se usa a diario en la calle, no
+  // para entrenar (mismo criterio que campera-negra, no camisa-negra) --
+  // por eso tampoco entra en el "poliéster por defecto" que sí aplica a
+  // las prendas con estilo "deportivo".
+  { id: "campera-piloto-negra", nombre: "Campera piloto negra", categoria: "campera", colorHex: "#1A1A1A", textura: "impermeable", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
   // sweater con cierre -- de punto/lana, no un buzo ni un sweater sin
   // cierre (esos ya están en sus propias categorías): es una prenda de
   // punto que se usa COMO campera, así que va en categoria="campera" con
