@@ -250,6 +250,20 @@ const FAMILIA_TEXTURA: Record<string, "liso" | "texturado"> = {
   // catalogo.ts) -- sin la trama tejida marcada de la lana, mismo brillo
   // sutil que seda/poliéster (ver TEXTURA_BRILLO en Maniqui.tsx).
   viscosa: "liso",
+  // impermeable/tricot -- faltaban acá, mismo motivo que denim/acolchado
+  // más abajo: el enum Textura creció (rondas de catálogo "campera
+  // impermeable"/"campera deportiva de entretiempo") y este mapa no se
+  // actualizó, así que la técnica de rescate "separar por textura" nunca
+  // se ofrecía para ninguna de las dos -- encontrado en la auditoría
+  // integral de Consejo (roles: sastre/ingeniero textil), revisando el
+  // enum Textura completo contra este mapa. Mismo criterio ya establecido
+  // en PrendaIcon.tsx (TEXTURA_BRILLO, ver su comentario largo): las dos
+  // son LISAS y brillosas de verdad (nylon impermeable, punto tricot con
+  // brillo característico), sin trama tejida visible como la lana/tejido
+  // grueso/frisado -- mismo grupo que poliéster/seda/viscosa, no el de
+  // denim/acolchado.
+  impermeable: "liso",
+  tricot: "liso",
   lana: "texturado",
   pana: "texturado",
   corderoy: "texturado",
@@ -520,14 +534,33 @@ const TECHO_FORMALIDAD_POR_CATEGORIA: Partial<Record<Categoria, number>> = {
  *  declarados, vía estilosDe), acotado por su techo de categoría si
  *  corresponde -- ver TECHO_FORMALIDAD_POR_CATEGORIA. undefined si la
  *  prenda no declaró ningún estilo con rango conocido (no se inventa un
- *  valor por defecto, mismo criterio que el resto de estas reglas). */
+ *  valor por defecto, mismo criterio que el resto de estas reglas).
+ *
+ *  Calzado: mismo argumento que TECHO_FORMALIDAD_POR_CATEGORIA, pero
+ *  dentro de una sola categoría -- "calzado" en sí no tiene techo (un
+ *  zapato de vestir SÍ puede ser genuinamente formal), pero el CORTE
+ *  real de la zapatilla sí importa: una zapatilla urbana, de lona o de
+ *  running es sastrería intrínsecamente informal por construcción (suela
+ *  de goma, sin cordón/costura de vestir), sea cual sea el estilo
+ *  cargado. Consejo, auditoría integral (roles: sastre/asesor de imagen)
+ *  -- verificado contra el placard real del usuario: una zapatilla
+ *  urbana (corte_calzado="zapatilla_urbana", estilo="urbano",
+ *  estilos_secundarios=["casual","clasico"]) aparecía como opción YA
+ *  LISTA en "Vestite hoy > Formal" Y "Clásico" -- 4 de los outfits
+ *  "formal" y 2 de los "clásico" del pool real la usaban como calzado.
+ *  CORTES_DE_VESTIR (declarado más arriba, ya usado por prendaDeCuero)
+ *  es la única excepción real: un zapato de vestir o un mocasín sí
+ *  pueden alcanzar rango 2 sin techo. */
 function rangoDeFormalidad(p: Prenda): number | undefined {
   const rangos = estilosDe(p)
     .map((e) => FORMALIDAD_ESTILO[e])
     .filter((r): r is number => r !== undefined);
   if (rangos.length === 0) return undefined;
   const rango = Math.max(...rangos);
-  const techo = TECHO_FORMALIDAD_POR_CATEGORIA[p.categoria];
+  let techo = TECHO_FORMALIDAD_POR_CATEGORIA[p.categoria];
+  if (p.categoria === "calzado" && !CORTES_DE_VESTIR.includes(p.corte_calzado)) {
+    techo = techo === undefined ? 1 : Math.min(techo, 1);
+  }
   return techo !== undefined ? Math.min(rango, techo) : rango;
 }
 
@@ -1249,13 +1282,17 @@ function esDeOficina(p: Prenda): boolean {
  *  que el usuario elija nada -- un outfit por cada prenda de piernas
  *  (pantalón, bermuda o short deportivo -- CATEGORIAS_PIERNAS, la categoría
  *  que conecta con todas las demás en CATEGORIAS_COMPLEMENTARIAS, el ancla
- *  natural) y por cada torso propio que combine al menos "muy_bueno" con
- *  esa ancla -- nunca fuerza un "con cuidado". Varía el torso (no calzado/
- *  accesorio) porque es la prenda que más define la identidad visual de un
- *  outfit en el maniquí; esto es lo que le da al usuario "otras opciones"
- *  para ir rotando en vez de una sola combinación fija por ancla. Devuelve
- *  el pool completo, mejor primero por ancla y, entre opciones parejas en
- *  color, con `clima` primero (ver ordenarPorEstacion) -- la UI decide
+ *  natural), por cada torso propio que combine al menos "muy_bueno" con esa
+ *  ancla, y por cada calzado/accesorio propio que también combine al menos
+ *  "muy_bueno" (ver el comentario de candidatasPropias más abajo, en el
+ *  cuerpo de la función -- reporte real del usuario: "el motor nunca está
+ *  ofreciendo las zapatillas blancas", porque antes solo el calzado/
+ *  accesorio "más top" entraba, siempre el mismo por ancla) -- nunca fuerza
+ *  un "con cuidado". Esto es lo que le da al usuario "otras opciones" para
+ *  ir rotando de verdad, usando todo el placard, en vez de una sola
+ *  combinación fija por ancla. Devuelve el pool completo, mejor primero por
+ *  ancla y, entre opciones parejas en color, con `clima` primero (ver
+ *  ordenarPorEstacion) -- la UI decide
  *  cuántas mostrar de una vez.
  *
  *  `clima` -- pedido explícito del usuario: "quiero que en cada sección me

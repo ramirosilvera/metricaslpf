@@ -958,6 +958,46 @@ describe("registroOutfit / advertenciasDeRegistro", () => {
     camisaFormal.estilo = "formal";
     expect(advertenciasDeRegistro([pantalonVestir, camisaFormal])).toEqual([]);
   });
+
+  // Consejo, auditoría integral (rol: sastre/asesor de imagen) -- verificado
+  // contra el placard real del usuario: una zapatilla urbana (corte_calzado
+  // default, "zapatilla_urbana") tageada con "clasico" como estilo
+  // secundario aparecía como calzado YA LISTO en "Vestite hoy > Formal" y
+  // "Clásico" -- ninguna zapatilla (urbana, de lona o de running) es
+  // calzado de vestir real por más que se la tagee así, es una cuestión de
+  // CONSTRUCCIÓN (suela de goma, sin costura de vestir), no de estilo
+  // declarado. Un zapato de vestir o un mocasín (CORTES_DE_VESTIR) siguen
+  // sin techo -- esos sí son cuero de vestir real.
+  it("una zapatilla (urbana/lona/running) tageada 'clasico' o 'formal' SIGUE avisando -- ninguna zapatilla es calzado de vestir real", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const zapatillaUrbana = mkPrenda("calzado", "#1F2A44", 222, 39, 21);
+    zapatillaUrbana.estilo = "urbano";
+    zapatillaUrbana.estilos_secundarios = ["casual", "clasico"];
+    zapatillaUrbana.corte_calzado = "zapatilla_urbana";
+    expect(advertenciasDeRegistro([pantalonVestir, zapatillaUrbana])).toEqual(["calzado más informal que el pantalon"]);
+
+    const zapatillaRunning = { ...zapatillaUrbana, corte_calzado: "zapatilla_running" as const };
+    expect(advertenciasDeRegistro([pantalonVestir, zapatillaRunning])).toEqual(["calzado más informal que el pantalon"]);
+
+    const zapatillaLona = { ...zapatillaUrbana, corte_calzado: "zapatilla_lona" as const };
+    expect(advertenciasDeRegistro([pantalonVestir, zapatillaLona])).toEqual(["calzado más informal que el pantalon"]);
+  });
+
+  it("un zapato de vestir o un mocasín SÍ pueden ser genuinamente formales/clásicos -- el techo de calzado no los toca", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+
+    const zapatoVestir = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoVestir.estilo = "formal";
+    zapatoVestir.corte_calzado = "zapato_vestir";
+    expect(advertenciasDeRegistro([pantalonVestir, zapatoVestir])).toEqual([]);
+
+    const mocasin = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    mocasin.estilo = "clasico";
+    mocasin.corte_calzado = "mocasin";
+    expect(advertenciasDeRegistro([pantalonVestir, mocasin])).toEqual([]);
+  });
 });
 
 describe("recomendar -- corbata necesita cuello", () => {
@@ -1071,6 +1111,29 @@ describe("tecnicaRescate", () => {
     const remera = { ...candidato, textura: "algodon" as const };
     const conAlgodon = tecnicaRescate(remeraDeportiva, remera, [remeraDeportiva, remera]);
     expect(conAlgodon).not.toContain("textura");
+  });
+
+  // Consejo, auditoría integral (rol: ingeniero textil) -- FAMILIA_TEXTURA
+  // se armó con 8 valores y se fue actualizando de a pares cada vez que el
+  // enum Textura creció (denim/acolchado en la 2da ronda, ver el test de
+  // arriba), pero "impermeable" y "tricot" -- agregados en una ronda
+  // posterior de catálogo -- quedaron afuera del mapa: sin entrada,
+  // tecnicaRescate nunca ofrecía "separar por textura" para ninguna de las
+  // dos, aunque el resto del motor (PrendaIcon.tsx, TEXTURA_BRILLO) ya las
+  // trata como una familia real y distinta de la lana/tejido grueso.
+  it("impermeable y tricot cuentan como 'liso' (mismo grupo que poliéster/seda/viscosa, ver TEXTURA_BRILLO) -- separan por textura contra lana", () => {
+    const camperaImpermeable = { ...base, textura: "impermeable" as const };
+    const sweaterLana = { ...candidato, textura: "lana" as const };
+    expect(tecnicaRescate(camperaImpermeable, sweaterLana, [camperaImpermeable, sweaterLana])).toContain("textura");
+
+    const camperaTricot = { ...base, textura: "tricot" as const };
+    expect(tecnicaRescate(camperaTricot, sweaterLana, [camperaTricot, sweaterLana])).toContain("textura");
+
+    // pero NO entre sí, ni contra otro "liso" (poliéster) -- misma familia.
+    const remeraPoliester = { ...candidato, textura: "poliester" as const };
+    expect(tecnicaRescate(camperaImpermeable, remeraPoliester, [camperaImpermeable, remeraPoliester])).not.toContain(
+      "textura",
+    );
   });
 });
 
