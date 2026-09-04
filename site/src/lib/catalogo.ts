@@ -836,6 +836,10 @@ export function presetAPrendaSintetica(preset: PresetPrenda & { hsl: { h: number
     color2_l: hsl2?.l ?? null,
     corte_calzado: preset.corteCalzado ?? "zapatilla_urbana",
     calce: preset.calce ?? "regular",
+    // el catálogo de presets/sugerencias nunca modela una prenda gastada
+    // -- necesita_cambio es un dato real de UNA prenda puntual que el
+    // usuario ya tiene puesta, no algo que tenga sentido en un preset.
+    necesita_cambio: false,
     created_at: "",
     updated_at: "",
   };

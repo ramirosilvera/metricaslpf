@@ -187,6 +187,17 @@ export interface Prenda {
    *  solo dibujo), calce SÍ entra en una regla real del motor
    *  (chocanEnVolumen en recommend.ts) -- no es puramente visual. */
   calce: Calce;
+  /** Pedido explícito del usuario: "que se pueda agregar la opción de que
+   *  una prenda necesita cambio... todavía es usable pero necesita cambio
+   *  en breve. Lo que no es usable directamente no está en mi placard."
+   *  Puramente informativo -- a diferencia de suela_contraste/
+   *  requiere_cuello (que sí entran en reglas de combinación), esto NO
+   *  cambia el puntaje ni bloquea nada: el motor la trata como cualquier
+   *  otra prenda utilizable. Solo dispara un aviso en la UI (ver
+   *  Outfits.tsx) para que el usuario sepa que, aunque el outfit combine
+   *  bien, alguna prenda puesta ahí conviene reemplazarla pronto. Default
+   *  false: no se marca nada como gastado que el usuario no cargó así. */
+  necesita_cambio: boolean;
   created_at: string;
   updated_at: string;
 }

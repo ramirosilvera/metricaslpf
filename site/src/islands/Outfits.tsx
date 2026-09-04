@@ -169,6 +169,25 @@ function RegistroBadge({ prendas, estiloTab }: { prendas: Prenda[]; estiloTab?: 
   );
 }
 
+/** Pedido explícito del usuario: "que se pueda agregar la opción de que
+ *  una prenda necesita cambio y que en outfit la tome como ok pero te
+ *  tire una alerta. Todavía es usable pero necesita cambio en breve."
+ *  Puramente informativo -- no toca puntuarOutfit ni ningún chequeo de
+ *  outfitSirveParaEstilo (necesita_cambio es un dato de la prenda, no una
+ *  regla de compatibilidad), solo un aviso adicional junto a
+ *  RegistroBadge, mismo criterio visual ("⚠"/color --warn) que ya usa esa
+ *  advertencia para el desentono de registro. */
+function AvisoNecesitaCambio({ prendas }: { prendas: Prenda[] }) {
+  const gastadas = prendas.filter((p) => p.necesita_cambio);
+  if (gastadas.length === 0) return null;
+  const nombres = gastadas.map((p) => descripcionPrenda(p)).join(" y ");
+  return (
+    <p style={{ margin: "0.3rem 0 0", fontSize: "0.7rem", color: "var(--warn)" }}>
+      🔧 {nombres} {gastadas.length === 1 ? "necesita" : "necesitan"} cambio pronto.
+    </p>
+  );
+}
+
 /** Una tarjeta de "Vestite hoy" -- extraída para no duplicar el markup
  *  entre la opción principal y la de contraste (ver candidatosDeContraste
  *  en recommend.ts). `etiquetaGrupo` es el rótulo fijo ("Mejor opción" /
@@ -205,6 +224,7 @@ function TarjetaSugerido({
         </p>
         <PuntajeBadge prendas={s.prendas} precomputado={{ puntaje: s.puntaje, explicacion: s.explicacionPuntaje }} />
         <RegistroBadge prendas={s.prendas} estiloTab={estiloTab} />
+        <AvisoNecesitaCambio prendas={s.prendas} />
       </div>
       {errorGuardar[s.id] && <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>}
       <button
@@ -923,6 +943,7 @@ export function Contenido({
                   </p>
                   <PuntajeBadge prendas={o.prendas} />
                   <RegistroBadge prendas={o.prendas} estiloTab={filtroEstilo ?? undefined} />
+                  <AvisoNecesitaCambio prendas={o.prendas} />
                 </div>
                 {errorEliminar[o.id] && (
                   <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorEliminar[o.id]}</p>

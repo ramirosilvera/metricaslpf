@@ -2877,6 +2877,32 @@ describe("puntuarOutfit", () => {
 // avisar). Escenario tomado del ejemplo real del usuario: "la mejor
 // valoración de tu outfit es de X, te recomiendo comprar esto para
 // subirla" -- este es el caso que arma la validación de punta a punta.
+// Pedido explícito del usuario: "que se pueda agregar la opción de que
+// una prenda necesita cambio... en outfit la tome como ok pero te tire
+// una alerta". Guarda de regresión: necesita_cambio es puramente
+// informativo (el aviso vive en la UI, ver AvisoNecesitaCambio en
+// Outfits.tsx) -- estos tests confirman que ni el puntaje ni si un outfit
+// "sirve" para un estilo cambian según este dato, para que nadie meta sin
+// querer una penalización acá más adelante.
+describe("necesita_cambio -- puramente informativo, no afecta el motor", () => {
+  it("puntuarOutfit da exactamente el mismo puntaje con necesita_cambio en true o en false", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const remera = mkPrenda("remera", "#8C8C8C", 0, 0, 60);
+    const sinMarcar = puntuarOutfit([pantalon, remera]);
+    const conMarcar = puntuarOutfit([{ ...pantalon, necesita_cambio: true }, { ...remera, necesita_cambio: true }]);
+    expect(conMarcar.puntaje).toBe(sinMarcar.puntaje);
+    expect(conMarcar.explicacion).toBe(sinMarcar.explicacion);
+  });
+
+  it("outfitSirveParaEstilo no se ve afectado por necesita_cambio", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "casual";
+    pantalon.estilos_secundarios = ["urbano"];
+    expect(outfitSirveParaEstilo([pantalon], "urbano")).toBe(true);
+    expect(outfitSirveParaEstilo([{ ...pantalon, necesita_cambio: true }], "urbano")).toBe(true);
+  });
+});
+
 const catalogoPorId = Object.fromEntries(CATALOGO_CON_HSL.map((p) => [p.id, p]));
 const placardFormalSinZapatosDeVestir: Prenda[] = [
   "pantalon-vestir-negro",
@@ -3116,6 +3142,7 @@ function mkPrenda(
     color2_l: null,
     corte_calzado: "zapatilla_urbana",
     calce: "regular",
+    necesita_cambio: false,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };

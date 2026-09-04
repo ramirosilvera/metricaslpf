@@ -118,6 +118,13 @@ export default function PrendaForm() {
   // el único que no tenía ningún dato. Ver Calce en types.ts y
   // chocanEnVolumen en recommend.ts.
   const [calce, setCalce] = useState<Calce>(presetDePrefill?.calce ?? "regular");
+  // necesita_cambio -- pedido explícito del usuario: "que se pueda agregar
+  // la opción de que una prenda necesita cambio... todavía es usable pero
+  // necesita cambio en breve". Nunca viene precargada de un preset (no
+  // tiene sentido cargar del catálogo una prenda ya "gastada") -- siempre
+  // arranca en false acá, a diferencia del resto de los campos que sí
+  // heredan del preset elegido.
+  const [necesitaCambio, setNecesitaCambio] = useState(false);
   const [fotoBlob, setFotoBlob] = useState<Blob | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [estado, setEstado] = useState<"idle" | "guardando" | "error">("idle");
@@ -210,6 +217,7 @@ export default function PrendaForm() {
           color2_l: hsl2?.l ?? null,
           corte_calzado: categoria === "calzado" ? corteCalzado : "zapatilla_urbana",
           calce: CATEGORIAS_CON_CALCE.includes(categoria) ? calce : "regular",
+          necesita_cambio: necesitaCambio,
         })
         .select()
         .single();
@@ -331,6 +339,10 @@ export default function PrendaForm() {
             </div>
             <SelectOpcional label="Ocasión" value={ocasion} onChange={setOcasion} opciones={OCASIONES} />
             <SelectOpcional label="Estación" value={estacion} onChange={setEstacion} opciones={ESTACIONES} />
+            <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <input type="checkbox" checked={necesitaCambio} onChange={(e) => setNecesitaCambio(e.target.checked)} />
+              <span>Necesita cambio pronto (usable por ahora, pero avisame en los outfits)</span>
+            </label>
             {CATEGORIAS_CON_CALCE.includes(categoria) && (
               <label className="field-label">
                 <span>Calce</span>

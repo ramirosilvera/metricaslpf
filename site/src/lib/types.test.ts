@@ -28,6 +28,7 @@ function mkPrenda(categoria: Prenda["categoria"], overrides: Partial<Prenda> = {
     color2_l: null,
     corte_calzado: "zapatilla_urbana",
     calce: "regular",
+    necesita_cambio: false,
     created_at: "",
     updated_at: "",
     ...overrides,

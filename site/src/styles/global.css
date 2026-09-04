@@ -793,6 +793,30 @@ body.tiene-aviso-actualizacion {
 .prenda-card:active {
   transform: scale(0.98);
 }
+/* Toggle de "necesita cambio" en cada tarjeta del placard -- estado
+   apagado (aún no marcada) discreto y con borde punteado, para no
+   competir visualmente con los badges de estilo/estación reales; estado
+   prendido usa --warn (mismo tono que .nivel-con_cuidado/.nivel-muy_bueno
+   -- "avisá, no bloquees", no un error). */
+.necesita-cambio-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: 1px dashed var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.necesita-cambio-toggle.activo {
+  border: 1px solid transparent;
+  background: color-mix(in srgb, var(--warn) 20%, transparent);
+  color: var(--warn);
+}
 .prenda-card-icon {
   width: 48px;
   height: 48px;

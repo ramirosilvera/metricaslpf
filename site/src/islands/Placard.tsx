@@ -14,7 +14,22 @@ const ESTILOS_FILTRO: Estilo[] = ["formal", "oficina", "clasico", "urbano", "cas
  *  probar visualmente con datos de prueba reales, sin necesitar una
  *  sesión real. El default export de abajo es el único que sabe de
  *  Supabase; esto solo recibe `prendas` ya cargadas. */
-export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }) {
+export function Contenido({
+  prendas,
+  base,
+  onToggleNecesitaCambio,
+}: {
+  prendas: Prenda[];
+  base: string;
+  /** Pedido explícito del usuario: "que se pueda agregar la opción de que
+   *  una prenda necesita cambio". No existe ninguna pantalla de "editar
+   *  prenda" en la app (PrendaForm solo crea) -- para que esto sirva de
+   *  verdad con el placard que el usuario YA tiene cargado (no solo con
+   *  prendas nuevas), el toggle vive acá mismo, directo sobre la tarjeta.
+   *  Opcional: el snapshot de datos de prueba (ver el comentario de
+   *  Contenido) puede montarse sin esta prop, sin botón de toggle. */
+  onToggleNecesitaCambio?: (p: Prenda) => void;
+}) {
   const [filtroEstilo, setFiltroEstilo] = useState<Estilo | null>(null);
   const [filtroColor, setFiltroColor] = useState<string | null>(null);
   const [filtroEstacion, setFiltroEstacion] = useState<Estacion | null>(null);
@@ -219,6 +234,23 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
                         {p.estacion && <span className="registro-badge">{ESTACION_LABEL[p.estacion]}</span>}
                       </span>
                     )}
+                    {onToggleNecesitaCambio && (
+                      <button
+                        type="button"
+                        className={`necesita-cambio-toggle${p.necesita_cambio ? " activo" : ""}`}
+                        style={{ marginTop: "0.3rem" }}
+                        onClick={(e) => {
+                          // la tarjeta entera es un <a> (navega a Combinar) --
+                          // sin esto, tocar el toggle también dispararía la
+                          // navegación.
+                          e.preventDefault();
+                          e.stopPropagation();
+                          onToggleNecesitaCambio(p);
+                        }}
+                      >
+                        {p.necesita_cambio ? "🔧 Necesita cambio" : "Marcar que necesita cambio"}
+                      </button>
+                    )}
                   </a>
                 ))}
               </div>
@@ -297,5 +329,15 @@ export default function Placard() {
 
   if (prendas === null) return <p style={{ color: "var(--text-muted)" }}>Cargando tu placard...</p>;
 
-  return <Contenido prendas={prendas} base={base} />;
+  // Optimista: actualiza el estado local antes de esperar la respuesta de
+  // Supabase -- el peor caso (el update falla) es que el toggle vuelva a
+  // su valor anterior en el próximo refresco de la pantalla, no distinto
+  // de cualquier otro fallo de red silencioso de esta pantalla.
+  async function toggleNecesitaCambio(p: Prenda) {
+    const nuevoValor = !p.necesita_cambio;
+    setPrendas((prev) => prev?.map((x) => (x.id === p.id ? { ...x, necesita_cambio: nuevoValor } : x)) ?? prev);
+    await supabase.from("prendas").update({ necesita_cambio: nuevoValor }).eq("id", p.id);
+  }
+
+  return <Contenido prendas={prendas} base={base} onToggleNecesitaCambio={toggleNecesitaCambio} />;
 }
