@@ -58,16 +58,29 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
       <span>Hay una versión nueva de Mi ropa.</span>
       <button type="button" onclick="location.reload()">Actualizar</button>
     </div>
+    <!-- Pedido explícito del usuario: "que la sección de inicio sea
+         outfit... revisá el resto del orden para que haya una línea y
+         tengan sentido". Orden nuevo -- una narrativa de uso real, no
+         alfabético ni el orden histórico en que se fueron agregando las
+         pantallas:
+         1. Outfits (ahora la home, "/") -- la acción del día a día:
+            vestirte hoy con lo que ya tenés.
+         2. Placard -- tu guardarropa completo, lo que Outfits usa.
+         3. + Prenda -- sumar algo nuevo a ese guardarropa.
+         4. Probar -- decidir si comprar algo TODAVÍA no cargado.
+         5. Estadísticas -- una vista de análisis/reportes, al final a
+            propósito (no es una acción del día a día como las anteriores).
+         Placard se mudó de "/" a "/placard/" -- Outfits toma la home. -->
     <nav class="tabbar">
+      <a href={import.meta.env.BASE_URL} class={path === import.meta.env.BASE_URL ? "active" : ""}>Outfits</a>
       <a
-        href={import.meta.env.BASE_URL}
-        class={path === import.meta.env.BASE_URL || path.includes("/combinar/") ? "active" : ""}
+        href={`${import.meta.env.BASE_URL}placard/`}
+        class={path.includes("/placard/") || path.includes("/combinar/") ? "active" : ""}
       >
         Placard
       </a>
       <a href={`${import.meta.env.BASE_URL}prenda/nueva/`} class={path.includes("/prenda/") ? "active" : ""}>+ Prenda</a>
       <a href={`${import.meta.env.BASE_URL}probar/`} class={path.includes("/probar/") ? "active" : ""}>Probar</a>
-      <a href={`${import.meta.env.BASE_URL}outfits/`} class={path.includes("/outfits/") ? "active" : ""}>Outfits</a>
       <a href={`${import.meta.env.BASE_URL}estadisticas/`} class={path.includes("/estadisticas/") ? "active" : ""}>Estadísticas</a>
     </nav>
     <script>

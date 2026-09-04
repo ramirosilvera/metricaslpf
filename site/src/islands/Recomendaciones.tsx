@@ -87,7 +87,7 @@ export default function Recomendaciones() {
     return (
       <div className="empty-state">
         <p>No encontré esa prenda en tu placard.</p>
-        <a className="btn btn-primary" href={`${base_url}`}>
+        <a className="btn btn-primary" href={`${base_url}placard/`}>
           Volver al placard
         </a>
       </div>
@@ -166,7 +166,7 @@ export default function Recomendaciones() {
       }
       // replace, no href: que la URL de una prenda ya borrada no quede en
       // el historial (evita reaparecer vía bfcache al volver atrás).
-      window.location.replace(base_url);
+      window.location.replace(`${base_url}placard/`);
     } catch (e) {
       setErrorEliminar(e instanceof Error ? e.message : "No se pudo eliminar la prenda.");
       setEliminando(false);
@@ -379,7 +379,7 @@ export default function Recomendaciones() {
       {(seleccionadas.size > 0 || guardando || guardado || errorGuardado) && (
         <div className="save-bar">
           {guardado ? (
-            <span>✓ Outfit guardado — <a href={`${base_url}outfits/`}>verlo</a></span>
+            <span>✓ Outfit guardado — <a href={base_url}>verlo</a></span>
           ) : errorGuardado ? (
             <span style={{ color: "#ffb3ab" }}>{errorGuardado}</span>
           ) : (

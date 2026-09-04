@@ -722,7 +722,7 @@ export function Contenido({
           botón <strong>"Guardar outfit"</strong> que aparece abajo. Cargá algún pantalón para que Mi ropa también te
           arme sugerencias solo.
         </p>
-        <a className="btn btn-primary" href={base}>
+        <a className="btn btn-primary" href={`${base}placard/`}>
           Ir al placard
         </a>
       </div>

@@ -1,13 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
-import Placard from "../islands/Placard";
+import Outfits from "../islands/Outfits";
 ---
 
-<Base title="Placard">
+<Base title="Outfits">
   <p class="eyebrow">Mi ropa</p>
-  <h1>Tu placard</h1>
-  <p style="color: var(--text-muted); margin-top: -0.25rem;">
-    Elegí una prenda para ver con qué combina, y por qué.
-  </p>
-  <Placard client:only="react" />
+  <h1>Tus outfits</h1>
+  <Outfits client:only="react" />
 </Base>
