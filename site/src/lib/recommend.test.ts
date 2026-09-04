@@ -785,6 +785,30 @@ describe("outfitSirveParaEstilo", () => {
     remera.estilo = "casual";
     expect(outfitSirveParaEstilo([remera], "casual")).toBe(false);
   });
+
+  // Consejo, revisión integral: "el motor tampoco respeta los estilos de
+  // cada prenda" -- un short deportivo tageado a mano como "formal" (nada
+  // en PrendaForm lo impide) nunca puede servir de ancla para "formal" o
+  // "clasico": ningún short es indumentaria de vestir, sea cual sea la
+  // etiqueta. Ver TECHO_FORMALIDAD_POR_CATEGORIA en recommend.ts.
+  it("un short deportivo tageado 'formal' a mano no sirve como ancla de formal/clasico, aunque el tag lo diga", () => {
+    const shortFormal = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    shortFormal.estilo = "formal";
+    expect(outfitSirveParaEstilo([shortFormal], "formal")).toBe(false);
+    expect(outfitSirveParaEstilo([shortFormal], "clasico")).toBe(false);
+  });
+
+  it("el techo no afecta rangos por debajo de él -- un short deportivo sigue sirviendo para su propio estilo real", () => {
+    const shortDeportivo = mkPrenda("short_deportivo", "#1A1A1A", 0, 0, 10);
+    shortDeportivo.estilo = "deportivo";
+    expect(outfitSirveParaEstilo([shortDeportivo], "deportivo")).toBe(true);
+  });
+
+  it("un pantalón o bermuda SÍ pueden servir para formal/clasico -- el techo es solo para categorías intrínsecamente informales", () => {
+    const bermudaFormal = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermudaFormal.estilo = "formal";
+    expect(outfitSirveParaEstilo([bermudaFormal], "formal")).toBe(true);
+  });
 });
 
 describe("outfitEsCoherenteParaEstilo", () => {
@@ -887,6 +911,52 @@ describe("registroOutfit / advertenciasDeRegistro", () => {
     buzo.estilo = "casual";
     const avisos = advertenciasDeRegistro([bermudaClasico, buzo]);
     expect(avisos).toEqual(["buzo más informal que el bermuda"]);
+  });
+
+  // Consejo, revisión integral: "el motor tampoco respeta los estilos de
+  // cada prenda... en urbano puso un jean con una campera deportiva".
+  // Verificado contra el placard REAL del usuario (vía Supabase MCP): no
+  // se reprodujo ESE caso puntual (ya lo bloqueaba el fix anterior de
+  // outfitEsCoherenteParaEstilo), pero la auditoría completa de su
+  // placard encontró un caso real y sí vigente -- una remera básica con
+  // estilos_secundarios=["urbano","clasico","formal"] (PrendaForm no
+  // restringe qué estilo puede llevar cada categoría) armaba "Vestite
+  // hoy > Formal" con pantalón de vestir + esa remera + zapatos de cuero.
+  // Ver TECHO_FORMALIDAD_POR_CATEGORIA en recommend.ts.
+  it("una remera tageada 'formal' a mano SIGUE avisando -- ninguna remera es indumentaria formal real", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const remeraFormal = mkPrenda("remera", "#D8C7A1", 40, 30, 70);
+    remeraFormal.estilo = "casual";
+    remeraFormal.estilos_secundarios = ["urbano", "clasico", "formal"];
+    const avisos = advertenciasDeRegistro([pantalonVestir, remeraFormal]);
+    expect(avisos).toEqual(["remera más informal que el pantalon"]);
+  });
+
+  it("mismo caso pero con la remera tageada 'clasico' puro -- también avisa (clasico y formal comparten rango 2)", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const remeraClasica = mkPrenda("remera", "#B7D2EC", 209, 58, 82);
+    remeraClasica.estilo = "clasico";
+    remeraClasica.estilos_secundarios = ["casual"];
+    const avisos = advertenciasDeRegistro([pantalonVestir, remeraClasica]);
+    expect(avisos).toEqual(["remera más informal que el pantalon"]);
+  });
+
+  it("el techo no inventa avisos donde antes no había -- una remera 'clasico' sigue sin chocar contra un pantalón 'casual'", () => {
+    const pantalonCasual = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonCasual.estilo = "casual";
+    const remeraClasica = mkPrenda("remera", "#B7D2EC", 209, 58, 82);
+    remeraClasica.estilo = "clasico";
+    expect(advertenciasDeRegistro([pantalonCasual, remeraClasica])).toEqual([]);
+  });
+
+  it("una CAMISA (a diferencia de la remera) sí puede ser genuinamente formal -- el techo es solo para remera/buzo/short deportivo", () => {
+    const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonVestir.estilo = "formal";
+    const camisaFormal = mkPrenda("camisa", "#FAFAF7", 0, 0, 98);
+    camisaFormal.estilo = "formal";
+    expect(advertenciasDeRegistro([pantalonVestir, camisaFormal])).toEqual([]);
   });
 });
 

@@ -492,6 +492,45 @@ const FORMALIDAD_ESTILO: Partial<Record<NonNullable<Prenda["estilo"]>, number>> 
   deportivo: 0,
 };
 
+/** Techo real de formalidad por categoría -- ninguna combinación de estilo
+ *  cargada a mano (PrendaForm no restringe qué estilo/estilos_secundarios
+ *  puede llevar cada categoría) puede hacer que una remera básica, un buzo
+ *  (hoodie) o un short deportivo cuenten como rango 2 (clasico/formal) de
+ *  FORMALIDAD_ESTILO: son prendas de construcción intrínsecamente informal
+ *  o deportiva, sea cual sea la etiqueta que tengan cargada. Consejo,
+ *  revisión integral pedida por el usuario ("el motor tampoco respeta los
+ *  estilos de cada prenda") -- verificado contra el placard REAL del
+ *  usuario (vía Supabase): una remera básica (categoria="remera",
+ *  estilo="casual", estilos_secundarios=["urbano","clasico","formal"])
+ *  armaba "Vestite hoy > Formal" con pantalón de vestir + esa remera +
+ *  zapatos de cuero -- una remera nunca es indumentaria formal, tenga la
+ *  etiqueta que tenga; lo mismo aplica a un buzo o un short deportivo,
+ *  aunque hoy ningún dato real los tenga mal tageados (esto los blinda
+ *  igual). undefined = sin techo -- la categoría SÍ puede ser genuinamente
+ *  clásica/formal (pantalón, bermuda, camisa, sweater, saco, campera,
+ *  calzado, accesorio): no se toca esa parte, ya está bien cubierta por
+ *  las reglas de cuero/corbata/deportivo de más abajo. */
+const TECHO_FORMALIDAD_POR_CATEGORIA: Partial<Record<Categoria, number>> = {
+  remera: 1,
+  buzo: 1,
+  short_deportivo: 1,
+};
+
+/** Rango de formalidad real de una prenda (el mejor de TODOS sus estilos
+ *  declarados, vía estilosDe), acotado por su techo de categoría si
+ *  corresponde -- ver TECHO_FORMALIDAD_POR_CATEGORIA. undefined si la
+ *  prenda no declaró ningún estilo con rango conocido (no se inventa un
+ *  valor por defecto, mismo criterio que el resto de estas reglas). */
+function rangoDeFormalidad(p: Prenda): number | undefined {
+  const rangos = estilosDe(p)
+    .map((e) => FORMALIDAD_ESTILO[e])
+    .filter((r): r is number => r !== undefined);
+  if (rangos.length === 0) return undefined;
+  const rango = Math.max(...rangos);
+  const techo = TECHO_FORMALIDAD_POR_CATEGORIA[p.categoria];
+  return techo !== undefined ? Math.min(rango, techo) : rango;
+}
+
 // duplicado a propósito -- ver el comentario sobre CATEGORIAS_TORSO más
 // abajo (esa constante se declara después porque la usa armarOutfits*, que
 // vive más abajo en el archivo; acá hace falta antes). "saco" agregado a
@@ -538,13 +577,14 @@ function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean 
   if (!pantalon) return false;
   if (otra.categoria !== "calzado" && !CATEGORIAS_CON_TORSO.includes(otra.categoria)) return false;
   if (!pantalon.estilo) return false;
-  const rangosOtra = estilosDe(otra)
-    .map((e) => FORMALIDAD_ESTILO[e])
-    .filter((r): r is number => r !== undefined);
-  if (rangosOtra.length === 0) return false;
+  // rangoDeFormalidad acota por TECHO_FORMALIDAD_POR_CATEGORIA -- una
+  // remera/buzo tageada "clasico" o "formal" a mano nunca cuenta como
+  // rango 2 real acá, ver el comentario largo de esa constante.
+  const rangoOtra = rangoDeFormalidad(otra);
+  if (rangoOtra === undefined) return false;
   const rangoPantalon = FORMALIDAD_ESTILO[pantalon.estilo];
   if (rangoPantalon === undefined) return false;
-  return Math.max(...rangosOtra) < rangoPantalon;
+  return rangoOtra < rangoPantalon;
 }
 
 /** Volumen/proporción: tercer eje real de un conjunto (después de color y
@@ -673,6 +713,15 @@ export function registroOutfit(prendas: Prenda[]): string | null {
 export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolean {
   const pantalon = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   if (!pantalon) return false;
+  // Techo real de categoría (ver TECHO_FORMALIDAD_POR_CATEGORIA): un short
+  // deportivo nunca sirve de ancla para "formal"/"clasico" aunque alguien
+  // lo haya tageado así a mano en PrendaForm -- ningún short es indumentaria
+  // de vestir, sea cual sea la etiqueta. pantalon/bermuda no tienen techo
+  // (sí pueden ser genuinamente clásicos/formales), así que esto no les
+  // cambia nada.
+  const techo = TECHO_FORMALIDAD_POR_CATEGORIA[pantalon.categoria];
+  const rangoPedido = FORMALIDAD_ESTILO[estilo];
+  if (techo !== undefined && rangoPedido !== undefined && rangoPedido > techo) return false;
   return estilosDe(pantalon).includes(estilo);
 }
 
