@@ -11,6 +11,7 @@ import {
   comboParaExcelencia,
   diffPrendasEdicion,
   estacionActual,
+  estilosDe,
   ESTILO_LABEL,
   mejorCompraParaSubirNota,
   outfitEsCoherenteParaEstilo,
@@ -18,6 +19,7 @@ import {
   puntuarOutfit,
   registroOutfit,
   semillaDelDia,
+  sugerenciaDeAbrigoInvierno,
   sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
@@ -541,6 +543,37 @@ export function Contenido({
     return sugerenciaDeAncla(estiloSugerido, placard);
   }, [estiloSugerido, climaSugerido, poolSugeridosPorEstilo, placard]);
 
+  // Un PANTALÓN puntual (no CATEGORIAS_PIERNAS entera) del estilo elegido
+  // -- con clima="invierno" un bermuda/short_deportivo nunca ancla nada
+  // (ver la regla 2 de armarOutfitsSugeridos), así que la única forma
+  // honesta de saber si el pool quedó vacío por FALTA DE ABRIGO (y no por
+  // falta de pantalón real) es chequear la categoría puntual acá, no
+  // reusar sugerenciaAncla -- esa función mira CATEGORIAS_PIERNAS entera
+  // (bermuda incluido) y no sabe nada de clima, así que un usuario con
+  // bermudas de este estilo pero ningún pantalón largo pasaría como "ya
+  // hay ancla" para sugerenciaAncla, aunque para clima="invierno" no haya
+  // ninguna ancla real utilizable.
+  const hayPantalonDeEsteEstilo = useMemo(() => {
+    if (!estiloSugerido || estiloSugerido === "todos") return false;
+    return placard.some((p) => p.categoria === "pantalon" && estilosDe(p).includes(estiloSugerido));
+  }, [estiloSugerido, placard]);
+
+  // Pedido explícito del usuario, ronda siguiente: "en el clima frío,
+  // siempre las opciones tienen que ser con abrigo, sí o sí, y con un
+  // abrigo de invierno. En caso de que no tenga un abrigo de invierno, no
+  // tenés que poner ninguna opción y le tenés que recomendar una compra."
+  // armarOutfitsSugeridos ya bloquea las opciones que no cumplan (ver
+  // esAbrigoDeInvierno en recommend.ts) -- esto es la sugerencia de compra
+  // cuando el pool queda vacío por esa razón puntual. Solo se calcula
+  // cuando hayPantalonDeEsteEstilo es true (si no hay ni un pantalón real
+  // de este registro, ESE es el problema de fondo, no el abrigo -- ver el
+  // comentario de arriba).
+  const sugerenciaAbrigo = useMemo(() => {
+    if (!estiloSugerido || estiloSugerido === "todos" || climaSugerido !== "invierno" || poolSugeridosPorEstilo.length > 0 || !hayPantalonDeEsteEstilo)
+      return null;
+    return sugerenciaDeAbrigoInvierno(estiloSugerido, placard);
+  }, [estiloSugerido, climaSugerido, poolSugeridosPorEstilo, hayPantalonDeEsteEstilo, placard]);
+
   // Pedido explícito del usuario, reporte real: "el estilo formal no me
   // arroja ningún resultado, y tengo todas las prendas... saco, pantalón,
   // camisa, corbata, cinturón y zapatos". Causa real, verificada por
@@ -812,17 +845,19 @@ export function Contenido({
                 ? "Todavía no armamos ninguna combinación con lo que tenés cargado -- cargá algún pantalón, bermuda o short: es la prenda ancla que arma el resto del outfit."
                 : formalImposibleConCalor
                   ? 'Un saco no se usa con calor real -- "Formal" (el traje completo) no tiene sentido con esta temperatura, aunque tengas todas las prendas cargadas. Probá "Frío" o "Entretiempo".'
-                  : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado.${sugerenciaAncla ? "" : ` Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}`}
+                  : climaSugerido === "invierno" && hayPantalonDeEsteEstilo
+                    ? `Con frío de verdad, "Vestite hoy" solo arma looks ${ESTILO_LABEL[estiloSugerido]} con un abrigo real de invierno puesto -- no alcanza con una remera o camisa sola, ni con un abrigo de entretiempo.${sugerenciaAbrigo ? "" : " Por ahora no encontramos en el catálogo un abrigo de invierno de este registro para sugerirte -- fijate si tenés uno cargado sin marcar la estación."}`
+                    : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado.${sugerenciaAncla ? "" : ` Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}`}
             </p>
-            {sugerenciaAncla && (
+            {(sugerenciaAncla || sugerenciaAbrigo) && (
               <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
                 <span style={{ fontSize: "1.2rem" }}>💡</span>
-                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>{sugerenciaAncla.mensaje}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>{(sugerenciaAncla ?? sugerenciaAbrigo)!.mensaje}</p>
                 <button
                   type="button"
                   className="btn btn-secondary"
                   style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
-                  onClick={() => cargarSugerencia(sugerenciaAncla.sugerida)}
+                  onClick={() => cargarSugerencia((sugerenciaAncla ?? sugerenciaAbrigo)!.sugerida)}
                 >
                   + Cargar
                 </button>

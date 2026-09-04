@@ -22,6 +22,7 @@ import {
   registroOutfit,
   scoreColor,
   semillaDelDia,
+  sugerenciaDeAbrigoInvierno,
   sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
@@ -989,6 +990,52 @@ describe("outfitSirveParaEstilo -- formal exige saco, todo lo demás excluye sac
     const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
     expect(outfitSirveParaEstilo([pantalon, saco], "formal")).toBe(true);
   });
+
+  // Consejo, ronda siguiente -- reporte real del usuario sobre su propio
+  // placard: "el cinturón, yo solamente los tagué para formal y oficina,
+  // así que no me lo ofrezcas para urbano". Verificado contra Supabase: los
+  // dos cinturones reales del usuario tienen estilo="formal" +
+  // estilos_secundarios=["oficina"] -- sin embargo aparecían en outfits
+  // "Urbano" porque, a diferencia de corbata/saco (esPrendaDeTrajeExclusiva)
+  // o del resto de las prendas (prendaMenosFormalQuePantalon, que excluye
+  // "accesorio" a propósito), ningún chequeo miraba el estilo PROPIO de un
+  // cinturón. Ver esCinturon en recommend.ts.
+  describe("cinturón -- solo sirve para el/los estilo(s) que el usuario le cargó de verdad", () => {
+    function conCinturon(estilo: Prenda["estilo"], secundarios: Prenda["estilo"][] = []): Prenda {
+      const c = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+      c.posicion_accesorio = "cintura";
+      c.estilo = estilo;
+      c.estilos_secundarios = secundarios as never;
+      return c;
+    }
+
+    it("cinturón tageado formal+oficina -> no sirve para urbano/casual/clasico/deportivo, solo para formal/oficina", () => {
+      const cinturon = conCinturon("formal", ["oficina"]);
+      const pantalonUrbano = conPantalonVestir("casual", ["urbano"]);
+      for (const estilo of ["urbano", "casual", "clasico", "deportivo"] as const) {
+        expect(outfitSirveParaEstilo([pantalonUrbano, cinturon], estilo)).toBe(false);
+      }
+      const pantalonFormal = conPantalonVestir("formal", ["oficina"]);
+      expect(outfitSirveParaEstilo([pantalonFormal, cinturon], "oficina")).toBe(true);
+      const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+      expect(outfitSirveParaEstilo([pantalonFormal, saco, cinturon], "formal")).toBe(true);
+    });
+
+    it("cinturón SIN ningún estilo cargado -> no se inventa una restricción, sirve para cualquier estilo (mismo criterio que el resto de estas reglas)", () => {
+      const cinturonSinEstilo = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
+      cinturonSinEstilo.posicion_accesorio = "cintura";
+      const pantalonUrbano = conPantalonVestir("casual", ["urbano"]);
+      expect(outfitSirveParaEstilo([pantalonUrbano, cinturonSinEstilo], "urbano")).toBe(true);
+    });
+
+    it("un accesorio en posicion='cuello' (bufanda) NO es un cinturón -- esta regla no lo toca, aunque tenga un estilo puntual cargado", () => {
+      const bufanda = mkPrenda("accesorio", "#8C8C8C", 0, 0, 55);
+      bufanda.posicion_accesorio = "cuello";
+      bufanda.estilo = "formal";
+      const pantalonUrbano = conPantalonVestir("casual", ["urbano"]);
+      expect(outfitSirveParaEstilo([pantalonUrbano, bufanda], "urbano")).toBe(true);
+    });
+  });
 });
 
 describe("outfitEsCoherenteParaEstilo", () => {
@@ -1680,10 +1727,16 @@ describe("armarOutfitsSugeridos", () => {
   });
 
   it("una prenda sin estación cargada (remera/camisa) no se ve afectada por el orden de estación -- mantiene el orden por color", () => {
+    // clima="entretiempo" a propósito -- este test es sobre ordenarPorEstacion
+    // (el rango neutro de una prenda sin `estacion`), no sobre la exigencia de
+    // abrigo real de invierno (ver esAbrigoDeInvierno): con clima="invierno"
+    // ni remera ni camisa alcanzan nunca como torso, sea cual sea su
+    // `estacion`, así que ese caso se prueba aparte (ver el describe de
+    // clima más abajo).
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     const remera = mkPrenda("remera", "#3366CC", 220, 60, 50); // sin estacion (null)
     const camisa = mkPrenda("camisa", "#F5F5F0", 0, 5, 95); // sin estacion (null)
-    const outfits = armarOutfitsSugeridos([pantalon, remera, camisa], "invierno");
+    const outfits = armarOutfitsSugeridos([pantalon, remera, camisa], "entretiempo");
     expect(outfits).toHaveLength(2);
   });
 
@@ -1891,12 +1944,38 @@ describe("armarOutfitsSugeridos", () => {
       expect(armarOutfitsSugeridos([bermuda, remera], "invierno")).toHaveLength(0);
     });
 
-    it("clima='invierno' no afecta a un pantalón largo -- sigue combinando con abrigo y con remera", () => {
+    // Pedido explícito del usuario, ronda siguiente: "en el clima frío,
+    // siempre las opciones tienen que ser con abrigo, sí o sí, y con un
+    // abrigo de invierno. En caso de que no tenga un abrigo de invierno, no
+    // tenés que poner ninguna opción". Reemplaza el test anterior de este
+    // mismo nombre (que esperaba que un sweater SIN `estacion` cargada y
+    // hasta una remera sola combinaran igual con clima="invierno" -- ese
+    // comportamiento es justo el que el usuario pidió cambiar).
+    it("clima='invierno' exige un abrigo REAL de invierno en el torso -- ni una remera sola ni un sweater de entretiempo/sin estación alcanzan", () => {
       const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
-      const sweater = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      const sweaterSinEstacion = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
       const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
-      const outfits = armarOutfitsSugeridos([pantalon, sweater, remera], "invierno");
-      expect(outfits).toHaveLength(2);
+      expect(armarOutfitsSugeridos([pantalon, sweaterSinEstacion, remera], "invierno")).toHaveLength(0);
+
+      const sweaterEntretiempo = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      sweaterEntretiempo.estacion = "entretiempo";
+      expect(armarOutfitsSugeridos([pantalon, sweaterEntretiempo, remera], "invierno")).toHaveLength(0);
+
+      const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+      sweaterInvierno.estacion = "invierno";
+      const outfits = armarOutfitsSugeridos([pantalon, sweaterInvierno, remera], "invierno");
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria)).toContain("sweater");
+      expect(outfits[0].prendas.map((p) => p.categoria)).not.toContain("remera");
+    });
+
+    it("clima='invierno' -- un saco sigue sirviendo de abrigo para 'formal' aunque no tenga `estacion` cargada (no se tagea con ese campo)", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      saco.estilo = "formal";
+      const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([pantalon, saco, camisa], "invierno");
+      expect(outfits.some((o) => o.prendas.some((p) => p.categoria === "saco"))).toBe(true);
     });
 
     it("sin `clima` explícito, usa la estación real de hoy por default (mismo comportamiento que antes de esta ronda)", () => {
@@ -2743,6 +2822,93 @@ describe("sugerenciaDeAncla", () => {
       { id: "sweater-clasico", nombre: "Sweater clásico", categoria: "sweater", colorHex: "#1A1A1A", estilo: "clasico", hsl: { h: 0, s: 0, l: 10 } },
     ];
     expect(sugerenciaDeAncla("clasico", [], catalogoSinPiernas)).toBeNull();
+  });
+});
+
+// Consejo, ronda siguiente -- pedido explícito del usuario: "en el clima
+// frío, siempre las opciones tienen que ser con abrigo, sí o sí, y con un
+// abrigo de invierno. En caso de que no tenga un abrigo de invierno, no
+// tenés que poner ninguna opción y le tenés que recomendar una compra."
+// armarOutfitsSugeridos ya bloquea las opciones (ver su describe de clima
+// más arriba) -- esta es la contraparte de compra, mismo patrón que
+// sugerenciaDeAncla pero para el abrigo en sí, no para la prenda de piernas.
+describe("sugerenciaDeAbrigoInvierno", () => {
+  const catalogoAbrigos: (PresetPrenda & { hsl: HSL })[] = [
+    {
+      id: "sweater-clasico-invierno",
+      nombre: "Sweater clásico de lana (invierno)",
+      categoria: "sweater",
+      colorHex: "#1A1A1A",
+      estilo: "clasico",
+      estacion: "invierno",
+      hsl: { h: 0, s: 0, l: 10 },
+    },
+    // mismo estilo, pero de entretiempo -- nunca debería sugerirse acá.
+    {
+      id: "sweater-clasico-entretiempo",
+      nombre: "Sweater clásico liviano (entretiempo)",
+      categoria: "sweater",
+      colorHex: "#8C8C8C",
+      estilo: "clasico",
+      estacion: "entretiempo",
+      hsl: { h: 0, s: 0, l: 55 },
+    },
+  ];
+
+  it("sin ancla (pantalón/bermuda/short) de ese estilo en el placard -> null (sugerenciaDeAncla ya cubre ese caso, con prioridad)", () => {
+    expect(sugerenciaDeAbrigoInvierno("clasico", [], catalogoAbrigos)).toBeNull();
+  });
+
+  it("el placard YA tiene un abrigo de invierno real para ese estilo -> null, nada que comprar", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    expect(sugerenciaDeAbrigoInvierno("clasico", [pantalon, sweaterInvierno], catalogoAbrigos)).toBeNull();
+  });
+
+  it("hay ancla pero ningún abrigo de invierno real (sweater sin estacion, o de entretiempo) -> sugiere el candidato de invierno del catálogo", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const sweaterSinEstacion = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterSinEstacion.estilo = "clasico";
+    const r = sugerenciaDeAbrigoInvierno("clasico", [pantalon, sweaterSinEstacion], catalogoAbrigos);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.id).toBe("sweater-clasico-invierno");
+    expect(r!.mensaje).toContain("Clásico");
+  });
+
+  it("un saco cuenta siempre como abrigo de 'formal', aunque no tenga `estacion` cargada -- null, nada que comprar", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "formal";
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    saco.estilo = "formal";
+    expect(sugerenciaDeAbrigoInvierno("formal", [pantalon, saco], [])).toBeNull();
+  });
+
+  it("el catálogo no tiene ningún abrigo de invierno de ese estilo -> null, no inventa una sugerencia que no existe", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "urbano";
+    expect(sugerenciaDeAbrigoInvierno("urbano", [pantalon], catalogoAbrigos)).toBeNull();
+  });
+
+  // Caso real encontrado verificando contra el placard del usuario: tenía
+  // bermudas "clasico" pero ningún pantalón "clasico" -- con clima=
+  // "invierno" un bermuda nunca ancla nada (ver armarOutfitsSugeridos), así
+  // que el problema real era la falta de PANTALÓN, no de abrigo (de hecho
+  // sí tenía un sweater de invierno "clasico" cargado). Antes de este fix,
+  // esta función miraba CATEGORIAS_PIERNAS entera (bermuda incluido) para
+  // decidir si "ya hay ancla", así que hubiera devuelto null pensando que
+  // el bermuda alcanzaba -- dejando a Outfits.tsx sin ninguna pista de que
+  // el motivo real era otro.
+  it("solo bermudas de ese estilo (sin ningún pantalón) -> null, aunque el placard ya tenga un abrigo de invierno real -- un bermuda no ancla nada con frío", () => {
+    const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermuda.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    expect(sugerenciaDeAbrigoInvierno("clasico", [bermuda, sweaterInvierno], catalogoAbrigos)).toBeNull();
   });
 });
 

@@ -562,6 +562,25 @@ function esPrendaDeTrajeExclusiva(p: Prenda): boolean {
   return p.categoria === "saco" || p.requiere_cuello;
 }
 
+/** El accesorio de cintura -- pedido explícito del usuario, con su propio
+ *  criterio de tageo: "el cinturón yo solamente los tagué para formal y
+ *  oficina, así que no me lo ofrezcas para urbano". Verificado contra el
+ *  placard real (vía Supabase): los dos cinturones del usuario tienen
+ *  estilo="formal" + estilos_secundarios=["oficina"], sin embargo
+ *  aparecían igual en outfits "Urbano" -- porque ningún chequeo de acá
+ *  arriba mira el estilo PROPIO del accesorio. `prendaMenosFormalQuePantalon`
+ *  (más arriba) excluye "accesorio" de su comparación a propósito, y esa
+ *  exclusión es correcta para la regla general de "elevación" (un accesorio
+ *  de vestir sobre un jean no arruina un look "smart casual" real) -- pero
+ *  el usuario pide acá lo contrario para el cinturón puntual: no una
+ *  cuestión de rango de formalidad (donde algo MÁS formal que el pantalón
+ *  se admite como elevación), sino de VOCABULARIO exacto -- mismo tipo de
+ *  chequeo que ya usa esPrendaDeTrajeExclusiva más arriba, no una
+ *  comparación de rangos. */
+function esCinturon(p: Prenda): boolean {
+  return p.categoria === "accesorio" && p.posicion_accesorio === "cintura";
+}
+
 /** Techo real de formalidad por categoría -- ninguna combinación de estilo
  *  cargada a mano (PrendaForm no restringe qué estilo/estilos_secundarios
  *  puede llevar cada categoría) puede hacer que una remera básica, un buzo
@@ -848,6 +867,13 @@ export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolea
   // requiere_cuello) pueden estar presentes fuera de "formal": son, por
   // definición, lo que convierte un look en traje.
   if (estilo !== "formal" && prendas.some(esPrendaDeTrajeExclusiva)) return false;
+  // Cinturón -- pedido explícito del usuario (ver esCinturon más arriba):
+  // solo se ofrece en el/los estilo(s) que el usuario le cargó de verdad,
+  // no en cualquier registro donde el color combine. Un cinturón SIN
+  // ningún estilo cargado no dispara esto -- no se inventa una
+  // restricción sobre un dato ausente, mismo criterio que el resto de
+  // estas reglas.
+  if (prendas.some((p) => esCinturon(p) && estilosDe(p).length > 0 && !estilosDe(p).includes(estilo))) return false;
   // "Formal" -- pedido explícito: "es el traje. Formal es formal." El
   // saco es, por convención real de sastrería, la prenda que define un
   // traje -- sin él, un pantalón de vestir + camisa (con o sin corbata)
@@ -1464,6 +1490,23 @@ function ordenarPorEstacion<T extends { prenda: Prenda }>(items: T[], hoy: Estac
 // aproximación menos incorrecta del modelo binario actual).
 const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
 
+/** true si la prenda sirve de abrigo REAL para clima="invierno" -- pedido
+ *  explícito del usuario: "en el clima frío, siempre las opciones tienen
+ *  que ser con abrigo, sí o sí, y con un abrigo de invierno". A diferencia
+ *  de CATEGORIAS_ABRIGO (que solo mira la categoría), esto exige además
+ *  `estacion === "invierno"` cargada en la prenda -- un buzo/sweater/
+ *  campera de entretiempo (o sin estación cargada) no cuenta como abrigo
+ *  de invierno real, no se inventa el dato para un chequeo que BLOQUEA
+ *  (a diferencia de ordenarPorEstacion, arriba, que solo reordena sin
+ *  descartar nada). Un saco cuenta siempre, sin mirar `estacion` -- no se
+ *  tagea con ese campo (ver el comentario de CATEGORIAS_ABRIGO: es una
+ *  capa de formalidad, no de temperatura), pero conceptualmente un traje
+ *  completo (saco + camisa) no deja a nadie "sin abrigo" con frío real. */
+function esAbrigoDeInvierno(p: Prenda): boolean {
+  if (p.categoria === "saco") return true;
+  return CATEGORIAS_ABRIGO.includes(p.categoria) && p.estacion === "invierno";
+}
+
 /** bermuda/short_deportivo -- las dos categorías de piernas que exponen las
  *  piernas, a diferencia de pantalon. Revisado como modista, reporte real
  *  del usuario ("bermuda con sweater, ambos beige"): el problema no era el
@@ -1605,6 +1648,20 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
     // (bermuda/short), nunca por clima -- un pantalón largo + saco de lana
     // pasaba igual con clima="verano".
     const excluirSaco = esAnclaVeraniega || clima === "verano";
+    // Pedido explícito del usuario: "en el clima frío, siempre las
+    // opciones tienen que ser con abrigo, sí o sí, y con un abrigo de
+    // invierno. En caso de que no tenga un abrigo de invierno, no tenés
+    // que poner ninguna opción y le tenés que recomendar una compra."
+    // Antes de esto, clima="invierno" no exigía NADA sobre el torso (una
+    // remera sola, o un buzo de entretiempo, pasaban igual que un buzo de
+    // invierno real) -- ver esAbrigoDeInvierno más arriba. Se exige para
+    // TODOS los estilos por igual, deportivo incluido (un ancla deportiva
+    // con remera sola tampoco cuenta como "con abrigo" acá) -- si el
+    // placard no tiene ningún torso que la cumpla para un registro dado,
+    // ese registro queda sin ninguna opción con clima="invierno", tal
+    // como pidió el usuario (ver sugerenciaDeAbrigoInvierno, la
+    // contraparte de compra, más abajo en el archivo).
+    const exigirAbrigoDeInvierno = clima === "invierno";
 
     const candidatosTorso = placard.filter((p) => {
       if (!CATEGORIAS_TORSO.includes(p.categoria)) return false;
@@ -1626,7 +1683,25 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
       if (excluirSaco && p.categoria === "saco") return false;
       return true;
     });
-    const torsos = ordenarPorEstacion(candidatasPropias(ancla, candidatosTorso, placard), clima);
+    // La camisa nunca es, en sí misma, el "abrigo" de invierno -- es la
+    // capa BASE que va debajo de un saco (ver el comentario de
+    // camisasParaSaco más abajo), y el saco es el que provee la función de
+    // abrigo real (esAbrigoDeInvierno ya lo trata así). Por eso
+    // exigirAbrigoDeInvierno se aplica sobre `torsos` (la competencia por
+    // el ÚNICO lugar de torso cuando NO hay saco encima -- ahí sí hace
+    // falta que la prenda sea abrigo por sí sola) pero NO sobre la lista de
+    // la que sale camisasParaSaco -- exigirle a la camisa lo que ya cumple
+    // el saco dejaba "Formal" sin ninguna camisa base posible con
+    // clima="invierno", el mismo bug (auto-generado por este mismo cambio)
+    // que la ronda anterior recién había arreglado para clima="verano".
+    const torsos = ordenarPorEstacion(
+      candidatasPropias(
+        ancla,
+        exigirAbrigoDeInvierno ? candidatosTorso.filter((p) => esAbrigoDeInvierno(p)) : candidatosTorso,
+        placard,
+      ),
+      clima,
+    );
     // La capa base bajo un saco -- pedido explícito del usuario: "formal es
     // formal, es el traje" (ver el chequeo nuevo en outfitSirveParaEstilo,
     // que ahora exige saco para "formal"). Un saco no es un torso
@@ -2368,7 +2443,10 @@ const NEUTROS_PRIORIDAD_COMPRA = ["Blanco", "Negro", "Gris", "Azul marino", "Bei
  *  combine con el ancla real del usuario (mismo motor de recomendar() que
  *  armarOutfitsParaComprar, nunca una sugerencia que choque), priorizando
  *  primero un color que el usuario TODAVÍA NO tiene en ese registro y
- *  dentro de eso los neutros más versátiles primero. */
+ *  dentro de eso los neutros más versátiles primero. `soloInvierno`
+ *  (default false) exige además `estacion === "invierno"` en el preset --
+ *  lo usa sugerenciaDeAbrigoInvierno más abajo, no cambia nada para el
+ *  resto de los llamados existentes. */
 function mejorCandidatoDelCatalogo(
   ancla: Prenda,
   categoria: Categoria,
@@ -2376,9 +2454,15 @@ function mejorCandidatoDelCatalogo(
   coloresActuales: Set<string>,
   placard: Prenda[],
   catalogo: (PresetPrenda & { hsl: HSL })[],
+  soloInvierno = false,
 ): (PresetPrenda & { hsl: HSL }) | undefined {
   const candidatos = catalogo
-    .filter((preset) => preset.categoria === categoria && estilosDe(presetAPrendaSintetica(preset)).includes(estilo))
+    .filter(
+      (preset) =>
+        preset.categoria === categoria &&
+        estilosDe(presetAPrendaSintetica(preset)).includes(estilo) &&
+        (!soloInvierno || preset.estacion === "invierno"),
+    )
     .map((preset) => {
       const sintetica = presetAPrendaSintetica(preset);
       const [r] = recomendar(ancla, [sintetica], placard);
@@ -2531,6 +2615,64 @@ export function sugerenciaDeAncla(
       : `Todavía no tenés ninguna prenda de estilo ${ESTILO_LABEL[estilo]} para armar un look completo. Arrancá sumando "${sugerida.nombre}".`;
 
   return { mensaje, sugerida };
+}
+
+export interface SugerenciaAbrigoInvierno {
+  mensaje: string;
+  sugerida: PresetPrenda & { hsl: HSL };
+}
+
+/** Pedido explícito del usuario: "en el clima frío, siempre las opciones
+ *  tienen que ser con abrigo, sí o sí, y con un abrigo de invierno. En
+ *  caso de que no tenga un abrigo de invierno, no tenés que poner ninguna
+ *  opción y le tenés que recomendar una compra." armarOutfitsSugeridos ya
+ *  exige esAbrigoDeInvierno en el torso cuando clima="invierno" (ver su
+ *  comentario) -- pero armarOutfitsParaComprar (el motor real de "Ideas
+ *  para comprar") es climate-agnostic a propósito (ver su comentario: "acá
+ *  no hay pregunta de clima") y solo mira categorías AUSENTES del placard
+ *  (categoriasAusentes) -- un buzo/sweater/campera de ENTRETIEMPO no
+ *  cuenta como "ausente" (la categoría sí está presente), así que nunca
+ *  sugiere sumar uno de invierno para reemplazarlo. Esta función tapa ese
+ *  hueco puntual, mismo patrón que sugerenciaDeAncla (su contraparte para
+ *  la prenda de piernas) pero para el abrigo.
+ *
+ *  `null` en cuatro casos, todos sin sugerencia real que ofrecer: sin
+ *  ningún PANTALÓN de este estilo (a diferencia de sugerenciaDeAncla, acá
+ *  se exige la categoría "pantalon" puntual, no CATEGORIAS_PIERNAS entera
+ *  -- un bermuda/short_deportivo no ancla nada con clima="invierno", ver
+ *  la regla 2 del comentario de armarOutfitsSugeridos, así que contarlo
+ *  acá como "ya hay ancla" haría este mensaje mentir en el caso real de un
+ *  usuario con bermudas de ese estilo pero ningún pantalón largo -- ese
+ *  caso, distinto, lo cubre sugerenciaDeAncla con prioridad, ver su uso en
+ *  Outfits.tsx); si el placard ya tiene un abrigo de invierno utilizable
+ *  para este estilo (nada que comprar -- un saco siempre cuenta, ver
+ *  esAbrigoDeInvierno); o si el catálogo no tiene ningún buzo/sweater/
+ *  campera de invierno de este estilo que combine (hueco real del
+ *  catálogo, no hay nada honesto que ofrecer todavía). */
+export function sugerenciaDeAbrigoInvierno(
+  estilo: Estilo,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): SugerenciaAbrigoInvierno | null {
+  const ancla = placard.find((p) => p.categoria === "pantalon" && estilosDe(p).includes(estilo));
+  if (!ancla) return null;
+
+  const yaHayAbrigo = placard.some((p) => estilosDe(p).includes(estilo) && esAbrigoDeInvierno(p));
+  if (yaHayAbrigo) return null;
+
+  const coloresActuales = new Set(
+    placard.filter((p) => estilosDe(p).includes(estilo)).map((p) => nombreColor(p.color_h, p.color_s, p.color_l)),
+  );
+
+  for (const categoria of CATEGORIAS_ABRIGO) {
+    const sugerida = mejorCandidatoDelCatalogo(ancla, categoria, estilo, coloresActuales, placard, catalogo, true);
+    if (!sugerida) continue;
+    return {
+      mensaje: `Con frío de verdad, "${ESTILO_LABEL[estilo]}" necesita un abrigo de invierno real puesto -- lo que tenés cargado en ese registro es de entretiempo (o no alcanza). Te serviría sumar "${sugerida.nombre}".`,
+      sugerida,
+    };
+  }
+  return null;
 }
 
 /** Diff entre las prendas actuales de un outfit guardado y las que el

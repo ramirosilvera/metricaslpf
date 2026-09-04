@@ -819,8 +819,21 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // tiene ninguna silueta que competir con un jean o una zapatilla), y sin
   // embargo se había quedado solo en "clasico". Corregido por la misma
   // razón.
-  { id: "cinturon-negro", nombre: "Cinturón negro de cuero", categoria: "accesorio", colorHex: "#1A1A1A", textura: "cuero_liso", estilo: "clasico", estilosSecundarios: ["casual"] },
-  { id: "cinturon-marron", nombre: "Cinturón marrón de cuero", categoria: "accesorio", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "clasico", estilosSecundarios: ["casual"] },
+  // "formal"/"oficina" sumados -- Consejo, ronda siguiente: pedido
+  // explícito del usuario sobre SU propio placard ("el cinturón yo
+  // solamente los tagué para formal y oficina, no me lo ofrezcas para
+  // urbano") llevó a que el motor empiece a respetar el estilo PROPIO del
+  // cinturón de verdad (ver esCinturon/su chequeo en outfitSirveParaEstilo)
+  // -- antes ningún chequeo lo miraba, así que el tageo real del catálogo
+  // nunca importaba. Sin este agregado, ESTE cinturón (liso, sin hebilla
+  // vistosa -- el más versátil de los dos que existen) hubiera quedado
+  // bloqueado de aparecer en outfits "Formal"/"Oficina" a partir de ahora,
+  // aunque un cinturón de cuero liso negro/marrón sin decoración es
+  // exactamente el que corresponde con un traje real -- no se toca
+  // "urbano" (queda afuera a propósito, mismo criterio que pidió el
+  // usuario: un cinturón de vestir no es una pieza de streetwear).
+  { id: "cinturon-negro", nombre: "Cinturón negro de cuero", categoria: "accesorio", colorHex: "#1A1A1A", textura: "cuero_liso", estilo: "clasico", estilosSecundarios: ["casual", "formal", "oficina"] },
+  { id: "cinturon-marron", nombre: "Cinturón marrón de cuero", categoria: "accesorio", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "clasico", estilosSecundarios: ["casual", "formal", "oficina"] },
   { id: "corbata-azul-marino", nombre: "Corbata azul marino", categoria: "accesorio", colorHex: "#1F2A44", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
   { id: "corbata-bordo", nombre: "Corbata bordo", categoria: "accesorio", colorHex: "#6B2737", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
   // roja -- la corbata de vestir más clásica que existe ("power tie"), un
