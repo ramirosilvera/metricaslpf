@@ -541,6 +541,20 @@ export function Contenido({
     return sugerenciaDeAncla(estiloSugerido, placard);
   }, [estiloSugerido, climaSugerido, poolSugeridosPorEstilo, placard]);
 
+  // Pedido explícito del usuario, reporte real: "el estilo formal no me
+  // arroja ningún resultado, y tengo todas las prendas... saco, pantalón,
+  // camisa, corbata, cinturón y zapatos". Causa real, verificada por
+  // ejecución: armarOutfitsSugeridos excluye el saco de CUALQUIER outfit
+  // cuando el clima elegido es "Calor" (un saco de lana no tiene sentido
+  // con calor real, ver excluirSaco en recommend.ts) -- y "Formal" exige
+  // saco (outfitSirveParaEstilo). Con "Calor", "Formal" es una
+  // combinación estructuralmente imposible para CUALQUIER placard, no
+  // solo el de este usuario -- pero sugerenciaAncla no lo detecta (el
+  // usuario SÍ tiene pantalón/saco de ese registro; el clima elegido es
+  // lo que los excluye, no una prenda faltante) y el mensaje genérico
+  // ("no armamos nada... probá otra ocasión") no explica el motivo real.
+  const formalImposibleConCalor = estiloSugerido === "formal" && climaSugerido === "verano";
+
   const paraComprar = useMemo(
     () => tanda(poolParaComprar, offsetParaComprar, VISIBLES_POR_SECCION),
     [poolParaComprar, offsetParaComprar],
@@ -796,7 +810,9 @@ export function Contenido({
             <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
               {estiloSugerido === "todos"
                 ? "Todavía no armamos ninguna combinación con lo que tenés cargado -- cargá algún pantalón, bermuda o short: es la prenda ancla que arma el resto del outfit."
-                : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado.${sugerenciaAncla ? "" : ` Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}`}
+                : formalImposibleConCalor
+                  ? 'Un saco no se usa con calor real -- "Formal" (el traje completo) no tiene sentido con esta temperatura, aunque tengas todas las prendas cargadas. Probá "Frío" o "Entretiempo".'
+                  : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado.${sugerenciaAncla ? "" : ` Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}`}
             </p>
             {sugerenciaAncla && (
               <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
