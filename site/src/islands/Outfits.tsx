@@ -423,9 +423,13 @@ export function Contenido({
   // esta corre a demanda -- el pedido del usuario fue justamente que
   // funcione AUNQUE ya haya opciones armadas, así que no puede estar
   // atada a "el pool quedó vacío" como sugerenciaAncla/Abrigo/Saco.
+  // Pasa climaSugerido -- reporte real del usuario: sin esto, la auditoría
+  // no tenía forma de saber que un registro anclado solo en bermudas queda
+  // en CERO opciones con clima="invierno" (ver el comentario largo de
+  // auditoriaDeGuardarropa en recommend.ts).
   function hacerRecomendacionDeCompra() {
     if (!estiloSugerido || estiloSugerido === "todos") return;
-    setAuditoria(auditoriaDeGuardarropa(estiloSugerido, placard) ?? "sin_hueco");
+    setAuditoria(auditoriaDeGuardarropa(estiloSugerido, placard, climaSugerido) ?? "sin_hueco");
   }
 
   // Pedido explícito del usuario: "la idea es poder usar toda la ropa de

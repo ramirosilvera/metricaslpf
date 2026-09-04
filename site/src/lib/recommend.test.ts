@@ -26,6 +26,7 @@ import {
   sugerenciaDeAbrigoEntretiempo,
   sugerenciaDeAbrigoInvierno,
   sugerenciaDeAncla,
+  sugerenciaDeAnclaInvernal,
   sugerenciaDeSacoDeVerano,
   sugerenciaDeVariedad,
   tanda,
@@ -1092,6 +1093,37 @@ describe("outfitSirveParaEstilo -- formal exige saco, todo lo demás excluye sac
       const pantalonUrbano = conPantalonVestir("casual", ["urbano"]);
       expect(outfitSirveParaEstilo([pantalonUrbano, bufanda], "urbano")).toBe(true);
     });
+
+    // Consejo, ronda siguiente -- bug real reportado por el usuario, con
+    // captura: "el botón de recomendación de compra dice que no hay hueco,
+    // pero tampoco hay opciones de outfit". Diagnosticado por ejecución
+    // contra el placard real: "Clásico" quedaba en CERO combinaciones en
+    // los tres climas -- no por falta de prendas, sino porque
+    // armarOutfitsSugeridos SIEMPRE fuerza un accesorio cuando alguno
+    // combina en color (nunca cae a "sin accesorio" si hay uno válido) y
+    // los únicos dos cinturones del usuario eran "formal"/"oficina",
+    // nunca "clasico" -- como su color combinaba con cualquier bermuda
+    // neutra, terminaban forzados en TODAS las combinaciones ancladas en
+    // esa bermuda, y esta misma regla del describe (arriba) las
+    // rechazaba a TODAS, sin ninguna versión sin cinturón para caer. Ver
+    // accesorioPuedeServirParaAncla en recommend.ts, la función que
+    // ahora filtra esto ANTES de competir por el lugar de accesorio.
+    it("bug real: un cinturón de otro registro que combina en color ya NO bloquea todas las combinaciones -- queda una versión sin accesorio", () => {
+      const pantalonUrbano = conPantalonVestir("casual", ["urbano"]);
+      const remeraCasual = mkPrenda("remera", "#F5F5F5", 0, 0, 96);
+      remeraCasual.estilo = "casual";
+      // mismo color neutro que el pantalón/remera -- combina en color con
+      // cualquiera de los dos, pero está tageado SOLO "formal"/"oficina".
+      const cinturon = conCinturon("formal", ["oficina"]);
+
+      const outfits = armarOutfitsSugeridos([pantalonUrbano, remeraCasual, cinturon], "verano");
+      const sirvenParaCasual = outfits.filter((s) => outfitSirveParaEstilo(s.prendas, "casual"));
+      expect(sirvenParaCasual.length).toBeGreaterThan(0);
+      // ninguna de las que sirven puede llevar el cinturón formal/oficina
+      // puesto -- si lo llevara, outfitSirveParaEstilo ya la habría
+      // rechazado (ver el primer test de este describe).
+      expect(sirvenParaCasual.every((s) => !s.prendas.some((p) => p.id === cinturon.id))).toBe(true);
+    });
   });
 });
 
@@ -1879,7 +1911,10 @@ describe("armarOutfitsSugeridos", () => {
       const pantalonCasual = mkConEstilo("pantalon", "#1A1A1A", 0, 0, 10, "casual");
       const buzoCasual = mkConEstilo("buzo", "#1A1A1A", 0, 0, 10, "casual");
       buzoCasual.estacion = "entretiempo"; // clima="entretiempo" exige abrigo real, ver esAbrigoDeClima
-      const cinturon = mkConEstilo("accesorio", "#1A1A1A", 0, 0, 10, "clasico");
+      // estilo="casual", mismo registro que el ancla -- un cinturón de OTRO
+      // estilo sin nada en común con el ancla ya no se ofrece acá a propósito
+      // (ver accesorioPuedeServirParaAncla, bug real corregido esta ronda).
+      const cinturon = mkConEstilo("accesorio", "#1A1A1A", 0, 0, 10, "casual");
 
       const outfits = armarOutfitsSugeridos([pantalonCasual, buzoCasual, cinturon], "entretiempo");
       expect(outfits).toHaveLength(1);
@@ -2974,6 +3009,44 @@ describe("sugerenciaDeAncla", () => {
   });
 });
 
+// Consejo, ronda siguiente -- bug real reportado por el usuario, con
+// captura: "el botón de recomendación de compra dice que no hay hueco,
+// pero tampoco hay opciones de outfit". Diagnosticado por ejecución: un
+// registro anclado SOLO en bermudas (sin ningún pantalón largo) pasaba
+// como "ya hay ancla" para sugerenciaDeAncla (mira CATEGORIAS_PIERNAS
+// entera), pero con clima="invierno" un bermuda nunca ancla nada -- el
+// registro queda en cero outfits posibles igual. Contraparte puntual para
+// ese caso, solo la usa auditoriaDeGuardarropa.
+describe("sugerenciaDeAnclaInvernal", () => {
+  const catalogoClasico: (PresetPrenda & { hsl: HSL })[] = [
+    { id: "pantalon-clasico-negro", nombre: "Pantalón clásico negro", categoria: "pantalon", colorHex: "#1A1A1A", estilo: "clasico", hsl: { h: 0, s: 0, l: 10 } },
+    // otro estilo -- no debería aparecer nunca como sugerencia "clasico".
+    { id: "pantalon-deportivo", nombre: "Pantalón deportivo", categoria: "pantalon", colorHex: "#1A1A1A", estilo: "deportivo", hsl: { h: 0, s: 0, l: 10 } },
+  ];
+
+  it("ya hay un pantalón literal de ese estilo -> null, nada que comprar", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    expect(sugerenciaDeAnclaInvernal("clasico", [pantalon], catalogoClasico)).toBeNull();
+  });
+
+  it("solo bermudas de ese estilo (sin ningún pantalón) -> sugiere un pantalón real del catálogo", () => {
+    const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermuda.estilo = "clasico";
+    const r = sugerenciaDeAnclaInvernal("clasico", [bermuda], catalogoClasico);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.categoria).toBe("pantalon");
+    expect(r!.sugerida.id).not.toBe("pantalon-deportivo"); // nunca de otro estilo
+    expect(r!.mensaje).toContain("pantalón largo");
+  });
+
+  it("el catálogo no tiene ningún pantalón de ese estilo -> null, no inventa una sugerencia que no existe", () => {
+    const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermuda.estilo = "urbano";
+    expect(sugerenciaDeAnclaInvernal("urbano", [bermuda], catalogoClasico)).toBeNull();
+  });
+});
+
 // Consejo, ronda siguiente -- pedido explícito del usuario: "en el clima
 // frío, siempre las opciones tienen que ser con abrigo, sí o sí, y con un
 // abrigo de invierno. En caso de que no tenga un abrigo de invierno, no
@@ -3218,9 +3291,85 @@ describe("auditoriaDeGuardarropa", () => {
   ];
 
   it("sin ancla -> delega en sugerenciaDeAncla, con prioridad sobre cualquier otro hueco", () => {
-    const r = auditoriaDeGuardarropa("clasico", [], catalogoCompleto);
+    const r = auditoriaDeGuardarropa("clasico", [], undefined, catalogoCompleto);
     expect(r).not.toBeNull();
     expect(r!.sugerida.categoria).toBe("pantalon");
+  });
+
+  // Consejo, ronda siguiente -- bug real reportado por el usuario, con
+  // captura: "clasico" con solo bermudas quedaba en CERO opciones con
+  // clima="invierno", pero la auditoría decía "no encontramos ningún
+  // hueco real" -- porque antes de esta ronda era climáticamente ciega.
+  it("solo bermudas de este registro y clima='invierno' elegido -> detecta el hueco real, aunque haya variedad de sobra en el resto del placard", () => {
+    const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermuda.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    const sweaterEntretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55);
+    sweaterEntretiempo.estilo = "clasico";
+    sweaterEntretiempo.estacion = "entretiempo";
+    const remeraBlanca = mkPrenda("remera", "#FFFFFF", 0, 0, 100);
+    remeraBlanca.estilo = "clasico";
+    const calzadoNegro = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    calzadoNegro.estilo = "clasico";
+    const calzadoMarron = mkPrenda("calzado", "#5C3A21", 25, 44, 25);
+    calzadoMarron.estilo = "clasico";
+    // placard "bien cubierto" en las demás capas (mismo fixture que el
+    // último test de este describe, que da null sin clima) -- el único
+    // problema real es que el ancla es bermuda, no pantalón.
+    const placard = [bermuda, sweaterInvierno, sweaterEntretiempo, remeraBlanca, calzadoNegro, calzadoMarron];
+    const r = auditoriaDeGuardarropa("clasico", placard, "invierno", catalogoCompleto);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.categoria).toBe("pantalon");
+    expect(r!.mensaje).toContain("pantalón largo");
+  });
+
+  it("mismo placard solo-bermudas, pero clima='entretiempo' -> null, un bermuda funciona perfecto ahí (no es un hueco real)", () => {
+    const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermuda.estilo = "clasico";
+    const sweaterEntretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55);
+    sweaterEntretiempo.estilo = "clasico";
+    sweaterEntretiempo.estacion = "entretiempo";
+    const remeraBlanca = mkPrenda("remera", "#FFFFFF", 0, 0, 100);
+    remeraBlanca.estilo = "clasico";
+    const calzadoNegro = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    calzadoNegro.estilo = "clasico";
+    const calzadoMarron = mkPrenda("calzado", "#5C3A21", 25, 44, 25);
+    calzadoMarron.estilo = "clasico";
+    expect(
+      auditoriaDeGuardarropa(
+        "clasico",
+        [bermuda, sweaterEntretiempo, remeraBlanca, calzadoNegro, calzadoMarron],
+        "entretiempo",
+        catalogoCompleto,
+      ),
+    ).toBeNull();
+  });
+
+  it("mismo placard solo-bermudas, pero sin pasar clima (undefined) -> null, mismo comportamiento que antes de esta ronda", () => {
+    const bermuda = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
+    bermuda.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    const sweaterEntretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55);
+    sweaterEntretiempo.estilo = "clasico";
+    sweaterEntretiempo.estacion = "entretiempo";
+    const remeraBlanca = mkPrenda("remera", "#FFFFFF", 0, 0, 100);
+    remeraBlanca.estilo = "clasico";
+    const calzadoNegro = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    calzadoNegro.estilo = "clasico";
+    const calzadoMarron = mkPrenda("calzado", "#5C3A21", 25, 44, 25);
+    calzadoMarron.estilo = "clasico";
+    expect(
+      auditoriaDeGuardarropa(
+        "clasico",
+        [bermuda, sweaterInvierno, sweaterEntretiempo, remeraBlanca, calzadoNegro, calzadoMarron],
+        undefined,
+        catalogoCompleto,
+      ),
+    ).toBeNull();
   });
 
   it("hay ancla pero falta abrigo de invierno -- gana sobre el hueco de variedad de torso, aunque los dos apliquen", () => {
@@ -3228,7 +3377,7 @@ describe("auditoriaDeGuardarropa", () => {
     pantalon.estilo = "clasico";
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10); // 1 sola prenda de torso -- también sería hueco de variedad
     remera.estilo = "clasico";
-    const r = auditoriaDeGuardarropa("clasico", [pantalon, remera], catalogoCompleto);
+    const r = auditoriaDeGuardarropa("clasico", [pantalon, remera], undefined, catalogoCompleto);
     expect(r).not.toBeNull();
     expect(r!.sugerida.id).toBe("sweater-clasico-invierno");
     expect(r!.mensaje).toContain("abrigo de invierno");
@@ -3240,7 +3389,7 @@ describe("auditoriaDeGuardarropa", () => {
     const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10); // cubre invierno, pero sigue siendo 1 sola prenda de torso
     sweaterInvierno.estilo = "clasico";
     sweaterInvierno.estacion = "invierno";
-    const r = auditoriaDeGuardarropa("clasico", [pantalon, sweaterInvierno], catalogoCompleto);
+    const r = auditoriaDeGuardarropa("clasico", [pantalon, sweaterInvierno], undefined, catalogoCompleto);
     expect(r).not.toBeNull();
     expect(r!.sugerida.id).toBe("sweater-clasico-entretiempo");
     expect(r!.mensaje).toContain("abrigo de entretiempo");
@@ -3256,7 +3405,7 @@ describe("auditoriaDeGuardarropa", () => {
     const sacoLana = mkPrenda("saco", "#1A1A1A", 0, 0, 10); // 1 sola prenda de torso, también hueco de variedad
     sacoLana.estilo = "formal";
     sacoLana.textura = "lana";
-    const r = auditoriaDeGuardarropa("formal", [pantalon, sacoLana], catalogoFormal);
+    const r = auditoriaDeGuardarropa("formal", [pantalon, sacoLana], undefined, catalogoFormal);
     expect(r).not.toBeNull();
     expect(r!.sugerida.id).toBe("saco-lino-beige");
     expect(r!.mensaje).toContain("saco de verano");
@@ -3273,7 +3422,7 @@ describe("auditoriaDeGuardarropa", () => {
     sweaterEntretiempo.estacion = "entretiempo";
     // 2 torsos, pero ambos abrigo -- sigue habiendo un hueco de variedad
     // real (nunca una remera liviana) y, además, CERO calzado cargado.
-    const r = auditoriaDeGuardarropa("clasico", [pantalon, sweaterInvierno, sweaterEntretiempo], catalogoCompleto);
+    const r = auditoriaDeGuardarropa("clasico", [pantalon, sweaterInvierno, sweaterEntretiempo], undefined, catalogoCompleto);
     expect(r).not.toBeNull();
     expect(r!.sugerida.categoria).not.toBe("calzado");
   });
@@ -3294,6 +3443,7 @@ describe("auditoriaDeGuardarropa", () => {
     const r = auditoriaDeGuardarropa(
       "clasico",
       [pantalon, sweaterInvierno, sweaterEntretiempo, remeraBlanca, calzadoNegro],
+      undefined,
       catalogoCompleto,
     );
     expect(r).not.toBeNull();
@@ -3321,6 +3471,7 @@ describe("auditoriaDeGuardarropa", () => {
       auditoriaDeGuardarropa(
         "clasico",
         [pantalon, sweaterInvierno, sweaterEntretiempo, remeraBlanca, calzadoNegro, calzadoMarron],
+        undefined,
         catalogoCompleto,
       ),
     ).toBeNull();

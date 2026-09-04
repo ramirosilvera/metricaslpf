@@ -603,6 +603,45 @@ function esCinturon(p: Prenda): boolean {
   return p.categoria === "accesorio" && p.posicion_accesorio === "cintura";
 }
 
+/** Bug real reportado por el usuario ("el botón de recomendación de compra
+ *  dice que no hay hueco, pero tampoco hay opciones de outfit") --
+ *  diagnosticado por ejecución contra el placard real: "Clásico" quedaba en
+ *  CERO combinaciones en los tres climas, no por falta de prendas (sobran
+ *  remeras, buzos, sweaters, camperas y calzado tageados "clasico"), sino
+ *  porque armarOutfitsSugeridos SIEMPRE fuerza un accesorio cuando alguno
+ *  combina en color (ver accesorioOpciones más abajo: solo cae a "sin
+ *  accesorio" si NINGUNO combina) -- y los dos únicos cinturones del
+ *  usuario son "formal"/"oficina", nunca "clasico". Como su color (negro,
+ *  marrón) combina con cualquier bermuda neutra, terminaban en TODAS las
+ *  216 combinaciones posibles ancladas en una bermuda "clasico" -- y
+ *  outfitSirveParaEstilo (ver esCinturon ahí) las rechazaba a las 216 por
+ *  el mismo motivo, sin ninguna versión sin cinturón para caer. Mismo
+ *  problema estructural con una corbata (u otro accesorio que
+ *  requiere_cuello, ver esPrendaDeTrajeExclusiva): esa prenda SOLO puede
+ *  sobrevivir el filtro de outfitSirveParaEstilo cuando el estilo elegido
+ *  es "formal" -- así que si el ancla ni siquiera sirve para "formal", no
+ *  tiene sentido dejar que ocupe el único lugar de accesorio.
+ *
+ *  Esta función filtra ESO en el momento de armar la lista de candidatos
+ *  (antes de competir por el lugar), no en el resultado final -- así
+ *  siempre queda una versión "sin accesorio" real para caer cuando el
+ *  único accesorio que combina en color es de un registro incompatible.
+ *  No hace falta saber el estilo puntual que el usuario eligió en pantalla
+ *  (armarOutfitsSugeridos arma combos para todos los estilos a la vez,
+ *  ver su comentario): un cinturón sin ningún estilo en común con el ancla
+ *  no podría pasar outfitSirveParaEstilo para NINGÚN estilo que ese ancla
+ *  sirva (esa función exige `estilosDe(pantalon).includes(estilo)`), así
+ *  que excluirlo acá nunca cambia el resultado para otro estilo -- solo
+ *  le abre lugar a la versión sin accesorio que antes no existía. Mismo
+ *  razonamiento para trajeExclusiva: si "formal" no está entre los estilos
+ *  del ancla, esa prenda jamás iba a sobrevivir el filtro, para ningún
+ *  estilo. */
+function accesorioPuedeServirParaAncla(p: Prenda, ancla: Prenda): boolean {
+  if (esPrendaDeTrajeExclusiva(p) && !estilosDe(ancla).includes("formal")) return false;
+  if (esCinturon(p) && estilosDe(p).length > 0 && !estilosDe(p).some((e) => estilosDe(ancla).includes(e))) return false;
+  return true;
+}
+
 /** Techo real de formalidad por categoría -- ninguna combinación de estilo
  *  cargada a mano (PrendaForm no restringe qué estilo/estilos_secundarios
  *  puede llevar cada categoría) puede hacer que una remera básica, un buzo
@@ -1869,7 +1908,11 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
           // miraba. Sin esto, "Vestite hoy" podía sugerir una bufanda de
           // lana con clima="verano" o con una ancla veraniega.
           placard.filter(
-            (p) => p.categoria === "accesorio" && !(excluirOficina && esDeOficina(p)) && !(excluirAbrigo && esAbrigoDeCuello(p)),
+            (p) =>
+              p.categoria === "accesorio" &&
+              !(excluirOficina && esDeOficina(p)) &&
+              !(excluirAbrigo && esAbrigoDeCuello(p)) &&
+              accesorioPuedeServirParaAncla(p, ancla),
           ),
           placard,
         );
@@ -2705,9 +2748,12 @@ function mejorAnclaDelCatalogo(
   torsosPropios: Prenda[],
   placard: Prenda[],
   catalogo: (PresetPrenda & { hsl: HSL })[],
+  soloPantalon = false,
 ): (PresetPrenda & { hsl: HSL }) | undefined {
   const candidatos = catalogo.filter(
-    (preset) => CATEGORIAS_PIERNAS.includes(preset.categoria) && estilosDe(presetAPrendaSintetica(preset)).includes(estilo),
+    (preset) =>
+      (soloPantalon ? preset.categoria === "pantalon" : CATEGORIAS_PIERNAS.includes(preset.categoria)) &&
+      estilosDe(presetAPrendaSintetica(preset)).includes(estilo),
   );
   if (candidatos.length === 0) return undefined;
 
@@ -2763,6 +2809,39 @@ export function sugerenciaDeAncla(
       : `Todavía no tenés ninguna prenda de estilo ${ESTILO_LABEL[estilo]} para armar un look completo. Arrancá sumando "${sugerida.nombre}".`;
 
   return { mensaje, sugerida };
+}
+
+/** Bug real reportado por el usuario ("el botón de recomendación de compra
+ *  dice que no hay hueco, pero tampoco hay opciones de outfit") --
+ *  diagnosticado por ejecución: "Clásico" tenía CINCO bermudas pero NINGÚN
+ *  pantalón largo -- sugerenciaDeAncla (arriba) mira CATEGORIAS_PIERNAS
+ *  entera (bermuda incluido), así que devuelve null ("ya hay ancla"). Pero
+ *  con clima="invierno" un bermuda/short nunca ancla nada (ver la regla 2
+ *  de armarOutfitsSugeridos) -- así que ese registro queda en CERO outfits
+ *  posibles con frío real, aunque "en un sentido amplio" tenga ancla.
+ *  auditoriaDeGuardarropa (más abajo) llama a esto SOLO cuando el usuario
+ *  tiene elegido clima="invierno" en pantalla Y no hay ningún PANTALÓN
+ *  literal de ese estilo -- si ya hay uno, o si el clima elegido no es
+ *  invierno (o no se sabe cuál es), esto no aplica: un bermuda-only
+ *  registro funciona perfecto en entretiempo/calor, no es un hueco real
+ *  ahí. `null` si ya hay un pantalón literal de este estilo, o si el
+ *  catálogo no tiene ningún pantalón de este estilo que combine. */
+export function sugerenciaDeAnclaInvernal(
+  estilo: Estilo,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): SugerenciaAncla | null {
+  const hayPantalonLiteral = placard.some((p) => p.categoria === "pantalon" && estilosDe(p).includes(estilo));
+  if (hayPantalonLiteral) return null;
+
+  const torsosPropios = placard.filter((p) => CATEGORIAS_TORSO.includes(p.categoria) && estilosDe(p).includes(estilo));
+  const sugerida = mejorAnclaDelCatalogo(estilo, torsosPropios, placard, catalogo, true);
+  if (!sugerida) return null;
+
+  return {
+    mensaje: `Con frío de verdad, un bermuda o short no ancla ningún look ${ESTILO_LABEL[estilo]} -- para esta ocasión con esta temperatura hace falta un pantalón largo real. Te serviría sumar "${sugerida.nombre}".`,
+    sugerida,
+  };
 }
 
 export interface SugerenciaAbrigoInvierno {
@@ -2949,35 +3028,60 @@ export interface AuditoriaGuardarropa {
  *  estaciones? ¿hay variedad real de torso, de calzado, de color, o todo
  *  termina pareciendo lo mismo?
  *
+ *  Consejo, ronda siguiente -- bug real reportado por el usuario, con
+ *  captura: "el botón de recomendación de compra dice que no hay hueco,
+ *  pero tampoco hay opciones de outfit". Diagnosticado por ejecución
+ *  contra el placard real: "Clásico" tenía 5 bermudas pero NINGÚN
+ *  pantalón largo -- con clima="invierno" un bermuda nunca ancla nada
+ *  (armarOutfitsSugeridos, regla 2), así que el pool quedaba en CERO,
+ *  pero esta auditoría (climáticamente ciega hasta esta ronda) veía
+ *  "ancla" en sentido amplio (sugerenciaDeAncla mira CATEGORIAS_PIERNAS
+ *  entera) y variedad de sobra en el resto del registro (ignorando el
+ *  clima), así que nunca detectaba el hueco real. Por eso ahora toma el
+ *  clima elegido en pantalla (`clima`, opcional -- `undefined` preserva
+ *  el comportamiento anterior, climáticamente ciego, para quien no lo
+ *  pase) y agrega una capa nueva, la 2, para ese caso puntual.
+ *
  *  Revisa esas capas EN ORDEN DE IMPACTO real sobre la cantidad de
  *  combinaciones posibles -- el hueco que bloquea más combinaciones
  *  primero, no el primero que aparece:
  *   1. Ancla (pantalón/bermuda/short) -- sin esto no hay ningún outfit
  *      posible, es el bloqueo más grande que puede haber.
- *   2. Abrigo de invierno y de entretiempo -- sin esto, toda una
+ *   2. Ancla REAL para el clima elegido -- un bermuda/short "cuenta" para
+ *      el punto 1, pero no ancla nada con clima="invierno" (ver
+ *      sugerenciaDeAnclaInvernal); sin esto, el registro queda en cero
+ *      outfits con frío aunque el punto 1 no haya encontrado nada raro.
+ *   3. Abrigo de invierno y de entretiempo -- sin esto, toda una
  *      estación entera queda en cero outfits (ver esAbrigoDeClima).
- *   3. Saco de verano (solo "formal", el único estilo que lo exige) --
- *      mismo bloqueo estacional que el punto 2, para el caso puntual de
+ *   4. Saco de verano (solo "formal", el único estilo que lo exige) --
+ *      mismo bloqueo estacional que el punto 3, para el caso puntual de
  *      calor real.
- *   4. Variedad de torso y de color (ver sugerenciaDeVariedad) -- ya no
+ *   5. Variedad de torso y de color (ver sugerenciaDeVariedad) -- ya no
  *      bloquea una estación entera, pero sí limita cuántas combinaciones
  *      distintas arma con lo que hay.
- *   5. Variedad de calzado (ver sugerenciaDeCalzado) -- el hueco más sutil:
+ *   6. Variedad de calzado (ver sugerenciaDeCalzado) -- el hueco más sutil:
  *      por más torsos y colores que haya, si hay un solo par, todo
  *      termina pareciendo la misma combinación.
  *  Devuelve la PRIMERA que encuentre, ya priorizada -- un tip claro y
  *  accionable, no una pared de advertencias. `null` solo si de verdad no
- *  hay ningún hueco real en ninguna de las cinco capas (placard bien
- *  cubierto para este registro). */
+ *  hay ningún hueco real en ninguna de las capas (placard bien cubierto
+ *  para este registro, con el clima elegido si se pasó uno). */
 export function auditoriaDeGuardarropa(
   estilo: Estilo,
   placard: Prenda[],
+  clima?: Estacion | null,
   catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
 ): AuditoriaGuardarropa | null {
   const ancla = sugerenciaDeAncla(estilo, placard, catalogo);
   if (ancla) return ancla;
 
   const hayPantalon = placard.some((p) => p.categoria === "pantalon" && estilosDe(p).includes(estilo));
+
+  if (clima === "invierno" && !hayPantalon) {
+    const anclaInvernal = sugerenciaDeAnclaInvernal(estilo, placard, catalogo);
+    if (anclaInvernal) return anclaInvernal;
+  }
+
   if (hayPantalon) {
     const abrigoInvierno = sugerenciaDeAbrigoInvierno(estilo, placard, catalogo);
     if (abrigoInvierno) return abrigoInvierno;
