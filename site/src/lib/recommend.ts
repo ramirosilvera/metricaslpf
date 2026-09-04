@@ -1030,6 +1030,53 @@ export interface PuntajeOutfit {
 
 const PUNTOS_POR_NIVEL: Record<NivelCompatibilidad, number> = { excelente: 10, muy_bueno: 7, con_cuidado: 3 };
 
+/** Cuántos colores "protagonistas" tiene el outfit -- pedido explícito del
+ *  usuario: "reglas universales que toda combinación debe seguir... por
+ *  ejemplo la regla del 60-30-10: un color principal, uno secundario y un
+ *  accesorio terciario". Rol: asesor de imagen/colorista.
+ *
+ *  A diferencia de scoreColor/recomendar (que comparan PARES sueltos), esto
+ *  mira el outfit ENTERO de una sola vez -- el eje que faltaba: dos prendas
+ *  pueden combinar bien cada una contra el resto (todos los pares
+ *  "excelente") y aun así el conjunto tener 4 o más colores saturados
+ *  compitiendo sin que ninguno domine, el error real que describe la regla
+ *  60-30-10 ("varios colores gritando a la vez" en vez de un principal +
+ *  un secundario + un acento).
+ *
+ *  Un color solo "cuenta" si es un color de verdad -- ni neutro (esNeutro:
+ *  el negro/blanco/gris no compite, es el lienzo, no un color) ni apagado
+ *  (croma <= CROMA_ACENTO, la paleta base de sastrería, mismo umbral que ya
+ *  separa "acento" de "base" en el resto del motor -- dos tonos tierra
+ *  apagados conviven sin competir, igual que ya asume la regla 5 de
+ *  scoreColor). Dos prendas del mismo color de familia (hueDist <=
+ *  HUE_ANALOGO, el mismo umbral de "análogo" que ya usa scoreColor) cuentan
+ *  como UN solo grupo -- un pantalón y un cinturón del mismo bordó no son
+ *  "dos colores", son el mismo color repetido.
+ *
+ *  1-3 grupos: sin problema -- de hecho es exactamente lo que pide 60-30-10
+ *  (dominante + secundario + acento), o un esquema más simple todavía
+ *  (outfit predominantemente neutro con un solo color real, o dos). Recién
+ *  a partir de 4 grupos distintos y saturados a la vez (algo que solo puede
+ *  pasar si CADA una de las 4 prendas del outfit -- piernas, torso,
+ *  calzado, accesorio -- aporta un color saturado y ninguno repite/es
+ *  neutro) se considera que la jerarquía se rompió: ningún color manda de
+ *  verdad. Umbral pensado para no ser rígido -- ver el pedido explícito del
+ *  usuario ("permito que las reglas tengan cierta flexibilidad, no tienen
+ *  que ser 100% rígidas") -- un outfit de 2 o 3 colores reales nunca se
+ *  toca, solo el caso maximalista de verdad. */
+export function contarColoresProtagonistas(prendas: Prenda[]): number {
+  const protagonistas = prendas.filter(
+    (p) => !esNeutro(p.color_s, p.color_l) && croma({ h: p.color_h, s: p.color_s, l: p.color_l }) > CROMA_ACENTO,
+  );
+  const gruposHue: number[] = [];
+  for (const p of protagonistas) {
+    if (!gruposHue.some((h) => hueDist(h, p.color_h) <= HUE_ANALOGO)) {
+      gruposHue.push(p.color_h);
+    }
+  }
+  return gruposHue.length;
+}
+
 /** Pedido explícito del usuario: "quiero un sistema de valoración por
  *  puntos... este outfit es un nueve de diez por esto y por esto". No es
  *  una escala nueva ni un modelo aparte -- es el mismo scoreColor/
@@ -1066,6 +1113,23 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
   const promedio = pares.reduce((acc, p) => acc + PUNTOS_POR_NIVEL[p.score.nivel], 0) / pares.length;
   const puntaje = todosExcelentes ? 10 : Math.max(1, Math.min(9, Math.round(promedio)));
 
+  // Regla universal 60-30-10 (ver contarColoresProtagonistas) -- pensada
+  // para MEJORAR LA EXPLICACIÓN, no el número: matemáticamente, con las
+  // reglas actuales de scoreColor, dos prendas no-neutras y saturadas
+  // (croma > CROMA_ACENTO) solo pueden dar "excelente" entre sí si están
+  // hueDist <= HUE_ANALOGO -- es decir, si son del MISMO grupo de color
+  // (ver contarColoresProtagonistas). Por lo tanto, 4 grupos de color
+  // realmente distintos y saturados a la vez (el único outfit posible acá
+  // tiene 4 prendas -- piernas/torso/calzado/accesorio, el máximo del
+  // motor) nunca puede dar `todosExcelentes`: el promedio de pares ya
+  // queda bajo por su cuenta (como mucho 7, nunca 9 o 10) por la misma
+  // razón de siempre. Lo que faltaba no era topar el puntaje (ya está
+  // topado) sino la EXPLICACIÓN correcta: sin esto, un outfit así citaba
+  // el motivo de UN par al azar ("funciona, pero se nota") en vez de
+  // nombrar la causa real y completa (demasiados colores compitiendo a la
+  // vez, ninguno domina) -- el diagnóstico que de verdad describe 60-30-10.
+  const demasiadosColores = contarColoresProtagonistas(prendas) >= 4;
+
   // el par que más pesa en contra -- el de nivel más bajo (con_cuidado
   // antes que muy_bueno); a igualdad de nivel, el primero en orden de
   // evaluación alcanza (no hay un criterio de desempate más fino que
@@ -1082,6 +1146,13 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
     // (Combinar/Probar no bloquean nada, solo avisan), así que si de
     // verdad hay un con_cuidado, es la razón real y se cita tal cual.
     explicacion = peor.score.explicacion;
+  } else if (demasiadosColores) {
+    // por la demostración de arriba, este caso nunca coincide con
+    // todosExcelentes -- el puntaje ya viene topado por el promedio de
+    // pares real, esto solo reemplaza una explicación parcial (un par al
+    // azar) por el diagnóstico completo y correcto.
+    explicacion =
+      "Hay 4 o más colores saturados compitiendo a la vez, sin que ninguno mande -- la regla 60-30-10 (un color principal, uno secundario y el resto como acento) ayuda a que no se vea disperso.";
   } else if (todosExcelentes) {
     explicacion = tieneToneSobreTono
       ? "Combinación segura: tono sobre tono en la base del outfit."

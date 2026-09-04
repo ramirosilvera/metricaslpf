@@ -5,6 +5,7 @@ import {
   armarOutfitsSugeridos,
   candidatosDeContraste,
   categoriasAusentes,
+  contarColoresProtagonistas,
   diffPrendasEdicion,
   elegirContraste,
   esNeutro,
@@ -2503,6 +2504,47 @@ describe("sugerenciaDeAncla", () => {
 // puntos... este outfit es un nueve de diez por esto y por esto". No es una
 // escala nueva -- reusa scoreColor/recomendar() sobre TODOS los pares del
 // outfit, expresado en una nota de 1 a 10.
+// Consejo, pedido explícito del usuario: "reglas universales que toda
+// combinación debe seguir... por ejemplo la regla del 60-30-10 -- un color
+// principal, uno secundario y un accesorio terciario". Rol: asesor de
+// imagen/colorista.
+describe("contarColoresProtagonistas", () => {
+  it("outfit todo neutro (negro/gris/blanco) -> 0 colores protagonistas, el neutro no compite", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const remera = mkPrenda("remera", "#8C8C8C", 0, 0, 55);
+    const calzado = mkPrenda("calzado", "#F5F5F5", 0, 0, 96);
+    expect(contarColoresProtagonistas([pantalon, remera, calzado])).toBe(0);
+  });
+
+  it("un solo color real sobre una base neutra -> 1 protagonista", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const remera = mkPrenda("remera", "#3366CC", 220, 70, 50);
+    expect(contarColoresProtagonistas([pantalon, remera])).toBe(1);
+  });
+
+  it("dos prendas del mismo color de familia (hueDist chico) cuentan como UN solo grupo, no dos", () => {
+    const pantalon = mkPrenda("pantalon", "#B93A32", 5, 70, 45);
+    const accesorio = mkPrenda("accesorio", "#C24A3A", 10, 70, 48);
+    expect(contarColoresProtagonistas([pantalon, accesorio])).toBe(1);
+  });
+
+  it("una paleta apagada (croma bajo, tierra) NO cuenta como protagonista aunque no sea neutra por esNeutro", () => {
+    // marrón/oliva apagados, saturación real pero croma bajo -- la paleta
+    // base de sastrería (mismo criterio que ya usa scoreColor regla 2/4/4b).
+    const pantalon = mkPrenda("pantalon", "#8A6D4A", 32, 33, 40);
+    const remera = mkPrenda("remera", "#5A6B4A", 90, 20, 35);
+    expect(contarColoresProtagonistas([pantalon, remera])).toBe(0);
+  });
+
+  it("4 colores saturados y mutuamente distintos (piernas/torso/calzado/accesorio) -> 4 grupos", () => {
+    const pantalon = mkPrenda("pantalon", "#FF0000", 0, 90, 30);
+    const remera = mkPrenda("remera", "#FFA500", 50, 90, 45);
+    const calzado = mkPrenda("calzado", "#00FF00", 90, 90, 60);
+    const accesorio = mkPrenda("accesorio", "#0000FF", 130, 90, 75);
+    expect(contarColoresProtagonistas([pantalon, remera, calzado, accesorio])).toBe(4);
+  });
+});
+
 describe("puntuarOutfit", () => {
   it("una sola prenda -> 10, no hay con qué chocar", () => {
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
@@ -2593,6 +2635,33 @@ describe("puntuarOutfit", () => {
     const r = puntuarOutfit([pantalon, remera, calzado]);
     expect(r.puntaje).toBe(10);
     expect(r.explicacion).toContain("Combinación segura");
+  });
+
+  // Consejo, pedido explícito del usuario ("reglas universales... regla del
+  // 60-30-10"): un outfit con las 4 prendas en colores saturados y
+  // mutuamente distintos (ninguno análogo a otro) nunca puede dar
+  // "todosExcelentes" con las reglas actuales de scoreColor -- dos colores
+  // no-neutros y saturados solo dan "excelente" entre sí si son del MISMO
+  // grupo de matiz (ver contarColoresProtagonistas), así que 4 grupos
+  // reales ya bajan el promedio por su cuenta. Lo que faltaba era la
+  // EXPLICACIÓN correcta -- sin el fix, este caso citaba el motivo de un
+  // solo par al azar en vez de nombrar la causa real y completa.
+  it("4 colores saturados y mutuamente distintos -> cita la regla 60-30-10 como motivo, nunca 10/10", () => {
+    const pantalon = mkPrenda("pantalon", "#FF0000", 0, 90, 30);
+    const remera = mkPrenda("remera", "#FFA500", 50, 90, 45);
+    const calzado = mkPrenda("calzado", "#00FF00", 90, 90, 60);
+    const accesorio = mkPrenda("accesorio", "#0000FF", 130, 90, 75);
+    const r = puntuarOutfit([pantalon, remera, calzado, accesorio]);
+    expect(r.puntaje).toBeLessThan(10);
+    expect(r.explicacion).toContain("60-30-10");
+  });
+
+  it("2-3 colores reales (el escenario que 60-30-10 pide) NO dispara el aviso -- solo el caso de 4 a la vez", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10); // neutro, no cuenta
+    const remera = mkPrenda("remera", "#FF0000", 0, 90, 30);
+    const accesorio = mkPrenda("accesorio", "#0000FF", 130, 90, 75);
+    const r = puntuarOutfit([pantalon, remera, accesorio]);
+    expect(r.explicacion).not.toContain("60-30-10");
   });
 });
 
