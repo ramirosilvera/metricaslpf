@@ -99,7 +99,7 @@ const CROMA_ACENTO = 40;
 
 export interface ScoreColor {
   nivel: NivelCompatibilidad;
-  tag?: "tono_sobre_tono" | "combinacion_audaz";
+  tag?: "tono_sobre_tono" | "combinacion_audaz" | "contraste_marcado";
   explicacion: string;
 }
 
@@ -112,6 +112,33 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
 
   // 1. Neutro de por medio.
   if (baseNeutro || candNeutro) {
+    // 1c. Contraste marcado entre dos neutros -- pedido explícito del
+    // usuario, como asesor de imagen: "me gusta especialmente cuando hay
+    // contraste... pantalón negro, remera blanca, zapatillas negras" /
+    // "pantalón beige, remera negra, zapatillas blancas". Es una técnica
+    // real de styling (romper la silueta con contraste de valor en vez de
+    // dejar que las prendas se fundan en un solo bloque de tono), distinta
+    // de lo que ya cubre la regla 1 (cualquier neutro combina con
+    // cualquier cosa, sin importar cuánto se parezcan entre sí). A
+    // propósito acotado a NEUTRO-CONTRA-NEUTRO (no neutro+color, que ya
+    // tiene su propio color protagonista y su propia lectura vía las
+    // reglas de abajo): negro+blanco, negro+beige, blanco+beige con buena
+    // separación de luminosidad son justo los ejemplos reales que dio el
+    // usuario. No cambia el nivel (ya era "excelente", los neutros no
+    // compiten) -- solo lo etiqueta para que puntuarOutfit lo cuente en la
+    // explicación y armarOutfitsSugeridos lo use para desempatar outfits
+    // con el mismo puntaje, prefiriendo mostrar el que tiene más contraste
+    // marcado en vez de uno más plano (ver su comentario largo). Mismo
+    // piso VALUE_AUDAZ que ya usa la regla 4 para "buen contraste de
+    // luminosidad" entre complementarios -- mismo criterio, aplicado acá a
+    // neutros.
+    if (baseNeutro && candNeutro && vd >= VALUE_AUDAZ) {
+      return {
+        nivel: "excelente",
+        tag: "contraste_marcado",
+        explicacion: "Contraste marcado entre neutros -- un oscuro y un claro que se recortan bien, no se funden.",
+      };
+    }
     return {
       nivel: "excelente",
       explicacion: "El neutro no compite con ningún color: combina con lo que sea.",
@@ -1111,6 +1138,13 @@ export interface PuntajeOutfit {
    *  repite el registro (Formal/Casual/...) -- eso ya lo muestra
    *  RegistroBadge en Outfits.tsx aparte; esto se concentra en color. */
   explicacion: string;
+  /** true si algún par del outfit tiene contraste marcado entre neutros
+   *  (ver la regla 1c de scoreColor) -- pedido explícito del usuario, como
+   *  asesor de imagen: "me gusta especialmente cuando hay contraste...
+   *  pantalón negro, remera blanca, zapatillas negras". No cambia el
+   *  puntaje (los neutros ya daban excelente); armarOutfitsSugeridos lo
+   *  usa para desempatar outfits con el mismo puntaje. */
+  contrasteMarcado: boolean;
 }
 
 // muy_bueno bajó de 7 a 6 -- pedido explícito del usuario, revisado con
@@ -1194,7 +1228,7 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
     }
   }
   if (pares.length === 0) {
-    return { puntaje: 10, explicacion: "Una sola prenda: no hay con qué chocar." };
+    return { puntaje: 10, explicacion: "Una sola prenda: no hay con qué chocar.", contrasteMarcado: false };
   }
 
   // Auditoría de Consejo (lógica/motor, verificado por ejecución sobre el
@@ -1252,6 +1286,7 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
   const peor = [...pares].sort((x, y) => nivelOrden(x.score.nivel) - nivelOrden(y.score.nivel))[0];
   const tieneToneSobreTono = pares.some((p) => p.score.tag === "tono_sobre_tono");
   const tieneAudaz = pares.some((p) => p.score.tag === "combinacion_audaz");
+  const contrasteMarcado = pares.some((p) => p.score.tag === "contraste_marcado");
 
   let explicacion: string;
   if (peor.score.nivel === "con_cuidado") {
@@ -1269,9 +1304,14 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
     explicacion =
       "Hay 4 o más colores saturados compitiendo a la vez, sin que ninguno mande -- la regla 60-30-10 (un color principal, uno secundario y el resto como acento) ayuda a que no se vea disperso.";
   } else if (todosExcelentes) {
-    explicacion = tieneToneSobreTono
-      ? "Combinación segura: tono sobre tono en la base del outfit."
-      : "Combinación segura en color, sin nada que ajustar.";
+    // contrasteMarcado primero (antes que tono sobre tono): pedido
+    // explícito del usuario, es la lectura más específica e interesante
+    // cuando aplica -- ver la regla 1c de scoreColor.
+    explicacion = contrasteMarcado
+      ? "Contraste marcado y prolijo: la alternancia de tonos oscuros y claros define bien el outfit."
+      : tieneToneSobreTono
+        ? "Combinación segura: tono sobre tono en la base del outfit."
+        : "Combinación segura en color, sin nada que ajustar.";
   } else {
     // al menos un par en muy_bueno: cita el motivo real y puntual (ya es
     // un texto ejecutivo, generado por scoreColor/recomendar -- "el color
@@ -1283,7 +1323,7 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
     }
   }
 
-  return { puntaje, explicacion };
+  return { puntaje, explicacion, contrasteMarcado };
 }
 
 // duplicado a propósito de CAPA en Maniqui.tsx -- esa es la agrupación
@@ -1338,6 +1378,9 @@ export interface OutfitSugerido {
    *  Outfits.tsx no tenga que reimportar la lógica de puntaje por outfit. */
   puntaje: number;
   explicacionPuntaje: string;
+  /** ver PuntajeOutfit.contrasteMarcado -- usado por armarOutfitsSugeridos
+   *  para desempatar outfits con el mismo puntaje (ver su comentario). */
+  contrasteMarcado: boolean;
 }
 
 function mejorPropia(
@@ -1697,8 +1740,8 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
             if (vistos.has(clave)) continue;
             vistos.add(clave);
 
-            const { puntaje, explicacion } = puntuarOutfit(prendas);
-            resultados.push({ id: clave, prendas, puntaje, explicacionPuntaje: explicacion });
+            const { puntaje, explicacion, contrasteMarcado } = puntuarOutfit(prendas);
+            resultados.push({ id: clave, prendas, puntaje, explicacionPuntaje: explicacion, contrasteMarcado });
           }
         }
       }
@@ -1716,6 +1759,18 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
   // grupo con/sin abrigo es siempre la de mejor nota, y "otras opciones"
   // va de mejor a peor, no al azar). Sort estable (spec desde ES2019): a
   // igual puntaje, se conserva el orden anterior (ancla, después color).
+  //
+  // contrasteMarcado (ver PuntajeOutfit) se calcula por outfit pero
+  // deliberadamente NO se usa acá como criterio de desempate -- auditoría
+  // de Consejo, verificado por ejecución: el orden de inserción a igual
+  // puntaje ya está haciendo un trabajo real (la preferencia real de
+  // "abrigo de la estación de hoy" vive en el orden en que
+  // candidatasPropias arma los torsos, no en el puntaje) -- desempatar acá
+  // por contraste rompía ESE orden (un sweater de la estación equivocada
+  // pero con más contraste de valor pasaba primero). El desempate por
+  // contraste vive en elegirContraste (más abajo), que ya es la pieza
+  // pensada específicamente para esto: elegir la segunda tarjeta ("Otra
+  // combinación") entre candidatas ya empatadas en puntaje.
   resultados.sort((a, b) => b.puntaje - a.puntaje);
 
   return resultados;

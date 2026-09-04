@@ -92,6 +92,51 @@ describe("scoreColor", () => {
     expect(r.nivel).toBe("excelente");
   });
 
+  // Pedido explícito del usuario, como asesor de imagen: "me gusta
+  // especialmente cuando hay contraste... pantalón negro, remera blanca,
+  // zapatillas negras" / "pantalón beige, remera negra, zapatillas
+  // blancas". No cambia el nivel (los neutros ya daban excelente) -- solo
+  // etiqueta el par para que puntuarOutfit lo cuente en la explicación.
+  it("contraste marcado entre dos neutros (negro + blanco) -> excelente, tag contraste_marcado", () => {
+    const negro = { h: 0, s: 0, l: 10 };
+    const blanco = { h: 0, s: 0, l: 95 };
+    const r = scoreColor(negro, blanco);
+    expect(r.nivel).toBe("excelente");
+    expect(r.tag).toBe("contraste_marcado");
+  });
+
+  it("contraste marcado entre neutros -- también aplica negro + un gris cálido claro (mismo criterio de neutro amplio que ya usa esNeutro)", () => {
+    const negro = { h: 0, s: 0, l: 10 };
+    const grisCalidoClaro = { h: 41, s: 12, l: 74 }; // s<=15 -> neutro real, no confundir con el beige del catálogo (s=41, NO es neutro -- ver el test siguiente)
+    const r = scoreColor(negro, grisCalidoClaro);
+    expect(r.nivel).toBe("excelente");
+    expect(r.tag).toBe("contraste_marcado");
+  });
+
+  // El "beige" del catálogo (#D8C7A1, s=41) NO pasa esNeutro -- a
+  // diferencia de negro/blanco/gris, es un color propio (croma apagado),
+  // ya cubierto por otras reglas (2/4, análogo+croma bajo). La regla
+  // 1c es específicamente neutro-contra-neutro; no se fuerza acá.
+  it("negro + beige del catálogo (NO es neutro, croma apagado) -> excelente por otra regla, sin el tag de contraste marcado", () => {
+    const negro = { h: 0, s: 0, l: 10 };
+    const beigeCatalogo = { h: 41, s: 41, l: 74 };
+    const r = scoreColor(negro, beigeCatalogo);
+    expect(r.nivel).toBe("excelente");
+    expect(r.tag).not.toBe("contraste_marcado");
+  });
+
+  it("dos neutros CERCANOS en luminosidad (dos grises parecidos) -> excelente, pero SIN el tag -- no hay contraste real que marcar", () => {
+    const r = scoreColor({ h: 0, s: 0, l: 50 }, { h: 0, s: 0, l: 55 });
+    expect(r.nivel).toBe("excelente");
+    expect(r.tag).toBeUndefined();
+  });
+
+  it("neutro + color saturado (no dos neutros) -> excelente, sin el tag -- la regla es específica de neutro-contra-neutro", () => {
+    const r = scoreColor({ h: 0, s: 0, l: 10 }, { h: 200, s: 80, l: 90 });
+    expect(r.nivel).toBe("excelente");
+    expect(r.tag).toBeUndefined();
+  });
+
   it("análogo + saturación baja -> excelente", () => {
     const r = scoreColor({ h: 200, s: 30, l: 50 }, { h: 210, s: 35, l: 55 });
     expect(r.nivel).toBe("excelente");
@@ -2128,7 +2173,7 @@ describe("armarOutfitsSugeridos", () => {
 });
 
 describe("elegirContraste", () => {
-  const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
+  const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
 
   it("elige, entre varios candidatos, el que más contrasta en luminosidad contra el pantalón de la principal", () => {
     const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
@@ -2183,8 +2228,8 @@ describe("elegirContraste", () => {
 
   it("a igual distancia de color, desempata por mayor puntaje", () => {
     const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
-    const mismoColorMenosPuntaje = { id: "a", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 7, explicacionPuntaje: "" };
-    const mismoColorMasPuntaje = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 10, explicacionPuntaje: "" };
+    const mismoColorMenosPuntaje = { id: "a", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 7, explicacionPuntaje: "", contrasteMarcado: false };
+    const mismoColorMasPuntaje = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
     const elegido = elegirContraste(principal, [mismoColorMenosPuntaje, mismoColorMasPuntaje]);
     expect(elegido?.id).toBe("b");
   });
@@ -2208,7 +2253,7 @@ describe("elegirContraste", () => {
 // devuelve la lista RANKEADA completa para que offsetSugeridos pueda indexar
 // distintas posiciones y de verdad cambie lo que se ve en pantalla.
 describe("candidatosDeContraste", () => {
-  const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
+  const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
 
   it("devuelve la lista completa ordenada por distancia descendente, no solo el ganador", () => {
     const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
@@ -2228,8 +2273,8 @@ describe("candidatosDeContraste", () => {
 
   it("a igual distancia, desempata por mayor puntaje", () => {
     const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
-    const menosPuntaje = { id: "a", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 7, explicacionPuntaje: "" };
-    const masPuntaje = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 10, explicacionPuntaje: "" };
+    const menosPuntaje = { id: "a", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 7, explicacionPuntaje: "", contrasteMarcado: false };
+    const masPuntaje = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
     const candidatos = candidatosDeContraste(principal, [menosPuntaje, masPuntaje]);
     expect(candidatos.map((c) => c.id)).toEqual(["b", "a"]);
   });
@@ -2267,11 +2312,11 @@ describe("semillaDelDia", () => {
   // 3 outfits empatados en el puntaje máximo (10), 2 por debajo (7) -- el
   // nivel a rotar tiene que ser SOLO los 3 primeros, no los 5.
   const nivelDe3 = [
-    { id: "a", prendas: [prenda], puntaje: 10, explicacionPuntaje: "" },
-    { id: "b", prendas: [prenda], puntaje: 10, explicacionPuntaje: "" },
-    { id: "c", prendas: [prenda], puntaje: 10, explicacionPuntaje: "" },
-    { id: "d", prendas: [prenda], puntaje: 7, explicacionPuntaje: "" },
-    { id: "e", prendas: [prenda], puntaje: 7, explicacionPuntaje: "" },
+    { id: "a", prendas: [prenda], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false },
+    { id: "b", prendas: [prenda], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false },
+    { id: "c", prendas: [prenda], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false },
+    { id: "d", prendas: [prenda], puntaje: 7, explicacionPuntaje: "", contrasteMarcado: false },
+    { id: "e", prendas: [prenda], puntaje: 7, explicacionPuntaje: "", contrasteMarcado: false },
   ];
 
   it("pool vacío -> 0", () => {
@@ -2279,7 +2324,7 @@ describe("semillaDelDia", () => {
   });
 
   it("un solo outfit en el nivel máximo -> siempre 0, sea cual sea el día", () => {
-    const unSolo = [{ id: "a", prendas: [prenda], puntaje: 10, explicacionPuntaje: "" }];
+    const unSolo = [{ id: "a", prendas: [prenda], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false }];
     expect(semillaDelDia(unSolo, new Date(0))).toBe(0);
     expect(semillaDelDia(unSolo, new Date(86400000 * 50))).toBe(0);
   });
@@ -2749,7 +2794,11 @@ describe("contarColoresProtagonistas", () => {
 describe("puntuarOutfit", () => {
   it("una sola prenda -> 10, no hay con qué chocar", () => {
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
-    expect(puntuarOutfit([remera])).toEqual({ puntaje: 10, explicacion: "Una sola prenda: no hay con qué chocar." });
+    expect(puntuarOutfit([remera])).toEqual({
+      puntaje: 10,
+      explicacion: "Una sola prenda: no hay con qué chocar.",
+      contrasteMarcado: false,
+    });
   });
 
   it("outfit vacío -> 10 por default (mismo caso límite que una sola prenda)", () => {
@@ -2762,6 +2811,30 @@ describe("puntuarOutfit", () => {
     const r = puntuarOutfit([pantalon, remera]);
     expect(r.puntaje).toBe(10);
     expect(r.explicacion).toContain("Combinación segura");
+  });
+
+  // Pedido explícito del usuario, ejemplo real dado como asesor de imagen:
+  // "pantalón negro, remera blanca, zapatillas negras". contrasteMarcado
+  // no cambia el puntaje (ya era 10, todos los pares son neutros) -- pero
+  // sí cambia la explicación, para reconocer explícitamente la técnica.
+  it("pantalón negro + remera blanca + zapatillas negras -> 10, contrasteMarcado=true, explicación lo nombra", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const remera = mkPrenda("remera", "#F5F5F5", 0, 0, 95);
+    const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    const r = puntuarOutfit([pantalon, remera, zapatillas]);
+    expect(r.puntaje).toBe(10);
+    expect(r.contrasteMarcado).toBe(true);
+    expect(r.explicacion).toContain("Contraste marcado");
+  });
+
+  it("outfit todo del mismo neutro (sin contraste real) -> 10 igual, pero SIN contrasteMarcado ni la mención en la explicación", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
+    const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    const r = puntuarOutfit([pantalon, remera, zapatillas]);
+    expect(r.puntaje).toBe(10);
+    expect(r.contrasteMarcado).toBe(false);
+    expect(r.explicacion).not.toContain("Contraste marcado");
   });
 
   it("una prenda más informal que el pantalón (muy_bueno, no con_cuidado) -> puntaje intermedio con el motivo real citado", () => {
@@ -2935,13 +3008,13 @@ describe("mejorasDeReemplazo", () => {
   it("outfit ya perfecto (10/10) -> ningún reemplazo puede superarlo, lista vacía", () => {
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
-    const outfitPerfecto = { id: "x", prendas: [pantalon, remera], puntaje: 10, explicacionPuntaje: "" };
+    const outfitPerfecto = { id: "x", prendas: [pantalon, remera], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
     expect(mejorasDeReemplazo(outfitPerfecto, [pantalon, remera])).toEqual([]);
   });
 
   it("sin ancla (piernas) en el outfit -> no hay nada que anclar la validación, lista vacía", () => {
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
-    const outfitSinAncla = { id: "x", prendas: [remera], puntaje: 10, explicacionPuntaje: "" };
+    const outfitSinAncla = { id: "x", prendas: [remera], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
     expect(mejorasDeReemplazo(outfitSinAncla, [remera])).toEqual([]);
   });
 });
@@ -2962,7 +3035,7 @@ describe("mejorCompraParaSubirNota", () => {
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     pantalon.estilo = "formal";
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
-    const outfitPerfecto = { id: "x", prendas: [pantalon, remera], puntaje: 10, explicacionPuntaje: "" };
+    const outfitPerfecto = { id: "x", prendas: [pantalon, remera], puntaje: 10, explicacionPuntaje: "", contrasteMarcado: false };
     expect(mejorCompraParaSubirNota("formal", outfitPerfecto, [pantalon, remera])).toBeUndefined();
   });
 
@@ -2981,7 +3054,7 @@ describe("mejorCompraParaSubirNota", () => {
     const placard = [pantalon, camisa];
     // puntaje bajo a propósito -- cualquier sugerencia real que arme un
     // outfit razonable lo supera, sin depender de un número exacto.
-    const base = { id: "x", prendas: placard, puntaje: 5, explicacionPuntaje: "" };
+    const base = { id: "x", prendas: placard, puntaje: 5, explicacionPuntaje: "", contrasteMarcado: false };
     const compra = mejorCompraParaSubirNota("formal", base, placard);
     expect(compra).toBeDefined();
     expect(compra!.categoriaSugerida).toBe("saco");
@@ -3076,7 +3149,7 @@ describe("comboParaExcelencia", () => {
 
   it("outfit sin ancla (piernas) -> undefined", () => {
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
-    const outfit = { id: "x", prendas: [remera], puntaje: 5, explicacionPuntaje: "" };
+    const outfit = { id: "x", prendas: [remera], puntaje: 5, explicacionPuntaje: "", contrasteMarcado: false };
     expect(comboParaExcelencia("formal", outfit, [remera])).toBeUndefined();
   });
 });
