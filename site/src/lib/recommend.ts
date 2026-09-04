@@ -1102,7 +1102,21 @@ export interface PuntajeOutfit {
   explicacion: string;
 }
 
-const PUNTOS_POR_NIVEL: Record<NivelCompatibilidad, number> = { excelente: 10, muy_bueno: 7, con_cuidado: 3 };
+// muy_bueno bajó de 7 a 6 -- pedido explícito del usuario, revisado con
+// multiples roles (asesor de imagen, sastre, motor/QA): "veo una
+// puntuación de 9/10 que para mí debería ser menos... subí un poco la
+// exigencia". El problema real no era el nivel en sí (muy_bueno sigue
+// siendo "funciona, con un detalle") sino que, en un outfit de varias
+// prendas (varios pares), UN SOLO par en muy_bueno se diluía en el
+// promedio del resto en excelente y terminaba redondeando a 9 -- un
+// outfit con un defecto real leído como "casi perfecto". Bajar el punto
+// por nivel (no solo el tope de más abajo) hace que ESE mismo defecto
+// pese más en el promedio, sea cual sea la cantidad de prendas -- más
+// prendas ya no diluye un defecto, lo sigue penalizando en proporción.
+// con_cuidado se deja en 3: ya se lee como "mal" con claridad, y en la
+// práctica casi nunca llega a puntuarOutfit (armarOutfitsSugeridos ya
+// filtra esos pares antes de llegar acá).
+const PUNTOS_POR_NIVEL: Record<NivelCompatibilidad, number> = { excelente: 10, muy_bueno: 6, con_cuidado: 3 };
 
 /** Cuántos colores "protagonistas" tiene el outfit -- pedido explícito del
  *  usuario: "reglas universales que toda combinación debe seguir... por
@@ -1181,11 +1195,27 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
   // explicación citando el defecto, una contradicción directa (confirmado
   // con el catálogo real: 180 de los outfits que arma armarOutfitsSugeridos
   // caían en este caso). `todosExcelentes` se calcula ANTES que el puntaje
-  // y lo topea en 9 -- un 10/10 pasa a significar, siempre, "ningún par
-  // por debajo de excelente", nunca "el redondeo dio justo".
+  // y lo topea -- un 10/10 pasa a significar, siempre, "ningún par por
+  // debajo de excelente", nunca "el redondeo dio justo".
+  //
+  // Tope bajado de 9 a 8 -- segunda vuelta de auditoría, pedido explícito
+  // del usuario: "veo una puntuación de 9/10 que para mí debería ser
+  // menos... subí un poco la exigencia". El caso de arriba (5 excelente +
+  // 1 muy_bueno) seguía redondeando a 9 con el tope viejo -- técnicamente
+  // ya no era un 10 falso, pero un outfit con un defecto de registro real
+  // (no una diferencia de gustos) leído como "casi perfecto" (9/10)
+  // tampoco describe bien la realidad, sobre todo porque más prendas =
+  // más pares = el mismo defecto se diluye más en el promedio, así que un
+  // outfit rico "esconde" mejor su propio defecto que uno simple -- al
+  // revés de lo que un ojo de sastre esperaría. 9 y 10 quedan reservados
+  // para "todos los pares excelente" (10) o el escalón inmediato debajo
+  // sin llegar ahí no existe más -- cualquier outfit con algo para ajustar,
+  // por mínimo que sea, topea en 8. Combinado con PUNTOS_POR_NIVEL.muy_bueno
+  // (bajado de 7 a 6 en la misma revisión), el caso de 5 excelente + 1
+  // muy_bueno ahora promedia (5*10+6)/6=9.33 -> redondea a 9 -> topeado a 8.
   const todosExcelentes = pares.every((p) => p.score.nivel === "excelente");
   const promedio = pares.reduce((acc, p) => acc + PUNTOS_POR_NIVEL[p.score.nivel], 0) / pares.length;
-  const puntaje = todosExcelentes ? 10 : Math.max(1, Math.min(9, Math.round(promedio)));
+  const puntaje = todosExcelentes ? 10 : Math.max(1, Math.min(8, Math.round(promedio)));
 
   // Regla universal 60-30-10 (ver contarColoresProtagonistas) -- pensada
   // para MEJORAR LA EXPLICACIÓN, no el número: matemáticamente, con las
@@ -2088,9 +2118,34 @@ export function mejorCompraParaSubirNota(
   placard: Prenda[],
   catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
 ): OutfitParaComprar | undefined {
-  const reemplazos = mejorasDeReemplazo(base, placard, catalogo);
+  // outfitSirveParaEstilo se chequea sobre prendasPropias + LA SUGERIDA (no
+  // solo lo que el usuario ya tiene) -- auditoría de Consejo, verificado
+  // por ejecución: "formal" ahora exige un saco presente en el outfit (ver
+  // outfitSirveParaEstilo) -- si el usuario no tiene NINGÚN saco, la
+  // categoría ausente que este mecanismo debería poder sugerir es
+  // justamente "saco", pero chequear el requisito solo contra
+  // prendasPropias (que por definición nunca incluye lo que se está por
+  // sugerir comprar) hacía que esa sugerencia se descartara a sí misma:
+  // "comprate un saco" fallaba el chequeo de "esto sirve para formal"
+  // porque, sin el saco todavía puesto, no lo era.
+  //
+  // mejorasDeReemplazo (a diferencia de armarOutfitsParaComprar) nunca
+  // filtró por estilo -- no hacía falta mientras cambiar UNA prenda de un
+  // outfit nunca podía romper su registro (el pantalón, que es lo único
+  // de lo que dependía estilosDe, nunca se toca acá). Dejó de ser cierto
+  // con "formal exige saco": reemplazar la camisa por una mejor, en un
+  // outfit que YA no tiene saco, sigue sin ser "formal" -- sin este
+  // filtro, mejorCompraParaSubirNota podía sugerir "comprá esta camisa
+  // mejor" como si eso alcanzara para llegar a formal, cuando el saco
+  // seguía faltando. Mismo chequeo que en `ausentes`: sobre el outfit
+  // COMPLETO resultante (prendasPropias + la sugerida), no solo sobre lo
+  // que ya había puesto.
+  const reemplazos = mejorasDeReemplazo(base, placard, catalogo).filter((c) =>
+    outfitSirveParaEstilo([...c.prendasPropias, presetAPrendaSintetica(c.sugerida)], estilo),
+  );
   const ausentes = armarOutfitsParaComprar(placard, catalogo).filter(
-    (c) => c.puntaje > base.puntaje && outfitSirveParaEstilo(c.prendasPropias, estilo),
+    (c) =>
+      c.puntaje > base.puntaje && outfitSirveParaEstilo([...c.prendasPropias, presetAPrendaSintetica(c.sugerida)], estilo),
   );
   return [...reemplazos, ...ausentes].sort((a, b) => b.puntaje - a.puntaje)[0];
 }

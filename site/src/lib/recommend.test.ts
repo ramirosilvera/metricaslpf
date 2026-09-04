@@ -1488,7 +1488,7 @@ describe("armarOutfitsSugeridos", () => {
     // sin sacrificar puntaje: ninguno de los dos se descarta por el otro --
     // cada uno arma su propia combinación, puntuada de verdad por separado
     // (no hay un "ganador único" que tape al resto).
-    for (const o of outfits) expect(o.puntaje).toBeGreaterThanOrEqual(9);
+    for (const o of outfits) expect(o.puntaje).toBeGreaterThanOrEqual(8);
   });
 
   it("con varios accesorios propios que combinan igual de bien, arma una variante por cada uno -- mismo criterio que el calzado", () => {
@@ -2741,7 +2741,7 @@ describe("puntuarOutfit", () => {
     const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
     zapatillas.estilo = "urbano";
     const r = puntuarOutfit([pantalonVestir, zapatillas]);
-    expect(r.puntaje).toBe(7); // un solo par, muy_bueno -> PUNTOS_POR_NIVEL.muy_bueno
+    expect(r.puntaje).toBe(6); // un solo par, muy_bueno -> PUNTOS_POR_NIVEL.muy_bueno
     expect(r.explicacion).toContain("más informal que el pantalón");
   });
 
@@ -2757,16 +2757,16 @@ describe("puntuarOutfit", () => {
 
   it("promedia sobre TODOS los pares, no solo contra la primera prenda", () => {
     // pantalón + remera (mismo color, excelente) + calzado más informal que
-    // el pantalón (muy_bueno) -- promedio (10+10+7)/3 = 9 (pantalón-remera,
-    // pantalón-calzado, remera-calzado; remera-calzado también excelente
-    // por ser el mismo color exacto).
+    // el pantalón (muy_bueno) -- promedio (10+10+6)/3 = 8.67 -> redondea a
+    // 9 -> topeado a 8 (pantalón-remera, pantalón-calzado, remera-calzado;
+    // remera-calzado también excelente por ser el mismo color exacto).
     const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     pantalonVestir.estilo = "formal";
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
     const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
     zapatillas.estilo = "urbano";
     const r = puntuarOutfit([pantalonVestir, remera, zapatillas]);
-    expect(r.puntaje).toBe(9);
+    expect(r.puntaje).toBe(8);
   });
 
   it("puntaje siempre entre 1 y 10 (clamp), redondeado", () => {
@@ -2779,15 +2779,18 @@ describe("puntuarOutfit", () => {
   });
 
   // Auditoría de Consejo (lógica/motor): con 4 prendas hay 6 pares -- 5
-  // excelente + 1 muy_bueno promedia (5*10+7)/6 = 9.5, que Math.round
-  // redondeaba a 10 antes de este fix. Un outfit de 4 prendas con un salto
-  // de registro real (acá: pantalón de vestir + zapatillas urbanas, mismo
-  // color exacto en las 4 prendas para que el resto de los pares sea
-  // excelente sin ambigüedad) mostraba "10/10" al lado de una explicación
-  // citando el defecto -- una contradicción directa entre el número y el
-  // texto, confirmada con el catálogo real (180 outfits de
-  // armarOutfitsSugeridos caían en este caso antes del fix).
-  it("5 pares excelente + 1 muy_bueno (avg 9.5) -> topea en 9, nunca redondea a 10 sin ser todosExcelentes", () => {
+  // excelente + 1 muy_bueno promedia (5*10+6)/6 = 9.33, que Math.round
+  // sube a 9 -- topeado a 8 (segunda vuelta de auditoría, pedido explícito
+  // del usuario: "veo un 9/10 que debería ser menos"). Un outfit de 4
+  // prendas con un salto de registro real (acá: pantalón de vestir +
+  // zapatillas urbanas, mismo color exacto en las 4 prendas para que el
+  // resto de los pares sea excelente sin ambigüedad) mostraba antes
+  // "10/10" (bug de redondeo original) y después "9/10" (todavía muy alto
+  // para un defecto real) al lado de una explicación citando el defecto
+  // -- una contradicción directa entre el número y el texto, confirmada
+  // con el catálogo real (180 outfits de armarOutfitsSugeridos caían en
+  // este caso antes del primer fix).
+  it("5 pares excelente + 1 muy_bueno (avg 9.33) -> topea en 8, nunca en 9 o 10 sin ser todosExcelentes", () => {
     const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     pantalonVestir.estilo = "formal";
     const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
@@ -2795,7 +2798,7 @@ describe("puntuarOutfit", () => {
     zapatillas.estilo = "urbano";
     const cinturon = mkPrenda("accesorio", "#1A1A1A", 0, 0, 10);
     const r = puntuarOutfit([pantalonVestir, camisa, zapatillas, cinturon]);
-    expect(r.puntaje).toBe(9);
+    expect(r.puntaje).toBe(8);
     expect(r.explicacion).not.toContain("Combinación segura");
     expect(r.explicacion).toContain("más informal que el pantalón");
   });
@@ -2862,7 +2865,7 @@ describe("mejorasDeReemplazo", () => {
     const mejor = armarOutfitsSugeridos(placard, "entretiempo")
       .filter((s) => outfitSirveParaEstilo(s.prendas, "formal"))
       .sort((a, b) => b.puntaje - a.puntaje)[0];
-    expect(mejor.puntaje).toBe(9); // ver el test de puntuarOutfit del fix de redondeo
+    expect(mejor.puntaje).toBe(8); // ver el test de puntuarOutfit del fix de redondeo/exigencia
     expect(mejor.explicacionPuntaje).toContain("más informal que el pantalón");
 
     const reemplazos = mejorasDeReemplazo(mejor, placard);
@@ -2906,6 +2909,27 @@ describe("mejorCompraParaSubirNota", () => {
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
     const outfitPerfecto = { id: "x", prendas: [pantalon, remera], puntaje: 10, explicacionPuntaje: "" };
     expect(mejorCompraParaSubirNota("formal", outfitPerfecto, [pantalon, remera])).toBeUndefined();
+  });
+
+  // Consejo, pedido explícito del usuario: "revisá la función de recomendar
+  // compra" -- verificado por ejecución tras la ronda que agregó "formal
+  // exige saco" (outfitSirveParaEstilo): sin este fix, ausentes se
+  // chequeaba con outfitSirveParaEstilo(c.prendasPropias, estilo) --
+  // prendasPropias por definición NUNCA incluye lo que se está por
+  // sugerir comprar, así que "comprate un saco para armar formal" se
+  // descartaba a sí misma (sin el saco puesto todavía, ese outfit no era
+  // "formal"). Ahora se chequea contra prendasPropias + LA SUGERIDA.
+  it("si al usuario le falta directamente el saco (la categoría que 'formal' exige), igual se lo sugiere comprar", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "formal";
+    const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+    const placard = [pantalon, camisa];
+    // puntaje bajo a propósito -- cualquier sugerencia real que arme un
+    // outfit razonable lo supera, sin depender de un número exacto.
+    const base = { id: "x", prendas: placard, puntaje: 5, explicacionPuntaje: "" };
+    const compra = mejorCompraParaSubirNota("formal", base, placard);
+    expect(compra).toBeDefined();
+    expect(compra!.categoriaSugerida).toBe("saco");
   });
 });
 
