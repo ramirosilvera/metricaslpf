@@ -73,6 +73,7 @@ export default function CatalogoPicker({
             categoria={p.categoria}
             color={p.colorHex}
             textura={p.textura}
+            estacion={p.estacion}
             suelaContraste={p.suelaContraste}
             posicionAccesorio={p.posicionAccesorio}
             requiereCuello={p.requiereCuello}

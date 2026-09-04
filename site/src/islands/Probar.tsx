@@ -196,6 +196,7 @@ export default function Probar() {
                 categoria={pruebaBase.categoria}
                 color={pruebaBase.color_hex}
                 textura={pruebaBase.textura ?? undefined}
+                estacion={pruebaBase.estacion}
                 suelaContraste={pruebaBase.suela_contraste}
                 posicionAccesorio={pruebaBase.posicion_accesorio}
                 requiereCuello={pruebaBase.requiere_cuello}
@@ -243,6 +244,7 @@ export default function Probar() {
                             categoria={prenda.categoria}
                             color={prenda.color_hex}
                             textura={prenda.textura ?? undefined}
+                            estacion={prenda.estacion}
                             suelaContraste={prenda.suela_contraste}
                             posicionAccesorio={prenda.posicion_accesorio}
                             requiereCuello={prenda.requiere_cuello}

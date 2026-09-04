@@ -204,6 +204,7 @@ export default function Recomendaciones() {
             categoria={base.categoria}
             color={base.color_hex}
             textura={base.textura ?? undefined}
+            estacion={base.estacion}
             suelaContraste={base.suela_contraste}
             posicionAccesorio={base.posicion_accesorio}
             requiereCuello={base.requiere_cuello}
@@ -331,6 +332,7 @@ export default function Recomendaciones() {
                         categoria={prenda.categoria}
                         color={prenda.color_hex}
                         textura={prenda.textura ?? undefined}
+                        estacion={prenda.estacion}
                         suelaContraste={prenda.suela_contraste}
                         posicionAccesorio={prenda.posicion_accesorio}
                         requiereCuello={prenda.requiere_cuello}

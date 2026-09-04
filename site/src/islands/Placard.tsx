@@ -199,6 +199,7 @@ export function Contenido({ prendas, base }: { prendas: Prenda[]; base: string }
                         categoria={p.categoria}
                         color={p.color_hex}
                         textura={p.textura ?? undefined}
+                        estacion={p.estacion}
                         suelaContraste={p.suela_contraste}
                         posicionAccesorio={p.posicion_accesorio}
                         requiereCuello={p.requiere_cuello}

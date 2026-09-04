@@ -1,5 +1,5 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
-import PrendaIcon, { PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
+import PrendaIcon, { esCamperaDePunto, PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
 import { descripcionPrenda, type Calce, type Categoria, type CorteCalzado, type Prenda } from "../lib/types";
 
 /** Escala horizontal de la silueta según Calce (ver types.ts) -- auditoría
@@ -470,7 +470,14 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           {prenda.categoria === "sweater" && (
             <path d="M48 40 Q60 46 72 40" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
           )}
-          {(prenda.categoria === "sweater" || prenda.categoria === "buzo") && (
+          {(prenda.categoria === "sweater" ||
+            prenda.categoria === "buzo" ||
+            // campera de punto (cardigan con cierre, ver esCamperaDePunto
+            // en PrendaIcon.tsx y el comentario largo más abajo en
+            // categoria="campera") -- mismo dobladillo acanalado que un
+            // sweater/buzo real: es la misma prenda de punto, solo con
+            // cierre en vez de cuello redondo/pullover.
+            esCamperaDePunto(prenda.categoria, prenda.textura, prenda.estacion)) && (
             // dobladillo acanalado -- pedido explícito del usuario ("fijate
             // el dobladillo"), comparando contra una foto real donde se ve
             // claramente la banda tejida más densa en el borde inferior del
@@ -490,17 +497,37 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           {prenda.categoria === "campera" && (
             <>
               <line x1="60" y1="60" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
-              {/* mismo rediseño de cuello camisero que en TorsoCuerpo/
-                  camisa (ver ese comentario largo para el porqué), 2u más
-                  abajo -- offset que ya traía este bloque de antes. */}
-              <path
-                d="M46 44 Q60 38 74 44 Q68 46 60 47 Q52 46 46 44 Z"
-                fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
-                stroke={stroke}
-                {...strokeProps}
-              />
-              <path d="M46 44 L60 60 L54 44 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
-              <path d="M74 44 L60 60 L66 44 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+              {esCamperaDePunto(prenda.categoria, prenda.textura, prenda.estacion) ? (
+                // campera de punto con cierre (cardigan) -- pedido
+                // explícito del usuario, revisado como sastre y diseñador:
+                // "campera-sweater-azul-marino" es una prenda de punto CON
+                // cierre, no una campera técnica de tela ni un tapado de
+                // paño (ver esCamperaDePunto en PrendaIcon.tsx para el
+                // porqué "lana" solo no alcanza) -- la solapa armada de
+                // acá abajo (dos piezas en punta formando un cuello duro)
+                // lee como una campera de tela rígida, no como un cardigan
+                // real, que tiene un escote en V blando, sin cuello
+                // armado. Mismo trazo que ya usa categoria="sweater"
+                // arriba (nunca se desincroniza, es literal el mismo path)
+                // -- el cierre (línea de arriba) se mantiene: a diferencia
+                // de un sweater sin más, esta prenda SÍ cierra con
+                // cremallera.
+                <path d="M48 40 Q60 46 72 40" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
+              ) : (
+                <>
+                  {/* mismo rediseño de cuello camisero que en TorsoCuerpo/
+                      camisa (ver ese comentario largo para el porqué), 2u más
+                      abajo -- offset que ya traía este bloque de antes. */}
+                  <path
+                    d="M46 44 Q60 38 74 44 Q68 46 60 47 Q52 46 46 44 Z"
+                    fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                    stroke={stroke}
+                    {...strokeProps}
+                  />
+                  <path d="M46 44 L60 60 L54 44 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+                  <path d="M74 44 L60 60 L66 44 Z" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} stroke={stroke} {...strokeProps} />
+                </>
+              )}
             </>
           )}
           {prenda.categoria === "saco" && (
@@ -1020,9 +1047,20 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                 {principal.torso.categoria === "buzo" && (
                   <path d="M46 20 L74 20 L74 39 Q60 43 46 39 Z" />
                 )}
-                {principal.torso.categoria === "campera" && (
-                  <path d="M40 20 L80 20 L80 52 Q60 58 40 52 Z" />
-                )}
+                {principal.torso.categoria === "campera" &&
+                  (esCamperaDePunto(principal.torso.categoria, principal.torso.textura, principal.torso.estacion) ? (
+                    // campera de punto (cardigan con cierre, ver
+                    // esCamperaDePunto en PrendaIcon.tsx) -- mismo escote
+                    // angosto en V que categoria="sweater" arriba (ver el
+                    // comentario largo de TorsoCuerpo): con el cuello
+                    // armado reemplazado por un V blando, el hueco real
+                    // por donde asoma la camisa de abajo es el mismo que
+                    // el de un sweater, no el ancho/bajo de una campera de
+                    // tela.
+                    <path d="M46 20 L74 20 L74 40 Q60 46 46 40 Z" />
+                  ) : (
+                    <path d="M40 20 L80 20 L80 52 Q60 58 40 52 Z" />
+                  ))}
                 {principal.torso.categoria === "saco" && (
                   // el escote más ancho/bajo de los cuatro -- un saco se usa
                   // abierto, con las solapas mostrando la camisa (y corbata)

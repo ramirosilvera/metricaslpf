@@ -1,6 +1,26 @@
 import { useId } from "react";
 import { detalleHsl, hexToHsl, tonoTexturaHsl } from "../lib/color";
-import type { Categoria, CorteCalzado, Patron, Textura } from "../lib/types";
+import type { Categoria, CorteCalzado, Estacion, Patron, Textura } from "../lib/types";
+
+/** "Campera sweater" -- cardigan de punto CON cierre (categoria="campera",
+ *  textura="lana", ver "campera-sweater-azul-marino" en catalogo.ts), no
+ *  una campera de tela ni un tapado/sobretodo de paño. Pedido explícito
+ *  del usuario, revisado como sastre y diseñador: la silueta genérica de
+ *  campera (solapa armada, cierre recto) lee como una prenda de tela
+ *  rígida, no como un cardigan de punto real. "lana" solo NO alcanza para
+ *  distinguirlo -- "tapado-pano-gris" también usa textura="lana" (misma
+ *  fibra, construcción bien distinta: paño tejido apretado y estructurado,
+ *  no punto blando). `estacion` sí distingue los dos casos reales de hoy:
+ *  un cardigan de punto fino es entretiempo (no abriga como un tapado de
+ *  paño real -- ver el comentario de campera-sweater-azul-marino en
+ *  catalogo.ts); el tapado es específicamente invierno (por eso existe,
+ *  ver su propio comentario). Exportada (no un condicional inline) para
+ *  que el ícono chico de acá y el maniquí grande (Maniqui.tsx) usen
+ *  EXACTAMENTE el mismo criterio y nunca se desincronicen -- mismo motivo
+ *  que ya documenta TEXTURA_PATRON/TEXTURA_BRILLO más abajo. */
+export function esCamperaDePunto(categoria: Categoria, textura: Textura | null | undefined, estacion: Estacion | null | undefined): boolean {
+  return categoria === "campera" && textura === "lana" && estacion !== "invierno";
+}
 
 // texturas que se dibujan como un patrón repetido (trama de tela) vs. las
 // que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
@@ -200,6 +220,7 @@ export function PrendaShape({
   categoria,
   color,
   textura,
+  estacion,
   suelaContraste = false,
   posicionAccesorio = "cintura",
   requiereCuello = false,
@@ -210,6 +231,13 @@ export function PrendaShape({
 }: {
   categoria: Categoria;
   color: string;
+  /** Ver Prenda.estacion en types.ts. Solo afecta a "campera" -- ver
+   *  esCamperaDePunto más arriba (distingue un cardigan de punto de un
+   *  tapado de paño, ambos textura="lana"). Sin esto, ninguna prenda
+   *  distinguía cardigan de tapado en el ícono -- el maniquí grande sí
+   *  puede (recibe la Prenda completa), pero este ícono chico solo recibe
+   *  campos sueltos, así que necesita el dato explícito. */
+  estacion?: Estacion | null;
   /** Ver Prenda.textura en types.ts. Revisado como ingeniero textil,
    *  pedido explícito del usuario: dos prendas de la MISMA categoría y
    *  color pero de fibra distinta (ej. sweater de lana vs. sweater
@@ -453,12 +481,31 @@ export function PrendaShape({
       break;
     }
     case "campera":
-      forma = (
-        <>
-          <FormaConTextura d="M24 6 L32 12 L40 6 L54 16 L47 27 L42 22 L42 58 L22 58 L22 22 L17 27 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
-          <line x1="32" y1="12" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
-        </>
-      );
+      // "campera sweater" (esCamperaDePunto, ver su comentario largo más
+      // arriba) es una prenda real distinta -- pedido explícito del
+      // usuario, revisado como sastre y diseñador: es un cardigan de punto
+      // CON cierre, no una campera técnica de tela ni un tapado de paño.
+      // La silueta genérica de acá abajo (dos solapas en punta armando un
+      // cuello, línea de cierre recta) lee como una campera de tela rígida
+      // -- un cardigan de punto real tiene el hombro/cuerpo más blando y
+      // un escote en V simple sin solapa armada. Se reusa la MISMA
+      // silueta y el mismo trazo de V que ya usa categoria="sweater" más
+      // abajo (nunca se desincronizan, es literal el mismo path) y se le
+      // suma la línea de cierre -- es un sweater con cierre, no un
+      // sweater sin más.
+      forma =
+        esCamperaDePunto(categoria, textura, estacion) ? (
+          <>
+            <FormaConTextura d="M22 8 L32 13 L42 8 L53 17 L46 27 L42 23 L42 58 L22 58 L22 23 L18 27 L11 17 Z" fill={color} stroke={stroke} patron={patron} />
+            <path d="M25 8 L32 12 L39 8" fill="none" stroke={stroke} />
+            <line x1="32" y1="13" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
+          </>
+        ) : (
+          <>
+            <FormaConTextura d="M24 6 L32 12 L40 6 L54 16 L47 27 L42 22 L42 58 L22 58 L22 22 L17 27 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
+            <line x1="32" y1="12" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
+          </>
+        );
       break;
     case "saco": {
       // mismo cuerpo de "chaqueta con cuello" que campera (misma silueta
@@ -536,6 +583,7 @@ export default function PrendaIcon({
   categoria,
   color,
   textura,
+  estacion,
   suelaContraste,
   posicionAccesorio,
   requiereCuello,
@@ -547,6 +595,7 @@ export default function PrendaIcon({
   categoria: Categoria;
   color: string;
   textura?: Textura;
+  estacion?: Estacion | null;
   suelaContraste?: boolean;
   posicionAccesorio?: "cuello" | "cintura";
   requiereCuello?: boolean;
@@ -561,6 +610,7 @@ export default function PrendaIcon({
         categoria={categoria}
         color={color}
         textura={textura}
+        estacion={estacion}
         suelaContraste={suelaContraste}
         posicionAccesorio={posicionAccesorio}
         requiereCuello={requiereCuello}
