@@ -1361,14 +1361,33 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
       return true;
     });
     const torsos = ordenarPorEstacion(candidatasPropias(ancla, candidatosTorso, placard), clima);
-    const calzado = mejorPropia(
+    // Pedido explícito del usuario: "el motor nunca está ofreciendo las
+    // zapatillas blancas... fijate si podés poner alguna ponderación para
+    // que las prendas que salen mucho vayan rotando... sin sacrificar
+    // puntaje". Verificado por ejecución: hasta acá, calzado/accesorio se
+    // elegían con mejorPropia -- UN solo "mejor" por ancla, siempre el
+    // mismo sea cual sea el torso -- así que para un pantalón dado, TODO
+    // el pool de "Vestite hoy" (y por lo tanto también semillaDelDia,
+    // candidatosDeContraste y "otras opciones") solo podía mostrar ESE
+    // calzado y ESE accesorio: si otro par de zapatillas nunca es el
+    // número 1 estricto para ningún pantalón del placard, no aparece
+    // JAMÁS, sin importar cuántas veces se pida "otras opciones". Mismo
+    // patrón que ya usa candidatasPropias para el torso (varias
+    // candidatas >= muy_bueno, no una sola) -- "sin sacrificar puntaje"
+    // sale gratis de ese mismo mecanismo: cada combinación se puntúa por
+    // separado (puntuarOutfit) y semillaDelDia solo rota DENTRO del nivel
+    // de puntaje máximo, así que una zapatilla que combina peor arma un
+    // outfit de menor puntaje, que el ranking ya deja más abajo -- nunca
+    // reemplaza a una mejor, solo se suma como una opción más cuando
+    // empata en calidad.
+    const calzados = candidatasPropias(
       ancla,
       placard.filter((p) => p.categoria === "calzado" && !(excluirOficina && esDeOficina(p))),
       placard,
     );
-    const accesorio = esAnclaDeportiva
-      ? undefined
-      : mejorPropia(
+    const accesorios = esAnclaDeportiva
+      ? []
+      : candidatasPropias(
           ancla,
           // esAbrigoDeCuello: hallazgo del revisor de color/textiles,
           // verificado por ejecución -- una bufanda de lana es tan abrigo
@@ -1391,34 +1410,41 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
       // vs. torso -- calzado vs. torso nunca se cruzaban entre sí (ej. un
       // pantalón neutro admite tanto un calzado naranja saturado como una
       // remera azul saturada, cada uno "excelente" por separado, pero esos
-      // dos colores se funden entre sí -- se armaba el outfit igual). El
-      // accesorio sigue siendo el que se cae primero si choca (es el único
-      // slot puramente opcional); ahora el calzado también se puede caer
-      // si choca con ESTE torso puntual, dejando un outfit sin calzado en
-      // vez de uno con una combinación real mala -- calzado/accesorio ya
-      // son opcionales, esto no cambia esa regla, solo la aplica bien.
-      const calzadoOk = calzado && !chocan(calzado.prenda, torso.prenda, placard);
-      const accesorioOk =
-        accesorio &&
-        !(calzadoOk && calzado && chocan(accesorio.prenda, calzado.prenda, placard)) &&
-        !chocan(accesorio.prenda, torso.prenda, placard);
+      // dos colores se funden entre sí -- se armaba el outfit igual).
+      //
+      // calzado/accesorio ahora son LISTAS de candidatas (ver el
+      // comentario de arriba) -- se prueba cada calzado válido contra este
+      // torso, y para cada uno, cada accesorio válido contra ambos; si
+      // ninguno queda (todos chocan), se arma un outfit sin ese slot en
+      // vez de forzar una combinación real mala -- exactamente la misma
+      // degradación que antes, solo que ahora puede haber más de un
+      // resultado "sin choque" en vez de uno solo.
+      const calzadosValidos = calzados.filter((c) => !chocan(c.prenda, torso.prenda, placard));
+      const calzadoOpciones: Array<{ prenda: Prenda } | undefined> = calzadosValidos.length > 0 ? calzadosValidos : [undefined];
 
-      const prendas = [
-        ancla,
-        torso.prenda,
-        calzadoOk ? calzado?.prenda : undefined,
-        accesorioOk ? accesorio?.prenda : undefined,
-      ].filter((p): p is Prenda => p !== undefined);
+      for (const calzadoElegido of calzadoOpciones) {
+        const accesoriosValidos = accesorios.filter(
+          (a) => !chocan(a.prenda, torso.prenda, placard) && !(calzadoElegido && chocan(a.prenda, calzadoElegido.prenda, placard)),
+        );
+        const accesorioOpciones: Array<{ prenda: Prenda } | undefined> =
+          accesoriosValidos.length > 0 ? accesoriosValidos : [undefined];
 
-      const clave = [...prendas]
-        .map((p) => p.id)
-        .sort()
-        .join("-");
-      if (vistos.has(clave)) continue;
-      vistos.add(clave);
+        for (const accesorioElegido of accesorioOpciones) {
+          const prendas = [ancla, torso.prenda, calzadoElegido?.prenda, accesorioElegido?.prenda].filter(
+            (p): p is Prenda => p !== undefined,
+          );
 
-      const { puntaje, explicacion } = puntuarOutfit(prendas);
-      resultados.push({ id: clave, prendas, puntaje, explicacionPuntaje: explicacion });
+          const clave = [...prendas]
+            .map((p) => p.id)
+            .sort()
+            .join("-");
+          if (vistos.has(clave)) continue;
+          vistos.add(clave);
+
+          const { puntaje, explicacion } = puntuarOutfit(prendas);
+          resultados.push({ id: clave, prendas, puntaje, explicacionPuntaje: explicacion });
+        }
+      }
     }
   }
 

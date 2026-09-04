@@ -89,9 +89,26 @@ function PuntajeBadge({
  *  Clásico, Urbano, Casual...) corresponde el outfit, no solo que evite
  *  combinaciones raras en silencio. Sin pantalón con `estilo` cargado en
  *  el outfit no hay de dónde sacar el registro -- no se muestra nada en
- *  vez de inventar un valor. */
-function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
-  const registro = registroOutfit(prendas);
+ *  vez de inventar un valor.
+ *
+ *  `estiloTab`: reporte real del usuario ("en las categorías de clásicos a
+ *  veces aparecen opciones formales"), verificado por ejecución -- el
+ *  badge usaba registroOutfit(), que solo mira el estilo PRINCIPAL del
+ *  pantalón, mientras que el filtro de pestaña (outfitSirveParaEstilo)
+ *  matchea también por estilo SECUNDARIO a propósito (un pantalón
+ *  estilo="formal" con secundario="clasico" sirve para las dos pestañas,
+ *  intencional). Resultado: elegís la pestaña "Clásico", el outfit
+ *  califica de verdad (por el secundario), pero el badge mostraba
+ *  "Formal" -- técnicamente cierto sobre esa prenda, pero contradice la
+ *  pestaña que el usuario mismo eligió. Cuando se conoce la pestaña
+ *  activa (no "todos"), se muestra ESE estilo en el badge en vez de
+ *  recalcularlo -- ya se sabe, por construcción (el outfit pasó el
+ *  filtro), que el outfit sirve genuinamente para esa pestaña. Sin
+ *  pestaña activa (vista "Todos", o pantallas sin selector de estilo como
+ *  "Ideas para comprar"), sigue mostrando el registro real vía
+ *  registroOutfit(), sin cambios. */
+function RegistroBadge({ prendas, estiloTab }: { prendas: Prenda[]; estiloTab?: Estilo }) {
+  const registro = estiloTab ? ESTILO_LABEL[estiloTab] : registroOutfit(prendas);
   if (!registro) return null;
   const avisos = advertenciasDeRegistro(prendas);
   return (
@@ -114,6 +131,7 @@ function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
 function TarjetaSugerido({
   s,
   etiquetaGrupo,
+  estiloTab,
   guardadas,
   guardando,
   errorGuardar,
@@ -121,6 +139,7 @@ function TarjetaSugerido({
 }: {
   s: OutfitSugerido;
   etiquetaGrupo: string;
+  estiloTab?: Estilo;
   guardadas: Set<string>;
   guardando: string | null;
   errorGuardar: Record<string, string>;
@@ -139,7 +158,7 @@ function TarjetaSugerido({
           {leyenda(s.prendas)}
         </p>
         <PuntajeBadge prendas={s.prendas} precomputado={{ puntaje: s.puntaje, explicacion: s.explicacionPuntaje }} />
-        <RegistroBadge prendas={s.prendas} />
+        <RegistroBadge prendas={s.prendas} estiloTab={estiloTab} />
       </div>
       {errorGuardar[s.id] && <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorGuardar[s.id]}</p>}
       <button
@@ -694,6 +713,7 @@ export function Contenido({
                 <TarjetaSugerido
                   s={opcionPrincipal}
                   etiquetaGrupo="Mejor opción"
+                  estiloTab={estiloSugerido !== "todos" ? (estiloSugerido ?? undefined) : undefined}
                   guardadas={guardadas}
                   guardando={guardando}
                   errorGuardar={errorGuardar}
@@ -708,6 +728,7 @@ export function Contenido({
                 <TarjetaSugerido
                   s={opcionContraste}
                   etiquetaGrupo="Otra combinación"
+                  estiloTab={estiloSugerido !== "todos" ? (estiloSugerido ?? undefined) : undefined}
                   guardadas={guardadas}
                   guardando={guardando}
                   errorGuardar={errorGuardar}
@@ -801,7 +822,7 @@ export function Contenido({
                     {leyenda(o.prendas)}
                   </p>
                   <PuntajeBadge prendas={o.prendas} />
-                  <RegistroBadge prendas={o.prendas} />
+                  <RegistroBadge prendas={o.prendas} estiloTab={filtroEstilo ?? undefined} />
                 </div>
                 {errorEliminar[o.id] && (
                   <p style={{ color: "var(--danger)", fontSize: "0.75rem", margin: 0 }}>{errorEliminar[o.id]}</p>

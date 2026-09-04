@@ -1293,6 +1293,60 @@ describe("armarOutfitsSugeridos", () => {
     expect(torsos).toEqual(["camisa", "remera", "sweater"]);
   });
 
+  // Consejo, auditoría integral -- pedido explícito del usuario: "el motor
+  // nunca está ofreciendo las zapatillas blancas... fijate si podés poner
+  // alguna ponderación para que las prendas que salen mucho vayan
+  // rotando, sin sacrificar puntaje". Verificado por ejecución contra el
+  // placard real: antes de este fix, calzado/accesorio se elegían con
+  // mejorPropia (UN solo "mejor" por ancla, siempre el mismo) -- un par de
+  // zapatillas que nunca fuera el número 1 estricto no aparecía JAMÁS en
+  // "Vestite hoy", sin importar cuántas veces se pidieran "otras
+  // opciones". candidatasPropias (ya usada para el torso) reemplaza a
+  // mejorPropia también acá.
+  it("con varios calzados propios que combinan igual de bien, arma una variante por cada uno -- no se queda con uno solo", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), // negro, neutro -- combina con cualquier calzado
+      mkPrenda("remera", "#3366CC", 220, 60, 50),
+      mkPrenda("calzado", "#5C3A21", 25, 50, 30), // marrón
+      mkPrenda("calzado", "#F5F5F0", 0, 5, 95), // blanco
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(2);
+    const calzados = outfits.map((o) => o.prendas.find((p) => p.categoria === "calzado")?.color_hex).sort();
+    expect(calzados).toEqual(["#5C3A21", "#F5F5F0"]);
+    // sin sacrificar puntaje: ninguno de los dos se descarta por el otro --
+    // cada uno arma su propia combinación, puntuada de verdad por separado
+    // (no hay un "ganador único" que tape al resto).
+    for (const o of outfits) expect(o.puntaje).toBeGreaterThanOrEqual(9);
+  });
+
+  it("con varios accesorios propios que combinan igual de bien, arma una variante por cada uno -- mismo criterio que el calzado", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10),
+      mkPrenda("remera", "#3366CC", 220, 60, 50),
+      mkPrenda("accesorio", "#5C3A21", 25, 50, 30),
+      mkPrenda("accesorio", "#8C8C8C", 0, 0, 55),
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    expect(outfits).toHaveLength(2);
+    const accesorios = outfits.map((o) => o.prendas.find((p) => p.categoria === "accesorio")?.color_hex).sort();
+    expect(accesorios).toEqual(["#5C3A21", "#8C8C8C"]);
+  });
+
+  it("combina cada torso con cada calzado válido (producto cartesiano), no solo torso con torso", () => {
+    const placard = [
+      mkPrenda("pantalon", "#1A1A1A", 0, 0, 10),
+      mkPrenda("remera", "#3366CC", 220, 60, 50),
+      mkPrenda("camisa", "#F5F5F0", 0, 5, 95),
+      mkPrenda("calzado", "#5C3A21", 25, 50, 30),
+      mkPrenda("calzado", "#F5F5F0", 0, 5, 95),
+    ];
+    const outfits = armarOutfitsSugeridos(placard);
+    // 2 torsos x 2 calzados = 4 combinaciones (ninguna choca entre sí --
+    // pantalón neutro, todo combina).
+    expect(outfits).toHaveLength(4);
+  });
+
   it("saco es una prenda de torso válida como cualquier otra (categoría nueva, pedido explícito del usuario: 'un traje azul marino')", () => {
     const placard = [
       mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), // negro, neutro
