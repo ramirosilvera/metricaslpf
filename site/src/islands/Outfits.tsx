@@ -70,11 +70,23 @@ function nivelDePuntaje(puntaje: number): "excelente" | "muy_bueno" | "con_cuida
  *  como una señal cualitativa. Por eso esto es SOLO una capa de
  *  presentación: el motor sigue puntuando 1-10 puertas adentro (ordena el
  *  pool, decide "otras opciones", decide qué conviene comprar) sin ningún
- *  cambio; acá se traduce a 5 estrellas con pasos de 0.5 (puntaje/2), que
- *  es una conversión lineal sin pérdida ya que puntuarOutfit solo emite
- *  enteros. */
+ *  cambio; acá se traduce a estrellas de 5.
+ *
+ *  Pedido explícito del usuario: "prefiero redondeo para abajo" -- Math.floor
+ *  en vez de redondear al más cercano, para que la estrella nunca sugiera
+ *  más calidad de la que hay (6 y 7 puntos truncan los dos a 3★, no a 3.5★
+ *  ni 4★; nunca al revés). */
 function estrellasDePuntaje(puntaje: number): number {
-  return puntaje / 2;
+  return Math.floor(puntaje / 2);
+}
+
+// s.puntaje === 10 es la ÚNICA forma de llegar a ese número en puntuarOutfit
+// (ver recommend.ts: "todosExcelentes ? 10 : ..."), así que este chequeo es
+// exactamente "todos los pares del outfit son excelente", sin numerología --
+// y con estrellasDePuntaje ya en piso (floor(10/2)=5) es siempre 5 estrellas
+// completas, nunca una aproximación.
+function esExcelente(s: OutfitSugerido): boolean {
+  return s.puntaje === 10;
 }
 
 function Estrellas({ puntaje }: { puntaje: number }) {
@@ -340,10 +352,23 @@ export function Contenido({
   // pool, con outfitEsCoherenteParaEstilo (que además exige cero
   // advertencias de registro), es el que de verdad se MUESTRA como
   // opción lista para usar en las tarjetas de abajo.
+  //
+  // Pedido explícito del usuario (ronda de estrellas): "que en el outfit
+  // solo se muestren 5 estrellas, es decir las combinaciones excelentes...
+  // todo por debajo de excelente no me interesa que figure en vístete
+  // hoy" -- se agrega esExcelente encima de lo anterior. Auditado con el
+  // placard real: para "formal" esto vacía la sección casi siempre (6
+  // combinaciones coherentes hoy, 0 llegan a excelente) -- el sistema no
+  // se rompe porque ya existía el camino de "no armamos nada" con la
+  // tarjeta de mejorCompra debajo (ver más abajo), que sigue funcionando
+  // sobre el pool LAXO y sigue sugiriendo qué comprar para llegar a un 10
+  // real. No se tocó poolSugeridosPorEstilo (laxo) a propósito: sigue
+  // siendo la base de mejorCompra/sugerenciaVariedad/sugerenciaAncla.
   const poolCoherentePorEstilo = useMemo(() => {
     if (estiloSugerido === null) return [];
-    if (estiloSugerido === "todos") return poolSugeridos.filter((s) => advertenciasDeRegistro(s.prendas).length === 0);
-    return poolSugeridos.filter((s) => outfitEsCoherenteParaEstilo(s.prendas, estiloSugerido));
+    if (estiloSugerido === "todos")
+      return poolSugeridos.filter((s) => advertenciasDeRegistro(s.prendas).length === 0 && esExcelente(s));
+    return poolSugeridos.filter((s) => outfitEsCoherenteParaEstilo(s.prendas, estiloSugerido) && esExcelente(s));
   }, [poolSugeridos, estiloSugerido]);
 
   function elegirEstiloSugerido(valor: Estilo | "todos") {
