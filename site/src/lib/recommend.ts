@@ -2657,6 +2657,38 @@ export function sugerenciaDeVariedad(
   return null;
 }
 
+/** Contraparte de sugerenciaDeVariedad para calzado -- pedido del usuario
+ *  de auditar TODO el guardarropa, no solo torso/color: 0 o 1 sola opción
+ *  de calzado para este registro es un cuello de botella real (todo
+ *  outfit termina en el mismo par), aunque haya de sobra variedad de
+ *  torso y de color arriba. Mismo criterio que el hueco de torso de
+ *  sugerenciaDeVariedad (0 o 1 -> sumar de esa misma categoría, ver su
+ *  comentario). `null` si ya hay 2+ opciones de calzado de este registro,
+ *  o sin ancla para validar contra qué combina (mismo motivo: sin ancla
+ *  no hay con qué comparar). Solo la usa auditoriaDeGuardarropa. */
+function sugerenciaDeCalzado(
+  estilo: Estilo,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[],
+): SugerenciaVariedad | null {
+  const prendasEstilo = placard.filter((p) => estilosDe(p).includes(estilo));
+  const ancla = prendasEstilo.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
+  if (!ancla) return null;
+
+  const calzados = prendasEstilo.filter((p) => p.categoria === "calzado");
+  if (calzados.length > 1) return null;
+
+  const coloresActuales = new Set(prendasEstilo.map((p) => nombreColor(p.color_h, p.color_s, p.color_l)));
+  const sugerida = mejorCandidatoDelCatalogo(ancla, "calzado", estilo, coloresActuales, placard, catalogo);
+  if (!sugerida) return null;
+
+  const mensaje =
+    calzados.length === 0
+      ? `Para ${ESTILO_LABEL[estilo]} todavía no tenés ningún calzado cargado -- te serviría sumar uno, como este: "${sugerida.nombre}".`
+      : `Para ${ESTILO_LABEL[estilo]} tenés un solo calzado -- por más variedad de arriba que sumes, siempre termina en el mismo par. Te serviría sumar otro, como este: "${sugerida.nombre}".`;
+  return { mensaje, sugerida };
+}
+
 export interface SugerenciaAncla {
   mensaje: string;
   sugerida: PresetPrenda & { hsl: HSL };
@@ -2894,6 +2926,74 @@ export function sugerenciaDeSacoDeVerano(
     mensaje: `Con calor de verdad, "Formal" necesita un saco de verano real (lino o algodón, no de lana) -- ese sí tiene sentido con esta temperatura. Te serviría sumar "${sugerida.nombre}".`,
     sugerida,
   };
+}
+
+export interface AuditoriaGuardarropa {
+  mensaje: string;
+  sugerida: PresetPrenda & { hsl: HSL };
+}
+
+/** Pedido explícito del usuario: "no solo quiero que me hagas una
+ *  recomendación de compra cuando no hay opciones, sino también quiero
+ *  que pongas un botón que diga hacer recomendación de compra, aunque
+ *  tenga opciones, y que revise todas mis opciones y que en función de
+ *  eso me haga una recomendación para tener más opciones. Actuá como
+ *  asesor de imagen, experto en moda, sastre." A diferencia de
+ *  sugerenciaDeAncla/Abrigo/Saco (que solo corren cuando el pool de
+ *  opciones quedó en CERO) y de sugerenciaDeVariedad (pasiva, mira solo
+ *  torso/color, siempre calculada de fondo), esta es la auditoría
+ *  completa que dispara el botón explícito, sin importar si YA hay
+ *  looks armados -- el objetivo no es "arreglar lo roto" sino "ampliar
+ *  lo que ya funciona", con la misma mirada que un asesor de imagen real
+ *  repasaría un placard: ¿hay con qué armar algo? ¿cubre las tres
+ *  estaciones? ¿hay variedad real de torso, de calzado, de color, o todo
+ *  termina pareciendo lo mismo?
+ *
+ *  Revisa esas capas EN ORDEN DE IMPACTO real sobre la cantidad de
+ *  combinaciones posibles -- el hueco que bloquea más combinaciones
+ *  primero, no el primero que aparece:
+ *   1. Ancla (pantalón/bermuda/short) -- sin esto no hay ningún outfit
+ *      posible, es el bloqueo más grande que puede haber.
+ *   2. Abrigo de invierno y de entretiempo -- sin esto, toda una
+ *      estación entera queda en cero outfits (ver esAbrigoDeClima).
+ *   3. Saco de verano (solo "formal", el único estilo que lo exige) --
+ *      mismo bloqueo estacional que el punto 2, para el caso puntual de
+ *      calor real.
+ *   4. Variedad de torso y de color (ver sugerenciaDeVariedad) -- ya no
+ *      bloquea una estación entera, pero sí limita cuántas combinaciones
+ *      distintas arma con lo que hay.
+ *   5. Variedad de calzado (ver sugerenciaDeCalzado) -- el hueco más sutil:
+ *      por más torsos y colores que haya, si hay un solo par, todo
+ *      termina pareciendo la misma combinación.
+ *  Devuelve la PRIMERA que encuentre, ya priorizada -- un tip claro y
+ *  accionable, no una pared de advertencias. `null` solo si de verdad no
+ *  hay ningún hueco real en ninguna de las cinco capas (placard bien
+ *  cubierto para este registro). */
+export function auditoriaDeGuardarropa(
+  estilo: Estilo,
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): AuditoriaGuardarropa | null {
+  const ancla = sugerenciaDeAncla(estilo, placard, catalogo);
+  if (ancla) return ancla;
+
+  const hayPantalon = placard.some((p) => p.categoria === "pantalon" && estilosDe(p).includes(estilo));
+  if (hayPantalon) {
+    const abrigoInvierno = sugerenciaDeAbrigoInvierno(estilo, placard, catalogo);
+    if (abrigoInvierno) return abrigoInvierno;
+    const abrigoEntretiempo = sugerenciaDeAbrigoEntretiempo(estilo, placard, catalogo);
+    if (abrigoEntretiempo) return abrigoEntretiempo;
+  }
+
+  if (estilo === "formal") {
+    const saco = sugerenciaDeSacoDeVerano(placard, catalogo);
+    if (saco) return saco;
+  }
+
+  const variedad = sugerenciaDeVariedad(estilo, placard, catalogo);
+  if (variedad) return variedad;
+
+  return sugerenciaDeCalzado(estilo, placard, catalogo);
 }
 
 /** Diff entre las prendas actuales de un outfit guardado y las que el

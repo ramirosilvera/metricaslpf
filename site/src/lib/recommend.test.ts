@@ -3,6 +3,7 @@ import {
   advertenciasDeRegistro,
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
+  auditoriaDeGuardarropa,
   candidatosDeContraste,
   categoriasAusentes,
   comboParaExcelencia,
@@ -3178,6 +3179,151 @@ describe("sugerenciaDeSacoDeVerano", () => {
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     pantalon.estilo = "formal";
     expect(sugerenciaDeSacoDeVerano([pantalon], [])).toBeNull();
+  });
+});
+
+// Consejo, ronda siguiente -- pedido explícito del usuario: "no solo quiero
+// que me hagas una recomendación de compra cuando no hay opciones, sino
+// también quiero que pongas un botón que diga hacer recomendación de
+// compra, aunque tenga opciones, y que revise todas mis opciones... Actuá
+// como asesor de imagen, experto en moda, sastre." A diferencia de las
+// funciones de arriba (cada una tapa UN hueco puntual), esta compone todas
+// en un único orden de prioridad -- estos tests verifican sobre todo ESE
+// orden (el hueco que bloquea más combinaciones gana, aunque haya varios
+// huecos reales al mismo tiempo).
+describe("auditoriaDeGuardarropa", () => {
+  const catalogoCompleto: (PresetPrenda & { hsl: HSL })[] = [
+    { id: "pantalon-clasico-negro", nombre: "Pantalón clásico negro", categoria: "pantalon", colorHex: "#1A1A1A", estilo: "clasico", hsl: { h: 0, s: 0, l: 10 } },
+    {
+      id: "sweater-clasico-invierno",
+      nombre: "Sweater clásico de lana (invierno)",
+      categoria: "sweater",
+      colorHex: "#1A1A1A",
+      estilo: "clasico",
+      estacion: "invierno",
+      hsl: { h: 0, s: 0, l: 10 },
+    },
+    {
+      id: "sweater-clasico-entretiempo",
+      nombre: "Sweater clásico liviano (entretiempo)",
+      categoria: "sweater",
+      colorHex: "#8C8C8C",
+      estilo: "clasico",
+      estacion: "entretiempo",
+      hsl: { h: 0, s: 0, l: 55 },
+    },
+    { id: "remera-clasica-blanca", nombre: "Remera clásica blanca", categoria: "remera", colorHex: "#FFFFFF", estilo: "clasico", hsl: { h: 0, s: 0, l: 100 } },
+    { id: "calzado-clasico-negro", nombre: "Calzado clásico negro", categoria: "calzado", colorHex: "#1A1A1A", estilo: "clasico", hsl: { h: 0, s: 0, l: 10 } },
+    { id: "calzado-clasico-marron", nombre: "Calzado clásico marrón", categoria: "calzado", colorHex: "#5C3A21", estilo: "clasico", hsl: { h: 25, s: 44, l: 25 } },
+  ];
+
+  it("sin ancla -> delega en sugerenciaDeAncla, con prioridad sobre cualquier otro hueco", () => {
+    const r = auditoriaDeGuardarropa("clasico", [], catalogoCompleto);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.categoria).toBe("pantalon");
+  });
+
+  it("hay ancla pero falta abrigo de invierno -- gana sobre el hueco de variedad de torso, aunque los dos apliquen", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10); // 1 sola prenda de torso -- también sería hueco de variedad
+    remera.estilo = "clasico";
+    const r = auditoriaDeGuardarropa("clasico", [pantalon, remera], catalogoCompleto);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.id).toBe("sweater-clasico-invierno");
+    expect(r!.mensaje).toContain("abrigo de invierno");
+  });
+
+  it("abrigo de invierno cubierto pero falta el de entretiempo -- gana sobre el hueco de variedad de torso", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10); // cubre invierno, pero sigue siendo 1 sola prenda de torso
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    const r = auditoriaDeGuardarropa("clasico", [pantalon, sweaterInvierno], catalogoCompleto);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.id).toBe("sweater-clasico-entretiempo");
+    expect(r!.mensaje).toContain("abrigo de entretiempo");
+  });
+
+  it("formal: abrigo por clima cubierto (el saco siempre cuenta) pero es de lana -- el saco de verano gana sobre el hueco de variedad", () => {
+    const catalogoFormal: (PresetPrenda & { hsl: HSL })[] = [
+      { id: "saco-lino-beige", nombre: "Saco de lino beige", categoria: "saco", colorHex: "#D8C7A1", textura: "lino", estilo: "formal", hsl: { h: 41, s: 41, l: 74 } },
+      { id: "remera-formal-blanca", nombre: "Remera formal blanca", categoria: "remera", colorHex: "#FFFFFF", estilo: "formal", hsl: { h: 0, s: 0, l: 100 } },
+    ];
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "formal";
+    const sacoLana = mkPrenda("saco", "#1A1A1A", 0, 0, 10); // 1 sola prenda de torso, también hueco de variedad
+    sacoLana.estilo = "formal";
+    sacoLana.textura = "lana";
+    const r = auditoriaDeGuardarropa("formal", [pantalon, sacoLana], catalogoFormal);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.id).toBe("saco-lino-beige");
+    expect(r!.mensaje).toContain("saco de verano");
+  });
+
+  it("abrigo y saco cubiertos -- cae en el hueco de variedad de torso antes que en el de calzado", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    const sweaterEntretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55);
+    sweaterEntretiempo.estilo = "clasico";
+    sweaterEntretiempo.estacion = "entretiempo";
+    // 2 torsos, pero ambos abrigo -- sigue habiendo un hueco de variedad
+    // real (nunca una remera liviana) y, además, CERO calzado cargado.
+    const r = auditoriaDeGuardarropa("clasico", [pantalon, sweaterInvierno, sweaterEntretiempo], catalogoCompleto);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.categoria).not.toBe("calzado");
+  });
+
+  it("torso y color ya variados, pero un solo calzado -- cae en el hueco de calzado (sugerenciaDeCalzado)", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    const sweaterEntretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55);
+    sweaterEntretiempo.estilo = "clasico";
+    sweaterEntretiempo.estacion = "entretiempo";
+    const remeraBlanca = mkPrenda("remera", "#FFFFFF", 0, 0, 100);
+    remeraBlanca.estilo = "clasico";
+    const calzadoNegro = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    calzadoNegro.estilo = "clasico";
+    const r = auditoriaDeGuardarropa(
+      "clasico",
+      [pantalon, sweaterInvierno, sweaterEntretiempo, remeraBlanca, calzadoNegro],
+      catalogoCompleto,
+    );
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.categoria).toBe("calzado");
+    expect(r!.sugerida.id).toBe("calzado-clasico-marron"); // no repite el color que ya tiene
+    expect(r!.mensaje).toContain("un solo calzado");
+  });
+
+  it("placard bien cubierto en las 5 capas -> null, sin ningún hueco real", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "clasico";
+    const sweaterInvierno = mkPrenda("sweater", "#1A1A1A", 0, 0, 10);
+    sweaterInvierno.estilo = "clasico";
+    sweaterInvierno.estacion = "invierno";
+    const sweaterEntretiempo = mkPrenda("sweater", "#8C8C8C", 0, 0, 55);
+    sweaterEntretiempo.estilo = "clasico";
+    sweaterEntretiempo.estacion = "entretiempo";
+    const remeraBlanca = mkPrenda("remera", "#FFFFFF", 0, 0, 100);
+    remeraBlanca.estilo = "clasico";
+    const calzadoNegro = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    calzadoNegro.estilo = "clasico";
+    const calzadoMarron = mkPrenda("calzado", "#5C3A21", 25, 44, 25);
+    calzadoMarron.estilo = "clasico";
+    expect(
+      auditoriaDeGuardarropa(
+        "clasico",
+        [pantalon, sweaterInvierno, sweaterEntretiempo, remeraBlanca, calzadoNegro, calzadoMarron],
+        catalogoCompleto,
+      ),
+    ).toBeNull();
   });
 });
 

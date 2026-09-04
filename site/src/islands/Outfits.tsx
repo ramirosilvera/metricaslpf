@@ -7,6 +7,7 @@ import {
   advertenciasDeRegistro,
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
+  auditoriaDeGuardarropa,
   candidatosDeContraste,
   comboParaExcelencia,
   diffPrendasEdicion,
@@ -25,6 +26,7 @@ import {
   sugerenciaDeSacoDeVerano,
   sugerenciaDeVariedad,
   tanda,
+  type AuditoriaGuardarropa,
   type OutfitParaComprar,
   type OutfitSugerido,
 } from "../lib/recommend";
@@ -313,6 +315,14 @@ export function Contenido({
   // usuario responda a propósito, ver poolSugeridos más abajo (con
   // cualquiera de los dos en null, el pool queda vacío).
   const [climaSugerido, setClimaSugerido] = useState<Estacion | null>(null);
+  // Pedido explícito del usuario: un botón "hacer recomendación de compra"
+  // que funcione AUNQUE ya haya opciones armadas (a diferencia de
+  // sugerenciaAncla/Abrigo/Saco, que solo corren con el pool en cero) --
+  // por eso es un resultado disparado a mano (no un useMemo pasivo): solo
+  // se calcula cuando el usuario lo pide, y desaparece si cambia de
+  // estilo (ver el useEffect más abajo) para no mostrar una auditoría
+  // vieja de otro registro.
+  const [auditoria, setAuditoria] = useState<AuditoriaGuardarropa | "sin_hueco" | null>(null);
   const [editando, setEditando] = useState<OutfitConPrendas | null>(null);
   const [nombreEdicion, setNombreEdicion] = useState("");
   const [prendasEdicion, setPrendasEdicion] = useState<Set<string>>(new Set());
@@ -399,11 +409,23 @@ export function Contenido({
   function elegirEstiloSugerido(valor: Estilo | "todos") {
     setEstiloSugerido((prev) => (prev === valor ? null : valor));
     setOffsetSugeridos(0);
+    setAuditoria(null);
   }
 
   function elegirClimaSugerido(valor: Estacion) {
     setClimaSugerido((prev) => (prev === valor ? null : valor));
     setOffsetSugeridos(0);
+    setAuditoria(null);
+  }
+
+  // Botón explícito "Hacer recomendación de compra": a diferencia del resto
+  // de las sugerencias (siempre pasivas, un useMemo que recalcula solo),
+  // esta corre a demanda -- el pedido del usuario fue justamente que
+  // funcione AUNQUE ya haya opciones armadas, así que no puede estar
+  // atada a "el pool quedó vacío" como sugerenciaAncla/Abrigo/Saco.
+  function hacerRecomendacionDeCompra() {
+    if (!estiloSugerido || estiloSugerido === "todos") return;
+    setAuditoria(auditoriaDeGuardarropa(estiloSugerido, placard) ?? "sin_hueco");
   }
 
   // Pedido explícito del usuario: "la idea es poder usar toda la ropa de
@@ -972,6 +994,69 @@ export function Contenido({
               </div>
             )}
           </>
+        )}
+
+        {/* Pedido explícito del usuario: "no solo quiero que me hagas una
+            recomendación de compra cuando no hay opciones, sino también
+            quiero que pongas un botón que diga hacer recomendación de
+            compra, aunque tenga opciones, y que revise todas mis opciones
+            y que en función de eso me haga una recomendación para tener
+            más opciones. Actuá como asesor de imagen, experto en moda,
+            sastre." A diferencia de sugerenciaAncla/Abrigo/Saco (arriba,
+            automáticas, solo con el pool en cero) y de tarjetaSugerencia
+            (automática también, mira solo la MEJOR opción actual), este
+            botón dispara auditoriaDeGuardarropa a demanda -- funciona
+            siempre que haya una ocasión elegida, con o sin looks armados,
+            y repasa el registro entero (ancla, abrigo por clima, variedad
+            de torso/color/calzado) antes de dar una recomendación. */}
+        {estiloSugerido && estiloSugerido !== "todos" && climaSugerido !== null && (
+          <div style={{ marginTop: "0.6rem" }}>
+            <button type="button" className="btn btn-secondary" onClick={hacerRecomendacionDeCompra}>
+              🧵 Hacer recomendación de compra
+            </button>
+            {auditoria === "sin_hueco" ? (
+              <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
+                <span style={{ fontSize: "1.2rem" }}>✅</span>
+                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>
+                  Repasamos ancla, abrigo por clima, variedad de torso, color y calzado para{" "}
+                  {ESTILO_LABEL[estiloSugerido]} -- no encontramos ningún hueco real. Buena variedad.
+                </p>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
+                  onClick={() => setAuditoria(null)}
+                >
+                  Cerrar
+                </button>
+              </div>
+            ) : (
+              auditoria && (
+                <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center", flexWrap: "wrap" }}>
+                  <span style={{ fontSize: "1.2rem" }}>🧑‍🎨</span>
+                  <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>{auditoria.mensaje}</p>
+                  <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
+                      onClick={() => cargarSugerencia(auditoria.sugerida)}
+                    >
+                      + Cargar {CATEGORIA_LABEL[auditoria.sugerida.categoria].toLowerCase()}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
+                      onClick={() => setAuditoria(null)}
+                    >
+                      Cerrar
+                    </button>
+                  </div>
+                </div>
+              )
+            )}
+          </div>
         )}
       </section>
 
