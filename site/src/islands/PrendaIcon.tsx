@@ -49,6 +49,27 @@ export function esCamperaTecnica(categoria: Categoria, textura: Textura | null |
   return categoria === "campera" && (textura === "poliester" || textura === "impermeable");
 }
 
+/** Campera deportiva de entretiempo (track jacket/"campera de buzo",
+ *  categoria="campera", textura="tricot", ver "campera-deportiva-*" en
+ *  catalogo.ts). Pedido explícito del usuario: "las camperas deportivas no
+ *  son solo rompeviento, también hay algunas de entretiempo. Revisa en las
+ *  marcas deportivas tipo Adidas, Puma, Nike" -- verificado por búsqueda
+ *  web (Firebird Track Jacket de adidas y equivalentes reales): es tela
+ *  TRICOT (punto liviano con brillo característico), NO el tejido plano
+ *  técnico del rompeviento (esCamperaTecnica) -- misma fibra base
+ *  (poliéster) pero construcción bien distinta, mismo criterio que ya
+ *  separó impermeable de poliéster. El cuello real es una banda alta pero
+ *  más BAJA/relajada que el funnel del rompeviento (no corta viento, es
+ *  para entrenar, no para la lluvia) y el cierre queda expuesto -- sin la
+ *  tapeta que sí lleva un impermeable real (no hace falta taparlo de
+ *  agua). "tricot" alcanza solo: es la ÚNICA campera del catálogo con esa
+ *  textura hoy. Exportada, mismo motivo que esCamperaDePunto/
+ *  esCamperaTecnica: ícono chico y maniquí grande comparten EXACTAMENTE el
+ *  mismo criterio. */
+export function esCamperaTrack(categoria: Categoria, textura: Textura | null | undefined): boolean {
+  return categoria === "campera" && textura === "tricot";
+}
+
 // texturas que se dibujan como un patrón repetido (trama de tela) vs. las
 // que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
 // null/una textura sin mapear acá (p.ej. sin cargar) no dibuja nada extra.
@@ -70,8 +91,11 @@ export const TEXTURA_PATRON: Textura[] = ["denim", "pana", "corderoy", "tejido_g
 // impermeable es LISO Y BRILLOSO de verdad (el agua resbala, no se
 // absorbe como en una tela porosa), el más cercano a este grupo de los
 // tres -- pedido explícito del usuario ("la campera piloto en realidad es
-// una campera impermeable"), revisado como ingeniero textil.
-export const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso", "poliester", "viscosa", "impermeable"];
+// una campera impermeable"), revisado como ingeniero textil. tricot --
+// mismo grupo: es justamente el "brillo característico" (signature sheen)
+// que describen las fichas técnicas reales de una campera de buzo/track
+// jacket, no una trama tejida visible como tejido_grueso/frisado.
+export const TEXTURA_BRILLO: Textura[] = ["seda", "cuero_liso", "poliester", "viscosa", "impermeable", "tricot"];
 
 /** El <pattern> real por textura -- son ilustraciones esquemáticas a
  *  propósito (líneas/formas simples que se repiten), no una textura
@@ -556,6 +580,21 @@ export function PrendaShape({
             // cierre (no centrada), como se ve una tapeta real.
             <rect x="33" y="14" width="5" height="40" rx="1" fill={detalleHsl(tonoH, tonoS, tonoL)} stroke={stroke} strokeWidth={0.5} />
           )}
+        </>
+      ) : esCamperaTrack(categoria, textura) ? (
+        // campera deportiva de entretiempo/track jacket (esCamperaTrack,
+        // ver su comentario largo más arriba) -- pedido explícito del
+        // usuario: "las camperas deportivas no son solo rompeviento,
+        // también hay algunas de entretiempo". Cuello banda intermedio
+        // (26-38, cae a y=10) -- más angosto/alto que el cuello abierto de
+        // la campera genérica de acá abajo (24-40, cae a y=12), pero más
+        // bajo/relajado que el funnel del rompeviento (28-36, cae a y=8):
+        // un track jacket real cierra bastante pero no hasta el mentón
+        // como una prenda técnica de lluvia/viento. Sin tapeta -- el
+        // cierre queda expuesto, a diferencia de un impermeable real.
+        <>
+          <FormaConTextura d="M26 6 L32 10 L38 6 L54 16 L47 27 L42 22 L42 58 L22 58 L22 22 L17 27 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
+          <line x1="32" y1="10" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
         </>
       ) : (
         <>

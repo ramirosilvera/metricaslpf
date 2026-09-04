@@ -695,6 +695,26 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // y desaturada de siempre, no una tercera variante de celeste.
   { id: "campera-rompeviento-roja", nombre: "Campera rompeviento roja", categoria: "campera", colorHex: "#B93A32", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
   { id: "campera-rompeviento-azul-marino", nombre: "Campera rompeviento azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+  // "campera deportiva" (track jacket/"campera de buzo") -- pedido
+  // explícito del usuario: "las camperas deportivas no son solo
+  // rompeviento, también hay algunas de entretiempo. Revisa en las marcas
+  // deportivas tipo Adidas, Puma, Nike que venden". Verificado por
+  // búsqueda web (adidas.com, Firebird Track Jacket y equivalentes de
+  // Puma/Nike): es una prenda real y distinta del rompeviento de arriba,
+  // no otro color del mismo modelo -- tela TRICOT (punto liviano de
+  // poliéster con brillo característico, no el tejido plano técnico del
+  // rompeviento), cuello alto tipo banda (más bajo/relajado que el cuello
+  // funnel del rompeviento) y puño/ruedo acanalados, cierre expuesto (sin
+  // tapeta -- a diferencia del impermeable, no corta agua, no la
+  // necesita). "entretiempo": es la capa liviana de entrenamiento/uso
+  // diario, no abriga como un buzo frisado ni protege como una pluma real.
+  // Colores reusados de otras prendas deportivas ya cargadas (negro,
+  // azul marino, gris -- mismos hex que pantalon-deportivo-negro/
+  // campera-rompeviento-azul-marino/remera-deportiva-gris), consistencia
+  // cross-categoría, mismo criterio que el resto del catálogo.
+  { id: "campera-deportiva-negra", nombre: "Campera deportiva negra", categoria: "campera", colorHex: "#1A1A1A", textura: "tricot", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+  { id: "campera-deportiva-azul-marino", nombre: "Campera deportiva azul marino", categoria: "campera", colorHex: "#1F2A44", textura: "tricot", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+  { id: "campera-deportiva-gris", nombre: "Campera deportiva gris", categoria: "campera", colorHex: "#8C8C8C", textura: "tricot", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
   // tapado/sobretodo de paño -- pedido explícito del usuario ("agregá
   // prendas si es necesario" al diferenciar abrigos de invierno):
   // revisando el catálogo, TODAS las prendas de invierno real (acolchado)

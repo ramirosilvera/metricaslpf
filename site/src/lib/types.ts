@@ -25,7 +25,8 @@ export type Textura =
   | "acolchado"
   | "poliester"
   | "viscosa"
-  | "impermeable";
+  | "impermeable"
+  | "tricot";
 
 export type Estilo = "casual" | "formal" | "deportivo" | "urbano" | "clasico";
 export type Ocasion = "casual" | "laburo" | "formal";
@@ -240,6 +241,13 @@ export function descripcionPrenda(p: Prenda): string {
     // contra el resto del catálogo (ver esCamperaTecnica en PrendaIcon.tsx).
     if (p.textura === "poliester") return "Campera rompeviento";
     if (p.textura === "impermeable") return "Campera impermeable";
+    // tricot -- pedido explícito del usuario: "las camperas deportivas no
+    // son solo rompeviento, también hay algunas de entretiempo", verificado
+    // contra lo que venden Adidas/Nike/Puma (el "track jacket"/"campera de
+    // buzo" real es tela tricot, no el poliéster técnico liso del
+    // rompeviento). Sin ambigüedad, mismo criterio que poliester/
+    // impermeable de arriba.
+    if (p.textura === "tricot") return "Campera deportiva";
   }
   if (p.categoria === "camisa") {
     if (p.patron === "rayas") return "Camisa a rayas";

@@ -1,5 +1,5 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
-import PrendaIcon, { esCamperaDePunto, esCamperaTecnica, PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
+import PrendaIcon, { esCamperaDePunto, esCamperaTecnica, esCamperaTrack, PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
 import { descripcionPrenda, type Calce, type Categoria, type CorteCalzado, type Prenda } from "../lib/types";
 
 /** Escala horizontal de la silueta según Calce (ver types.ts) -- auditoría
@@ -488,7 +488,14 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             // el ruedo -- así que se reusa el mismo dibujo en vez de
             // inventar un tercer detalle para una diferencia que no se
             // notaría a este tamaño.
-            esCamperaTecnica(prenda.categoria, prenda.textura)) && (
+            esCamperaTecnica(prenda.categoria, prenda.textura) ||
+            // campera deportiva de entretiempo/track jacket (esCamperaTrack,
+            // ver PrendaIcon.tsx) -- pedido explícito del usuario, verificado
+            // por búsqueda web contra lo que venden Adidas/Nike/Puma: el
+            // puño y el ruedo acanalados son justamente la seña más
+            // reconocible de este tipo de campera real (tela tricot, no la
+            // misma del rompeviento, pero comparte esta seña visual).
+            esCamperaTrack(prenda.categoria, prenda.textura)) && (
             // dobladillo acanalado -- pedido explícito del usuario ("fijate
             // el dobladillo"), comparando contra una foto real donde se ve
             // claramente la banda tejida más densa en el borde inferior del
@@ -507,14 +514,16 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           )}
           {prenda.categoria === "campera" && (
             <>
-              {/* el cierre sube más adentro del cuello en un rompeviento
-                  (ver la rama esCamperaTecnica más abajo) -- un cuello
-                  funnel cerrado hasta el mentón necesita que el cierre
-                  llegue hasta ahí arriba, no solo hasta la línea de
-                  hombros como en una campera abierta. */}
+              {/* el cierre sube más adentro del cuello en una campera
+                  técnica cerrada (ver las ramas esCamperaTecnica/
+                  esCamperaTrack más abajo) -- cuanto más alto el cuello,
+                  más arriba tiene que llegar el cierre para que no quede
+                  flotando por debajo. Funnel (rompeviento/impermeable) es
+                  el más alto, track jacket un poco más bajo, campera
+                  abierta se queda en la línea de hombros. */}
               <line
                 x1="60"
-                y1={esCamperaTecnica(prenda.categoria, prenda.textura) ? 36 : 60}
+                y1={esCamperaTecnica(prenda.categoria, prenda.textura) ? 36 : esCamperaTrack(prenda.categoria, prenda.textura) ? 40 : 60}
                 x2="60"
                 y2="124"
                 stroke={stroke}
@@ -582,6 +591,26 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                     />
                   )}
                 </>
+              ) : esCamperaTrack(prenda.categoria, prenda.textura) ? (
+                // campera deportiva de entretiempo/track jacket
+                // (esCamperaTrack, ver su comentario largo en
+                // PrendaIcon.tsx) -- pedido explícito del usuario: "las
+                // camperas deportivas no son solo rompeviento, también hay
+                // algunas de entretiempo", verificado por búsqueda web
+                // contra lo que venden Adidas/Nike/Puma. Banda CERRADA
+                // (sin las dos solapas triangulares de la campera abierta
+                // de acá abajo -- un track jacket real no se abre sobre el
+                // pecho), pero más baja/ancha que el funnel del
+                // rompeviento (49-71 en vez de 52-68, cae a y=38 en vez de
+                // y=34): un cuello banda relajado de entrenamiento, no un
+                // cuello que corta viento/lluvia hasta el mentón. Sin
+                // tapeta -- el cierre queda expuesto.
+                <path
+                  d="M49 44 Q60 38 71 44 Q66 47 60 48 Q54 47 49 44 Z"
+                  fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                  stroke={stroke}
+                  {...strokeProps}
+                />
               ) : (
                 <>
                   {/* mismo rediseño de cuello camisero que en TorsoCuerpo/
@@ -1127,13 +1156,17 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                     // el de un sweater, no el ancho/bajo de una campera de
                     // tela.
                     <path d="M46 20 L74 20 L74 40 Q60 46 46 40 Z" />
-                  ) : esCamperaTecnica(principal.torso.categoria, principal.torso.textura) ? (
-                    // rompeviento (esCamperaTecnica, ver PrendaIcon.tsx) --
-                    // sin path: un cuello funnel cerrado hasta el mentón
-                    // (ver TorsoCuerpo/campera más arriba) no deja ningún
-                    // hueco por donde asome la camisa de abajo -- un
-                    // clipPath sin ninguna forma adentro recorta TODO (no
-                    // deja pasar nada), que es exactamente lo que
+                  ) : esCamperaTecnica(principal.torso.categoria, principal.torso.textura) ||
+                    esCamperaTrack(principal.torso.categoria, principal.torso.textura) ? (
+                    // rompeviento/impermeable (esCamperaTecnica) o track
+                    // jacket (esCamperaTrack, ver PrendaIcon.tsx) -- sin
+                    // path: las tres tienen un cuello banda CERRADO (ver
+                    // TorsoCuerpo/campera más arriba -- el track jacket es
+                    // más bajo que el funnel, pero sigue siendo una banda
+                    // cerrada, no una que se abre sobre el pecho), así que
+                    // ninguna deja hueco por donde asome la camisa de abajo
+                    // -- un clipPath sin ninguna forma adentro recorta TODO
+                    // (no deja pasar nada), que es exactamente lo que
                     // corresponde acá: nada de la camisa debería verse.
                     <></>
                   ) : (

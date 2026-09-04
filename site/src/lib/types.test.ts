@@ -67,11 +67,12 @@ describe("descripcionPrenda", () => {
     expect(descripcionPrenda(mkPrenda("sweater", { textura: "lana" }))).toBe("Sweater");
   });
 
-  it("campera de denim/acolchado/poliester/impermeable se describe específicamente; campera de lana (ambigua) cae al genérico", () => {
+  it("campera de denim/acolchado/poliester/impermeable/tricot se describe específicamente; campera de lana (ambigua) cae al genérico", () => {
     expect(descripcionPrenda(mkPrenda("campera", { textura: "denim" }))).toBe("Campera de jean");
     expect(descripcionPrenda(mkPrenda("campera", { textura: "acolchado" }))).toBe("Campera de pluma");
     expect(descripcionPrenda(mkPrenda("campera", { textura: "poliester" }))).toBe("Campera rompeviento");
     expect(descripcionPrenda(mkPrenda("campera", { textura: "impermeable" }))).toBe("Campera impermeable");
+    expect(descripcionPrenda(mkPrenda("campera", { textura: "tricot" }))).toBe("Campera deportiva");
     expect(descripcionPrenda(mkPrenda("campera", { textura: "lana" }))).toBe("Campera");
   });
 
