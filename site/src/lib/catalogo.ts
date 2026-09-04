@@ -600,12 +600,19 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // azul marino), sin textura "cuero_liso" (es lona/textil, no cuero) --
   // mismo criterio que las urbanas de arriba. Puntera de goma + costura
   // lateral son el detalle real, ver CorteCalzado en types.ts.
+  // estilosSecundarios ["urbano","clasico"] en las 3 -- auditoría de imagen
+  // (misma ronda que campera-jean/cinturon de arriba). Inconsistencia real:
+  // solo la azul marino tenía esta cobertura multi-estilo; blanca y negra
+  // (los dos colores MÁS neutros/versátiles de cualquier calzado, no menos)
+  // se habían quedado en "casual" solo. Pareja las 3 -- blanco y negro son,
+  // si acaso, más versátiles que el azul marino, no menos.
   {
     id: "zapatillas-lona-blancas",
     nombre: "Zapatillas de lona blancas",
     categoria: "calzado",
     colorHex: "#F5F5F0",
     estilo: "casual",
+    estilosSecundarios: ["urbano", "clasico"],
     ocasion: "casual",
     corteCalzado: "zapatilla_lona",
   },
@@ -615,6 +622,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
     categoria: "calzado",
     colorHex: "#1A1A1A",
     estilo: "casual",
+    estilosSecundarios: ["urbano", "clasico"],
     ocasion: "casual",
     corteCalzado: "zapatilla_lona",
   },
@@ -634,7 +642,17 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // relleno (bomber/utility/denim/nylon liviano sin forro): cortan viento
   // pero no abrigan como una pluma o un paño de invierno real.
   { id: "campera-negra", nombre: "Campera negra", categoria: "campera", colorHex: "#1A1A1A", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
-  { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", textura: "denim", estilo: "casual", ocasion: "casual", estacion: "entretiempo" },
+  // estilo secundario "urbano" -- auditoría de imagen (Consejo, pedido
+  // explícito del usuario: "cuál es la diferencia entre casual, urbano y
+  // clásico... revisá todo el catálogo"). Inconsistencia real encontrada:
+  // el jean PANTALÓN de más arriba ya lleva "urbano" en TODO color con el
+  // argumento explícito de que "lo que hace a un jean urbano/streetwear no
+  // es el color, es la PRENDA (denim de corte casual)" -- ese mismo
+  // argumento aplica letra por letra a una campera de jean, y sin embargo
+  // se había quedado afuera (única prenda de denim del catálogo sin
+  // "urbano"). Corregido para ser consistente con el propio criterio que
+  // el archivo ya documenta.
+  { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", textura: "denim", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual", estacion: "entretiempo" },
   { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
   // piloto -- no es un rompeviento deportivo (más abajo) ni una campera de
   // vestir: es la campera de lluvia liviana/impermeable de uso diario
@@ -773,8 +791,16 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // propósito, no por pereza: mantiene la consistencia cross-categoría del
   // catálogo (una corbata azul marino combina con las prendas azul marino
   // ya cargadas, no con un azul ligeramente distinto).
-  { id: "cinturon-negro", nombre: "Cinturón negro de cuero", categoria: "accesorio", colorHex: "#1A1A1A", textura: "cuero_liso", estilo: "clasico" },
-  { id: "cinturon-marron", nombre: "Cinturón marrón de cuero", categoria: "accesorio", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "clasico" },
+  // estilo secundario "casual" -- auditoría de imagen (misma ronda que
+  // campera-jean más arriba). Inconsistencia real: mocasines-negros/
+  // mocasines-marrones (más abajo, calzado) ya llevan "casual" secundario
+  // con el argumento "es smart-casual real" -- un cinturón de cuero liso
+  // sin decoración es, si acaso, TODAVÍA más versátil que un mocasín (no
+  // tiene ninguna silueta que competir con un jean o una zapatilla), y sin
+  // embargo se había quedado solo en "clasico". Corregido por la misma
+  // razón.
+  { id: "cinturon-negro", nombre: "Cinturón negro de cuero", categoria: "accesorio", colorHex: "#1A1A1A", textura: "cuero_liso", estilo: "clasico", estilosSecundarios: ["casual"] },
+  { id: "cinturon-marron", nombre: "Cinturón marrón de cuero", categoria: "accesorio", colorHex: "#5C3A21", textura: "cuero_liso", estilo: "clasico", estilosSecundarios: ["casual"] },
   { id: "corbata-azul-marino", nombre: "Corbata azul marino", categoria: "accesorio", colorHex: "#1F2A44", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
   { id: "corbata-bordo", nombre: "Corbata bordo", categoria: "accesorio", colorHex: "#6B2737", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
   // roja -- la corbata de vestir más clásica que existe ("power tie"), un
