@@ -820,7 +820,7 @@ describe("outfitSirveParaEstilo", () => {
 // quiero un estilo oficina por un lado, y el estilo formal solamente el
 // traje (pantalón de vestir, camisa, corbata, cinturón y saco). Formal es
 // formal." Roles: asesor de imagen, sastre.
-describe("outfitSirveParaEstilo -- formal exige saco, oficina excluye saco/corbata", () => {
+describe("outfitSirveParaEstilo -- formal exige saco, todo lo demás excluye saco/corbata", () => {
   function conPantalonVestir(estilo: Prenda["estilo"], secundarios: Prenda["estilo"][] = []): Prenda {
     const p = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     p.estilo = estilo;
@@ -875,6 +875,34 @@ describe("outfitSirveParaEstilo -- formal exige saco, oficina excluye saco/corba
     expect(outfitSirveParaEstilo([pantalon, cinturon], "oficina")).toBe(true);
     const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
     expect(outfitSirveParaEstilo([pantalon, saco, cinturon], "formal")).toBe(true);
+  });
+
+  // Consejo, reporte real del usuario: "en el estilo urbano, como
+  // resultado me arroja outfits con camisa y corbata... corbata es solo
+  // formal, ni siquiera de oficina, es exclusivamente formal. Incluso
+  // está taggeado de esa manera, pero el sistema no lo reconoce." Antes
+  // el chequeo de esPrendaDeTrajeExclusiva solo corría para "oficina" --
+  // nada bloqueaba una corbata (o un saco) en urbano/casual/clasico/
+  // deportivo más allá del color, que scoreColor sí puede aprobar sin
+  // saber nada de registro.
+  it("una corbata puesta -> nunca sirve para urbano/casual/clasico/deportivo, solo para 'formal'", () => {
+    const pantalonUrbano = conPantalonVestir("casual", ["urbano"]);
+    const corbata = mkPrenda("accesorio", "#1F2A44", 222, 37, 19);
+    corbata.requiere_cuello = true;
+    for (const estilo of ["urbano", "casual", "clasico", "deportivo"] as const) {
+      expect(outfitSirveParaEstilo([pantalonUrbano, corbata], estilo)).toBe(false);
+    }
+    const pantalonFormal = conPantalonVestir("formal");
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    expect(outfitSirveParaEstilo([pantalonFormal, saco, corbata], "formal")).toBe(true);
+  });
+
+  it("un saco puesto -> nunca sirve para urbano/casual/clasico/deportivo, mismo criterio que la corbata", () => {
+    const pantalonUrbano = conPantalonVestir("casual", ["urbano"]);
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    for (const estilo of ["urbano", "casual", "clasico", "deportivo"] as const) {
+      expect(outfitSirveParaEstilo([pantalonUrbano, saco], estilo)).toBe(false);
+    }
   });
 
   // Consejo, aclaración explícita del usuario: "el zapato de vestir no

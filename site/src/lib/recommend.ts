@@ -805,11 +805,22 @@ export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolea
   const rangoPedido = FORMALIDAD_ESTILO[estilo];
   if (techo !== undefined && rangoPedido !== undefined && rangoPedido > techo) return false;
 
-  // "Oficina" -- pedido explícito: "sin corbatas, sin traje". Ni el saco
-  // ni una corbata (o cualquier otro accesorio que requiere_cuello)
-  // pueden estar presentes: son, por definición, lo que convierte un
-  // look en "formal" (traje), no en "elegante sport".
-  if (estilo === "oficina" && prendas.some(esPrendaDeTrajeExclusiva)) return false;
+  // "Formal" es la ÚNICA categoría que admite estas prendas -- pedido
+  // explícito del usuario, con reporte real ("Urbano me arma outfits con
+  // camisa y corbata... corbata es solo formal, ni siquiera de oficina,
+  // es exclusivamente formal. Incluso está taggeado de esa manera, pero
+  // el sistema no lo reconoce"). El chequeo original ("sin corbatas, sin
+  // traje") solo corría para "oficina" -- pero outfitSirveParaEstilo solo
+  // mira el PANTALÓN para decidir el estilo (ver el comentario grande más
+  // arriba), así que nada más bloqueaba un saco o una corbata en
+  // urbano/casual/clasico/deportivo: si el color combinaba, scoreColor no
+  // tiene forma de saber que esa prenda es de registro exclusivamente
+  // formal. Verificado por ejecución contra el catálogo: una corbata
+  // (estilo="formal", sin estilos_secundarios) pasaba igual en un outfit
+  // urbano. Ni el saco ni una corbata (o cualquier otro accesorio que
+  // requiere_cuello) pueden estar presentes fuera de "formal": son, por
+  // definición, lo que convierte un look en traje.
+  if (estilo !== "formal" && prendas.some(esPrendaDeTrajeExclusiva)) return false;
   // "Formal" -- pedido explícito: "es el traje. Formal es formal." El
   // saco es, por convención real de sastrería, la prenda que define un
   // traje -- sin él, un pantalón de vestir + camisa (con o sin corbata)
