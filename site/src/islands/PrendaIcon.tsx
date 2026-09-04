@@ -22,6 +22,24 @@ export function esCamperaDePunto(categoria: Categoria, textura: Textura | null |
   return categoria === "campera" && textura === "lana" && estacion !== "invierno";
 }
 
+/** Rompeviento -- campera técnica deportiva (categoria="campera",
+ *  textura="poliester", ver "campera-rompeviento-*" en catalogo.ts).
+ *  Pedido explícito del usuario: revisar la campera deportiva como sastre
+ *  y modista. La silueta genérica de campera (cuello camisero abierto en
+ *  dos solapas hacia el pecho, mismo trazo que una campera de tela/jean)
+ *  es exactamente lo opuesto de cómo se usa un rompeviento real: cierra
+ *  hasta el cuello con un cuello alto (funnel/stand collar), no se lleva
+ *  abierto sobre el pecho -- es viento/lluvia lo que corta, y un cuello
+ *  abierto no cumple esa función. "poliester" alcanza solo (a diferencia
+ *  de esCamperaDePunto): es la ÚNICA textura entre las camperas del
+ *  catálogo hoy, verificado contra catalogo.ts completo -- ninguna otra
+ *  campera (de tela, de punto, acolchada) usa poliéster. Exportada, mismo
+ *  motivo que esCamperaDePunto: ícono chico y maniquí grande comparten
+ *  EXACTAMENTE el mismo criterio. */
+export function esCamperaTecnica(categoria: Categoria, textura: Textura | null | undefined): boolean {
+  return categoria === "campera" && textura === "poliester";
+}
+
 // texturas que se dibujan como un patrón repetido (trama de tela) vs. las
 // que se dibujan como un brillo diagonal (materiales lisos y reflectantes).
 // null/una textura sin mapear acá (p.ej. sin cargar) no dibuja nada extra.
@@ -493,19 +511,31 @@ export function PrendaShape({
       // abajo (nunca se desincronizan, es literal el mismo path) y se le
       // suma la línea de cierre -- es un sweater con cierre, no un
       // sweater sin más.
-      forma =
-        esCamperaDePunto(categoria, textura, estacion) ? (
-          <>
-            <FormaConTextura d="M22 8 L32 13 L42 8 L53 17 L46 27 L42 23 L42 58 L22 58 L22 23 L18 27 L11 17 Z" fill={color} stroke={stroke} patron={patron} />
-            <path d="M25 8 L32 12 L39 8" fill="none" stroke={stroke} />
-            <line x1="32" y1="13" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
-          </>
-        ) : (
-          <>
-            <FormaConTextura d="M24 6 L32 12 L40 6 L54 16 L47 27 L42 22 L42 58 L22 58 L22 22 L17 27 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
-            <line x1="32" y1="12" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
-          </>
-        );
+      forma = esCamperaDePunto(categoria, textura, estacion) ? (
+        <>
+          <FormaConTextura d="M22 8 L32 13 L42 8 L53 17 L46 27 L42 23 L42 58 L22 58 L22 23 L18 27 L11 17 Z" fill={color} stroke={stroke} patron={patron} />
+          <path d="M25 8 L32 12 L39 8" fill="none" stroke={stroke} />
+          <line x1="32" y1="13" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
+        </>
+      ) : esCamperaTecnica(categoria, textura) ? (
+        // rompeviento (esCamperaTecnica, ver su comentario largo más
+        // arriba) -- pedido explícito del usuario, revisado como sastre y
+        // modista: mismo cuerpo/mangas que la campera genérica de abajo,
+        // pero con la abertura del cuello mucho más angosta y alta (28-36
+        // en vez de 24-40, apenas 2u de caída en vez de 6) -- un cuello
+        // funnel cerrado hasta el mentón, no la solapa abierta de una
+        // campera de tela. El cierre sube con el cuello, hasta y=8 en vez
+        // de y=12.
+        <>
+          <FormaConTextura d="M28 6 L32 8 L36 6 L54 16 L47 27 L42 22 L42 58 L22 58 L22 22 L17 27 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
+          <line x1="32" y1="8" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
+        </>
+      ) : (
+        <>
+          <FormaConTextura d="M24 6 L32 12 L40 6 L54 16 L47 27 L42 22 L42 58 L22 58 L22 22 L17 27 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
+          <line x1="32" y1="12" x2="32" y2="58" stroke={stroke} strokeDasharray="2 2" />
+        </>
+      );
       break;
     case "saco": {
       // mismo cuerpo de "chaqueta con cuello" que campera (misma silueta

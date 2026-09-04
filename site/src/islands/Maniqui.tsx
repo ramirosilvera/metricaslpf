@@ -1,5 +1,5 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
-import PrendaIcon, { esCamperaDePunto, PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
+import PrendaIcon, { esCamperaDePunto, esCamperaTecnica, PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
 import { descripcionPrenda, type Calce, type Categoria, type CorteCalzado, type Prenda } from "../lib/types";
 
 /** Escala horizontal de la silueta según Calce (ver types.ts) -- auditoría
@@ -477,7 +477,18 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             // categoria="campera") -- mismo dobladillo acanalado que un
             // sweater/buzo real: es la misma prenda de punto, solo con
             // cierre en vez de cuello redondo/pullover.
-            esCamperaDePunto(prenda.categoria, prenda.textura, prenda.estacion)) && (
+            esCamperaDePunto(prenda.categoria, prenda.textura, prenda.estacion) ||
+            // rompeviento (esCamperaTecnica, ver PrendaIcon.tsx) -- pedido
+            // explícito del usuario, revisado como sastre y modista: un
+            // rompeviento real cierra con puño elástico o cordón en el
+            // ruedo, no queda suelto/recto como una campera de tela. No es
+            // literalmente el mismo canalé de punto que un sweater (es
+            // elástico sintético, no lana tejida), pero a esta escala
+            // esquemática es la misma seña visual -- una banda distinta en
+            // el ruedo -- así que se reusa el mismo dibujo en vez de
+            // inventar un tercer detalle para una diferencia que no se
+            // notaría a este tamaño.
+            esCamperaTecnica(prenda.categoria, prenda.textura)) && (
             // dobladillo acanalado -- pedido explícito del usuario ("fijate
             // el dobladillo"), comparando contra una foto real donde se ve
             // claramente la banda tejida más densa en el borde inferior del
@@ -496,7 +507,20 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
           )}
           {prenda.categoria === "campera" && (
             <>
-              <line x1="60" y1="60" x2="60" y2="124" stroke={stroke} {...strokeProps} strokeDasharray="3 3" />
+              {/* el cierre sube más adentro del cuello en un rompeviento
+                  (ver la rama esCamperaTecnica más abajo) -- un cuello
+                  funnel cerrado hasta el mentón necesita que el cierre
+                  llegue hasta ahí arriba, no solo hasta la línea de
+                  hombros como en una campera abierta. */}
+              <line
+                x1="60"
+                y1={esCamperaTecnica(prenda.categoria, prenda.textura) ? 36 : 60}
+                x2="60"
+                y2="124"
+                stroke={stroke}
+                {...strokeProps}
+                strokeDasharray="3 3"
+              />
               {esCamperaDePunto(prenda.categoria, prenda.textura, prenda.estacion) ? (
                 // campera de punto con cierre (cardigan) -- pedido
                 // explícito del usuario, revisado como sastre y diseñador:
@@ -513,6 +537,26 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                 // de un sweater sin más, esta prenda SÍ cierra con
                 // cremallera.
                 <path d="M48 40 Q60 46 72 40" fill="none" stroke={stroke} {...strokeProps} strokeWidth={3} />
+              ) : esCamperaTecnica(prenda.categoria, prenda.textura) ? (
+                // rompeviento (esCamperaTecnica, ver su comentario largo en
+                // PrendaIcon.tsx) -- pedido explícito del usuario, revisado
+                // como sastre y modista: un rompeviento técnico cierra
+                // hasta el cuello (funnel/stand collar cerrado), no se usa
+                // abierto sobre el pecho como una campera de tela -- es
+                // viento/lluvia lo que corta, un cuello abierto no cumple
+                // esa función. A diferencia de la campera genérica de acá
+                // abajo (banda ancha con dos solapas que se abren en V
+                // hacia el pecho), esta banda es angosta (52-68 en vez de
+                // 46-74) y más alta (sube hasta y=34 en vez de y=38, más
+                // cerca del cuello del maniquí) -- y SIN las dos solapas
+                // triangulares: un cuello funnel no se abre, se mantiene
+                // cerrado sobre sí mismo.
+                <path
+                  d="M52 44 Q60 34 68 44 Q64 47 60 48 Q56 47 52 44 Z"
+                  fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)}
+                  stroke={stroke}
+                  {...strokeProps}
+                />
               ) : (
                 <>
                   {/* mismo rediseño de cuello camisero que en TorsoCuerpo/
@@ -1058,6 +1102,15 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                     // el de un sweater, no el ancho/bajo de una campera de
                     // tela.
                     <path d="M46 20 L74 20 L74 40 Q60 46 46 40 Z" />
+                  ) : esCamperaTecnica(principal.torso.categoria, principal.torso.textura) ? (
+                    // rompeviento (esCamperaTecnica, ver PrendaIcon.tsx) --
+                    // sin path: un cuello funnel cerrado hasta el mentón
+                    // (ver TorsoCuerpo/campera más arriba) no deja ningún
+                    // hueco por donde asome la camisa de abajo -- un
+                    // clipPath sin ninguna forma adentro recorta TODO (no
+                    // deja pasar nada), que es exactamente lo que
+                    // corresponde acá: nada de la camisa debería verse.
+                    <></>
                   ) : (
                     <path d="M40 20 L80 20 L80 52 Q60 58 40 52 Z" />
                   ))}
