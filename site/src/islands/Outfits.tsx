@@ -7,11 +7,12 @@ import {
   advertenciasDeRegistro,
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
+  candidatosDeContraste,
   diffPrendasEdicion,
-  elegirContraste,
   estacionActual,
   ESTILO_LABEL,
   mejorCompraParaSubirNota,
+  outfitEsCoherenteParaEstilo,
   outfitSirveParaEstilo,
   puntuarOutfit,
   registroOutfit,
@@ -106,8 +107,8 @@ function RegistroBadge({ prendas }: { prendas: Prenda[] }) {
 }
 
 /** Una tarjeta de "Vestite hoy" -- extraída para no duplicar el markup
- *  entre la opción principal y la de contraste (ver elegirContraste en
- *  recommend.ts). `etiquetaGrupo` es el rótulo fijo ("Mejor opción" /
+ *  entre la opción principal y la de contraste (ver candidatosDeContraste
+ *  en recommend.ts). `etiquetaGrupo` es el rótulo fijo ("Mejor opción" /
  *  "Otra combinación"), no el registro (Formal/Casual/...) que ya muestra
  *  RegistroBadge -- son dos datos distintos y se muestran los dos. */
 function TarjetaSugerido({
@@ -165,7 +166,7 @@ const VISIBLES_POR_SECCION = 2;
  *  coinciden en la misma capa -- siempre 2 opciones fijas al elegir una
  *  ocasión en "Vestite hoy": la principal (mejor puntaje) y la que más
  *  contrasta en color contra ella (matiz, luminosidad y saturación --
- *  no dos variantes parecidas). Ver elegirContraste en recommend.ts. */
+ *  no dos variantes parecidas). Ver candidatosDeContraste en recommend.ts. */
 const OPCIONES_A_LA_VEZ = 1;
 
 const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
@@ -278,6 +279,21 @@ export function Contenido({
     return poolSugeridos.filter((s) => outfitSirveParaEstilo(s.prendas, estiloSugerido));
   }, [poolSugeridos, estiloSugerido]);
 
+  // Pedido explícito del usuario, con reporte real: "en el estilo formal
+  // le pone el buzo con capucha... no entiendo por qué esa pésima
+  // elección hace el motor". poolSugeridosPorEstilo (arriba) es LAXO a
+  // propósito -- solo mira el pantalón; mejorCompra más abajo lo sigue
+  // necesitando así para encontrar una base real aunque tenga una
+  // democión (es la excusa de por qué la nota no es más alta). Este otro
+  // pool, con outfitEsCoherenteParaEstilo (que además exige cero
+  // advertencias de registro), es el que de verdad se MUESTRA como
+  // opción lista para usar en las tarjetas de abajo.
+  const poolCoherentePorEstilo = useMemo(() => {
+    if (estiloSugerido === null) return [];
+    if (estiloSugerido === "todos") return poolSugeridos.filter((s) => advertenciasDeRegistro(s.prendas).length === 0);
+    return poolSugeridos.filter((s) => outfitEsCoherenteParaEstilo(s.prendas, estiloSugerido));
+  }, [poolSugeridos, estiloSugerido]);
+
   function elegirEstiloSugerido(valor: Estilo | "todos") {
     setEstiloSugerido((prev) => (prev === valor ? null : valor));
     setOffsetSugeridos(0);
@@ -299,12 +315,23 @@ export function Contenido({
   // comparte el mismo puntaje máximo), pero un día distinto ya arranca en
   // un combo distinto sin tocar nada. "otras opciones" (offsetSugeridos)
   // sigue sumando desde ahí exactamente igual que antes.
-  const opcionPrincipal = tanda(poolSugeridosPorEstilo, semillaDelDia(poolSugeridosPorEstilo) + offsetSugeridos, OPCIONES_A_LA_VEZ)[0];
-  const opcionContraste = useMemo(
-    () => (opcionPrincipal ? elegirContraste(opcionPrincipal, poolSugeridosPorEstilo) : undefined),
-    [opcionPrincipal, poolSugeridosPorEstilo],
+  const opcionPrincipal = tanda(poolCoherentePorEstilo, semillaDelDia(poolCoherentePorEstilo) + offsetSugeridos, OPCIONES_A_LA_VEZ)[0];
+  // Pedido explícito del usuario, reporte real: "toco el botón de otras
+  // opciones y la otra combinación no cambia". Verificado por ejecución:
+  // elegirContraste (un solo resultado) quedaba dominado por
+  // pantalón+calzado+accesorio -- el mismo outlier de esas categorías
+  // ganaba el primer puesto sin importar qué principal se le comparara,
+  // así que la rotación diaria (que sobre todo mueve el torso) casi
+  // nunca cambiaba la segunda tarjeta. candidatosDeContraste devuelve el
+  // ranking COMPLETO, e indexarlo con el mismo offsetSugeridos que ya
+  // mueve "otras opciones" garantiza que cada click cambie las dos
+  // tarjetas, no solo la principal.
+  const candidatosContraste = useMemo(
+    () => (opcionPrincipal ? candidatosDeContraste(opcionPrincipal, poolCoherentePorEstilo) : []),
+    [opcionPrincipal, poolCoherentePorEstilo],
   );
-  const hayMasOpciones = poolSugeridosPorEstilo.length > 1;
+  const opcionContraste = tanda(candidatosContraste, offsetSugeridos, OPCIONES_A_LA_VEZ)[0];
+  const hayMasOpciones = poolCoherentePorEstilo.length > 1;
 
   // Pedido explícito del usuario: en el estilo elegido hoy, avisar si hay
   // poca variedad (de tipo de prenda o de color) con una sugerencia
@@ -330,17 +357,19 @@ export function Contenido({
   // usuario YA tiene puesto hoy son los que frenan la nota, y
   // sugerenciaVariedad no mira eso (mejorCompraParaSubirNota sí, vía
   // mejorasDeReemplazo -- ver su comentario largo en recommend.ts). Toma
-  // el mejor outfit que se está mostrando ahora (principal o contraste, el
-  // que tenga más puntaje de los dos) como base de la comparación.
+  // el mejor outfit REAL disponible (poolSugeridosPorEstilo, laxo -- ya
+  // ordenado por puntaje) como base, no las tarjetas mostradas
+  // (poolCoherentePorEstilo): a propósito, para que la sugerencia de
+  // compra siga funcionando aunque NINGUNA combinación quede coherente
+  // para mostrar todavía -- es exactamente el caso donde más falta hace
+  // ("no tengo nada prolijo, decime qué comprar para arreglarlo").
   const mejorCompra = useMemo(() => {
     if (!estiloSugerido || estiloSugerido === "todos") return null;
-    const base = [opcionPrincipal, opcionContraste]
-      .filter((o): o is OutfitSugerido => o !== undefined)
-      .sort((a, b) => b.puntaje - a.puntaje)[0];
+    const base = poolSugeridosPorEstilo[0];
     if (!base) return null;
     const compra = mejorCompraParaSubirNota(estiloSugerido, base, placard, CATALOGO_CON_HSL);
     return compra ? { compra, actual: base.puntaje } : null;
-  }, [estiloSugerido, opcionPrincipal, opcionContraste, placard]);
+  }, [estiloSugerido, poolSugeridosPorEstilo, placard]);
 
   // Unifica las dos fuentes de "sumá esto" en UNA sola tarjeta -- mostrar
   // dos a la vez (una por variedad, otra por puntaje) sería ruido si

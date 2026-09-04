@@ -3,6 +3,7 @@ import {
   advertenciasDeRegistro,
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
+  candidatosDeContraste,
   categoriasAusentes,
   diffPrendasEdicion,
   elegirContraste,
@@ -12,6 +13,7 @@ import {
   hueDist,
   mejorCompraParaSubirNota,
   mejorasDeReemplazo,
+  outfitEsCoherenteParaEstilo,
   outfitSirveParaEstilo,
   puntuarOutfit,
   recomendar,
@@ -782,6 +784,40 @@ describe("outfitSirveParaEstilo", () => {
     const remera = mkPrenda("remera", "#3366CC", 220, 60, 50);
     remera.estilo = "casual";
     expect(outfitSirveParaEstilo([remera], "casual")).toBe(false);
+  });
+});
+
+describe("outfitEsCoherenteParaEstilo", () => {
+  it("reporte real del usuario: un buzo estilo=casual bajo un pantalón formal pasaba 'sirve para formal' -- acá NO", () => {
+    const pantalonFormal = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonFormal.estilo = "formal";
+    const buzoCasual = mkPrenda("buzo", "#5A5F3D", 90, 30, 30);
+    buzoCasual.estilo = "casual";
+    // la versión laxa lo dejaba pasar (solo mira el pantalón) -- la estricta no.
+    expect(outfitSirveParaEstilo([pantalonFormal, buzoCasual], "formal")).toBe(true);
+    expect(outfitEsCoherenteParaEstilo([pantalonFormal, buzoCasual], "formal")).toBe(false);
+  });
+
+  it("outfit genuinamente coherente (torso también formal) -> true", () => {
+    const pantalonFormal = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonFormal.estilo = "formal";
+    const camisaFormal = mkPrenda("camisa", "#FAFAF7", 0, 0, 98);
+    camisaFormal.estilo = "formal";
+    expect(outfitEsCoherenteParaEstilo([pantalonFormal, camisaFormal], "formal")).toBe(true);
+  });
+
+  it("si el pantalón ni siquiera sirve para el estilo pedido, false directo (sin llegar a mirar advertencias)", () => {
+    const pantalonFormal = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonFormal.estilo = "formal";
+    expect(outfitEsCoherenteParaEstilo([pantalonFormal], "casual")).toBe(false);
+  });
+
+  it("también excluye por una democión de CALZADO, no solo de torso -- cualquier advertencia de registro cuenta", () => {
+    const pantalonFormal = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonFormal.estilo = "formal";
+    const zapatillasUrbanas = mkPrenda("calzado", "#1A1A1A", 0, 0, 15);
+    zapatillasUrbanas.estilo = "urbano";
+    expect(outfitEsCoherenteParaEstilo([pantalonFormal, zapatillasUrbanas], "formal")).toBe(false);
   });
 });
 
@@ -1772,6 +1808,68 @@ describe("elegirContraste", () => {
   it("pool sin candidatos (vacío) -> undefined", () => {
     const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
     expect(elegirContraste(principal, [])).toBeUndefined();
+  });
+});
+
+// Reporte real del usuario: "Toco el botón de otras opciones y la otra
+// combinación no cambia" -- elegirContraste devolvía SIEMPRE el mismo
+// ganador (un solo id), así que "otras opciones" (que solo mueve el offset
+// dentro de esta lista) no tenía nada distinto para mostrar en el segundo
+// cardo salvo que el primer candidato dejara de existir. candidatosDeContraste
+// devuelve la lista RANKEADA completa para que offsetSugeridos pueda indexar
+// distintas posiciones y de verdad cambie lo que se ve en pantalla.
+describe("candidatosDeContraste", () => {
+  const puntajeDePrueba = { puntaje: 10, explicacionPuntaje: "" };
+
+  it("devuelve la lista completa ordenada por distancia descendente, no solo el ganador", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const bajo = { id: "bajo", prendas: [mkPrenda("pantalon", "#333333", 0, 0, 20)], ...puntajeDePrueba };
+    const medio = { id: "medio", prendas: [mkPrenda("pantalon", "#808080", 0, 0, 50)], ...puntajeDePrueba };
+    const alto = { id: "alto", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], ...puntajeDePrueba };
+    const candidatos = candidatosDeContraste(principal, [bajo, alto, medio]);
+    expect(candidatos.map((c) => c.id)).toEqual(["alto", "medio", "bajo"]);
+  });
+
+  it("excluye a la principal misma de la lista, aunque esté en el pool", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const otro = { id: "o", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], ...puntajeDePrueba };
+    const candidatos = candidatosDeContraste(principal, [principal, otro]);
+    expect(candidatos.map((c) => c.id)).toEqual(["o"]);
+  });
+
+  it("a igual distancia, desempata por mayor puntaje", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const menosPuntaje = { id: "a", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 7, explicacionPuntaje: "" };
+    const masPuntaje = { id: "b", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], puntaje: 10, explicacionPuntaje: "" };
+    const candidatos = candidatosDeContraste(principal, [menosPuntaje, masPuntaje]);
+    expect(candidatos.map((c) => c.id)).toEqual(["b", "a"]);
+  });
+
+  it("pool sin candidatos (vacío) -> lista vacía", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    expect(candidatosDeContraste(principal, [])).toEqual([]);
+  });
+
+  it("elegirContraste sigue siendo el primer elemento de candidatosDeContraste (compatibilidad)", () => {
+    const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
+    const bajo = { id: "bajo", prendas: [mkPrenda("pantalon", "#333333", 0, 0, 20)], ...puntajeDePrueba };
+    const alto = { id: "alto", prendas: [mkPrenda("pantalon", "#E6E6E6", 0, 0, 90)], ...puntajeDePrueba };
+    const pool = [bajo, alto];
+    expect(elegirContraste(principal, pool)?.id).toBe(candidatosDeContraste(principal, pool)[0]?.id);
+  });
+
+  it("distinto principal produce un orden de candidatos genuinamente distinto -- la base del fix de 'otras opciones'", () => {
+    // outfit A y outfit B contrastan distinto contra dos principales de matiz opuesto.
+    const pantalonComun = mkPrenda("pantalon", "#808080", 0, 30, 50);
+    const principalRojo = { id: "p1", prendas: [pantalonComun, mkPrenda("remera", "#B93A32", 0, 80, 50)], ...puntajeDePrueba };
+    const principalAzul = { id: "p2", prendas: [pantalonComun, mkPrenda("remera", "#3A5FB9", 220, 80, 50)], ...puntajeDePrueba };
+    const candidatoAzul = { id: "azul", prendas: [pantalonComun, mkPrenda("remera", "#3A5FB9", 220, 80, 50)], ...puntajeDePrueba };
+    const candidatoRojo = { id: "rojo", prendas: [pantalonComun, mkPrenda("remera", "#B93A32", 0, 80, 50)], ...puntajeDePrueba };
+    const pool = [candidatoAzul, candidatoRojo];
+    const paraRojo = candidatosDeContraste(principalRojo, pool).map((c) => c.id);
+    const paraAzul = candidatosDeContraste(principalAzul, pool).map((c) => c.id);
+    expect(paraRojo[0]).toBe("azul");
+    expect(paraAzul[0]).toBe("rojo");
   });
 });
 

@@ -659,18 +659,49 @@ export function registroOutfit(prendas: Prenda[]): string | null {
   return pantalon?.estilo ? ESTILO_LABEL[pantalon.estilo] : null;
 }
 
-/** true si el outfit sirve para la ocasión pedida -- usado por "Vestite
- *  hoy" (Outfits.tsx) para filtrar, tanto los outfits armados solos como
- *  los ya guardados. A diferencia de registroOutfit (que etiqueta el
- *  outfit con el estilo PRINCIPAL del pantalón, para el badge), acá se
- *  chequean TODOS los estilos declarados del pantalón (principal +
- *  secundarios, vía estilosDe): un pantalón "clasico" con "casual" como
- *  estilo secundario aparece tanto si el usuario elige Clásico como
- *  Casual, no solo el principal. */
+/** true si el outfit sirve para la ocasión pedida -- chequeo LAXO, a
+ *  propósito: solo mira el PANTALÓN (TODOS sus estilos declarados,
+ *  principal + secundarios, vía estilosDe -- un pantalón "clasico" con
+ *  "casual" como estilo secundario aparece tanto si el usuario elige
+ *  Clásico como Casual, no solo el principal). No exige que el resto del
+ *  outfit esté libre de advertencias de registro -- lo usa
+ *  mejorCompraParaSubirNota para encontrar una BASE real sobre la que
+ *  razonar "qué comprar para mejorar", y esa base puede legítimamente
+ *  tener una democión (es la excusa de por qué la nota no es más alta).
+ *  Para filtrar qué se MUESTRA como opción ya lista en "Vestite hoy", ver
+ *  la versión estricta: outfitEsCoherenteParaEstilo. */
 export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolean {
   const pantalon = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   if (!pantalon) return false;
   return estilosDe(pantalon).includes(estilo);
+}
+
+/** Versión ESTRICTA de outfitSirveParaEstilo -- pedido explícito del
+ *  usuario, con reporte real: "en el estilo formal le pone el buzo con
+ *  capucha... no entiendo por qué esa pésima elección hace el motor".
+ *  Verificado por ejecución: outfitSirveParaEstilo solo mira el
+ *  PANTALÓN -- cualquier torso pasaba como "sirve para formal" aunque
+ *  desentonara en registro (recomendar() lo permite, demovido a
+ *  muy_bueno en vez de bloqueado, para no cerrar casos límite reales
+ *  cuando el usuario arma algo a mano en Combinar/Probar) -- confirmado
+ *  contra el catálogo completo: 116 de 192 outfits del pool "formal"
+ *  tenían alguna advertencia de registro real (un buzo estilo="casual"
+ *  combinado con un pantalón formal, entre otros). Cuando el usuario
+ *  elige un estilo puntual A PROPÓSITO en "Vestite hoy", ese desentono ya
+ *  no debería aparecer como una opción presentable, lista para usar --
+ *  reusa advertenciasDeRegistro (el mismo criterio que ya usa el aviso
+ *  "⚠" en la UI) como FILTRO, no solo como aviso visual.
+ *
+ *  Deliberadamente NO se fusiona con outfitSirveParaEstilo: hallazgo real
+ *  de Consejo, verificado por ejecución -- fusionarlas rompía
+ *  mejorCompraParaSubirNota (necesita encontrar una base aunque tenga
+ *  una democión real, es la razón de ser de esa función) y dejaba el
+ *  mecanismo de "comprá esto para mejorar" sin ninguna base sobre la que
+ *  trabajar. Esta versión estricta se usa solo donde el outfit se
+ *  muestra como opción YA LISTA (las tarjetas de "Vestite hoy"); la laxa
+ *  sigue alimentando la búsqueda de mejoras. */
+export function outfitEsCoherenteParaEstilo(prendas: Prenda[], estilo: Estilo): boolean {
+  return outfitSirveParaEstilo(prendas, estilo) && advertenciasDeRegistro(prendas).length === 0;
 }
 
 /** Mensajes puntuales de por qué una prenda del outfit desentona en
@@ -1404,36 +1435,43 @@ function distanciaEntreOutfits(x: OutfitSugerido, y: OutfitSugerido): number {
   return total;
 }
 
-/** Elige, para acompañar a `principal` (la mejor opción de "Vestite hoy",
- *  ya elegida por puntaje), la SEGUNDA opción del pool que más contrasta
- *  en color contra ella -- pedido explícito del usuario: "no me refería a
- *  un outfit todo oscuro y otro todo claro... sino que entre las dos
- *  opciones se usen colores distintos -- si en una usaste pantalón
- *  oscuro, en la otra pantalón claro. La teoría del color habla de
- *  matiz, luminosidad y saturación, quiero que esa variedad se refleje,
- *  más allá del botón de buscar más opciones" (es decir: el contraste
- *  tiene que estar en las dos tarjetas que se ven de entrada, no solo
- *  disponible clickeando "otras opciones"). Reemplaza separarPorContraste
- *  (que agrupaba por luminosidad PROMEDIO del outfit entero -- el enfoque
- *  que el usuario aclaró que no era lo que pedía). Recorre TODO el pool
- *  (no solo los mejores puntuados): cada outfit del pool ya pasó el
- *  filtro de calidad de armarOutfitsSugeridos (nunca un par con_cuidado,
- *  ver puntuarOutfit -- el piso real es "muy_bueno" en todos los pares),
- *  así que maximizar contraste no tiene el riesgo de elegir una
- *  combinación mala -- a igual distancia de color, gana el de mayor
- *  puntaje. */
+/** Candidatos para acompañar a `principal` (la mejor opción de "Vestite
+ *  hoy", ya elegida por puntaje), de MÁS a MENOS contraste en color --
+ *  pedido explícito del usuario: "no me refería a un outfit todo oscuro y
+ *  otro todo claro... sino que entre las dos opciones se usen colores
+ *  distintos -- si en una usaste pantalón oscuro, en la otra pantalón
+ *  claro. La teoría del color habla de matiz, luminosidad y saturación,
+ *  quiero que esa variedad se refleje, más allá del botón de buscar más
+ *  opciones". Recorre TODO el pool (no solo los mejores puntuados): cada
+ *  outfit del pool ya pasó el filtro de calidad de armarOutfitsSugeridos
+ *  (nunca un par con_cuidado, ver puntuarOutfit -- el piso real es
+ *  "muy_bueno" en todos los pares), así que maximizar contraste no tiene
+ *  el riesgo de elegir una combinación mala -- a igual distancia de
+ *  color, gana el de mayor puntaje.
+ *
+ *  Devuelve la lista COMPLETA (no solo el primero) -- hallazgo real de
+ *  Consejo, reporte del usuario: "toco el botón de otras opciones y la
+ *  otra combinación no cambia". Verificado por ejecución contra el
+ *  catálogo real: la distancia total está dominada por pantalón+calzado+
+ *  accesorio (3 categorías) contra apenas 1 para el torso, así que el
+ *  MISMO outlier de pantalón/calzado ganaba el primer puesto sin importar
+ *  qué principal se le comparara (con la rotación diaria de
+ *  semillaDelDia, que sobre todo varía el torso, esto dejaba "otra
+ *  combinación" prácticamente congelada de un día a otro). Outfits.tsx
+ *  usa esta lista completa e indexa con el mismo offsetSugeridos que ya
+ *  mueve "otras opciones", así que cada click cambia genuinamente la
+ *  segunda tarjeta también, no solo la primera. */
+export function candidatosDeContraste(principal: OutfitSugerido, pool: OutfitSugerido[]): OutfitSugerido[] {
+  return pool
+    .filter((c) => c.id !== principal.id)
+    .map((c) => ({ c, distancia: distanciaEntreOutfits(principal, c) }))
+    .sort((a, b) => b.distancia - a.distancia || b.c.puntaje - a.c.puntaje)
+    .map((x) => x.c);
+}
+
+/** El candidato de mayor contraste solo -- ver candidatosDeContraste. */
 export function elegirContraste(principal: OutfitSugerido, pool: OutfitSugerido[]): OutfitSugerido | undefined {
-  let mejor: OutfitSugerido | undefined;
-  let mejorDistancia = -1;
-  for (const candidato of pool) {
-    if (candidato.id === principal.id) continue;
-    const distancia = distanciaEntreOutfits(principal, candidato);
-    if (distancia > mejorDistancia || (distancia === mejorDistancia && mejor && candidato.puntaje > mejor.puntaje)) {
-      mejor = candidato;
-      mejorDistancia = distancia;
-    }
-  }
-  return mejor;
+  return candidatosDeContraste(principal, pool)[0];
 }
 
 /** Punto de partida de "Vestite hoy" DENTRO del nivel de mayor puntaje del
