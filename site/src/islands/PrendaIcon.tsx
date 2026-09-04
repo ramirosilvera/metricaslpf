@@ -420,6 +420,7 @@ export function PrendaShape({
   const patId = useId();
   const brilloId = useId();
   const estampadoId = useId();
+  const mallaId = useId();
 
   const conPatron = textura && TEXTURA_PATRON.includes(textura);
   const conBrillo = textura && TEXTURA_BRILLO.includes(textura);
@@ -444,8 +445,21 @@ export function PrendaShape({
   const conEstampado = (estampado === "rayas" || estampado === "cuadros") && !!color2;
   const estampadoUrl = conEstampado ? `url(#${estampadoId})` : undefined;
   const tonoPatron = tonoTexturaHsl(tonoH, tonoS, tonoL);
+  // panel de malla técnica bajo la axila -- pedido explícito del usuario,
+  // revisado como sastre/modista/costurera: "las remeras deportivas suelen
+  // tener tejido técnico y transpirable debajo de las axilas". Detalle real
+  // de indumentaria técnica (running/entrenamiento): un inserto de malla
+  // perforada en la zona de mayor transpiración, cosido como panel aparte
+  // (no el mismo tejido liso del resto de la prenda) -- mismo criterio que
+  // ya usa "zapatilla_running" (panel de malla lateral, ver más abajo) pero
+  // acá con un patrón de puntitos real en vez de un relleno plano, porque
+  // la malla técnica de una remera es un tejido calado/perforado visible,
+  // no una superficie lisa de otro color. Solo en remera deportiva real
+  // (ver esRemeraDeportiva más arriba) -- una remera de algodón común no
+  // lleva este panel.
+  const conMalla = esRemeraDeportiva(categoria, textura);
 
-  const defs = (conPatron || conBrillo || conEstampado) && (
+  const defs = (conPatron || conBrillo || conEstampado || conMalla) && (
     <defs>
       {conPatron && textura && <PatronTextura id={patId} textura={textura} tono={tonoPatron} />}
       {conBrillo && (
@@ -458,6 +472,11 @@ export function PrendaShape({
       )}
       {conEstampado && color2 && (estampado === "rayas" || estampado === "cuadros") && (
         <PatronEstampado id={estampadoId} patron={estampado} colorBase={color} color2={color2} horizontal={categoria === "remera"} />
+      )}
+      {conMalla && (
+        <pattern id={mallaId} width="2.4" height="2.4" patternUnits="userSpaceOnUse">
+          <circle cx="1.2" cy="1.2" r="0.55" fill={tonoDetalle} />
+        </pattern>
       )}
     </defs>
   );
@@ -491,6 +510,12 @@ export function PrendaShape({
             <>
               <line x1="36" y1="10" x2="42" y2="22" stroke={tonoDetalle} strokeWidth={1} />
               <line x1="28" y1="10" x2="22" y2="22" stroke={tonoDetalle} strokeWidth={1} />
+              {/* paneles de malla bajo la axila -- ver conMalla más arriba.
+                  Cuñas chicas en la unión manga/cuerpo (el mismo punto donde
+                  termina cada costura raglán de arriba), el lugar real donde
+                  una remera técnica cose el inserto perforado. */}
+              <path d="M47 26 L42 22 L44 30 Z" fill={`url(#${mallaId})`} />
+              <path d="M17 26 L22 22 L20 30 Z" fill={`url(#${mallaId})`} />
             </>
           )}
         </>

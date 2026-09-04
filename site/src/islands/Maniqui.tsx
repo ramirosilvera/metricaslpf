@@ -253,6 +253,17 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
     (prenda.categoria === "camisa" || prenda.categoria === "remera") &&
     (prenda.patron === "rayas" || prenda.patron === "cuadros") &&
     !!prenda.color2_hex;
+  // panel de malla técnica bajo la axila -- pedido explícito del usuario,
+  // revisado como sastre/modista/costurera: "las remeras deportivas suelen
+  // tener tejido técnico y transpirable debajo de las axilas". Mismo
+  // criterio real que ya documenta esRemeraDeportiva en PrendaIcon.tsx (el
+  // corte raglán): en indumentaria técnica de entrenamiento la axila es la
+  // zona de mayor transpiración, así que se cose un panel de malla
+  // perforada aparte del resto del cuerpo -- acá con el mismo patrón de
+  // puntitos que el ícono chico (ver mallaId más abajo), para que las dos
+  // vistas nunca se desincronicen.
+  const mallaId = `malla-${prenda.id}`;
+  const conMalla = esRemeraDeportiva(prenda.categoria, prenda.textura);
   const cuelloD =
     // + con_capucha -- pedido explícito del usuario, revisado como modista/
     // ingeniero textil: no todos los buzos son hoodie. Antes se dibujaba
@@ -290,6 +301,13 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                 color2={prenda.color2_hex}
                 horizontal={prenda.categoria === "remera"}
               />
+            </defs>
+          )}
+          {conMalla && (
+            <defs>
+              <pattern id={mallaId} width="3" height="3" patternUnits="userSpaceOnUse">
+                <circle cx="1.5" cy="1.5" r="0.65" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
+              </pattern>
             </defs>
           )}
 
@@ -426,6 +444,12 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             <>
               <line x1="54" y1="42" x2="37" y2="66" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
               <line x1="66" y1="42" x2="83" y2="66" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+              {/* paneles de malla bajo la axila -- ver conMalla más arriba.
+                  Cuñas chicas justo donde termina cada costura raglán de
+                  arriba (37,66 / 83,66), la unión real manga-cuerpo donde
+                  una remera técnica cose el inserto perforado. */}
+              <path d="M37 66 L34 73 L41 70 Z" fill={`url(#${mallaId})`} />
+              <path d="M83 66 L86 73 L79 70 Z" fill={`url(#${mallaId})`} />
             </>
           )}
 
