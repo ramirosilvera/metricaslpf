@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { detalleHsl, hexToHsl, tonoTexturaHsl } from "../lib/color";
-import type { Categoria, CorteCalzado, Estacion, Patron, Textura } from "../lib/types";
+import type { Calce, Categoria, CorteCalzado, Estacion, Patron, Textura } from "../lib/types";
 
 /** "Campera sweater" -- cardigan de punto CON cierre (categoria="campera",
  *  textura="lana", ver "campera-sweater-azul-marino" en catalogo.ts), no
@@ -68,6 +68,62 @@ export function esCamperaTecnica(categoria: Categoria, textura: Textura | null |
  *  mismo criterio. */
 export function esCamperaTrack(categoria: Categoria, textura: Textura | null | undefined): boolean {
   return categoria === "campera" && textura === "tricot";
+}
+
+/** Jean real (categoria="pantalon"/"bermuda", textura="denim") -- pedido
+ *  explícito del usuario, revisado como sastre: "que se diferencie un jean
+ *  de un pantalón de vestir". Antes de esta revisión TODOS los pantalones
+ *  (jean, de vestir, chino, jogger, deportivo) compartían una silueta
+ *  genérica sin ningún detalle de corte -- la textura ya pintaba una trama
+ *  diagonal encima (ver TEXTURA_PATRON) pero nunca cambiaba la FORMA. El
+ *  pespunte doble bien visible en las costuras exteriores es el detalle de
+ *  sastrería más citado de un jean real, en cualquier lavado o color --
+ *  eso es lo que separa esta silueta, no la trama de la tela (que ya
+ *  estaba). Se extiende a "bermuda": un bermuda de jean real existe (denim
+ *  cortado a la rodilla) y merece el mismo pespunte, mismo criterio que ya
+ *  usa esCamperaDePunto/Tecnica/Track para "campera". */
+export function esJean(categoria: Categoria, textura: Textura | null | undefined): boolean {
+  return (categoria === "pantalon" || categoria === "bermuda") && textura === "denim";
+}
+
+/** Pantalón de vestir real (categoria="pantalon", textura="lana") --
+ *  contraparte de sastrería del jean de arriba. La raya/pinza al frente
+ *  planchada (crease) es el detalle real que define un pantalón de vestir
+ *  -- nunca lleva pespunte visible como el jean (la tela de vestir se cose
+ *  con costura oculta, no expuesta). "lana" alcanza solo: es la única
+ *  textura real de pantalón de vestir en el catálogo hoy (ver
+ *  pantalon-vestir-* en catalogo.ts) -- un chino de algodón (registro
+ *  clásico/oficina pero tela informal) no lleva esta raya planchada real,
+ *  se queda con la silueta genérica/default. */
+export function esPantalonDeVestir(categoria: Categoria, textura: Textura | null | undefined): boolean {
+  return categoria === "pantalon" && textura === "lana";
+}
+
+/** Jogger/pantalón deportivo real (categoria="pantalon", calce="holgado",
+ *  textura algodón o poliéster). El puño elástico angostado en el tobillo
+ *  -- en vez de terminar a lo ancho de la pierna como cualquier otro
+ *  pantalón -- es el detalle real que define un jogger, reconocible aunque
+ *  no se dibuje el elástico en detalle (ver catalogo.ts: jogger-* y
+ *  pantalon-deportivo-* son las únicas prendas category="pantalon" con
+ *  calce="holgado" hoy). Denim/lana quedan afuera aunque calcen holgado --
+ *  esJean/esPantalonDeVestir van primero con prioridad en el switch de más
+ *  abajo (un pantalón de vestir de corte ancho sigue siendo de vestir por
+ *  la tela, no un jogger; ídem un jean ancho/baggy sigue siendo jean). */
+export function esJogger(categoria: Categoria, textura: Textura | null | undefined, calce: Calce | null | undefined): boolean {
+  return categoria === "pantalon" && calce === "holgado" && (textura === "algodon" || textura === "poliester");
+}
+
+/** Remera deportiva real (categoria="remera", textura="poliester") --
+ *  contraparte de esCamperaTecnica/Track para remeras: pedido explícito
+ *  del usuario ("que se diferencie... una remera deportiva de una remera
+ *  casual"). La manga raglán (costura diagonal desde la axila hasta el
+ *  cuello, en vez de la costura horizontal de hombro de una remera de
+ *  algodón común) es el corte real más asociado a una remera técnica/
+ *  jersey deportivo -- ver remera-deportiva-* en catalogo.ts, la única
+ *  textura real que usan hoy es poliéster (ya en TEXTURA_BRILLO, el brillo
+ *  sintético sigue dibujándose igual, esto es aparte: cambia el CORTE). */
+export function esRemeraDeportiva(categoria: Categoria, textura: Textura | null | undefined): boolean {
+  return categoria === "remera" && textura === "poliester";
 }
 
 // texturas que se dibujan como un patrón repetido (trama de tela) vs. las
@@ -284,6 +340,7 @@ export function PrendaShape({
   patron: estampado = "liso",
   color2,
   corteCalzado = "zapatilla_urbana",
+  calce,
 }: {
   categoria: Categoria;
   color: string;
@@ -340,6 +397,12 @@ export function PrendaShape({
    *  "zapatilla_urbana" preserva el ícono de todo el catálogo anterior a
    *  esta columna (100% zapatillas urbanas hasta esta revisión). */
   corteCalzado?: CorteCalzado;
+  /** Ver Prenda.calce en types.ts. Solo afecta a "pantalon" -- ver esJogger
+   *  más arriba: es la señal (junto con textura) que distingue un jogger/
+   *  deportivo (puño angostado en el tobillo) de un chino de corte recto,
+   *  las dos con textura algodón. Sin calce cargado no dibuja el puño --
+   *  no se inventa un corte que la prenda no tiene marcado. */
+  calce?: Calce | null;
 }) {
   const stroke = "rgba(0,0,0,0.15)";
   const soleClipId = useId();
@@ -356,6 +419,12 @@ export function PrendaShape({
   // relleno y el patrón queda invisible, confirmado renderizando el ícono
   // real.
   const { h: tonoH, s: tonoS, l: tonoL } = hexToHsl(color);
+  // tono de detalle (costuras/pespunte/decoración) derivado del color real
+  // de la prenda -- mismo criterio que ya usaba "calzado" más abajo, ahora
+  // hoisteado para que jean/vestir/jogger/remera deportiva (ver esJean/
+  // esPantalonDeVestir/esJogger/esRemeraDeportiva más arriba) también lo
+  // usen sin duplicar el cálculo.
+  const tonoDetalle = detalleHsl(tonoH, tonoS, tonoL);
   // estampado (rayas/cuadros) -- reemplaza el relleno plano por completo
   // cuando está cargado, no se combina con conPatron/conBrillo de textura:
   // una camisa a rayas se lee por sus rayas, no por una trama de tela
@@ -386,7 +455,21 @@ export function PrendaShape({
 
   switch (categoria) {
     case "remera":
-      forma = <FormaConTextura d="M22 8 L32 14 L42 8 L54 16 L47 26 L42 22 L42 56 L22 56 L22 22 L17 26 L10 16 Z" fill={color} stroke={stroke} patron={patron} />;
+      // manga raglán (costura diagonal desde el cuello hasta la axila) --
+      // ver esRemeraDeportiva más arriba: el corte real que distingue una
+      // remera técnica/jersey de una remera de algodón común, que no lleva
+      // ninguna costura de manga marcada en la silueta.
+      forma = (
+        <>
+          <FormaConTextura d="M22 8 L32 14 L42 8 L54 16 L47 26 L42 22 L42 56 L22 56 L22 22 L17 26 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
+          {esRemeraDeportiva(categoria, textura) && (
+            <>
+              <line x1="36" y1="10" x2="42" y2="22" stroke={tonoDetalle} strokeWidth={1} />
+              <line x1="28" y1="10" x2="22" y2="22" stroke={tonoDetalle} strokeWidth={1} />
+            </>
+          )}
+        </>
+      );
       break;
     case "camisa":
       // con estampado: el fill ES el patrón de rayas/cuadros (dos colores
@@ -431,14 +514,67 @@ export function PrendaShape({
       );
       break;
     case "pantalon":
-      forma = <FormaConTextura d="M18 6 H46 L44 58 H34 L32 24 L30 58 H20 Z" fill={color} stroke={stroke} patron={patron} />;
+      // jean/vestir/jogger -- ver esJean/esPantalonDeVestir/esJogger más
+      // arriba. Antes esta silueta era una sola para cualquier pantalón,
+      // sin ningún detalle real de corte -- pedido explícito del usuario,
+      // revisado como sastre: "que se diferencie un jean de un pantalón de
+      // vestir". Las tres son mutuamente excluyentes por construcción (ver
+      // esJogger: excluye denim/lana con prioridad), así que como mucho una
+      // se dibuja.
+      forma = (
+        <>
+          <FormaConTextura d="M18 6 H46 L44 58 H34 L32 24 L30 58 H20 Z" fill={color} stroke={stroke} patron={patron} />
+          {esJean(categoria, textura) && (
+            // pespunte doble en las costuras exteriores -- el detalle de
+            // sastrería real más citado de un jean, en cualquier lavado.
+            <>
+              <line x1="43" y1="8" x2="41" y2="56" stroke={tonoDetalle} strokeWidth={0.8} />
+              <line x1="21" y1="8" x2="23" y2="56" stroke={tonoDetalle} strokeWidth={0.8} />
+            </>
+          )}
+          {esPantalonDeVestir(categoria, textura) && (
+            // raya/pinza planchada al frente de cada pierna -- el detalle
+            // real que define un pantalón de vestir, costura oculta (sin
+            // pespunte visible como el jean).
+            <>
+              <line x1="38" y1="10" x2="39" y2="56" stroke={tonoDetalle} strokeWidth={0.8} />
+              <line x1="26" y1="10" x2="25" y2="56" stroke={tonoDetalle} strokeWidth={0.8} />
+            </>
+          )}
+          {esJogger(categoria, textura, calce) && (
+            // puño elástico angostado en el tobillo -- línea de corte del
+            // puño + un par de costillas cortas sugiriendo el elástico.
+            <>
+              <line x1="35" y1="50" x2="43" y2="50" stroke={tonoDetalle} strokeWidth={0.8} />
+              <line x1="21" y1="50" x2="29" y2="50" stroke={tonoDetalle} strokeWidth={0.8} />
+              <line x1="37" y1="51" x2="37" y2="57" stroke={tonoDetalle} strokeWidth={0.6} />
+              <line x1="40" y1="51" x2="40" y2="57" stroke={tonoDetalle} strokeWidth={0.6} />
+              <line x1="23" y1="51" x2="23" y2="57" stroke={tonoDetalle} strokeWidth={0.6} />
+              <line x1="26" y1="51" x2="26" y2="57" stroke={tonoDetalle} strokeWidth={0.6} />
+            </>
+          )}
+        </>
+      );
       break;
     case "bermuda":
       // mismo path que "pantalon" hasta la cadera (18-46 arriba, entrepierna
       // en 32,24) pero cortado a la altura de la rodilla (y=44 en vez de
       // y=58) en vez de llegar al tobillo -- ver Maniqui.tsx para el mismo
-      // criterio aplicado a la silueta grande del maniquí.
-      forma = <FormaConTextura d="M18 6 H46 L44 44 H34 L32 24 L30 44 H20 Z" fill={color} stroke={stroke} patron={patron} />;
+      // criterio aplicado a la silueta grande del maniquí. Solo el pespunte
+      // de jean aplica acá (ver esJean, que incluye "bermuda" a propósito)
+      // -- un bermuda de vestir/jogger no existe como arquetipo real en
+      // este catálogo, así que no hace falta esa decoración.
+      forma = (
+        <>
+          <FormaConTextura d="M18 6 H46 L44 44 H34 L32 24 L30 44 H20 Z" fill={color} stroke={stroke} patron={patron} />
+          {esJean(categoria, textura) && (
+            <>
+              <line x1="43" y1="8" x2="41.5" y2="42" stroke={tonoDetalle} strokeWidth={0.8} />
+              <line x1="21" y1="8" x2="22.5" y2="42" stroke={tonoDetalle} strokeWidth={0.8} />
+            </>
+          )}
+        </>
+      );
       break;
     case "short_deportivo":
       // mismo criterio que "bermuda" pero más corto (y=34, medio muslo en
@@ -469,11 +605,11 @@ export function PrendaShape({
       // porqué de cada una (revisado como modista/ingeniero textil, pedido
       // explícito del usuario: "las costuras, cortes y decoración más
       // usadas según usos y costumbres"). tonoDetalle (lightness-aware,
-      // igual criterio que el resto de la app -- ver color.ts) en vez de
-      // un tono fijo semitransparente: un detalle sobre una zapatilla
-      // negra necesita más luz, no menos, para leerse -- mismo hallazgo ya
-      // confirmado con el cuello de la camisa y las solapas del saco.
-      const tonoDetalle = detalleHsl(tonoH, tonoS, tonoL);
+      // igual criterio que el resto de la app -- ver color.ts, calculado
+      // más arriba junto con tonoH/tonoS/tonoL) en vez de un tono fijo
+      // semitransparente: un detalle sobre una zapatilla negra necesita
+      // más luz, no menos, para leerse -- mismo hallazgo ya confirmado con
+      // el cuello de la camisa y las solapas del saco.
       let decoracion: React.ReactNode = null;
       switch (corteCalzado) {
         case "zapatilla_running":
@@ -687,6 +823,7 @@ export default function PrendaIcon({
   patron,
   color2,
   corteCalzado,
+  calce,
 }: {
   categoria: Categoria;
   color: string;
@@ -699,6 +836,7 @@ export default function PrendaIcon({
   patron?: Patron;
   color2?: string | null;
   corteCalzado?: CorteCalzado;
+  calce?: Calce | null;
 }) {
   return (
     <svg viewBox="0 0 64 64" width="100%" height="100%">
@@ -714,6 +852,7 @@ export default function PrendaIcon({
         patron={patron}
         color2={color2}
         corteCalzado={corteCalzado}
+        calce={calce}
       />
     </svg>
   );

@@ -256,6 +256,7 @@ export function Contenido({
                           patron={p.patron}
                           color2={p.color2_hex}
                           corteCalzado={p.corte_calzado}
+                          calce={p.calce}
                         />
                       </span>
                       <strong style={{ fontSize: "0.85rem" }}>{descripcionPrenda(p)}</strong>

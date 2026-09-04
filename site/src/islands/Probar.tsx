@@ -205,6 +205,7 @@ export default function Probar() {
                 patron={pruebaBase.patron}
                 color2={pruebaBase.color2_hex}
                 corteCalzado={pruebaBase.corte_calzado}
+                calce={pruebaBase.calce}
               />
             </span>
             <div style={{ flex: 1 }}>
@@ -253,6 +254,7 @@ export default function Probar() {
                             patron={prenda.patron}
                             color2={prenda.color2_hex}
                             corteCalzado={prenda.corte_calzado}
+                            calce={prenda.calce}
                           />
                         </span>
                         <div style={{ flex: 1 }}>

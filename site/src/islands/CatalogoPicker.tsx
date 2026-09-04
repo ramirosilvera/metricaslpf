@@ -81,6 +81,7 @@ export default function CatalogoPicker({
             patron={p.patron}
             color2={p.colorHex2}
             corteCalzado={p.corteCalzado}
+            calce={p.calce}
           />
         </span>
         <span className="catalogo-nombre">{p.nombre}</span>

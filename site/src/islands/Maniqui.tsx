@@ -1,5 +1,17 @@
 import { contornoHsl, detalleHsl, luzHsl, sombraHsl, tonoTexturaHsl } from "../lib/color";
-import PrendaIcon, { esCamperaDePunto, esCamperaTecnica, esCamperaTrack, PatronEstampado, PatronTextura, TEXTURA_BRILLO, TEXTURA_PATRON } from "./PrendaIcon";
+import PrendaIcon, {
+  esCamperaDePunto,
+  esCamperaTecnica,
+  esCamperaTrack,
+  esJean,
+  esJogger,
+  esPantalonDeVestir,
+  esRemeraDeportiva,
+  PatronEstampado,
+  PatronTextura,
+  TEXTURA_BRILLO,
+  TEXTURA_PATRON,
+} from "./PrendaIcon";
 import { descripcionPrenda, type Calce, type Categoria, type CorteCalzado, type Prenda } from "../lib/types";
 
 /** Escala horizontal de la silueta según Calce (ver types.ts) -- auditoría
@@ -387,6 +399,21 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             sugerida={sugerida}
           />
 
+          {/* manga raglán -- ver esRemeraDeportiva en PrendaIcon.tsx,
+              EXACTAMENTE el mismo criterio que ya usa el ícono chico.
+              Costura diagonal desde el cuello hasta la axila (donde el
+              cuerpo se junta con la manga, ver el path de la manga corta
+              más arriba) -- el corte real que distingue una remera
+              técnica/jersey de una remera de algodón común, que no lleva
+              ninguna costura de manga marcada. Dibujada DESPUÉS del cuerpo
+              principal para que quede encima de la tela, no tapada. */}
+          {esRemeraDeportiva(prenda.categoria, prenda.textura) && (
+            <>
+              <line x1="54" y1="42" x2="37" y2="66" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+              <line x1="66" y1="42" x2="83" y2="66" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+            </>
+          )}
+
           {/* cierre de escote -- revisión como modista a pedido del usuario
               ("revisa el cuello de todas las prendas"), comparando de
               cerca contra el render real: el escote del cuerpo de arriba
@@ -765,6 +792,54 @@ function PiernasCuerpo({ prenda }: { prenda: Prenda }) {
               postura de firmes, no relajada. */}
           <Forma d={izquierda} fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           <Forma d={derecha} fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
+          {/* jean/vestir/jogger -- ver esJean/esPantalonDeVestir/esJogger en
+              PrendaIcon.tsx, EXACTAMENTE el mismo criterio que ya usa el
+              ícono chico (mismas funciones importadas, no duplicadas) --
+              pedido explícito del usuario, revisado como sastre: "que se
+              diferencie un jean de un pantalón de vestir". Mutuamente
+              excluyentes por construcción (ver esJogger). El pespunte de
+              jean también se dibuja en bermuda (esJean incluye esa
+              categoría) -- vestir/jogger no, ninguna existe como arquetipo
+              real de bermuda en este catálogo.
+              hem-aware -- bug real encontrado en esta misma revisión,
+              verificado por captura: sin esto, el pespunte de un bermuda de
+              jean se dibujaba con el largo fijo del pantalón (hasta y=220)
+              y seguía de largo por ENCIMA de la pierna desnuda, por debajo
+              del ruedo real del short. Con hem, el pespunte termina un poco
+              antes del ruedo (hem-5) y queda recto (sin la curva Q que sí
+              tiene sentido en el tobillo del pantalón largo, pero no en un
+              bermuda -- ahí la pierna todavía no empezó a taperar, ver el
+              comentario de arriba sobre HEM_PIERNAS/y=185). */}
+          {esJean(prenda.categoria, prenda.textura) &&
+            (hem ? (
+              <>
+                <line x1="44" y1="124" x2="44" y2={hem - 5} stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+                <line x1="76" y1="124" x2="76" y2={hem - 5} stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+              </>
+            ) : (
+              <>
+                <path d="M44 124 Q43 172 45 220" fill="none" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+                <path d="M76 124 Q77 172 75 220" fill="none" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+              </>
+            ))}
+          {esPantalonDeVestir(prenda.categoria, prenda.textura) && (
+            <>
+              <line x1="50" y1="124" x2="47" y2="220" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+              <line x1="70" y1="124" x2="73" y2="220" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+            </>
+          )}
+          {esJogger(prenda.categoria, prenda.textura, prenda.calce) && (
+            <>
+              <line x1="43" y1="207" x2="53" y2="207" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+              <line x1="67" y1="207" x2="77" y2="207" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
+              {[46, 49, 52].map((x) => (
+                <line key={x} x1={x} y1="209" x2={x} y2="221" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.6} vectorEffect="non-scaling-stroke" />
+              ))}
+              {[68, 71, 74].map((x) => (
+                <line key={x} x1={x} y1="209" x2={x} y2="221" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.6} vectorEffect="non-scaling-stroke" />
+              ))}
+            </>
+          )}
           {/* cinturilla */}
           <path
             d="M40 116 H80 V126 H40 Z"
@@ -1253,6 +1328,7 @@ export default function Maniqui({ prendas }: { prendas: Prenda[] }) {
                 patron={p.patron}
                 color2={p.color2_hex}
                 corteCalzado={p.corte_calzado}
+                calce={p.calce}
               />
             </span>
           ))}
