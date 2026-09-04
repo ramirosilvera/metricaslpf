@@ -15,6 +15,7 @@ import {
   outfitSirveParaEstilo,
   puntuarOutfit,
   registroOutfit,
+  semillaDelDia,
   sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
@@ -287,13 +288,18 @@ export function Contenido({
     setOffsetSugeridos(0);
   }
 
-  // "otras opciones" rota CUÁL outfit del pool (ya ordenado por puntaje)
-  // hace de principal -- tanda() con offsetSugeridos, mismo mecanismo de
-  // siempre. La segunda tarjeta se recalcula cada vez a partir de esa
-  // principal (elegirContraste busca, en TODO el pool, la que más
-  // contrasta en color contra ella), así que sigue habiendo contraste real
-  // sea cual sea la principal que esté rotando en ese momento.
-  const opcionPrincipal = tanda(poolSugeridosPorEstilo, offsetSugeridos, OPCIONES_A_LA_VEZ)[0];
+  // Pedido explícito del usuario: "la idea es poder usar toda la ropa de
+  // mi placar... con la menor cantidad de búsqueda de nuevas opciones" --
+  // sin semillaDelDia, offsetSugeridos arrancaba siempre en 0 y "la mejor
+  // opción" quedaba fija en el MISMO combo cada vez que se abre la
+  // pantalla (el primero del pool ordenado por puntaje), sin importar
+  // cuántas otras prendas empatadas en el mismo puntaje máximo tenía el
+  // placard. semillaDelDia rota el punto de partida DENTRO de ese empate
+  // usando el día de hoy -- nunca baja de calidad (todo ese nivel
+  // comparte el mismo puntaje máximo), pero un día distinto ya arranca en
+  // un combo distinto sin tocar nada. "otras opciones" (offsetSugeridos)
+  // sigue sumando desde ahí exactamente igual que antes.
+  const opcionPrincipal = tanda(poolSugeridosPorEstilo, semillaDelDia(poolSugeridosPorEstilo) + offsetSugeridos, OPCIONES_A_LA_VEZ)[0];
   const opcionContraste = useMemo(
     () => (opcionPrincipal ? elegirContraste(opcionPrincipal, poolSugeridosPorEstilo) : undefined),
     [opcionPrincipal, poolSugeridosPorEstilo],

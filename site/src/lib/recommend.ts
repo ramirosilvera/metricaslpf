@@ -1436,6 +1436,31 @@ export function elegirContraste(principal: OutfitSugerido, pool: OutfitSugerido[
   return mejor;
 }
 
+/** Punto de partida de "Vestite hoy" DENTRO del nivel de mayor puntaje del
+ *  pool (ya ordenado descendente, ver armarOutfitsSugeridos) -- pedido
+ *  explícito del usuario: "la idea es poder usar toda la ropa de mi
+ *  placar, combinado por supuesto, pero con la menor cantidad de búsqueda
+ *  de nuevas opciones... antes te mostraban dos opciones y cuando tocabas
+ *  otras opciones por ahí era todo el mismo outfit y solo cambiaba la
+ *  remera". Sin esto, `tanda(pool, 0, 1)[0]` (offset siempre en 0) fijaba
+ *  la "mejor opción" en el MISMO combo cada vez que se abre la pantalla
+ *  -- cualquier prenda que no ganara ESE primer puesto no se veía nunca
+ *  sin clickear "otras opciones" a mano, y con un placard rico hay
+ *  MUCHOS outfits empatados en el puntaje máximo (10/10) que nunca
+ *  tenían su turno. Rota DENTRO de ese empate -- nunca baja de calidad,
+ *  todo el nivel comparte el mismo puntaje máximo -- usando el día de
+ *  hoy como semilla, mismo patrón que estacionActual (hoy: Date = new
+ *  Date(), inyectable para tests en vez de depender del reloj real). Un
+ *  día distinto arranca en un punto distinto DEL MISMO NIVEL; "otras
+ *  opciones" sigue cicleando desde ahí exactamente igual que antes (y,
+ *  pasado ese nivel, sigue bajando a puntajes menores como ya hacía). */
+export function semillaDelDia(pool: OutfitSugerido[], hoy: Date = new Date()): number {
+  if (pool.length === 0) return 0;
+  const tamañoDelNivel = pool.filter((s) => s.puntaje === pool[0].puntaje).length;
+  const diasDesdeEpoch = Math.floor(hoy.getTime() / 86400000);
+  return diasDesdeEpoch % tamañoDelNivel;
+}
+
 export interface OutfitParaComprar {
   id: string;
   /** prendas reales del placard que forman parte del outfit. */

@@ -17,6 +17,7 @@ import {
   recomendar,
   registroOutfit,
   scoreColor,
+  semillaDelDia,
   sugerenciaDeAncla,
   sugerenciaDeVariedad,
   tanda,
@@ -1771,6 +1772,51 @@ describe("elegirContraste", () => {
   it("pool sin candidatos (vacío) -> undefined", () => {
     const principal = { id: "p", prendas: [mkPrenda("pantalon", "#1A1A1A", 0, 0, 10)], ...puntajeDePrueba };
     expect(elegirContraste(principal, [])).toBeUndefined();
+  });
+});
+
+describe("semillaDelDia", () => {
+  const prenda = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+  // 3 outfits empatados en el puntaje máximo (10), 2 por debajo (7) -- el
+  // nivel a rotar tiene que ser SOLO los 3 primeros, no los 5.
+  const nivelDe3 = [
+    { id: "a", prendas: [prenda], puntaje: 10, explicacionPuntaje: "" },
+    { id: "b", prendas: [prenda], puntaje: 10, explicacionPuntaje: "" },
+    { id: "c", prendas: [prenda], puntaje: 10, explicacionPuntaje: "" },
+    { id: "d", prendas: [prenda], puntaje: 7, explicacionPuntaje: "" },
+    { id: "e", prendas: [prenda], puntaje: 7, explicacionPuntaje: "" },
+  ];
+
+  it("pool vacío -> 0", () => {
+    expect(semillaDelDia([], new Date(0))).toBe(0);
+  });
+
+  it("un solo outfit en el nivel máximo -> siempre 0, sea cual sea el día", () => {
+    const unSolo = [{ id: "a", prendas: [prenda], puntaje: 10, explicacionPuntaje: "" }];
+    expect(semillaDelDia(unSolo, new Date(0))).toBe(0);
+    expect(semillaDelDia(unSolo, new Date(86400000 * 50))).toBe(0);
+  });
+
+  it("rota SOLO dentro del nivel de mayor puntaje -- el tamaño del nivel es 3, no 5", () => {
+    // día 0, 1, 2 -> semilla 0, 1, 2 (nunca 3 o 4, que serían los de puntaje 7).
+    expect(semillaDelDia(nivelDe3, new Date(0))).toBe(0);
+    expect(semillaDelDia(nivelDe3, new Date(86400000))).toBe(1);
+    expect(semillaDelDia(nivelDe3, new Date(86400000 * 2))).toBe(2);
+    // día 3 -> vuelve a dar la vuelta (3 % 3 = 0).
+    expect(semillaDelDia(nivelDe3, new Date(86400000 * 3))).toBe(0);
+  });
+
+  it("mismo día -> misma semilla siempre (determinístico, no depende de un reloj oculto)", () => {
+    const hoy = new Date(86400000 * 7);
+    expect(semillaDelDia(nivelDe3, hoy)).toBe(semillaDelDia(nivelDe3, hoy));
+  });
+
+  it("la semilla nunca se sale del rango del nivel", () => {
+    for (let dia = 0; dia < 20; dia++) {
+      const semilla = semillaDelDia(nivelDe3, new Date(86400000 * dia));
+      expect(semilla).toBeGreaterThanOrEqual(0);
+      expect(semilla).toBeLessThan(3);
+    }
   });
 });
 
