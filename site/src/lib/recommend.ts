@@ -817,6 +817,17 @@ export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolea
   // traje sin corbata (cuello abierto) sigue siendo formal, la prenda que
   // de verdad lo decide es el saco.
   if (estilo === "formal" && !prendas.some((p) => p.categoria === "saco")) return false;
+  // "Formal" -- aclaración explícita del usuario, rol sastre: "el zapato
+  // de vestir no puede tener suela blanca -- debe ser todo el mismo
+  // color, o todo marrón, o todo negro". Una suela de contraste (goma
+  // blanca/crema en vez del tono del cuero) es un detalle real de calzado
+  // "smart" contemporáneo -- válido para oficina/clásico (por eso no se
+  // toca `rangoDeFormalidad`, que sigue afectando a los dos por igual),
+  // pero rompe la convención de zapato de vestir de un traje formal
+  // real, sea cual sea su corte o estilo cargado. Verificado contra el
+  // placard real del usuario: 2 de sus 3 zapatos de vestir tienen
+  // suela_contraste=true y hoy aparecían igual en outfits "Formal".
+  if (estilo === "formal" && prendas.some((p) => p.categoria === "calzado" && p.suela_contraste)) return false;
 
   return estilosDe(pantalon).includes(estilo);
 }

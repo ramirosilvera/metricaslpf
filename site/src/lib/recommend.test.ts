@@ -875,6 +875,46 @@ describe("outfitSirveParaEstilo -- formal exige saco, oficina excluye saco/corba
     const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
     expect(outfitSirveParaEstilo([pantalon, saco, cinturon], "formal")).toBe(true);
   });
+
+  // Consejo, aclaración explícita del usuario: "el zapato de vestir no
+  // puede tener suela blanca -- debe ser todo el mismo color, o todo
+  // marrón, o todo negro". Rol: sastre. Verificado contra el placard
+  // real: 2 de los 3 zapatos de vestir del usuario tienen
+  // suela_contraste=true y hoy aparecían igual en "Formal".
+  it("un zapato de vestir con suela de contraste (blanca/crema) NO sirve para 'formal', aunque tenga saco puesto", () => {
+    const pantalon = conPantalonVestir("formal");
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    const zapatoSuelaContraste = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoSuelaContraste.corte_calzado = "zapato_vestir";
+    zapatoSuelaContraste.suela_contraste = true;
+    expect(outfitSirveParaEstilo([pantalon, saco, zapatoSuelaContraste], "formal")).toBe(false);
+  });
+
+  it("el mismo zapato de vestir, SIN suela de contraste (todo el mismo tono) -> sí sirve para 'formal'", () => {
+    const pantalon = conPantalonVestir("formal");
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    const zapatoMonocromo = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoMonocromo.corte_calzado = "zapato_vestir";
+    zapatoMonocromo.suela_contraste = false;
+    expect(outfitSirveParaEstilo([pantalon, saco, zapatoMonocromo], "formal")).toBe(true);
+  });
+
+  it("suela de contraste no bloquea 'oficina' -- es un detalle 'smart' válido fuera del traje estricto", () => {
+    const pantalon = conPantalonVestir("formal", ["oficina"]);
+    const sweater = mkPrenda("sweater", "#1F2A44", 222, 39, 21);
+    sweater.estilo = "clasico";
+    sweater.estilos_secundarios = ["oficina"];
+    const zapatoSuelaContraste = mkPrenda("calzado", "#5C3A21", 25, 47, 25);
+    zapatoSuelaContraste.corte_calzado = "zapato_vestir";
+    zapatoSuelaContraste.suela_contraste = true;
+    expect(outfitSirveParaEstilo([pantalon, sweater, zapatoSuelaContraste], "oficina")).toBe(true);
+  });
+
+  it("sin ningún calzado en el outfit, la regla de suela de contraste no tiene nada que bloquear -- 'formal' sigue sirviendo con solo saco", () => {
+    const pantalon = conPantalonVestir("formal");
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    expect(outfitSirveParaEstilo([pantalon, saco], "formal")).toBe(true);
+  });
 });
 
 describe("outfitEsCoherenteParaEstilo", () => {
