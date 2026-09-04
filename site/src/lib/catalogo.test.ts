@@ -2,21 +2,22 @@ import { describe, expect, it } from "vitest";
 import { CATALOGO_PRENDAS } from "./catalogo";
 import type { Categoria, CorteCalzado, Estilo } from "./types";
 
-// sweater/campera -- las dos categorías de abrigo que SÍ se tagean por
-// estación (ver el criterio al principio de catalogo.ts). buzo quedó
-// afuera a partir de la revisión de esta ronda -- ver el describe de más
-// abajo. Mismo criterio que CATEGORIAS_ABRIGO en recommend.ts (duplicado a
-// propósito acá, mismo motivo que ya documenta el resto del archivo: no
-// crear una dependencia cruzada por 3 strings).
-const CATEGORIAS_ABRIGO_CON_ESTACION: Categoria[] = ["sweater", "campera"];
+// buzo/sweater/campera -- las tres categorías de abrigo que SÍ se tagean
+// por estación (ver el criterio al principio de catalogo.ts). Mismo
+// criterio que CATEGORIAS_ABRIGO en recommend.ts (duplicado a propósito
+// acá, mismo motivo que ya documenta el resto del archivo: no crear una
+// dependencia cruzada por 3 strings). buzo se sumó en la ronda siguiente
+// -- ver el describe dedicado más abajo, con el mapeo textura->estacion
+// puntual que usó para backfillear los 11 buzos existentes.
+const CATEGORIAS_ABRIGO_CON_ESTACION: Categoria[] = ["buzo", "sweater", "campera"];
 
-describe("catálogo -- sweater/campera siempre tageados por estación", () => {
+describe("catálogo -- buzo/sweater/campera siempre tageados por estación", () => {
   // Pedido explícito del usuario: diferenciar los abrigos de entretiempo
   // de los de invierno. A diferencia del resto del catálogo (donde
   // `estacion` se deja vacía a propósito por ser ambigua -- ver el
-  // criterio al principio de catalogo.ts), un sweater o una campera SIEMPRE
-  // tienen un nivel de abrigo real y no deberían quedar sin tagear.
-  it("ningún sweater/campera queda sin `estacion`", () => {
+  // criterio al principio de catalogo.ts), un buzo, sweater o campera
+  // SIEMPRE tienen un nivel de abrigo real y no deberían quedar sin tagear.
+  it("ningún buzo/sweater/campera queda sin `estacion`", () => {
     const abrigos = CATALOGO_PRENDAS.filter((p) => CATEGORIAS_ABRIGO_CON_ESTACION.includes(p.categoria));
     expect(abrigos.length).toBeGreaterThan(0);
     const sinEstacion = abrigos.filter((p) => !p.estacion);
@@ -60,22 +61,35 @@ describe("catálogo -- sweater/campera siempre tageados por estación", () => {
     expect(inviernoClasico.length).toBeGreaterThan(0);
   });
 
-  it("las demás categorías (no sweater/campera, incluye buzo) siguen sin forzar `estacion`, a propósito", () => {
+  it("las demás categorías (no buzo/sweater/campera) siguen sin forzar `estacion`, a propósito", () => {
     const noAbrigos = CATALOGO_PRENDAS.filter((p) => !CATEGORIAS_ABRIGO_CON_ESTACION.includes(p.categoria));
     expect(noAbrigos.some((p) => !p.estacion)).toBe(true);
   });
 });
 
-describe("catálogo -- buzo: peso por textura y capucha, nunca por estación", () => {
-  // Corrección explícita de esta ronda, revisado como modista/ingeniero
-  // textil: "los buzos tmb algunos son livianos y otros más pesados... pero
-  // tampoco los llamaría de invierno o de entretiempo" -- a diferencia de
-  // sweater/campera de arriba, ningún buzo del catálogo debería llevar
-  // `estacion`.
-  it("ningún buzo del catálogo lleva `estacion`", () => {
+describe("catálogo -- buzo: peso por textura Y por estación (mapeadas una a la otra)", () => {
+  // Consejo, ronda siguiente -- reemplaza el criterio anterior de esta
+  // ronda ("los buzos tmb algunos son livianos y otros más pesados... pero
+  // tampoco los llamaría de invierno o de entretiempo", que dejaba a
+  // NINGÚN buzo con `estacion`). Pedido explícito del usuario, contrario a
+  // ese criterio anterior: "revisá todos los buzos porque no figuran las
+  // clasificaciones de invierno o entretiempo... agregá la opción para
+  // marcar si un abrigo es de invierno o de entretiempo". Motivo real del
+  // cambio de criterio: el motor de "Vestite hoy" (esAbrigoDeClima, ver
+  // recommend.ts) exige el campo `estacion` puntual para reconocer un
+  // torso como abrigo real de invierno/entretiempo -- NUNCA mira
+  // `textura` -- así que sin este campo ningún buzo podía nunca contar
+  // como abrigo real para esa regla, aunque la tela ya distinguiera pesado
+  // de liviano. La textura sigue siendo el dato real del GRAMAJE (no se
+  // saca, sigue existiendo la distinción tejido_grueso/frisado) -- ahora
+  // además mapeada 1 a 1 a `estacion` (frisado->invierno, tejido_grueso->
+  // entretiempo) para que el motor de clima también la reconozca.
+  it("todo buzo del catálogo lleva `estacion`, mapeada de su textura", () => {
     const buzos = CATALOGO_PRENDAS.filter((p) => p.categoria === "buzo");
     expect(buzos.length).toBeGreaterThan(0);
-    expect(buzos.every((p) => !p.estacion)).toBe(true);
+    expect(buzos.every((p) => p.estacion)).toBe(true);
+    expect(buzos.filter((p) => p.textura === "frisado").every((p) => p.estacion === "invierno")).toBe(true);
+    expect(buzos.filter((p) => p.textura === "tejido_grueso").every((p) => p.estacion === "entretiempo")).toBe(true);
   });
 
   // El peso real (liviano vs. pesado/frisado) se resuelve con textura, no

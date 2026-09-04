@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SUPABASE_CONFIGURADO, supabase } from "../lib/supabase";
 import { nombreColor } from "../lib/color";
-import { ESTILO_LABEL, estilosDe } from "../lib/recommend";
+import { CATEGORIAS_ABRIGO, ESTILO_LABEL, estilosDe } from "../lib/recommend";
 import { coincideBusqueda, contarPorColor, contarPorEstacion, TODAS_LAS_CATEGORIAS } from "../lib/estadisticas";
 import { CATEGORIA_LABEL, descripcionPrenda, ESTACION_LABEL, type Estacion, type Estilo, type Prenda } from "../lib/types";
 import ConfigWarning from "./ConfigWarning";
@@ -15,16 +15,24 @@ const ESTILOS_FILTRO: Estilo[] = ["formal", "oficina", "clasico", "urbano", "cas
  *  sesión real. El default export de abajo es el único que sabe de
  *  Supabase; esto solo recibe `prendas` ya cargadas. */
 /** Lo que se puede editar inline desde una tarjeta del placard -- estilo/
- *  estilos_secundarios (pedido: "visualizar y editar los estilos") y
- *  necesita_cambio (pedido de la ronda anterior), unificados en un solo
- *  botón "⚙️ Editar" y un solo guardado (pedido explícito del usuario:
- *  "agrupalos detrás de un solo botón que despliegue las dos cosas
- *  juntas" -- antes eran dos controles separados y siempre visibles en la
- *  tarjeta, compitiendo por atención). */
+ *  estilos_secundarios (pedido: "visualizar y editar los estilos"),
+ *  necesita_cambio (pedido de una ronda anterior) y, agregado en esta
+ *  ronda, `estacion` para los abrigos (pedido explícito del usuario:
+ *  "revisá todos los buzos porque no figuran las clasificaciones de
+ *  invierno o entretiempo... agregá la opción para marcar si un abrigo es
+ *  de invierno o de entretiempo" -- ver el chequeo real de esAbrigoDeClima
+ *  en recommend.ts, que exige justo este dato para que un buzo/sweater/
+ *  campera cuente como abrigo real de esa estación con clima="invierno"/
+ *  "entretiempo"). Todos unificados en un solo botón "⚙️ Editar" y un solo
+ *  guardado (pedido explícito del usuario, ronda anterior: "agrupalos
+ *  detrás de un solo botón que despliegue las dos cosas juntas" -- antes
+ *  eran controles separados y siempre visibles en la tarjeta, compitiendo
+ *  por atención). */
 export interface CambiosPrenda {
   estilo: Estilo | null;
   estilos_secundarios: Estilo[];
   necesita_cambio: boolean;
+  estacion: Estacion | null;
 }
 
 export function Contenido({
@@ -330,6 +338,18 @@ function EditorPrenda({
   const [estilo, setEstilo] = useState<Estilo | "">(p.estilo ?? "");
   const [secundarios, setSecundarios] = useState<Estilo[]>(p.estilos_secundarios);
   const [necesitaCambio, setNecesitaCambio] = useState(p.necesita_cambio);
+  // Pedido explícito del usuario: "agregá la opción para marcar si un
+  // abrigo es de invierno o de entretiempo". Solo tiene sentido real para
+  // buzo/sweater/campera (CATEGORIAS_ABRIGO) -- un saco no se tagea con
+  // este campo (es una capa de formalidad, no de temperatura, ver
+  // esAbrigoDeClima) y el resto de las categorías (pantalón, remera,
+  // calzado...) tampoco participan de ninguna regla de clima. Sin opción
+  // "Verano" a propósito: ningún chequeo del motor la usa para un abrigo
+  // (con clima="verano" el abrigo se EXCLUYE por categoría entera, nunca
+  // se busca uno "de verano" -- ver excluirAbrigo), así que ofrecerla acá
+  // sería una opción que no hace nada.
+  const [estacion, setEstacion] = useState<Estacion | "">(p.estacion ?? "");
+  const esAbrigo = CATEGORIAS_ABRIGO.includes(p.categoria);
 
   return (
     <div style={{ width: "100%", textAlign: "left", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -369,6 +389,16 @@ function EditorPrenda({
           ))}
         </div>
       </div>
+      {esAbrigo && (
+        <label className="field-label" style={{ fontSize: "0.75rem" }}>
+          <span>Peso del abrigo</span>
+          <select className="field" value={estacion} onChange={(e) => setEstacion(e.target.value as Estacion | "")}>
+            <option value="">(sin especificar)</option>
+            <option value="invierno">{ESTACION_LABEL.invierno}</option>
+            <option value="entretiempo">{ESTACION_LABEL.entretiempo}</option>
+          </select>
+        </label>
+      )}
       <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.75rem" }}>
         <input type="checkbox" checked={necesitaCambio} onChange={(e) => setNecesitaCambio(e.target.checked)} />
         <span>Necesita cambio pronto (usable por ahora, pero avisa en los outfits)</span>
@@ -379,7 +409,12 @@ function EditorPrenda({
           className="btn btn-primary"
           style={{ fontSize: "0.75rem", padding: "0.35rem 0.6rem", flex: 1 }}
           onClick={() =>
-            onGuardar({ estilo: estilo || null, estilos_secundarios: secundarios, necesita_cambio: necesitaCambio })
+            onGuardar({
+              estilo: estilo || null,
+              estilos_secundarios: secundarios,
+              necesita_cambio: necesitaCambio,
+              estacion: esAbrigo ? estacion || null : p.estacion,
+            })
           }
         >
           Guardar

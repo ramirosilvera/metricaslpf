@@ -1533,7 +1533,7 @@ function ordenarPorEstacion<T extends { prenda: Prenda }>(items: T[], hoy: Estac
 // tenga sentido real. Cae en "sin abrigo" junto con remera/camisa por
 // descarte (no encaja del todo en ninguno de los dos baldes, pero es la
 // aproximación menos incorrecta del modelo binario actual).
-const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
+export const CATEGORIAS_ABRIGO: Categoria[] = ["buzo", "sweater", "campera"];
 
 /** true si la prenda sirve de abrigo REAL para el `clima` dado
  *  ("invierno" o "entretiempo" -- "verano" no usa esto, ahí no se exige
