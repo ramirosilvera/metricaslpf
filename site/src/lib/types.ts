@@ -28,7 +28,16 @@ export type Textura =
   | "impermeable"
   | "tricot";
 
-export type Estilo = "casual" | "formal" | "deportivo" | "urbano" | "clasico";
+// "oficina" -- pedido explícito del usuario, revisado como asesor de
+// imagen/sastre: "formal y oficina se mezclan... formal es solamente el
+// traje (pantalón de vestir, camisa, corbata, cinturón y saco); oficina es
+// elegante sport -- pantalón de vestir + camisa o sweater, sin corbata ni
+// saco". Distinción real de vestuario de trabajo: "formal" exige la
+// prenda que define un traje (el saco -- ver el chequeo nuevo en
+// outfitSirveParaEstilo, recommend.ts), "oficina" la excluye a propósito,
+// junto con cualquier prenda que requiera cuello (corbata/moño -- ver
+// requiere_cuello más abajo).
+export type Estilo = "casual" | "formal" | "deportivo" | "urbano" | "clasico" | "oficina";
 export type Ocasion = "casual" | "laburo" | "formal";
 export type Estacion = "verano" | "invierno" | "entretiempo";
 

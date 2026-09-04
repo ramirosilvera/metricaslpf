@@ -367,14 +367,17 @@ function prendaDeCuero(p: Prenda): boolean {
  *  "clasico" (siempre "deportivo"), pero el chequeo de estilo abajo lo
  *  filtraría igual aunque algún día se cargara mal.
  *
- *  Multi-estilo: alcanza con que formal/clasico sea CUALQUIERA de los
- *  estilos declarados (principal o secundario, vía estilosDe) -- si un
+ *  Multi-estilo: alcanza con que formal/clasico/oficina sea CUALQUIERA de
+ *  los estilos declarados (principal o secundario, vía estilosDe) -- si un
  *  pantalón es "clasico" además de "casual", sigue siendo lo bastante de
- *  vestir como para que aplique la convención del cuero. */
+ *  vestir como para que aplique la convención del cuero. "oficina" sumado
+ *  junto con el estilo nuevo (ver Estilo en types.ts): un pantalón de
+ *  vestir sin saco sigue siendo de vestir para esta regla -- la
+ *  convención del cuero no depende de si hay un traje completo puesto. */
 function esPantalonDeVestir(p: Prenda): boolean {
   if (!CATEGORIAS_PIERNAS.includes(p.categoria)) return false;
   const estilos = estilosDe(p);
-  return estilos.includes("formal") || estilos.includes("clasico");
+  return estilos.includes("formal") || estilos.includes("clasico") || estilos.includes("oficina");
 }
 
 /** Cuero negro + cuero (o pantalón de vestir) de otro color (marrón,
@@ -497,14 +500,40 @@ export function estilosDe(p: Prenda): Estilo[] {
 // tests de esta misma regla (un sweater "clasico" con un pantalón
 // "formal" se degradaba a muy_bueno, y así también la camisa). Mismo
 // criterio para "urbano"/"casual": son archetypes distintos del mismo
-// registro relajado, ninguno es más formal que el otro.
+// registro relajado, ninguno es más formal que el otro. "oficina" (nueva,
+// pedido explícito del usuario: "formal y oficina se mezclan") entra al
+// mismo escalón que formal/clasico -- las tres son registro "de vestir"
+// por igual (un pantalón de vestir + camisa sin saco no es menos elegante
+// que uno con corbata, solo distinto en QUÉ prendas exactas lleva puestas,
+// no en la altura del registro); lo que separa formal de oficina no es un
+// escalón de formalidad más, es un chequeo de VOCABULARIO real -- ver
+// esPrendaDeTrajeExclusiva y su uso en outfitSirveParaEstilo más abajo.
 const FORMALIDAD_ESTILO: Partial<Record<NonNullable<Prenda["estilo"]>, number>> = {
   formal: 2,
   clasico: 2,
+  oficina: 2,
   urbano: 1,
   casual: 1,
   deportivo: 0,
 };
+
+/** Vocabulario exclusivo del traje -- pedido explícito del usuario, rol:
+ *  asesor de imagen/sastre. "Formal es formal... el traje. Oficina es
+ *  elegante sport -- pantalón de vestir, camisa, sweater, sin corbatas,
+ *  sin traje." Un saco (blazer/americana) es, por convención real de
+ *  sastrería occidental, la prenda que por sí sola define si un conjunto
+ *  ES un traje o no -- sin saco no hay traje, tenga o no corbata puesta
+ *  (un traje sin corbata sigue siendo formal; un pantalón de vestir +
+ *  sweater con corbata puesta encima no es un look real). Una corbata (o
+ *  cualquier accesorio que `requiere_cuello`, ver types.ts) es, en
+ *  cambio, la prenda que por sí sola DESCARTA "oficina": nadie usa
+ *  corbata en un look de oficina elegante-sport real. Las dos entran por
+ *  la misma función porque las dos comparten el mismo rol -- "esto SOLO
+ *  existe en un traje" -- aunque una la exija (saco, para "formal") y la
+ *  otra la prohíba (corbata, para "oficina"), ver outfitSirveParaEstilo. */
+function esPrendaDeTrajeExclusiva(p: Prenda): boolean {
+  return p.categoria === "saco" || p.requiere_cuello;
+}
 
 /** Techo real de formalidad por categoría -- ninguna combinación de estilo
  *  cargada a mano (PrendaForm no restringe qué estilo/estilos_secundarios
@@ -703,8 +732,15 @@ function chocaRegistroDeportivo(a: Prenda, b: Prenda): boolean {
     // textura="cuero_liso" cargada a mano -- mismo motivo, ver su
     // comentario más arriba.
     if (prendaDeCuero(p)) return true;
+    // "oficina" sumado junto con el estilo nuevo (ver Estilo en types.ts):
+    // una camisa clasico+[formal,oficina] sigue siendo "de vestir" para
+    // este chequeo -- sin esto, agregarle "oficina" a una prenda que ya
+    // era formal/clasico rompía estilos.every() (ningún estilo nuevo se
+    // agrega SIN que "oficina" esté en la lista permitida) y la sacaba de
+    // esDeVestir, dejando pasar short/jogger deportivo + esa camisa sin
+    // choque.
     const estilos = estilosDe(p);
-    return estilos.length > 0 && estilos.every((e) => e === "formal" || e === "clasico");
+    return estilos.length > 0 && estilos.every((e) => e === "formal" || e === "clasico" || e === "oficina");
   };
   return (esDeportivo(a) && esDeVestir(b)) || (esDeportivo(b) && esDeVestir(a));
 }
@@ -712,6 +748,7 @@ function chocaRegistroDeportivo(a: Prenda, b: Prenda): boolean {
 export const ESTILO_LABEL: Record<Estilo, string> = {
   formal: "Formal",
   clasico: "Clásico",
+  oficina: "Oficina",
   urbano: "Urbano",
   casual: "Casual",
   deportivo: "Deportivo",
@@ -742,7 +779,19 @@ export function registroOutfit(prendas: Prenda[]): string | null {
  *  razonar "qué comprar para mejorar", y esa base puede legítimamente
  *  tener una democión (es la excusa de por qué la nota no es más alta).
  *  Para filtrar qué se MUESTRA como opción ya lista en "Vestite hoy", ver
- *  la versión estricta: outfitEsCoherenteParaEstilo. */
+ *  la versión estricta: outfitEsCoherenteParaEstilo.
+ *
+ *  formal vs. oficina: a diferencia del resto de los chequeos de acá
+ *  (todos sobre el PANTALÓN solo), esta distinción es sobre el
+ *  VOCABULARIO del outfit completo -- no es una cuestión de rango de
+ *  formalidad (los dos están parejos en FORMALIDAD_ESTILO), es una
+ *  cuestión de qué prendas exactas hay puestas (ver
+ *  esPrendaDeTrajeExclusiva). Deliberadamente en la versión LAXA (no solo
+ *  en la estricta): "formal" sin saco, o "oficina" con corbata, no son
+ *  una democión de registro gradual como un buzo con un pantalón de
+ *  vestir -- son una imposibilidad categórica, el mismo tipo de chequeo
+ *  que ya hace el techo de formalidad por categoría un poco más arriba
+ *  (un short deportivo nunca es "formal", sea cual sea su tag). */
 export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolean {
   const pantalon = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   if (!pantalon) return false;
@@ -755,6 +804,20 @@ export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolea
   const techo = TECHO_FORMALIDAD_POR_CATEGORIA[pantalon.categoria];
   const rangoPedido = FORMALIDAD_ESTILO[estilo];
   if (techo !== undefined && rangoPedido !== undefined && rangoPedido > techo) return false;
+
+  // "Oficina" -- pedido explícito: "sin corbatas, sin traje". Ni el saco
+  // ni una corbata (o cualquier otro accesorio que requiere_cuello)
+  // pueden estar presentes: son, por definición, lo que convierte un
+  // look en "formal" (traje), no en "elegante sport".
+  if (estilo === "oficina" && prendas.some(esPrendaDeTrajeExclusiva)) return false;
+  // "Formal" -- pedido explícito: "es el traje. Formal es formal." El
+  // saco es, por convención real de sastrería, la prenda que define un
+  // traje -- sin él, un pantalón de vestir + camisa (con o sin corbata)
+  // es "oficina", no "formal". La corbata NO se exige acá a propósito: un
+  // traje sin corbata (cuello abierto) sigue siendo formal, la prenda que
+  // de verdad lo decide es el saco.
+  if (estilo === "formal" && !prendas.some((p) => p.categoria === "saco")) return false;
+
   return estilosDe(pantalon).includes(estilo);
 }
 
@@ -1469,6 +1532,22 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
       return true;
     });
     const torsos = ordenarPorEstacion(candidatasPropias(ancla, candidatosTorso, placard), clima);
+    // La capa base bajo un saco -- pedido explícito del usuario: "formal es
+    // formal, es el traje" (ver el chequeo nuevo en outfitSirveParaEstilo,
+    // que ahora exige saco para "formal"). Un saco no es un torso
+    // alternativo más -- a diferencia de remera/buzo/sweater/campera, que
+    // compiten entre sí por el mismo lugar, un saco es una CAPA DE AFUERA
+    // que se pone SOBRE una camisa, nunca solo: sin esto, "formal" armaba
+    // un traje sin camisa debajo, un look que no existe en la sastrería
+    // real. Solo camisa (no sweater/remera/buzo) -- es la única prenda base
+    // que de verdad corresponde debajo de un saco de traje, sin ambigüedad
+    // (un sweater bajo un saco es un look real, pero es "oficina"/business
+    // casual, no "el traje" -- el registro estricto que pidió el usuario).
+    const camisasParaSaco = candidatasPropias(
+      ancla,
+      candidatosTorso.filter((p) => p.categoria === "camisa"),
+      placard,
+    );
     // Pedido explícito del usuario: "el motor nunca está ofreciendo las
     // zapatillas blancas... fijate si podés poner alguna ponderación para
     // que las prendas que salen mucho vayan rotando... sin sacrificar
@@ -1510,47 +1589,65 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
         );
 
     for (const torso of torsos) {
-      // calzado/accesorio se eligieron solo contra el pantalón -- acá se
-      // valida que además no choquen entre sí ni con ESTE torso puntual
-      // (cada variante de torso puede convivir distinto con el mismo
-      // calzado/accesorio). Auditoría de Consejo (QA, verificado por
-      // ejecución): esto SOLO validaba accesorio vs. calzado y accesorio
-      // vs. torso -- calzado vs. torso nunca se cruzaban entre sí (ej. un
-      // pantalón neutro admite tanto un calzado naranja saturado como una
-      // remera azul saturada, cada uno "excelente" por separado, pero esos
-      // dos colores se funden entre sí -- se armaba el outfit igual).
-      //
-      // calzado/accesorio ahora son LISTAS de candidatas (ver el
-      // comentario de arriba) -- se prueba cada calzado válido contra este
-      // torso, y para cada uno, cada accesorio válido contra ambos; si
-      // ninguno queda (todos chocan), se arma un outfit sin ese slot en
-      // vez de forzar una combinación real mala -- exactamente la misma
-      // degradación que antes, solo que ahora puede haber más de un
-      // resultado "sin choque" en vez de uno solo.
-      const calzadosValidos = calzados.filter((c) => !chocan(c.prenda, torso.prenda, placard));
-      const calzadoOpciones: Array<{ prenda: Prenda } | undefined> = calzadosValidos.length > 0 ? calzadosValidos : [undefined];
+      // Saco: capa de afuera, exige una camisa propia debajo (ver el
+      // comentario largo de camisasParaSaco más arriba) -- si ninguna
+      // camisa combina con ESTE saco puntual, no hay traje real que armar
+      // con él, se salta (nunca se fuerza un saco sin camisa).
+      const esSaco = torso.prenda.categoria === "saco";
+      const camisasBaseValidas = esSaco ? camisasParaSaco.filter((c) => !chocan(c.prenda, torso.prenda, placard)) : [];
+      if (esSaco && camisasBaseValidas.length === 0) continue;
+      const camisaBaseOpciones: Array<{ prenda: Prenda } | undefined> = esSaco ? camisasBaseValidas : [undefined];
 
-      for (const calzadoElegido of calzadoOpciones) {
-        const accesoriosValidos = accesorios.filter(
-          (a) => !chocan(a.prenda, torso.prenda, placard) && !(calzadoElegido && chocan(a.prenda, calzadoElegido.prenda, placard)),
-        );
-        const accesorioOpciones: Array<{ prenda: Prenda } | undefined> =
-          accesoriosValidos.length > 0 ? accesoriosValidos : [undefined];
+      for (const camisaBase of camisaBaseOpciones) {
+        // prendasDeTorso: 1 prenda normalmente (torso solo), o 2 cuando el
+        // torso es un saco (saco + la camisa que lleva debajo).
+        const prendasDeTorso = [torso.prenda, camisaBase?.prenda].filter((p): p is Prenda => p !== undefined);
 
-        for (const accesorioElegido of accesorioOpciones) {
-          const prendas = [ancla, torso.prenda, calzadoElegido?.prenda, accesorioElegido?.prenda].filter(
-            (p): p is Prenda => p !== undefined,
+        // calzado/accesorio se eligieron solo contra el pantalón -- acá se
+        // valida que además no choquen entre sí ni con ESTE torso puntual
+        // (cada variante de torso puede convivir distinto con el mismo
+        // calzado/accesorio). Auditoría de Consejo (QA, verificado por
+        // ejecución): esto SOLO validaba accesorio vs. calzado y accesorio
+        // vs. torso -- calzado vs. torso nunca se cruzaban entre sí (ej. un
+        // pantalón neutro admite tanto un calzado naranja saturado como una
+        // remera azul saturada, cada uno "excelente" por separado, pero esos
+        // dos colores se funden entre sí -- se armaba el outfit igual).
+        //
+        // calzado/accesorio ahora son LISTAS de candidatas (ver el
+        // comentario de arriba) -- se prueba cada calzado válido contra este
+        // torso (las dos prendas de prendasDeTorso si hay saco+camisa), y
+        // para cada uno, cada accesorio válido contra ambos; si ninguno
+        // queda (todos chocan), se arma un outfit sin ese slot en vez de
+        // forzar una combinación real mala -- exactamente la misma
+        // degradación que antes, solo que ahora puede haber más de un
+        // resultado "sin choque" en vez de uno solo.
+        const calzadosValidos = calzados.filter((c) => prendasDeTorso.every((p) => !chocan(c.prenda, p, placard)));
+        const calzadoOpciones: Array<{ prenda: Prenda } | undefined> = calzadosValidos.length > 0 ? calzadosValidos : [undefined];
+
+        for (const calzadoElegido of calzadoOpciones) {
+          const accesoriosValidos = accesorios.filter(
+            (a) =>
+              prendasDeTorso.every((p) => !chocan(a.prenda, p, placard)) &&
+              !(calzadoElegido && chocan(a.prenda, calzadoElegido.prenda, placard)),
           );
+          const accesorioOpciones: Array<{ prenda: Prenda } | undefined> =
+            accesoriosValidos.length > 0 ? accesoriosValidos : [undefined];
 
-          const clave = [...prendas]
-            .map((p) => p.id)
-            .sort()
-            .join("-");
-          if (vistos.has(clave)) continue;
-          vistos.add(clave);
+          for (const accesorioElegido of accesorioOpciones) {
+            const prendas = [ancla, ...prendasDeTorso, calzadoElegido?.prenda, accesorioElegido?.prenda].filter(
+              (p): p is Prenda => p !== undefined,
+            );
 
-          const { puntaje, explicacion } = puntuarOutfit(prendas);
-          resultados.push({ id: clave, prendas, puntaje, explicacionPuntaje: explicacion });
+            const clave = [...prendas]
+              .map((p) => p.id)
+              .sort()
+              .join("-");
+            if (vistos.has(clave)) continue;
+            vistos.add(clave);
+
+            const { puntaje, explicacion } = puntuarOutfit(prendas);
+            resultados.push({ id: clave, prendas, puntaje, explicacionPuntaje: explicacion });
+          }
         }
       }
     }

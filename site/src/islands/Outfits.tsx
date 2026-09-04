@@ -188,7 +188,7 @@ const VISIBLES_POR_SECCION = 2;
  *  no dos variantes parecidas). Ver candidatosDeContraste en recommend.ts. */
 const OPCIONES_A_LA_VEZ = 1;
 
-const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
+const ESTILOS_FILTRO: Estilo[] = ["formal", "oficina", "clasico", "urbano", "casual", "deportivo"];
 
 // Pedido explícito del usuario, con captura real ("bermuda con sweater,
 // ambos beige"): antes "Vestite hoy" solo usaba la fecha REAL de hoy para

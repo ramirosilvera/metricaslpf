@@ -767,9 +767,12 @@ describe("recomendar -- volumen (calce): dos prendas holgadas pierden silueta", 
 
 describe("outfitSirveParaEstilo", () => {
   it("matchea por el estilo principal del pantalón", () => {
+    // "clasico", no "formal" -- desde que "formal" exige saco (ver el
+    // describe dedicado más abajo), este test genérico usa un estilo sin
+    // ese requisito extra para probar solo lo que dice el título.
     const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
-    pantalon.estilo = "formal";
-    expect(outfitSirveParaEstilo([pantalon], "formal")).toBe(true);
+    pantalon.estilo = "clasico";
+    expect(outfitSirveParaEstilo([pantalon], "clasico")).toBe(true);
     expect(outfitSirveParaEstilo([pantalon], "casual")).toBe(false);
   });
 
@@ -805,10 +808,72 @@ describe("outfitSirveParaEstilo", () => {
     expect(outfitSirveParaEstilo([shortDeportivo], "deportivo")).toBe(true);
   });
 
-  it("un pantalón o bermuda SÍ pueden servir para formal/clasico -- el techo es solo para categorías intrínsecamente informales", () => {
+  it("un pantalón o bermuda SÍ pueden servir para clasico -- el techo es solo para categorías intrínsecamente informales", () => {
     const bermudaFormal = mkPrenda("bermuda", "#1A1A1A", 0, 0, 10);
-    bermudaFormal.estilo = "formal";
-    expect(outfitSirveParaEstilo([bermudaFormal], "formal")).toBe(true);
+    bermudaFormal.estilo = "clasico";
+    expect(outfitSirveParaEstilo([bermudaFormal], "clasico")).toBe(true);
+  });
+});
+
+// Consejo, pedido explícito del usuario: "formal y oficina se mezclan...
+// quiero un estilo oficina por un lado, y el estilo formal solamente el
+// traje (pantalón de vestir, camisa, corbata, cinturón y saco). Formal es
+// formal." Roles: asesor de imagen, sastre.
+describe("outfitSirveParaEstilo -- formal exige saco, oficina excluye saco/corbata", () => {
+  function conPantalonVestir(estilo: Prenda["estilo"], secundarios: Prenda["estilo"][] = []): Prenda {
+    const p = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    p.estilo = estilo;
+    p.estilos_secundarios = secundarios as never;
+    return p;
+  }
+
+  it("pantalón de vestir + camisa, SIN saco -> no sirve para 'formal' (es oficina, no traje)", () => {
+    const pantalon = conPantalonVestir("formal", ["oficina"]);
+    const camisa = mkPrenda("camisa", "#FAFAF7", 0, 0, 98);
+    expect(outfitSirveParaEstilo([pantalon, camisa], "formal")).toBe(false);
+    expect(outfitSirveParaEstilo([pantalon, camisa], "oficina")).toBe(true);
+  });
+
+  it("el mismo pantalón + saco -> SÍ sirve para 'formal' -- el saco es lo que lo convierte en traje", () => {
+    const pantalon = conPantalonVestir("formal", ["oficina"]);
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    expect(outfitSirveParaEstilo([pantalon, saco], "formal")).toBe(true);
+  });
+
+  it("un traje NO necesita corbata para ser 'formal' -- el saco solo ya alcanza (cuello abierto sigue siendo formal)", () => {
+    const pantalon = conPantalonVestir("formal");
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    expect(outfitSirveParaEstilo([pantalon, saco], "formal")).toBe(true);
+  });
+
+  it("una corbata puesta -> nunca sirve para 'oficina', aunque no haya saco", () => {
+    const pantalon = conPantalonVestir("formal", ["oficina"]);
+    const corbata = mkPrenda("accesorio", "#1F2A44", 222, 37, 19);
+    corbata.requiere_cuello = true;
+    expect(outfitSirveParaEstilo([pantalon, corbata], "oficina")).toBe(false);
+  });
+
+  it("un saco puesto -> nunca sirve para 'oficina', aunque no haya corbata -- el saco también define el traje", () => {
+    const pantalon = conPantalonVestir("formal", ["oficina"]);
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    expect(outfitSirveParaEstilo([pantalon, saco], "oficina")).toBe(false);
+  });
+
+  it("pantalón de vestir + sweater, sin saco ni corbata -> sirve para 'oficina' -- el look 'elegante sport' real", () => {
+    const pantalon = conPantalonVestir("formal", ["oficina"]);
+    const sweater = mkPrenda("sweater", "#1F2A44", 222, 39, 21);
+    sweater.estilo = "clasico";
+    sweater.estilos_secundarios = ["oficina"];
+    expect(outfitSirveParaEstilo([pantalon, sweater], "oficina")).toBe(true);
+  });
+
+  it("un cinturón (accesorio SIN requiere_cuello) no bloquea ni 'formal' ni 'oficina' -- el chequeo es específico de saco/corbata, no de cualquier accesorio", () => {
+    const pantalon = conPantalonVestir("formal", ["oficina"]);
+    const cinturon = mkPrenda("accesorio", "#5C3A21", 25, 47, 25);
+    cinturon.textura = "cuero_liso";
+    expect(outfitSirveParaEstilo([pantalon, cinturon], "oficina")).toBe(true);
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+    expect(outfitSirveParaEstilo([pantalon, saco, cinturon], "formal")).toBe(true);
   });
 });
 
@@ -816,19 +881,21 @@ describe("outfitEsCoherenteParaEstilo", () => {
   it("reporte real del usuario: un buzo estilo=casual bajo un pantalón formal pasaba 'sirve para formal' -- acá NO", () => {
     const pantalonFormal = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     pantalonFormal.estilo = "formal";
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21); // "formal" exige saco -- ver el describe dedicado
     const buzoCasual = mkPrenda("buzo", "#5A5F3D", 90, 30, 30);
     buzoCasual.estilo = "casual";
     // la versión laxa lo dejaba pasar (solo mira el pantalón) -- la estricta no.
-    expect(outfitSirveParaEstilo([pantalonFormal, buzoCasual], "formal")).toBe(true);
-    expect(outfitEsCoherenteParaEstilo([pantalonFormal, buzoCasual], "formal")).toBe(false);
+    expect(outfitSirveParaEstilo([pantalonFormal, saco, buzoCasual], "formal")).toBe(true);
+    expect(outfitEsCoherenteParaEstilo([pantalonFormal, saco, buzoCasual], "formal")).toBe(false);
   });
 
   it("outfit genuinamente coherente (torso también formal) -> true", () => {
     const pantalonFormal = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
     pantalonFormal.estilo = "formal";
+    const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
     const camisaFormal = mkPrenda("camisa", "#FAFAF7", 0, 0, 98);
     camisaFormal.estilo = "formal";
-    expect(outfitEsCoherenteParaEstilo([pantalonFormal, camisaFormal], "formal")).toBe(true);
+    expect(outfitEsCoherenteParaEstilo([pantalonFormal, saco, camisaFormal], "formal")).toBe(true);
   });
 
   it("si el pantalón ni siquiera sirve para el estilo pedido, false directo (sin llegar a mirar advertencias)", () => {
@@ -1411,14 +1478,76 @@ describe("armarOutfitsSugeridos", () => {
     expect(outfits).toHaveLength(4);
   });
 
-  it("saco es una prenda de torso válida como cualquier otra (categoría nueva, pedido explícito del usuario: 'un traje azul marino')", () => {
+  it("saco es una prenda de torso válida como cualquier otra (categoría nueva, pedido explícito del usuario: 'un traje azul marino') -- exige una camisa propia debajo, ver el describe dedicado más abajo ('formal exige camisa debajo del saco')", () => {
     const placard = [
       mkPrenda("pantalon", "#1A1A1A", 0, 0, 10), // negro, neutro
       mkPrenda("saco", "#1F2A44", 222, 39, 21),
+      mkPrenda("camisa", "#FAFAF7", 0, 0, 98),
     ];
     const outfits = armarOutfitsSugeridos(placard);
-    expect(outfits).toHaveLength(1);
-    expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "saco"].sort());
+    // 2 outfits reales: la camisa sola (torso normal, sin saco) y el
+    // saco CON la camisa debajo (ver el describe dedicado más abajo) --
+    // ya no "pantalón + saco" solos.
+    expect(outfits).toHaveLength(2);
+    const conSaco = outfits.find((o) => o.prendas.some((p) => p.categoria === "saco"));
+    expect(conSaco?.prendas.map((p) => p.categoria).sort()).toEqual(["camisa", "pantalon", "saco"].sort());
+  });
+
+  // Consejo, pedido explícito del usuario: "formal y oficina se
+  // mezclan... formal es el traje". Rol: sastre. Un saco no es un torso
+  // alternativo más (como remera/buzo/sweater/campera) -- es una capa de
+  // afuera que va SOBRE una camisa, nunca solo.
+  describe("formal exige camisa debajo del saco -- un saco solo no es un traje real", () => {
+    it("saco sin ninguna camisa propia en el placard -> no arma ningún outfit con saco", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1F2A44", 222, 39, 21);
+      const remera = mkPrenda("remera", "#3366CC", 220, 60, 50); // torso alternativo -- sin camisa
+      const outfits = armarOutfitsSugeridos([pantalon, saco, remera]);
+      // arma el outfit con la remera (torso normal, sin capa base) pero
+      // ninguno con el saco -- nunca "pantalón + saco" solos.
+      expect(outfits).toHaveLength(1);
+      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
+    });
+
+    it("saco + camisa que combina -> arma el outfit con las DOS prendas de torso a la vez (saco y camisa juntos, no una en lugar de la otra)", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([pantalon, saco, camisa]);
+      // 2 outfits: la camisa sola (torso normal) y el saco CON la camisa
+      // debajo -- el punto de este test es el segundo.
+      expect(outfits).toHaveLength(2);
+      const conSaco = outfits.find((o) => o.prendas.some((p) => p.categoria === "saco"));
+      expect(conSaco?.prendas).toHaveLength(3);
+      expect(conSaco?.prendas.map((p) => p.categoria).sort()).toEqual(["camisa", "pantalon", "saco"].sort());
+    });
+
+    it("saco + camisa que combina + otra camisa que NO combina con el pantalón -> solo arma con la que sí combina, nunca con la que choca", () => {
+      const pantalon = mkPrenda("pantalon", "#CC3333", 0, 60, 50); // rojo saturado
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10); // negro, neutro -- combina con cualquier camisa
+      const camisaOk = mkPrenda("camisa", "#1A1A1A", 0, 0, 10); // neutra -- combina "excelente" con el pantalón rojo
+      // verde saturado, misma luminosidad que el rojo del pantalón -- se
+      // funden (con_cuidado), mismo par que ya usa el resto del archivo.
+      const camisaChoca = mkPrenda("camisa", "#33CC33", 120, 60, 52);
+      const outfits = armarOutfitsSugeridos([pantalon, saco, camisaOk, camisaChoca]);
+      const conSaco = outfits.filter((o) => o.prendas.some((p) => p.categoria === "saco"));
+      expect(conSaco).toHaveLength(1);
+      expect(conSaco[0].prendas.map((p) => p.id)).toContain(camisaOk.id);
+      expect(conSaco[0].prendas.map((p) => p.id)).not.toContain(camisaChoca.id);
+    });
+
+    it("calzado/accesorio se validan contra saco Y camisa a la vez, no solo contra uno de los dos", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      const camisa = mkPrenda("camisa", "#3366CC", 220, 60, 50); // azul saturado
+      // naranja quemado saturado, misma luminosidad que el azul de la camisa -- se funden (con_cuidado), mismo par que ya usa el resto del archivo para probar choques cruzados.
+      const calzadoChocaConCamisa = mkPrenda("calzado", "#C8763F", 25, 60, 45);
+      const outfits = armarOutfitsSugeridos([pantalon, saco, camisa, calzadoChocaConCamisa]);
+      const conSaco = outfits.filter((o) => o.prendas.some((p) => p.categoria === "saco"));
+      expect(conSaco).toHaveLength(1);
+      // el calzado que choca con la camisa (aunque combine con el pantalón/saco neutros) se cae, no arma la combinación real mala.
+      expect(conSaco[0].prendas.map((p) => p.categoria)).not.toContain("calzado");
+    });
   });
 
   it("entre dos abrigos que combinan igual de bien por color, prioriza el de la estación de hoy (caso real: 4 sweaters de entretiempo + 1 de invierno del mismo usuario, mismo pantalón)", () => {
@@ -1634,10 +1763,12 @@ describe("armarOutfitsSugeridos", () => {
       const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
       const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
       saco.estilo = "clasico";
-      const outfitsInvierno = armarOutfitsSugeridos([pantalon, saco], "invierno");
-      const outfitsEntretiempo = armarOutfitsSugeridos([pantalon, saco], "entretiempo");
-      expect(outfitsInvierno).toHaveLength(1);
-      expect(outfitsEntretiempo).toHaveLength(1);
+      const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10); // saco exige camisa propia debajo (ver "formal exige camisa debajo del saco")
+      const outfitsInvierno = armarOutfitsSugeridos([pantalon, saco, camisa], "invierno");
+      const outfitsEntretiempo = armarOutfitsSugeridos([pantalon, saco, camisa], "entretiempo");
+      // 2 outfits en cada clima: la camisa sola y el saco con la camisa debajo.
+      expect(outfitsInvierno.some((o) => o.prendas.some((p) => p.categoria === "saco"))).toBe(true);
+      expect(outfitsEntretiempo.some((o) => o.prendas.some((p) => p.categoria === "saco"))).toBe(true);
     });
 
     it("clima='invierno' -- un bermuda/short no ancla ningún outfit, sea cual sea el torso", () => {
@@ -1919,9 +2050,10 @@ describe("armarOutfitsSugeridos", () => {
     it("un pantalón largo sigue combinando con un saco, sin cambios", () => {
       const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
       const saco = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
-      const outfits = armarOutfitsSugeridos([pantalon, saco]);
-      expect(outfits).toHaveLength(1);
-      expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "saco"].sort());
+      const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10); // saco exige camisa propia debajo
+      const outfits = armarOutfitsSugeridos([pantalon, saco, camisa]);
+      const conSaco = outfits.find((o) => o.prendas.some((p) => p.categoria === "saco"));
+      expect(conSaco?.prendas.map((p) => p.categoria).sort()).toEqual(["camisa", "pantalon", "saco"].sort());
     });
   });
 });

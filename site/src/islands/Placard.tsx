@@ -7,7 +7,7 @@ import { CATEGORIA_LABEL, descripcionPrenda, ESTACION_LABEL, type Estacion, type
 import ConfigWarning from "./ConfigWarning";
 import PrendaIcon from "./PrendaIcon";
 
-const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
+const ESTILOS_FILTRO: Estilo[] = ["formal", "oficina", "clasico", "urbano", "casual", "deportivo"];
 
 /** Parte interactiva del placard (buscador, filtros, secciones por
  *  categoría) separada del fetch a Supabase -- así se puede montar y

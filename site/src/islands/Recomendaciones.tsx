@@ -12,7 +12,7 @@ const NIVEL_LABEL: Record<string, string> = {
   con_cuidado: "Con cuidado",
 };
 
-const ESTILOS_FILTRO: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
+const ESTILOS_FILTRO: Estilo[] = ["formal", "oficina", "clasico", "urbano", "casual", "deportivo"];
 
 export default function Recomendaciones() {
   const [placard, setPlacard] = useState<Prenda[] | null>(null);

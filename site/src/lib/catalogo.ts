@@ -154,8 +154,8 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // auditoría de sastrería (Consejo, ronda de auditoría del motor): una
   // camisa de oficina real se usa metida adentro, silueta entallada, la
   // contraparte de volumen contenido de un pantalón de vestir/saco.
-  { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#F5F5F5", textura: "algodon", estilo: "clasico", ocasion: "laburo", calce: "ajustado" },
-  { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", ocasion: "laburo", calce: "ajustado" },
+  { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#F5F5F5", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
+  { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
   // "urbano" a propósito, no un descuido: una camisa negra lee más
   // "urban professional" que clásica, a diferencia de blanca/celeste/gris.
   // colorHex #1A1A1A -- mismo negro que las otras 16+ prendas "negro/negra"
@@ -165,7 +165,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // exactamente el bug que reportó el usuario ("una cosa es un gris
   // oscuro y otra un negro").
   { id: "camisa-negra", nombre: "Camisa negra", categoria: "camisa", colorHex: "#1A1A1A", textura: "algodon", estilo: "urbano", ocasion: "laburo" },
-  { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", ocasion: "laburo", calce: "ajustado" },
+  { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
   // patron "cuadros" + colorHex2 -- corrección real de esta ronda: esta
   // entrada ya existía nombrada "a cuadros" pero se dibujaba como una
   // camisa lisa de un solo color, sin ningún cuadro real (el modelo de
@@ -178,7 +178,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // mismo beige que el resto del catálogo (ver remera-beige) -- clasico/
   // laburo, mismo registro que blanca/celeste/gris: una camisa beige es
   // tan de oficina como esas, no informal como la de cuadros.
-  { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo", calce: "ajustado" },
+  { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
 
   // --- Camisas a rayas -- pedido explícito del usuario: "camisas
   // ralladas, blanca y celestes y de otros colores tmb, inspírate en usos
@@ -192,23 +192,23 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // en Argentina y en el mundo (raya fina celeste sobre fondo blanco,
   // "Bengal stripe" clásico). Mismos hex que camisa-blanca/camisa-celeste
   // ya usan, por consistencia de paleta cross-prenda.
-  { id: "camisa-rayas-celeste", nombre: "Camisa a rayas celeste", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#B7D2EC", patron: "rayas", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  { id: "camisa-rayas-celeste", nombre: "Camisa a rayas celeste", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#B7D2EC", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo" },
   // azul marino sobre blanco -- el "pinstripe" clásico de oficina/
   // vestir, un escalón más formal que la celeste de arriba (se banca sin
   // problema una corbata y un traje). Mismo azul marino que ya usan
   // pantalon-vestir-azul/saco-azul-marino/corbata-azul-marino.
-  { id: "camisa-rayas-azul-marino", nombre: "Camisa a rayas azul marino", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#1F2A44", patron: "rayas", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  { id: "camisa-rayas-azul-marino", nombre: "Camisa a rayas azul marino", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#1F2A44", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo" },
   // rosa sobre blanco -- el color "no neutro" más estándar de oficina
   // desde hace años (estilo francés/business casual), tan de laburo como
   // la celeste, no un capricho de color. Mismo rosa que remera-rosa.
-  { id: "camisa-rayas-rosa", nombre: "Camisa a rayas rosa", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#E4A6B4", patron: "rayas", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+  { id: "camisa-rayas-rosa", nombre: "Camisa a rayas rosa", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#E4A6B4", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo" },
   // Bengal invertida -- fondo celeste con raya blanca, no blanco con raya
   // celeste (la de arriba): mismo par de colores, pero la base más
   // saturada la hace un poco menos "de escritorio estricto" y más
   // versátil para un finde -- estilo secundario "casual" a propósito,
   // mismo criterio multi-estilo que ya usa sweater-mostaza (ejemplo real
   // del usuario: la misma prenda funciona en dos registros).
-  { id: "camisa-rayas-celeste-base", nombre: "Camisa celeste a rayas blancas", categoria: "camisa", colorHex: "#B7D2EC", colorHex2: "#F5F5F5", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["casual"], ocasion: "laburo" },
+  { id: "camisa-rayas-celeste-base", nombre: "Camisa celeste a rayas blancas", categoria: "camisa", colorHex: "#B7D2EC", colorHex2: "#F5F5F5", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["casual", "oficina"], ocasion: "laburo" },
   // negro sobre blanco, estilo urbano -- una rayada bien de calle
   // (contraste alto, sin color de oficina de por medio), no una variante
   // más de la misma camisa de laburo. Mismo criterio que camisa-negra
@@ -238,15 +238,23 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // auditoría del motor): un pantalón de vestir real es de corte recto/
   // entallado, no ancho, la contraparte de volumen contenido que hace que
   // un saco/blazer (también "ajustado" más abajo) funcione en proporción.
-  { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
-  { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
-  { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
+  // estilosSecundarios: ["oficina"] en los 4 -- pedido explícito del
+  // usuario: "formal y oficina se mezclan... formal es el traje (con
+  // saco), oficina es elegante sport (pantalón de vestir + camisa/sweater,
+  // sin saco ni corbata)". El pantalón de vestir en sí sirve para las dos
+  // ocasiones (es la base compartida, lo que cambia es si arriba va un
+  // saco o no) -- ver el chequeo nuevo en outfitSirveParaEstilo
+  // (recommend.ts), que exige saco para "formal" y lo prohíbe para
+  // "oficina".
+  { id: "pantalon-vestir-negro", nombre: "Pantalón de vestir negro", categoria: "pantalon", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
+  { id: "pantalon-vestir-gris", nombre: "Pantalón de vestir gris", categoria: "pantalon", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
+  { id: "pantalon-vestir-azul", nombre: "Pantalón de vestir azul marino", categoria: "pantalon", colorHex: "#1F2A44", textura: "lana", estilo: "formal", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
   // distinto de pantalon-beige de acá abajo (el chino, algodón/clasico) --
   // mismo beige del resto del catálogo, pero de vestir: lana/formal, igual
   // criterio que negro/gris/azul marino de arriba. No es una entrada
   // duplicada -- un chino y un pantalón de vestir son prendas distintas
   // aunque compartan color.
-  { id: "pantalon-vestir-beige", nombre: "Pantalón de vestir beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
+  { id: "pantalon-vestir-beige", nombre: "Pantalón de vestir beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "lana", estilo: "formal", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
   { id: "pantalon-beige", nombre: "Pantalón chino beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
   // joggers -- casual como el jean (no "clasico" como el chino: no van a
   // la oficina), textura "algodon" sin ambigüedad porque el usuario la dio
@@ -368,17 +376,23 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // entretiempo. La versión de entretiempo es la de fibra más liviana
   // (viscosa/poliéster/algodón fino) -- ver "Sweater liviano" más abajo,
   // agregado justo para cubrir ese registro sin forzarlo en la lana.
-  { id: "sweater-gris", nombre: "Sweater gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "invierno" },
-  { id: "sweater-azul-marino", nombre: "Sweater azul marino", categoria: "sweater", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "invierno" },
-  { id: "sweater-bordo", nombre: "Sweater bordo", categoria: "sweater", colorHex: "#6B2737", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "invierno" },
+  // estilosSecundarios: ["oficina"] en los 7 sweaters de acá abajo --
+  // pedido explícito del usuario: "oficina es elegante sport -- pantalón
+  // de vestir, camisa, sweater, sin corbatas, sin traje". Un sweater sobre
+  // una camisa (o solo, sin nada debajo) es justamente la prenda que
+  // define ese look sin saco -- ver el chequeo nuevo en
+  // outfitSirveParaEstilo (recommend.ts).
+  { id: "sweater-gris", nombre: "Sweater gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "lana", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", estacion: "invierno" },
+  { id: "sweater-azul-marino", nombre: "Sweater azul marino", categoria: "sweater", colorHex: "#1F2A44", textura: "lana", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", estacion: "invierno" },
+  { id: "sweater-bordo", nombre: "Sweater bordo", categoria: "sweater", colorHex: "#6B2737", textura: "lana", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", estacion: "invierno" },
   // colorHex #1A1A1A -- ver el comentario de camisa-negra más arriba: el
   // reporte real del usuario que motivó esta corrección era justo este
   // sweater ("tengo un suéter negro que dice gris oscuro").
-  { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "invierno" },
+  { id: "sweater-negro", nombre: "Sweater negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "lana", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", estacion: "invierno" },
   // mismo beige que el resto del catálogo -- clasico/laburo, mismo
   // registro que el resto de los sweaters (gris/marino/bordo/negro): un
   // sweater beige es tan de oficina como esos.
-  { id: "sweater-beige", nombre: "Sweater beige", categoria: "sweater", colorHex: "#D8C7A1", textura: "lana", estilo: "clasico", ocasion: "laburo", estacion: "invierno" },
+  { id: "sweater-beige", nombre: "Sweater beige", categoria: "sweater", colorHex: "#D8C7A1", textura: "lana", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", estacion: "invierno" },
   // mostaza -- color evergreen de sweater de oficina, tan estándar como
   // bordó/azul marino/gris de acá arriba. Este hex real (h=40, s=62, l=47)
   // fue justamente el que encontró el bug de nombreColor() clasificándolo
@@ -395,7 +409,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
     colorHex: "#C3922E",
     textura: "lana",
     estilo: "clasico",
-    estilosSecundarios: ["casual"],
+    estilosSecundarios: ["casual", "oficina"],
     ocasion: "laburo",
     estacion: "invierno",
   },
@@ -409,8 +423,8 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // falso) o dejar la textura vacía (perdiendo la distinción real que
   // motivó este pedido). Gris y negro -- los dos colores más versátiles,
   // no una duplicación completa de los 6 sweaters de lana de arriba.
-  { id: "sweater-liviano-gris", nombre: "Sweater liviano gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "viscosa", estilo: "clasico", estilosSecundarios: ["casual"], ocasion: "laburo", estacion: "entretiempo" },
-  { id: "sweater-liviano-negro", nombre: "Sweater liviano negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "viscosa", estilo: "clasico", estilosSecundarios: ["casual"], ocasion: "laburo", estacion: "entretiempo" },
+  { id: "sweater-liviano-gris", nombre: "Sweater liviano gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "viscosa", estilo: "clasico", estilosSecundarios: ["casual", "oficina"], ocasion: "laburo", estacion: "entretiempo" },
+  { id: "sweater-liviano-negro", nombre: "Sweater liviano negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "viscosa", estilo: "clasico", estilosSecundarios: ["casual", "oficina"], ocasion: "laburo", estacion: "entretiempo" },
 
   // --- Calzado ---
   // Revisado como modista/ingeniero textil, pedido explícito del usuario:

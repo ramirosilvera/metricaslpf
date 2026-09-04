@@ -42,7 +42,7 @@ const TEXTURAS: Textura[] = [
   "impermeable",
   "tricot",
 ];
-const ESTILOS: Estilo[] = ["casual", "formal", "deportivo", "urbano", "clasico"];
+const ESTILOS: Estilo[] = ["casual", "formal", "oficina", "deportivo", "urbano", "clasico"];
 const OCASIONES: Ocasion[] = ["casual", "laburo", "formal"];
 const ESTACIONES: Estacion[] = ["verano", "invierno", "entretiempo"];
 const CALCES: Calce[] = ["ajustado", "regular", "holgado"];

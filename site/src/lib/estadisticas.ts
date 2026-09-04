@@ -24,7 +24,7 @@ const CATEGORIAS_PIERNAS: Categoria[] = ["pantalon", "bermuda", "short_deportivo
  *  motivo que CATEGORIAS_PIERNAS arriba: recommend.ts no la exporta. */
 const CATEGORIAS_ABRIGO_CON_ESTACION: Categoria[] = ["sweater", "campera"];
 
-const ESTILOS: Estilo[] = ["formal", "clasico", "urbano", "casual", "deportivo"];
+const ESTILOS: Estilo[] = ["formal", "oficina", "clasico", "urbano", "casual", "deportivo"];
 const ESTACIONES: Estacion[] = ["verano", "entretiempo", "invierno"];
 
 export interface ConteoCategoria {
