@@ -237,11 +237,20 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
   // el comentario largo de PatronEstampado ahí): reemplaza el relleno del
   // cuerpo principal por completo, no se combina con conPatron/conBrillo de
   // Volumen (una camisa a rayas se lee por sus rayas, no por una trama
-  // semitransparente de textura encima). Solo aplica al torso principal de
-  // una camisa -- las otras categorías no tienen patron/color2 cargados hoy.
+  // semitransparente de textura encima). Aplica al torso principal de
+  // camisa Y remera -- ampliación del catálogo (Consejo, ronda de
+  // "variedad de colores/estilos/prendas"), pedido explícito del usuario:
+  // se agregó "remera-rayas-marina" (catalogo.ts, la marinière/Breton
+  // stripe real), la primera remera con patron/color2 cargados. Antes de
+  // esta corrección el chequeo estaba restringido a `categoria === "camisa"`
+  // a propósito (comentario original: "las otras categorías no tienen
+  // patron/color2 cargados hoy") -- cierto en su momento, dejó de serlo con
+  // esta remera y hacía que se dibujara lisa en el maniquí grande, sin
+  // avisar (el ícono chico tenía el mismo bug, corregido en la misma
+  // ronda, ver PrendaIcon.tsx).
   const estampadoId = `estampado-${prenda.id}`;
   const conEstampado =
-    prenda.categoria === "camisa" &&
+    (prenda.categoria === "camisa" || prenda.categoria === "remera") &&
     (prenda.patron === "rayas" || prenda.patron === "cuadros") &&
     !!prenda.color2_hex;
   const cuelloD =
@@ -274,7 +283,13 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
         <>
           {conEstampado && prenda.color2_hex && (prenda.patron === "rayas" || prenda.patron === "cuadros") && (
             <defs>
-              <PatronEstampado id={estampadoId} patron={prenda.patron} colorBase={prenda.color_hex} color2={prenda.color2_hex} />
+              <PatronEstampado
+                id={estampadoId}
+                patron={prenda.patron}
+                colorBase={prenda.color_hex}
+                color2={prenda.color2_hex}
+                horizontal={prenda.categoria === "remera"}
+              />
             </defs>
           )}
 

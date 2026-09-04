@@ -136,6 +136,55 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // "Naranja".
   { id: "remera-roja", nombre: "Remera roja", categoria: "remera", colorHex: "#B93A32", textura: "algodon", estilo: "casual", ocasion: "casual" },
   { id: "remera-rosa", nombre: "Remera rosa", categoria: "remera", colorHex: "#E4A6B4", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  // verde y celeste -- ampliación del catálogo (Consejo, pedido explícito
+  // del usuario: "variedad de colores... en función de usos y costumbres").
+  // Vacío real: ninguna remera del catálogo cubría verde ni celeste, dos
+  // colores básicos de remera tan comunes como el resto de la paleta ya
+  // cargada. Mismos hex que ya usan buzo-verde (#1E5631, verde botella real)
+  // y camisa-celeste/buzo-celeste (#B7D2EC) -- consistencia de paleta
+  // cross-categoría, mismo criterio que documenta el resto del archivo.
+  { id: "remera-verde", nombre: "Remera verde botella", categoria: "remera", colorHex: "#1E5631", textura: "algodon", estilo: "casual", ocasion: "casual" },
+  { id: "remera-celeste", nombre: "Remera celeste", categoria: "remera", colorHex: "#B7D2EC", textura: "algodon", estilo: "casual", ocasion: "casual" },
+
+  // --- Remera a rayas (Breton stripe) -- ampliación del catálogo. Hueco
+  // real: el catálogo tenía camisas a rayas (ver más abajo) pero ninguna
+  // remera a rayas, y la remera a rayas marina (blanco con rayas azul
+  // marino, "marinière") es una prenda clásica real por derecho propio --
+  // el básico de punto francés que usan Chanel/Saint James desde hace un
+  // siglo, no una variante menor de la camisa. "clasico" (no "casual"):
+  // es justamente el registro donde este básico juega mejor, junto con un
+  // pantalón chino o de lino. Mismos hex que ya usan remera-blanca/
+  // pantalon-vestir-azul (#F5F5F5/#1F2A44) -- consistencia de paleta.
+  {
+    id: "remera-rayas-marina",
+    nombre: "Remera a rayas marina",
+    categoria: "remera",
+    colorHex: "#F5F5F5",
+    colorHex2: "#1F2A44",
+    patron: "rayas",
+    textura: "algodon",
+    estilo: "clasico",
+    ocasion: "casual",
+  },
+
+  // --- Remera oversize (urbano) -- mismo criterio que buzo-negro-oversize
+  // más abajo: el hoodie oversize ya cubre el torso de abrigo "holgado" de
+  // calle real, pero la remera (la prenda de punto liviana, sin abrigo) se
+  // había quedado sin ningún equivalente urbano -- hasta esta ronda
+  // "urbano" en remera dependía por completo del pantalón/zapatilla que se
+  // le sumara, sin ninguna remera que aportara ese registro por sí misma.
+  // calce "holgado" -- el volumen exagerado (silueta boxy, mangas caídas)
+  // es el rasgo real que define a esta prenda como streetwear, no el color.
+  {
+    id: "remera-negra-oversize",
+    nombre: "Remera negra (oversize)",
+    categoria: "remera",
+    colorHex: "#1A1A1A",
+    textura: "algodon",
+    estilo: "urbano",
+    ocasion: "casual",
+    calce: "holgado",
+  },
 
   // --- Remeras deportivas (agregadas en la ampliación del catálogo: el
   // estilo "deportivo" no tenía NINGUNA prenda cargada en todo el catálogo
@@ -239,6 +288,16 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // contraste del color, no de la fibra.
   { id: "camisa-rayas-negra", nombre: "Camisa a rayas negras", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#1A1A1A", patron: "rayas", textura: "algodon", estilo: "urbano", ocasion: "casual" },
 
+  // --- Camisa de jean (overshirt) -- ampliación del catálogo. Distinta de
+  // campera-jean de más abajo (esa es una campera, cierra como campera, se
+  // usa como capa exterior sobre una remera) y de jean-azul (pantalón): una
+  // camisa de jean/overshirt es más liviana, se abrocha como camisa y se
+  // usa suelta y abierta sobre una remera, prenda real y con nombre propio
+  // en el streetwear actual (denim shirt/overshirt), no una duplicación de
+  // ninguna de las otras dos. Mismo denim azul que ya usan jean-azul/
+  // bermuda-jean/campera-jean (#3B5998) -- consistencia de paleta.
+  { id: "camisa-denim", nombre: "Camisa de jean (overshirt)", categoria: "camisa", colorHex: "#3B5998", textura: "denim", estilo: "urbano", ocasion: "casual" },
+
   // --- Pantalones ---
   // estilo secundario "urbano" en TODO jean, sea cual sea el color -- pedido
   // explícito del usuario, reportando que su jean AZUL real (el corte/tela
@@ -279,6 +338,33 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // aunque compartan color.
   { id: "pantalon-vestir-beige", nombre: "Pantalón de vestir beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "lana", estilo: "formal", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
   { id: "pantalon-beige", nombre: "Pantalón chino beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", ocasion: "laburo" },
+
+  // --- Pantalón de lino (clásico, verano) -- ampliación del catálogo,
+  // pareja real del pantalón chino de arriba: distinto tejido, mismo
+  // registro. Verificado por uso y costumbre real de la moda: el lino es
+  // LA tela de pantalón de vestir/smart-casual de verano por excelencia
+  // (fresco, transpirable), la contraparte de estación cálida de la lana
+  // de pantalon-vestir-* de arriba -- se usa con camisa-lino-* o una
+  // remera lisa, sin corbata. Mismos hex que ya usan camisa-lino-blanca/
+  // camisa-lino-beige -- consistencia de paleta cross-categoría.
+  { id: "pantalon-lino-blanco", nombre: "Pantalón de lino blanco", categoria: "pantalon", colorHex: "#F5F5F5", textura: "lino", estilo: "clasico", ocasion: "casual" },
+  { id: "pantalon-lino-beige", nombre: "Pantalón de lino beige", categoria: "pantalon", colorHex: "#D8C7A1", textura: "lino", estilo: "clasico", ocasion: "casual" },
+
+  // --- Pantalón de pana (corduroy) -- ampliación del catálogo. Hueco real
+  // encontrado en esta ronda: la textura "pana"/"corderoy" existe en el
+  // enum (ver types.ts, con su propio patrón de canutillo real en
+  // PatronTextura de PrendaIcon.tsx) pero NINGUNA prenda del catálogo
+  // hasta ahora la usaba. Verificado por uso y costumbre real de la moda:
+  // el pantalón de pana es el básico de entretiempo/invierno "clasico" por
+  // excelencia (con sweater y mocasines, look de otoño/campus clásico),
+  // tan real como el chino de algodón de arriba pero de otra estación.
+  // Marrón/camel -- mismo hex que ya usa zapatillas-marrones (#6F4E37),
+  // consistencia de paleta. Verde -- mismo hex que pantalon-deportivo-
+  // verde-oscuro (#2F5233, verde bosque real), el otro color clásico de
+  // pana además del marrón.
+  { id: "pantalon-pana-marron", nombre: "Pantalón de pana marrón", categoria: "pantalon", colorHex: "#6F4E37", textura: "pana", estilo: "clasico", ocasion: "casual" },
+  { id: "pantalon-pana-verde", nombre: "Pantalón de pana verde", categoria: "pantalon", colorHex: "#2F5233", textura: "pana", estilo: "clasico", ocasion: "casual" },
+
   // joggers -- casual como el jean (no "clasico" como el chino: no van a
   // la oficina), textura "algodon" sin ambigüedad porque el usuario la dio
   // así directamente. Colores reusados del resto del catálogo (negro
@@ -402,6 +488,18 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // statement de calle, no un básico neutro.
   { id: "buzo-negro-oversize", nombre: "Buzo negro (oversize)", categoria: "buzo", colorHex: "#1A1A1A", textura: "tejido_grueso", estilo: "urbano", ocasion: "casual", calce: "holgado", estacion: "entretiempo" },
 
+  // --- Buzo deportivo (hoodie técnico de entrenamiento) -- ampliación del
+  // catálogo. Hueco real encontrado en esta ronda: NINGÚN buzo del
+  // catálogo tenía estilo "deportivo", pese a que remera/pantalón/short/
+  // campera deportivos ya existen hace rondas -- el buzo era la única
+  // categoría de torso con abrigo real sin su versión de entrenamiento.
+  // Textura "poliester" por defecto en toda prenda deportiva (mismo
+  // criterio que el resto del catálogo). "entretiempo": tela técnica
+  // liviana de entrenamiento, no abriga como un frisado real de invierno.
+  // Mismos hex que remera-deportiva-negra/gris -- consistencia de paleta.
+  { id: "buzo-deportivo-negro", nombre: "Buzo deportivo negro", categoria: "buzo", colorHex: "#1A1A1A", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+  { id: "buzo-deportivo-gris", nombre: "Buzo deportivo gris", categoria: "buzo", colorHex: "#8C8C8C", textura: "poliester", estilo: "deportivo", ocasion: "casual", estacion: "entretiempo" },
+
   // --- Sweaters (oficina/vestir) ---
   // estacion "invierno" en los 6 de lana -- corrección de una ronda
   // anterior, pedido explícito del usuario como ingeniero textil: un
@@ -459,6 +557,15 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // no una duplicación completa de los 6 sweaters de lana de arriba.
   { id: "sweater-liviano-gris", nombre: "Sweater liviano gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "viscosa", estilo: "clasico", estilosSecundarios: ["casual", "oficina"], ocasion: "laburo", estacion: "entretiempo" },
   { id: "sweater-liviano-negro", nombre: "Sweater liviano negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "viscosa", estilo: "clasico", estilosSecundarios: ["casual", "oficina"], ocasion: "laburo", estacion: "entretiempo" },
+
+  // --- Sweater cuello alto (turtleneck) -- ampliación del catálogo. Hueco
+  // real: todos los sweaters de arriba son cuello redondo/pullover -- el
+  // cuello alto de lana negro es una prenda clásica real con nombre e
+  // identidad propia (el básico minimalista de invierno por excelencia,
+  // tan citado en moda como el sweater a rayas o la camisa blanca), no una
+  // variante menor. Lana + invierno, mismo criterio textil que el resto de
+  // los sweaters de lana de arriba. Mismo negro estándar del catálogo.
+  { id: "sweater-cuello-alto-negro", nombre: "Sweater cuello alto negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "lana", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", estacion: "invierno" },
 
   // --- Calzado ---
   // Revisado como modista/ingeniero textil, pedido explícito del usuario:
@@ -599,6 +706,18 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
     ocasion: "casual",
     corteCalzado: "zapatilla_running",
   },
+  // rojas -- ampliación del catálogo, mismo rojo que remera-roja/campera-
+  // rompeviento-roja/bufanda-roja (#B93A32): completa el kit deportivo
+  // rojo (campera + zapatilla) que hasta ahora solo tenía la campera.
+  {
+    id: "zapatillas-running-rojas",
+    nombre: "Zapatillas running rojas",
+    categoria: "calzado",
+    colorHex: "#B93A32",
+    estilo: "deportivo",
+    ocasion: "casual",
+    corteCalzado: "zapatilla_running",
+  },
   // mocasines -- registro clásico, hueco real del catálogo (antes clasico
   // no tenía NINGÚN calzado propio). Sin cordones, con la tira/correa
   // cruzando el empeine (penny loafer) -- el detalle real más definitorio
@@ -688,6 +807,18 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // el archivo ya documenta.
   { id: "campera-jean", nombre: "Campera de jean", categoria: "campera", colorHex: "#5B7FA6", textura: "denim", estilo: "casual", estilosSecundarios: ["urbano"], ocasion: "casual", estacion: "entretiempo" },
   { id: "campera-verde-militar", nombre: "Campera verde militar", categoria: "campera", colorHex: "#5A5F3D", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
+  // campera de cuero (biker/motociclista) -- ampliación del catálogo. Hueco
+  // real: "cuero_liso" ya existe en el enum y se usa en zapatos/mocasines/
+  // cinturones, pero ninguna campera del catálogo lo usaba -- la campera de
+  // cuero negra es EL ícono urbano por excelencia (Perfecto/biker jacket),
+  // tan real y citado como la de jean o la de pluma, no una variante menor
+  // de campera-negra (tela lisa) -- el cuero liso ya suma su propio brillo
+  // real en el ícono/maniquí (ver TEXTURA_BRILLO en PrendaIcon.tsx), así
+  // que se distingue visualmente de las demás camperas negras del catálogo.
+  // Mismo negro de cuero que ya usan zapatos-cuero-negro/mocasines-negros
+  // (#1C1210, no el #1A1A1A de tela) -- consistencia de paleta cross-
+  // categoría: es el mismo material, tiene que ser el mismo tono.
+  { id: "campera-cuero-negra", nombre: "Campera de cuero negra", categoria: "campera", colorHex: "#1C1210", textura: "cuero_liso", estilo: "urbano", ocasion: "casual", estacion: "entretiempo" },
   // piloto -- no es un rompeviento deportivo (más abajo) ni una campera de
   // vestir: es la campera de lluvia liviana/impermeable de uso diario
   // (nylon/microfibra), verificado por búsqueda web. Pedido explícito del
@@ -834,6 +965,15 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // (no "ajustado" como el de lana): un saco de lino real es más suelto,
   // parte de por qué transpira mejor.
   { id: "saco-lino-beige", nombre: "Saco de lino beige", categoria: "saco", colorHex: "#D8C7A1", textura: "lino", estilo: "formal", ocasion: "laburo", calce: "regular" },
+  // saco negro y gris carbón -- ampliación del catálogo. Hueco real: hasta
+  // esta ronda el único saco de paño era azul marino, dejando afuera los
+  // otros dos colores de traje más estándar que existen (negro y gris
+  // carbón), tan reales como el azul marino en cualquier placard formal.
+  // Gris carbón reusa el mismo hex que pantalon-vestir-gris (#6E6E6E) --
+  // consistencia de paleta cross-categoría: arma el mismo traje completo
+  // que ya arma el azul marino (saco + pantalón de vestir a tono).
+  { id: "saco-negro", nombre: "Saco negro", categoria: "saco", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
+  { id: "saco-gris", nombre: "Saco gris carbón", categoria: "saco", colorHex: "#6E6E6E", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
 
   // --- Accesorios ---
   // Reusa hex ya presentes en otras categorías (azul marino, bordo) a
@@ -868,12 +1008,23 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // roja -- la corbata de vestir más clásica que existe ("power tie"), un
   // vacío real en un catálogo que hasta ahora solo tenía azul marino/bordó.
   { id: "corbata-roja", nombre: "Corbata roja", categoria: "accesorio", colorHex: "#A6332B", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
+  // negra -- ampliación del catálogo. Hueco real: la corbata negra lisa es
+  // tan estándar de vestir (junto con la azul marino) como cualquiera de
+  // las tres de arriba, y el catálogo no tenía ninguna. Mismo negro
+  // estándar que ya usa el resto del catálogo (#1A1A1A).
+  { id: "corbata-negra", nombre: "Corbata negra", categoria: "accesorio", colorHex: "#1A1A1A", textura: "seda", estilo: "formal", ocasion: "laburo", requiereCuello: true, posicionAccesorio: "cuello" },
   { id: "bufanda-gris", nombre: "Bufanda gris", categoria: "accesorio", colorHex: "#8C8C8C", textura: "lana", estilo: "casual", ocasion: "casual", posicionAccesorio: "cuello" },
   // roja -- mismo hex que remera-roja de arriba, mismo criterio de paleta
   // consistente que ya documenta el archivo (una bufanda roja combina con
   // la remera roja ya cargada, no con un rojo ligeramente distinto). Color
   // de acento típico de bufanda de invierno.
   { id: "bufanda-roja", nombre: "Bufanda roja", categoria: "accesorio", colorHex: "#B93A32", textura: "lana", estilo: "casual", ocasion: "casual", posicionAccesorio: "cuello" },
+  // azul marino -- ampliación del catálogo. Hueco real: la bufanda azul
+  // marino es tan de invierno estándar como la gris/roja de arriba, y
+  // combina con toda la ropa azul marino ya cargada en el resto del
+  // catálogo (buzo/sweater/pantalón/campera/zapatillas). Mismo hex de
+  // siempre (#1F2A44) -- consistencia de paleta cross-categoría.
+  { id: "bufanda-azul-marino", nombre: "Bufanda azul marino", categoria: "accesorio", colorHex: "#1F2A44", textura: "lana", estilo: "casual", ocasion: "casual", posicionAccesorio: "cuello" },
 ];
 
 /** Deriva h/s/l de cada preset una sola vez (no en cada render). hsl2 solo

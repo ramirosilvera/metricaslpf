@@ -234,25 +234,36 @@ export function PatronTextura({ id, textura, tono }: { id: string; textura: Text
  *  celeste sobre blanco es blanco Y celeste, no "blanco con un tinte
  *  celeste". Pedido explícito del usuario: "camisas ralladas... inspírate
  *  en usos y costumbres, moda". Rayas verticales (paralelas a los
- *  botones) -- así se raya una camisa de vestir real; horizontal es un
- *  patrón "Breton"/marinero, otra prenda que esta app no tiene. Cuadros:
- *  grilla simple horizontal+vertical, un tattersall/cuadro básico. */
+ *  botones) por default -- así se raya una camisa de vestir real.
+ *  `horizontal` -- ampliación del catálogo (Consejo, ronda de "variedad de
+ *  colores/estilos/prendas"): se agregó una remera a rayas ("remera-rayas-
+ *  marina" en catalogo.ts, la marinière/Breton stripe real), y ese
+ *  estampado SIEMPRE es horizontal en la prenda real -- una rayada
+ *  vertical no se lee como Breton, se lee como si fuera una camisa. Antes
+ *  de esta ronda esta función solo sabía dibujar rayas verticales (el
+ *  comentario decía explícitamente "horizontal... otra prenda que esta
+ *  app no tiene", cierto en ese momento, ya no). Los llamadores pasan
+ *  `horizontal={categoria === "remera"}` -- ver PrendaIcon/Maniqui.tsx --
+ *  para no afectar ninguna camisa ya cargada. Cuadros no cambia: un
+ *  tattersall es simétrico, no tiene una orientación "correcta". */
 export function PatronEstampado({
   id,
   patron,
   colorBase,
   color2,
+  horizontal = false,
 }: {
   id: string;
   patron: Extract<Patron, "rayas" | "cuadros">;
   colorBase: string;
   color2: string;
+  horizontal?: boolean;
 }) {
   if (patron === "rayas") {
     return (
       <pattern id={id} width="5" height="5" patternUnits="userSpaceOnUse">
         <rect width="5" height="5" fill={colorBase} />
-        <rect x="0" width="1.6" height="5" fill={color2} />
+        {horizontal ? <rect y="0" width="5" height="1.6" fill={color2} /> : <rect x="0" width="1.6" height="5" fill={color2} />}
       </pattern>
     );
   }
@@ -446,7 +457,7 @@ export function PrendaShape({
         </linearGradient>
       )}
       {conEstampado && color2 && (estampado === "rayas" || estampado === "cuadros") && (
-        <PatronEstampado id={estampadoId} patron={estampado} colorBase={color} color2={color2} />
+        <PatronEstampado id={estampadoId} patron={estampado} colorBase={color} color2={color2} horizontal={categoria === "remera"} />
       )}
     </defs>
   );
@@ -459,9 +470,23 @@ export function PrendaShape({
       // ver esRemeraDeportiva más arriba: el corte real que distingue una
       // remera técnica/jersey de una remera de algodón común, que no lleva
       // ninguna costura de manga marcada en la silueta.
+      // con estampado (remera-rayas-marina en catalogo.ts, la primera
+      // remera con patron real) -- mismo mecanismo que camisa más abajo: el
+      // fill ES el patrón de rayas (dos colores reales, horizontal acá, ver
+      // el comentario de PatronEstampado), sin la capa de textura
+      // semitransparente encima. Bug real de esta ronda: antes de esta
+      // corrección el `fill` de la remera quedaba hardcodeado a `color`,
+      // ignorando `estampadoUrl` por completo -- inofensivo mientras
+      // ninguna remera del catálogo tuviera patron cargado, pero silencioso
+      // (la prenda se dibujaba lisa, sin avisar) apenas se cargó una.
       forma = (
         <>
-          <FormaConTextura d="M22 8 L32 14 L42 8 L54 16 L47 26 L42 22 L42 56 L22 56 L22 22 L17 26 L10 16 Z" fill={color} stroke={stroke} patron={patron} />
+          <FormaConTextura
+            d="M22 8 L32 14 L42 8 L54 16 L47 26 L42 22 L42 56 L22 56 L22 22 L17 26 L10 16 Z"
+            fill={conEstampado ? estampadoUrl! : color}
+            stroke={stroke}
+            patron={conEstampado ? undefined : patron}
+          />
           {esRemeraDeportiva(categoria, textura) && (
             <>
               <line x1="36" y1="10" x2="42" y2="22" stroke={tonoDetalle} strokeWidth={1} />
