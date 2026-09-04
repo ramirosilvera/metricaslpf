@@ -21,6 +21,7 @@ import {
   semillaDelDia,
   sugerenciaDeAbrigoInvierno,
   sugerenciaDeAncla,
+  sugerenciaDeSacoDeVerano,
   sugerenciaDeVariedad,
   tanda,
   type OutfitParaComprar,
@@ -577,16 +578,28 @@ export function Contenido({
   // Pedido explícito del usuario, reporte real: "el estilo formal no me
   // arroja ningún resultado, y tengo todas las prendas... saco, pantalón,
   // camisa, corbata, cinturón y zapatos". Causa real, verificada por
-  // ejecución: armarOutfitsSugeridos excluye el saco de CUALQUIER outfit
-  // cuando el clima elegido es "Calor" (un saco de lana no tiene sentido
-  // con calor real, ver excluirSaco en recommend.ts) -- y "Formal" exige
-  // saco (outfitSirveParaEstilo). Con "Calor", "Formal" es una
-  // combinación estructuralmente imposible para CUALQUIER placard, no
-  // solo el de este usuario -- pero sugerenciaAncla no lo detecta (el
-  // usuario SÍ tiene pantalón/saco de ese registro; el clima elegido es
-  // lo que los excluye, no una prenda faltante) y el mensaje genérico
-  // ("no armamos nada... probá otra ocasión") no explica el motivo real.
+  // ejecución: armarOutfitsSugeridos excluye el saco de LANA de cualquier
+  // outfit cuando el clima elegido es "Calor" (un saco de lana no tiene
+  // sentido con calor real, ver excluirSacoPorPiernas/esSacoLivianoDeVerano
+  // en recommend.ts) -- y "Formal" exige saco (outfitSirveParaEstilo). Con
+  // "Calor", "Formal" queda sin ninguna opción para cualquier placard cuyo
+  // único saco sea de lana -- pero sugerenciaAncla no lo detecta (el
+  // usuario SÍ tiene pantalón/saco de ese registro; el clima elegido es lo
+  // que los excluye, no una prenda faltante).
   const formalImposibleConCalor = estiloSugerido === "formal" && climaSugerido === "verano";
+
+  // Pedido explícito del usuario, ronda siguiente: "falta poner la
+  // recomendación de compra cuando no hay opciones de outfit" -- el
+  // mensaje de arriba explicaba el motivo pero, a diferencia del resto de
+  // los "sin opciones" (que sí ofrecen una tarjeta de "+ Cargar"), este
+  // quedaba como un callejón sin salida real. A diferencia de la falta de
+  // abrigo de invierno (sin arreglo real posible), acá SÍ lo hay: un saco
+  // de lino/algodón (el saco de verano de sastrería real) sí funciona con
+  // calor -- ver sugerenciaDeSacoDeVerano en recommend.ts.
+  const sugerenciaSaco = useMemo(() => {
+    if (!formalImposibleConCalor || poolSugeridosPorEstilo.length > 0) return null;
+    return sugerenciaDeSacoDeVerano(placard);
+  }, [formalImposibleConCalor, poolSugeridosPorEstilo, placard]);
 
   const paraComprar = useMemo(
     () => tanda(poolParaComprar, offsetParaComprar, VISIBLES_POR_SECCION),
@@ -844,20 +857,20 @@ export function Contenido({
               {estiloSugerido === "todos"
                 ? "Todavía no armamos ninguna combinación con lo que tenés cargado -- cargá algún pantalón, bermuda o short: es la prenda ancla que arma el resto del outfit."
                 : formalImposibleConCalor
-                  ? 'Un saco no se usa con calor real -- "Formal" (el traje completo) no tiene sentido con esta temperatura, aunque tengas todas las prendas cargadas. Probá "Frío" o "Entretiempo".'
+                  ? `Un saco de lana no se usa con calor real -- "Formal" no tiene sentido con esta temperatura con el que tenés cargado.${sugerenciaSaco ? "" : ' Probá "Frío" o "Entretiempo", o cargá un saco de lino/algodón (el saco de verano real).'}`
                   : climaSugerido === "invierno" && hayPantalonDeEsteEstilo
                     ? `Con frío de verdad, "Vestite hoy" solo arma looks ${ESTILO_LABEL[estiloSugerido]} con un abrigo real de invierno puesto -- no alcanza con una remera o camisa sola, ni con un abrigo de entretiempo.${sugerenciaAbrigo ? "" : " Por ahora no encontramos en el catálogo un abrigo de invierno de este registro para sugerirte -- fijate si tenés uno cargado sin marcar la estación."}`
                     : `No armamos ningún look ${ESTILO_LABEL[estiloSugerido]} todavía con lo que tenés cargado.${sugerenciaAncla ? "" : ` Mirá "Ideas para comprar" más abajo, o probá otra ocasión.`}`}
             </p>
-            {(sugerenciaAncla || sugerenciaAbrigo) && (
+            {(sugerenciaAncla || sugerenciaAbrigo || sugerenciaSaco) && (
               <div className="card" style={{ marginTop: "0.6rem", display: "flex", gap: "0.6rem", alignItems: "center" }}>
                 <span style={{ fontSize: "1.2rem" }}>💡</span>
-                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>{(sugerenciaAncla ?? sugerenciaAbrigo)!.mensaje}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", flex: 1 }}>{(sugerenciaAncla ?? sugerenciaAbrigo ?? sugerenciaSaco)!.mensaje}</p>
                 <button
                   type="button"
                   className="btn btn-secondary"
                   style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", whiteSpace: "nowrap" }}
-                  onClick={() => cargarSugerencia((sugerenciaAncla ?? sugerenciaAbrigo)!.sugerida)}
+                  onClick={() => cargarSugerencia((sugerenciaAncla ?? sugerenciaAbrigo ?? sugerenciaSaco)!.sugerida)}
                 >
                   + Cargar
                 </button>

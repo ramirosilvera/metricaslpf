@@ -183,27 +183,49 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
   }
 
   // 4. Complementarios.
-  if (hd >= HUE_COMPLEMENTARIO && vd >= VALUE_AUDAZ) {
-    // Complementarios APAGADOS con buen contraste de luminosidad: no es un
-    // statement, es la base de la paleta de sastrería clásica (camel +
-    // marino, celeste + marrón). Auditoría de color/textiles (Consejo,
-    // ronda siguiente), verificada corriendo el catálogo completo (155
-    // pares con tag "audaz", 126 de ellos con croma bajo): lo que hace
-    // "audaz" a un complementario es su croma, no el ángulo de matiz -- el
-    // matiz del beige (h=41) es formalmente complementario del azul marino,
-    // pero los dos están tan rebajados que no compiten como statement.
+  if (hd >= HUE_COMPLEMENTARIO) {
+    // Complementarios APAGADOS: no es un statement, es la base de la
+    // paleta de sastrería clásica (camel + marino, celeste + marrón, y el
+    // caso que motivó este ajuste: un traje azul marino con cuero marrón
+    // -- cinturón y zapatos). Auditoría de color/textiles (Consejo, ronda
+    // siguiente), verificada corriendo el catálogo completo (155 pares con
+    // tag "audaz", 126 de ellos con croma bajo): lo que hace "audaz" a un
+    // complementario es su croma, no el ángulo de matiz ni la separación
+    // de luminosidad -- el matiz del beige (h=41) es formalmente
+    // complementario del azul marino, pero los dos están tan rebajados que
+    // no compiten como statement.
+    //
+    // Reporte real del usuario, revisado como asesor de imagen: "con un
+    // traje azul marino, cinturón y zapatos marrones SÍ va" -- y tenía
+    // razón, es una de las combinaciones más clásicas de sastrería que
+    // existen (a menudo preferida sobre el negro). Antes de este ajuste
+    // esta rama exigía TAMBIÉN `vd >= VALUE_AUDAZ` (buena separación de
+    // luminosidad) para entrar acá -- funciona bien para "beige + marino"
+    // (l=74 vs l=19, vd=0.55) pero un traje azul marino (h222 s37 l19) y un
+    // cuero marrón real (h25 s47 l25) son dos oscuros con luminosidad
+    // parecida (vd=0.06): quedaban afuera de esta rama, nunca por hd (que
+    // sí es complementario) ni por croma (los dos apagados, croma 14 y 24)
+    // sino solo por la separación de luminosidad -- y caían en el
+    // catch-all genérico (regla 6, "muy_bueno") en vez de acá. La
+    // separación de luminosidad es la razón de ser de la regla 4 SATURADA
+    // de abajo (necesita contraste de valor para leerse intencional, no
+    // caótica) -- pero una paleta apagada no compite en absoluto, así que
+    // no necesita ese contraste para funcionar (mismo criterio que ya usa
+    // la regla 2, análoga + croma bajo, que tampoco exige nada de `vd`).
     if (Math.max(croma(base), croma(candidato)) < CROMA_ACENTO) {
       return {
         nivel: "excelente",
-        explicacion: "Complementarios apagados con buen contraste de luminosidad: la base de la paleta clásica.",
+        explicacion: "Complementarios apagados: la base de la paleta clásica de sastrería (marino y marrón, camel y marino...).",
       };
     }
-    return {
-      nivel: "muy_bueno",
-      tag: "combinacion_audaz",
-      explicacion:
-        "Colores opuestos en el círculo cromático con buen contraste de luminosidad: funciona, pero se nota.",
-    };
+    if (vd >= VALUE_AUDAZ) {
+      return {
+        nivel: "muy_bueno",
+        tag: "combinacion_audaz",
+        explicacion:
+          "Colores opuestos en el círculo cromático con buen contraste de luminosidad: funciona, pero se nota.",
+      };
+    }
   }
 
   // 4b. Complementarios de croma alto SIN separación de luminosidad: el
@@ -1507,6 +1529,20 @@ function esAbrigoDeInvierno(p: Prenda): boolean {
   return CATEGORIAS_ABRIGO.includes(p.categoria) && p.estacion === "invierno";
 }
 
+/** true si el saco es de tela liviana de verano (lino o algodón) -- el
+ *  saco de verano real de sastrería (blazer de lino/algodón sin forro
+ *  pesado), a diferencia del paño de lana que ya excluye armarOutfits*
+ *  con clima="verano" (ver su comentario grande). Sin esto, "Formal" con
+ *  "Calor" era estructuralmente imposible para cualquier placard: un saco
+ *  de lino existe y se usa en verano de verdad, pero el motor lo trataba
+ *  igual que uno de lana. No usa `estacion` (ese campo no se tagea en
+ *  saco -- ver CATEGORIAS_ABRIGO): la tela SÍ es el dato real que separa
+ *  un saco de invierno de uno de verano, igual que ya distingue un buzo
+ *  liviano de uno frisado (ver Textura en types.ts). */
+function esSacoLivianoDeVerano(p: Prenda): boolean {
+  return p.categoria === "saco" && (p.textura === "lino" || p.textura === "algodon");
+}
+
 /** bermuda/short_deportivo -- las dos categorías de piernas que exponen las
  *  piernas, a diferencia de pantalon. Revisado como modista, reporte real
  *  del usuario ("bermuda con sweater, ambos beige"): el problema no era el
@@ -1647,7 +1683,22 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
     // con calor), y antes de esto solo se excluía por ancla veraniega
     // (bermuda/short), nunca por clima -- un pantalón largo + saco de lana
     // pasaba igual con clima="verano".
-    const excluirSaco = esAnclaVeraniega || clima === "verano";
+    //
+    // Consejo, ronda siguiente -- pedido explícito del usuario ("falta la
+    // recomendación de compra cuando no hay opciones de outfit"),
+    // diagnosticado por ejecución: la exclusión de arriba bloqueaba TODO
+    // saco con clima="verano", sea cual sea su tela -- pero un saco de
+    // lino/algodón (el saco de verano real, ver esSacoLivianoDeVerano más
+    // abajo) sí existe en sastrería real y sí tiene sentido con calor de
+    // verdad, a diferencia de uno de lana. Sin este ajuste, "Formal" con
+    // "Calor" era estructuralmente imposible para CUALQUIER placard (no
+    // solo el de este usuario) aunque el catálogo/placard tuviera un saco
+    // liviano cargado -- y como el motor solo excluía, nunca distinguía,
+    // tampoco había forma de sugerir comprar uno. clima="invierno"/
+    // "entretiempo" no cambian: cualquier saco sirve ahí, sea cual sea su
+    // tela (un saco de lino en invierno es una elección rara pero no una
+    // combinación imposible como sí lo es un saco de lana con calor real).
+    const excluirSacoPorPiernas = esAnclaVeraniega;
     // Pedido explícito del usuario: "en el clima frío, siempre las
     // opciones tienen que ser con abrigo, sí o sí, y con un abrigo de
     // invierno. En caso de que no tenga un abrigo de invierno, no tenés
@@ -1680,7 +1731,10 @@ export function armarOutfitsSugeridos(placard: Prenda[], clima: Estacion = estac
       if (esAnclaDeportiva && p.categoria !== "remera" && !estilosDe(p).includes("deportivo")) return false;
       if (excluirAbrigo && CATEGORIAS_ABRIGO.includes(p.categoria)) return false;
       if (excluirOficina && esDeOficina(p)) return false;
-      if (excluirSaco && p.categoria === "saco") return false;
+      if (p.categoria === "saco") {
+        if (excluirSacoPorPiernas) return false;
+        if (clima === "verano" && !esSacoLivianoDeVerano(p)) return false;
+      }
       return true;
     });
     // La camisa nunca es, en sí misma, el "abrigo" de invierno -- es la
@@ -2673,6 +2727,54 @@ export function sugerenciaDeAbrigoInvierno(
     };
   }
   return null;
+}
+
+export interface SugerenciaSacoDeVerano {
+  mensaje: string;
+  sugerida: PresetPrenda & { hsl: HSL };
+}
+
+/** Contraparte de sugerenciaDeAbrigoInvierno, para el otro extremo:
+ *  pedido explícito del usuario ("falta la recomendación de compra cuando
+ *  no hay opciones de outfit"), diagnosticado por ejecución -- "Formal"
+ *  con clima="verano" queda con CERO opciones para cualquier placard cuyo
+ *  único saco sea de lana (paño de invierno real, ver
+ *  esSacoLivianoDeVerano): un saco de lana nunca combina con calor de
+ *  verdad, así que armarOutfitsSugeridos lo excluye siempre con ese clima
+ *  (ver su comentario) -- pero a diferencia de la mayoría de los "sin
+ *  opciones", esto SÍ tiene arreglo real: un saco de lino/algodón (el saco
+ *  de verano de sastrería real) sí funciona. armarOutfitsParaComprar no
+ *  puede verlo (mismo motivo que sugerenciaDeAbrigoInvierno): "saco" no
+ *  está AUSENTE del placard, solo mal tageado para la estación. Solo
+ *  aplica a "formal" (es la única ocasión que exige saco -- ver
+ *  outfitSirveParaEstilo) -- a propósito no toma `estilo` como parámetro,
+ *  a diferencia de sugerenciaDeAbrigoInvierno, porque no tendría sentido
+ *  para ningún otro. `null` si no hay ancla formal, si el placard ya tiene
+ *  un saco liviano real, o si el catálogo no tiene ninguno que combine. */
+export function sugerenciaDeSacoDeVerano(
+  placard: Prenda[],
+  catalogo: (PresetPrenda & { hsl: HSL })[] = CATALOGO_CON_HSL,
+): SugerenciaSacoDeVerano | null {
+  const ancla = placard.find((p) => p.categoria === "pantalon" && estilosDe(p).includes("formal"));
+  if (!ancla) return null;
+
+  if (placard.some(esSacoLivianoDeVerano)) return null;
+
+  const candidatos = catalogo
+    .filter((preset) => preset.categoria === "saco" && (preset.textura === "lino" || preset.textura === "algodon"))
+    .map((preset) => {
+      const [r] = recomendar(ancla, [presetAPrendaSintetica(preset)], placard);
+      return { preset, score: r.score };
+    })
+    .filter((c) => c.score.nivel !== "con_cuidado")
+    .sort((a, b) => nivelOrden(b.score.nivel) - nivelOrden(a.score.nivel));
+  const sugerida = candidatos[0]?.preset;
+  if (!sugerida) return null;
+
+  return {
+    mensaje: `Con calor de verdad, "Formal" necesita un saco de verano real (lino o algodón, no de lana) -- ese sí tiene sentido con esta temperatura. Te serviría sumar "${sugerida.nombre}".`,
+    sugerida,
+  };
 }
 
 /** Diff entre las prendas actuales de un outfit guardado y las que el

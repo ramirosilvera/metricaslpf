@@ -805,6 +805,21 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // calce "ajustado" -- un saco/blazer de sastrería real es entallado, no
   // ancho (auditoría de sastrería, Consejo, ronda de auditoría del motor).
   { id: "saco-azul-marino", nombre: "Saco azul marino", categoria: "saco", colorHex: "#1F2A44", textura: "lana", estilo: "formal", ocasion: "laburo", calce: "ajustado" },
+  // saco de lino -- Consejo, ronda siguiente, pedido explícito del usuario
+  // ("falta la recomendación de compra cuando no hay opciones de outfit"):
+  // diagnosticado por ejecución, "Formal" con clima="Calor" quedaba
+  // estructuralmente imposible para CUALQUIER placard -- el único saco de
+  // acá arriba es de lana (paño de invierno real), y armarOutfitsSugeridos
+  // excluye TODO saco con calor real, sin importar la tela. Un saco de
+  // lino (o algodón/mixto) es el saco de verano de sastrería real -- sin
+  // forro pesado, tela suelta que transpira -- verificado por búsqueda
+  // web: es la prenda estándar para "traje de verano" (bodas/eventos
+  // formales de temporada cálida). Beige, el color de lino más clásico y
+  // el mismo hex que ya usa el resto del catálogo (pantalon-vestir-beige y
+  // compañía) -- consistencia de paleta cross-categoría. calce "regular"
+  // (no "ajustado" como el de lana): un saco de lino real es más suelto,
+  // parte de por qué transpira mejor.
+  { id: "saco-lino-beige", nombre: "Saco de lino beige", categoria: "saco", colorHex: "#D8C7A1", textura: "lino", estilo: "formal", ocasion: "laburo", calce: "regular" },
 
   // --- Accesorios ---
   // Reusa hex ya presentes en otras categorías (azul marino, bordo) a

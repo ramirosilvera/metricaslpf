@@ -24,6 +24,7 @@ import {
   semillaDelDia,
   sugerenciaDeAbrigoInvierno,
   sugerenciaDeAncla,
+  sugerenciaDeSacoDeVerano,
   sugerenciaDeVariedad,
   tanda,
   tecnicaRescate,
@@ -173,6 +174,21 @@ describe("scoreColor", () => {
     // viejo no distinguía "saturado de verdad" de "apenas con color".
     const r = scoreColor({ h: 222, s: 37, l: 19 }, { h: 25, s: 47, l: 25 });
     expect(r.nivel).not.toBe("con_cuidado");
+  });
+
+  // Consejo, ronda siguiente -- reporte real del usuario, revisado como
+  // asesor de imagen: "con un traje azul marino, cinturón y zapatos
+  // marrones SÍ va", corrigiendo una respuesta anterior de la app. El test
+  // de arriba ("2da ronda") solo pedía "no con_cuidado" -- dejaba pasar
+  // "muy_bueno", que es justo lo que daba antes de este ajuste (ver la
+  // regla 4 de scoreColor, rama "apagados"): la separación de luminosidad
+  // funciona para "beige + marino" (l muy separados) pero marino+marrón de
+  // cuero son dos oscuros parecidos en luminosidad -- por croma, los dos
+  // son "paleta apagada" igual, así que corresponde "excelente" directo,
+  // no solo "aceptable".
+  it("marino + marrón de cuero (mismos valores reales, dos oscuros con poca separación de luminosidad) -> excelente, no solo 'no con_cuidado'", () => {
+    const r = scoreColor({ h: 222, s: 37, l: 19 }, { h: 25, s: 47, l: 25 });
+    expect(r.nivel).toBe("excelente");
   });
 
   it("banda de neutro ampliada evita el salto de tier por ruido de foto (l=12 vs l=13)", () => {
@@ -1915,6 +1931,24 @@ describe("armarOutfitsSugeridos", () => {
       expect(outfits[0].prendas.map((p) => p.categoria).sort()).toEqual(["pantalon", "remera"].sort());
     });
 
+    // Consejo, ronda siguiente -- pedido explícito del usuario ("falta la
+    // recomendación de compra cuando no hay opciones de outfit"): un saco
+    // de LANA no tiene sentido con calor real (test de arriba), pero un
+    // saco de LINO/ALGODÓN es el saco de verano real de sastrería -- sin
+    // este ajuste "Formal" con clima="verano" era estructuralmente
+    // imposible para cualquier placard, sin importar la tela del saco.
+    it("clima='verano' SÍ permite un saco de lino/algodón (el saco de verano real), a diferencia de uno de lana", () => {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      const sacoLino = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+      sacoLino.estilo = "clasico";
+      sacoLino.textura = "lino";
+      // un saco exige camisa propia debajo (nunca solo) -- ver el
+      // comentario de camisasParaSaco en armarOutfitsSugeridos.
+      const camisa = mkPrenda("camisa", "#1A1A1A", 0, 0, 10);
+      const outfits = armarOutfitsSugeridos([pantalon, sacoLino, camisa], "verano");
+      expect(outfits.some((o) => o.prendas.some((p) => p.categoria === "saco"))).toBe(true);
+    });
+
     it("clima='verano' excluye una bufanda de lana del accesorio elegido, incluso con un pantalón largo", () => {
       const pantalon = mkPrenda("pantalon", "#8C8C8C", 0, 0, 55);
       const remera = mkPrenda("remera", "#8C8C8C", 0, 0, 55);
@@ -2912,6 +2946,52 @@ describe("sugerenciaDeAbrigoInvierno", () => {
   });
 });
 
+// Consejo, ronda siguiente -- pedido explícito del usuario: "falta poner la
+// recomendación de compra cuando no hay opciones de outfit". Contraparte de
+// sugerenciaDeAbrigoInvierno, para el hueco real diagnosticado: "Formal" con
+// clima="verano" queda sin ninguna opción para cualquier placard cuyo único
+// saco sea de lana (ver esSacoLivianoDeVerano/armarOutfitsSugeridos) -- un
+// saco de lino/algodón sí tiene sentido con calor real.
+describe("sugerenciaDeSacoDeVerano", () => {
+  const catalogoSacos: (PresetPrenda & { hsl: HSL })[] = [
+    { id: "saco-lino-beige", nombre: "Saco de lino beige", categoria: "saco", colorHex: "#D8C7A1", textura: "lino", estilo: "formal", hsl: { h: 41, s: 41, l: 74 } },
+    // saco de lana -- nunca debería sugerirse acá, es justo lo que no
+    // sirve con calor real.
+    { id: "saco-lana-negro", nombre: "Saco de lana negro", categoria: "saco", colorHex: "#1A1A1A", textura: "lana", estilo: "formal", hsl: { h: 0, s: 0, l: 10 } },
+  ];
+
+  it("sin ningún pantalón formal en el placard -> null (sugerenciaDeAncla ya cubre ese caso, con prioridad)", () => {
+    expect(sugerenciaDeSacoDeVerano([], catalogoSacos)).toBeNull();
+  });
+
+  it("el placard YA tiene un saco liviano de verano (lino/algodón) -> null, nada que comprar", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "formal";
+    const sacoLino = mkPrenda("saco", "#D8C7A1", 41, 41, 74);
+    sacoLino.estilo = "formal";
+    sacoLino.textura = "lino";
+    expect(sugerenciaDeSacoDeVerano([pantalon, sacoLino], catalogoSacos)).toBeNull();
+  });
+
+  it("el único saco es de lana (no de verano) -> sugiere el saco de lino/algodón del catálogo", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "formal";
+    const sacoLana = mkPrenda("saco", "#1A1A1A", 0, 0, 10);
+    sacoLana.estilo = "formal";
+    sacoLana.textura = "lana";
+    const r = sugerenciaDeSacoDeVerano([pantalon, sacoLana], catalogoSacos);
+    expect(r).not.toBeNull();
+    expect(r!.sugerida.id).toBe("saco-lino-beige");
+    expect(r!.mensaje).toContain("Formal");
+  });
+
+  it("el catálogo no tiene ningún saco liviano -> null, no inventa una sugerencia que no existe", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "formal";
+    expect(sugerenciaDeSacoDeVerano([pantalon], [])).toBeNull();
+  });
+});
+
 // Pedido explícito del usuario: "quiero un sistema de valoración por
 // puntos... este outfit es un nueve de diez por esto y por esto". No es una
 // escala nueva -- reusa scoreColor/recomendar() sobre TODOS los pares del
@@ -3227,16 +3307,24 @@ describe("mejorCompraParaSubirNota", () => {
   });
 });
 
-// Placard real y chico (mismos ids que el catálogo real) donde NINGUNA
-// compra de una sola prenda alcanza un 10 -- hallazgo de la auditoría de
-// Consejo sobre el placard REAL del usuario: saco y pantalón azul marino
-// "excelente"/"muy_bueno" contra calzado Y accesorio de cuero marrón (los
-// dos del MISMO marrón entre sí, por eso "excelente" uno con el otro, pero
-// "muy_bueno" cada uno contra el azul marino) -- cambiar solo el calzado a
-// negro deja el accesorio marrón sin coordinar (y viceversa), así que
-// hacen falta las dos prendas juntas. Confirmado por ejecución contra el
-// placard real de producción antes de escribir este test sintético.
-const placardFormalMarronSinCoordinar: Prenda[] = [
+// Placard real y chico (mismos ids que el catálogo real) con un traje azul
+// marino y cuero marrón (calzado + accesorio, coordinados entre sí).
+// Consejo, ronda siguiente -- reporte real del usuario, revisado como
+// asesor de imagen: "con un traje azul marino, cinturón y zapatos marrones
+// SÍ va" (corrigiendo una respuesta anterior de la app que asumía lo
+// contrario). Tenía razón: es una de las combinaciones más clásicas de
+// sastrería que existen. Hallazgo real, verificado por ejecución: la
+// regla 4 de scoreColor ("complementarios apagados" -- ver su comentario
+// largo) ya trataba a marino+marrón como paleta apagada por croma, pero
+// exigía ADEMÁS buena separación de luminosidad (`vd >= VALUE_AUDAZ`) para
+// entrar a esa rama -- funciona para "beige + marino" (l=74 vs l=19) pero
+// no para "marrón de cuero + marino" (l=25 vs l=19, dos oscuros): caía en
+// el catch-all genérico ("muy_bueno") en vez de "excelente", y eso topeaba
+// el outfit completo en 8/10 -- la app entonces "corregía" sugiriendo
+// cambiar a NEGRO (que sí es neutro), dando la falsa impresión de que el
+// marrón "no combinaba" con el traje. Arreglado en scoreColor (regla 4):
+// la rama apagada ya no exige `vd`, solo croma bajo -- ver su comentario.
+const placardFormalMarronConTrajeMarino: Prenda[] = [
   "pantalon-vestir-azul",
   "saco-azul-marino",
   "camisa-celeste",
@@ -3244,22 +3332,18 @@ const placardFormalMarronSinCoordinar: Prenda[] = [
   "cinturon-marron",
 ].map((id) => presetAPrendaSintetica(catalogoPorId[id]));
 
-describe("comboParaExcelencia", () => {
-  it("caso real: cuero marrón (calzado + accesorio) sin coordinar con el azul marino -- ninguna compra de UNA prenda llega a 10, pero la pareja sí", () => {
-    const placard = placardFormalMarronSinCoordinar;
+describe("scoreColor -- traje azul marino con cuero marrón (cinturón y zapatos)", () => {
+  it("caso real corregido: traje azul marino + cinturón y zapatos marrones -> 10/10 directo, sin necesitar ninguna compra", () => {
+    const placard = placardFormalMarronConTrajeMarino;
     const base = armarOutfitsSugeridos(placard, "entretiempo")
       .filter((s) => outfitEsCoherenteParaEstilo(s.prendas, "formal"))
       .sort((a, b) => b.puntaje - a.puntaje)[0];
-    expect(base.puntaje).toBe(8);
-    // confirma la premisa del test: con esta base, ni un solo swap alcanza.
-    expect(mejorCompraParaSubirNota("formal", base, placard)).toBeUndefined();
-
-    const combo = comboParaExcelencia("formal", base, placard);
-    expect(combo).toBeDefined();
-    expect(combo!.puntaje).toBe(10);
-    expect(combo!.sugeridas.map((s) => s.id).sort()).toEqual(["cinturon-negro", "zapatos-cuero-negro"]);
+    expect(base).toBeDefined();
+    expect(base.puntaje).toBe(10);
   });
+});
 
+describe("comboParaExcelencia", () => {
   // Consejo, reporte real del usuario con captura: "Clásico" no armaba
   // NINGÚN look ni sugería NADA para comprar -- ni siquiera la tarjeta de
   // "comprá esto para llegar a 5 estrellas". Causa real, verificada por
@@ -3306,10 +3390,11 @@ describe("comboParaExcelencia", () => {
   });
 
   it("ni una prenda ni una pareja alcanzan (catálogo vacío) -> undefined, sin inventar una mejora que no existe", () => {
-    const placard = placardFormalMarronSinCoordinar;
+    const placard = placardFormalSinZapatosDeVestir;
     const base = armarOutfitsSugeridos(placard, "entretiempo")
-      .filter((s) => outfitEsCoherenteParaEstilo(s.prendas, "formal"))
+      .filter((s) => outfitSirveParaEstilo(s.prendas, "formal"))
       .sort((a, b) => b.puntaje - a.puntaje)[0];
+    expect(base.puntaje).toBeLessThan(10);
     expect(comboParaExcelencia("formal", base, placard, [])).toBeUndefined();
   });
 
