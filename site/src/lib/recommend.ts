@@ -2202,7 +2202,20 @@ export interface ComboParaExcelencia {
  *  millones. Devuelve la primera combinación válida que llega a un 10
  *  real y estricto (outfitEsCoherenteParaEstilo, la misma vara que decide
  *  qué se MUESTRA en Vestite hoy), no necesariamente "la más barata" entre
- *  varias -- cualquiera que llegue a 10 sirve igual de bien. */
+ *  varias -- cualquiera que llegue a 10 sirve igual de bien.
+ *
+ *  Auditoría de Consejo (reporte real del usuario, captura de "Clásico"
+ *  sin ninguna tarjeta ni sugerencia): un slot de TORSO (remera/buzo/
+ *  sweater/camisa/campera/saco) se busca entre TODAS las categorías de
+ *  torso del catálogo, no solo la categoría original -- verificado por
+ *  ejecución que el caso real es exactamente esto: el usuario tiene una
+ *  remera puesta hoy, pero lo que hace falta para llegar a un "clásico"
+ *  de 10 es CAMBIAR DE CATEGORÍA (una remera nunca es clásica en este
+ *  catálogo, hace falta una camisa) -- buscar solo entre remeras del
+ *  catálogo (mismo error que antes de esta ronda) nunca podía encontrar
+ *  esa solución, sin importar cuántas remeras probara. Calzado y
+ *  accesorio siguen acotados a su propia categoría (son slots de silueta
+ *  real distinta, no intercambiables entre sí). */
 export function comboParaExcelencia(
   estilo: Estilo,
   base: OutfitSugerido,
@@ -2223,12 +2236,24 @@ export function comboParaExcelencia(
   const ancla = base.prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   if (!ancla) return undefined;
   const otras = base.prendas.filter((p) => p.id !== ancla.id);
+  // restantes: para no ofrecer un candidato de categoría torso que
+  // DUPLIQUE una que el resto del outfit ya conserva sin cambios (ej.
+  // reemplazar solo el saco por una camisa cuando la camisa ORIGINAL
+  // sigue en restantes -- terminaría en "2 camisas", y si encima el
+  // candidato elegido resulta ser el mismo preset de esa camisa ya
+  // puesta, puntuarOutfit revienta con dos ids idénticos, ver el
+  // hallazgo real de esta ronda al ampliar la búsqueda de torso).
+  const candidatosParaSlot = (categoriaOriginal: Categoria, restantes: Prenda[]) =>
+    (CATEGORIAS_CON_TORSO.includes(categoriaOriginal)
+      ? catalogo.filter((p) => CATEGORIAS_CON_TORSO.includes(p.categoria))
+      : catalogo.filter((p) => p.categoria === categoriaOriginal)
+    ).filter((p) => !restantes.some((r) => r.categoria === p.categoria));
 
   for (let i = 0; i < otras.length; i++) {
     for (let j = i + 1; j < otras.length; j++) {
       const restantes = base.prendas.filter((p) => p.id !== otras[i].id && p.id !== otras[j].id);
-      const candidatosA = catalogo.filter((p) => p.categoria === otras[i].categoria);
-      const candidatosB = catalogo.filter((p) => p.categoria === otras[j].categoria);
+      const candidatosA = candidatosParaSlot(otras[i].categoria, restantes);
+      const candidatosB = candidatosParaSlot(otras[j].categoria, restantes);
 
       for (const presetA of candidatosA) {
         const prendaA = presetAPrendaSintetica(presetA);
@@ -2242,6 +2267,13 @@ export function comboParaExcelencia(
           if (!rB || rB.score.nivel === "con_cuidado") continue;
           if (restantes.some((p) => chocan(prendaB, p, placard))) continue;
           if (chocan(prendaA, prendaB, placard)) continue;
+          // candidatosA/B pueden compartir pool entero (dos slots de torso
+          // a la vez, ver candidatosParaSlot) -- sin este chequeo, elegir
+          // el MISMO preset para los dos slots produce dos prendas con
+          // idéntico id sintético, y puntuarOutfit revienta al toparse con
+          // un par (a, b) donde a.id === b.id (recomendar() los filtra
+          // como "es la misma prenda", dejando ese par sin score).
+          if (presetA.id === presetB.id) continue;
 
           const outfitCompleto = [...restantes, prendaA, prendaB];
           if (!outfitEsCoherenteParaEstilo(outfitCompleto, estilo)) continue;

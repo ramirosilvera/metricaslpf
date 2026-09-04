@@ -180,6 +180,26 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // tan de oficina como esas, no informal como la de cuadros.
   { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
 
+  // --- Camisa de lino (smart casual) -- hueco real encontrado en la
+  // auditoría de imagen de esta ronda (Consejo, reporte real del usuario:
+  // "Clásico" no armaba ningún look ni sugería nada para comprar).
+  // Verificado por ejecución contra el placard real: TODAS las camisas/
+  // sweaters "clasico" del catálogo son ocasion="laburo" -- ninguna sirve
+  // de torso para un bermuda/short "clasico" (ocasion="casual"), porque
+  // esa combinación se excluye a propósito en armarOutfitsSugeridos (un
+  // bermuda no combina con una prenda de oficina real, ver esDeOficina).
+  // Resultado: "clásico" con un ancla de piernas corta era, hasta esta
+  // ronda, una combinación matemáticamente imposible en TODO el catálogo,
+  // no solo en el placard de este usuario. La camisa de lino es la prenda
+  // real que llena ese hueco -- el "smart casual" de verano por
+  // excelencia (lino con bermuda/chino corto, sin corbata), verificado
+  // por uso y costumbre real de la moda. Textura "lino" (ya existe en el
+  // enum, ver corbata/tapado). Mismo beige de siempre, más una blanca --
+  // los 2 colores más versátiles, mismo criterio que el resto del
+  // catálogo.
+  { id: "camisa-lino-blanca", nombre: "Camisa de lino blanca", categoria: "camisa", colorHex: "#F5F5F5", textura: "lino", estilo: "clasico", ocasion: "casual" },
+  { id: "camisa-lino-beige", nombre: "Camisa de lino beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "lino", estilo: "clasico", ocasion: "casual" },
+
   // --- Camisas a rayas -- pedido explícito del usuario: "camisas
   // ralladas, blanca y celestes y de otros colores tmb, inspírate en usos
   // y costumbres, moda". Curadas por real convención de vestimenta, del

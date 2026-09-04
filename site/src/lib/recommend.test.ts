@@ -3021,6 +3021,39 @@ describe("comboParaExcelencia", () => {
     expect(combo!.sugeridas.map((s) => s.id).sort()).toEqual(["cinturon-negro", "zapatos-cuero-negro"]);
   });
 
+  // Consejo, reporte real del usuario con captura: "Clásico" no armaba
+  // NINGÚN look ni sugería NADA para comprar -- ni siquiera la tarjeta de
+  // "comprá esto para llegar a 5 estrellas". Causa real, verificada por
+  // ejecución: comboParaExcelencia buscaba reemplazos DENTRO de la misma
+  // categoría del slot (remera -> otra remera) -- pero acá lo que hace
+  // falta es CAMBIAR DE CATEGORÍA (una remera nunca es "clasico" en todo
+  // el catálogo/placard real; hace falta una camisa) y, a la vez, un
+  // calzado que no esté topeado a rango 1 por su corte (ver
+  // rangoDeFormalidad/CORTES_DE_VESTIR) -- un mocasín, no una zapatilla.
+  // Ninguna búsqueda de una sola categoría podía encontrar esto. Ver el
+  // comentario de candidatosParaSlot en comboParaExcelencia (recommend.ts).
+  it("caso real: 'clasico' con bermuda + remera + zapatillas -- hace falta CAMBIAR DE CATEGORÍA (remera->camisa) además de calzado, no un reemplazo dentro de la misma categoría", () => {
+    const placard = ["bermuda-beige", "remera-negra", "zapatillas-negras", "cinturon-negro"].map((id) =>
+      presetAPrendaSintetica(catalogoPorId[id]),
+    );
+    const base = armarOutfitsSugeridos(placard, "entretiempo")
+      .filter((s) => outfitSirveParaEstilo(s.prendas, "clasico"))
+      .sort((a, b) => b.puntaje - a.puntaje)[0];
+    expect(base.puntaje).toBe(7);
+    // confirma la premisa: la mejor compra de UNA sola prenda no alcanza a 10.
+    const unaSola = mejorCompraParaSubirNota("clasico", base, placard);
+    expect(unaSola?.puntaje).toBeLessThan(10);
+
+    const combo = comboParaExcelencia("clasico", base, placard);
+    expect(combo).toBeDefined();
+    expect(combo!.puntaje).toBe(10);
+    const ids = combo!.sugeridas.map((s) => s.id).sort();
+    expect(ids).toContain("mocasines-marrones");
+    // el reemplazo de torso tiene que ser una CAMISA (categoría distinta a
+    // la remera original) -- es justo lo que antes no podía encontrar.
+    expect(combo!.sugeridas.some((s) => s.categoria === "camisa")).toBe(true);
+  });
+
   it("cuando UNA sola prenda ya alcanza el 10 (mejorCompraParaSubirNota), la reusa en vez de buscar una pareja", () => {
     const placard = placardFormalSinZapatosDeVestir;
     const base = armarOutfitsSugeridos(placard, "entretiempo")
