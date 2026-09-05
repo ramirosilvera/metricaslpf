@@ -163,7 +163,13 @@ function PuntajeBadge({
 function RegistroBadge({ prendas, estiloTab }: { prendas: Prenda[]; estiloTab?: Estilo }) {
   const registro = estiloTab ? ESTILO_LABEL[estiloTab] : registroOutfit(prendas);
   if (!registro) return null;
-  const avisos = advertenciasDeRegistro(prendas);
+  // estiloTab (cuando se conoce) -- mismo bug real que motivó el parámetro
+  // en recommend.ts (ver el comentario largo de prendaMenosFormalQuePantalon):
+  // sin esto, el aviso anclaba siempre al estilo PRINCIPAL del pantalón, no
+  // a la pestaña real que este badge está mostrando -- podía citar "más
+  // informal que el pantalón" sobre una prenda genuinamente tageada para
+  // esa pestaña (secundario, no principal).
+  const avisos = advertenciasDeRegistro(prendas, estiloTab);
   return (
     <div style={{ margin: "0.3rem 0 0" }}>
       <span className="registro-badge">{registro}</span>

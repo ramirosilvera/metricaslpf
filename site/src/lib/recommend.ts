@@ -783,13 +783,34 @@ const CATEGORIAS_CON_TORSO: Categoria[] = ["remera", "camisa", "buzo", "sweater"
  *  igual a las tres categorías de CATEGORIAS_PIERNAS.
  *
  *  Multi-estilo: el pantalón ancla la comparación con su estilo PRINCIPAL
- *  únicamente (es el que define el registro del outfit completo, igual que
- *  registroOutfit) -- pero la otra prenda se evalúa por el MEJOR (más
+ *  por default (es el que define el registro del outfit completo, igual
+ *  que registroOutfit) -- pero la otra prenda se evalúa por el MEJOR (más
  *  formal) de TODOS sus estilos declarados, principal o secundario. Un
  *  sweater tageado "clasico" + "casual" no se degrada contra un pantalón
  *  "casual": tiene un estilo (el secundario) que alcanza esa formalidad,
- *  aunque su estilo principal sea otro. */
-function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean {
+ *  aunque su estilo principal sea otro.
+ *
+ *  `estilo` (nuevo, opcional) -- bug real reportado por el usuario, con
+ *  placard propio: "tengo un pantalón negro chino tageado como clásico
+ *  principal y urbano secundario. Pero el outfit urbano nunca lo muestra
+ *  por más que pida otras opciones". Causa real, verificada por ejecución
+ *  contra su placard: sin este parámetro, el ancla SIEMPRE usaba el
+ *  PRINCIPAL del pantalón ("clasico", rango 2) sin importar para qué
+ *  estilo se estuviera armando el outfit -- así que hasta una zapatilla
+ *  genuinamente tageada "urbano" (rango 1, correcto para ese registro)
+ *  quedaba marcada "más informal que el pantalón" al construir la pestaña
+ *  Urbano, porque se la comparaba contra el rango de "clasico", no contra
+ *  el de "urbano". El pantalón nunca podía armar un outfit "urbano" de
+ *  verdad: cualquier prenda genuinamente urbana (rango 1) siempre iba a
+ *  perder contra el rango 2 de su propio estilo principal. Cuando se pasa
+ *  el estilo que se está evaluando (ver su uso en advertenciasDeRegistro/
+ *  outfitEsCoherenteParaEstilo), el ancla usa ESE rango en vez del
+ *  principal -- ya se sabe, por construcción (outfitSirveParaEstilo se
+ *  chequea antes), que el pantalón sirve genuinamente para ese estilo, sea
+ *  principal o secundario. Sin `estilo` (los demás llamadores, ej.
+ *  recomendar() en Combinar/Probar, donde no hay una pestaña elegida) el
+ *  comportamiento no cambia -- sigue anclando al principal. */
+function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda, estilo?: Estilo): boolean {
   const pantalon = CATEGORIAS_PIERNAS.includes(base.categoria)
     ? base
     : CATEGORIAS_PIERNAS.includes(candidato.categoria)
@@ -798,13 +819,14 @@ function prendaMenosFormalQuePantalon(base: Prenda, candidato: Prenda): boolean 
   const otra = pantalon === base ? candidato : base;
   if (!pantalon) return false;
   if (otra.categoria !== "calzado" && !CATEGORIAS_CON_TORSO.includes(otra.categoria)) return false;
-  if (!pantalon.estilo) return false;
   // rangoDeFormalidad acota por TECHO_FORMALIDAD_POR_CATEGORIA -- una
   // remera/buzo tageada "clasico" o "formal" a mano nunca cuenta como
   // rango 2 real acá, ver el comentario largo de esa constante.
   const rangoOtra = rangoDeFormalidad(otra);
   if (rangoOtra === undefined) return false;
-  const rangoPantalon = FORMALIDAD_ESTILO[pantalon.estilo];
+  const estiloAncla = estilo ?? pantalon.estilo;
+  if (!estiloAncla) return false;
+  const rangoPantalon = FORMALIDAD_ESTILO[estiloAncla];
   if (rangoPantalon === undefined) return false;
   return rangoOtra < rangoPantalon;
 }
@@ -1063,21 +1085,33 @@ export function outfitEsCoherenteParaEstilo(prendas: Prenda[], estilo: Estilo): 
   // ausente, mismo criterio que ya documenta esCinturon más arriba (el
   // caso puntual del que se generaliza esta regla).
   if (prendas.some((p) => estilosDe(p).length > 0 && !estilosDe(p).includes(estilo))) return false;
-  return outfitSirveParaEstilo(prendas, estilo) && advertenciasDeRegistro(prendas).length === 0;
+  return outfitSirveParaEstilo(prendas, estilo) && advertenciasDeRegistro(prendas, estilo).length === 0;
 }
 
 /** Mensajes puntuales de por qué una prenda del outfit desentona en
  *  registro con la prenda de piernas (no en color -- eso ya lo cubre
  *  `recomendar`), para mostrar junto al outfit en vez de dejar la
  *  democión a muy_bueno escondida adentro del `explicacion` de un par que
- *  la UI de outfits armados no siempre muestra. */
-export function advertenciasDeRegistro(prendas: Prenda[]): string[] {
+ *  la UI de outfits armados no siempre muestra.
+ *
+ *  `estilo` (opcional) -- ver el comentario largo de
+ *  prendaMenosFormalQuePantalon sobre el bug real que motiva este
+ *  parámetro: cuando se sabe para qué estilo se está evaluando el outfit
+ *  (outfitEsCoherenteParaEstilo, o el badge de una pestaña puntual en la
+ *  UI), hay que pasarlo -- si no, el ancla de formalidad usa el estilo
+ *  PRINCIPAL del pantalón sin importar la pestaña real, lo que puede
+ *  rechazar prendas genuinamente tageadas para esa pestaña (un pantalón
+ *  "clasico"+secundario "urbano" nunca podía armar un outfit "urbano" de
+ *  verdad, sin este fix). Sin `estilo` (ej. la vista "Todos", que mezcla
+ *  outfits de cualquier registro y no tiene una pestaña única contra la
+ *  cual anclar), el comportamiento es el de siempre. */
+export function advertenciasDeRegistro(prendas: Prenda[], estilo?: Estilo): string[] {
   const pantalon = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
   if (!pantalon) return [];
   const avisos: string[] = [];
   for (const p of prendas) {
     if (p.id === pantalon.id) continue;
-    if (prendaMenosFormalQuePantalon(pantalon, p)) {
+    if (prendaMenosFormalQuePantalon(pantalon, p, estilo)) {
       // "el" concuerda con las tres categorías de CATEGORIAS_PIERNAS (el
       // pantalón, el bermuda, el short deportivo) -- no hace falta variar
       // el artículo por categoría.

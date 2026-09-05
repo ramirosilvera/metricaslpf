@@ -1272,6 +1272,75 @@ describe("outfitEsCoherenteParaEstilo -- ninguna prenda aparece en un estilo que
   });
 });
 
+// Consejo, reporte real del usuario con placard propio: "tengo un pantalón
+// negro chino en mi placard tageado como clásico principal y urbano
+// secundario. Pero el outfit urbano nunca lo muestra por más que pida
+// otras opciones repetidamente". Causa real, verificada por ejecución
+// contra el placard real (vía Supabase): prendaMenosFormalQuePantalon (el
+// chequeo de formalidad relativa, vía advertenciasDeRegistro) anclaba
+// SIEMPRE al estilo PRINCIPAL del pantalón ("clasico", rango 2), nunca al
+// estilo que se estaba evaluando -- así que hasta una zapatilla
+// genuinamente tageada "urbano" (rango 1, lo correcto para ese registro)
+// quedaba marcada "más informal que el pantalón" al construir la pestaña
+// Urbano: se la comparaba contra el rango de "clasico", no el de "urbano".
+// El pantalón nunca podía armar NINGÚN outfit "urbano" real -- cualquier
+// prenda genuinamente urbana (rango 1 por diseño) siempre perdía contra el
+// rango 2 de su propio estilo principal. Reproducido contra el placard
+// real del usuario: 0 outfits "Urbano" coherentes con este pantalón en las
+// 3 estaciones, sin importar cuántas "otras opciones" pidiera.
+describe("prendaMenosFormalQuePantalon / advertenciasDeRegistro -- ancla al estilo evaluado, no siempre al principal del pantalón", () => {
+  it("caso real: pantalón clasico+secundario urbano, con una zapatilla tageada 'urbano' puro -- sin pasar el estilo, el aviso viejo (ancla al principal) sigue disparando", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.textura = "algodon";
+    pantalon.estilo = "clasico";
+    pantalon.estilos_secundarios = ["urbano"];
+    const zapatillaUrbana = mkPrenda("calzado", "#1A1A1A", 0, 0, 15);
+    zapatillaUrbana.estilo = "urbano";
+    zapatillaUrbana.corte_calzado = "zapatilla_urbana";
+    // sin el 2do argumento, sigue anclando al principal del pantalón
+    // ("clasico", rango 2) -- comportamiento de siempre, sin cambios.
+    expect(advertenciasDeRegistro([pantalon, zapatillaUrbana])).toEqual(["calzado más informal que el pantalon"]);
+  });
+
+  it("mismo caso, pasando 'urbano' como el estilo evaluado -- el aviso ya no dispara, la zapatilla es genuinamente urbana", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.textura = "algodon";
+    pantalon.estilo = "clasico";
+    pantalon.estilos_secundarios = ["urbano"];
+    const zapatillaUrbana = mkPrenda("calzado", "#1A1A1A", 0, 0, 15);
+    zapatillaUrbana.estilo = "urbano";
+    zapatillaUrbana.corte_calzado = "zapatilla_urbana";
+    expect(advertenciasDeRegistro([pantalon, zapatillaUrbana], "urbano")).toEqual([]);
+    expect(outfitEsCoherenteParaEstilo([pantalon, zapatillaUrbana], "urbano")).toBe(true);
+  });
+
+  it("el pantalón sigue sirviendo para 'Clásico' con el mismo criterio de siempre (sin regresión) -- una zapatilla urbana ahí SÍ es menos formal", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.textura = "algodon";
+    pantalon.estilo = "clasico";
+    pantalon.estilos_secundarios = ["urbano"];
+    const zapatillaUrbana = mkPrenda("calzado", "#1A1A1A", 0, 0, 15);
+    zapatillaUrbana.estilo = "urbano";
+    zapatillaUrbana.corte_calzado = "zapatilla_urbana";
+    expect(outfitEsCoherenteParaEstilo([pantalon, zapatillaUrbana], "clasico")).toBe(false);
+  });
+
+  it("una prenda genuinamente MÁS formal que el estilo evaluado sigue avisando aunque no sea más formal que el principal del pantalón", () => {
+    // pantalón principal "casual" (rango 1) + secundario "clasico" (rango
+    // 2): evaluado para "casual", un torso tageado solo "formal" (rango 2,
+    // sin "casual") sigue quedando afuera -- no por este fix (ya lo
+    // bloquea el chequeo de tag exacto de la ronda anterior), pero
+    // confirma que anclar a "casual" (rango 1) en vez de "clasico" (rango
+    // 2) no vuelve permisivo el chequeo por accidente.
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.estilo = "casual";
+    pantalon.estilos_secundarios = ["clasico"];
+    const camisaFormal = mkPrenda("camisa", "#F5F5F5", 0, 0, 96);
+    camisaFormal.estilo = "formal";
+    expect(outfitEsCoherenteParaEstilo([pantalon, camisaFormal], "casual")).toBe(false);
+  });
+});
+
 describe("registroOutfit / advertenciasDeRegistro", () => {
   it("toma el estilo del pantalón como registro del outfit completo", () => {
     const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
