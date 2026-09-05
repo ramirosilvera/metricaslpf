@@ -267,6 +267,36 @@ export function scoreColor(base: HSL, candidato: HSL): ScoreColor {
     };
   }
 
+  // 5b. Paleta apagada/tierra en cualquier distancia de matiz -- auditoría
+  // integral de Consejo (roles: especialista en teoría del color/estilista),
+  // pedido explícito del usuario: "no exigir que sean iguales [saturación/
+  // luminosidad]... evaluar si la diferencia genera armonía". Las reglas 2 y
+  // 4 ya reconocen que, cuando los dos colores están apagados (croma bajo),
+  // el matiz importa mucho menos -- pero solo en sus dos extremos (análogo
+  // en la regla 2, complementario en la regla 4). La franja INTERMEDIA de
+  // ángulo (entre HUE_ANALOGO y HUE_COMPLEMENTARIO) caía en el catch-all
+  // genérico de la regla 6 sin ese mismo reconocimiento, aunque sea
+  // exactamente la misma paleta de sastrería clásica (marrón + verde oliva/
+  // militar, camel + gris piedra, bordó + verde botella -- ninguno de estos
+  // pares es análogo ni complementario, pero son combinaciones de tonos
+  // tierra tan válidas como las que ya cubren esas dos reglas). Reproducido
+  // por ejecución (los tres ejemplos que pidió auditar el usuario):
+  // pantalón marrón oscuro + sweater verde oscuro (hd=0.62, croma 19/18)
+  // daba "muy_bueno" con el mensaje genérico "contraste moderado" -- una
+  // subestimación real de una combinación de sastrería clásica, marcada acá
+  // como falso negativo. Va DESPUÉS de la regla 5 a propósito, nunca antes:
+  // dos colores oscuros y saturados de VERDAD (croma bajo por estar
+  // oscuros, pero `s` cruda alta -- ver el comentario de la regla 5 sobre
+  // por qué usa `s` en vez de croma ahí) siguen chocando en pie de igualdad
+  // cuando comparten casi la misma luminosidad; esta regla no debe taparle
+  // ese caso a la 5, así que corre solo sobre lo que la 5 dejó pasar.
+  if (croma(base) <= CROMA_ACENTO && croma(candidato) <= CROMA_ACENTO) {
+    return {
+      nivel: "excelente",
+      explicacion: "Dos tonos apagados de la paleta tierra: la distancia de matiz no compite cuando ninguno de los dos es un color vívido.",
+    };
+  }
+
   // 6. Resto.
   return {
     nivel: "muy_bueno",
@@ -1348,6 +1378,53 @@ export function contarColoresProtagonistas(prendas: Prenda[]): number {
   return gruposHue.length;
 }
 
+/** El acento aislado -- auditoría integral de Consejo (roles: asesor de
+ *  imagen/estilista), pedido explícito del usuario tras un caso real
+ *  propio: "las zapatillas azul marino con jean y remera beige... me hace
+ *  ruido... un cinturón azul marino uniría perfectamente los zapatos con
+ *  el conjunto". Diagnóstico confirmado por ejecución: pantalón beige +
+ *  remera beige + zapatos azul marino da 10/10 "sin nada que ajustar" --
+ *  matemáticamente correcto (cada par es excelente por separado) pero
+ *  visualmente incompleto: el marino aparece UNA sola vez, en una prenda
+ *  chica (calzado/accesorio), sin que ningún otro punto del cuerpo lo
+ *  repita -- exactamente la falla real que scoreColor (que solo compara
+ *  PARES) no puede ver por construcción, y que contarColoresProtagonistas
+ *  tampoco cubre (esa función mira si hay DEMASIADOS colores compitiendo a
+ *  la vez, no si a un color aislado le falta un segundo punto de anclaje).
+ *
+ *  Acotado a prendas CHICAS (calzado/accesorio) a propósito, no a
+ *  cualquier categoría: una prenda dominante (pantalón, torso) puede ser
+ *  perfectamente el color "distinto" del conjunto sin necesitar ningún eco
+ *  -- es del tamaño suficiente para sostenerse sola como protagonista real
+ *  (ver el ejemplo real de la misma auditoría: jean azul + remera marrón +
+ *  zapatilla beige, donde remera y zapatilla SÍ comparten familia y el
+ *  jean funciona solo como contraste dominante, sin que nadie lo señale
+ *  como "aislado"). Un accesorio/calzado chico, en cambio, es precisamente
+ *  el tipo de prenda que un asesor de imagen recomienda anclar en un
+ *  segundo punto (cinturón + zapatos del mismo tono es la técnica clásica)
+ *  porque, a diferencia de una prenda grande, no tiene superficie propia
+ *  para leerse como protagonista intencional por sí sola.
+ *
+ *  Puramente informativo -- NO cambia el puntaje (ver su único uso en
+ *  puntuarOutfit, reemplazando solo el mensaje genérico de "nada que
+ *  ajustar"): un acento sin eco no es un error de color (nada choca en el
+ *  sentido de scoreColor), es una oportunidad de refinamiento real, y
+ *  penalizar el puntaje por esto generaría falsos negativos masivos --
+ *  la gran mayoría de la ropa real no tiene un accesorio calzado a tono
+ *  para cada color de zapatilla, y esa combinación simple sigue siendo
+ *  perfectamente válida sin él. */
+export function acentoDeColorAislado(prendas: Prenda[]): Prenda | null {
+  if (prendas.length < 3) return null;
+  const candidatos = prendas.filter(
+    (p) => (p.categoria === "calzado" || p.categoria === "accesorio") && !esNeutro(p.color_s, p.color_l),
+  );
+  for (const p of candidatos) {
+    const tieneEco = prendas.some((otra) => otra.id !== p.id && hueDist(p.color_h, otra.color_h) <= HUE_ANALOGO);
+    if (!tieneEco) return p;
+  }
+  return null;
+}
+
 /** Pedido explícito del usuario: "quiero un sistema de valoración por
  *  puntos... este outfit es un nueve de diez por esto y por esto". No es
  *  una escala nueva ni un modelo aparte -- es el mismo scoreColor/
@@ -1417,6 +1494,15 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
   // vez, ninguno domina) -- el diagnóstico que de verdad describe 60-30-10.
   const demasiadosColores = contarColoresProtagonistas(prendas) >= 4;
 
+  // Acento aislado (ver acentoDeColorAislado más arriba) -- pedido
+  // explícito del usuario, con caso real propio ("las zapatillas azul
+  // marino con jean y remera beige... me hace ruido... un cinturón azul
+  // marino uniría perfectamente los zapatos con el conjunto"). Igual que
+  // demasiadosColores, es un ajuste de EXPLICACIÓN, no de puntaje -- ver el
+  // comentario largo de la función sobre por qué esto es una sugerencia de
+  // refinamiento, no un error de color real.
+  const acentoAislado = acentoDeColorAislado(prendas);
+
   // el par que más pesa en contra -- el de nivel más bajo (con_cuidado
   // antes que muy_bueno); a igualdad de nivel, el primero en orden de
   // evaluación alcanza (no hay un criterio de desempate más fino que
@@ -1449,7 +1535,9 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
       ? "Contraste marcado y prolijo: la alternancia de tonos oscuros y claros define bien el outfit."
       : tieneToneSobreTono
         ? "Combinación segura: tono sobre tono en la base del outfit."
-        : "Combinación segura en color, sin nada que ajustar.";
+        : acentoAislado
+          ? `El color combina bien, pero ${CATEGORIA_LABEL[acentoAislado.categoria]} es el único toque de ese tono en el conjunto -- un accesorio o cinturón a tono lo ataría mejor.`
+          : "Combinación segura en color, sin nada que ajustar.";
   } else {
     // al menos un par en muy_bueno: cita el motivo real y puntual (ya es
     // un texto ejecutivo, generado por scoreColor/recomendar -- "el color

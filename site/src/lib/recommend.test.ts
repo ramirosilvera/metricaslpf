@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  acentoDeColorAislado,
   advertenciasDeRegistro,
   armarOutfitsParaComprar,
   armarOutfitsSugeridos,
@@ -194,6 +195,35 @@ describe("scoreColor", () => {
   it("marino + marrón de cuero (mismos valores reales, dos oscuros con poca separación de luminosidad) -> excelente, no solo 'no con_cuidado'", () => {
     const r = scoreColor({ h: 222, s: 37, l: 19 }, { h: 25, s: 47, l: 25 });
     expect(r.nivel).toBe("excelente");
+  });
+
+  // Regla 5b -- auditoría integral de Consejo (roles: especialista en
+  // teoría del color/estilista/auditor del motor), pedido explícito del
+  // usuario: "no exigir que sean iguales [saturación/luminosidad]...
+  // evaluar si la diferencia genera armonía", probado con un ejemplo
+  // concreto que pidió auditar. Antes de este fix, un par de colores
+  // apagados a distancia de matiz INTERMEDIA (ni análoga -- regla 2 -- ni
+  // complementaria -- regla 4) caía en el catch-all genérico "muy_bueno" /
+  // "contraste moderado", subestimando una paleta de sastrería clásica
+  // (marrón + verde oliva/militar) tan válida como las que ya cubren esas
+  // dos reglas.
+  it("marrón oscuro + verde oscuro (hue intermedio, los dos apagados) -> excelente, no el catch-all genérico", () => {
+    // valores reales del ejemplo auditado: pantalón marrón oscuro + sweater
+    // verde oscuro (hd≈0.62, ni análogo ni complementario; croma 19/18, los
+    // dos bien por debajo de CROMA_ACENTO).
+    const r = scoreColor({ h: 25, s: 45, l: 20 }, { h: 140, s: 45, l: 20 });
+    expect(r.nivel).toBe("excelente");
+    expect(r.explicacion).toContain("apagados");
+  });
+
+  it("regla 5 sigue ganando sobre la 5b: dos oscuros BIEN saturados (no apagados por croma) siguen chocando, aunque el matiz sea intermedio", () => {
+    // mismo par que el test de 'compiten en pie de igualdad' de más arriba
+    // (rojo oscuro s90 + azul oscuro s60, misma luminosidad) -- croma bajo
+    // por estar oscuros (igual que cualquier par en esta franja), pero la
+    // regla 5b nunca debe taparle este caso a la regla 5: sigue siendo
+    // con_cuidado, no excelente.
+    const r = scoreColor({ h: 0, s: 90, l: 20 }, { h: 240, s: 60, l: 24 });
+    expect(r.nivel).toBe("con_cuidado");
   });
 
   it("banda de neutro ampliada evita el salto de tier por ruido de foto (l=12 vs l=13)", () => {
@@ -3670,6 +3700,52 @@ describe("contarColoresProtagonistas", () => {
   });
 });
 
+// Consejo, auditoría integral del motor de combinación de colores, pedido
+// explícito del usuario con caso real propio: "las zapatillas azul marino
+// con jean y remera beige... me hace ruido... un cinturón azul marino
+// uniría perfectamente los zapatos con el conjunto". Roles: asesor de
+// imagen/estilista/auditor del motor.
+describe("acentoDeColorAislado", () => {
+  it("caso real: zapato azul marino + pantalón/remera beige (mismo color) -> el zapato es el acento aislado", () => {
+    const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const remera = mkPrenda("remera", "#D8C7A1", 40, 30, 70);
+    const zapato = mkPrenda("calzado", "#1F2A44", 222, 37, 19);
+    expect(acentoDeColorAislado([pantalon, remera, zapato])?.id).toBe(zapato.id);
+  });
+
+  it("si otra prenda repite el mismo tono (ej. un cinturón azul marino), ya no queda aislado -> null", () => {
+    const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const remera = mkPrenda("remera", "#D8C7A1", 40, 30, 70);
+    const zapato = mkPrenda("calzado", "#1F2A44", 222, 37, 19);
+    const cinturon = mkPrenda("accesorio", "#1F2A44", 222, 37, 19);
+    expect(acentoDeColorAislado([pantalon, remera, zapato, cinturon])).toBeNull();
+  });
+
+  it("una prenda DOMINANTE (pantalón/torso) aislada en color NO cuenta -- solo calzado/accesorio necesitan eco", () => {
+    // caso real de la misma auditoría: jean azul + remera marrón + zapatilla
+    // beige -- remera y zapatilla comparten familia (marrón/beige), el jean
+    // es el color distinto, pero es una prenda grande (pantalón): se
+    // sostiene sola como protagonista, no necesita ningún eco.
+    const jean = mkPrenda("pantalon", "#3B5998", 222, 40, 45);
+    const remera = mkPrenda("remera", "#5C3A21", 25, 47, 25);
+    const zapatilla = mkPrenda("calzado", "#D8C7A1", 40, 30, 70);
+    expect(acentoDeColorAislado([jean, remera, zapatilla])).toBeNull();
+  });
+
+  it("el acento aislado tiene que ser un color de verdad -- un neutro (negro/blanco/gris) nunca cuenta, aunque no se repita", () => {
+    const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const remera = mkPrenda("remera", "#D8C7A1", 40, 30, 70);
+    const zapatoNegro = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    expect(acentoDeColorAislado([pantalon, remera, zapatoNegro])).toBeNull();
+  });
+
+  it("outfit de menos de 3 prendas -> null, no hay 'resto' del que estar aislado", () => {
+    const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const zapato = mkPrenda("calzado", "#1F2A44", 222, 37, 19);
+    expect(acentoDeColorAislado([pantalon, zapato])).toBeNull();
+  });
+});
+
 describe("puntuarOutfit", () => {
   it("una sola prenda -> 10, no hay con qué chocar", () => {
     const remera = mkPrenda("remera", "#1A1A1A", 0, 0, 10);
@@ -3818,6 +3894,33 @@ describe("puntuarOutfit", () => {
     const accesorio = mkPrenda("accesorio", "#0000FF", 130, 90, 75);
     const r = puntuarOutfit([pantalon, remera, accesorio]);
     expect(r.explicacion).not.toContain("60-30-10");
+  });
+
+  // Consejo, auditoría integral del motor de color, caso real propio del
+  // usuario: "zapatos azul marino + remera beige + pantalón beige... me
+  // hace ruido... un cinturón azul marino uniría perfectamente los zapatos
+  // con el conjunto". Cada par por separado ya daba "excelente" (ver
+  // acentoDeColorAislado más arriba) -- el puntaje sigue en 10 (nada choca
+  // de verdad), pero la explicación ahora nombra el refinamiento real en
+  // vez de decir "sin nada que ajustar" sobre un acento que sí se puede
+  // mejorar.
+  it("acento aislado (calzado/accesorio sin eco) -> sigue en 10/10, pero la explicación sugiere anclarlo en vez de 'nada que ajustar'", () => {
+    const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const remera = mkPrenda("remera", "#D8C7A1", 40, 30, 70);
+    const zapato = mkPrenda("calzado", "#1F2A44", 222, 37, 19);
+    const r = puntuarOutfit([pantalon, remera, zapato]);
+    expect(r.puntaje).toBe(10);
+    expect(r.explicacion).toContain("único toque de ese tono");
+  });
+
+  it("mismo caso, pero con un cinturón que repite el marino -- ya no queda aislado, vuelve al mensaje genérico", () => {
+    const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const remera = mkPrenda("remera", "#D8C7A1", 40, 30, 70);
+    const zapato = mkPrenda("calzado", "#1F2A44", 222, 37, 19);
+    const cinturon = mkPrenda("accesorio", "#1F2A44", 222, 37, 19);
+    const r = puntuarOutfit([pantalon, remera, zapato, cinturon]);
+    expect(r.puntaje).toBe(10);
+    expect(r.explicacion).not.toContain("único toque de ese tono");
   });
 });
 
