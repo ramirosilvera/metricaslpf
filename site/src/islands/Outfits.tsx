@@ -420,7 +420,27 @@ export function Contenido({
     if (estiloSugerido === null) return [];
     if (estiloSugerido === "todos")
       return intercalarPorTorso(poolSugeridos.filter((s) => advertenciasDeRegistro(s.prendas).length === 0 && esExcelente(s)));
-    return intercalarPorTorso(poolSugeridos.filter((s) => outfitEsCoherenteParaEstilo(s.prendas, estiloSugerido) && esExcelente(s)));
+    // Puntaje recalculado con la pestaña activa -- mismo bug real que
+    // motivó el parámetro `estilo` en outfitEsCoherenteParaEstilo/
+    // advertenciasDeRegistro (ver su comentario largo en recommend.ts), pero
+    // encontrado en el sistema de PUNTAJE, no solo en el de coherencia:
+    // s.puntaje/explicacionPuntaje vienen de un único cálculo genérico hecho
+    // una sola vez en armarOutfitsSugeridos (ancla la formalidad del
+    // pantalón a su estilo PRINCIPAL siempre), reusado tal cual por todas
+    // las pestañas. Un pantalón clásico principal + urbano secundario podía
+    // pasar outfitEsCoherenteParaEstilo("urbano") pero seguir citando "el
+    // calzado es más informal que el pantalón" y nunca llegar a 10/10 (por
+    // lo tanto nunca a esExcelente, el piso real para aparecer acá) porque
+    // ese puntaje genérico seguía comparando contra "clasico". Se recalcula
+    // acá, PARA ESTA pestaña, antes de filtrar por esExcelente -- mismo
+    // patrón que ya usa RegistroBadge (estiloTab) para las advertencias.
+    const conPuntajeDeTab = poolSugeridos
+      .filter((s) => outfitEsCoherenteParaEstilo(s.prendas, estiloSugerido))
+      .map((s) => {
+        const { puntaje, explicacion, contrasteMarcado } = puntuarOutfit(s.prendas, estiloSugerido);
+        return { ...s, puntaje, explicacionPuntaje: explicacion, contrasteMarcado };
+      });
+    return intercalarPorTorso(conPuntajeDeTab.filter((s) => esExcelente(s)));
   }, [poolSugeridos, estiloSugerido]);
 
   function elegirEstiloSugerido(valor: Estilo | "todos") {

@@ -1226,6 +1226,7 @@ export function recomendar(
   base: Prenda,
   candidatas: Prenda[],
   placard: Prenda[],
+  estilo?: Estilo,
 ): Array<{ prenda: Prenda; score: ScoreColor; tecnicaRescate?: string }> {
   return candidatas
     .filter((c) => c.id !== base.id)
@@ -1282,7 +1283,7 @@ export function recomendar(
       // (con_cuidado): ese motivo pesa más y no hay técnica de rescate que
       // arregle "cambiá esto por algo más formal" en el mismo sentido que
       // las demás.
-      if (score.nivel === "excelente" && prendaMenosFormalQuePantalon(base, c)) {
+      if (score.nivel === "excelente" && prendaMenosFormalQuePantalon(base, c, estilo)) {
         score = {
           nivel: "muy_bueno",
           explicacion: `El color combina, pero ${c.categoria === "calzado" ? "el calzado" : "esta prenda"} es más informal que el pantalón -- se nota el salto de registro.`,
@@ -1502,14 +1503,32 @@ export function torsoYPiernasCasiIdenticos(prendas: Prenda[]): { piernas: Prenda
  *  recomendar() de siempre, agregado sobre TODOS los pares del outfit y
  *  expresado en una nota de 1 a 10 en vez de en tres niveles con nombre.
  *  Un outfit de una sola prenda (o vacío) no tiene ningún par que evaluar
- *  -- 10 por default, no hay con qué chocar. */
-export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
+ *  -- 10 por default, no hay con qué chocar.
+ *
+ *  `estilo` (nuevo, opcional) -- mismo bug real y mismo parámetro que
+ *  prendaMenosFormalQuePantalon (ver su comentario largo): un pantalón
+ *  clásico principal + urbano secundario nunca llegaba a 10/10 (ni siquiera
+ *  a "excelente" en el par pantalón-calzado) al armar la pestaña Urbano,
+ *  porque recomendar() -- y por lo tanto puntuarOutfit(), que la usa para
+ *  cada par -- anclaba la formalidad del pantalón SIEMPRE a su estilo
+ *  PRINCIPAL ("clasico", rango 2), nunca al estilo de la pestaña real que
+ *  se está evaluando. outfitEsCoherenteParaEstilo/advertenciasDeRegistro ya
+ *  habían recibido este mismo parámetro en una ronda anterior, pero
+ *  puntuarOutfit quedó afuera -- así que la pestaña Urbano SÍ aceptaba el
+ *  outfit como coherente (sin advertencia de registro) pero igual lo
+ *  descartaba de "Vestite hoy" porque esExcelente (puntaje === 10) nunca se
+ *  cumplía: el mismo defecto, en dos lugares distintos del motor, arreglado
+ *  solo en uno. Sin `estilo` (armarOutfitsSugeridos, que calcula un único
+ *  puntaje por combinación reusado por todas las pestañas) el comportamiento
+ *  no cambia -- Outfits.tsx recalcula el puntaje pasando la pestaña activa
+ *  solo para las tarjetas de "Vestite hoy", ver poolCoherentePorEstilo. */
+export function puntuarOutfit(prendas: Prenda[], estilo?: Estilo): PuntajeOutfit {
   const pares: Array<{ a: Prenda; b: Prenda; score: ScoreColor }> = [];
   for (let i = 0; i < prendas.length; i++) {
     for (let j = i + 1; j < prendas.length; j++) {
       const a = prendas[i];
       const b = prendas[j];
-      const [r] = recomendar(a, [b], [a, b]);
+      const [r] = recomendar(a, [b], [a, b], estilo);
       pares.push({ a, b, score: r.score });
     }
   }

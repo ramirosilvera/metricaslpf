@@ -3999,6 +3999,64 @@ describe("puntuarOutfit", () => {
   });
 });
 
+// Consejo, reporte real del usuario, ronda siguiente a la que agregó el
+// parámetro `estilo` a outfitEsCoherenteParaEstilo/advertenciasDeRegistro:
+// "sigue sin aparecer el pantalón negro taggeado como clásico en principal y
+// urbano en secundario en el outfit de urbano... revisa que no haya un
+// problema de fondo en el sistema de puntuación y el motor de
+// combinaciones". Tenía razón: el fix anterior solo llegó a la mitad del
+// motor. outfitEsCoherenteParaEstilo("urbano") YA daba `true` para este
+// pantalón (verificado por ejecución contra su placard real) -- pero
+// "Vestite hoy" (poolCoherentePorEstilo en Outfits.tsx) exige ADEMÁS
+// puntaje===10 (esExcelente), y ese puntaje salía de puntuarOutfit(), que
+// llama a recomendar() sin el estilo de la pestaña -- así que
+// prendaMenosFormalQuePantalon() seguía anclando SIEMPRE al estilo
+// PRINCIPAL del pantalón ("clasico", rango 2), nunca a "urbano" (rango 1),
+// y una zapatilla_urbana genuinamente urbana volvía a leerse como "más
+// informal que el pantalón". El outfit pasaba la coherencia pero nunca
+// llegaba a 10/10 -- quedaba afuera igual, por la otra puerta. Mismo
+// parámetro, mismo criterio, ahora también en recomendar()/puntuarOutfit().
+describe("puntuarOutfit -- parámetro `estilo`, mismo bug real que prendaMenosFormalQuePantalon pero en el sistema de PUNTAJE", () => {
+  it("sin pasar el estilo, el pantalón clasico+secundario urbano sigue topando en 8 con una zapatilla urbana -- comportamiento de siempre, sin cambios", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.textura = "algodon";
+    pantalon.estilo = "clasico";
+    pantalon.estilos_secundarios = ["urbano"];
+    const zapatillaUrbana = mkPrenda("calzado", "#1A1A1A", 0, 0, 15);
+    zapatillaUrbana.estilo = "urbano";
+    zapatillaUrbana.corte_calzado = "zapatilla_urbana";
+    const r = puntuarOutfit([pantalon, zapatillaUrbana]);
+    expect(r.puntaje).toBe(6); // un solo par, muy_bueno
+    expect(r.explicacion).toContain("más informal que el pantalón");
+  });
+
+  it("pasando 'urbano' -- caso real del usuario: llega a 10/10, la zapatilla es genuinamente urbana para esa pestaña", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.textura = "algodon";
+    pantalon.estilo = "clasico";
+    pantalon.estilos_secundarios = ["urbano"];
+    const zapatillaUrbana = mkPrenda("calzado", "#1A1A1A", 0, 0, 15);
+    zapatillaUrbana.estilo = "urbano";
+    zapatillaUrbana.corte_calzado = "zapatilla_urbana";
+    const r = puntuarOutfit([pantalon, zapatillaUrbana], "urbano");
+    expect(r.puntaje).toBe(10);
+    expect(r.explicacion).not.toContain("más informal que el pantalón");
+  });
+
+  it("pasando 'clasico' (el principal) -- sigue dando el mismo resultado de siempre, no hay regresión para la pestaña que ya funcionaba", () => {
+    const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalon.textura = "algodon";
+    pantalon.estilo = "clasico";
+    pantalon.estilos_secundarios = ["urbano"];
+    const zapatillaUrbana = mkPrenda("calzado", "#1A1A1A", 0, 0, 15);
+    zapatillaUrbana.estilo = "urbano";
+    zapatillaUrbana.corte_calzado = "zapatilla_urbana";
+    const r = puntuarOutfit([pantalon, zapatillaUrbana], "clasico");
+    expect(r.puntaje).toBe(6);
+    expect(r.explicacion).toContain("más informal que el pantalón");
+  });
+});
+
 // Consejo, auditoría integral del motor de color, caso real propio del
 // usuario: "jean beige + buzo con capucha beige + zapatillas urbanas
 // negras... revisaría que el buzo y el jean beige no sean exactamente el

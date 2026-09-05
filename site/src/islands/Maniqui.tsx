@@ -1050,7 +1050,20 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
             </>
           )}
           <DecoracionCalzado corte={prenda.corte_calzado} tono={tonoDetalle} stroke={stroke} mirror={false} />
-          <path d="M36 234 H56 V240 Q56 242 53 242 L39 242 Q36 242 36 240 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          {/* suela_contraste=true (bug real reportado por el usuario: "en
+              mejor opción dice zapatilla urbana negro pero muestra
+              blanco"): con la franja de suela vieja (234 a 242, la mitad
+              de los ~16u de alto del zapato) una zapatilla NEGRA con
+              suela clara real -- un dato correcto, no inventado -- quedaba
+              con casi la mitad de su área pintada casi blanca (sombraHsl(0,
+              0, 94)); a la escala chica del maniquí eso lee como "zapatilla
+              blanca", no "zapatilla negra con suela clara", verificado
+              renderizando el ícono real al tamaño real de tarjeta. La
+              suela sigue siendo un dato real y visible (no se oculta), pero
+              ahora ocupa una franja angosta (237 a 242, ~5u) en vez de la
+              mitad del zapato -- el color principal de la prenda (fill)
+              vuelve a ser el que domina el ícono, como corresponde. */}
+          <path d="M36 237 H56 V240 Q56 242 53 242 L39 242 Q36 242 36 240 Z" fill={suela} stroke={stroke} {...strokeProps} />
           <Forma d="M80 223 Q84 224 84 231 Q84 238 74 239 Q64 238 64 231 Q64 224 68 223 Z" fill={fill} stroke={stroke} patron={patron} sugerida={esSugerida(prenda)} />
           {conCordones && (
             <>
@@ -1059,7 +1072,7 @@ function PiesCuerpo({ prenda }: { prenda: Prenda }) {
             </>
           )}
           <DecoracionCalzado corte={prenda.corte_calzado} tono={tonoDetalle} stroke={stroke} mirror={true} />
-          <path d="M84 234 H64 V240 Q64 242 67 242 L81 242 Q84 242 84 240 Z" fill={suela} stroke={stroke} {...strokeProps} />
+          <path d="M84 237 H64 V240 Q64 242 67 242 L81 242 Q84 242 84 240 Z" fill={suela} stroke={stroke} {...strokeProps} />
         </>
       )}
     />
