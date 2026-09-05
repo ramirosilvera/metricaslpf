@@ -8,6 +8,7 @@ import PrendaIcon, {
   esPantalonDeVestir,
   esRemeraDeportiva,
   PatronEstampado,
+  PatronPanelDeportivo,
   PatronTextura,
   TEXTURA_BRILLO,
   TEXTURA_PATRON,
@@ -253,17 +254,15 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
     (prenda.categoria === "camisa" || prenda.categoria === "remera") &&
     (prenda.patron === "rayas" || prenda.patron === "cuadros") &&
     !!prenda.color2_hex;
-  // panel de malla técnica bajo la axila -- pedido explícito del usuario,
-  // revisado como sastre/modista/costurera: "las remeras deportivas suelen
-  // tener tejido técnico y transpirable debajo de las axilas". Mismo
-  // criterio real que ya documenta esRemeraDeportiva en PrendaIcon.tsx (el
-  // corte raglán): en indumentaria técnica de entrenamiento la axila es la
-  // zona de mayor transpiración, así que se cose un panel de malla
-  // perforada aparte del resto del cuerpo -- acá con el mismo patrón de
-  // puntitos que el ícono chico (ver mallaId más abajo), para que las dos
-  // vistas nunca se desincronicen.
+  // panel lateral de rayas diagonales + cinta en la manga -- pedido
+  // explícito del usuario con foto de referencia real (remera técnica de
+  // entrenamiento): "dales un diseño parecido al de la captura adjunta".
+  // Reemplaza el panel de malla de puntitos de la ronda anterior -- ver el
+  // comentario largo de conPanelDeportivo en PrendaIcon.tsx. Mismo
+  // PatronPanelDeportivo que el ícono chico (ver mallaId más abajo), para
+  // que las dos vistas nunca se desincronicen.
   const mallaId = `malla-${prenda.id}`;
-  const conMalla = esRemeraDeportiva(prenda.categoria, prenda.textura);
+  const conPanelDeportivo = esRemeraDeportiva(prenda.categoria, prenda.textura);
   const cuelloD =
     // + con_capucha -- pedido explícito del usuario, revisado como modista/
     // ingeniero textil: no todos los buzos son hoodie. Antes se dibujaba
@@ -303,11 +302,9 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
               />
             </defs>
           )}
-          {conMalla && (
+          {conPanelDeportivo && (
             <defs>
-              <pattern id={mallaId} width="3" height="3" patternUnits="userSpaceOnUse">
-                <circle cx="1.5" cy="1.5" r="0.65" fill={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
-              </pattern>
+              <PatronPanelDeportivo id={mallaId} tono={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} />
             </defs>
           )}
 
@@ -351,6 +348,19 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
                   brazo en vez de quebrar en ángulo. */}
               <Forma d="M34 48 Q32 51 30 64 Q27 74 34 77 Q38 74 39 68 Q37 56 34 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
               <Forma d="M86 48 Q88 51 90 64 Q93 74 86 77 Q82 74 81 68 Q83 56 86 48 Z" fill={fill} stroke={stroke} patron={patron} sugerida={sugerida} />
+              {/* cinta clara cerca del puño de cada manga -- el detalle
+                  reflectante real de una remera de entrenamiento, foto de
+                  referencia del usuario. Blanco fijo (no derivado del color
+                  de la prenda): una cinta reflectante real es siempre clara/
+                  plateada. Cerca del extremo de la manga corta (y=73-77,
+                  la punta del path de arriba), dibujada después para quedar
+                  encima de la tela. */}
+              {esRemeraDeportiva(prenda.categoria, prenda.textura) && (
+                <>
+                  <line x1="29" y1="73" x2="37" y2="75" stroke="rgba(255,255,255,0.9)" strokeWidth={1.6} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+                  <line x1="91" y1="73" x2="83" y2="75" stroke="rgba(255,255,255,0.9)" strokeWidth={1.6} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+                </>
+              )}
             </>
           ) : (
             <>
@@ -444,12 +454,20 @@ function TorsoCuerpo({ prenda }: { prenda: Prenda }) {
             <>
               <line x1="54" y1="42" x2="37" y2="66" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
               <line x1="66" y1="42" x2="83" y2="66" stroke={detalleHsl(prenda.color_h, prenda.color_s, prenda.color_l)} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
-              {/* paneles de malla bajo la axila -- ver conMalla más arriba.
-                  Cuñas chicas justo donde termina cada costura raglán de
-                  arriba (37,66 / 83,66), la unión real manga-cuerpo donde
-                  una remera técnica cose el inserto perforado. */}
-              <path d="M37 66 L34 73 L41 70 Z" fill={`url(#${mallaId})`} />
-              <path d="M83 66 L86 73 L79 70 Z" fill={`url(#${mallaId})`} />
+              {/* paneles laterales de rayas diagonales -- ver
+                  PatronPanelDeportivo/conPanelDeportivo más arriba y la foto
+                  de referencia del usuario. Tiras pegadas al costado del
+                  cuerpo, siguiendo la misma curva que el borde del torso
+                  (Q34 59 37 70 Q39 89 41 104, ver el <Forma> principal de
+                  más arriba), de la axila (y=48) al ruedo (y=126). */}
+              <path
+                d="M34 48 Q34 59 37 70 Q39 89 41 104 L41 126 L48 126 L48 104 Q46 89 44 70 Q44 59 41 48 Z"
+                fill={`url(#${mallaId})`}
+              />
+              <path
+                d="M86 48 Q86 59 83 70 Q81 89 79 104 L79 126 L72 126 L72 104 Q74 89 76 70 Q76 59 79 48 Z"
+                fill={`url(#${mallaId})`}
+              />
             </>
           )}
 

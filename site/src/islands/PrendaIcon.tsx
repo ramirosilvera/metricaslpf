@@ -276,6 +276,25 @@ export function PatronEstampado({
   );
 }
 
+/** El panel lateral de rayas diagonales de una remera técnica real -- pedido
+ *  explícito del usuario con foto de referencia (remera de entrenamiento
+ *  tipo gimnasio: panel gris de rayas diagonales sobre el costado negro,
+ *  de la axila al ruedo). A diferencia de PatronEstampado (dos colores
+ *  opacos, reemplaza el relleno entero de la prenda), esto se dibuja SOLO
+ *  dentro de un panel chico recortado en el costado -- las rayas quedan a
+ *  rayas transparentes/coloreadas alternadas para que el color de fondo de
+ *  la prenda siga viéndose entre raya y raya, el mismo efecto "panel de
+ *  otra tela cosido en el costado" que la foto real. Reusa `tono` (mismo
+ *  detalleHsl con contraste garantizado que ya usa la costura raglán) para
+ *  que se lea bien tanto en la remera negra como en la gris del catálogo. */
+export function PatronPanelDeportivo({ id, tono }: { id: string; tono: string }) {
+  return (
+    <pattern id={id} width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <rect x="0" width="3" height="6" fill={tono} />
+    </pattern>
+  );
+}
+
 /** Una forma "de tela": el color plano de siempre + (si corresponde) una
  *  segunda copia del mismo trazo con el patrón/brillo de textura encima, a
  *  opacidad reducida para no perder el color de fondo -- mismo mecanismo
@@ -445,21 +464,20 @@ export function PrendaShape({
   const conEstampado = (estampado === "rayas" || estampado === "cuadros") && !!color2;
   const estampadoUrl = conEstampado ? `url(#${estampadoId})` : undefined;
   const tonoPatron = tonoTexturaHsl(tonoH, tonoS, tonoL);
-  // panel de malla técnica bajo la axila -- pedido explícito del usuario,
-  // revisado como sastre/modista/costurera: "las remeras deportivas suelen
-  // tener tejido técnico y transpirable debajo de las axilas". Detalle real
-  // de indumentaria técnica (running/entrenamiento): un inserto de malla
-  // perforada en la zona de mayor transpiración, cosido como panel aparte
-  // (no el mismo tejido liso del resto de la prenda) -- mismo criterio que
-  // ya usa "zapatilla_running" (panel de malla lateral, ver más abajo) pero
-  // acá con un patrón de puntitos real en vez de un relleno plano, porque
-  // la malla técnica de una remera es un tejido calado/perforado visible,
-  // no una superficie lisa de otro color. Solo en remera deportiva real
-  // (ver esRemeraDeportiva más arriba) -- una remera de algodón común no
-  // lleva este panel.
-  const conMalla = esRemeraDeportiva(categoria, textura);
+  // panel lateral de rayas diagonales + cinta en la manga -- pedido
+  // explícito del usuario con foto de referencia real (remera técnica de
+  // entrenamiento tipo Amazon/gimnasio): "dales un diseño parecido al de
+  // la captura adjunta". Reemplaza el panel de malla de puntitos de la
+  // ronda anterior (esRemeraDeportiva "tejido técnico bajo las axilas") --
+  // visto contra la foto real, el detalle dominante de esta prenda no es
+  // un inserto chico en la axila sino un PANEL LATERAL de rayas diagonales
+  // (gris sobre negro) que corre de la axila al ruedo, más una cinta clara
+  // corta cerca del puño de cada manga (detalle reflectante real de ropa
+  // de entrenamiento). Sigue gateado por esRemeraDeportiva -- una remera
+  // de algodón común no lleva ninguno de los dos.
+  const conPanelDeportivo = esRemeraDeportiva(categoria, textura);
 
-  const defs = (conPatron || conBrillo || conEstampado || conMalla) && (
+  const defs = (conPatron || conBrillo || conEstampado || conPanelDeportivo) && (
     <defs>
       {conPatron && textura && <PatronTextura id={patId} textura={textura} tono={tonoPatron} />}
       {conBrillo && (
@@ -473,11 +491,7 @@ export function PrendaShape({
       {conEstampado && color2 && (estampado === "rayas" || estampado === "cuadros") && (
         <PatronEstampado id={estampadoId} patron={estampado} colorBase={color} color2={color2} horizontal={categoria === "remera"} />
       )}
-      {conMalla && (
-        <pattern id={mallaId} width="2.4" height="2.4" patternUnits="userSpaceOnUse">
-          <circle cx="1.2" cy="1.2" r="0.55" fill={tonoDetalle} />
-        </pattern>
-      )}
+      {conPanelDeportivo && <PatronPanelDeportivo id={mallaId} tono={tonoDetalle} />}
     </defs>
   );
 
@@ -510,12 +524,19 @@ export function PrendaShape({
             <>
               <line x1="36" y1="10" x2="42" y2="22" stroke={tonoDetalle} strokeWidth={1} />
               <line x1="28" y1="10" x2="22" y2="22" stroke={tonoDetalle} strokeWidth={1} />
-              {/* paneles de malla bajo la axila -- ver conMalla más arriba.
-                  Cuñas chicas en la unión manga/cuerpo (el mismo punto donde
-                  termina cada costura raglán de arriba), el lugar real donde
-                  una remera técnica cose el inserto perforado. */}
-              <path d="M47 26 L42 22 L44 30 Z" fill={`url(#${mallaId})`} />
-              <path d="M17 26 L22 22 L20 30 Z" fill={`url(#${mallaId})`} />
+              {/* paneles laterales de rayas diagonales -- ver
+                  PatronPanelDeportivo/conPanelDeportivo más arriba. Tiras
+                  angostas pegadas al borde del cuerpo, de la axila (y=22)
+                  al ruedo (y=56), igual que en la foto de referencia. */}
+              <path d={`M38 22 L42 22 L42 56 L38 56 Z`} fill={`url(#${mallaId})`} />
+              <path d={`M22 22 L26 22 L26 56 L22 56 Z`} fill={`url(#${mallaId})`} />
+              {/* cinta clara cerca del puño de cada manga -- el detalle
+                  reflectante real de una remera de entrenamiento, visto en
+                  la foto de referencia. Blanco fijo (no derivado del color
+                  de la prenda): una cinta reflectante real es siempre clara/
+                  plateada, sea cual sea el color de la tela. */}
+              <line x1="48" y1="12" x2="52" y2="17" stroke="rgba(255,255,255,0.9)" strokeWidth={1.4} strokeLinecap="round" />
+              <line x1="16" y1="12" x2="12" y2="17" stroke="rgba(255,255,255,0.9)" strokeWidth={1.4} strokeLinecap="round" />
             </>
           )}
         </>
