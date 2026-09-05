@@ -1425,6 +1425,43 @@ export function acentoDeColorAislado(prendas: Prenda[]): Prenda | null {
   return null;
 }
 
+/** Piernas y torso prácticamente el mismo color -- pedido explícito del
+ *  usuario, con caso real propio: "jean beige + buzo con capucha beige +
+ *  zapatillas urbanas negras... revisaría que el buzo y el jean beige no
+ *  sean exactamente el mismo tono y textura, porque ahí sí podría quedar
+ *  algo plano en la parte superior/inferior". Diagnóstico confirmado por
+ *  ejecución: scoreColor ya distingue el degradé tono-sobre-tono REAL (regla
+ *  1b, misma familia con luminosidades bien separadas -- vd >=
+ *  VALUE_DEGRADE_MIN) del caso "prácticamente el mismo color repetido"
+ *  (regla 3, vd <= VALUE_MONOCROMATICO) -- pero puntuarOutfit trataba a los
+ *  dos por igual bajo el mismo tag "tono_sobre_tono" y el mismo mensaje
+ *  genérico ("Combinación segura: tono sobre tono en la base del outfit"),
+ *  sin distinguir CUÁL de los dos casos es. La distinción real importa
+ *  específicamente entre piernas y torso -- las dos prendas de mayor
+ *  superficie del outfit -- porque son las que definen el "arriba/abajo" de
+ *  la silueta: si son literalmente el mismo tono y encima la misma textura,
+ *  el cuerpo se lee como un solo bloque plano sin la línea de cintura real
+ *  (el mismo riesgo que ya describe el usuario). El mismo caso entre, por
+ *  ejemplo, calzado y accesorio no tiene ese riesgo -- son prendas chicas,
+ *  no definen la silueta -- así que esta función se acota a piernas+torso
+ *  a propósito, no a cualquier par tono-sobre-tono del outfit.
+ *
+ *  Excluye neutros (esNeutro) a propósito, mismo motivo que ya excluye la
+ *  regla 3 de scoreColor por construcción (un neutro de por medio siempre
+ *  cae en la regla 1, nunca en la 3): un pantalón negro + buzo negro es un
+ *  monocromo neutro normal y esperado, no el riesgo real que describe el
+ *  usuario (que fue justo sobre dos beige, un color con matiz real). */
+export function torsoYPiernasCasiIdenticos(prendas: Prenda[]): { piernas: Prenda; torso: Prenda } | null {
+  const piernas = prendas.find((p) => CATEGORIAS_PIERNAS.includes(p.categoria));
+  const torso = prendas.find((p) => CATEGORIAS_TORSO.includes(p.categoria));
+  if (!piernas || !torso) return null;
+  if (esNeutro(piernas.color_s, piernas.color_l) || esNeutro(torso.color_s, torso.color_l)) return null;
+  const hd = hueDist(piernas.color_h, torso.color_h);
+  const vd = valueDist(piernas.color_l, torso.color_l);
+  if (hd <= HUE_MONOCROMATICO && vd <= VALUE_MONOCROMATICO) return { piernas, torso };
+  return null;
+}
+
 /** Pedido explícito del usuario: "quiero un sistema de valoración por
  *  puntos... este outfit es un nueve de diez por esto y por esto". No es
  *  una escala nueva ni un modelo aparte -- es el mismo scoreColor/
@@ -1503,6 +1540,13 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
   // refinamiento, no un error de color real.
   const acentoAislado = acentoDeColorAislado(prendas);
 
+  // Piernas y torso casi idénticos (ver torsoYPiernasCasiIdenticos más
+  // arriba) -- pedido explícito del usuario, con caso real propio ("jean
+  // beige + buzo con capucha beige... revisaría que no sean exactamente el
+  // mismo tono y textura"). Mismo criterio de "ajuste de explicación, no de
+  // puntaje" que acentoAislado -- sigue siendo un tono-sobre-tono válido.
+  const piernasTorsoIdenticos = torsoYPiernasCasiIdenticos(prendas);
+
   // el par que más pesa en contra -- el de nivel más bajo (con_cuidado
   // antes que muy_bueno); a igualdad de nivel, el primero en orden de
   // evaluación alcanza (no hay un criterio de desempate más fino que
@@ -1530,14 +1574,24 @@ export function puntuarOutfit(prendas: Prenda[]): PuntajeOutfit {
   } else if (todosExcelentes) {
     // contrasteMarcado primero (antes que tono sobre tono): pedido
     // explícito del usuario, es la lectura más específica e interesante
-    // cuando aplica -- ver la regla 1c de scoreColor.
+    // cuando aplica -- ver la regla 1c de scoreColor. piernasTorsoIdenticos
+    // se chequea INDEPENDIENTE de tieneToneSobreTono (no anidado adentro),
+    // no como un caso particular de él -- hallazgo real de esta ronda: para
+    // colores apagados/tierra (el caso real reportado, dos beige) la regla
+    // 2 de scoreColor (análogo + croma bajo) siempre gana antes de llegar a
+    // la regla 3 (la que pone el tag "tono_sobre_tono"), así que un par
+    // piernas+torso muy apagado y casi idéntico NUNCA lleva ese tag -- si
+    // este chequeo quedaba anidado adentro de tieneToneSobreTono, nunca
+    // disparaba para el caso real que lo motivó (jean beige + buzo beige).
     explicacion = contrasteMarcado
       ? "Contraste marcado y prolijo: la alternancia de tonos oscuros y claros define bien el outfit."
-      : tieneToneSobreTono
-        ? "Combinación segura: tono sobre tono en la base del outfit."
-        : acentoAislado
-          ? `El color combina bien, pero ${CATEGORIA_LABEL[acentoAislado.categoria]} es el único toque de ese tono en el conjunto -- un accesorio o cinturón a tono lo ataría mejor.`
-          : "Combinación segura en color, sin nada que ajustar.";
+      : piernasTorsoIdenticos
+        ? `Tono sobre tono en la base del outfit: ${CATEGORIA_LABEL[piernasTorsoIdenticos.piernas.categoria]} y ${CATEGORIA_LABEL[piernasTorsoIdenticos.torso.categoria]} son prácticamente el mismo color -- funciona bien, pero si además comparten exactamente la misma textura puede quedar plano arriba/abajo; una pequeña diferencia de tono, luminosidad o textura entre los dos ayuda.`
+        : tieneToneSobreTono
+          ? "Combinación segura: tono sobre tono en la base del outfit."
+          : acentoAislado
+            ? `El color combina bien, pero ${CATEGORIA_LABEL[acentoAislado.categoria]} es el único toque de ese tono en el conjunto -- un accesorio o cinturón a tono lo ataría mejor.`
+            : "Combinación segura en color, sin nada que ajustar.";
   } else {
     // al menos un par en muy_bueno: cita el motivo real y puntual (ya es
     // un texto ejecutivo, generado por scoreColor/recomendar -- "el color

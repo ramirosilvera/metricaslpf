@@ -33,6 +33,7 @@ import {
   sugerenciaDeVariedad,
   tanda,
   tecnicaRescate,
+  torsoYPiernasCasiIdenticos,
   valueDist,
   type OutfitSugerido,
 } from "./recommend";
@@ -3905,8 +3906,13 @@ describe("puntuarOutfit", () => {
   // vez de decir "sin nada que ajustar" sobre un acento que sí se puede
   // mejorar.
   it("acento aislado (calzado/accesorio sin eco) -> sigue en 10/10, pero la explicación sugiere anclarlo en vez de 'nada que ajustar'", () => {
+    // remera GRIS (neutro), no beige como el pantalón -- a propósito, para
+    // que este test quede aislado del chequeo de piernasTorsoIdenticos (ver
+    // el describe de más abajo): acá lo único que se quiere probar es el
+    // acento sin eco, sin que el pantalón/torso también disparen su propio
+    // aviso.
     const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
-    const remera = mkPrenda("remera", "#D8C7A1", 40, 30, 70);
+    const remera = mkPrenda("remera", "#8C8C8C", 0, 0, 55);
     const zapato = mkPrenda("calzado", "#1F2A44", 222, 37, 19);
     const r = puntuarOutfit([pantalon, remera, zapato]);
     expect(r.puntaje).toBe(10);
@@ -3915,12 +3921,65 @@ describe("puntuarOutfit", () => {
 
   it("mismo caso, pero con un cinturón que repite el marino -- ya no queda aislado, vuelve al mensaje genérico", () => {
     const pantalon = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
-    const remera = mkPrenda("remera", "#D8C7A1", 40, 30, 70);
+    const remera = mkPrenda("remera", "#8C8C8C", 0, 0, 55);
     const zapato = mkPrenda("calzado", "#1F2A44", 222, 37, 19);
     const cinturon = mkPrenda("accesorio", "#1F2A44", 222, 37, 19);
     const r = puntuarOutfit([pantalon, remera, zapato, cinturon]);
     expect(r.puntaje).toBe(10);
     expect(r.explicacion).not.toContain("único toque de ese tono");
+  });
+});
+
+// Consejo, auditoría integral del motor de color, caso real propio del
+// usuario: "jean beige + buzo con capucha beige + zapatillas urbanas
+// negras... revisaría que el buzo y el jean beige no sean exactamente el
+// mismo tono y textura, porque ahí sí podría quedar algo plano". Rol:
+// asesor de imagen/estilista.
+describe("torsoYPiernasCasiIdenticos", () => {
+  it("caso real: jean y buzo exactamente el mismo beige -> devuelve el par", () => {
+    const jean = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const buzo = mkPrenda("buzo", "#D8C7A1", 40, 30, 70);
+    const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    const r = torsoYPiernasCasiIdenticos([jean, buzo, zapatillas]);
+    expect(r?.piernas.id).toBe(jean.id);
+    expect(r?.torso.id).toBe(buzo.id);
+  });
+
+  it("con una diferencia real de tono/luminosidad entre los dos -> null, ya no hace falta el aviso", () => {
+    const jean = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const buzoMasOscuro = mkPrenda("buzo", "#8A6D4A", 40, 33, 40); // mismo matiz, notablemente más oscuro (vd > 0.15)
+    const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    expect(torsoYPiernasCasiIdenticos([jean, buzoMasOscuro, zapatillas])).toBeNull();
+  });
+
+  it("piernas/torso negros (neutro) -> null, un monocromo neutro es normal y no necesita este aviso", () => {
+    const pantalonNegro = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    const buzoNegro = mkPrenda("buzo", "#1A1A1A", 0, 0, 10);
+    expect(torsoYPiernasCasiIdenticos([pantalonNegro, buzoNegro])).toBeNull();
+  });
+
+  it("sin pantalón/bermuda/short o sin torso en el outfit -> null", () => {
+    const buzo = mkPrenda("buzo", "#D8C7A1", 40, 30, 70);
+    const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    expect(torsoYPiernasCasiIdenticos([buzo, zapatillas])).toBeNull();
+  });
+
+  // Integración con puntuarOutfit -- el caso exacto reportado por el
+  // usuario ("jean beige + buzo con capucha beige + zapatillas urbanas
+  // negras"). Hallazgo real de esta ronda: para colores apagados (como
+  // este beige) la regla 2 de scoreColor siempre gana antes de llegar a la
+  // regla 3 (la que pone el tag "tono_sobre_tono"), así que este chequeo
+  // tiene que vivir INDEPENDIENTE de `tieneToneSobreTono` en puntuarOutfit
+  // -- si quedara anidado adentro, nunca disparaba para este caso real
+  // (verificado escribiendo este test y viéndolo fallar antes del fix).
+  it("jean beige + buzo beige + zapatillas negras -> 10/10, con el aviso de posible planitud en la explicación", () => {
+    const jean = mkPrenda("pantalon", "#D8C7A1", 40, 30, 70);
+    const buzo = mkPrenda("buzo", "#D8C7A1", 40, 30, 70);
+    const zapatillas = mkPrenda("calzado", "#1A1A1A", 0, 0, 10);
+    const r = puntuarOutfit([jean, buzo, zapatillas]);
+    expect(r.puntaje).toBe(10);
+    expect(r.explicacion).toContain("pantalon y buzo son prácticamente el mismo color");
+    expect(r.explicacion).toContain("puede quedar plano");
   });
 });
 
