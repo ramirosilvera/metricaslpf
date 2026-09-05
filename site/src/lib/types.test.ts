@@ -58,6 +58,42 @@ describe("descripcionPrenda", () => {
     expect(descripcionPrenda(mkPrenda("pantalon", { textura: "algodon", estilo: "casual" }))).toBe("Jogger");
   });
 
+  // Consejo, reporte real del usuario: "en el catálogo hay joggers, pero
+  // cuando le pongo que su textura es de poliéster en mi placard lo
+  // convierte a pantalón deportivo... es un pantalón casual tipo jogger
+  // con ajuste elástico en cadera y tobillos". Bug real: la fibra
+  // (poliéster) no distingue un jogger casual de un pantalón de
+  // entrenamiento -- ambos se cosen hoy en tela técnica por igual -- lo
+  // que los distingue es el corte (calce="holgado", el puño elástico,
+  // mismo dato que ya usa esJogger en PrendaIcon.tsx) y el registro real
+  // (estilo="deportivo" para un pantalón de entrenamiento de verdad).
+  it("pantalón de poliéster holgado, NO deportivo, es Jogger -- la fibra sola no lo hace 'deportivo'", () => {
+    expect(descripcionPrenda(mkPrenda("pantalon", { textura: "poliester", calce: "holgado", estilo: "casual" }))).toBe(
+      "Jogger",
+    );
+    expect(descripcionPrenda(mkPrenda("pantalon", { textura: "poliester", calce: "holgado", estilo: "urbano" }))).toBe(
+      "Jogger",
+    );
+  });
+
+  it("pantalón de poliéster holgado Y estilo='deportivo' sigue siendo Pantalón deportivo -- el registro real, no solo la tela", () => {
+    expect(
+      descripcionPrenda(mkPrenda("pantalon", { textura: "poliester", calce: "holgado", estilo: "deportivo" })),
+    ).toBe("Pantalón deportivo");
+  });
+
+  it("pantalón de poliéster SIN calce holgado (corte recto) sigue siendo Pantalón deportivo -- sin el puño elástico no es un jogger real", () => {
+    expect(descripcionPrenda(mkPrenda("pantalon", { textura: "poliester", calce: "regular", estilo: "casual" }))).toBe(
+      "Pantalón deportivo",
+    );
+  });
+
+  it("bermuda de poliéster sigue siendo Bermuda deportiva sin cambios -- la bermuda no tiene el dato de corte jogger modelado", () => {
+    expect(descripcionPrenda(mkPrenda("bermuda", { textura: "poliester", calce: "holgado", estilo: "casual" }))).toBe(
+      "Bermuda deportiva",
+    );
+  });
+
   it("buzo distingue con/sin capucha", () => {
     expect(descripcionPrenda(mkPrenda("buzo", { con_capucha: true }))).toBe("Buzo con capucha");
     expect(descripcionPrenda(mkPrenda("buzo", { con_capucha: false }))).toBe("Buzo sin capucha");

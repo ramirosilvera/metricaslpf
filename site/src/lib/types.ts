@@ -245,7 +245,26 @@ export function descripcionPrenda(p: Prenda): string {
     const esPantalon = p.categoria === "pantalon";
     if (p.textura === "denim") return esPantalon ? "Jean" : "Bermuda de jean";
     if (p.textura === "lana") return esPantalon ? "Pantalón de vestir" : "Bermuda de vestir";
-    if (p.textura === "poliester") return esPantalon ? "Pantalón deportivo" : "Bermuda deportiva";
+    if (p.textura === "poliester") {
+      // pedido explícito del usuario, revisado como sastre/ingeniero
+      // textil: "en el catálogo hay joggers, pero cuando le pongo que su
+      // textura es de poliéster en mi placard lo convierte a pantalón
+      // deportivo... es un pantalón casual tipo jogger con ajuste elástico
+      // en cadera y tobillos". Bug real: esta rama asumía "poliéster =
+      // deportivo" sin excepción, pero un jogger real (streetwear/casual)
+      // se cose hoy tan seguido en poliéster/poli-blend técnico (fleece
+      // con spandex, quick-dry) como en algodón -- la FIBRA no distingue
+      // un jogger casual de un pantalón de entrenamiento, lo que los
+      // distingue es el CORTE (puño elástico angostado, calce="holgado" --
+      // ver esJogger en PrendaIcon.tsx, que YA reconocía poliéster como
+      // tela de jogger válida, solo esta descripción de texto se había
+      // quedado atrás) y el REGISTRO real (estilo="deportivo" para un
+      // pantalón de entrenamiento de verdad, no cualquier prenda de tela
+      // técnica). "Bermuda deportiva" no cambia -- la bermuda no tiene el
+      // mismo dato de corte jogger (calce) modelado hoy.
+      if (esPantalon && p.calce === "holgado" && p.estilo !== "deportivo") return "Jogger";
+      return esPantalon ? "Pantalón deportivo" : "Bermuda deportiva";
+    }
     if (p.textura === "algodon" && esPantalon) return p.estilo === "clasico" ? "Pantalón chino" : "Jogger";
   }
   if (p.categoria === "buzo") return p.con_capucha ? "Buzo con capucha" : "Buzo sin capucha";
