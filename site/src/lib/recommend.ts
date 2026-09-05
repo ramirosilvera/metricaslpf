@@ -1005,6 +1005,34 @@ export function outfitSirveParaEstilo(prendas: Prenda[], estilo: Estilo): boolea
  *  muestra como opción YA LISTA (las tarjetas de "Vestite hoy"); la laxa
  *  sigue alimentando la búsqueda de mejoras. */
 export function outfitEsCoherenteParaEstilo(prendas: Prenda[], estilo: Estilo): boolean {
+  // Ninguna prenda puede aparecer en un estilo que no tiene tageado --
+  // pedido explícito del usuario, con reporte real: "en el outfit me
+  // muestran las zapatillas de lona en el estilo deportivo, eso es un
+  // error porque no está tageada como deportiva. Quiero que revises para
+  // que nunca se muestre ninguna prenda en un estilo que no fue tageada."
+  // Causa real, verificada por ejecución: el resto de este archivo decide
+  // "¿esta prenda desentona?" por RANGO de formalidad (FORMALIDAD_ESTILO/
+  // rangoDeFormalidad/prendaMenosFormalQuePantalon, más arriba), no por
+  // coincidencia exacta de estilo -- funciona para bloquear una prenda
+  // GENUINAMENTE menos formal, pero dos huecos reales quedaban abiertos:
+  // (1) "deportivo" es el piso de la escala (rango 0) -- nada puede ser
+  // "menos formal" que el piso, así que CUALQUIER calzado/torso/accesorio
+  // pasaba en un outfit deportivo sin que su propio tageo importara en
+  // absoluto (el caso reportado: zapatillas de lona, estilo="casual",
+  // estilos_secundarios=["urbano","clasico"], sin "deportivo" en ningún
+  // lado, aparecían igual); (2) fuera de ese caso límite, el sistema de
+  // rangos permite a propósito una prenda MÁS formal que el pantalón sin
+  // tag exacto ("elevación", ej. una camisa clásico sobre un jean casual)
+  // -- pedido explícito del usuario en esta misma ronda: bloquear también
+  // esto, sin excepción para torso/calzado/accesorio -- si una prenda
+  // tiene que funcionar en más de un registro, se tagea con
+  // estilos_secundarios (ya soportado, ver sweater-mostaza/camisa-rayas-
+  // celeste-base en catalogo.ts), no se infiere de su rango de formalidad.
+  // Una prenda SIN ningún estilo cargado (estilosDe vacío) sigue siendo
+  // neutra a propósito -- no se inventa una restricción sobre un dato
+  // ausente, mismo criterio que ya documenta esCinturon más arriba (el
+  // caso puntual del que se generaliza esta regla).
+  if (prendas.some((p) => estilosDe(p).length > 0 && !estilosDe(p).includes(estilo))) return false;
   return outfitSirveParaEstilo(prendas, estilo) && advertenciasDeRegistro(prendas).length === 0;
 }
 

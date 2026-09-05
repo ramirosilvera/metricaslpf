@@ -206,8 +206,24 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // auditoría de sastrería (Consejo, ronda de auditoría del motor): una
   // camisa de oficina real se usa metida adentro, silueta entallada, la
   // contraparte de volumen contenido de un pantalón de vestir/saco.
-  { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#F5F5F5", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
-  { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
+  // "formal" sumado a las 4 -- Consejo, ronda de "nunca mostrar una prenda
+  // en un estilo que no fue tageada": outfitEsCoherenteParaEstilo pasó a
+  // exigir el tag EXACTO en toda prenda (antes alcanzaba con no ser "menos
+  // formal" que el pantalón, el mismo agujero que dejaba pasar zapatillas
+  // de lona en "Deportivo") -- sin este agregado, "Formal" (que exige
+  // saco, ver outfitSirveParaEstilo) se quedaba sin NINGUNA camisa posible
+  // en TODO el catálogo, porque ninguna llevaba el tag "formal" a pesar de
+  // ser justamente la camisa de vestir que se usa bajo un traje real
+  // (verificado por el test ya existente "traje azul marino + cinturón y
+  // zapatos marrones -> 10/10", que dejó de pasar apenas se activó la
+  // regla estricta). No es debilitar la regla nueva: es la corrección de
+  // tageo real que esa regla dejó en evidencia -- una camisa de vestir
+  // lisa clara SÍ funciona en los tres registros de vestir (clasico como
+  // principal, oficina y formal como secundarios), mismo criterio que ya
+  // usa sweater-mostaza para declarar que una prenda sirve en más de un
+  // registro a propósito, en vez de inferirlo del rango de formalidad.
+  { id: "camisa-blanca", nombre: "Camisa blanca", categoria: "camisa", colorHex: "#F5F5F5", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina", "formal"], ocasion: "laburo", calce: "ajustado" },
+  { id: "camisa-celeste", nombre: "Camisa celeste", categoria: "camisa", colorHex: "#B7D2EC", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina", "formal"], ocasion: "laburo", calce: "ajustado" },
   // "urbano" a propósito, no un descuido: una camisa negra lee más
   // "urban professional" que clásica, a diferencia de blanca/celeste/gris.
   // colorHex #1A1A1A -- mismo negro que las otras 16+ prendas "negro/negra"
@@ -217,7 +233,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // exactamente el bug que reportó el usuario ("una cosa es un gris
   // oscuro y otra un negro").
   { id: "camisa-negra", nombre: "Camisa negra", categoria: "camisa", colorHex: "#1A1A1A", textura: "algodon", estilo: "urbano", ocasion: "laburo" },
-  { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
+  { id: "camisa-gris", nombre: "Camisa gris", categoria: "camisa", colorHex: "#9A9A94", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina", "formal"], ocasion: "laburo", calce: "ajustado" },
   // patron "cuadros" + colorHex2 -- corrección real de esta ronda: esta
   // entrada ya existía nombrada "a cuadros" pero se dibujaba como una
   // camisa lisa de un solo color, sin ningún cuadro real (el modelo de
@@ -230,7 +246,7 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // mismo beige que el resto del catálogo (ver remera-beige) -- clasico/
   // laburo, mismo registro que blanca/celeste/gris: una camisa beige es
   // tan de oficina como esas, no informal como la de cuadros.
-  { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", calce: "ajustado" },
+  { id: "camisa-beige", nombre: "Camisa beige", categoria: "camisa", colorHex: "#D8C7A1", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina", "formal"], ocasion: "laburo", calce: "ajustado" },
 
   // --- Camisa de lino (smart casual) -- hueco real encontrado en la
   // auditoría de imagen de esta ronda (Consejo, reporte real del usuario:
@@ -263,17 +279,25 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // celeste sobre blanco -- LA camisa a rayas de oficina por excelencia
   // en Argentina y en el mundo (raya fina celeste sobre fondo blanco,
   // "Bengal stripe" clásico). Mismos hex que camisa-blanca/camisa-celeste
-  // ya usan, por consistencia de paleta cross-prenda.
-  { id: "camisa-rayas-celeste", nombre: "Camisa a rayas celeste", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#B7D2EC", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo" },
+  // ya usan, por consistencia de paleta cross-prenda. "formal" sumado --
+  // mismo motivo que camisa-blanca/celeste/gris/beige más arriba (ver su
+  // comentario): es justamente la camisa de vestir que se usa bajo un
+  // traje real, no una variante casual de la de oficina.
+  { id: "camisa-rayas-celeste", nombre: "Camisa a rayas celeste", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#B7D2EC", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina", "formal"], ocasion: "laburo" },
   // azul marino sobre blanco -- el "pinstripe" clásico de oficina/
   // vestir, un escalón más formal que la celeste de arriba (se banca sin
   // problema una corbata y un traje). Mismo azul marino que ya usan
-  // pantalon-vestir-azul/saco-azul-marino/corbata-azul-marino.
-  { id: "camisa-rayas-azul-marino", nombre: "Camisa a rayas azul marino", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#1F2A44", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo" },
+  // pantalon-vestir-azul/saco-azul-marino/corbata-azul-marino. "formal"
+  // sumado -- mismo motivo que camisa-blanca más arriba, reforzado acá por
+  // el propio comentario original ("se banca sin problema... un traje").
+  { id: "camisa-rayas-azul-marino", nombre: "Camisa a rayas azul marino", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#1F2A44", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina", "formal"], ocasion: "laburo" },
   // rosa sobre blanco -- el color "no neutro" más estándar de oficina
   // desde hace años (estilo francés/business casual), tan de laburo como
   // la celeste, no un capricho de color. Mismo rosa que remera-rosa.
-  { id: "camisa-rayas-rosa", nombre: "Camisa a rayas rosa", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#E4A6B4", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo" },
+  // "formal" sumado -- mismo motivo que camisa-blanca más arriba: mismo
+  // registro que la celeste/azul marino de arriba, no menos formal por el
+  // color.
+  { id: "camisa-rayas-rosa", nombre: "Camisa a rayas rosa", categoria: "camisa", colorHex: "#F5F5F5", colorHex2: "#E4A6B4", patron: "rayas", textura: "algodon", estilo: "clasico", estilosSecundarios: ["oficina", "formal"], ocasion: "laburo" },
   // Bengal invertida -- fondo celeste con raya blanca, no blanco con raya
   // celeste (la de arriba): mismo par de colores, pero la base más
   // saturada la hace un poco menos "de escritorio estricto" y más

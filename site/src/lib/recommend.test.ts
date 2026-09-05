@@ -1165,6 +1165,82 @@ describe("outfitEsCoherenteParaEstilo", () => {
   });
 });
 
+describe("outfitEsCoherenteParaEstilo -- ninguna prenda aparece en un estilo que no tiene tageado", () => {
+  // Consejo, reporte real del usuario con captura: "en el outfit me
+  // muestran las zapatillas de lona en el estilo deportivo, eso es un
+  // error porque no está tageada como deportiva". Causa real, verificada
+  // por ejecución: "deportivo" es el piso de FORMALIDAD_ESTILO (rango 0)
+  // -- prendaMenosFormalQuePantalon (vía advertenciasDeRegistro) solo
+  // bloquea una prenda "menos formal" que el pantalón, y nada puede ser
+  // menos formal que el piso, así que CUALQUIER calzado pasaba sin que su
+  // propio tageo importara. Reproduce el caso real: zapatillas de lona
+  // (estilo="casual", estilos_secundarios=["urbano","clasico"], SIN
+  // "deportivo" en ningún lado) bajo un pantalón deportivo.
+  it("una zapatilla de lona (casual/urbano/clasico, sin 'deportivo') NO aparece en un outfit 'Deportivo', aunque no sea 'menos formal' que el pantalón", () => {
+    const pantalonDeportivo = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonDeportivo.estilo = "deportivo";
+    const zapatillasLona = mkPrenda("calzado", "#F5F5F0", 0, 0, 95);
+    zapatillasLona.corte_calzado = "zapatilla_lona";
+    zapatillasLona.estilo = "casual";
+    zapatillasLona.estilos_secundarios = ["urbano", "clasico"];
+    // confirma la premisa del bug: la versión laxa Y advertenciasDeRegistro
+    // (formalidad relativa) las dejaban pasar igual -- el agujero real no
+    // era "menos formal", era "no tageada para este estilo puntual".
+    expect(outfitSirveParaEstilo([pantalonDeportivo, zapatillasLona], "deportivo")).toBe(true);
+    expect(advertenciasDeRegistro([pantalonDeportivo, zapatillasLona])).toEqual([]);
+    expect(outfitEsCoherenteParaEstilo([pantalonDeportivo, zapatillasLona], "deportivo")).toBe(false);
+  });
+
+  it("la misma zapatilla SÍ aparece en 'Casual' o 'Urbano' -- los estilos que de verdad tiene tageados", () => {
+    const zapatillasLona = mkPrenda("calzado", "#F5F5F0", 0, 0, 95);
+    zapatillasLona.corte_calzado = "zapatilla_lona";
+    zapatillasLona.estilo = "casual";
+    // "clasico" queda afuera de este loop a propósito, aunque también está
+    // tageado: una zapatilla (de lona, urbana o running) sigue topeada a
+    // rango 1 por su CORTE (ver rangoDeFormalidad/CORTES_DE_VESTIR, regla
+    // ya existente y sin relación con este fix), y "clasico" pide rango 2
+    // -- eso la sigue bloqueando vía advertenciasDeRegistro, correctamente,
+    // aunque el tag exacto ya no sea el motivo.
+    zapatillasLona.estilos_secundarios = ["urbano", "clasico"];
+    for (const estilo of ["casual", "urbano"] as const) {
+      const pantalon = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+      pantalon.estilo = estilo;
+      expect(outfitEsCoherenteParaEstilo([pantalon, zapatillasLona], estilo)).toBe(true);
+    }
+  });
+
+  // Pedido explícito del usuario, generalizando el caso puntual: la misma
+  // regla vale para TORSO, no solo calzado -- antes se permitía una prenda
+  // MÁS formal que el pantalón sin tag exacto ("elevación", ej. una camisa
+  // clásico sobre un jean casual); ahora tampoco, sin excepción.
+  it("una prenda de torso MÁS formal que el pantalón (pero sin el estilo elegido tageado) también queda bloqueada -- ya no hay 'elevación' implícita", () => {
+    const pantalonCasual = mkPrenda("pantalon", "#3B5998", 220, 40, 45); // jean, casual
+    pantalonCasual.estilo = "casual";
+    const camisaClasica = mkPrenda("camisa", "#F5F5F5", 0, 0, 96); // clasico puro, sin "casual"
+    camisaClasica.estilo = "clasico";
+    // rango-wise, la camisa (2) no es "menos formal" que el pantalón (1) --
+    // por eso antes pasaba (era exactamente el agujero de "elevación").
+    expect(advertenciasDeRegistro([pantalonCasual, camisaClasica])).toEqual([]);
+    expect(outfitEsCoherenteParaEstilo([pantalonCasual, camisaClasica], "casual")).toBe(false);
+  });
+
+  it("una prenda SIN ningún estilo cargado sigue siendo neutra -- aparece en cualquier estilo, no se inventa una restricción sobre un dato ausente", () => {
+    const pantalonDeportivo = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonDeportivo.estilo = "deportivo";
+    const remeraSinEstilo = mkPrenda("remera", "#8C8C8C", 0, 0, 55); // estilo null, estilos_secundarios []
+    expect(outfitEsCoherenteParaEstilo([pantalonDeportivo, remeraSinEstilo], "deportivo")).toBe(true);
+  });
+
+  it("una prenda tageada exactamente con el estilo elegido (además de otros) sigue pasando, sin cambios", () => {
+    const pantalonCasual = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
+    pantalonCasual.estilo = "casual";
+    const sweaterMultiEstilo = mkPrenda("sweater", "#C3922E", 40, 62, 47);
+    sweaterMultiEstilo.estilo = "clasico";
+    sweaterMultiEstilo.estilos_secundarios = ["casual", "oficina"]; // mismo caso real que sweater-mostaza
+    expect(outfitEsCoherenteParaEstilo([pantalonCasual, sweaterMultiEstilo], "casual")).toBe(true);
+  });
+});
+
 describe("registroOutfit / advertenciasDeRegistro", () => {
   it("toma el estilo del pantalón como registro del outfit completo", () => {
     const pantalonVestir = mkPrenda("pantalon", "#1A1A1A", 0, 0, 10);
