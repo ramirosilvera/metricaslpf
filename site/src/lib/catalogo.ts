@@ -591,6 +591,33 @@ export const CATALOGO_PRENDAS: PresetPrenda[] = [
   // los sweaters de lana de arriba. Mismo negro estándar del catálogo.
   { id: "sweater-cuello-alto-negro", nombre: "Sweater cuello alto negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "lana", estilo: "clasico", estilosSecundarios: ["oficina"], ocasion: "laburo", estacion: "invierno" },
 
+  // --- Sweater de algodón (entretiempo, cuello en V) -- ampliación del
+  // catálogo, pedido explícito del usuario: "sweater de algodón de
+  // entretiempo cuello en V". Revisado como ingeniero textil: el algodón
+  // es una fibra real de punto de entretiempo (sin la aislación térmica de
+  // la lana, mismo criterio ya documentado para sweater-liviano-* -- ahí
+  // la fibra liviana es viscosa, acá es algodón, otra fibra real y
+  // distinta que hasta esta ronda "algodon" no tenía ningún sweater
+  // propio en todo el catálogo, pese a estar en el enum Textura hace
+  // rondas). No es un duplicado de sweater-liviano: son dos fibras reales
+  // distintas con el mismo nivel de abrigo (ninguna es de invierno), tan
+  // legítimo tenerlas dos como tener jean (denim) y jogger (algodón) como
+  // pantalones separados. El escote en V ya es el corte por defecto de
+  // TODO sweater en el ícono/maniquí (ver categoria==="sweater" en
+  // PrendaIcon.tsx/Maniqui.tsx, la costura en V que se dibuja sin
+  // excepción) -- no hace falta ningún cambio de renderizado, la silueta
+  // ya es la correcta apenas se carga con esta categoría. estilo/
+  // ocasion/estilosSecundarios igual que sweater-liviano-* (mismo
+  // registro real: un sweater de punto liviano es tan de oficina/vestir
+  // como de finde, sin corbata). Negro y gris -- mismos hex que el resto
+  // del catálogo (#1A1A1A/#8C8C8C, ya usados en sweater-liviano-*).
+  // Marrón -- mismo camel que ya usan pantalon-pana-marron/zapatillas-
+  // marrones (#6F4E37): es justamente el tono de sweater más clásico
+  // que existe (jersey camel), no un marrón nuevo inventado.
+  { id: "sweater-algodon-negro", nombre: "Sweater de algodón negro", categoria: "sweater", colorHex: "#1A1A1A", textura: "algodon", estilo: "clasico", estilosSecundarios: ["casual", "oficina"], ocasion: "laburo", estacion: "entretiempo" },
+  { id: "sweater-algodon-marron", nombre: "Sweater de algodón marrón", categoria: "sweater", colorHex: "#6F4E37", textura: "algodon", estilo: "clasico", estilosSecundarios: ["casual", "oficina"], ocasion: "laburo", estacion: "entretiempo" },
+  { id: "sweater-algodon-gris", nombre: "Sweater de algodón gris", categoria: "sweater", colorHex: "#8C8C8C", textura: "algodon", estilo: "clasico", estilosSecundarios: ["casual", "oficina"], ocasion: "laburo", estacion: "entretiempo" },
+
   // --- Calzado ---
   // Revisado como modista/ingeniero textil, pedido explícito del usuario:
   // "dale más detalles a las zapatillas... revisa todos los estilos...
